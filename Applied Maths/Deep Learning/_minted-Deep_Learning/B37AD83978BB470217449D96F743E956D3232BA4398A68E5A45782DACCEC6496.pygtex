@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{linear\PYGZus{}activation\PYGZus{}backward}\PYG{p}{(}\PYG{n}{dA}\PYG{p}{,} \PYG{n}{cache}\PYG{p}{,} \PYG{n}{activation}\PYG{p}{):}
+
+    \PYG{n}{linear\PYGZus{}cache}\PYG{p}{,} \PYG{n}{activation\PYGZus{}cache} \PYG{o}{=} \PYG{n}{cache}
+
+    \PYG{k}{if} \PYG{n}{activation} \PYG{o}{==} \PYG{l+s+s2}{\PYGZdq{}relu\PYGZdq{}}\PYG{p}{:}
+        \PYG{n}{dZ} \PYG{o}{=} \PYG{n}{relu\PYGZus{}backward}\PYG{p}{(}\PYG{n}{dA}\PYG{p}{,} \PYG{n}{activation\PYGZus{}cache}\PYG{p}{)}
+        \PYG{n}{dA\PYGZus{}prev}\PYG{p}{,} \PYG{n}{dW}\PYG{p}{,} \PYG{n}{db} \PYG{o}{=} \PYG{n}{linear\PYGZus{}backward}\PYG{p}{(}\PYG{n}{dZ}\PYG{p}{,} \PYG{n}{linear\PYGZus{}cache}\PYG{p}{)}
+
+    \PYG{k}{elif} \PYG{n}{activation} \PYG{o}{==} \PYG{l+s+s2}{\PYGZdq{}sigmoid\PYGZdq{}}\PYG{p}{:}
+        \PYG{n}{dZ} \PYG{o}{=} \PYG{n}{sigmoid\PYGZus{}backward}\PYG{p}{(}\PYG{n}{dA}\PYG{p}{,} \PYG{n}{activation\PYGZus{}cache}\PYG{p}{)}
+        \PYG{n}{dA\PYGZus{}prev}\PYG{p}{,} \PYG{n}{dW}\PYG{p}{,} \PYG{n}{db} \PYG{o}{=} \PYG{n}{linear\PYGZus{}backward}\PYG{p}{(}\PYG{n}{dZ}\PYG{p}{,} \PYG{n}{linear\PYGZus{}cache}\PYG{p}{)}
+
+    \PYG{k}{return} \PYG{n}{dA\PYGZus{}prev}\PYG{p}{,} \PYG{n}{dW}\PYG{p}{,} \PYG{n}{db}
+\end{Verbatim}

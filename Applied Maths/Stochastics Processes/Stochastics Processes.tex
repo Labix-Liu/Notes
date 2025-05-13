@@ -1,0 +1,396 @@
+\documentclass[a4paper]{article}
+
+\input{C:/Users/liula/Desktop/Latex/Headers V1.2.tex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Labix}
+\lhead{Stochastic Processes}
+\rfoot{\thepage}
+
+
+\title{Stochastic Processes}
+
+\author{Labix}
+
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+\end{abstract}
+\tableofcontents
+
+\pagebreak
+\section{Introduction to Stochastic Processes}
+\subsection{Basic Terminology}
+\begin{defn}{Stochastic Processes}{} Let $(\Omega,\mathcal{F},P)$ be a probability space. Let $(S,\Sigma)$ be a measurable space. A stochastic process is a collection of random variables $$\{X(t):\Omega\to S\;|\;t\in T\}$$ indexed by some set $T$. In this case we write the stochastic process as $X:\Omega\times T\to S$. 
+\end{defn}
+
+\begin{defn}{Terminology}{} Let $(\Omega,\mathcal{F},P)$ be a probability space. Let $(S,\Sigma)$ be a measurable space. Let $X:\Omega\times T\to S$ be a stochastic process. 
+\begin{itemize}
+\item Define the state space of the stochastic process to be $S$. 
+\item Write $\mF_n=\sigma(X_0,\dots,X_n)$. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Discrete Time Stochastic Processes}{} Let $(\Omega,\mathcal{F},P)$ be a probability space. Let $(S,\Sigma)$ be a measurable space. Let $X:\Omega\times T\to S$ be a stochastic process. We say that the stochastic process has discrete time if $T\subseteq\N$. 
+\end{defn}
+
+\begin{defn}{Filtrations}{} Let $\mF=\{\mF_t\;|\;t\in T\}$ be a family of $\sigma$-algebras. We say that $\mF$ is a filtration if $\mF_t\leq\mF_s$ for $t\leq s$. 
+\end{defn}
+
+\begin{defn}{Adapted Stochastic Process}{} Let $(\Omega,\mathcal{F},P)$ be a probability space. Let $(S,\Sigma)$ be a measurable space. Let $X:\Omega\times T\to S$ be a stochastic process. Let $\mF=\{\mF_t\;|\;t\in T\}$ be a filtration. We say that $X$ is adapted to $\mF$ if $X_t$ is $\mF_t$-measurable for all $t\in T$. 
+\end{defn}
+
+\subsection{Hitting Time and Stopping Time}
+\begin{defn}{Hitting Time}{} Let $(\Omega,\mathcal{F},P)$ be a probability space. Let $(S,\Sigma)$ be a measurable space. Let $X:\Omega\times T\to S$ be a stochastic process. Let $A\in\Sigma$ be a measurable set. Define the hitting time of $X$ to be the random variable $H_A:\Omega\to T$ given by $$H_A(\omega)=\inf\{t\in T\;|\;X(\omega,t)\in A\}$$
+\end{defn}
+
+Recall that for a $\sigma$-algebra $\mF$ and a subset $Y\subseteq\mF$, $\sigma(Y)$ is the smallest $\sigma$-algebra that contains $Y$. 
+
+\begin{defn}{Stopping Time}{} Let $(\Omega,\mathcal{F},P)$ be a probability space. Let $(S,\Sigma)$ be a measurable space. Let $X:\Omega\times T\to S$ be a stochastic process. Let $S:\Omega\to T$ be a random variable. We say that $S$ is a stopping time if $S$ has the property that $$\{\omega\in\Omega\;|\;S(\omega)\leq t\}\subseteq\sigma(X_t)$$ for all $t\in T$. 
+\end{defn}
+
+In other words, events determined by $S$ up to some time $t\in T$ is dictated entirely using the variables $X_0,\dots,X_t$. 
+
+\begin{lmm}{}{} Let $(\Omega,\mathcal{F},P)$ be a probability space. Let $(S,\Sigma)$ be a measurable space. Let $X:\Omega\times T\to S$ be a stochastic process. Let $S:\Omega\to T$ be a random variable. Then $S$ is a stopping time if and only if $S$ has the property that $$\{\omega\in\Omega\;|\;S(\omega)=t\}\subseteq\sigma(X_t)$$ for all $t\in T$. 
+\end{lmm}
+
+\begin{thm}{Début Theorem}{}
+\end{thm}
+
+\pagebreak
+\section{Markov Chains}
+\subsection{Markov Chains}
+\begin{defn}{Stochastic Matrix}{} Let $P=(p_{i,j})\in M_n(\R)$ be a matrix. We say that $P$ is a stochastic matrix if the following are true. 
+\begin{itemize}
+\item $0\leq p_{i,j}\leq 1$ for $1\leq i,j\leq n$. 
+\item For any fixed $1\leq k\leq n$, we have $$\sum_{j=1}^np_{k,j}=1$$
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Markov Chain}{} Let $(\Omega,\mF,\Prj)$ be a probability space. Let $I=\{1,\dots,k\}\subseteq\N$. Let $\{X_n:\Omega\to I\;|\;n\in\N\}$ be a discrete stochastic process. Let $\lambda:I\to[0,1]$ be a probability distribution. Let $P=(p_{i,j})$ be a stochastic matrix. We say that $(X_n)_{n\geq 0}$ is a Markov chain with initial distribution $\lambda$ and transition matrix $P$ if the following are true. 
+\begin{itemize}
+\item $P_{X_0}=\lambda$
+\item For any $i_0,\dots,i_{n+1}\in I$, we have $$\Prj(X_{n+1}=i_{n+1}\;|\;X_k=i_k\text{ for }0\leq k\leq n)=\lambda(i_0)\cdot\prod_{j=0}^n p_{i_j,i_{j+1}}$$ 
+\end{itemize}
+In this case we say that $(X_n)_{n\geq 0}$ is $\text{Markov}(\lambda,P)$. 
+\end{defn}
+
+In other words, Markov chains are a sequence of random variables where the next step does not depends on what states you visited previously, but only on the state now. There is an important property that makes studying Markov chains worth while. 
+
+\begin{prp}{}{} Let $(\Omega,\mF,\Prj)$ be a probability space. Let $I=\{1,\dots,k\}$. Let $\{X_n:\Omega\to I\;|\;n\in\N\}$ be a sequence of random variables. Let $\lambda:I\to[0,1]$ be a probability distribution. Then $(X_n)_{n\geq 0}$ is a Markov chain if and only if $$\Prj(X_{n+1}=i_{n+1}\;|\;X_k=i_k\text{ for }0\leq k\leq n)=\Prj(X_{n+1}=i_{n+1}\;|\;X_n=i_n)$$ for any $i_0,\dots,i_{n+1}\in I$. In this case, the transition matrix of the Markov chain is given by $$P=\begin{pmatrix}
+\Prj(X_1=1\;|\;X_0=1) & \cdots & \Prj(X_1=k\;|\;X_0=1)\\
+\vdots & \ddots & \vdots\\
+\Prj(X_1=1\;|\;X_0=k) & \cdots & \Prj(X_1=k\;|\;X_0=k)
+\end{pmatrix}$$
+\end{prp}
+
+\begin{thm}{Markov Property}{} Let $(X_n)_{n\geq0}$ be a markov chain. Suppose that $X_m=E_m$ is given. Then $(X_{m+n})_{n\geq 0}$ is a Markov chain. 
+\end{thm}
+
+
+Notice that the transition probabbility $\Prj(X_{n+1}=j|X_n=i)$ still depedns on $i,j,n$. We further restrict out study of Markov chains to the following type. 
+
+\begin{defn}{Homogenous Markov Chains}{} We say that a Markov chain $(X_n)_{n\geq 0}$ is homogenous if $$\Prj(X_{n+1}=j|X_n=i)=\Prj(X_1=j|X_0=i)$$
+\end{defn}
+
+This means that homogenous Markov chains are time independent. 
+
+\begin{lmm}{}{} The transition matrix $P$ of a homogenous Markov chain is a Stochastic matrix. 
+\end{lmm}
+
+\begin{thm}{}{} Let $(X_n)_{n\geq 0}$ be Markov. Then for all $m,n\geq0$, we have
+\begin{itemize}
+\item $\Prj(X_n=j|X_0=i)=\Prj(X_1=j|X_0=i)^n$
+\item $\Prj(X_n=j)=\sum_{i\in I}\Prj(X_0=i)\Prj(X_n=j|X_0=i)$
+\end{itemize}
+\end{thm}
+
+This theorem is saying that $\Prj(X_n=j|X_0=i)$ is equal to the $i,j$th entry of the matrix $P^n$ if $P$ is the transition matrix. To find out the total probability of reaching the $j$th state at the $n$the step regardless of the starting point, you sum up the $\Prj(X_n=j|X_0=i)$ multiplying the probability that you start at state $i$. \\~\\
+
+We often like to create new Markov chains from old (at least from exams). If we want to show that a squence $(X_n)_{n\geq 0}$ of random vriables is Markov, try and write $X_{n+1}=X_n+\text{ some term only related to }n+1$. 
+
+We use $$h_i^A=\Prj(H^A<\infty|X_0=i)$$ to denote the corresponding probability. We use $$k_i^A=E_i[H_A]=\sum_{k=0}^\infty k\Prj(H_A=k|X_0=i)+\infty\Prj(H_A=\infty|X_0=i)$$ to denote the expectation. 
+
+\begin{prp}{}{} We can find the probabilities of all hitting times by solving the system of linear equations $$\begin{cases}
+\Prj(H_A<\infty|X_0=i)=1 & i\in A\\
+\Prj(H_A<\infty|X_0=i)=\sum_{j\in I}\Prj(X_1=j|X_0=i)\Prj(H_A<\infty|X_0=j) & x\notin A
+\end{cases}$$
+\end{prp}
+
+\begin{prp}{}{} We can find the expected number of hitting times by solving the system of linear equations $$\begin{cases}
+E_i[H_A]=0 & i\in A\\
+E_i[H_A]=1+\sum_{j\notin A}\Prj(X_1=j|X_0=i)E_j[H_A] & i\notin A
+\end{cases}$$
+\end{prp}
+
+\begin{thm}{Strong Markov Property}{} Let $(X_n)_{n\geq 0}$ be Markov$(\lambda,P)$ and $T$ a stopping time of $(X_n)_{n\geq 0}$. Then conditional on both $\{X_T=i\}$ and $\{T<\infty\}$, we have $(X_{T+n})_{n\geq 0}$ is Markov$(\delta_i,P)$ and independent of $X_0,\dots,X_T$. 
+\end{thm}
+
+\subsection{Communicating Classes}
+\begin{defn}{Talks and Communicates}{} Let $i,j$ be states. We say that $i$ talks to $j$ which is $i\rightarrow j$ if there exists $n\in\N$ such that $$\Prj(X_n=j|X_0=i)>0$$ We say that two states $i$ and $j$ communicate if $i\leftrightarrow j$. 
+\end{defn}
+
+\begin{defn}{Communicating Class}{} Let $C\subseteq I$. $C$ is a communicating class if $\forall i,j\in C$, $i\leftrightarrow j$ and $\forall i\in C$ and $\forall k\in I\setminus C$, $i\not{\rightarrow} k$ 
+\end{defn}
+
+\begin{defn}{Closed and Absorbing}{} We say that a class is closed if no states in the class talks to any states outside of that class. We say that a class is absorbing if it forms a closed class by itself. 
+\end{defn}
+
+\begin{defn}{Irreducible Markov Chains}{} A Markov chain is said to be irreducible if for all $i,j\in I$, $i\leftrightarrow j$. 
+\end{defn}
+
+\subsection{Recurrence and Transcience}
+\begin{defn}{Recurrence and Transcience}{} A state $i\in I$ is recurrent if $\Prj_i(X_n=i\text{ for infinitely many }n)=1$. A state $i\in I$ is transient if $\Prj_i(X_n=i\text{ for infinitely many }n)=0$. 
+\end{defn}
+
+\begin{defn}{$k$-th Passage Time}{} The first passage time of state $i$ is a stopping time such that $$T_i(\omega)=\inf\{n\geq 1|X_n(\omega)=i\}$$ The $k$-th passage time is a stopping time such that $$T_i^{(k)}(\omega)=\inf\{n\geq T_i^{(k-1)}|X_n(\omega)=i\}$$ The $k$-th excursion time is defined by $$S_i^{(k)}=\begin{cases}
+T_i^{(k)}-T_i^{(k-1)} & \text{ if }T_i^{(k-1)}<\infty\\
+\infty & \text{ otherwise }
+\end{cases}$$
+\end{defn}
+
+Intuitively, $T_i^{(k)}$ outputs the time it takes for the Markov chain to reach state $i$ for the $k$th time and $S_i^k$ outputs the number of steps taken between consecutive visits. 
+
+\begin{lmm}{}{} For $k=2,3,\dots$ and if $T_i^{(k-1)}<\infty$, then $S_i^{(k)}$ is independent of $\{X_m:m\leq T_i^{(k-1)}\}$ and $$\Prj(S_i^{(k)}=n|T_i^{(k-1)}<\infty)=\Prj_i(T_i=n)$$
+\end{lmm}
+
+\begin{defn}{Visit Counting Function}{} Let $i\in I$ be a state. Define $$V_i=\sum_{k=0}^\infty1_{\{X_n=i\}}$$ the number of visits ever to state $i$. 
+\end{defn}
+
+\begin{lmm}{}{} If $V_i$ counts the number of vists to state $i$, then $$E_i(V_i)=\sum_{k=0}^\infty P_{ii}^{(k)}$$
+\end{lmm}
+
+\begin{lmm}{}{} For $k=0,1,2,\dots$, we have $$\Prj_i(V_i>k)=(\Prj_i(T_i<\infty))^k$$
+\end{lmm}
+
+This lemma means that $V_i$ asserts a geometric distribution. 
+
+\begin{thm}{Characteristic of Recurrent and Transient States}{} Let $(X_n)_{n\geq 0}$ be a Markov chain. Let $T_i$ be the first passage time of state $i$. If $\Prj_i(T_i<\infty)=1$, then $i$ is recurrent and $\sum_{k=1}^\infty\Prj(X_1=k|X_0=k)^n=\infty$. If $\Prj_i(T_i<\infty)<1$, then $i$ is transient and $\sum_{k=1}^\infty\Prj(X_1=k|X_0=k)^n<\infty$. 
+\end{thm} 
+
+\begin{thm}{}{} Let $C$ be a communicating class. Then either all states in $C$ are transient or all are recurrent. 
+\end{thm}
+
+\begin{thm}{}{} Let $C\subset I$ be a class of a Markov chain. Then
+\begin{itemize}
+\item Every recurrent class is closed
+\item Every finite closed class is recurrent
+\end{itemize}
+\end{thm}
+
+\begin{thm}{}{} If $P$ is irreducible and recurrent then for all $j\in I$, $$\Prj(T_j<\infty)=1$$
+\end{thm}
+
+\begin{defn}{Component Independent Simple Random Walk on $\Z^d$}{} A component independent simple random walk on $\Z^d$ for $d\in\N$ is defined as $$X_{n+1}=X_n+Z_{n+1}$$ where $Z_{n+1}=(Z_{n+1}^1,\dots,Z_{n+1}^d)$ with $$Z_m^j=\begin{cases}
+1 & \text{ with probability }p_j\\
+-1 & \text{ with probabilty }q_j
+\end{cases}$$
+where $Z_m^j$ are independent for all $j,m$. 
+\end{defn}
+
+\begin{prp}{}{} Let $(X_n)_{n\geq 0}$ be a CISRW on $\Z^d$. If there exists $j\in\{1,\dots,d\}$ such that $p_j\neq\frac{1}{2}$ then $(X_n)$ is transient. 
+\end{prp}
+
+\begin{prp}{}{} Let $(X_n)_{n\geq 0}$ be a CISRW on $\Z^d$ and $p_j=q_j=\frac{1}{2}$ for all $j$. Then
+\begin{itemize}
+\item If $d\leq 2$ then all states are recurrent
+\item If $d\geq 3$ then all states are transient
+\end{itemize}
+\end{prp}
+
+\subsection{Branching Process}
+\begin{defn}{Branching Process}{} Let $(X_n)_{n\geq 0}$ be the number of individuals in a population at time $n$ where $X_n\in\{0\}\cup\N$. At every time step each individual in the population gives birth to a random number of offspring. Thus $X_{n+1}$ is defined to be $$X_{n+1}=\sum_{k=1}^{X_n}Z_k^n$$ where $Z_k^n\sim Z$ and $\Prj(Z\geq 0)=1$. Then $(X_n)_{n\geq 0}$ is said to be a branching process. 
+\end{defn}
+
+\begin{prp}{}{} Define $G(s)=E[s^Z]$ and $F_{n+1}(s)=E[S^{X_{n+1}}|X_0=1]$ for $s\in(0,1)$. Then $$F_n(s)=G(F_{n-1}(s))$$
+\end{prp}
+
+\begin{prp}{}{} For a braching process $(X_n)_{n\geq 0}$ with off-spring distribution $Z$ where $E[Z]=\mu$, we have $$E[X_n]=\mu^n$$
+\end{prp}
+
+\begin{thm}{Extinction Probability}{} The extinction probability is the smallest non-negative root of $G(\alpha)=\alpha$. 
+\end{thm}
+
+\begin{thm}{}{} Suppose that $G(0)>0$, $\mu=E[Z]=G'(1)$. Then $\mu\leq 1$ implies certain extiction. $\mu>1$ implies uncertain extinction. 
+\end{thm}
+
+\subsection{Invariant Distributions on a Markov Chain}
+\begin{defn}{Invariant Distribution}{} A measure $\lambda=(\lambda_i:i\in I)$ with non-negative entries is said to be an invariant distribution if 
+\begin{itemize}
+\item $\lambda P=P$
+\item $\pi_i\in[0,1]$ for all $i$
+\item $\sum_{i\in I}\pi_i=1$
+\end{itemize}
+\end{defn}
+
+The following theorem shows that after applying a Markov process to an invariant distribution, the new distribution will be the same as the old one. Notice here that right multiplication of a distribution gives the next step on the Markov chain instead of the usual left multiplication. 
+
+\begin{thm}{}{} Let $(X_n)_{n\geq 0}$ be Markov$(\pi,P)$, where $\pi$ is an invariant distribution for $P$. Then $\forall m\geq 0$, $(X_{n+m})_{n\geq 0}$ is Markov$(\pi,P)$. \tcbline
+\begin{proof}
+By the Markov property, the new sequence will be Markov. But we do not yet know its distribution. We have that 
+\begin{align*}
+\Prj(X_m=i)&=(\pi P^m)_i\tag{this denotes the $i$th entry of $P$}\\
+&=(\pi PP^{m-1})_i\\
+&=(\pi P^{m-1})_i
+\end{align*}
+Thus by induction, we see that $\Prj(X_m=i)=\pi_i$ thus we are done. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{}{} Let $I$ be finite. Suppose that for some $i\in I$, $$P_{ij}^n\to\pi_j$$ for all $j\in I$. Then $\pi=(\pi_j:j\in I)$ is an invariant distribution. 
+\end{thm}
+
+Let us look at an example. 
+
+\begin{eg}{Gene Mutation}{} Recall the gene mutation example that has transition matrix $P=\begin{pmatrix}
+1-\alpha & \alpha\\
+\beta & 1-\beta
+\end{pmatrix}$. Recall that $$P^n=\begin{pmatrix}
+\frac{\beta}{\alpha+\beta}+\frac{\alpha}{\alpha+\beta}(1-\alpha-\beta)^n & \frac{\alpha}{\alpha+\beta}-\frac{\alpha}{\alpha+\beta}(1-\alpha-\beta)^n\\
+? & ?
+\end{pmatrix}$$
+As $n\to\infty$, observe that the first entry tends to $\frac{\beta}{\alpha+\beta}$ the second entry tends to $\frac{\alpha}{\alpha+\beta}$. This means that $\pi=\left(\frac{\beta}{\alpha+\beta},\frac{\alpha}{\alpha+\beta}\right)$ is an invariant distribution for the gene mutation model. \\~\\
+We can also find the invariant distribution directly: Let $\pi=(\pi_1,\pi_2)$ be an invariant distribution for $P$. We have that 
+\begin{align*}
+\pi P&=\pi\\
+\begin{pmatrix}
+\pi_1(1-\alpha)+\pi_2\beta & \pi_1\alpha+\pi_2(1-\beta)
+\end{pmatrix}&=\begin{pmatrix}
+\pi_1 & \pi_2
+\end{pmatrix}\\
+\begin{pmatrix}
+\pi_2\beta-\pi_1\alpha & \pi_1\alpha-\pi_2\beta
+\end{pmatrix}&=0\\
+\end{align*} Notice that these two equations mean the same thing. (In general if you have an $n\times n$ transition matrix, only the first $n-1$ equations will be useful and the last one will be redundant.) This is why we need to use the fact that $\pi_1+\pi_2=1$ as our final equation. \\~\\
+Now solving it, we have that $\pi=\left(\frac{\beta}{\alpha+\beta},\frac{\alpha}{\alpha+\beta}\right)$ which is the exact same answer as the one given in the first method. \\~\\
+A third way to think about it is that notice that $P^T\pi^T=\pi^T$ is the equation that we are attempting to solve. Recall that $1$ is necessarily an eigenvector of a transtition matrix which means that this equation really is just a question of finding eigenvectors from the eigenvalue $1$. 
+\end{eg}
+
+The above examples gives a lot of practical information when calculating the invariant distribution of a transition matrix. 
+
+\begin{defn}{Expected Time Spent}{} Define the expected time spent in state $i$ in between visits to state $k$ by $$\gamma_i^k=E_k\left(\sum_{n=0}^{T_k-1}\mathcal{X}_{X_n=i}\right)$$
+\end{defn}
+
+This uses $k$ as a reference, and as we keep going back to $k$, this records how much time we have spent in $i$ in the process of leaving and returning to $k$. 
+
+\begin{thm}{}{} Let $P$ be irreducible and recurrent. Then
+\begin{itemize}
+\item $\gamma_k^k=1$
+\item $\gamma^k=(\gamma_i^k:i\in I)$ is an invariant measure satisfying $\gamma^kP=\gamma^k$
+\item $0<\gamma_i^k<\infty\;\forall i\in I$
+\end{itemize}
+\end{thm}
+
+\begin{thm}{}{} Let $P$ be irreducible and $\lambda$ and invariant measure and $\lambda_k=1$ for some $k$. Then $\lambda\geq\gamma^k$. If we also have that $P$ is recurrent, then $\lambda=\gamma^k$
+\end{thm}
+
+This theorem assesrts that as long as $P$ is irreducible and recurrent, then any invariant measure is exactly equal to the $\gamma^k$ we defined, which means that there is really only one invariant measure up to rescaling. 
+
+\begin{defn}{Positive Recurrent}{} A state $i\in I$ is positive recurrent if it is recurrent and $$E_i[T_i]<\infty$$ A state which is not positive recurrent but is recurrent is called null recurrent. 
+\end{defn}
+
+\begin{thm}{}{} Let $P$ be irreducible. Then the following are equivalent. 
+\begin{itemize}
+\item Every state is positive recurrent
+\item Some state $i$ is positive recurrent
+\item $P$ has an invariant distribution $\pi$. More over, $\pi_i=\frac{1}{E_i[T_i]}$
+\end{itemize}
+\end{thm}
+
+\pagebreak
+\section{Brownian Motion}
+\begin{defn}{Brownian Motion}{} Let $(\Omega,E,P)$ be a probability space. Let $(S,\Sigma)$ be a measurable space. Let $B:\Omega\times[0,T]\to S$ be continuous stochastic processes. We say that $B$ is a Brownian motion if the following are true. 
+\begin{itemize}
+\item $B_0=0$. 
+\item For any $0\leq t_1<t_2<t_3\leq T$, $$B_{t_2}-B_{t_1}\;\;\;\;\text{ and }\;\;\;\;B_{t_3}-B_{t_2}$$ are independent variables. 
+\item For any $0\leq t_1<t_2\leq T$, $$B_{t_2}-B_{t_1}\sim N(0,t_2-t_1)$$
+\item For any $\omega\in\widetilde{\Omega}$ such that $P(\widetilde{\Omega})=1$, we have that $B(\omega,-):T\to S$ is a continuous function. 
+\end{itemize}
+\end{defn}
+
+\pagebreak
+\section{Martingale Processes}
+\subsection{Basic Definitions}
+\begin{defn}{Martingale Process}{} Let $(\Omega,E,P)$ be a probability space. Let $(S,\Sigma)$ be a measurable space. Let $M:\Omega\times[0,T]\to S$ be a continuous stochastic process adapted to a filtration $\mF=\{\mF_t\;|\;t\in[0,T]\}$. We say that $M$ is Martingale with respect to $\mF$ if the following are true. 
+\begin{itemize}
+\item $E[\abs{M_k}]<\infty$ for all $k$. 
+\item $E[M_{t_2}\;|\;\mF_{t_1}]=M_{t_1}$ for all $0\leq t_1<t_2\leq T$. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Continuous Martingale Process}{} Let $(\Omega,E,P)$ be a probability space. Let $(S,\Sigma)$ be a measurable space. Let $M:\Omega\times[0,T]\to S$ be a continuous stochastic process. We say that $M$ is continuous if for all $\omega\in\widetilde{\Omega}$ such that $P(\widetilde{\Omega})=1$, the function $$M(\omega,-):[0,T]\to S$$ is continuous. 
+\end{defn}
+
+\begin{defn}{Standard Brownian Filtration}{}
+\end{defn}
+
+\subsection{Martingale Transformations}
+
+\pagebreak
+\section{Stochastic Calculus}
+\subsection{Ito's Integral}
+Given a Martingale process $M:\Omega\times[0,T]\to\R$ on some filtered probability space, we may ask to integrate $M$ over the product measure of the measurable space $\Omega\times[0,T]$ because $M$ is in particular a measurable function. Ito's integral gives a construction of such an integral under certain assumption on $M$. 
+
+\begin{defn}{Simple Functions}{} Let $(\Omega,\mF,P)$ be a probability space. Define $\mH_0^2\subseteq L^2(\Omega\times[0,T])$ to be the vector subspace whose measurable functions are of the form $$f(\omega,t)=\sum_{i=0}^{n-1}a_i(\omega)1_{(t_i,t_{i+1}]}$$
+\end{defn}
+
+\begin{defn}{Ito Integral of Simple Functions}{} Let $(\Omega,\mF,P)$ be a probability space. Let $f\in\mH_0^2$. Define the Ito integral of $f(\omega,t)=\sum_{i=0}^{n-1}a_i(\omega)1_{(t_i,t_{i+1}]}$ by the formula $$I(f)(\omega)=\sum_{t=0}^{n-1}a_i(\omega)(B_{t_{i+1}}-B_{t_i})$$ In particular, $I$ is a function $I:\mH_0^2\to L^2(\Omega)$. 
+\end{defn}
+
+\begin{lmm}{Ito's Isometry I}{} Let $(\Omega,\mF,P)$ be a probability space. The map $I:\mH_0^2\to L^2(\Omega)$ is a linear isometry. 
+\end{lmm}
+
+\begin{defn}{Ito Integrable Functions}{} Let $(\Omega,\mF,P)$ be a probability space. Define the space of Ito integrable functions $\mH^2\subseteq L^2(\Omega\times[0,T])$ to be the vector subspace whose measurable functions $f\in L^2(\Omega\times[0,T])$ satisfies the fact that $$E\left[\int_{[0,T]}f^2(\omega,t)\;dt\right]=\int_\Omega\int_{[0,T]}f^2(\omega,t)\;dt\;dP<\infty$$
+\end{defn}
+
+\begin{lmm}{}{} Let $(\Omega,\mF,P)$ be a probability space. Then $\mH_0^2$ is dense in $\mH^2$. 
+\end{lmm}
+
+\begin{defn}{Ito Integral of Integrable Functions}{} Let $(\Omega,\mF,P)$ be a probability space. Let $f\in\mH^2$. Let $(f_n)_{n\in\N\setminus\{0\}}$ be a sequence such that $f_n\to f$ in $L^2(\Omega\times[0,T])$. Then define the Ito integral of $f$ by $$I(f)=\lim_{n\to\infty}I(f_n)$$ In particular, $I$ is a function $I:\mH^2\to L^2(\Omega)$. 
+\end{defn}
+
+\begin{lmm}{Ito's Isometry II}{} Let $(\Omega,\mF,P)$ be a probability space. The map $I:\mH^2\to L^2(\Omega)$ is a linear isometry. 
+\end{lmm}
+
+\subsection{The Integral as a Martingale}
+
+\subsection{Ito's Lemma}
+
+\subsection{Localization}
+
+\pagebreak
+\section{Stochastic Differential Equations}
+\subsection{Basic Definitions}
+\begin{defn}{Stochastic Differential Equations}{}
+\end{defn}
+
+Methods of solving differential equations can also be applied to stochastic differential equations. 
+
+\subsection{Geometric Brownian Motions}
+\begin{defn}{Geometric Brownian Motion}{} Let $(\Omega,E,P)$ be a probability space. Let $S:\Omega\times[0,T]\to\R$ be a continuous Martingale process with respect to the standard Brownian filtration $\mB=\{B_t\;|\;t\in[0,T]\}$. We say that $S$ follows a geometric Brownian motion if it satisfies the following stochastic differential equation $$dS_t=\mu S_tdt+\sigma S_tdB_t$$ where $\mu$ is called the percentage drift and $\sigma$ is called the percentage volitality. 
+\end{defn}
+
+Recall that $dS_t$ really means the Radon–Nikodym derivative $\frac{dS_t}{d\mu}$ where $\mu$ here (not the same one as above) refers to the standard measure on $\R$, while $dt$ means the genuine infinitesimally small increment in $\R$. 
+
+\begin{lmm}{}{} Let $(\Omega,E,P)$ be a probability space. Let $S:\Omega\times[0,T]\to\R$ be a continuous Martingale process with respect to the standard Brownian filtration $\mB=\{B_t\;|\;t\in[0,T]\}$. Suppose that $S$ follows a geometric Brownian motion. Then the solution of the stochastic differential equation is given by $$S_t=S_0e^{(\mu-\sigma^2/2)t+\sigma B_t}$$
+\end{lmm}
+
+\begin{prp}{}{} Let $(\Omega,E,P)$ be a probability space. Let $S:\Omega\times[0,T]\to\R$ be a continuous Martingale process with respect to the standard Brownian filtration $\mB=\{B_t\;|\;t\in[0,T]\}$. Suppose that $S$ follows a geometric Brownian motion. Then the following are true. 
+\begin{itemize}
+\item For each $t$, $S_t$ has a log normal distrbution. 
+\item For each $t$, we have $$E[S_t]=S_0e^{\mu t}$$
+\item For each $t$, we have $$\text{Var}(S_t)=S_0^2e^{2\mu t}(e^{\sigma^2 t}-1)$$
+\end{itemize}
+\end{prp}
+
+We also provide a discrete approach to solving the differential equation for easy simulation using the Monte Carlo method. 
+
+\begin{prp}{}{} The discretization of the defining stochastic differential equation of a geometric Brownian motion is given by $$S_{t+dt}-S_t=\mu S_tdt+\sigma S_tN\sqrt{dt}$$ where $dt$ denotes a small change in time, and $N\sim N(0,1)$ refers a random variable with a normal distribution. 
+\end{prp}
+
+\subsection{Systems of SDEs}
+
+
+\end{document}

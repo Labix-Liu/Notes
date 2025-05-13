@@ -1,0 +1,1199 @@
+\documentclass[a4paper]{article}
+
+\input{C:/Users/liula/Desktop/Latex/Headers V1.2.tex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Labix}
+\lhead{Advanced Ring Theory}
+\rfoot{\thepage}
+
+\title{Advanced Ring Theory}
+
+\author{Labix}
+
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+\begin{itemize}
+\item Abstract Alebra by Thomas W. Judson
+\end{itemize}
+\end{abstract}
+\pagebreak
+\tableofcontents
+
+\pagebreak
+
+\section{The Quaternions}
+\subsection{The Structure of Quaternions}
+Recall in Group theory that we have encountered the quaternion group. We can turn it into a vector space over $\R$ by allowing coefficients on the quaternion group. 
+
+\begin{defn}{Quaternions}{} Define the quaternions as the quotient algebra $$\H=\frac{\R\langle x_1,x_2,x_3\rangle}{I}$$ where $I=(x_1^2+1,x_2^2+1,x_3^2+1,x_1x_2x_3+1)$. \\~\\
+Elements of $\H$ are of the form $a+b\vb{i}+c\vb{j}+d\vb{k}$ for $a,b,c,d\in\R$ and by writing $\vb{i}=x_1+I$, $\vb{j}=x_2+I$ and $\vb{k}=x_3+I$. \\~\\
+A quaternion is said to be real if $b=c=d=0$. It is said to be imaginary if $a=0$. Denote the set of all imaginary quaternions by $\H_0$. 
+\end{defn}
+
+\begin{prp}{}{} The quaternions satisfy the following multiplication table: \begin{center}
+\begin{tabular}{ |c|c|c|c|c| } 
+\hline
+$\cdot$ & $1$ & $\vb{i}$ & $\vb{j}$ & $\vb{k}$\\\hline
+$1$ & $1$ & $\vb{i}$ & $\vb{j}$ & $\vb{k}$\\\hline
+$\vb{i}$ & $\vb{i}$ & $-1$& $\vb{k}$ & $-\vb{j}$ \\\hline
+$\vb{j}$ & $\vb{j}$& $-\vb{k}$& $-1$& $\vb{i}$\\\hline
+$\vb{k}$ & $\vb{k}$ & $\vb{j}$ & $-\vb{i}$ & $-1$\\\hline
+\end{tabular}
+\end{center}\tcbline
+\begin{proof}
+We only need to consider products that does not involve $1$. It clear for $t=1,2,3$, $x_t^2+1\in I$. This means that $x_t^2+I=-1+I$ and thus $\vb{i}^2=\vb{j}^2=\vb{k}^1=-1$. Similarly, we have that $x_1x_2x_3+I=-1+I$ and thus $\vb{ijk}=-1$. Multiplying this expression by $-\vb{i}$ on the left gives $\vb{jk}=\vb{i}$. We can also multiply the expression by $-\vb{k}$ on the right to get $\vb{ij}=\vb{k}$. Now multiply $\vb{i}$ to the left of the equation $\vb{ij}=\vb{k}$ to get $-\vb{j}=\vb{ik}$. We can also multiply $\vb{ij}=\vb{k}$ by $\vb{j}$ on the right gives $-\vb{i}=\vb{kj}$. Finally we have $\vb{j}(\vb{i}=\vb{jk})\implies\vb{ji}=-\vb{k}$ and $(\vb{ji}=-\vb{k})(-\vb{i})\implies\vb{j}=\vb{ki}$. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{} The elements $1,\vb{i},\vb{j},\vb{k}$ form a basis for the $\R$-algebra $\H$. \tcbline
+\begin{proof}
+It is clear that $1,x_1,x_2,x_3,x_1x_2,x_1x_3,x_2,x_3,\dots$ span $\H$. By writing $x_1,x_2,x_3$ each in terms of $1,\vb{i},\vb{j},\vb{k}$ respectively, we have can see that $1,\vb{i},\vb{j},\vb{k}$ span $\H$. It remains to show that they are linearly independent. \\~\\
+
+Consider the $\R$-algebra homomorphism $f:\R\langle x_1,x_2,x_3\rangle\to M_{2\times 2}(\C)$ defined by $f(x_1)=\begin{pmatrix}
+i & 0\\
+0 & -i
+\end{pmatrix}$, $f(x_2)=\begin{pmatrix}
+0 & 1\\
+-1 & 0
+\end{pmatrix}$ and $f(x_3)=\begin{pmatrix}
+0 & i\\
+i & 0
+\end{pmatrix}$. It is clear that $I\subseteq\ker(f)$ since $f(x_1^2+1)=f(x_2^2+1)=f(x_3^2+1)=f(x_1x_2x_3+1)=0$. By the first and third isomorphism theorem for modules, we have that $$\frac{\H}{\ker(f)/I}\cong\frac{\R\langle x_1,x_2,x_3\rangle}{\ker(f)}\cong\im(f)$$
+This means that $\dim_\R(\H)\geq\dim_\R(\im(f))$. Since the matrices $f(x_1),f(x_2),f(x_3)$ and $1$ are all linearly independent over $\R$, we have that $\im(f)$ is at least $4$-dimensional. Hence the four spanning elements of $\H$ must be linearly independent. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{} The imaginary quaternions $\H_0$ form a three dimensional vector subspace of $\H$. The real quaternions form a subalgebra $\R$ of $\H$. 
+\end{prp}
+
+We treat the imaginary quaternions $\H_0$ as the standard $3$-space with dot product $$(b_1\vb{i}+c_1\vb{j}+d_1\vb{k})\cdot(b_2\vb{i}+c_2\vb{j}+d_2\vb{k})=b_1b_2+c_1c_2+d_1d_2$$ and cross product 
+\begin{align*}
+(b_1\vb{i}+c_1\vb{j}+d_1\vb{k})\times_c(b_2\vb{i}+c_2\vb{j}+d_2\vb{k})&=(c_1d_2-c_2d_1)\vb{i}+(d_1b_2-d_2b_1)\vb{j}+(b_1c_2-c_2b_1)\vb{k}\\
+&=\begin{vmatrix}
+\vb{i} & \vb{j} & \vb{k}\\
+b_1 & c_1 & d_1\\
+b_2 & c_2 & d_2
+\end{vmatrix}
+\end{align*}
+
+\begin{prp}{}{} Let $a_1+\vb{h}_1$ and $a_2+\vb{h}_2$ be quaternions such that $a_1,a_2\in\R$ and $\vb{h}_1,\vb{h}_2\in\H_0$. Then $$(a_1+\vb{h}_1)(a_2+\vb{h}_2)=(a_1a_2-\vb{h}_1\cdot\vb{h}_2)+(a_1\vb{h}_2+a_2\vb{h}_1+\vb{h}_1\times_c\vb{h}_2)$$ \tcbline
+\begin{proof}
+By $\R$-bilinearity, we have that we have that $$(a_1+\vb{h}_1)(a_2+\vb{h}_2)=(a_1a_2+a_1\vb{h}_2+a_1\vb{h}_1+\vb{h}_1\vb{h}_2)$$ A simple calculation yields $\vb{h}_1\vb{h}_2=-\vb{h}_1\cdot\vb{h}_2+\vb{h}_1\times\vb{h}_2$ using multiplication rules of quaternions. Thus we are done. 
+\end{proof}
+\end{prp}
+
+\begin{defn}{Conjugate and Norm}{} Let $x=a+b\vb{i}+c\vb{j}+d\vb{k}\in\H$ be a quaternion. Define the conjugate of $x$ to be $$x^\ast=a-b\vb{i}-c\vb{j}-d\vb{k}$$ Also define the norm of $x$ to be $$\|x\|=\sqrt{a^2+b^2+c^2+d^2}$$
+\end{defn}
+
+\begin{prp}{}{} Let $x,y\in\H$ be quaternions. The following are true regarding the conjugate and norm of the quaternions: 
+\begin{itemize}
+\item $xx^\ast=\|x\|^2$
+\item $(xy)^\ast=y^\ast x^\ast$
+\item $\|xy\|=\|x\|\|y\|$
+\end{itemize} \tcbline
+\begin{proof}~\\
+\begin{itemize}
+\item Write $x=a+b\vb{i}+c\vb{j}+d\vb{k}$. Then by considering the purely imaginary quaternions as a $3$ dimensional vector space, we have that 
+\begin{align*}
+xx^\ast&=\left(a^2-\begin{pmatrix}
+b\\c\\d\\\end{pmatrix}\cdot\begin{pmatrix}-b\\-c\\-d\\\end{pmatrix}\right)+\left(a\begin{pmatrix}b\\c\\d\\\end{pmatrix}-a\begin{pmatrix}b\\c\\d\\\end{pmatrix}-\begin{pmatrix}b\\c\\d\\\end{pmatrix}\times\begin{pmatrix}b\\c\\d\\\end{pmatrix}\right)\\
+&=a^2+b^2+c^2+d^2\\
+&=\|x\|^2
+\end{align*}
+\item Again write $x=a_1+\vb{h}_1$ and $y=a_2+\vb{h}_2$, then by a similar method, we have that 
+\begin{align*}
+y^\ast x^\ast&=(a_2a_1+\vb{h}_2\cdot\vb{h}_1)+(-a_1\vb{h}_2-a_2\vb{h}_1+\vb{h}_2\times\vb{h}_1)\\
+&=(a_2a_1+\vb{h}_2\cdot\vb{h}_1)-(a_1\vb{h}_2+a_2\vb{h}_1+\vb{h}_1\times\vb{h}_2)\\
+&=(xy)^\ast
+\end{align*}
+by using the fact that $-\vb{x}\times\vb{y}=\vb{y}\times\vb{x}$. 
+\item Using the above two identity, we have that 
+\begin{align*}
+\|xy\|^2&=(xy)(xy)^\ast\\
+&=xyy^\ast x^\ast\\
+&=x\|y\|^2 x^\ast\\
+&=xx^\ast\|y\|^2\\
+&=\|x\|^2\|y\|^2
+\end{align*}
+\end{itemize}
+And so we are done. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{} $\H$ is a division ring. \tcbline
+\begin{proof}
+Let $x\in\H$. By the above proposition, we have that $x\frac{x^\ast}{\|x\|}=1$ which means we have found an inverse $\frac{x^\ast}{\|x\|}$ for $x$. 
+\end{proof}
+\end{prp}
+
+Similar to the real and complex counter part, we can form all kinds of special groups for quaternions, beginning with the unitary group. 
+
+\begin{defn}{The Quaternionic Unitary Group}{} Define the quaternionic unitary group to be the subgroup $$U(\H)=\{x\in\H\;|\;\|x\|=1\}$$ of $\H^\times$. 
+\end{defn}
+
+Note that this is different from the quaternion group since the quaternion group only consists of the basis vectors and their inverses. 
+
+\begin{prp}{}{} The multiplicative group $\H^\times$ is isomorphic to $\R_+^\times\times U(\H)$, where $\R_+^\times$ is the multiplicative group of non-zero real numbers. \tcbline
+\begin{proof}
+Define $\phi:\R_+^\times\times U(\H)\to\H$ by $\phi(r,x)=rx$. It is clear that this is a group homomorphism. Moreover, its kernel is trivial since scalar multiplication is equal to $0$ if and only if $x=0$. Also it is surjective. Indeed any vector $x$ can be written as $\|x\|\frac{x}{\|x\|}$ where $\frac{x}{\|x\|}$ now lies in the unitary group. Thus $\phi$ is a bijective homomorphism.  
+\end{proof}
+\end{prp}
+
+By writing every quaternion group as a scalar multiplied by an element of the unitary group, we obtain a polar coordinate representation similar to that of the complex numbers in terms of the argument and magnitude. 
+
+\begin{prp}{Quaternionic Euler's Formula}{} Let $a+b\vb{x}\in\H$ be a quaternion where $a,b\in\R$ and $\vb{x}\in\H_0$ is purely imaginary such that $\|\vb{x}\|=1$. Then $$e^{a+b\vb{x}}=e^a(\cos(b)+\vb{x}\sin(b))$$ \tcbline
+\begin{proof}
+If $q=a+b\vb{x}$ then notice that $q$ lies in the two dimensional $\R$-subalgebra $\R(x)=\R+\R\vb{x}$. This is isomorphic to $\C$ so in particular, all partial sums $$\sum_{k=0}^n\frac{\vb{x}^n}{n!}$$ also lie in $\R(x)\cong\C$ and quaternionic Euler's formula follows from the usual Euler's formula. 
+\end{proof}
+\end{prp}
+
+However, note that in general since quaternions do not commutate, $e^{X+Y}\neq e^Xe^Y$. This is true only if $X,Y\in\R(x)$. This is because then $XY=YX$ so that $e^{X+Y}=e^Xe^Y$. 
+
+\begin{prp}{Quaternionic De Moivre's Formula}{} Let $\vb{x}\in H_0$ be purely imaginary such that $\|\vb{x}\|=1$. Let $n\in\Z$. Then $$(\cos(b)+\vb{x}\sin(b))^n=\cos(nb)+\vb{x}\sin(nb)$$ \tcbline
+\begin{proof}
+We have that $$(\cos(b)+\vb{x}\sin(b))^n=e^{{b\vb{x}}^n}=e^{nb\vb{x}}=\cos(nb)+\vb{x}\sin(nb)$$ and so we are done. 
+\end{proof}
+\end{prp}
+
+\subsection{3D Rotations using Quaternions}
+Recall the special orthogonal group in $3$-dimensions is the group $$\text{SO}_3(\R)=\{M\in\text{GL}_3(\R)|\det(M)=1\}$$
+
+\begin{prp}{}{} Let $M\in\text{SO}_3(\R)$ be a special orthogonal transformation. Then there exists an orthonormal basis of $\R^3$ such that the matrix decomposes into the direct sum $(1)\oplus R_\alpha$, where $$R_\alpha=\begin{pmatrix}
+\cos(\alpha) & -\sin(\alpha)\\
+\sin(\alpha) & \cos(\alpha)
+\end{pmatrix}$$ is a rotation in $\R^2$. \tcbline
+\begin{proof}
+Since $M$ is a bijective linear transformation, $M$ has at least $1$ real eigenvector $\vb{v}$ with eigenvalue $\alpha\in\R$. Note that since $M$ is also in the special orthogonal group, $a=\pm1$. Let $W$ be the plane orthogonal to $\vb{v}$. Note that $M\vb{w}\in W$ for any $\vb{w}\in W$ because $M$ is bijective and that $$\vb{v}\cdot M\vb{w}=M(\alpha^{-1}\vb{v})\cdot(M\vb{w})=\alpha^{-1}\vb{v}\cdot\vb{w}=0$$ so that $M\vb{w}\in W$. Thus the linear transformation of $M$ restricted to $W$ is an orthogonal transformation. But orthogonal transformations in $\R^2$ is exactly given by $R_\alpha$ for some angle $\alpha$, or a reflection $S_\alpha$ along an angle. \\~\\
+
+If $\alpha=1$, we must have that $M$ restricted to the orthogonal plane is a rotation $R_\alpha$. Then we are done by choosing the ordered basis $\vb{v}$ and any orthonormal basis $e_2$ and $e_3$ of $W$. If $\alpha=-1$, then $M$ restricted to the orthogonal plane is a reflection $S_\alpha$. But $S_\alpha$ then has eigenvalues $1$ and $-1$. We can then return to the start of the proof and choose the eigenvector corresponding to the eigenvalue $1$. Thus then we will arrive at the case of $\alpha=1$. 
+\end{proof}
+\end{prp}
+
+Now we know that every special orthogonal transformation is just a rotation in the plane orthogonal to $e_1$. In generality, we write $R_{\vb{x}}^\alpha$ for the anti-clockwise rotation in angle $\alpha$ in the plane orthogonal to $\vb{x}\in\R^3$. We can use the quaternions to write out a formula for applying the special orthogonal transformation to a vector. This is more compact than the usual notations. 
+
+\begin{lmm}{}{} Let $\vb{x}\in\H_0$ be an imaginary unit. Let $\theta\in\R$. Then $$R_{\vb{x}}^{2\theta}(\vb{w})=e^{\theta\vb{x}}\vb{w}e^{-\theta\vb{x}}$$ for all $\vb{w}\in\H_0$. \tcbline
+\begin{proof}
+Choose $\vb{y}\in\H_0$ an orthogonal vector to $\vb{x}$ that is a unit vector. Let $\vb{z}=\vb{x}\times\vb{y}$. By proposition 5.1.5, we have that $\vb{x}^2+\vb{y}^2+\vb{z}^2=-1$ and \begin{gather*}
+\vb{x}\vb{y}=-\vb{y}\vb{x}=\vb{z}\\
+\vb{y}\vb{z}=-\vb{z}\vb{y}=\vb{x}\\
+\vb{z}\vb{x}=-\vb{x}\vb{z}=\vb{y}
+\end{gather*} so that $\vb{x}$, $\vb{y}$, $\vb{z}$ forms a basis for $\H_0$. 
+It suffices to check the equation on basis vectors since the rotation is a linear map. Notice that $e^{-\theta\vb{x}}=\cos(\theta)-\vb{x}\sin(\theta)$. Now we have that $$
+e^{\theta\vb{x}}\vb{x}e^{-\theta\vb{x}}=\vb{x}e^{\theta\vb{x}}e^{-\theta\vb{x}}=\vb{x}=R_{\vb{x}}^{2\theta}(\vb{x})$$ Now also, 
+\begin{align*}
+e^{\theta\vb{x}}\vb{y}e^{-\theta\vb{x}}&=(\cos(\theta)+\vb{x}\sin(\theta))\vb{y}(\cos(\theta)-\vb{x}\sin(\theta))\\
+&=(\vb{y}\cos(\theta)+\vb{z}\sin(\theta))(\cos(\theta)-\vb{x}\sin(\theta))\\
+&=((\cos(\theta))^2-(\sin(\theta))^2)\vb{y}+(2\cos(\theta)\sin(\theta))\vb{z}\\
+&=\vb{y}\cos(2\theta)+\vb{z}\sin(2\theta)\\
+&=R_{\vb{x}}^{2\theta}(\vb{y})
+\end{align*} Finally we have that 
+\begin{align*}
+e^{\theta\vb{x}}\vb{z}e^{-\theta\vb{x}}&=(\cos(\theta)+\vb{x}\sin(\theta))\vb{z}(\cos(\theta)-\vb{x}\sin(\theta))\\
+&=(\vb{z}\cos(\theta)-\vb{y}\sin(\theta))(\cos(\theta)-\vb{x}\sin(\theta))\\
+&=((\cos(\theta))^2-(\sin(\theta))^2)\vb{z}-(2\cos(\theta)\sin(\theta))\vb{y}\\
+&=\vb{z}\cos(2\theta)-\vb{y}\sin(2\theta)\\
+&=R_{\vb{x}}^{2\theta}(\vb{z})
+\end{align*}
+and so we conclude. 
+\end{proof}
+\end{lmm}
+
+This leads to the fundamental fact behind the theory of spinors in Geometry and Physics. 
+
+\begin{thm}{}{} The conjugation action map $$\phi:U(\H)\to\text{SO}(\H_0)\cong\text{SO}_3(\R)$$ defined by $\phi(x)(\vb{z})=x\vb{z}x^{-1}$ for $\vb{z}\in\H_0$ and $x\in U(\H)$ is a surjective two to one group homomorphism. 
+\end{thm}
+
+\subsection{4D Scrolls}
+\begin{defn}{Left Scrolls and Right Scrolls}{} Let $X\in U(\H)$ be a unit quaternion. Define its left scroll $L_X\in\text{SO}_1(\H)$ and right scroll $R_X\in\text{SO}_1(\H)$ as left and right multiplications: $$L_X(Y)=XY\;\;\;\;\text{ and }\;\;\;\; R_X(Y)=YX$$
+\end{defn}
+
+\begin{lmm}{}{} Let $X\in U(\H)$ be a unit quaternion. Then the left scroll $L_X$ and the right scroll $R_X$ are orthogonal linear transformations. \tcbline
+\begin{proof}
+Since $\H$ is a $4$-dimensional vector space over $\R$ and multiplication of quaternions commute with scalar multiplication, $L_X$ and $R_X$ are both linear transformations. Moreover, we have that $$\|XY\|=\|X\|\|Y\|=\|Y\|=\|YX\|$$ so that multiplication is orthogonal. 
+\end{proof}
+\end{lmm}
+
+\begin{lmm}{}{} Let $X=e^{\alpha\vb{x}}$ be a quaternion where $\vb{x}$ is a purely imaginary quaternion. Let $\vb{y}$ be a purely imaginary quaternion orthogonal to $\vb{x}$. Let $\vb{z}=\vb{x}\times\vb{y}$. Then in the basis $1,\vb{x},\vb{y},\vb{z}$, the matrices for the left scroll and right scroll of $X$ are given by $$L_X=R_\alpha\oplus R_\alpha\;\;\;\;\text{ and }\;\;\;\; R_X=R_\alpha\oplus R_{-\alpha}$$
+\end{lmm}
+
+Given a special orthogonal linear transformation, we can write it in terms of a left multiplication and a right multiplication. \\~\\
+
+Suppose that $f\in\text{SO}_1(\H)$ is a special orthogonal linear transformation. \\
+Step 1: Construct a map $g=L\circ f$ such that $g(1)=1$. \\
+Step 2: Find the fixed line in $\H_0=\text{span}\{\vb{i},\vb{j},\vb{k}\}$ either through observation or by finding an eigenvector $\vb{u}$ with eigenvalue $1$. \\
+Step 3: Find the angle $\alpha$ of rotation either through observation of by finding the other complex eigenvalues. \\
+Step 4: We have found $g(w)=e^{\alpha\vb{u}}we^{-\alpha\vb{u}}$. Recover $f$ from $g$ by expanding the right hand side and then inverting $L$. 
+
+\begin{thm}{}{} The map $\psi:U(\H)\times U(\H)\to\text{SO}_1(\H)$ defined by $$\psi(X,Y)=L_XR_{Y^{-1}}$$ is a surjective two-to-one group homomorphism. 
+\end{thm}
+
+\subsection{Quaternion Algebras}
+\begin{defn}{Quaternion Algebras}{} Let $k$ be a field and let $a,b\in k^\times$. Define the generalized quaternion algebra of type $(a,b)$ over $k$ to be the algebra $$\Q(a,b)=\frac{k\langle i,j,k\rangle}{(i^2-a,j^2-b,ij-k,ij+ji)}$$ over $k$. 
+\end{defn}
+
+\begin{defn}{Split Quaternion Algebras}{} Let $Q$ be a quaternion algebra over a field $k$. We say that $Q$ is split if $Q$ is isomorphic $$Q\cong M_2(k)$$ to the $2\times 2$ matrix ring. 
+\end{defn}
+
+\begin{thm}{}{} Let $Q$ be a quaternion algebra over a field $k$. Then $Q$ is either split or is not a division algebra, but not both. 
+\end{thm}
+
+\pagebreak
+\section{Division Rings and Division Algebras}
+Division rings are very closed to being a field. They are just missing commutativity. As one can seen in Field and Galois theory, fields and field homomorphisms are rather rigid objects, so one can expect division rings to be restrictive. Indeed, in this section we will show that any finite division ring must be a field. Moreover, the only finite dimensional division algebra over $\R$ can only take $3$ forms, namely $\R$, $\C$ or $\H$. In particular, they have dimension $1$, $2$ and $4$ respectively. \\~\\
+
+A division algebra is an algebra such that the underlying ring is a division ring. When it is also a field, we have seen in Field and Galois theory that they are well understood. We now study division algebras over $\R$ and $\C$. Moreover, the underlying structure is similar to non-commutative vector fields. Therefore definitions such as the trace map in Fields and Galois theory can be easily carried over. 
+
+\subsection{Properties of Division Rings}
+\begin{prp}{}{} Let $D$ be a division ring. The following are true regarding the properties of a division ring. 
+\begin{itemize}
+\item The only ideals of $D$ are $(0)$ and $D$. 
+\item If $D$ is an division algebra, then $D$ is a simple $D$-module. 
+\end{itemize} \tcbline
+\begin{proof}
+Let $I$ be a non-trivial ideal of $D$. Then by property of an ideal, for $x\in I\setminus\{0\}$, $x^{-1}x\in I$ so that $1\in I$. Then for any $d\in D$, $d\cdot 1\in I$ thus $D=I$. \\~\\
+
+Since the submodules of $D$ are precisely the ideals of $D$, we conclude that $D$ is a simple $D$-module. 
+\end{proof}
+\end{prp}
+
+\begin{lmm}{}{} Let $D$ be a division ring. Then the following are true. 
+\begin{itemize}
+\item $Z(D)$ is a field and $D$ is a $Z(D)$-algebra
+\item $C_D(x)$ is a division ring and a $Z(D)$-subalgebra
+\end{itemize} \tcbline
+\begin{proof}
+$Z(D)$ as a subdivision ring is also a division ring in its own right. Since $Z(D)$ consists of all commuting elements, $Z(D)$ is commutative and so is a field. Thus $D$ is a $Z(D)$-algebra by multiplication. \\~\\
+
+It is clear that $0,1\in C_D(x)$. Let $a,b\in C_D(x)$. Then $$(a-b)x=ax-bx=xa-xb=x(a-b)$$ so that $a-b\in C_D(x)$. Also $abx=axb=xab$ implies that $ab\in C_D(x)$. Finally, $ax=xa$ implies that $x=a^{-1}xa$ so that $xa^{-1}=a^{-1}x$ and that $a^{-1}\in D$. Thus $C_D(x)$ is a sub division ring. Since $C_R(x)$ contains $Z(R)$, $C_R(x)$ is thus a $Z(D)$-algebra. 
+\end{proof}
+\end{lmm}
+
+\subsection{Amitsur-Schur Lemma}
+Recall that we say $a\in\F$ a field is an algebraic element over $\F$ if there exists some polynomial in $f\in\F[x]$ for which $f(a)=0$. Moreover, the minimal polynomial $\mu_a$ is monic and of smallest degree amongst all $f$ for which $f(a)=0$. 
+
+\begin{thm}{Amitsur-Schur Lemma}{} Let $A$ be an $\F$-algebra for $\F$ a field, such that $A$ has vector space dimension less than $\abs{\F}$. If $M$ is a simple left $A$-module, then every element of the division $\F$-algebra $\text{End}_A(M)$ is algebraic. \tcbline
+\begin{proof}
+By Schur's Lemma II, $D=\text{End}_A(M)$ is a division ring. Clearly, $D$ is an $\F$-algebra by defining the ring homomorphism $\phi:\F\to D$ by $\phi(\alpha)(m)=\alpha m$. Then the dimensions of the three vector spaces satisfy $$\dim_\F(D)\leq\dim_\F(M)\leq\dim_\F(A)<\abs{\F}$$ Indeed, suppose that $x\in M$ is non-zero. Consider the map $\pi:A\to M$ defined by $\pi(a)=ax$. Since $\pi$ is not the zero map and $M$ is simple, by Shur's lemma $I$ we know that $\im(\pi)=M$. By the firs isomorphism theorem, we have that $M\cong\frac{A}{\ker(\pi)}$ and thus the second inequality in dimensions hold. For the first inequality, the linear map $\omega_x:D\to M$ defined by $\omega_x(d)=xd$ is injective because $M$ is simple. \\~\\
+
+Any element $\alpha\in\F\subseteq D$ is clearly algebraic: Just choose $\mu_\alpha(x)=x-\alpha$. Now consider $d\in D\setminus\F$. Then for each $\alpha\in\F$, the element $d-\alpha$ is non-zero. Since $D$ is a division ring, we get $\abs{\F}$ number of non-zero elements $(d-\alpha)^{-1}$. Their number exceeds the dimension of $D$. Hence we have a non-trivial linear dependence $$\sum_{i=1}^k\beta_i(d-\alpha_i)^{-1}=0$$ for any $k\geq 1$. Notice that $d-\alpha_i$ and $d-\alpha_j$ for any $i$ and $j$ because $\alpha_i\in\F\subseteq Z(D)$. Furthermore, $d-\alpha_i$ commutes with $(d-\alpha_j)^{-1}$ because 
+\begin{align*}
+ab=ba\implies ab^{-1}&=b^{-1}bab^{-1}\\
+&=b^{-1}abb^{-1}\\
+&=b^{-1}a
+\end{align*}
+Thus we can apply the usual calculations with fractions: $$0=\sum_{i=1}^k\beta_i\frac{1}{d-\alpha_i}=\frac{f(d)}{(d-\alpha_1)\cdots(d-\alpha_k)}$$ where $f(d)=\sum_{j=1}^k\prod_{i=1}^k\frac{\beta_j}{x-\alpha_j}(x-\alpha_i)$. Multiplying by the denominator, we get $f(d)=0$. Notice that $$f(\alpha_1)=\beta_1(\alpha_1-\alpha_2)\cdots(\alpha_1-\alpha_k)\neq 0$$ so that $f(x)\neq 0$ and thus $d$ is algebraic. 
+\end{proof}
+\end{thm}
+
+\begin{crl}{}{} Let $A$ be a countable generated $\C$-algebra. Let $M$ is a simple left $A$-module. Then $\text{End}_A(M)=\C$. \tcbline
+\begin{proof}
+The dimension of $A$ is countable since $A$ is a quotient of $\C\langle X\rangle$. Since $M$ is simple, it is isomorphic to $A/L$ for some left ideal $L$. Hence the dimension of $M$ over $\C$ is also countable. This implies that $\dim_\C(\text{End}_\C(M))$ is countable, and so is the dimension of its subalgebra $\text{End}_A(M)$. But $\C$ is uncountable. Thus every $f\in\text{End}_A(M)$ is algebraic by the Amitsur-Schur lemma. By the fundamental theorem of algebra, the $\C$ is algebraically closed so that the minimal polynomial of $f$, which is irreducible, has degree $1$. Thus the minimal polynomial has root $f\in\C$. 
+\end{proof}
+\end{crl}
+
+\subsection{Division Rings over Real and Complex Numbers}
+\begin{prp}{}{} The only finite dimensional $\C$-division algebra is $\C$. \tcbline
+\begin{proof}
+Let $D$ be a finite dimensional $\C$-division algebra. Then in particular, $\C\subseteq D$. Suppose that $a\in D$. Then the minimal polynomial $\mu_a(x)$ is an irreducible element of $\C[x]$. By the fundamental theorem of algebra, $\mu_a(x)=x-\alpha$ with $\alpha\in\C$. This means that $a=\alpha\in\C$ and thus $D=\C$. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{} The only odd dimensional $\R$-division algebra is $\R$. \tcbline
+\begin{proof}
+Let $D$ be an $\R$-division algebra of odd dimension $n$. Then in particular, $\R\subseteq D$. Let $a\in D$. In linear algebra we know that the $\R$-linear map $L:D\to D$ defined by $L(d)=ad$ admits a real eigenvalue $\alpha\in D$ and eigenvector $v$. Then $av=\alpha v$ implies that $(a-\alpha)v=0$. Since $D$ is a division algebra, we have that $a=\alpha\in\R$. Thus $\R=D$. 
+\end{proof}
+\end{prp}
+
+In order to proof the grand result, we need the notion of the trace map from Linear Algebra. 
+
+\begin{defn}{Trace Map}{} Let $D$ be a real division algebra of finite dimension over $\R$. Define the trace map $\text{Tr}_D:D\to\R$ by $$\text{Tr}_D(a)=\text{Tr}(L_a)$$ where $L_a:D\to D$ is the left multiplication map $L_a(d)=ad$. 
+\end{defn}
+
+\begin{lmm}{}{} Let $A$ be a finite dimensional algebra over a field $\F$. If $a\in A$ then the minimal polynomial of $L_a$ is equal to $\mu_a$. \tcbline
+\begin{proof}
+Notice that we have $L_a^n(b)=a^nb=L_{a^n}(b)$ so that $$f(L_a)(b)=f(a)b=L_{f(a)}(b)$$ for each polynomial $f(x)$ and $b\in A$. If $f(a)=0$, then $f(L_a)=0$. If $f(L_a)=0$, then $f(a)=f(a)\cdot 1=f(L_a)(1)=0$. Thus the minimal polynomial of $L_a$ and $a$ are the same. 
+\end{proof}
+\end{lmm}
+
+\begin{thm}{Frobenius Theorem}{} A finite dimensional division algebra over $\R$ is isomorphic to $\R$, $\C$ or $\H$. \tcbline
+\begin{proof}
+Let $D$ be a finite dimensional division algebra over $\R$. \\~\\
+
+Step 1: $D=\R\oplus\ker(\text{Tr}_D)$. \\
+The trace map is defined to be linear over the components of the matrix so that it is a linear map from $D$ to $\R$. It is clear that if $D$ is $n$-dimensional over $\R$, then $\text{Tr}_D(L_a)=na$ so that $\text{Tr}_D$ is surjective. By Rank-Nullity Theorem, The kernel of $\text{Tr}_D$ is $n-1$ dimensional. Since $R$ and $\ker(\text{Tr}_D)$ are disjoin, we conclude that $D=\R\oplus\ker(\text{Tr}_D)$ is the direct sum. \\~\\
+
+Step 2: If $a\in\ker(\text{Tr}_D)$ then $a^2\in\R$ and $a^2\leq 0$ with equality if and only if $a=0$. \\
+Now let $a\in D$ lie in the kernel. If $a\in\R$ then since $D$ is the direct sum of $\R$ and the kernel, we must have that $a=0$. So suppose that $a\notin\R$. Then since any irreducible polynomial in $\R[x]$ must either be linear or quadratic with discriminant less than $0$ and $a\notin\R$, the minimal polynomial $\mu_a$ of $a$ must be quadratic: $$\mu_a(x)=x^2+\alpha x+\beta$$ where $\alpha^2-4\beta<0$. By the above corollary, $L_a$ also has $\mu_a$ as the minimal polynomial. The characteristic polynomial $c_{L_a}(x)$ of $L_a$ has the same roots as $\mu_a$. Since $\mu_a$ is irreducible, $c_{L_a}$ must be a power of $\mu_a$. It follows that $$c_{L_a}(x)=\mu_a(x)^{n/2}=(x^2+\alpha x+\beta)^{n/2}=x^n+\frac{n\alpha}{2}x^{n-1}+\dots+\beta^{n/2}$$ From Linear Algebra, we know that the trace appears as the first coefficient of the characteristic polynomial. By definition of $\ker(\text{Tr}_D)$, we have that $\text{Tr}_D(a)=0$. It follows that $\alpha=0$, $\beta>0$ and $\alpha^2+\beta=0$. Thus $\alpha^2=-\beta<0$. We then conclude that $a^2\leq 0$. \\~\\
+
+Write $D_0=\ker(\text{Tr}_D)$. We now have a function $q:D_0\to\R$ defined by $$q(a)=-a^2$$ This is a positive definite quadratic form. We can polarize it to obtain $\tau:D_0\times D_0\to\R$ defined by $$\tau(a,b)=-\frac{1}{2}(ab+ba)$$~\\
+
+Step 3: $(D_0,\tau)$ is a finite dimensional Euclidean space. \\
+It is clear that $\tau$ is symmetric since $\tau(a,b)=\tau(b,a)$. $\tau$ is bilinear since 
+\begin{align*}
+\tau(a+b,c)&=-\frac{1}{2}((a+b)c+c(a+b))\\
+&=-\frac{1}{2}(ac+ca)-\frac{1}{2}(bc+cb)\\
+&=\tau(a,c)+\tau(b,c)
+\end{align*} and the property that $\tau(\lambda a,b)=\lambda\tau(a,b)$ for $\lambda\in\R$ is clear. Thus $\tau$ is a bilinear form. It is positive definite by step 2 since $\tau(a,a)=-a^2>0$. \\~\\
+
+By Gram-schimdt, we obtain an orthonormal basis for $D_0$, namely $e_1,\dots,e_{n-1}$. \\~\\
+
+Step 4: $e_i^2=-1$ and $e_i\cdot e_j=-e_j\cdot e_i$ for all $1\leq i\neq j\leq n-1$. Also, $e_k=\pm(e_i\cdot e_j)^{-1}$ for $1\leq i<j<k\leq n-1$. \\
+As the basis is orthonormal, we have that $\tau(e_i,e_i)=1$ and $\tau(e_i,e_j)=0$ for all $i\neq j$. The results then follow from the definition of $\tau$. Also, let $u=e_ie_je_k$. We have that 
+\begin{align*}
+u^2&=(e_ie_j)e_ke_ie_je_k\\
+&=-e_j(e_ie_k)e_ie_je_k\\
+&=e_je_k(e_ie_i)e_je_k\\
+&=-(e_je_k)e_je_k\\
+&=e_je_je_ke_k\\
+&=1
+\end{align*}
+Thus $u^2=1$ implies $(u-1)(u+1)=0$. Since $D$ is a division algebra, $e_ie_je_k=u=\pm1$. Hence we conclude. 
+
+Step 5: Conclusion. \\
+By analzing the dimension $n$, we have the following: 
+\begin{itemize}
+\item If $n=1$, then we must have $D=\R$. 
+\item If $n=2$, then $e_1^2=1$ so that $D\cong\C$. 
+\item If $n=3$, then it is impossible by proposition 5.4.2. 
+\item If $n=4$, then $D=\R\oplus\R e_1\oplus\R e_2\oplus\R e_3$. Let $i=e_1$, $j=e_2$ and $k=e_1e_2$. Then by step 4, we have that $i^2=j^2=k^2=-1$ and $ijk=kk=-1$. Thus $D\cong\H$. 
+\item If $n=5$, then it is impossible by step 4. Indeed we have that $e_3\pm(e_1e_2)^{-1}$ and $e_4=\pm(e_1e_2)^{-1}$ so that $e_4=\pm e_3$. This contradicts the fact that $e_1,\dots,e_{n-1}$ is a basis. 
+\end{itemize}
+\end{proof}
+\end{thm}
+
+Together with Amitsur-Schur lemma, we can prove a stronger statement. 
+
+\begin{thm}{}{} The only countably generated division algebra over $\R$ up to isomorphism is either $\R$, $\C$ or $\H$. \tcbline
+\begin{proof}
+Let $D$ be a countable generated $\R$-division algebra. Then $D$ is a simple module and $\text{End}_D(D)\cong D$ by lemma 2.4.3. Moreover, by Amitsur-Schur lemma, every element $d\in D$ is algebraic. The algebra $\R\langle d\rangle$ generated by $d$ is a finite dimensional field. If $d\notin\R$, then by Frobenius theorem, $\R\langle d\rangle\cong\C$ and the minimal polynomial is quadratic. Write it as $\mu_d=x^2+\alpha_dx+\beta_d$. If $\R\langle d\rangle=D$, then we are done. \\~\\
+
+If $\R\langle d\rangle\neq D$, pick $c\in D\setminus\R\langle d\rangle$. Then subalgebra $A=\R\langle c,d\rangle$ generated by $d$ and $c$ is a division algebra because each element $r\notin R$ can be inverted from $r^2+\alpha_r+\beta_r=0$. Indeed we have that $(r+\alpha_r)r=-\beta_r$ so that $r^{-1}=-\beta_r^{-1}(r+\alpha_r)$. Note that $\beta_r\neq0$ since $\mu_r(x)$ is irreducible. \\~\\
+
+Now we have that $$(c+d)^2+\alpha_{c+d}(c+d)+\beta_{c+d}=c^2+cd+dc+d^2+\alpha_{c+d}(c+d)+\beta_{c+d}$$ This is the minimal polynomial of $c+d$, and so it is $0$. It follows that 
+\begin{align*}
+dc&=-c^2-cd-d^2-\alpha_{c+d}(c+d)-\beta_{c+d}\\
+&=\alpha_cc+\beta_c-cd+\alpha_dd+\beta_d-\alpha_{c+d}(c+d)-\beta_{c+d}
+\end{align*}
+Thus every element of $\R\langle c,d\rangle$ is an $\R$-linear combination of $1,c,d,cd$. By Frobenius theorem, we have that $\R\langle c,d\rangle\cong\H$. If $\R\langle c,d\rangle=D$ then we are done. \\~\\
+
+Suppose that $\R\langle c,d\rangle\neq D$. Pick $b\in D\setminus\R\langle c,d\rangle$. Consider the subalgebra $\R\langle b,c,d\rangle$ generated by $b,c,d$. By the same argument as above, $\R\langle b,c,d\rangle$ is a division algebra. By the argument with the minimal polynomials of $b,r$ and $b+r$ for some $r\in\R\langle c,d\rangle$, we can write every element as an $\R$-linear combination of $1,c,d,cd,b,cb,db$ and $cdb$. Thus $\R\langle b,c,d\rangle$ is a finite dimensional division algebra over $\R$ of dimension at least $5$. This contradicts Frobenius theorem. 
+\end{proof}
+\end{thm}
+
+However this is no longer true for division algebras over $\R$ of uncountable dimension. For example, the ring of Laurent series $\R((x))$, $\C((x))$ and $\H((x))$ are all examples of such. 
+
+\subsection{Finite Division Rings}
+\begin{crl}{}{} Let $D$ be a finite division ring. Then the following statements are true regrading $D$. 
+\begin{itemize}
+\item $Z(D)$ is a finite field $\F_{p^n}$ for some $n\in\N\setminus\{0\}$
+\item The dimension of $D$, $m=\dim_{Z(D)}D$ over $Z(D)$ is finite
+\item $\abs{D}={p^n}^m$
+\end{itemize} \tcbline
+\begin{proof}
+We know that $Z(D)$ is a field. Since $D$ is finite, $Z(D)$ is finite. Every finite field is of the form $\F_{p^n}$ from Field and Galois theory. Since $D$ is a $Z(D)$-algebra and $D$ is finite, we must have $\dim_{Z(D)}D$ is finite. The final point also follows. 
+\end{proof}
+\end{crl}
+
+\begin{prp}{}{} Let $D$ be a finite division ring and $\dim_{Z(D)}(D)=m$ for $Z(D)\cong\F_{p^n}$ for some prime $p$ and $n\in\N\setminus\{0\}$. Then there exists positive integers $d_1,\dots,d_k$ such that $d_i|m$, $d_i<m$ and $$q^m=q+\sum_{i=1}^k\frac{q^m-1}{q^{d_i}-1}$$ \tcbline
+\begin{proof}
+The group $D^\times$ acts on $D$ by conjugation. By the class equation, we have that $$q^m=\abs{D}=\abs{Z(R)}+\sum_{i=1}^k\abs{\text{Orb}_{D^\times}(x_i)}$$ for $Z(R),\text{Orb}_{D^\times}(x_1),\dots,\text{Orb}_{D^\times}(x_k)$ the distinct orbits of the action. \\~\\
+
+If $D$ is a field, then $Z(D)=D$ and $m=1$. All orbits moreover have size $1$ since $D$ is commutative. Thus we have that $q=q$ for the identity. \\~\\
+
+Now suppose that $D$ is not a field. There exists orbits of size greater than $1$ since in general. $xyx^{-1}\neq y$. Thus $k\geq 1$. Let $\text{Orb}_{D^\times}(y_1),\dots,\text{Orb}_{D^\times}(y_k)$ be the distinct orbits of size at least $2$. Notice that 
+\begin{align*}
+\text{Stab}_{D^\times}(y_i)&=\{g\in D^\times\;|\;gy_ig^{-1}=y_i\}\\
+&=\{g\in D^\times\;|\;gy_i=y_ig\}\\
+&=C_D(y_i)\setminus\{0\}
+\end{align*}
+Since $C_D(y_i)$ is a division algebra, its dimension $d_i$ must be finite since $D$ is finite. It is also strictly less than $m$ since $C_D(y_i)$ is a $Z(R)$-subalgebra of $D$. The orbit stabilizer theorem together with the class equation gives 
+\begin{align*}
+q^m&=\abs{D}\\
+&=\abs{Z(R)}+\sum_{i=1}^k\abs{\text{Orb}_{D^\times}(x_i)}\\
+&=q+\sum_{i=1}^k\frac{\abs{D^\times}}{\abs{C_D(y_i)\setminus\{0\}}}\\
+&=q+\sum_{i=1}^k\frac{q^m-1}{q^{d_i}-1}
+\end{align*}
+and so we conclude. 
+\end{proof}
+\end{prp}
+
+\begin{thm}{Little Wedderburn's Theorem}{} A finite division ring is a field. \tcbline
+\begin{proof}
+Firstly, the function $h(x)=\frac{x^m-1}{x^{d_i}-1}$ is a polynomial since $d_i$ divides $m$. Any factor $x-\zeta^k$ where $\zeta=e^{2\pi i/m}$ of the cyclotomic polynomial $\Psi_m(x)$ divides $x^m-1$ but not $x^{d_i}-1$ and hence it divides $h(x)$. Thus $\Psi_m(x)$ divides $h(x)$ and $\Psi_m(q)$ divides the right hand side of $$q-1=q^m-1-\sum_{i=1}^k\frac{q^m-1}{q^{d_i}-1}$$ Hence $\Psi_m(q)$ divides $q-1$. But this is a contradiction since $\abs{\Psi_m(q)}>q-1$. Indeed, we have that 
+\begin{align*}
+\abs{\Psi_m(q)}&=\prod_{t=1,\gcd(t,m)=1}^{m-1}\abs{q-\zeta^t}\\
+&>(q-1)^{\deg(\Psi_m(x))}\\
+&\geq q-1
+\end{align*}
+where the first inequality $\abs{q-\zeta^t}>q-1$ is clear since $\zeta^t\neq 1$ and on the complex plane, $q-1$ is the distinct from the real point $q$ to $1$ and $\abs{q-\zeta^t}$ is the distance from $q$ to $\zeta^t$ which is on the unit circle and thus is further away from $q$ than $1$. 
+\end{proof}
+\end{thm}
+
+\pagebreak
+\section{Structure Theorem for Semisimple Rings}
+Simple modules are easy to understand since they have minimal internal structure. Semisimple modules are the next best modules one can consider. Artin-Wedderburn theorem at the very end not only gives a decomposition of semisimple rings using matrix rings over division rings, it also shows that semisimplicity does not depend on the left / right module structure. 
+
+
+\subsection{Peirce Decomposition for Modules}
+\begin{defn}{Idempotents}{} Let $R$ be a ring. We say that $e\in R$ is idempotent if $e^2=e$. 
+\end{defn}
+
+\begin{defn}{Full System of Orthogonal Idempotents}{} Let $R$ be a ring. Two idempotents $e,f$ are orthogonal if $ef=fe=0$. A full system of orthogonal idempotents is a finite collection of non-zero pairwise orthogonal idempotent elements $e_1,\dots,e_n\in R$ such that $e_1+\dots+e_n=1$. 
+\end{defn}
+
+Such a system always exists and may not be unique up even just up to the size $n\in\N$. Indeed one such trivial system is to take the identity $1$. 
+
+\begin{prp}{}{} Let $M$ be an $R$-module. Then there is a bijection $$\left\{\substack{\text{Finite direct sum}\\\text{decompositions }M=\bigoplus_{i=1}^n M_i}\right\}\;\;\overset{1:1}{\longleftrightarrow}\;\;\left\{\substack{\text{Full orthogonal system}\\\text{of idempotentes in }\text{End}_R(M)}\right\}$$ between the set of all finite direct sum decompositions $M=\bigoplus_{i=1}^n M_i$ with all $M_i\neq 0$ and the set of all full orthogonal system of idempotents in $\text{End}_R(M)$. \tcbline
+\begin{proof}
+A decomposition $M=\bigoplus_{i=1}^nM_i$ gives a system of idempotents through its component maps $e_k:M\to M$ defined by $(x_1,\dots,x_n)\mapsto(0,\dots,0,x_i,0,\dots,0)$. This map is an endomorphism since it is the composition of the projection with to $M_k$ with the inclusion to $M$. It is clear that they form a full system of orthogonal idempotents for $\text{End}_R(M)$. \\~\\
+
+Now suppose that we have a full orthogonal system of idempotents $e_1,\dots,e_n$ in $\text{End}_R(M)$. Define $M_k=Me_k=\im(e_k)$ for $1\leq k\leq n$. $\phi:\bigoplus_{i=1}^nM_i\to M$ defined by $(m_1,\dots,m_n)\mapsto\sum_{i=1}^nm_i$ is surjective because each $m\in M$ can be written as 
+\begin{align*}
+\text{id}_{\text{End}_R(M)}(m)&=(e_1+\dots+e_n)(m)\\
+&=e_1(m)+\dots+e_n(m)\\
+&=\phi(e_1(m),\dots,e_n(m))
+\end{align*}
+It is injective because if $\phi(x)=0$ for $x=(e_1(m_1),\dots,e_n(m_n))$ implies that 
+\begin{align*}
+0&=e_k(\phi(x))\\
+&=e_k(e_1(m_1)+\dots+e_n(m_n))\\
+&=\sum_{i=1}^ne_k(e_i(m_i))\\
+&=e_k(m_k)
+\end{align*}
+This implies that $m_k=0$ for $1\leq k\leq n$ and so $x=0$. \\~\\
+
+It is clear that these constructions are inverse functions between the stated sets. 
+\end{proof}
+\end{prp}
+
+Note that in particular, we can also take $M$ to just be $R$ to get a decomposition on idempotents by ideals of $R$. This means that for $\{e_1,\dots,e_n\}$ a full orthogonal system of idempotents, we have a decomposition $$R=Re_1\oplus\cdots\oplus Re_n$$
+
+\begin{defn}{Peirce Decompositions}{} Let $M$ be an $R$-module. A finite direct sum decomposition $$M=\bigoplus_{i=1}^nM_i$$ arising from a full orthogonal system of idempotents are called Peirce decompositions. 
+\end{defn}
+
+For two idempotents $e$ and $f$, $eRf$ loses the structure of a ring and is just an abelian group. We give a useful interpretation of $eRf$ as follows. 
+
+\begin{prp}{}{} Let $e,f,g\in R$ be idempotents of a ring. Then the map $\psi:eRf\to\Hom_R(Re,Rf)$ defined by $$\psi(erf):Re\to Rf$$ to be the map $se\mapsto serf$ is an isomorphism of abelian groups such that $\psi(erf)\psi(fsg)=\psi(erfsg)$. In particular, if $e=f$, then $\psi$ is a ring isomorphism. 
+\end{prp}
+
+By collecting all the abelian groups $eRf$ in a matrix, we can recover the ring $R$ itself. 
+
+\begin{thm}{Two-Sided Peirce Decompositions}{} Let $R$ be a ring and $M$ an $R$-module. A full orthogonal system of idempotents in $R$ gives a direct sum decomposition of $R$ and $M$ into $\Z$-modules that can be written in matrix forms $$R=\bigoplus_{i,j=1}^n e_iRe_j=\begin{pmatrix}
+e_1Re_1 & \cdots & e_1Re_n\\
+\vdots & \ddots & \vdots\\
+e_nRe_1 & \cdots & e_nRe_n
+\end{pmatrix}\;\;\;\;\text{ and }\;\;\;\;M=\bigoplus_{i=1}^ne_iM=\begin{pmatrix}
+e_1M\\
+\vdots\\
+e_nM
+\end{pmatrix}$$ that satisfies the following: 
+\begin{itemize}
+\item If $R$ is an $\F$-algebra for $\F$ a field, then all $e_iRe_j$ and $e_iM$ are $\F$-vector subspaces
+\item The multiplication in $R$ defines the structure of a ring on each $e_iRe_j$. This ring is non-zero. 
+\item The $R$-module action on $M$ defines a structure of $e_iRe_i$-module on $e_iM$
+\item In the matrix interpretation, the multiplication in $R$ and the $R$ action on $M$ satisfies the standard matrix rules
+\end{itemize} \tcbline
+\begin{proof}
+Let $e_1,\dots,e_n$ be the given full orthogonal system of idempotents of the ring $R$.  Then by proposition 3.1.3 we obtain a finite direct sum decomposition $$R=\bigoplus_{i=1}^ne_iR\;\;\;\;\text{ and }\;\;\;\;M=\bigoplus_{i=1}^ne_iM$$ Each $e_iR$ is an $R$-module since they are left ideals. Thus we can apply proposition 3.1.3 again to obtain $e_iR=\bigoplus_{i=1}^ne_iRe_j$ so that we obtain the required decompositions for $R$ and $M$. \\~\\
+
+Let $\lambda\in\F$ and $e_iye_j\in e_iRe_j$ for some $y\in R$. Then $$\lambda e_iye_j=e_i(y\lambda)e_j\in e_iRe_j$$ since $R$ is an $\F$-algebra. Since $e_iRe_j$ is an abelian subgroup, it follows that $e_iRe_j$ is an $\F$-vector subspace. The proof for $e_iM$ is similar. \\~\\
+
+Multiplication in $R$ is given by $(e_ixe_i)\cdot(e_iye_i)=e_ixye_i$ so that multiplication is closed. Moreover, $1_{e_iRe_i}=e_i$ is not equal to $0$ so that the ring is non-zero. \\~\\
+
+Similarly, $(e_ixe_i)\cdot(e_im)=e_ixm\in e_iM$ so that $e_iM$ is closed under the ring action. Thus $e_iM$ becomes an $e_iRe_i$-module. \\~\\
+
+It is easy to check that multiplication defined in the matrix way makes sense. 
+\end{proof}
+\end{thm}
+
+Note component wise multiplication only defines a group isomorphism between $R=\bigoplus_{i,j=1}^ne_iRe_j$ To obtain a ring isomorphism, one needs to consider multiplication as matrices. 
+
+\subsection{The Matrix Rings}
+Recall that for a ring $R$, we can define the matrix ring over $R$ by $$M_n(R)=\left\{\begin{pmatrix}
+a_{11} & \cdots & a_{1n}\\
+\vdots & \ddots & \vdots\\
+a_{n1} & \cdots & a_{nn}
+\end{pmatrix}\right\}$$ The latter section will focus on matrix rings over division rings. 
+
+\begin{prp}{}{} Let $R$ be a ring. Then the ideals in $R$ are in one to one correspondence with the ideals in $M_n(R)$ $$\left\{I\subseteq R\;\bigg{|}\;I\text{ is an ideal of} R\right\}\;\;\;\;\overset{1:1}{\longleftrightarrow}\;\;\;\;\left\{\overline{I}\subseteq M_n(R)\;\bigg{|}\;\overline{I}\text{ is an ideal}\right\}$$ via the following. For each $I$ an ideal of $R$, $M_n(I)$ is an ideal of $M_n(R)$. For each ideal $\overline{I}$ of $M_n(R)$, the set $$I=\{a_{11}\in R\;|\;(a_{ij})_{n\times  n}\in\overline{I}\}$$ is an ideal in $R$. 
+\end{prp}
+
+\begin{prp}{}{} Let $D$ be a division ring. Then $M_n(D)$ is both a left and right semisimple ring via the decompositions $$M_n(D)=\bigoplus_{i=1}^nc_i(D)=\bigoplus_{i=1}^nr_i(D)$$ where $$c_i(D)=\{M\in M_n(D)\;|\;M\text{ is non zero only in the }i\text{th column}\}$$ and $$r_i(D)=\{M\in M_n(D)\;|\;M\text{ is non zero only in the }i\text{th row}\}$$
+\end{prp}
+
+\subsection{Artin-Wedderburn Theorem}
+Artin-Wedderburn not only completely classifies every semisimple left $R$-module for a ring $R$, it also gives a decomposition of the semisimple module into simple matrix rings over division rings. Therefore one often is allowed to reduce a question of semisimple rings into matrix rings. 
+
+\begin{thm}{Artin-Wedderburn Theorem}{} Let $R$ be a ring. Then the following are equivalent characterizations of semisimplicity. 
+\begin{itemize}
+\item Every left $R$-module is semisimple
+\item The ring $R$ as a left $R$-module is semisimple
+\item There exists $n_1,\dots,n_k\in\N$ and division rings $D_1,\dots,D_k$ such that $R$ is isomorphic to the direct product $\prod_{i=1}^kM_{n_i}(D_i)$ Moreover, the decomposition in to matrix rings are unique up to reordering. 
+\end{itemize} \tcbline
+\begin{proof}~\\
+\begin{itemize}
+\item $(1)\implies(2)$ is obvious because $R$ is also a left $R$-module. 
+\item $(2)\implies(1)$: Let $M$ be an $R$-module. Choose a generating set $B$ of $M$. Then $M$ is a quotient of the free module $\bigoplus_{b\in B}Rb$. Since $R$ is semisimple, $RB$ is also semisimple. By corollary 6.1.4, $M$ is also a semisimple module. 
+\item $(2)\implies(3)$: Write the $R$-module $R$ as a direct sum of simple modules $R=\bigoplus_{i\in I}S_i$. Note that the set $I$ is finite because $1=\sum_{i\in I}s_i$  for $s_i\in S_i$ and so we can remove the $0$ in the sum to get $1=s_1,\dots,s_m$. Then each element $r\in R$ can be written as $r=rs_1+\dots+rs_m$. Hence $R=\bigoplus_{i=1}^mS_i$. \\~\\
+
+Let $L_1,\dots,L_k$ be distinct simple modules among the $S_i$. By Schur's lemma, $D_i=\text{End}_RL_i$ is a division ring. Reorder the summands so that we can group them as following: $$R=\underbrace{S_1\oplus\cdots\oplus S_{n_1}}_{\text{each }S_i\cong L_1}\oplus\cdots\oplus\underbrace{S_{n_1+\dots+n_{k-1}+1}\oplus\cdots\oplus S_m}_{\text{each }S_i\cong L_k}$$ Replace each $S_i$ with the corresponding $L_j$ together with lemma 2.4.3 to get $$R\cong\text{End}_R\cong\text{End}_R\left(\underbrace{L_1\oplus\cdots\oplus L_1}_{n_1}\oplus\cdots\oplus\underbrace{L_{i_k}\oplus\cdots\oplus L_k}_{n_k}\right)=\text{End}_R\left(\bigoplus_{j=1}^kL_j^{n_j}\right)$$ Now let $e_1,\dots,e_m$ be the full system of orthogonal idempotents corresponding to the above decomposition by proposition 6.2.4. Consider $e_j$ in the $j$th group and $e_t$ in the $t$th group. By proposition 6.2.5, we have $$e_jRe_t\cong\Hom_R(L_j,L_t)=\begin{cases}
+0 & \text{ if } j\neq t\\
+D_j=\text{End}_R(L_j) & \text{ if }j=t
+\end{cases}$$ Then by the Peirce decomposition, $$R=\begin{pmatrix}
+D_1 & \cdots & D_1 & 0 & \cdots & 0 & \cdots\\
+\vdots & & \vdots & \vdots & & \vdots & \\
+D_1 & \cdots & D_1 & 0 & \cdots & 0 & \cdots\\
+0 & \cdots & 0 & D_2 & \cdots & D_2 & \cdots\\
+\vdots & & \vdots & \vdots & & \vdots & \\
+0 & \cdots & 0 & D_2 & \cdots & D_2 & \cdots\\
+\vdots & & \vdots & \vdots & & \vdots & 
+\end{pmatrix}=M_{n_1}(D_1)\times M_{n_2}(D_2)\times\cdots\times M_{n_k}(D_k)$$
+\item $(3)\implies(2)$: Let $R=\prod_{i=1}^kM_{n_i}(D_i)$. Since $D_i$ is a division ring, we have seen that $M_{n_i}(D_i)$ is left semisimple thus their product is also left semisimple. 
+\end{itemize}
+\end{proof}
+\end{thm}
+
+Using the matrix ring over division rings, Artin-Wedderburn theorem implies that every semisimple module is built out of these matrix rings. Moreover, semisimplicity no longer distinguishes between left and right. 
+
+\begin{crl}{}{} A ring is left semisimple if and only if it is right semisimple. \tcbline
+\begin{proof}
+$R$ is a right $R$-module if and only if it is a left $R^{\text{op}}$-module. Moreover $M_n(D)^\text{op}\cong M_n(D^\text{op})$. Explicitly, we have seen that each $M_n(D)$ for $D$ a division ring is both left and right semisimple. 
+\end{proof}
+\end{crl}
+
+It thus makes sense to just say that a ring is semisimple instead of distinguishing left and right. 
+
+\begin{prp}{}{} The following are true regarding semisimple algebras over fields. 
+\begin{itemize}
+\item A semisimple $\C$-algebra of countable dimension is isomorphic to $$\prod_{i=1}^kM_{k_i}(\C)$$
+\item A semisimple $\R$-algebra of countable dimension is isomorphic to $$\prod_{i=1}^kM_{k_i}(\R)\times\prod_{i=1}^nM_{n_i}(\C)\times\prod_{i=1}^tM_{t_i}(\H)$$
+\item A finite dimensional semisimple $\F_q$ algebra is isomorphic to $$\prod_{i=1}^k M_{k_i}(\F_{q^{t_i}})$$
+\end{itemize} \tcbline
+\begin{proof}
+If $R$ is an $\F$-algebra that is semisimple, we have that $$R=\prod_{i=1}^kM_{n_i}(D_i)$$ by Artin-Wedderburn theorem. In particular, each $M_{n_i}(D_i)$ is also an $\F$-algebra. Moreover, by identifying $D$ in any one component of $M_{n_i}$, we can see that $D$ is also an $\F$-algebra. Each $D_i$ is a finite dimensional $\F$-vector space if and only if $R$ is finite dimensional. Then we have the following. 
+\begin{itemize}
+\item If $\F=\C$ then $D_i$ can only possibly be $D_i=\C$
+\item If $\F=\R$ then $D_i$ is either $\R$ or $\C$ or $\H$ by Frobenius theorem and theorem 1.4.6. 
+\item If $\F=\F_{q}$ then $D_i=\F_{q^{t_i}}$ for some $t_i\in\N$ by Little Wedderburn's theorem. 
+\end{itemize}
+Thus we conclude. 
+\end{proof}
+\end{prp}
+
+\pagebreak
+\section{Central Simple Algebras}
+\subsection{Central Simple Algebras}
+\begin{defn}{Central Algebras}{} Let $A$ be an algebra over a field $k$. We say that $A$ is central if $$Z(A)=k$$
+\end{defn}
+
+\begin{defn}{Central Simple Algebras}{} Let $A$ be an algebra over a field $k$. We say that $A$ is a central simple algebra if $A$ is central and simple. This means that $Z(A)=k$ and $A$ has no non-trivial 2 sided ideals. 
+\end{defn}
+
+\begin{lmm}{}{} Let $D$ be a division algebra over a field $k$. Then $D$ is a central simple algebra. 
+\end{lmm}
+
+\begin{thm}{}{} Let $k$ be an algebraically closed field. Then every central simple $k$-algebra is isomorphic to $M_n(k)$ for some $n\in\N$. 
+\end{thm}
+
+\subsection{Spitting Fields of Central Simple Algebras}
+\begin{thm}{}{} Let $k$ be a field. Let $A$ be a finite-dimensional $A$-algebra. Then $A$ is a central simple algebra if and only if there exists a finite field extension $K>k$ such that $$A\otimes_k K\cong M_n(K)$$ for some $n\in\N$. 
+\end{thm}
+
+\begin{crl}{}{} Let $A$ be a central simple algebra over a field $k$. Then $\dim_k(A)$ is a square. 
+\end{crl}
+
+\begin{defn}{Splitting Fields for Central Simple Algebras}{} Let $A$ be a central simple algebra over a field $k$. A field extension $K>k$ is a splitting field for $A$ if there is an isomorphism $$A\otimes_kK\cong M_n(K)$$ for some $n\in\N$. The degree of $A$ is defined to be $$\deg(A)=\sqrt{\dim_k(A)}$$
+\end{defn}
+
+\begin{lmm}{}{} Let $k$ be a field and let $A$ and $B$ be central simple $k$-algebras. If $A$ and $B$ are split by $K$, then $$A\otimes_k B$$ is also split by $K$. 
+\end{lmm}
+
+\begin{thm}{}{} Every central division algebra $D$ of degree $n$ over an infinite field $k$ is split by a separable extension $K>k$ of degree $n$. Moreover, such a $K$ is isomorphic to a $k$-subalgebra of $D$. 
+\end{thm}
+
+\begin{crl}{}{} Every central simple algebra over a field $k$ has a splitting field that is finite and separable over $k$. 
+\end{crl}
+
+\begin{crl}{}{} Let $A$ be a finite dimensional algebra over a field $k$. Then $A$ is a central simple algebra over $k$ if and only if there exists a finite Galois extension $K>k$ such that there is an isomorphism $$A\otimes_k K\cong M_n(k)$$ for some $n\in\N$. 
+\end{crl}
+
+\pagebreak
+\section{Exercises}
+\subsection{Problem Set 1}
+\begin{ex}{Problem 1.3}{} Let $I$ be an an ideal of the non-zero ring $R$ (left, right or $2$-sided), $R^\ast$ its set of units. Show that $I$ is proper if and only if $1\notin I$. More generally, show that $I$ is proper if and only if $I\cap R^\ast=\emptyset$. \tcbline
+\begin{proof}
+Let $1\in I$. Then for any $r\in R$, $r\cdot 1\in I$. Thus $R=I$ and $I$ is not proper. If $I$ is not proper then $I=R$ and $1\in I$. \\~\\
+
+Suppose that $I\cap R^\ast\neq\emptyset$. Then there exists an invertible $r\in R$ such that $r\in I$. Then $r^{-1}\cdot r\in I$ which means that $1\in I$. Thus $I=R$. Suppose that $I=R$ is not proper. Then clearly $I\cap R^\ast=\emptyset$. 
+\end{proof}
+\end{ex}
+
+\begin{ex}{Problem 1.4}{} Let $R$ be an integral domain. Show that $R[x]^\ast=R^\ast$. \tcbline
+\begin{proof}
+Suppose that $f(x)=\sum_{k=0}^na_kx^k$ is invertible. Then there exists $g(x)=\sum_{j=0}^mb_jx^j$ such that $fg=1$ without loss of generality $b_m\neq 0$. Then we have that $a_nb_m=0$ which implies $a_n=0$. Inductively, for $0\leq k\leq n-1$, if $a_n=\dots=a_{n-k+1}=0$, then we have $$a_{n-k}b_m+a_{n-k+1}b_{m-1}+\dots+a_nb_{m-k}=0$$ which implies that $a_{n-k}b_m=0$ so that $a_{n-k}=0$. Now what remains is that $f$ is a constant polynomial. Thus $f\in R^\ast$. Also it is clear that if $r\in R^\ast$ is invertible, then $r\in R[x]^\ast$ is also invertible since $R\subseteq R[x]$. 
+\end{proof}
+\end{ex}
+
+\begin{ex}{Problem 1.5}{} Let $R$ be a ring. Prove that the rings $M_n(R[x])$ and $M_n(R)[x]$ are isomorphic. \tcbline
+\begin{proof}
+Notice that $M_n(R[x])$ has an $R[x]$-module basis $\{E_{i,j}\;|\;1\leq i,j\leq n\}$ and hence an $R$-module basis $\{x^kE_{i,j}\;|\;1\leq i,j\leq n\text{ and }k\in\N\}$ where $E_{i,j}$ are the matrices with $1$ at the $(i,j)$th position and $0$ everywhere else. Similarly, $M_n(R)$ has $R$-module basis $\{E_{i,j}\;|\;1\leq i,j\leq n\}$ and hence $M_n(R)[x]$ has an $R$-module basis $\{x^kE_{i,j}\;|\;1\leq i,j\leq n\text{ and }k\in\N\}$. One can define an isomorphism by sending basis elements to basis elements from $M_n(R[x])$ to $M_n(R)[x]$. It is clearly surjectivity and injectivity. 
+\end{proof}
+\end{ex}
+
+\begin{ex}{Problem 1.8}{} Find the smallest positive integer $x$ such that $x\equiv 1\;(\bmod\;7)$, $x\equiv 1\;(\bmod\;11)$ and $x\equiv 4\;(\bmod\;13)$. \tcbline
+\begin{proof}
+The goal is to decompose $\Z$ into $\Z/7\Z\times\Z/11\Z\times\Z/13\Z$ via a map with kenrnel $1001\Z$. Since $7\Z+11\Z=\Z$, using Bezout's lemma we find that $-21+22=1$. Under $7\Z+13\Z=\Z$, we have that $14-13=1$. Finally under $11\Z+13\Z=\Z$, we have that $66-65=1$. Then we have that 
+\begin{gather*}
+x_1=(22)(-13)=-286\\
+x_2=(-21)(-65)=1365\equiv 364\;(\bmod\;1001)\\
+x_3=(14)(66)=924\equiv -77\;(\bmod\;1001)
+\end{gather*}
+Then $(1)x_1+(1)x_2+(4)x_3=-230$ is a solution to the congruence equations. Moreover, the smallest solution in $\N$ is $1001-230=771$. 
+\end{proof}
+\end{ex}
+
+\begin{ex}{Problem 1.12}{} Let $R=M_n(\F)$ where $\F$ is a field. It acts on the left on the vector space $\F^n$. Let $V\subseteq\F^n$ be a subspace. 
+\begin{enumerate}
+\item Prove that $l(V)=\{X\in R\;|\;\ker(X)\supseteq V\}$ is a left ideal of $R$. 
+\item Pick $a\in R$. Prove that $Ra=l(\ker(a))$. (Hint: writing $a$ in Smith Normal Form may help. )
+\item Pick $a,b\in R$. Prove that $Ra+Rb=l(\ker(a)\cap\ker(b))$. (Hint: you have enough elements in $Ra$ and $Rb$ from the previous part, now try to find an element in $Ra+Rb$ whose kernel is $\ker(a)\cap\ker(b)$. )
+\item Prove that any left ideal of $R$ has the form $l(V)$. 
+\end{enumerate} \tcbline
+\begin{proof}~\\
+\begin{enumerate}
+\item Let $X,Y\in l(V)$ and $v\in V$. Then $(X+Y)(v)=Xv+Yv=0$. For any $M\in M_n(\F)$, $(RX)(v)=R(Xv)=0$. Thus $l(V)$ is a left ideal of $R$. 
+\item Suppose that $Ca$ is the Smith Normal form of $a$, where $C$ is an invertible matrix. Let $X\in l(\ker(a))$ and suppose that $EX$ is the Smith Normal form of $X$ where $E$ is an invertible matrix. Notice that column operations are not needed since $a$ and $X$ are square matrices. By assumption, $\ker(X)\supseteq\ker(a)$ means that $\ker(EX)\supseteq\ker(Ca)$ and $\dim(\ker(X))-\dim(\ker(a))\geq 0$ Multiply a diagonal matrix $D$ with non-zero entries on the diagonal to convert $EX$ to have the same diagonal entries with $Ca$. Now apply a linear transformation $T$ on $Ca$ to convert the last $\dim(\ker(X))-\dim(\ker(a))$ non-zero rows of $EX$ to $0$. Thus now we have that $DEX=TCa$. Since $D$ and $E$ are invertible, we have that $X=E^{-1}D^{-1}TCa$ which shows that $X\in Ra$. \\~\\
+
+Now suppose that $Ma\in Ra$ for $M\in M_n(\F)$. Then for any $v\in\ker(a)$, $(Ma)(v)=M(av)=0$ shows that $\ker(Ma)\supseteq\ker(a)$ so that $\ker(Ma)\in l(\ker(a))$. 
+
+\item Suppose that $Ma+Nb\in Ra+Rb$. For $v\in\ker(a)\cap\ker(b)$, we have that $(Ma+Nb)(v)=M(av)+N(bv)=0$ so that $Ma+Nb\in l(\ker(a)\cap\ker(b))$. \\~\\
+
+Let $X\in l(\ker(a)\cap\ker(b))$. Notice that $\ker(a+b)\supseteq\ker(a)\cap\ker(b)$. 
+\end{enumerate}
+\end{proof}
+\end{ex}
+
+\begin{ex}{Problem 1.13}{} Let $R$ be a ring. Consider $R^{n\times m}$ as a left $M_n(R)$-module. Find a ring homomorphism $\varphi:M_m(R)\to\text{End}_{M_n(R)}(R^{n\times m})$. Show that $\varphi$ is injective. Prove that $\varphi$ is an isomorphism. (Hint: where do the elementary matrices $E_{1,k}$ go under an endomorphism?) \tcbline
+\begin{proof}
+Define $\varphi_M:R^{n\times m}\to R^{n\times m}$ by $A\mapsto AM$. Notice that this is a ring homomorphism since matrix multiplication respects addition by distributivity law and for $B\in M_n(R)$, we have that $$\varphi_M(BA)=BAM=B\varphi_M(A)$$ Also we have that $$\varphi_{MN}(A)=AMN=\varphi_N(AM)=(\varphi_N\circ\varphi_M)(A)$$ Now if $M\in\ker(\varphi)$ then $AM=0$ for all $A\in R^{n\times m}$. In particular, $IM=0$ implies that $M=0$. \\~\\
+
+(?)
+\end{proof}
+\end{ex}
+
+\begin{ex}{Problem 1.14}{} Compute $\text{End}_\Z\Q$. \tcbline
+\begin{proof}
+Let $x=\frac{a}{b}\in\Q$. Then $a=bx$. Suppose that $\phi\in\text{End}_\Z\Q$. Then $\phi(a)=\phi(bx)$. Since $a,b\in\Z$ and $\phi$ respects the $\Z$-module structure, we have that 
+\begin{align*}
+\phi(a)&=\phi(bx)\\
+a\phi(1)&=b\phi(x)\\
+\phi(x)&=\frac{a}{b}\phi(1)\\
+\phi\left(\frac{a}{b}\right)&=\frac{a}{b}\phi(1)
+\end{align*}
+This means that any $\phi\in\text{End}_\Z\Q$ is determined by where $1\in\Q$ is sent to in $\Q$. Define $\Phi:\Q\to\text{End}_\Z\Q$ by $\Phi(a):\Q\to\Q$ defined by $x\mapsto ax$. It is clear that this is a ring homomorphism since multiplication in $\Q$ respects addition and multiplication is commutative. This map is surjective by the fact that any $\phi\in\text{End}_\Z\Q$ is determined by where $1\in\Q$ is sent to. It is injective since $\Q$ is a domain. Thus $\text{End}_Z\Q\cong\Q$. 
+\end{proof}
+\end{ex}
+
+\begin{ex}{Problem 1.18}{} Let $R$ be a ring. Compute the center of $M_n(R)$. \tcbline
+\begin{proof}
+Suppose that $A\in Z(M_n(R))$. Notice that for any $E_{i,j}$ the standard basis for $M_n(R)$ over $R$, $AE_{i,j}=E_{i,j}A$. If $i=j$, then $AE_{i,i}$ only has a non-zero $i$th column. Similarly, $E_{i,i}A$ only has a non-zero $i$th row. In particular, this implies that for $i\neq j$, $a_{i,j}=0$ since $AE{i,i}=E{i,i}A$. If $i\neq j$, then $AE_{i,j}$ only has a non-zero $j$th column given by $\begin{pmatrix}
+a_{1,i}\\\vdots\\ a_{n,i}
+\end{pmatrix}$ and $E{i,j}A$ only has a non-zero $i$th row given by $\begin{pmatrix}
+a_{j,1} & \cdots & a_{j,n}
+\end{pmatrix}$. Since $AE_{i,j}=E_{i,j}A$, we must have that $a_{i,i}=a_{j,j}$ which show that $A$ is of the form $A=\text{diag}(a,\dots,a)$. Thus $$Z(M_n(R))=\{A=\text{diag}(a,\dots,a)\;|\;a\in R\}$$
+\end{proof}
+\end{ex}
+
+\begin{ex}{Problem 1.19}{} Find all idempotent in the ring $\Z/60\Z$. \tcbline
+\begin{proof}
+Notice that $60=3\times 4\times 5$. By the Chinese Remainder theorem, we have that $$\frac{\Z}{60\Z}\cong\frac{\Z}{3\Z}\times\frac{\Z}{4\Z}\times\frac{\Z}{5\Z}$$ The only idempotents of $\Z/3\Z$ are $0,1$ similarly the only idempotents the other two are also $0,1$. \\~\\
+
+We will construct the ring isomorphism $\phi:\Z/3\Z\times\Z/4\Z\times\Z/5\Z\to\Z/60\Z$. Using the fact that $3\Z+4\Z=\Z$, we have that $-3+4=1$, for $3\Z+5\Z=\Z$ we have $-9+10=1$. Finally for $4\Z+5\Z=\Z$, we have that $-4+5=1$. Let $x_1=(4)(10)=40$. Let $x_2=(-3)(5)=-15\equiv 45\;(\bmod\;60)$ and $x_3=(-9)(-4)=36$. Then we have that $\phi(a,b,c)=(40a+45b+36c)$. There are eight idempotents in $\Z/3\Z\times\Z/4\Z\times\Z/5\Z$ given by a combination of $0$ and $1$ in each factor of the product ring. Each of these correspond to an element in $\Z/60\Z$ as follows: 
+\begin{enumerate}
+\item $(0,0,0)$ corresponds to $0\in\Z/60\Z$
+\item $(0,0,1)\mapsto 36\in\Z/60\Z$
+\item $(0,1,0)\mapsto 45\in\Z/60\Z$
+\item $(0,1,1)\mapsto 21\in\Z/60\Z$
+\item $(1,0,0)\mapsto 40\in\Z/60\Z$
+\item $(1,0,1)\mapsto 16\in\Z/60\Z$
+\item $(1,1,0)\mapsto 25\in\Z/60\Z$
+\item $(1,1,1)\mapsto 1\in\Z/60\Z$
+\end{enumerate}
+and so we conclude. 
+\end{proof}
+\end{ex}
+
+\subsection{Problem Set 2}
+\begin{ex}{Problem 2.3}{} Find all $\R$-algebra homomorphisms from $\C$ to $\H$. Does the set of all $\R$-algebra homomorphisms from $\C$ to $\H$ have a geometric meaning? \tcbline
+\begin{proof}
+Any $\R$-algebra is also an $\R$-vector space an $\R$-algebra homomorphism is determined by where it sends the generators to. In this case, $\C=\R\langle i\rangle$ and $\H\langle i,j,k\rangle$ hence any $\R$-algebra sends $i$ to $i,j,k$. Thus there are three. \\~\\
+
+The map sending $i$ to $i$ is the identity. Then map sending $i$ to $j$ or $i$ to $k$ can be seen as a rotation in $\H_0$ along a vector subspace normal to either $k$ or $j$. 
+\end{proof}
+\end{ex}
+
+\begin{ex}{Problem 2.4}{} Assume that a division ring $D$ is a finite-dimensional vector space over the field $Z(D)$. Show that if $Z(D)$ is an algebraically closed field then $D=Z(D)$. \tcbline
+\begin{proof}
+Since $Z(D)$ is algebraically closed, $Z(D)$ has uncountably many elements. In particular, Amitsur-Schur's lemma can be applied to $D$ since every division ring is a simple module over itself. We conclude that every element of the division $Z(D)$-algebra $\text{End}_D(D)$ is algebraic. Now $\text{End}_D(D)\cong D$ is an algebra over $Z(D)$ which is algebraic. Since $Z(D)$ is algebraically closed, we conclude that $Z(D)=D$. 
+\end{proof}
+\end{ex}
+
+\begin{ex}{Problem 2.5}{} Answer the following questions and justify your answers. 
+\begin{enumerate}
+\item Is $\R^n$ free as an $\R$-module?
+\item Is $\Z[i]$ free as a $\Z$-module?
+\item Let $n\geq 2$. Is $\Z^n$ free as an $M_n(\Z)$-module?
+\item Is $\Q$ free as a $\Z$-module?
+\item Is $\Q/\Z$ free as a $\Z$-module?
+\item Is $\R/\Q$ free as a $\Q$-module?
+\item Let $m>0$. Is $\Z/m\Z$ free as a $\Z$-module?
+\item Is $\Z/m\Z$ free as a $\Z/m\Z$-module?
+\end{enumerate} \tcbline
+\begin{proof}~\\
+\begin{enumerate}
+\item Yes. Since $\R$ is a field this question becomes whether $\R^n$ is a vector space over $\R$. 
+\item Yes. $\Z[i]$ is free with basis $1$ and $i$. 
+
+\item No. Notice that $$\begin{pmatrix}
+-s & r & 0 & \cdots & 0\\
+0 & 0 & 0 & \cdots & 0\\
+\vdots & \vdots & \vdots & \ddots & 0\\
+0 & 0 & 0 & \cdots & 0
+\end{pmatrix}\begin{pmatrix}
+r\\s\\\ast\\\vdots\\\ast
+\end{pmatrix}=0$$
+
+\item No. Notice that any two elements $\frac{a}{b},\frac{c}{d}$ in $\Q$ are linearly dependent since $cb\frac{a}{b}-ad\frac{c}{d}=0$. Hence any basis of $\Q$ over $\Z$ must have at most one element. But any one element of $\Q$ does not have a $\Z$-span over $\Q$. 
+\item Similar to the above. 
+\item Yes. $\R/\Q$ is an uncountable dimensional vector space over $\Q$. Alternatively, this is true by baby Artin-Wedderburn. 
+\item No. Notice that any two elements of $\Z/m\Z$ are linearly dependent. Indeed $a+m\Z$ and $b+m\Z$ are linearly dependent via $b(a+m\Z)-a(b+m\Z)=m\Z$. Thus any set of elements of $\Z/m\Z$ that are linearly independent must have size $1$. But for any $a+m\Z\in\Z/m\Z$, one has $m(a+m\Z)=m\Z$. 
+\item Yes. Every ring is free over itself. 
+\end{enumerate}
+\end{proof}
+\end{ex}
+
+\begin{ex}{Problem 2.7}{} Let $C,D$ be additive abelian groups. Let $\mP$ be the set of pairs $(A,f)$ where $A$ is a subgroup of $C$ and $f:A\to D$ is a homomorphism. We define the partial order: $(A_1,f_1)\preceq(A_2,f_2)$, whenever $A_1\subseteq A_2$ and $f_2|_{A_1}=f_1$. 
+\begin{enumerate}
+\item Show that $\preceq$ is a partial ordering on $\mP$.
+\item Take $C=D=\Z$, and $A_1=2\Z$. Let $f_1:A_1\to\Z$ be given by $f_1(2x)=x$ for $x\in\Z$. Show that $(A_1,f_1)$ is a maximal element of $\mP$.
+\item Take $C=D=\Z$, and $A_1=2\Z$. Let $f_1:A_1\to\Z$ be given by $f_1(2x)=4x$ for $x\in\Z$. Show that $(A_1,f_1)$ is not a maximal element of $\mP$.
+\item Show that every chain $C$ of $\mP$ has an upper bound.
+\end{enumerate} \tcbline
+\begin{proof}~\\
+\begin{enumerate}
+\item It is clearly reflexive. It is also clearly antisymmetric since $\subseteq$ is antisymmetric. It is also transitive since $\subseteq$ is transitive and if $f_3|_{A_2}=f_2$ and $f_2|_{A_1}=f_1$ then $f_3|_{A_1}=f_2|_{A_1}=f_1$. 
+\item Suppose that $(A_1,f_1)\preceq(A_2,f_2)$. Then $2\Z\subseteq A_2$ implies that either $A_2=2\Z$ or $A_2=\Z$. If $A_2=2\Z$ then $f_1=f_2$. Hence we are done. If $A_2=\Z$, then we have that 
+\begin{align*}
+f_1(2)&=1\\
+f_2|_{A_1}(2)&=1\\
+f_2(1)+f_2(1)&=1\\
+2f_2(1)&=1
+\end{align*}
+This is a contradiction. 
+\item It is easy to see that $(\Z,n\mapsto 2n)$ is such that $(A_1,f_1)\preceq(\Z,n\mapsto 2n)$. 
+\item Let $C=\{(A_i,f_i)\;|\;i\in I\}$ be a chain in $\mP$. Then $A=\bigcup_{i\in I}A_i$ is a subgroup of $C$. Define $f:A\to\Z$ as follows. Let $a\in A$. Then there exists $i\in I$ such that $a_i\in A_i$. Then define $f(a)=f_i(a)$. Notice that this is well defined. If $a_i$ also lies in $A_j$, then if $i\geq j$, then $f_i|_{A_j}(a)=f_j(a)$. If $i\leq j$, then $f_j|_{A_i}(a)=f_i(a)$. This is a group homomorphism. Suppose that $a,b\in A$. Then there exists $i,j\in I$ such that $a\in A_i$ and $b\in A_j$. Since $C$ is a total ordering, there is also a total ordering on the subsets $\{A_i\;|\;i\in I\}$. This means that there exists some $A_k$ such that $a,b\in A_k$. Then $f(a+b)=f_k(a+b)=f_k(a)+f_k(b)$. It is clear that $(A,f)$ is an upper bound of $C$ since $f|_{A_i}=f_i$ for all $i\in I$. 
+\end{enumerate}
+\end{proof}
+\end{ex}
+
+\begin{ex}{Problem 2.8}{} An additive abelian group $D$ is called divisible if for every $x\in D$ and every $n\in\N$ there is $y\in D$ satisfying $ny=x$. Let $D$ be divisible. Let $C$ be an additive abelian group, and $A$ a subgroup of $C$. Let $f:A\to D$ a homomorphism. Let $x\in C\setminus A$. Let $B=A+\Z\cdot x$. Show there is a homomorphism $g:B\to D$ such that $g|_A=f$. \\~\\
+
+Prove that there is a homomorphism $h:C\to D$ satisfying $h|_A=f$. (Hint: Consider
+the set of pairs $(B,g)$ where $B$ is a subgroup of $C$ containing $A$ and $g:B\to D$ is a
+homomorphism satisfying $g|_A=f$). \tcbline
+\begin{proof}
+Suppose that $A\cap\Z\cdot x=\{0\}$. Then for $b\in B$, $b$ can be written uniquely as $a+nx$ for some $a\in A$ and $n\in\N$. Define $g:B\to D$ by $g(b)=g(a+nx)=f(a)$. In other words, set $g(x)=0$. Notice that this is a group homomorphism since $f$ is a group homomorphism. \\~\\
+
+Suppose that $A\cap\Z\cdot x\neq 0$. Then there exists some $n\in\N$ such that $nx\in A$. Suppose that $f(nx)=d$. Since $D$ is divisible, there exists $y\in D$ such that $ny=d$. Then define $g(x)=y$ and extend $\Z$-linearly and then $g(a)=f(a)$ for all $a\in A$. Notice that this is well defined. Indeed let $a_1+k_1x,a_2+k_2x\in B$ such that they represent the same element. Then we have that $(a_1-a_2)+(k_1-k_2)x=0\in A\cap\Z\cdot x$ hence $(k_1-k_2)x\in A$. But $nx\in A$ implies that $n\;|\;k_1-k_2$. Writing $k_1-k_2=nm$, we have that $$g(a_2)-g(a_1)=g((k_1-k_2)x)=g(mnx)=mng(x)=(k_1-k_2)y$$ (?)
+\end{proof}
+\end{ex}
+
+\begin{ex}{Problem 2.10}{} Let $M$ be a left $R$-module. A maximal submodule of $M$ is a proper submodule that is not contained in any other proper submodule. In this exercise you will show that the $\Z$-module $\Q$ has no maximal submodules. Let $N$ be a non-trivial proper submodule of $\Q$. 
+\begin{enumerate}
+\item Show that there is some integer $c\geq 1$ such that $c\in N$.
+\item Show that there is some integer $b>1$ such that $\frac{1}{b}\in\Q\setminus N$
+\item Let $N'=N+\Z\left(\frac{1}{b}\right)$. Show that $N'$ is a $\Z$-submodule of $\Q$ properly containing $N$. 
+\item Show that $\frac{1}{cb^2}\notin N'$. 
+\item Deduce that $\Q$ has no maximal $\Z$-submodules
+\item Let $\mP$ be the set of all proper $\Z$-submodules of $\Q$, ordered by inclusion. The above says that $\mP$ has no maximal element. What goes wrong if you try to use Zorn's Lemma?
+\end{enumerate} \tcbline
+\begin{proof}~\\
+\begin{enumerate}
+\item Suppose that $\frac{p}{q}\in N$ for $p,q\in\Z$ such that $\gcd(p,q)=1$. Then $q\cdot\frac{p}{q}=p\in N$. 
+\item Suppose the contrary. Let $\frac{p}{q}\in\Q$ such that $\gcd(p,q)=1$. By assumption, $\frac{1}{q}\in N$ so that $p\cdot\frac{1}{q}\in N$. Thus $\Q=N$. This is a contradiction. 
+\item Notice that $N$ and $\Z\left(\frac{1}{b}\right)$ are both $\Z$-submodules of $\Q$ so their sum is also a $\Z$-submodule. Moreover, $\frac{1}{b}\notin N$ by assumption hence $N\subset N'$. 
+\item Suppose that $\frac{1}{cb^2}=n+\frac{x}{b}$ for some $n\in N$ and $x\in\Z$. Then $$\frac{1}{b}=cbn+cx$$ lies in $N$ because $cbn\in N$ and $c\in N$ so that $cx\in N$. This is a contradiction. 
+\item We have constructed a non-trivial proper $\Z$-submodule containing any arbitrary $\Z$-submodule. Thus we conclude. 
+\item The chain $\mC=\{N,N',N'',\dots\}$ in $\mP$ ordered by inclusion does not have an upper bound. 
+\end{enumerate}
+\end{proof}
+\end{ex}
+
+\begin{ex}{Problem 2.11}{} Let $\mB$ be a set, $R$ a ring. Prove the universal property of the free module $\text{Fun}_f(\mB,R)$:
+\begin{enumerate}
+\item For a left $R$-module $M$ and a function $f:\mB\to M$, there exists a unique module homomorphism $\text{Fun}_f(\mB,R)\to M$ such that $\delta_b\mapsto f(b)$ for all $b\in\mB$. 
+\item This defines a bijection between the set of functions from $\mB$ to $M$ and the set of module homomorphisms from $\text{Fun}_f(\mB,R)$ to $M$. 
+\end{enumerate} \tcbline
+\begin{proof}
+\end{proof}
+\end{ex}
+
+\begin{ex}{Problem 2.13}{} Let $R=\begin{pmatrix}
+\Q & \Q\\
+0 & \Q
+\end{pmatrix}$. We consider the column vector space $M=\Q^2$ as a left $R$-module
+under matrix multiplication. 
+\begin{enumerate}
+\item Prove that $M$ is not a simple $R$-module
+\item Prove that $\text{End}_R(M)=\Q$
+\item Why doesn't it contradict Schur's lemma?
+\end{enumerate} \tcbline
+\begin{proof}~\\
+\begin{enumerate}
+\item Consider $N=\begin{pmatrix}
+\Q\\0
+\end{pmatrix}$. Then $RN=\begin{pmatrix}
+\Q\\0
+\end{pmatrix}=N$ so that $N$ is an $R$-submodule of $M$. 
+\item Notice that $\Q^2$ is generated as an $R$-module by $\begin{pmatrix}
+1\\1
+\end{pmatrix}$. Indeed for any $\begin{pmatrix}
+a\\b
+\end{pmatrix}$, we have that $$\begin{pmatrix}
+a\\b
+\end{pmatrix}=\begin{pmatrix}
+a & 0\\
+0 & b
+\end{pmatrix}\begin{pmatrix}
+1\\1
+\end{pmatrix}$$ This means that any $R$-module endomorphism of $\Q^2$ is determined by where $\begin{pmatrix}
+1\\1
+\end{pmatrix}$
+is sent to. Now define a map $\Phi:\Q\to\text{End}_RM$ by $$a\mapsto\left(\begin{pmatrix}
+1\\1
+\end{pmatrix}\mapsto\begin{pmatrix}
+a\\a
+\end{pmatrix}\right)$$
+This is an $R$-module homomorphism since multiplication by a scalar is associativity and commutes with matrix multiplication. It is injective since $\Q$ is a domain. For surjectivity, the above already gives half the proof. Indeed we have showed that every $R$-module homomorphism is determined by the image of $\begin{pmatrix}
+1\\1
+\end{pmatrix}$. It remains to show that it must be multiplication by a scalar. Let $\psi\in\text{End}_RM$. Now any $R$-module homomorphism is also a $\Q$-module homomorphism since $R$ is a $\Q$-module. Thus $\psi$ is a $\Q$-linear map. So suppose that $\psi\left(\begin{pmatrix}
+1\\1
+\end{pmatrix}\right)=\begin{pmatrix}
+p\\q
+\end{pmatrix}$. Also, since $\psi$ is an $R$-module homomorphism, for any $\begin{pmatrix}
+x & y\\
+0 & z
+\end{pmatrix}\in R$, we have that 
+\begin{align*}
+\begin{pmatrix}
+x & y\\
+0 & z
+\end{pmatrix}\psi\left(\begin{pmatrix}
+1\\1
+\end{pmatrix}\right)&=\psi\left(\begin{pmatrix}
+x & y\\
+0 & z
+\end{pmatrix}\begin{pmatrix}
+1\\1
+\end{pmatrix}\right)\\
+\begin{pmatrix}
+x & y\\
+0 & z
+\end{pmatrix}\begin{pmatrix}
+p\\q
+\end{pmatrix}&=\psi\left(\begin{pmatrix}
+x+y \\ z
+\end{pmatrix}\right)\\
+\begin{pmatrix}
+px+qy\\qz
+\end{pmatrix}&=\begin{pmatrix}
+px+py \\ qz
+\end{pmatrix}
+\end{align*}
+Thus it is clear that $p=q$ so that $\psi$ is a multiplication by a scalar. This proves surjectivity and we have an isomorphism $$\Q\cong\text{End}_RM$$ so that we conclude. 
+\item We need $M$ to be a simple $R$-module to apply Schur's lemma. We proved previously that $M$ is not simple. 
+\end{enumerate}
+\end{proof}
+\end{ex}
+
+\begin{ex}{Problem 2.14}{} Pick $A\in M_2(\R)$ and consider the left $\R[x]$-module $N=\R^2$, given by $X\cdot n=An for all n\in N$. Compute $\text{End}_{\R[x]}(N)$. (Hint: there will be four answers depending on $A$: no Jordan form over $\R$, Jordan form with $1$ block, $2$ blocks but $1$ eigenvalue, $2$ distinct eigenvalues.) \tcbline
+\begin{proof}
+Notice that since $R^2$ is an $M_2(\R)$-module, in particular it is an $\R$-module. Thus all maps in $\text{End}_{M_2(\R)}(\R^2)$ are linear maps. We have that the endomorphism ring
+\begin{align*}
+\text{End}_{M_2(\R)}(\R^2)&=\{T:\R^2\to\R^2\;|\;T(Av)=AT(v)\}\\
+&=\{B\in M_2(\R)\;|\;AB=BA\}\\
+&=C_{M_2(\R)}(A)
+\end{align*}
+is the centralizer of $A$. \\~\\
+
+Case 1: $A$ has no Jordan form over $\R$. \\
+Let $M$ be a submodule of $\R^2$. Notice that for all $f(x)\in\R[x]$, we have that $f\cdot m\in M$ which means that in particular, $kM\subseteq M$ for all $k\in\R$. Thus $M$ is a vector subspace of dimension $0,1$ or $2$. If $\dim(M)=1$ then we can write $M=\R[x]v$ for any $v\in\R^2\setminus\{0\}$ such that $Av\in\R v$. But $A$ has no eigenvalues this is a contradiction. So either $M$ is $0$ or $2$. Thus $\R^2$ is simple. By Schur's lemma, $\text{End}_{\R[x]}\R^2$ is a division ring. \\~\\
+
+Consider $C_{M_2(\R)}(A)$ as an $\R$-algebra which is finite dimensional since $M_2(\R)$ is. By Frobenius theorem, it is either $\R$, $\C$ or $\H$. It cannot be $\H$ since $C_{M_2(\R)}(A)$ is not the entire matrix ring. It is not $\R$ since $A\in C_{M_2(\R)}(A)$ and $A\notin\R I=Z(M_2(\R))\cong\R$. Thus $\text{End}_{\R[x]}=C_{M_2(\R)}(A)=\C$. \\~\\
+
+Case 2: $A$ has Jordan form with $1$ block with value $\lambda$ on the diagonal. \\
+Then we have that
+\begin{align*}
+C_{M_2(\R)}(A)&=\left\{ \begin{pmatrix}a&b\\c&d\end{pmatrix}:\begin{pmatrix}a&b\\c&d\end{pmatrix}\begin{pmatrix}\lambda & 1 \\ 0 & \lambda\end{pmatrix}=\begin{pmatrix}\lambda & 1 \\ 0 & \lambda\end{pmatrix}\begin{pmatrix}a&b\\c&d\end{pmatrix} \right\}\\
+&=\left\{ \begin{pmatrix}a&b\\c&d\end{pmatrix}: \begin{pmatrix}
+    a\lambda & a+b\lambda \\ c\lambda & c+d\lambda
+\end{pmatrix}=\begin{pmatrix}
+    a\lambda+c & b\lambda+d \\ c\lambda & d\lambda
+\end{pmatrix} \right\} \\
+&=\left\{ \begin{pmatrix}a & b \\ 0 & a\end{pmatrix} \right\}\\
+&\cong \R\times\R
+\end{align*}
+
+Case 3: $A$ has Jordan form with $2$ blocks and $1$ eigenvalue $\lambda$. \\
+By a similar calculation, we conclude that $$C_{M_2(\R)}(A)\cong M_2(\R)$$
+
+Case 4: $A$ has Jordan form with $2$ blocks and $2$ distinct eigenvalue $\lambda$ and $\mu$. \\
+By a similar calculation, we conclude that $$C_{M_2(\R)}(A)\cong\R\times\R$$
+
+\end{proof}
+\end{ex}
+
+\begin{ex}{Problem 2.19}{} Suppose $(A,\F)$ is a finite-dimensional algebra. Show that every element $a\in A$ is algebraic. \tcbline
+\begin{proof}
+Suppose that $\dim_\F(A)=n$. Let $a\in A$. Then $1,a,a^2,\dots,a^n$ are linearly independent and so there exists non-trivial $b_0,\dots,b_n\in\F$ such that $\sum_{k=0}^nb_ka^k=0$. Without loss of generality assume that $b_n\neq 0$. Then multiply $\frac{1}{b_n}$ to the identity to obtain $$a^n+c_{n-1}a^{n-1}+\dots+c_1a+c_0=0$$ Then $\mu_a(x)=x^n+c_{n-1}x^{n-1}+c_1x+c_0$ is a polynomial such that $a$ is root. Thus $a$ is algebraic. 
+\end{proof}
+\end{ex}
+
+\subsection{Problem Set 3}
+\begin{ex}{Problem 3.2}{} Calculate the following quaternions: 
+\begin{enumerate}
+\item $(\vb{i}-\vb{j})(\vb{i}+\vb{j})$
+\item $e^{\vb{i}+\vb{k}}$
+\item $(\vb{i}+1)(\vb{i}+\vb{j})^{-1}$
+\end{enumerate} \tcbline
+\begin{proof}~\\
+\begin{enumerate}
+\item We have $$(\vb{i}-\vb{j})(\vb{i}+\vb{j})=-1+\vb{i}\vb{j}-\vb{j}\vb{i}+1=2\vb{i}\vb{j}=2\vb{k}$$
+\item Using the quaternionic Euler's formula, we have $$e^{\vb{i}+\vb{k}}=e^{\sqrt{2}\left(\frac{1}{\sqrt{2}}\vb{i}+\vb{k}\right)}=\left(\cos(\sqrt{2})+\frac{1}{\sqrt{2}}(\vb{i}+\vb{k})\sin(\sqrt{2})\right)$$
+\item Recall the conjugate of $(\vb{i}+\vb{j})$ is $(-\vb{i}-\vb{j})$. Thus we have that 
+\begin{align*}
+(\vb{i}+1)(\vb{i}+\vb{j})^{-1}(-\vb{i}-\vb{j})^{-1}(-\vb{i}-\vb{j})&=(\vb{i}+1)(2)^{-1}(-\vb{i}-\vb{j})\\
+&=\frac{1}{2}(1-\vb{i}-\vb{j}-\vb{k})
+\end{align*}
+\end{enumerate}
+\end{proof}
+\end{ex}
+
+\begin{ex}{Problem 3.5}{} Show that for each $n\geq 1$, there exists an $n$-dimensional division algebra over $\Q$. \tcbline
+\begin{proof}
+$\Q(d^{1/n})$ for $d\in\Q$ such that $d^{1/n},d^{2/n},\dots,d^{n-1/n}$ are not in $\Q$. It is clear that it is a division ring since it is a field. Moreover, it is also a vector space over $\Q$ with vector space basis $\{1,x,x^2,\dots,x^{n-1}\}$ for $x=d^{1/n}$. 
+\end{proof}
+\end{ex}
+
+\begin{ex}{Problem 3.8}{} Write the following special orthogonal linear transformations of $\H$ as a product of left and right scrolls: 
+\begin{enumerate}
+\item The rotations in two planes: by $\alpha$ in the $(1,\vb{i})$-plane and by $\beta$ in the $(\vb{j},\vb{k})$-plane. 
+\item The reflections in two planes: fixing the vector $(1+\vb{i})$ in the $(1,\vb{i})$-plane and the vector $\vb{j}$ in the $(\vb{j},\vb{k})$-plane. 
+\end{enumerate} \tcbline
+\begin{proof}~\\
+\begin{enumerate}
+\item The rotation can be written down using matrices: $$\begin{pmatrix}
+\cos(\alpha) & -\sin(\alpha) & 0 & 0\\
+\sin(\alpha) & \cos(\alpha) & 0 & 0\\
+0 & 0 & \cos(\beta) & -\sin(\beta)\\
+0 & 0 & \sin(\beta) & \cos(\beta)
+\end{pmatrix}$$ This is equal to $$\begin{pmatrix}
+\cos\frac{\alpha-\beta}{2} & -\sin\frac{\alpha-\beta}{2} & 0 & 0 \\
+\sin\frac{\alpha-\beta}{2} & \cos\frac{\alpha-\beta}{2} & 0 & 0 \\
+0 & 0 & \cos\frac{\alpha-\beta}{2} & -\sin\frac{\alpha-\beta}{2}\\
+0 & 0 & \sin\frac{\alpha-\beta}{2} & \cos\frac{\alpha-\beta}{2}
+\end{pmatrix}\begin{pmatrix}
+\cos\frac{\alpha+\beta}{2} & -\sin\frac{\alpha+\beta}{2} & 0 & 0 \\
+\sin\frac{\alpha+\beta}{2} & \cos\frac{\alpha+\beta}{2} & 0 & 0 \\
+0 & 0 & \cos\frac{-\alpha-\beta}{2} & -\sin\frac{-\alpha-\beta}{2}\\
+0 & 0 & \sin\frac{-\alpha-\beta}{2} & \cos\frac{-\alpha-\beta}{2}
+\end{pmatrix}$$
+So that the rotation is the same as $$L_{e^{(\alpha-\beta)/2}\vb{x}}R_{e^{(\alpha+\beta)/2}\vb{y}}$$ where $\vb{x}$ and $\vb{y}$ are any unit vectors in the $(1,\vb{i})$-plane and the $(\vb{j},\vb{k})$-plane respectively. 
+
+\item It is clear that given special orthogonal linear transformation $f$ has the following effect on the standard basis vectors: $1\mapsto\vb{i}$, $\vb{i}\mapsto 1$, $\vb{j}\mapsto\vb{j}$ and $\vb{k}\mapsto-\vb{k}$. Compose this with a left multiplication of $-\vb{i}$ to obtain a map $L_{-\vb{i}}\circ f$ that has the effect of: $1\mapsto 1$, $\vb{i}\mapsto-\vb{i}$, $\vb{j}\mapsto-\vb{k}$ and $\vb{k}\mapsto-\vb{j}$. \\~\\
+
+The matrix of $L_{-\vb{i}}\circ f$ in $\H_0$ is given by $\begin{pmatrix}
+-1  & 0 & 0\\
+0 & 0 & -1\\
+0 & -1 & 0
+\end{pmatrix}$. Then unit eigenvector of the matrix is $\frac{1}{\sqrt{2}}\begin{pmatrix}
+0\\1\\-1
+\end{pmatrix}$. It is clear that $\begin{pmatrix}
+1\\0\\0
+\end{pmatrix}$ is an orthogonal unit vector to the eigenvector. Also, we compute that their cross product is $-\frac{1}{\sqrt{2}}\vb{j}-\frac{1}{\sqrt{2}}\vb{k}$. This forms an orthogonal basis of $\H_0$. Now it is clear that $\vb{i}$ in the basis is sent to $-\vb{i}$ by $L_{-\vb{i}}\circ f$ and $-\frac{1}{\sqrt{2}}\vb{j}-\frac{1}{\sqrt{2}}\vb{k}$ is sent to $\frac{1}{\sqrt{2}}\vb{j}+\frac{1}{\sqrt{2}}\vb{k}$ so that $L_{-\vb{i}}\circ f$ has the action of rotating the $\left(\vb{i},-\frac{1}{\sqrt{2}}\vb{j}-\frac{1}{\sqrt{2}}\vb{k}\right)$-plane by $\pi$. We conclude that $$(L_{-\vb{i}}\circ f)(w)=e^{\frac{\pi}{2\sqrt{2}}(\vb{j}-\vb{k})}we^{-\frac{\pi}{2\sqrt{2}}(\vb{j}-\vb{k})}$$ Expanding using the quaternionic Euler's formula give 
+\begin{align*}
+(L_{-\vb{i}}\circ f)(w)&=e^{\frac{\pi}{2\sqrt{2}}(\vb{j}-\vb{k})}we^{-\frac{\pi}{2\sqrt{2}}(\vb{j}-\vb{k})}\\
+&=\left(\cos\left(\frac{\pi}{2}\right)+\frac{1}{\sqrt{2}}(\vb{j}-\vb{k})\sin\left(\frac{\pi}{2}\right)\right)w\left(\cos\left(-\frac{\pi}{2}\right)+\frac{1}{\sqrt{2}}(\vb{j}-\vb{k})\sin\left(-\frac{\pi}{2}\right)\right)\\
+&=\left(\frac{1}{\sqrt{2}}(\vb{j}-\vb{k})\right)w\left(\frac{1}{\sqrt{2}}(-\vb{j}+\vb{k})\right)\\
+f(w)&=\vb{i}\left(\frac{1}{\sqrt{2}}(\vb{j}-\vb{k})\right)w\left(\frac{1}{\sqrt{2}}(-\vb{j}+\vb{k})\right)\\
+&=\left(\frac{1}{\sqrt{2}}(\vb{j}+\vb{k})\right)w\left(\frac{1}{\sqrt{2}}(-\vb{j}+\vb{k})\right)\\
+&=L_{\frac{1}{\sqrt{2}}(\vb{j}+\vb{k})}wR_{\frac{1}{\sqrt{2}}(-\vb{j}+\vb{k})}
+\end{align*}
+\end{enumerate}
+\end{proof}
+\end{ex}
+
+\begin{ex}{Problem 3.9}{} Compute the number of monic irreducible quadratic polynomials over a finite field $\F_q$. \tcbline
+\begin{proof}
+The finite field $\F_q$ has $q$ distinct elements. For any quadratic polynomial with two unique roots, the roots can be chosen in $\binom{q}{2}$ different ways. For any quadratic polynomial with one double root, the root can be chosen in $q$ ways. Every monic quadratic is determined by two elements of $\F_q$. One for the coefficient of $x$ and one for the constant term. Thus there are in total $q^2$ unique quadratics. Thus the number of monic irreducible quadratics are $$q^2-\frac{q(q-1)}{2}-q=\frac{q(q-1)}{2}$$
+\end{proof}
+\end{ex}
+
+\begin{ex}{Problem 3.10}{} Let $\Z_5$ be the finite field of $5$ elements. Let $f(x)=x^4+x^3-x\in\Z_5[x]$. 
+\begin{enumerate}
+\item What is the number of elements in the $\Z_5$-algebra $\Z_5[x]/(f)$?
+\item Choose its basis and write down its multiplication table in this basis
+\item Is this a field?
+\item If not, is this a direct product of fields?
+\end{enumerate} \tcbline
+\begin{proof}~\\
+\begin{enumerate}
+\item Notice that it is a vector space over $\Z_5$. Using the fact that $x^4=x-x^3$, we see that the basis of $\Z_5[x]/(f)$ as the quotient algebra of $\Z_5[x]$ has basis $\{1,x,x^2,x^3\}$. It is four dimensional and so the number of elements are $5^4=625$. 
+\item As seen above we have found $\{1,x,x^2,x^3\}$ as a basis. The multiplication table is given by 
+\begin{center}
+\begin{tabular}{c|cccc}
+      & 1     & $x$     & $x^2$       & $x^3$       \\ \hline
+1     & 1     & $x$     & $x^2$       & $x^3$       \\
+$x$   & $x$   & $x^2$   & $x^3$       & $x-x^3$     \\
+$x^2$ & $x^2$ & $x^3$   & $x-x^3$     & $x^3+x^2-x$ \\
+$x^3$ & $x^3$ & $x-x^3$ & $x^3+x^2-x$ & 0          
+\end{tabular}
+\end{center}
+\item It is not a field since there is a non-trivial nilpotent element $x^3$. 
+\item Notice that $x^4+x^3-x$ factorizes into irreducibles $x(x^3+x^2-1)$. By the Chinese Remainder Theorem, we have that $$\frac{\Z_5[x]}{(f)}\cong\frac{\Z_5[x]}{(x)}\times\frac{\Z_5[x]}{(x^3+x^2-1)}$$ so that it is indeed a product of fields. 
+\end{enumerate}
+\end{proof}
+\end{ex}
+
+\begin{ex}{Problem 3.11}{} Let $A$ be a finite dimensional algebra. Show that if $A$ is a domain, then $A$ is a division algebra. \tcbline
+\begin{proof}
+Consider the left multiplication map $\varphi_a:A\to A$ defined by $x\mapsto ax$ for $a\in A$. It is clear that this is an algebra homomorphism since multiplication in $A$ is associative and commutes with multiplication in the field where $A$ is over. It is injective since $A$ is a domain. Since $\varphi_a$ is a linear map over the field where $A$ is over, rank nullity theorem implies that $\varphi_a$ is surjective. Thus there exists $x\in A$ such that $ax=1$. We can similarly find the right inverse by the right multiplication map. Thus $A$ is a division algebra. 
+\end{proof}
+\end{ex}
+
+\begin{ex}{Problem 3.12}{} Show that a finite domain is a field. \tcbline
+\begin{proof}
+By the above question, $A$ is a division ring. By Little Wedderburn's theorem, $A$ is a field. 
+\end{proof}
+\end{ex}
+
+\subsection{Problem Set 4}
+\begin{ex}{Problem 4.3}{} Answer the following questions and justify your answers. 
+\begin{enumerate}
+\item Is $\R^n$ semisimple as an $\R$-module?
+\item Is $\Z[i]$ semisimple as a $\Z$-module?
+\item Let $n\geq 2$. Is $\Z^n$ semisimple as an $M_n(\Z)$-module?
+\item Is $\Q$ semisimple as a $\Z$-module?
+\item Is $\Q/\Z$ semisimple as a $\Z$-module?
+\item Is $\R/\Q$ semisimple as a $\Q$-module?
+\item Let $m>0$. Is $\Z/m\Z$ semisimple as a $\Z$-module?
+\item Is $\Z/m\Z$ semisimple as a $\Z/m\Z$-module?
+\item If the answer to one of the questions is no, what is the socle of the corresponding module?
+\end{enumerate} \tcbline
+\begin{proof}~\\
+\begin{enumerate}
+\item Yes. Since $\R$ is a division ring, it is a simple module over itself. Thus $\R^n=\R\oplus\cdots\oplus\R$ is a semisimple module. 
+\item No. By Artin-Wedderburn, we just have to check whether $\Z$ is a semisimple ring. All submodules of $\Z$ are of the form $n\Z$ for $n\in\N$. Moreover, every $n\Z$ contains the submodule $2n\Z$ so that $\Z$ has no simple submodules. Thus $\Z[i]$ is not a semisimple module over $\Z$. \\~\\
+
+Let $M$ be a submodule of $\Z[i]$. Then $2M$ is clearly another submodule of $\Z[i]$. Thus $\Z[i]$ has no non-trivial simple submodules hence $\text{soc}(\Z[i])=0$. 
+
+\item Suppose for a contradiction that $\Z^n$ is completely reducible. Then $(2\Z)^n$ is an $M_n(\Z)$-submodule of $\Z^n$ that has a direct complement $N$. Let $n\in N$ be non-zero. Then $2n\in(2\Z)^n$ and $2n\in N$. This is a contradiction. \\~\\
+
+$\text{soc}(\Z^n)=0$. (?)
+
+\item No. If $\Q$ is semisimple, then any quotient modules and submodules are also semisimple. Consider the quotient module $\Q/\Z$. The submodule $\{x\in\Q/\Z\;|\;4x=1\}\subseteq\Q/\Z$ is isomorphic to $\Z/4\Z$ as a $\Z$-module. But $\Z/4\Z$ is not a semisimple module thus there is a contradiction so that $\Q$ is not semisimple. \\~\\
+
+Let $M$ be a submodule of $\Q$. Then $2M$ is also a submodule of $\Q$ hence $\text{soc}(\Q)=0$. 
+\item No. The above answer already showed that $\Q/\Z$ is not semisimple over $\Z$. \\~\\
+
+Let $M$ be a submodule of $\Q/\Z$. Then $2M$ is also a submodule of $\Q/\Z$. Hence $\text{soc}(\Q/\Z)=0$. 
+
+\item Yes. By Artin-wedderburn, we just have to check whether $\Q$ is a semisimple ring. But $\Q$ is a division ring so it has no non-trivial proper submodules so that it is simple and hence semisimple. 
+
+\item Depends. The only simple modules over $\Z$ are of the form $\Z/p\Z$ for $p$ a prime because they are fields. If $m$ is not a prime so that $\Z/m\Z$ is not a field, then we can write $m$ as a product of distinct prime powers. By the Chinese Remainder Theorem, $\Z/m\Z$ is a direct product of $\Z/(p^k)\Z$ for each $p$ a prime factor of $m$. Then $\Z/m\Z$ is semisimple if and only if $m$ is square free. \\~\\
+
+If $m$ is not square free, then $\text{soc}(\Z/m\Z)=\sum_{p|m}\Z/p\Z$. 
+
+\item Depends. By Artin-Weddurburn, we just have to check whether $\Z/m\Z$ is a semisimple ring. By the above answer, it is semisimple if and only if $m$ is square free. \\~\\
+
+If $m$ is not square free, then $\text{soc}(\Z/m\Z)=\sum_{p|m}\Z/p\Z$. 
+\end{enumerate}
+\end{proof}
+\end{ex}
+
+\begin{ex}{Problem 4.4}{} Let $n\in\N$. Let $A$ be an abelian group under addition such that $na=0$ for all $a\in A$. 
+\begin{enumerate}
+\item Explain why $A$ is a $\Z/n\Z$-module. 
+\item Let us decompose $n$ into a product of prime powers $n=q_1\cdots q_k$. The isomorphism in the Chinese Remainder Theorem $\Z/n\Z\cong\Z/q_1\Z\times\cdots\times\Z/q_k\Z$ yields $k$ idempotents in $\Z/n\Z$: $e_1,\dots,e_k$. Prove that $Ae_i=\{a\in A\;|\;q_ia=0\}$ for all $i$. 
+\end{enumerate} \tcbline
+\begin{proof}~\\
+\begin{enumerate}
+\item Every abelian group is already a $\Z$-module. Suppose that $b+n\Z\in\Z/n\Z$. Then define $b+n\Z\cdot a=b\cdot a$. Note that this is well defined because for different representatives $b_1+n\Z=b_2+n\Z$, we have that $b_1=b_2+nu$ for some $u\in\Z$ so that $$b_1+n\Z\cdot a=b_1\cdot a=b_2\cdot a+nu\cdot a=b_2\cdot a$$
+\item Let $a\in A$ such that $ae_i\in Ae_i$. Then $q_i(ae_i)=a(q_ie_i)=0$ hence $Ae_i\subseteq\{a\in A\;|\;q_ia=0\}$. Now suppose that $a\in A$ such that $q_ia=0$. Then $a=ae_1+\dots+e_k$ since $1=e_1+\dots+e_k$. Then $$0=q_ia=aq_ie_1+\dots+aq_ie_k=$$ Since the $q_i$'s are distinct prime powers, we have that $aq_ie_j\neq 0$ provided that $i\neq j$ and $ae_j\neq 0$. But this means that if $aq_ie_j=0$ and $i\neq j$ then $ae_j=0$. Since $\Z/n\Z$ is the direct sum of the prime power cyclic groups, and $0=aq_ie_1+\dots+aq_ie_k$, we conclude that $aq_ie_j=0$ for all $j$. This means that $ae_j=0$ for all $j\neq i$. Hence $a=ae_i\in Ae_i$ and so we conclude. 
+\end{enumerate}
+\end{proof}
+\end{ex}
+
+\begin{ex}{Problem 4.5}{} Let $A$ be an abelian group under addition, considered as a $\Z$-module. Prove that $$\text{soc}(A)=\{x\in A\;|\;\abs{x}\text{ is finite and square-free}\}$$ \tcbline
+\begin{proof}
+Recall that the only simple $\Z$-modules are $\Z/p\Z$ for $p$ a prime. Hence simple submodules of $A$ are of the form $\Z\cdot a$ for $a\in A$ and $\abs{a}=p$ some prime. Hence $$\text{soc}(A)=\sum_{p\text{ prime, }\abs{a}=p}\Z\cdot a$$ Let $a\in\text{soc}(A)$. Then $a$ is the finite sum $a=n_1a_1+\dots+n_ka_k$ for $a_1,\dots,a_k$ have orders being prime. $a$ has order a square free number since $\text{soc}(A)$ is a direct sum and each $a_1,\dots,a_k$ has square free order. It moreover has finite order since each $a_1,\dots,a_k$ has finite order. Conversely, if $a\in A$ is such that $\abs{a}$ is finite and square free, then $\abs{a}$ is equal to the product of distinct primes. (?)
+\end{proof}
+\end{ex}
+
+\begin{ex}{Problem 4.6}{} We consider a semisimple ring $R$ together with its Artin-Wedderburn decomposition $R=A_1\times\cdots\times A_t$ where each $A_i$ is a matrix ring over a division ring.
+\begin{enumerate}
+\item A ring $S$ is called simple if $S\neq 0$ and $0,S$ are the only two-sided ideals. Prove that each $A_i$ is simple.
+\item Let $I$ be a subset of $\{1,2,\dots,t\}$. Show that $\prod_{i\in I}A_i$ is a two-sided ideal of $R$.
+\item Show that any two-sided ideal of $R$ is of the form as in Q2.
+\item Suppose $\psi:R\to M_n(D)$ is a surjective ring homomorphism, where $D$ is a division
+ring. Prove that there exists $i$ such that $A_i\cong M_n(D)$.
+\item Let $Q_8$ be the quaternionic group. Prove that $\R Q_8$ is isomorphic to $\R\times\R\times\R\times\R\times\H$. 
+\item Let $D_8$ be the dihedral group of order $8$. Prove that $\R D_8$ is isomorphic to $\R\times\R\times\R\times\R\times M_2(\R)$. 
+\end{enumerate} \tcbline
+\begin{proof}~\\
+\begin{enumerate}
+\item Ideals in $M_n(R)$ are in one-to-one correspondence with the ideals in $R$. In our case the division ring $D$ has no non-trivial ideals hence there are no non-trivial ideals in $M_n(D)$. 
+\item Clearly it is an abelian group since it is a direct sum of abelian groups. It also inherits the structure of an $R$-module by multiplication. 
+\item Two sided ideals of a direct product of rings is a direct product of ideals in each component of the product ring. But the only ideals of $A_i$ are itself hence the ideals of $R$ are the products of the $A_i$'s. 
+\item By the first isomorphism theorem, $M_n(D)$ is isomorphic to a direct sum of $A_i$'s quotient $\ker(\psi)$. But $M_n(D)$ has no non-trivial ideals. If $\frac{R}{\ker(\psi)}$ is not isomorphic to one $A_i$, then it is isomrophic to a product of $A_i$'s since $\ker(\psi)$ is an ideal of $R$. In this case the product has at least one non-trivial ideal. Hence this is impossible and $\frac{R}{\ker(\psi)}$ must be one copy of $A_i$ for some $i$. 
+\item Notice that the dimension of the algebra is $8$ since $Q_8$ has $8$ elements. It is clear that there are four distinct surjective homomorphisms to $\R\cong M_1(\R)$ determined by where $i,j\in Q_8$ is mapped to $1$ or $-1$. By the above parts, there are four copies of $M_1(\R)$ in the decomposition of $\R Q_8$. Also, there is a surjective ring homomorphism $\R Q_8\to\H$ defined by sending $i$ to $i$ and $j$ to $j$. Hence $\H$ is also part of the decomposition. Since $\R\times\R\times\R\times\R\times\H$ is $8$ dimensional, we conclude. 
+\item Notice that the dimension of the algebra is $8$ since $D_8$ has $8$ elements. Recall that $D_8$ is generated as $D_8=\langle r,s\;|\;r^4,s^2,rs=sr^{-1}\rangle$. There are four distinct surjective homomorphisms $\R D_8\to\R$ determined by $r,s$ mapping to $1,-1$. By the above this means that the decomposition of $\R D_8$ consists of $4$ copies of $\R$. Notice that there is a surjective homomorphism $\R D_8\to M_2(\R)$ defined by $r\mapsto\begin{pmatrix}\frac{1}{\sqrt2}&-\frac{1}{\sqrt2}\\\frac{1}{\sqrt2}&\frac{1}{\sqrt2}\end{pmatrix},s\mapsto\begin{pmatrix}1&0\\0&-1\end{pmatrix}$. Now we have $\R\times\R\times\R\times\R\times M_2(\R)$ which is $8$ dimensional. Thus we are done. 
+\end{enumerate}
+\end{proof}
+\end{ex}
+
+\begin{ex}{Problem 4.7}{} Let $A$ be a finite dimensional commutative algebra over a field $\F$. 
+\begin{enumerate}
+\item Suppose $A$ contains no nilpotent elements. Prove that $A$ is isomorphic to a finite direct product of fields. 
+\item Suppose $A$ contains no zero divisors. Prove that $A$ is a field. 
+\end{enumerate} \tcbline
+\begin{proof}~\\
+\begin{enumerate}
+\item By Artin-Wedderburn, $A$ is a direct product of matrix rings. But matrix rings $M_n(R)$ have nilpotent elements if and only if $n\geq 2$. Thus $A$ is a direct product of rings. 
+\item By the above, we already know that $A$ is a direct product of fields. Indeed every nilpotent element is a zero divisor. Now any non-trivial direct product of fields must contain a zero divisor: $(1,0)\times(0,1)=(0,0)$. Hence $A$ can only be a field. 
+\end{enumerate}
+\end{proof}
+\end{ex}
+
+\begin{ex}{Problem 4.9}{} Let $(A,\F)$ be a simple infinite-dimensional algebra. Prove any non-zero $A$-module is infinite dimensional. \tcbline
+\begin{proof}
+Let $N$ be an $A$-module. Then the action of $A$ on $N$ gives a natural $\F$-algebra homomorphism $$\varphi:A\to\text{End}_\F N$$ Since $A$ is simple, $\ker(\varphi)=0$ and so $\varphi$ is injective. Now suppose that $\dim(N)<\infty$. Then $$\dim_\F(A)<\dim_\F\text{End}_\F N<\infty$$ This is a contradiction. 
+\end{proof}
+\end{ex}
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

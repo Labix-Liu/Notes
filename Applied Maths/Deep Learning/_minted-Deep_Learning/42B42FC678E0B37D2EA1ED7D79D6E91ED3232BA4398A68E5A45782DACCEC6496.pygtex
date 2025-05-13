@@ -1,0 +1,16 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{initialize\PYGZus{}parameters\PYGZus{}deep}\PYG{p}{(}\PYG{n}{layer\PYGZus{}dims}\PYG{p}{):}
+
+    \PYG{n}{np}\PYG{o}{.}\PYG{n}{random}\PYG{o}{.}\PYG{n}{seed}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{)}
+    \PYG{n}{parameters} \PYG{o}{=} \PYG{p}{\PYGZob{}\PYGZcb{}}
+    \PYG{n}{L} \PYG{o}{=} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{layer\PYGZus{}dims}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} number of layers in the network}
+
+    \PYG{k}{for} \PYG{n}{l} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{L}\PYG{p}{):}
+        \PYG{n}{parameters}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}W\PYGZdq{}} \PYG{o}{+} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{l}\PYG{p}{)]} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{random}\PYG{o}{.}\PYG{n}{randn}\PYG{p}{(}\PYG{n}{layer\PYGZus{}dims}\PYG{p}{[}\PYG{n}{l}\PYG{p}{],} \PYG{n}{layer\PYGZus{}dims}\PYG{p}{[}\PYG{n}{l}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{])} \PYG{o}{*} \PYG{l+m+mf}{0.01}
+        \PYG{n}{parameters}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}b\PYGZdq{}} \PYG{o}{+} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{l}\PYG{p}{)]} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{zeros}\PYG{p}{((}\PYG{n}{layer\PYGZus{}dims}\PYG{p}{[}\PYG{n}{l}\PYG{p}{],} \PYG{l+m+mi}{1}\PYG{p}{))}
+
+        \PYG{k}{assert}\PYG{p}{(}\PYG{n}{parameters}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}W\PYGZsq{}} \PYG{o}{+} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{l}\PYG{p}{)]}\PYG{o}{.}\PYG{n}{shape} \PYG{o}{==} \PYG{p}{(}\PYG{n}{layer\PYGZus{}dims}\PYG{p}{[}\PYG{n}{l}\PYG{p}{],} \PYG{n}{layer\PYGZus{}dims}\PYG{p}{[}\PYG{n}{l} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{]))}
+        \PYG{k}{assert}\PYG{p}{(}\PYG{n}{parameters}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}b\PYGZsq{}} \PYG{o}{+} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{l}\PYG{p}{)]}\PYG{o}{.}\PYG{n}{shape} \PYG{o}{==} \PYG{p}{(}\PYG{n}{layer\PYGZus{}dims}\PYG{p}{[}\PYG{n}{l}\PYG{p}{],} \PYG{l+m+mi}{1}\PYG{p}{))}
+
+    \PYG{k}{return} \PYG{n}{parameters}
+\end{Verbatim}

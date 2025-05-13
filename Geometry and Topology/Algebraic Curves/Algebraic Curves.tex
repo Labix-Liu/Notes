@@ -1,0 +1,256 @@
+\documentclass[a4paper]{article}
+
+\input{C:/Users/liula/Desktop/Latex/Headers V1.2.tex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Labix}
+\lhead{Algebraic Curves}
+\rfoot{\thepage}
+
+\title{Algebraic Curves}
+
+\author{Labix}
+
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+\end{abstract}
+\pagebreak
+\tableofcontents
+\pagebreak
+
+\section{Algebraic Curves in Classical Algebraic Geometry}
+\subsection{Basic Properties of Curves}
+\begin{defn}{Curves}{} Let $k$ be a field. Let $X$ be a variety over $k$. We say that $X$ is a curve if $\dim(X)=1$. 
+\end{defn}
+
+\begin{prp}{}{} Let $k$ be an algebraically closed field. Let $C$ be an irreducible curve over $k$. Let $p\in C$ be a non-singular point. Then $\mO_{C,p}$ is a DVR. Moreover, the valuation is given by the degree of the regular function. \tcbline
+\begin{proof}
+Since $p$ is non-singular, by definition $\mO_{C,p}$ is a regular local ring. Moreover, we know that $1=\dim(C)=\dim(\mO_{C,p})$ so that $\mO_{C,p}$ has Krull dimension $1$. By the equivalent characterization of DVR we conclude. 
+\end{proof}
+\end{prp}
+
+We denote the valuation map by $v_p:\text{Frac}(\mO_{C,p})\to\Z$. 
+
+\begin{eg}{}{} Consider the projective curve $C=\V(x^2+y^2-z^2)\subset\Prj_\C^2$. Let $p=[p_0:p_1:p_2]$ be a point on the curve. \\~\\
+
+If $p_2\neq 0$, then $p\in U_2$. Under the affine chart $(U_2,\varphi_2)$, we find that $C_2=\varphi_2(C\cap U_2)=\V(x^2+y^2-1)$. The corresponding coordinate ring is given by $\frac{\C[x,y]}{(x^2+y^2-1)}$. The formula for the local ring in the affine case gives $$\mO_{C,p}\cong\left(\frac{\C[x,y]}{(x^2+y^2-1)}\right)_{m_{(p_0/p_2,p_1/p_2)}}$$ Recall that the unique maximal ideal of the local ring is given as the $\mO_{X,p}$-module $m_p=\{f\in\C[C_2]\;|\;f(p_0/p_2,p_1/p_2)=0\}$, which under the nullstellensatz is the maximal ideal corresponding to the point $(p_0/p_2,p_1/p_2)$ and is given by $m_p=(x-r,y-s)$ where $r=p_0/p_1$ and $s=p_0/p_2$. By Nakayama's lemma, since $x-r,y-s$ generate $m_p$ we know that $x-r+m_p^2,y-s+m_p^2$ span the vector space $m_p/m_p^2$ over $\mO_{X,p}/m_p$. I claim that they are linearly dependent. This mean that I want to find $f+m_p^2$ and $g+m_p^2$ in $\mO_{X,p}/m_p$ that are non-trivial, and that $(x-r)f+(y-s)g+m_p^2=m_p^2$. This means that we want to find $f,g\in\mO_{X,p}\setminus m_p$ such that $(x-r)f+(y-s)g\in m_p^2$. Choose $f=x+r$ and $g=y+s$ to get $$(x-r)(x+r)+(y-s)(y+s)=x^2-r^2+y^2-s^2=1-1=0$$ since $(r,s)$ lie on the curve. Moreover, $x+r,y+s\mO_{X,p}\setminus m_p$ since evaluating at $(r,s)$ at the functions are non-zero. This verifies that $\mO_{X,p}$ is a regular local ring of dimension $1$, hence is a DVR. \\~\\
+
+We can even find its uniformizer and valuation. Since $x-r$ and $y+s$ are linearly dependent and spans $m_p/m_p^2$, any one of the two is a basis for the vector space. WLOG take $x-r$ to be a basis. Nakayama's lemma implies that $x-r$ generates $m_p$. Being a DVR means that for all $f\in\mO_{X,p}$, $f=u(x-r)^n$ where $u$ is invertible. Then the valuation of $f$ is $n$. 
+\end{eg}
+
+\begin{prp}{}{} Let $C$ be an affine irreducible curve over $\C$. Then $C$ is smooth if and only if $C$ is a normal variety. 
+\end{prp}
+
+Recall that by taking the integral closure of the coordinate ring $k[C]$ of an irreducible affine curve $C\subseteq\A^n$, we obtain a corresponding variety $\widetilde{C}$ called the normalization of $C$. \\
+
+Moreover, within each birational class of irreducible curves, one can discuss the isomorphism classes of curves. 
+
+\begin{crl}{}{} Let $k$ be an algebraically closed field. Let $C\subseteq\A_k^n$ be an irreducible affine curve over $k$. Then the normalization $\widetilde{C}$ is smooth. 
+\end{crl}
+
+\subsection{Morphisms between Curves}
+\begin{prp}{}{} Let $k$ be a field. Let $C$ be a smooth curve over $k$. Then for any projective variety $X\subseteq\Prj^n$ and rational map $\phi:C\to X$, there exists a regular map $$\overline{\phi}:C\to X$$ such that $\overline{\phi}|_U=\phi|_U$ for some dense subset $U\subseteq C$. 
+\end{prp}
+
+\begin{prp}{}{} Let $k$ be an algebraically closed field. Let $X,Y$ be smooth irreducible projective curves over $k$. Let $\phi:X\to Y$ be a non-constant regular map. Then $\phi$ is a finite morphism. 
+\end{prp}
+
+\begin{prp}{}{} Let $k$ be an algebraically closed field. Let $X,Y$ be smooth irreducible projective curves over $k$. Let $\phi:X\to Y$ be a rational map. If $\phi$ is birational, then $\phi$ is an isomorphism of varieties. 
+\end{prp}
+
+\subsection{Birational Classification of Irreducible Curves}
+We would like to classify all irreducible curves up to birational classes. The first theorem is the following. 
+
+\begin{thm}{}{} Let $k$ be an algebraically closed field. Let $C$ be an irreducible curve over $k$. Then $C$ is birational to a unique projective smooth irreducible curve. \tcbline
+\begin{proof}
+We know that $C$ is birational to its normalization, which is a smooth curve. 
+\end{proof}
+\end{thm}
+
+Therefore it suffices to classify all smooth irreducible projective curves up to birational classes. But we have seen that in this case, it is the same as classifying all smooth irreducible projective curves up to isomorphism classes. 
+
+\begin{prp}{}{} Let $k$ be an algebraically closed field. Let $C$ be an irreducible curve over $k$. Suppose that $C$ is birational to $\Prj^1$ (rational) and $C$ is not isomorphic to $\Prj^1$. Then the following are true. 
+\begin{itemize}
+\item $C$ is isomorphic to an open subset of $\A_k^1$. 
+\item $C$ is an affine curve. 
+\item $k[C]$ is a UFD, 
+\end{itemize}
+\end{prp}
+
+
+\subsection{Ramification Index}
+\begin{defn}{Ramification Index}{} Let $k$ be an algebraically closed field. Let $X,Y$ be smooth irreducible projective curves over $k$. Let $\phi:X\to Y$ be a non-constant regular map. Let $p\in X$. Define the ramification index of $\phi$ at $p$ to be $$e_\phi(p)=v_p(\phi^\ast(\pi))$$ where $\pi$ is a uniformizing parameter of $\mO_{Y,\phi(p)}$. 
+\end{defn}
+
+\begin{lmm}{}{} Let $k$ be an algebraically closed field. Let $X,Y$ be smooth irreducible projective curves over $k$. Let $\phi:X\to Y$ be a non-constant regular map. Let $p\in X$. Then $$e_\phi(p)=\dim_k\left(\frac{\mO_{X,p}}{(\phi^\ast(\pi)}\right)$$ where $\pi$ is a uniformizing parameter of $\mO_{Y,\phi(p)}$. 
+\end{lmm}
+
+Let $\phi:X\to Y$ be a non-constant regular map between smooth irreducible and projective curves. Since $\phi$ is finite, the notion of degree makes sense. Recall that the degree is defined to be $$\deg(\phi)=\dim_{K(Y)}K(X)$$
+
+\begin{prp}{}{} Let $k$ be an algebraically closed field. Let $X,Y$ be smooth irreducible projective curves over $k$. Let $\phi:X\to Y$ be a non-constant regular map. Let $q\in Y$. Then we have $$\sum_{p\in\phi^{-1}(q)}e_\phi(p)=\deg(\phi)$$
+\end{prp}
+
+\subsection{Differential Forms on Curves}
+\begin{prp}{}{} Let $C$ be a smooth irreducible curve over $\C$. Then $\Omega_{\C(C)/\C}^1$ is a $1$-dimensional vector space over $\C(C)$. 
+\end{prp}
+
+\begin{prp}{}{} Let $C$ be a smooth irreducible curve over $\C$. Let $f\in\C(C)$ be non-constant. Then the following are true. 
+\begin{itemize}
+\item $df\neq 0$ in $\Omega_{\C(C)/\C}^1$. 
+\item $df$ is a $\C(C)$-basis for $\Omega_{\C(C)/\C}^1$. 
+\end{itemize}
+\end{prp}
+
+\begin{defn}{Valuation of Differential $1$-Forms}{} Let $C$ be a smooth irreducible curve over $\C$. Let $p\in C$. Let $\omega\in\Omega_{\C(C)/\C}^1$ be a differential $1$-form of $C$. Define the valuation of $\omega$ at $p$ as follows. Choose a uniformizing parameter $\pi\in\mO_{C,p}$. Write $\omega=fd\pi$ for $f\in\C(C)$. Then define the valuation as $$\text{val}_p(\omega)=\text{val}_p(f)$$
+\end{defn}
+
+\pagebreak
+\section{Classical Divisors on Curves}
+\subsection{The Pullback Map of Divisors}
+\begin{defn}{Pullback Map of Divisors}{} Let $k$ be an algebraically closed field. Let $C$ be a smooth irreducible projective curve over $k$. Let $Y$ be a smooth irreducible projective variety over $k$. Let $\phi:X\to Y$ be a non-constant regular map. Define the induced pullback map $\phi^\ast:\text{Div}(Y)\to\text{Div}(C)$ on generators as follows. For $H\subseteq Y$ a codimension one subvariety, define $$\phi^\ast(H)=\sum_{p\in X}\text{val}_p(\phi^\ast(g))\cdot p$$ where $g$ is a generator of $\I(H)\mO_{Y,\phi(p)}$. 
+\end{defn}
+
+When $Y$ is a curve, we essentially have the formula: $$\phi^\ast\left(\sum_{q\in Y} n_q\cdot q\right)=\sum_{q\in Y}n_q\cdot\left(\sum_{p\in\phi^{-1}(q)}e_\phi(p)\cdot p\right)=\sum_{p\in X}n_{\phi(p)}e_\phi(p)\cdot p$$
+
+\begin{prp}{}{} Let $k$ be an algebraically closed field. Let $X,Y$ be smooth irreducible projective curves over $k$. Let $\phi:X\to Y$ be a non-constant regular map. Then we have $$\deg(\phi^\ast(D))=\deg(\phi)\deg(D)$$ for any $D\in\text{Div}(Y)$. 
+\end{prp}
+
+\begin{prp}{}{} Let $k$ be an algebraically closed field. Let $X$ be a smooth irreducible projective curve over $k$. Let $D\in\text{Div}(X)$ be a principal divisor of $X$. Then $\deg(D)=0$. 
+\end{prp}
+
+\begin{prp}{}{} Let $k$ be an algebraically closed field. Let $X,Y$ be smooth irreducible projective curves over $k$. Let $\phi:X\to Y$ be a non-constant regular map. Then $\phi(\text{Prin}(Y))\subseteq\text{Prin}(X)$. 
+\end{prp}
+
+\begin{defn}{Induced Map of Divisor Class Groups}{} Let $k$ be an algebraically closed field. Let $X,Y$ be smooth irreducible projective curves over $k$. Let $\phi:X\to Y$ be a non-constant regular map. Define the induced map of divisor class groups $\phi^\ast:\text{Cl}(Y)\to\text{Cl}(X)$ by $$\phi^\ast([D])=[\phi^\ast(D)]$$
+\end{defn}
+
+\subsection{The Linear System of Divisors}
+\begin{defn}{The Linear System of Divisors}{} Let $k$ be an algebraically closed field. Let $X$ be a smooth irreducible projective curve over $k$. Let $D\in\text{Div}(X)$ be a divisor. Define the linear system of $D$ to be $$\mL(D)=\{0\}\cup\{f\in K(X)\;|\;\deg(D+\text{div}(f))\geq 0\}\subseteq K(X)$$
+\end{defn}
+
+\begin{lmm}{}{} Let $k$ be an algebraically closed field. Let $X$ be a smooth irreducible projective curve over $k$. Let $D\in\text{Div}(X)$ be a divisor. Then $\mL(D)$ is a vector space over $k$. 
+\end{lmm}
+
+\begin{prp}{}{} Let $k$ be an algebraically closed field. Let $X$ be a smooth irreducible projective curve over $k$. Let $D,D'\in\text{Div}(X)$ be divisors. If $D\sim D'$ are linearly equivalent, then we have $$\dim_k(\mL(D))=\dim_k(\mL(D'))$$
+\end{prp}
+
+\begin{prp}{}{} Let $k$ be an algebraically closed field. Let $X$ be a smooth irreducible projective curve over $k$. Let $D\in\text{Div}(X)$ be a divisor. Then the following are true. 
+\begin{itemize}
+\item If $\deg(D)<0$, then we have $$\dim_k(\mL(D))=0$$
+\item If $\deg(D)=0$, then we have $$\dim_k(\mL(D))=\begin{cases}
+0 & \text{ if }D\not\sim0\\
+1 & \text{ if }D\sim 0
+\end{cases}$$
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{} Let $k$ be an algebraically closed field. Let $X$ be a smooth irreducible projective curve over $k$. Let $D\in\text{Div}(X)$ be a divisor. Then we have $$\dim_k(\mL(D))\leq\deg(D)+1$$
+\end{prp}
+
+\subsection{The Canonical Divisor for Curves}
+\begin{defn}{Divisors of Differential Forms}{} Let $C$ be a smooth irreducible curve over $\C$. Let $p\in C$. Let $\omega\in\Omega_{\C(C)/\C}^1$ be a differential $1$-form of $C$. Define the divisor of $\omega$ by $$\text{div}(\omega)=\sum_{p\in C}\text{val}_p(\omega)\cdot p\in\text{Div}(C)$$
+\end{defn}
+
+\begin{prp}{}{} Let $C$ be a smooth irreducible curve over $\C$. Let $p\in C$. Let $\omega,\tau\in\Omega_C^1$ be non-zero. Then $\text{div}(\omega)$ and $\text{div}(\tau)$ are linearly equivalent. 
+\end{prp}
+
+\begin{defn}{The Canonical Divisor}{} Let $C$ be a smooth irreducible projective curve over $\C$. Let $p\in C$. Define the canonical divisor of $C$ to be $$K_C=[\omega]\in\text{Pic}(C)$$ in the divisor class group for any non-zero $\omega\in\Omega_C^1$. 
+\end{defn}
+
+\begin{lmm}{}{} Let $C$ be a smooth irreducible projective curve over $\C$. Then $$\dim_\C(\mL(K_C))=\dim_\C(\Omega_C^1)$$
+\end{lmm}
+
+\subsection{The Riemann-Roch Theorem}
+\begin{thm}{Riemann-Roch Theorem}{} Let $C$ be a smooth irreducible projective curve over $\C$. Let $D\in\text{Div}(C)$ be a divisor on $C$. Then $$\dim_\C(\mL(D))+\dim_\C(\mL(K_C-D))=\deg(D)+1-p_g(C)$$
+\end{thm}
+
+\begin{prp}{}{} Let $C$ be a smooth irreducible projective curve over $\C$. Let $D\in\text{Div}(C)$ be a divisor on $C$. Then $$\deg(D)+1-p_g(C)\leq\dim_\C(\mL(D))\leq\deg(D)+1$$
+\end{prp}
+
+\begin{prp}{}{} Let $C$ be a smooth irreducible projective curve over $\C$. Then we have $$\deg(K_C)=2p_g(C)-2$$
+\end{prp}
+
+\begin{prp}{}{} Let $C$ be a smooth irreducible projective curve over $\C$. Then the following are equivalent. 
+\begin{itemize}
+\item $C$ is isomorphic to $\Prj^1$. 
+\item The geometric genus $p_g(C)=0$ is zero. 
+\item For all $p,q\in C$, $p\sim q$ are linearly equivalent. 
+\item There exists distinct $p,q\in C$, such that $p\sim q$ are linearly equivalent. 
+\item The degree map $\deg:\text{Pic}(C)\to\Z$ is an isomorphism. 
+\item For all $D\in\text{Div}(C)$ with $\deg(D)>0$, we have $l(D)=\deg(D)+1$. 
+\item There exists $D\in\text{Div}(C)$ with $\deg(D)>0$ such that $l(D)=\deg(D)+1$. 
+\end{itemize}
+\end{prp}
+
+\subsection{Base Point Free Divisors}
+\begin{defn}{Base Point Free Divisor}{} Let $C$ be a smooth projective irreducible curve over $\C$. Let $D\in\text{Div}(C)$ be a divisor given by $D=\sum_{p\in C}n_p\cdot p$. We say that $D$ is base point free if for all $p\in C$ and all $f\in\mL(D)$, we have $$\text{val}_p(f\pi^{n_p})\neq 0$$ where $\pi$ is a uniformizer of $\mO_{C,p}$. 
+\end{defn}
+
+\begin{defn}{Associated Map to Divisors}{} Let $C$ be a smooth projective irreducible curve over $\C$. Let $D\in\text{Div}(C)$ be a divisor. Define the associated rational map $F_D:C\to\Prj(\mL(D)^\ast)$ by $$p\mapsto\left(\substack{\phi_p:\mL(D)\to\C\\f\mapsto(f\cdot\pi^{n_p})(p)}\right)$$ where $\pi$ is the uniformizer of $\mO_{C,p}$. 
+\end{defn}
+
+\begin{lmm}{}{} Let $C$ be a smooth projective irreducible curve over $\C$. Let $D\in\text{Div}(C)$ be a divisor. Then the associated map $F_D:C\to\Prj(\mL(D)^\ast)$ is a regular map. 
+\end{lmm}
+
+\begin{prp}{}{} Let $C$ be a smooth projective irreducible curve over $\C$. Let $D\in\text{Div}(C)$ be a divisor. Then $D$ is base point free if and only if $$\dim_\C(\mL(D-p))=\dim_\C(\mL(D))-1$$ for all $p\in C$. 
+\end{prp}
+
+\begin{crl}{}{} Let $C$ be a smooth projective irreducible curve over $\C$. Let $D\in\text{Div}(C)$ be a divisor. If $\deg(D)\geq 2g$ then $D$ is base point free. 
+\end{crl}
+
+\begin{prp}{}{} Let $C$ be a smooth projective irreducible curve over $\C$. Let $D\in\text{Div}(C)$ be a base point free divisor. Then there is a one-to-one correspondence $$\{H\subseteq\Prj(\mL(D)^\ast)\;|\;H\text{ is a hyperplane }\}\;\;\overset{1:1}{\longleftrightarrow}\;\;\{E\in\text{Div}(C)\;|\;E\text{ is effective and }E\sim D\}$$ The map is given by $H\mapsto F_D^\ast(H)$. 
+\end{prp}
+
+\subsection{Very Ample Divisors}
+\begin{defn}{Very Ample Divisor}{} Let $C$ be a smooth projective irreducible curve over $\C$. Let $D\in\text{Div}(C)$. We say that $D$ is very ample if $D$ is base point free and the associated map $F_D:C\to\Prj(\mL(D)^\ast)$ is an embedding. 
+\end{defn}
+
+\begin{prp}{}{} Let $C$ be a smooth projective irreducible curve over $\C$. Let $D\in\text{Div}(C)$. Then $D$ is very ample if and only if for all $p,q\in C$, we have $$\dim_\C(\mL(D-p-q))=\dim_\C(\mL(D))-2$$
+\end{prp}
+
+\begin{crl}{}{} Let $C$ be a smooth projective irreducible curve over $\C$. Let $D\in\text{Div}(C)$. If $\deg(D)\geq 2g+1$ then $D$ is very ample. 
+\end{crl}
+
+
+\pagebreak
+\section{Algebraic Curves in the Context of Schemes}
+\begin{defn}{Algebraic Curves}{} Let $k$ be an algebraically closed field. A curve over $k$ is an integral separated scheme $X$ of finite type over $k$ that has dimension $1$. 
+\end{defn}
+
+\begin{prp}{}{} Let $X$ be an algebraic curve. Then the arithmetic and geometric genus coincide. In particular, $$p_a(X)=p_g(X)=\dim_kH^1(X,\mO_X)$$
+\end{prp}
+
+We will simply call the genus of a curve $g$ from now on since the arithmetic genus is the same as the geometric genus. 
+
+\subsection{Riemann-Roch Theorem}
+\begin{defn}{Canonical Divisor}{} Let $X$ be an algebraic curve. The canonical divisor $K$ of $X$ is a divisor in the linear equivalence class of $$\Omega_{X/k}^1=\omega_X$$
+\end{defn}
+
+\begin{thm}{Riemann-Roch Theorem}{} Let $X$ be an algebraic curve. Let $D$ be a divisor on $X$ and let $K$ be the canonical divisor of $X$. Let $\mL(D)$ be the associated sheaf of the divisor $D$. Then $$\dim_k(H^0(X,\mL(D)))+\dim_k(H^0(X,\mL(K-D)))=\deg(D)+1-p_g(X)$$
+\end{thm}
+
+\subsection{Classification of Curves in $\Prj^3$}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

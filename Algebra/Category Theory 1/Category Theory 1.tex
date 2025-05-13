@@ -1,0 +1,1642 @@
+\documentclass[a4paper]{article}
+
+\input{C:/Users/liula/Desktop/Latex/Headers V1.2.tex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Labix}
+\lhead{Category Theory 1}
+\rfoot{\thepage}
+
+\title{Category Theory 1}
+
+\author{Labix}
+
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+\end{abstract}
+\pagebreak
+\tableofcontents
+\pagebreak
+
+\section{Categories and Functors}
+\subsection{The Concept of a Category}
+Categories are introduced by Eileenberg-Maclane in 1945 to formally define the concept of naturality, and to lay foundations for homological algebra. Note that there are some set-theoretic subtleties with the following definition. 
+
+\begin{defn}{Categories}{} A category $\mC$ consists of the following data. 
+\begin{itemize}
+\item A collection $\Obj\mC$ called the objects of $\mC$. 
+\item For every $C,D\in\Obj(\mC)$, a collection $\Hom_\mC(C,D)$ called the morphisms from $C$ to $D$. A morphism $f\in\Hom_\mC(C,D)$ is denoted by $f:C\to D$. We call $C$ the source, $D$ the target. 
+\item For every $C,D,E\in\mC$, there is a map of sets $$\circ:\Hom_\mC(D,E)\times\Hom_\mC(C,D)\to\Hom_\mC(C,E)$$ called composition satisfying
+\begin{itemize}
+\item Associativity: $$(h\circ g)\circ f=h\circ(g\circ f)$$ for all $C\overset{f}{\rightarrow}D\overset{g}{\rightarrow}E\overset{h}{\rightarrow}A$
+\item Unitality: For every $C\in\mC$, there is a morphism $\text{id}:C\to C$ such that 
+\begin{align*}
+\text{id}\circ f&=f\;\;\;\;\text{ for }f:D\to C\\
+g\circ\text{id}&=g\;\;\;\;\text{ for }g:C\to D
+\end{align*}
+\end{itemize}
+\end{itemize}
+\end{defn}
+
+We write $$\mC=\left(\Obj\mC,\Hom_\mC=\bigcup_{C,D\in\Obj\mC}\Hom_\mC(C,D),\circ\right)$$ to abbreviate notation. Sometimes we write $\Hom_\mC(C,D)=\Hom(C,D)$ if context is clear. 
+
+\begin{defn}{Small Categories}{} A category $\mC$ is said to be small if all its morphisms $\Hom(-,-)$ form a set. \\~\\
+A category $\mC$ is said to be locally small if between any pair of objects $C,D\in\Obj\mC$, all the arrows between the pair of objects $\Hom_\mC(C,D)$ form a set. 
+\end{defn}
+
+We now define different types of morphisms in a category. The idea is that a category is a formal context to compare objects via morphisms. 
+
+\begin{defn}{Types of Morphisms}{} Let $\mC$ be a category. Let $f:C\to D$ be a morphism in $\mC$. Then $f$ is said to be a
+\begin{itemize}
+\item Isomorphism if there exists $g:D\to C$ such that $g\circ f=1_C$ and $f\circ g=1_D$
+\item Endomorphism if $C=D$
+\item Automorphism if it is endomorphic and isomorphic
+\item Monomorphism if for any pair of morphisms $h,k:B\to C$, $f\circ h=f\circ k$ implies $h=k$
+\item Epimorphism if for any pair of morphisms $h,k:D\to E$, $h\circ f=k\circ f$ implies $h=k$
+\end{itemize}
+\end{defn}
+
+It is important to note that monomorphisms and epimorphisms in a category whose objects have underlying sets translates roughly to the notion of injections and surjections. However not every monomorphisms are an injection and vice versa. \\~\\
+
+In particular, it is easy to see that every isomorphism is a monomorphism and an epimorphism, but not every morphism that is monic and epic is an isomorphism. For example, the inclusion $Z\hookrightarrow\Q$ is not an isomorphism in the category of rings, but it is monic and epic. 
+
+\begin{prp}{}{} Let $\mC$ be a category and let $f:C\to D$ and $g:D\to E$ be morphisms in $\mC$. Then the following are true. 
+\begin{itemize}
+\item If $f$ and $g$ are monic then $g\circ f$ is monic
+\item If $f$ and $g$ are epic then $g\circ f$ is epic
+\item If $g\circ f$ is monic then $f$ is monic
+\item If $g\circ f$ is epic then $g$ is epic. 
+\item If $f$ is an isomorphism then $f$ is monic and epic. 
+\end{itemize} \tcbline
+\begin{proof}~\\
+\begin{itemize}
+\item Suppose that $g\circ f\circ h=g\circ f\circ k$. Since $g$ is monic, we conclude that $f\circ h=f\circ k$. Since $f$ is monic, we conclude that $h=k$. 
+\item Suppose that $h\circ g\circ f=k\circ g\circ f$. Since $f$ is epic, we conclude that $h\circ g=k\circ g$. Since $g$ is epic, we conclude that $h=k$. 
+\item Suppose that $f\circ h=f\circ k$. Then $g\circ f\circ h=g\circ f\circ k$. Since $g\circ f$ is monic, we conclude that $h=k$. 
+\item Suppose that $h\circ g=k\circ g$. Then $h\circ g\circ f=k\circ g\circ f$. Since $g\circ f$ is epic, we conclude that $h=k$. 
+\item Suppose that $f$ is an isomorphism with inverse $g:D\to C$. Suppose that $f\circ h=f\circ k$. Then applying $g$ on the left gives $h=k$. Similarly if $h\circ f=k\circ f$, then applying $g$ on the right gives $h=k$. 
+\end{itemize}
+\end{proof}
+\end{prp}
+
+\begin{defn}{Opposite Categories}{} Let $\mC$ be a category. The opposite category $\mC^{\text{op}}$ is another category where
+\begin{itemize}
+\item $\Obj\mC^{\text{op}}=\Obj\mC$
+\item $\Hom_{\mC^{\text{op}}}(C,D)=\Hom_{\mC}(D,C)$ where for $f\in\Hom_\mC(D,C)$, write $f^{\text{op}}$ for the corresponding morphism in $\Hom_{\mC^{\text{op}}}(C,D)$
+\item For every $C,D,E\in\mC$, the composition $$\circ:\Hom_{\mC^{\text{op}}}(D,E)\times\Hom_{\mC^{\text{op}}}(C,D)\to\Hom_{\mC^{\text{op}}}(C,E)$$ where for $f^{\text{op}}\in\Hom_{\mC^{\text{op}}}(C,D)$ and $g^{\text{op}}\in{\mC^{\text{op}}}(D,E)$, define $$g^{\text{op}}\circ_{\mC^{\text{op}}}f^{\text{op}}=f\circ_\mC g$$
+\end{itemize}
+\end{defn}
+
+One can also dualize notions and statements. For example monic and epic are dual notions. This means that $f$ is monic in $\mC$ if and only if $f$ is epic in $\mC^\text{op}$. 
+
+In particular, this means that every notion we define for categories has a categorical dual. 
+
+\begin{lmm}{}{} Let $\mC$ be a category and $f:C\to D$ be a morphism. Then the following are equivalent. 
+\begin{itemize}
+\item $f$ is an isomorphism
+\item For all $E\in\Obj\mC$, the map of sets $$f_\ast:\Hom_\mC(E,C)\to\Hom_\mC(E,D)$$ defined by $g\mapsto f\circ g$ is a bijection
+\item For all $E\in\Obj\mC$, the map of sets $$f^\ast:\Hom_\mC(D,E)\to\Hom_\mC(C,E)$$ defined by $g\mapsto g\circ f$ is a bijection. 
+\end{itemize} \tcbline
+\begin{proof}~\\
+\begin{itemize}
+\item $(1)\implies(2)$: Let $f^{-1}:D\to C$ be the inverse of $f$. Then $$(f^{-1})_\ast:\Hom_\mC(E,D)\to\Hom_\mC(E,C)$$ defined by $h\mapsto f^{-1}\circ h$ is an inverse of $f_\ast$ since 
+\begin{align*}
+(f^{-1})_\ast(f_\ast(g))&=(f^{-1})(f\circ g)\\
+&=f^{-1}(f\circ g)\\
+&=f^{-1}\circ f\circ g\tag{Associativity of morphisms}\\
+&=g
+\end{align*}
+And $f_\ast((f^{-1})_\ast(h))=h$ similarly. 
+\item $(2)\implies(1)$: Choose $E=D$. Then $f_\ast:\Hom_\mC(D,C)\to\Hom_\mC(D,D)$ is a bijection. Then $f^{-1}=(f_\ast)^{-1}(\text{id}_D)$ is the inverse of $f$. But by definition $f_\ast(f^{-1})=\text{id}_D$ implies $f\circ f^{-1}=\text{id}_D$. Now we just need to show that $f^{-1}\circ f=\text{id}_C$. Now choose $E=C$. Then $f_\ast:\Hom_\mC(C,C)\to\Hom_\mC(C,D)$ is a bijection. Then $f^{-1}\circ f=\text{id}_C$ if and only if $f_\ast(f^{-1}\circ f)=f_\ast(\text{id}_C)$. Indeed, we have on the left hand side $$f_\ast(f^{-1}\circ f)=f\circ f^{-1}\circ f=\text{id}_D\circ f=f$$ and on the right, we have $$f_\ast(\text{id}_C)=f\circ \text{id}_C=f$$
+\item $(2)\iff(3)$: Let $f:C\to D$ be a morphism in $\mC$. We want $f^\ast:\Hom_\mC(D,E)\to\Hom_\mC(C,E)$ to be a bijection. But using the dual, we have that $\Hom_\mC(D,E)=\Hom_{\mC^{\text{op}}}(E,D)$ and $\Hom_\mC(C,E)=\Hom_{\mC^{\text{op}}}(E,C)$ which means that $f_\ast$ actually maps $g^{\text{op}}$ to $$(f^\ast(g))^{\text{op}}=(g\circ_\mC f)^{\text{op}}=f^{\text{op}}\circ_{\mC^{\text{op}}}g^{\text{op}}=(f^{\text{op}})_\ast(g^{\text{op}})$$ This shows that $f^\ast$ is actually $(f^{\text{op}})_\ast$. Then $f^\ast$ is a bijection if and only if $(f^{\text{op}})_\ast$ is a bijection. 
+\end{itemize}
+\end{proof}
+\end{lmm}
+
+\begin{defn}{Subcategories}{} Let $\mC$ be a category. A subcategory $\mD$ of $\mC$ consists of 
+\begin{itemize}
+\item A subcollection $\Obj\mD\subseteq\Obj\mC$ of objects
+\item For each $C,D\in\Obj\mD$, a subcollection $\Hom_\mD(C,D)\subseteq\Hom_\mC(C,D)$ closed under composition, and containing the identities of each objects in $\Obj\mD$
+\end{itemize}
+We say that $\mD$ is a full subcategory of $\mC$ if $\Hom_\mD(C,D)=\Hom_\mC(C,D)$ for all $C,D\in\Obj\mD$
+\end{defn}
+
+\subsection{Functoriality}
+The idea is that a good construction should also tell you what to do on morphisms. 
+
+\begin{defn}{Functors}{} Let $\mC,\mD$ be categories. A covariant functor $F:\mC\to\mD$ consists of 
+\begin{itemize}
+\item The object part of $F$ where $F:\Obj\mC\to\Obj\mD$
+\item The arrow part of $F$ where $F:\Hom_\mC(C,D)\to\Hom_\mD(F(C),F(D))$ for all $C,D\in\Obj\mC$ satisfying:
+\begin{itemize}
+\item For all $C\overset{f}{\rightarrow}D\overset{g}{\rightarrow}E$ in $\mC$, we have $$F(g\circ_\mC f)=F(g)\circ_\mD F(f)$$
+\item For all $C\in\Obj\mC$, $$F(\text{id}_C)=\text{id}_{F(C)}$$
+\end{itemize}
+\end{itemize}
+A contravariant functor is a covariant functor $F:\mC^\text{op}\to\mD$. This consists of 
+\begin{itemize}
+\item $F:\Obj\mC\to\Obj\mD$
+\item $F:\Hom_{\mC^{\text{op}}}(D,C)\to\Hom_\mD(F(C),F(D))$ for all $C,D\in\Obj\mC$ satisfying:
+\begin{itemize}
+\item For all $E\overset{g^{\text{op}}}{\rightarrow}D\overset{f^{\text{op}}}{\rightarrow}C$ in $\mC$, we have $$F(f^{\text{op}}\circ_{\mC^{\text{op}}}g^{\text{op}})=F(g)\circ_\mD F(f)$$
+\item For all $C\in\Obj\mC$, $$F(\text{id}_C)=\text{id}_{F(C)}$$
+\end{itemize}
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{} Let $F:\mC\to\mD$ be a functor and $f:C\to D$ is an isomorphism in $\mC$. Then $F(f):F(C)\to F(D)$ is an isomorphism in $\mD$. \tcbline
+\begin{proof}
+Let $f^{-1}:D\to C$ be the inverse of $f$. Then $F(f^{-1}):F(D)\to F(C)$ is the inverse of $F(f)$. Indeed, we have $$F(f)\circ F(f^{-1})=F(f\circ f^{-1})=F(\text{id}_D)=\text{id}_{F(D)}$$ and $F(f^{-1})\circ F(f)=\text{id}_{F(C)}$ similarly. 
+\end{proof}
+\end{lmm}
+
+\begin{prp}{}{} Let $F:\mC\to\mD$ and $G:\mD\to\mE$ be functors. Define $G\circ F:\mC\to\mE$ where
+\begin{itemize}
+\item On objects, $(G\circ F)(C)=G(F(C))$ for all $C\in\Obj\mC$
+\item On morphisms, for $f:C\to D$ in $\mC$, $(G\circ F)(f)=G(F(f))$. 
+\end{itemize} 
+Then $G\circ F$ is also a functor. \tcbline
+\begin{proof}
+It clearly satisfies the requirements of a functor. 
+\end{proof}
+\end{prp}
+
+\begin{defn}{Types of Functors}{} A functor $F:\mathcal{C}\to\mathcal{D}$ is 
+\begin{itemize}
+\item full if for each $A,B\in\mathcal{C}$, the map $\Hom_C(A,B)\to\Hom_D(FA,FB)$ is surjective
+\item faithful if for each $A,B\in\mathcal{C}$, the map $\Hom_C(A,B)\to\Hom_D(FA,FB)$ is injective
+\item fully faithful if it is full and faithful
+\item is an embedding of $\mathcal{C}$ on $\mathcal{D}$ if it is fully faithful and the object part of $F$ is injective
+\item is essentially surjective if for every $D\in\mathcal{D}$ there exists $C\in\mathcal{C}$ such that $FC\cong D$
+\end{itemize}
+\end{defn}
+
+\subsection{Split Morphisms}
+Functors in general do not preserve monomorphisms and epimorphisms. However if there is a morphism ``witnessing'' the monomorphism or epimorphism, the functor does preserve these type of morphisms. We have also seen that while isomorphisms must be monic and epic, the converse need not be true. There is a class of morphisms (and their dual) that resolve all these issues. 
+
+\begin{defn}{Split Morphisms}{} Let $\mC$ be a category and $f:C\to D$ a morphism in $\mC$. Then $f$ is said to be a 
+\begin{itemize}
+\item split monomorphism if there exists $r:D\to C$ such that $r\circ f=\text{id}_C$. 
+\item split epimorphism if there exists $s:D\to C$ such that $f\circ s=\text{id}_D$
+\end{itemize}
+We say that $r$ is a retract of $f$ and $s$ is a section of $f$. 
+\end{defn}
+
+One can easily see that split monomorphisms are dual to split epimorphisms similar to how the concept of monomorphisms and epimorphisms are dual to each other. 
+
+\begin{prp}{}{} Let $\mC$ be a category and $f:C\to D$ a morphism in $\mC$. Then the following are true. 
+\begin{itemize}
+\item If $f$ is a split monomorphism then $f$ is a monomorphism
+\item If $f$ is a split epimorphism then $f$ is an epimorphism
+\end{itemize} \tcbline
+\begin{proof}
+Suppose that $f$ has a retract $r$ and that $f\circ h=f\circ k$. Then $r\circ f\circ h=r\circ f\circ k$ implies that $h=k$ since $r\circ f=\text{id}_C$. \\~\\
+
+Now suppose that $f$ has a section $s$ and that $h\circ f=k\circ f$. Then $h\circ f\circ s=k\circ f\circ s$ implies that $h=k$ since $f\circ s=\text{id}_D$. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{} Let $\mC$ be a category and $F:\mC\to\mD$ a functor. Let $f:C\to D$ be a morphism in $\mC$. Then the following are true. 
+\begin{itemize}
+\item If $f$ is a split monomorphism then $F(f)$ is a split monomorphism
+\item If $f$ is a split epimorphism then $F(f)$ is a split epimorphism
+\end{itemize} \tcbline
+\begin{proof}
+Suppose that $f$ has a retract $r$. Then by functoriality, we have that $$F(r)\circ F(f)=F(\text{id}_C)=\text{id}_{F(C)}$$ hence $F(f)$ has a retract $F(r)$. \\~\\
+
+Suppose that $f$ has a section $s$. Then by functoriality, we have that $$F(f)\circ F(s)=F(\text{id}_D)=\text{id}_{F(D)}$$ hence $F(f)$ has a section $F(s)$. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{} Let $\mC$ be a category and $f:C\to D$ a morphism in $\mC$. Then the following conditions are equivalent. 
+\begin{itemize}
+\item $f$ is an isomorphism
+\item $f$ is a monomorphism and a split epimorphism
+\item $f$ is a split monomorphism and an epimorphism
+\end{itemize} \tcbline
+\begin{proof}~\\
+\begin{itemize}
+\item $(1)\implies(2)$: Suppose that $f$ is an isomorphism. We have already seen that $f$ is a monomorphism by \ref{prp:1.1.4}. Now there exists a morphism $s:D\to C$ such that $f\circ s=\text{id}_D$. Hence $f$ is a split epimorphism. 
+
+\item $(2)\implies(3)$: Suppose that $f$ is a monomorphism and a split epimorphism. We have seen that $f$ is then an epimorphism. Since $f$ is a split epimorphism, there exists a section $s:D\to C$ such that $f\circ s=\text{id}_D$. We can then pre compose with $f$ on both sides to obtain $$f\circ s\circ f=f$$ Since $f$ is a monomorphism, we conclude that $s\circ f=\text{id}_C$. Thus $f$ is a split monomorphism. 
+
+\item $(3)\implies(1)$: Suppose that $f$ is a split monomorphism and an epimorphism. Then $f$ has a retract $r$ for which $r\circ f=\text{id}_C$. We can then post compose with $f$ to obtain $$f\circ r\circ f=f$$ Since $f$ is an epimorphism, we conclude that $f\circ r=\text{id}_D$. Thus $f$ has a two sided inverse $r$ and hence an isomorphism. 
+\end{itemize}
+\end{proof}
+\end{prp}
+
+\subsection{Categories as Objects}
+\begin{defn}{The Category of Locally Small Categories}{} Let $\bold{CAT}$ be the category where 
+\begin{itemize}
+\item $\Obj\bold{CAT}=$ ''all'' the locally small categories
+\item For $\mC,\mD\in\Obj\text{CAT}$, define $\Hom_{\bold{CAT}}(\mC,\mD)=\{\text{Functors }F:\mC\to\mD\}$
+\item Composition is defined as the composition of functors as seen in 1.2.3
+\end{itemize}
+\end{defn}
+
+This is a very large category. 
+
+\begin{defn}{The Category of Small Categories}{} Define $\bold{Cat}$ to be the full subcategory of $\bold{CAT}$ consisting of small categories. 
+\end{defn}
+
+\begin{lmm}{}{} The category $\bold{Cat}$ of small categories is a locally small category. 
+\end{lmm}
+
+Now that we have defined $\bold{Cat}$, we can talk about isomorphisms of categories. \\~\\
+
+In general, few categories are isomorphic. There are categories which are not isomorphic but that we want to consider ''the same''. 
+
+\subsection{Diagram Chasing}
+\begin{defn}{Commutative Diagram}{} Let $\mJ$ be a category. A commutative diagram in a category $\mC$ of shape $\mJ$ is a functor $X:\mJ\to\mC$. A diagram is said to be small if $I$ is small. 
+\end{defn}
+
+In nice cases, such a functor can be visualized by drawing the images of the objects and morphism of $I$ in $\mC$. For example, if $I$ is the preorder \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+0\arrow[r]\arrow[d] & 1\arrow[d]\\
+2\arrow[r] & 3
+\end{tikzcd}}\\~\\
+then a functor $I\to\mC$ consists of the following data in $\mC$: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+C_0\arrow[r, "f"]\arrow[d, "g"] & C_1\arrow[d, "\bar{g}"]\\
+C_2\arrow[r, "\bar{f}"] & C_3
+\end{tikzcd}}\\~\\
+such that $\bar{g}\circ f=\bar{f}\circ g$. \\~\\
+
+\begin{prp}{}{} Let $\mC,\mD$ be categories. If $X:I\to\mC$ is a commutative diagram ad $F:\mC\to\mD$ is a functor, then $F\circ X:I\to\mD$ is again a commutative diagram. 
+\end{prp}
+
+\subsection{The Category of Sets}
+\begin{defn}{The Category of Sets}{} The category $\bold{Set}$ of sets where 
+\begin{itemize}
+\item $\Obj(\bold{Set})=\text{''all'' sets}$
+\item For two set $X$ and $Y$, the morphisms $\Hom_\bold{Set}(X,Y)$ consists of functions $f:X\to Y$. 
+\item Composition is given by the composition of functions. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Presheaves}{} Let $\mC$ be a category. A presheaf on $\mC$ is a contravariant functor $\mC^\text{op}\to\bold{Set}$. 
+\end{defn}
+
+\begin{defn}{Concrete Category}{} A concrete category is a category $\mC$ together with a faithful functor $\mC\to\text{Set}$. 
+\end{defn}
+
+It turns out that it is difficult to construct examples of non-concrete categories. In fact, every small category admits a faithful functor to sets. \\~\\
+A non-examples was given by Freyd which says that the category of homotopic spaces is not concrete. 
+
+\begin{prp}{}{} Let $F:\mC\to\text{Set}$ be a concrete category. Then $g\circ f=h$ in $\mC$ is true if and only if $F(g)\circ F(f)=F(h)$. \tcbline
+\begin{proof}
+Notice that $F(g)\circ F(f)=F(h)$ if and only if $F(g\circ f)=F(h)$ since $F$ is a functor. Also $F(g\circ f)=F(h)$ if and only if $g\circ f=h$ since $F$ is faithful. 
+\end{proof}
+\end{prp}
+
+This in particular means that a diagram commutes in $\mC$ if and only if $F$ of the diagram commutes in $\text{Set}$. Thus it is very convenient to work in concrete categories. 
+
+\subsection{New Categories From Old}
+\begin{defn}{Slice Category}{} Let $\mC$ be a category and $C$ an object. Define the slice category $\mC/C$ to consist of the following data. 
+\begin{itemize}
+\item The objects consists of morphisms $f:D\to C$ for $D\in\mC$. This means that they are a pair $(D,f)$. 
+\item For two objects $(D,f)$ and $(E,g)$, a morphism in the slice category is a morphism $h:D\to E$ in $\mC$ such that the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	D && E \\
+	& C
+	\arrow["h", from=1-1, to=1-3]
+	\arrow["f"', from=1-1, to=2-2]
+	\arrow["g", from=1-3, to=2-2]
+\end{tikzcd}}\\~\\
+\item Composition of morphisms are defined as the composition in $\mC$. 
+\end{itemize}
+\end{defn}
+
+Dually, there is the notion of a coslice category. 
+
+\begin{defn}{Coslice Category}{} Let $\mC$ be a category and $C$ an object. Define the coslice category $C/\mC$ to consist of the following data. 
+\begin{itemize}
+\item The objects consists of morphisms $f:C\to D$ for $D\in\mC$. This means that they are a pair $(D,f)$. 
+\item For two objects $(D,f)$ and $(E,g)$, a morphism in the slice category is a morphism $h:D\to E$ in $\mC$ such that the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	& C \\
+	D && E
+	\arrow["f", from=2-1, to=1-2]
+	\arrow["h", from=2-1, to=2-3]
+	\arrow["g"', from=2-3, to=1-2]
+\end{tikzcd}}\\~\\
+\item Composition of morphisms are defined as the composition in $\mC$. 
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{} Let $\mC$ be a category and $C$ an object. Then the two categories $$(\mC/C)^\text{op}=C/(\mC^\text{op})$$ are equal. \tcbline
+\begin{proof}
+An object in $C/(\mC^\text{op})$ is a morphism $f^\text{op}:D\to C$ in $\mC^\text{op}$. This is precisely an object in $(\mC/C)^\text{op}$. Thus the objects of the two categories are the same. \\~\\
+
+A morphism in $C/(\mC^\text{op})$ consists of two objects $f^\text{op}:D\to C$ and $g^\text{op}:E\to C$ together with a morphism $h^\text{op}:D\to E$ such that the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	D && E \\
+	& C
+	\arrow["h", from=1-1, to=1-3]
+	\arrow["f"', from=1-1, to=2-2]
+	\arrow["g", from=1-3, to=2-2]
+\end{tikzcd}}\\~\\
+This is precisely the morphisms in $(\mC/C)^\text{op}$. Indeed $(D,f^\text{op})$ and $(E,g^\text{op})$ are objects in $(\mC/C)^\text{op}$ and the morphism $h^\text{op}:D\to E$ also gives a commutative diagram: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	D && E \\
+	& C
+	\arrow["h", from=1-1, to=1-3]
+	\arrow["f"', from=1-1, to=2-2]
+	\arrow["g", from=1-3, to=2-2]
+\end{tikzcd}}\\~\\
+which is exactly the same diagram. \\~\\
+
+Finally, composition of morphisms in either categories are just compositions in $\mC$ so the composition laws for both categories are identical. 
+\end{proof}
+\end{prp}
+
+\begin{defn}{Arrow Category}{} Let $\mC$ be a category. Define the arrow category $\text{Arr}(\mC)$ to consist of the following data. 
+\begin{itemize}
+\item The objects are morphisms $f:C\to D$ in $\mC$. 
+\item For two objects $f:C\to D$ and $g:E\to F$, a morphism from $f$ to $g$ is a commutative square: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	C & D \\
+	E & F
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["h"', from=1-1, to=2-1]
+	\arrow["k", from=1-2, to=2-2]
+	\arrow["g"', from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+This means that a morphism from $f$ to $g$ is a pair $(h:C\to E,k:D\to F)$. 
+\item Composition is given by placing commutative squares side by side to obtain a commutative rectangle. 
+\end{itemize}
+\end{defn}
+
+\pagebreak
+\section{Naturality and Equivalences}
+\subsection{Naturality and Equivalence of Categories}
+\begin{defn}{Natural Transformation}{} Let $\mathcal{C},\mathcal{D}$ be categories with two functors $F,G:\mathcal{C}\to\mathcal{D}$ that are both covariant. A natural transformation $\tau$ is a family of arrows of $\mathcal{D}$, $$\tau=\{\tau_A:FA\to GA|A\in\mathcal{C}\}$$ such that for each morphism $f:A\to B$ in $\mC$, we have 
+$$G(f)\circ\tau_A=\tau_B\circ F(f)$$ In other words, the square on the right side of the following diagram is required to commute: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+ & & F(A)\arrow[rr, "Ff"]\arrow[dd, "\tau_A"] && F(B)\arrow[dd, "\tau_B"] \\
+A\arrow[r, "f"] & B\arrow[ru, "F", Mapsto]\arrow[rd, "G", Mapsto] & & \\
+ & & G(A)\arrow[rr, "Gf"] && G(B)
+\end{tikzcd}}
+\end{defn}
+
+\begin{prp}{}{} The composition of nartural transformation with appropriate domain and range is again a natural transformation. 
+\end{prp}
+
+\begin{defn}{Natural Isomorphism}{} A natural isomorphism between two functors $F,G:\mathcal{C}\to\mathcal{D}$ is a natural transformation $\tau:F\to G$ such that $\tau_C:F(C)\to G(C)$ is an isomorphism in $\mathcal{D}$ for every $\tau_C\in\tau$. 
+\end{defn}
+
+\begin{lmm}{}{} Let $F,G:\mC\to\mD$ be functors and $\alpha:F\to G$ be a natural isomorphism. Then the inverses $\alpha^{-1}_C:G(C)\to F(C)$, for $C\in\Obj\mC$ defines a natural isomorphism $\alpha^{-1}:G\to F$. \tcbline
+\begin{proof}
+The naturality condition of $\alpha$ implies that there is a commutative diagram: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{F(C)} & {F(D)} \\
+	{G(C)} & {G(D)}
+	\arrow["{F(f)}", from=1-1, to=1-2]
+	\arrow["\cong"', from=1-1, to=2-1]
+	\arrow["\cong", from=1-2, to=2-2]
+	\arrow["{G(f)}"', from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+By changing one's point of view, one can easily use the isomorphism to define inverses from $G(C)$ to $F(C)$ for each $C\in\mC$ such that the naturality condition holds. 
+\end{proof}
+\end{lmm}
+
+\begin{defn}{Isomoprhic Categories}{} Two categories are said to be isomorphic if there are functors $F:\mathcal{C}\to\mathcal{D}$ and $G:\mathcal{D}\to\mathcal{C}$ such that $G\circ F=I_\mathcal{C}$ and $F\circ G=I_\mathcal{D}$. \\~\\
+In other words, $F$ and $G$ are inverses in the category $\text{CAT}$. 
+\end{defn}
+
+We relax the notion of isomorphic categories to obtain the following. 
+
+\begin{defn}{Equivalence of Categories}{} Let $\mC,\mD$ be categories and $F:\mC\to\mD$ and $G:\mD\to\mC$ be functors. We say that $\mC$ and $\mD$ is are equivalent categories if there exists natural isomorphisms $$
+\eta:\text{id}_\mC\overset{\cong}{\Rightarrow}G\circ F\;\;\;\;\text{ and }\;\;\;\;
+\tau:F\circ G\overset{\cong}{\Rightarrow}\text{id}_\mD$$
+In this case we say that $F$ and $G$ are an equivalence of categories. 
+\end{defn}
+
+\begin{prp}{}{} A functor $F:\mathcal{C}\to\mathcal{D}$ defines an equivalence of categories if and only if $F$ is fully faithful and essentially surjective. \tcbline
+\begin{proof}
+Suppose that $F$ and $G$ are an equivalence of categories with natural isomorphisms $\eta:\text{id}_\mC\overset{\cong}{\Rightarrow}G\circ F$ and $
+\tau:\text{id}_\mD\overset{\cong}{\Rightarrow}F\circ G$. Consider the following map between morphisms: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+\Hom_\mC(C,C')\arrow[r, "F"] & \Hom_\mD(F(C),F(C'))\arrow[dd, "G"]\\
+& \\
+& \Hom_\mC(G(F(C)),G(F(C')))\arrow[uul, "\eta_\ast"]
+\end{tikzcd}}\\~\\
+where $\eta_\ast$ sends $g\in\Hom_\mC(G(F(C)),G(F(C')))$ to $\eta_{C'}^{-1}\circ g\circ\eta_C:C\to C'$. I claim that $\eta_\ast\circ G$ is an inverse of $F$. \\~\\
+We have that 
+\begin{align*}
+\eta_\ast(G(F(f:C\to C')))&=\eta_{C'}^{-1}\circ(G(F(f:C\to C')))\circ\eta_C\\
+&=\eta_{C'}^{-1}\circ\eta_{C'}\circ\text{id}(f:C\to C')\tag{$\nu$ is natural}\\
+&=f:C\to C'
+\end{align*}
+Similarly $F(\nu_\ast(G))$ is the identity map. Thus $F$ is fully faithful. $F$ is also essentially surjective. For all $D\in\Obj\mD$, we can choose $G(D)$ such that $$F(G(D))\cong D$$ by the naturality of $\tau$. \\~\\
+
+Now suppose that $F$ is fully faithful and essentially surjective. Define $G:\mD\to\mC$ as follows: 
+\begin{itemize}
+\item For every $D\in\Obj\mD$, choose $C_D\in\Obj\mC$ and isomorphism $\tau_D:F(C_D)\cong D$. This is possible since $F$ is essentially surjective and by the axiom of choice. 
+\item For $g:D\to D'$ in $\mD$, define $$G(g:D\to D')=F^{-1}(\tau_{D'}\circ g\circ\tau_D)$$
+\end{itemize}
+We check that $G$ is a functor. 
+\begin{itemize}
+\item Associativity: Let $g:D\to D'$ and $g':D'\to D''$ be morphisms in $\mD$. Since $F$ is fully faithful, associativity holds if and only if $$F(G(g'\circ g))=F(G(g')\circ G(g))$$ We have that on the left hand side, 
+\begin{align*}
+F(G(g'\circ g))&=F(F^{-1}(\tau_{D''}^{-1}\circ(g'\circ g)\circ\tau_D))\\
+&=\tau_{D''}^{-1}\circ(g'\circ g)\circ\tau_D
+\end{align*}
+On the right hand side, we have 
+\begin{align*}
+F(G(g')\circ G(g))&=F(G(g'))\circ F(G(g))\\
+&=\tau_{D''}^{-1}\circ g'\circ\tau_{D'}\circ\tau_{D'}^{-1}\circ g\circ\tau_D\\
+&=\tau_{D''}^{-1}\circ(g'\circ g)\circ\tau_D
+\end{align*}
+Thus we are done. 
+\item We also have that $$F(G(\text{id}_D))=F(F^{-1}(\tau_D^{-1}\circ\text{id}_D\circ\tau_D))=\text{id}_{F(G(D))}=F(\text{id}_{G(D)})$$
+\end{itemize}
+Thus $G$ is a functor. \\~\\
+We also need natural isomorphisms. We show that $\tau_D:F(G(D))\overset{\cong}{\rightarrow}D$ is natural. For every $g:D\to D'$ in $\mD$, we have 
+\begin{align*}
+\tau_{D'}\circ F(G(g))=\tau_{D'}\circ F(F^{-1}(\tau_{D'}\circ g\circ\tau_D))\\
+&=g\circ\tau_D\\
+&=\text{id}_{\mD}(g)\circ\tau_D
+\end{align*}
+Finally, define $\eta_C=F^{-1}(\tau_{F(C)}^{-1}):C\to G(F(C))$. For $f:C\to C'$ in $\mC$, $G(F(f))\circ\eta_C=\eta_{C'}\circ f$. But this is true if and only if $F(G(F(f))\circ\eta_C)=F(\eta_{C'}\circ f)$ since $F$ is fully faithful. On the left hand side, we have
+\begin{align*}
+F(G(F(f))\circ\eta_C)&=F\left(F^{-1}\left(\tau_{F(C')}^{-1}\circ F(f)\circ\tau_{F(C)}\right)\circ F^{-1}\left(\tau_{F(C)}^{-1}\right)\right)\\
+&=\tau_{F(C')}^{-1}\circ F(f)\circ\tau_{F(C)}\circ\tau_{F(C)}^{-1}\\
+&=\tau_{F(C')}^{-1}\circ F(f)
+\end{align*}
+On the right hand side, we have
+\begin{align*}
+F(\eta_{C'}\circ f)&=F(F^{-1}(\tau_{F(C')})\circ f)\\
+&=\tau_{F(C')}^{-1}\circ F(f)
+\end{align*}
+Finally, $\eta_C$ is an isomorphism with inverse $F^{-1}(\tau_{F(C)})$ since 
+\end{proof}
+\end{prp}
+
+\subsection{The Skeleton of a Category}
+There is an explicit way of understanding what equivalence of categories mean. 
+
+\begin{defn}{Skeletal Category}{} A category $\mC$ is said to be skeletal if each isomorphism class in $\mC$ contains exactly one object. 
+\end{defn}
+
+Using the axiom of choice, any category contains a skeletal category. 
+
+\begin{defn}{Skeleton of a Category}{} Let $\mC$ be a category. The skeleton $\text{sk}(\mC)$ of $\mC$ is the skeletal category equivalent to $\mC$ that is unique up to isomorphism. 
+\end{defn}
+
+For a category $\mC$, one can construct $\text{sk}(\mC)$ as follows. Just choose an object in each isomorphism class in $\mC$ and take the full subcategory of the chosen objects. It is then easy to see that the inclusion functor $\text{sk}(\mC)\hookrightarrow\mC$ defines an equivalence of categories. \\~\\
+
+In particular, one can think of equivalence of categories being a comparison on isomorphism classes of objects instead of a comparison of the objects themselves. For instance, some significantly ``larger'' categories can be equivalent to ``smaller'' categories while they can never be isomorphic. 
+
+\subsection{The Functor Category}
+\begin{prp}{Vertical Composition}{} Let $F,G,H:\mC\to\mD$ be functors and let $\lambda:F\Rightarrow G$ and $\tau:G\Rightarrow H$ be natural transformations. For each object $C\in\mC$, the collection of morphisms $$\tau_C\circ\lambda_C:F(C)\to H(C)$$ assemble into a natural transformation denoted $$\tau\circ\lambda:F\Rightarrow H$$ \tcbline
+\begin{proof}
+The naturality conditions of $\lambda$ and $\tau$ implies that there is a commutative diagram \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{F(C)} & {F(D)} \\
+	{G(C)} & {G(D)} \\
+	{H(C)} & {H(D)}
+	\arrow["{F(f)}", from=1-1, to=1-2]
+	\arrow["{\lambda_C}"', from=1-1, to=2-1]
+	\arrow["{\lambda_D}", from=1-2, to=2-2]
+	\arrow["{G(f)}", from=2-1, to=2-2]
+	\arrow["{\tau_C}"', from=2-1, to=3-1]
+	\arrow["{\tau_D}", from=2-2, to=3-2]
+	\arrow["{H(f)}", from=3-1, to=3-2]
+\end{tikzcd}}\\~\\
+if $f:C\to D$ is a morphism in $\mC$. It is easy to see that a naturality condition between $F$ and $H$ via the morphisms $\tau_C\circ\lambda_C$ for each $C\in\mC$. 
+\end{proof}
+\end{prp}
+
+\begin{defn}{The Functor Category}{} Let $\mC,\mD$ be categories. The category of functors from $\mC$ to $\mD$ is the category $\mD^\mC=\text{Func}(\mC,\mD)$ where
+\begin{itemize}
+\item The objects are functors $F:\mC\to\mD$
+\item For two functors $F,G:\mC\to\mD$, the morphisms $\Hom_{\mD^\mC}(F,G)$ are natural transformations $\lambda:F\Rightarrow G$
+\item For $\lambda:F\Rightarrow G$ and $\tau:G\Rightarrow H$ natural transformations, define their composition as $\tau\circ\lambda$
+\end{itemize}
+\end{defn}
+
+It is easy to see that composition of natural transformations satisfy associativity since morphisms in $\mD$ satisfy associativity. It is also clear that there is an identity natural transformation. 
+
+\begin{defn}{Category of Endofunctors}{} Let $\mC$ be a category. Define the category of endofunctors to be the category $$\text{End}(\mC)=\mC^\mC=\text{Func}(\mC,\mC)$$
+\end{defn}
+
+\begin{defn}{Collection of Natural Transformations}{} Let $\mC,\mD$ be categories. Let $F,G:\mC\to\mD$ be two functors. We write $$\text{Nat}(F,G)=\Hom_{\text{Func}(\mC,\mD)}(F,G)$$ as the collection of all natural transformations from $F$ to $G$. 
+\end{defn}
+
+\subsection{The 2-Category of Categories}
+\begin{prp}{Horizontal Composition}{} Let $F_1,F_2:\mC\to\mD$ and $G_1,G_2:\mD\to\mE$ be functors such that there are natural transformations $\lambda:F_1\Rightarrow F_2$ and $\tau:G_1\Rightarrow G_2$. Then there exists a natural transformation from $G_1\circ F_1$ to $G_2\circ F_2$. \tcbline
+\begin{proof}
+For each $C\in\mC$, consider the morphism $\lambda_C:F_1(C)\to F_2(C)$ in $\mD$. The natruality condition of $\tau$ implies that there is a commutative diagram in $\E$: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	&&& {G_1(F_1(C))} && {G_1(F_2(C))} \\
+	{F_1(C)} & {F_2(C)} \\
+	&&& {G_2(F_1(C))} && {G_2(F_2(C))}
+	\arrow["{G_1(\lambda_C)}", from=1-4, to=1-6]
+	\arrow["{\tau_{F_1(C)}}"', from=1-4, to=3-4]
+	\arrow["{\tau_{F_2(C)}}", from=1-6, to=3-6]
+	\arrow["{\lambda_C}", from=2-1, to=2-2]
+	\arrow[shorten <=9pt, Rightarrow, maps to, from=2-2, to=1-4]
+	\arrow[shorten <=9pt, Rightarrow, maps to, from=2-2, to=3-4]
+	\arrow["{G_2(\lambda_C)}"', from=3-4, to=3-6]
+\end{tikzcd}}\\~\\
+In particular we now have a morphism $G_1(F_1(C))\to G_2(F_2(C))$ given by $$\eta_C=G_2(\lambda_C)\circ\tau_{F_1(C)}=\tau_{F_2(C)}\circ G_1(\lambda_C)$$ for each $C\in\mC$. I claim that these morphisms assemble into a natural transformation from $G_1\circ F_1$ to $G_2\circ F_2$. This means that we must check that the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{G_1(F_1(C))} && {G_1(F_1(D))} \\
+	\\
+	{G_2(F_2(C))} && {G_2(F_2(D))}
+	\arrow["{G_1(F_1(f))}", from=1-1, to=1-3]
+	\arrow["{\eta_C}"', from=1-1, to=3-1]
+	\arrow["{\eta_D}", from=1-3, to=3-3]
+	\arrow["{G_2(F_2(f))}"', from=3-1, to=3-3]
+\end{tikzcd}}\\~\\
+if $f:C\to D$ is a morphism in $\mC$. Consider the following diagram in $\mE$: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{G_1(F_1(C))} && {G_1(F_1(D))} \\
+	\\
+	{G_1(F_2(C))} && {G_1(F_2(D))} \\
+	\\
+	{G_2(F_2(C))} && {G_2(F_2(D))}
+	\arrow["{G_1(F_1(f))}", from=1-1, to=1-3]
+	\arrow["{G_1(\lambda_C)}"', from=1-1, to=3-1]
+	\arrow["{G_1(\lambda_D)}", from=1-3, to=3-3]
+	\arrow["{G_1(F_2(C))}", from=3-1, to=3-3]
+	\arrow["{\tau_{F_2(C)}}"', from=3-1, to=5-1]
+	\arrow["{\tau_{F_2(D)}}", from=3-3, to=5-3]
+	\arrow["{G_2(F_2(f))}"', from=5-1, to=5-3]
+\end{tikzcd}}\\~\\
+The bottom square commutes since $\tau$ is a natural transformation. The top square commutes since $\lambda$ is a natural transformation and functors preserve commutative diagrams. Thus we conclude. 
+\end{proof}
+\end{prp}
+
+
+\pagebreak
+\section{Examples of Categories and Functors}
+\subsection{The Big List of Categories}
+\begin{defn}{The Category of Groups}{} The category $\bold{Grp}$ of groups where 
+\begin{itemize}
+\item The objects consists of groups $(G,\ast)$
+\item For two groups $G$ and $H$, the morphisms $\Hom_\bold{Grp}(G,H)$ consists of group homomorphisms $f:G\to H$
+\item Composition is given by composition of functions
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Category of Algebraic Objects}{} Most of the algebraic objects can be made into a category. 
+\begin{itemize}
+\item $\bold{Ab}$ is the category of Abelian groups and group homomorphisms
+\item $\bold{Mon}$ is the category of monoids and monoid homomorphisms
+\item $\bold{Rings}$ is the category of rings and ring homomorphisms
+\item ${_R}\bold{Mod}$ is the category of (left) $R$-modules and $R$-module homomorphisms for a ring $R$
+\item $\bold{Vect}_k$ is the category of vector spaces over a field $k$ and linear maps
+\end{itemize}
+\end{defn}
+
+The category $\bold{Ab}$ of abelian groups is a full subcategory of $\bold{Grp}$. 
+
+\begin{defn}{The Category of Topological Spaces}{} The category $\bold{Top}$ of topological spaces where 
+\begin{itemize}
+\item The objects consists of topological spaces $(X,\mT)$
+\item For two spaces $X$ and $Y$, the morphisms $\Hom_\bold{Top}(X,Y)$ consists of continuous maps $f:G\to H$
+\item Composition is given by composition of functions
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Category of G-Sets}{} Let $G$ be a group. Define the category $G\text{-Set}$ to consist of the following data. 
+\begin{itemize}
+\item The objects are sets which have a group action $G$. 
+\item For two $G$-sets $X$ and $Y$, a morphism is a $G$-equivariant function $f:X\to Y$. This means that $$f(g\cdot x)=g\cdot f(x)$$ for all $g\in G$ and $x\in X$. 
+\item Composition is given by the composition of functions. 
+\end{itemize}
+\end{defn}
+
+These examples are of the same type. They are sets with additional structures and morphisms are functions which preserve the additional structure. They are in particular, concrete categories. What follows is that the categories no longer follow the same way we construct the ones above. 
+
+\begin{defn}{The Category of Matrices $\bold{Mat}_k$}{} The category $\bold{Mat}_k$ of manifolds where 
+\begin{itemize}
+\item $\Obj(\bold{Mat}_k)=\N$
+\item $\Hom(n,k)=M_{k\times n}(k)$
+\item Given $n\overset{A}{\rightarrow}k\overset{B}{\rightarrow}l$, define $$B\circ A=B\cdot A\in M_{l\times n}(k)$$ Associativity and unitality follows from matrix multiplications. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{The Category of a Preorder}{} Let $(P,\leq)$ be a preorder. Define a category associated with a preorder as follows. 
+\begin{itemize}
+\item The objects are the elements of $P$
+\item For $x,y\in P$, define the morphisms to be $$\Hom(x,y)=\begin{cases}
+\ast & \text{ if } x\leq y\\
+\emptyset & \text{ otherwise }
+\end{cases}$$
+\item For two morphisms $x\to y$ and $y\to z$, define their composition to be the unique morphism $x\to z$ which exists by transitivity. 
+\end{itemize}
+\end{defn}
+
+\subsection{Categories with Finite Sets}
+\begin{defn}{Category of Finite Sets}{} Define the category of finite sets $\bold{Fin}$ to be the full subcategory of $\bold{Set}$ consisting of finite sets. 
+\end{defn}
+
+To simplify constructions, we often use the skeleton of this category. This consists of objects of the form $[n]=\{0,\dots,n\}$ for each $n\in\N$. 
+
+\begin{defn}{Simplex Category}{} The simplex category $\Delta$ consists of the following data. 
+\begin{itemize}
+\item The objects are $[n]=\{0,\dots,n\}$ for $n\in\N$. 
+\item The morphisms are the non-strictly order preserving functions. This means that a morphism $f:[n]\to[m]$ must satisfy $f(i)\leq f(j)$ for all $i\leq j$. 
+\item Composition is the usual composition of functions. 
+\end{itemize}
+\end{defn}
+
+\subsection{Important Functors}
+\begin{defn}{The Forgetful Functor}{} Given a category whose objects are sets ($\bold{Grp},\bold{Ab},{_R}\bold{Mod},\bold{Top},\dots$), define the forgetful functor $u:\bold{Grp}\to\bold{Set}$ as follows. 
+\begin{itemize}
+\item $u$ sends the object to the underlying set
+\item Each morphism is sent to itself $u(f)=f$ since every morphism in these categories are also functions of sets. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{The Free Group Functor}{} The free group functor $F:\bold{Set}\to\bold{Grp}$ is defined as follows. 
+\begin{itemize}
+\item On objects, define $F(X)=\langle X\rangle$ the free group on $X$
+\item If $f:X\to Y$ is a morphism in $\bold{Set}$, define $F(f):\langle X\rangle\to\langle Y\rangle$ by $$F(f)(x_1^{\pm1}\cdots x_m^{\pm1})=f(x_1)^{\pm1}\cdots f(x_m)^{\pm1}$$
+\end{itemize}
+\end{defn}
+
+It is easy to check that $F(f)$ is a well defined group homomorphism. Indeed we have that 
+\begin{align*}
+&\;\;F(f)(x_1^{\pm1}\cdots x_m^{\pm1})\cdot F(f)(y_1^{\pm1}\cdots y_n^{\pm1})\\
+&=f(x_1)^{\pm1}\cdots f(x_m)^{\pm1}\cdot f(y_1)^{\pm1}\cdots f(y_n)^{\pm1}\\
+&=F(f)(x_1^{\pm1}\cdots x_m^{\pm1}\cdot y_1^{\pm1}\cdots y_n^{\pm1})
+\end{align*}
+Moreover, it is also to see that composition of functions are respective by the free functor $F$. 
+
+\begin{defn}{The Opposite Functor}{} There is a opposite functor $(-)^\text{op}:\text{CAT}\to\text{CAT}$ defined as follows. 
+\begin{itemize}
+\item $(-)^\text{op}(\mC)=\mC^\text{op}$
+\item For a morphism $F:\mC\to\mD$ in $\text{CAT}$, $(-)^\text{op}$ sends the morphism to $$F^\text{op}:\mC^\text{op}\to\mD^\text{op}$$ defined as follows. 
+\begin{itemize}
+\item $F^\text{op}$ sends $C\in\mC^\text{op}$ to $F(C)\in\mD^\text{op}$
+\item A morphism $f^\text{op}:C\to D$ in $\mC^\text{op}$ to $$F(f)^\text{op}:F(C)\to F(D)$$ in $\mD^\text{op}$
+\end{itemize}
+\end{itemize}
+\end{defn}
+
+It is clear that $(-)^\text{op}$ is a functor since it respects composition of functors by definition. 
+
+\pagebreak
+\section{Representability and Universality}
+\subsection{Representable Functors}
+Given a category $\mC$, we can regard $\Hom_\mC$ as a functor by fixing one of the two objects and allowing the other to vary. 
+
+\begin{defn}{Hom Functor in the Second Variable}{} Let $\mC$ be a locally small category. For every $C\in\Obj\mC$, define the Hom functor to be $$\Hom_\mC(C,-):\mC\to\text{Set}$$ where 
+\begin{itemize}
+\item On objects, sends $D\in\mC$ to the set $\Hom_\mC(C,D)$
+\item On morphisms, sends $f:D\to E$ in $\mC$ to the map of sets $$f_\ast:\Hom_\mC(C,D)\to\Hom_\mC(C,E)$$ defined by $g\mapsto f\circ g$. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Hom Functor in the First Variable}{} Let $\mC$ be a locally small category. For every $C\in\Obj\mC$, define the Hom functor to be $$\Hom_\mC(-,C):\mC^\text{op}\to\text{Set}$$ where 
+\begin{itemize}
+\item On objects, sends $D\in\Obj\mC$ to the set $\Hom_\mC(D,C)=\Hom_{\mC^{\text{op}}}(C,D)$
+\item On morphisms, sends $f:D\to E$ in $\mC^{\text{op}}$ to the map of sets $$f^\ast:\Hom_\mC(E,C)\to\Hom_\mC(D,C)$$ defined by $g\mapsto g\circ f$. 
+\end{itemize}
+\end{defn}
+
+Given morphisms $f:D\to D'$ and $g:C'\to C$ in a category $\mC$, it is easy to see that the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+\Hom_\mC(C,D)\arrow[r, "g^\ast"]\arrow[d, "f_\ast"'] & \Hom_\mC(C',D)\arrow[d, "f_\ast"] \\
+\Hom_\mC(C,D')\arrow[r, "g^\ast"] & \Hom_\mC(C',D')
+\end{tikzcd}}\\~\\
+
+The compositions $g^\ast\circ f_\ast$ and $f_\ast\circ g^\ast$ is the map sending $h:C\to D$ to the morphism $f\circ h\circ g:C'\to D'$. 
+
+\begin{defn}{Representable Functors}{} Let $\mC$ be a locally small category. Let $F:\mC\to\bold{Set}$ be a functor. 
+\begin{itemize}
+\item If $F$ is covariant, we say that $F$ is representable by an object $C\in\mC$ if there is a natural isomorphism $$F\cong\Hom(C,-)$$
+\item If $F$ is contravariant, we say that $F$ is corepresentable by an object $C\in\mC$ if there is a natural isomorphism $$F\cong\Hom(C,-)$$
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{} The following functors are all representable. 
+\begin{itemize}
+\item The identity functor $\text{id}:\bold{Set}\to\bold{Set}$ is representable with the object $\{\ast\}$
+\item The forgetful functor $u:\bold{Grp}\to\bold{Set}$ is representable with the object $\Z$
+\item The functor $\mP:\bold{Set}^\text{op}\to\bold{Set}$ is representable with the object $\{0,1\}$. 
+\end{itemize}
+\end{prp}
+
+\subsection{The Yoneda Lemma}
+\begin{thm}{Yoneda's Lemma I}{} Let $\mC$ be a locally small category. Let $F:\mC\to\bold{Set}$ be a functor. Let $C\in\mC$ be an object. Then there is a natural bijection of sets $$\Hom_{\text{Func}(\mC,\bold{Set})}(\Hom_\mC(C,-),F)\cong F(C)$$ defined by $\left(\alpha:\Hom_\mC(C,-)\Rightarrow F\right)\mapsto\left(\alpha_C(\text{id}_C)\right)$. \tcbline
+\begin{proof}
+Define a function of sets $$\Psi:F(C)\to\Hom_{\text{Set}^\mC}\left(\Hom_\mC(C,-),F\right)$$ as follows. For each $x\in F(C)$, $\Psi(x)$ is a natural transformation $$\Psi(x):\Hom_\mC(C,-)\Rightarrow F$$ This is defined as for each $D\in\mC$, $\Psi(x)_D:\Hom_\mC(C,D)\to F(D)$ is defined by sending $f:C\to D$ to $F(f)(x)$. \\~\\
+
+We first show that $\Psi(x)$ for each $x$ is indeed a natural transformation. This means that we need to show the commutativity of the following diagram: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\Hom_\mC(C,D)} && {\Hom_\mC(C,D')} \\
+	\\
+	{F(D)} && {F(D')}
+	\arrow["{g_\ast}", from=1-1, to=1-3]
+	\arrow["{\Psi(x)_D}"', from=1-1, to=3-1]
+	\arrow["{\Psi(x)_{D'}}", from=1-3, to=3-3]
+	\arrow["{F(g)}", from=3-1, to=3-3]
+\end{tikzcd}}\\~\\
+where $g:D\to D'$ is a morphism in $\mC$. Let $f:C\to D$ be a morphism in $\Hom_\mC(C,D)$. Then we have that 
+\begin{align*}
+(F(g)\circ\Psi(x)_D)(f)&=F(g)(F(f)(x))\\
+&=(F(g)\circ F(f))(x)\\
+&=F(g\circ f)(x)\\
+&=\Psi(x)_{D'}(g\circ f)\\
+&=(\Psi(x)_{D'}\circ g_\ast)(f)
+\end{align*}
+And thus $\Psi$ is well defined. Next step is to show that $\Psi$ and $\Phi$ are inverses of each other. We have that $$\Phi(\Psi(x))=\Psi(x)_C(\text{id}_C)=F(\text{id}_C)(x)=x$$ and 
+\begin{align*}
+\Psi(\Phi(\alpha))_D(f:C\to D)&=F(f)(\Phi(\alpha))\\
+&=F(f)(\alpha_C(\text{id}_C))\\
+&=\alpha_D(f_\ast(\text{id}_C))\\
+&=\alpha_D(f)
+\end{align*}
+Thus we are done. Finally, we show naturality in $\mC$ and $\text{Set}^\mC$. To show naturality in $\mC$, we want to show that the square \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\Hom_{\text{Set}^\mC}(\Hom_\mC(C,-),F)} && {\Hom_{\text{Set}^\mC}(\Hom_\mC(C',-),F)} \\
+	\\
+	{F(C)} && {F(C')}
+	\arrow["{f_\ast}", from=1-1, to=1-3]
+	\arrow["{\Phi_C}"', from=1-1, to=3-1]
+	\arrow["{\Phi_{C'}}", from=1-3, to=3-3]
+	\arrow["{F(f)}"', from=3-1, to=3-3]
+\end{tikzcd}}\\~\\
+commutes for $f:C\to C'$ a morphism in $\mC$. In this case, $f_\ast$ is defined as follows. For a natural transformation $\alpha:\Hom_\mC(C,-)\Rightarrow F$ with components $$\alpha_D:\Hom_\mC(C,D)\to F(D)$$ define a natural transformation $f_\ast(\alpha)$ with components $$(f_\ast(\alpha))_D:\Hom_\mC(C',D)\to F(D)$$ defined by $$(g:C'\to D)\mapsto\left((F(g)\circ\alpha_{C'})(f)\right)$$ If $f_\ast(\alpha)$ is indeed a natural transformation, then we have that 
+\begin{align*}
+F(f)(\Phi_C(\alpha))&=F(f)(\alpha_C(\text{id}_C))\\
+&=\alpha_{C'}(f)
+\end{align*}
+by the naturality of $\alpha$. Also we have 
+\begin{align*}
+\Phi_{C'}(f_\ast(\alpha))&=f_\ast(\alpha)(\text{id}_{C'})\\
+&=F(\text{id}_{C'})(\alpha_{C'}(f))\\
+&=\text{id}_{F(C')}(\alpha_{C'}(f))\\
+&=\alpha_{C'}(f)
+\end{align*}
+which shows that naturality condition. Now it remains to show that $f_\ast(\alpha)$ is a natural transformation. This amounts to showing that the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\Hom_\mC(C',D)} && {\Hom_\mC(C',D')} \\
+	\\
+	{F(D)} && {F(D')}
+	\arrow["{h_\ast}", from=1-1, to=1-3]
+	\arrow["{(f_\ast(\alpha))_D}"', from=1-1, to=3-1]
+	\arrow["{(f_\ast(\alpha))_{D'}}", from=1-3, to=3-3]
+	\arrow["{F(h)}"', from=3-1, to=3-3]
+\end{tikzcd}}\\~\\
+for $h:D\to D'$ a morphism in $\mC$. Let $u\in\Hom_\mC(C',D)$ By following the arrows on the bottom left, we have that $$(F(h)\circ(f_\ast(\alpha)_D))(u)=F(h)\left(F(u)\circ\alpha_{C'}(f)\right)=\left(F(h\circ u)\circ\alpha_{C'}\right)(f)$$ By following the arrows on the top right, we have that $$((f_\ast(\alpha)_{D'})\circ h_\ast)(u)=(f_\ast(\alpha))_D(h\circ u)=\left(F(h\circ u)\circ\alpha_{C'}\right)(f)$$ Thus we conclude. \\~\\
+
+It remains to show naturality on $\text{Set}^\mC$. Naturality condition means the following diagram must commute: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\Hom_{\bold{Set}^\mC}(\Hom_\mC(C,-),F)} && {\Hom_{\bold{Set}^\mC}(\Hom_\mC(C,-),G)} \\
+	\\
+	{F(C)} && {G(C)}
+	\arrow["{\beta_\ast}", from=1-1, to=1-3]
+	\arrow["{\Phi_F}"', from=1-1, to=3-1]
+	\arrow["{\Phi_G}", from=1-3, to=3-3]
+	\arrow["{\beta_C}", from=3-1, to=3-3]
+\end{tikzcd}}\\~\\
+for a natural transformation $\beta$. Let $\alpha:\Hom_\mC(C,-)\Rightarrow F$ be a natural transformation. Then following the bottom left of the diagram gives $$(\beta_C\circ\Phi_F)(\alpha)=\beta_C(\alpha_C(1_C))$$ Following the top right of the diagram gives $$(\Phi_G\circ\beta_\ast)(\alpha)=\Phi_G(\beta\circ\alpha)=(\beta\circ\alpha)_C(1_C)=\beta_C(\alpha_C(1_C))$$ and so we conclude. 
+\end{proof}
+\end{thm}
+
+This means that the collection of the above bijections define a natural isomorphism between the functors $$\Hom_{\text{Set}^\mC}\left(\Hom_\mC(-,-),-\right):\mC\times\bold{Set}^{\mC^\text{op}}\to\bold{Set}$$ and $$\text{Ev}:\mC\times\bold{Set}^{\mC^\text{op}}\to\bold{Set}$$ defined by $\text{Ev}(C,F)=F(C)$. \\~\\
+
+Note that $\Hom_{\text{Set}^\mC}\left(\Hom_\mC(C,-),F\right)$ is a priori large, but it is small as a consequence of the Yoneda lemma. 
+
+\begin{defn}{Yoneda's Embedding}{} Let $\mC$ be a locally small category. Define a functor $$y:\mC^\text{op}\to\text{Func}(\mC,\bold{Set})$$ by the following data. 
+\begin{itemize}
+\item For each $C\in\mC$ an object, $y(C)$ is the functor $\Hom_\mC(C,-):\mC\to\bold{Set}$. 
+\item For each morphism $f:C\to D$ in $\mC$, $y(f)$ is the natural transformation $$f^\ast:\Hom_\mC(D,-)\Rightarrow\Hom_\mC(C,-)$$ whose components $f_X^\ast:\Hom_\mC(D,X)\to\Hom_\mC(C,X)$ are given by pre-composition with $f$. 
+\end{itemize}
+\end{defn}
+
+\begin{prp}{Yoneda's Embedding}{} Let $\mC$ be a locally small category. Then Yoneda's embedding $y:\mC^\text{op}\to\text{Func}(\mC,\bold{Set})$ is fully faithful. Moreover, two objects $C,D$ in $\Obj\mC$ are isomorphic if and only if the functors $\Hom_\mC(C,-)$ and $\Hom_\mC(D,-)$ are naturally isomorphic. \tcbline
+\begin{proof}
+On the level of morphisms, fully faithful means that we want to show that $$y:\Hom_{\mC^{\text{op}}}(C,D)\to\Hom_{\mC^{\text{Set}}}\left(\Hom_\mC(C,-),\Hom_\mC(D,-))\right)$$ is bijective. Using the fact that $\Hom_{\mC^{\text{op}}}(C,D)=\Hom_\mC(D,C)$ and Yoneda's lemma, we have the diagram \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+\Hom_\mC(D,C)\arrow[r, "y"] & \Hom_{\mC^{\text{Set}}}\left(\Hom_\mC(C,-),\Hom_\mC(D,-))\right)\arrow[d, "\Psi"]\\
+&\Hom_\mC(D,C)\\
+\end{tikzcd}}\\~\\ We want to show that $\Psi(y(f))=f$ for all $f\in\Hom_\mC(D,C)$. But 
+\begin{align*}
+\Psi(y(f))&=y(f)_D(\text{id}_D)\\
+&=\text{id}_D\circ f\\
+&=f
+\end{align*}
+Thus $y$ is fully faithful. 
+\end{proof}
+\end{prp}
+
+\begin{crl}{}{} Let $\mC$ be a locally small category. Let $C,D\in\mC$ be objects. Then $C$ and $D$ are isomorphic objects if and only if the functors $\Hom_\mC(C,-)$ and $\Hom_\mC(D,-)$ are naturally isomorphic. \tcbline
+\begin{proof}
+Clearly if $C\cong C'$, Then $y(C)\cong y(C')$ since $y$ is a functor. Conversely, suppose $\alpha:y(C)\overset{\cong}{\rightarrow}y(C')$ is an isomorphism. Since $y$ is fully faithful, there is a unique $f:C\to C'$ in $\mC^{\text{op}}$ such that $y(f)=\alpha$. Similarly, $\alpha^{-1}:y(C')\to y(C)$ gives a unique morphism $g:C'\to C$. in $\mC^{\text{op}}$. Notice that we have
+\begin{align*}
+y(f\circ g)&=y(f)\circ y(g)\\
+&=\alpha\circ\alpha^{-1}\\
+&=\text{id}_{y(C')}\\
+&=y(\text{id}_{C'})
+\end{align*}
+Since $y$ is faithful, this implies that $f\circ g=\text{id}_{C'}$. A similar argument shows that $g\circ f=\text{id}_C$ and thus $g$ is an inverse of $f$. 
+\end{proof}
+\end{crl}
+
+\subsection{Universal Properties}
+Essentially the universal property is a way of saying the phrase "unique up to isomorphism". Much of the later categorical constructs as we see will have this universal property. 
+
+\begin{defn}{Universal Property}{} Let $\mC$ be a locally small category. Let $C\in\Obj\mC$. A universal property for $C$ consists of a representable functor $F:\mC\to\text{Set}$, where the representation is given by $$\alpha:\Hom_\mC(C,-)\overset{\cong}{\Rightarrow}F$$ (Yoneda lemma implies that $\alpha$ corresponds to a unique $x\in F(C)$). The element $x\in F(C)$ in this case is called the universal element, and $(C,x)$ is called a representation of $F$. 
+\end{defn}
+
+The name universality is given because a universal property is a description of the maps out of $C$. \\~\\
+This universal property of an object $C$ of $\mC$ uniquely determines $C$ up to isomorphism. If $C,D$ have the same universal property, this means that there are isomorphisms \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+\alpha:\Hom_\mC(C,-)\arrow[r, "\cong", Rightarrow] & F & \Hom_\mC(D,-):\beta\arrow[l, "\cong"', Rightarrow]
+\end{tikzcd}}\\~\\ Then since $\Hom_\mC(C,-)\cong\Hom_\mC(D,-)$, by the Yoneda embedding we have $C\cong D$. Verbally speaking, this says that if two objects has all maps going out of it being the same, then the objects are isomorphic. 
+
+\pagebreak
+\section{Limits and Colimits}
+Limits and colimits are objects constructed from diagrams by means of certain universal properties. They formalize the notion of subobjects in objects and gluing of objects. 
+
+\subsection{Initial and Terminal Objects}
+\begin{defn}{Initial and Terminal Objects}{} Let $\mathcal{C}$ be a category. 
+\begin{itemize}
+\item $A\in Obj(\mathcal{C})$ is initial if for any object $C\in\mathcal{C}$, there is a unique morphism $A\to C$
+\item $B\in Obj(\mathcal{C})$ is terminal if for any object $C\in\mathcal{C}$, there is a unique morphism $C\to B$. 
+\item $A\in\Obj\mC$ is a zero object if it is both initial and terminal. 
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{} Let $\mC$ be a category. Then $A$ is initial in $\mC$ if and only if $A$ is terminal in $\mC^{\text{op}}$. 
+\end{lmm}
+
+\begin{prp}{}{} Let $\mC$ be a category. Then initial an terminal objects (if it exists) are unique up to unique isomorphism. \tcbline
+\begin{proof}
+Suppose that $A,B$ are two terminal objects of $\mC$. Then there is a unique morphism $f:A\to B$ and $g:B\to A$ respectively since $B$ and $A$ are terminal. Again since $B$ and $A$ are terminal, there is only one unique morphism $B\to B$ and $A\to A$ which is the identity. Thus $f\circ g:A\to A$ and $g\circ f:B\to B$ are both the identity. 
+\end{proof}
+\end{prp}
+
+Initial and terminal objects has an equivalent characterization via representability. This means that there must be some functor for which the initial / terminal object represents. It turns out that the following functor is precisely the required functor. 
+
+\begin{defn}{Constant Functor}{} Let $\mJ,\mC$ be categories. The constant functor with value $C\in\Obj\mC$ is the functor $\Delta C:\mJ\to\mC$ defined by 
+\begin{itemize}
+\item $(\Delta C)(J)=C$ on objects $J\in\Obj\mJ$
+\item $(\Delta C)(f:I\to J)=\text{id}_C$ on morphisms $f:I\to J$ in $\mJ$
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{} Let $\mC$ be a locally small category. Let $C\in\mC$ be an object. Then the following are true. 
+\begin{itemize}
+\item $C$ is initial if and only if $C$ corepresents the constant functor $\Delta\ast:\mC\to\bold{Set}$ of the one point set. 
+\item $C$ is terminal if and only if $C$ represents the constant functor $\Delta\ast:\mC\to\bold{Set}$ of the one point set. 
+\end{itemize}
+\end{prp}
+
+In other words, an initial object in $\mC$ exists if and only if the constant functor is representable. 
+
+\subsection{Limits and Colimits}
+Recall that a commutative diagram in $\mC$ of shape $\mJ$ is a functor $X:\mJ\to\mC$. Though there are no restriction on the following definition, we will eventually take $\mJ$ to be a small category. 
+
+\begin{defn}{Cone Over and Under}{} Let $X:\mJ\to\mC$ be a commutative diagram. A cone over $X$ with summit $C\in\Obj\mC$ is a natural transformation $$\lambda:\Delta C\Rightarrow X$$ from the constant functor to the diagram. Explicitly, $\lambda$ is a collection of morphisms $\lambda_J:C\to X(J)$ for each $J\in\Obj\mJ$ such that \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+& C\arrow[ld, "\lambda_I"']\arrow[rd, "\lambda_J"] &\\
+X(I)\arrow[rr, "X(f)"] & & X(J)
+\end{tikzcd}}\\~\\
+commutes for $f:I\to J$ a morphism in $\mJ$. 
+\end{defn}
+
+\begin{defn}{The Category of Cone Over a Diagram}{} Let $\mC$ be a category. Let $X:\mJ\to\mC$ be a diagram. Define the category of cones over $X$ $$\text{Cone}(X)$$ to consist of the following data. 
+\begin{itemize}
+\item The objects consist of cones over $X$
+\item Given two cones $\lambda:\Delta C\Rightarrow X$ and $\mu:\Delta D\Rightarrow X$, a morphism from $\lambda$ to $\mu$ consists of a morphism $f:C\to D$ in $\mC$ such that the following diagram commutes for all $J\in\mJ$: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	C && D \\
+	& {X(J)}
+	\arrow["f", from=1-1, to=1-3]
+	\arrow["{\lambda_J}"', from=1-1, to=2-2]
+	\arrow["{\mu_J}", from=1-3, to=2-2]
+\end{tikzcd}}\\~\\
+\item Composition is given by composition of morphisms in $\mC$
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Limits}{} Let $\mC$ be a category. Let $X:\mJ\to\mC$ be a diagram. A limit of $X$ is an object $$\lim_\mJ X\in\Obj\mC$$ together with a natural transformation $\lambda:\Delta(\lim_\mJ X)\Rightarrow X$ which is terminal in the category of cones over $X$. 
+\end{defn}
+
+Explicitly, this consists of an object $\lim_\mJ X$ of $\mC$ with maps $\lambda_J:\lim_\mJ X\to X(J)$ such that for any other cone $\mu:\Delta C\Rightarrow X$, there is a unique map $u:C\to\lim_\mJ X$ such that the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+&C\arrow[dd, "\exists!u", dashed]\arrow[bend left=-20, lddd, "\mu_I"']\arrow[bend right=-20, rddd, "\mu_J"]&\\
+&&\\
+& \lim_\mJ X\arrow[ld, "\lambda_I"']\arrow[rd, "\lambda_J"] &\\
+X(I)\arrow[rr, "X(f)"] & & X(J)
+\end{tikzcd}}\\~\\
+
+\begin{defn}{Cone Under a Diagram}{} Let $X:\mJ\to\mC$ be a commutative diagram. A cone under $X$ with apex $C\in\Obj\mC$ is a natural transformation $$\lambda:X\Rightarrow\Delta C$$ from the diagram to the constant functor.Explicitly, $\lambda$ is a collection of morphisms $\lambda_J:C\to X(J)$ for each $J\in\Obj\mJ$ such that \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{X(I)} && {X(J)} \\
+	& C
+	\arrow["{X(f)}", from=1-1, to=1-3]
+	\arrow["{\lambda_I}"', from=1-1, to=2-2]
+	\arrow["{\lambda_J}", from=1-3, to=2-2]
+\end{tikzcd}}\\~\\
+commutes for $f:I\to J$ a morphism in $\mJ$.  
+\end{defn}
+
+\begin{defn}{The Category of Cone Under a Diagram}{} Let $\mC$ be a category. Let $X:\mJ\to\mC$ be a diagram. Define the category of cones under $X$ $$\text{Cocone}(X)$$ to consist of the following data. 
+\begin{itemize}
+\item The objects consist of cones under $X$
+\item Given two cones $\lambda:X\Rightarrow\Delta C$ and $\mu:X\Rightarrow\Delta D$, a morphism from $\lambda$ to $\mu$ consists of a morphism $f:C\to D$ in $\mC$ such that the following diagram commutes for all $J\in\mJ$: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	& {X(J)} \\
+	C && D
+	\arrow["{\lambda_J}"', from=1-2, to=2-1]
+	\arrow["{\mu_J}", from=1-2, to=2-3]
+	\arrow["f"', from=2-1, to=2-3]
+\end{tikzcd}}\\~\\
+\item Composition is given by composition of morphisms in $\mC$
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Colimits}{} Let $\mC$ be a category. Let $X:\mJ\to\mC$ be a diagram. A colimit of $X$ is an object $$\colim_\mJ X\in\Obj\mC$$ together with a natural transformation $\lambda:X\Rightarrow\Delta\left(\colim_\mJ X\right)$ which is initial in the category of cones under $X$. 
+\end{defn}
+
+Explicitly, this consists of an object $\colim_\mJ X$ of $\mC$ with maps $\lambda_J:X(J)\to\Delta\left(\colim_\mJ X\right)$ such that for any other cone $\mu:X\Rightarrow\Delta C$, there is a unique map $u:\colim_\mJ X\to C$ such that the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+X(I)\arrow[rd, "\lambda_I"']\arrow[rr, "X(f)"]\arrow[bend left=-20, rddd, "\psi_I"'] & & X(J)\arrow[ld, "\lambda_J"]\arrow[bend right=-20, lddd, "\psi_J"]\\
+&\colim_\mJ X\arrow[dd, "\exists!u", dashed] &\\
+&&\\
+&C&
+\end{tikzcd}}\\~\\
+
+\begin{prp}{Uniqueness of (Co)Limits}{} Let $\mC$ be a category. Let $X:\mJ\to\mC$ be a diagram. Then the limit and colimit of $X$ is unique up to unique isomorphism, provided that it exists. \tcbline
+\begin{proof}
+Since limits and colimits are terminal and initial respectively, by 2.1.5 we are done. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{} Let $\mC$ be a category and let $X:\mJ\to\mC$ be a diagram. If $\mJ$ has an initial object $0\in\mJ$, then $$\lim_\mJ X=X(0)$$ Dually, if $\mJ$ has a terminal object $1\in\mJ$, then $$\colim_\mJ X=X(1)$$
+\end{prp}
+
+Recall that initial and terminal objects has an equivalent characterization using representability. Therefore by admitting a suitable functor, we should be able to convert the definition of limits and colimits in to representability criteria. It turns out that the following functor gives the characterization. 
+
+\begin{thm}{}{} Let $\mC$ be a category. Let $X:\mJ\to\mC$ be a diagram. Let $C\in\mC$ be an object. Then the following are true. 
+\begin{itemize}
+\item $C$ is the limit of $X$ if and only if there is a natural isomorphism $$\Hom_\mC(-,C)\cong\text{Nat}(\Delta(-),X)$$ In other words, $\text{Nat}(\Delta(-),X):\mC\to\bold{Set}$ is corepresentable by $C$. 
+\item $C$ is the colimit of $X$ if and only if there is a natural isomorphism $$\Hom_\mC(C,-)\cong\text{Nat}(X,\Delta(-))$$ In other words, $\text{Nat}(X,\Delta(-)):\mC\to\bold{Set}$ is representable by $C$. 
+\end{itemize} \tcbline
+\begin{proof}
+Define $\Psi:\Hom_\mC(-,C)\Rightarrow\text{Cone}(-,X)$ as follows. For each $D\in\mC$, $\Psi_D:\Hom_\mC(D,C)\to\text{Cone}(D,X)$ is defined by $$(f:D\to C)\mapsto\left(D\overset{f}{\rightarrow}C\overset{\lambda_J}{\rightarrow}X(J)\right)$$ for each $J\in\mJ$. \\~\\
+
+We first show that $\Psi$ is an isomorphism in $\bold{Set}$ (A bijection). We know that $\lambda:\Delta C\Rightarrow X$ is a limit of $X$ if and only if it is terminal. This means that $\lambda$ is a limit if and only if for all $\delta:\Delta D\Rightarrow X$, there exists a unique $u:D\to C$ a map of cone such that \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+D\arrow[rr, "u"]\arrow[rd, "\delta_J"'] & & C\arrow[ld, "\lambda_J'"]\\
+& X(J) &
+\end{tikzcd}}\\~\\
+for all $J\in\Obj\mJ$. But this precisely means that every $\delta$ has a unique preimage $u$ by $\Psi$. Thus $\Psi$ is a bijection. \\~\\
+
+It remains to show that $\Psi$ is a natural isomorphism. 
+\end{proof}
+\end{thm}
+
+\begin{defn}{Complete and Cocomplete Categories}{} Let $\mC$ be a category. $\mC$ is said to be (co)complete if every small diagram $\mJ\to\mC$ admits a (co)limit. 
+\end{defn}
+
+The smallness in the definition is key! If completeness is defined by requiring all limits to exists, then any complete category $\mC$ that has the set of morphisms $\Hom_\mC(C,D)$ between any two objects $C,D$ being larger than $1$, then $\mC$
+will be a preorder!
+
+\begin{prp}{}{} The category $\text{Set}$ is complete and cocomplete. \tcbline
+\begin{proof}
+Denote $1$ the one element set. Then since we are working with the category of sets, we have the isomorphism $$L(X)=\lim_\mJ X\cong\Hom_\text{Set}(1,\lim_\mJ X)\cong\text{Cone}(1,X)$$ for any small diagram $X:\mJ\to\mC$. This is equal to $$\lim_\mJ X=\left\{\{x_J\in X(J)\}_{J\in\Obj\mJ}\in\prod_{J\in\Obj\mJ}X(J)\;\bigg{|}\;\forall (f:I\to J)\in\mJ, f_\ast(x_I)=x_J\right\}$$ where the maps of the cones are $\pi_J:\lim_\mJ X\to X(J)$ defined by $\{x_I\}_{I\in\Obj\mJ}\to x_J$. Dually, we have that $$\lim_\mJ X=\frac{\coprod_{J\in\Obj\mJ}X(J)}{\sim}$$ where $\sim$ is the equivalence relation generated by $x_I\in X(I)\sim x_J\in X(J)$ if and only if there exists $f:I\to K$ and $g:J\to K$ in $\mJ$ such that $f_\ast(x_I)=g_\ast(x_J)$. The maps are the inclusions $$\iota_J:X(J)\hookrightarrow\frac{\coprod_{I\in\Obj\mJ X(I)}}{\sim}$$ Note that these are sets since $\mJ$ is small. \\~\\
+
+We now prove the statement for the limit, the dual statement for colimit will follow. Claim: the $\pi_J$ assemble into a natural transformation $\pi:\Delta(L(X))\Rightarrow X$. Indeed, for $f:I\to J$ in $\mJ$, we have that 
+\begin{align*}
+f_\ast(\pi_I(\{x_K\}_{K\in\Obj\mJ}))&=f_\ast(x_I)\\
+&=x_J\\
+&=\pi_J(\{x_K\}_{K\in\Obj\mJ})
+\end{align*}
+showing that this is true. Now let $\alpha:\Delta Y\Rightarrow X$ be a cone over $X$. We need to show that there is a unique map $$u:Y\to L(X)$$ such that \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+Y\arrow[rr, "\exists !u", dashed]\arrow[rd, "\alpha_I"'] & & L(X)\arrow[ld, "\pi_I'"]\\
+& X(I) &
+\end{tikzcd}}\\~\\
+Let us define $u(y)=\{\alpha_J(y)\}_{J\in\Obj\mJ}$. If this is well defined, it is unique. (Two points in $\ prod_{J\in\Obj\mJ}X(J))$ if and only if they have the same components). We need to see that $u(y)\in L(X)$. Let $f:I\to J$, then $f_\ast(\alpha_I(y))=\alpha_J(y)$ since $\alpha$ is natural. Thus we are done. 
+\end{proof}
+\end{prp}
+
+Limits and colimits generalizes all the important concepts in category theory, beginning with initial and terminal objects. 
+
+\subsection{Products and Coproducts}
+\begin{defn}{Discrete Categories}{} Let $K$ be a set. Define the discrete category $K^S$ to consist of the following data. 
+\begin{itemize}
+\item The objects of $K^S$ are the elements of $K$
+\item The only morphisms are the identity morphisms
+\item Composition is trivial since there are only identity morphisms. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Products}{} Let $\mC$ be a category. Let $K$ be a set. Let $\{C_k\}_{k\in K}$ be a set of objects in $\mC$. Define the product of the objects $\{C_k\}_{k\in K}$ to be the limit of the diagram $X:K^S\to\mC$ sending $k\in K$ to $C_k\in\mC$ if it exists. We denote the limit in this case as $$\prod_{k\in K}C_k=\lim_{K^S}X$$
+\end{defn}
+
+\begin{defn}{Coproducts}{} Let $\mC$ be a category. Let $K$ be a set. Let $\{C_k\}_{k\in K}$ be a set of objects in $\mC$. Define the coproduct of the objects $\{C_k\}_{k\in K}$ to be the colimit of the diagram $X:K^S\to\mC$ sending $k\in K$ to $C_k\in\mC$ if it exists. We denote the colimit in this case as $$\coprod_{k\in K}C_k=\colim_{K^S}X$$
+\end{defn}
+
+In the case that $K=\{1,2\}$ has two elements, we have the following: A product of $C_1,C_2\in\mC$ is an object $$C_1\times C_2\in\mC$$ equipped with a pair of morphisms $\pi_1:C_1\times C_2\to C_1$ and $\pi_2:C_1\times C_2\to C_2$ such that for every object $D\in\mC$ and every pair of morphisms $f_1:D\to C_1$ and $f_2:D\to C_2$, there exists a unique morphism $$f:D\to C_1\times C_2$$ Together with the dual argument, we have the following two diagrams: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+D\arrow[rrdd, "f_1", bend left=25]\arrow[ddddr, "f_2"', bend right=25]\arrow[rdd, "\exists!u", dashed] & & & & & & D & &\\
+ &&&&&&&&\\
+ & C_1\times C_2\arrow[dd, "\pi_2"]\arrow[r, "\pi_1"] & C_1 & & & & & C_1\amalg C_2\arrow[luu, "\exists!u"', dashed] & C_1\arrow[lluu, "g_1"', bend right=25]\arrow[l, "\iota_1"']\\
+ &&&&&&&&\\
+ & C_2 & & & & & & C_2\arrow[uuuul, "g_2", bend left=25]\arrow[uu, "\iota_2"'] &
+\end{tikzcd}}\\~\\
+for maps $g_1:C_1\to X$ and $g_2:C_2\to X$. 
+
+\begin{prp}{}{} Consider the category of sets $\bold{Set}$. Let $X,Y\in\mC$ be objects. 
+\begin{itemize}
+\item The product of $X$ and $Y$ is given by the Cartesian product $X\times Y$ together with projection maps. 
+\item The coproduct of $X$ and $Y$ is given by the disjoint union $X\amalg Y$ together with inclusion maps. 
+\end{itemize}
+\end{prp}
+
+Let $(X,\mT_X)$ and $(Y,\mT_Y)$ be spaces. Recall that we can equip the disjoint union of sets $X\amalg Y$ with a canonical topology as follows. Namely, $U\subseteq\mathcal{T}_X\amalg\mathcal{T}_Y$ is open if and only if $U\cap X\in\mathcal{T}_X$ and $U\cap Y\in\mathcal{T}_Y$. 
+
+\begin{prp}{}{} Consider the category of spaces $\bold{Top}$. Let $X,Y\in\mC$ be objects. 
+\begin{itemize}
+\item The product of $X$ and $Y$ is given by the product space $X\times Y$ together with projection maps. 
+\item The coproduct of $X$ and $Y$ is given by the disjoint union $X\amalg Y$ together with inclusion maps. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{} Consider the category of groups $\bold{Grp}$. Let $X,Y\in\mC$ be objects. 
+\begin{itemize}
+\item The product of $X$ and $Y$ is given by the product group $X\times Y$ together with projection maps. 
+\item Coproducts does not exist in general. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{} Consider the category of abelian groups $\bold{Ab}$. Let $X,Y\in\mC$ be objects. The product and coproduct of $X$ and $Y$ is given by the direct sum $X\oplus Y$ together with projection maps. 
+\end{prp}
+
+\subsection{Pullbacks and Pushouts}
+Following this we have a stronger notion of products which restricts the product to an even stronger sense by forcing them to be related by a commutative square. 
+
+\begin{defn}{Pullbacks and Pushouts}{} Let $\mC$ be a category. A pullback is the limit of a diagram $X:\mJ\to\mC$ where $\mJ=\left(\cdot\rightarrow\cdot\leftarrow\cdot\right)$. We denote the limit in this case as $$\lim_\mJ X=C\times_DB$$ Dually, a pushout is the colimit of a diagram $X:\mJ^{\text{op}}\to\mC$, where $\mJ=\left(\cdot\leftarrow\cdot\rightarrow\cdot\right)$. We denote the colimit in this case as $$\colim_\mJ X=C\amalg_DB$$~\\
+
+In particular, the universal product of limits means that for any $X\in\Obj\mC$ together with maps $\lambda_C:X\to C$ and $\lambda_B:X\to B$ such that $f\circ\lambda_C=g\circ\lambda_D$, there exists a unique $u:X\to C\times_DB$ such that the following diagram commutes (Dually, the diagram on the right): \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+X\arrow[rrdd, "\lambda_C", bend left=25]\arrow[ddddr, "\lambda_B"', bend right=25]\arrow[rdd, "\exists!u", dashed] & & & & & & X & & \\
+ &&&&&&&&\\
+ & C\times_DB\arrow[dd, "\pi_B"]\arrow[r, "\pi_C"] & C\arrow[dd, "f"] & & & & & C\amalg_DB\arrow[luu, "\exists!u"', dashed] & C\arrow[l, "\iota_C"']\arrow[lluu, "\lambda_C"', bend right=25]\\
+ &&&&&&&&\\
+ & B\arrow[r, "g"] & D & & & & & B\arrow[uu, "\iota_B"']\arrow[uuuul, "\lambda_B", bend left=25] & D\arrow[l, "g"']\arrow[uu, "f"']
+\end{tikzcd}}\\~\\
+\end{defn}
+
+\begin{prp}{}{} The following categories exhibit pullbacks and pushouts. 
+\begin{itemize}
+\item For $\mC=\text{Set}$, the pullback is precisely $$C\times_DB\cong\{(x,y)\in C\times B\;|\;f(x)=g(y)\}$$ and the pushout is precisely $$C\amalg_DB\cong\frac{C\amalg B}{\sim}$$ where $x\in C\sim y\in B$ if and only if $f(x)=g(y)$ for $C,D,B$ sets. 
+\item For $\mC=\text{Top}$, pullbacks and pushouts are the same as in Set. 
+\item For $\mC=\text{Grp}$, pullbacks are the same as pullbacks in Set. The pushout is precisely $$\colim\left(G\overset{f}{\leftarrow}K\overset{g}{\rightarrow}H\right)=G\ast_KH$$ the amalgamated product of the groups $G$ and $H$ over $K$. \\~\\(Recall the amalgamated product is defined by $G\ast_KH=\frac{G\ast H}{N}$ for $N$ the normalizer of $\{f(k)\cdot(g(k))^{-1}\;|\;k\in K\}$
+\end{itemize} \tcbline
+\begin{proof}
+Define $\lambda_C:\{(c,b)\in C\times B\;|\;f(c)=g(b)\}\to C$ by $(c,b)\mapsto c$ and similarly for $\lambda_B$. It is then clear that $f\circ\lambda_C=g\circ\lambda_B$ by definition of the set. By the universal property of pushouts, we obtain a unique map $u:\{(c,b)\in C\times B\;|\;f(c)=g(b)\}\to C\times_DB$. Now define a map $$v:C\times_DB\to \{(c,b)\in C\times B\;|\;f(c)=g(b)\}$$ by $v(z)=(\pi_C(z),\pi_B(z))$ Note that we have $\lambda_C(v(z))=\pi_C(z)$ and a similar argument shows that $\lambda_B\circ v=\pi_B$. Now apply $X=C\times_DB$ to the universal property of $C\times_DB$. Then there exists a unique map $C\times_DB\to C\times_DB$ such that the diagram in the above definition commutes. The identity is such a map and hence it is the unique map. But $u\circ v$ also allows the above diagram to commute because 
+\begin{align*}
+(\pi_C\circ u\circ v)(z)&=\lambda_C(v(z))\\
+&=\lambda_C(\pi_C(z),\pi_B(z))\\
+&=\pi_C(z)
+\end{align*}
+and similarly for $\pi_B\circ u\circ v=\pi_B$. Thus $u\circ v=\text{id}$. 
+\end{proof}
+\end{prp}
+
+\subsection{Inverse and Direct Limits}
+For diagram constructing purposes we define the category of natural numbers. 
+
+\begin{defn}{Category of Natural Numbers}{} The category of natural numbers $(\N,\leq)$ is the category where 
+\begin{itemize}
+\item the objects are $\N$
+\item the morphisms are $f_{ij}:i\to j$ for $i\leq j$
+\item Composition is defined such that $f_{jk}\circ f_{ij}=f_{ik}$
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Inverse and Direct Limits}{} Let $\mC$ be a category. A direct limit is the limit of a diagram $X:(\N,\leq)\to\mC$. Dually, the inverse limit is the limit of a diagram $X:\mJ^{\text{op}}\to\mC$ where $\mJ^{\text{op}}=(\N,\leq)^{\text{op}}$. \\~\\
+
+The universal property of the inverse limit is given by the following: For $C\in\Obj\mC$ and maps $\lambda_i:C\to X(i)$, there exists a unique map $u:C\to\lim_{(\N,\leq)^{\text{op}}}X$ such that the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+&C\arrow[dd, "\exists!u", dashed]\arrow[bend right=25, ldddd, "\lambda_i"']\arrow[bend left=25, rdddd, "\lambda_j"]&\\
+&&\\
+& \lim X\arrow[ldd, "\pi_j"']\arrow[rdd, "\pi_i"] &\\
+&&\\
+X(i)\arrow[rr, "f_{ij}"] & & X(j)
+\end{tikzcd}}\\~\\
+\end{defn}
+
+\begin{prp}{}{} The following categories exhibit inverse and direct limits. 
+\begin{itemize}
+\item For $\mC=\text{Set}$, the direct limit is $$\lim_{(\N,\leq)}X=\left\{(x_0,x_1,\dots)\in\prod_{i\in \N}X(i)\;\bigg{|}\;x_j=f_{ij}(x_i)\text{ for all }i\leq j\right\}=\varinjlim_{n\in\N}X(n)$$ and the inverse limit is $$\lim_{(\N,\leq)^\text{op}}X=\frac{\coprod_{i\in\N}X(i)}{\sim}=\varprojlim_{n\in\N}X(n)$$ where $x_i\sim x_j$ for $i<j$ and $x_i\in X(i)$ and $x_j\in X(j)$ if and only if there exists some $k\in K$ such that $f_{ik}(x_i)=f_{jk}(x_j)$. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{} Let $X:(\N,\leq)\to\text{Set}$ such that each map $X_i\to X_{i+1}$ is a subset inclusion. Then $$\lim_{(\N,\leq)}X=\bigcup_{i=0}^\infty X_i$$
+\end{prp}
+
+\subsection{Equalizers and Coequalizers}
+\begin{defn}{(Co)Equalizer Category}{} Define the coequalizer category $\mJ$ to consist of the following data. 
+\begin{itemize}
+\item There are two objects $I,J$ in $\mJ$
+\item There are two non-identical morphisms $\lambda_1,\lambda_2:I\to J$ and two identity morphisms $\text{id}_I$ and $\text{id}_J$
+\item The composition law is defined by $f=\text{id}_J\circ f=f\circ\text{id}_I$, $g=\text{id}_J\circ g=g\circ\text{id}_I$
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Equalizers}{} Let $\mC$ be a category. Let $C,D\in\mC$ be two objects. Let $f,g:C\to D$ be two morphisms in $\mC$. Let $\mJ$ be the equalizer category. Define the equalizer of $f$ and $g$ to be the limit $$\text{Eq}(f,g)=\lim_{\mJ}X$$ of the diagram $X:\mJ\to\mC$ given by $X(\lambda_1)=f$ and $X(\lambda_2)=g$. 
+\end{defn}
+
+The universal property of the equalizer is given as follows: For $A\in\Obj\mC$ together with a map $\lambda:A\to C$ for which $f\circ\lambda=g\circ\lambda$, there exists a unique map $u:A\to N$ such that the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+A\arrow[rd, "a"]\arrow[d, "\exists !u"', dashed] &&\\
+\lim_\mJ X\arrow[r, "h"'] & C\arrow[r, shift left, "f"]\arrow[r, shift right, "g"'] & D
+\end{tikzcd}}\\~\\
+
+\begin{defn}{Coequalizers}{} Let $\mC$ be a category. Let $C,D\in\mC$ be two objects. Let $f,g:C\to D$ be two morphisms in $\mC$. Let $\mJ$ be the coequalizer category. Define the coequalizer of $f$ and $g$ to be the limit $$\text{Coeq}(f,g)=\colim_{\mJ}X$$ of the diagram $X:\mJ\to\mC$ given by $X(\lambda_1)=f$ and $X(\lambda_2)=g$. 
+\end{defn}
+
+Dually, the coequalizer has the following universal property: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	&& A \\
+	C & D & {\colim_\mJ X}
+	\arrow["f", shift left, from=2-1, to=2-2]
+	\arrow["g"', shift right, from=2-1, to=2-2]
+	\arrow["a"', from=2-2, to=1-3]
+	\arrow["h"', from=2-2, to=2-3]
+	\arrow["{\exists!u}"', dashed, from=2-3, to=1-3]
+\end{tikzcd}}\\~\\
+
+\subsection{Criteria for Completeness and Cocompleteness}
+\begin{defn}{Small (Co)Limits}{} Let $\mC$ be a category. Let $X:\mJ\to\mC$ be a diagram in $\mC$ that admits a (co)limit. We say that the (co)limit is small if $\mJ$ is small. 
+\end{defn}
+
+The equalizer gives us a necessary and sufficient criterion for a category to be complete and cocomplete. 
+
+\begin{thm}{}{} Let $\mC$ be a category with small products, and $X:\mJ\to\mC$ be a small diagram. Define two morphisms $$f,g:\prod_{J\in\Obj\mJ}X_J\to\prod_{(\alpha:J\to I)\in\mJ}X_I$$ as follows. 
+\begin{itemize}
+\item Define $f$ to be the unique map such that $\pi_I\circ f=\pi_{\text{cod}(\alpha)}$ where both $\pi$ are projections. 
+\item Define $g$ to be the unique map such that $\pi_{\text{cod}(\alpha)}\circ g=F(\alpha)\circ\pi_{\text{dom}(\alpha)}$
+\end{itemize}
+If $\text{Eq}(f,g)$ exists, then there is a canonical isomorphism $$\lim_\mJ X\cong\text{Eq}(f,g)$$ \tcbline
+\begin{proof}
+Define a cone over $X$ by $\pi_I^E:\text{Eq}(f,g)\to X_I$ for all $I\in\Obj\mJ$ by \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+\text{Eq}(f,g)\arrow[r, "\pi_0"] & \prod_{J\in\Obj\mJ}X_J\arrow[r, "\pi_I"] & X_I
+\end{tikzcd}} \\~\\
+where $\pi_0$ is the projection onto the source of $f$ and $g$. Now we show that this cone is indeed the limit using 3.1.4. We have that 
+
+\begin{align*}
+\Hom_\mC(D,\text{Eq}(f,g))&\cong\text{Cone}\left(D,\prod_{J\in\Obj\mJ}X_J\overset{f}{\underset{g}{\rightrightarrows}}\prod_{(\alpha:J\to I)\in\Hom\mJ}X_I\right)\\
+&=\left\{(a\in\Hom_\mC(D,\prod_{J\in\Obj\mJ}X_J))\;\bigg{|}\;\; f\circ a=g\circ a\right\}\\
+&=\left\{a\in\Hom_\mC(D,\prod_{J\in\Obj\mJ}X_J)\;\bigg{|}\;\;\forall\alpha:J\to I\in\mJ, \pi_\alpha\circ f\circ\alpha\cong\pi_\alpha\circ g\circ a\right\}\\
+&\cong\left\{\{a_J\in\Hom_\mC(D,X_J)\}_{J\in\Obj\mJ}\;\bigg{|}\;\; a_i=\alpha_\ast\circ a_j\right\}\tag{Universal property of $\prod_{J\in\Obj\mJ}X_J$}\\
+&=\text{Cone}(D,X)\\
+&=\Hom_{\mC^\mJ}(\Delta D,X)
+\end{align*}
+where the third equality and the fourth isomorphism is due to the fact that maps into products is defined by their components. \\~\\
+
+It remains to show that the bijection is the map defined from the cone maps $\pi_I^E$. 
+\end{proof}
+\end{thm}
+
+\begin{crl}{}{} The category $\bold{Top}$ of topological spaces is complete and cocomplete. \tcbline
+\begin{proof}
+We first show that small products in $\bold{Top}$ exists. It is clear that the finite products are the product space with projection maps. We have seen that they satisfy the universal property in Point Set Topology. We have to define countable products. 
+
+Now we show that equalizers exists. Let $f,g:(X,\mT_X)\to(Y,\mT_Y)$ be continuous maps. We define a topology on $$\text{Eq}(f,g)=\{x\in X\;|\;f(x)=g(x)\}$$ using the subspace topology. Now suppose that there is a commutative diagram \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	X && Y \\
+	& Z
+	\arrow["g"', shift right, from=1-1, to=1-3]
+	\arrow["f", shift left, from=1-1, to=1-3]
+	\arrow["{\lambda_X}", from=2-2, to=1-1, bend left = 30]
+	\arrow["{\lambda_Y}"', from=2-2, to=1-3, bend right = 30]
+\end{tikzcd}} \\~\\
+We want to show that there exists a unique morphism $u:Z\to\text{Eq}(f,g)$ that fits into the limit diagram. It is clear that by constraints of the subspace topology, the only possible map is $u(z)=\lambda_X(z)$. Since $\lambda_X$ is continuous and takes values in $\text{Eq}(f,g)$, $u$ is continuous. \\~\\
+
+It remains to prove that colimits exists. 
+\end{proof}
+\end{crl}
+
+Note that while we could prove the above corollary by directing defining the subspace topology on the limit in Set, we will see that it will be harder to work directly through the definitions in the case for other categories. 
+
+\begin{crl}{}{} The category $\bold{Grp}$ of groups is complete and cocomplete. \tcbline
+\begin{proof}
+Let $X:\mJ\to\bold{Grp}$ be a functor. Then the limit of the diagram $\mJ\overset{X}{\to}\bold{Grp}\overset{u}{\to}\bold{Set}$ for $u$ the forgetful functor has a group structure (as a subgroup of $\prod_{I\in\text{Obj}(\mJ)}X_I$) which is the limit in $\bold{Grp}$. \\~\\
+
+Small coproducts clearly exists since they are simple free products on an arbitrary set of generators. We prove that coproducts exists. Let $\varphi,\psi:G\to H$ be group homomorphisms. Then the quotient $$\frac{H}{N(\langle\varphi(g)\cdot(\psi(g))^{-1}\;|\;g\in G\rangle)}$$ with the normalizer, forms a commutative diagram as follows: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	G & H \\
+	& {\frac{H}{N(\langle\varphi(g)\cdot(\psi(g))^{-1}\;|\;g\in G\rangle)}}
+	\arrow["\psi"', shift right, from=1-1, to=1-2]
+	\arrow["\varphi", shift left, from=1-1, to=1-2]
+	\arrow["{\pi\circ\varphi=\pi\circ\psi}"', from=1-1, to=2-2]
+	\arrow["\pi"', from=1-2, to=2-2]
+\end{tikzcd}} \\~\\
+Notice that $\pi\circ\varphi=\pi\circ\psi$ is true if and only if $\varphi(g)(\psi(g))^{-1}\in N(\langle\varphi(g)\cdot(\psi(g))^{-1}\;|\;g\in G\rangle)$ which is true by definition. We now show that this cone is a colimit. Write $N=N(\langle\varphi(g)\cdot(\psi(g))^{-1}\;|\;g\in G\rangle)$. Let $K$ be an arbitrary group. We have that 
+\begin{align*}
+\Hom_{\bold{Grp}}\left(\frac{H}{N},K\right)&\cong\{f:H\to K\in\bold{Grp}\;|\;f(n)=1\text{ for all }n\in N\}\\
+&\cong\{f:H\to K\in\bold{Grp}\;|\;f(\varphi(g)\cdot(\psi(g))^{-1})\text{ for all }g\in G\}\\
+&=\{f:H\to K\in\bold{Grp}\;|\;f(\varphi(g))=f(\psi(g))\text{ for all }g\in G\}
+\end{align*}
+But this is exactly the cone $$\text{Cone}\left(X,K\right)$$ where $X$ is the diagram: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	G & H
+	\arrow["\varphi", shift left, from=1-1, to=1-2]
+	\arrow["\psi"', shift right, from=1-1, to=1-2]
+\end{tikzcd}} \\~\\
+and so we conclude. 
+\end{proof}
+\end{crl}
+
+\begin{prp}{}{} The category $\bold{Cat}$ is complete and cocomplete. 
+\end{prp}
+
+There are also non-examples. For example, $\bold{Set}\setminus\{\emptyset\}$ is not cocomplete. The category $\bold{Man}$ of manifolds is not cocomplete. 
+
+\subsection{Commuting Functors with Limits}
+\begin{defn}{Limit Preserving Functors}{} Let $\mC,\mD$ be categories. Let $F:\mC\to\mD$ be a functor. Let $X:\mJ\to\mC$ be a diagram. We say that $F$ commutes with the limit of $X$ if there is a natural isomorphism $$F\left(\lim_\mJ X\right)=\lim_\mJ F\circ X$$
+\end{defn}
+
+\begin{prp}{}{} Let $\mC$ be a category. Then the following are true. 
+\begin{itemize}
+\item $\Hom_\mC(Y,-):\mC\to\bold{Set}$ preserves all limits for all objects $Y\in\mC$. 
+\item $\Hom_\mC(-,Y):\mC^\text{op}\to\bold{Set}$ preserves all colimits for all objects $Y\in\mC$. 
+\end{itemize}
+\end{prp}
+
+\begin{crl}{}{} Let $\mC,\mD$ be categories. Let $F:\mC\to\mD$ be a functor. If $F$ is representable, then $F$ preserves all limits. 
+\end{crl}
+
+\pagebreak
+\section{Adjunction}
+\subsection{Adjoint Functors and (Co)Units}
+\begin{defn}{Adjunction}{} An adjunction consists of two functors $L:\mC\to\mD$ and $R:\mD\to\mC$ together with a natural isomorphisms $$a_{-,-}:\Hom_\mD(L(-),-)\overset{\cong}{\to}\Hom_\mC(-,R(-))$$ In this case, $L$ is said to be the left adjoint of $R$ and $R$ is said to be the right adjoint of $L$. 
+\end{defn}
+
+Note that naturality of $a$ means the following: The two functors $$\Hom_\mD(L(-),-)\;\;\text{ and }\;\;\Hom_\mC(-,R(-)):\mC^\text{op}\times\mD\to\text{Set}$$ is natural on both variables. This means that the following two diagrams commute: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\Hom_\mD(L(C),D)} & {\Hom_\mD(L(C),D')} && {\Hom_\mD(L(C),D)} & {\Hom_\mD(L(C'),D)} \\
+	{\Hom_\mC(C,R(D))} & {\Hom_\mC(C,R(D'))} && {\Hom_\mC(C,R(D))} & {\Hom_\mC(C',R(D))}
+	\arrow["{g_\ast}", from=1-1, to=1-2]
+	\arrow["\cong"', from=1-1, to=2-1]
+	\arrow["\cong", from=1-2, to=2-2]
+	\arrow["{L(f)^\ast}", from=1-4, to=1-5]
+	\arrow["\cong"', from=1-4, to=2-4]
+	\arrow["\cong", from=1-5, to=2-5]
+	\arrow["{R(g)_\ast}"', from=2-1, to=2-2]
+	\arrow["{f^\ast}"', from=2-4, to=2-5]
+\end{tikzcd}} \\~\\
+for morphisms $g:D\to D'$ in $\mD$ and $f:C'\to C$ in $\mC$. Both diagrams can be simplified into one commutative diagram: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\Hom_\mD(L(C),D)} && {\Hom_\mC(C,R(D))} \\
+	\\
+	{\Hom_\mD(L(C'),D')} && {\Hom_\mC(C',R(D'))}
+	\arrow["{a_{C,D}}", from=1-1, to=1-3]
+	\arrow["{a_{C',D'}}", from=3-1, to=3-3]
+	\arrow["{g_\ast\circ L(f)^\ast}"{description}, from=1-1, to=3-1]
+	\arrow["{R(g)_\ast\circ f^\ast}"{description}, from=1-3, to=3-3]
+\end{tikzcd}} \\~\\
+This means that for all $\alpha:L(C)\to D$, we have that $$R(g)\circ\left(a_{C,D}(\alpha)\right)\circ f=a_{C',D'}\left(g\circ\alpha\circ L(f)\right)$$
+
+\begin{lmm}{}{} Let $L:\mC\to\mD$ and $R:\mD\to\mC$ be left and right adjoint functors of each other such that there is a natural isomorphism $$a_{C,D}:\Hom_\mD(L(C),D)\overset{\cong}{\to}\Hom_\mC(C,R(D))$$ The left diagram below commutes if and only if the right diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{L(C)} & D && C & {R(D)} \\
+	{L(C')} & {D'} && {C'} & {R(D')}
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["{L(h)}"', from=1-1, to=2-1]
+	\arrow["k", from=1-2, to=2-2]
+	\arrow["{a(f)}", from=1-4, to=1-5]
+	\arrow["h"', from=1-4, to=2-4]
+	\arrow["{R(k)}", from=1-5, to=2-5]
+	\arrow["g"', from=2-1, to=2-2]
+	\arrow["{a(g)}"', from=2-4, to=2-5]
+\end{tikzcd}} \tcbline
+\begin{proof}
+\end{proof}
+\end{lmm}
+
+\begin{thm}{}{} Let $L:\mC\to\mD$ and $R:\mD\to\mC$ be functors. There is a bijection between the natural isomorphisms $$a_{(-),(-)}:\Hom_\mD(L(-),-)\overset{\cong}{\longrightarrow}\Hom_\mC(-,R(-))$$ and the pair of natural transformations $$\varepsilon:L\circ R\Rightarrow\text{id}_\mD\;\;\;\;\;\;\eta:\text{id}_\mC\Rightarrow R\circ L$$ satisfying the triangle conditions (i) and (ii): \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{L(C)} && {LRL(C)} &&& {R(D)} && {RLR(D)} \\
+	\\
+	&& {L(C)} &&&&& {R(D)}
+	\arrow["{\text{id}_{L(C)}}"', from=1-1, to=3-3]
+	\arrow["{L(\eta_C)}", from=1-1, to=1-3]
+	\arrow["{\varepsilon_{L(C)}}", from=1-3, to=3-3]
+	\arrow["{\eta_{R(D)}}", from=1-6, to=1-8]
+	\arrow["{R(\varepsilon_D)}", from=1-8, to=3-8]
+	\arrow["{\text{id}_{R(D)}}"', from=1-6, to=3-8]
+\end{tikzcd}} \\~\\
+This means that there is a one-to-one correspondence: $$\left\{\substack{a:\Hom_\mD(L(-),-)\overset{\cong}{\longrightarrow}\Hom_\mC(-,R(-))\\a\text{ is a natural isomorphism }}\right\}\;\;\;\;\overset{1:1}{\longleftrightarrow}\;\;\;\;\left\{(\varepsilon,\eta)\;\bigg{|}\;\substack{\eta:\text{id}_\mC\Rightarrow RL\text{ and }\varepsilon:LR\Rightarrow\text{id}_\mD\\\text{ are natural transformations }\\\text{satisfying the triangle conditions}}\right\}$$ \tcbline
+\begin{proof}
+Suppose that there is a natural isomorphism $$a:\Hom_\mD(L(C),D)\overset{\cong}{\longrightarrow}\Hom_\mC(C,R(D))$$ Then by choosing $D=L(C)$, we obtain an isomorphism $$a:\Hom_\mD(L(C),L(C))\overset{\cong}{\longrightarrow}\Hom_\mC(C,R(L(C)))$$ Define $\eta_C:C\to RL(C)$ by $\eta_C=a(\text{id}_{L(C)})$. Similarly, define $\varepsilon_D:LR(D)\to D$ by $\varepsilon_D=a^{-1}(\text{id}_{R(D)})$. We wish to show that the $\eta_C$ and the $\varepsilon_C$ assembles into natural transformations $\eta:\text{id}_C\Rightarrow RL$ and $\varepsilon:LR\Rightarrow\text{id}_D$ respectively. This is clear by lemma 5.1.2 by applying $D=L(C)$ for $\eta$ and applying $C=R(D)$ for $\varepsilon$ respectively. We now show that the triangle conditions are satisfied. We have that 
+\begin{align*}
+a(\varepsilon_{L(C)}\circ L(\eta_C))&=a(\varepsilon_{L(C)})\circ\eta\tag{Naturality of $a$}\\
+&=a(a^{-1}(\text{id}_{RL(C)}))\circ\eta_C\\
+&=\eta_C
+\end{align*}
+This means that $$\varepsilon_{L(C)}\circ L(\eta_C)=a^{-1}(\eta_C)=\text{id}_{L(C)}$$ a similar argument shows that the second triangle condition is also satisfied. \\~\\
+
+Conversely, suppose that we are given the natural transformations $\eta$ and $\varepsilon$. Define a collection of isomorphisms $$a_{C,D}:\Hom_\mD(L(C),D)\overset{\cong}{\longrightarrow}\Hom_\mC(C,R(D))$$ for varying $C\in\mC$ and $D\in\mD$ as follows. The morphism $f:L(C)\to D$ in $\mD$ is sent to $$C\overset{\eta_C}{\to}RL(C)\overset{R(f)}{\to}R(D)$$ We need to show that these assemble into a natural transformation. \\~\\
+
+Now each $a_{C,D}$ has inverse given by $$L(C)\overset{L(g)}{\to}LR(D)\overset{\varepsilon_D}{\to}D$$ for $g:C\to R(D)$ in $\mC$. We also need to show that these assemble into a natural transformation. 
+\end{proof}
+\end{thm}
+
+The above theorem implies that given two functors, if one wants to specify an adjunction between them, we just have to exhibit two natural transformations $\eta:\text{id}_\mC\Rightarrow RL$ and $\varepsilon:LR\Rightarrow\text{id}_\mD$ satisfying the triangle conditions. 
+
+\begin{defn}{Units and Counits}{} Let $L:\mC\to\mD$ and $R:\mD\to\mC$ be adjoint functors with a natural isomorphism $$a_{C,D}:\Hom_\mD(L(C),D)\overset{\cong}{\to}\Hom_\mC(C,R(D))$$ for each $C\in\mC$ and $D\in\mD$. Define the unit of the adjunction to be the corresponding natural transformation $$\eta:\text{id}_\mC\Rightarrow R\circ L$$ Define the counit of the adjunction to be the corresponding natural transformation $$\varepsilon:L\circ R\Rightarrow\text{id}_\mD$$
+\end{defn}
+
+Evidently, the data of an adjunction is not only the two functors exhibiting the adjunction, but also the choice of the natural isomorphism. 
+
+\begin{prp}{}{} Let $U:\bold{Top}\to\bold{Set}$ be the forgetful functor. Then $U$ admits a left adjoint and a right adjoint. \tcbline
+\begin{proof}
+The data of a left adjoint of $U$ consists of isomorphisms $$\Hom_\bold{Top}(L(X),Y)\cong\Hom_\bold{Set}(X,U(Y))$$ that assemble into a natural isomorphism. Consider the functor $L:\bold{Set}\to\bold{Top}$ sending a set $X$ to the space $X$ with its discrete topology. Then any map $f:X\to Y$ on the level sets must also be a continuous map since $X$ has the discrete topology. Thus we have constructed a left adjoint. \\~\\
+
+Similarly, the data of a right adjoint of $U$ consists of isomorphisms $$\Hom_\bold{Set}(U(X),Y)\cong\Hom_\bold{Top}(X,R(Y))$$ that assemble into a natural isomorphism. Consider the functor $R:\bold{Set}\to\bold{Top}$ sending $Y$ to the space $Y$ with the indiscrete topology. Then any map $f:X\to Y$ on the level of sets is also a continuous map since $Y$ has the indiscrete topology. Thus we have constructed a right adjoint. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{} Let $U:\bold{Grp}\to\bold{Set}$ be the forgetful functor. Then $U$ admits a left adjoint. \tcbline
+\begin{proof}
+The data of a left adjoint of $U$ consists of isomorphisms $$\Hom_\bold{Grp}(L(X),Y)\cong\Hom_\bold{Set}(X,U(Y))$$ that assemble into a natural isomorphism. Consider the functor $L:\bold{Set}\to\bold{Grp}$ sending a set $X$ to the free group $F(X)$ on $X$. Then any map $f:X\to Y$ on the level sets extend to a group homomorphism. Thus we have constructed a left adjoint. 
+\end{proof}
+\end{prp}
+
+We end the section with a theorem that connects (co)limits to adjunctions. 
+
+\begin{thm}{}{} Let $\mC$ be a category. Let $\mJ$ be a small category and let $\Delta:\mC\to\mC^\mJ$ be the diagonal functor sending $C$ to $\Delta(C)$. Then the following are true. 
+\begin{itemize}
+\item If $\mC$ is complete, then $\Delta(-)$ admits a right adjoint $\lim_\mJ(-)$. 
+\item Dually, if $X$ is cocomplete, then $\Delta(-)$ admits a left adjoint $\colim_\mJ(-)$. 
+\end{itemize}
+\end{thm}
+
+\subsection{Adjoint Functors Preserve (Co)Limits}
+\begin{lmm}{}{} Let $F:\mC\to\mD$ be a functor with a left adjoint $L$. Then for every small category $\mJ$, the functor $$F\circ(-):\mC^\mJ\to\mD^\mJ$$ has a left adjoint by $L\circ(-)$. \tcbline
+\begin{proof}
+We need a natural bijection $$\Hom_{\mC^\mJ}(L\circ X,Y)\cong\Hom_{\mD^\mJ}(X,F\circ Y)$$ for all $X:\mJ\to\mD$ and for all $Y:\mJ\to\mC$. By assumption, we have a natural bijection $a:\Hom_\mC(L(D),C)\overset{\cong}{\to}\Hom_\mD(D,F(C))$. Let $\alpha:L\circ X\Rightarrow Y$. Then $$a(\alpha_J:L(X_J)\to Y_J):X_J\to F(Y_J)$$ We claim that $a(\alpha_J)$ defines a natural transformation $A(\alpha):X\Rightarrow F\circ Y$. We need to show that for all $f:I\to J$ in $\mJ$, we have that the square \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{X_I} && {F(Y_I)} \\
+	\\
+	{X_J} && {F(Y_J)}
+	\arrow["{X(f)}"', from=1-1, to=3-1]
+	\arrow["{a(\alpha_J)}", from=3-1, to=3-3]
+	\arrow["{a(\alpha_I)}", from=1-1, to=1-3]
+	\arrow["{F(Y(f))}", from=1-3, to=3-3]
+\end{tikzcd}} \\~\\
+commutes. This means that we want $$F(Y(f))\circ a(\alpha_I)=a(\alpha_J)\circ X(f)$$ Recall that since $a$ is natural, we have that $$F(Y(f))\circ a(\alpha_I)\circ\text{id}=a(Y(f)\circ\alpha_I\circ\text{id})$$ Again by naturality (Swap the places of $f$ and $\text{id}$), we have that $$a(\alpha_J)\circ X(f)=a(\alpha_J\circ L(X(f)))$$ Since $a$ is a bijection, it remains to show that $\alpha_J\circ L(X(f))=Y(f)\circ\alpha_I$ which holds by naturality of $\alpha$. Clearly $A$ is bijective since $a$ is. It remains to show that $A$ is natural. 
+\end{proof}
+\end{lmm}
+
+\begin{prp}{}{} Let $\mC,\mD$ be categories. Let $F:\mC\to\mD$ be a functor. Then the following are true. 
+\begin{itemize}
+\item If $F$ is the right adjoint of some functor, then $F$ preserves all limits. 
+\item If $F$ is the left adjoint of some functor, then $F$ preserves all colimits. 
+\end{itemize} \tcbline
+\begin{proof}
+Let $X:\mJ\to\mC$ be a diagram with limit $\Delta\lim_\mJ X\to X$. Let $L$ be the left adjoint of $F$. We want to show that $$\Hom_\mD\left(D,F\left(\lim_\mJ X\right)\right)\cong\Hom_{\mD^\mJ}(\Delta(D),F\circ X)$$
+But this is true sine
+\begin{align*}
+\Hom_\mD\left(D,F\left(\lim_\mJ X\right)\right)&\cong\Hom_\mC\left(L(D),\lim_\mJ X\right)\tag{Natural bijection of adjunction}\\
+&\cong\Hom_{\mC^\mJ}(\Delta(L(D)),X)\tag{Universal property of limits}\\
+&=\Hom_{\mC^\mJ}(L(\Delta(D)),X)\\
+&\cong\Hom_{\mD^\mJ}(\Delta(D),F\circ X)\tag{Lemma 4.2.2}
+\end{align*}
+This is moreover the same bijection defined from the cone maps of $F\left(\lim_\mJ X\right)$ since
+\end{proof}
+\end{prp}
+
+\subsection{The Adjoint Functor Theorem}
+In the previous section we saw that functors that admit left adjoints preserve limits. We may also ask the converse: Does functors that preserve limits admit left adjoints? There is a partial converse to this and we will work towards it in this section. 
+
+\begin{lmm}{}{} Let $U:\mA\to\mS$ be a functor. Then $U$ admits a left adjoint if and only if for any $S\in\Obj\mS$, there is a map $S\overset{i}{\to}U(A)$ such that for all $f:S\to U(B)$ in $\mS$, there is a unique map $\lambda:B\to A$ such that the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	S && {U(A)} \\
+	\\
+	&& {U(B)}
+	\arrow["f"', from=1-1, to=3-3]
+	\arrow["{U(\exists!\lambda)}"', dashed, from=3-3, to=1-3]
+	\arrow["i", from=1-1, to=1-3]
+\end{tikzcd}}
+\end{lmm}
+
+This lemma is almost tautological. In practise it is not helpful. We want to relax this condition. 
+
+\begin{defn}{Weakly Initial Elements}{} Let $\mC$ be a category. An object $C\in\Obj\mC$ is weakly initial if for every $D\in\Obj\mC$, there is a map $C\to D$. A set of objects $\{C_i\;|\;i\in I\}$ is jointly weakly initial if for every $D\in\Obj\mC$, there is a map $C_i\to D$ for some $i\in I$. 
+\end{defn}
+
+Recall the definition of slice categories $S/U$ for the functor $U:\mA\to\mS$. Then the condition in lemma 4.3.1 becomes exactly that $S/U$ admits an initial object. 
+
+\begin{thm}{General Adjoint Functor Theorem}{} Let $\mA$ be a locally small and complete category. Let $U:\mA\to\mS$ be a functor which preserves limits. Suppose that $U$ satisfies the solution set condition: For any $S\in\Obj\mS$, there is a set of maps $$\Psi_S=\{f_i:S\to U(A_i)\}$$ such that for every morphism $f:S\to U(B)$ there exists an $f_i\in\Psi_i$ and $\lambda:A_i\to B$ such that \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	S && {U(A_i)} \\
+	\\
+	&& {U(B)}
+	\arrow["f"', from=1-1, to=3-3]
+	\arrow["{U(\exists\lambda)}"', dashed, from=1-3, to=3-3]
+	\arrow["f_i", from=1-1, to=1-3]
+\end{tikzcd}}\\~\\
+Then $U$ has a left adjoint. \tcbline
+\begin{proof}
+Notice that the solution set condition is equal to $\Psi_S$ being a set of jointly weakly initial object in $S/U$. So now we need to prove that if $U$ preserves limits and every $S/U$ has a set of jointly weakly initial objects, then $S/U$ has an initial object. By lemma 4.3.1 this would imply that $U$ has a left adjoint. \\~\\
+
+First notice that since $U$ preserves limits, $S/U$ is complete: Given $X:\mJ\to S/U$, then $$X_J=\left(A_J\in\Obj\mA,f_J:S\to U(A_J)\right)$$ and one can check that $$\lim_\mJ X=\left(\lim_{J\in\mJ}A_J,S\overset{\{f_J\}}{\to}\lim_{J\in\Obj\mJ}U(A_J)\overset{\cong}{\to}U\left(\lim_JA_J\right)\right)$$ It is clear that $S/U$ has a set of jointly weakly initial objects $\Psi=\Psi_J$. \\~\\
+
+Let $\mJ\in S/U$ be the full subcategory of $S/U$ on the objects in $\Psi$. $\lim\left(\mJ\hookrightarrow S/U\right)$ exists since $\Psi$ is small and $S/U$ is complete. Let us prove that it is initial in $S/U$. Let $C\in S/U$. First, there is a map $\lambda_C:\lim\left(\mJ\hookrightarrow S/U\right)\to C$ defined as follows: Choose a $J\in\Psi$ and a map $h_C:J\to C$ and define $$\lambda_C:\lim\left(\mJ\hookrightarrow S/U\right)\overset{\pi_J}{\to}J\overset{h_C}{\to}C$$ where $\pi_J$ is the projection map of the limit. We need to see that this map is unique. \\~\\
+
+First let us prove that $\lambda_C=\text{id}_C$ when $C=\lim\left(\mJ\hookrightarrow S/U\right)$. By the universal property of the limit, this is the case if and only if $$\pi_I\circ\lambda_C=\pi_I\circ\text{id}$$ for all $I\in\Psi$. And indeed, we have that $$\pi_I\circ\lambda_C=\left(\lim\left(\mJ\hookrightarrow S/U\right)\overset{\pi_J}{\to}J\overset{h_C}{\to}\lim\left(\mJ\hookrightarrow S/U\right)\overset{\pi_I}{\to}I\right)$$ Since $J$ is a full subcategory of $S/U$, $\pi_I\circ h_c:J\to I$ lies in $J$. The cone condition of $\pi$ implies that $\pi_J$ post composed with the map from $J$ to $I$ is equal to $\pi_I$ so that the map $\lim\left(\mJ\hookrightarrow S/U\right)$ to $I$ is $\pi_I$. Thus we have that $\pi_I\circ\lambda_C=\pi_I$. \\~\\
+
+Now let $C\in S/U$ be any object of $S/U$. Let $f:\lim\left(\mJ\hookrightarrow S/U\right)\to C$ be any morphism. Since $\Psi$ consists of the weakly initial objects, choose $J'$ together with a map $h_l:J\to\lim\left(\mJ\hookrightarrow S/U\right)$. Then since $S/U$ is complete, we can take the pullback of $J$ and $J'$ to form a diagram \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	P &&&& J \\
+	\\
+	{J'} && {\lim\left(\mJ\hookrightarrow S/U\right)} && C
+	\arrow["{h_l}", from=3-1, to=3-3]
+	\arrow["f", from=3-3, to=3-5]
+	\arrow["{h_C}"', from=1-5, to=3-5]
+	\arrow[from=1-1, to=1-5]
+	\arrow[from=1-1, to=3-1]
+\end{tikzcd}}\\~\\
+which commutes. Now choose $J''\in\Psi$ and a map $h_P:J''\to P$. This is possible since $\Psi$ is weakly initial. Since $\mJ$ is a full subcategory, we have maps $J''\to J$ and $J''\to J$ so that we have the following diagram \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{J''} \\
+	& P &&&& J \\
+	\\
+	& {J'} && {\lim\left(\mJ\hookrightarrow S/U\right)} && C
+	\arrow["{h_l}", from=4-2, to=4-4]
+	\arrow["f", from=4-4, to=4-6]
+	\arrow["{h_C}"', from=2-6, to=4-6]
+	\arrow[from=2-2, to=2-6]
+	\arrow[from=2-2, to=4-2]
+	\arrow[bend left=-20, from=1-1, to=4-2]
+	\arrow[bend right=-15, from=1-1, to=2-6]
+	\arrow["{h_P}", from=1-1, to=2-2]
+\end{tikzcd}}\\~\\
+that is commutative. Finally, since $l=\lim\left(\mJ\hookrightarrow S/U\right)$ is a limit, we can find maps to $\pi_J:l\to J$, $\pi_{J'}:l\to J'$ and $\pi_{J''}:l\to J''$ so that the following diagram \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\lim\left(\mJ\hookrightarrow S/U\right)} \\
+	& {J''} \\
+	&& P &&&& J \\
+	\\
+	&& {J'} && {\lim\left(\mJ\hookrightarrow S/U\right)} && C
+	\arrow["{h_l}", from=5-3, to=5-5]
+	\arrow["f", from=5-5, to=5-7]
+	\arrow["{h_C}"', from=3-7, to=5-7]
+	\arrow[from=3-3, to=3-7]
+	\arrow[from=3-3, to=5-3]
+	\arrow[bend left=-20, from=2-2, to=5-3]
+	\arrow[bend right=-15, from=2-2, to=3-7]
+	\arrow["{h_P}", from=2-2, to=3-3]
+	\arrow["{\pi_{J'}}", bend left=-40, from=1-1, to=5-3]
+	\arrow["{\pi_J}", bend right=-20, from=1-1, to=3-7]
+	\arrow["{\pi_{J''}}", from=1-1, to=2-2]
+\end{tikzcd}}\\~\\
+is commutative. This implies that $h_C\circ\pi_J=f\circ h_l\circ\pi_{J'}$. Since $h_C\circ\pi_J=\lambda_C$ and $h_l\circ\pi_{J'}=\lambda_l=\text{id}$, we have that $\lambda_C=f$ which shows uniqueness of $\lambda_C$. 
+\end{proof}
+\end{thm}
+
+\pagebreak
+\section{Monoidal Categories}
+\subsection{Strict and Weak Monoidal Categories}
+\begin{defn}{Strict Monoidal Categories}{} A strict monoidal category is a category $\mA$ consisting of a bifunctor $\otimes:\mA\times\mA\to\mA$ together with an object $I\in\mA$ such that the following are true. 
+\begin{itemize}
+\item Associativity: $(A\otimes B)\otimes C=A\otimes(B\otimes C)$
+\item Identity: $I\otimes A=A$ and $A\otimes I=A$
+\end{itemize}
+\end{defn}
+
+Notice that we require strict equality in the associativity and identity laws. Since we usually only consider objects up to isomorphism in a category, strict monoidal categories may seem quite rare in practise. 
+
+\begin{defn}{Weak Monoidal Category}{} A weak monoidal category is a category $\mA$ consisting of a bifunctor $\otimes:\mA\times\mA\to\mA$ together with an object $I\in\mA$ such that the following are true. 
+\begin{itemize}
+\item Associativity: There are isomorphisms $$\alpha_{A,B,C}:(A\otimes B)\otimes C\overset{\cong}{\longrightarrow} A\otimes(B\otimes C)$$ that is natural in $A$, $B$ and $C$
+\item Identity: There are isomorphisms $$\lambda_A:I\otimes A\overset{\cong}{\longrightarrow} A\;\;\;\;\text{ and }\;\;\;\;\rho_A:A\otimes I\overset{\cong}{\longrightarrow} A$$ that are both natural in $A$
+\end{itemize}
+Such natural isomorphisms must also satisfy the following commutative laws: 
+\begin{itemize}
+\item The pentagon identity: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	& {(A\otimes B)\otimes(C\otimes D)} \\
+	\\
+	{((A\otimes B)\otimes C)\otimes D} && {A\otimes (B\otimes(C\otimes D))} \\
+	\\
+	\\
+	{(A\otimes(B\otimes C))\otimes D} && {A\otimes((B\otimes C)\otimes D)}
+	\arrow["{\alpha_{A,B,C\otimes D}}", from=1-2, to=3-3]
+	\arrow["{\alpha_{A\otimes B,C,D}}", from=3-1, to=1-2]
+	\arrow["{\alpha_{A,B,C}\otimes 1_D}"', from=3-1, to=6-1]
+	\arrow["{\alpha_{A,B\otimes C,D}}"', from=6-1, to=6-3]
+	\arrow["{1_A\otimes\alpha_{B,C,D}}"', from=6-3, to=3-3]
+\end{tikzcd}}\\~\\
+\item The triangle identity: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{(A\otimes I)\otimes B} && {A\otimes (I\otimes B)} \\
+	\\
+	& {A\otimes B}
+	\arrow["{\alpha_{A,I,B}}", from=1-1, to=1-3]
+	\arrow["{\rho_A\otimes 1_B}"', from=1-1, to=3-2]
+	\arrow["{1_A\otimes\lambda_B}", from=1-3, to=3-2]
+\end{tikzcd}}\\~\\
+\end{itemize}
+\end{defn}
+
+It is clear that every strict monoidal category is also a weak monoidal category. 
+
+\begin{lmm}{}{} Every category $\mC$ with finite products is a monoidal category with product $\times:\mC\times\mC\to\mC$ and identity $\ast$ the terminal object. 
+\end{lmm}
+
+\begin{prp}{}{} Let $\mC$ be a category. Then $(\text{End}(\mC),\circ,\text{id}_\mC)$ is a monoidal category. 
+\end{prp}
+
+\subsection{Symmetric Monoidal Categories}
+\begin{defn}{Symmetric Monoidal Category}{} Let $\mC$ be a category. We say that $\mC$ is a symmetric monoidal category if $\mC$ is a weak monoidal category together with isomorphisms $$s_{A,B}:A\otimes B\overset{\cong}{\longrightarrow} B\otimes A$$ that are natural in $A$ and $B$ such that the following are satisfied: 
+\begin{itemize}
+\item Unit coherence: If $I$ is the distinguished object of $\mC$ as a weak monoidal category, then the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{A\otimes I} && {I\otimes A} \\
+	& A
+	\arrow["{s_{A,I}}", from=1-1, to=1-3]
+	\arrow["{\lambda_A}"', from=1-1, to=2-2]
+	\arrow["{\rho_A}", from=1-3, to=2-2]
+\end{tikzcd}}\\~\\
+\item The associativity coherence: For any $A,B,C\in\mC$, the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{(A\otimes B)\otimes C} && {(B\otimes A)\otimes C} \\
+	{A\otimes(B\otimes C)} && {B\otimes(A\otimes C)} \\
+	{(B\otimes C)\otimes A} && {B\otimes(C\otimes A)}
+	\arrow["{s_{A,B}\otimes\text{id}_C}", from=1-1, to=1-3]
+	\arrow["{\alpha_{A,B,C}}"', from=1-1, to=2-1]
+	\arrow["{\alpha_{B,A,C}}", from=1-3, to=2-3]
+	\arrow["{s_{A,B\otimes C}}"', from=2-1, to=3-1]
+	\arrow["{\text{id}_B\otimes s_{A,C}}", from=2-3, to=3-3]
+	\arrow["{\alpha_{B,C,A}}"', from=3-1, to=3-3]
+\end{tikzcd}}\\~\\
+\item The inverse law: For any $A,B\in\mC$, the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	& {B\otimes A} \\
+	{A\otimes B} && {A\otimes B }
+	\arrow["{s_{B,A}}", from=1-2, to=2-3]
+	\arrow["{s_{A,B}}", from=2-1, to=1-2]
+	\arrow["{\text{id}_{A\otimes B}}"', from=2-1, to=2-3]
+\end{tikzcd}}\\~\\
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{} Let $\mC$ be a category with finite products. Denote the terminal object of $\mC$ by $1$. Then $(\mC,\times 1)$ is a symmetric monoidal category. 
+\end{prp}
+
+Thus most of the classical categories one considers are symmetric monoidal categories. This includes set based categories such as $\bold{Set}$ and $\bold{Top}$, but also $\bold{Grp}, \bold{Ab}, {_R}\bold{Mod}$ and more. However, it is important to note that such a symmetric monoidal structure on a category may not be unique. 
+
+\begin{prp}{}{} For any commutative ring $R$, the category $\bold{Mod}_R$ of $R$-modules is a symmetric monoidal category with the tensor product $\otimes$ and the identity object $R$. 
+\end{prp}
+
+\subsection{Braided Monoidal Categories}
+
+\subsection{Cartesian Monoidal Categories}
+
+\pagebreak
+\section{Closed Categories}
+\subsection{The Structure of Closed Categories}
+
+\subsection{Closed Monoidal Categories}
+\begin{defn}{Interal Hom}{} Let $(\mC,\otimes,I)$ be a monoidal category. An internal hom is a bifunctor $$\text{HOM}(-,-):\mC^\text{op}\times\mC\to\mC$$ such that for every object $X\in\mC$, there is an adjunction $-\otimes X:\mC\rightleftarrows\mC:\text{HOM}(X,-)$. Explicitly, there is an isomorphism $$\Hom_\mC(A\otimes X,B)\cong\Hom_\mC(A,\text{HOM}(X,B))$$ that is natural in $A$ and $B$. 
+\end{defn}
+
+\begin{defn}{Closed Monoidal Categories}{} Let $(\mC,\otimes,I)$ be a monoidal category. We say that $\mC$ is closed if there exists an internal hom bifunctor $\text{HOM}(-,-):\mC^\text{op}\times\mC\to\mC$ such that there is an adjunction $$-\otimes X:\mC\rightleftarrows\mC:\text{HOM}(X,-)$$ for any $X\in\mC$. Explicitly, this means that there is a isomorphism $$\Hom_\mC(A\otimes X,B)\cong\Hom_\mC(A,\text{HOM}(X,B))$$ that is natural in $A,B\in\mC$. 
+\end{defn}
+
+\begin{prp}{}{} Every closed monoidal category is closed and monoidal. 
+\end{prp}
+
+\begin{prp}{}{} Let $(\mC,\otimes,I,\text{HOM})$ be a closed symmetric monoidal category. Then for any $X\in\mC$, there is an adjunction $$\text{HOM}(-,X):\mC\rightleftarrows\mC^\text{op}:\text{HOM}(-,X)$$ Explicitly, there is an isomorphism $$\Hom_\mC(\text{HOM}(A,X),B)\cong\Hom_\mC(A,\text{HOM}(X,B))$$ that are natural in $A$ and $B$. 
+\end{prp}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

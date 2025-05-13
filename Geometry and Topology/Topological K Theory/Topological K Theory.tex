@@ -1,0 +1,147 @@
+\documentclass[a4paper]{article}
+
+\input{C:/Users/liula/Desktop/Latex/Headers V1.2.tex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Labix}
+\lhead{Topological K Theory}
+\rfoot{\thepage}
+
+\title{Topological K Theory}
+
+\author{Labix}
+
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+\end{abstract}
+\pagebreak
+\tableofcontents
+
+\pagebreak
+\section{The K Group of a Space}
+\subsection{Grothendieck Completions}
+\begin{defn}{Grothendieck Completion}{} Let $A$ be an Abelian monoid. We say that a group $\mG(A)$ together with a monoid homomorphism $i:A\to\mG(A)$ is a Grothendieck completion of $A$ if the following universal property is satisfied. If $j:A\to H$ is another monoid homomorphism where $H$ is an abelian group, then there exists a unique group homomorphism $k:\mG(A)\to H$ such that the following diagram \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	A & {\mG(A)} \\
+	& H
+	\arrow["i", from=1-1, to=1-2]
+	\arrow["j"', from=1-1, to=2-2]
+	\arrow["{\exists!k}", dashed, from=1-2, to=2-2]
+\end{tikzcd}}\\~\\
+is commutative. 
+\end{defn}
+
+\begin{prp}{}{} Let $X$ be a space. Then $\text{Vect}^\R(X)$ and $\text{Vect}^\C(X)$ are both abelian monoids with the Whitney sum operator. They are moreover a commutative semiring under then tensor product operator. 
+\end{prp}
+
+\subsection{The K-Group of a Space}
+\begin{thm}{}{} Let $X$ be a compact Hausdorff space. Then for any vector bundle $E\to X$ over $F=\R$ or $\C$, there exists a vector bundle $\widetilde{E}\to X$ over $F$ such that there is an isomorphism $$E\oplus\widetilde{E}\cong X\times F^n$$ to the trivial bundle. 
+\end{thm}
+
+\begin{defn}{The K-Group of a Space}{} Let $X$ be a space. Define the real and complex $K$ group of $X$ respectively to be the Grothendieck completion $$KO(X)=\mG(\text{Vect}^\R(X))\;\;\;\;\text{ and }\;\;\;\;KU(X)=\mG(\text{Vect}^\C(X))$$
+\end{defn}
+
+\begin{lmm}{}{} Let $X$ be a space. Then $KO(X)$ and $KU(X)$ are both commutative rings with identity. 
+\end{lmm}
+
+\begin{defn}{The K Functor}{} Define the $K$ functors $$KO,KU:\bold{Top}\to\bold{CRing}$$ as follows. 
+\begin{itemize}
+\item For each space $X$, $KO(X)$ is the real $K$-group of $X$ and $KU(X)$ is the complex $K$-group of $X$
+\item For each map $f:X\to Y$, $KO(f):KO(Y)\to KO(X)$ is the ring homomorphism that sends each isomorphism class of vector bundle $[E]\in KO(Y)$ to the pullback bundle $[f^\ast(E)]\in KO(X)$. This is similar for $KU(f):KU(Y)\to KU(X)$. 
+\end{itemize}
+\end{defn}
+
+We use $K:\bold{Top}\to\bold{CRing}$ to mean either the real $K$ groups or the complex $K$ groups when no distinction is needed. 
+
+\subsection{Reduced K-Theory}
+\begin{defn}{Reduced K-Theory}{} Let $X$ be a space. Define the reduced $K$-theory of $X$ to be the kernel $$\widetilde{KO}(X)=\ker(KO(X)\to KO(\ast))\;\;\;\;\text{ and }\;\;\;\;\widetilde{KU}(X)=\ker(KU(X)\to KU(\ast))$$
+\end{defn}
+
+Similarly, we use $\widetilde{K}:\bold{Top}\to\bold{Ab}$ to mean either the reduced real $K$ groups or the reduced complex $K$ groups when no distinction is needed. \\~\\
+
+The universal property of the kernel turns reduced $K$-theory into a functorial construction. 
+
+\begin{defn}{Reduced K Functor}{} Define the $K$ functors $$\widetilde{KO},\widetilde{KU}:\bold{Top}\to\bold{Ab}$$ as follows. 
+\begin{itemize}
+\item For each space $X$, $\widetilde{KO}(X)$ is the reduced real $K$-group of $X$ and $\widetilde{KU}(X)$ is the reduced complex $K$-group of $X$
+\item For each map $f:X\to Y$, $\widetilde{KO}(f):\widetilde{KO}(Y)\to\widetilde{KO}(X)$ is the ring homomorphism that sends each isomorphism class of vector bundle $[E]\in \widetilde{KO}(Y)$ to the pullback bundle $[f^\ast(E)]\in\widetilde{KO}(X)$. This is similar for $\widetilde{KU}(f):\widetilde{KU}(Y)\to\widetilde{KU}(X)$. 
+\end{itemize}
+\end{defn}
+
+\begin{thm}{}{} Let $X$ be a compact Hausdorff space. Then the natural homomorphism $K(X)\to\widetilde{K}(X)$ is surjective with kernel $\Z$. In particular, this gives an isomorphism $$K(X)\cong\widetilde{K}(X)\oplus\Z$$ A similar 
+\end{thm}
+
+\begin{defn}{Reduced Equivalence}{} Let $X$ be a space. Let $V\to X$ and $W\to X$ be two vector bundles over $X$. We say that $V\sim_\text{red}W$ if $V\oplus T^m\cong W\oplus T^n$ for some $m,n\in\N$ and $T$ the trivial bundle. 
+\end{defn}
+
+\begin{prp}{}{} Let $X$ be a space. Then $\text{Vect}^\R/\sim_\text{red}$ and $\text{Vect}^\C/\sim_\text{red}$ form abelian groups respectively with the Whitney sum operation. 
+\end{prp}
+
+\begin{thm}{}{} Let $X$ be a space. Then there is are natural isomorphisms $$KO(X)\cong\frac{\text{Vect}^\R}{\sim_\text{red}}\;\;\;\;\text{ and }\;\;\;\;KU(X)\cong\frac{\text{Vect}^\C}{\sim_\text{red}}$$
+\end{thm}
+
+\begin{prp}{}{} Let $X$ be a compact Hausdorff space and let $A\subseteq X$ be a closed subspace. Then the inclusion map $i:A\to X$ and the projection map $q:X\to X/A$ induces an exact sequence \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\widetilde{K}(X/A)} & {\widetilde{K}(X)} & {\widetilde{K}(A)}
+	\arrow["{q^\ast}", from=1-1, to=1-2]
+	\arrow["{i^\ast}", from=1-2, to=1-3]
+\end{tikzcd}}\\~\\
+\end{prp}
+
+\subsection{Relative K-Theory}
+\begin{defn}{}{} Let $X$ be a space and let $A\subseteq X$ be a closed subspace. Define the relative $K$ theory of the pair $(X,A)$ by $$K(X,A)=\widetilde{K}(X/A)$$
+\end{defn}
+
+\pagebreak
+\section{Functorial Properties of the K Groups}
+\subsection{Representability of the Reduced K Functor}
+They key point of being compact Hausdorff is displayed as follows. 
+
+\begin{thm}{Stabilization Theorem}{} Let $X$ be a compact space. Then there is a natural isomorphism $$\lim_{\N}\text{Vect}_n^\R(X)\cong\widetilde{KO}(X)$$ induced by the direct limit of the maps $\text{Vect}_n^\R(X)$. Similarly, there is a natural isomorphism $$\lim_{\N}\text{Vect}_n^\C(X)\cong\widetilde{KU}(X)$$
+\end{thm}
+
+Now $\text{Vect}_n^\R(-)$ is representable by $O(n)$. Commuting with the direct limit gives the following theorem. 
+
+\begin{thm}{}{} The real and complex $K:\bold{CH}\to\bold{CRing}$ functors defined on the full subcategory $\bold{CH}$ of compact Hausdorff spaces are representable: $$KO(-)\cong[-,BO\times\Z]\;\;\;\;\text{ and }\;\;\;\;KU(-)\cong[-,BU\times\Z]$$ Similarly, the real and complex reduced $\widetilde{K}:\bold{CH}\to\bold{CRing}$ functors are representable: $$\widetilde{KO}(-)\cong[-,BO]\;\;\;\;\text{ and }\;\;\;\;\widetilde{KU}(-)\cong[-,BU]$$
+\end{thm}
+
+\subsection{K Theory as a Cohomology Theory}
+\begin{thm}{Homotopy Invariance}{} If $X$ and $Y$ are paracompact space such that $f:X\to Y$ is a homotopy equivalence, then there is an isomorphism $$K(f):K(Y)\overset{\cong}{\longrightarrow}K(X)$$ given by the induced map. 
+\end{thm}
+
+\begin{thm}{Long Exact Sequence}{} Let $X$ be a compact Hausdorff space. Let $A\subseteq X$ be a closed subspace. Then there is a long exact sequence in reduced $K$-theory: \\~\\
+\adjustbox{scale=0.85,center}{\begin{tikzcd}
+	\cdots & {\widetilde{KU}(\Sigma(X/A))} & {\widetilde{KU}(\Sigma X)} & {\widetilde{KU}(\Sigma A)} & {\widetilde{KU}(X/A)} & {\widetilde{KU}(X)} & {\widetilde{KU}(A)} & \cdots
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+	\arrow[from=1-5, to=1-6]
+	\arrow[from=1-6, to=1-7]
+	\arrow[from=1-7, to=1-8]
+\end{tikzcd}}\\~\\
+\end{thm}
+
+\subsection{External Product}
+
+\pagebreak
+\section{Bott Periodicity}
+\subsection{Fundamental Product Theorem}
+\subsection{The Bott Periodicity Theorem}
+\begin{thm}{The Bott Periodicity Theorem}{} Let $X$ be a space. Let $L$ be a line bundle over $X$. 
+\end{thm}
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

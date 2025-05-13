@@ -1,0 +1,292 @@
+\documentclass[a4paper]{article}
+
+\input{C:/Users/liula/Desktop/Latex/Headers V1.2.tex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Labix}
+\lhead{Simplicial Methods in Algebra}
+\rfoot{\thepage}
+
+\title{Simplicial Methods in Algebra}
+
+\author{Labix}
+
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+
+\end{abstract}
+References: 
+
+\pagebreak
+\tableofcontents
+
+\pagebreak
+\section{Simplicial Homological Algebra}
+\subsection{Chain Complexes of Simplicial Objects}
+\begin{defn}{Associated Chain Complex}{} Let $\mA$ be an abelian category. Let $A$ be a (semi)-simplicial object in $\mA$. Define the associated chain complex of $A$ to be \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\cdots & {C_{n+1}(A)} & {C_n(A)} & {C_{n-1}(A)} & \cdots & {C_0(A)}
+	\arrow[from=1-1, to=1-2]
+	\arrow["{\partial_{n+1}}", from=1-2, to=1-3]
+	\arrow["{\partial_n}", from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+	\arrow[from=1-5, to=1-6]
+\end{tikzcd}}\\~\\
+where $C_n(A)=A_n$ and the boundary operator given by $$\partial_n=\sum_{i=0}^n(-1)^id_i^n:A_n\to A_{n-1}$$
+\end{defn}
+
+TBA: Functoriality of associated chain complex
+
+\begin{defn}{Simplicial Homology}{} Let $R$ be a ring. Let $X$ be a (semi)-simplicial set. Define the simplicial homology of $X$ with coefficients in $R$ to be the homology groups $$H_n^\Delta(X;R)=H_n(C_\bullet(R[X]))$$
+\end{defn}
+
+Notice that this definition coincides with that in Algebraic Topology 2. Recall that in AT2 we defined the simplicial homology of a $\Delta$-set, but in $\Z$ coefficients. 
+
+\subsection{Normalized Chain Complexes}
+\begin{defn}{Normalized Chain Complexes}{} Let $\mA$ be an abelian category or the category $\bold{Grp}$. Let $A$ be a simplicial object in $\mA$. Define the normalized chain complex of $A$ to be the chain complex: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\cdots & {N_{k+1}(A)} & {N_k(A)} & {N_{k-1}(A)} & \cdots & {N_1(A)}
+	\arrow[from=1-1, to=1-2]
+	\arrow["{\partial_{k+1}}", from=1-2, to=1-3]
+	\arrow["{\partial_k}", from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+	\arrow[from=1-5, to=1-6]
+\end{tikzcd}}\\~\\
+where $$N_k(A)=\bigcap_{i=1}^k\ker(d_i^k:A_k\to A_{k-1})$$ and the differential given by $\partial_k=d_0^K|_{N_k(A)}$. We denote the normalized chain complex by $(N_\bullet(G),\partial_\bullet)$
+\end{defn}
+
+nLab: We may think of the elements of the complex in degree $k$ as being $k$-dimensional disks in $G$ all of whose boundary is captured by a single face. 
+
+\begin{lmm}{}{} Let $G$ be a simplicial group. Consider the normalized chain complex $(N_\bullet(G),\partial_\bullet)$. Then $\partial_n N_n(G)$ is a normal subgroup of $N-{n-1}(G)$. 
+\end{lmm}
+
+Because of this lemma, it now makes sense to take the homology group of the normalized chain complex even if we take a simplicial object in $\bold{Grp}$. 
+
+\begin{defn}{Normalized Chain Complex Functor}{} Let $\mA$ be an abelian category. Define the normalized chain complex functor $N$
+\end{defn}
+
+\begin{defn}{Degenerate Chain Complex}{} Let $\mA$ be an abelian category. Let $A$ be a simplicial object in $\mA$. Define the degenerate chain complex $D_\bullet(A)$ of $A$ to be the subcomplex of the associated chain complex $C_\bullet(A)$ defined by $$D_n(A)=\langle s_i^n:A_n\to A_{n+1}\;|\;s_i\text{ is the degenerate maps}\rangle$$
+\end{defn}
+
+\begin{prp}{}{} Let $\mA$ be an abelian category. Let $A$ be a simplicial object in $\mA$. Then there is a splitting $$C_\bullet(A)\cong N_\bullet(A)\oplus D_\bullet(A)$$ in the abelian category of chain complexes of $\mA$. 
+\end{prp}
+
+\begin{thm}{Eilenberg-Maclane}{} Let $\mA$ be an abelian category. Let $A$ be a simplicial object in $A$. Then the inclusion $$N_\bullet(A)\hookrightarrow C_\bullet(A)$$ is a natural chain homotopy equivalence. In other words, $D_\bullet(A)$ is null homotopic. 
+\end{thm}
+
+\begin{thm}{The Dold-Kan Correspondence}{} Consider the abelian category $\bold{Ab}$ of abelian groups. The normalized chain complex functor $$N:\text{s}\bold{Ab}\overset{\cong}{\longrightarrow}\text{Ch}_{\geq 0}(\bold{Ab})$$ gives an equivalence of categories, with inverse as the simplicialization functor $$\Gamma:\text{Ch}_{\geq 0}(\bold{Ab})\to\text{s}\bold{Ab}$$
+\end{thm}
+
+
+\subsection{Bar Resolutions}
+\begin{defn}{Bar Construction}{} Let $A$ be an algebra over a ring $R$. Let $M$ be an $A$-algebra. Define the maps $d_i^n:M\otimes A^{\otimes n}\to M\otimes A^{\otimes n-1}$ by the following formulas: 
+\begin{itemize}
+\item If $i=0$, then $$d_i^n(m\otimes a_1\otimes\cdots\otimes a_n)=ma_1\otimes a_2\otimes\cdots\otimes a_n$$
+\item If $0<i<n$, then $$d_i^n(m\otimes a_1\otimes\cdots\otimes a_n)=m\otimes a_1\otimes\cdots a_{i-1}\otimes a_ia_{i+1}\otimes a_{i+2}\otimes\cdots\otimes a_n$$
+\item If $i=n$, then $$d_i^n(m\otimes a_1\otimes\cdots\otimes a_n)=ma_n\otimes a_1\otimes a_2\otimes\cdots\otimes a_{n-1}$$
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{} Let $A$ be an algebra over a ring $R$. Let $M$ be an $A$-algebra. Then $(M\otimes A^{\otimes n},d_i^n)$ defines a simplicial object in ????
+\end{prp}
+
+\begin{defn}{Bar Resolutions}{} Let $A$ be an algebra over a ring $R$. Let $M$ be an $A$-algebra. Define the bar resolution of $M$ to be the associated chain complex of the simplicial object $$(M\otimes A^{\otimes n},d_i^n)$$ 
+\end{defn}
+
+Explicitly, the chain complex is given in the form \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\cdots & {A^{\otimes n+1}\otimes M} & {A^{\otimes n}\otimes M} & {A^{\otimes n-1}\otimes M} & \cdots & A\otimes M &M & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+	\arrow[from=1-5, to=1-6]
+	\arrow[from=1-6, to=1-7]
+	\arrow[from=1-7, to=1-8]
+\end{tikzcd}}\\~\\
+with the boundary map $\partial:A^{\otimes n}\otimes M\to A^{\otimes n-1}\otimes M$ given by $$\partial=\sum_{i=0}^n(-1)^id_i^n$$
+
+
+\pagebreak
+\section{(Co)Homology of Groups}
+\subsection{G-Modules}
+\begin{defn}{G-Modules}{} Let $G$ be a group. A $G$-module is an abelian group $A$ together with a group action of $G$ on $A$. 
+\end{defn}
+
+\begin{defn}{Morphisms of G-Modules}{} Let $G$ be a group. Let $M$ and $N$ be $G$-modules. A function $f:M\to N$ is said to be a $G$-module homomorphism if it is an equivariant group homomorphism. This means that $$f(g\cdot m)=g\cdot f(m)$$ for all $m\in M$ and $g\in G$. 
+\end{defn}
+
+\subsection{Invariants and Coinvariants}
+\begin{defn}{The Group of Invariants}{} Let $G$ be a group and let $M$ be a $G$-module. Define the group of invariants of $G$ in $M$ to be the subgroup $$M^G=\{m\in M\;|\;gm=m\text{ for all }g\in G\}$$
+\end{defn}
+
+This is the largest subgroup of $M$ for which $G$ acts trivially. 
+
+\begin{defn}{Functor of Invariants}{} Let $G$ be a group. Define the functor of invariants by $$(-)^G:{_G}\bold{Mod}\to\bold{Ab}$$ as follows. 
+\begin{itemize}
+\item For each $G$-module $M$, $M^G$ is the group of invariants
+\item For each morphism $f:M\to N$ of $G$-modules, $f^G:M^G\to N^G$ is the restriction of $f$ to $M^G$. 
+\end{itemize}
+\end{defn}
+
+\begin{thm}{}{} Let $G$ be a group. The functor of invariants $(-)^G:{_G}\bold{Mod}\to\bold{Ab}$ is left exact. 
+\end{thm}
+
+\begin{defn}{The Group of Coinvariants}{} Let $G$ be a group and let $M$ be a $G$-module. Define the group of coinvariants of $G$ in $M$ to be the quotient group $$M_G=\frac{M}{\langle gm-m\;|\;g\in G, m\in M\rangle}$$
+\end{defn}
+
+This is the largest quotient of $M$ for which $G$ acts trivially. 
+
+\subsection{Group Cohomology and its Equivalent Forms}
+\begin{defn}{The nth Cohomology Group}{} Let $G$ be a group. Define the $n$th cohomology group of $G$ with coefficients in a $G$-module $M$ to be $$H_n(G;M)=(L_n(-)_G)(M)$$ the $n$th left derived functor of $(-)_G:{_G\bold{Mod}}\to\bold{Ab}$. 
+\end{defn}
+
+\begin{thm}{}{} Let $G$ be a group and let $M$ be a $G$-module. Then there is an isomorphism $$H^n(G;M)\cong\text{Ext}^n_{\Z[G]}(\Z,M)$$ that is natural in $M$. 
+\end{thm}
+
+Recall that there are two descriptions of $\text{Ext}$ by considering it as a functor of the first or second variable. Since the above theorem exhibits an isomorphism that is natural in the second variable, let us consider $\text{Ext}$ as the right derived functor of the functor $\Hom_{\Z[G]}(-,M)$ applied to $\Z$ as a $\Z[G]$-module. 
+
+\begin{prp}{}{} Let $G$ be a group and let $M$ be a $G$-module. Let $P_\bullet\to\Z$ be a projective resolution of $\Z$ with $\Z[G]$-modules. Then there is an isomorphism $$H^n(G;M)\cong H^n(\Hom_{\Z[G]}(P_\bullet,M))$$ that is natural in $M$. 
+\end{prp}
+
+For any group $G$, there is always the trivial choice of projective resolution. 
+In the following lemma, we use the notation $(g_0,\dots,\hat{g_i},\dots,g_n)$ as a shorthand for writing the element in $G^n$ but with the $i$th term omitted. 
+
+\begin{lmm}{}{} Let $G$ be a group. Then the cochain complex \\~\\
+\adjustbox{scale=1,center}{\begin{tikzcd}
+	\cdots & {\Z[G^{n+1}]} & {\Z[G^n]} & {\Z[G^{n-1}]} & \cdots & {\Z[G]} & \Z & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["{f_n}", from=1-2, to=1-3]
+	\arrow["{f_{n-1}}", from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+	\arrow[from=1-5, to=1-6]
+	\arrow[from=1-6, to=1-7]
+	\arrow[from=1-7, to=1-8]
+\end{tikzcd}}\\~\\ where $f_n:\Z[G^{n+1}]\to\Z[G^n]$ is defined by $$(g_0,\dots,g_n)\mapsto\sum_{i=0}^n(-1)^i(g_0,\dots,\hat{g_i},\dots,g_n)$$ is a projective resolution of $\Z$ lying in ${_{\Z[G]}}\bold{Mod}$. 
+\end{lmm}
+
+Let $A$ be an $R$-algebra and let $M$ be an $A$-module. Recall that the bar resolution is defined to be the chain complex consisting of $M\otimes A^{\otimes n}$ for each $n\in\N$ together with the boundary maps defined by multiplying the $i$the element to the $i+1$th element. Now let $G$ be a group. By considering $\Z[G]$ as a $\Z$-algebra and that and ring is a module over itself, it makes sense to talk about the bar resolution of $\Z[G]$. 
+
+\begin{prp}{}{} Let $G$ be a group. Consider the bar resolution \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\cdots & {\Z[G^{n+1}]} & {\Z[G^n]} & {\Z[G^{n-1}]} & \cdots & \Z[G] & \Z & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+	\arrow[from=1-5, to=1-6]
+	\arrow[from=1-6, to=1-7]
+	\arrow[from=1-7, to=1-8]
+\end{tikzcd}}\\~\\
+of $\Z[G]$. Then it is a free resolution, and hence a projective resolution of $\Z$ with $\Z[G]$-modules. 
+\end{prp}
+
+Thus, given a group $G$ and a $G$-module $M$, the group cohomology of $G$ with coefficients in $M$ can be thought of in the following way: 
+\begin{itemize}
+\item It is the right derived functor of the functor of invariants $(-)^G:{_G\bold{Mod}}\to\bold{Ab}$
+\item It is the extension group $\text{Ext}_{\Z[G]}^n(\Z,M)$ (which is computable by the obvious projective resolution $\Z[G^\bullet]$)
+\end{itemize}
+
+\subsection{Group Homology and its Equivalent Forms}
+\begin{defn}{The nth Cohomology Group}{} Let $G$ be a group. Define the $n$th cohomology group of $G$ with coefficients in a $G$-module $M$ to be $$H^n(G;M)=(R^n(-)^G)(M)$$ the $n$th right derived functor of $(-)^G:{_G\bold{Mod}}\to\bold{Ab}$. 
+\end{defn}
+
+\begin{thm}{}{} Let $G$ be a group and let $M$ be a $G$-module. Then there is an isomorphism $$H_n(G;M)\cong\text{Tor}_n^{\Z[G]}(\Z,M)$$ that is natural in $M$. 
+\end{thm}
+
+\subsection{Low Degree Interpretations}
+\begin{thm}{}{} Let $G$ be a group and let $M$ be a $G$-module. Then there are natural isomorphisms $$H^0(G,M)=M^G\;\;\;\;\text{ and }\;\;\;H_0(G;M)=M_G$$
+\end{thm}
+
+\begin{thm}{}{} Let $G$ be a group and let $M$ be a $G$-module. Then there is an isomorphism $$H_1(G,M)\cong\frac{G}{[G,G]}=G_\text{ab}$$
+\end{thm}
+
+\begin{thm}{}{} Let $G$ be a group and let $M$ be a trivial $G$-module. Then there is a natural isomorphism $$H^1(G;M)=\frac{(\{f:G\to M\;|\;f(ab)=f(a)+af(b)\},+)}{\langle f:G\to M\;|\;f(g)=gm-m\text{ for some fixed }m\rangle}$$
+\end{thm}
+
+\begin{crl}{}{} Let $G$ be a group and let $M$ be a trivial $G$-module. Then there is a natural isomorphism $$H^1(G;M)\cong\Hom_\bold{Grp}(G,M)$$
+\end{crl}
+\pagebreak
+
+
+\pagebreak
+\section{Hochschild (Co)Homology for Rings}
+\subsection{Hochschild Homology}
+\begin{defn}{Hochschild Complex}{} Let $M$ be an $R$-module. Define the Hoschild complex to be the chain complex $C(R,M)$ given as follows. \\~\\
+\adjustbox{scale=0.95,center}{\begin{tikzcd}
+	\cdots & {M\otimes R^{\otimes n+1}} & {M\otimes R^{\otimes n}} & {M\otimes R^{\otimes n-1}} & \cdots & {M\otimes R} & M & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["d", from=1-2, to=1-3]
+	\arrow["d", from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+	\arrow[from=1-5, to=1-6]
+	\arrow[from=1-6, to=1-7]
+	\arrow[from=1-7, to=1-8]
+\end{tikzcd}}\\~\\
+The map $d$ is defined by $d=\sum_{i=0}^n(-1)^id_i$ where $d_i:M\otimes R^{\otimes n}\to M\otimes R^{\otimes n-1}$ is given by the following formula. 
+\begin{itemize}
+\item If $i=0$, then $d_0(m\otimes r_1\otimes\cdots\otimes r_n)=mr_1\otimes r_2\otimes\cdots\otimes r_n$
+\item If $i=n$, then $d_n(m\otimes r_1\otimes\cdots\otimes r_n)=r_nm\otimes r_1\otimes\cdots\otimes r_{n-1}$
+\item Otherwise, then $d_i(m\otimes r_1\otimes\cdots\otimes r_n)=m\otimes r_1\otimes\cdots\otimes r_ir_{i+1}\otimes \cdots\otimes r_{n-1}$
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Hochschild Homology}{} Let $M$ be an $R$-module. Define the Hochschild homology of $M$ to be the homology groups of the Hochschild complex $C(R,M)$: $$H_n(R,M)=\frac{\ker(d:M\otimes R^{\otimes n}\to M\otimes R^{\otimes n-1})}{\im(d:M\otimes R^{\otimes n+1}\to M\otimes R^{\otimes n})}=H_n(C(R,M))$$ If $M=R$ then we simply write $$HH_n(R)=H_n(R,R)=H_n(C(R,R))$$
+\end{defn}
+
+TBA: Functoriality. 
+
+\begin{prp}{}{} Let $A$ be an $R$-algebra. Then $HH_n(A)$ is a $Z(A)$-module. 
+\end{prp}
+
+\begin{prp}{}{} Let $A$ be an $R$-algebra. Then the following are true regarding the $0$th Hochschild homology. 
+\begin{itemize}
+\item Let $M$ be an $A$-module. Then $H_0(A,M)=\frac{M}{\{am-ma\;|\;a\in A, m\in M\}}$
+\item The $0$th Hochschild homology of $A$ is given by $HH_0(A)=\frac{A}{[A,A]}$
+\item If $A$ is commutative, then the $0$th Hochschild homology is given by $HH_0(A)=A$. 
+\end{itemize}
+\end{prp}
+
+\begin{thm}{}{} Let $A$ be a commutative $R$-algebra. Then there is a canonical isomorphism $$HH_1(A)\cong\Omega_{A/R}^1$$
+\end{thm}
+
+\subsection{Bar Complex}
+\begin{defn}{Enveloping Algebra}{} Let $A$ be an $R$-algebra. Define the enveloping algebra of $A$ to be $$A^e=A\otimes A^\text{op}$$
+\end{defn}
+
+\begin{prp}{}{} Let $A$ be an $R$-algebra. Then any $A,A$-bimodule $M$ equal to a left (right) $A^e$-module. 
+\end{prp}
+
+\begin{defn}{Bar Complex}{}
+\end{defn}
+
+\begin{prp}{}{} Let $A$ be an $R$-algebra. The bar complex of $A$ is a resolution of the $A$ viewed as an $A^e$-module. 
+\end{prp}
+
+\begin{thm}{}{} Let $A$ be an $R$-algebra that is projective as an $R$-module. If $M$ is an $A$-bimodule, then there is an isomorphism $$H_n(A,M)=\text{Tor}_n^{A^e}(M,A)$$
+\end{thm}
+
+\subsection{Relative Hochschild Homology}
+
+\subsection{The Trace Map}
+\begin{defn}{The Generalized Trace Map}{} Let $R$ be a ring and let $M$ be an $R$-module. Define the generalized trace map $$\text{tr}:M_r(M)\otimes M_r(A)^{\oplus n}\to M\otimes A^{\otimes n}$$ by the formula $$\text{tr}((m_{i,j})\otimes (a_{i,j})_1\otimes\cdots\otimes(a_{i,j})_n)=\sum_{0\leq i_0,\dots,i_n\leq r}m_{i_0,i_1}\otimes (a_{i_1,i_2})_1\otimes\cdots\otimes (a_{i_n,i_0})_n$$
+\end{defn}
+
+\begin{thm}{}{} The trace map defines a morphism of chain complex $$\text{tr}:C_\bullet(M_r(A),M_r(M))\to C_\bullet(A,M)$$
+\end{thm}
+
+\subsection{Morita Equivalence and Morita Invariance}
+\begin{defn}{}{} Let $R$ and $S$ be rings. We say that $R$ and $S$ are Morita equivalent if there is an equivalence of categories $$\bold{Mod}_R\cong\bold{Mod}_S$$
+\end{defn}
+
+\begin{thm}{Morita Invariance for Matrices}{}
+\end{thm}
+
+\pagebreak
+\section{(Co)Homology for Lie Algebras}
+
+
+\end{document}

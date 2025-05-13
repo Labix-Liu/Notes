@@ -1,0 +1,637 @@
+\documentclass[a4paper]{article}
+
+\input{C:/Users/liula/Desktop/Latex/Headers V1.2.tex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Labix}
+\lhead{Higher Algebra}
+\rfoot{\thepage}
+
+\title{Higher Algebra}
+
+\author{Labix}
+
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+\begin{itemize}
+\end{itemize}
+\end{abstract}
+\pagebreak
+\tableofcontents
+
+\pagebreak
+\section{Pushouts and Pullbacks}
+\subsection{Pointed Infinity Categories}
+Upshot: stable infinity categories are the infinity categorical version of stable model categories. \\
+Protypical example: category of spectra. 
+
+\begin{defn}{Zero Objects}{} Let $\mC$ be an infinity category. A zero object of $\mC$ is an object $0$ of $\mC$ such that $0$ is both initial and final. We say that $\mC$ is pointed if it contains a zero object. 
+\end{defn}
+
+\begin{lmm}{}{} Let $\mC$ be an infinity category. The zero object of $\mC$ is unique up to equivalence if it exists. \tcbline
+\begin{proof}
+Let $0$ and $0'$ be two zero objects of $\mC$. Then they are both final objects of $\mC$. But final objects are unique up to equivalence. Hence $0$ and $0'$ are equivalent. 
+\end{proof}
+\end{lmm}
+
+\begin{lmm}{}{} Let $\mC$ be an infinity category. Then $\mC$ is pointed if and only if the following are true. 
+\begin{itemize}
+\item $\mC$ has an initial object $\emptyset$
+\item $\mC$ has a final object $\ast$
+\item There exists a morphism $\ast\to\emptyset$ in $\mC$
+\end{itemize}
+\end{lmm}
+
+\subsection{Fibers and Cofiber Sequences}
+\begin{defn}{Triangles}{} Let $\mC$ be a pointed infinity category. A triangle in $\mC$ consists of a commutative diagram: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	X & Y \\
+	0 & Z
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["{\exists!}"', from=1-1, to=2-1]
+	\arrow["g", from=1-2, to=2-2]
+	\arrow["{\exists!}"', from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+where $X,Y,Z$ are objects and $f,g$ are morphisms. 
+\end{defn}
+
+\begin{defn}{Fiber and Cofiber Sequences}{} Let $\mC$ be a pointed infinity category. 
+\begin{itemize}
+\item A triangle in $\mC$ is called a fiber sequence if it is a pullback square
+\item A triangle in $\mC$ is called a cofiber sequence if it is a pushout square. 
+\end{itemize}
+\end{defn}
+
+Upshot: $\text{Fiber Sequences}\subseteq\text{Pullbacks}$ and $\text{Cofiber Sequences}\subseteq\text{Pushouts}$ therefore we want to talk about pushouts and pullbacks. 
+
+\subsection{Excisive and Reduced Functors}
+\begin{defn}{Excisive Functors}{} Let $\mC,\mD$ be infinity categories. Suppose that $\mC$ admits all pushouts. Let $F:\mC\to\mD$ be a functor. We say that $F$ is excisive if $F$ sends pushout squares to pullback squares. 
+\end{defn}
+
+Upshot: Cofiber sequences are sent to fiber sequences under excisive functors. 
+
+\begin{defn}{Reduced Functors}{} Let $\mC,\mD$ be infinity categories. Suppose that $\ast$ is the final object of $\mC$. Let $F:\mC\to\mD$ be a functor. We say that $F$ is reduced if $F(\ast)$ is the final object of $\mD$. 
+\end{defn}
+
+\begin{defn}{Full Subcategory of Excisive and Reduced Functors}{} Let $\mC,\mD$ be infinity categories. Suppose that $\mC$ admits all pushouts and admits a final object $\ast$. Define $$\text{Exc}_\ast(\mC,\mD)\subseteq\Hom_{\mC_\infty}(\mC,\mD)$$ to be the full sub infinity category of $\Hom_{\mC_\infty}(\mC,\mD)$ consisting of excisive functors and reduced functors. 
+\end{defn}
+
+\subsection{Suspension and Loop Functors}
+\begin{defn}{Subcategory of Pushout Squares}{} Let $\mC$ be a pointed infinity category. Define $M^\Sigma$ to be the full sub infinity category of $\text{Func}_\bold{\infty-\bold{Cat}}(\Delta^1\times\Delta^1,\mC)$ consisting of pushout squares of the form \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	X & 0 \\
+	0 & Y
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+\end{defn}
+
+\begin{defn}{Projection Maps}{} Let $\mC$ be a pointed infinity category. Define the following two projection maps. 
+\begin{itemize}
+\item $\text{proj}_1:M^\Sigma\to\mC$ is the functor defined by sending an object \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	X & 0 \\
+	0 & Y
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+in $M^\Sigma$ to $X$. 
+\item $\text{proj}_2:M^\Sigma\to\mC$ is the functor defined by sending an object \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	X & 0 \\
+	0 & Y
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+in $M^\Sigma$ to $Y$. 
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{} Let $\mC$ be a pointed infinity category. If every morphism in $\mC$ admits cofibers, then the evaluation functor $\text{proj}_1:M^\Sigma\to\mC$ is a trivial fibration. 
+\end{lmm}
+
+Recall that every trivial fibration admits a section. 
+
+\begin{defn}{The Suspension Functor}{} Let $\mC$ be a pointed infinity category such that every morphism of $\mC$ admits cofibers. Let $s_1:\mC\to M^\Sigma$ be a section of the trivial fibration $\text{proj}_1:M^\Sigma\to\mC$. Define the suspension functor $\Sigma:\mC\to\mC$ to be the composite $$\Sigma:\mC\overset{s_1}{\rightarrow}M^\Sigma\overset{\text{proj}_2}{\rightarrow}\mC$$ where $\text{proj}_2:M^\Sigma\to\mC$ is the projection 
+\end{defn}
+
+Upshot: For every object $X$, there is a diagram \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	X & 0 \\
+	0 & Y
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+for some $Y$ an object of $\mC$. We define this $Y$ to be precisely the suspension. Indeed, classically the homotopy pushout of the diagram $\ast\leftarrow X\rightarrow\ast$ is a suspension. 
+
+\begin{defn}{Subcategory of Pullback Squares}{} Let $\mC$ be a pointed infinity category. Define $M^\Omega$ to be the full sub infinity category of $\text{Func}_\bold{\infty-\bold{Cat}}(\Delta^1\times\Delta^1,\mC)$ consisting of pullback squares of the form \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	X & 0 \\
+	0 & Y
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+\end{defn}
+
+\begin{defn}{Projection Maps}{} Let $\mC$ be a pointed infinity category. Define the following two projection maps. 
+\begin{itemize}
+\item $\text{proj}_1:M^\Omega\to\mC$ is the functor defined by sending an object \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	X & 0 \\
+	0 & Y
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+in $M^\Sigma$ to $X$. 
+\item $\text{proj}_2:M^\Omega\to\mC$ is the functor defined by sending an object \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	X & 0 \\
+	0 & Y
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+in $M^\Omega$ to $Y$. 
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{} Let $\mC$ be a pointed infinity category. If morphism in $\mC$ admits fibers, then the evaluation functor $\text{proj}_2:M^\Omega\to\mC$ is a trivial fibration. 
+\end{lmm}
+
+Recall that every trivial fibration admits a section. 
+
+\begin{defn}{The Loop Functor}{} Let $\mC$ be a pointed infinity category such that every morphism in $\mC$ admits fibers. Let $s_2:\mC\to M^\Omega$ be a section of the trivial fibration $\text{proj}_2:M^\Omega\to\mC$. Define the suspension functor $\Omega:\mC\to\mC$ to be the composite $$\Omega:\mC\overset{s_2}{\rightarrow}M^\Omega\overset{\text{proj}_1}{\rightarrow}\mC$$ where $\text{proj}_2:M^\Omega\to\mC$ is the projection 
+\end{defn}
+
+\begin{prp}{}{} Let $\mC$ be a pointed infinity category. Then there is an adjunction given by $\Sigma:\mC\rightleftarrows\mC:\Omega$. 
+\end{prp}
+
+\begin{prp}{}{} Let $\mC,\mD$ be pointed infinity categories. Suppose that $\mC$ admits all finite colimits and $\mD$ admits all finite limits. Then the following are equivalent. 
+\begin{itemize}
+\item $F$ is reduced and excisive. 
+\item $F$ is reduced and it satisfies the following. For all $X\in\mC$, the comparison map $$\eta_X:F(X)\to\Omega_\mD(F(\Sigma_\mC X))$$ is an equivalence in $\mD$, where $\eta_X$ is given as follows. For any $X\in\mC$, the diagram \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	X & \ast \\
+	\ast & {\Sigma_\mC X}
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+is a pushout in $\mC$. Sending the diagram through $F$ gives the wanted comparison map $\eta_X$ by the universal property of limits. 
+\end{itemize} \tcbline
+\begin{proof}
+Let $F$ be reduced and excisive. Notice that following diagram on the left \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	X & \ast && {F(X)} & \ast \\
+	\ast & {\Sigma_\mC X} && \ast & {F(\Sigma_\mC X)}
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[""{name=0, anchor=center, inner sep=0}, from=1-2, to=2-2]
+	\arrow[from=1-4, to=1-5]
+	\arrow[""{name=1, anchor=center, inner sep=0}, from=1-4, to=2-4]
+	\arrow[from=1-5, to=2-5]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-4, to=2-5]
+	\arrow["F", shorten <=14pt, shorten >=14pt, Rightarrow, from=0, to=1]
+\end{tikzcd}}\\~\\
+is a pushout diagram in $\mC$. Applying $F$ gives a pullback diagram on the right. On the other hand, we know that \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\Omega_\mD F(\Sigma_\mC X)} & \ast \\
+	\ast & {F(\Sigma_\mC X)}
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+is a pullback diagram. Since limits in infinity category are unique up to equivalence, the comparison map $F(X)\to\Omega_\mD F(\Sigma_\mC X)$ is an equivalence. \\~\\
+
+Now suppose that $F$ satisfies the second conditions. Let \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	W & X \\
+	Y & Z
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+be a pushout square. Consider the following diagram in $\mC$: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	W & X & 0 \\
+	Y & {X\coprod_W Y} & {0\coprod_WY} & 0 \\
+	0 & {X\coprod_W0} & {\Sigma_\mC W} & {\Sigma_\mC Y} \\
+	& 0 & {\Sigma_\mC X} & {\Sigma_\mC(X\coprod_WY)}
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=1-3, to=2-3]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-1, to=3-1]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-2, to=3-2]
+	\arrow[from=2-3, to=2-4]
+	\arrow[from=2-3, to=3-3]
+	\arrow[from=2-4, to=3-4]
+	\arrow[from=3-1, to=3-2]
+	\arrow[from=3-2, to=3-3]
+	\arrow[from=3-2, to=4-2]
+	\arrow[from=3-3, to=3-4]
+	\arrow[from=3-3, to=4-3]
+	\arrow[from=3-4, to=4-4]
+	\arrow[from=4-2, to=4-3]
+	\arrow[from=4-3, to=4-4]
+\end{tikzcd}}\\~\\
+Label the small squares $1$ to $7$ from left to right and top to bottom. By definition, $1$ is a pushout diagram. Since $1+2$ is a pushout diagram, by the pasting law $2$ is a diagram. Similarly, $3$ is a pushout diagram. Now $1+2+3+4$ is a pushout by definition. Since $1+3$ is a pushout, $2+4$ is a pushout diagram. Since $2$ is a pushout diagram, $4$ is a pushout diagram. Now $2+4+6$ is a pushout diagram by definition. Since $2+4$ is a pushout, $6$ is a pushout. Similarly,$3+4+5$ is a pushout. Since $3+4$ is a pushout then so is $5$. Finally, $4+5+6+7$ is a pushout diagram. Since $4+6$ is a pushout, so is $5+7$. Since $5$ is a pushout, then $7$ is a pushout. This proves that all squares $1$ to $7$ are pushouts. By applying $F$, we obtain the following diagram: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{F(W)} & {F(X)} & 0 \\
+	{F(Y)} & {F(X\coprod_W Y)} & {F(0\coprod_WY)} & 0 \\
+	0 & {F(X\coprod_W0)} & {F(\Sigma_\mC W)} & {F(\Sigma_\mC Y)} \\
+	& 0 & {F(\Sigma_\mC X)} & {F(\Sigma_\mC(X\coprod_WY))}
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=1-3, to=2-3]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-1, to=3-1]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-2, to=3-2]
+	\arrow[from=2-3, to=2-4]
+	\arrow[from=2-3, to=3-3]
+	\arrow[from=2-4, to=3-4]
+	\arrow[from=3-1, to=3-2]
+	\arrow[from=3-2, to=3-3]
+	\arrow[from=3-2, to=4-2]
+	\arrow[from=3-3, to=3-4]
+	\arrow[from=3-3, to=4-3]
+	\arrow[from=3-4, to=4-4]
+	\arrow[from=4-2, to=4-3]
+	\arrow[from=4-3, to=4-4]
+\end{tikzcd}}\\~\\
+Since $Z$ is equivalent to $X\coprod_WY$, we can remove the top left object and replace it with the pullback so that we obtain a commutative diagram: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{F(W)} \\
+	& {F(X)\times_{F(Z)}F(Y)} & {F(X)} & 0 \\
+	& {F(Y)} & {F(Z)} & {F(0\coprod_WY)} & 0 \\
+	& 0 & {F(X\coprod_W0)} & {F(\Sigma_\mC W)} & {F(\Sigma_\mC Y)} \\
+	&& 0 & {F(\Sigma_\mC X)} & {F(\Sigma_\mC Z)}
+	\arrow["\mu", from=1-1, to=2-2]
+	\arrow[bend left = 20, from=1-1, to=2-3]
+	\arrow[bend right = 20, from=1-1, to=3-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-2, to=3-2]
+	\arrow[from=2-3, to=2-4]
+	\arrow[from=2-3, to=3-3]
+	\arrow[from=2-4, to=3-4]
+	\arrow[from=3-2, to=3-3]
+	\arrow[from=3-2, to=4-2]
+	\arrow[from=3-3, to=3-4]
+	\arrow[from=3-3, to=4-3]
+	\arrow[from=3-4, to=3-5]
+	\arrow[from=3-4, to=4-4]
+	\arrow[from=3-5, to=4-5]
+	\arrow[from=4-2, to=4-3]
+	\arrow[from=4-3, to=4-4]
+	\arrow[from=4-3, to=5-3]
+	\arrow[from=4-4, to=4-5]
+	\arrow[from=4-4, to=5-4]
+	\arrow[from=4-5, to=5-5]
+	\arrow[from=5-3, to=5-4]
+	\arrow[from=5-4, to=5-5]
+\end{tikzcd}}\\~\\
+By considering the large square on the left, we obtain a comparison map $F(X)\times_{F(Z)}F(Y)\to\Omega_\mD F(\Sigma_\mC W)$ which will be called $\theta$. Let $\mu$ be the comparison map $F(W)\to F(X)\times_{F(Z)}F(Y)$. Finally, notice that the following diagram on the left sits in the bottom right of the above square, and that we can add $0$s to the map so that the limits of the two diagrams remain equivalent (coinitial): \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	&& 0 &&& 0 & 0 & 0 \\
+	&& {F(\Sigma_\mC Y)} & 0 & 0 & 0 \\
+	0 & {F(\Sigma_\mC X)} & {F(\Sigma_\mC Z)} && {F(\Sigma_\mC X)} & {F(\Sigma_\mC Z)} & {F(\Sigma_\mC Y)}
+	\arrow[from=1-3, to=2-3]
+	\arrow[from=1-3, to=3-2]
+	\arrow[from=1-6, to=1-7]
+	\arrow[from=1-6, to=3-5]
+	\arrow[from=1-7, to=3-6]
+	\arrow[from=1-8, to=1-7]
+	\arrow[from=1-8, to=3-7]
+	\arrow[from=2-3, to=3-3]
+	\arrow[from=2-4, to=2-5]
+	\arrow[from=2-4, to=3-5]
+	\arrow[from=2-5, to=3-6]
+	\arrow[from=2-6, to=2-5]
+	\arrow[from=2-6, to=3-7]
+	\arrow[from=3-1, to=2-3]
+	\arrow[from=3-1, to=3-2]
+	\arrow[from=3-2, to=3-3]
+	\arrow[from=3-5, to=3-6]
+	\arrow[from=3-7, to=3-6]
+\end{tikzcd}}\\~\\
+Their limit is precisely computed vertically on each slice and hence is the pullback $$\Omega_\mD F(\Sigma_\mC X)\times_{\Omega_\mD F(\Sigma_\mC Z)}\Omega_\mD F(\Sigma_\mC Y)$$ Since all the diagrams map to each other, we obtain a commutative diagram: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{F(W)} & {F(X)\times_{F(Z)}F(Y)} \\
+	& {\Omega_\mD F(\Sigma_\mC W)} & {\Omega_\mD F(\Sigma_\mC X)\times_{\Omega_\mD F(\Sigma_\mC Z)}\Omega_\mD F(\Sigma_\mC Y)}
+	\arrow["\mu", from=1-1, to=1-2]
+	\arrow["\simeq"', from=1-1, to=2-2]
+	\arrow["\theta", from=1-2, to=2-2]
+	\arrow["\simeq", from=1-2, to=2-3]
+	\arrow[from=2-2, to=2-3]
+\end{tikzcd}}\\~\\
+where by assumption we have equivalences $F(W)\simeq\Omega_\mD F(\Sigma_\mC W)$ hence there are also equivalences on pullbacks. Notice that this implies $\theta$ has a left and right homotopy inverse, and hence is an equivalence. By the two out of three property, $\mu$ is also an equivalence. Hence $F$ sends pushouts to pullbacks. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{} Let $\mC$ be a pointed infinity category that admits all finite limits and colimits. Then the following are true. 
+\begin{itemize}
+\item If the suspension functor $\Sigma:\mC\to\mC$ is fully faithful, then every pushout square in $\mC$ is a pullback square in $\mC$. 
+\item If the loop functor $\Omega:\mC\to\mC$ is fully faithful, then every pullback square in $\mC$ is a pushout square in $\mC$. 
+\end{itemize} \tcbline
+\begin{proof}
+Let $\Sigma$ be a fully faithful functor. Then the comparison map $X\to\Omega\Sigma X$ is an equivalence (Why ????). By the above proposition, the identity map is reduced and excisive. Hence given a pushout diagram, it is also a pullback square. The other statement follows from the dual. 
+\end{proof}
+\end{prp}
+
+\pagebreak
+\section{Stable Infinity Categories}
+\subsection{Properties of Stable Infinity Categories}
+\begin{defn}{Stable Infinity Categories}{} Let $\mC$ be an infinity category. We say that $\mC$ is stable if the following are true. 
+\begin{itemize}
+\item $\mC$ has a zero object $0$
+\item Every morphism in $\mC$ admits a fiber and a cofiber
+\item A triangle in $\mC$ is a fiber sequence if and only if it is a cofiber sequence
+\end{itemize}
+\end{defn}
+
+Motivation: In the category of spectra, a square is a homotopy pushout if and only if it is a homotopy pullback. 
+
+\begin{prp}{}{} Let $\mC$ be an infinity category. Then $\mC$ is a stable infinity category if and only if the following are true. 
+\begin{itemize}
+\item $\mC$ has a zero object $0$
+\item $\mC$ admits all finite limits and colimits
+\item A square in $\mC$ of the form \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	X & Y \\
+	Z & W
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+is a pushout if and only if it is a pullback. 
+\end{itemize} \tcbline
+\begin{proof}
+Suppose that $\mC$ satisfies the three conditions. It is clear that $\mC$ has a zero object. Since fiber and cofiber sequences are special cases of pullbacks and pushouts respectively, the fact that $\mC$ admits all finite limits and colimits imply that every morphism in $\mC$ admits a fiber and a cofiber. Finally, since pushouts diagrams and pullback diagrams coincide, fiber and cofiber sequences also coincide. \\~\\
+
+Suppose now that $\mC$ is stable. It is clear that $\mC$ has a zero object. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{} Let $\mC$ be a stable infinity category. Then the following are true regarding the stability of suspension and looping. 
+\begin{itemize}
+\item $M^\Sigma=M^\Omega$
+\item There is an equivalence of infinity categories given by $$\Sigma:\mC\leftrightarrow\mC:\Omega$$
+\end{itemize} \tcbline
+\begin{proof}
+Let $\mC$ be stable. By the above prp, pushouts coincide with pullbacks. Hence $M^\Sigma=M^\Omega$. Let $X\in\mC$. Then \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	X & 0 \\
+	0 & {\Sigma X}
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+is a pushout in $\mC$. Then it is also a pullback in $\mC$ hence applying $\Omega$ to $\Sigma X$ shows that $\Omega\Sigma X$ is equivalent to $X$. Similarly, let $Y\in\mC$. Then \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\Omega Y} & 0 \\
+	0 & Y
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+is a pullback and a pushout in $\mC$. Applying $\Sigma$ to $\Omega Y$ shows that $\Sigma\Omega Y$ is equivalent to $Y$. This shows that $\Sigma$ is a homotopy inverse of $\Omega$ and vice versa. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{} Let $\mC$ be an infinity category. Then $\mC$ is a stable infinity category if and only if the following are true. 
+\begin{itemize}
+\item $\mC$ has a zero object $0$
+\item $\mC$ admits all finite limits and colimits
+\item The loop functor $\Omega:\mC\to\mC$ is an equivalence of infinity categories. 
+\end{itemize} \tcbline
+\begin{proof}
+Let $\mC$ be stable. By prp2.1.2, $\mC$ has a zero object and admits all finite limits and colimits. By prp2.1.3, $\Omega$ is an equivalence of infinity categories hence we are done. \\~\\
+
+Conversely, suppose that the above conditions are satisfied. Since $\Sigma$ is adjoint to $\Omega$, this means that $\Sigma$ is also an equivalence of infinity categories. In particular, $\Sigma$ and $\Omega$ are both fully faithful. By prp1.4.10, pushout squares are the same as pullback squares and vice versa. By the above prp, we conclude that $\mC$ is stable. 
+\end{proof}
+\end{prp}
+
+\begin{defn}{Distinguished Triangles}{} Let $\mC$ be a stable infinity category. Let the following \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	X & Y & Z & {\Sigma_\mC X}
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["g", from=1-2, to=1-3]
+	\arrow["h", from=1-3, to=1-4]
+\end{tikzcd}}\\~\\
+be a diagram in $h(\mC)$. We say that it is a distinguished triangle if there exists a commutative diagram of the form \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	X & Y & 0 \\
+	{0'} & Z & W
+	\arrow["{\widetilde{f}}", from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=1-3]
+	\arrow["{\widetilde{g}}", from=1-2, to=2-2]
+	\arrow[from=1-3, to=2-3]
+	\arrow[from=2-1, to=2-2]
+	\arrow["{\widetilde{h}}", from=2-2, to=2-3]
+\end{tikzcd}}\\~\\
+in $\mC$ such that the following are true. 
+\begin{itemize}
+\item $0$ and $0'$ are zero objects of $\mC$. 
+\item Both the left and the right squares are pushout diagrams. 
+\item The morphisms $\widetilde{f}$ and $\widetilde{g}$ in $\mC$ represents $f$ and $g$ in $h(\mC)$ respectively. 
+\item $h:Z\to\Sigma_\mC X$ is the composition of the homotopy class $\widetilde{h}$ with the equivalence $W\simeq\Sigma_\mC X$ determined by the outer rectangle that is a pushout. 
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{} Let $\mC$ be a stable infinity category. Then $h(\mC)$ is a triangulated category with the following data. 
+\begin{itemize}
+\item The shift functor is given by $\Sigma_\mC$
+\item The class of distinguished triangles are given as the above. 
+\end{itemize}
+\end{prp}
+
+We give a summary of some of the properties of stable infinity categories. 
+\begin{itemize}
+\item $\mC$ is pointed, admits all fibers and cofibers and fibers and cofibers coincide (def2.1.1)
+\item $\mC$ admits all finite limits and colimits (prp2.1.2)
+\item Pullbacks and pushouts in $\mC$ coincide (prp2.1.2)
+\item $\Sigma$ and $\Omega$ gives an equivalence of categories (prp2.1.3)
+\item $h(\mC)$ is triangulated (prp2.1.6)
+\end{itemize}
+
+\subsection{Exact Functors and its Equivalent Criteria}
+\begin{defn}{Exact Functors}{} Let $\mC,\mD$ be two stable infinity categories. A functor $F:\mC\to\mD$ is exact if the following are true. 
+\begin{itemize}
+\item The zero object is preserved: $F(0)=0$
+\item $F$ sends fiber sequences to fiber sequences. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Left and Right Exact Sequences}{} Let $\mC,\mD$ be two infinity categories. Let $F:\mC\to\mD$ be a functor. 
+\begin{itemize}
+\item $F$ is left exact if $F$ commutes with finite limits. Explicitly, this means that for all finite simplicial sets $K$ and functors $X:K\to\mC$, $$F\left(\lim_K X\right)=\lim_K F\circ X$$
+\item $F$ is right exact if $F$ commutes with finite colimits. Explicitly, this means that for all finite simplicial sets $K$ and functors $X:K\to\mC$, $$F\left(\colim_K X\right)=\colim_K F\circ X$$
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{} Let $\mC,\mD$ be two stable infinity categories. Let $F:\mC\to\mD$ be a functor. Then the following are equivalent. 
+\begin{itemize}
+\item $F$ is exact. 
+\item $F$ is left exact. 
+\item $F$ is right exact. 
+\item $F$ is reduced and excisive
+\item $F$ sends the zero object to the zero object, and for all $X\in\mC$ the map $$\Sigma_\mD F(X)\to F(\Sigma_\mC X)$$ is an equivalence in $\mD$. 
+\end{itemize}\tcbline
+\begin{proof}~\\
+\begin{itemize}
+\item $(1)\implies (2)$: Suppose that $F$ is exact. ????\\~\\
+
+\item $(2)\implies (1)$: Suppose that $F$ is left exact. Then the zero object $0$ of $\mC$ is a final object. But the final object is the limit of the empty diagram. Since $F$ commutes with finite limits, $F(0)$ is a final object of $\mD$. But the zero object of $\mD$ is also a final object of $\mD$. Since final objects are unique up to equivalence, we conclude that $F(0)$ is the zero object of $\mD$. Given a fiber sequence, it is in particular a pullback, which is a finite limit. Since $F$ preserves finite limits, $F$ sends the fiber sequence to a pullback. But $F(0)=0$ hence the pullback is a fiber sequence. Hence $F$ sends fiber sequences to fiber sequences. \\~\\
+
+\item $(1)\implies (3)$ and $(3)\implies (1)$ has a dual argument. \\~\\
+
+\item $(1)\implies (4)$: Suppose that $F$ is exact. By the above we know that $F$ commutes with finite limits. Given a pushout diagram in $\mC$, since $\mC$ is stable by prp2.1.3 we know that it is a pullback. Since $F$ commutes with finite limits, $F$ sends the pullback to a pullback. Hence $F$ is excisive. Let $\ast$ be a final object of $\mC$. Since $F$ is left exact and $\ast$ is the limit of the empty diagram, $F(\ast)$ is a final object of $\mD$. Hence $F$ is reduced. \\~\\
+
+\item $(4)\implies (1)$: Suppose that $F$ is reduced and excisive. Let $0$ be a zero object of $\mC$. Since $F$ is reduced, $F(0)$ is a final object of $\mD$. But the zero object of $\mD$ is also a final object of $\mD$. Since final objects are unique up to equivalence, we conclude that $F(0)$ is the zero object of $\mD$. Given a fiber sequence in $\mC$, by definition it is also a cofiber sequence in $\mC$. In particular it is a pushout. Since $F$ is excisive, the pushout diagram is sent to a pullback. Moreover, since $F(0)=0$, the pullback diagram is in fact a fiber sequence. Hence $F$ sends fiber sequences to fiber sequences. \\~\\
+
+\item $(4)\implies(5)$: Let $F$ be reduced and exicisive. Clearly it sends zero objects to zero objects. By prp1.4.10 this implies that there is an equivalence $F(X)\to\Omega_\mD(F(\Sigma_\mC X))$. Passing to $\Sigma_\mD$ gives an equivalence $\Sigma_\mD F(X)\to\Sigma_\mD\Omega_\mD F\Sigma_\mC X$. Since $\Sigma_\mD$ and $\Omega_\mD$ is an equivalence of infinity categories by prp2.1.3, this implies that $\Sigma_\mD\Omega_\mD F(\Sigma_\mC X)$ and $F(\Sigma_\mC X)$ are equivalent. Hence we obtain an equivalence $\Sigma_\mD F(X)\to F(\Sigma_\mC X)$. \\~\\
+
+\item $(5)\implies(4)$: We already know that $F$ is reduced. Suppose that we have equivalences $\Sigma_\mD F(X)\to F(\Sigma_\mC X)$ for all $X\in\mC$. Since $\mD$ is stable, applying $\Omega_\mD$ to both sides give an equivalence $F(X)\to \Omega_\mD\Sigma_\mD F(X)\to\Omega_\mD F(\Sigma_\mC X)$. By prp1.4.10 we conclude that $F$ is excisive. 
+\end{itemize}
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{} Let $\mC,\mD$ be infinity categories. Suppose that $\mC$ is pointed and admits all finite colimits. Suppose that $\mD$ admits all finite limits. Then $$\text{Exc}_\ast(\mC,\mD)$$ is a stable infinity category. \tcbline
+\begin{proof}
+We first show that $\text{Exc}_\ast(\mC,\mD)$ is pointed. Let $\ast$ denote a final object of $\mC$. Since $\mD$ admits all finite limits and final objects are limits of the empty diagram, $\mD$ admits a final object $\ast'$. Let $X:\mC\to\mD$ be the constant functor landing in $\Delta^0\cong\{\ast'\}\subset\mD$. It is clear that $X$ is reduced and excisive. Moreover, $X$ is a final object of $\text{Exc}_\ast(\mC,\mD)$ (Why ????). \\~\\
+
+Now let $Y\in\text{Exc}_\ast(\mC,\mD)$. Since $X$ and $Y$ are reduced, the mapping space $\Hom_\mD(X(\ast),Y(\ast))$ is contractible. Consider the restriction map $$\Hom_{\text{Func}(\mC,\mD)}(X,Y)\to\Hom_\mD(X(\ast),Y(\ast))$$ given by sending a natural transformation $F:X\Rightarrow Y$ to $F(\ast):X(\ast)\to Y(\ast)$. 
+Admit finite limits (Why ????)
+\end{proof}
+\end{prp}
+
+\subsection{The Infinity Category of Stable Infinity Categories}
+\begin{defn}{The Infinity Category of Stable Infinity Categories}{} Define the infinity category $\mC_\infty^\text{Ex}$ of stable infinity categories as follows. 
+\begin{itemize}
+\item The objects are stable infinity categories. 
+\item For $\mC,\mD$ stable infinity categories, $\Hom_{\mC_\infty^\text{Ex}}(\mC,\mD)$ is the full sub infinity category of $\Hom_{\mC_\infty}(\mC,\mD)$ consisting of exact functors. 
+\end{itemize}
+\end{defn}
+
+\pagebreak
+\section{Spectrum Objects}
+\subsection{The Stable Infinity Category of Spectrum Objects}
+The infinity category of spectrum objects is the prototypical example of a stable infinity category. 
+Recall that we denote $$\mS=N_\bullet^\text{hc}(\bold{Kan})$$ as the infinity category of spaces. 
+
+\begin{defn}{The Infinity Category of Finite Spaces}{} Define the infinity category of finite pointed spaces $$\mS_\ast^\text{fin}$$ to be the smallest full subcategory of pointed spaces $\mS_\ast$ that contains the final object $\ast$ and is stable under finite colimits. 
+\end{defn}
+
+Heuristic: $\mS_\ast^\text{fin}$ is freely generated by by $\ast$ under finite colimits. 
+
+\begin{lmm}{}{} Let $\mC$ be an infinity category which admits finite colimits. Then the evaluation functor gives an equivalence of infinity categories $$\text{ev}_\ast:\text{Func}^\text{Rex}(\mS^\text{fin},\mC)\to\mC$$ where $\text{Func}^\text{Rex}(\mS^\text{fin},\mC)$ refers to the full sub infinity category of right exact functors. 
+\end{lmm}
+
+\begin{defn}{The Category of Spectrum Objects}{} Let $\mC$ be an infinity category that admits all finite limits. A spectrum object of $\mC$ is a reduced and excisive functor $$F:\mS_\ast^\text{fin}\to\mC$$ Define the infinity category of spectrum objects of $\mC$ to be $$\text{Sp}(\mC)=\text{Exc}_\ast(\mS_\ast^\text{fin},\mC)$$
+\end{defn}
+
+Heuristic: Spectra in the usual sense is weakly equivalent to reduced and excisive functors from $\bold{Top}_\ast$ to $\bold{Top}_\ast$. 
+
+\begin{lmm}{}{} Let $\mC$ be an infinity category that admits all finite limits. Then $\text{Sp}(\mC)$ is a stable infinity category. \tcbline
+\begin{proof}
+Follows from prp2.2.4
+\end{proof}
+\end{lmm}
+
+\subsection{The Delooping Functor}
+\begin{defn}{Delooping}{} Let $\mC$ be an infinity category that admits all finite limits. Define the delooping of $\mC$ to be the evaluation functor $$\Omega^\infty:\text{Sp}(\mC)\to\mC$$ given by $(F:\mS_\ast^\text{fin}\to\mC)\mapsto F(S^0)$. 
+\end{defn}
+
+\begin{prp}{}{} Let $\mC$ be an infinity category that admits all finite limits. Then $\mC$ is stable if and only if $$\Omega^\infty:\text{Sp}(\mC)\to\mC$$ is an equivalence of infinity categories. \tcbline
+\begin{proof}
+Suppose first that $\mC$ is stable. Let $F:\mS^\text{fin}\to\mS_\ast^\text{fin}$ be a left adjoint to the forgetful functor $\mS_\ast^\text{fin}\to\mS^\text{fin}$ which is obtained by adding a disjoint base point. Now consider the functor $$\text{Sp}(\mC)=\text{Exc}_\ast(\mS_\ast^\text{fin},\mC)\overset{-\circ F}{\longrightarrow}\text{Exc}'(\mS^\text{fin},\mC)\overset{\text{ev}_{\ast}}{\longrightarrow}\mC$$ where $\text{Exc}'(\mS^\text{fin},\mC)$ is the infinity category of functors that send initial objects to final objects. This functor sends a reduced and excisive functor $G\in\text{Sp}(\mC)$ to $(G\circ F)(\ast)=G(S^0)$. Hence this composition is in fact equivalent to $\Omega^\infty$. \\~\\
+
+Consider the composite functor given by \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\text{Func}(\mS^\text{fin},\mC)\times\mS_\ast^\text{fin}} & {\text{Func}(\mS^\text{fin},\mC)\times\text{Func}(\Delta^1,\mS^\text{fin})} & {\text{Func}(\Delta^1,\mC)} & \mC
+	\arrow[hook, from=1-1, to=1-2]
+	\arrow["\circ", from=1-2, to=1-3]
+	\arrow["{\text{cofiber}}", from=1-3, to=1-4]
+\end{tikzcd}}\\~\\
+Using the product-hom adjunction, this is the same data as a map $\theta:\text{Func}(\mS^\text{fin},\mC)\to\text{Func}(\mS_\ast^\text{fin},\mC)$. Let $T:\mS^\text{fin}\to\mC$ be a functor sending initial objects to final objects. Consider the functor $\theta(T):\mS_\ast^\text{fin}\to\mC$. ??????? Hence $\theta$ restricts to a map $\psi:\text{Exc}'(\mS^\text{fin},\mC)\to\text{Exc}_\ast(\mS_\ast^\text{fin},\mC)$. ????????? Thus $\psi$ is a homotopy inverse of $-\circ F$. \\~\\
+
+Now I claim that a functor $T:\mS^\text{fin}\to\mC$ sends initial objects to final objects if and only if $F$ is right exact. Suppose that $T$ sends initial objects to final objects. ????? 
+
+It follows from lmm3.1.2 that $\text{ev}_\ast$ is an equivalence of infinity categories. Hence $\Omega^\infty$ is an equivalence of infinity categories. \\~\\
+
+The other direction follows from lmm3.1.4. 
+\end{proof}
+\end{prp}
+
+HA 1.4.2.21
+
+\begin{prp}{}{} Let $\mC$ be a pointed infinity category that admits all finite colimits. Let $\mD$ be an infinity category that admits all finite limits. Then post composition with $\Omega^\infty$ gives an equivalence of infinity categories $$\Omega_\mD^\infty\circ-:\text{Exc}_\ast(\mC,\text{Sp}(\mD))\overset{\simeq}{\rightarrow}\text{Exc}_\ast(\mC,\mD)$$ \tcbline
+\begin{proof}
+Notice that there is a canonical isomorphism 
+\begin{align*}
+\text{Exc}_\ast(\mC,\text{Sp}(\mD))&=\text{Exc}_\ast(\mC,\text{Exc}_\ast(\mS_\ast^\text{fin},\mD))\\
+&\simeq\text{Exc}_\ast(\mC\times\mS_\ast^\text{fin},\mD)\\
+&\simeq\text{Exc}_\ast(\mS^\text{fin},\text{Exc}_\ast(\mC,\mD))\\
+&=\text{Sp}(\text{Exc}_\ast(\mC,\mD))
+\end{align*}
+Under this identification, the functor $\Omega^\infty\circ -$ corresponds to the functor $\Omega_{\text{Exc}_\ast(\mC,\mD)}^\infty$ since $\Omega$ are computed term wise (like all limits). By prp2.2.4 $\text{Exc}_\ast(\mC,\mD)$ is stable. Hence by prp3.2.2 we conclude that $\Omega_{\text{Exc}_\ast(\mC,\mD)}^\infty$ is an equivalence of infinity categories. Hence $\Omega_\mD^\infty\circ-$ is an equivalence of infinity categories. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{} Let $\mC$ be a pointed infinity category that admits all finite limits. Then there is an equivalence of infinity categories $$\text{Sp}(\mC)\simeq\lim\left(\cdots\rightarrow\mC\overset{\Omega}{\rightarrow}\mC\overset{\Omega}{\rightarrow}\mC\right)$$ given by the functor $\Omega^\infty:\text{Sp}(\mC)\to\mC$. \tcbline
+\begin{proof}
+Step 1: $\overline{\mC}=\lim\left(\cdots\rightarrow\mC\overset{\Omega}{\rightarrow}\mC\overset{\Omega}{\rightarrow}\mC\right)$ is stable. \\~\\
+
+Step 2: \\
+Consider the canonical map $G:\overline{\mC}\to\mC$ sending $\{X_n\}$ to $X_0$. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{} Let $\mC$ be an infinity category. Then the following are equivalent. 
+\begin{itemize}
+\item $\mC$ is a stable infinity category. 
+\item $\mC$ is pointed, admits all finite limits and $\Omega:\mC\to\mC$ is an equivalence of infinity categories. 
+\item $\mC$ is pointed, admits all finite colimits and $\Sigma:\mC\to\mC$ is an equivalence of infinity categories. 
+\end{itemize} \tcbline
+\begin{proof}~\\
+\begin{itemize}
+\item $(1)\implies(2),(3)$: If $\mC$ is stable, then by prp2.1.4 $\Omega$ is an equivalence. Since $\Omega$ is right adjoint to $\Sigma$, $\Sigma$ is also an equivalence. Hence $(2)$ and $(3)$ follows. \\~\\
+
+\item 
+\end{itemize}
+\end{proof}
+\end{prp}
+
+
+
+\end{document}

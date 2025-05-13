@@ -1,0 +1,19 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{L\PYGZus{}model\PYGZus{}forward}\PYG{p}{(}\PYG{n}{X}\PYG{p}{,} \PYG{n}{parameters}\PYG{p}{):}
+
+    \PYG{n}{caches} \PYG{o}{=} \PYG{p}{[]}
+    \PYG{n}{A} \PYG{o}{=} \PYG{n}{X}
+    \PYG{n}{L} \PYG{o}{=} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{parameters}\PYG{p}{)} \PYG{o}{//} \PYG{l+m+mi}{2}                  \PYG{c+c1}{\PYGZsh{} number of layers in the neural network}
+
+    \PYG{c+c1}{\PYGZsh{} The first n\PYGZhy{}1 layers using ReLU}
+    \PYG{k}{for} \PYG{n}{l} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{L}\PYG{p}{):}
+        \PYG{n}{A\PYGZus{}prev} \PYG{o}{=} \PYG{n}{A}
+        \PYG{n}{A}\PYG{p}{,} \PYG{n}{cache} \PYG{o}{=} \PYG{n}{linear\PYGZus{}activation\PYGZus{}forward}\PYG{p}{(}\PYG{n}{A\PYGZus{}prev}\PYG{p}{,} \PYG{n}{parameters}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}W\PYGZdq{}} \PYG{o}{+} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{l}\PYG{p}{)],} \PYG{n}{parameters}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}b\PYGZdq{}} \PYG{o}{+} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{l}\PYG{p}{)],} \PYG{l+s+s2}{\PYGZdq{}relu\PYGZdq{}}\PYG{p}{)}
+        \PYG{n}{caches}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{cache}\PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{} The output layer using sigmoid}
+    \PYG{n}{AL}\PYG{p}{,} \PYG{n}{cache} \PYG{o}{=} \PYG{n}{linear\PYGZus{}activation\PYGZus{}forward}\PYG{p}{(}\PYG{n}{A}\PYG{p}{,} \PYG{n}{parameters}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}W\PYGZdq{}} \PYG{o}{+} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{L}\PYG{p}{)],} \PYG{n}{parameters}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}b\PYGZdq{}} \PYG{o}{+} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{L}\PYG{p}{)],} \PYG{l+s+s2}{\PYGZdq{}sigmoid\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{caches}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{cache}\PYG{p}{)}
+
+    \PYG{k}{return} \PYG{n}{AL}\PYG{p}{,} \PYG{n}{caches}
+\end{Verbatim}

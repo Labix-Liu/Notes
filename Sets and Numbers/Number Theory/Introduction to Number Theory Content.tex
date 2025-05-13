@@ -1,0 +1,721 @@
+\section{Properties of the Integers}
+\subsection{Divisibility}
+We begin our study of number theory with divisibility. 
+\begin{defn}{Divisibility}{} Let $a,b\in\Z$. We define the relation $$a|b$$ if and only if there exists some $k\in\Z$ such that $b=ak$. We say that $a$ divides $b$ in this case. 
+\end{defn}
+The definition is vey simple. The intuition is straight forward as well. Savour this moment as the subject increases its difficulty exponentially.  
+
+\begin{prp}{}{} Let $d,m,n\in\Z$. The relation $|$ has the following properties and thus is a partial order in $\mathbb{N}$. 
+\begin{itemize}
+\item (Reflexivity) $n|n$
+\item (Antisymmetry) $m|n$ and $n|m\implies m=n$
+\item (Transitivity) $d|n$ and $n|m\implies d|m$
+\item (Linearity) $d|n$ and $d|m\implies d|(an+bm)$ for any $a,b\in\Z$
+\item $1|n$
+\item $n|0$
+\end{itemize}\tcbline
+\begin{proof} We prove antisymmetry and transitivity and leave the others for the reader. Let $m,n,d\in\Z$. 
+\begin{itemize}
+\item (Antisymmetry) If $m|n$ and $n|m$ then there exists some $k_1,k_2\in\mathbb{N}$ such that $n=k_1m$ and $m=k_2n$ thus $n=k_1k_2n$. Then $k_1k_2=1\implies k_1=k_2=1$ and $m=n$
+\item (Linearity) If $d|n$ and $n|m$ then there exists $k_1k_2\in\mathbb{N}$ such that $n=k_1d$ and $m=k_2n$. Then $m=k_2k_1d$ thus $d|m$
+\end{itemize}
+\end{proof}
+\end{prp}
+
+
+These properties will come up again and again and will be the foundation of number theory. It is safe to say that number theory is built upon the notion of divisibility. 
+
+\subsection{The Division Algorithm}
+This section is dedicated to develop the Euclidean algorithm, a means to find the greatest common divisor. The gcd is a central notion in number theory as well. 
+\begin{defn}{Greatest Common Divisor}{} Suppose that $m,n\in\Z$. A number $d\in\mathbb{N}$ such that 
+\begin{itemize}
+\item $d\geq 0$
+\item $d|m$ and $d|n$
+\item $e|a$ and $e|b\implies e|d$
+\end{itemize}
+is called the greatest common divisor of $m$ and $n$, denoted $\gcd{(m,n)}$.
+\end{defn}
+
+In contrast to the greatest common divisor, we also have the lowest common multiple. Although they work as a pair, we often see the notion of gcd come up more than lcm. 
+
+\begin{defn}{Lowest Common Multiple}{} Suppose that $m,n\in\Z$. A number $l\in\mathbb{N}$ such that 
+\begin{itemize}
+\item $l\geq 0$
+\item $m|l$ and $n|l$
+\item $m|e$ and $n|e\implies l|e$
+\end{itemize}
+is called the lowest common multiple of $m$ and $n$, denoted $\lcm{(m,n)}$.
+\end{defn}
+
+Beware that both of these definitions does not imply the uniqueness of such a number. However, with a little work, we will see that both of them are indeed unique. Readers should think about whether the existence of these numbers is guaranteed as well. 
+
+\begin{prp}{}{} Let $m,n\in\Z$. $\gcd(m,n)$ and $\lcm(m,n)$ are unique. \tcbline
+\begin{proof}
+By the third property of both numbers, we must have if $c,d$ are $\gcd(m,n)$/$\lcm(m,n)$, then $c|d$ and $d|c$ thus $c=d$ and $\gcd(m,n)$/$\lcm(m,n)$ is unique. 
+\end{proof}
+\end{prp}
+
+We will see more on gcd and lcm when we deal with factorization. For now, we turn our heads to the division algorithm. This algorithm proves to us that upon dividing two integers, as long as they are not divisible by one or the other, you can always guarantee a remainder smaller than the divident. 
+
+\begin{thm}{The Division Algorithm}{} Let $a\in\N$ and $b\in\Z$ with $b\neq 0$. Then there exists unique $q,r\in\Z$ such that $$b=aq+r$$ with $0\leq r<a$. \tcbline
+\begin{proof}
+We prove existence first by considering three cases. \\
+Cases 1: $b$ is divisible by $a$.  If $b$ is divisible by $a$ then there exists $k\in\Z$ such that $b=ka$ thus $k=q$ and $r=0$. \\~\\
+Case 2: $b$ is positive and $a$ does not divide $b$. Let $$S=\{b-ka\in\N|k\in\N\}$$ Then $S\subseteq\N$ thus we can apply the well-ordering principle to $S$. Let $r$ be the least natural number in $S$. Then $r\in S$ implies $r=b-ka$ for some $k\in\N$. Thus $b=ka+r$ for some $k$ and $r$. We show that $r<a$. Suppose for a contradiction that $r\geq a$. Then $u=r-a\in\N$ and $$b=ka+r\implies b=ka+(u-a)\implies b=(k-1)a+u$$ thus $u\in S$ and $u<r$, contradicting the fact that $r$ is the least element in $S$. Thus $r\leq a$. If $r=a$, then $$b=ka+a\implies b=(k+1)a$$ which means that $a|b$ which is false in our case. Thus we must have $r<a$. \\~\\
+Case 3: $b$ is negative and $a$ does not divide $b$. Then apply the exact same argument to the number $-b$ to get $(-b)=ka+r$ and $b=-ka-r$. Let $k'=-k-1$ and $r'=-r+a$. Then $$b=-ka-r=k'a+a+r'-a=k'a+r'$$ Since we have $0\leq r<a$, we have $-a<-r\leq 0$ and $0<r'\leq a$. Again $r'\neq a$ or else $a|b$ which contradicts our assumption. \\~\\
+We now prove uniqueness. Suppose that $b=aq_1+r_1$ and $b=aq_2+r_2$. Then $r_1-r_2=a(q_2-q_1)$. We know that $-a<r_1-r_2<a$ thus $-a<a(q_2-q_1)<a$ and $-1<q_2-q_1<1$ which is impossible for integers $q_1,q_2$ unless $q_1=q_2$. If $q_1=q_2$ then $r_1=r_2$ and we are done. 
+\end{proof}
+\end{thm}
+
+The division algorithm does not require $b$ to be larger than $a$. In fact, if $a$ is larger than $b$, then the division algorithm simply gives $a$ itself as the remainder. Before we reach our conclusion, we need one more proposition. 
+
+\begin{prp}{}{} Suppose that $m\geq n>0$ are natural numbers with $m=qn+r$ for some $q,r\in\mathbb{N}$. Then $$\gcd{(m,n)}=\gcd{(n,r)}$$\tcbline
+\begin{proof}
+Suppose that $d=\gcd(m,n)$. Then we know that $d<n$ from definition. We want to show that $d$ satisfies the three results of a gcd but in terms of $n$ and $r$. Since $d|n$ and $d|m$, by linearity we must have $d|r$. \\~\\
+Now suppose for a contradiction that there exists $e$ such that $e$ is a common divisor of $n$ and $r$ and $e>d$. Then $e|n$ and $e|r$ by definition thus $e|m$ by linearity. $e|m$ and $e|n$ implies that $e$ is a larger common divisor of $m$ and $n$ than $d$. However this is not possible since $d$ is assumed to be the largest among the common divisors. This is a contradiction thus $d=\gcd(n,r)$ and we are done. 
+\end{proof}
+\end{prp}
+
+\begin{thm}{Euclid's Algorithm}{} Suppose that $m\geq n>0$ are natural numbers. We have the following inequalities. 
+$$m=nq_1+r_1\text{ with }0<r_1<n$$
+$$n=r_1q_2+r_2\text{ with }0<r_2<n$$
+$$r_1=r_2q_3+r_3\text{ with }0<r_3<n$$
+$$\cdots\cdots\cdots\cdots\cdots\cdots\cdots\cdots\cdots\cdots$$
+$$r_{k-2}=r_{k-1}q_k+r_k\text{ with }0<r_k<r_{k-1}$$
+$$r_{k-1}=r_kq_{k-1}$$
+From this, we have $r_k|r_{k-1}$, $r_k|r_{k-2}\dots r_k|n$ and $r_k|m$. \tcbline\begin{proof} The first part of the results is due to the repeated use of the division algorithm. For the second part, we have $$\gcd(m,n)=\gcd(n,r_1)=\gcd(r_1,r_2)=\dots=\gcd(r_{k-1},r_k)=r_k$$ and we are done. 
+\end{proof}
+\end{thm}
+
+\begin{lmm}{Bezout's Lemma}{} Let $a,b\in\Z$ such that they are not both $0$. Then there exists $x,y\in\Z$ such that $$ax+by=\gcd(a,b)$$\tcbline
+\begin{proof} Reconstruct $x$ and $y$ using the Euclidean Algorithm. This is possible since $\gcd(m,n)=r_k$ and every $r_1,\dots,r_{k-1}$ has a factor of $r_k$ in it. 
+\end{proof}
+\end{lmm}
+
+\begin{lmm}{}{} Let $a,b\in\Z$ such that they are not both $0$. Then the equation $$ax+by=\gcd(a,b)$$ has an infinite number of integer solutions. \tcbline
+\begin{proof} Using Bezout's Lemma, we conclude that $(x_0,y_0)$ is a solution to the equation. But then $$(x_0-bt,y+at)$$ are also solutions for $t\in\Z$ since $$a(x_0-bt)+b(y+at)=ax+by=\gcd(a,b)$$
+\end{proof}
+\end{lmm}
+
+\subsection{Unique Factorization}
+\begin{defn}{Prime Numbers}{} We say that $n\in\mathbb{N}$ is a prime number if and only if it has exactly two factors, which is $1$ and $n$. Else $n$ is composite. 
+\end{defn}
+
+\begin{lmm}{}{} Every integer is divisible by a prime. \tcbline
+\begin{proof}
+If the integer is a prime then it divides itself. If the integer is not a prime then it has some other factor $k<n$ not equal to $1$ or $n$. If $k$ is prime then we are done. If $k$ is not prime then there is another non trivial factor $k_1<k$. Repeat this process until you reach a prime. This is always possible since the integers are well ordered integers between $1$ and $n$ are finite. 
+\end{proof}
+\end{lmm}
+
+\begin{lmm}{}{} Every integer $n>1$ can be written as a product of primes. \tcbline
+\begin{proof}
+If $n$ is a prime that we are already done. If $n$ is not a prime then we know that it is divisible by a prime $p$. Then repeat this procedure on $\frac{n}{p}$ until the remaining integer is a prime. 
+\end{proof}
+\end{lmm}
+
+\begin{thm}{}{} There is an infinite number of primes. \tcbline
+\begin{proof}
+Suppose for a contradiction that there is only a finite number of primes $p_1,\dots,p_n$. Then I claim that $p=p_1,\cdots p_n+1$ is a prime. 
+\end{proof}
+\end{thm}
+
+\begin{prp}{Euclid's Lemma}{} Suppose that $p,m,n\in\mathbb{N}$, with $p$ prime and $m,n>1$. Suppose that $p|mn$. Then $p$ divides at least one of $m$ or $n$. 
+\end{prp}
+
+\begin{prp}{}{} Suppose that $p$ is a prime such that $p|a_1a_2\cdots a_k$. Then $p|a_i$ for some $i\in\{1,2,\dots,k\}$. \tcbline
+\begin{proof}
+Treat $a_2\cdots a_k$ as one integer. By Euclid's lemma, $p$ either divides $a_1$ or $a_2\cdots a_k$. If $p$ divides $a_1$ we are done. If it doesn't then $p|a_2\cdots a_k$. Repeat this procedure until one of $a_i$ is divisible by $p$ or we reach $p|a_{k-1}a_k$. Then by Euclid's lemma $p|a_{k-1}$ or $p|a_k$ and we are done. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{} Let $d,m,n\in\Z$. If $\gcd(m,d)=1$, then $d|mn$ implies $d|n$. 
+\end{prp}
+
+\begin{thm}{Fundamental Theorem of Arithmetic}{} Suppose that $n\neq 0$ is a natural number. Then there exists exactly one prime factorization for every $n$, meaning that the decomposition $$n=\prod_{k=1}^np_k^{s_k}$$ where $p_k$ is prime exists and is unique. 
+\end{thm}
+
+\begin{thm}{}{} Suppose that $m,n\in\mathbb{N}$. Suppose that 
+$$m=p_1^{\alpha_1}p_2^{\alpha_2}\cdots p_r^{\alpha_r}$$
+$$n=p_1^{\beta_1}p_2^{\beta_2}\cdots p_q^{\beta_q}$$
+with $p_1=2$, $p_2=3$, $p_3=5\dots$. Without loss of generality $r\leq q$. Then $$\gcd{(m,n)}=p_1^{\min{(\alpha_1,\beta_1)}}p_2^{\min{(\alpha_2,\beta_2)}}\cdots p_q^{\min{(\alpha_q,\beta_q)}}$$
+$$\lcm{(m,n)}=p_1^{\max{(\alpha_1,\beta_1)}}p_2^{\max{(\alpha_2,\beta_2)}}\cdots p_q^{\max{(\alpha_q,\beta_q)}}$$ \tcbline
+\begin{proof}
+This is direct from the definition of $\gcd(m,n)$ and $\lcm(m,n)$ and the fact that $p_k^{\min(\alpha_k,\beta_k)}|m$ and $n$ but $p_k^{\min(\alpha_k,\beta_k)+1}$ either does not divide $m$ or $n$. The proof for $\lcm(m,n)$ is similar. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{}{} Suppose that $m$ and $n$ are natural numbers. Then $$\gcd{(m,n)}\times\lcm{(m,n)}=m\times n$$ \tcbline
+\begin{proof} Since $\min\{a,b\}\cdot\max\{a,b\}=ab$, from the above theorem, we have that $\gcd{(m,n)}\times\lcm{(m,n)}=m\times n$ and we are done. 
+\end{proof}
+\end{thm}
+
+\pagebreak
+\section{Congruences}
+\subsection{Modular Arithmetic}
+\begin{defn}{Modulo Notation}{} We say that $a\in\Z$ is congruent to $b\in\Z$ modulo $n\in\N$ if and only if $m|(a-b)$. We write it as $a\equiv b\;(\bmod\;n)$. 
+\end{defn}
+
+\begin{prp}{}{} The congruence relation is an equivalence relation. We denote the equivalence class as $$\Z/n\Z$$ with elements in it as either $m\in\Z/n\Z$, $[m]\in\Z/n\Z$ or $m+n\Z\in\Z/n\Z$. \tcbline
+\begin{proof} The three facts
+\begin{itemize}
+\item (Reflexivity) $a\equiv a\;(\bmod\;m)$
+\item (Symmetry) $a\equiv b\;(\bmod\;m)$ if and only if $b\equiv a\;(\bmod\;m)$
+\item (Transitivity) $a\equiv b\;(\bmod\;m)$ and $b\equiv c\;(\bmod\;m)\implies a\equiv c\;(\bmod\;m)$
+\end{itemize}
+are obvious to prove. 
+\end{proof}
+\end{prp}
+
+Group and ring theory play a very important role in abstract algebra. Abstract algebra is practically invented to investigate properties of integers. 
+
+\begin{prp}{}{} Suppose that $a,b,c,d\in\mathbb{Z}$. Then
+\begin{itemize}
+\item (Addition) $a\equiv b\;(\bmod\;m)$ and $c\equiv d\;(\bmod\;m)\implies a+c\equiv b+d\;(\bmod\;m)$
+\item (Multiplication) $a\equiv b\;(\bmod\;m)$ and $c\equiv d\;(\bmod\;m)\implies ac\equiv bd\;(\bmod\;m)$
+\end{itemize} and thus $\Z/n\Z$ form a ring. \tcbline
+\begin{proof}
+Easy expansion involving rewriting the modulo definition into its divisibility equivalence. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{} If $ac\equiv bc\;(\bmod\;m)$ and $\gcd(c,m)=1$ then $$a\equiv b\;(\bmod\;m)$$ \tcbline
+\begin{proof}
+If $ac\equiv bc\;(\bmod\;m)$, then $ac=bc+km$ for some $k\in\Z$. Then $c(a-b)=km$. But $m$ does not divide $c$ so $m$ must divide $a-b$. Thus $a\equiv b\;(\bmod\;m)$. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{} If $ac\equiv bc\;(\bmod\;m)$ and $\gcd(c,m)=d$ then $$a\equiv b\;(\bmod\;m/d)$$ \tcbline
+\begin{proof}
+If $ac\equiv bc\;(\bmod\;m)$, then $ac=bc+km$ for some $k\in\Z$. Then $c(a-b)=km$ and $\frac{c}{d}(a-b)=k\frac{m}{d}$. The same thing happens since $\frac{m}{d}$ does not divide $\frac{c}{d}$ so it must divides $a-b$. Thus $a\equiv b\;(\bmod\;m/d)$ and we are done. 
+\end{proof}
+\end{prp}
+
+\subsection{Linear Congruences}
+\begin{lmm}{}{} If $\gcd(a,m)$ does not divide $b$, then $$ax\equiv b\;(\bmod\;m)$$ has no solutions. \tcbline
+\begin{proof}
+This lemma is equivalent to asking whether $$ax-my=b$$ has integer solutions, which has no solution according to Bezout's lemma. 
+\end{proof}
+\end{lmm}
+
+\begin{lmm}{}{} If $(a,m)=1$, then $$ax\equiv b\;(\bmod\;m)$$ has exactly one solution modulo $m$. \tcbline
+\begin{proof}
+The question is equivalent to finding integers $x,y$ such that $ax=by+m$ holds. Rewriting this gives $ax-by=m$ which is Bezout's lemma. Thus existence of solution is guaranteed. \\~\\
+We need to show that there are no other solutions modulo $m$. 
+\end{proof}
+\end{lmm}
+
+\begin{crl}{}{} Let $m\in\N$ and $a\in\Z$. Then $a$ has an inverse modulo $m$ if and only if $\gcd(a,m)=1$. \tcbline
+\begin{proof} From the above lemma, we know that if $\gcd(a,m)=1$ then $ax\equiv 1\;(\bmod\;m)$ has exactly one solution thus we are done. \\~\\
+If $ax\equiv 1\;(\bmod\;m)$ has a unique solution, then $ax=1+km$ for some $k\in\Z$. This is just rewriting bezout's lemma with $ax-km=1$ thus we know that this means that $\gcd(a,m)=1$. 
+\end{proof}
+\end{crl}
+
+\begin{lmm}{}{} Let $d=(a,m)$. If $d|b$, then $$ax\equiv b\;(\bmod\;m)$$ has exactly $d$ solutions. 
+\end{lmm}
+
+\begin{thm}{Chinese Remainder Theorem}{} Let $m_1,\dots,m_k\in\N$ be pairwise coprime and let $a_1,\dots,a_k\in\Z$. Then there exists $x\in\Z$, unique to modulo $\prod_{i=1}^km_k$ such that $$x\equiv a_i\;(\bmod\; m_i)$$ for $1\leq i\leq k$. This solution is given by $$x=\sum_{t=1}^ka_tM_ty_t$$ where $M_t=\prod_{j\neq t}m_j$ and $M_ty_t\equiv1\;(\bmod\; m_t)$. Any other integer $z$ is a solution to the answer as long as $x\equiv z\;(\bmod\; m_1\times\dots\times m_k)$\tcbline
+\begin{proof}
+We show that $x$ is indeed congruent to $a_i$ modulo $m_i$ for $1\leq i\leq k$. Note that for $t\neq i$, $m_i$ is a factor of $M_t$. Thus for $t\neq i$, $a_tM_ty_t\equiv0\;(\bmod\; m_i)$. Thus
+\begin{align*}
+x&\equiv\sum_{t=1}^ka_tM_ty_t\;(\bmod\; m_i)\\
+&\equiv a_iM_iy_i\\
+&\equiv a_i
+\end{align*}
+Since $M_iy_i\equiv 1\;(\bmod\; m_i)$. \\~\\
+Now we show uniqueness. Suppose that $x,y$ are two solutions, then $x-y$ is divisible by $m_1,\dots,m_k$. As $m-1,\dots,m_k$ are coprime, we have that $m_1\cdots m_k|x-y$ thus $x$ is in fact congruent to $y$. 
+\end{proof}
+\end{thm}
+
+In practice, you are suppose to find $y_i$ by yourself using the fact that $M_iy_i\equiv 1\;(\bmod\; m_i)$. An algorithm for solving for the system of linear congruences is given as follows: \\~\\
+Step 1: Convert the system of linear congruences $a_ix\equiv b_i\;(\bmod\; m_i)$ into the form $x_i\equiv c_i\;(\bmod\; m_i)$ by finding the inverse of $a_i$ modulo $m_i$. \\
+Step 2: Compute $M_t=\frac{1}{m_t}\Pi_{i=1}^km_k$\\
+Step 3: Find $y_t$ from $M_ty_t\equiv\;1(\bmod\; m_i)$\\
+Step 4: Find $x$ from $x=\sum_{t=1}^ka_tM_ty_t$
+
+\subsection{Multiplicative Functions}
+\begin{defn}{Multiplicative Functions}{} We say that $f:\Z\to\Z$ is a multiplcative function if $(m,n)=1$ implies $f(mn)=f(m)f(n)$. 
+\end{defn}
+
+\begin{defn}{Sum and Number of Divisors}{} Let $n\in\N$. Denote $$d(n)=\sum_{d|n}1$$ the number of positive divisots of $n$ and $$\sigma(n)=\sum_{d|n}d$$ the sum of the positive divisors of $n$. 
+\end{defn}
+
+\begin{thm}{}{} $d(n)$ and $\phi(n)$ are multiplicative. Meaning if $n=\prod_{i=1}^kp_i^{r_i}$ is the prime decomposition of $x\in\N$, then $$d(n)=\prod_{i=1}^kd(p_i^{r_i})$$ and $$\sigma(n)=\prod_{i=1}^k\sigma(p_i^{r_i})$$
+\end{thm}
+
+\begin{defn}{Euler's Totient Function}{} Let $n\in\N$. Define the euler totient function to be $$\phi(n)=\sum_{\substack{(d,m)=1\\d\leq m}}1=\abs{\{k\in\N|\gcd(k,n)=1,1\leq k\leq n\}}$$ the number of positive integers less than or equal to itself that is relatively prime. In particular, $\phi(m)$ is the order of the group $(\Z/m\Z)^\times$
+\end{defn}
+
+It is clear that the order of the group $(\Z/m\Z)^\times$ has to exclude all elements in $\Z/m\Z$ that has a multplicative inverse as a ring, which is exactly the elements $k+m\Z\in\Z/m\Z$ with $\gcd(k,m)=1$
+
+\begin{thm}{Euler's Theorem}{} Suppose that $m\geq 1$ and $(a,m)=1$. Then $$a^{\phi(m)}\equiv 1\;(\bmod\;m)$$\tcbline\begin{proof}
+Easy proof by considering Lagrange's theorem. 
+\end{proof}
+\end{thm}
+
+\begin{lmm}{}{} Let $p$ be a prime. Then $$\phi(p^n)=p^{n-1}(p-1)$$\tcbline
+\begin{proof}
+$\phi(p)=p-1$ is trivial since a prime is coprime to all numbers except $1$. Let $n\geq 1$, Then the positive integers less than and not coprime with $p^n$ are exactly $p,2p,3p,\dots,p^{n-1}p$. There are $p^{n-1}$ of them. Thus we have that 
+\begin{align*}
+\phi(p^n)&=\text{all numbers less than }p^n-\text{ less than and not coprime with }p^n\\
+&=p^n-p^{n-1}\\
+&=p^{n-1}(p-1)
+\end{align*}
+\end{proof}
+\end{lmm}
+
+\begin{thm}{}{} $\phi(n)$ is multiplicative. Meaning if $n=\prod_{i=1}^kp_i^{r_i}$ is the prime decomposition of $x\in\N$, then $$\phi(n)=\prod_{i=1}^k\phi(p_i^{r_i})$$ \tcbline
+\begin{proof}
+We appeal to the Chinese Remainder Theorem for Rings. We have that $(p\Z)$ and $(q\Z)$ are coprime ideals in $\Z$ since $(p\Z)+(q\Z)=(1)=\Z$ from the fact that there exists $x,y\in\Z$ such that $px+qy=1$ from Bezout's lemma. Notice also that $(p\Z)\cap(q\Z)=(pq\Z)$We can thus apply the Chinese Remainder Theorem for Rings and have that $$\Z/p\Z\times\Z/q\Z\cong\Z/pq\Z$$ Now notice that in ring products, $(r,s)\in R\times S$ is a unit if and only if $r$ is a unit in $R$ and $s$ is a unit in $S$. Thus we have that the number of units in $\Z/pq\Z$ is exactly the product of the number of units in $p\Z$ and the number of units in $q\Z$. Since the number of units in a $\Z/m\Z$ is exactly $\phi(m)$, we are done. 
+\end{proof}
+\end{thm}
+
+\begin{crl}{}{} If $n=\prod_{i=1}^kp_i^{r_i}$ is the prime decomposition of $x\in\N$, then $$\phi(n)=\prod_{i=1}^kp_i^{r_i-1}(p_i-1)=n\prod_{i=1}^k\left(1-\frac{1}{p_i}\right)$$ \tcbline
+\begin{proof}
+This is direct from the fact that $\phi$ is multiplicative and that $\phi(p^n)=p^{n-1}(p-1)$. 
+\end{proof}
+\end{crl}
+
+\begin{thm}{}{} If $n\geq 1$, then $$\sum_{d|n}\phi(d)=n$$
+\end{thm}
+
+\subsection{Special Congruences}
+\begin{lmm}{}{} If $\gcd(a,m)=1$, then the least residues of $a,2a,\dots,(m-1)a$ are $$1,2,\dots,m-1$$ in some order. \tcbline
+\begin{proof}
+We show that no two residues in the set $\{a,2a,\dots,(m-1)a\}$ is congruent to complete the proof. Suppose for a contrary that there exists $1\leq r,s\leq m-1$ such that $ra\equiv sa\;(\bmod\;p)$. Then $(r-s)a\equiv\;(\bmod\;p)$ and $\gcd(a,m)=1$ implies $r\equiv s\;(\bmod\;p)$. Thus $r$ and $s$ in fact are the same element in the set $\{a,2a,\dots,(m-1)a\}$ and we are done. 
+\end{proof}
+\end{lmm}
+
+\begin{thm}{Fermat's Theorem}{} If $p$ is a prime and $\gcd{(a,p)}=1$. Then $$a^{p-1}\equiv 1\;(\bmod\;p)$$ \tcbline
+\begin{proof}
+Using the above lemma, we find that 
+\begin{align*}
+a\cdot\dots\cdot(p-1)a&\equiv 1\cdot\dots\cdot(p-1)\;(\bmod\;p)\\
+(p-1)!a^{p-1}&\equiv(p-1)!\;(\bmod\;p)
+\end{align*}
+Since $(p-1)!$ and $p$ are relatively prime, we can cancel it out to get $$a^{p-1}\equiv 1\;(\bmod\;p)$$
+\end{proof}
+\end{thm}
+
+We will see a vast generalization of Fermat's theorem soon involving general modulo instead of primes. It involves the notion of groups. 
+
+\begin{lmm}{}{} The congruence equation $$x^2\equiv 1\;(\bmod\;p)$$ has exactly two solutions, $1$ and $p-1$. \tcbline
+\begin{proof}
+It is easy to check that $1$ and $p-1$ are indeed solutions of the congruence equation. Now let $r$ be a solution to the linear congruence. Then $$(r-1)(r+1)\equiv 0\;(\bmod\;p)$$ Hence either $p|r+1$ or $p|r-1$. This means that either $r\equiv-1\;(\bmod\;p)$ or $r\equiv 1\;(\bmod\;p)$ thus we are done. 
+\end{proof}
+\end{lmm}
+
+\begin{lmm}{}{} Let $p$ be an odd prime. For every $a\in\{1,\dots,p-1\}$, there exists a unique $b\in\{1,\dots,p-1\}$ such that $ab\equiv 1\;(\bmod\;p)$ such that eventually we can pair up the numbers in $\{1,\dots,p-1\}$ so that they are inverses of each other. \\~\\
+Moreover, the only elements with inverse as itself is precisely $1$ and $p-1$. \tcbline
+\begin{proof}
+Notice that since $p$ is a prime, $\gcd(a,p)=1$ for any $a$ in the set. We have proven that this guarantees an inverse for $a$ that is unique up to modulo $p$. The above lemma has also shown that $x^2\equiv 1\;(\bmod\;p)$ precisely have two solutions. 
+\end{proof}
+\end{lmm}
+
+\begin{thm}{Wilson's Theorem}{} $p$ is a prime if and only if $$(p-1)!\equiv-1\;(\bmod\;p)$$ \tcbline
+\begin{proof}
+From the above lemma, we pair up elements in the set $\{1,\dots,p-1\}$ so that multiplication in the congruence relation gives $1$. Then we have that 
+\begin{align*}
+(p-1)!&\equiv 1\cdot 1\cdot (p-1)\;(\bmod\;p)\\
+&\equiv -1\\
+\end{align*}
+Now suppose that $(p-1)!\equiv -1\;(\bmod\;p)$. Suppose for a contradiction that $p$ is not prime. Then $p=ab$ for some $a,b\in\N$ where $a,b<p$. Then since $(p-1)!$ necessarily contains one multiple of $a$ and $b$, $(p-1)!$ will contain a copy of $p$ in it and thus is divisible by $p$, a contradiction. 
+\end{proof}
+\end{thm}
+
+We will see a proof of similar style when we encounter Euler's Criterion. 
+
+\begin{lmm}{}{} Let $p$ be prime. Let $1\leq k<p$ be a positive integer. Then $$\binom{p}{k}\equiv0\;(\bmod\;p)$$ \tcbline
+\begin{proof}
+Clear there is a factor of $p$ in $\frac{p!}{k!(p-k)!}$ since $p$ is a prime and $p$ is not contained in $k!$ or $(p-k)!$. 
+\end{proof}
+\end{lmm}
+
+Notice that the proof goes wrong if we relax the conditions to general numbers instead of prime numbers because divisors of $p$ in this case could lie in $k!$ or $(p-k)!$. 
+
+\begin{lmm}{Power-Up Lemma}{} Let $p$ be a prime. Let $k\in\N$. Suppose that $a\equiv b\;(\bmod\;p^k)$. Then $$a^p\equiv b^p\;(\bmod\;p^{k+1})$$ \tcbline
+\begin{proof}
+Suppose that $a=b+cp^k$ for some $c\in\Z$. Then we have that 
+\begin{align*}
+a^p&\equiv(b+cp^k)^p\;(\bmod\;p^{k+1})\\
+&\equiv\sum_{k=0}^p\binom{p}{k}b^kc^{p-k}p^{k(p-k)}\;(\bmod\;p^{k+1})\\
+&\equiv b^p\;(\bmod\;p^{k+1})
+\end{align*}
+using the binomial theorem. 
+\end{proof}
+\end{lmm}
+
+\begin{crl}{}{} Let $p$ an odd prime. Let $k\geq 2$ be an integer. Then $$(1+ap)^{p^{k-2}}\equiv1+ap^{k-1}\;(\bmod\;p^k)$$ where $a\in\Z$. 
+\end{crl}
+
+\subsection{Order and Primitive Roots}
+\begin{defn}{Order}{} Let $m\in\Z$ and $a\in\Z$ such that $\gcd(a,m)=1$. Define the order of $a$ modulo $m$ to be the smallest natural number $d$ such that $$a^d\equiv 1\;(\bmod\;m)$$ In particular, the order of $a$ modulo $m$ is equivalent to saying the order of $a\in(\Z/m\Z)^\times$. 
+\end{defn}
+
+\begin{thm}{}{} Let $\gcd(a,m)=1$ and $a$ has order $d$ modulo $m$. Then $a^n\equiv 1\;(\bmod\;m)$ if and only if $d|n$. \tcbline
+\begin{proof}
+Suppose that $a^n\equiv1\;(\bmod\;m)$. By the division algorithm, we have that $n=dq+r$ for some $q,r\in\Z$ and $0\leq r<d$. Then 
+\begin{align*}
+a^n&\equiv a^{dq+r}\;(\bmod\;m)\\
+&\equiv (a^d)^q\cdot a^r\;(\bmod\;m)\\
+&\equiv a^r\;(\bmod\;m)
+\end{align*}
+This mean that $a^r\equiv 1\;(\bmod\;m)$ which means $r=0$ since $r<d$ and $d$ is the order of $a$. \\~\\
+Now suppose that $d|n$. Then
+\begin{align*}
+a^n\equiv (a^{d})^{n/d}\;(\bmod\;m)\\
+1\;(\bmod\;m)
+\end{align*}
+Thus we are done. 
+\end{proof}
+\end{thm}
+
+\begin{lmm}{}{} If $\gcd(a,m)=1$ and $a$ has order $d$ modulo $m$, then $d|\phi(m)$. \tcbline
+\begin{proof}
+Apply Euler's theorem and the above theorem. 
+\end{proof}
+\end{lmm}
+
+\begin{thm}{}{} If the order of $a$ modulo $m$ is $t$ then $a^r\equiv a^s\;(\bmod\;m)$ if and only if $r\equiv s\;(\bmod\;t)$. \tcbline
+\begin{proof}
+Suppose that $a^r\equiv a^s\;(\bmod\;m)$. WLOG let $r\geq s$. Then $a^{r-s}\equiv 1\;(\bmod\;m)$ which is true if and only if $r-s$ is a multiple of $t$. The process can be reversed for the if part. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{}{} Let $a$ have order $d$ modulo $m$. Let $u\in\N$. Then $$\text{ord}_m(a^k)=\frac{\text{ord}_m(a)}{\gcd(k,\text{ord}_m(a))}$$\tcbline
+\begin{proof}
+This is proven in groups and rings. 
+\end{proof}
+\end{thm}
+
+\begin{defn}{Primitive Root}{} We say that $a$ is a primitive root of $m$ if $(a,m)=1$ and the order of $a$ modulo $m$ is $\phi(m)$. In particular, $a$ being a primitive root of $m$ is equivalent to saying that $a$ generates $(\Z/m\Z)^{\times}$
+\end{defn}
+
+\begin{crl}{}{} If $p$ is a prime then there are exactly $\phi(p-1)$ primitive roots modulo $p$. \tcbline
+\begin{proof}
+\end{proof}
+\end{crl}
+
+\begin{thm}{}{} If $g$ is a primitive root of $m$, then $g^t$ is a primitive root modulo $p$ if and only if $(t,\phi(m))=1$. 
+\end{thm}
+
+Notice that this is a rather strong statement. Once we are successful in finding one primitive root, we will be able to find all other primitive roots. 
+
+\begin{prp}{}{} Let $n\in\N$ such that there exists at least one primitive root modulo $n$. Then the number of primitive roots modulo $n$ is exactly $\phi(\phi(n))$. \tcbline
+\begin{proof}
+Notice that from the above theorem, $g^t$ is a primitive root modulo $p$ if and only if $\gcd(t,\phi(m))=1$. Thus we need to count how many numbers are coprime to $\phi(m)$, which is exactly $\phi(\phi(m))$. 
+\end{proof}
+\end{prp}
+
+\begin{thm}{}{} Let $p$ be an odd prime. Then there exists a primitive root $g\in\Z$ modulo $p$ such that $g^{p-1}$ does not equal to $1$ congruent to $p^2$. Moreover, any such $g$ is a primitive root modulo any power of $p$. 
+\end{thm}
+
+\begin{thm}{}{} Let $m\geq 2$ be an integer. If $m=2$ or $4$ or $m=p^k$ or $m=2p^k$ for some $k\in\N$ and $p$ and odd prime, then there exists a primitive root modulo $p$. Otherwise, there isn't. 
+\end{thm}
+
+To show that $g$ is a primitive root of $p$, we usually use the definition, which is to show that the order of $g$ is $\phi(p)$. And to do this, we consider all factors of $\phi(p)$ and simply show that powers of $g$ of those factors are not the identity. 
+
+\pagebreak
+\section{Quadratic Congruences}
+\subsection{Quadratic Residues}
+\begin{prp}{}{} Let $A,B,C\in\Z$. Solving $$Ax^2+Bx+C\equiv0\;(\bmod\; p)$$ is equivalent to solving $y^2\equiv a\;(\bmod\; m)$ where $y$ is linear to $x$, given that $p$ is a prime number. \tcbline
+\begin{proof}
+Take $A$ to be indivisible by $p$. Else the quadratic congruence deforms into a linear congruence. Then $A$ must have a moduo inverse since $p$ is a prime. Then we can write the congruence as $x^2+A'Bx+A'C\equiv 0\;(\bmod\; p)$. If $A'B$ is even, we can complete the square and we are done. If $A'B$ is odd, then replace $A'B$ with $p+A'B$ and it is even. 
+\end{proof}
+\end{prp}
+
+\begin{defn}{Quadratic Residue}{} If there exists $x_0$ to be the solution to $x^2\equiv a\;(\bmod\; m)$, then $a$ is said to be a quadratic residue modulo $m$. If there are no solutions, then $a$ is said to be a quadratic non-residue modulo $m$
+\end{defn}
+
+\begin{prp}{}{} Suppose that $p$ is an odd prime. If $p$ does not divide $a$ then $x^2\equiv a\;(\bmod\; m)$ has either two or zero solutions modulo $m$. 
+\end{prp}
+
+\begin{defn}{Legendre Symbol}{} Let $p$ be an odd prime and $a\in\Z$. The Legendre Symbol is defined to be $$\left(\frac{a}{p}\right)=\begin{cases}
+0 & \text{if }p|a\\
+1 & \text{if }p\not{|}a \text{ and $a$ is a quadratic residue modulo }p\\
+-1 & \text{if }a \text{is a quadratic non-residue modulo }p\\
+\end{cases}$$
+\end{defn}
+
+\begin{thm}{Euler's Criterion}{} Let $p$ be prime. Let $a\in\Z$ with $p\not{|}a$. Then $$a^{(p-1)/2}\equiv\left(\frac{a}{p}\right)\;(\bmod\; p)$$ \tcbline
+\begin{proof}
+By Wilson's theorem, we have that $(p-1)!\equiv -1\;(\bmod\;p)$. Thus we just have to prove that $$(p-1)!\equiv-\left(\frac{a}{p}\right)a^{\frac{p-1}{2}}\;(\bmod\;p)$$
+First suppose that $\left(\frac{a}{p}\right)=1$. Let $x$ be the intger that solves this quadratic residue. Notice that 
+\begin{align*}
+x(p-x)&\equiv -x^2\;(\bmod\;p)\\
+&\equiv -a\;(\bmod\;p)\\
+\end{align*}
+Now also notice that since $p$ does not divide $a$, for all numbers between $1$ and $p-1$ except the $x$ and $p-x$ that solves the quadratic congruence, we can pair them up so that multiplication between the two elements yield $a$. This means that we have 
+\begin{align*}
+(p-1)!&\equiv -a\prod_{\substack{1\leq k\leq p-1\\k\notin\{x,p-x\}}}k\;(\bmod\;p)\\
+&\equiv -a\cdot a^{\frac{p-3}{2}}\;(\bmod\;p)\\
+&\equiv -a^{\frac{p-1}{2}}\;(\bmod\;p)
+\end{align*}
+Thus we are done. \\~\\
+Now suppose that $\left(\frac{a}{p}\right)=-1$. Then similar to the above, we get $p-1$ pairs since none are quadratic residues thus $$(p-1)!\equiv a^{\frac{p-1}{2}}\;(\bmod\;p)$$
+Thus we are done. 
+\end{proof}
+\end{thm}
+
+This criterion is a powerful statement in the sense that we can know whether $a$ is a quadratic residue of $p$ by direct computation. 
+
+\begin{prp}{}{} Let $p$ be an odd prime. Let $a,b\in\Z$. Then
+\begin{itemize}
+\item If $a\equiv b\;(\bmod\; p)$, then $\left(\frac{a}{p}\right)=\left(\frac{b}{p}\right)$
+\item $\left(\frac{ab}{p}\right)=\left(\frac{a}{p}\right)\left(\frac{b}{p}\right)$
+\end{itemize}
+\end{prp}
+
+\begin{crl}{}{} Let $p$ be an odd prime. Then $$\left(\frac{-1}{p}\right)=\begin{cases}
+-1 & \text{if }p\equiv 3\;(\bmod\; 4)\\
+1 & \text{if }p\equiv 1\;(\bmod\; 4)
+\end{cases}$$ \tcbline
+\begin{proof}
+A simple application of Euler's criterion. 
+\end{proof}
+\end{crl}
+
+\begin{prp}{Gauss's Lemma}{} Let $p$ be an odd prime. Let $a$ be an integer such that $\gcd(a,p)=1$. Consider the integers $a,2a,3a,\dots,\frac{p-1}{2}a$ and their least positive residues modulo $p$. Let $n$ be the number of these residues that are greater than $\frac{p}{2}$. Then $$\left(\frac{a}{p}\right)=(-1)^n$$ \tcbline
+\begin{proof}
+Define a set $P_1=\{1,\dots,\frac{p-1}{2}\}$ and $P_2=\{\frac{p+1}{2},\dots,p-1\}=\{\frac{1-p}{2},\dots,-1\}$. We  only consider modulo relations thus they are equivalent sets. Let $k_1,k_2\in P_1$ be distinct. Notice that $1\leq k_1+k_2\leq p-1$. Without loss of generality take $k_1>k_2$. Then since $p$ does not divide $k_1+k_2$ and $k_1-k_2$, and that $p$ does not divide $a$, then $p$ does not divide $k_1a\pm k_2a$ by Euclid's lemma. \\~\\
+Since this is true for arbitrary $k_1,k_2$, taking modulo $p$ for general $ka$ for $k\in P_1$ will allow $ka$ to lie within the set $P_1\cup P_2$. Also notice that taking distinct elements for $k$ will result in a distinct modulo. Suppose that among these $k$, $m$ of them fall into $P_1$ and $n$ of them fall into $P_2$. Say they fall into $A\subset P_1$ and $B\subset P_2$ respectively (Observe that $P_1\cap P_2=\emptyset$ implies $A\cap B=\emptyset$, also $A\cup B=P_1$). Recalling that $P_2$ has two equivalent definitions, we have 
+\begin{align*}
+\prod_{k=1}^{\frac{p-1}{2}}(ka)&\equiv\left(\prod_{\substack{1\leq k\leq \frac{p-1}{2}\\k\in A}}k\right)\times\left((-1)^n\prod_{\substack{1\leq k\leq \frac{p-1}{2}\\k\in B}}k\right)\;(\bmod\;p)\\
+&\equiv(-1)^n\prod_{k=1}^{\frac{p-1}{2}}\;(\bmod\;p)
+\end{align*}
+and also $$\prod_{k=1}^{\frac{p-1}{2}}(ka)\equiv a^{\frac{p-1}{2}}\prod_{k=1}^{\frac{p-1}{2}}k\;(\bmod\;p)$$
+Finally, notice that the product is invertible modulo $p$, thus we can cancel it on both sides to get $$(-1)^n\equiv a^{\frac{p-1}{2}}\;(\bmod\;p)$$ and we are done. 
+\end{proof}
+\end{prp}
+
+\begin{lmm}{}{} Let $p$ be an odd prime. Then $$\left(\frac{2}{p}\right)=\begin{cases}
+-1 & \text{if }p\equiv \pm3\;(\bmod\; 8)\\
+1 & \text{if }p\equiv \pm1\;(\bmod\; 8)
+\end{cases}$$ \tcbline
+\begin{proof}
+We apply Gauss's lemma direct by counting the number of elements in $\{2,4,\dots,p-1\}$ that upon taking modulo $p$, ends in the set $\{\frac{p+1}{2},\dots,p-1\}$. But these are precisely the elements $\frac{p+1}{2},\dots,p-1$, which has $\floor{\frac{p+1}{4}}$ elements. The result follows immediately. 
+\end{proof}
+\end{lmm}
+
+\begin{thm}{The Quadratic Reciprocity Theorem}{} Let $p\neq q$ be odd primes. Then $$\left(\frac{q}{p}\right)=\begin{cases}
+-\left(\frac{p}{q}\right) & \text{if }p\equiv q\equiv 3\;(\bmod\; 4)\\
+\left(\frac{p}{q}\right) & \text{otherwise}
+\end{cases}$$
+\end{thm}
+
+\subsection{Primitive Roots and Quadratic Residues}
+\begin{prp}{}{} Let $p$ be a prime. If $g$ is a primitive root modulo $p$ then $g$ is a quadratic non-resuidue of $p$. \tcbline
+\begin{proof}
+Trivially if there exists $x$ such that $x^2\equiv g\;(\bmod\; p)$, then since the order of $x$ divides $\phi(p)$, the order of $g$ divides $\frac{\phi(p)}{2}$. But the order of a primitive root must be $\phi(p)$. 
+\end{proof}
+\end{prp}
+
+\begin{defn}{Fermat Primes}{} We say that $n$ is a Fermat prime if $n$ is prime and $n=2^{2^k}+1$ for some $k\in\N$. 
+\end{defn}
+
+\begin{thm}{}{} If $p$ is a Fermat prime then $g$ is a primitive root modulo $p$ if and only if $g$ is a quadratic nonresidue of $p$. 
+\end{thm}
+
+\pagebreak
+\section{Diophantine Equations}
+\subsection{Introduction to Diophantine Equations}
+\begin{defn}{Diophantine Equations}{} Diophantine Equations are polynomial equations in two or more unknowns with integer coefficients, where we only consider integer solutions. 
+\end{defn}
+
+We will consider diophantine equations of the form: \\~\\
+$z=x^2+y^2$ and the cases with three squares and four squares. \\
+$z^2=x^2+y^2$ the pythagoreas triples. \\
+$ax^2+by^2=cz^2$ which is ternary quadratic equations. 
+
+\subsection{Lattices}
+\begin{defn}{Lattice}{} Let $n\in\N\setminus\{0\}$. We say that $\Lambda$ is a lattice in $\R^n$ if $$\Lambda=\left\{\sum_{k=1}^na_kv_k\bigg{|}v_k\in\Z\right\}$$ where $v_1,\dots,v_n$ are linearly independet vectors. In this case, we say that $v_1,\dots,v_n$ forms a basis for $\Lambda$. 
+\end{defn}
+
+\begin{thm}{Minkowski's Theorem}{} Let $\Lambda$ be a lattice in $\R^n$. Let $S\subseteq\R^n$ be a symmetric, convex set whose volumes exceeds $2^n\det(\Lambda)$. Then $S$ contains a non-zero lattice point. 
+\end{thm}
+
+\begin{crl}{Strong Minkowski's Theorem}{} Let $\Lambda$ be a lattice in $\R^n$. Let $S\subseteq\R^n$ be a symmetric, convex, compact set whose volumes is greater than or equal to $2^n\det(\Lambda)$. Then $S$ contains a non-zero lattice point. 
+\end{crl}
+
+\subsection{Sum of Squares}
+We discuss numbers that can be written as a sum of two squares, in other words, solving the diophantine equation $z=x^2+y^2$. 
+\begin{thm}{}{} Let $p\equiv 1\;(\bmod\;4)$ be prime. Then $p$ is a sum of two squares. \tcbline
+\begin{proof}
+We know that $-1$ is a quadratic residue of $p$. So let $m$ be an integer such that $m^2\equiv -1\;(\bmod\;p)$. Define a lattice by $\Lambda=\text{span}\{(1,m),(0,p)\}$. Consider another set $$S=\{(x,y)\in\R^2|x^2+y^2<2p\}$$ Clearly $S$ is symmetric and convex. It also has volume $2\pi p$ thus is larger than $2^2$ times the volume of $\Lambda$ which is $\det(\Lambda)=p$. By Minkowski's theorem, there exists $(x,y)=a(1,m)+b(0,p)\in\Lambda$ for some $a,b$ such that $(x,y)\in S$ which is nonzero. \\~\\
+Since 
+\begin{align*}
+x^2+y^2&\equiv a^2+a^2m^2\;(\bmod\;p)\\
+&\equiv a^2(1+m^2)\;(\bmod\;p)\\
+&\equiv 0\;(\bmod\;p)
+\end{align*}
+Since $x^2+y^2<2p$, naturall we have $x^2+y^2=p$. 
+\end{proof}
+\end{thm}
+
+\begin{lmm}{}{} If $a,b\in\N$ are each sum of two squares, then so is $ab$. \tcbline
+\begin{proof}
+A simple proof involving algebraic manipulations. 
+\end{proof}
+\end{lmm}
+
+\begin{lmm}{}{} Let $x,y\in\Z$ and suppose a prime $p\equiv 3\;(\bmod\;4)$ divides $x^2+y^2$. Then $p|x$ and $p|y$. 
+\end{lmm}
+
+\begin{crl}{}{} If $n\in\N$ is a sum of two squares and $p\equiv 3\;(\bmod\;4)$ is a prime divisor of $n$, then $p^2|n$ and $\frac{n}{p^2}$ is a sum of two squares. 
+\end{crl}
+
+\begin{thm}{Two Square Theorem}{} Let $n\in\N$. Then $n$ can be expressed as a sum of two squares if and only if for every prime $$p\equiv 3\;(\bmod\;4)$$ in the prime decomposition of $n$, $p$ has an even power in the factorization. 
+\end{thm}
+
+We turn to discuss diophnatine equations of the form $w=x^2+y^2+z^2$
+
+\begin{thm}{Three Square Theorem}{} A positive integer is a sum of three squares if and only if its not of the form $4^a(8b+7)$ where $a,b\in\N\cup\{0\}$. 
+\end{thm}
+
+Finally we also consider the case with four squares. 
+
+\begin{lmm}{}{} If $a,b\in\N$ are each sum of four squares, then so is $ab$. \tcbline
+\begin{proof}
+A matter of algebra manipulation. 
+\end{proof}
+\end{lmm}
+
+\begin{thm}{Lagrange's Four Square Theorem}{} Any positive integer is a sum of four squares. \tcbline
+\begin{proof}
+By the above lemma and the fact that $2=1^2+1^2+0+0$, we just have to show that any odd prime has a decomposition into a sum of four squares. Let $p$ be an odd prime. We show that there exists $x^2+y^2+w^2+z^2$ divisible by $p$ and lies between $(0,2p)$, which completes the proof. \\~\\
+Define two sets $A=\{a^2|a\in\Z/p\Z\}$ and $B=\{-(1+b^2)|b\in\Z/p\Z\}$. They each have cardinality $\frac{p-1}{2}$ and thus must intersect at say $a_0\in A$ and $-(1+b_0^2)\in B$. Then we have the modulo equation $$a^2+b^2\equiv-1\;(\bmod\;p)$$ Now define $$\Lambda=\{(x,y,w,z)\in\Z^4|z\equiv ax+by\;(\bmod\;p)\text{ and }w\equiv ay-bx\;(\bmod\;p)\}$$ Then 
+\begin{align*}
+x^2+y^2+z^2+w^2&\equiv x^2+y^2+(ax+by)^2+(bx-ay)^2\;(\bmod\;p)\\
+&\equiv x^2+y^2+(a^2+b^2)x^2+(a^2+b^2)y^2\;(\bmod\;p)\\
+&\equiv(a^2+b^2+1)(x^2+y^2)\;(\bmod\;p)\\
+&\equiv(a^2+b^2+1)(x^2+y^2)\;(\bmod\;p)\\
+&\equiv 0\;(\bmod\;p)
+\end{align*}~\\
+We now show that $\Lambda$ can be applied the Minkowski theorem (The symmetric convex set is defined below). Notice that $$\left\{\begin{pmatrix} 1\\ 0\\ a\\ -b\end{pmatrix}, \begin{pmatrix} 0\\ 1\\ b\\ a\end{pmatrix}, \begin{pmatrix} 0\\ 0\\ p\\ 0\end{pmatrix}, \begin{pmatrix} 0\\ 0\\ 0\\ p\end{pmatrix}\right\}$$ forms a basis for the lattice $\Lambda$, and that $\det(\Lambda)=p^2$. Now $$D=\{(x,y,z,w)\in\R^4|x^2+y^2+z^2+w^2<2p\}$$ is symmetric and convex. It also has volume $$\frac{\pi^2}{2}(\sqrt{2p})^4=2\pi^2p^2>2^4\det(\Lambda)=2^4p^2$$ Applying Minkowski's theorem gives a nonzero element of $\Lambda$ thus we are done. 
+\end{proof}
+\end{thm}
+
+In general, to find out the sum of four squares of a natural number, we first try and find the biggest square contained in the number, then try and find a three or two square decomposition. If it does not work, try the second biggest square and vice versa. 
+
+\subsection{Gaussian Integers}
+We study the ring of Gaussian integers here, which is actually a type of field extension. We attempt to classify all primes in the ring of Gaussian Integers. 
+\begin{defn}{Gaussian Integers}{} Define the ring of Gaussian integers to be $$\Z[i]=\{a+bi|a,b\in\Z\}$$ Define the norm of $z=a+bi\in\Z[i]$ to be $N(z)=a^2+b^2$. 
+\end{defn}
+
+Notice that $\Z\leq\Z[i]$. In fact, the Guassian integers are simply complex numbers with integer coefficients. We are trying to extend the notion of divisibility and prime numbers to an algebraically complete field. Moreover, by the definition of norm, we are in fact discussing equations of the form $x^2+y^2=z$. 
+
+\begin{prp}{}{} The ring of Gaussian integers is a Euclidean domain, and thus is also a PID and UFD. 
+\end{prp}
+
+Recall that we have the notion of division in a commutative ring. As ina analysis, we have defined the notion of distance in the complex numbers. 
+
+\begin{defn}{Gaussian Primes}{} We say that $z\in\Z[i]$ is a Gaussian prime if $z\neq 0$, $z$ is not a unit and that for any $x,y\in\Z[i]$ such that $z|xy$, then either $z|x$ or $z|y$. 
+\end{defn}
+
+This is precisely the definition of a prime or irreducible element in integral domains. 
+
+\begin{prp}{}{} Let $z\in\Z[i]$ be a Gaussian prime. Then any unit multiple of $z$ is also a Gaussian prime, as well as $\overline{z}$
+\end{prp}
+
+\begin{lmm}{}{} Let $z\in\Z[i]$ and $N(z)$ is a prime number in $\Z$. Then $z$ is a Gaussian prime. 
+\end{lmm}
+
+\begin{thm}{}{} Let $z\in\Z[i]$. Then $z$ is a Gaussian prime if and only if $z$ is in one of the following forms: 
+\begin{itemize}
+\item $1+i$
+\item $p$ is a prime in $\Z$ such that $p\equiv 3\;(\bmod\;4)$
+\item $N(z)$ is a prime in $\Z$ such that $N(z)\equiv 1\;(\bmod\;4)$
+\item Any unit multple of the above
+\end{itemize}
+\end{thm}
+
+Below gives a list of ways to detect whether $p$ is a prime for $z\in\Z[i]$. 
+
+\begin{prp}{}{} Let $z\in\Z[i]$. Let $p\in\Z$ be a prime divisor of $N(z)$. 
+\begin{itemize}
+\item If $p=2$ then $1+i|z$
+\item If $p\equiv 3\;(\bmod\;4)$ then $p|z$
+\item If $p=x^2+y^2$ with $x,y\in\Z$ then either $x+yi$ or $x-yi$ divides $z$
+\end{itemize}
+\end{prp}
+
+\subsection{Pythagorean Triples}
+\begin{defn}{Pythagorean Triples}{} A pythagorean triple is a solution $(x,y,z)\in(\N\setminus\{0\})^3$ such that $x^2+y^2=z^2$. A pythagorean triple is said to be primitive if $\gcd(x,y,z)=1$. 
+\end{defn}
+
+\begin{lmm}{}{} Exactly one of $x,y,z$ in a pythagorean triple is even. \tcbline
+\begin{proof}
+Obviously all three cannot be odd numbers at the same time. If they both are even then by taking modulo $2$ we see that $0\equiv 1\;(\bmod\;2)$ which is a contradiction. 
+\end{proof}
+\end{lmm}
+
+\begin{lmm}{}{} If $x,y,z$ is a pythagorean triple then $z$ is odd. \tcbline
+\begin{proof}
+For odd or even $x,y$ such that not both are even, $x^2+y^2\equiv 1\;(\bmod\;2)$. 
+\end{proof}
+\end{lmm}
+
+\begin{lmm}{}{} Let $r,s,t\in\N$ such that $r^2=st$. If $\gcd(s,t)=1$, then $s,t$ are both perfect squares. \tcbline
+\begin{proof}
+Result is clear from the fact that $s$ and $t$ have no common prime numbers in their decomposition, and that every prime in the prime decomposition of $r^2$ must have an even number of power. 
+\end{proof}
+\end{lmm}
+
+\begin{thm}{}{} Let $(x,y,z)\in(\N\setminus\{0\})^3$. Then $(x,y,z)$ is a pythagorean triple if and only if $x=u^2-v^2$, $y=2uv$ and $z=u^2+v^2$ for some coprime $u,v\in\N\setminus\{0\}$ such that at least one of $u,v$ is even and that $u>v$. \tcbline
+\begin{proof}
+Suppose that $(x,y,z)$ is a pythagorean triple with $y$ even. Since $y$ is even, $y=2r$ for some $r\in\N$. Thus $y^2=4r^2$. From $y^2=z^2-x^2$, we have that $4r^2=(z+x)(z-x)$. Since $x,z$ are both odd, $z+x$ and $z-x$ are both even. Thus $z+x=2s$ and $z-x=2t$ for some $s,t\in\N$. Solving the the system gives $z=s+t$ and $x=s-t$. Now we have that $4r^2=4st$ thus $r^2=st$. \\~\\
+I claim that $s$ and $t$ here are relatively prime. Suppose for a contradiction that there exists $d\in\N$ such that $d|s$ and $d|t$. From the system of equations, we see that $d|z$ and $d|x$. But we already assumed that $x,y,z$ are relatively prime. Thus the contradiction arises. Now we can apply the above lemma to see that $s=u^2$ and $t=v^2$ for some $u,v\in\N$. Thus $y=\sqrt{4r^2}=\sqrt{4st}=2uv$. From the system of equations we also have that $z=u^2+v^2$ and $x=u^2-v^2$ and we are done. \\~\\
+The only if part is simple in substituting the expressions and seeing that they are indeed equal. It remains to show that $u$ and $v$ are coprime. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{}{} The equation $x^4+y^4=z^2$ has no solutions over $\N\setminus\{0\}$. \tcbline
+\begin{proof}
+Notice that this equation is just $(x^2)^2+(y^2)^2=z^2$ which is just a question of pythagorean triples. Suppose that $x^2,y^2,z$ is a primitive pythagorean triple that satisfies the equation. By the solution of pythagorean triples, there exists coprime $u,v$ with $u>v$ such that $x^2=u^2-v^2$, $y=2uv$, $z^2=u^2+v^2$. \\~\\
+I claim that in fact $u$ must be odd and $v$ even. Because if this was the case, then $x^2=u^2-v^2\equiv -1\;(\bmod\;4)$ which is impossible. Rearranging this equation gives $x^2+v^2=u^2$, which is another pythagorean triple. So using the solution gives a pair $(m,n)$ such that $x=m^2-n^2$, $v=2mn$, $u=m^2+n^2$. \\~\\
+Now since $y^2=2uv$ where $u,v$ are coprime and $u$ is odd, we can deduce that $u$ is a square and $v$ is twice a square, say $u=r^2$ and $v=2s^2$. Thus we can rewrite equations for $u,v$ as $2s^2=2mn$ and $r^2=m^2+n^2$. Finally, since $2s^2=2mn$ and $m,n$ coprime, they must both be squares as well, say $m=M^2$ and $n=N^2$. Thus $M,N,r$ is yet another triple satisfying $M^4+N^4=r^2$. This complete the infinite descent and we are done. 
+\end{proof}
+\end{thm}
+
+We give partial solutions to the general equation $x^n+y^n=z^n$. 
+
+\begin{crl}{}{} If $n$ is a multiple of $4$ then then the equation $x^n+y^n=z^n$ has no solution over $\N\setminus\{0\}$. \tcbline
+\begin{proof}
+Take $n=4k$, then $x^n+y^n=z^n$ is just $(x^k)^4+(y^k)^4=(z^{2k})^2$ which is the theorem above in disguise. 
+\end{proof}
+\end{crl}
+
+\begin{thm}{}{} Let $p$ be an odd prime such that $q=2p+1$ is prime. Then the equation $$x^p+y^p=z^p$$ has no integer solutions for which $p$ does not divide $xyz$. 
+\end{thm}
+
+\begin{thm}{}{} Let $p$ be an odd prime. Assume that there exists $x,y,z\in\Z$ such that $$x^p+y^p+z^p=0$$ where $x,y,z$ each is indivisble by $p$. Then $$2^{p-1}\equiv 1\;(\bmod\; p^2)$$
+\end{thm}
+
+\subsection{Ternary Quadratic Equation}
+\begin{defn}{Squarefree}{} We say that a number is squarefree if it is not a square of an integer. 
+\end{defn}
+
+\begin{thm}{}{} Let $a,b,c\in\N\setminus\{0\}$ be squarefree and pairwise coprime. Then the equation $$ax^2+by^2=cz^2$$ has a non-trivial integer solution if and only if 
+\begin{itemize}
+\item $bc$ is a quadratic residue modulo $a$
+\item $ac$ is a quadratic residue modulo $b$
+\item $-ab$ is a quadratic residue modulo $c$
+\end{itemize} \tcbline
+\begin{proof}
+Firstly suppose that $(x,y,z)$ is a non-trivial solution to $ax^2+by^2=cz^2$ that is coprime. Multiplying by $c$ gives $$acx^2+bcy^2=(cz)^2$$ Taking modulo $a$ gives $$bcy^2\equiv(cz)^2\;(\bmod\;4)$$
+I claim that $\gcd(a,y)=1$. Indeed suppose for a contradiction that $p|a$ and $p|y$. Then $p|cz^2$. Since $\gcd(a,c)=1$ we must have $p|z$, which is a contradiction. Thus $\gcd(a,y)=1$. This means that we can take the inverse of $y$ modulo $a$ and get $$bc\equiv(y^{-1}cz)^2\;(\bmod\;a)$$ Similarly, the other quadratic resdiues are proven in the same way. \\~\\
+Now for the other direction, we use the strong form of Minkwoski's theorem. Let $r,s,t\in\Z$ solve the quadratic congruences for $bc$, $ac$ and $-ab$ respectively. Suppose that $$\Lambda=\{(x,y,z)\in\Z^3|by\equiv rz\;(\bmod\;a), cz\equiv sx\;(\bmod\;b), ax\equiv ty\;(\bmod\;c)\}$$ Then we must have $$bry\equiv r^2z\equiv bcz\;(\bmod\;a)$$ Thus as $\gcd(a,b)=1$ we have $ry\equiv cz\;(\bmod\;a)$. Thus 
+\begin{align*}
+ax^2+by^2-cz^2&\equiv by^2-cz^2\equiv\;(\bmod\;a)\\
+&\equiv rzy-cz^2\;(\bmod\;a)\\
+&\equiv z(ry-cz)\;(\bmod\;a)\\
+&\equiv 0\;(\bmod\;a)
+\end{align*}
+Similarly, we can show that $ax^2+by^2-cz^2$ is divisible by $b$ and $c$. As $a,b,c$ are pariwise coprime, we must have $$ax^2+by^2-cz^2\equiv 0\;(\bmod\;abc)$$
+Thus we can write the congruences in $\Lambda$ into $$\Lambda=\{(x,y,z)\in\Z^3|z\equiv r_a^{-1}by\;(\bmod\;a), z\equiv c_b^{-1}sx\;(\bmod\;b), x\equiv a_c^{-1}ty\;(\bmod\;c)\}$$ where $r_a^{-1}$ denotes the inverse of $r$ modulo $a$ and so on. \\~\\
+By the CRT, we can write the congruences into $y\equiv\nu x\;(\bmod\;c)$ and thus $$z\equiv\tau x+\rho y\;(\bmod\;ab)$$ for some $\nu, \tau, \rho\in\Z$. Now, 
+\end{proof}
+\end{thm}
+
+\subsection{Waring's Problem}
+\begin{defn}{Warring's Problem}{} Let $k\in\N$. Consider the equation $$n=\sum_{i=1}^sx_i^k$$ for any $n\in\N$. Warring's problem consists of finding $g(k)$, the least $s\in\N$ for which any $n\in\N$ can be expressed as a sum of $s$ powers of $k$. 
+\end{defn}

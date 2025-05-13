@@ -1,0 +1,305 @@
+\documentclass[a4paper]{article}
+
+\input{C:/Users/liula/Desktop/Latex/Headers V1.2.tex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Labix}
+\lhead{Bundle Structures in Topology}
+\rfoot{\thepage}
+
+\title{Bundle Structures in Topology}
+
+\author{Labix}
+
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+\begin{itemize}
+\item Notes on Algebraic Topology by Oscar Randal-Williams
+\end{itemize}
+\end{abstract}
+\pagebreak
+\tableofcontents
+
+\pagebreak
+\section{Fibrations and Cofibrations}
+\subsection{Fibrations and The Homotopy Lifting Property}
+\begin{defn}{The Homotopy Lifting Property}{} Let $p:E\to B$ be a map and let $X$ be a space. We say that $p$ has the homotopy lifting property with respect to $X$ if for every homotopy $H:X\times I\to B$ and a lift $\widetilde{H(-,0)}:X\to E$ of $H(-,0)$, there exists a homotopy $\widetilde{H}:X\times I\to E$ such that the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{X\times\{0\}} && E \\
+	\\
+	{X\times I} && B
+	\arrow["H"', from=3-1, to=3-3]
+	\arrow["{\exists\widetilde{H}}"{description}, dashed, from=3-1, to=1-3]
+	\arrow["p", from=1-3, to=3-3]
+	\arrow["\iota"', hook, from=1-1, to=3-1]
+	\arrow["{\widetilde{H(-,0)}}", from=1-1, to=1-3]
+\end{tikzcd}}\\~\\
+\end{defn}
+
+\begin{defn}{Fibrations}{} We say that a map $p:E\to B$ is a fibration if it has the homotopy lifting property with respect to all topological spaces $X$. We call $B$ the base space and $E$ the total space. 
+\end{defn}
+
+\begin{defn}{The Hopf Fibration}{} Define the Hopf fibration $h:S^3\to S^2$ as follows. Consider $S^2$ as the one point compactification of $\C$. Also consider $S^3=\{(z_1,z_2)\in\C^2\;|\;\abs{z_1}^2+\abs{z_2}^2=1\}$. Define the map $h$ by $$(z_1,z_2)\to\frac{z_2}{z_1}$$
+\end{defn}
+
+\begin{eg}{}{} The Hopf fibration $h:S^3\to S^2$ is a fibration. Moreover, the fibers of the Hopf fibration are circles $S^1$. \tcbline
+\begin{proof}
+We can rewrite the coordinates of $S^3$ by $r_je^{i\theta_j}$. Then $$h(r_1e^{i\theta_1},r_2e^{i\theta_2})=\frac{r_2}{r_1}e^{i(\theta_2-\theta_1)}$$ Fix $re^{i\theta}\in S^2$. Then there exists a unique pair $(r_1,r_2)$ that solves the simultaneous equation $rr_1=r_2$ and $r_1^2+r_2^2=1$. 
+\end{proof}
+\end{eg}
+
+\subsection{Cofibrations and The Homotopy Extension Property}
+\begin{defn}{The Homotopy Extension Property}{} Let $i:A\to X$ be a map and let $Y$ be a space. Denote $i_0$ the inclusion map $A\times\{0\}\hookrightarrow A\times I$. We say that $i$ has the homotopy extension property with respect to $Y$ if for every homotopy $H:A\times I\to Y$ and every map $f:X\to Y$ such that $$H\circ i_0=f\circ i$$ there exists a homotopy $\widetilde{H}:X\times I\to Y$ such that the following diagram commute: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{A\cong A\times\{0\}} & {A\times I} \\
+	{X\cong X\times\{0\}} & {X\times I} \\
+	&& Y
+	\arrow["{\iota_0}", from=1-1, to=1-2]
+	\arrow["i"', hook, from=1-1, to=2-1]
+	\arrow["{i\times\text{id}_I}", from=1-2, to=2-2]
+	\arrow["H", bend left = 30, from=1-2, to=3-3]
+	\arrow["{\iota_0}"', from=2-1, to=2-2]
+	\arrow["f", bend right = 20, from=2-1, to=3-3]
+	\arrow["{\exists\tilde{H}}", dashed, from=2-2, to=3-3]
+\end{tikzcd}}\\~\\
+\end{defn}
+
+\begin{defn}{Cofibrations}{} Let $A,X$ be spaces. Let $i:A\to X$ be a map. We say that $i$ is a cofibration if it has the homotopy extension property for all spaces $Y$. 
+\end{defn}
+
+\begin{prp}{}{} Let $A,X$ be spaces. Let $i:A\to X$ be a cofibration. Then $i:A\to i(A)$ is a homeomorphism. 
+\end{prp}
+
+There is actually an easier way to write out cofibrations when $(X,A)$ is a pair of spaces. 
+
+\begin{lmm}{}{} Let $(X,A)$ be a pair of spaces with $A$ closed in $X$. Let $\iota:A\to X$ be the inclusion. Then $\iota$ is a cofibration if and only if for all spaces $Y$ and maps $f:X\to Y$ and $H:A\times I\to Y$, there exists a map $\tilde{H}:X\times I\to Y$ such that the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{X\times\{0\}\cup A\times I} & Y \\
+	{X\times I}
+	\arrow["{f\cup H}", from=1-1, to=1-2]
+	\arrow["\iota"', from=1-1, to=2-1]
+	\arrow["{\tilde{H}}"', from=2-1, to=1-2]
+\end{tikzcd}}\\~\\
+\end{lmm}
+
+\subsection{Basic Properties of Fibrations and Cofibrations}
+\begin{prp}{}{} Let $X_1,X_2,Y,_1,Y_2$ be spaces. Let $p_1:X_1\to Y_1$ and $p_2:X_2\to Y_2$ be maps. Then the following are true. 
+\begin{itemize}
+\item If $p_1$ and $p_2$ are fibrations then $p_1\times p_2:X_1\times X_2\to Y_1\times Y_2$ is a fibration. 
+\item If $p_1$ and $p_2$ are cofibrations then $p_1\coprod p_2:X_1\coprod X_2\to Y_1\coprod Y_2$ is a cofibration. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{} Let $X,Y,Z$ be spaces. Let $f:X\to Y$ be a map. 
+\begin{itemize}
+\item Let $f$ be a fibration. Consider the following lifting problem: \\~\\
+\adjustbox{scale=1,center}{\begin{tikzcd}
+	{Z\times\{0\}} & X \\
+	{Z\times I} & Y
+	\arrow["g", from=1-1, to=1-2]
+	\arrow["{i_0}"', hook, from=1-1, to=2-1]
+	\arrow["f", from=1-2, to=2-2]
+	\arrow[dashed, from=2-1, to=1-2]
+	\arrow["h"', from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+If $h_0$ and $h_1$ are both solutions to the lifting problem, then $h_0$ and $h_1$ are homotopic relative to $Z\times\{0\}$. 
+\item Let $f$ be a cofibration. Consider the following extension problem: \\~\\
+\adjustbox{scale=1,center}{\begin{tikzcd}
+	X & {Z\times\{0\}} \\
+	Y & {Z\times I}
+	\arrow["g", from=1-1, to=1-2]
+	\arrow["f"', from=1-1, to=2-1]
+	\arrow["{\text{ev}_0}", hook, from=1-2, to=2-2]
+	\arrow[dashed, from=2-1, to=1-2]
+	\arrow["h"', from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+If $h_0$ and $h_1$ are both solutions to the extension problem, then $h_0$ and $h_1$ are homotopic relative to $Z$. 
+\end{itemize}
+\end{prp}
+
+\subsection{Serre Fibrations}
+\begin{defn}{Serre Fibration}{} We say that a map $p:E\to B$ is a Serre fibration if it has the homotopy lifting property with respect to all CW-complexes. 
+\end{defn}
+
+\begin{lmm}{}{} Every (Hurewicz) fibration is a Serre fibration. \tcbline
+\begin{proof}
+This is true since Hurewicz fibrations satisfies the homotopy lifting property with respect to all topological spaces, including CW complexes. 
+\end{proof}
+\end{lmm}
+
+\pagebreak
+\section{Vector Bundles}
+\subsection{Basic Definitions}
+\begin{defn}{Vector Bundles}{} Let $F$ be a field. A vector bundle $(E,B,p)$ consists of two topological spaces $E$ and $B$, a continuous surjection $p:E\to B$ such that
+\begin{itemize}
+\item For every $b\in B$, the fibre $E_b=p^{-1}(b)$ is an $F$-vector space of dimension $k$. 
+\item For every $b\in B$, there exists an open neighbourhood $U\subseteq B$ of $p$ and a homeomorphism $\phi:p^{-1}(U)\to U\times F^k$ such that for $\pi:U\times F^k\to U$ the projection map, the following diagram commutes \\~\\
+\adjustbox{scale=1.1,center}{\begin{tikzcd}
+p^{-1}(U)\arrow[rr, "\phi"]\arrow[rdd, "p"'] & & U\times K^r\arrow[ldd, "\pi"]\\
+&&\\
+& U &
+\end{tikzcd}} \\~\\
+and the map $$E_b\overset{\phi|_{E_b}}{\longrightarrow}\{b\}\times F^k\overset{\pi}{\longrightarrow}F^k$$ is a vector space isomorphism. 
+\end{itemize}
+$B$ is said to be the base space and $E$ the total space. Each $(U,\phi)$ is said to be a local trivialization. 
+\end{defn}
+
+The local trivialization means that locally at a neighbourhood, the vector bundle looks the same the open set times $F^k$. In particular, there is also a notion of trivial bundle which means that the bundle is globally just $B\times\R^r$. 
+
+\begin{defn}{Sections}{} A section of a vector bundle $p:E\to B$ is a map $s:B\to E$ assigning to each $b\in B$ a vector space $s(b)$ in the fiber $p^{-1}(b)$. 
+\end{defn}
+
+\begin{prp}{}{} Let $p:E\to B$ be a vector bundle. Let $s,s_1,s_2$ be sections of $E$. Then $s_1+s_2$ and $\lambda s$ are also vector bundles for any $\lambda\in\R$. Moreover, the set of all sections $s(E)$ is a vector space. 
+\end{prp}
+
+\begin{defn}{Morphism of Vector Bundles}{} Let $p_1:E_1\to B_1$ and $p_2:E_2\to B_2$ be vector bundles. A morphism of these vector bundles is given by is a pair of continuous maps $f:E_1\to E_2$ and $g:B_1\to B_2$ such that the following diagram commutes \\~\\
+\adjustbox{scale=1.1,center}{\begin{tikzcd}
+E_1\arrow[r, "f"]\arrow[d, "p_1"] & E_2\arrow[d, "p_2"]\\
+B_1\arrow[r, "g"] & B_2
+\end{tikzcd}} \\
+If $B=B_1=B_2$  then the diagram collapses: \\~\\
+\adjustbox{scale=1.1,center}{\begin{tikzcd}
+E_1\arrow[rr, "f"]\arrow[rd, "p_1"] && E_2\arrow[ld, "p_2"]\\
+&B&
+\end{tikzcd}}
+\end{defn}
+
+\begin{defn}{Isomorphism of Vector Bundles}{} A bundle homomorphism from $E_1$ to $E_2$ is an isomorphism if there exists an inverse bundle homomorphism from $E_2$ to $E_1$. In this case, we say that $E_1$ and $E_2$ are isomorphic. 
+\end{defn}
+
+\subsection{The Cocycle Conditions}
+Given two charts $(U_\alpha,\phi_\alpha)$ and $(U_\beta,\phi_\beta)$ of a vector bundle, $$\phi_\beta\circ\phi_\alpha^{-1}:(U_\alpha\cap U_\beta)\times F^k\to(U_\alpha\cap U_\beta)\times F^k$$ is a well defined function. In particular, by fixing a point in $U_\alpha\cap U_\beta$, we obtain a linear map. 
+
+\begin{defn}{Transition Functions}{} Let $p:E\to B$ be an $F$-vector bundle of rank $r$. Let $(U_\alpha,\phi_\alpha)$ and $(U_\beta,\phi_\beta)$ be local trivialization. For each $x\in U_\alpha\cap U_\beta$, $\phi_\beta\circ\phi_\alpha^{-1}(x,-):F^k\to F^k$ is a linear map. Define $g_{U_\alpha U_\beta}:U_\alpha\cap U_\beta\to\text{GL}(n,F)$ by $$x\mapsto\phi_\beta\circ\phi_\alpha^{-1}(x,-):F^k\to F^k$$ In other words, $g_{U_\alpha U_\beta}$ is such that $$\phi_\beta\circ\phi_\alpha^{-1}(x,v)=(x,g_{U_\alpha U_\beta}(x)v)$$ For $x\in U_\alpha\cap U_\beta$ and $v\in F^k$. 
+\end{defn}
+
+\begin{prp}{}{} Let $p:E\to B$ be a $K$-vector bundle of rank $r$. The transition functions of the vector bundle satisfies the following. 
+\begin{itemize}
+\item Cocycle condition: $g_{\alpha\beta}\circ g_{\beta\gamma}\circ g_{\gamma\alpha}=I_r$ on $U_\alpha\cap U_\beta\cap U_\gamma$
+\item $g_{\alpha\alpha}=I_r$ on $U_\alpha$
+\end{itemize}
+\end{prp}
+
+\subsection{Operations on Vector Bundles}
+\begin{defn}{Whitney Sum}{} Let $p_1:E_1\to B$ and $p_2:E_2\to B$ be two vector bundles. Define the direct sum of the vector bundles to be $$E_1\oplus E_2=\{(v_1,v_2)\in E_1\times E_2\;|\;p_1(v_1)=p_2(v_2)\}$$ together with the projection $p:E_1\oplus E_2\to B$ defined by $(v_1,v_2)\mapsto p_1(v)=p_2(v)$. 
+\end{defn}
+
+\begin{lmm}{}{} The Whitney sum $E_1\oplus E_2$ of two vector bundles is again a vector bundle. 
+\end{lmm}
+
+\begin{prp}{Tensor Product Bundle}{} Let $p_1:E_1\to B$ and $p_2:E_2\to B$ be vector bundles. Define the tensor product bundle of it to be $$E_1\otimes E_2=\{p_1^{-1}(x)\otimes p_2^{-1}(x)|x\in B\}$$ The construction $E_1\otimes E_2$ is a vector bundle over $B$. 
+\end{prp}
+
+\begin{thm}{Pullback Bundle}{} Let $p:E\to Y$ be a vector bundle. Let $f:X\to Y$ be a continuous map. Then there exists $E'$ and $p'$ such that $p':E'\to X$ is a vector bundle. 
+\end{thm}
+
+\begin{thm}{Dual Bundle}{} Let $p:E\to B$ be a $K$-vector bundle. Then the dual bundle $p^\ast:E^\ast\to B$ defined by $$E_b^\ast=\Hom_K(E_b,K)$$ is a vector bundle over $B$. 
+\end{thm}
+
+\pagebreak
+\section{The Topology of Fiber Bundles}
+\subsection{Fiber Bundles}
+Fiber bundles serve as somewhat of a generalization of both vector bundles and covering spaces, while being a special case of a fibration. It therefore has the properties of a fibration. 
+
+\begin{defn}{Fiber Bundles}{} Let $E,B,F$ be spaces with $B$ connected, and $p:E\to B$ a continuous map. We say that $p$ is a fiber bundle over $F$ if the following are true. 
+\begin{itemize}
+\item $p^{-1}(b)\cong F$ for all $b\in B$
+\item $p:E\to B$ is surjective
+\item Local Triviality: For every $x\in B$, there is an open neighbourhood $U\subset B$ of $x$ and a homeomorphism $\phi_U:p^{-1}(U)\to U\times F$ such that the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{p^{-1}(U)} && {U\times F} \\
+	& U
+	\arrow["{\phi_U}", from=1-1, to=1-3]
+	\arrow["p"', from=1-1, to=2-2]
+	\arrow["\pi", from=1-3, to=2-2]
+\end{tikzcd}}\\~\\
+where $\pi$ is the projection by forgetting the second variable. 
+\end{itemize}
+We say that $B$ is the base space, $E$ the total space. It is denoted as $(F,E,B)$
+\end{defn}
+
+Intuitively, we would like a fiber bundle to locally look like the product $B\times F$. The condition is also equivalent to the following form: There exists an open cover $\{U_i\;|\;i\in I\}$ and a collection of homeomorphisms $\phi_i:p^{-1}(U_i)\to U_i\times F$ for which the same diagram commutes. \\~\\
+
+Vector bundles generalizes vector bundles in the sense that the fibers are no longer vector spaces but instead arbitrary spaces. 
+
+\begin{lmm}{}{} Every vector bundle is a fiber bundle. \tcbline
+\begin{proof}
+Indeed if $p:E\to B$ is a vector bundle, then each fiber $p^{-1}(b)$ is an $n$-dimensional vector spaces over a field $F$. Moreover, by definition the local triviality condition is also satisfied. 
+\end{proof}
+\end{lmm}
+
+A lot of examples of fiber bundles therefore come from vector bundles. Another familiar collection of examples come from covering space theory. 
+
+\begin{lmm}{}{} Every covering space is a fiber bundle. \tcbline
+\begin{proof}
+If $p:\tilde{X}\to X$ is a covering space, then we have seen that $p^{-1}(x)$ remains constant as $x\in X$ varies. Moreover, $p^{-1}(x)$ has the discrete topology with countable fiber since each $p^{-1}(U)$ is a disjoint union for $U\subseteq X$ open. Thus they must all be homeomorphic. \\~\\
+
+Finally, for any $U\subseteq X$, recall that $$p^{-1}(U)=\coprod_{i\in I}V_i$$ where each $V_i\cong U$. It is clear by definition that $\abs{p^{-1}(x)}\abs{I}$ for any $x\in X$. By giving $I$ the discrete topology, we obtain a homeomorphism $p^{-1}(x)\cong I$. The homeomorphism $p^{-1}(U)=\coprod_{i\in I}V_i$ translates to $$p^{-1}(U)=\coprod_{i\in I}V_i\cong\coprod_{i\in I}U\cong U\times I$$ defined by $\tilde{x}\in V_i\mapsto(p(\tilde{x})=x,i)$. It is thus clear that the local triviality condition is satisfied. 
+\end{proof}
+\end{lmm}
+
+\begin{prp}{}{} Every fiber bundle is a Serre fibration. 
+\end{prp}
+
+We can provide a partial converse for the fact that every fiber bundle is a Serre fibration. 
+
+\begin{prp}{}{} Let $p:E\to B$ be a fiber bundle. If $B$ is paracompact, then $p$ is a (Hurewicz) fibration. 
+\end{prp}
+
+We there fore have inclusions $$\substack{\text{Fiber}\\\text{Bundles}}\subset\substack{\text{Serre}\\\text{Fibrations}}\subset\substack{\text{(Hurewicz)}\\\text{Fibrations}}$$
+
+\begin{defn}{Map of Fiber Bundles}{} Let $(F_1,E_1,B_1)$ and $(F_2,E_2,B_2)$ be fiber bundles. A map of fiber bundles is a pair of basepoint preserving continuous maps $(\tilde{f}:E_1\to E_2,f:B_1\to B_2)$ such that the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{E_1} & {E_2} \\
+	{B_1} & {B_2}
+	\arrow["{\tilde{f}}", from=1-1, to=1-2]
+	\arrow["{p_1}"', from=1-1, to=2-1]
+	\arrow["{p_2}", from=1-2, to=2-2]
+	\arrow["f"', from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+Such a map of fiber bundles determine a continuous of the fibers $F_1\cong p_1^{-1}(b_1)\to p_2^{-1}(b_2)\cong F_2$. \\~\\
+
+A map of fiber bundles $(\tilde{f},f)$ is said to be an isomorphism if there is a map $(\tilde{g}:E_2\to E_1,g:B_2\to B_1)$ such that $\tilde{g}$ is the inverse of $\tilde{f}$ and $g$ is the inverse of $f$. 
+\end{defn}
+
+Notice that a morphism of fiber bundles preserves fibers. Indeed, If $p_1^{-1}(b)$ is a fiber of $B$, then using the commutativity of the diagram we have that $$p_2(\overline{f}(p_1^{-1}(b)))=f(p_1(p_1^{-1}(b)))=f(b)$$ which implies that $$p_2^{-1}(f(b))=\overline{f}(p^{-1}(b))$$ or in other words, the fiber at $f(b)$ is the same as the fiber at $b$ applied with $\overline{f}$. 
+
+\begin{defn}{Equivalent Fiber Bundles}{} Let $p:E_1\to B_1$ and $p:E_2\to B_2$ be two fiber bundles. We say that they are equivalent if there exists an isomorphism $(\tilde{f}:E_1\to E_2,f:B_1\to B_2)$ of fiber bundles. 
+\end{defn}
+
+There are two important special cases of fiber bundles that will appear time and time again. 
+
+\begin{defn}{Trivial Bundles}{} We say that a fiber bundle $(F,E,B)$ is trivial if $(F,E,B)$ is isomorphic to the trivial fibration $B\times F\to B$. 
+\end{defn}
+
+\begin{defn}{The Pullback Bundle}{} Let $p:E\to B$ be a fiber bundle with fiber $F$. Let $f:B'\to B$ be a continuous function. Define the pullback of $p$ by $f$ to be the space $$f^\ast(E)=\{(b',e)\in B'\times E\;|\;p(e)=f(b')\}$$
+\end{defn}
+
+\begin{thm}{}{} Let $p:E\to B$ be a fiber bundle. Suppose that $f,g:X\to B$ are homotopic maps. Then the pull back bundles $$f^\ast(E)\cong g^\ast(E)$$ are equivalent. 
+\end{thm}
+
+\subsection{Sections of a Bundle}
+\begin{defn}{Sections}{} Let $(F,E,B)$ be a fiber bundle. A section on the fiber bundle is a map $s:B\to E$ such that $$p\circ s=\text{id}_B$$
+\end{defn}
+
+\begin{defn}{Local Sections}{} Let $(F,E,B)$ be a fiber bundle. Let $U\subset B$ be an open set. A local section of the fiber bundle on $U$ is a map $s:U\to B$ such that $$p\circ s=\text{id}_U$$
+\end{defn}
+
+\subsection{Sphere Bundles}
+We now consider a special type of fibrations where the fibers are given by $S^1$. When we pick $n=1$ we obtain the classical object of study in algebraic topology called the Hopf fibration. 
+
+\begin{defn}{Sphere Bundles}{} A sphere bundle is a fiber bundle $p:E\to B$ for which its fibers are the $n$-sphere $S^n$. 
+\end{defn}
+
+\begin{thm}{}{} Let $n\in\N$. Consider $S^{2n+1}$ lying inside $\C^{n+1}$. Then canonical map $\C^n\to\C\Prj^{n}$ given by $$(z_0,\dots,z_n)\mapsto[z_0:\cdots:z_n]$$ is a fiber bundle with fiber $S^1$. 
+\end{thm}
+
+\begin{defn}{Hopf Fibration / Hopf Bundle}{} The fiber bundle $p:S^3\to S^2$ with fiber $S^1$ is called the Hopf fibration / Hopf bundle. 
+\end{defn}
+
+
+
+\end{document}

@@ -1,0 +1,1791 @@
+\documentclass[a4paper]{article}
+
+\input{C:/Users/liula/Desktop/Latex/Headers/Headers.tex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Labix}
+\lhead{Elementary Real Analysis}
+\rfoot{\thepage}
+
+\title{Elementary Real Analysis}
+
+\author{Labix}
+
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+Real analysis is all about functions from $\R$ to $\R$. It involves continuity, differentiability and integration as its central notions. However, to better characterize and prove stuff easier, we use and apply what we know about sequences and series. They are crucial not only in real analysis, but also in sequences of functions. Real analysis is often treated as the most simple case of general analysis. \\~\\
+Often when dealing with functions of multivariable, or complex functions, or even spaces with different properties, the methods and techniques are still the core of it. It is expected that when dealing with analysis on a different space, similar methods and ideas could be applied. \\~\\
+Real analysis is the best course for first year undergraduate students trying to get the hang of university mathematics. Its deployment of a wide range of ideas in proofs as well as a fair sense of abstraction invites challenging yet rewarding questions and theorems. 
+\end{abstract}
+\textbf{References}
+\begin{itemize}
+\item Principles of Mathematical Analysis Third Edition by Walter Rudin
+\item University of Warwick MA131 Analysis Lecture Notes by Keith Ball
+\item University of Warwick MA244 Analysis Lecture Notes by Jose Rodrigo
+\item Imperial College London Math40002 Lecture Notes
+\end{itemize}
+\pagebreak
+\tableofcontents
+\pagebreak
+\section{Properties of the Real Numbers}
+In this section, we will give the very first properties of the real numbers for readers to familiarize themselves with so that when we go on to the main discussion of sequences, we are well equipped with theorems at our disposal. 
+
+\subsection{The Completeness Axiom}
+What is special about the real numbers from most of the other number systems is the existence of the completeness axiom that says a bounded subset must have a least upper bound. But before we reach our main result, we develop the notion of supremum and infinum which is especially important when considering convergences and continuity in future chapters. \\
+
+Let us give a proper definition for bounds. 
+\begin{defn}{Upper and Lower Bounds}{}\\ Let $S$ be a non empty subset of $\R$ 
+\begin{itemize}
+\item $S$ is said to be bounded above if there exists $u\in\R$, called an upper bound of $S$ such that $x\leq u$ for all $x\in S$
+\item $S$ is said to be bounded below if there exists $l\in\R$, called a lower bound of $S$ such that $l\leq x$ for all $x\in S$
+\item $S$ is said to be bounded if there exists a $M\in\R$ such that $\abs{x}\leq M$ for all $x\in S$
+\end{itemize}
+\end{defn}
+
+Here is a trivial proposition involving bounds to exercise your minds. 
+
+\begin{prp}{}{}\\ A non-empty subset $S$ of $\R$ is bounded if and only if it is bounded above and bounded below. 
+\begin{proof}\\ If $S$ is bounded, then $-M\leq x\leq M$ thus it is bounded above and below. If $S$ is bounded above by $M$ and bounded below by $N$, then $\abs{x}\leq\max(\abs{M},\abs{N})$. 
+\end{proof}
+\end{prp}
+
+The notion of supremum and infinum is closely tied to that of boundedness. In particular, there is only one number in $\R$ that can be called the supremum per set, similarly for the infinum. But for boundedness, you can take any number in $\R$. As long as its absolute value is big enough to cover up for all elements in $S$, it could be a bound. So if $M>0$ is a bound for a set $S$ then naturally $M+1$, $1.1M$ and more would also be bounds for $S$. 
+
+\begin{defn}{Supremum}{}\\ Let $S$ be a subset of $\R$. We say that $U\in\R$ is the supremum of $S$ when
+\begin{itemize}
+\item $x\leq U$ for all $x\in S$
+\item If $u$ is an upper bound of $S$ then $U\leq u$
+\end{itemize}
+We denote the supremum of $S$ as $\sup(S)=U$
+\end{defn}
+
+\begin{defn}{Infinum}{}\\ Let $S$ be a non-empty subset of $\R$. We say that $L\in\R$ is the infinum of $S$ when
+\begin{itemize}
+\item $L\leq x$ for all $x\in S$
+\item If $l$ is an upper bound of $S$ then $l\leq L$
+\end{itemize}
+We denote the infinum of $S$ as $\inf(S)=L$
+\end{defn}
+
+Readers can easily check that the supremum and infinum, should it exists, is unique. One can also think about the criteria for the supremum and infinum to exists. Naturally, since the notion of supremum and infinum involves comparison, there will be no such thing in complex numbers. 
+
+\begin{prp}{}{}\\ Let $S$ be a non-empty subset of $\R$. Then $$-\sup(S)=\inf(-S)$$ where $-S=\{-x|x\in S\}$. 
+\begin{proof}\\ Since for all $x\in S$ $x\leq\sup(S)$. But this implies that $-\sup(S)\leq-x$ for all $x\in S$ thus for all $-x\in-S$. Then by definition $-\sup(S)=\inf(-S)$. 
+\end{proof}
+\end{prp}
+
+The above theorem allows us to translate properties of the supremum to properties of the infinum by simply "inverting" the set. That way to prove things about the infinum we could invert the set, use the proof by the supremum and invert it back to prove it for the infinum. In practise however, we barely use this theorem to prove anything. 
+
+The following property is an important characterization of supremums and infinums that will be used later when we need it. It is called the approximation property because it allows some sort of wiggle room between the supremum and our approximation in the sense that we can always make a better approximation for the supremum. 
+
+\begin{prp}{Approximation Property}{}\\ Let $S$ be a non-empty subset of $\R$. 
+\begin{itemize}
+\item If $\sup(S)$ exists then for all $\varepsilon>0$ there exists $x\in S$ such that $\sup(S)-\varepsilon<x\leq sup(S)$. 
+\item If $\inf(S)$ exists then for all $\varepsilon>0$ there exists $x\in S$ such that $\inf(S)\leq x<inf(S)+\varepsilon$. 
+\end{itemize}
+\begin{proof}\\ Notice that since $\sup(S)$ is the supremum of $S$, we have that $\sup(S)-\varepsilon$ is not the supremum of $S$ Thus there exists some element $x\in S$ such that $\sup(S)-\varepsilon<x$. Mirror the proof for the infinum version. 
+\end{proof}
+\end{prp}
+
+We finally reach the goal of this chapter, which is the completeness axiom. 
+
+\begin{thm}{The Completeness Property of Real Numbers}{}\\ Let $S\subseteq\R$ be a subset of $\R$ that is bounded above. Then $S$ has a supremum. 
+\end{thm}
+
+\subsection{The Absolute Value}
+Recall that we have constructed the set of real numbers as Dedekind sets. Instead of focusing on the set-theoretic foundations of the real numbers. We focus on some of its properties and forego the clumsy notation of thinking about real numbers in terms of a set. \\
+
+The absolute value is an important function when it comes to defining useful concepts such as distances in the field of real. It simply measures the shortest distance between two points. 
+
+\begin{defn}{The Absolute Value}{}\\ The absolute value of a real number $x\in\R$ is defined by
+$$\abs{x}=\begin{cases}
+x & \text{if $x\geq0$} \\
+-x & \text{if $x\leq0$}
+\end{cases}$$
+\end{defn}
+
+Readers should already be familiar with the absolute value in high school. In particular, one should be able to draw graphs related to the absolute function. However, there are properties of the absolute value that are yet to be seen or proved. The following properties will be a list of its useful properties. 
+
+\begin{prp}{}{}\\ Let $x,y\in\R$. Then the following are true of the absolute value. 
+\begin{itemize}
+\item $\abs{x}\geq 0$ with equality if and only if $x=0$
+\item $\abs{xy}=\abs{x}\abs{y}$
+\item $\abs{x+y}\leq\abs{x}+\abs{y}$
+\item $\abs{\abs{x}-\abs{y}}\leq\abs{x-y}$
+\end{itemize}
+\begin{proof}\\ I left out the proofs of the first and second property since they are simplay obtained via case by case analysis. 
+\begin{itemize}
+\item We start by squaring the left hand side of the inequality. 
+\begin{align*}
+\abs{x+y}^2&=(x+y)^2 \\
+&=x^2+2xy+y^2 \\
+&\leq \abs{x}^2+2\abs{x}\abs{y}+\abs{y}^2 \\
+&=(\abs{x}+\abs{y})^2
+\end{align*}
+Since the both sides of the inequality is non-negative, we can take the square root on both sides, thus obtaining $\abs{x+y}\leq\abs{x}+\abs{y}$. 
+\item Choose $x$ to be $x-y$ in (4) and we obtain $\abs{x}-\abs{y}\leq\abs{x-y}$. Similarly, choosing $y$ to be $y-x$ in (4), we find that $\abs{y}-\abs{x}\leq\abs{y-x}=\abs{x-y}$. Thus we have $\abs{\abs{x}-\abs{y}}\leq\abs{x-y}$. 
+\end{itemize}
+\end{proof}
+\end{prp}
+
+These properties will also be used extensively throguhout the entire notes. The reader should be absolutely familiar with its properties so that they can understand the definitions and the proofs more smoothly. The geometric interpretation of the absolute value will serve as an extremely important visualization on limits and convergences. 
+
+\begin{defn}{Intervals}{}\\ Let $I\subseteq\R$ be a subset. We say that $I$ is an interval if for all $a,b\in I$, we have $x\in I$ for all $a<x<b$. 
+\end{defn}
+
+We use the following convention: 
+\begin{itemize}
+\item The open interval $(a,b)=\{x\in\R\;|\;a<x<b\}$
+\item The closed interval $[a,b]=\{x\in\R\;|\;a\leq x\leq b\}$
+\item $(a,b]=\{x\in\R\;|\;a<x\leq b\}$
+\item $[a,b)=\{x\in\R\;|\;a\leq x<b\}$
+\end{itemize}
+
+\subsection{Density of the Real Numbers}
+In this chapter we will investigate another important property of the real numbers, albeit shared by the complex numbers as well. This is the density of the real numbers. We try to mathematically prove and formulate the fact that the real numbers are very rich. It is dense in the sense that for every two real numbers, you can always find another real number in between. Obviously if you simply consider the rationals or the irrationals, this is also true. But the main thing to take away here is that there would be an uncountably amount of rationals and irrationals each, between any two real numbers. This distribution can not be measured as well. The rationals and the irrationals are so interspersed and intertwined that there is no notion of "next" number in the reals. And you would not even know whether it is rational or irrational. \\~\\
+
+To start off this chapter, we need an important where it use throughout these notes will only be of this section. 
+
+\begin{thm}{Archimedean Property}{}\\ For any real numbers $a$ and $b$ with $a>0$ there exists $n\in\N$ such that $na>b$. 
+\begin{proof}\\ Suppose that $na\leq b$ for all $n$. Then the set of all $na$, denoted by $S$ has an uppper bound $b$, thus also has a least upeer bound, say $u$. We have that there exists some $na\in S$ such that $u-a<na\leq u$. But this implies that $u<(n+1)a\in S$, a contradiction. 
+\end{proof}
+\end{thm}
+
+The Archimedean property, as stated by the name, is given by Archimedes. While the theorem does look somewhat trivial, often it is the trivial theorems that are the hardest to prove, especially by new students. This is also quite a standard example for proof of contradiction. \\~\\
+
+Before we move on, we also need the floor function in our proof of density, which is formalized below. 
+
+\begin{prp}{Floor Function}{}\\ For each $x\in\R$ there exists a unique integer $\floor{x}$ such that $$\floor{x}\leq x<\floor{x}+1$$ 
+\begin{proof}\\ Let $A=\{n\in\Z:n\leq x\}$. By the archimedean property there exists $k>-x$ and thus $-k<x$ with $-k\in A$ hence $A$ is non-empty. Let $a=sup(A)$. We have some $n\in A$ such that $a-1<n\leq a\leq x$ and thus $a+1<n+1\leq a+1\leq x+1$. From this we have $n\leq x$ as well as $n+1$ not in $A$ thus $x<n+1$. \\~\\
+Now suppose that $m\leq x<m+1$ and $n\leq x<n+1$. From these we derive that $m\leq x<n+1$ and $n\leq x<m+1$. Thus $m-n<1$ and $m-n>-1$ and $m-n\in\Z$. and we have $m-n=0$
+\end{proof}
+\end{prp}
+
+Now who said that the irrational numbers are not just some fantasy of a mathematician. Let us give birth to the first ever irrational mankind every thought of! Pythagoras and his disciples were quite confused by this phenomenon that they deemed their mathematics must be wrong somewhere. 
+
+\begin{lmm}{}{}\\ The positive solution to the equation $x^2-2=0 $, denoted $\sqrt{2}$ is irrational. 
+\begin{proof}\\ Suppose that $\sqrt{2}$ is rational, then it can be represented as $\frac{m}{n}$ with $hcf(m,n)=1$. Then we have $m^2=2n^2$, implying that $2|m^2$ and $2|m$. Thus we can say that $m=2k$ for some $k\in\Z$. Substituting $m=2k$, we have $2k^2=n^2$ which similarly implies that $2|n$ which is a contradiction since they have a common factor. 
+\end{proof}
+\end{lmm}
+
+Congratulations we showed that irrational numbers do exist! Finally we can move on to the core of this section, the density theorems. 
+
+\begin{thm}{Density of the Rationals}{}\\ Between any pair of distinct real numbers there is a rational number. 
+\begin{proof}\\ Suppose $a,b\in\R$ and $a<b$. By the archimedean property we have that $n(b-a)>1$ for some $n\in\N$. Let $m=\floor{na}+1$. We have $na<m\leq na+1<nb$. Thus $a<\frac{m}{n}<b$. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{Density of the Irrationals}{}\\ Between any pair of distinct real numbers there is an irrational number. 
+\begin{proof}\\ Suppose $a,b\in\R$ and $a<b$. By the density of the rationals we have that $\frac{a}{\sqrt{2}}<r<\frac{b}{\sqrt{2}}$ for some $r\in\Q$ thus $a<r\sqrt{2}<b$. 
+\end{proof}
+\end{thm}
+
+Once we have the density in the rationals and irrationals, we now have an infinite number of rationals and irrationals betweena any two real numbers. 
+
+\begin{crl}{}{}\\ Between any pair of distinct real numbers there is an infinite number of rationals and irrationals. 
+\begin{proof}\\ Recursively apply density of rationals and density of irrationals. 
+\end{proof}
+\end{crl}
+
+Beware that there is no pattern as to how the rationals and irrationals line up in the real number line. It is unknown whether a rational or an irrational "follows" a real number. In fact, it may not be possible to define what "the next number" of a real number is. 
+
+\pagebreak
+\section{Sequences}
+Sequences have not only proven themselves to be useful in real analysis, but also in several other areas of mathematics as well including complex analysis and topology and metric spaces (they are all just analysis) and differential equations and more. They are the intermediate step for the notion of continuity and differentiability since those definitions can be reduced by an equivalence characterization via sequences. Therefore it is important to investigate properties of the sequences to better understand and prove theorems of continuity and limits. 
+
+\subsection{Sequences and Convergences}
+We begin our discussion we the definition and the first properties of sequences, as well as convergence. 
+\begin{defn}{Sequences}{}\\ A sequence in $\R$ is a function $f:\N\to\R$ that assigns to each natural number a real number. We write often write $f(n)=a_n$ and say that it is the $n$th term of the sequence. We use $(a_n)_{n\in\N}$ to represent a sequence indexed by $n$. 
+\end{defn}
+
+Real analysis is all about closeness of things. The definition of convergence below will be one such. It is important here to not only understand the geometric meaning of convergence, which is closeness towards the limit, but to also be able to apply the definition to prove convergence. While we will see later that there are more ways to prove convergences, when all else fails, we must return to this definition and therefore we should be well trained with its definition. 
+
+\begin{defn}{Covergence of Sequences}{}\\ A sequence $(a_n)_{n\in\N}$ tends to $a$ if and only if for every $\varepsilon>0$ there exists $N\in\N$ such that $$n>N\implies \abs{a_n-a}<\varepsilon$$
+We write $a_n\to a$ in this case. 
+\end{defn}
+
+While generally not true in other spaces, one neat property of the real numbers is that we know that if it converges, it will only converge to exactly one number. While we will barely use this theorem anywhere, it is important to know that this is true and the reasoning behind it. This will be very first theorem involving the notion of convergence and therefore it is helpful for us to truely understand what convergence means. 
+
+\begin{prp}{Uniqueness of Limits}{}\\ A sequence in $\R$ cannot converge to more than one limit. 
+\begin{proof}\\ Suppose that $a_n\to a$ and $a_n\to b$. Choose $\varepsilon$ to be $\frac{\abs{a-b}}{10}$. Then there exists $N_1$ and $N_2$ such that $\abs{a_n-a}\varepsilon$ for all $n>N_1$ and $\abs{a_n-b}<\varepsilon$ for all $n>N_2$ respectively. When $n>\max{(N_1,N_2)}$ we have both inequalies hold together. Then 
+\begin{align*}
+\abs{a-b}&\leq\abs{a_n-a}+\abs{a_n-b}\\
+&\leq \frac{\abs{a-b}}{10}+\frac{\abs{a-b}}{10}\\
+&=\frac{\abs{a-b}}{5}
+\end{align*}
+Which is a contradiction. 
+\end{proof}
+\end{prp}
+
+The main idea here is that since convergence means closeness, if we have two numbers to converge to then there will be two closeness. But then numbers between these two closeness will not be close to each other anymore! \\~\\
+Another important property of convergence sequecnes is that it is bounded. 
+
+\begin{prp}{}{}\\ A convergent sequence in $\R$ is bounded. 
+\begin{proof}\\ Suppose that $a_n\to a$. Fixing $\varepsilon$ to be any number larger than 0, we have that $\abs{a_n-a}<\varepsilon\implies a-\varepsilon<a_n<a+\varepsilon$ for all $n$ larger than some number $N$. At the same time, all the terms less than $N$ are bounded by $M=\max{(\abs{a_1}, \abs{a_2}, \dots,\abs{a_N})}$. Thus if we take $$C=\max{(M,\abs{a+\varepsilon},\abs{a-\varepsilon})}$$ $C$ would bound all the terms of $a_n$. 
+\end{proof}
+\end{prp}
+
+The next two theorems demonstrate inequalities between convergent sequences. 
+
+\begin{prp}{}{}\\ Let $(a_n)_{n\in\N}$ and $(b_n)_{n\in\N}$ be sequences with $a_n\to a$ and $b_n\to b$. If $\exists N\in\N$ such that $a_n\leq b_n$ for all $n>N$, then $a\leq b$. 
+\begin{proof}\\ Suppose that $b<a$. Then we have $b<\frac{a+b}{2}<a$. Choosing $\varepsilon=\frac{a-b}{2}$, then whenever $n>N_1$, we have $$b_n-b<\frac{a-b}{2}$$ Similarly, choose $\varepsilon=\frac{b-a}{2}$, then whenever $n>N_2$, we have $$a_n-a<\frac{b-a}{2}$$ Then we have $$b_n<\frac{a+b}{2}<a_n$$ which is a contradiction. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{Sandwich Theorem}{}\\ Let $(a_n)_{n\in\N}$, $(b_n)_{n\in\N}$, $(c_n)_{n\in\N}$ be sequences in $\R$ such that $$a_n\leq b_n\leq c_n$$ for all $n$ larger than some $N\in\N$. If $a_n\to L$ and $c_n\to L$ then $b_n\to L$. 
+\begin{proof}\\ Suppose $a_n\to L$ and $c_n\to L$. Then choose an $\varepsilon$ that is greater than $0$. Then there exists $N_1$ and $N_2$ such that $\abs{a_n-L}<\varepsilon$ whenever $n>N_1$, and $\abs{c_n-L}<\varepsilon$ whenever $n>N_2$. Then whenever $N=\max{(N_1,N-2)}$, we have $-\varepsilon<a_n-L<b_n-L<c_n-L<\varepsilon$, and thus we have $\abs{b_n-L}<\varepsilon$ whenever $n>N$. 
+\end{proof}
+\end{prp}
+
+The sandwich theorem is useful in detecting the convergence to $0$ of a positive sequence. Whenever one is given a very complicated positive sequence that does not have an easily determinable limit, one can use a sequence with larger values that tends to $0$ show that that sequence converges to $0$. This however requires more care and exercise to get familiarize. \\~\\
+
+As one accummulate more examples, it can be made clear that even divergence has different kinds. This is made explicitly true when considering the sequence $a_n=\sin(n)$ and $b_n=n$. One oscillates while the other blows up. We therefore give a definition of blowing up in technicallity. 
+
+\begin{defn}{Divergence to Infinity}{}\\ A sequence $(a_n)_{n\in\N}$ in $\R$ is said to 
+\begin{itemize}
+\item diverge to $\infty$ if for every real number $C>0$ there exists a number $N\in\N$ such that $$n>N\implies a_n>C$$
+\item diverge to $-\infty$ if for every real number $C<0$ there exists a number $N\in\N$ such that $$n>N\implies a_n<C$$
+\end{itemize}
+\end{defn}
+
+This definition should be much easier to understand than that of convergence sequences. In practise it is also not hard to prove sequences that tends to infinity. Usually showing that a limit convergences requires you to find out the limit explicitly (except that if you are sandwiching) and that is often harder than simply showing that a sequence blows up. \\~\\
+But in case it is not obvious to know that it diverges to infinity, we can apply a comparison test as stated below. 
+
+\begin{prp}{}{}\\ Let $(a_n)_{n\in\N}$ and $(b_n)_{n\in\N}$ be sequences in $\R$. If $b_n\geq a_n$ for all $n$ larger than some $N\in\N$ and $a_n\to\infty$ then $b_n\to\infty$. 
+\begin{proof}\\ Suppose $a_n\to\infty$. Then we have for every $C>0$ there exists some $N\in\N$ such that $a_n>C$ whenever $n>N$. Then we have $b_n>a_n>C$ for all $n>N$ thus $b_n\to\infty$. 
+\end{proof}
+\end{prp}
+
+This proposition bears similarity to that of the convergence version. Often the hardest part of using these two comparisons is to find an appropriate sequence to demonstrate the limit of the main sequence. \\~\\
+
+The collection of all convergent sequences also works similarly to $\R$ in the sense that aside from comparison, there is also a notion of addition, scalar multplication and sequence multiplication. However the main usage of this proposition is not to construct new sequences from old, but to evaluate limits from know sequences. 
+
+\begin{prp}{Algebra of Sequences}{}\\ Let $(a_n)_{n\in\N}$ and $(b_n)_{n\in\N}$ be sequences in $\R$. Let $a_n\to a$ and $b_n\to b$. Then the following are true. 
+\begin{itemize}
+\item Sum Rule: $sa_n+tb_n\to sa+tb$ for any $s,t\in\R$
+\item Product Rule: $a_nb_n\to ab$
+\item Quotient Rule: $\frac{a_n}{b_n}\to\frac{a}{b}$ if $b\neq 0$
+\item $\abs{a_n}\to\abs{a}$
+\end{itemize}
+\begin{proof}\\ Suppose that $(a_n)\to a$ and $(b_n)\to b$
+\begin{itemize}
+\item Choosing any $\frac{\varepsilon}{\abs{s}}>0$, we have that whenever $n>N_1$ for some $N_1$, $\abs{a_n-a}<\frac{\varepsilon}{\abs{s}}$, thus $\abs{sa_n-sa}<\varepsilon$, thus $(sa_n)\to sa$. Similarly, $(tb_n)\to tb$. Now for every $\frac{\varepsilon}{2}>0$, we have that whenever $n>\max{(N_1,N_2)}$, $\abs{sa_n-sa}$ and $\abs{tb_n-tb}$ whenever $n>\max{(N_1,N_2)}$. Then 
+\begin{align*}
+\abs{(sa_n+tb_n)-(sa+tb)}&\leq\abs{sa_n-sa}+\abs{tb_n-tb} \\
+&<\frac{\varepsilon}{2}+\frac{\varepsilon}{2} \\
+&=\varepsilon
+\end{align*}
+Thus we have the desired result. 
+\item Choose $M\geq\abs{a}$ such that $\abs{b_n}\leq M$ for all $n$. This is possible since both sequecnes are bounded. Then there exists $N\in\N$ we have $\abs{a_n-a}<\frac{\varepsilon}{2M}$ and $\abs{b_n-b}<\frac{\varepsilon}{2M}$ for all $n>N$. We then have
+\begin{align*}
+\abs{a_nb_n-ab}&=\abs{(a_n-a)b_n+a(b_n-b)} \\
+&\leq\abs{a_n-a}\abs{b_n}+\abs{a}\abs{b_n-b} \\
+&\leq M\abs{a_n-a}+M\abs{b_n-b} \\
+&<\frac{\varepsilon}{2}+\frac{\varepsilon}{2} \\
+&=\varepsilon
+\end{align*}
+Thus we have the desired result. 
+\item We want to show that $\frac{1}{b_n}\to\frac{1}{b}$ since we can apply the product rule to produce the quotient rule. From the product rule we have that $bb_n\to b^2$. Choosing $\varepsilon=\frac{b^2}{2}>0$, we have a fixed $N$ such that $\abs{bb_n-b^2}<\frac{b^2}{2}$ whenever $n>N$. Thus we have $\frac{b^2}{2}<bb_n$ whenever $n>N$. Then we have
+\begin{align*}
+\frac{b^2}{2}<\abs{bb_n}&\implies\frac{1}{\abs{bb_n}}<\frac{2}{b^2} \\
+&\implies\abs{\frac{b_n-b}{bb_n}}<\frac{2\abs{b_n-b}}{b^2} \\
+&\implies\abs{\frac{1}{b_n}-\frac{1}{b}}<\frac{2\abs{b_n-b}}{b^2}
+\end{align*}
+Since we have $0<\abs{\frac{1}{b_n}-\frac{1}{b}}<\frac{2\abs{b_n-b}}{b^2}$ then by sandwich theorem, we have that $\frac{1}{b_n}\to\frac{1}{b}$. Then by product rule, we have the desired result. 
+\item For every $\varepsilon>0$, there exists some $N$ such that $\abs{\abs{a_n}-\abs{a}}\leq\abs{a_n-a}<\varepsilon$ whenever $n>N$. Thus trivially $\abs{a_n}\to a$. 
+\end{itemize}
+\end{proof}
+\end{prp}
+
+We will return to this property more often than you think as we will often go back to sequences when further defining new notions such as continuity and differentiability. This is why developing the notion of sequences would be useful. \\~\\
+Next up we also have the ability to invert sequences that tends to $0$ and infinity, given sufficient conditions. 
+
+\begin{prp}{}{}\\ The following two statements are true about a sequence $(a_n)_{n\in\N}$. 
+\begin{itemize}
+\item If $a_n\to\infty$ then $\frac{1}{a_n}\to 0$
+\item If $a_n\to 0$ and there exists $N\in\N$ such that $a_n>0$ for all $n>N$, then $\frac{1}{a_n}\to\infty$
+\end{itemize}
+\begin{proof}\\ We prove the following with care. 
+\begin{itemize}
+\item Since $a_n\to\infty$, we have for every $C>0$ there exists some $N$ such that $a_n>C$ whenever $n>N$. Then we have for every $\varepsilon=\frac{1}{C}>0$ there exists $N$ such that $\abs{\frac{1}{a_n}}<\frac{1}{C}=\varepsilon$. Thus we have the desired result. 
+\item We have that for every $\varepsilon>0$, there exists some $N_1$ such that $\abs{a_n}<\varepsilon$ whenever $n>N_1$, also we have $a_n>0$ when $n>N_2$. Choosing $C=\frac{1}{\varepsilon}$, then for all $n>\max{(N_1,N_2)}$, we have $\abs{a_n}<\varepsilon\implies\abs{\frac{1}{\varepsilon}}>\frac{1}{\varepsilon}=C$ Thus we have the desired result. 
+\end{itemize}
+\end{proof}
+\end{prp}
+
+Finally in this exceptionally long section, we will give special names for sequences that looks more timid. Sequences that only goes up or down will have special names, and then we show an application of the completeness axiom. 
+
+\begin{defn}{Categorization of Sequences}{}\\ A sequence $(a_n)$ in $\R$ may have different properties as below. 
+\begin{itemize}
+\item $(a_n)_{n\in\N}$ is strictly increasing if $a_n<a_{n+1}$ for all $n\in\N$
+\item $(a_n)_{n\in\N}$ is increasing if $a_n\leq a_{n+1}$ for all $n\in\N$
+\item $(a_n)_{n\in\N}$ is strictly decreasing if $a_n>a_{n+1}$ for all $n\in\N$
+\item $(a_n)_{n\in\N}$ is decreasing if $a_n\geq a_{n+1}$ for all $n\in\N$
+\item $(a_n)_{n\in\N}$ is monotone if it is either increasing or decreasing
+\end{itemize}
+\end{defn}
+
+\begin{thm}{Monotone Sequence Theorem}{}\\ Every bounded monotone sequence converges in $\R$. 
+\begin{proof}\\ Suppose $(a_n)_{n\in\N}$ is increasing and bounded. Then $S=\{a_n|n\in\N\}$ is bounded thus has a supremum. We have that $$\sup(S)-\varepsilon< a_N\leq a_{N+1}\leq\dots\leq\sup(S)<\sup(S)+\varepsilon$$ for all $n$ larger than some $N\in\N$. Thus we have the for all $n>N$, $$\sup(S)-\varepsilon<a_n<\sup(S)+\varepsilon\implies\abs{a_n-\sup(S)}<\varepsilon$$ The proof is similar for the decreasing version. 
+\end{proof}
+\end{thm}
+
+The monotone sequence theorem is in fact equivalent to the completeness axiom. However we will not pursue this notion further as it does not deem particularly useful. 
+
+\subsection{Subsequences}
+Subsequences, as the name suggests, are new sequences extracted from old sequences. Since they came from another sequences, some properties of the old sequence should retain, as you will see. Of all the subsequences, the most important would be the limit inferior and limit superior. 
+
+\begin{defn}{Subsequences}{}\\ A subsequence of a sequence $(a_n)_{n\in\N}$ in $\R$ is a sequence $(a_{n_k})_{k\in\N}$, where $$0\leq n_1<n_2<\dots$$
+\end{defn}
+
+An immediate property of subsequences is the following. 
+
+\begin{prp}{}{}\\ Let $(a_n)_{n\in\N}$ be a sequence in $\R$ and let $a_n\to a$. Then any subsequence of $(a_{n_k})_{k\in\N}$ converges to $a$. 
+\begin{proof}\\ Given $\varepsilon>0$ there exists some $N$ such that $\abs{a_n-a}<\varepsilon$ whenever $n>N$. Since $n_k>k$, we have that $\abs{a_{n_k}-a}<\varepsilon$ for all $k>N$, thus we have $a_{n_k}\to a$
+\end{proof}
+\end{prp}
+
+There is in fact an inverse saying that if every subsequence convergesn to the same number, then the sequence also converges to that number. However it is impractical since I doubt there are any methods that can find out what all the subsequences converge to, all without knowing the limit of the original sequence. \\~\\
+
+Next we have a very important theorem that constructs very useful subsequences. 
+
+\begin{thm}{Bolzano-Weierstrass Theorem}{}\\ Every bounded sequence in $\R$ has a convergent subsequence. 
+\begin{proof}\\ Let $(a_n)_{n\in\N}$ be a bounded sequence, say $c_0\leq a_n\leq d_0$ for all $n$. Bisect the interval $I_0=[c_0,d_0]$. Observe that if the union of two sets contains infinitely many terms, than at least one of the sets must contain infinitely many terms of the sequence. \\~\\
+Suppose $I_1$ is the said set. From $I_1$, choose one such term, say $a_{n_1}$. Bisect $I_1$ again and call $I_2$ the interval with infinitely many terms of the sequence. Choose one such term say $a_{n_2}$, with $n_2>n_1$, by repeating this procedure, we obtain a subsequence $(a_{n_k})$ and a sequence of intervals $I_k=[c_k,d_k]$ such that $$c_0\leq c_{k-1}\leq c_k\leq a_{n_k}\leq d_k\leq d_{k-1}\leq d_0$$ and $d_{k+1}-c_{k+1}=\frac{1}{2}(d_k-c_k)$. \\~\\
+Observe that $(c_k)$ and $(d_k)$ are monotonic and bounded, thus converges to $c$ and $d$ respectively. Since $$d_k-c_k=2^{-k}(d_0-c_0)\to 0$$ we have that $c=d$. By the sandwich theorem, we have $a_{n_k}\to c$
+\end{proof}
+\end{thm}
+
+As you see, the monotone convergence theorem is applied thus the completeness axiom actually implies the Bolzano-Weierstrass theorem. Once again, the converse is also true but is too much of a nuisance to prove, given that there is virtually no good application. However, the Bolzano-Weierstrass theorem will prove itself extremely useful in future proofs. It is one of the rare theorems, that returns you a sequence will useful properties. \\~\\
+
+Finally, we have the two important subsequences. 
+
+\begin{defn}{Limit Superior and Limit Inferior}{}\\ Let $(a_n)_{n\in\N}$ be a sequence. Define the limit superior of the sequence to be the the limit of $$s_n=\sup_{m\geq n}a_m$$ if it exists. \\~\\ Define the limit inferior of the sequence to be the limit of $$t_n=\inf_{m\geq n}a_m$$ if it exists. 
+\end{defn}
+
+They will not serve much of a purpose except to prove a test that involves series later. However, I will collect a few of its properties here. There are much nicer properties involving inequalities but is rarely useful unless you are taking an exam. 
+
+\begin{prp}{}{}\\ Let $(a_n)_{n\in\N}$ be a bounded sequence. Then $s_n$ and $t_n$ converges. 
+\begin{proof}\\
+Trivially we must have $s_n$ a decreasing sequence and $t_n$ an increasing sequence since $\{a_m|m\geq n_2\}\subset\{a_m|m\geq n_1\}$ as long as $n_1<n_2$. Since $(a_n)_{n\in\N}$ is bounded, so is the subsequences $s_n$ and $t_n$. Thus $s_n$ and $t_n$ is convergent by the monotone convergent theorem. 
+\end{proof}
+\end{prp}
+
+Finally the below proposition is a characterization of limit superior and limit inferior. This would be quite useful if combined with the monotone convergence theorem. 
+
+\begin{prp}{}{}\\ Let $(a_n)_{n\in\N}$ be a sequence. Then $a_n\to a$ if and only if $$\lim_{n\to\infty}\sup_{m\geq n}a_m=\lim_{n\to\infty}\inf_{m\geq n}a_m=a$$ 
+\begin{proof}\\
+Firstly suppose that $a_n\to a$. Then since $(a_n)_{n\in\N}$ is convergent it is bounded. Then by the above theorem the subsequences converges. By theorem 2.2.2 we must have the limit suprerior and limit inferior converge to $a$. \\~\\
+Now suppose that the limit superior and limit inferior both converges to $a\in\R$. Then this means that fixing $\varepsilon>0$, there exists $N_1\in\N$ such that $a-\varepsilon<\sup_{m\geq n}a_m<a+\varepsilon$ for all $n>N_1$. Similarly there exists $N_2$ such that $a-\varepsilon<\inf_{m\geq n}a_m<a+\varepsilon$ for all $n>N_2$. This means that $$a-\varepsilon<\inf_{m\geq n}a_m<a_m<\sup_{m\geq n}a_m<a+\varepsilon$$ for all $m\geq n>\max{N_1,N_2}$. Thus $a_n\to a$ and we are done. 
+\end{proof}
+\end{prp}
+
+\subsection{Cauchy Sequences}
+\begin{defn}{Cauchy Sequence}{}\\ A sequence $(a_n)_{n\in\N}$ is said to be Cauchy if for every $\varepsilon>0$ there exists $N\in\N$ such that $$n,m>N\implies\abs{a_n-a_m}<\varepsilon$$
+\end{defn}
+
+\begin{prp}{}{}\\ Every convergent sequence is Cauchy. 
+\begin{proof}\\ Suppose that $(a_n)_{n\in\N}$ is convergent. Choose $\frac{\varepsilon}{2}>0$, then there exists $N$ such that $\abs{a_n-a}<\frac{\varepsilon}{2}$ and $\abs{a_m-a}<\frac{\varepsilon}{2}$ whenever $n,m>N$. Then 
+\begin{align*}
+\abs{a_n-a_m}&\leq\abs{a_n-a}+\abs{a_m-a} \\
+&<\frac{\varepsilon}{2}+\frac{\varepsilon}{2} \\
+&=\varepsilon
+\end{align*}
+Thus we have the desired result. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{}\\ Every Cauchy Sequence is bounded. 
+\begin{proof}\\ Suppose that $(a_n)_{n\in\N}$ is cauchy. Then fixing $\varepsilon>0$ there exists some $N$ such that $\abs{a_n-a_m}<\varepsilon$ whenever $n,m>N$. Then we have
+\begin{align*}
+\abs{a_n}&\leq\abs{a_n-a_N}+\abs{a_N}\\
+&<\abs{a_N}+\varepsilon
+\end{align*}
+whenever $n>N$. Thus we have that $a_n$ is bounded whenever $n>N$. For $n\leq N$, it is bounded by $M=\max{(a_1,a_2,\dots,a_N)}$. So by taking the max of $M$ and $a_N+\varepsilon$, we have that all terms in the sequence are bounded. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{}\\ Every Cauchy sequence is convergent. 
+\begin{proof}\\ Since a cauchy sequence is bounded, we have from the Bolzano Weierstrass theorem that there is subsequence, say $(a_{n_k})_{k\in\N}$ that converges to say, $a$. Then fixing $\frac{\varepsilon}{2}>0$, there exists some $N_1\in\N$ such that $\abs{a_{n_k}-a}<\frac{\varepsilon}{2}$ whenever $k>N_1$. Also since it is cauchy, we have that when we have $\frac{\varepsilon}{2}>0$ there exists some $N_2\in\N$ such that $\abs{a_n-a_{n_k}}<\frac{\varepsilon}{2}$ whenever $n,k>N_2$. Choosing $N=\max{(N_1,N_2)}$, then we have 
+\begin{align*}
+\abs{a_n-a}&\leq\abs{a_n-a_{n_k}}+\abs{a_{n_k}-a} \\
+&<\frac{\varepsilon}{2}+\frac{\varepsilon}{2} \\
+&=\varepsilon
+\end{align*}
+Thus we have the desired result. 
+\end{proof}
+\end{prp}
+
+\begin{thm}{Geometric Sequences}{}\\ $$x^n\to\begin{cases}
+\infty & \text{if $x>1$} \\
+1 & \text{if $x=1$} \\
+0 & \text{if $-1<x<1$} \\
+\text{diverges} & \text{if $x\leq-1$}
+\end{cases}$$
+\begin{proof}\\ We treat different cases separately. 
+\begin{itemize}
+\item We have $x^n\geq(1+n(x-1))$ by the Bernoulli's Inequality. Since $(1+n(x-1))$ diverges to $+\infty$, we also have that $(x^n)$ diverges to $+\infty$. 
+\item Now when $x=1$ we have the sequence $1,1,1,\dots$ thus it converges to $1$. 
+\item If $\abs{x}<1$, let $x=\frac{1}{1+t}$ with $t>0$. Then by Bernoulli's Inequality, we have $(1+t)^n\geq1+nt>nt$, thus $\frac{1}{(1+t)^n}\leq\frac{1}{1+nt}<\frac{1}{nt}$. But since $nt\to\infty$, we have that $\frac{1}{nt}\to 0$. Then for every $\varepsilon>0$ there exists $N$ such that $\abs{\frac{1}{nt}}<\varepsilon$ whenever $n>N$. Using this, we have $\abs{x^n}=\abs{\frac{1}{(1+t)^n}}<\varepsilon$. Thus we have the desired result. 
+\item It is easy to show that it neither goes to $\pm\infty$ nor converges. 
+\end{itemize}
+\end{proof}
+\end{thm}
+
+\begin{defn}{Strictly Contracting}{}\\ A sequence $(a_n)_{n\in\N}$ is strictly contracting if $\abs{a_{n+2}-a_{n+1}}\leq l\abs{a_{n+1}-a_n}$ for all $n\in\N$ where $l\in(0,1)$
+\end{defn}
+
+\begin{thm}{}{}\\ Every strictly contracting sequence is Cauchy. 
+\begin{proof}\\ Suppose that $(a_n)_{n\in\N}$ is a strictly contracting sequence. Without loss of generality suppose $n>m$. 
+\begin{align*}
+\abs{a_n-a_m}&\leq\abs{a_n-a_{n-1}}+\abs{a_{n_1}-a_{n-2}}+\dots+\abs{a_{m+2}-a_{m+1}}+\abs{a_{m+1}-a_m} \\
+&\leq l^{n-m}\abs{a_{m+1}-a{m}}+l^{n-m-1}\abs{a_{m+1}-a{m}}+\dots+l\abs{a_{m+1}-a_m}+\abs{a_{m+1}-a_m} \\
+&=(l^{n-m}+l^{n-m-1}+\dots+l+1)\abs{a_{m+1}-a_m} \\
+&=\frac{1-l^{n-m+1}}{1-l}\abs{a_{m+1}-a_m} \\
+&=\frac{1-l^{n-m+1}}{1-l}l^m\abs{a_2-a_1} \\
+&\leq\frac{l^m}{1-l}\abs{a_2-a_1}
+\end{align*}
+As $m\to\infty$ we have $\left(\frac{l^m}{1-l}\right)\to0$ by the geometric sequence. Then for every $\frac{\varepsilon}{\abs{a_2-a_1}}$, there exists $N$ such that $\abs{\frac{l^m}{1-l}}<\frac{\varepsilon}{\abs{a_2-a_1}}$ whenever $n>N$. Using this, we have that $\abs{a_n-a_m}\leq\frac{\varepsilon}{\abs{a_2-a_1}}<\varepsilon$. Thus we have the desired result. 
+\end{proof}
+\end{thm}
+
+\subsection{Standard Limits}
+\begin{thm}{$n$th root}{}\\ For every $x\in\R$ and $n\in\N$ there exists a unique $n$th root denoted by $x^\frac{1}{n}$. 
+\begin{proof}\\ Let $A=\{x>0:x^n>a\}$ We want to show that the infinum of this set is exactly the $n$th root of $a$. Note that $(1+a)^n\geq1+na>a$ thus $A$ is non-empty. Also since $x>0$ we have that $0$ is a lower bound and thus its infinum exists by the completeness axiom. We let $b=\inf(A)$. Since $b$ is the infinum, we have some $a_k\in A$ such that $b\leq a_k<b+\frac{1}{k}$. By the sandwich theorem we have $a_k\to b$. By the product rule of series, we have $a_k^n\to b^n$. Recall that $a_k\in A$, then we have $a_k^n>a$, and $\lim_{k\to\infty}a_k^n\geq a$, thus $b^n\geq a$. \\~\\
+Assume now that $b^n>a$, we have $0<\frac{a}{b^n}<1$ so we may choose $\delta>0$ so that $\delta<\frac{b}{n}(1-\frac{a}{b^n})$. We now show that $b-\delta\in A$. Not that from our definition of $\delta$, we have $\delta<\frac{b}{n}(1-\frac{a}{b^n})$ and since $n>1$ and $0<1-\frac{a}{b^n}<1$, we have $\delta<\frac{b}{n}\left(1-\frac{a}{b^n}\right)<b$. Thus we have $\frac{\delta}{b}<1$, and $-\frac{\delta}{b}>-1$. Thus we can apply Bernoulli's Inequality. 
+\begin{align*}
+(b-\delta)^n&=b^n\left(1-\frac{\delta}{b}\right)^n \\
+&\geq b^n\left(1-n\frac{\delta}{b}\right) \tag{By Bernoulli's Inequality} \\
+&>a
+\end{align*}
+since $\delta<\frac{b}{n}\left(1-\frac{a}{b^n}\right)\implies b^n\left(1-n\frac{\delta}{b}\right)>a$. This proves that $b-\delta\in A$, contradicting the fact that $b$ is the infinum. Hence we can only have $b^n=a$ This completes the proof of existence of the $n$th root.\\~\\
+Now we prove the uniqueness of the $n$th root. Suppose that $b^n=c^n=a$. Without loss of generality assume $b\leq c$We have
+\begin{align*}
+0&=c^n-b^n \\
+0&=(c-b)(c^{n-1}+bc^{n-2}+\dots+b^{n-2}c+b^{n-1})
+\end{align*}
+But $c^{n-1}+bc^{n-2}+\dots+b^{n-2}c+b^{n-1}>nb^{n-1}$. Thus we can only have $b=c$. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{}{}\\ For all $x>0$, $$x^{\frac{1}{n}}\to 1$$ 
+\begin{proof}\\ Consider the case with $x\geq1$. We have $x^\frac{1}{n}\geq1$. From the Bernoulli's Inequality, we have $\left(1+x^\frac{1}{n}-1\right)\geq1+n\left(x^\frac{1}{n}-1\right)\implies x\geq1+n\left(x^\frac{1}{n}-1\right)$.  Thus we have $0<x^\frac{1}{n}-1\leq\frac{x-1}{n}$. Since $\left(\frac{x-1}{n}\right)\to0$, we have that $\left(x^\frac{1}{n}-1\right)\to0$ from the sandwich theorem and thus $\left(x^\frac{1}{n}\right)\to1$. For the case $0<x<1$, note that $\left(\frac{1}{x^\frac{1}{n}}\right)\to1$ since $\frac{1}{x}>1$. Using the algebra for sequences, we have $\left(\frac{1}{\frac{1}{x}^{\frac{1}{n}}}\right)=\left(x^\frac{1}{n}\right)\to1$. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{}{}\\ The sequence $n^{\frac{1}{n}}$ converges to $1$. 
+\begin{proof}\\ Note that $n\geq1$ and $n^\frac{1}{2n}>0$, we have 
+\begin{align*}
+\sqrt{n}&=(1+(n^\frac{1}{2n}-1))^n \\
+&\geq1+n(n^\frac{1}{2n}-1) \\
+&>n(n^\frac{1}{2n}-1)
+\end{align*}
+from Bernoulli's Inquality. Thus we have that $1\leq n^\frac{1}{2n}<\frac{1}{\sqrt{n}}+1$. So by the sand wich theorem we have $(n^\frac{1}{2n})\to1$ and $(n^\frac{1}{n})=(n^\frac{1}{2n})^2\to1$ by the arithmetic of sequences. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{Ratio Lemma}{}\\ Suppose $0\leq l<1$. Let $(a_n)_{n\in\N}$ be a sequence. 
+\begin{itemize}
+\item If there exists some $N\in\N$ $\frac{a_{n+1}}{a_n}\leq l$ for all $n>N$, then $a_n\to 0$
+\item If $\frac{a_{n+1}}{a_n}\to l$ then $a_n\to0$
+\end{itemize}
+\begin{proof}\\ Suppose that $0\leq l<1$
+\begin{itemize}
+\item Note that since $a_n\leq la_{n-1}$, we have $a_n\leq l^na_N$. Since $0<a_n\leq l^na_N$, and $(l^n)\to 0$ by geometric sequences, we have $a_n\to 0$. 
+\item Since $\frac{a_{n+1}}{a_n}\to l$, we have that for every $\varepsilon>0$, there exists $N$ such that $\abs{\frac{a_{n+1}}{a_n}-l}<\varepsilon$ whenever $n>N$. Then choosing $\varepsilon$ such that $l+\varepsilon<1$, we have that all the terms after $a_N$ being less than $l+\varepsilon<1$, thus apply the ratio lemma to have $a_n\to 0$. 
+\end{itemize}
+\end{proof}
+\end{thm}
+
+\begin{thm}{}{}\\ Suppose $k\in\N$. Then
+$$\frac{x^n}{n^k}\to\begin{cases}
+\infty & \text{if $x>1$} \\
+0 & \text{if $0<x\leq1$} 
+\end{cases}$$
+\begin{proof}\\ Consider $\frac{a_{n+1}}{a_n}$ with $a_n=\left(\frac{x^n}{n^k}\right)$, We have that 
+\begin{align*}
+\frac{a_{n+1}}{a_n}&=\frac{x^{n+1}}{(n+1)^k}\frac{n^k}{x^n} \\
+&=\left(1-\frac{1}{n+1}\right)^kx
+\end{align*}
+We have that $\left(1-\frac{1}{n+1}^k\right)\to 0$ so by the ratio lemma, it converges to $0$ whenever $0<x\leq1$. Then suppose that $b_n=\frac{1}{a_n}$. Then $\frac{b_{n+1}}{b_n}=\frac{1}{\left(1-\frac{1}{n+1}\right)^k}\frac{1}{x}$ thus $b_n$ tends to $0$ whenever $x>1$. Then by taking the reciprocal we have $a_n\to\infty$ when $x>1$. 
+\end{proof}
+\end{thm}
+
+\subsection{Further Developing the Real Numbers}
+\begin{defn}{Decimal Representation}{}\\ For every $x\in\R$, $$x=\sum_{k=0}^{\infty}\frac{d_k}{10^k}$$ where $d_n\in{0,1,\dots9}$ for all $n\in\N$ and $d_0$ an integer. We write $x=d_0.d_1d_2\dots$
+\end{defn}
+
+\begin{defn}{Categorization of Decimals}{}\\ An infinte decimal $\pm d_0.d_1d_2\dots$ is
+\begin{itemize}
+\item terminating if there exists a natural number $N$ such that $d_n=0$ for every $n>N$
+\item recurring if there exists natural numbers $N$ and $r$ such that $d_n=d_{n+r}$ for every $n>N$
+\item non-recurring if it is neither terminating nor recurring
+\end{itemize}
+\end{defn}
+
+\begin{thm}{}{}\\ Every infinte decimal $\pm d_0.d_1d_2\dots$ represents a real number. 
+\begin{proof}\\ Suppose we have an infinite decimal $\pm d_0.d_1d_2\dots$. Define a sequence $$s_n=\sum_{k=0}^{n}\frac{d_k}{10^k}$$ Then we have that $(s_n)$ is increasing and is bounded by by the infinite decimal. Thus by the completeness axiom $(d_n)$ converges and it converges to its supremum which is a real number. Thus the real number it represents is its supremum. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{}{}\\ Every real number can be represented by an infinte decimal. 
+\begin{proof}\\ Define a sequence $$s_n=\sum_{k=0}^{n}\frac{d_k}{10^k}$$ with $d_k$ selected such that $d_k$ is the largest in ${0,\dots 9}$ and $s_n$ is less than $x\in\R$. Then we have that $(s_n)$ is increasing and is bounded by $x$. Thus by the completeness axiom $(s_n)$ converges and it converges to its supremum. Note that for however small $\varepsilon$ there exists an $n\in\N$ such that $10^n\varepsilon>1$, and thus $\varepsilon>\frac{1}{10^n}$. Then for every $\varepsilon>0$ there exists some $N$ such that $$\abs{x-\sum_{k=0}^{n}\frac{d_k}{10^k}}<\frac{1}{10^n}<\varepsilon$$ whenever $n>N$. Thus the condition for convergence is satisfied and $(s_n)\to x$. Thus the there exists an infinite decimal such that it converges to the selected real number. 
+\end{proof}
+\end{thm}
+
+\begin{lmm}{}{}\\ For every real number $x$ there is a sequence of rationals that converges to $x$. 
+\begin{proof}\\ By the construction of the last theorem the sequence used is a sequence of rationals that converges to $x$. 
+\end{proof}
+\end{lmm} 
+
+\begin{thm}{}{}\\ Every real number $x$ is rational if and only if it can be written as a terminating or recurring decimal. This implies that $x$ is irrational if and only if it is non-recurring. 
+\begin{proof}\\ We first prove the forward implication. Suppose that $x=\frac{p}{q}$ with $p,q\in\N$. To represent a negative real number simply append the minus operation in front of $\frac{p}{q}$. Now, remove the integer part of $x$ so that the new number, $y$, is between $0$ and $1$. Then $y$ is also a rational number since alegra under rationals are closed. Let $y=\frac{m}{n}$. Let $m=d_0n+r_1$. Then let $10r_1=d_1n+r_2$. Recursively define $10r_{k-1}=d_{k-1}n+r_k$. Observe that $r_k\in\{o,\dots,n-1\}$. Thus the operation eventually repeats, and we obtain a recurring decimal. If the recurring block of the decimal is only $0$, then it is in fact a terminating decimal, a subset of recurring decimals. Note that the proof here required knowledge on basic number theory. \\~\\
+We now prove the backward implication. Suppose that we have a recursive decimal $x$ with $0<x<1$, a non-recurring block of length $p$ and recurring block of length $q$. Then we have $(10^{p+q}-1)x=n\in\N$. Then we have $x=\frac{n}{10^{p+q}-1}$. Append any integer to the front of the decimal then any recurring decimal can be represented by a rational number. 
+\end{proof}
+\end{thm}
+
+\begin{crl}{}{}\\ The series $$a_n=\left(1+\frac{1}{n}\right)^n$$ converges. 
+\begin{proof}\\ Consider $\frac{a_{n+1}}{a_n}$. We have that $\frac{a_{n+1}}{a_n}=\left(1+\frac{1}{n+1}\right)\left(1-\frac{1}{(n+1)^2}\right)^n$. Note that since $\frac{-1}{(n+1)^2}>-1$, we can apply the Bernoulli's Inequality can be applied. Then $$\left(1+\frac{1}{n+1}\right)\left(1-\frac{1}{(n+1)^2}\right)^n\geq\left(1+\frac{1}{n+1}\left(1-\frac{n}{(n+1)^2}\right)\right)=1+\frac{1}{(n+1)^3}\geq 1$$ Thus $a_n$ is an increasing sequence. 
+\\~\\ Now note that $\left(1+\frac{1}{2n}\right)^n=\frac{1}{\left(1+\frac{1}{2n+1}\right)^n}$. Since $\frac{-1}{2n+1}>-1$. Thus we can apply Bernoulli's Inequality to have 
+\begin{align*}
+\left(1-\frac{1}{2n+1}\right)^n&\geq1-\frac{n}{2n+1} \\
+\left(1-\frac{1}{2n+1}\right)^n&\geq\frac{n+1}{2n+1} \\
+\frac{2n+1}{n+1}&\geq\frac{1}{\left(1-\frac{1}{2n+1}\right)^n} \\
+2-\frac{1}{n+1}&\geq\left(1+\frac{1}{2n}\right)^n \\
+2&\geq\left(1+\frac{1}{2n}\right)^n \\
+\end{align*}
+Then we have $0\leq a_{2n}\leq 4$, which is bounded. By the completeness axiom, this sequence converges. 
+\end{proof}
+\end{crl}
+
+\pagebreak
+\section{Series}
+\subsection{Series and Convergences}
+\begin{defn}{Definition of Series}{}\\ Let $(a_n)_{n\in\N}$ be a sequence of real numbers. We denote $$\sum_{k=1}^{\infty}a_n=a_1+a_2+\dots+a_k+\dots$$ as an infinite series. The $n$th partial sum of the series is defined by $$s_n=\sum_{k=1}^{n}a_k$$
+\end{defn} 
+
+\begin{defn}{Convergence of Series}{}\\ The series is said to converge if the sequence of partial sums converge. The series diverges if the sequence of partial sums diverge. 
+\end{defn}
+
+\begin{thm}{Algebra of Series}{}\\ Let $(a_n)_{n\in\N}$ and $(b_n)_{n\in\N}$ be sequecnces in $\R$ and let $s,t\in\R$. If $\sum_{k=1}^\infty a_k$ and $\sum_{k=1}^\infty b_k$ converges, then $$\sum_{k=1}^\infty(sa_k+tb_k)$$ converges. 
+\begin{proof}\\ Since series are also sequences, we can simply apply the arithmetic of sequences to obtain the results. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{Geometric Series}{}\\ The geometric series $$\sum_{k=0}^{\infty}ar^k$$ where $a,r\in\R$ and $a\neq0$, converges if and only if $\abs{r}<1$. In this case $$\sum_{k=0}^{\infty}ar^k=\frac{a}{1-r}$$ 
+\begin{proof}\\ Consider the partial sum $s_n=a+ar+\dots+ar^{n}$. We have $s_n=\frac{1-r^{n+1}}{1-r}$. If $\abs{r}<1$, then $(r^{n+1})$ converges to $0$. Then for every $(1-r)\varepsilon>0$ there exists some $N$ such that $n\geq N$ implies $\abs{r^{n+1}}<(1-r)\varepsilon$. Then
+\begin{align*}
+\abs{\frac{1-r^{n+1}}{1-r}-\frac{1}{1-r}}&=\abs{\frac{r^{n+1}}{1-r}}\\
+&<\varepsilon
+\end{align*} Thus the geometric series converges if and only if $\abs{r}<1$. 
+\end{proof}
+\end{thm}
+
+\begin{crl}{}{}\\ The infinite sum $$\sum_{k=0}^{\infty}\frac{1}{k!}$$ converges. 
+\begin{proof}\\  For all $n>0$, we have that $n!\geq2^{n-1}$, we have that $\frac{1}{n!}\leq\frac{1}{2^{n-1}}$. Thus we have that $$\sum_{k=0}^{n}\frac{1}{k!}\leq\sum_{k=0}^{n}\frac{1}{2^{k}}$$ $\sum_{k=0}^{n}\frac{1}{2^{k}}$ is a geometric series so it converges then it has an upper bound. By the completeness axiom, we have that the sum converges. 
+\end{proof}
+\end{crl}
+
+\begin{defn}{Euler's Number}{}\\ Define Euler's number to be $$e=\sum_{k=0}^{\infty}\frac{1}{k!}$$
+\end{defn}
+
+\begin{prp}{}{}\\ $$e=\lim_{n\to\infty}\left(1+\frac{1}{n}\right)^n=\sum_{k=0}^{\infty}\frac{1}{k!}$$ 
+\begin{proof}\\ We start by considering the $n$th term of both sequences. From the binomial theorem, we have that
+\begin{align*}
+\left(1+\frac{1}{n}\right)^n&=\sum_{k=0}^{n}\frac{1}{k!}\left(1-\frac{1}{n}\right)\left(1-\frac{2}{n}\right)\cdots\left(1-\frac{k-1}{n}\right)\\
+&\leq\sum_{k=0}^{n}\frac{1}{k!}
+\end{align*} Thus letting $n\to\infty$, we have $$\lim_{n\to\infty}\left(1+\frac{1}{n}\right)^n\leq\sum_{n=0}^{\infty}\frac{1}{n!}$$\\
+However, if $n>m$, $$\left(1+\frac{1}{n}\right)^n=\sum_{k=0}^{m}\frac{1}{k!}\left(1-\frac{1}{n}\right)\left(1-\frac{2}{n}\cdots\left(1-\frac{k-1}{n}\right)\right)$$ Letting $n\to\infty$, we have $e\geq s_m$. Letting $m\to\infty$, we have $e\geq s$. Thus we have $e=\lim_{n\to\infty}\left(1+\frac{1}{n}\right)^n$
+\end{proof}
+\end{prp}
+
+\begin{thm}{Null Sequence Test}{}\\ If $(a_n)_{n\in\N}$ does not tend to $0$ then $\sum_{k=0}^\infty a_k$ diverges. 
+\begin{proof}\\ Suppose that $\sum_{n=0}^\infty a_n$ converges. Then we have that for all $\varepsilon>0$, there exists some $N$ such that $$\abs{\sum_{k=0}^m a_k-\sum_{k=0}^n a_k}<\varepsilon$$ whenever $n,m>N$. In particular, choosing $m=n+1$, we have
+\begin{align*}
+\abs{\sum_{k=0}^{n+1} a_k-\sum_{k=0}^n a_k}&=\abs{a_{n+1}}\\
+&<\varepsilon
+\end{align*} for all $n>N$. Thus we have that $(a_{n})\to 0$. 
+\end{proof}
+\end{thm}
+
+\subsection{Series with Non-negative Terms}
+\begin{thm}{}{}\\ If $a_n\geq 0 $ for all $n>N$ with $N\in\N$ then the series $\sum_{k=1}^\infty a_k$ converges in $\R$ if and only if its partial sums are bounded. 
+\begin{proof}\\ We first prove the forward implication. Suppose that $\sum_{k=1}^\infty a_k$ converges, then by 2.1.4 it is bounded. Now suppose that $\sum_{k=1}^\infty a_k$ is bounded. Then since $a_n\geq0$ then $\sum_{k=1}^\infty a_k$ is increasing. Then $\sum_{k=1}^\infty a_k$ is convergent by monotonic increasing theorem. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{Direct Comparison Test}{}\\ Suppose $0\leq a_n\leq b_n$ for all $n>N$ with $N\in\N$.
+\begin{itemize}
+\item If $\sum_{k=1}^\infty b_k$ converges then $\sum_{k=1}^\infty a_k$ converges. 
+\item If $\sum_{k=1}^\infty a_k$ diverges then $\sum_{k=1}^\infty b_k$ diverges. 
+\end{itemize}
+\begin{proof}\\ Suppose $0\leq a_n\leq b_n$ for all $n>N$. 
+\begin{itemize}
+\item Suppose that $\sum_{k=1}^\infty b_k$ converges to $b$. Then since $a_n\leq b_n$ for all $n$ then $a_n$ is bounded above by $b$. Then by the monotonic increasing theorem $a_n$ converges. 
+\item Suppose that $\sum_{k=1}^\infty a_k$ diverges. Then for every $C>0$ there exists $N$ such that $\sum_{k=1}^\infty a_k>C$ for all $n>N$. Then $$C<\sum_{k=1}^\infty a_k\leq\sum_{k=1}^\infty b_k$$ thus we also have $\sum_{k=1}^\infty b_k\geq C$. Thus $\sum_{k=1}^\infty b_k$ diverges. 
+\end{itemize}
+\end{proof}
+\end{thm}
+
+\begin{lmm}{}{}\\ The harmonic series $\sum_{k=1}^\infty\frac{1}{k}$ diverges. 
+\begin{proof}\\ Let $s_n=\sum_{k=1}^{n}\frac{1}{k}$. Then
+\begin{align*}
+s_{2n}&=\frac{1}{n+1}+\frac{1}{n+2}+\dots+\frac{1}{2n-1}+\frac{1}{2n}+s_n\\
+&\geq\frac{1}{2n}+\frac{1}{2n}+\dots+\frac{1}{2n}+\frac{1}{2n}+s_n\\
+&=s_n+\frac{1}{2}
+\end{align*}
+Now, we have 
+\begin{align*}
+s_{2^n}&\geq s_{2^{n-1}}+\frac{1}{2}\\
+&\geq s_{2^{n-2}}+\frac{1}{2}+\frac{1}{2}\\
+&\geq s_1+\frac{1}{2}+\dots+\frac{1}{2}\tag{$n$ times}\\
+&=1+\frac{n}{2}
+\end{align*}
+By the direct comparison test, we now have $s_n$ diverge since $1+\frac{n}{2}$ diverges. 
+\end{proof}
+\end{lmm}
+
+\begin{lmm}{}{}\\ $\sum_{k=1}^\infty\frac{1}{k^2}$ converges. 
+\begin{proof}\\ We first prove that $\sum_{k=2}^{\infty}\frac{1}{k^2-k}$ converges. Consider $s_n=\sum_{k=2}^{n}\frac{1}{(k)(k-1)}$. 
+\begin{align*}
+s_n&=\sum_{k=2}^{n}\left(\frac{1}{k-1}-\frac{1}{k}\right)\\
+&=\left(1+\frac{1}{2}+\frac{1}{3}+\dots+\frac{1}{n-1}\right)-\left(\frac{1}{2}+\frac{1}{3}+\dots+\frac{1}{n-1}+\frac{1}{n}\right)\\
+&=1-\frac{1}{n}
+\end{align*}
+Thus we have that $s_n\to1$. By the direct comparison test, we have that $\sum_{k=1}^\infty\frac{1}{k^2}$ converges. 
+\end{proof}
+\end{lmm}
+
+\begin{lmm}{}{}\\ The number $e$ is irrational. 
+\begin{proof}\\ Suppose that $e$ can be written in an irreducible fraction $\frac{p}{q}$. 
+\begin{align*}
+e-\sum_{k=1}^{q+1}\frac{1}{(k-1)!}&=\frac{p}{q}-\left(\frac{1}{0!}+\frac{1}{1!}+\dots+\frac{1}{q!}\right)\\
+&=\frac{p(q-1)!-(q!+q!+\frac{q!}{2}+\dots+1)}{q!}
+\end{align*}
+Then $k=p(q-1)!-(q!+q!+\frac{q!}{2}+\dots+1)\in\N$ and $e-\sum_{k=1}^{q+1}\frac{1}{(k-1)!}=\frac{k}{q!}$. 
+Now consider 
+\begin{align*}
+e-\sum_{k=1}^{q+1}\frac{1}{(k-1)!}&=\sum_{k=0}^{\infty}\frac{1}{k!}-\sum_{k=0}^{q}\frac{1}{k!}\\
+&=\frac{1}{(q+1)!}+\frac{1}{(q+2)!}+\dots\\
+&=\frac{1}{q!}\left(\frac{1}{q+1}+\frac{1}{(q+1)(q+2)}+\dots\right)\\
+&<\frac{1}{q!}\left(\frac{1}{2}+\frac{1}{2}\cdot\frac{1}{2}+\dots\right)\tag{since $q>1$}\\
+&=\frac{1}{q!}\left(\frac{1}{2}+\frac{1}{4}+\dots\right)\\
+&=\frac{1}{q!}\tag{by geometric series}\\
+\end{align*}
+Thus now we have that $\frac{k}{q!}<\frac{1}{q!}$ for some $k\in\N$ which is not possible for any choice of $k$. Thus we have arrived in a contradiction. 
+\end{proof}
+\end{lmm}
+
+In this section here we suppose that the techniques and origins of integration is already properly introduced, it would be weird to add the integral test to the section of integration since it is developed for testing series convergence. 
+\begin{thm}{Integral Bounds}{}\\ Let $f$ be decreasing and non-negative and integrable on the interval $[1,\infty)$. Then $$\int_{m+1}^{n+1}f(x)\,dx\leq\sum_{k=m+1}^{n+1}f(k)\leq\int_{m}^{n}f(x)\,dx$$ 
+\begin{proof}\\ The inequality is obtained through drawing the graph of a decreasing function $f$ and estimating the area of the curve with rectangles of width $1$. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{Integral Test}{}\\ Let $f$ be decreasing and non-negative and integrable on the interval $[1,\infty)$. Then $s_n=\sum_{k=1}^{n}f(k)$ converges if and only if $\int_{1}^{\infty}f(x)\,dx$ converges. 
+\begin{proof}\\ From the integral bounds, we have $$\sum_{k=0}^{\infty}f(k)\leq\int_{1}^{\infty}f(x)\,dx$$ Thus when the integral is converges, the increasing sum is bounded. Thus by the monotone convergence theorem, the $\sum_{k=0}^{\infty}$ converges. When the integral diverges, then $$\int_{0}^{\infty}f(x)\,dx\leq\sum_{k=0}^{\infty}f(k)$$ also diverges by the comparison test. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{$p$ series test}{}\\ $\sum_{k=1}^{\infty}\frac{1}{k^p}$ converges when $p>1$ and diverges when $0<p\leq1$. 
+\begin{proof}\\ When $0<p\leq1$, we have that $\sum_{k=1}^{\infty}\frac{1}{n^p}$ diverges by the direct comparison test with $\sum_{k=1}\frac{1}{n}$. When $p>1$, it converges by the direct comparison test with $\sum_{k=1}^{\infty}\frac{1}{n^2}$. For $p\in(1,2)$, we have that $\frac{1}{x^p}$ is decreasing. Consider 
+\begin{align*}
+\int_{1}^{\infty}\frac{1}{x^p}\,dx&=\lim_{n\to\infty}\frac{1}{(1-p)n^{(p-1)}}-\frac{1}{1-p}\\
+&=\frac{1}{p-1}
+\end{align*}Thus $\int_{1}^{\infty}\frac{1}{x^p}\,dx$ converges and by the integral test, $\sum_{k=1}^{\infty}\frac{1}{n^p}$ converges. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{Limit Comparison Test}{}\\ Let $a_n, b_n>0$ for all $n>N$ with $N\in\N$. If $\frac{a_n}{b_n}$ converges to $x\in(0,\infty)$, then $\sum_{k=1}^\infty b_k$ converge if and only if $\sum_{k=1}^\infty a_k$ converges. 
+\begin{proof}\\ We know that for every $\varepsilon>0$ there exists $N$ such that $$\abs{\frac{a_n}{b_n}-x}<\varepsilon$$ whenever $n>N$. This means that $$(x-\varepsilon)b_n<a_n<(x+\varepsilon)b_n$$ As $x>0$, choose $\varepsilon$ so that $x-\varepsilon>0$. Then $b_n<\frac{1}{x-\varepsilon}a_n$ thus by the direct comparison test if $\sum_{k=1}^\infty a_k$ converges then $\sum_{k=1}^\infty b_k$ converges. Similarly, $\frac{1}{c+\varepsilon}<b_n$ so if $\sum_{k=1}^\infty a_k$ diverges, then $\sum_{k=1}^\infty b_k$ diverges. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{Root Test}{}\\ Let $a_n\geq0$ for all $n$ and let $p=\lim_{n\to\infty}a_n^{1/n}$. 
+\begin{itemize}
+\item If $p<1$ then $\sum_{k=1}^\infty a_k$ converges
+\item If $p>1$ then $\sum_{k=1}^\infty a_k$ diverges
+\end{itemize} 
+\begin{proof}\\ We first proof the case with $p<1$. Choose $\varepsilon>0$ such that $p+\varepsilon<1$. Then for all $n>N$, we have $a_n^\frac{1}{n}<(p+\varepsilon)$ and $a_n\leq(p+\varepsilon)^n$. Since $p+\varepsilon<1$, $\sum_{k=0}^{\infty}(p+\varepsilon)^k$ converges and by comparison test, $\sum_{k=1}^\infty a_k$ converges. \\~\\
+Now suppose that $p>1$ then choose $\varepsilon>0$ such that $p-\varepsilon>1$. Then for all $n>N$ we have $a_n^\frac{1}{n}>p+\varepsilon$ thus $a_n>(p+\varepsilon)^n$. Then $\sum_{n=0}^{\infty}(p+\varepsilon)^n$ diverges by the geometric series and $\sum_{k=1}^\infty a_k$ diverges by comparison test. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{Ratio Test}{}\\ Let $a_n>0$ for all $n>N$ with $N\in\N$. Let $r=\lim_{n\to\infty}\frac{a_{n+1}}{a_n}$
+\begin{itemize} 
+\item If $r<1$, then $\sum_{k=1}^\infty a_k$ converges. 
+\item If $r>1$, then $\sum_{k=1}^\infty a_k$ diverges. 
+\end{itemize} 
+\begin{proof}\\ Suppose that $r<1$. Then choose $$0<\varepsilon=\frac{1-r}{2}<1$$ Then there exists some $N$ such that for every $n>N$, $$\abs{\frac{a_{n+1}}{a_n}-r}<\frac{1-r}{2}\implies\frac{a_{n+1}}{a_n}<\frac{1+r}{2}<1$$ This means that $a_{n+1}<(\frac{1+r}{2})a_n$ and $a_{n+1}<(\frac{1+r}{2})^na_1$. Since $\frac{1+r}{2}<1$, $\sum_{n=0}^{\infty}(\frac{1+r}{2})^n$ converges by geometric series and $\sum a_n$ converges by comparison test. \\~\\
+Similarly for the divergence case, choose $$\varepsilon=\frac{r-1}{2}$$ Then there exists some $N$ such that for every $n>N$, $$\abs{\frac{a_{n+1}}{a_n}-r}<\frac{1-r}{2}\implies 1<\frac{r+1}{2}<\frac{a_{n+1}}{a_n}$$ Then $a_n(\frac{r+1}{2})<a_{n+1}$ and $a_1(\frac{r+1}{2})^n<a_{n+1}$. By geometric series $\sum_{n=0}^{\infty}(\frac{r+1}{2})^n$ diverges and by comparison test $\sum_{k=1}^\infty a_k$ diverges. 
+\end{proof}
+\end{thm}
+
+\subsection{Alternating Series}
+\begin{defn}{Alternating Series}{}\\ An alternating series is one of the form $$\sum_{k=1}^{\infty}(-1)^{k+1}a_k$$ where $a_n>0$ for all $n\in\N$. 
+\end{defn}
+
+\begin{thm}{Alternating Series Test}{}\\ Suppose $a_n\geq a_{n+1}$ for all $n$ and $a_n\to0$. Then $$\sum_{k=1}^{\infty}(-1)^ka_k$$ converges. 
+\begin{proof}\\ Firstly note that $$s_{2n+2}=\sum_{k=1}^{2n}(-1)^ka_k-a_{2n+1}+a_{2n+2}$$ Since $a_n$ is decreasing, $a_{2n+1}\geq a_{2n+1}$ thus $s_{2n+2}\geq s_{2n}$. Similarly, we have $s_{2n+1}\leq s_{2n-1}$. Combining the two inequality, we have $$s_2\leq s_{2n}+a_{2n+1}=s_{2n+1}\leq s_1$$ Since $s_{2n}$ is increasing and bounded, it converges. Similarly, $s_{2n+1}$ is decreasing and bounded thus converges. Suppose that $(s_{2n})\to s$. Then $s_{2n}+a_{2n+1}=s_{2n+1}$. Thus $(s_{2n+1})\to s+0=s$. Suppose that for all $\varepsilon$, there exists $N$ such that $\abs{a_{n}}<\varepsilon$ whenever $n>N$. Then, we have
+\begin{align*}
+s_{2n}&\leq s\\
+s_{2n+1}-a_{2n+1}&\leq s\\
+s_{2n+1}-s&\leq a_{2n+1}\\
+\abs{s_{2n+1}-s}&\leq a_{2n+1}\\
+\abs{s_{2n+1}-s}&<\varepsilon\\
+\end{align*}
+Similarly, 
+\begin{align*}
+s&\leq s_{2n-1}\\
+s&\leq s_{2n}-a_{2n-1}\\
+s-s_{2n}&\leq a_{2n-1}\\
+\abs{s_{2n}-s}&\leq a_{2n-1}\\
+\abs{s_{2n}-s}&<\varepsilon\\
+\end{align*}
+Thus we have that $\abs{s_n-s}<\varepsilon$ whenever $n>N$ and $(s_n)$ converges. 
+\end{proof}
+\end{thm}
+
+\begin{lmm}{}{}\\ The alternating harmonic series $$\sum_{k=1}^{\infty}\frac{(-1)^{k+1}}{k}$$ converges. 
+\begin{proof}\\ Simple application of the alternating series test. 
+\end{proof}
+\end{lmm}
+
+\subsection{Absolute Convergence}
+\begin{defn}{Absolute Convergence}{}\\ A series $\sum_{k=0}^\infty a_k$ in $\R$ is said to converge absolutely if $$\sum_{k=0}^\infty\abs{a_k}$$ converges.
+\end{defn}
+
+\begin{thm}{}{}\\ Every absolutely convergent series is convergent.
+\begin{proof}\\ Consider $s_n=\sum_{k=1}^na_k$ and $t_n=\sum_{k=1}^n\abs{a_n}$. Without loss of generality suppose that $n>m$
+\begin{align*}
+\abs{s_n-s_m}&=\abs{a_n+a_{n-1}+\dots+a_{m+1}}\\
+&\leq \abs{a_n}+\abs{a_{n-1}}+\dots+\abs{a_{m+1}}\\
+&=t_n-t_m\\
+&=\abs{t_n-t_m}
+\end{align*}
+If $(t_n)$ converges then for every $\varepsilon>0$ there exists $N$ such that $\abs{t_n-t_m}<\varepsilon$ for all $n,m>N$. This implies that $\abs{s_n-s_m}<\varepsilon$ thus $s_n$ is convergent. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{Ratio Test for Series}{}\\ Suppose $a_n\neq0$ for all $n$ and $\abs{\frac{a_{n+1}}{a_n}}\to l$. Then $\sum_{k=1}^{\infty}a_k$ converges absolutely if $0\leq l<1$ and diverges if $l>1$. 
+\begin{proof}\\
+Since $\frac{a_{n+1}}{a_n}\to l<1$, choose $\varepsilon>0$ such that $l+\varepsilon<1$. There exists an $N$ such that $\abs{\frac{a_{n+1}}{a_n}-l}<\varepsilon$ whenever $n>N$. 
+\begin{align*}
+\abs{\frac{a_{n+1}}{a_n}-l}&<\varepsilon\\
+\abs{\abs{\frac{a_{n+1}}{a_n}}-l}&<\varepsilon\\
+\abs{\frac{a_{n+1}}{a_n}}&<l+\varepsilon\\
+\abs{a_{n+1}}&<\abs{a_n}(l+\varepsilon)\\
+\abs{a_{n+1}}&<\abs{a_N}(l+\varepsilon)^{n+1-N}\\
+\end{align*}
+Since $$\sum_{k=1}^{\infty}\abs{a_N}(l+\varepsilon)^{k+1-N}=\frac{a_N}{1-(l+\varepsilon)}$$ We have that $\sum_{k=1}^{\infty}\abs{a_k}$ converges by comparison test. \\~\\
+Now suppose that $l>1$, there exists $N$ $\abs{a_{n+1}}>\abs{a_n}$ for some $n>N$. This means that $(a_n)$ does not converge to $0$ and by the null sequence test $\sum_{k=1}^{\infty}\abs{a_k}$ diverges. 
+\end{proof}
+\end{thm}
+
+\subsection{Rearrangement of Series}
+\begin{defn}{Rearrangement}{}\\ $(b_n)_{n\in\N}$ is a rearrangement of $(a_n)_{n\in\N}$ if there is a bijection $\sigma:\N\to\N$ such that for all $n\in\N$ $b_n=a_{\sigma(n)}$
+\end{defn}
+
+\begin{thm}{}{}\\ Suppose $(b_n)_{n\in\N}$ is a rearrangement of $(a_n)_{n\in\N}$ and $a_n>0$ for all $n$ and $\sum_{k=1}^{\infty}a_k$ converges. Then $\sum_{k=1}^{\infty}b_k$ converges and $$\sum_{k=1}^{\infty}b_k=\sum_{k=1}^{\infty}a_k$$ 
+\begin{proof}\\ Suppose that $s_n=\sum_{k=1}^{n}a_k$, $\sum_{k=1}^{\infty}a_k=s$ and $t_n=\sum_{k=1}^{n}b_k$. Suppose that $a_{\sigma(n)}=b_n$. Fix $N$ and consider $M_N=\max\{\sigma(r):r\leq N\}$. Then the first $a_{M_n}$ terms contains the first $b_n$ terms. Since $a_n,b_n>0$ for all $n$, we have $t_n<s_{M_N}<s$. Thus $t_n$ is increasing and bounded and converges by the completeness axiom to, say $t$ with $t\leq s$. Reverse the roles of $a_n$ and $b_n$ now given that $t_n$ converges, and we get $s\leq t$. Thus $s=t$. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{}{}\\ Suppose $(b_n)_{n\in\N}$ is a rearrangement of $(a_n)_{n\in\N}$ and $\sum_{k=1}^{\infty}a_k$ converges absolutely. Then $\sum_{k=1}^{\infty}b_k$ converges and $\sum_{k=1}^{\infty}b_k=\sum_{k=1}^{\infty}a_k$. 
+\begin{proof}\\
+Let $\sum_{k=1}^{\infty}a_k$ converges absolutely and $\sum_{k=1}^{\infty}b_k$ a rearrangement of the series. Consider $u_n=\frac{1}{2}(\abs{a_n}+a_n)$, $v_n=\frac{1}{2}(\abs{a_n}-a_n)$, $x_n=\frac{1}{2}(\abs{b_n}+b_n)$, $y_n=\frac{1}{2}(\abs{b_n}-b_n)$. We have that $$u_n=\begin{cases}
+a_n & a_n\geq0\\
+0 & a_n\leq 0
+\end{cases}$$ $$v_n=\begin{cases}
+0 & a_n\geq0\\
+a_n & a_n\leq 0
+\end{cases}$$ $$x_n=\begin{cases}
+b_n & b_n\geq0\\
+0 & b_n\leq 0
+\end{cases}$$ $$y_n=\begin{cases}
+0 & b_n\geq0\\
+b_n & b_n\leq 0
+\end{cases}$$
+We have $\sum_{k=1}^{\infty}u_k\leq\sum_{k=1}^{\infty}\abs{a_k}$ thus $\sum_{k=1}^{\infty}u_k$ is convergent by completeness axiom and $$\sum_{k=1}^{\infty}-v_k\leq\sum_{k=1}^{\infty}\abs{a_k}$$ thus $\sum_{k=1}^{\infty}-v_k$ converges by completeness axiom and $$\sum_{k=1}^{\infty}-v_k=-\sum_{k=1}^{\infty}v_k$$ converges. We have that $\sum_{k=1}^{\infty} u_k=\sum_{k=1}^{\infty} x_k$ and $\sum_{k=1}^{\infty} v_k=\sum_{k=1}^{\infty} y_k$ by construction. Thus $$\sum_{k=1}^{\infty} a_k=\sum_{k=1}^{\infty}(u_k-v_k)=\sum_{k=1}^{\infty}(x_k-y_k)=\sum_{k=1}^{\infty} b_k$$ is convergent. 
+\end{proof}
+\end{thm}
+
+\begin{defn}{Conditionally Convergent}{}\\ A series $\sum_{k=1}^{\infty}a_k$ is said to be conditionally convergent if $\sum_{k=1}^{\infty}a_k$ is convergent but $$\sum_{k=1}^{\infty}\abs{a_k}$$ diverges. 
+\end{defn}
+
+\begin{thm}{}{}\\ Suppose $\sum_{k=1}^{\infty}a_k$ is conditionally convergent. Consider $\sum_{k=1}^{\infty}u_k$ and $\sum_{k=1}^{\infty}v_k$ where $$u_n=\begin{cases}
+a_n & \text{if $a_n\geq0$} \\
+0 & \text{if $a_n<0$}
+\end{cases}$$
+and
+$$v_n=\begin{cases}
+0 & \text{if $a_n\geq0$} \\
+a_n & \text{if $a_n<0$}
+\end{cases}$$
+Then $\sum_{k=1}^{\infty}u_k=+\infty$ and $\sum_{k=1}^{\infty}v_k=-\infty$. 
+\begin{proof}\\
+Note that $a_n=u_n-v_n$ and $\abs{a_n}=u_n+v_n$. Suppose for contradiction that $\sum u_n$ converges. Then $\abs{a_n}=2u_n-a_n$ and thus $\sum\abs{a_n}$ converges, a contradiction. Suppose also that $\sum v_n$ converges. Then again $\abs{a_n}=2v_n+a_n$ and thus $\sum\abs{a_n}$ converges, a contradiction. Thus we have $\sum u_n$ and $\sum v_n$ diverges. Since $u_n\geq 0$ and $v_n\leq 0$ for all n, we have that $\sum u_n=\infty$ and $\sum v_n=-\infty$. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{}{}\\ Suppose $\sum_{k=1}^{\infty}a_k$ is conditionally convergent. Then for every $l\in\R$ there exists a rearrangement $(b_n)$ of $(a_n)$ such that $\sum_{k=1}^{\infty}b_k=l$. 
+\begin{proof}\\
+Let $(p_n)$ be the subsequence of all positive terms of $(a_n)$ and $(q_n)$ all its negative terms. We have that $(p_n)\to+\infty$ and $(q_n)\to-\infty$. Consider $l\geq0$. There exists $N_1$ such that $S_1=\sum_{k=1}^{N_1}a_k<l$ and $S_1+a_{N_1+1}>l$. Then since $(q_n)\to-\infty$. There exists $M_1$ such that $T_1=S_1+\sum_{k=1}^{M_1}q_k<l$ but $S_1+\sum_{k=1}^{M_1-1}q_k>l$. Repeat the process to find the rearrangement of our sequence $$p_1,\dots,p_{N_1},q_1,\dots,q_{M_1},p_{N_1+1},\dots,p_{N_2},q_{M_1+1},\dots,q_{M_2},\dots$$
+Its partial sums converges since $\abs{S_i-l}\leq p_{N_i}$ and $\abs{T_i-l}\leq -q_{M_i}$ for all $i$ and $p_{N_i}$ and $q_{M_i}$ tends to $0$ since $a_n$ is null. Swap the roles of $q_n$ and $p_n$ for the case $l<0$. 
+\end{proof}
+\end{thm}
+
+\pagebreak
+\section{Limits and Continuity}
+\subsection{Limits at a Point}
+\begin{defn}{Limits at a Point}{}\\ Let $f:(a,c)\cup(c,b)\to\R$ be a function. We say that $f$ converges to $L\in\R$ at $c$ if for every $\varepsilon>0$, there exists $\delta>0$ such that for all $x$ for which $0<\abs{x-c}<\delta$, we have $\abs{f(x)-L}<\varepsilon$. In this case, we write $$\lim_{x\to c}f(x)=L$$
+\end{defn}
+
+\begin{defn}{One Sided Limits}{}\\ Let $f:(a,c)\cup(c,b)\to\R$ be a function. 
+\begin{itemize}
+\item We say that $$\lim_{x\to c^+}f(x)=L\in\R$$ if for every $\varepsilon>0$ there exists $\delta>0$ such that for all $x\in(c,c+\delta)$ we have $\abs{f(x)-L}<\varepsilon$
+\item We say that $$\lim_{x\to c^-}f(x)=L\in\R$$ if for every $\varepsilon>0$ there exists $\delta>0$ such that for all $x\in(c-\delta,c)$ we have $\abs{f(x)-L}<\varepsilon$
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{}\\ Let $f:(a,c)\cup(c,b)\to\R$ be a function. Let $L\in\R$. Then $\lim_{x\to c}f(x)=L$ if and only if $$\lim_{x\to c^+}f(x)=\lim_{x\to c^-}f(x)=L$$ 
+\begin{proof}\\ An easy manipulation of the definition of limits. 
+\end{proof}
+\end{lmm}
+
+\begin{thm}{Sequential Limits}{}\\ Let $f:(a,c)\cup(c,b)\to\R$ be a function. Then $$\lim_{x\to c}f(x)=L$$ if and only if for every sequence $(x_n)$ in $(a,b)\setminus\{c\}$ with $(x_n)\to c$ we have $(f(x_n))\to L$. 
+\begin{proof}\\ Suppose that $\lim_{x\to c}f(x)=L$. Then for every $\varepsilon>0$ there exists a number $\delta>0$ such that if $\abs{x-c}<\delta$ then $\abs{f(x)-L}<\varepsilon$. Consider a sequence with $(x_n)\to c$. Then for every $\delta>0$ we have that $\abs{x_n-c}<\delta$ for all $n$ larger than some $N$. However this implies that $\abs{f(x_n)-L}<\varepsilon$ for all $n$ larger than $N$. Thus we have $(f(x_n))\to L$. \\~\\ 
+Now suppose that $(x_n)\to c\implies (f(x))\to L$. This means that for all $\delta>0$, there exists $N$ such that $\abs{x_n-c}<\delta$ for all $n>N$. Consider any $x$ in the interval $I$. Then there is a sequence $(x_n)$ that contains $x$. That sequence has the properties that $\abs{x_n-c}<\delta$. We thus have $\abs{f(x)-L}<\varepsilon$ by assumption. 
+\end{proof}
+\end{thm}
+
+\begin{prp}{Algebra of Limits}{}\\ Let $f,g:(a,c)\cup(c,b)\to\R$ be functions. Let $\lim_{x\to c}f(x)=L$ and $\lim_{x\to c}g(x)=L$. Then the following are true. 
+\begin{itemize}
+\item $\lim_{x\to c}\left(f(x)+g(x)\right)=L+M$
+\item $\lim_{x\to c}\left(f(x)g(x)\right)=LM$
+\item If $M\neq 0$, then $\lim_{x\to c}(f(x)/g(x))=L/M$
+\end{itemize}
+\begin{proof}\\ Convert them to sequential definition of limits and apply algebra of sequences. 
+\end{proof}
+\end{prp}
+
+\begin{thm}{Sandwich Theorem for Limits}{}\\ Let $f,g,h:(a,c)\cup(c,b)\to\R$ be functions. If $f(x)\leq h(x)\leq g(x)$ for all $x\in (a,c)\cup(c,b)$, and $$\lim_{x\to c}f(x)=\lim_{x\to c}g(x)=L$$ then we have $$\lim_{x\to c}h(x)=L$$ 
+\begin{proof}\\ Convert them to sequential definition and apply the sandwich theorem of sequences. 
+\end{proof}
+\end{thm}
+
+\begin{defn}{Limits to Infinity}{}\\ Let $f:(a,c)\cup(c,b)\to\R$ be a function. 
+\begin{itemize} 
+\item We say that $f$ converges to $\infty$ as $x\to c$ if for all $M>0$ there exists $\delta>0$ such that for all $x$ for which $0<\abs{x-c}<\delta$, we have $f(x)>M$. In this case we write $$\lim_{x\to c}f(x)=\infty$$
+\item We say that $f$ converges to $-\infty$ as $x\to c$ if for all $M<0$ there exists $\delta>0$ such that for all $x$ for which $0<\abs{x-c}<\delta$, we have $f(x)<M$. In this case we write $$\lim_{x\to c}f(x)=-\infty$$
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Limits at Infinity}{}\\ Let $f:\R\to\R$ be a function. 
+\begin{itemize} 
+\item We say that $f$ converges to $L\in\R$ at positive infinity if for every $\varepsilon>0$ there exists a $M>0$ such that $x>M$ implies $\abs{f(x)-L}<\varepsilon$. In this case we write $$\lim_{x\to\infty}f(x)=L$$
+\item We say that $f$ converges to $L\in\R$ at negative infinity if for every $\varepsilon>0$ there exists a $M<0$ such that $x<M$ implies $\abs{f(x)-L}<\varepsilon$ In this case we write $$\lim_{x\to-\infty}f(x)=L$$
+\end{itemize}
+\end{defn}
+
+\subsection{Continuity}
+\begin{defn}{Continuity}{}\\ A function $f:I\subseteq\R\to\R$ is said to be continuous at $c\in I$ if and only if for every $\varepsilon>0$ there exists $\delta>0$ such that for every $x\in I$, $$\abs{x-c}<\delta\implies\abs{f(x)-f(c)}<\varepsilon$$
+\end{defn}
+
+\begin{defn}{Sequential Continuity}{}\\ Let $f:(a,b)\to\R$ be a function. Let $c\in (a,b)$. We say that $f$ is sequentially continuous at $c$ if for every sequence $(x_n)_{n\in\N}\subset(a,b)$ that converges to $c$, then $$(f(x_n))_{n\in\N}\to f(c)$$
+\end{defn}
+
+\begin{thm}{}{}\\ Let $f:(a,b)\to\R$ be a function. Let $c\in (a,b)$. Then the following are equivalent. 
+\begin{itemize}
+\item $f$ is continuous at $c$. 
+\item $f$ is sequentially continuous at $c$. 
+\item $\lim_{x\to c}f(x)=f(c)$. 
+\end{itemize} 
+\begin{proof}\\ We first prove the forward implication. Suppose that $f$ is continuous at $c$ and $(x_n)\to c$. Then for every $\varepsilon>0$, there exists $\delta>0$ such that for all $x\in I$, $\abs{x-c}<\delta\implies\abs{f(x)-f(c)}<\varepsilon$. Now, choose $N$ so that if $n>N$, then $\abs{x_n-c}<\delta$. Then if $n>N$ we have $\abs{f(x_n)-f(c)}<\varepsilon$. Thus $\left(f(x_n)\right)\to c$. \\~\\
+Now suppose $f$ is not continuous at $c$. Then there are some $\varepsilon>0$ such that there exists some $x$ with $\abs{x-c}<\delta\implies\abs{f(x)-f(c)}\geq\varepsilon$. We now construct a sequence as follows. For each $n$, choose $x_n$ such that $\abs{x_n-c}<\delta=\frac{1}{n}$ but $\abs{f(x_n)-f(c)}\geq\varepsilon$. Then the sequence constructed tends to $c$ since $\left(\frac{1}{n}\right)\to0$ but $f(x_n)$ does not converge to $f(c)$. \\~\\
+
+$f$ is continuous if and only if for all $\epsilon>0$, there exists $\delta>0$ such that $x\in(c-\delta,c+\delta)$ implies $\abs{f(x)-f(c)}<\epsilon$. But this is precisely the definition of the limit of $f$. 
+\end{proof}
+\end{thm}
+
+\begin{prp}{}{}\\ Let $f,g:I\subseteq\R\to\R$ and continuous at $c\in I$. Then
+\begin{itemize}
+\item $f+g$ is continuous at $c$
+\item $f\cdot g$ is continuous at $c$
+\item If $g(c)\neq0$ then $\frac{f}{g}$ is continuous at $c$
+\end{itemize}
+\begin{proof}\\ The three proofs are simple. Using sequential continuity, since we have the algebra of sequences, we also conclude the algebra of continuous functions. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{}\\ Let $f:I\subseteq\R\to\R$ and $g:J\subseteq\R\to I$. If $f$ is continuous at $g(c)$ and $g$ is continuous at $c$, then $f\circ g$ is continuous at $c$. 
+\begin{proof}\\ Let $x_n\to c$, then $g(x_n)\to g(c)$ thus $f(g(x_n))\to f(g(c))$. 
+\end{proof}
+\end{prp}
+
+\begin{thm}{Intermediate Value Theorem}{}\\ Let $f:[a,b]\to\R$ be continuous and suppose that $f(a)<u<f(b)$. Then $$f(c)=u$$ for some $c\in(a,b)$.
+\begin{proof}\\ Consider the set $$A=\{x\in[a,b]:f(x)\leq u\}$$ Since $a\in A$, $A$ is non-empty. Let $s=\sup(A)$. Suppose that $f(s)<u$. Since $f$ is continuous, we can choose $\varepsilon=u-f(s)$. Then for some $\delta>0$, $\abs{f(x)-f(s)}<\varepsilon$ as long as $\abs{x-s}<\delta$. In particular, consider $x=s+\frac{\delta}{2}$. Then we have $$f\left(s+\frac{\delta}{2}\right)<f(s)+\varepsilon=u$$ Thus $s+\frac{\delta}{2}\in A$, a contradiction. \\~\\
+Now suppose that $f(s)>u$. Since $f$ is continuous, we can choose $\varepsilon=f(s)-u$. Then for some $\delta>0$, all $x$ that satisfies $\abs{x-s}<\delta$ also satisfy $\abs{f(x)-f(s)}<\varepsilon$. In particular, consider $x=s-\frac{\delta}{2}$. Then we have $$f\left(s-\frac{\delta}{2}\right)>f(s)-\varepsilon=u$$ Hence $s-\frac{\delta}{2}$ is an upper bound smaller than s, a contradiction. 
+\end{proof}
+\end{thm}
+
+\begin{prp}{}{}\\ If $f:I\subseteq\R\to\R$ is continuous on the interval $I$ then its range is an interval. 
+\begin{proof}\\ Suppose that $a,b\in I$. Then $f(a),f(b)\in f(I)$ and by the IVT, for every $y$ between $f(a)$ and $f(b)$, you can find a corresponding $x$ such that $f(x)=y$. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{Inverse Function Theorem}{}\\ Let $f:[a,b]\to\R$ be continuous and strictly increasing. Then $f$ has an inverse defined on its range and $f^{-1}$ is continuous. 
+\begin{proof}\\ Firstly, since $f$ is increasing, all of the values of $f$ lies between $f(a)=c$ and $f(b)=d$. Thus the range of $f$ is exactly $[c,d]$. By the IVT, for each $y\in[c,d]$ there is an unique number $x$ such that $f(x)=y$. Define $g=f^{-1}$ by setting $g(y)=x$ for every pair of $(x,y)$. By construction, $g$ is then increasing. Since $f$ is increasing, we have that $f(x-\varepsilon)<y=f(x)<f(x+\varepsilon)$ with $\varepsilon>0$. Since $f$ is continuous, we have that $$f(x-\varepsilon)<y-\delta<y<y+\delta<f(x+\varepsilon)$$ for some $\delta>0$. Thus we have that for every $y$ between $y-\delta$ and $y+\delta$, $x-\varepsilon<g(y)<x+\varepsilon$. Thus the definition of continuity is satisfied. 
+\end{proof}
+\end{prp}
+
+\begin{thm}{Boundedness of Continuous Functions}{}\\ Let $f:[a,b]\to\R$ be continuous. Then $f$ is bounded. 
+\begin{proof}\\ Suppose that $f$ is unbounded. For each $n$, choose $x_n\in[a,b]$ such that $\abs{f(x_n)}\geq n$. Since $f$ is continuous, we can choose a subsequence $(x_{n_k})$ such that it converges to $x$. Since the interval is closed we must have $x\in[a,b]$. Then $f(x_{n_k})\to f(x)$. But this is not possible since $f(x_{n_k})$ is becoming arbitrarily large. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{Extreme Value Theorem}{}\\ Let $f:[a,b]\to\R$ be continuous. Then $f$ has a maximum and a minimum attained in the interval. 
+\begin{proof}\\ Let $M$ be the supremum of $\{f(x):x\in[a,b]\}$. Suppose that no point in the interval such that $M$ is attained. Then the function $g(x)=M-f(x)$ is strictly positive and continuous on the interval. By the algebra of continuous functions, $\frac{1}{M-f(x)}$ is continuous and therefore bounded by, say $R$. Then $\frac{1}{R}\leq M-f(x)$ and hence $f(x)\leq M-\frac{1}{R}$. This shows that $M$ is not the supremum, a contradiction. 
+\end{proof}
+\end{thm}
+
+\subsection{Uniform Continuity}
+\begin{defn}{Uniform Continuity}{}\\ Let $f:I\subseteq\to\R$. Then $f$ is uniformly continuous on $I$ if and only if for every $\varepsilon>0$ there exists $\delta>0$ such that for all $x,y\in I$ and $$\abs{x-y}<\delta\implies\abs{f(x)-f(y)}<\varepsilon$$ 
+\end{defn}
+
+\begin{prp}{}{}\\ Every uniformly continuous function is continuous. 
+\begin{proof}\\ Fix $y$ and allow $x$ to vary. Then we have the definition of continuity at $(y,f(y))$. 
+\end{proof}
+\end{prp}
+
+\begin{thm}{}{}\\ If $f$ is continuous on a closed interval $[a,b]$, then $f$ is uniformly continuous on $[a,b]$. 
+\begin{proof}\\ Suppose that $f$ is not uniformly continuous. Then there exists $\varepsilon>0$ such that for all $\delta>0$ there are points $x,y\in[a,b]$ such that $$\abs{x-y}<\delta\implies\abs{f(x)-f(y)}\geq\varepsilon$$ Now for every $k\in\N$, choose $x_k,y_k\in[a,b]$ such that $\abs{x_k-y_k}<\frac{1}{k}$ and $$\abs{f(x_k)-f(y_k)}\geq\varepsilon$$ We have that $(x_k)$ is bounded by $[a,b]$, thus by the Bolzano-Weierstrass theorem, there exists a convergent subsequence $(x_{k_i})$ such that it has a limit $x_0\in[a,b]$. Mirror for $y_k$. Now we have 
+\begin{align*}
+\abs{x_0-y_{k_i}}&\leq\abs{x_0-x_{k_i}}+\abs{x_{k_1}-y_{k_i}}\\
+&\leq\abs{x_0-x_{k_j}}+\frac{1}{k_j}
+\end{align*}
+Thus we also have $y_{k_j}\to x_0$. But since $f$ is continuous at $x_0$, we must have $$\abs{f(x_{k_j})-f(x_0)}<\frac{\varepsilon}{2}$$ and $$\abs{f(y_{k_j})-f(x_0)}<\frac{\varepsilon}{2}$$ Thus
+\begin{align*}
+\abs{f(x_{k_j})-f(y_{k_j})}&\leq\abs{f(x_{k_j})-f(x_0)}+\abs{f(y_{k_j})-f(x_0)}\\
+&<\frac{\varepsilon}{2}+\frac{\varepsilon}{2}\\
+&=\varepsilon
+\end{align*} This is a contradiction since we assumed that $\abs{f(x)-f(y)}\geq\varepsilon$. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{}{}\\ If $f$ is uniformly continuous on a set $I$ and $(s_n)_{n\in\N}$ is a Cauchy sequence in $I$, then $(f(s_n))_{n\in\N}$ is a Cauchy sequence. 
+\begin{proof}\\ Since $s_n$ is Cauchy in $S$, then fix $\delta>0$. There exists $N$ such that $\abs{s_n-s_m}<\delta$ for all $m,n>N$. Since $f$ is uniformly continuous, for every $\varepsilon>0$, there exists $\delta>0$ such that $$\abs{s_n-s_m}<\delta\implies\abs{f(s_n)-f(s_m)}<\varepsilon$$ for all $m,n>N$. Thus $f(s_n)$ is Cauchy. 
+\end{proof}
+\end{thm}
+
+\pagebreak
+\section{Differentiation}
+\subsection{Properties of the Derivative}
+\begin{defn}{Derivative}{}\\ Let $f:(a,b)\to\R$ be a function and $c\in(a,b)$. We say $f$ is differentiable at $c$ or $f$ has a derivative at $c$ if the limit $$\lim_{x\to c}\frac{f(x)-f(c)}{x-c}$$ exists and is finite. We write $f'(c)$ or $\frac{df}{dx}\vert_{x=c}$ as the derivative of $f$ at $c$. 
+\end{defn}
+
+\begin{prp}{}{}\\ Let $f:(a,b)\to\R$ be a function and $c\in(a,b)$. Then $f$ is differentiable at $c$ if and only if $$\lim_{h\to 0}\frac{f(c+h)-f(c)}{h}$$ exists and is finite. In this case this limit is equal to $f'(c)$. 
+\begin{proof}\\
+Simple change of variables where $x=c+h$. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{}\\ If $f$ is differentiable at $c$ then $f$ is continuous at $c$. 
+\begin{proof}\\ Suppose that $f$ is differentiable at $c$. 
+\begin{align*}
+\lim_{x\to c}f(x)-f(c)&=\lim_{x\to c}\frac{(f(x)-f(c))(x-c)}{x-c}\\
+&=f'(c)\lim_{x\to c}(x-c)\\
+&=0
+\end{align*}
+\end{proof}
+\end{prp}
+
+\begin{thm}{Algebra of Derivatives}{}\\ Let $f$ and $g$ are differentiable at the point $c$, then
+\begin{itemize}
+\item $(f+g)'(c)=f'(c)+g'(c)$
+\item $(cf)'(c)=cf'(c)$
+\item $(fg)'(c)=f'(c)g(c)+g'(c)f(c)$
+\item $\left(\frac{f}{g}\right)'(c)=\frac{f'(c)g(c)-g'(c)f(c)}{\left(g(c)\right)^2}$ as long as $g(c)\neq 0$. 
+\end{itemize}
+\begin{proof}\\ Use the limit definition of the derivatives. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{Chain Rule}{}\\ Suppose that $g:(a,b)\to\R$ and $f:g((a,b))\to\R$ such that $g$ is differentiable at $c\in(a,b)$ and $f$ is differentiable at $g(c)\in g((a,b))$. Then $f\circ g$ is differentiable at $c$ and $(f\circ g)'(c)=f'(g(c))g'(c)$. 
+\begin{proof}\\
+\begin{align*}
+\lim_{x\to c}\frac{f(g(x))-f(g(c))}{x-c}&=\lim_{x\to c}\frac{f(g(x))-f(g(c))}{g(x)-g(c)}\frac{g(x)-g(c)}{x-c}\\
+&=\lim_{x\to c}\frac{f(g(x))-f(g(c))}{g(x)-g(c)}\lim_{x\to c}\frac{g(x)-g(c)}{x-c}\\
+&=f'(g(c))g'(c)
+\end{align*}
+\end{proof}
+\end{thm}
+
+\begin{defn}{$\mC^n$-Functions}{}\\ Let $f:U\subseteq\R\to\R$ be a function. We say that $f$ is a function of class $\mC^n(U)$ if the following are true. 
+\begin{itemize}
+\item $f^{(k)}:U\to\R$ is differentiable for $0\leq k\leq n-1$
+\item $f^{(n)}:U\to\R$ is continuous. 
+\end{itemize}
+We say that $f$ is a smooth function if $f$ is $C^n$ for all $n\in\N$. 
+\end{defn}
+
+\begin{defn}{Smooth Functions}{}\\ Let $f:U\subseteq\R\to\R$ be a function. We say that $f$ is a smooth function if $f\in\mC^n(U)$ for all $U$. In this case we write $f\in\mC^\infty(U)$. 
+\end{defn}
+
+\subsection{Inverse of the Derivative}
+\begin{thm}{}{}\\ If $f:I\subseteq\R\to\R$ is continuous and injective then $f^{-1}$ is either increasing or decreasing on the interval. 
+\begin{proof}\\ Suppose that $f^{-1}$ is neither increasing or decreasing on the interval $I$. Then $f^{-1}$ is decreasing on some interval $(a,b)\in I$ and not decreasing on end points. This means that $(c,a)\in I$ is not decreasing thus there is some interval $(c',a)\in(c,a)$ that is increasing, Then for every $y\in(\min{f(c),f(d)},f(a))$, the function is not injective. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{Inverse Function Theorem}{}\\ Let $f$ be a continuous injective function defined on an interval and suppose that $f$ is differentiable at $f^{-1}(b)$, with derivative $f'\left(f^{-1}(b)\right)\neq0$. Then $f^{-1}$ is differentiable at $b$ and $$\left(f^{-1}\right)'(b)=\frac{1}{f'\left(f^{-1}(b)\right)}$$ 
+\begin{proof}\\ Since $f$ is continuous and injective, the derivative exists. Suppose that $g=f^{-1}$. We have that $f(g(x))=x$ for all $x\in\im(f)$. Then we have $f'(g(x))g'(x)=1$ and $g'(x)=\frac{1}{f'(g(x))}$. 
+\end{proof}
+\end{thm}
+
+\subsection{Mean Value Theorem}
+\begin{defn}{Local Maximum and Minimums}{}\\ Let $f:(a,b)\to\R$ be a function and $c\in(a,b)$. 
+\begin{itemize}
+\item $f$ is said to have a local maximum at $c$ if $f(x)\leq f(c)$ for all $x\in(a,b)$
+\item $f$ is said to have a local minimum at $c$ if $f(x)\geq f(c)$ for all $x\in(a,b)$
+\end{itemize}
+Both local maximums and local minimums are called local extremums. 
+\end{defn}
+
+\begin{thm}{}{}\\ If $f$ is defined on an open interval containing $c$, if $f$ assumes its maximum or minimum at $c$, and if $f$ is differentiable at $c$, then $$f'(c)=0$$ 
+\begin{proof}\\ Suppose that $f$ attains maximum at $c$. If $x>c$, then $\frac{f(x)-f(c)}{x-c}\leq 0$ Thus $$\lim_{x\to c}\frac{f(x)-f(c)}{x-c}\leq 0$$ If $x<c$, then $\frac{f(x)-f(c)}{x-c}\geq 0$. Thus $$\lim_{x\to c}\frac{f(x)-f(c)}{x-c}\geq 0$$ Thus $f'(c)=0$. The proof for minimum is similar. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{Rolle's Theorem}{}\\ Suppose that $f:[a,b]\to\R$ is continuous on the closed interval $[a,b]$ and differentiable at the open interval $(a,b)$ and that $f(a)=f(b)$. Then there is a point $c$ in the open interval where $$f'(c)=0$$ 
+\begin{proof}\\ If $f$ is constant, then its derivative is $0$ everywhere. If $f$ is non-constant, then by the theorem 4.2.9, $f$ is bounded and by theorem 4.2.10, $f$ attains a maximum and minimum in the interval. Those two points have their derivatives equal to $0$. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{The Mean Value Theorem}{}\\ Suppose that $f:[a,b]\to\R$ is continuous on the closed interval $[a,b]$ and differentiable on the open interval $(a,b)$. Then there is a point $c\in(a,b)$ such that $$f'(c)=\frac{f(b)-f(a)}{b-a}$$ 
+\begin{proof}\\ Consider the function $g(x)=f(x)-x\frac{f(b)-f(a)}{b-a}$. We have that 
+\begin{align*}
+g(b)-g(a)&=f(b)-f(a)-(b-a)\frac{f(b)-f(a)}{b-a}\\
+g(b)-g(a)&=0\\
+g(b)&=g(a)
+\end{align*} Thus by Rolle's Theorem there exists a point $c$ such that $g'(c)=0$. 
+\begin{align*}
+g'(c)&=0\\
+f'(c)-\frac{f(b)-f(a)}{b-a}&=0\\
+f'(c)&=\frac{f(b)-f(a)}{b-a}
+\end{align*}
+\end{proof}
+\end{thm}
+
+\begin{thm}{Generalized Mean Value Theorem}{}\\ Let $f$ and $g$ be continuous functions on $[a,b]$ that are differentiable on $(a,b)$ Then there exists at least one $x$ in $(a,b)$ such that $$f'(x)[g(b)-g(a)]=g'(x)[f(b)-f(a)]$$
+\begin{proof}\\ Consider $h(x)=f(x)(g(b)-g(a))-(f(b)-f(a))g(x)$. We have that $h(a)=h(b)=f(a)g(b)-g(a)f(b)$. By Rolle's Theorem there is a point between $a$ and $b$ where $h'(c)=0$. Thus we have 
+\begin{align*}
+h'(c)&=0\\
+f'(c)(g(b)-g(a))-g'(c)(f(b)-f(a))&=0
+\end{align*}
+\end{proof}
+\end{thm}
+
+
+\begin{thm}{Constant Function}{}\\ If $f:(a,b)\to\R$ is differentiable and $f'(x)=0$ for all $x\in(a,b)$ then $f$ is constant. 
+\begin{proof}\\ Suppose that $h,k\in(a,b)$. By the Mean Value Theorem, there exists $c\in(h,k)$ such that $$f'(c)=\frac{f(k)-f(h)}{k-h}$$ Since $f'(c)=0$ we have that $f(h)=f(k)$ Since this is true for every $h,k\in(a,b)$, we have that $$f(x)=m$$ for some $m\in\R$ for all $x\in(a,b)$. 
+\end{proof}
+\end{thm}
+
+
+\begin{thm}{}{}\\ Let $f:(a,b)\to\R$ be differentiable on $(a,b)$. 
+\begin{itemize}
+\item If $\forall x\in I$, $f'(x)>0$ then $f$ is strictly increasing on the interval
+\item If $\forall x\in I$, $f'(x)<0$ then $f$ is strictly decreasing on the interval
+\item If $\forall x\in I$, $f'(x)\leq 0$ then $f$ is increasing on the interval
+\item If $\forall x\in I$, $f'(x)\geq 0$ then $f$ is decreasing on the interval
+\end{itemize}
+\begin{proof}\\ We demonstrate the proof only of the first item. $f'(x)>0$ implies $\lim_{x\to c}\frac{f(x)-f(c)}{x-c}>0$. If $x>c$, we must have $f(x)>f(c)$. If $x<c$, we must have $f(x)<f(c)$. Thus $f(x)$ is strictly increasing. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{L'Hopital's Rule}{}\\ Suppose that $f,g:(a,b)\to\R$ are differentiable functions and $c\in(a,b)$. Suppose that $$\lim_{x\to c}\frac{f'(x)}{g'(x)}=L$$ exists. Then if $\lim_{x\to c}f(x)=\lim_{x\to c}g(x)=0$ then $$\lim_{x\to c}\frac{f(x)}{g(x)}=L$$ 
+\begin{proof}\\ Suppose that $\lim_{x\to c}\frac{f'(x)}{g'(x)}$ exists. Then $g'(x_n)\neq0$ for any sequence of $x_n$ that converges to $c$. Thus we can apply Cauchy's MVT. Since $f(c)=g(c)=0$, $$\lim_{x\to c}\frac{f(x)}{g(x)}=\lim_{x\to c}\frac{f(x)-f(c)}{g(x)-g(c)}$$ By Cauchy's MVT, there exists $t$ between $x$ and $c$ such that $\frac{f(x)-f(c)}{g(x)-g(c)}=\frac{f'(t)}{g'(t)}$. As $x\to c$, $t\to c$. Thus we have that $$\lim_{x\to c}\frac{f(x)}{g(x)}=\lim_{x\to c}\frac{f'(x)}{g'(x)}$$
+\end{proof}
+\end{thm}
+
+\pagebreak
+\section{Integration}
+Students often misunderstand the importance of integration. It originated not from begin an inverse operation of differentiation, but as a tool to find the area under the function. It just so happens that they two serve as an inverse to each other. This point will be made very clear once you encounter differentiation and integration of multiple dimensions. \\~\\
+Integration has two underlying theories, that can be shown equivalent. These are the Darboux Integral and the Riemann Integral. We start our rigorous study on integration with the Darboux Integral. 
+\subsection{Darboux Integral}
+The area under the function will be approximated by small rectangles, their height will be exactly the function while the collection of their various widths, will be called a partition. Once we establish most of the proporties of paritions we will then take limits. 
+\begin{defn}{Partition}{}\\ Let $a<b$. A partition $P$ of the interval $[a,b]$ is a finite collection of points in $[a,b]$, one of which is $a$ and one of which is $b$. We write $P=\{a=t_0<t_1<t_2<\dots<t_n=b\}$ and $I_k=[t_{k-1},t_k]$. 
+\end{defn}
+
+Do note that a partition does not have to partition the $x$-axis equally. This means that rectangles can have different lengths. \\~\\
+For the heights, we obtain two approximations for the area, one that uses the shortest rectangle, and the other that uses the longest rectangles. 
+
+\begin{defn}{Lower and Upper Sum}{}\\ Suppose $f$ is bounded on $[a,b]$ and $P=\{t_0,\dots,t_n\}$ is a partition of $[a,b]$. Let $$m_k=\inf\{f(x):t_{k-1}\leq x\leq t_k\}$$ $$M_k=\sup\{f(x):t_{k-1}\leq x\leq t_k\}$$ The lower sum of $f$ for $P$, denoted by $L(f,P)$, is defined as $$L(f,P)=\sum_{k=1}^nm_k(t_k-t_{k-1})=\sum_{k=1}^nm_k\abs{I_k}$$ The upper sum of $f$ for $P$, denoted by $U(f,P)$, is defined as $$U(f,P)=\sum_{k=1}^nM_k(t_k-t_{k-1})=\sum_{k=1}^nM_k\abs{I_k}$$
+\end{defn}
+
+As indicated by the notation, the lower and upper sum not only depends on the function, but it also depends on the partition one takes since the supremum and infinum of each particular rectangle would be different if two different partitions are chosen. \\~\\
+We now give an obvious proposition. 
+
+\begin{prp}{}{}\\ Suppose that $f$ is a function and $P$ is a partition. Then $$L(f,P)\leq U(f,P)$$ 
+\begin{proof}\\ For all $k\in\{1,\dots,n\}$, we have $m_k\leq M_k$. Thus $$\sum_{k=1}^nm_k(t_k-t_{k-1})\leq\sum_{k=1}^nM_k(t_k-t_{k-1})$$ and we are done. 
+\end{proof}
+\end{prp}
+
+The above proposition states universally that the lower sum must be less than the upper sum. We will later see that the choice of parition need not matter, the lower sum will always be less than the upper sum. To formally prove that, we need the notion of a "better" partition. 
+
+\begin{defn}{Refinement}{}\\ A partition $Q=\{a=s_0<s_1<s_2<\dots<s_m=b\}$ is a refinement of $P=\{a=t_0<t_1<t_2<\dots<t_n=b\}$ if every interval in $P$ is the union of one or more interval in $Q$. We write $P\subseteq Q$ in this case. 
+\end{defn}
+
+Be careful with the notion of refinement. It requires the intervals in $P$ to be unions of intervals of $Q$. This means that there can be two partitions that are not refinements of one and another. One way to think of refinements easier is that every point in $P$ must be contained in $Q$ in order for intervals in $P$ to be union of intervals in $Q$, which is why we use a subset notation to indicate refinements. \\~\\
+The above proposition is also obvious. As we make better approximations, the lower and upper sums get closer, which as you can guess, once the lower sum and upper sum are equal, that number will be the area under the function. 
+
+\begin{prp}{}{}\\ Suppose that $P,Q$ are partitions. If $P\subseteq Q$, then $$L(f,P)\leq L(f,Q)\leq U(f,Q)\leq U(f,P)$$ 
+\begin{proof}\\ Let $P=\{t_0,\dots,t_n\}$. Let $Q$ be a refinement of $P$. Then there exists some interval in $P$, say $[t_{i-1},t_i]$ such that it is equal to $[s_{j-1},s_j]\cup[s_j,s_{j+1}]$ for some $j$. Then $m_i\leq m_j,m_{j+1}$. Thus $m_i(t_i-t_{i-1})\leq m_j(t_i-t_{i-1}),m_{j+1}(t_i-t_{i-1})$. Summing all these $m_i$ and $m_j$ we have that $L(f,P)\leq L(f,Q)$. The proof is mirrored for $U(f,Q)\leq U(f,P)$
+\end{proof}
+\end{prp}
+
+We will need a lemma in order to prove the required result. 
+
+\begin{lmm}{}{}\\ For any two partitions $P_1,P_2$, there exists a partition $P$ such that $P_1\subseteq P$ and $P_2\subseteq P$. 
+\begin{proof}\\ Let $P_1=\{t_0,\dots,t_m\}$ and $P_2=\{s_0,\dots,s_n\}$. Then define $P$ by ordering all the elements of $P_1$ and $P_2$ from smallest to largest. Then $P_1\subseteq P$ and $P_2\subseteq P$. 
+\end{proof}
+\end{lmm}
+
+Below is the proposition we need to prove a lot of things. The trick is to make the common refinement so that comparison can be made between them. 
+
+\begin{prp}{}{}\\ Suppose that $P_1$ and $P_2$ are any two partitions of $[a,b]$. Then $$L(f,P_1)\leq U(f,P_2)$$ 
+\begin{proof}\\ Let $Q$ be the common refinement of $P_1$ and $P_2$. Then $$L(f,P_1)\leq L(f,Q)\leq U(f,Q)\leq U(f,P_2)$$
+\end{proof}
+\end{prp}
+
+Finally, we can develop limits with better approximations to reach our goal. In particular, we have the following fact. 
+
+\begin{lmm}{}{}\\ Suppose that $f$ is a function and $P$ any partition of an interval. Then $$\sup_P\{L(f,P)\}\leq\inf_P\{U(f,P)\}$$ 
+\begin{proof}\\ Suppose that $T=\sup_P\{L(f,P)\}$. By lemma 6.1.5, we have that all upper sums are upper bounds of all low sums. Thus $T\leq U(f,P)$ for any $P$. This means that $T$ is a lower bound for $U(f,P)$ thus $\sup_P\{L(f,P)\}=T\leq\inf_P\{U(f,P)\}$
+\end{proof}
+\end{lmm}
+
+We now give the proper notion of integrability with Darboux Integrals. 
+
+\begin{defn}{Darboux Integrable Functions}{}\\ Let $f:[a,b]\to\R$ be a bounded function. We say that $f$ is Darboux integrable if $$\sup\{L(f,P)\;|\;P\text{ is a partition of [a,b]}\}=\inf\{U(f,P)\;|\;P\text{ is a partition of [a,b]}\}$$ In this case, we write the common number $$\int_{a}^{b}f$$
+\end{defn}
+
+Notice that the variable $x$ is not present in the integral representation of the equivalent supremum and infinum to indicate the number is the same regardless of what we take for $dx$, which is the length of the triangle. \\~\\
+We then have an equivalent characterization of intergability to work on. 
+
+\begin{thm}{}{}\\ If $f$ is bounded on $[a,b]$, then $f$ is integrable on $[a,b]$ if and only if for every $\varepsilon>0$ there exists a partition $P$ of $[a,b]$ such that $U(f,P)-L(f,P)<\varepsilon$. 
+\begin{proof}\\ Suppose that $f$ is integrable. Let $T=\sup_P\{L(f,P)\}=\inf_P\{U(f,P)\}$. By the approximation property, fix $\frac{\varepsilon}{2}>0$. There exists $P_1,P_2$ such that $$T-\frac{\varepsilon}{2}<L(f,P_1)\leq T$$ and $$T\leq U(f,P_2)<T+\frac{\varepsilon}{2}$$ Define a new partition $P_3$ such that $P_1\subseteq P_3$ and $P_2\subseteq P_3$, then $$T-\frac{\varepsilon}{2}<L(f,P_1)\leq L(f,P_3)\leq T$$ and $$T\leq U(f,P_3)\leq U(f,P_2)<T+\frac{\varepsilon}{2}$$ Then we have $T-L(f,P_3)<\frac{\varepsilon}{2}$ and $U(f,P_3)-T<\frac{\varepsilon}{2}$ and $$U(f,P_3)-L(f,P_3)<\varepsilon$$
+Now suppose that for every $\varepsilon>0$, there exists $P$ such that $U(f,P)-L(f,P)<\varepsilon$. Fix $\varepsilon>0$. Then $U(f,P)-L(f,P)<\varepsilon$ implies $\inf_P\{U(f,P)\}-\sup_P\{L(f,P)\}<\varepsilon$. Thus for all $\varepsilon>0$, $\inf_P\{U(f,P)\}-\sup_P\{L(f,P)\}<\varepsilon$ Thus we must have $\inf_P\{U(f,P)\}-\sup_P\{L(f,P)\}$ less than every positive number and larger than every negative number. Thus $\sup_P\{L(f,P)\}=\inf_P\{U(f,P)\}$. 
+\end{proof}
+\end{thm}
+
+This epsilon definition makes it easier to prove things since we are very familiar with closeness and limits. Often the supremum and infinum will be hard to compute which is why we will often resort to this theorem. \\~\\
+To end this section, we will discover another useful characterization of integrability. We start with a new definition on partitions. 
+
+\begin{defn}{Mesh}{}\\ The mesh of a partition $P$ is the maximum length of the subintervals of $p$. This means that $\text{mesh}(P)=\max\{t_k-t_{k-1}:k=1,2,\dots,n\}$
+\end{defn}
+
+Now we have the following equivalent characterization oif Darboux Integrability. 
+
+\begin{thm}{}{}\\ A bounded function $f$ on $[a,b]$ is integrable if and only if for each $\varepsilon>0$ there exists a $\delta>0$ such that $$\text{mesh}(P)<\delta\implies U(f,P)-L(f,P)<\varepsilon$$ for all partitions $P$ of $[a,b]$. 
+\begin{proof}\\ The converse is trivial. Since there exists a $\delta>0$ such that the condition hold, choose one of such $P$ will complete the proof using the epsilon delta definition of Darboux Integrability. \\~\\
+Suppose that $f$ is Darboux Integrable. Let $\varepsilon>0$, select a partition $P_0$ such that $$U(f,P_0)-L(f,P_0)<\frac{\varepsilon}{2}$$ Since $f$ is bounded, there exists $B>0$ such that $\abs{f(x)}<B$ for all $x$. Let $\delta
+=\frac{\varepsilon}{8mB}$, where $m$ is the number of partitions of $P_0$. Consider any partition $P$. We want to prove that $U(f,P)-L(f,P)<\varepsilon$. Let $Q$ be the common refinement of $P$ and $P_0$. I claim that $$L(f,Q)-L(f,P)\leq 2mB\cdot\text{mesh}(P)<2mB\delta=\frac{\varepsilon}{4}$$\\
+When $m=1$, Suppose that the refinement of $P$ by $P_0$ is located at $[t_{k-1},t_k]$. Then 
+\begin{align*}
+L(f,Q)-L(f,P)&=\inf\{f(t):t_{k-1}\leq t\leq u\}(u-t_{k-1})+\inf\{f(t):u\leq t\leq t_k\}(t_k-u)\\
+&-m_k(t_k-t_{k-1})\\
+&\leq B\cdot\text{mesh}(P)-(-B)\cdot\text{mesh}(P)\tag{$-B$ is a minimum of $f(x)$}\\
+&<2B\text{mesh}(P)
+\end{align*}
+For the case that $Q$ has the maximum $m$ elements not in $P$, 
+\begin{align*}
+L(f,Q)-L(f,P)&\leq 2mB\cdot\text{mesh}(P)\tag{Same argument as the case for $m=1$}\\
+&<2mB\delta\\
+&=\frac{\varepsilon}{4}\tag{constructed $\delta$}
+\end{align*}
+\\~\\
+Since $Q$ is a refinement of $P_0$, we have $L(f,P_0)\leq L(f,Q)$ thus $$L(f,P_0)-L(f,P)<\frac{\varepsilon}{4}$$ By a similar argument, $$U(f,P)-U(f,P_0)<\frac{\varepsilon}{4}$$
+Thus $$U(f,P)-L(f,P)<U(f,P_0)-L(f,P_0)+\frac{\varepsilon}{2}$$ From the start of the proof, we have $U(f,P_0)-L(f,P_0)<\frac{\varepsilon}{2}$, thus we now have $U(f,P)-L(f,P)<\varepsilon$ as desired. 
+\end{proof}
+\end{thm}
+
+This gives some more restriction on the partition with a delta as well, and allows us to choose our partition better. These different notions of integrability will prove to be useful in different scenarious. Often in proving fundamental functions that cannot be decomposed with algebra of integrability, we will resort to these definitions. This is why it also crucrial to learn how to properly find the required partitions for the epsilon, and epsilon-delta definitions. 
+
+\subsection{Riemann Integral}
+The Riemann integral is more abstract thus standard lecture notes in developing the notion of integrability will most likely use the Darboux integral. Treat this section as a bonus. 
+
+\begin{defn}{Tagged Partition}{}\\ A tagged partition is a partition $P=\{t_0,\dots,t_n\}$ such that every $[t_{k-1},t_k]$ is associated with a $x_k\in[t_{k-1},t_k]$. 
+\end{defn}
+
+\begin{defn}{Riemann Sum}{}\\ Let $f$ be a bounded function on $[a,b]$ and let $P=\{a=t_0<t_1<\dots<t_n=b\}$. A Riemann sum of $f$ associated with the tagged partition $P$ is a sum of the form $$S(f,P)=\sum_{k=1}^{n}f(x_k)(t_k-t_{k-1})=\sum_{k=1}^nx_k\abs{I_k}$$
+\end{defn}
+
+\begin{defn}{Riemann Integrable Functions}{}\\ The function $f$ is Riemann Integrable on $[a,b]$ if there exists a number $L$ such that for every $\varepsilon>0$, there exists $\delta$ such that mesh$(P)<\delta$ implies $\abs{S(f,P)-L}<\varepsilon$ where $P$ is a tagged partition. 
+\end{defn}
+
+As one can see, riemann integrability is more abstract in the sense that at least the Darboux integrability explicitly gives what the limit is. But here not only is the limit made implicitly, even the choice of the tag in the tagged partition is arbitrary. 
+
+\begin{thm}{}{}\\ A bounded function $f$ on $[a,b]$ is Riemann Integrable if and only if it is Darboux Integrable. In this case, both methods produce the same sum. 
+\begin{proof}\\ Suppose that $f$ is Darboux Integrable. Then for any tagged partition $P'$, $$L(f,P)\leq S(f,P')\leq U(f,P)$$ Since it is Darboux Integrable, $$U(f,P)<L(f,P)+\varepsilon\leq\sup_P\{L(f,P)\}+\varepsilon=\int_a^b f+\varepsilon$$ and $$L(f,P)>U(f,P)-\varepsilon\geq\inf_P\{U(f,P)\}-\varepsilon=\int_a^b f-\varepsilon$$ Thus we have $$\abs{S(f,P')-\int_a^b f}<\varepsilon$$ \\~\\
+Suppose that $f$ is a bounded function that is Riemann Integrable and that converges to $L$. Let $P$ be any partition of $[a,b]$. Then for every $\varepsilon>0$, there exists a $\delta$ such that mesh$(P)<\delta$ implies $\abs{S(f,P)-L}<\varepsilon$. In particular, choose a partition $P$ such that mesh$(P)<\delta$. For each interval in $P$, choose the tag $x_k$ such that $$f(x_k)<m_k+\varepsilon$$ Thus we have $$S(f,P)\leq L(f,P)+\varepsilon(b-a)$$ and $$\abs{S(f,P)-L}<\varepsilon$$ by definition of Riemann Integrability. Thus 
+\begin{align*}
+\sup_P\{L(f,P)\}&\geq L(f,P)\\
+&\geq S(f,P)-\varepsilon(b-a)\\
+&>L-\varepsilon-\varepsilon(b-a)
+\end{align*}
+Thus we have $L\leq\sup_P\{L(f,P)\}$. Similarly we have $L\geq\inf_P\{U(f,P)\}$. Thus we have $$\sup_P\{L(f,P)\}=L=\inf_P\{U(f,P)\}$$
+\end{proof}
+\end{thm}
+
+\subsection{Properties of the Riemann Integral}
+This section gives us instant knowledge on whether a function is integrable, once we also have integrability of the basic functions. \\~\\
+We start the section with two sufficient and powerful conditions for integrability. 
+\begin{thm}{}{}\\ Every monotonic function $f$ on $[a,b]$ is integrable. 
+\begin{proof}\\ Consider a uniform partition $P$. We have 
+\begin{align*}
+U(f,P)-L(f,P)&=\sum_{k=1}^nM_k(t_k-t_{k-1})-\sum_{k=1}^nm_k(t_k-t_{k-1})\\
+&\leq\frac{b-a}{n}\sum_{k=1}^n\left(f\left(a+\frac{k}{n}(b-a)\right)-f\left(a+\frac{k-1}{n}(b-a)\right)\right)\\
+&=\frac{b-a}{n}(f(b)-f(a))
+\end{align*}
+Thus given $\varepsilon$ we can choose $n$ large enough such that $\frac{(b-a)(f(b)-f(a))}{n}<\varepsilon$. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{}{}\\ Every continuous function $f:[a,b]\to\R$ is integrable. 
+\begin{proof}\\ Suppose that $f$ is continuous. Then $f$ is uniformly continuous in $[a,b]$. Pick a partition $P$ such that mesh$(P)<\delta$, where $\delta$ is chosen from an $\varepsilon$ from uniform continuity. Since $f$ is continuous is in a closed interval, $f$ is bounded and a maximum and minimum is achieved. For any $M_k$ and $m_k$, $$M_k-m_k=f(x_k)-f(y_k)<\frac{\varepsilon}{b-a}$$ by uniform continuity, where $x_k,y_k\in[t_{k-1},t_k]$. Hence 
+\begin{align*}
+U(f,P)-L(f,P)&=\sum_{k=1}^nM_k(t_k-t_{k-1})-\sum_{k=1}^nm_k(t_k-t_{k-1})\\
+&=\sum_{k=1}^n(M_k-m_k)(t_k-t_{k-1})\\
+&<\sum_{k=1}^n\frac{\varepsilon}{b-a}(t_k-t_{k-1})\\
+&=\varepsilon
+\end{align*}
+\end{proof}
+\end{thm}
+
+The above two theorems already provide a rich foundation of integrable functions. These include the typical trigonometric functions, exponential functions, polynomials and more. However do be careful that being integrable does not means that you can alawys find a nice expression for the result, or even an existence of an antiderivative, as we will see in other sections. \\~\\
+We also have the basic addition and scalar multiplication of integrable functions. 
+
+\begin{thm}{Algebra of Integrals}{}\\ Let $f,g$ be integrable functions on $[a,b]$, and let $c\in\R$. Then
+\begin{itemize}
+\item $cf$ is integrable and $\int_{a}^{b}cf=c\int_{a}^{b}f$
+\item $f+g$ is integrable and $\int_{a}^{b}(f+g)=\int_{a}^{b}f+\int_{a}^{b}g$
+\end{itemize}
+\begin{proof}\\ We first note that $$\sup_P\{L(cf,P)\}=\sup_P\{c\cdot L(f,P)\}=c\sup_P\{L(f,P)\}$$ and $$\inf_P\{(U(cf,P)\}=\inf_P\{c\cdot U(f,P)\}=c\inf_P\{U(f,P)\}$$ if $c>0$. The first equality is achieved since $\sum_{k=1}^ncm_k(t_k-t_{k-1})=c\sum_{k=1}^nm_k(t_k-t_{k-1})$. The second equality is just a property of the supremum and infinum. This results in $\sup_P\{L(cf,P)\}=\inf_P\{(U(cf,P)\}$ by integrability of $f$. Thus $cf$ is integrable. From those equality we can also deduce that $$\int_a^bcf=\inf\{(U(cf,P)\}=c\inf\{U(f,P)\}=c\int_a^bf$$
+\\
+The negative version can be proven just by setting $c=-1$. Note that $\sup_P(-f)=-\inf_P(f)$ and $\inf_P(-f)=-\sup_P(f)$. Thus $U(-f,P)=-L(f,P)$ and $L(-f,P)=-U(f,P)$ and $$\inf\{U(-f,P)\}=-\sup\{L(f,P)\}=-\inf\{U(f,P)\}=\sup\{L(-f,P)\}$$ and we are done. \\~\\
+For the sum rule, note that $\sup(f+g)\leq\sup(f)+\sup(g)$ and thus $$U(f+g,P)\leq U(f,P)+U(g,P)$$ and similarly $$L(f,P)+L(g,P)\leq L(f+g,P)$$ Also since $U(f,P)-L(f,P)<\frac{\varepsilon}{2}$ and $U(g,P)-L(g,P)<\frac{\varepsilon}{2}$ for some $P$, we have $U(f+g,P)-L(f+g,P)<\varepsilon$. Thus we have $f+g$ is integrable. \\~\\
+Now $$L(f,P)+L(g,P)\leq L(f+g,P)\leq U(f+g,P)\leq U(f,P)+U(g,P)$$ thus $\int_a^bf+g=\int_a^bf+\int_a^bg$
+\end{proof}
+\end{thm}
+
+Similar to sequences, we also have inequalities between values of the integral and the value of the function. 
+
+\begin{thm}{Monotinicity of the Integral}{}\\ If $f,g$ are intergrable on $[a,b]$ and $f(x)\leq g(x)$ for all $x\in[a,b]$. Then $\int_{a}^{b}f\leq\int_{a}^{b}g$. 
+\begin{proof}\\ We note that since $g-f\geq 0$, $U(g-f,P)>\inf\{U(g-f,P)\}>0$ for any partition $P$. By the algebra of integrals, $g-f$ is integrable and $\inf\{U(g-f,P)\}=\int_a^bg-f\geq 0$ which implies $$\int_a^bf\leq\int_a^bg$$
+\end{proof}
+\end{thm}
+
+With the above theorem in play, we can give the integral version of intermediate value theorem. But before that, we need a proposition. 
+
+\begin{prp}{}{}\\ Let $f:[a,b]\to\R$ be integrable. Let $m=\inf_{x\in[a,b]}\{f(x)\}$ and $M=\sup_{x\in[a,b]}\{f(x)\}$. Then $$m(b-a)\leq\int_{a}^{b}f\leq M(b-a)$$ 
+\begin{proof}\\ Let $g=\sup\{f\}$ and $h(x)=\inf\{f\}$ be constant functions. Then $h(x)\leq f(x)\leq g(x)$ for all $x\in[a,b]$. By the above theorem, we have our desired inequality. 
+\end{proof}
+\end{prp}
+
+This can be made clear with a graph, the proposition simply states that the smallest rectangle above the function and the largest rectangle under the function bounds the area of the integral. Now we can give the intermediate value theorem. 
+
+\begin{thm}{Intermediate Value Theorem for Integration}{}\\ Let $f:[a,b]\to\R$ be a continuous function. Then there exists $c\in[a,b]$ such that $$f(c)=\frac{1}{b-a}\int_{a}^{b}f$$ 
+\begin{proof}\\ By the above proposition, we have $$m\leq\frac{1}{b-a}\int_a^bf\leq M$$ Since $f$ is continuous in the bounded interval $[a,b]$, $f$ attains its maximum and minimum. Thus by the IVT, $f$ must attain $\frac{1}{b-a}\int_a^bf$ for some $c\in(a,b)$. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{}{}\\ If $f$ is integrable on $[a,b]$ then $\abs{f}$ is integrable on $[a,b]$ and $$\abs{\int_{a}^{b}f}\leq\int_{a}^{b}\abs{f}$$ \begin{proof}\\ Since we have the inequality $\sup\{\abs{f}\}-\inf\{\abs{f}\}\leq\sup\{f\}-\inf\{f\}$, we have $$U(\abs{f},P)-L(\abs{f},P)<U(f,P)-L(f,P)<\varepsilon$$ and thus $\abs{f}$ is integrable. Now by monotinicity, $-\abs{f}\leq f\leq\abs{f}$ and thus $$\abs{\int_a^bf}\leq\int_a^b\abs{f}$$
+\end{proof}
+\end{thm}
+
+\begin{thm}{}{}\\ Let $f$ be a function defined on $[a,b]$. $f$ is integrable on $[a,c]$ and $[c,b]$ with $c\in(a,b)$ if and only if $f$ is integrable on $[a,b]$ and $$\int_{a}^{b}f=\int_{a}^{c}f+\int_{c}^{b}f$$ 
+\begin{proof}\\ First suppose that $f:[a,b]\to\R$ is integrable. Then for every $\varepsilon>0$ there exists a partition $P$ such that $U(f,P)-L(f,P)<\varepsilon$. Let $P_c$ be the refinement of $P$ that contains $c$. Let $Q$ be the partition of $[a,c]$ induced by $P_c$ and $R$ be the partition at $[c,b]$. Then we have $$U(f,P_c)=U(f,Q)+U(f,R)$$ and $$L(f,P_c)=L(f,Q)+L(f,R)$$ which means $$U(f,Q)-L(f,Q)+U(f,R)-L(f,R)=U(f,Q)-L(f,Q)<\varepsilon$$ Note that the first two terms combined on the left hand side are positive and the last two terms as well thus they each must be less than $\varepsilon$ and thus is integrable. \\~\\
+Now let $f:[a,c]\to\R$ and $f:[c,b]\to\R$ be integrable. For every $\frac{\varepsilon}{2}$ there exists partitions $Q$ and $R$ such that $$U(f,Q)-L(f,Q)<\frac{\varepsilon}{2}$$ and $$U(f,R)-L(f,R)<\frac{\varepsilon}{2}$$ Take $P$ to be the common refinement of $Q$ and $R$. Then $$U(f,Q)-L(f,Q)=U(f,Q)-L(f,Q)+U(f,R)-L(f,R)<\varepsilon$$ thus $f$ is integrable on $[a,b]$. \\~\\
+Note that we have 
+\begin{align*}
+\int_a^bf&\leq U(f,P)\\
+&=U(f,Q)+U(f,R)\\
+&\leq L(f,Q)+L(f,R)+\varepsilon\\
+&\leq\int_a^cf+\int_c^bf+\varepsilon
+\end{align*} and
+\begin{align*}
+\int_a^b&\geq L(f,P)\\
+&=L(f,Q)+L(f,R)\\
+&\geq U(f,Q)+U(f,R)-\varepsilon\\
+&\geq\int_a^cf+\int_c^bf-\varepsilon
+\end{align*}
+Thus we have $$\left(\int_a^cf+\int_c^bf\right)-\varepsilon\leq\int_a^bf\leq\left(\int_a^cf+\int_c^bf\right)+\varepsilon$$
+\end{proof}
+\end{thm}
+
+The following theorem shows that composing a Riemann integrable function with a continuous function gives another Riemann integrable function. Mind the differences of this theorem and the theorem stated for the substitution rule in the later chapters. 
+
+\begin{thm}{}{}\\ Let $f:[a,b]\to\R$ be a Riemann Integrable function and $g:\R\to\R$ is a continuous function. Then $g\circ f$ is Riemann Integrable. 
+\begin{proof}\\ Since $f$ is integrable, $f$ is bounded, thus we only need to consided $g:[-M,M]\to\R$. On this bounded interval, $g$ is uniformly continuous and bounded, say $\abs{g(x)}\leq K$. \\~\\
+Let $\varepsilon>0$, set $\varepsilon'=\frac{\varepsilon}{2(b-a)}$. By uniform continuity, there exists $\delta>0$ such that $\abs{x-y}<\delta$ implies $\abs{g(x)-g(y)}<\varepsilon'$. Choose $\nu=\frac{\delta}{4K}\varepsilon$, by integrability of $f$, there exists $Q$ such that $U(f,Q)-L(f,Q)<\nu$. Let $h=g\circ f$ for convenience. Now consider $U(h,Q)-L(h,Q)$
+\begin{align*}
+U(h,Q)-L(h,Q)&=\sum_{k=1}^n(\sup_{I_k}(h)-\inf_{I_k}(h))\abs{I_k}\\
+&=\sum_{\substack{\sup_{I_k}(f)\\-\inf_{I_k}(f)<\delta}}\left(\sup_{I_k}(h)-\inf_{I_k}(h)\right)\abs{I_k}+\sum_{\substack{\sup_{I_k}(f)\\-\inf_{I_k}(f)\geq\delta}}\left(\sup_{I_k}(h)-\inf_{I_k}(h)\right)\abs{I_k}\\
+&\leq\sum_{\substack{\sup_{I_k}(f)\\-\inf_{I_k}(f)<\delta}}\varepsilon'\abs{I_k}+\sum_{\substack{\sup_{I_k}(f)\\-\inf_{I_k}(f)\geq\delta}}(\sup_{I_k}(h)-\inf_{I_k}(h))\abs{I_k}\tag{By the $\varepsilon'$ from uniform continuity}\\
+&\leq\sum_{\substack{\sup_{I_k}(f)\\-\inf_{I_k}(f)<\delta}}\varepsilon'\abs{I_k}+\sum_{\substack{\sup_{I_k}(f)\\-\inf_{I_k}(f)\geq\delta}}2K\abs{I_k}\tag{By boundedness of $g$}\\
+&\leq\varepsilon'\sum_{k=1}^n\abs{I_k}+2K\sum_{\substack{\sup_{I_k}(f)\\-\inf_{I_k}(f)\geq\delta}}\abs{I_k}\\
+&=\varepsilon'(b-a)+2K\sum_{\substack{\sup_{I_k}(f)\\-\inf_{I_k}(f)\geq\delta}}\abs{I_k}
+\end{align*}
+Now as a side note, observe that
+\begin{align*}
+\sum_{\substack{\sup_{I_k}(f)\\-\inf_{I_k}(f)\geq\delta}}\abs{I_k}&=\frac{1}{\delta}\sum_{\substack{\sup_{I_k}(f)\\-\inf_{I_k}(f)\geq\delta}}\delta\abs{I_k}\\
+&<\frac{1}{\delta}\sum_{\substack{\sup_{I_k}(f)\\-\inf_{I_k}(f)\geq\delta}}(\sup_{I_k}(f)-\inf_{I_k}(f))\abs{I_k}\\
+&\leq\frac{1}{\delta}\sum_{k=1}^n(\sup_{I_k}(f)-\inf_{I_k}(f))\abs{I_k}\\
+&=\frac{1}{\delta}\sum_{k=1}^n(M_k-m_k)\abs{I_k}\\
+&=\frac{1}{\delta}(U(f,Q)-L(f,Q))\\
+&<\frac{\nu}{\delta}
+\end{align*}
+Thus continuing from the main calculation, 
+\begin{align*}
+\varepsilon'(b-a)+2K\sum_{\substack{\sup_{I_k}(f)\\-\inf_{I_k}(f)\geq\delta}}\abs{I_k}&<\varepsilon'(b-a)+\frac{2K\nu}{\delta}\\
+&=\frac{\varepsilon}{2}+\frac{\varepsilon}{2}\\
+&=\varepsilon
+\end{align*}
+Thus we are done. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{}{}\\ Let $f,g:[a,b]\to\R$ be Riemann Integrable functions. Then $fg$ and $\frac{f}{g}$ are both Riemann Integrable, with the second one provided that $\frac{1}{g}$ is bounded. 
+\begin{proof}\\ Note that if $f$ is integrable, then $f^2$ is integrable by the above theorem, and choosing $g(x)=x^2$. Now we have that $$fg=\frac{1}{2}((f+g)^2-f^2-g^2)$$ by the algebra of integrable functions, $fg$ is integrable. For the quotient rule, note that if $g$ is bounded, then there exists $\varepsilon>0$ such that $\varepsilon<\abs{g}$. Now consider $$h(x)=\begin{cases}
+\frac{1}{x} & \text{if $\abs{x}>\varepsilon$}\\
+\frac{x}{\varepsilon^2} & \text{if $\abs{x}\leq\varepsilon$}
+\end{cases}$$
+Notice that $h\circ g=\frac{1}{g}$. Since $h$ is continuous and $g$ is integrable, $\frac{1}{g}$ is integrable by the above theorem. 
+\end{proof}
+\end{thm}
+
+The comoposition rule, although lengthy in proof, is extremely powerful as once can see. We are unable to prove the product and quotient rule without the fundamental theorem of calculus and so we will begin with it on the next section. 
+
+\subsection{Fundamental Theorem of Calculus}
+\begin{thm}{Fundamental Theorem of Calculus I}{}\\ Suppose that $f:[a,b]\to\R$ is an integrable function and define the function $F:[a,b]\to\R$ by $$F(x)=\int_{a}^{x}f(t)\,dt$$ Then $F$ is continuous at $[a,b]$. Also if $f$ is continuous at $c\in[a,b]$ then $F'(c)=f(c)$. 
+\begin{proof}\\
+Note that since $f$ is integrable, $f$ is bounded by say $M$. Then $$F(x+h)-F(x)=\int_x^{x+h}f(t)\,dt$$ by linearity. Considering the horizontal length and vertical length, we have
+\begin{align*}
+\abs{F(x+h)-F(x)}&=\abs{\int_x^{x+h}f(t)\,dt}\\
+&\leq M\abs{h}
+\end{align*}
+Thus $F$ is continuous by choosing $\delta=\varepsilon$. 
+Now 
+\begin{align*}
+\lim_{h\to 0}\frac{1}{h}\int_x^{x+h}f(t)\,dt-f(x)&=\lim_{h\to 0}\frac{1}{h}\int_x^{x+h}(f(t)-f(x))\,dt
+\end{align*}
+We need to show that this is equal to $0$. Now since $f$ is continuous, given $\varepsilon>0$, there exists $\delta>0$ such that $\abs{x-y}<\delta$ implies $\abs{f(x)-f(y)}<\varepsilon$. Therefore, choose $y=x+h$ and $x$ to be $x$. For $\abs{x+h-x}=\abs{h}<\delta$, 
+\begin{align*}
+\abs{\frac{1}{h}\int_x^{x+h}(f(t)-f(x))\,dt}&\leq\abs{\frac{1}{h}\int_x^{x+h}\abs{f(t)-f(x)}\,dt}\tag{By 6.3.7}\\
+&\leq\abs{\frac{1}{h}\int_x^{x+h}\varepsilon\,dt}\tag{By Uniform Continuity}\\
+&=\varepsilon
+\end{align*}
+Thus we have $$\lim_{h\to 0}\frac{1}{h}\int_x^{x+h}(f(t)-f(x))\,dt=0$$ and $$\lim_{h\to 0}\frac{1}{h}\int_x^{x+h}f(t)\,dt=f(x)$$
+Thus $F'(x)=f(x)$. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{Fundamental Theorem of Calculus II}{}\\ Let $F:[a,b]\to\R$ be a continuous function that is differentiable on $(a,b)$ with $F'=f$. Suppose that $f:[a,b]\to\R$ is an integrable function. Then $$\int_{a}^{b}f(x)dx=F(b)-F(a)$$ 
+\begin{proof}\\
+Consider any partition $P$ of the interval $[a,b]$. For every interval in $P$, $$\inf_{I_k}(f(x))(t_k-t_{k-1})\leq f(c_k)(t_k-t_{k-1})\leq\sup_{I_k}(f(x))(t_k-t_{k-1})$$
+for every $c_k\in(t_{k-1},t_k)$. Since $F$ is continuous on $[t_{k-1},t_k]$ and differentiable on $(t_{k-1},t_k)$, by the mean value theorem, there exists $c_k$ such that $F(t_k)-F(t_{k-1})=f(c_k)(t_k-t_{k-1})$. Thus $$\inf_{I_k}(f(x))(t_k-t_{k-1})\leq F(t_k)-F(t_{k-1})\leq\sup_{I_k}(f(x))(t_k-t_{k-1})$$ and $$L(f,P)\leq\sum_{k=1}^n(F(t_k)-F(t_{k-1})\leq U(f,P)$$ and $$L(f,P)\leq F(b)-F(a)\leq U(f,P)$$ This is true for every $P$ thus $$\sup_{P}(L(f,P))\leq F(b)-F(a)\leq\inf_{P}(U(f,P))$$ and thus $$\int_a^bf(x)\,dx=F(b)-F(a)$$
+\end{proof}
+\end{thm}
+
+For the first time, we are given an explicit way of calculating the integral, given that the antiderivative exists. This is another reason why the fundamental theorem of calculus is so important. Without it, we will need to resort to the basic definitions of partitions. 
+
+\begin{thm}{}{}\\ Let $f:[a,b]\to\R$ be an integrable function on $[a,b]$ and continuous at $a$. Let $x\in I_h$ and $\abs{I_h}\to 0$. Then $$\lim_{h\to 0}\frac{1}{\abs{I_h}}\int_{I_h}f(t)\,dt=f(x)$$ 
+\begin{proof}\\ From the last part of the proof of the FTC I, this is already proven. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{Product Rule of Integrals}{}\\ Let $f,g:[a,b]\to\R$ be continuous functions on $[a,b]$ that are differentiable on $(a,b)$ and such that $f',g'$ are integrable on $[a,b]$. Then $$\int_{a}^{b}f(x)g'(x)\,dx=f(b)g(b)-f(a)g(a)-\int_{a}^{b}f'(x)g(x)\,dx$$ 
+\begin{proof}\\ Note that by the algebra of integrable function, $f'g,fg',(fg)'$ are all integrable. Also by the FTC, we have $$\int_a^b(fg)'=f(b)g(b)-f(a)g(a)$$ and $$\int_a^b(fg)'=\int_a^bf'g+fg'$$ thus we have the required result. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{Chain Rule of Integrals}{}\\ Let $f:[a,b]\to\R$ be a differentiable function such that $f'$ is integrable on $[a,b]$. Let $g$ be a continuous function on $f([a,b])$. Then $$\int_{a}^{b}g\left(f(x)\right)f'(x)\,dx=\int_{f(a)}^{f(b)}g(t)\,dt$$ 
+\begin{proof}\\
+Define $G(x)=\int_{f(a)}^xg(t)\,dt$. By the FTC, $G'(x)=g(x)$. By the chain rule of differentiation, we obtain $G'(f(x))=g(f(x))f'(x)$. Since $g$ is continuous and $f$ is integrable, $g\circ f$ is integrable. Also $f'$ is integrable. By the algebra of integrable functions, $G'(f(x))$ is integrable. Thus we have
+\begin{align*}
+\int_a^bg(f(x))f'(x)\,dx&=\int_a^bG'(f(x))\,dx\\
+&=G(f(b))-G(f(a))\tag{FTC}\\
+&=\int_{f(a)}^{f(b)}g(t)\,dt\tag{FTC}
+\end{align*}
+\end{proof}
+\end{thm}
+
+A neat trick to apply the FTC on non-standard integral bounds is to use the following formula: $$\frac{d}{dx}\int_{a(x)}^{b(x)}f(t)\,dt=b'(x)f(b(x))-a'(x)f(a(x))$$ This involves using the chain rule. The proof is simple with the given conditions for both the FTC and the chain rule. 
+
+\subsection{Improper Integrals}
+\begin{defn}{Improper Integral}{}\\ Let $f:[a,b]\to\R$ be Riemann Integrable for every $[c,b]$ with $a<c$. Then the improper integral of $f$ on $[a,b]$ is defined as $$\int_a^bf(x)\,dx=\lim_{\varepsilon\to0^+}\int_{a+\varepsilon}^bf(x)\,dx $$
+Similarly, if $f:[a,b]\to\R$ is Riemann Integrable for every $[a,c]$ with $c<b$, then the improper integral of $f$ on $[a,b]$ is define as $$\int_a^bf(x)\,dx=\lim_{\varepsilon\to0^+}\int_a^{b-\varepsilon}f(x)\,dx$$
+\end{defn}
+
+\begin{defn}{Improper Integrals on Interior Points}{}\\ Let $f:[a,b]\to\R$ be a function that is integrable on $[a,c-\varepsilon]$ and $[c+\delta,b]$ for all $\varepsilon,\delta>0$ where the interval makes sense. Then define the integral of $f$ on $[a,b]$ to be $$\int_a^bf(x)\,dx=\lim_{\varepsilon\to0^+}\int_a^{c-\varepsilon}f(x)\,dx+\lim_{\delta\to0^+}\int_{c+\delta}^bf(x)\,dx$$
+\end{defn}
+
+\begin{defn}{Improper Integrals with Infinity}{}\\ let $f:[a,\infty)\to\R$ be a function that is integrable for every interval $[a,c]$ with $a<c<\infty$. We define the improper integral of $f$ on $[a,\infty]$ by $$\int_{a}^{\infty}f(x)\,dx=\lim_{c\to\infty}\int_{a}^{c}f(x)\,dx$$
+Similarly if $g:(-\infty,b]\to\R$ is an integrable function for every integral $[c,b]$ with $-\infty<c<b$ then we define the improper integral of $g$ on $(-\infty,b]$ by $$\int_{-\infty}^{b}g(x)\,dx=\lim_{c\to-\infty}\int_{c}^{b}g(x)\,dx$$
+Finally, if $h:\R\to\R$ is a function that is integrable on every bounded interval $[a,b]$, then define the improper integral $$\int_{-\infty}^\infty f(x)\,dx=\lim_{a\to-\infty}\int_a^cf(x)\,dx+\lim_{b\to\infty}\int_c^bf(x)\,dx$$ where $c$ is any point in $\R$. 
+\end{defn}
+
+\begin{thm}{Absolute Comparison Test}{}\\ Let $f:[a,\infty)\to\R$ be integrable on $[a,b]$. For every $b>a$. If $\int_a^\infty\abs{f}<\infty$, then $\int_a^\infty f$ converges. Moreover, if $g:[a,\infty)\to[0,\infty)$ is such that $\abs{f}\leq g$ and $\int_a^\infty g<\infty$, then $\int_a^\infty f$ is absolutely convergent. 
+\begin{proof}\\ Recall from Cauchy Criterion that $\lim_{t\to\infty}\int_a^t\abs{f}$ is finite if and only if for every $\varepsilon>0$, there exists $N$ such that $R_1,R_2>N$ implies $$\abs{\int_a^{R_2}\abs{f}-\int_a^{R_1}\abs{f}}=\abs{\int_{R_1}^{R_2}\abs{f}}<\varepsilon$$ Thus we have that $$\abs{\int_{R_1}^{R_2}f}\leq\int_{R_1}^{R_2}\abs{f}<\varepsilon$$ So $\int_a^\infty$ converges by the Cauchy Criterion. \\~\\
+Similarly, we have that for every $\varepsilon>0$, there exists $N$ such that $R_1,R_2>N$ implies $$\abs{\int_a^{R_2}g-\int_a^{R_1}g}=\abs{\int_{R_1}^{R_2}g}<\varepsilon$$ Therefore $$\abs{\int_{R_1}^{R_2}\abs{f}}\leq\abs{\int_{R_1}^{R_2}g}<\varepsilon$$
+\end{proof}
+\end{thm}
+
+\pagebreak
+\section{Sequences and Series of Functions}
+\subsection{Uniform Convergence}
+\begin{defn}{Pointwise Convergence}{}\\ Suppose $(f_n)_{n\in\N}$ is a sequence of functions defined on an interval $I$. Suppose that the sequence of numbers $(f_n(x))_{n\in\N}$ converges for every $x\in I$. We can define $$f(x)=\lim_{n\to\infty}f_n(x)$$ for all $x\in I$. We say that $(f_n)_{n\in\N}$ converges to $f$. 
+\end{defn}
+
+\begin{defn}{Uniform Convergence}{}\\ We say that $(f_n)_{n\in\N}$ converges uniformly on $I$ to a function $f$ if for every $\varepsilon>0$ there is an integer $N$ such that $n>N$ implies $$\abs{f_n(x)-f(x)}<\varepsilon$$ for all $x\in I$. 
+\end{defn}
+
+\begin{crl}{}{}\\ Uniform convergence implies pointwise convergence. 
+\begin{proof}\\ Suppose that $(f_n)_{n\in\N}$ is uniformly convergent to $f$. Then in particular fix any $x$ in its domain, its epsilon-delta definition of convergence on $x$ is precisely the definition of pointwise convergence. 
+\end{proof}
+\end{crl}
+
+\begin{thm}{Cauchy Criterion}{}\\ The sequence of functions $(f_n)_{n\in\N}$ defined on $I$ converges uniformly if and only if for every $\varepsilon>0$ there eixsts $N$ such that $m,n>N$ implies $$\abs{f_m(x)-f_n(x)}<\varepsilon$$ for all $x$ in the domain. 
+\begin{proof}\\
+Suppose that $(f_n)_{n\in\N}$ converges uniformly to $f$. Then fix $\frac{\varepsilon}{2}>0$, there exists $N\in\N$ such that $n>N$ implies $\abs{f_n-f}<\frac{\varepsilon}{2}$ and $\abs{f_m-f}<\frac{\varepsilon}{2}$ if $m>N$. Then $$\abs{f_m(x)-f_n(x)}\leq\abs{f_m(x)-f(x)}+\abs{f_n(x)-f(x)}<\varepsilon$$
+Now suppose that the cauchy criterion is satisfied. Then for every fixed $x$, $f_n(x)$ is Cauchy in $\R$ and thus is convergent. This means there exists $f$ on its domain such that at least $f_n$ is pointwise convergent to $f$. From the cauchy criterion, we have that $$f_m(x)-\varepsilon<f_n(x)<f_m(x)+\varepsilon$$ for all $x$ and $n,m>N$. Since the bounds hold for all $m>N$, and we have that $f_m(x)\to f$ pointwise, we have that $$f(x)-\varepsilon<f_n(x)<f(x)+\varepsilon$$ and thus $$\abs{f(x)-f_n(x)}<2\varepsilon$$ for all $n>N$. 
+\end{proof}
+\end{thm}
+
+Side note: Since we want a universal $N$ such that it works for every $x\in I$, we can simply consider the maximum of the difference between $f_m(x)$ and $f_n(x)$, which leads to some notes developing the norm of a functionn $\|f\|_{\infty}=\sup_{x\in I}\abs{f(x)}$. They are essentially the same even when substitued in the definition. 
+
+\begin{prp}{}{}\\ Suppose $\lim_{n\to\infty}f_n(x)=f(x)$. Let $$\sup_{x\in I}\abs{f_n(x)-f(x)}=\|f_n-f\|_\infty$$ Then $(f_n)_{n\in\N}$ converges to $f$ uniformly if and only if $$\lim_{n\to\infty}\|f_n-f\|_\infty=0$$ 
+\begin{proof}\\
+Suppose that $(f_n)_{n\in\N}$ converges to $f$ uniformly. Then trivially $\sup_{x\in I}\abs{f_n-f}<\varepsilon$. Thus we are done. \\~\\
+Suppose that $\|f_n-f\|\to 0$ as $n\to\infty$. Then since $\abs{f_n-f}\leq\|f_n-f\|_\infty<\varepsilon$ in the $\varepsilon$ definition, we must have $(f_n)_{n\in\N}$ converging to $f$ uniformly. 
+\end{proof}
+\end{prp}
+
+\subsection{Uniform Convergence and Continuity}
+\begin{thm}{}{}\\ Let $(f_n)_{n\in\N}$ be a sequence of continuous functions on $I$, and if $f_n$ converges to $f$ uniformly on $I$, then $f$ is continuous on $I$. 
+\begin{proof}\\ By uniform convergence, we know that if $\frac{\varepsilon}{3}>0$, there exists $N\in\N$ such that $\abs{f_n(x)-f(x)}<\frac{\varepsilon}{3}$ for all $x\in I$ and $n>N$. Fix $n$ such that $n>N$ now. I will show that $f$ is continuous at $x_0$. Since $f_n(x)$ is continuous at $x_0$, we know that there exists $\delta$ such that $x\in(x_0-\delta,x_0+\delta)\cap I$ implies $\abs{f_n(x)-f_n(x_0)}<\frac{\varepsilon}{3}$. Now
+\begin{align*}
+\abs{f(x)-f(x_0)}&\leq\abs{f(x)-f_n(x)}+\abs{f_n(x)-f_n(x_0)}+\abs{f_n(x_0)-f(x_0)}\\
+&<\frac{\varepsilon}{3}+\frac{\varepsilon}{3}+\frac{\varepsilon}{3}\\
+&=\varepsilon
+\end{align*}
+Thus $f$ is continuous at $x_0$. 
+\end{proof}
+\end{thm}
+
+\begin{prp}{}{}\\ Let $(f_n)_{n\in\N}$ be a sequence of continuous and bounded functions on $I\subseteq\R$ that is cauchy. Then it converges to a continuous and bounded function. 
+\begin{proof}\\ We alredy showed that uniform convergence implies continuity on its limit, we just have to show that it is bounded. Note that for all $x\in I$, the domain of $f$, $$\abs{f(x)}\leq\abs{f(x)-f_n(x)}+\abs{f_n(x)}$$ By uniformly convergence, there exists $N\in\N$ such that $n>N$ implies $\abs{f_n(x)-f(x)}<1$. For that $n$, since $f_n$ is bounded, we have $\abs{f_n}<M$ is $f_n$ is bounded. Thus we have that $\abs{f(x)}\leq M+1$ for all $x\in I$. 
+\end{proof}
+\end{prp}
+
+\subsection{Uniform Convergence and Integrability}
+\begin{thm}{}{}\\ Suppose $(f_n)_{n\in\N}$ is a sequence of functions that is Riemann Integrable on $[a,b]$ that converges uniformly on $[a,b]$ to a function $f$. Then $f$ is Riemann Integrable and $$\lim_{n\to\infty}\int_a^bf_n(x)\,dx=\int_a^b\lim_{n\to\infty}f_n(x)\,dx$$ 
+\begin{proof}\\ We first show that $f$ is integrable. Fix $\frac{\varepsilon}{4(b-a)}>0$. Then there exists $N\in\N$ such that $n>N$ implies $$\abs{f_n(x)-f(x)}<\frac{\varepsilon}{4(b-a)}$$ for all $x$. Fix $n>N$. Since $f_n$ is integrable, given $\frac{\varepsilon}{2}>0$ there exists a partition such that $U(f_n,P)-L(f_n,P)<\frac{\varepsilon}{2}$. For that $P$,
+\begin{align*}
+U(f,P)-L(f,P)&=\sum_{k=1}^n(\sup_{I_k}f-\inf_{I_k}f)\abs{I_k}\\
+&=\sum_{k=1}^n(\sup_{I_k}(f-f_n+f_n)-\inf_{I_k}(f-f_n+f_n))\abs{I_k}\\
+&\leq\sum_{k=1}^n\left(\sup_{I_k}\abs{f-f_n}+\sup_{I_k}f_n+\inf_{I_k}\abs{f-f_n}-\inf_{I_k}f_n\right)\abs{I_k}\\
+&=2\sum_{k=1}^n\|f_n-f\|_\infty\abs{I_k}+\sum_{k=1}^n(\sup_{I_k}f_n-\inf_{I_k}f_n)\abs{I_k}\\
+&\leq 2\|f_n-f\|_\infty(b-a)+U(f_n,P)-L(f_n,P)\\
+&\leq\frac{\varepsilon}{2}+\frac{\varepsilon}{2}\\
+&=\varepsilon
+\end{align*}
+Thus we have that $f$ is integrable. 
+\\~\\
+Now note that
+\begin{align*}
+\abs{\int_a^bf_n-\int_a^bf}&=\abs{\int_a^b(f_n-f)}\\
+&\leq\int_a^b\abs{f_n-f}\\
+&\leq\int_a^b\|f-f_n\|_\infty\\
+&=\|f_n-f\|_\infty(b-a)
+\end{align*}
+which goes to $0$ as $n\to\infty$ by the uniform convergence of $f_n$ to $f$. 
+\end{proof}
+\end{thm}
+
+\subsection{Uniform Convergence and Differentiability}
+\begin{thm}{}{}\\ Suppose $(f_n)_{n\in\N}\subset C^1([a,b])$ and it is pointwise convergent to $f$. If $(f_n')_{n\in\N}$ converges uniformly on $[a,b]$, then $f\in C^1([a,b])$ and $(f_n')_{n\in\N}$ in fact converges uniformly to $f'$. In other words, we have $$\lim_{n\to\infty}\left(\frac{d}{dx}f_n(x)\right)=\frac{d}{dx}\left(\lim_{n\to\infty}f_n(x)\right)$$ 
+\begin{proof}\\ Suppose that $f_n'$ converges uniformly to $g$. By 7.3.1, we have that $$\int_a^xg(t)\,dt=\int_a^x\lim_{n\to\infty}f_n'(t)\,dt=\lim_{n\to\infty}\int_a^xf_n'(t)\,dt$$
+By the FTC, this gives $$\int_a^xg(t)\,dt=\lim_{n\to\infty}(f_n(x)-f_n(a))=f(x)-f(a)$$
+Now since $\{f_n\}$ is continuous thus $g$ is continuous. By the above, we also have that $f$ is continuous. Thus the FTC implies that $\frac{d}{dx}\int_a^xg(t)\,dt=g(x)$. Thus we have that $g=f'$. 
+\end{proof}
+\end{thm}
+
+An easy way to remember this is $(f_n)_{n\in\N}$ pointwise convergent, $(f_n')_{n\in\N}$ are all continuous and converges uniformly, we can exchange the order of differentiation and limit. 
+
+\subsection{Series of Functions}
+\begin{defn}{Pointwise Convergence of Series of Functions}{}\\ Let $(f_k)_{k\in\N}$ be a sequence of functions $f_k:[a,b]\to\R$. Define $$S_n(x)=\sum_{k=1}^nf_k(x)$$ Then the series converges pointwise to $S:[a,b]\to\R$ if $S_n\to S$ pointwise. 
+\end{defn}
+
+\begin{defn}{Uniform Convergence of Series of Functions}{}\\ Let $(f_k)_{k\in\N}$ be a sequence of functions $f_k:[a,b]\to\R$. Define $$S_n(x)=\sum_{k=1}^nf_k(x)$$ Then the series converges uniformly to $S:[a,b]\to\R$ if $S_n$ converges to $S$ uniformly.  
+\end{defn}
+
+\begin{thm}{}{}\\ Let $(f_n)_{n\in\N}$ such that $f_n:[a,b]\to\R$ is a sequence of Riemann Integrable functions. If $S_n=\sum_{k=1}^nf_k$ converges uniformly, then $\sum_{k=1}^\infty f_k$ is Riemann Integrable and $$\int_a^b\sum_{k=1}^\infty f_k(x)\,dx=\sum_{k=1}^\infty\int_a^bf_k(x)\,dx$$ 
+\begin{proof}\\ Since $S_n$ is a finite sum of integrable functions, $S_n$ is also integrable by additivity. By theorem $7.3.1$, $S$ is also integrable and we have $$\lim_{n\to\infty}\int S_n=\int\lim_{n\to\infty}S_n$$ Substituting $S_n=\sum_{k=1}^nf_k$ and we get the result. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{Term by Term Differentiation}{}\\ Let $(f_n)_{n\in\N}$ such that $f_n:[a,b]\to\R$ is a sequence of $C^1$ functions. If $S_n=\sum_{k=1}^nf_k$ converges pointwise, and $\sum_{k=1}^nf_k'$ converges uniformly, then $$\left(\sum_{k=1}^\infty f_k(x)\right)'=\sum_{k=1}^\infty f_k'(x)$$ 
+\begin{proof}\\ Similar to the proof above, except that it utilizes theorem $7.4.1$ instead. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{Weierstrass M-test}{}\\ Let $\{f_n\}$ be a sequence of functions $f_n:[a,b]\to\R$, and assume that for every $n$ there exists $M_n>0$ such that $\abs{f_n(x)}\leq M_n$ for every $x\in[a,b]$ and $\sum_{k=1}^\infty M_k$ is finite. Then $$S_n=\sum_{k=1}^n f_k$$ converges uniformly on $[a,b]$ to the function $\sum_{k=1}^\infty f_k$. 
+\begin{proof}\\
+Since $\sum_{k=1}^nM_k<\infty$, given $\varepsilon>0$ there exists $N$ such that $$\sum_{k=m+1}^nM_k<\varepsilon$$ for all $m,n>N$ by cauchy condition of infinite sums. Now note that
+\begin{align*}
+\abs{S_n(x)-S_m(x)}&=\abs{\sum_{k=m+1}^nf_k(x)}\\
+&\leq\sum_{k=m+1}^n\abs{f_k(x)}\\
+&\leq\sum_{k=m+1}^nM_k\\
+&<\varepsilon
+\end{align*}
+This proves that $S_n$ is uniformly cauchy, which implies that $S_n$ is uniformly convergent. 
+\end{proof}
+\end{thm}
+
+\pagebreak
+\section{Power Series and Taylor Series}
+\subsection{Power Series}
+\begin{defn}{Power Series}{}\\ A power series in $\R$ is an infinite series of the form $$\sum_{k=0}^\infty a_k(x-c)^k$$ where $c\in\R$ is the center and $a_k\in\R$ for all $k\in\N$. 
+\end{defn}
+
+We treat the case of when $c=0$ so that the power series is centered at $0$. The more general case follows immediately by a translation. 
+
+\begin{thm}{}{}\\ Let $\sum_{k=0}^{\infty}a_kx^k$ be a power series with $\sum_{k=0}^{\infty}a_kt^k$ convergent for some $t\in\R$. Then $\sum_{k=0}^{\infty}a_kx^k$ converges absolutely for all $x$ with $\abs{x}<\abs{t}$. 
+\begin{proof}\\ Note that the convergence of $\sum_{k=0}^{\infty}a_kt^k$ implies $(a_nt^n)\to 0$. This implies that $a_nt^n$ is bounded by, say $M$. 
+\begin{align*}
+\sum_{k=0}^{\infty}\abs{a_kx^k}&=\sum_{k=0}^{\infty}\abs{a_kt^k}\abs{\frac{x^k}{t^k}}\\
+&<\sum_{k=0}^{\infty}M\abs{\frac{x^k}{t^k}}\\
+&=\frac{M}{1-\abs{\frac{x}{t}}}\\
+\end{align*} Since it is increasing and bounded, the infinity sum converges absolutely thus the sum converges. 
+\end{proof}
+\end{thm}
+
+\begin{defn}{Radius of Convergence}{}\\ Let $\sum_{k=0}^\infty a_k(x-c)^k$ be a power series. Define the radius of convergence of the power series to be $$R=\sup\left\{r\in\R\;|\;\sum_{k=0}^\infty a_kr^k\text{ converges }\right\}$$
+\end{defn}
+
+\begin{prp}{}{}\\ Let $\sum_{k=0}^{\infty}a_kx^k$ with radius of convergence $R$. Then $\sum_{k=0}^{\infty}\abs{a_k}x^k$ also has radius of convergence $R$. 
+\begin{proof}\\ We have that $$\abs{\sum_{k=0}^{\infty}\abs{a_k}x^k}\leq\sum_{k=0}^{\infty}\abs{a_k}\abs{x^k}$$ which converges between $(-R,R)$. 
+\end{proof}
+\end{prp}
+
+\begin{thm}{}{}\\ For any power series $\sum_{k=0}^\infty a_kx^k$, the radius of convergence is $$R=\frac{1}{\limsup_{n\to\infty}\abs{a_n}^{\frac{1}{n}}}$$ 
+\begin{proof}\\ Application of the root test. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{Continuity of Power Series}{}\\ Let $\sum_{k=0}^{\infty}a_kx^k$ with radius of convergence $R$. Then the function $f(x)=\sum_{k=0}^{\infty}a_kx^k$ is continuous on the interval $(-R,R)$. 
+\begin{proof}\\ Suppose $\abs{x}<R$. We show that the function is continuous at $x$. Let $T$ such that $\abs{x}<T<R$. Then $\sum_{k=0}^\infty\abs{a_k}T^k$ converges, so for every $\varepsilon>0$ there is some number $N$ such that $$\sum_{k=N+1}^\infty\abs{a_k}T^k<\frac{\varepsilon}{3}$$ Let $y$ such that $\abs{y-x}<T-\abs{x}$. Then we will have $\abs{y}<T$ and $\abs{x}<T$. Hence $$\sum_{k=N+1}^\infty\abs{a_k}\abs{x}^k<\frac{\varepsilon}{3}$$ and $$\sum_{k=N+1}^\infty\abs{a_k}\abs{y}^k<\frac{\varepsilon}{3}$$ The partial sum $$\sum_{k=0}^Na_ky^k$$ is a polynomial thus is continuous. There exists some $\delta_0>0$ such that $\abs{y-x}<\delta_0$ implies $$\abs{\sum_{k=0}^Na_ky^k-\sum_{k=0}^Na_kx^k}<\frac{\varepsilon}{3}$$ Choose $\delta=\min(\delta_0,T-\abs{x})$. Then we have that $\abs{y-x}<\delta$ we get 
+\begin{align*}
+\abs{\sum_{k=0}^\infty a_ky^k-\sum_{k=0}^\infty a_kx^k}&\leq\abs{\sum_{k=N+1}^\infty a_ky^k}+\abs{\sum_{k=0}^Na_ky^k-\sum_{k=0}^Na_kx^k}+\abs{\sum_{k=N+1}^\infty a_kx^k}\\
+&\leq\frac{\varepsilon}{3}+\frac{\varepsilon}{3}+\frac{\varepsilon}{3}\\
+&=\varepsilon
+\end{align*}
+\end{proof}
+\end{thm}
+
+\begin{prp}{}{}\\ Let $\sum_{k=0}^\infty a_kx^k$ be a power series with radius of convergence $R$. Then $f$ is differentiable on $(-R,R)$ and $$f'(x)=\sum_{k=1}^\infty ka_kx^{k-1}$$ 
+\begin{proof}\\ We first show that $\sum_{k=1}^\infty ka_kx^{k-1}$ has the same radius of convergence. We have that $\sum_{k=0}^\infty \abs{a_k}x^k$ has the same radius of convergence. Choose $x$ and $y$ such that $x<y<R$. Then $\sum_{k=0}^\infty a_kx^k$ and $\sum_{k=0}^\infty a_ky^k$ converges. 
+\begin{align*}
+\sum_{k=1}^\infty ka_kx^{k-1}&<\sum_{k=1}^\infty\abs{a_k}(y^{k-1}+y^{k-2}x+\dots+x^{k-1})\\
+&=\sum_{k=0}^\infty\abs{a_k}\frac{y^k-x^k}{y-x}
+\end{align*}
+Since $\sum_{k=0}^\infty\abs{a_k}\frac{y^k-x^k}{y-x}$ converges, we complete our lemma. \\~\\
+Now for the main proof. Choose $T$ such that $\abs{x}<T<R$. We have proved that $\sum_{k=1}^\infty ka_kx^{k-1}$ converges so given $\varepsilon>0$ there is a number $N$ so that $$\sum_{k=N+1}^\infty k\abs{a_k}T^{k-1}<\frac{\varepsilon}{3}$$ Now if $0<\abs{y-x}<T-\abs{x}$, we have $\abs{y}<T$ and $\abs{x}<T$. Thus we have that $$\abs{\sum_{k=N+1}^\infty ka_kx^{k-1}\leq\sum_{k=N+1}^\infty k\abs{a_k}\abs{x}^{k-1}<\frac{\varepsilon}{3}}$$ and also
+\begin{align*}
+\abs{\sum_{k=N+1}^\infty a_k\frac{y^k-x^k}{y-x}}&=\abs{\sum_{k=N+1}^\infty a_k(y^{k-1}+y^{k-2}x+\dots+x^{k-1})}\\
+&\leq\sum_{k=N+1}^\infty\abs{a_k}(\abs{y}^{k-1}+\dots+\abs{x}^{k-1})\\
+&\leq\sum_{k=N+1}^\infty k\abs{a_k}T^{k-1}\\
+&\leq\frac{\varepsilon}{3}
+\end{align*} The sum $$\sum_{k=1}^Na_k(y^{k-1}+y^{k-2}x+\dots+x^{k-1})$$ is a polynomial in $y$ whose value at $x$ is $\sum_{k=1}^Nka_kx^{k-1}$ so there exists $\delta_0>0$ such that $\abs{y-x}<\delta_0$ implies 
+\begin{align*}
+\abs{\sum_{k=1}^Na_k\frac{y^k-x^k}{y-x}-\sum_{k=1}^N}ka_kx^{k-1}&=\abs{\sum_{k=1}^Na_k(y^{k-1}+y^{k-2}x+\dots+x^{k-1})-\sum_{k=1}^Nka_kx^{k-1}}\\
+&\leq\frac{\varepsilon}{3}
+\end{align*}
+Finally, choose $\delta=\min(\delta_0,T-\abs{x})$ then $\abs{y-x}<\delta$ implies
+\begin{align*}
+\abs{\sum_{k=1}^\infty a_k\frac{y^k-x^k}{y-x}-\sum_{k=1}^\infty ka_kx^{k-1}}&\leq\abs{\sum_{k=N+1}^\infty a_k\frac{y^k-x^k}{y-x}}+\abs{\sum_{k=1}^N a_k\frac{y^k-x^k}{y-x}-\sum_{k=1}^N ka_kx^{k-1}}\\
+&+\abs{\sum_{k=N+1}^\infty ka_kx^{k-1}}\\
+&\leq\frac{\varepsilon}{3}+\frac{\varepsilon}{3}+\frac{\varepsilon}{3}\\
+&=\varepsilon
+\end{align*}
+\end{proof}
+\end{prp}
+
+\begin{lmm}{}{}\\ Every power series is a smooth function. 
+\end{lmm}
+
+\subsection{Analytic Functions and Taylor Series}
+Given a function $f:U\to\R$, we may ask whether $f$ can be represented as a power series. Since power series are infinitely differentiable, we expect any function representable by a power series to also be infinitely differentiable. However there are more conditions needed for $f$ to representable by a power series. 
+
+\begin{defn}{Analytic Functions}{}\\ Let $f:U\subseteq\R\to\R$ be a function. Let $(a,b)\subseteq U$ be an open interval. We say that $f$ is analytic on $(a,b)$ if there exists $a_k\in\R$ for each $k\in\N$ and $c\in(a,b)$ such that $f$ can be expressed as a power series $$f(x)=\sum_{k=0}^\infty a_k(x-c)^k$$ for all $x\in(a,b)$. 
+\end{defn}
+
+\begin{prp}{}{}\\ Let $f:U\subseteq\R\to\R$ be a function. Then the following are true. 
+\begin{itemize}
+\item If $f$ is analytic at $(a,b)\subseteq U$, then $f\in\mC^\infty(a,b)$. 
+\item Moreover, if the power series representation of $f$ at $(a,b)$ is given by $$f(x)=\sum_{k=0}^\infty a_k(x-c)^k$$ for some $c\in(a,b)$ and $a_k\in\R$, then we have $$a_k=\frac{f^{(k)}(c)}{k!}$$
+\end{itemize}
+\end{prp}
+
+Smooth functions may not be analytic in general. Consider the function $$f(x)=\begin{cases}
+e^{-\frac{1}{x^2}} & \text{ if }x\neq 0\\
+0 & \text{ if } x=0
+\end{cases}$$
+It is smooth but is not analytic at any interval containing $x=0$. 
+
+\begin{defn}{Taylor Series}{}\\ Let $f:(a,b)\to\R$ be a smooth function. Let $c\in(a,b)$. Define the Taylor series of $f$ to be $$\sum_{k=0}^{\infty}\frac{f^{(k)}(c)}{k!}(x-c)^k$$
+\end{defn}
+
+\begin{defn}{Remainder}{}\\ Let $f:(a,b)\to\R$ in $C^n$. Let $c\in(a,b)$. Then define the $n$th remainder of $f$ at $c$ to be $$R_n(x)=f(x)-\sum_{k=0}^{n-1}\frac{f^{(k)}(c)}{k!}(x-c)^{n-1}$$
+\end{defn}
+
+\begin{thm}{}{}\\ Let $f:(a,b)\to\R$ possess derivatives of all order at $c\in(a,b)$. Then $$f(x)=\sum_{k=0}^{\infty}\frac{f^{(k)}(c)}{k!}(x-c)^k$$ if and only if $$\lim_{n\to\infty}R_n(x)=0$$ 
+\begin{proof}\\
+Suppose that $f(x)$ is equal to its taylor series at $c$. Since the taylor series converges to $f(x)$, $R_n(x)$ converges to $0$ by definition. \\~\\
+Suppose that $R_n(x)$ converges to $0$. Then by the definition of $R_n(x)$ we must have $f(x)$ equal to its taylor and we are done. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{Lagrange Remainder}{}\\ If $f:(c,d)\to\R$ is $n$ times differentiable and $a,b\in(c,d)$, then $$R_n(b)=\frac{f^{(n)}(t)}{n!}(b-a)^n$$ for some $t$ between $a$ and $b$. 
+\begin{proof}\\ Define $$g(x)=f(x)-\left(f(a)+f'(a)(x-a)+\dots+\frac{f^{(n-1)}(a)}{(n-1)!}(x-a)^{n-1}\right)$$ $g(x)$ satisfies $g(a)=g'(a)=\dots=g^{(n-1)}(a)=0$. It also satisfies $g^{(n)}(x)=f^{(n)}(x)$ for all $x$. Define $h(x)=g(x)-g(b)\frac{(x-a)^n}{(b-a)^n}$. Then $h(a)=h'(a)=\dots=h^{(n-1)}(a)=0$ and $h(b)=0$. Now since $h(a)=h(b)=0$, there exists $t_1\in(a,b)$ where $h'(t_1)=0$ by Rolle's Theorem. Since $h'(t_1)=h'(a)=0$, there exists $t_2\in(a,t_1)$ where $h''(t_2)=0$. Continuing this way we get that $t=t_n$ where $h^{(n)}(t)=0$. In terms of $g$, we have $$g^{(n)}(t)=g(b)\frac{n!}{(b-a)^n}$$ Rewriting the equation we have that $$g(b)=\frac{g^{(n)}(t)}{n!}(b-a)^n=\frac{f^{(n)}(t)}{n!}(b-a)^n$$ Substituting $x=b$ into the definition of $g(x)$, we have 
+\begin{align*}
+g(b)&=f(b)-\left(f(a)+f'(a)(b-a)+\dots+\frac{f^{(n-1)}(a)}{(n-1)!}(b-a)^{n-1}\right)\\
+\frac{f^{(n)}(t)}{n!}(b-a)^n&=f(b)-\left(f(a)+f'(a)(b-a)+\dots+\frac{f^{(n-1)}(a)}{(n-1)!}(b-a)^{n-1}\right)\\
+&=f(b)-\sum_{k=0}^{n-1}\frac{f^{(k)(a)}}{(k-1)!}(b-a)^{k-1}\\
+&=R_n(b)
+\end{align*}
+Thus we are done. 
+\end{proof}
+\end{thm}
+
+\subsection{The Exponential Series}
+Now that we have explored most of the theorems in power series, we will give a through investigation on the exponential function and the logarithm function. \\~\\
+We begin by recalling the definition of the exponential function. 
+\begin{defn}{The Exponential Function}{}\\ Let $x\in\R$. The series $$e^x=\sum_{k=0}^\infty \frac{x^k}{k!}$$ is called the exponential series
+\end{defn}
+
+\begin{thm}{}{}\\ $f(x)=e^x$ is continuous for $x\in R$. 
+\begin{proof}\\ Power series are continuous. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{Property of the Exponential}{}\\ Let $x,y\in\R$. Then 
+\begin{itemize}
+\item $e^{x+y}=e^xe^y$
+\item $e^x\geq 1+x$ for all $x$
+\item $e^x\leq\frac{1}{1-x}$ for all $x<1$
+\item $e^x$ is strictly increasing
+\end{itemize}
+\begin{proof}\\ Let $x,y\in\R$. 
+\begin{itemize}
+\item We want to show that $$\sum_{k=0}^{2m}\frac{(x+y)^k}{k!}-\left(\sum_{i=0}^m\frac{x^i}{i!}\right)\left(\sum_{j=0}^m\frac{x^j}{j!}\right)\to0$$ This is equivalent to saying that $e^{x+y}-e^xe^y=0$. From the binomial theorem, we have $$(x+y)^k=\sum_{i=0}^k\frac{k!}{i!(k-i)!}x^iy^{k-i}=\sum_{i+j=k}k!\frac{x^i}{i!}\frac{y^j}{j!}$$ Hence
+\begin{align*}
+&\sum_{k=0}^{2m}\frac{(x+y)^k}{k!}-\left(\sum_{i=0}^m\frac{x^i}{i!}\right)\left(\sum_{j=0}^m\frac{x^j}{j!}\right)\\
+&=\sum_{i+j=k}k!\frac{x^i}{i!}\frac{y^j}{j!}-\left(\sum_{i=0}^m\frac{x^i}{i!}\right)\left(\sum_{j=0}^m\frac{x^j}{j!}\right)\\
+&=\sum_{i\geq m+1,i+j\leq 2m}\frac{x^i}{i!}\frac{y^j}{j!}\\
+&\leq\sum_{i\geq m+1,i+j\leq 2m}\frac{\abs{x^i}}{i!}\frac{\abs{y^j}}{j!}\\
+&=\sum_{i\geq m+1,j\geq0}\frac{\abs{x^i}}{i!}\frac{\abs{y^j}}{j!}\\
+&=\left(\sum_{i\geq m+1}\frac{\abs{x^i}}{i!}\right)\left(\sum_{j=0}^\infty\frac{\abs{y^j}}{j!}\right)
+\end{align*} The first sum tends to $0$ as $m$ tends to infinity. 
+\item When $x\geq0$, $e^x=1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\dots\geq 1+x$
+\item When $0\leq x<1$, we have $e^x=1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\dots\leq1+x+x^2+x^3+\dots=\frac{1}{1-x}$. Now suppose that $x=-u$ is negative, then $$e^u\geq1+u$$ thus $e^{-x}\geq1-x$. This implies that $\frac{1}{1-x}\geq e^x$ thus this equality is true for all $x<1$. Now to prove the previous inequality, suppose $x\leq-1$, then $e^x>0>1+x$. Now suppose that $-1<x<0$. Let $x=-u$ then $0<u<1$ hence $e^u\leq\frac{1}{1-u}$. This implies that $e^{-x}\leq\frac{1}{1+x}$ thus $$1+x\leq e^x$$
+\item Suppose $x<y$. Then we have
+\begin{align*}
+e^y&=e^{y-x}e^x\\
+&\geq(1+y-x)e^x\\
+&>e^x
+\end{align*}
+\end{itemize}
+\end{proof}
+\end{thm}
+
+\begin{thm}{}{}\\ $f(x)=e^x$ is differentiable for $x\in R$ and the derivative is $$f'(x)=e^x$$ 
+\begin{proof}\\ Power series are differentiable and differentiating the power series for $e^x$ gives $e^x$. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{}{}\\ The inverse of $e^x$ exists. 
+\begin{proof}\\ It suffices to show that $e^x$ is injective. Since it is strictly increasing, it must be increasing. Since the range of $e^x$ is $(0,\infty)$, the domain of the inverse is $(0,\infty)$
+\end{proof}
+\end{thm}
+
+This theorem allows us to define properly the inverse of the exponetial function, namely the logarithm. We will also show that the logarithm is also a power series. 
+
+\begin{defn}{The Logarithm}{}\\ Define the logarithm function as the inverse of $e^x$ as $\ln(x)$. 
+\end{defn}
+
+\begin{thm}{}{}\\ $f(x)=\ln(x)$ is continuous and differentiable for all $x\in(0,\infty)$ and the derivative is $$f'(x)=\frac{1}{x}$$ 
+\begin{proof}\\ Since $e^x$ is continuous then $\ln(x)$ is also continuous. By theorem 5.2.2, $\ln(x)$ is differentiable. Also by theorem 5.2.2 we have $f'(x)=\frac{1}{x}$. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{}{}\\ The Taylor Series for the $\ln(1-x)$ is $$\ln(1-x)=-\sum_{k=1}^\infty\frac{x^k}{k}$$ for $-1\leq x<1$
+\end{thm}
+
+Be cautious that the taylor series is only defined for $x\in[-1,1)$. Outside of the interval, the power series will diverge. With that in mind, we will complete the chapter by defining real exponents. This is defined through both the exponential function and the logarithm. 
+
+\begin{defn}{Real Exponents}{}\\ If $x>0$ and $p\in\R$ define $$x^p=e^{p\ln(x)}$$
+\end{defn}
+
+\begin{thm}{Law of Exponents}{}\\ Let $x>0$ and $p,q\in\R$. 
+\begin{itemize}
+\item $x^{p+q}=x^px^q$
+\item $(x^p)^q=x^{pq}$
+\end{itemize}
+\begin{proof}\\ Simply revert the real exponents in terms of $e$. 
+\end{proof}
+\end{thm}
+
+\pagebreak
+\section{Examples}
+\subsection{Integrable Functions}
+\begin{eg}{}{}\\ Define $$f(x)=\begin{cases}
+\frac{1}{q} & \text{if } x=\frac{p}{q} \text{ where } p,q\in\N \text{ and } \gcd(p,q)=1\\
+0 & \text{otherwise }
+\end{cases}$$ for $x\in[0,1]$. Then $f$ is integrable. This example show that non-continuous functions can be integrable. 
+\end{eg}
+
+\begin{eg}{}{}\\ Define $$f(x)=\begin{cases}
+\frac{1}{q} & \text{if } x=\frac{p}{q} \text{ where } p,q\in\N \text{ and } \gcd(p,q)=1\\
+0 & \text{otherwise }
+\end{cases}$$ for $x\in[0,1]$. Also define $g(x)=1-f(x)$.  Then $f(x)+g(x)$ is integrable and $$\inf_{P}\{U(f+g,P)\}\leq\inf_{P}\{U(f,P)\}+\inf_{P}\{U(g,P)\}$$ and $$\sup_{P}\{L(f+g,P)\}\geq\sup_{P}\{L(f,P)\}+\sup_{P}\{L(g,P)\}$$ This example shows the upper and lower riemann integrals of functions are not necessarily linear. 
+\end{eg}
+
+\subsection{Uniform Convergence}
+\begin{eg}{}{}\\ Define $$f_n(x)=\frac{x}{n}$$ for $n\in\N$. The sequence $(f_n)_{n\in\N}$ is not uniformly convergent. 
+\end{eg}
+
+\begin{eg}{}{}\\ Define $$f_n(x)=\frac{x}{1+x^n}$$ for $n\in\N$. The sequence $(f_n)_{n\in\N}$ is not uniformly convergent. 
+\end{eg}
+
+\begin{eg}{}{}\\ Define $$f_n(x)=\begin{cases}
+n & \text{if }0\leq x\leq\frac{1}{n}\\
+0 & \text{otherwise }
+\end{cases}$$ for $n\in\N$. The sequence $(f_n)_{n\in\N}$ is not uniformly convergent. \\~\\
+This example show that without uniform convergence, the limit and the integration opeartor cannot be interchanged. 
+\end{eg}
+
+\begin{eg}{}{}\\ Define $$f_n(x)=\sqrt{x^2+\frac{1}{n}}$$ for $n\in\N$. The sequence $(f_n)_{n\in\N}$ is continuously differentiable. It also converges uniformly to $f(x)=\abs{x}$. \\~\\
+This example show that without uniform convergence of the derivatives of $f_n(x)$, the limit and the differentiation opeartor cannot be interchanged. 
+\end{eg}
+
+\begin{eg}{}{}\\ Define $$f_n(x)=\frac{1}{n}\sin(n^2x)$$ for $n\in\N$. The sequence $(f_n)_{n\in\N}$ is continuously differentiable. It also converges uniformly. \\~\\
+This example show that without uniform convergence of the derivatives of $f_n(x)$, the limit and the differentiation opeartor cannot be interchanged. 
+\end{eg}
+\end{document}

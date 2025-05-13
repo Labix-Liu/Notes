@@ -1,0 +1,573 @@
+\documentclass[a4paper]{article}
+
+\input{C:/Users/liula/Desktop/Latex/Headers.tex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Labix}
+\lhead{Differential Equations}
+\rfoot{\thepage}
+
+\title{Differential Equations}
+
+\author{Labix}
+
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+These notes will act as a an introductory text with a collection of theorems and definitions for differential equations. 
+\end{abstract}
+\tableofcontents
+\pagebreak
+
+\section{Introduction to Differential Equations}
+\subsection{Classification}
+\begin{defn}{Dependency}{} We say that a variable $x$ is dependent on $y$ if $y=f(x)$ for some function $f$, otherwise it is independent. 
+\end{defn}
+
+\begin{defn}{Differential Equations}{} A differential equation is a function of variables and their derivatives. 
+\end{defn}
+
+\begin{defn}{Ordinary and Partial}{} A differential equation is said to be ordinary if there is only one independent variable. It is partial otherwise. In particular,
+\begin{itemize}
+\item The equation $$\left(y\frac{dy}{dx}+x\right)=\frac{d^2y}{dx^2}$$ is ordinary
+\item The equation $$\frac{du}{dx}\left(\frac{d^2u}{dx^2}+\frac{d^2u}{dt^2}\right)=u$$ is partial
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Autonomous and Non-autonomous}{} A differential equation is said to be autonomous if the independent variable does not appear explicitly.  It is non-autonomous otherwise. In particular,
+\begin{itemize}
+\item The equation $$y''+2y'=y'''y+4$$ is autonomous
+\item The equation $$\frac{dy}{dx}+\frac{d^2y}{dx^2}=x$$ is non-autonomous
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Linear and non-linear}{} An ordinary differential equation with $y$ dependent on $x$ is said to be linear if the coefficient of every derivative is a function of $x$ or a constant. It is non-linear otherwise. In particular,
+\begin{itemize}
+\item The equation $$x^2\frac{dy}{dx}=6\frac{d^2y}{dx^2}$$ is linear
+\item The equation $$y\frac{dy}{dx}=\left(\frac{d^2y}{dx^2}\right)^2$$ is non-linear
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Homogenous and non-homogenous}{} An ordinary differential equation is said to be homogenous if the term without a derivative is $0$. In particular,
+\begin{itemize}
+\item The equation $$y''+2y'+y=0$$ is homogenous
+\item The equation $$y'''+yy'=xy+\sin(x)$$ is not homogenous
+\end{itemize}
+\end{defn}
+
+\pagebreak
+\section{Ordinary Differential Equations: First Order}
+\subsection{Existence and Uniqueness of Solutions of First Order Differential Equations}
+\begin{thm}{}{}[Globally Lipschitz Picard's Theorem] Let $f:\R^n\times\R\to\R^n$ is continuous and that there exists $L>0$ such that $$\abs{f(x,t)-f(y,t)}\leq L\abs{x-y}$$ for all $x,y\in\R^n$, $t\in\R$.  If $\tau L<1$, then for every $x_0\in\R^n$, there exists a unique differentiable function $x:[t_0,t_0+\tau]\to\R^n$ that satisfies $$\frac{dx}{dt}=f(x,t)$$ with $x(t_0)=x_0$ for all $t\in[t_0,t_0+\tau]$. 
+\end{thm}
+
+\begin{prp}{}{} Suppose that a solution is guaranteed by the above theorem on $[t_0,t_1]$ given by $x_1(t)$ and another solution is guaranteed on $[t_1,t_2]$ given by $x_2(t)$. Then $$x(t)=\begin{cases}
+x_1(t) & t_0\leq t\leq t_1\\
+x_2(t) & t_1\leq t\leq t_2
+\end{cases}$$ is a solution for the differential equation $x'(t)=f(x,t)$ on $[t_0,t_2]$
+\end{prp}
+
+\begin{thm}{}{} Suppose we have a system of linear differential equations $\vb{x}'(t)=A\vb{x}(t)$ with initial condition $x(0)=x_0$ where $A$ is an $n\times n$ matrix. Then the solution of this is $$x(t)=e^{tA}x_0=\sum_{k=0}^\infty\frac{t^kA^k}{k!}x_0$$ for $\abs{t}\leq\tau$ where $\tau<\|A\|^{-1}$
+\end{thm}
+
+\begin{thm}{}{}[Locally Lipschitz Picard's Theorem] Let $f:\R^n\times\R\to\R^n$ is continuous and that there exists $L>0$ such that $$\abs{f(x,t)-f(y,t)}\leq L\abs{x-y}$$ for all $x,y\in\R^n$, $t\in\R$.  If $\tau L<1$, then for every $x_0\in\R^n$, there exists a unique differentiable function $x:[t_0,t_0+\tau]\to\R^n$ that satisfies $$\frac{dx}{dt}=f(x,t)$$ with $x(t_0)=x_0$ for all $t\in[t_0,t_0+\tau]$. 
+\end{thm}
+
+\begin{thm}{}{} Suppose that $U\subset\R^n$ is open and that $f:U\to\R^n$ is continuous and locally Lipschitz, meaning for every compact subset $K$ of $U$ there exists $L_K$ such that $$\abs{f(u)-f(v)}\leq L_k\abs{u-v}$$ for $u,v\in K$, then for some $\tau=\tau(x_0)>0$ there exists a unique $x:[t_0-\tau,t_0+\tau]\to U$ that solves $$\frac{dx}{dt}=f(x)$$ with initial condition $x(t_0)=x_0$ for all $t\in[t_0-\tau,t_0+\tau]$. 
+\end{thm}
+
+\subsection{Separable Equations}
+\begin{defn}{Separable Equations}{} If $\frac{dx}{dt}=f(x)g(t)$. Then it is called separable. 
+\end{defn}
+
+\begin{lmm}{}{} A separable differential equation $\frac{dx}{dt}=f(x)g(t)$ can be solved by solving $$\int\frac{1}{f(x)}\,dx=\int g(t)\,dt$$
+\end{lmm}
+
+\subsection{The Linear Case}
+\begin{thm}{}{}[First Order Linear Equation] Let $R(t)=\int r(t)\,dt$. The differential equation $$\frac{dx}{dt}+r(t)x=g(t)$$ has the solution $$x(t)=Ae^{-R(t)}+e^{-R(t)}\int e^{R(t)}g(t)\,dt$$
+\end{thm}
+\begin{proof} We first multiply both sides of the equation by $e^{R(t)}$. We have
+\begin{align*}
+\frac{dx}{dt}+r(t)x&=g(t)\\
+e^{R(t)}\frac{dx}{dt}+r(t)e^{R(t)}x&=g(t)e^{R(t)}\tag{Multiply by $e^{R(t)}$}\\
+\frac{d}{dt}\left(e^{R(t)}x\right)&=g(t)e^{R(t)}\\
+e^{R(t)}x+C&=\int g(t)e^{R(t)}\,dt\tag{By the FTC}\\
+x&=e^{-R(t)}\int g(t)e^{R(t)}\,dt+Ae^{-R(t)}\tag{Relabel $A=-C$}
+\end{align*}
+\end{proof}
+
+\begin{crl}{}{} If $r(t)=p$ is a constant function and $g(t)=0$, then the differential equation $$\frac{dx}{dt}+r(t)x=g(t)$$ has the solution $$x(t)=Ae^{-\int r(t)\,dt}$$
+\end{crl}
+
+\begin{crl}{}{} If $r(t)=p$ is a constant function, then the differential equation $$\frac{dx}{dt}+r(t)x=g(t)$$ has the solution $$x(t)=Ae^{-pt}$$
+\end{crl}
+
+\subsection{Substitution Method}
+\begin{thm}{Type 1 Substitution}{} Consider differential equations of the form $$\frac{dy}{dx}=F\left(\frac{y}{x}\right)$$ Then let $u=\frac{y}{x}$ to obtain $$x\frac{du}{dx}=F(u)-u$$
+\end{thm}
+
+\begin{thm}{Type 2 Substitution}{} Consider differential equations of the form $$\frac{dy}{dx}+p(x)y=q(x)y^n$$ Then let $u=y^{1-n}$ to obtain $$\frac{du}{dx}+(1-n)p(x)u=(1-n)q(x)$$
+\end{thm}
+
+\begin{prp}{}{} For a differential equation in the form $f(x,y',y'')=0$, the equation can be reduced to a first order differential equation by substitution. 
+\end{prp}
+
+\begin{prp}{}{} For a differential equation in the form $f(y,y',y'')=0$, the equation can be reduced to a first order differential equation by substitution
+\end{prp}
+
+\subsection{Systems of First Order Equations}
+\begin{defn}{}{}[System of First Order Equations] A system of first order equations is given by $$\vb{x}'(t)=A\vb{x}$$ where $\vb{x}'(t)=\begin{pmatrix}\frac{dx_1}{dt}\\\vdots\\\frac{dx_n}{dt}\end{pmatrix}$ and $\vb{x}=\begin{pmatrix}x_1\\\vdots\\x_n\end{pmatrix}$
+\end{defn}
+
+\begin{thm}{}{} Consider a system of first order equation with constant coefficients $$\begin{cases}\frac{dx}{dt}=px+qy\\\frac{dy}{dt}=rx+sy\end{cases}$$ with matrix equation $$\vb{x}'(t)=A\vb{x}$$ Suppose $A$ has eigenvalues $\lambda_{1,2}$ and eigenvectors $\vb{v}_{1,2}$. 
+\begin{itemize}
+\item If $\lambda_{1,2}$ are distinct, then $$\vb{x}(t)=e^{\lambda_1t}\vb{v}_1+e^{\lambda_2t}\vb{v}_2$$
+\item If $\lambda_{1,2}\in\C$, let $\vb{v}=\vb{v}_1+i\vb{v}_2$. Then $$\vb{x}(t)=\vb{c}\vb{v}e^{\lambda t}+\overline{\vb{c}}\overline{\vb{v}}e^{\overline{\lambda}t}=2\Re(\vb{c}\vb{v}e^{\lambda t})$$ where $c$ is such that $\vb{x}(t)$ is real. Or $$x(t)=e^{pt}[a\cos(qt)+b\sin(qt)\vb{v}_1+(b\cos(qt)-a\sin(qt))\vb{v}_2]$$
+\item If the eigenvalues are repeated, then $\vb{x}(t)=\vb{a}e^{\lambda t}+\vb{b}te^{\lambda t}$
+\end{itemize}
+\end{thm}
+
+\begin{thm}{}{}[Uncoupling Solutions] Let $\dot{\vb{x}}=A\vb{x}$ be a system of differential equations. Let it has distinct eigenvalues. Then there exists $P=(\vb{v}_1|\vb{v}_2)$ such that $P^{-1}AP=\begin{pmatrix}
+\lambda_1 & 0\\
+0 & \lambda_2
+\end{pmatrix}$ Then let $\dot{\vb{y}}=P^{-1}\dot{\vb{x}}$. Then $\dot{\vb{y}}=\begin{pmatrix}
+\lambda_1 & 0\\
+0 & \lambda_2
+\end{pmatrix}\vb{y}$
+\end{thm}
+
+\subsection{Direction Fields}
+\begin{defn}{}{}[Vector Fields] A planar vector field is a function $f:\R^2\to\R^2$. 
+\end{defn}
+
+\begin{defn}{}{}[Direction Fields] Let $\frac{dx}{dt}=f(x,t)$ be a differential equation. A direction field is vector field $v:\R^2\to\R^2$ such that each vector $(x,y)\in\R^2$ is assigned the vector with slope $f(x,t)$. 
+\end{defn}
+
+\begin{defn}{}{}[Fixed Points] We say that $(x_0,f(x_0))$ is a fixed point if $\frac{dx}{dt}=f(x)=0$. A fixed point is stable if $f'(x_0)<0$. It is unstable if $f'(x_0)>0$. 
+\end{defn}
+
+\pagebreak
+\section{Ordinary Differential Equations: Second Order}
+\subsection{Second Order Linear Ordinal Differential Equations}
+\begin{defn}{}{}[Linearly Independent Solutions] Two functions $x_1(t),x_2(t)$ defined on an interval $I$ are linearly independent if $\alpha_1x_1(t)+\alpha_2x_2(t)=0\implies\alpha_1=\alpha_2=0$. 
+\end{defn}
+
+\begin{defn}{}{} The complete solution to a inhomogeneous solution is given by $x(t)=x_h(t)+x_p(t)$ where $x_h(t)$ is the solution to the homogeneous solution and $x_p(t)$ is the particular solution to the equation. 
+\end{defn}
+
+\begin{defn}{}{}[Auxiliary Equations] Consider $$a\frac{d^2x}{dt^2}+b\frac{dx}{dt}+cx=0$$ The auxiliary equation of the differential is $ak^2+bk+c=0$. 
+\end{defn}
+
+\begin{thm}{}{} Consider $$a\frac{d^2x}{dt^2}+b\frac{dx}{dt}+cx=0$$ and $k_{1,2}$ roots of $ak^2+bk+c=0$
+\begin{itemize}
+\item If $b^2-4ac>0$, then $x(t)=Ae^{k_1t}+Be^{k_2t}$
+\item If $b^2-4ac=0$, then $x(t)=(A+Bt)e^{kt}$
+\item If $b^2-4ac<0$, then $x(t)=e^{pt}(C\cos(qt)+D\sin(qt))$, where $k_{1,2}=p\pm iq$ or $x(t)=Ee^{pt}\cos(qt-\phi)$ where $E^2=C^2+D^2$ and $\tan(\phi)=\frac{D}{C}$
+\end{itemize}
+\end{thm}
+
+\begin{thm}{}{} Let $$a\frac{d^2x}{dt^2}+b\frac{dx}{dt}+cx=f(t)$$ To find the particular solution, plug the possibility into the differential to find identities for coefficients. 
+\begin{itemize}
+\item If $f(t)$ is a polynomial, then $x_p(t)$ is a general polynomial of degree $n$. 
+\item If $f(t)=ae^{kt}$ where $k$ is not a root of the auxiliary equation, then $x_p(t)=Ae^{kt}$
+\item If $f(t)=ae^{kt}$ where $k$ is a root of the auxiliary equation, then $x_p(t)=Ate^{kt}$ or $At^2e^{kt}$
+\item If $f(t)=a\sin(\omega t)$ or $f(t)=a\cos(\omega t)$ then $x_p(t)=A\sin(\omega t)+B\cos(\omega t)$
+\item If $f(t)=at^ne^{kt}$ then $x_p(t)=P(t)e^{kt}$, where $P(t)$ is a polynomial. 
+\item If $f(t)=t^n(a\sin(\omega t)+b\cos(\omega t))$ then $x_p(t)=P_1(t)a\sin(\omega t)+P_2(t)b\cos(\omega t)$
+\item If $f(t)=e^{kt}(a\sin(\omega t)+b\cos(\omega t))$ then $x_p(t)=e^{kt}(A\sin(\omega t)+B\cos(\omega t))$
+\end{itemize}
+\end{thm}
+
+\pagebreak
+\section{Difference Equations}
+\subsection{First Order Homogeneous Linear Difference Equations}
+\begin{defn}{Order of a Differential Equation}{} The order of a difference equation is the difference between the highest index of $x$ and lowest. 
+\end{defn}
+
+\begin{defn}{First Order Difference Equations}{} First order difference equations are of the form $$x_{n+1}=f(x,n)$$
+\end{defn}
+
+\begin{thm}{}{} The solution to a first order homogeneous linear difference equation $$x_{n+1}=ax_n$$ is given by $x_n=a^nx_0$. 
+\end{thm}
+
+\begin{defn}{Fixed Point}{} A fixed point of the difference equation $x_{n+1}=f(x_n)$ is a point $x_0$ such that $f(x_0)=x_0$
+\end{defn}
+
+\begin{prp}{Stability of Fixed Points}{} If $\abs{a}<1$, then for any $x_0$, $x_0$ is stable. If $\abs{a}>1$, then $x_0$ is unstable. 
+\end{prp}
+
+\subsection{Second Order Linear Difference Equations}
+\begin{thm}{}{} Consider an equation of the form $$x_{n+2}+ax_{n+1}+bx_n=0$$ Let $k_{1,2}$ be roots of the equation $k^2+ak+b=0$
+\begin{itemize}
+\item If $k_{1,2}$ are distinct, then the general solution is $x_n=Ak_1^n+Bk_2^n$
+\item If $k_1=k_2$, then the general solution is $Ak^n+Bnk^n$
+\item If $k_1,k_2\in\C$, then let $k_{1,2}=k_{\pm}=re^{\pm i\theta}$. Then the general solution is $x_n=r^n(A\cos(n\theta)+B\sin(n\theta))$
+\end{itemize}
+\end{thm}
+
+\begin{thm}{}{} Consider an equation of the form $$x_{n+2}+ax_{n+1}+bx_n=f(n)$$ Let $k_{1,2}$ be roots of the equation $k^2+ak+b=0$. 
+\begin{itemize}
+\item If $f(n)$ is a polynomial, try a polynomial. 
+\item If $f(n)=a^n$. Try $x_n=Ca^n$ or $Cna^n$ or $Cn^2a^n$
+\end{itemize}
+\end{thm}
+
+\pagebreak
+\section{Partial Differential Equations: Notations}
+\subsection{Terminology}
+\begin{defn}{Partial Differential Equations}{} A partial differential equations is an equation of the form $$F(x_1,\dots,x_n,u,\partial_{x_1}u,\dots,\partial_{x_n}u,\partial_{x_1x_1}u,\dots,\partial_{x_nx_n}u,\dots)=0$$ We some times use the differential operator $\mathcal{L}$ to replace the differentials of the equation. The equation thus becomes $$\mathcal{L}(u)=r(x_1,\dots,x_n)$$ where $r(x_1,\dots,x_n)$ is a function only of the independent variables. 
+\end{defn}
+
+\begin{defn}{Classification of Partial Differential Equations}{} We say that a partial differential equation $\mathcal{L}(u)=r(x)$ is 
+\begin{itemize}
+\item linear if the differential operator is linear, meaning $\mathcal{L}(au+bv)=a\mathcal{L}(u)+b\mathcal{L}(v)$ for $a,b\in\R$ and $u,v$ functions
+\item homogenous if $r(x)=0$, meaning $\mathcal{L}(u)=0$
+\item of order $n$ if the highest order of possibly mixed partial derivative of $u$ is $n$
+\end{itemize}
+\end{defn}
+
+\subsection{Well-Posedness}
+\begin{defn}{Hadmard's Well-posedness}{} A partial differential equation problem is well-posed if it has a unique solution that continuously depends on the data. In other words, we want existence, uniqueness and stability in the solution. 
+\end{defn}
+
+\subsection{Classification of Linear Second Order PDEs}
+\begin{defn}{Classification of Linear Second Order PDEs}{} Let $\sum_{i=1}^d\sum_{j=1}^da_{ij}(x)\partial_{x_ix_j}u(x)+b(x)=0$ where $b(x)$ consists of lower order terms involving derivatives up to order $1$. Define the coefficient matrix $A$ by $$A=\begin{pmatrix}
+a_{11} & \cdots & a_{1n}\\
+\vdots & \ddots & \vdots\\
+a_{n1} & \cdots & a_{nn}
+\end{pmatrix}$$ for $x\in U\subseteq\R^d$. We say that 
+\begin{itemize}
+\item $A$ is elliptic for $x\in U$ if $A$ has $d$ eigenvalues of the same sign
+\item $A$ is hyperbolic for $x\in U$ if $A$ has $d-1$ eigenvalues of the same sign and one eigenvalue of the opposite sign
+\item $A$ is parabolic for $x\in U$ if one eigenvalue is $0$ and the other $d-1$ have the same sign
+\end{itemize}
+\end{defn}
+
+\pagebreak
+\section{Partial Differential Equations: Transport Equation}
+\subsection{Homogenous Transport Equation}
+\begin{defn}{Transport Equation}{} The transport equation is the equation $$\partial_tu(x,t)+v(x,t)\partial_xu(x,t)=0$$ or $$\frac{\partial u}{\partial t}(x,t)+v(x,t)\frac{\partial u}{\partial x}(x,t)=0$$
+\end{defn}
+
+\begin{defn}{Characteristics}{} The characteristic is the fucntion $\xi(t)$ satisfying the ODE $$\xi'(t)=v(\xi(t),t)$$ where $\xi(0)=x_0\in\R$. 
+\end{defn}
+
+\begin{prp}{}{} The solution to the transport equation is constant along the characteristics curve. \tcbline\begin{proof} We have that letting the position $x$ depends on $t$, meaning $x=\xi(t)$,
+\begin{align*}
+\frac{d}{dt}u(\xi(t),t)&=\partial_xu(\xi(t),t)\xi'(t)+\partial_tu(x,t)\\
+&=\partial_xu(\xi(t),t)v(x,t)+\partial_u(x,t)\\
+&=0
+\end{align*}
+Thus $u$ is constant along the characteristics. 
+\end{proof}
+\end{prp}
+
+\subsection{Inhomogenous Transport Equation}
+\begin{defn}{Transport Equation with Source}{} The transport equation with source term is the equation $$\partial_tu(x,t)+v(x,t)\partial_xu(x,t)=s(u)$$ or $$\frac{\partial u}{\partial t}(x,t)+v(x,t)\frac{\partial u}{\partial x}(x,t)=s(u)$$
+\end{defn}
+
+\begin{prp}{}{} Given the characteristic function $\xi(t)$, the transport equation with source amounts to solving the differential equation $$\frac{d}{dt}u(\xi(t),t)=s(\xi(t),t,u(\xi(t),t))$$ with given initial conditions. \tcbline
+\begin{proof}
+If $u(x,t)=u(\xi(t),t)$, then 
+\begin{align*}
+\frac{d}{dt}u(\xi(t),t)&=\xi'(t)\partial_xu(\xi(t),t)+\partial_tu(\xi(t),t)\\
+&=v(\xi(t),t)\partial_xu(\xi(t),t)+\partial_tu(\xi(t),t)\\
+&=s(\xi(t),t,u(\xi(t),t))
+\end{align*}
+thus we are done. 
+\end{proof}
+\end{prp}
+
+\subsection{Non-Linear Transpot Equation}
+\begin{defn}{Non-Linear Transport Equation}{} The non-linear transport equation is the equation $$\partial_tu(x,t)+v(u)\partial_xu(x,t)=0$$ or $$\frac{\partial u}{\partial t}(x,t)+v(u)\frac{\partial u}{\partial x}(x,t)=0$$ The difference being that $v$ is now a function of $u$. 
+\end{defn}
+
+\pagebreak
+\section{Partial Differential Equations: Wave Equation}
+\subsection{Wave Equation}
+\begin{defn}{Wave Equation in One Spatial Dimension}{} The wave equation in one dimension is defined to be $$\partial_{tt}u=c^2\partial_{xx}u$$ where $c$ is the speed of the sound waves. 
+\end{defn}
+
+\begin{prp}{}{} The wave operator corresponds to twice applying the transport operator with opposite velocity signs.  \tcbline
+\begin{proof}
+Note that 
+\begin{align*}
+(\partial_t-c\partial_x)(\partial_t+c\partial_x)u&=(\partial_t-c\partial_x)(\partial_tu+c\partial_xu)\\
+&=\partial_{tt}u-c\partial_{xt}u+c\partial_{tx}u-c^2\partial_{xx}u\\
+&=\partial_ttu-c^2\partial_{xx}u
+\end{align*}
+By expanding, we also have that $$(\partial_t+c\partial_x)(\partial_t-c\partial_x)u=\partial_ttu-c^2\partial_{xx}u$$ mainly since the partial derivatives are well defined and thus commute. 
+\end{proof}
+\end{prp}
+
+\begin{thm}{}{} The general solution of the wave equation is given by $$u(x,t)=f(x+ct)+g(x-ct)$$ where $f,g:\R\to\R$, using the coordinate method. \tcbline
+\begin{proof} By finding suitable coordinates $\xi=x+ct$ and $\nu=x-ct$, we can linearly transform the equation in to one the only involves $\partial_{\xi\nu}$. In particular, letting $v(\xi,\nu)=u(x,t)$, we have $$\partial_xu=\partial_\xi v+\partial_\nu v$$ and $$\partial_tu=c\partial_\xi-v\partial_\nu v$$ so that $$\partial_{xx}u=\partial_{\xi\xi}v+\partial_{\nu\xi}v+\partial_{\nu\xi}v+\partial_{\nu\nu}v$$ and $$\partial_{tt}u=c^2\partial_{\xi\xi}v-c^2\partial_{\xi\nu}v-c^2\partial_{\nu\xi}v+c^2\partial_{\nu\nu}v$$ If $u,v$ are smooth enough, we have that $$\partial_{tt}u-c^2\partial_{xx}u=c^2(-4\partial_{\xi\nu}v)$$ and our question becomes $$\partial_{\xi\nu}v=0$$ Integrating the mixed partial derivative by each of its variables once results in the form $$u(x,t)=f(x+ct)+g(x-ct)$$
+\end{proof}
+\end{thm}
+
+\subsection{Initial Value Problem on Wave Equations}
+\begin{defn}{Cauchy's Initial Value Problem}{} Let $\Psi:\R\to\R$ and $V:\R\to\R$ be two arbitrary functions. The initial value problem for the wave equation in one dimension consists of finding a function $u:\R\times(0,\infty)\to\R$ such that $$\begin{cases}
+\partial_{tt}u(x,t)=c^2\partial_{xx}u(x,t) & (x,t)\in\R\times(0,\infty)\\
+u(x,0)=\Psi(x) & x\in\R\\
+\partial_tu(x,0)=V(x) & x\in\R
+\end{cases}$$
+\end{defn}
+
+\begin{prp}{d'Alembert's Formula}{} The solution to Cauchy's Initial Value Problem is given by $$u(x,t)=\frac{1}{2}\left(\Psi(x+ct)+\Psi(x-ct)\right)+\frac{1}{2c}\int_{x-ct}^{x+ct}V(r)\,dr$$ provided that $\Psi\in C^2(\R)$ and $V\in C^1(\R)$. \tcbline
+\begin{proof} Using the change of coordinates method, we know that $u(x,t)=f(x+ct)+g(x-ct)$ thus $$\Psi(x)=u(x,0)=f(x)+g(x)$$ and $$\Psi'(x)=f'(x)+g'(x)$$ and $$V(x)=\partial_tu(x,0)=cf'(x)-cg'(x)$$ and $$\frac{1}{c}V(x)=f'(x)-g'(x)$$ Adding and subtracting the identities give $$f'(x)=\frac{1}{2}(\Psi'(x)+\frac{1}{c}V(x))$$ and $$g'(x)=\frac{1}{2}(\Psi'(x)-\frac{1}{c}V(x))$$ Integrating the two expressions with respect to $x$ gives $$f'(x)=\frac{1}{2}\Psi(x)+\frac{1}{2c}\int_0^xV(r)\,dr+C_f$$ and $$g(x)=\frac{1}{2}\Psi(x)-\frac{1}{2c}\int_0^xV(r)\,dr+C_g$$ Since $f(x)+g(x)=\Psi(x)$, we see that $C_f+C_g=0$. Thus $$u(x,t)=\frac{1}{2}\left(\Psi(x+ct)+\Psi(x-ct)\right)+\frac{1}{2c}\int_{x-ct}^{x+ct}V(r)\,dr$$
+\end{proof}
+\end{prp}
+
+\begin{prp}{Preservation in Energy}{} Let $u\in C^2(\R\times(0,\infty))$ be a solution to the initial value problem for the wave equation. Let $$E_k(t)=\int_\R\frac{1}{2}(\partial_tu)^2(x,t)\,dt$$ denote kinetic energy and $$E_p(t)=\int_\R\frac{1}{2}c^2(\partial_xu)^2(x,t)\,dt$$ denote potential energy. If
+\begin{itemize}
+\item $E_{WE}(t)=E_k(t)+E_p(t)$ is continuously differentiable with respect to $t$
+\item $u(x,t)$ and its partial derivatives satisfy $u(x,t)\to 0$ as $x\to\pm\infty$ for all $t$
+\item All mixed partial derivatives of $u$ of up to order $2$ are integrable with respect to $x$ over $\R$ for all $t$
+\end{itemize}
+Then the total energy $E_{WE}(t)$ is constant in time. \tcbline
+\begin{proof}
+We want to show that $E_{WE}'(t)=0$. Thanks to the assumptions, the following integrals and its calculations are allowed. We have 
+\begin{align*}
+E_{WE}'(t)&=\frac{d}{dt}\left(\int_\R\frac{1}{2}\left((\partial_tu)^2+c^2(\partial_xu)^2\right)\,dx\right)\\
+&=\int_\R(\partial_tu\partial_{tt}u+c^2\partial_xu\partial_{xt}u)\,dx\\
+&=\int_\R\partial_tu\partial_{tt}u\,dx+\int_\R c^2\partial_xu\partial_x(\partial_tu)\,dx\\
+&=\int_\R\partial_tu(\partial_{tt}u-c^2\partial_{xx}u)\,dx+c^2\left(\lim_{x\to\infty}\left(\partial_xu(x,t)\partial_tu(x,t)\right)-\lim_{x\to-\infty}\left(\partial_xu(x,t)\partial_tu(x,t)\right)\right)\tag{By parts}\\
+&=\int_\R(\partial_tu\cdot 0)\,dx\\
+&=0
+\end{align*}
+thus we are done. 
+\end{proof}
+\end{prp}
+
+\begin{thm}{Uniqueness and Existence}{} Let $\Psi\in C^2(\R)$ and $V\in C^1(\R)$. Then there is a unique solution $u\in C^2(\R\times(0,\infty))$ to the initial value problem for the one dimensional wave equation , given by d'Alembert's formula. \tcbline
+\begin{proof}
+Let $u_1,u_2$ be two solutions and $w=u_1-u_2$. Then $w$ is a solution of the initial value problem where $$\partial_{tt}w(x,t)=c^2\partial_{xx}w(x,t)$$ where $(x,t)\in(0,\infty)\times\R$, $w(x,0)=0$ for $x\in\R$ and $\partial_tw(x,0)=0$ for $x\in\R$. Thus the corresponding energy $$E_{WE}(t)=\frac{1}{2}\int_\R\left((\partial_tw)^2(x,t)+c^2(\partial_xw)^2(x,t)\right)\,dx$$ is constant. Note that $$E_{WE}(0)=\frac{1}{2}\int_\R\left((\partial_tw)^2(x,0)+c^2(\partial_xw)^2(x,0)\right)\,dx=0$$ by the initial values. Thus we have that $E_{WE}(t)=E_{WE}(0)=0$. Thus we have that $$\partial_tw(x,t)=0$$ and $$\partial_xw(x,t)=0$$ for all $(x,t)$. This means that $w(x,t)$ is constant. But $w(x,0)$ thus $0=u_1-u_2$ and $u_1=u_2$ and we are done. 
+\end{proof}
+\end{thm}
+
+\begin{defn}{Cauchy's Initial Value Problem on Finite Spatial Domain}{} Let $\Psi:\R\to\R$ and $V:\R\to\R$ be two arbitrary functions. The initial value problem for the wave equation in one dimension consists of finding a function $u:(0,L)\times(0,\infty)\to\R$ such that
+$$\begin{cases}
+\partial_{tt}u(x,t)=c^2\partial_{xx}u(x,t) & (x,t)\in(0,L)\times(0,\infty)\\
+u(x,0)=\Psi(x) & x\in(0,L)\\
+\partial_tu(x,0)=V(x) & x\in(0,L)
+\end{cases}$$
+\end{defn}
+
+\begin{prp}{Change of Variables}{} Let $\Psi:\R\to\R$ and $V:\R\to\R$ be two arbitrary functions. The initial value problem for the wave equation in one dimension on finite spatial domain is equivalent to solving $$\begin{cases}
+\partial_{tt}u(x,t)=\partial_{xx}u(x,t) & (x,t)\in(0,\pi)\times(0,\infty)\\
+u(x,0)=\hat{\Psi}(x)=\Psi\left(\frac{L}{\pi}x\right) & x\in(0,\pi)\\
+\partial_tu(x,0)=\hat{V}(x)=\frac{L}{\pi c}V\left(\frac{L}{\pi}x\right) & x\in(0,\pi)
+\end{cases}$$ 
+\end{prp}
+
+\subsection{Boundary Conditions on Wave Equations}
+Typical examples: motion of a string with fixed ends. 
+\begin{defn}{Homogenous Dirichlet Boundary Condition}{} The initial boundary value problem for the wave equation in 1D with homogenous Dirichlet boundary condition consists of finding a function $u:(0,\pi)\times(0,\infty)\to\R$ such that 
+$$\begin{cases}
+\partial_{tt}u(x,t)=\partial_{xx}u(x,t) & (x,t)\in(0,\pi)\times(0,\infty)\\
+u(x,0)=\Psi(x) & x\in(0,\pi)\\
+\partial_tu(x,0)=V(x) & x\in(0,\pi)\\
+u(0,t)=0 & t\in(0,\infty)\\
+u(\pi,t)=0 & t\in(0,\infty)
+\end{cases}$$
+\end{defn}
+
+\begin{defn}{Homogenous Neumann Boundary Condition}{} The initial boundary value problem for the wave equation in 1D with homoegenous Neumann boundary condition consists of finding a function $u:(0,\pi)\times(0,\infty)\to\R$ such that $$\begin{cases}
+\partial_{tt}u(x,t)=\partial_{xx}u(x,t) & (x,t)\in(0,\pi)\times(0,\infty)\\
+u(x,0)=\Psi(x) & x\in(0,\pi)\\
+\partial_tu(x,0)=V(x) & x\in(0,\pi)\\
+\partial_xu(0,t)=0 & t\in[0,\infty)\\
+\partial_xu(\pi,t)=0 & t\in[0,\infty)
+\end{cases}$$
+\end{defn}
+
+\begin{prp}{}{} Suppose that $u_1$, $u_2$ both solve either Neumann or Dirichlet's boundary conditions but with different initial data. Then $w=u_1-u_2$ is bounded. 
+\end{prp}
+
+\begin{lmm}{}{} Suppose that $u_1,u_2$ both solve either Neumann or Dirichlet's boundary conditions with the same initial data. Then $u_1=u_2$. 
+\end{lmm}
+
+\begin{prp}{}{} If $\Psi\in C^4(\R)$ and $V\in C^3(\R)$ and $\Psi(x)=\sum_{k=1}^\infty A_k\sin(kx)$ and $V(x)=\sum_{k=1}^\infty B_kk\sin(kx)$, then the solution to the Dirichlet Boundary Condition is given by $$u(x,t)=\sum_{k=1}^\infty\left(A_k\cos(kt)+B_k\sin(kt)\right)\sin(kx)$$ \tcbline
+\begin{proof}
+Asuume that $u(x,t)=X(x)T(t)$ is separable where $X:(0.\pi)\to\R$ and $T:(0,\infty)\to\R$. Then the wave equation changes to $$\frac{T''(t)}{T(t)}=\frac{X''(x)}{X(x)}$$ This ratio can only be constant since it cannot depend on $t$ nor $x$. Let the ratio be $\lambda$. Then we now have two ODEs $$X''(x)-\lambda X(x)=0$$ and $$T''(t)-\lambda T(t)=0$$~\\
+I claim that $\lambda\leq 0$. Indeed since integrating any of the above two expression with respect to $x$ from $0$ to $\pi$ gives
+\begin{align*}
+\int_0^\pi(-X''(x)X(x)+\lambda\abs{X(x)}^2)\,dx&=0\\
+\int_0^\pi\lambda\abs{X(x)}^2\,dx-[X'(x)X(x)]_0^\pi+\int_0^\pi\abs{X'(x)}^2\,dx\\
+\int_0^\pi\abs{X'(x)}^2\,dx+\lambda\int_0^\pi\abs{X(x)}^2\,dx\tag{$X(\pi)=X(0)=0$}
+\end{align*}
+If $\lambda>0$ then $X(x)=0$ for all $x\in(0,\pi)$ which is trivial. If $\lambda=0$ then $X'(x)=0$ and $X(x)$ is a constant function. But $X(0)=0$ thus $X(x)$ is also identicaly zero. \\~\\
+Thus we assume that $\lambda=-\beta^2$ for some $\beta\in\R^+$. The solution to this ODE is precisely $$X(x)=C\cos(\beta x)+D\sin(\beta x)$$ and $$T(t)=A\cos(\beta t)+B\sin(\beta t)$$ From $X(0)=0$ we have that $C=0$ and $D\neq 0$. $X(\pi)=0$ implies that $\beta\pi=k\pi$ for $k\in\N\setminus\{0\}$. Taking into account $T(t)$, we now have that $$u_j(x,t)=(A_j\cos(kt)+B_j\sin(kt))\sin(kx)$$ for $A_k,B_k\in\R$. Since any $k\in\N$ could solve the wave equation, we sum all the frequencies to get $$u(x,t)=\sum_{k=1}^\infty(A_k\cos(kt)+B_k\sin(kt))\sin(kx)$$
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{} If $\Psi\in C^4(\R)$ and $V\in C^3(\R)$ and $\Psi(x)=\sum_{k=1}^\infty A_k\cos(kx)$ and $V(x)=\sum_{k=1}^\infty B_kk\cos(kx)$, then the solution to the Dirichlet Boundary Condition is given by $$u(x,t)=\sum_{k=1}^\infty\left(A_k\cos(kt)+B_k\sin(kt)\right)\sin(kx)$$ \tcbline
+\begin{proof}
+We argue similarly by assuming separation of variables and take the ratio constant to be $\lambda=-\beta^2$ for some $\beta\in\R^+$. The solution to this ODE is precisely $$X(x)=C\cos(\beta x)+D\sin(\beta x)$$ and $$T(t)=A\cos(\beta t)+B\sin(\beta t)$$ From $X'(0)=0$ we have that $D=0$ and $C\neq 0$. $X'(\pi)=0$ implies that $\beta\pi=k\pi$ for $k\in\N$. Taking into account $T(t)$, we now have that $$u_j(x,t)=(A_j\cos(kt)+B_j\sin(kt))\cos(kx)$$ for $A_k,B_k\in\R$. Since any $k\in\N$ could solve the wave equation, we sum all the frequencies to get $$u(x,t)=\sum_{k=0}^\infty(A_k\cos(kt)+B_k\sin(kt))\cos(kx)$$
+\end{proof}
+\end{prp}
+
+\pagebreak
+\section{Partial Differential Equations: Heat Equation}
+\subsection{Heat Equation}
+\begin{defn}{One Dimensional Heat Equation}{} The one dimensional heat equation is the equation $$\partial_tu=k\partial_{xx}u$$ for a function $u(x,t)$ where $k>0$. 
+\end{defn}
+
+\subsection{Heat Equation: Dirichlet Boundary Conditions}
+\begin{defn}{Dirichlet Boundary Conditions}{} The initial boundary value problem for the heat equation in one dimension with inhomogenous Dirichlet boundary condition consists of finding a fuinction $u:(0,L)\times(0,\infty)\to\R$ such that $$\begin{cases}
+\partial_{t}u(x,t)=k\partial_{xx}u(x,t) & (x,t)\in(0,L)\times(0,\infty)\\
+u(x,0)=\Psi(x) & x\in[0,L]\\
+u(0,t)=g_0(t) & t\in[0,\infty)\\
+u(L,t)=g_L(t) & t\in[0,\infty)\\
+\end{cases}$$
+\end{defn}
+
+\begin{defn}{Space-Time Boundaries}{} We denote the space time rectangle by $$V_{L,T}=(0,L)\times(0,T]$$ and the parabolic boundary by $$\Gamma_{L,T}=\{(x,t)\in\overline{V_{L,T}}|x\in\{0,L\}\text{ or }t=0\}$$
+\end{defn}
+
+\begin{thm}{Maximum Priniciple}{} Assume that $u(x,t)\in C^2(\overline{V_{L,T}})$ solves the heat equation. Then the maximum and minimum of $u$ are attained on the parabolic boundary $\Gamma_{L,T}$
+\end{thm}
+
+\begin{thm}{Uniqueness and Stability}{} Let $u_1,u_2\in C^2([0,L]\times[0,\infty])$ denote two solutions to the initial boundary value problem with respective initial date $\Psi_1,\Psi_2$ and boundary data $g_{1,0},g_{1,L},g_{2,0},g_{2,L}$. Then $$\max_{(x,t)\in V_{L,T}}\abs{u_1(x,t)-u_2(x,t)}\leq\max\{A,B,C\}$$ where 
+\begin{itemize}
+\item $A=\max_{x\in[0,L]}\abs{\Psi_1(x)-\Psi_2(x)}$
+\item $B=\max_{t\in[0,T]}\abs{g_{1,0}-g_{2,0}}$
+\item $C=\max_{t\in[0,T]}\abs{g_{1,L}-g_{2,L}}$
+\end{itemize}
+In particular, if $\Psi_1=\Psi_2$, $g_{1,0}=g_{2,0}$ and $g_{1,L}=g_{2,L}$ then $u_1=u_2$. 
+\end{thm}
+
+\subsection{Heat Equation: Neumann Boundary Condition}
+\begin{defn}{Inhomogenous Neumann Boundary Condition}{} The initial boundary value problem for the heat equation in one dimension with inhomogenous Neumann boundary condition consists of finding a function $u:(0,L)\times(0,\infty)\to\R$ such that $$\begin{cases}
+\partial_tu(x,t)=k\partial_{xx}u(x,t) & (x,t)\in(0,L)\times(0,\infty)\\
+u(x,0)=\Psi(x) & x\in[0,L]\\
+\partial_xu(0,t)=h_0(t) & t\in[0,\infty)\\
+\partial_xu(L,t)=h_L(t) & t\in[0,\infty)
+\end{cases}$$
+where $h_0(0)=\Psi'(0)$ and $h_L(0)=\Psi'(L)$
+\end{defn}
+
+\begin{prp}{}{} The solution to the heat equation in Neumann boundary condition is unique ad is stable in the mean square sense. 
+\end{prp}
+
+\subsection{Duhamel's Principle}
+\begin{thm}{Partial Solution to Heat Equation with Dirichlet Boundary Conditions}{} The heat equation with Dirichlet boundary conditions has solution of the form $u(x,t)=u_B(x,t)+u_I(x,t)+w(x,t)$ where $$\begin{cases}
+h:[0,L]\to\R & \text{ is smooth such that }h(0)=0\text{ and }h(L)=1\\
+u_B(x,t)=g_0(t)+(g_L(t)-g_0(t))h(x) & (x,t)\in[0,L]\times[0,\infty)\\
+u_I(x,t)=\Psi(x)-u_B(x,0) & (x,t)\in[0,L]\times[0,\infty)\\
+w(x,t) & (x,t)\in[0,L]\times[0,\infty)
+\end{cases}$$ where $w(x,t)$ satisfies the following homogenous boundary and initial values: $$\begin{cases}
+\partial_{t}w(x,t)-k\partial_{xx}w(x,t)=f(x,t) & (x,t)\in[0,L]\times[0,\infty)\\
+w(x,0)=0 & x\in[0,L]\\
+w(0,t)=0 & t\in[0,\infty)\\
+w(L,t)=0 & t\in[0,\infty)
+\end{cases}$$ where $$f(x,t)=-(g_0'(t)+(g_L'(t)-g_0'(t))h(x))+k(g_L(t)-g_0(t))h''(x)+k(\Psi''(x)-(g_L(0)-g_0(0)))h''(x)$$
+\end{thm}
+
+\begin{thm}{Duhamel Principle}{} Let $f$ be any function. Consider the following homogenous boundary and initial values differential equation: $$\begin{cases}
+\partial_{t}w(x,t)-k\partial_{xx}w(x,t)=f(x,t) & (x,t)\in[0,L]\times[0,\infty)\\
+w(x,0)=0 & x\in[0,L]\\
+w(0,t)=0 & t\in[0,\infty)\\
+w(L,t)=0 & t\in[0,\infty)
+\end{cases}$$
+Let $v(x,t,\tau)$ denote a smooth solution to the following conditions with parameter $\tau$: $$\begin{cases}
+\partial_tv(x,t)=k\partial_{xx}v(x,t) & (x,t)\in(0,L)\times(\tau,\infty)\\
+v(x,\tau)=f(x,\tau) & x\in[0,L]\\
+v(0,t)=0 & t\in[\tau,\infty)\\
+v(L,t)=0 & t\in[\tau,\infty)
+\end{cases}$$
+Then $$w(x,t)=\int_0^t v(x,t,\tau)\,d\tau$$ solves above homogenous boundary condition and initial values of the heat equation. 
+\end{thm}
+
+It now remains to solve the function $v$ in Duhamel's principle, which is simply the heat equation and homogenous Dirichlet boundary conditions. 
+
+\begin{prp}{}{} Suppose that $f$ has fourier series expansion as $f(x,0)=\sum_{k=1}^nE_k\sin\left(\frac{k\pi}{L}x\right)$. The solution to the following initial value problem $$\begin{cases}
+\partial_tv(x,t)=k\partial_{xx}v(x,t) & (x,t)\in(0,L)\times(\tau,\infty)\\
+v(x,\tau)=f(x,\tau) & x\in[0,L]\\
+v(0,t)=0 & t\in[\tau,\infty)\\
+v(L,t)=0 & t\in[\tau,\infty)
+\end{cases}$$ is given by $$v(x,t)=\sum_{i=0}^\infty e^{-k\beta_i^2t}D_i\sin(\beta_ix)$$ where $\beta_i=\frac{i\pi}{L}$ and $D_i=$ \tcbline
+\begin{proof}
+WLOG take $\tau=0$. We perform separation of variables again and assume that $v(x,t)=X(x)T(t)$. Subsituting into the heat equation gives $$\frac{T'(t)}{kT(t)}=\frac{X''(x)}{X(x)}$$ This ratio can only be constant since it cannot depend on $x$ nor $t$. Similar to before we notice that $\lambda<0$ thus let $\lambda=-\beta^2$. The solution to the ODE with $X$ is given by $$X(x)=A_k\cos(\beta x)+B_k\sin(\beta x)$$ Using the fact that $X(0)=0$ and $X(\pi)=L$, we obtain $$X_k(x)=D_k\sin(\beta_k x)$$ for $\beta_k=\frac{k\pi}{L}$ for $k\in\N\setminus\{0\}$. Now solving the ODE for $T$, we get $$T_k(t)=C_ke^{-k\beta_k^2t}$$ Now absorbing the coefficients $C_k$ into $D_k$, we obtain the general solution $$v(x,t)=\sum_{k=1}^\infty D_ke^{-k\beta_k^2t}\sin\left(\frac{k\pi}{L}x\right)$$ Now when $t=0$, $$v(x,0)=\sum_{k=1}^\infty D_k\sin\left(\frac{k\pi}{L}x\right)=f(x,0)$$ Thus we can directly compare coefficients to get $D_k=E_k$. 
+\end{proof}
+\end{prp}
+
+Recalling all the steps we used, to solve an inhomogenous boundary conditions (the solution to Neumann is similar), we have the following procedure: \\~\\
+Step 1: Find $u_B$ and $u_I$ to get solutions with respect to the boundary conditions and initial value conditions. \\
+Step 2: Caluculate $f(x,t)$ from $w=u-u_B-u_I$ and the heat equation. \\
+Step 3: Solve the homogenous boundary conditions problem to obtain $v$
+Step 4: Use Duhamel's principle to find $w(x,t)=\int_0 ^tv(x,t,\tau)\,d\tau$
+
+\subsection{Cauchy Problem and the Fundamental Solution}
+\begin{defn}{Cauchy Problem of the Heat Equation}{} The Cauchy problem for the heat equation in one dimension consists of finding a fuinction $u:\R\times(0,\infty)\to\R$ such that $$\begin{cases}
+\partial_{t}u(x,t)=k\partial_{xx}u(x,t) & (x,t)\in\R\times(0,\infty)\\
+u(x,0)=\Psi(x) & x\in\R
+\end{cases}$$
+\end{defn}
+
+\begin{thm}{Fundamental Solution of the Heat Equation}{} Let $\Psi$ be continuous and bounded. Then $$u(x,t)=\frac{1}{\sqrt{4\pi kt}}\int_\R e^{-\frac{(x-y)^2}{4kt}}\Psi(y)\,dy$$ is smooth and solves the Cauchy problem of the heat equation. 
+\end{thm}
+
+\pagebreak
+\section{Partial Differential Equation: Laplace's Equation}
+\subsection{Laplace's Equation}
+\begin{defn}{Laplacian Operator}{} Let $u:\R^2\to\R$. Define the laplacian operaetor on $u$ by $$\Delta u(x,y)=\partial_{xx}u+\partial_{yy}u=\nabla\cdot\nabla u$$
+\end{defn}
+
+\begin{prp}{Change of Variables}{} Using the subtitution $x=r\cos(\theta)$ and $y=r\sin(\theta)$, we can change the laplacian operator into the form $$\Delta u(x_1,x_2)=\Delta v(r,\theta)=\partial_{rr}u+\frac{1}{r^2}\partial_{\theta\theta}u+\frac{1}{r}\partial_ru$$
+\end{prp}
+
+\begin{thm}{}{} The solution to the laplace's equation where $u$ is a function of $r$ and $\theta$ with the following conditions $$\begin{cases}
+\partial_{rr}u+\frac{1}{r^2}\partial_{\theta\theta}u+\frac{1}{r}\partial_ru=0 & u:(0,k)\times(0,\alpha)\\
+u(k,\theta)=g(\theta) & \theta\in(0,\alpha)\\
+u(r,0)=u(r,\alpha)=0 & r\in(0,k)
+\end{cases}$$ is given by $$u(r,\theta)=\sum_{k=1}^\infty r^{\frac{k\pi}{\alpha}}A_k\sin\left(\frac{k\pi}{\alpha}\theta\right)$$
+\end{thm}
+
+\subsection{Fundamental Solution and Green's Function}
+\begin{defn}{Poisson Problem}{} The poisson problem consists of finding a function $u:\R^n\to\R$ such that $$-\Delta u=f$$
+\end{defn}
+
+\begin{thm}{Fundamental Solution for the Laplacian}{} Let $f\in C^2(\R^n)$ be a function such that $\{x|f(x)\neq 0\}$ is bounded. Then the solution to the Poisson problem is given by $$u(x_1,\dots,x_n)=\int_{\R^n}F(x-y)f(y)\,dy$$ where its second order partial derivatives are continuous and $$F(x)=\begin{cases}
+-\frac{\abs{x}}{2} & n=1\\
+-\frac{1}{2\pi}\ln(\abs{x}) & n=2\\
+\frac{1}{n(n-2)V_n(B_1(0))}\cdot\frac{1}{\abs{x}^{n-2}} & n\geq 3
+\end{cases}$$ where $V_n(B_1(0))$ is the volume of the unit ball in $n$ dimensions. 
+\end{thm}
+
+\begin{defn}{Poisson Problem with Boundary Conditions}{} Let $\Omega\subseteq\R^n$ be an open bounded domain. Let $f:\Omega\to\R$ and $g:\partial\Omega\to\R$. The poisson problem with boundary conditions consists of finding a function $u:\R^n\to\R$ such that $$\begin{cases}
+-\Delta u(\vb{x})=f(\vb{x}) & \vb{x}\in\Omega\\
+u(\vb{x})=g(\vb{x}) & \vb{x}\in\partial\Omega
+\end{cases}$$
+\end{defn}
+
+\begin{thm}{}{} Let $u\in C^2(\Omega)\cap C^0(\overline{\Omega})$ is harmonic. Then $$\max_{x\in\Omega}u(x)=\max_{x\in\partial\Omega}\{u(x)\}$$ and $$\min_{x\in\Omega}u(x)=\min_{x\in\partial\Omega}\{u(x)\}$$
+\end{thm}
+
+The following principle gives the uniqueness and stability of our solution for the laplacian operator. 
+
+\begin{thm}{Dirichlet Principle}{} A function $u\in\mathcal{A}=\{v\in C^2(\partial\Omega)|v=g \text{ in }\partial\Omega\}$ solves $-\Delta u=f$ in $\Omega$ and $u=g$ in $\partial\Omega$ if and only if it minimizes $I$, meaning $$I(u)=\min_{w\in\mathcal{A}}\{I(w)\}$$ where $$I(w)=\int_{\Omega}\frac{1}{2}\abs{\nabla w}^2-fw\,dx$$
+\end{thm}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

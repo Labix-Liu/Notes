@@ -1,0 +1,29 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{L\PYGZus{}model\PYGZus{}backward}\PYG{p}{(}\PYG{n}{AL}\PYG{p}{,} \PYG{n}{Y}\PYG{p}{,} \PYG{n}{caches}\PYG{p}{):}
+
+    \PYG{n}{grads} \PYG{o}{=} \PYG{p}{\PYGZob{}\PYGZcb{}}
+    \PYG{n}{L} \PYG{o}{=} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{caches}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} the number of layers}
+    \PYG{n}{m} \PYG{o}{=} \PYG{n}{AL}\PYG{o}{.}\PYG{n}{shape}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}
+    \PYG{n}{Y} \PYG{o}{=} \PYG{n}{Y}\PYG{o}{.}\PYG{n}{reshape}\PYG{p}{(}\PYG{n}{AL}\PYG{o}{.}\PYG{n}{shape}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} after this line, Y is the same shape as AL}
+
+    \PYG{c+c1}{\PYGZsh{}Initializing the backpropagation}
+    \PYG{n}{dAL} \PYG{o}{=} \PYG{o}{\PYGZhy{}} \PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{divide}\PYG{p}{(}\PYG{n}{Y}\PYG{p}{,} \PYG{n}{AL}\PYG{p}{)} \PYG{o}{\PYGZhy{}} \PYG{n}{np}\PYG{o}{.}\PYG{n}{divide}\PYG{p}{(}\PYG{l+m+mi}{1} \PYG{o}{\PYGZhy{}} \PYG{n}{Y}\PYG{p}{,} \PYG{l+m+mi}{1} \PYG{o}{\PYGZhy{}} \PYG{n}{AL}\PYG{p}{))}
+
+    \PYG{c+c1}{\PYGZsh{} Lth layer (SIGMOID \PYGZhy{}\PYGZgt{} LINEAR) gradients}
+
+    \PYG{n}{current\PYGZus{}cache} \PYG{o}{=} \PYG{n}{caches}\PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{]}
+    \PYG{n}{dA\PYGZus{}prev\PYGZus{}temp}\PYG{p}{,} \PYG{n}{dW\PYGZus{}temp}\PYG{p}{,} \PYG{n}{db\PYGZus{}temp} \PYG{o}{=} \PYG{n}{linear\PYGZus{}activation\PYGZus{}backward}\PYG{p}{(}\PYG{n}{dAL}\PYG{p}{,} \PYG{n}{current\PYGZus{}cache}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}sigmoid\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{grads}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}dA\PYGZdq{}} \PYG{o}{+} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{L}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)]} \PYG{o}{=} \PYG{n}{dA\PYGZus{}prev\PYGZus{}temp}
+    \PYG{n}{grads}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}dW\PYGZdq{}} \PYG{o}{+} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{L}\PYG{p}{)]} \PYG{o}{=} \PYG{n}{dW\PYGZus{}temp}
+    \PYG{n}{grads}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}db\PYGZdq{}} \PYG{o}{+} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{L}\PYG{p}{)]} \PYG{o}{=} \PYG{n}{db\PYGZus{}temp}
+
+    \PYG{c+c1}{\PYGZsh{} L\PYGZhy{}1 layer to 1 (RELU \PYGZhy{}\PYGZgt{} LINEAR) gradients}
+    \PYG{k}{for} \PYG{n}{l} \PYG{o+ow}{in} \PYG{n+nb}{reversed}\PYG{p}{(}\PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{L}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)):}
+        \PYG{n}{current\PYGZus{}cache} \PYG{o}{=} \PYG{n}{caches}\PYG{p}{[}\PYG{n}{l}\PYG{p}{]}
+        \PYG{n}{dA\PYGZus{}prev\PYGZus{}temp}\PYG{p}{,} \PYG{n}{dW\PYGZus{}temp}\PYG{p}{,} \PYG{n}{db\PYGZus{}temp} \PYG{o}{=} \PYG{n}{linear\PYGZus{}activation\PYGZus{}backward}\PYG{p}{(}\PYG{n}{grads}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}dA\PYGZdq{}} \PYG{o}{+} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{l} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{)],} \PYG{n}{current\PYGZus{}cache}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}relu\PYGZdq{}}\PYG{p}{)}
+        \PYG{n}{grads}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}dA\PYGZdq{}} \PYG{o}{+} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{l}\PYG{p}{)]} \PYG{o}{=} \PYG{n}{dA\PYGZus{}prev\PYGZus{}temp}
+        \PYG{n}{grads}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}dW\PYGZdq{}} \PYG{o}{+} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{l}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{)]} \PYG{o}{=} \PYG{n}{dW\PYGZus{}temp}
+        \PYG{n}{grads}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}db\PYGZdq{}} \PYG{o}{+} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{l}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{)]} \PYG{o}{=} \PYG{n}{db\PYGZus{}temp}
+
+    \PYG{k}{return} \PYG{n}{grads}
+\end{Verbatim}

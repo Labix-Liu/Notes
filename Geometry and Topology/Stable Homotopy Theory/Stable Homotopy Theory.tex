@@ -1,0 +1,467 @@
+\documentclass[a4paper]{article}
+
+\input{C:/Users/liula/Desktop/Latex/Headers V1.2.tex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Labix}
+\lhead{Stable Homotopy Theory}
+\rfoot{\thepage}
+
+\title{Stable Homotopy Theory}
+
+\author{Labix}
+
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+\begin{itemize}
+\end{itemize}
+\end{abstract}
+\pagebreak
+\tableofcontents
+
+\pagebreak
+\section{The Category of Spectra and Basic Constructions}
+\subsection{Spectra and Functions of Spectra}
+The stable homotopy groups inputs a space and outputs a colimit of homotopy groups which stabilizes by the Freudenthal suspension theorem. Conversely, we can extract from this result the following. If $X$ is a space, we have a sequence of spaces $$X,\Sigma X,\Sigma^2X,\dots$$ For each $n$, the sequence $$\pi_n(X)\to\pi_{n+1}(\Sigma X)\to\pi_{n+2}(\Sigma^2X)\to\cdots$$ eventually stabilizes by the Freudenthal suspension theorem. This is the guiding result for the definition of a spectrum. 
+
+\begin{defn}{(Sequential) Spectra}{} A spectrum $E$ is a collection $\{(E_n,\ast)\;|\;n\in\Z\}$ of pointed spaces in $\bold{CG}$ together with continuous maps $e_n:\Sigma E_n\to E_{n+1}$ or equivalently, continuous maps $e_n:E_n\to\Omega E_{n+1}$. 
+\end{defn}
+
+We relate the definition with the above as follows. A spectrum consists of a sequence of spaces (let us start index it with $\N$) $$E_0,E_1,E_2,\dots$$ For each $n$, we would like to have a sequence of maps $$\pi_n(E_0)\to\pi_{n+1}(E_1)\to\pi_{n+2}(E_2)\to\dots$$ similar to the initial digression. These maps are in fact in our hands. For each $k\in\N$, one has the maps $$\pi_{n+k}(E_k)\overset{\Sigma_\ast}{\to}\pi_{n+k+1}(\Sigma E_k)\overset{(e_k)_\ast}{\to}\pi_{n+k+1}(E_{k+1})$$~\\
+
+Notice that we have restricted our spaces to that in $\bold{CG}$, the category of compactly generated spaces. Most of the theorems only work under such an assumption, and there is little loss forgetting the rest of the spaces. 
+
+\begin{defn}{Functions of Spectra}{} Let $E$ and $F$ be spectra. A function from $E$ to $F$ is a collection of maps $\varphi_n:E_n\to F_n$ such that the following diagrams (which are equivalent by adjunction) are commutative: \\~\\
+\adjustbox{scale=1,center}{\begin{tikzcd}
+	{\Sigma E_n} & {E_{n+1}} && {E_n} & {\Omega E_{n+1}} \\
+	{\Sigma F_n} & {F_{n+1}} && {F_n} & {\Omega F_{n+1}}
+	\arrow["{e_n}", from=1-1, to=1-2]
+	\arrow["{\Sigma\varphi_n}"', from=1-1, to=2-1]
+	\arrow["{\varphi_{n+1}}", from=1-2, to=2-2]
+	\arrow["{e_n'}", from=1-4, to=1-5]
+	\arrow["{\varphi_n}"', from=1-4, to=2-4]
+	\arrow["{\Omega\varphi_{n+1}}", from=1-5, to=2-5]
+	\arrow["{f_n}"', from=2-1, to=2-2]
+	\arrow["{f_n'}"', from=2-4, to=2-5]
+\end{tikzcd}}\\~\\
+\end{defn}
+
+\begin{defn}{The Category of Sequential Spectra}{} Let $\mU$ be a full subcategory of $\bold{Top}_\ast$. Define the category $$\text{Sp}^\N(\mU)$$ of sequential spectra of $\mU$ to consist of the following data. 
+\begin{itemize}
+\item The objects are the sequential spectra $\{E_n\in\mU\;|\;n\in\N\}$ of spaces in $\mU$. 
+\item The morphisms are the functions of spectra
+\item Composition is given by component-wise composition. 
+\end{itemize}
+\end{defn}
+
+\subsection{Functors From Spaces and Spectra to Spectra}
+\begin{defn}{Smash Tensoring}{} Let $E\in\text{Sp}^\N(\bold{CGWH}_\ast)$ be a spectrum and let $X\in\bold{CG}_\ast$ be a pointed space. Define the smash tensoring of $E$ and $X$ to be the spectrum $$E\wedge X$$ given as follows. 
+\begin{itemize}
+\item For each $n\in\N$, $(E\wedge X)_n=E_n\wedge X$
+\item For each map $e_n:\Sigma E\to E_{n+1}$, the structure map is given by $$e_n\wedge\text{id}_X:\Sigma(E\wedge X)_n\to(E\wedge X)_{n+1}$$ by wed
+\end{itemize}
+\end{defn}
+
+\begin{defn}{The Smash Tensoring Functor}{} Define the smash tensoring functor $$-\wedge-:\text{Sp}^\N(\bold{CGWH}_\ast)\times\bold{CGWH}_\ast\to\text{Sp}^\N(\bold{CGWH}_\ast)$$ as follows. 
+\begin{itemize}
+\item For $E$ a spectrum and $X$ a space, $E\wedge X$ is the smash tensor of $E$ and $X$
+\item For a map of spectra $\varphi:E\to F$ and a map of spaces $f:X\to Y$, define the map $$\varphi\wedge f:E\wedge X\to F\wedge Y$$ given on the $n$th level by the usual functoriality of the smash product $$\varphi_n\wedge f:E_n\wedge X\to F_n\wedge Y$$ in $\bold{CGWH}_\ast$. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Powering}{} Let $E\in\text{Sp}^\N(\bold{CGWH}_\ast)$ be a spectrum and let $X\in\bold{CG}_\ast$ be a pointed space. Define the powering of $E$ and $X$ to be the spectrum $$\text{Map}_\ast(X,E)$$ given as follows. 
+\begin{itemize}
+\item For each $n\in\N$, $(\text{Map}_\ast(X,E))_n=\text{Map}_\ast(X,E_n)$
+\item For each map $e_n:\Sigma E\to E_{n+1}$, the structure map is given by $$\Sigma(\text{Map}_\ast(X,E))_n\overset{(\text{const},\text{id})}{\longrightarrow}\text{Map}_\ast(X,\Sigma E_n)\overset{\text{Map}_\ast(X,e_n)}{\longrightarrow}(\text{Map}_\ast(X,E))_{n+1}$$ by wed
+\end{itemize}
+\end{defn}
+
+\begin{defn}{The Powering Functor}{} Define the powering functor $$\text{Map}_\ast(-,-):\bold{CGWH}_\ast^\text{op}\times\text{Sp}^\N(\bold{CGWH}_\ast)\to\text{Sp}^\N(\bold{CGWH}_\ast)$$ as follows. 
+\begin{itemize}
+\item For $E$ a spectrum and $X$ a space, $\text{Map}_\ast(X,E)$ is the powering of $E$ and $X$
+\item For a map of spectra $\varphi:E\to F$ and a map of spaces $f:X\to Y$, define the map $$\text{Map}_\ast(f,\varphi_n):\text{Map}_\ast(Y,E)\to\text{Map}_\ast(X,F)$$ given on the $n$th level by the usual functoriality of the mapping space $$\text{Map}_\ast(f,\varphi_n):\text{Map}_\ast(Y,E_n)\to\text{Map}_\ast(X,F_n)$$ in $\bold{CGWH}_\ast$. 
+\end{itemize}
+\end{defn}
+
+Most of the other interesting functors come from either the smash tensoring functor or the powering functor. \\
+
+Next: adjunction between smash tensoring and powering. Beware: there is a left and right adjunction of smash tensor. 
+
+\subsection{Functors between Spaces to Spectra}
+\begin{defn}{The Shifted Sphere Spectrum}{} Let $k\in\N$. Define the $k$th shifted sphere spectrum $\S^k$ as follows. 
+\begin{itemize}
+\item For each $n\in\N$, the $n$th level space is given by $$\S_n^k=\begin{cases}
+S^{n-k} & \text{ if }n\geq k\\
+\ast & \text{ if }n<k
+\end{cases}$$
+\item When $n<k$, the structure map $$e_k:\Sigma\S_n^k=\ast\to\ast=\S_{n+1}^k$$ is the unique map. When $n\geq k$, $$e_k:\Sigma\S_n^k=S^{n-k+1}\to S^{n-k+1}=\S_{n+1}^k$$ is the identity map. 
+\end{itemize}
+\end{defn}
+
+When $k=0$, we simply call $\S^k=\S$ the sphere spectrum. 
+
+\begin{defn}{The Shifted Spectrum}{} Let $X\in\bold{CGWH}_\ast$ be a space. Define the $k$-fold shifted spectrum of $X$ to be $$F_k^\N X=\S^k\wedge X$$ the smash tensoring of $\S^k$ and $X$. 
+\end{defn}
+Explicitly, we can write out the shifted spectrum of a space $X$ as follows. 
+\begin{itemize}
+\item For each $n$, the space is given by $$(F_k^\N X)_n=\begin{cases}
+S^{n-k}\wedge X & \text{ if } n\geq k\\
+\ast & \text{ if } n<k
+\end{cases}$$
+\item The structure maps are given by the canonical maps and the unique map from $\ast$. 
+\end{itemize}
+
+\begin{defn}{The Evaluation Functor}{} Define the evaluation functor $$\text{Ev}_k^\N:\text{Sp}^\N(\bold{CGWH}_\ast)\to\bold{CGWH}_\ast$$ as follows. 
+\begin{itemize}
+\item For each spectrum $X=\{X_n,\sigma_n\}$, $$\text{Ev}_k^\N(X)=X_k$$
+\item For each morphism of spectra $\varphi:X\to Y$, $$\text{Ev}_k^\N(\varphi)=\varphi_k:X_k\to Y_k$$
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{} Let $k\in\N$. Then there is an adjunction $$F_k^\N:\bold{CGWH}_\ast\rightleftarrows\text{Sp}^\N(\bold{CGWH}_\ast):\text{Ev}_k^\N$$ In other words, there is an isomorphism $$\Hom_\bold{\text{Sp}^\N(\bold{CGWH}_\ast)}(F_k^\N(X),Y)\cong\Hom_{\bold{CGWH}_\ast}(X,\text{Ev}_k^\N(Y))$$ that is natural in $X$ and $Y$. 
+\end{prp}
+
+\subsection{Suspension and Loopspaces}
+\begin{defn}{The Suspension Spectrum}{} Let $X\in\bold{CG}_\ast$ be a space. Define the suspension spectrum $\Sigma^\infty X$ of $X$ to consist of the following data. 
+\begin{itemize}
+\item The collection $\{\Sigma^n X\;|\;n\in\N\}$ of spaces. 
+\item The collection $\sigma_n:\Sigma(\Sigma^nX)\to\Sigma^{n+1}X$ of maps which is a homeomorphism. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{The Suspension Functor}{} Define the suspension functor $$\Sigma^\infty:\bold{CGWH}_\ast\to\mS^\N$$ to consist of the following. 
+\begin{itemize}
+\item For $X\in\bold{CG}_\ast$ a space, $\Sigma^\infty X$ is the suspension spectrum of $X$
+\item For $f:X\to Y$ a map, $$\Sigma^\infty f:\Sigma^\infty X\to\Sigma^\infty Y$$ is the map induced by the $n$th suspension of $f$ for all $n\in\N$. 
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{} Let $X\in\bold{CG}_\ast$ be a space. There is a natural isomorphism $$\S\wedge X\cong\Sigma^\infty X$$
+\end{prp}
+
+\begin{defn}{The Loopspace Functor}{} Define the loopspace functor $\Omega^\infty:\mS^\N\to\bold{CG}_\ast$ as follows. 
+\begin{itemize}
+\item For $X=\{X_n\;|\;n\in\N\}$ a spectrum, $$\Omega^\infty X=\text{hocolim}(X_0\to\Omega X_1\to\Omega^2X_2\to\cdots)$$ is a homotopy colimit
+\item For $f:X\to Y$ a morphism, $\Omega^\infty f:\Omega^\infty X\to\Omega^\infty Y$ is the map on the $0$th level in the function of spectra. 
+\end{itemize}
+\end{defn}
+
+(if $\Omega$ spectra then this functor just returns the first space. )
+
+\subsection{Functors From Spectra to Spectra}
+\begin{defn}{The Suspension of a Spectrum}{} Let $X=\{X_n,\sigma_n^X\}$ be a spectrum. Define the suspension $\Sigma X$ of $X$ to consist of the following data. 
+\begin{itemize}
+\item Level $n$ of the spectrum $\Sigma X$ is given by $$(\Sigma X)_n=S^1\wedge X_n$$
+\item For each $n\in\N$, the structure maps is given by $$\sigma_n^{\Sigma X}=\text{id}_{S^1}\wedge(\sigma_n^X):S^1\wedge\Sigma X_n\to S^1\wedge X_{n+1}$$
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Alternative Suspension}{} Define the alternative suspension functor to be the smash tensor $$\Sigma=S^1\wedge -:\mS^\N\to\mS^\N$$ Explicitly, this is given as follows. 
+\begin{itemize}
+\item For a spectrum $X\in\mS^\N$, $\Sigma X$ is the suspension of $X$. 
+\item For a map $\varphi:X\to Y$ of spectra, define $\Sigma f:\Sigma X\to\Sigma Y$ level-wise by $$(\Sigma f)_n=\text{id}_{S^1}\wedge\varphi_n:S^1\wedge X_n\to S^1\wedge Y_n$$
+\end{itemize}
+\end{defn}
+
+\begin{defn}{The Loopspace of a Spectra}{} Let $X$ be a spectrum. Define the loopspace of $X$ to consist of the following data.
+\begin{itemize}
+\item Level $n$ of the spectrum $\Omega X$ is given by $$(\Omega X)_n=\text{Map}_\ast(S^1,X_n)$$
+\item For each $n\in\N$, the structure maps is given by $$\sigma_n^{\Omega X}=\text{Map}_\ast(\text{id}_{S^1},\sigma_n^X):\text{Map}_\ast(S^1,\Sigma X_n)\to\text{Map}_\ast(S^1,X_{n+1})$$
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Alternative Looping}{} Define the alternative looping functor to be the powering $$\Omega=\text{Map}_\ast(S^1,-):\mS^\N\to\mS^\N$$ Explicitly, this is given as follows. 
+\begin{itemize}
+\item For a spectrum $X\in\mS^\N$, $\Omega X$ is the loopspace of $X$. 
+\item For a map $f:X\to Y$ of spectra, define $\Omega f:\Omega X\to\Omega Y$ level-wise by $$(\Omega f)_n=\text{Map}_\ast(\text{id}_{S^1},\sigma_n(f)):\Omega X_n\to\Omega Y_n$$
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{} Let $k\in\N$. Then there is an adjunction $$\Sigma:\text{Sp}^\N(\bold{CGWH}_\ast)\rightleftarrows\text{Sp}^\N(\bold{CGWH}_\ast):\Omega$$ In other words, there is an isomorphism $$\Hom_\bold{\text{Sp}^\N(\bold{CGWH}_\ast)}(\Sigma X,Y)\cong\Hom_{\text{Sp}^\N(\bold{CGWH}_\ast)}(X,\Omega Y)$$ that is natural in $X$ and $Y$. 
+\end{prp}
+
+\subsection{Limits and Colimits of Spectra}
+\begin{prp}{}{} The category $\text{Sp}^\N(\bold{CGWH}_\ast)$ is complete and cocomplete. 
+\end{prp}
+
+\pagebreak
+\section{Homotopy Groups of a Spectrum}
+\subsection{The Homotopy Groups as a Functor}
+Recall from the digression after def1.2.1 that we have a series of maps of the form \\~\\
+\adjustbox{scale=1,center}{\begin{tikzcd}
+	{\pi_{n+k}(X_k)} & {\pi_{n+k+1}(\Sigma X_k)} & {\pi_{n+k+1}(X_{k+1})}
+	\arrow["{\Sigma_\ast}", from=1-1, to=1-2]
+	\arrow["{(\sigma_n)_\ast}", from=1-2, to=1-3]
+\end{tikzcd}}\\~\\
+for $n+k>1$. We will use this to define the homotopy groups of a spectrum. 
+
+\begin{defn}{Homotopy Groups of a Spectrum}{} Let $X$ be a spectrum. Define the $n$th (stable) homotopy group of $X$ to be the colimit of the inverse system \\~\\
+\adjustbox{scale=1,center}{\begin{tikzcd}
+	{\pi_{n+k}(X_k)} && {\pi_{n+k+1}(X_{k+1})} && {\pi_{n+k+2}(X_{k+2})} & \cdots
+	\arrow["{\pi_n(\sigma_n\circ\Sigma)}", from=1-1, to=1-3]
+	\arrow["{\pi_n(\sigma_{n+1}\circ\Sigma)}", from=1-3, to=1-5]
+	\arrow[from=1-5, to=1-6]
+\end{tikzcd}}\\~\\
+for $n+k>1$. We write the $n$th stable homotopy group as $$\pi_n(X)=\colim_{k\to\infty}\pi_{n+k}(X_k)$$
+\end{defn}
+
+Notice that this is a generalization of the stable homotopy groups in Algebraic Topology 3. Indeed if one considers the suspension spectrum of space, then the homotopy groups of the given suspension spectrum are the stable homotopy groups. This is made rigorous with the following functor. 
+
+Next: $\pi_k(-)$ is functorial. 
+
+\begin{prp}{}{} Let $X$ be an $\Omega$-spectrum. Then the homotopy groups of $X$ are given as follows. $$\pi_k(X)=\begin{cases}
+\pi_{k+n}(X_n) & \text{ if } k+n\geq 0\\
+\pi_k(X_0) & \text{ if } k\geq 0\\
+\pi_0(X_{\abs{k}}) & \text{ if } k<0
+\end{cases}$$
+\end{prp}
+
+Unwinding the proposition, we have that 
+\begin{itemize}
+\item $\pi_0(X)=\pi_0(X_0)=\pi_1(X_1)=\dots$
+\item $\pi_1(X)=\pi_1(X_0)=\pi_2(X_1)=\dots$
+\end{itemize}
+and so on. Indeed this is the effect of imposing weak equivalences on the structure maps of $X$. 
+
+\subsection{Weak Equivalences of Spectra}
+\begin{defn}{$\pi_\ast$-Equivalence}{} Let $f:X\to Y$ be a map of spectra. We say that $f$ is a $\pi_\ast$-equivalence if the induced map $$\pi_n(f):\pi_n(X)\to\pi_n(Y)$$ is an isomorphism for all $n$. In this case, we say that $X$ and $Y$ are $\pi_\ast$-isomorphic. 
+\end{defn}
+
+This is also called weak equivalences in some literature. 
+
+\begin{prp}{}{} Let $X$ be a spectrum. Then the unit $$\eta_X:X\to\Omega\Sigma X$$ of the $(\Sigma,\Omega)$-adjunction is a $\pi_\ast$-equivalence. 
+\end{prp}
+
+\subsection{Long Exact Sequences of Homotopy Groups}
+
+\pagebreak
+\section{The Stable Model Structure}
+\subsection{The Level-wise Model Structure on the Category of Spectra}
+Note: $X_+=(X\coprod\{\ast\},\ast)\in\bold{Top}_\ast$. 
+
+\begin{thm}{}{} The category $\mS^\N$ of spectra has a pointed model structure with the following data. 
+\begin{itemize}
+\item The weak equivalences are the level-wise weak homotopy equivalences of spaces. 
+\item The fibrations are the level-wise Serre fibrations
+\item The cofibrations are the level-wise $q$-cofibrations. 
+\end{itemize}
+This model structure is cofibrantly generated with the generating sets given by $$I_\text{level}=\{F_d^\N(S_+^{a-1}\to D_+^a)\;|\;a,d\in\N\}\;\;\;\;\text{ and }\;\;\;\; J_\text{level}=\{F_d^\N(D_+^a\to(D^a\times I)_+)\;|\;a,d\in\N\}$$
+\end{thm}
+
+\begin{defn}{Level-wise Model Structure}{} The level wise model structure on the category $\mS^\N$ of spectra is the model structure generated by 
+\begin{itemize}
+\item The cofibrations $I_\text{level}=\{F_d^\N(S_+^{a-1}\to D_+^a)\;|\;a,d\in\N\}$
+\item The ayclic cofibrations $J_\text{level}=\{F_d^\N(D_+^a\to(D^a\times I)_+)\;|\;a,d\in\N\}$
+\end{itemize}
+\end{defn}
+
+Unfortunately, such a direct translation of model category structure from $\bold{Top}$ to $\mS^\N$ does not give the appropriate stable homotopy category. Therefore we need a new model structure. For this, we turn to the homotopy groups. 
+
+\subsection{The Stable Model Structure on the Category of Spectra}
+\begin{defn}{Generating Sets of the Stable Model Structure}{} Define the generating sets of the stable model structure by
+\begin{itemize}
+\item $I_\text{stable}=I_\text{level}$
+\item $J_\text{stable}=J_\text{level}\cup\{???\}$
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Stable Fibrations}{} Let $f:X\to Y$ be a map of spectra. We say that $f$ is a stable fibration if it has the right lifting property with respect to $J_\text{stable}$. 
+\end{defn}
+
+\begin{prp}{}{} Let $f:X\to Y$ be a map of spectra. Then $f$ is a stable fibration if and only if $f$ is a level-wise fibration of spaces and for each $n\in\N$, the map $$X_n\to Y_n\times_{\Omega Y_{n+1}}\Omega X_{n+1}$$ induced by $\widetilde{\sigma}_n^X$ and $f$ is a weak homotopy equivalence. 
+\end{prp}
+
+\begin{thm}{}{} The above generating sets cofibrantly generates a model structure on $\mS^\N$ with the following data. 
+\begin{itemize}
+\item The weak equivalence are precisely the $\pi_\ast$-isomorphisms
+\item The cofibrations are the $q$-fibrations
+\item The fibrations are precisely the stable fibrations
+\end{itemize}
+Moreover, the fibrant objects are precisely the $\Omega$-spectra. 
+\end{thm}
+
+\begin{defn}{The Stable Model Structure}{} The stable model structure on $\mS^\N$ is the model structure described above. Explicitly, 
+\begin{itemize}
+\item The weak equivalence are precisely the $\pi_\ast$-isomorphisms
+\item The cofibrations are the $q$-fibrations
+\item The fibrations are precisely the stable fibrations
+\end{itemize}
+\end{defn}
+
+\subsection{The Stable Homotopy Category}
+\begin{defn}{The Stable Homotopy Category}{} Define the stable homotopy category to be the homotopy category $$\mS\mH\mC=\text{Ho}(\mS^\N)$$ of the category of spectra. 
+\end{defn}
+
+Recall that a pointed model category implicitly has the notion of a suspension and loopspace functor. In our case it will prove to be useful to be able to construct it explicitly. In particular, one can see that such functors are reminiscent of the usual suspension and loopspace functors in classical algebraic topology. 
+
+\begin{thm}{}{} The suspension and looping functor of the stable model structure on $\mS^\N$ is precisely given by the alternative suspension and alternative looping. In particular, there is an adjunction $$\Sigma:\text{Ho}(\mS^\N)\rightleftarrows\text{Ho}(\mS^\N):\Omega$$
+\end{thm}
+
+\begin{thm}{}{} The category $\mS^\N$ is a stable model category. Explicitly, this means that both $\Sigma,\Omega:\text{Ho}(\mS^\N)\to\text{Ho}(\mS^\N)$ define equivalence of categories. 
+\end{thm}
+
+\begin{thm}{}{} There is an adjunction given by $$\Sigma^\infty:\bold{CG}_\ast\rightleftarrows\mS^\N :\Omega^\infty$$ Explicitly, this means that there are isomorphisms $$\Hom_{\mS^\N }(\Sigma^\infty X,Y)\cong\Hom_{\bold{CG}_\ast}(X,\Omega^\infty Y)$$ that are natural in $X\in\bold{CG}_\ast$ and $Y\in\mS^\N $. 
+\end{thm}
+
+\subsection{Homotopies Maps of Spectra}
+
+\subsection{Fibrant Objects and Fibrant Replacements}
+\begin{defn}{$\Omega$-Spectra}{} Let $\{E_n\;|\;n\in\Z\}$ and $e_n:E_n\to\Omega E_{n+1}$ be a spectra. We say that it is an $\Omega$-spectra if the induced map $(e_n)_\ast$ is a weak homotopy equivalence. 
+\end{defn}
+
+\begin{prp}{}{} The fibrant objects of $\mS^\N(\bold{CGWH}_\ast)$ are precisely the $\Omega$-spectra. 
+\end{prp}
+
+\begin{defn}{Intermediate Spectra}{} Let $X=\{X_n,\sigma_n^X:X_n\to\Omega X_{n+1}\}$ be a spectrum. For $k\geq 1$, define a spectrum $R_kX$ to consist of the following data. 
+\begin{itemize}
+\item For each $n\in\N$, the $n$th level is given by $$(R_kX)_n=\Omega^k X_{n+k}$$
+\item For each $n\in\N$, the structure map is given by $$\sigma_n^{R_kX}:\Omega^kX_{n+k}\overset{\Omega^k(\sigma_{n+k}^X)}{\longrightarrow}\Omega^{k+1}X_{n+k+1}=\Omega(\Omega^kX_{n+k+1})$$
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Maps between $R_kX$}{} Let $X=\{X_n,\sigma_n^X:X_n\to\Omega X_{n+1}\}$ be a spectrum. Define a map of spectra $$r_k:R_kX\to R_{k+1}X$$ on the $n$th level by $$\Omega^k(\sigma_{n+k}^X):(R_kX)_n=\Omega^kX_{n+k}\to\Omega^{k+1}X_{n+k+1}=(R_{k+1}X)_n$$
+\end{defn}
+
+\begin{defn}{Fibrant Replacement of a Spectrum}{} Let $X$ be a spectrum Define the fibrant replacement $$R_\infty X$$ of $X$ to consist of the following data. 
+\begin{itemize}
+\item For each $n\in\N$, the $n$th level is given by $$(R_\infty X)_n=\left(\text{Hocolim}_k\left(R_0X\overset{r_0}{\longrightarrow}R_1X\overset{r_1}{\longrightarrow}\cdots\longrightarrow R_kX\longrightarrow\cdots\right)\right)=\underset{k\in\N}{\text{Hocolim}}(\Omega^k X_{n+k})$$
+\item For each $n\in\N$, the structure map is given by
+\begin{align*}
+(R_\infty X)_n&=\underset{k\in\N}{\text{Hocolim}}(\Omega^k X_{n+k})\\
+&\overset{\underset{k\in\N}{\text{Hocolim}}\Omega^k(\sigma_{n+k}^X)}{\longrightarrow}\underset{k\in\N}{\text{Hocolim}}(\Omega^{k+1}X_{n+k+1})\\
+&\overset{\text{weak equiv.}}{\longrightarrow}\Omega\underset{k\in\N}{\text{Hocolim}}(\Omega^kX_{n+k+1})\\
+&=\Omega(R_\infty X)_{n+1}
+\end{align*}
+\end{itemize}
+\end{defn}
+
+\subsection{Homotopy Pushouts and Pullbacks of Spectra}
+
+\pagebreak
+\section{Alternative Models of the Stable Homotopy Category}
+\subsection{The Spanier-Whitehead Category}
+\begin{defn}{The Spanier-Whitehead Category}{} Define the Spanier-Whitehead category $\bold{SW}$ as follows. 
+\begin{itemize}
+\item The objects consists of a pair $(X,n)$ where $X$ is a pointed CW complex and $n\in\N$. 
+\item For $(X,n)$ and $(Y,m)$ to objects, $$\Hom_{\bold{SW}}((X,n),(Y,m))=\colim_{r\to\infty}[\Sigma^{n+r}X,\Sigma^{m+r}Y]_\ast$$
+\item Composition is given by the composition of maps. 
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{} The category $\bold{SW}$ is additive and is a triangulated category. 
+\end{prp}
+
+$[-,X]_\ast^s$ almost defines a reduced cohomology theory. It fails at the wedge axiom. \\
+Suspension gives equivalence of categories. 
+
+\subsection{The Category of Orthogonal Spectra}
+\begin{defn}{Orthogonal Spectra}{} An orthogonal spectrum $X$ consists of the following data. 
+\begin{itemize}
+\item For each $n\in\N$, a pointed space $X_n$ and a continuous group action of $O(n)$ that fixes the base point. 
+\item For each $n\in\N$, there are maps of pointed spaces $\sigma_n:S^1\wedge X_n\to X_{n+1}$
+\item For each $n,k\in\N$, the composite map \\~\\
+\adjustbox{scale=1,center}{\begin{tikzcd}
+	{S^k\wedge X_n} && {S^{k-1}\wedge X_{n+1}} && {S^{k-2}\wedge X_{n+2}} & \cdots & {X_{n+k}}
+	\arrow["{\text{id}_{S^{k-1}}\wedge\sigma_n}", from=1-1, to=1-3]
+	\arrow["{\text{id}_{S^{k-2}}\wedge\sigma_{n+1}}", from=1-3, to=1-5]
+	\arrow[from=1-5, to=1-6]
+	\arrow[from=1-6, to=1-7]
+\end{tikzcd}}\\~\\
+is $O(k)\times O(n)$ equivariant, where we think of $O(k)\times O(n)\leq O(n+k)$ by $O(k)$ acting on the first $k$ coordinate and $O(n)$ acting on the last $n$ coordinates. 
+\end{itemize}
+\end{defn}
+
+TBA: Morphism\\
+Examples: Trivial, Sphere, Suspension, Shifted Suspension\\
+TBA: Stable model structure\\
+TBA: Quillen adjunction with $S^\N$, Quillen adjunction with $\bold{Top}_\ast$
+
+\subsection{The Category of Symmetric Spectra}
+
+\pagebreak
+\section{The Importance of the Category of Spectra}
+\subsection{The Relation Between Linear Functors and Spectra}
+\subsection{Brown's Representability Theorem}
+Specific types of spectra are related to (co)homology theories. We will introduce the names of such spectra below. 
+
+\begin{lmm}{}{} Let $X$ be an infinite loopspace. Define a sequence of spaces and maps inductively:
+\begin{itemize}
+\item Let $X_0=X$
+\item Suppose $X_n$ is a chosen space. Choose $X_{n+1}$ to be a space such that $$X_n\simeq\Omega X_{n+1}$$ Also let the bonding map $\sigma_n$ be the weak equivalence $\sigma:X_n\to\Omega X_{n+1}$. 
+\end{itemize}
+The above data defines an $\Omega$-spectrum. 
+\end{lmm}
+
+Recall that if $Z$ is a group-like $H$-space (ref Concise J.P. May), then $[X,Z]$ has a group structure. 
+
+\begin{thm}{}{} Let $\{T_n\;|\;n\in\Z\}$ be a $\Omega$-spectrum consisting of CW complexes. For any space $X$, define a functor $\widetilde{E}^k:\bold{CW}_\ast\to\bold{Ab}$ as follows. 
+\begin{itemize}
+\item On objects, a space $X$ is sent to $\widetilde{E}^k(X)=[X,T_k]$ for $k\in\Z$.
+\item For $f:X\to Y$ a morphism, $\widetilde{E}^k(f):[Y,T_k]\to[X,T_k]$ is defined by pre composition.
+\end{itemize}
+Then the collection of functors $\widetilde{E}^k$ for all $k$ defines a reduced cohomology theory on CW complexes with base point. 
+\end{thm}
+
+\begin{thm}{Brown's Representability Theorem}{} Let $\widetilde{h}^n:\bold{hCW}_\ast\to\bold{Ab}$ be a reduced cohomology theory with chosen base points on the CW complexes. Then there exists a CW spectrum $\K=\{K_n\;|\;n\in\N\}$ and natural isomorphisms $$\widetilde{h}^n(X)\cong[X,K_n]_\ast$$ for all CW-complexes $X$. 
+\end{thm}
+
+It is related to representability in category theory in the following sense: Since $\widetilde{h}^n$ are functors that are homotopy equivalent, we can instead consider $\widetilde{h}^n$ as a functor from the homotopy category $\bold{hCW}_\ast$ of pointed CW-complexes to $\bold{Ab}$. Then Hom sets in $\bold{hCW}$ are precisely $[X,Y]_\ast$ which are the base point preserving homotopic maps from $X$ to $Y$. Then Brown's representability states that the functor $\widetilde{h}^n:\bold{hCW}_\ast\to\bold{Ab}$ is representable via $[X,K_n]_\ast$ and more over the $K_n$ assemble into a spectrum. \\
+
+Unfortunately, the two assignments does not give an equivalence of categories. The obstruction is called phantom maps. 
+
+\begin{thm}{}{} Every reduced cohomology theory determines and is determined by an $\Omega$ CW-spectrum. 
+\end{thm}
+
+We note here that every reduced cohomology theory induces a generalized cohomology theory, hence the above theorem hence a version for generalized cohomology theories and also pointed cohomology theories. \\~\\
+
+Note: non homotopy equivalent spectra can represent the same cohomology theory. 
+
+\begin{thm}{}{} The reduced singular cohomology theory $\widetilde{H}^k:\bold{CW}\to\bold{Ab}$ with coefficients in an abelian group $G$ is determined by the Eilenberg-maclane spectrum $\{K(G,n)\;|\;n\in\N\}$. 
+\end{thm}
+
+\begin{defn}{Homology with Coefficients in a Spectrum}{} Let $\K=\{T_n\;|\;n\in\Z\}$ be a spectrum. Define a functor $H_n(-;\K):\bold{CW}^2\to\bold{Ab}$ by $$H_n(X,A;\K)=\colim_{k\to\infty}\pi_{n+k}\left(\frac{X_+}{A_+}\wedge T_k\right)$$ where $X_+$ is the space $X$ together with a chosen base point. 
+\end{defn}
+
+\begin{thm}{}{} Let $(h_n,\delta_n)$ be a generalized homology theory. Then there exists a spectrum $\K$ and a natural isomorphism $$h_n(X,A)\cong H_n(X,A;\K)$$ for all CW pairs $(X,A)$. 
+\end{thm}
+
+\begin{thm}{}{} Let $\{T_n\;|\;n\in\Z\}$ be a CW spectrum such that $T_n$ is $(n-1)$-connected. Define $$\widetilde{E}_k(X)=\colim_{n\to\infty}\pi_{k+n}(X\wedge T_n)$$ Then the functors $\widetilde{E}_k$ for all $k$ defines a reduced homology theory on CW complexes with base point. (Concise J.P. May)
+\end{thm}
+
+\begin{thm}{}{} Any reduced homology theory determines and is determined by a CW spectrum. 
+\end{thm}
+
+\subsection{Three Examples of Spectra Representing Cohomology Theories}
+\begin{defn}{Eilenberg-MacLane Spectrum}{} Let $G$ be an abelian group. Define the Elienberg-Maclane spectrum to consist of the following data. 
+\begin{itemize}
+\item The collection $\{K(G,n)\;|\;n\in\N\}$ of spaces. 
+\item The collection $K(G,n)\to\Omega K(G,n+1)$ of maps which are homeomorphisms. 
+\end{itemize}
+\end{defn}
+
+\subsection{The Symmetric Monoidal Structure}
+
+\pagebreak
+\section{More Category of Spectra}
+\subsection{Spectra of Simplicial Sets}
+TBA: Def of spectra of simplicial sets\\
+TBA: Quillen adjunction with $S^\N$ induced by geometric realization and nerve functor. 
+
+\subsection{Diagram Spectra}
+
+\subsection{The Category of L-Spectra}
+In previously defined highly structured spectra, we see that the smash product behaves better only when we pass it to the homotopy category. However, we will present here one category of spectra in which the smash product behaves decently well. 
+
+\begin{defn}{(Coordinate Free) Spectra}{} Let $U$ be a infinite dimensional inner product space isomorphic to $\R^\infty$. A coordinate free spectra modelled on $U$ consists of the following data. 
+\begin{itemize}
+\item For each finite dimensional vector subspace $V\subset U$, a pointed topological space $E_V$. 
+\item For each inclusion of vector subspaces $V\hookrightarrow W$, a homeomorphism of pointed spaces $\sigma_{V,W}:E_V\overset{\cong}{\rightarrow}\Omega^{W-V}E_W=\text{Map}_\ast(S^{W-V},E_W)$. Here $S^{W-V}$ means the one point compactification of the space $W-V$. 
+\end{itemize}
+\end{defn}
+
+
+
+\end{document}

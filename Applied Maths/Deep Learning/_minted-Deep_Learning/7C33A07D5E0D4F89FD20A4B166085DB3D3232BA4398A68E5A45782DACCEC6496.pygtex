@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{linear\PYGZus{}backward}\PYG{p}{(}\PYG{n}{dZ}\PYG{p}{,} \PYG{n}{cache}\PYG{p}{):}
+
+    \PYG{n}{A\PYGZus{}prev}\PYG{p}{,} \PYG{n}{W}\PYG{p}{,} \PYG{n}{b} \PYG{o}{=} \PYG{n}{cache}
+    \PYG{n}{m} \PYG{o}{=} \PYG{n}{A\PYGZus{}prev}\PYG{o}{.}\PYG{n}{shape}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}
+
+    \PYG{n}{dW} \PYG{o}{=} \PYG{p}{(}\PYG{l+m+mi}{1}\PYG{o}{/}\PYG{n}{m}\PYG{p}{)}\PYG{o}{*}\PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{dot}\PYG{p}{(}\PYG{n}{dZ}\PYG{p}{,}\PYG{n}{A\PYGZus{}prev}\PYG{o}{.}\PYG{n}{T}\PYG{p}{))}
+    \PYG{n}{db} \PYG{o}{=} \PYG{p}{(}\PYG{l+m+mi}{1}\PYG{o}{/}\PYG{n}{m}\PYG{p}{)}\PYG{o}{*}\PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{sum}\PYG{p}{(}\PYG{n}{dZ}\PYG{p}{,} \PYG{n}{axis}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{keepdims}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{))}
+    \PYG{n}{dA\PYGZus{}prev} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{dot}\PYG{p}{(}\PYG{n}{W}\PYG{o}{.}\PYG{n}{T}\PYG{p}{,}\PYG{n}{dZ}\PYG{p}{)}
+
+    \PYG{k}{return} \PYG{n}{dA\PYGZus{}prev}\PYG{p}{,} \PYG{n}{dW}\PYG{p}{,} \PYG{n}{db}
+\end{Verbatim}

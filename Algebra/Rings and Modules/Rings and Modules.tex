@@ -1,0 +1,1610 @@
+\documentclass[a4paper]{article}
+
+\input{C:/Users/liula/Desktop/Latex/Headers V1.2.tex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Labix}
+\lhead{Rings and Modules}
+\rfoot{\thepage}
+
+\title{Rings and Modules}
+
+\author{Labix}
+
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+\begin{itemize}
+\item Abstract Alebra by Thomas W. Judson
+\end{itemize}
+\end{abstract}
+\pagebreak
+\tableofcontents
+
+\pagebreak
+\section{Basic Module Theory}
+\subsection{Introduction to Modules}
+\begin{defn}{Modules}{} Let $R$ be a ring. A left $R$-module or a left module over $R$ is an abelian group $(M,+)$ together with an action of $R$ on $M$ denoted by $\cdot:R\times M\to M$ such that 
+\begin{itemize}
+\item $r\cdot (m+n)=r\cdot m+r\cdot n$ for all $r,s\in R$, $m\in M$
+\item $(rs)\cdot m=r\cdot (s\cdot m)$ for all $r,s\in R$, $m\in M$
+\item $(r+s)\cdot m=r\cdot m+s\cdot m$ for all $r,s\in R$, $m\in M$
+\item $1\cdot m=m$ for all $m\in M$ if $1\in R$
+\end{itemize}
+A right $R$-module consists of the same axioms except that the action is on the right, meaning that the action of $R$ on an abelian group $M$ is the map $\cdot:M\times R\to M$. 
+\end{defn}
+
+Notice that while most of the time we exclusively work with left $R$-modules, all results are valid also to right $R$-modules because every right $R$-module is actually a left $R^{\text{op}}$ module and vice versa. $R^{\text{op}}$ here means that the abelian group is the same: $(R^{\text{op}},+,\cdot_{R^\text{op}})$ is defined to be $(R^\text{op},+)=(R,+)$ and $$a\cdot_{R^{\text{op}}}b=b\cdot_R a$$ for all $a,b\in R$. 
+
+\begin{defn}{Submodules}{} Let $R$ be a ring and let $M$ be an $R$-module. An $R$-submodule of $M$ is an abelian subgroup $N$ of $M$ which is closed under the action of ring elements, meaning $rn\in N$ for all $r\in R$, $n\in N$. 
+\end{defn}
+
+Submodules of a ring $R$ are well known objects. They are just the ideals of $R$. 
+
+\begin{prp}{Submodule Criterion}{} Let $R$ be a ring and let $M$ be a left $R$-module. A subset $N$ of $M$ is a left $R$-submodule of $M$ if and only if
+\begin{itemize}
+\item $x+y\in N$ for all $x,y\in N$
+\item $r\cdot x\in N$ for all $x\in N$ and $r\in R$
+\end{itemize} \tcbline
+\begin{proof}
+Suppose that $N$ is a left $R$-submodule. Then the above two conditions are satisfied since $N$ is an $R$-module in its own right. Conversely, the above two conditions imply that the four conditions for the definition of a module is satisfied. 
+\end{proof}
+\end{prp}
+
+\begin{defn}{Sum of Submodules}{} Let $R$ be a ring. Let $M,N$ be left $R$-submodules of an $R$-module $K$. Define the sum of $M$ and $N$ to be the set $$M+N=\{m+n\;|\;m\in M,n\in N\}$$ together with a ring operation $\cdot:R\times M+N\to M+N$ defined by $$(r,m+n)=r\cdot(m+n)=r\cdot m+r\cdot n$$
+\end{defn}
+
+\begin{lmm}{}{} Let $R$ be a ring. Let $M$ and $N$ be left $R$-submodules of an $R$-module $K$. Then $M+N$ is an $R$-submodule of $K$. \tcbline
+\begin{proof}
+Notice that since the underlying group of $K$ is abelian, we have that $M+N$ is a group. Also it is clear by definition of the ring operation on $M+N$ that the operation is closed. Thus $M+N$ is an $R$-submodule of $K$. 
+\end{proof}
+\end{lmm}
+
+\begin{lmm}{}{} Let $R$ be a ring. Let $M,N$ be left $R$-modules. Then the intersection $M\cap N$ is a left $R$-submodule of both $M$ and $N$. 
+\end{lmm}
+
+\subsection{Module Homomorphisms}
+\begin{defn}{$R$-Module Homomorphisms}{} Let $R$ be a ring and let $M$ and $N$ be left $R$-modules. A map $\phi:M\to N$ is an $R$-module homomorphism if 
+\begin{itemize}
+\item $\phi:M\to N$ is a homorphism of the underlying abelian group
+\item $\phi(am)=a\phi(m)$ for $a\in R$ and $m\in M$
+\end{itemize}
+We say that $\phi$ is a $R$-module isomorphism if it is bijective. 
+\end{defn}
+
+\begin{defn}{Kernel and Image}{} Let $R$ be a ring and let $M$ and $N$ be $R$-modules. Let $\phi:M\to N$ be a $R$-module homomorphism. Define
+\begin{itemize}
+\item the kernel of $\phi$ to be $\ker(\phi)=\{m\in M|\phi(m)=0\}$
+\item the image of $\phi$ to be $\im(\phi)=\{n\in N|n=\phi(m)\text{ for some }m\}$
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Quotient Module}{} Let $M$ be an $R$-module and $N$ a submodule of $M$. Define the quotient module of $M$ and $N$ to be the abelian quotient group $$\frac{M}{N}=\{m+N\;|\;m\in M\}$$ together with the left ring operation $\cdot:R\times\frac{M}{N}\to\frac{M}{N}$ defined by $$(r,m+N)=r\cdot(m+N)=rm+N$$
+\end{defn}
+
+\subsection{Isomorphism Theorem for Modules}
+Similar to the isomorphism theorem for rings, the isomorphism theorem for modules extends the definition of the original isomorphism for groups. Therefore most of the time we just have to check the compatibility of the isomorphism theorems with the ring action on the abelian group. 
+
+\begin{thm}{First isomorphism Theorem for Modules}{} Let $M,N$ be left $R$-modules and let $\psi:M\to N$ be an $R$-mdoule homomorphism. Then the following are true. 
+\begin{itemize}
+\item $\ker(\phi)$ is a submodule of $M$
+\item $\im(\phi)$ is a submodule of $N$
+\end{itemize}
+Moreover, we have an isomorphism $$\frac{M}{\ker(\phi)}\cong\phi(M)$$ of modules. 
+ \tcbline
+\begin{proof}
+We have seen all these statements for groups. We just have to show that the statements are compatible with the left action of the left $R$-module structure. 
+\begin{itemize}
+\item Let $r\in R$ and $m\in\ker(\phi)$. Then $\phi(r\cdot m)=r\cdot\phi(m)=0$ and thus $r\cdot m\in\ker(\phi)$
+\item Let $r\in R$ and $n\in\im(\phi)$. Then $r\cdot\phi(n)=\phi(r\cdot n)$ implies $r\cdot n$ lies in the image of $\phi$
+\item Let $r\in R$ and $m+\ker(\phi)\in M/\ker(\phi)$. Denote the group isomorphism $\overline{\phi}:M/\ker(\phi)\to\im(\phi)$ defined by $m+\ker(\phi)\mapsto\phi(m)$. Then we have 
+\begin{align*}
+\overline{\phi}(r\cdot(m+\ker(\phi)))&=\overline{\phi}(r\cdot m+\ker(\phi))\\
+&=\phi(r\cdot m)\\
+&=r\cdot\phi(m)
+\end{align*}
+\end{itemize}
+Thus they all are compatible with left multiplication. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{Second isomorphism Theorem for Modules}{} Let $A,B$ be left $R$-submodules of an $R$-module $M$. Then the following are true. 
+\begin{itemize}
+\item $A$ and $B$ are submodules of $A+B$
+\item $A\cap B$ is a submodule of $A$ and $B$
+\end{itemize}
+Moreover, we have the following isomorphism $$\frac{A+B}{B}\cong\frac{A}{A\cap B}$$ of quotient $R$-modules. \tcbline
+\begin{proof}
+It is clear that $A$ and $B$ are subgroups of $A+B$. Moreover, the left $R$-action on $A$ and $B$ is closed since they are left $R$-submodules. Thus $A$ and $B$ are submodules of $A+B$. The proof for $A\cap B$ is similar. \\~\\
+
+Consider the composition of $R$-module homomorphisms $\phi:A\to A+B\to\frac{A+B}{B}$ defined by $a\mapsto a+B$. It is a homomorphism since it is the composition of the inclusion and the quotient map. This maps is surjective since for any $(a+b)+B$, we have that $(a+b)+B=a+B$ and thus $a\in A$ maps to this element. \\~\\
+I claim that $\ker(\phi)=A\cap B$. If $a\in\ker(\phi)$ then $a+B=B$ implies that $a\in A$. Thus $a\in A\cap B$. If $a\in A\cap B$ then clearly $\phi(a)=a+B=B$. By the first isomorphism theorem, we have that $$\frac{A+B}{B}\cong\frac{A}{A\cap B}$$ and we are done. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{Third isomorphism Theorem for Modules}{} Let $M$ be a left $R$-module. Let $A$ be an $R$-submodule of $M$ and $B$ an $R$-submodule of $A$. Then we have the following isomorphism of quotient $R$-modules: $$\frac{M/B}{A/B}\cong\frac{M}{A}$$
+\end{thm}
+
+\begin{thm}{Correspondence Theorem for Modules}{} Let $N$ be a submodule of the $R$-module $M$. There is a bijection between the submodules of $M$ which contain $N$ and the submodules of $M/N$. $$\left\{\substack{\text{Submodules of }M\\\text{containing }N}\right\}\;\;\overset{\text{1:1}}{\longleftrightarrow}\;\;\left\{\substack{\text{Submodules }\\\text{of }M/N}\right\}$$ The correspondence is given by sending $A$ to $A/N$ for all $A\supseteq N$. 
+\end{thm}
+
+\subsection{Bimodules}
+\begin{defn}{Bimodules}{} Let $R,S$ be rings. Let $M$ be an abelian group. We say that $M$ is an $(R,S)$-bimodule if the following are true. 
+\begin{itemize}
+\item $M$ is a left $R$-module. 
+\item $M$ is a right $S$-module. 
+\item For all $r\in R$, $s\in S$ and $m\in M$, we have $$(rm)s=r(ms)$$
+\end{itemize}
+\end{defn}
+
+\subsection{Rings as a Module}
+Let $R$ be a ring. Then left multiplication on $R$ defines a module structure $\cdot:R\times R\to R$ on the ring $R$ itself. 
+
+\begin{prp}{}{} Let $R$ be a ring. Let $I$ be a subset of $R$. Then $I$ is a left ideal of $R$ if and only if $I$ is an $R$-submodule of $R$. 
+\end{prp}
+
+\begin{prp}{}{} Let $R$ be a ring. Let $I,J$ be left ideals of $R$. Then $\frac{R}{I}\cong\frac{R}{J}$ as $R$-modules if and only if $I=J$. \tcbline
+\begin{proof}
+When $I=J$ it is clear that $R/I\cong R/J$. Conversely, suppose that $\phi:R/I\to R/J$ is an $R$-module isomorphism. For any $r\in J$, we have $$\phi(r+I)=(r+J)\phi(1+I)=(r+J)(1+J)=(r+J)=0$$ Since $\phi$ is an isomorphism, we conclude that $r+I=I$, so that $r\in I$. This shows that $J\subseteq I$. Similarly one can show that $I\subseteq J$. 
+\end{proof}
+\end{prp}
+
+\pagebreak
+\section{Constructing New Modules}
+\subsection{Direct Sum and Products of Modules}
+\begin{defn}{Direct Product of Modules}{} Let $I$ be an indexing set and $\{M_i\;|\;i\in I\}$ a family of $R$-modules. Define the direct product to be the set $$\prod_{i\in I}M_i=\left\{(m_i)_{i\in I}\;\bigg{|}m_i\in M_i\;\right\}$$ together with the left $R$-module structure inherited component wise. 
+\end{defn}
+
+\begin{defn}{External Direct Sum of Modules}{} Let $I$ be an indexing set and $\{M_i\;|\;i\in I\}$ be a family of $R$-modules. Define the direct sum of the family of modules to be $$\bigoplus_{i\in I}M_i=\left\{(m_i)_{i\in I}\in\prod_{i\in I}M_i\;\bigg{|}\;m_i\neq 0\text{ for finitely many }i\right\}$$
+\end{defn}
+
+There is no different between finite direct sum and finite direct products. However when $I$ is an infinite indexing set, there is a big difference. For instance, a direct product of rings is still a ring but infinite direct product of rings is not a ring. 
+
+\begin{prp}{}{} Let $R$ be a ring. Let $I$ be an indexing set. Let $M_i$ be an $R$-module for each $i\in I$. Then there is an isomorphism $$\bigoplus_{i\in I}M_i\cong\prod_{i\in I}M_i$$ given component-wise if and only if $\abs{I}\in\N$. 
+\end{prp}
+
+Let $R$ be a ring. Given a left $R$-module $M$, how can we recognize that $M$ is isomorphic to a direct sum? We introduce the notion of internal direct sums to identify direct sums. 
+
+\begin{defn}{Internal Direct Sum of Modules}{} Let $I$ be an indexing set and $\{N_i\;|\;i\in I\}$ be a family of submodules of a left $R$-module $M$. Define $$\sum_{i\in I}N_i=\{a_1+\dots+a_n\;|\;a_i\in N_i\}$$ If the external direct product is isomorphic to $$\bigoplus_{i\in I}N_i\cong\sum_{i\in I}N_i$$ then we call $\sum_{i\in I}N_i$ the internal direct sum and denote it with $\bigoplus_{i\in I}N_i$ instead. If $M\cong\bigoplus_{i\in I}N_i$ then we say that $M$ is the internal direct sum. 
+\end{defn}
+
+Thus there is no distinction in external and internal direct sum of modules, just that whether our view point starts with the larger module $M$ or with the collection $\{M_i\;|\;i\in I\}$. 
+
+\begin{lmm}{}{} Let $I$ be an indexing set and $\{N_i\;|\;i\in I\}$ be a family of submodules of a left $R$-module $M$. Define $\phi:\bigoplus_{i\in I}N_i\to M$ by $$\phi\left((m_i)_{i\in I}\right)=\sum_{i\in I}m_i$$ Then the following are true. 
+\begin{itemize}
+\item $\im(\phi)=\sum_{i\in I}N_i$
+\item If $\phi$ is injective then $\sum_{i\in I}N_i$ is the internal direct sum
+\item $\phi$ is bijective then $M$ is the internal direct sum of $\{N_i\;|\;i\in I\}$
+\end{itemize} \tcbline
+\begin{proof}
+Firstly, it is clear that $\im(\phi)=\sum_{i\in I}N_i$ by definition of $\phi$. If $\phi$ is injective then we obtain an isomorphism $\bigoplus_{i\in I}N_i\cong\sum_{i\in I}N_i$ by the first isomorphism theorem of modules. Finally if $\phi$ is also surjective then we have $M=\sum_{i\in I}N_i\cong\bigoplus_{i\in I}N_i$ and so we are done. 
+\end{proof}
+\end{lmm}
+
+\subsection{The Module of Homomorphisms}
+\begin{defn}{The Set of Homomorphisms}{} Let $R$ be a ring. Let $M,N$ be $R$-modules. Define the homomorphism ring of $R$ to be the set $$\Hom_R(M,N)=\{\phi:M\to N\;|\;\phi\text{ is an }R\text{-module homomorphism}\}$$ of all $R$-module homomorphisms from $M$ to $N$.
+\end{defn}
+
+\begin{prp}{}{} Let $R$ be a ring. Let $M,N$ be $R$-modules. Then $\Hom_R(M,N)$ is a $Z(R)$-module with the following binary operations. 
+\begin{itemize}
+\item For $\phi,\varphi:M\to N$ two $R$-module homomorphisms, define $\phi+\varphi:M\to N$ by $(\phi+\varphi)(m)=\phi(m)+\varphi(m)$ for all $m\in M$
+\item For $\phi:M\to N$ an $R$-module homomorphism and $r\in Z(R)$, define $r\phi:M\to N$ by $(r\phi)(m)=r\cdot\phi(m)$ for all $m\in M$. 
+\end{itemize} 
+In particular, it is an abelian group. \tcbline
+\begin{proof}
+We first show that the addition operation gives the structure of a group. 
+\begin{itemize}
+\item Since $M$ is associative as an additive group, associativity follows
+\item Clearly the zero map $0\in\Hom_R(M,N)$ acts as the additive inverse since for any $\phi\in\Hom_R(M,N)$, we have that $\phi(m)+0=0+\phi(m)=\phi(m)$ since $0$ is the additive identity for $M$
+\item For every $\phi\in\Hom_R(M,N)$, the map taking $m$ to $-\phi(m)$ also lies in $\Hom_R(M,N)$. Since $-\phi(m)$ is the inverse of $\phi(m)$ in $M$ for each $m\in M$, we have that $-\phi$ is the inverse of $\phi$
+\end{itemize}
+We now show that 
+\begin{itemize}
+\item Let $r,s\in R$, we have that $((sr)\phi)(m)=(sr)\cdot\phi(m)=s\cdot(r\cdot\phi(m))=s(r(\phi))(m)$ and hence we showed associativity. 
+\item It is clear that $1_R\in R$ acts as the identity of the operation. 
+\end{itemize}
+Thus we are done. 
+\end{proof}
+\end{prp}
+
+\begin{eg}{}{} Let $n,m\geq 1$. Then we have $$\Hom_\Z\left(\frac{\Z}{n\Z},\frac{\Z}{m\Z}\right)\cong\frac{\Z}{\gcd(m,n)\Z}$$ \tcbline
+\begin{proof}
+Any $\Z$-module homomorphism is determined by where $1$ is mapped to. Let $\varphi_a:\Z/n\Z\to\Z/m\Z$ be the $\Z$-module homomorphism given by $[1]\mapsto[a]$. Then $$[0]=[n]=n\cdot[1]\mapsto n\cdot[a]$$ implies that $[na]=[0]$. Hence $m$ divides $na$. Let $km=na$ for some $k\in\N$. Then $a=\frac{km}{n}$. Now we know that $m/\gcd(m,n)$ and $n/\gcd(m,n)$ are coprime. Then this means that the possible choices for $k$ are $$\left\{\frac{n}{\gcd(m,n)},2\frac{n}{\gcd(m,n)},\dots,\gcd(m,n)\frac{n}{\gcd(m,n)}\right\}$$ and so the only possible choices for $a$ are $$\left\{\frac{m}{\gcd(m,n)},2\frac{m}{\gcd(m,n)},\dots,\gcd(m,n)\frac{m}{\gcd(m,n)}\right\}$$ and so $\Hom_\Z\left(\frac{\Z}{n\Z},\frac{\Z}{m\Z}\right)\cong\frac{\Z}{\gcd(m,n)\Z}$. 
+\end{proof}
+\end{eg}
+
+\subsection{The Endomorphism Ring}
+\begin{defn}{Endomorphisms of a Module}{} Let $R$ be a ring and $M$ a left $R$-module. An endomorphism of $M$ is a homomorphism $\phi:M\to M$. Denote the set of all $R$-endomorphisms by $$\text{End}_R(M)=\{\phi:M\to M\;|\;\phi\text{ is an isomorphism of }M\}$$
+\end{defn}
+
+\begin{prp}{}{} Let $R$ be a ring and $M$ a left $R$-module. Define two binary operations on $\text{End}_R(M)$ as follows. 
+\begin{itemize}
+\item Let $\phi,\psi\in\text{End}_R(M)$. Define $\phi+\psi:M\to M$ by $m\mapsto\phi(m)+\psi(m)$. 
+\item Let $\phi,\psi\in\text{End}_R(M)$. Define $\phi\cdot\psi\in\text{End}_R(M)$ by $m\mapsto\phi(\psi(m))$. 
+\end{itemize}
+Then $\text{End}_R(M)$ is a ring with the above operations. \tcbline
+\begin{proof}
+We first show that $\text{End}_R(M)$ is a group. 
+\begin{itemize}
+\item Since $M$ is associative as an additive group, associativity follows
+\item Clearly the zero map $0\in\edo_R(M)$ acts as the additive inverse since for any $\phi\in\text{End}_R(M)$, we have that $\phi(m)+0=0+\phi(m)=\phi(m)$ since $0$ is the additive identity for $M$
+\item For every $\phi\in\text{End}_R(M)$, the map taking $m$ to $-\phi(m)$ also lies in $\text{End}_R(M)$. Since $-\phi(m)$ is the inverse of $\phi(m)$ in $M$, we have that $-\phi$ is the inverse of $\phi$
+\end{itemize}
+We show the remaining axioms for a ring. 
+\begin{itemize}
+\item Since composition of functions is associative, associativity follows
+\item The identity map $\id$ acts as the identity since composition of any map with identity is itself
+\item Since $\phi\in\text{End}_R(M)$ is a module homomorphism, we have $$\phi((\psi+\varphi)(m))=\phi(\psi(m)+\varphi(m))=\phi(\psi(m))+\phi(\varphi(m))$$ and thus distributivity is satisfied. 
+\end{itemize}
+Thus we are done. 
+\end{proof}
+\end{prp}
+
+The following lemma shows that endomorphisms of $R$ as an $R$-module consists of precisely the left multiplications of $R$ by each element in $R$ (Thus also having an isomorphism on right multiplication). Moreover, the ring structures are compatible so that it is not just a bijection. 
+
+\begin{prp}{}{} Let $R$ be a ring. Then we have an isomorphism $$\text{End}_R(R)\cong R$$ \tcbline
+\begin{proof}~\\
+Define a map $\phi:R\to\text{End}_R(R)$ by $$r\mapsto\begin{pmatrix}
+\phi(r):R\to R\\x\mapsto x\cdot r
+\end{pmatrix}$$ We check that $\phi$ is a ring homomorphism. 
+\begin{itemize}
+\item $\phi$ preserves addition since 
+\begin{align*}
+\phi(r+s)(x)&=x\cdot (r+s)\\
+&=x\cdot r+x\cdot s\\
+&=\phi(r)(x)+\phi(s)(x)
+\end{align*}
+\item $\phi$ preserves identity since $\phi(1)(x)=x\cdot 1=x$ is just the identity map
+\item $\phi$ preserves multiplication since 
+\begin{align*}
+\phi(rs)&=x\cdot (rs)\\
+&=(x\cdot r)\cdot s\\
+&=\phi(s)(x\cdot r)\\
+&=\phi(s)(\phi(r)(x))
+\end{align*}
+\end{itemize}
+We also show that $\phi$ is bijective. 
+\begin{itemize}
+\item The kernel $\phi$ is $0$ because letting $r\in\ker(\phi)$, we have $\phi(r)=0$. But we also know that $\phi(r)(1_R)=1_R\cdot r$. Equating gives $r=0$. 
+\item Let $\eta\in\text{End}_R(R)$. Let $x\in R$. Then we have 
+\begin{align*}
+\eta(x)&=\eta(x\cdot 1_R)\\
+&=x\cdot\eta(1_R)\tag{$\eta$ is a module homomorphism}\\
+&=\phi(\eta(1_R))(x)
+\end{align*}
+\end{itemize}
+Thus $\phi$ is a ring isomorphism. 
+\end{proof}
+\end{prp}
+
+Notice that in the proof it might be more natural to show first that $R^\text{op}\cong\text{End}_R(R)$ and then to show that $R^\text{op}\cong R$. The first isomorphism is naturally isomorphic but the second one is not. Naturality refers to category theory. 
+
+\subsection{Tensor Products of Modules}
+\begin{defn}{Bilinear Maps}{} Let $R$ be a ring. Let $A,B,C$ be $R$-modules. We say that an $R$-module homomorphism $$\varphi:A\times B\to C$$ is bilinear if the following are true. 
+\begin{itemize}
+\item Linearity in the first variable: $$\varphi(sa_1+ta_2,b)=s\varphi(a_1,b)+t\varphi(a_2,b)$$ for all $a_1,a_2\in A$, $b\in B$ and $s,t\in R$. 
+\item Linearity in the second variable: $$\varphi(a,sb_1+tb_2)=s\varphi(a,b_1)+t\varphi(a,b_2)$$ for all $a\in A$, $b_1,b_2\in B$ and $s,t\in R$. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Tensor Product of Modules}{} Let $R$ be a ring. Let $A,B$ be $R$-modules. The tensor product of $A$ and $B$ over $R$ is an $R$-module $$A\otimes_R B$$ together with an $R$-bilinear map $\phi:A\times B\to A\otimes_RB$ such that the following universal property as satisfied. For any other $R$-bilinear map $\psi:A\times B\to C$, there is a unique $R$-linear map $\theta:A\otimes_RB\to C$ such that the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+A\times B\arrow[r, "\phi"]\arrow[rd, "\psi"'] & A\otimes_RB\arrow[d, "\exists !\theta", dashed]\\
+&C
+\end{tikzcd}}
+\end{defn}
+
+\begin{prp}{}{} Let $R$ be a ring. Let $A,B$ be $R$-modules. There is a one-to-one correspondence $$\left\{\varphi:A\times B\to R\;|\;\varphi\text{ is bilinear}\right\}\;\;\overset{1:1}{\longleftrightarrow}\;\;\Hom_R(A\otimes_RB,R)$$ given by the universal property. Explicitly, denote $\varphi:A\times B\to A\otimes_R B$ the universal map. For each $f\in\Hom_R(A\otimes_RB,R)$, it is mapped to $f\circ\varphi$. 
+\end{prp}
+
+The universal property makes it very abstract and hard to visualize the tensor product. There are a number of explicit ways to think about the tensor product. 
+
+\begin{lmm}{}{} Let $R$ be a ring. Let $A,B$ be $R$-modules. Let $F$ be the module over $R$ with basis $(a,b)\in A\times B$. Also let $L$ be the ideal of $F$ generated by the elements of $F$ of the form 
+\begin{itemize}
+\item $(a_1+a_2,b)-(a_1,b)-(a_2,b)$
+\item $(a,b_1+b_2)-(a,b_1)-(a,b_2)$
+\item $(sa,b)-s(a,b)$
+\item $(a,sb)-s(a,b)$
+\end{itemize}
+for $a,a_1,a_2\in A$, $b,b_1,b_2\in B$ and $s\in R$. Then the tensor product of $A$ and $B$ is given by $$A\otimes_RB=\frac{F}{L}$$
+\end{lmm}
+
+\begin{prp}{}{} Let $R$ be a ring and $A,B,C$ be $R$-modules. Then the following properties hold for the tensor product. 
+\begin{itemize}
+\item Associativity: $(A\otimes_RB)\otimes_RC\cong A\otimes_R(B\otimes_RC)$
+\item Commutativity: $A\otimes_R B\cong B\otimes_RA$
+\item Identity: $A\otimes_RR\cong A$
+\item Distributivity: $(A\oplus B)\otimes_R C\cong(A\otimes_RC)\oplus(B\otimes_RC)$
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{} Let $R$ be a ring and $I,J$ be ideals of $R$. Then $$\frac{R}{I}\otimes_R\frac{R}{J}\cong\frac{R}{I+J}$$
+\end{prp}
+
+\begin{prp}{}{} Let $M$ be an $R$-module and $I$ an ideal of $R$. Then $$M\otimes\frac{R}{I}\cong\frac{M}{IM}$$
+\end{prp}
+
+Recall that any abelian group $A$ can also be thought of as a $\Z$-module. The tensor product over $\Z$ or any of its quotient modules are significantly easier to compute. 
+
+\begin{prp}{}{} Let $A$ be an abelian group. Then the following are true. 
+\begin{itemize}
+\item $\Z\otimes_\Z A\cong A$
+\item $\Z/p\Z\otimes_\Z A\cong A/pA$
+\item $\Z/m\Z\otimes \Z/n\Z\cong\Z/\gcd(m,n)\Z$
+\end{itemize}
+\end{prp}
+
+\subsection{Tensor Products of Vector Spaces}
+Let $R=k$ be a field and let $V,W$ be finite dimensional vector spaces. Because they are finite dimensional, $V$ and $V^\ast$ are isomorphic and similarly for $W$. We can then obtain an interpretation of the tensor product using bilinear maps. 
+
+\begin{crl}{}{} Let $V,W$ be finite dimensional vector spaces over a field $k$. Then there is an isomorphism $$V\otimes W=\left\{\varphi:V^\ast\times W^\ast\to k\;|\;\varphi\text{ is multilinear}\right\}$$ given as follow by the above theorem and the fact that finite dimensional vector spaces are isomorphic to their dual. \tcbline
+\begin{proof}
+We have that 
+\begin{align*}
+\left\{\varphi:V^\ast\times W^\ast\to k\;|\;\varphi\text{ is multilinear}\right\}&\cong\Hom_k(V^\ast\otimes W^\ast,k)\tag{thm 3.3.4}\\
+&=(V^\ast\otimes W^\ast)^\ast\\
+&\cong V^{\ast\ast}\otimes W^{\ast\ast}\\
+&\cong V\otimes W
+\end{align*}
+and so we conclude. 
+\end{proof}
+\end{crl}
+
+Let $V$ be a vector space over a field $k$. In particular this means that $V$ is a module over $k$ and all the theory on tensor products apply to $V$. Because of the importance of the dual space there is more general notion of tensors for vector spaces. 
+
+\begin{defn}{The Space of Tensors}{} Let $V$ be a vector space over a field. Let $m,n\in\N$. A type $(m,n)$ tensor of $V$ is an element of the tensor product $$T_n^m(V)=V^{\otimes m}\otimes(V^\ast)^{\otimes n}$$ We call $T_n^m(V)$ the space of tensors of $V$. 
+\end{defn}
+
+Repeatedly applying 3.4.1 gives the following. 
+
+\begin{thm}{}{} Let $V$ be a finite dimensional vector space over a field $k$. Then there is an isomorphism $$T_n^m=\left\{\varphi:(V^\ast)^{\times m}\times V^{\times n}\to k\;|\;\varphi\text{ is multilinear}\right\}$$ given by applying 3.4.1 repeatedly. 
+\end{thm}
+
+\pagebreak
+\section{Some Properties of Modules}
+\subsection{Invariant Basis Number Property}
+It is not a coincidence that we require $R$ to be a division ring. Every division ring is an invariant basis number (IBN) ring. 
+
+\begin{defn}{Invariant Basis Number Property}{} Let $R$ be a ring. We say that $R$ has the invariant basis number (IBN) property if every free $R$-module has equal cardinality for basis. 
+\end{defn}
+
+\begin{prp}{}{} Let $R$ be a ring. Then $R$ is an IBN-ring if and only if $R^m\cong R^n$ implies that $m=n$. 
+\end{prp}
+
+\begin{prp}{}{} Every division ring is an IBN-ring. 
+\end{prp}
+
+\begin{prp}{}{} Every commutative ring is an IBN-ring. \tcbline
+\begin{proof}
+Let $R$ be a commutative ring. Let $m$ be a maximal ideal of $R$. Suppose that $R^k\cong R^n$. Then $(R/m)^k\cong(R/m)^n$ as vector spaces over $R/m$. Hence $k=n$. Thus $R$ is an IBN-ring. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{} Let $f:R\to S$ be a surjective non zero ring homomorphism. Let $S$ be an IBN-ring. Then $R$ is also an IBN-ring. 
+\end{prp}
+
+\subsection{Free Modules}
+Free modules is the module analogue of vector spaces. In general, they can be infinite dimensional. 
+
+\begin{defn}{Basis of a Module}{} Let $R$ be a ring and $M$ a left $R$-module. Let $B\subseteq M$. 
+\begin{itemize}
+\item We say that $B$ is linearly independent if for every $\{b_1,\dots,b_n\}\subseteq B$ such that $$\sum_{i=1}^nr_ib_i=0_M$$ we have that $r_1=\dots=r_n=0_R$
+\item We say that $B$ is a generating set of $M$ if for all $m\in M$, $$m=\sum_{b\in B}r_b\cdot b$$ for finitely many non zero $r_b$
+\item We say that $B$ is a basis of $M$ if $B$ is both linearly independent and is a generating set of $M$. 
+\end{itemize}
+\end{defn}
+
+By considering $r_b$ being dependent on $b\in B$, we can define $$\text{Fun}_f(B,R)=\{f:B\to R\;|\;f(b)=0_R\text{ for all but finitely many }b\in B\}$$ then we can rewrite the definition of generating sets to be if for every $m\in M$, there exists $f\in\text{Fun}_f(B,R)$ such that $m=\sum_{b\in B}f(b)\cdot b$. We can also define linear independence in a similar fashion. \\
+
+Basis for a module is similar to a basis for vector spaces. Indeed every field is a ring so one can think of modules as a generalization for vector spaces. However, not every module admits a basis just like the theory in vector spaces. When they do admit a basis, we call the module a free module. 
+
+\begin{defn}{Free R-Module}{} Let $R$ be a ring and $M$ a left $R$-module. We say that $M$ is a free $R$-module if $M$ admits a basis. 
+\end{defn}
+
+\begin{eg}{}{} Consider the following abelian groups as $\Z$-modules. 
+\begin{itemize}
+\item $\Z[x]$ is a free $\Z$-module isomorphic to $\bigoplus_{n\in\N}\Z\cdot x$. 
+\item $\Z[[x]]$ is not a free $\Z$-module but is isomorphic to $\prod_{n\in\N}\Z$. 
+\item $\Q$ is not a free $\Z$-module. 
+\item $\Q/\Z$ is not a free $\Z$-module. 
+\item $\R$ is not a free $\Z$-module. 
+\end{itemize}
+\end{eg}
+
+Notice that while the countable Cartesian product $\prod_{i\in I}R$ is indeed a left $R$-module, it is not a free module. Because in the definition of a generating set elements of the direct sum is a finite sum of elements. But elements in $\prod_{i\in I}R$ can have countably many long components. 
+
+\begin{lmm}{}{} Let $R$ be a ring. Let $B$ be a set. Then the external direct sum $$\bigoplus_{b\in B}R\cdot b$$ is a free left $R$-module with basis $B$. \tcbline
+\begin{proof}
+Notice that $\{1\cdot b\;|\;b\in B\}$ is a basis with cardinality $B$ since every element in $\bigoplus_{b\in B}R\cdot b$ only has finitely many non zero components so that it is a unique linear combination of the the set. 
+\end{proof}
+\end{lmm}
+
+\begin{prp}{}{} Let $R$ be a ring. Let $M$ be a free $R$-module. Then there is an isomorphism $$M\cong\bigoplus_{i\in I}R$$ for some indexing set $I$. 
+\end{prp}
+
+\begin{lmm}{}{} Let $R$ be a ring. Let $M$ be a left $R$-module. Then $M$ is isomorphic $$M\cong\frac{\bigoplus_{i\in I}R}{J}$$ to a quotient of a free module for some left $R$-submodule $J$. \tcbline
+\begin{proof}
+Let $M$ be an $R$-module. Choose a generating set $B\subseteq M$. This is always possible because trivially we can choose $B=M$. Define a map $\pi_B:\bigoplus_{b\in B}R\to M$ by $$\pi_B(r_1,r_2,\dots)=\sum_{b\in B}r_b\cdot b$$ Note that the sum is finite since elements of $\bigoplus_{b\in B}R$ has finitely many non-zero components. It is clear that it is an $R$-module homomorphism. It is also surjective by definition of a generating set. By the first isomorphism theorem for module, we have that $$\frac{\bigoplus_{b\in B}R}{\ker(\pi_B)}\cong M$$ and so we conclude. 
+\end{proof}
+\end{lmm}
+
+The following is reminiscent of a theorem in linear algebra. However note that we require that $R$ to be a division ring. Because we only dealt with finite dimensional vector spaces in Linear Algebra, we will need Zorn's lemma to deal with the case that the basis set has countable cardinality. Recall Zorn's lemma: If $(\mP,\preceq)$ is a non empty poset such that every chain $P_1\preceq P_2\preceq\cdots$ has an upper bound, then $(\mP,\preceq)$ contains a maximal element. 
+
+\begin{thm}{}{} Let $R$ be a division ring. Let $M$ be a left $R$-module. Then
+\begin{itemize}
+\item Every linearly independent subset $S\subseteq M$ can be extended to a basis
+\item Every generating set $Q\subseteq M$ contains a basis
+\item $M$ is a free $R$-module
+\end{itemize} \tcbline
+\begin{proof}~\\
+\begin{itemize}
+\item Let $S$ be a linearly independent set. Let $(\mP,\subseteq)$ be the poset ordered by inclusion, where elements are subsets $S\subseteq X\subseteq M$ and that $X$ is linearly independent. $\mP$ is non empty since $S\in\mP$. Let $\mC$ be a chain in $\mP$. If $\mC$ is empty, then any $X\in\mP$ is an upper bound. So assume that $\mC$ is non-empty. Consider the set $$T=\bigcup_{X\in\mC}X$$ Clearly $X\subseteq T$ for all $X\in\mC$. It remains to show that $T\in\mP$. \\~\\
+
+Clearly $S\subseteq T$. We now want to show that $T$ is a linearly independent set. Let $v_1,\dots,v_m\in T$ and $a_1,\dots,a_m\in R$ such that $$\sum_{k=1}^ma_kv_k=0$$ Since $T$ is the union of $X\in\mC$, each $v_j$ belongs to some $X_j\in\mC$. Since $\mC$ is a chain, one of these sets, $X_m$ contains all the other $X_j$. Thus $v_1,\dots,v_m\in X_m$. Since $X_m\in\mP$, we conclude that $a_1=\dots=a_m=0$. Thus $T$ is linearly independent so that $T\in\mP$. \\~\\
+
+By Zorn's lemma, $\mP$ has a maximal element $Z$. Suppose that $Z$ does not span $M$. Then there exists $v\in M$ that is not a finite linear combination of elements of $Z$. Since $Z$ is maximal, $Z\cup\{v\}$ does not belong to $\mP$ and hence is linearly dependent. Thus there are $v_1,\dots,v_m\in Z$ and $a_1,\dots,a_m,a\in R$ not all $0$ such that $$\sum_{k=1}^ma_kv_k+av=0$$ If $a=0$ then we have linear dependence among $v_1,\dots,v_m$, a contradiction. Thus $a\neq 0$. Since $R$ is a division ring, $a$ has an inverse $a^{-1}$. Hence $$v=-a^{-1}a_1v_1-\cdots-a^{-1}a_mv_m$$ This is a contradiction. Thus $Z$ is a basis. 
+
+\item Suppose that $(\mP,\subseteq)$ is the poset under inclusion with elements of $\mP$ being subsets $X\subseteq Q$ and $X$ is linearly independent. Notice that $\emptyset\in\mP$ so $\mP$ is non empty. By a similar argument as above, we can conclude that $\mP$ has an upper bound. By Zorn's lemma, $\mP$ has a maximal element $Z$. It is linearly independent and is contained in $Q$. Now $Z$ is a basis once we have shown that $Z$ generates $M$. Since every $v\in M$ is a finite linear combination of elements of $Q$, we just have to express every $q\in Q$ as a linear combination of $Z$. \\~\\
+
+Suppose that this is false. Then there exists $q\in Q$ such that $q$ is not a linear combination of $Z$. By a similar argument as above, $Z\cup\{q\}$ is a bigger element of $\mP$, contradicting the fact that $Z$ is maximal. Thus we are done. 
+
+\item Either apply the first point with $S=\emptyset$ or apply the second point with $Q=M$. 
+\end{itemize}
+This concludes the proof. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{Universal Property of Free Modules}{} Let $R$ be a ring. Let $M$ be an $R$-module. Let $B$ be a set. Let $f:B\to M$ be a function of sets. Then $M$ is a free module with basis $B$ if and only if the following is true. \\~\\
+
+For every $R$-module $N$ and function of sets $g:B\to N$, there exists a unique $R$-module homomorphism $h:M\to N$ such that the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	B & M \\
+	& N
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["g"', from=1-1, to=2-2]
+	\arrow["{\exists!}", dashed, from=1-2, to=2-2]
+\end{tikzcd}}\\~\\
+\end{thm}
+
+\subsection{Finitely Generated Modules}
+\begin{defn}{Finitely Generated Modules}{} Let $R$ be a ring. Let $M$ be a left $R$-module. We say that $M$ is finitely generated if $M$ has a finite generating set. 
+\end{defn}
+
+This notion should be somewhat familiar to us. A finitely generated $\Z$-module is just a finitely generated abelian group. We have already classified all finitely generated $\Z$-modules by the fundamental theorem of finitely generated abelian groups. \\
+
+On the other hand, a finitely generated $k$-module for a field $k$ is exactly a finite dimensional vector space over $k$. We have already classified all finitely generated $k$-modules as they are isomorphic to $k^n$ for some $n\in\N$. 
+
+\begin{prp}{}{} Let $R$ be a ring. Let $M$ be a left $R$-module. Let $N\leq M$ be an $R$-submodule of $M$. If $M$ is finitely generated, then $M/N$ is finitely generated. \tcbline
+\begin{proof}
+Suppose that $M$ is generated by the elements $m_1,\dots,m_k$. Let $p:M\to M/N$ be the projection map. It is in particular surjective. I claim that $m_1+N,\dots,m_k+N$ generate $M/N$. Let $t+N\in M/N$. Since $p$ is surjective, there exists $u\in M$ such that $p(u)=t+N$. Since $M$ is finitely generated by $m_1,\dots,m_k$, we can write $u=r_1m_1+\dots+r_km_k$. Then $$t+N=p(u)=p(r_1m_1+\dots+r_km_k)=r_1p(m_1)+\dots+r_kp(m_k)=r_1m_1+N+\dots+r_km_k+N$$ Hence every element of $M/N$ can be written as an $R$-linear combination of $m_1+N,\dots,m_k+N$. Hence $M/N$ is finitely generated by $m_1+N,\dots,m_k+N$. 
+\end{proof}
+\end{prp}
+
+Beware that $N\leq M$ may not be finitely generated even when $M$ is finitely generated. For instance, the ring $R=\R[x_1,\dots,x_n,\dots]$ is finitely generated by the element $1_R$ over itself. But the ideal $I=(x_1,\dots,x_n,\dots)$ (which is an $R$-submodule) is clearly not finitely generated. 
+
+\begin{eg}{}{} Consider the following abelian groups as $\Z$-modules. 
+\begin{itemize}
+\item $\Z[x]$ is not a finitely generated $\Z$-module. 
+\item $\Z[[x]]$ is not a finitely generated $\Z$-module. 
+\item $\Q$ is not a finitely generated $\Z$-module. 
+\item $\Q/\Z$ is not a finitely generated $\Z$-module. 
+\item $\R$ is not a finitely generated $\Z$-module. 
+\end{itemize}
+\end{eg}
+
+\begin{prp}{}{} Let $R$ be a ring. Let $M$ be a left $R$-module. Then $M$ is finitely generated if and only if there exists a surjective homomorphism $R^n\to M$ for some $n\in\N$. 
+\end{prp}
+
+While free modules mimic the notion of a vector space, finitely generated free modules mirror the notion of finite dimensional vector spaces. 
+
+\begin{prp}{}{} Let $R$ be a ring. Let $M$ be an $R$-module. If $M$ if finitely generated and free, then there is an isomorphism $$M\cong R^n\cong R^{\oplus n}$$ for some $n\in\N$. \tcbline
+\begin{proof}
+When $R=0$ then it is trivial. Suppose that $R\neq 0$. Let $m$ be a maximal ideal of $R$. Since $M\cong\bigoplus_{I\in I}R$ for some indexing set $I$, we can quotient $m$ on both sides to deduce: $$\frac{M}{mM}\cong\bigoplus_{i\in I}\frac{R}{m}$$ Now $R/m$ is a division ring and it satisfies the invariant basis number property. Since $M/mM$ is a free $R/m$-module, we conclude that any basis of $M/mM$ and $\bigoplus_{i\in I}\frac{R}{m}$ has equal cardinality. Since $M/mM$ is finitely generated, the basis of $M$ is finite. Hence the indexing set $I$ is finite, say $\abs{I}=n$. Then $M\cong\bigoplus_{i=1}^nR$ and so we are done. 
+\end{proof}
+\end{prp}
+
+\begin{defn}{Cyclic Modules}{} Let $R$ be a ring. Let $M$ be a left $R$-module. We say that $M$ is cyclic if $M$ is generated by one element. 
+\end{defn}
+
+\begin{lmm}{}{} Let $R$ be a ring. Let $M$ be a left $R$-module. Then $M$ is cyclic if and only if there exists an ideal $I$ of $R$ such that $M\cong R/I$ as left $R$-modules. \tcbline
+\begin{proof}
+Clearly $R/I$ is generated by the element $1+I$. Hence $M\cong R/I$ is cyclic. Conversely, suppose that $M$ is cyclic. Consider the $R$-module homomorphism $R\to M$ defined by $r\mapsto rx$. It is surjective since $M=R\cdot x$. Moreover, its kernel is an ideal. Hence $M\cong R/I$. 
+\end{proof}
+\end{lmm}
+
+\subsection{Simple Modules}
+The first structural result on Modules is the baby Artin-Wedderburn theorem. It relies on another powerful lemma called Schur's lemma, which has a fundamental application in Representation theory. We begin with the notion of simple modules. 
+
+\begin{defn}{Simple Module}{} Let $R$ be a ring. Let $M$ be a left $R$-module. We say that $M$ is simple if the following are true. 
+\begin{itemize}
+\item $M\neq\{0\}$. 
+\item The only sub-modules of $M$ are $\{0\}$ and $M$. 
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{} Let $R$ be a ring. Let $M$ be a left $R$-module. If $M$ is simple, then $M$ is cyclic. \tcbline
+\begin{proof}
+If not, then for any $0\neq x\in M$, we have that $R\cdot x$ is an $R$-submodule of $M$. 
+\end{proof}
+\end{lmm}
+
+\begin{lmm}{}{} Let $R$ be a ring. If $L\subseteq R$ is a maximal left ideal, then the left $R$-module $R/L$ is simple. \tcbline
+\begin{proof}
+By the correspondence theorem, ideals of $R/L$ are in 1-1 correspondence to ideals of $R$ that contains $L$. Since $L$ is maximal, there exists no such ideals. Thus $R/L$ has no ideals and thus no $R$-submodule. 
+\end{proof}
+\end{lmm}
+
+Recall that every ring has a maximal left ideal. As a result, we can prove the existence of a simple left $R$-module for any ring $R$. 
+
+\begin{crl}{}{} Every non-zero ring $R$ has a simple left $R$-module. \tcbline
+\begin{proof}
+Since every ring $R$ has a maximal left ideal $L$, $R/L$ is a non-trivial simple $R$-module by lemma 2.7.2. 
+\end{proof}
+\end{crl}
+
+\begin{prp}{}{} Let $R$ be a ring. Let $M$ be a left $R$-module. Then $M$ is simple if and only if there exists a maximal left ideal $m$ of $R$ such that $M\cong R/m$ as $R$-modules. \tcbline
+\begin{proof}
+We know that $R/m$ is simple. If there is an isomorphism $M\cong R/m$ then this means that $M$ is simple. Conversely, suppose that $M$ is simple. Then $M$ must be cyclic, and so $M\cong R/I$ for some ideal $I$. If $I$ is not maximal, then there exists a proper ideal $J$ of $R$ such that $I\subset J\subset R$. By the correspondence theorem, $J/I$ is an $R$-submodule of $R/I$, and hence $M$ has an $R$-submodule, a contradiction. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{Schur's Lemma I}{} Let $\phi:M\to N$ be a homomorphism of simple left $R$-modules. Then either $\phi=0$ or $\phi$ is an isomorphism. \tcbline
+\begin{proof}
+Suppose that $\phi\neq 0$. Since $\ker(\phi)$ is a submodule of $M$ and $M$ is simple, we must have that $\ker(\phi)=0$. Then we must have that $\im(\phi)$ is a non-trivial submodule of $N$. But since $N$ is simple, $\im(\phi)=N$. Thus $\phi$ is a bijection. 
+\end{proof}
+\end{prp}
+
+\begin{crl}{Schur's Lemma II}{} If $M$ is a simple left $R$-module, then $\text{End}_R(M)$ is a division ring. \tcbline
+\begin{proof}
+Let $\phi\in\text{End}_R(M)$ be non-zero. Since $M$ is simple, Schur's lemma I tells us that $\phi$ is an isomorphism. Then it has an inverse. 
+\end{proof}
+\end{crl}
+
+\begin{thm}{Baby Artin-Wedderburn Theorem}{} Let $R$ be a non-zero ring. Then every left $R$-module is free if and only if $R$ is a division ring. \tcbline
+\begin{proof}
+If $R$ is a division ring, then every left $R$-module has basis by theorem 2.6.5. Now suppose that $R$ is a non-zero ring such that every left $R$-module is free. By corollary 2.7.4, there exists a simple left $R$-module $M$. Let $x$ be a basis element of $M$. \\~\\
+
+Consider the homomorphism $\pi:R\to M$ defined by $\pi(r)=rx$. Then $\ker(\pi)=0$ otherwise there would be a linear dependency on the basis element $x$. Since $\im(\pi)$ is a non-zero submodule of $M$, a simple module, $\im(\pi)=M$. By the first isomorphism theorem, $M\cong R$ as left $R$-modules. By lemma 2.4.3, we have an isomorphism $$\text{End}_R(M)\cong\text{End}_R(R)\cong R$$ of rings. By Schur's lemma II, we have that $\text{End}_R(M)\cong R$ is a division ring. 
+\end{proof}
+\end{thm}
+
+\subsection{Semisimple Modules}
+\begin{defn}{Semisimple Modules}{} Let $R$ be a ring. A left $R$-module $M$ is semisimple if $$M=\bigoplus_{i\in I}S_i$$ is a direct sum of simple modules $S_i$. 
+\end{defn}
+
+It is clear that every simple module is a semisimple module. But beware that the notion of simplicity for a ring often does not coincide. For instance, one can say that a ring is simple if the only two sided ideals are $(0)$ and itself. One can also consider a ring to be simple if it is simple as a left $R$-module. In this case, the condition transfers to the only left ideals of $R$ are $(0)$ and itself. \\~\\
+
+All this is to say that simple rings and semisimple rings could mean different things, depending on the context. 
+
+\begin{prp}{}{} Let $R$ be a ring. Let $\{M_i\;|\;i\in I\}$ be a collection of semisimple $R$-modules. Then $$\bigoplus_{i\in I}M_i$$ is a semisimple $R$-module. 
+\end{prp}
+
+\begin{defn}{Socle of a Module}{} Let $M$ be a left $R$-module. The socle of $M$ is defined by $$\text{soc}(M)=\sum_{\substack{S\text{ is a simple}\\\text{submodule}}}S$$
+\end{defn}
+
+We can draw a connection between the radical and the socle. Consider $\Z$ as a $\Z$-module. It is clear that $\Z$ has no simple submodules. Indeed for any $k\in\Z$, $k\Z$ has a submodule $(2k)\Z$. Since $\Z$ is a principal ideal domain this concludes all possible ideals. Thus $$\text{soc}(\Z)=0$$ As for the radical, notice that quotient modules of $\Z$ are modules of the form $\Z/k\Z$. It does not have a subgroup exactly when $k=p$ is a prime. The intersection of all such groups is then $0$ so that $$\text{rad}(\Z)=0$$~\\
+
+There is a duality between the radical and the socle as follows. For $n\in\N$, consider $\Z/n\Z$ as a $\Z$-module. Clearly we have that its simple modules are exactly the submodules $\Z/(n/k)\Z$ when $n/k$ is a prime number. Similarly, $\Z/n\Z$ has a cosimple submodule of the form $\Z/(n/p)\Z$ when $p$ is a prime. \\~\\
+
+The notion of a radical is reminiscent to the radical of a number. In number theory, the radical of $n=p_1^{a_1}\cdots p_k^{a_k}\in\N$ is defined by $\text{rad}(n)=p_1\cdots p_k$. Write $r=\text{rad}(n)$. It is easy to see that $$\text{soc}(\Z/n\Z)=\frac{n}{r}\Z/n\Z\cong\Z/r\Z\cong\frac{\Z/n\Z}{\text{rad}(\Z/n\Z)}$$ and that $$\text{rad}(\Z/n\Z)\cong\Z/(n/r)\Z$$
+
+\begin{thm}{}{} A module $M$ is semisimple if and only if $\text{soc}(M)=M$. \tcbline
+\begin{proof}
+Suppose that $M$ is semisimple. Then $M$ is a direct sum of simple submodules so that $M=\text{soc}(M)$. \\~\\
+
+Now suppose that $\text{soc}(M)=M$. Then $M=\sum_{i\in I}S_i$ is the internal direct product of some simple submodules of $M$. Consider the poset $$\mP=\left\{X\subseteq I\;\bigg{|}\;\sum_{i\in X}S_i\text{ is a direct sum}\right\}$$ ordered by inclusion. In particular, recall from Rings and Modules that $X\in\mP$ if and only if $\phi:\bigoplus_{i\in X}S_i\to M$ defined by $\phi\left((m_i)_{i\in X}\right)=\sum_{i\in X}m_i$ is injective. The kernel of $\phi$ is given by 
+\begin{align*}
+\ker(\phi)&=\left\{(m_i)_{i\in X}\;\bigg{|}\;\sum_{i\in X}m_i=0\right\}\\
+&=\left\{(m_i)_{i\in X}\;\bigg{|}\;\text{ for all }i_1,\dots i_k\in X\text{ we have }m_{i_1}+\dots+m_{i_k}=0\right\}
+\end{align*}
+The kernel being trivial is equivalent to the condition that for all $i_1,\dots,i_k\in X$ and all $m_{i_t}\in S_{i_t}$, we have $m_{i_1}+\dots+m_{i_k}=0$ implies $m_{i_1}=\dots=m_{i_k}=0$. Let $\mC$ be a chain in $\mP$. It is clear that $T=\bigcup_{Z\in\mC}Z$ is an upper bound of $\mC$. Indeed if the above condition fails, then it fails on some finitely many elements $x_i$ which are contained in $X\subseteq Z\subseteq T$. By Zorn's lemma, $\mP$ has a maximal element $J$. We know that $N=\sum_{i\in J}S_i$ is actually a direct sum. It remains to show that $N=M$. \\~\\
+
+If this is false, then there exists $S_k$ not a subset of $N$. In particular, $k\neq J$. Consider the set $J\cup\{k\}$. In particular the above condition fails and such a failure must contain a non-zero element $x_k\in S_k$ since the condition holds before $k$ was introduced to $J$. Then $x_k=-\sum_{j\neq k}x_j\in N$ and $N\cap S_k$ is non-zero. Since $S_k$ is simple, $N\cap S_k=S_k$ and thus $N\supseteq S_k$, which is a contradiction. 
+\end{proof}
+\end{thm}
+
+\begin{crl}{}{} A quotient module of a semisimple module is semisimple. \tcbline
+\begin{proof}
+Suppose that $M$ is semisimple. Then $M=\bigoplus_{i\in I}S_i$ where $S_i$ are simple modules. Consider a quotient $M/N$ and the quotient homomorphism $\psi:M\to M/N$. Clearly, $M/N=\psi(M)=\sum_{i\in I}\psi(S_i)$ and each $\psi(S_i)$ is either $0$ or simple. Then $\text{soc}(M/N)=M/N$ and $M/N$ is semisimple. 
+\end{proof}
+\end{crl}
+
+\begin{lmm}{}{} Let $M$ be an $R$-module. If $M$ is semisimple, then $\text{rad}(M)=0$. \tcbline
+\begin{proof}
+Suppose that $M$ is semisimple. Then $M=\bigoplus_{i\in I}S_i$ for $S_i$ simple submodules of $M$. Define $$M_i=\bigoplus_{j\in I\setminus\{i\}}S_j$$ for each $i\in I$.  Since $M/M_i\cong S_i$, we have that $M_i$ is cosimple. Then $$\text{rad}(M)=\bigcap_{\substack{N\leq M\\N\text{ is cosimple }}}N\subseteq\bigcap_{i\in I}M_i=0$$ Thus $\text{rad}(M)=0$. 
+\end{proof}
+\end{lmm}
+
+\begin{prp}{}{} Let $R$ be a ring. Then $R$ is semisimple if and only if every left $R$-module $M$ is semisimple. \tcbline
+\begin{proof}
+Let $R$ be semisimple. Let $M$ be a free left $R$-module. Then $M$ is isomorphic as $R$-modules to the direct sum of some copies of $R$. In particular, the direct sum of semisimple modules are semisimple. Hence $M$ is semisimple. Let $N$ be an arbitrary $R$-module. Since every left $R$-module is the quotient of a free left $R$-module, and quotient of semisimple $R$-modules are semisimple, we conclude that $N$ is semisimple. \\~\\
+
+Conversely, if every left $R$-module is semisimple then $R$ is also a left $R$-module and so is semisimple. 
+\end{proof}
+\end{prp}
+
+\subsection{Completely Reducible Modules}
+For Maschke's theorem, we would need an equivalent definition of semisimplicity of modules. 
+
+\begin{defn}{Completely Reducible Modules}{} Let $M$ be an $R$-module. $M$ is said to be completely reducible if for every submodule $N$ of $M$, there exists a submodule $L$ of $M$ such that $M=N\oplus L$. 
+\end{defn}
+
+\begin{prp}{}{} Let $M$ be an $R$-module such that $M=N\oplus L$. Then there is an isomorphism $$L\cong\frac{M}{N}$$ of $R$-modules. \tcbline
+\begin{proof}
+Consider the quotient map $\psi:M\to M/N$. This restricts to a homomorphism $\psi|_L:L\to M/N$. This map is injective since $$\ker(\psi|_L)=L\cap\ker(\psi)=L\cap N=0$$ The map is surjective since every $m\in M$ can be written as $m=l+n$ for $l\in L$ and $n\in N$. Then $$\psi(l)=\psi(l+n)=\psi(m)=m+N$$ so that $\psi$ is surjective and so is $\psi|_L$. 
+\end{proof}
+\end{prp}
+
+\begin{lmm}{}{} A submodule of a completely reducible module is reducible. \tcbline
+\begin{proof}
+Let $N$ be a submodule of a completely reducible module $M$. Let $P$ be a submodule of $N$. Then $P$ has a direct complement $$M=P\oplus K$$ Consider the quotient homomorphism $\pi:P\oplus K\cong M\to P$ defined by $\pi(p+k)=p$. The image of $\pi$ is equal to $P$, which is a subset of $N$. We can restrict the map $\pi$ to $\pi|_N$. Now $$\frac{N}{\ker(\pi|_N)}\cong\im(\pi|_N)$$ by the first isomorphism theorem. By proposition 3.1.3 and the fact that $\pi|_N$ is an idempotent on $N$, we can decompose $N$ partially into $$N=\im(\phi)\oplus\ker(\phi)=P\oplus\ker(\phi)$$ so that we conclude. 
+\end{proof}
+\end{lmm}
+
+\begin{lmm}{}{} A non-zero completely reducible module contains a simple submodule. \tcbline
+\begin{proof}
+Let $M$ be a completely reducible $R$-module. Pick a non-zero element $x\in M$. Then left $R$-module homomorphism $\pi_x:R\to M$ defined by $\pi_x(r)=r\cdot x$ is non-zero because $\pi_x(1)=x\neq 0$. Since every ring has a maximal left ideal, $\ker(\pi_x)$ as an ideal also lies in some maximal ideal $L$. Notice that $Rx\cong\frac{R}{\ker(\pi_x)}$. This gives a surjective $R$-module homomorphism $$\psi:\frac{R}{\ker(\pi_x)}\to\frac{R}{L}$$ defined by $\psi(r+\ker(\pi_x))=r+L$. The module $Rx$ is a submodule of $M$, and hence completely reducible by the above lemma. This means that there exists a submodule $N$ of $Rx$ such that $Rx=N\oplus\ker(\psi)$. The homomorphism $\psi|_N:N\to R/L$ is hence an isomorphism. Since $R/L$ is simple, $N$ is a simple submodule of $M$ and so we conclude. 
+\end{proof}
+\end{lmm}
+
+\begin{thm}{}{} Let $M$ be an $R$-module. Then $M$ is semisimple if and only if $M$ is completely reducible. \tcbline
+\begin{proof}
+Suppose that $M$ is completely reducible. By the above lemma, it is clear that $\text{soc}(M)$ is non-empty. If $M=\text{soc}(M)$ we are done. So suppose not. By complete reducibility, there exists a submodule $K$ such that $M=\text{soc}(M)\oplus K$. Since $K$ is a submodule of $M$, $K$ is completely reducible. By the above lemma, $K$ contains a simple submodule $S$. But by the definition of the socle means that $S$ should lie in $\text{soc}$. This is a contradiction. \\~\\
+
+Now assume that $M$ is semisimple. Let $M=\bigoplus_{i\in I}S_i$ for simple modules $S_i$. Let $N$ be a submodule of $M$. If $\psi:M\to M/N$ is the quotient homomorphism, then $$M/N=\psi(M)=\sum_{\in I}\psi(M)$$ with each $\psi(S_i)=\frac{S_i}{S_i\cap N}$. In particular, each $\psi(S_i)$ is either zero or simple and isomorphic to $S_i$. Since quotient of semisimple modules are semisimple, we have that $M/N$ is semisimple and one can choose a subset $J$ of $I$ indices such that $$M/N=\bigoplus_{i\in J} S_i$$ with $\psi(S_i)\cong S_i$ for all $i$. \\~\\
+
+We claim that $M=N\oplus\left(\bigoplus_{i\in J}S_i\right)$. To prove it, consider the natural $R$-module homomorphism $$\varphi:N\oplus\left(\bigoplus_{i\in J}S_i\right)\to M$$ defined by $\varphi(n,(s_i)_{i\in J})=n+\sum_{i\in J}s_i$. It is injective since for $(n,(s_i)_{i\in J})\in\ker(\varphi)$, we have $\psi(n)+\sum_{i\in J}\psi(s_i)=0$ together with $n\in\ker(\psi)$ to imply that $$\sum_{i\in J}\psi(s_i)=0$$ Using the direct sum $M/N=\bigoplus_{i\in J} S_i$, we have that each $\psi(s_i)=0$. Since $\psi:S_i\to\psi(S_i)$ is an isomorphism, we have that $s_i=0$. This means that we have $n+\sum_{i\in J}s_i=0$ together with $s_i=0$ to imply that $n=0$. So we are done with injectivity. For surjectivity, we have for each $m\in M$, we can write a finite sum $\psi(m)=\sum_{i\in J}\psi(s_i)$ for some $s_i\in S_i$ all but finitely many non-zero. Then $m-\sum_{i\in J}s_i\in\ker(\psi)=N$ and we have that $$\varphi\left(m-\sum_{i\in J}s_i,(s_i)_{i\in J}\right)=m$$ This show that we have an isomorphism so that $M$ is now completely reducible. 
+\end{proof}
+\end{thm}
+
+\begin{crl}{}{} A submodule of a semisimple module is semisimple. \tcbline
+\begin{proof}
+If $M$ is semisimple, then $M$ is completely reducible. Submodule of completely reducible modules are completely reducible. Then by the above theorem, the submodule is semisimple. 
+\end{proof}
+\end{crl}
+
+Using the notion of completely reducible, we can prove that the decomposition of a semisimple module into simple modules is essentially unique. 
+
+\begin{prp}{}{} Let $M$ be a semisimple left $R$-module with two decompositions $$M=\bigoplus_{i=1}^nS_i\;\;\;\;\text{ and }\;\;\;\; M=\bigoplus_{j=1}^mT_j$$ into simple modules. Then $n=m$ and the simple modules $S_i$ and $T_j$ are isomorphic up to reordering. \tcbline
+\begin{proof}
+We proceed by induction on $n$. If $n=1$, then, $M$ is simple and we are done. \\~\\
+
+Suppose that it is true for $n-1$. Let $K=\bigoplus_{i=1}^{n-1}S_i$. Consider the quotient homomorphism $\psi:M\to M/K$. Clearly we have that $$\frac{M}{K}=\psi(M)=\psi\left(\sum_{j=1}^mT_j\right)=\sum_{j=1}^m\psi(T_j)$$ Then each $\psi(T_j)$ is either $0$ or simple and isomorphic to $T_j$ so that we can reduce the indexing set so that we exclude the $j\in J$ for which $\psi(T_j)=0$. Now we have that $M=K\oplus\left(\bigoplus_{j\in J}T_j\right)$. By proposition 2.2.2, we have that $S_n$ and $\left(\bigoplus_{j\in J}T_j\right)$ are isomorphic. Thus $\bigoplus_{j\in J}T_j$ is actually just a single element. Without loss of generality, take $J=\{m\}$. Both $\bigoplus_{i=1}^{n-1}S_i$ and $\bigoplus_{j=1}^{m-1}T_j$ are direct complements of $T_m$. They are isomorphic by proposition 2.2.2. By the induction hypothesis, we conclude. 
+\end{proof}
+\end{prp}
+
+\pagebreak
+\section{Exact Sequences of Modules}
+\subsection{Introduction to Exact Sequences}
+Exact sequences give a compact way of expressing a sequence of homomorphisms and modules. 
+
+\begin{defn}{Long Exact Sequences}{} Let $R$ be a ring. Let $M_k$ be a left $R$-module for each $k\in\Z$. Let $f_k:M_k\to M_{k-1}$ be $R$-module homomorphisms for each $k\in\Z$. We say that the sequence \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\cdots & {M_{k+1}} & {M_k} & {M_{k-1}} & \cdots
+	\arrow[from=1-1, to=1-2]
+	\arrow["{f_{k+1}}", from=1-2, to=1-3]
+	\arrow["{f_k}", from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\~\\
+is exact if $\im(f_{k+1})=\ker(f_k)$ for all $k\in\Z$. 
+\end{defn}
+
+We are particularly interested in a special type of long exact sequences: Those that has $3$ consecutively non-negative terms. 
+
+\begin{defn}{Short Exact Sequences}{} Let $R$ be a ring. A short exact sequence of $R$-modules is a long exact sequence consisting of $3$ consecutive non-zero terms in the sequence. Explicitly, it is given by \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {M_1} & {M_2} & {M_3} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["f", from=1-2, to=1-3]
+	\arrow["g", from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\~\\
+for $M_1,M_2,M_3$ being $R$-modules and $f:M_1\to M_2$ and $g:M_2\to M_3$ being $R$-module homomorphisms. 
+\end{defn}
+
+\begin{lmm}{}{} Let $R$ be a ring. Let $M_1,M_2,M_3$ be $R$-modules. Let $f:M_1\to M_2$ and $g:M_2\to M_3$ be $R$-module homomorphisms. Then the sequence \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {M_1} & {M_2} & {M_3} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["f", from=1-2, to=1-3]
+	\arrow["g", from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\~\\
+is exact if and only if the following are true. 
+\begin{itemize}
+\item $f$ is injective. 
+\item $g$ is surjective. 
+\item $\im(f)=\ker(g)$. 
+\end{itemize}
+\end{lmm}
+
+\begin{lmm}{}{} Let $R$ be a ring. Let $M_1,M_2,M_3$ be $R$-modules. Let $f:M_1\to M_2$ and $g:M_2\to M_3$ be $R$-module homomorphisms such that \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {M_1} & {M_2} & {M_3} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["f", from=1-2, to=1-3]
+	\arrow["g", from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\~\\
+is a short exact sequence. Then the following are true. 
+\begin{itemize}
+\item $M_1\cong\ker(g)$
+\item $M_3\cong\text{coker}(f)=\frac{M_2}{\im(f)}$
+\end{itemize} \tcbline
+\begin{proof}
+Since $f$ is injective, by the first isomorphism theorem we conclude that $A\cong\im(f)$. By exactness, $\im(f)=\ker(g)$ so that $A\cong\ker(g)$. \\~\\
+
+Since $g$ is surjective, by the first isomorphism theorem we conclude that $\frac{B}{\ker(g)}\cong C$. By exactness, $\im(f)=\ker(g)$ and so we conclude. 
+\end{proof}
+\end{lmm}
+
+From the above we can deduce that whenever we see the following sequences: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {\ker(g)} & B & C & 0 \\
+	0 & A & B & {\frac{B}{\im(f)}} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["\iota", hook, from=1-2, to=1-3]
+	\arrow["g", from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+	\arrow[from=2-1, to=2-2]
+	\arrow["f", from=2-2, to=2-3]
+	\arrow["q", two heads, from=2-3, to=2-4]
+	\arrow[from=2-4, to=2-5]
+\end{tikzcd}}\\~\\
+are exact by definition. 
+
+\begin{prp}{}{} Let $R$ be a ring. Let the following be a long exact sequence of $R$-modules. \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\cdots & {M_{k+1}} & {M_k} & {M_{k-1}} & \cdots
+	\arrow[from=1-1, to=1-2]
+	\arrow["{f_{k+1}}", from=1-2, to=1-3]
+	\arrow["{f_k}", from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\~\\
+Then for all $i\in\Z$, there are short exact sequences of the form \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {\im(f_{i+1})} & {M_i} & {\im(f_i)} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["{\text{incl.}}", from=1-2, to=1-3]
+	\arrow["{f_i}", from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}} \tcbline
+\begin{proof}
+Suppose we are given the long exact sequence and consider the 3 term sequence below. It is clear that the inclusion map is injective. Similarly, the map $f_i:M_i\to\im(f_i)$ is surjective tautologically. Finally, $\ker(f_i)=\im(f_{i+1})$ from the long exact sequence. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{} Let $R$ be a ring. Suppose that for each $i\in\Z$, we have a short exact sequence of the form \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {N_{i+1}} & {M_i} & {N_i} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["{g_i}", from=1-2, to=1-3]
+	\arrow["{h_i}", from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}} \\~\\
+Then the following sequence of $R$-modules \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\cdots & {M_{k+1}} & {M_k} & {M_{k-1}} & \cdots
+	\arrow[from=1-1, to=1-2]
+	\arrow["{g_i\circ h_{i+1}}", from=1-2, to=1-3]
+	\arrow["{g_{i-1}\circ h_i}", from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\~\\
+is a long exact sequence. \tcbline
+\begin{proof}
+Since $h_i$ is surjective, we have that $\im(g_i\circ h_{i+1})=\im(g_i)$. Similarly, since $g_i$ is injective, we have that $\ker(g_{i-1}\circ h_i)=\ker(h_i)$. But from the short exact sequence we know that $\im(g_i)=\ker(h_i)$. Hence we have $$\im(g_i\circ h_{i+1})=\im(g_i)=\ker(h_i)=\ker(g_{i-1}\circ h_i)$$ so that we have a long exact sequence. 
+\end{proof}
+\end{prp}
+
+It is convenient to think of the exchange as follows. We can intersperse $\im(f_i)$ to obtain a new sequence \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\cdots & {M_{i+1}} & {\im(f_{i+1})} & {M_i} & {\im(f_i)} & {M_{i-1}} & \cdots
+	\arrow[from=1-1, to=1-2]
+	\arrow["{\text{surj.}}", from=1-2, to=1-3]
+	\arrow["{\text{inj.}}", from=1-3, to=1-4]
+	\arrow["{\text{surj.}}", from=1-4, to=1-5]
+	\arrow["{\text{inj.}}", from=1-5, to=1-6]
+	\arrow[from=1-6, to=1-7]
+\end{tikzcd}}\\~\\
+that is NOT exact unless we fold up each pair of surjective map followed by an injective map into a single map. On the otherhand, we can ignore all other terms in the sequence except for an injective map followed by a surjective map. This will give us a short exact sequence. 
+
+The following two lemmas are very intuitive and straight forward to remember. 
+
+\begin{lmm}{Five Lemma}{} Let $R$ be a ring. Consider the commutative diagram \\~\\
+\adjustbox{scale=1.1,center}{\begin{tikzcd}
+A\arrow[r, "f"]\arrow[d, "l"] & B\arrow[r, "g"]\arrow[d, "m"] & C\arrow[r, "h"]\arrow[d, "n"] & D\arrow[r, "j"]\arrow[d, "p"] & E\arrow[d, "q"]\\
+A'\arrow[r, "r"] & B'\arrow[r, "s"] & C'\arrow[r, "t"] & D'\arrow[r, "u"] & E'
+\end{tikzcd}}\\~\\
+where all the objects are $R$-modules. Suppose that the following are true. 
+\begin{itemize}
+\item The two rows are exact
+\item $m:B\to B'$ and $p:D\to D'$ are isomorphisms
+\item $l:A\to A'$ is surjective
+\item $q:E\to E'$ is injective
+\end{itemize}
+Then $n$ is an isomorphism. \tcbline
+\begin{proof}
+For injectivity, \\
+Let $c\in\ker(n)$. Then $n(c)=0$. By commutativity, we have that $$p(h(c))=t(n(c))=t(0)=0$$ Since $p$ is an isomorphism, then $h(c)=0$ and $c\in\ker(h)$. By exactness, we have that $c\in\ker(h)=\im(g)$. Thus there exists $b\in B$ such that $g(b)=c$. Now by commutativity, we have that $$s(m(b))=n(g(b))=n(c)=0$$ so that $m(b)\in\ker(s)$. By exactness, we have that $m(b)\in\ker(s)=\im(r)$. Thus there exists $a'\in A'$ such that $r(a')=m(b)$. By surjectivity of $l$, there exists $a\in A$ such that $l(a)=a'$. By commutativity, we have that $$m(f(a))=r(l(a))=r(a')=m(b)$$ Since $m$ is an isomorphism, $f(a)=b$. Then by exactness, $\ker(g)=\im(f)$ implies $$0=g(f(a))g(b)=c$$ Thus $c=0$ and so $n$ is injective. \\~\\
+
+For surjectivity, \\
+Let $c'\in C'$. By exactness, we have that $u(t(c'))=0$. Since $p$ is an isomorphism, there exists $d\in D$ such that $p(d)=t(c')$. By commutativity, we have that $$q(j(d))=u(p(d))=u(t(c'))=0$$ Since $q$ is injective, $j(d)=0$. So $d\in\ker(j)$. By exactness, $d\in\ker(j)=\im(h)$. Thus there exists $c\in C$ such that $h(c)=d$. By commutativity, we have that $$t(n(c))=p(h(c))=p(d)=t(c')$$ Thus $t(n(c)-c')=0$ and $n(c)-c'\in\ker(t)$. By exactness, $n(c)-c'\in\ker(t)=\im(s)$. So there exists $b'\in B'$ such that $s(b')=n(c)-c'$. Since $m$ is an isomorphism, there exists $b\in B$ such that $m(b)=b'$. By commutativity, we have that $$n(g(b))=s(m(b))=n(c)-c'$$ Now $n(g(b)-c)=c'$ and so we have proven surjectivity. 
+\end{proof}
+\end{lmm}
+
+The proof is long but is rather straight forward. In every step there is only one possible way to advance, and so one eventually arrives at the conclusion. 
+
+\begin{lmm}{Snake Lemma}{} Let $R$ be a ring. Consider the commutative diagram \\~\\
+\adjustbox{scale=1.1,center}{\begin{tikzcd}
+ & A\arrow[r, "f"]\arrow[d, "a"] & B\arrow[r, "g"]\arrow[d, "b"] & C\arrow[r]\arrow[d, "c"] & 0\\
+0\arrow[r] & A'\arrow[r, "f'"] & B'\arrow[r, "g'"] & C' & 
+\end{tikzcd}}\\~\\
+where all the objects are $R$-modules. If the two rows are exact, then there is an exact sequence relating the kernels and cokernels of $a,b,c$ \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+\ker(a)\arrow[r] & \ker(b)\arrow[r] & \ker(c)\arrow[r, "d"] & \coker(a)\arrow[r] & \coker(b)\arrow[r] & \coker(c)
+\end{tikzcd}}\\~\\
+where $d$ is called the connecting homomorphism. \tcbline
+\begin{proof}
+We construct the function $d$ as follows. 
+\begin{itemize}
+\item Let $k\in\ker(c)$. 
+\item By exactness, $g$ is surjective. Thus there exists $l\in B$ such that $g(l)=k$. 
+\item But $g'(b(l))=c(g(l))=c(k)=0$ which means that $b(l)\in\ker(g')$. By exactness, there exists $m\in A'$ such that $f'(m)=b(l)$ since $\im(f')=\ker(g')$. This $m$ is unique since $f'$ is injective. In particular, $[m]\in\text{coker}(a)$. 
+\end{itemize}
+We then define $d:\ker(c)\to\coker(a)$ by $d(k)=m$. \\~\\
+
+We need to show that $d$ is well defined. Suppose that $l'$ is another element in $B$ such that $g(l')=k$. Then $g(l-l')=0$ so that $l-l'\in\ker(g)$. By exactness, $\im(f)=\ker(g)$ so there is some $n\in A$ such that $f(n)=l-l'$. By a similar argument as the first paragraph, one can find $m'\in A'$ such that $f'(m')=b(l')$. Then $$f'(a(n))=b(f(n))=b(l-l')=b(l)-b(l')=f'(m)-f'(m')$$ Since $f'$ is injective by exactness, we have that $a(n)=m-m'$ so that $m-m'\in\im(a)$ and hence $[m]=[m']$. Thus $d$ is a well defined map. \\~\\
+
+Since all operations above are $R$-module homomorphisms, $d$ is also an $R$-module homomorphism. \\~\\
+
+It remains to show exactness of the sequence. 
+\end{proof}
+\end{lmm}
+
+\begin{lmm}{}{} Let the following be an exact sequence of abelian groups. \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & A & B & C & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["f", from=1-2, to=1-3]
+	\arrow["g", from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\~\\
+Then $\rank(B)=\rank(A)+\rank(C)$. 
+\end{lmm}
+
+\begin{lmm}{}{} Let the following be an exact sequence of vector spaces. \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & V & W & U & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["f", from=1-2, to=1-3]
+	\arrow["g", from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\~\\
+Then $\dim(W)=\dim(V)+\dim(U)$. 
+\end{lmm}
+
+
+\subsection{Split Exact Sequences}
+\begin{defn}{Split Exact Sequence}{} Let $R$ be a ring. Let the following be an exact sequence of $R$-modules. \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {M_1} & {M_2} & {M_3} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["f", from=1-2, to=1-3]
+	\arrow["g", from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\~\\
+We say that the sequence is split exact if $M_2\cong M_1\oplus M_3$. 
+\end{defn}
+
+The following is an important equivalent characterization of split exact sequence. 
+
+\begin{prp}{The Splitting Lemma}{} Let $R$ be a ring. Let the following be an exact sequence of $R$-modules. \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & A & B & C & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["f", from=1-2, to=1-3]
+	\arrow["g", from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\~\\
+Then the following are equivalent. 
+\begin{itemize}
+\item The short exact sequence is a split exact sequence
+\item There exists an $R$-module homomorphism $p:B\to A$ such that $p\circ f=\text{id}_A$
+\item There exists an $R$-module homomorphism $s:C\to B$ such that $g\circ s=\text{id}_C$
+\end{itemize} \tcbline
+\begin{proof}~\\
+\begin{itemize}
+\item $(1)\implies(2),(3)$: Suppose that $B\cong A\oplus C$. Then the projection map $p:A\oplus C\to A$ and the inclusion map $s:C\to A\oplus C$ is such that $p\circ f=\text{id}_A$ and $g\circ s=\text{id}_C$. 
+
+\item $(2)\implies(1)$: For any $b\in B$, write $b=f(p(b))+(b-f(p(b)))$. Then $f(p(b))\in\im(f)$ and $b-f(p(b))\in\ker(p)$ since $p(b-f(p(b)))=p(b)-p(b)=0$. Now I claim that $\ker(p)\cap\im(f)=0$. Indeed if $b\in\ker(p)\cap\im(f)$, then there exists $a\in A$ such that $f(a)=b$. Then $$a=p(f(a))=p(b)=0$$ Thus $b=f(0)=0$. This shows that $B\cong\ker(p)\oplus\im(f)$. \\~\\
+
+Consider the restricted $g|_{\ker(p)}:\ker(p)\to C$. I want to show that $g$ is an isomorphism. Let $b\in\ker\left(g|_{\ker(p)}\right)$. By exactness, there exists $a\in A$ such that $f(a)=b$. Then $a=p(f(a))=p(b)=0$ since $b\in\ker(p)$. Thus $b=f(0)=0$ so that $b\in\ker\left(g|_{\ker(p)}\right)$. For surjectivity, let $c\in C$. By exactness, $g$ is surjective so there exists $b\in B$ such that $g(b)=c$. Since $B\cong\ker(p)\oplus\im(f)$, we can write $b=f(a)+k$ for some $a\in A$ and $k\in\ker(p)$. Then we have that $$c=g(b)=g(f(a)+k)=g(k)$$ which means that there exists $k\in\ker(p)$ such that $g|_{\ker(p)}(k)=c$. Thus $\ker(p)\cong C$. Since $f$ is injective, $im(f)=f(A)\cong A$. Thus we have that $B\cong\im(f)\oplus\ker(p)\cong A\oplus C$. 
+
+\item $(3)\implies(1)$: For any $b\in B$, write $b=(b-s(g(b)))+s(g(b))$. Then $s(g(b))\in\im(s)$ and $g(b)=g(b)-g(s(g(b))=0$ so that $b-s(g(b))\in\ker(g)$. Now I claim that $\ker(g)\cap\im(s)=0$. Indeed if $b\in\ker(g)\cap\im(s)$, then there exists $c\in C$ such that $s(b)=c$ and $$c=g(s(c))=g(b)=0$$ since $b\in\ker(g)$ so that $c=0$. This shows that $B\cong\ker(g)\oplus\im(s)$. \\~\\
+
+Since $\ker(g)=\im(f)$ by exactness, $f$ being injective also implies that $A\cong\im(f)=\ker(g)$. Since also we have that $g\circ s=\text{id}_C$, we have that $s$ is injective so that $\im(s)\cong C$. Thus we conclude that $B\cong\ker(g)\oplus\im(s)\cong A\oplus C$. 
+\end{itemize}
+Thus we conclude. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{} Let $R$ be a ring. Let the following be an exact sequence of $R$-modules. \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & A & B & C & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["f", from=1-2, to=1-3]
+	\arrow["g", from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\~\\
+If $C$ is a free $R$-module then it is a split exact sequence. \tcbline
+\begin{proof}
+Since $C$ is a free $R$-module, there exists a basis $X=\{c_1,\dots,c_n\}$ such that $C=\bigoplus_{i=1}^nRc_i$. Since $g$ is surjective, we can find $b_1,\dots,b_n\in B$ such that $g(b_i)=c_i$ for $1\leq i\leq n$. By the universal property of free $R$-modules, there exists an $R$-module homomorphism $s:C\to B$ such that $s(c_i)=b_i$ for $1\leq i\leq n$. Now notice that for $c\in C$, we can write $c=\sum_{i=1}^nk_ic_i$ for some $k_i\in\Z$. Since $s$ is an $R$-module homomorphism, we have that $s\left(\sum_{i=1}^nk_ic_i\right)=\sum_{i=1}^nk_ib_i$. Then we have that $$g(s(c))=g\left(\sum_{i=1}^nk_ib_i\right)=\sum_{i=1}^nk_ic_i$$ Thus $g\circ s=\text{id}_C$. By the splitting lemma, we conclude that $B\cong A\oplus C$. 
+\end{proof}
+\end{prp}
+
+\pagebreak
+\section{Algebras over a Ring}
+\subsection{Associative Algebras}
+\begin{defn}{Associative Algebras}{} Let $R$ be a commutative ring. An $R$-algebra is a ring $(A,+,\times)$ such that $(A,+)$ is an $R$-module and that the following distributivity law is satisfied: $$r\cdot(x\times y)=(r\cdot x)\times y=x\times(r\cdot y)$$ for all $r\in R$ and $x,y\in A$. 
+\end{defn}
+
+A prototypical example of an algebra would be a ring itself. Indeed for a ring $R$, $R$ is a left $R$-module via the action of left multiplication. 
+
+\begin{prp}{}{} Let $R$ be a commutative ring. Then the following are equivalent characterizations of an $R$-algebra. 
+\begin{itemize}
+\item $A$ is an $R$-algebra. 
+\item $A$ is a ring together with a ring homomorphism $f:R\to A$ such that $f(R)\subseteq Z(A)$. 
+\end{itemize}
+\end{prp}
+
+This establishes a one-to-one correspondence $$\left\{(A,R)\;\bigg{|}\;A\text{ is an }R\text{-algebra}\right\}\;\;\overset{1:1}{\longleftrightarrow}\;\;\left\{\phi:R\to A\;\bigg{|}\;\substack{\phi\text{ is a ring homomorphism}\\\text{ such that }f(R)\subseteq Z(A)}\right\}\;\;$$
+
+Notice that when $R$ is a field, the algebra $A$ becomes a vector space over $R$. 
+
+\begin{lmm}{}{} Let $R$ be a ring. Then $R$ is an algebra over $\Z$. 
+\end{lmm}
+
+\begin{defn}{R-Subalgebra}{} Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. An $R$-subalgebra of $A$ is a subring of $A$ which is also an $R$-algebra in its own right. 
+\end{defn}
+
+\begin{prp}{}{} Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Then any left, right or two-sided ideals of $A$ is an $R$-subalgebra of $A$. 
+\end{prp}
+
+\begin{defn}{R-Algebra Homomorphism}{} Let $R$ be a commutative ring and $A,B$ be both $R$-algebras. We say that a map of sets $f:A\to B$ is an $R$-algebra homomorphism if the following are satisfied: 
+\begin{itemize}
+\item $f$ is an $R$-linear map: $f(rx+sy)=rf(x)+sf(y)$ for $x,y\in A$ and $r,s\in R$
+\item $f$ is a ring homomorphism: $f(xy)=f(x)f(y)$ for $x,y\in A$
+\end{itemize}
+\end{defn}
+
+\subsection{Free Algebras}
+\begin{defn}{Free Algebra}{} Let $R$ be a commutative ring. Let $X$ be a set. Let $W=\{x_1\cdots x_n\;|\;x_1,\dots,x_n\in X\}$ be the set of words of $X$. Define the free $R$-algebra over $X$ to be the free $R$-module $$R\langle X\rangle=\bigoplus_{w\in W}R\cdot w$$ together with multiplication defined by $(x_1\cdots x_n)\cdot(y_1\cdots y_m)=x_1\cdots x_n\cdot y_1\cdots y_m$. 
+\end{defn}
+
+\begin{prp}{Universal Property}{} Let $R$ be a commutative ring. Let $X$ be a set. The free algebra $R\langle X\rangle$ over a ring $R$ satisfies the following universal property. If $A$ is an $R$-algebra, then for every $f:X\to A$ a map of sets, there exists a unique homomorphism of algebras $\varphi:R\langle X\rangle\to A$ such that $\varphi(x_i)=f(x_i)$ for each $x_i\in X$. In other words, the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	X & {R\langle X\rangle} \\
+	& A
+	\arrow["\iota", hook, from=1-1, to=1-2]
+	\arrow["f"', from=1-1, to=2-2]
+	\arrow["{\exists!\varphi}", dashed, from=1-2, to=2-2]
+\end{tikzcd}}\\~\\
+where $\iota:X\to R\langle X\rangle$ is the inclusion. \tcbline
+\begin{proof}
+Consider the set of monomials over elements of $X$. They form a basis of $R\langle X\rangle$ as an $R$-module. For a monomial $x_{i_1}\cdots x_{i_m}$, define $$\varphi(x_{i_1}\cdots x_{i_m})=f(x_{i_1})\cdots f(x_{i_m})$$ and extend it by $R$-linearity. Then it is clear that $\varphi$ is a well defined algebra homomorphism that satisfies the theorem. Any other homomorphism as in the theorem must satisfy the above conditions thus $\varphi$ is unique. 
+\end{proof}
+\end{prp}
+
+\subsection{Derivations of Algebras}
+\begin{defn}{Derivations}{2.1.1} Let $A$ be a ring and $B$ an $A$-algebra. Let $M$ be a $B$-module. An $A$-derivation of $B$ into $M$ is an $A$-module homomorphism $d:B\to M$ such that the Leibniz rule holds: $$d(b_1b_2)=b_1d(b_2)+d(b_1)b_2$$ for $b_1,b_2\in B$. Denote the set of all $A$-derivations from $B$ to $M$ by $$\text{Der}_A(B,M)=\{d:B\to M\;|\;d\text{ is an }A\text{ derivation }\}$$
+\end{defn}
+
+This is reminiscent of properties of a derivative. Indeed, from the above definition, take $A=\R$ and $B=M=\R[x_1,\dots,x_n]$. Then the formal partial derivatives $\frac{\partial}{\partial x_i}:\R[x_1,\dots,x_n]\to\R[x_1,\dots,x_n]$ defined by $$\left(f(x)=\sum_{k_1,\dots,k_n}a_{k_1,\dots,k_n}x_1^{k_1}\cdots x_i^{k_i}\cdots x_n^{k_n}\right)\mapsto\left(\frac{\partial f}{\partial x_i}=\sum_{k_1,\dots,k_n}a_{k_1,\dots,k_n}k_ix_1^{k_1}\cdots x_i^{k_i-1}\cdots x_n^{k_n}\right)$$ (provided $k_i\geq 1$, otherwise the derivative is constant on that term) is $\R$-linear and satisfies the Leibniz rule. These are the two fundamental properties that a derivative should possess. 
+
+\begin{defn}{The Module of Derivations}{} Let $A$ be a ring and $B$ an $A$-algebra. Let $M$ be a $B$-module. Define the $B$-module of derivations to be the set $$\text{Der}_A(B,M)=\{d:B\to M\;|\;d\text{ is a derivation of }A\}$$ together with the following operations: 
+\begin{itemize}
+\item Addition is defined by sending $d_1,d_2:B\to M$ to $(d_1+d_2):B\to M$ that maps $b$ to $d_1(b)+d_2(b)$. 
+\item Left action is defined by $\cdot:B\times\text{Der}_A(B,M)\to\text{Der}_A(B,M)$ that sends $b\in B$ and $d:B\to M$ to $(bd):B\to M$ defined by $u\mapsto b\cdot d(u)$.
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{2.1.3} Let $A$ be a ring and $B$ an $A$-algebra. Let $M$ be a $B$-module. Then $\text{Der}_A(B,M)$ is indeed a $B$-module with the given operations. \tcbline
+\begin{proof}
+Firstly, $\text{Der}_A(B,M)$ is an abelian group. We check the group axioms. 
+\begin{itemize}
+\item Closure: Let $a\in A$ and $b_1,b_2\in B$. $d_1+d_2:B\to M$ is an $A$-module homomorphism because 
+\begin{align*}
+(d_1+d_2)(ab_1+b_2)&=d_1(ab_1+b_2)+d_2(ab_1+b_2)\\
+&=ad_1(b_1)+d_1(b_2)+ad_2(b_1)+d_2(b_2)\\
+&=a(d_1+d_2)(b_1)+(d_1+d_2)(b_2)
+\end{align*}
+Finally, the Leibniz rule is satisfied because 
+\begin{align*}
+(d_1+d_2)(b_1b_2)&=d_1(b_1b_2)+d_2(b_1b_2)\\
+&=b_1d_1(b_2)+d_1(b_1)b_2+b_1d_2(b_2)+d_2(b_1)b_2\\
+&=b_1(d_1+d_2)(b_2)+(d_1+d_2)(b_1)b_2
+\end{align*}
+\item Associativity: Follows from the fact that $M$ is a group
+\item Identity: The zero map is the identity since for any $d:B\to M$, $d+0:B\to M$ sends $b$ to $d(b)$ and thus $d+0=d$. 
+\item Inverse: For each $d:B\to M$ the maps sending $b$ to $-d(b)$ is an inverse
+\item Abelian: Follows from the fact that $M$ is abelian. 
+\end{itemize}
+Finally, left action is defined by $\cdot:B\times\text{Der}_A(B,M)\to\text{Der}_A(B,M)$ that sends $b\in B$ and $d:B\to M$ to $(bd):B\to M$ defined by $u\mapsto b\cdot d(u)$. Associativity and identity is clear. 
+\end{proof}
+\end{lmm}
+
+Derivatives in analysis also satisfy the quotient rule and the fact that constant maps have $0$ derivative. The following lemma shows that instead of defining derivatives for it so that constant maps have $0$ derivative, it is in fact a consequence of linearity and Leibniz rule. 
+
+\begin{lmm}{}{2.1.2} Let $A$ be a ring and $B$ an $A$-algebra Let $M$ be a $B$-module. Let $d:B\to M$ be an $A$-derivation. Then $d(a)=0$ for all $a\in A$. \tcbline
+\begin{proof}
+Since $d:B\to M$ is an $A$-module homomorphism, $d(a\cdot 1)=a\cdot d(1)$. We also have, by the Leibniz rule that $d(1)=1\cdot d(1)+d(1)\cdot 1=2d(1)$ which implies $d(1)=0$. Thus $d(a\cdot 1)=a\cdot d(1)=0$. 
+\end{proof}
+\end{lmm}
+
+As mentioned above, derivatives in analysis also satisfy the quotient rule. However, one must be careful in the question of existence of the quotient rule given the Leibniz rule because first of all $B$ and $M$ may not formally have quotients since they are not fields. Instead, what one can do is to pass on the derivative to the fraction field so that quotients are well defined. Interested readers are referred to \cite{Zar-Sam}. \\~\\
+
+The set of all derivations itself also has an extra structure of being a $B$-module in its own right. 
+
+We can see that $\text{Der}_\R(\R[x_1,\dots,x_n],\R[x_1,\dots,x_n])$ has more than just the standard partial derivatives from the module structure. For examples, the sum of partial derivatives $$\frac{\partial}{\partial x_i}+\frac{\partial}{\partial x_j}:\R[x_1,\dots,x_n]\to\R[x_1,\dots,x_n]$$ defined by $f\mapsto\frac{\partial f}{\partial x_i}+\frac{\partial f}{\partial x_j}$. \\~\\
+
+However, second order derivatives (which are compositions of the first order partial derivatives) are not derivations! Indeed they satisfy not the Leibniz property but instead, we have that $$\frac{\partial (fg)}{\partial x_ix_j}=\frac{\partial}{\partial x_i}\left(\frac{\partial f}{\partial x_j}g+f\frac{\partial g}{\partial x_j}\right)=\frac{\partial^2 f}{\partial x_ix_j}+\frac{\partial f}{\partial x_j}\frac{\partial g}{\partial x_i}+\frac{\partial f}{\partial x_i}\frac{\partial g}{\partial x_j}+\frac{\partial^2g}{\partial x_ix_j}$$ which is way more complicated! \\~\\
+
+Finally, there is one more example of derivations. While we have done a completely general treatment of partial derivatives above, we can in fact evaluate the derivative at a chosen point and it will again be an $\R$-derivation. Writing $f(p)=\text{ev}_p(f)$ where $\text{ev}$ is the evaluation homomorphism, the $\R$-derivation $\R[x_1,\dots,x_n]\to\R[x_1,\dots,x_n]$ defined by $$f\mapsto \frac{\partial f}{\partial x_i}g(p)+f(p)\frac{\partial g}{\partial x_i}$$ is also a derivation! 
+
+\pagebreak
+\section{Special Ideals of a Ring}
+\subsection{The Radical of a Module}
+\begin{defn}{Cosimple}{} Let $M$ be an $R$-module. We say that a submodule $N$ of $M$ is cosimple if $\frac{M}{N}$ is simple. 
+\end{defn}
+
+\begin{lmm}{}{} Let $M$ be an $R$-module and $N$ a submodule of $M$. Then $N$ is cosimple if and only if $N$ is a maximal proper submodule of $M$. \tcbline
+\begin{proof}
+If $N$ is cosimple then $M/N$ has no non-trivial submodules. By the correspondence theorem this implies that there are not submodules of $M$ containing $N$. Thus $N$ is a maximal proper submodule of $M$. If $N$ is a maximal proper submodule of $M$, then by the correspondence theorem, $M/N$ has no submodules and so is simple. 
+\end{proof}
+\end{lmm}
+
+\begin{defn}{Radical}{} Let $M$ be an $R$-module. Define the radical of $M$ to be the intersection $$\text{rad}(M)=\bigcap_{\substack{S\leq M\\S\text{ is cosimple }}}S$$ of all cosimple submodules of $M$. 
+\end{defn}
+
+\subsection{Nilpotent Ideals}
+\begin{defn}{Nilpotent Ideals}{} Let $R$ be a ring. Let $I$ be an ideal of $R$. We say that $I$ is nilpotent if $I^n=0$ for some $n\in\N$. 
+\end{defn}
+
+\begin{prp}{}{} Let $R$ be a ring. Let $I,J$ be left ideals of $R$. If $I$ and $J$ are nilpotent, then $I+J$ is nilpotent. \tcbline
+\begin{proof}
+Suppose that $I^n=0$ and $J^m=0$. For any $x_i\in I$ and $y_j\in J$, we have that $$\prod_{i=1}^n(x_i+y_i)=x_1x_2\cdots x_n+\text{ terms involving at least one }y_i$$ so that $$(I+J)^{nm}=((I+J)^n)^m\subseteq(I^n+J)^m=J^m=0$$
+\end{proof}
+\end{prp}
+
+\begin{defn}{Nil Ideals}{} Let $R$ be a ring. Let $I$ be an ideal of $R$. We say that $I$ is nil if for all $x\in I$, $x$ is nilpotent. 
+\end{defn}
+
+\begin{lmm}{}{} Let $R$ be a ring. Let $I$ be an ideal of $R$. If $I$ is nilpotent then $I$ is nil. 
+\end{lmm}
+
+Not every nil ideal is nilpotent. 
+
+\begin{defn}{Quasiregular}{} Let $R$ be a ring. An element $x\in R$ is said to be quasiregular if $1+x$ is invertible. An ideal $I$ in $R$ is said to be quasiregular if every $x\in I$ is quasiregular. 
+\end{defn}
+
+\begin{lmm}{}{} Let $R$ be a ring. Then the following are true. 
+\begin{itemize}
+\item Let $x\in R$. If $x$ is nilpotent, then $x$ is quasi-regular. 
+\item Let $I$ be an ideal of $R$. If $I$ is nil, then $I$ is quasi-regular. 
+\end{itemize}
+\begin{proof}
+If $x^n=0$, then $$(1+x)(1-x+x^2-\cdots+(-1)^{n-1}x^{n-1})=1+(-1)^{n-1}x^n=1$$ Thus we have constructed an inverse. It follows that every nil ideal is quasiregular. 
+\end{proof}
+\end{lmm}
+
+The converse is in general false. Consider the matrix ring $M_n(\F)$ over a field $\F$. A matrix is nilpotent if and only if $0$ is the only eigenvalue. A matrix is quasiregular if and only if $-1$ is not an eigenvalue. These are not strict implications on one another. \\~\\
+
+For the statement for ideals, consider $\C[[x]]$ the ring of formal power series and the subring $\C((x))$ of Laurent power series. The ideal $$(x)=\{f\in\C((x))\;|\;a_0=0\}$$ is quasiregular but not nil. Indeed $x\in(x)$ is not nilpotent but every $z\in(x)$ is of the form $a_1x+a_2x^2+\dots$ so that $1+z=1+a_1x+a_2x^2+\dots$ is invertible. 
+
+\subsection{The Annihilator of an Element}
+\begin{defn}{Annihilators}{} Let $R$ be a ring. Let $M$ be a left $R$-module. Let $S\subseteq M$ be a subset of $M$. Define the left annihilator of $S$ to be the set $$\text{Ann}_R(S)=\{r\in R\;|\;rs=0\text{ for all }s\in S\}$$
+\end{defn}
+
+When $R$ is commutative left annihilators and right annihilators are the same. Moreover, notice that the left annihilator of an element $x\in M$ is precisely the kernel of the left multiplication map $$\text{Ann}_R(x)=\ker(r\mapsto r\cdot x)$$
+
+\begin{lmm}{}{} Let $R$ be a ring. Let $M$ be a left $R$-module. Let $S\subseteq M$ be a subset of $M$. Then $\text{Ann}_R(S)$ is a left ideal of $R$. 
+\end{lmm}
+
+\begin{prp}{}{} Let $R$ be a ring. Let $M$ be a left $R$-module. Let $S\subseteq M$ be a subset of $M$. Then $\text{Ann}_R(\langle S\rangle)\subseteq\text{Ann}_R(S)$. 
+\end{prp}
+
+\begin{prp}{}{} Let $R$ be a ring. Let $M$ be a left $R$-module. Then the following are true. 
+\begin{itemize}
+\item $M$ is cyclic if and only if there is an $R$-module isomorphism $M\cong R/\text{Ann}_R(m)$ for some $m\in M$. 
+\item $M$ is simple if and only if there is an $R$-module isomorphism $M\cong R/\text{Ann}_R(m)$ for some $m\in M$ such that $\text{Ann}_R(m)$ is a maximal left ideal of $R$. 
+\end{itemize}
+\end{prp}
+
+\subsection{The Jacobson Radical}
+\begin{defn}{Jacobson Radical}{} Let $R$ be a ring. The Jacobson radical of $R$ is the radical of $R$ as a left $R$-module. This is denoted as $$J(R)=\text{rad}(R)$$
+\end{defn}
+
+\begin{thm}{}{} Let $R$ be a ring. The following are equal for $R$ as a left $R$-module. 
+\begin{itemize}
+\item The Jacobson radical $J(R)=\text{rad}(R)$
+\item The intersection $$J_1=\bigcap_{\substack{I\text{ is a maximal}\\\text{ideal of }R}}I$$ of maximal ideals
+\item The intersection $$J_2=\bigcap_{M\text{ is simple}}\text{Ann}_R(M)$$ of all annihilators of simple modules
+\item The largest quasiregular two-sided ideal $J_3$. 
+\end{itemize} \tcbline
+\begin{proof}~\\
+\begin{itemize}
+\item $J(R)\subseteq J_2$: Let $x\in J(R)$ and $M$ a simple $R$-module. For each $m\in M$ non zero, $\text{Ann}_R(m)$ is a maximal left ideal of $R$, in other words it is a cosimple submodule of $R$ as a left $R$-module. Thus $x\in\text{Ann}_R(m)$ and $xm=0$. It follows that $xM=0$ and $x\in J_2$. 
+
+\item $J_2\subseteq J_1$: Let $x\in J_2$ and let $I$ be a maximal left ideal of $R$. Then $R/I$ is a simple left module so $x(R/I)=0$. It follows that $x+I=x(1+I)=I$. Thus $x\in I$ and $x\in J_1$. 
+
+\item $J_1$ is a quasiregular ideal. Let $x\in J_1$. Notice that $R(1+x)=R$ because if not, then $R(1+x)$ is contained in a maximal ideal $L$. Then both $x\in L$ and $1+x\in L$, thus $1\in L$ and $L=R$. Thus $1+x$ has an inverse in $R$, say $1+y$. Then $(1+y)(1+x)=1$ so that $y+x+yx=0$ and so that $y=-x-yx\in J_1$. Hence $1+y$ also has a left inverse $z$. Thus $$z=z(1+y)(1+x)=1+x$$ and that $x$ is quasiregular. 
+
+\item For any quasiregular ideal $I$, $I\subseteq J(R)$. Suppose the contrary. Then there exists a quasiregular ideal $I$ not in $J(R)$. Since $J(R)\subseteq J_2\subseteq J_1$ and $J_1$ is the intersection of maximal left ideals, there exists a maximal left ideal $L$ and $x\in I$ such that $x\notin L$. Then $L+Rx=R$ and $1=k+rx$ for some $k\in L$ and $r\in R$. But then $k=1-rx=1+(-r)x$ is invertible since $-rx\in I$. This implies that $L=R$, which is a contradiction. 
+
+\item $J_2$ is a two sided ideal. It is clear that $J_2$ is an additive subgroup. Let $x\in J_2$ and $r\in R$ and $M$ a simple $R$-module. We know that $xM=0$. But also we have that $xrM\subseteq xM=0$ and $rxM\subseteq r\{0\}=0$. Thus $J_2$ is a two sided-ideal. 
+
+\item Conclusion: By the fist four points, $J(R)\subseteq J_2\subseteq J_1\subseteq J(R)$ so that they all are equal. Moreover, $J(R)$ contains every quasiregular ideal so $J(R)=J_3$. 
+\end{itemize}
+\end{proof}
+\end{thm}
+
+In particular, the last equivalent characterization means that $J(R)$ is a two sided ideal so that all the above equivalent characterizations also work when considering $R$ as a right $R$-module. \\~\\
+
+One can imagine the Jacobson radical to work well in commutative algebra. Indeed it is a two sided ideal so that when everything is commutative, the notion of the Jacobson radical still makes sense. We will see more of the Jacobson radical in Commutative Algebra. 
+
+\begin{lmm}{}{} Let $R,S$ be rings. Let $\varphi:R\to S$ be a ring homomorphism. If $\varphi$ is surjective, then $\varphi(J(R))\subseteq J(S)$. \tcbline
+\begin{proof}
+Since $\varphi$ is surjective, for any maximal ideal $m$ of $S$, we have $\varphi^{-1}(m)$ is a maximal ideal of $R$. Then we have $$J(R)\subseteq\bigcap_{m\text{ maximal ideal of }S}\varphi^{-1}(m)$$ and so $$\varphi(J(R))\subseteq\bigcap_{m\text{ maximal ideal of }S}m=J(S)$$
+\end{proof}
+\end{lmm}
+
+\begin{lmm}{}{} Let $R$ be a ring. Then we have $$J\left(\frac{R}{J(R)}\right)=0$$
+\end{lmm}
+
+\pagebreak
+\section{Chain Conditions}
+\subsection{Noetherian Rings and Modules}
+\begin{defn}{Ascending Chain Condition}{} Let $R$ be a ring. Let $M$ be an $R$-module. We say that $M$ satisfies the ascending chain condition if for any chain of $R$-submodules $$M_1\subseteq M_2\subseteq M_3\subseteq\cdots$$ there is a positive integer $n$ such that $M_i=M_n$ for all $i\geq n$. 
+\end{defn}
+
+\begin{defn}{Noetherian Modules}{} Let $R$ be a ring. Let $M$ be a left $R$-module. We say that $M$ is left Noetherian if $M$ satisfies the ascending chain condition. 
+\end{defn}
+
+The Noetherian property depends on the left / right module structure. For example, $$R=\begin{pmatrix}
+\Z & \Q\\
+0 & \Q
+\end{pmatrix}$$ is right Noetherian but not left Noetherian. 
+
+\begin{prp}{}{} Let $R$ be a ring and $M$ an $R$-module. Then the following are equivalent. 
+\begin{itemize}
+\item $M$ is Noetherian
+\item Every $R$-submodule of $M$ is finitely generated
+\item Every non empty collection of $R$-submodules of $M$ has a maximal element
+\end{itemize} \tcbline
+\begin{proof}~\\
+\begin{itemize}
+\item $(1)\implies(2)$: Let $M$ be Noetherian. Let $N\subseteq M$ be an $R$-submodule. If $N$ is not finitely generated, then there exists a sequence of elements $f_1,\dots,f_n,\dots$ of $N$ such that $f_{n+1}\notin R\cdot f_1+\dots R\cdot f_n$. Then $(f_1)\subset (f_1,f_2)\subset\cdots\subset(f_1,\dots,f_n)\subset$ is a strictly increasing chain of $R$-submodules of $N$, and hence a strictly increasing chain of $R$-submodules of $M$. This contradicts the fact that $M$ is Noetherian. 
+\item $(2)\implies(1)$: Let $M_1\subseteq M_2\subseteq\cdots\subseteq M_n\subseteq\cdots$ be a chain of $R$-submodules of $M$. Then $N=\bigcup_{i=1}^\infty M_i$ is an $R$-submodule of $M$. Indeed, if $a,b\in N$ then $a\in M_i$ and $b\in M_j$ for some $i$ and $j$. Then $a,b\in M_{\max\{i,j\}}$ so that $a+b\in M_{\max\{i,j\}}\subseteq N$. If $a\in N$ then $a\in M_i$ for some $i$ so that $-a\in M\subseteq N$. Finally if $a\in N$, then $a\in M_i$ for some $i$ so that $r\cdot a\in M_i\subseteq N$ for some $i$. \\~\\
+
+By assumption, $N$ is finitely generated by some elements, say $f_1,\dots,f_n$. Since $f_1,\dots,f_n\in N$, $f_i\in M_{p_i}$ for some $p_i\in\N$. Then $f_1,\dots,f_n\in M_{\max\{p_i\}}$. Hence $M_{\max\{p_i\}}=N$ so that the increasing chain of $R$-submodules terminate at finitely many steps. 
+\item $(1)\implies(3)$: Let $M$ be Noetherian. Let $\{M_i\;|\;i\in I\}$ be a non-empty collection of $R$-submodules. Choose $M_1\in S$. If the set has no maximal element, then for each $i$ we can always choose $M_i$ so that $M_i\supset M_{i-1}$. This forms a strictly increasing chain of $R$-submodules of $M$ thus contradicting the Noetherian property. 
+\item $(3)\implies(1)$: Let $M_1\subseteq M_2\subseteq\cdots\subseteq M_n\subseteq\cdots$ be an increasing chain of $R$-submodules of $M$. Then they form a collection of $R$-submodules of $M$. Hence they have a maximal element say $M_n$. Then $M_n=M_{n+k}$ for all $k\in\N$ so that the chain of $R$-submodules of $M$ terminate at finitely many steps. 
+\end{itemize}
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{} Let $R$ be a ring. Let $M_1,M_2,M_3$ be $R$-modules. Let $f:M_1\to M_2$ and $g:M_2\to M_3$ be $R$-module homomorphisms such that \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {M_1} & {M_2} & {M_3} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["f", from=1-2, to=1-3]
+	\arrow["g", from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\~\\
+is a short exact sequence. Then $M_2$ is Noetherian if and only if $M_1$ and $M_3$ are Noetherian. \tcbline
+\begin{proof}
+Suppose that $M_2$ is Noetherian. Let $N_1\subseteq\cdots\subseteq N_k\subseteq\cdots$ be an increasing chain of $R$-submodules of $M_1$. Since $f$ is injective, $f(N_1)\subseteq\cdots\subseteq f(N_k)\subseteq\cdots$ is an increasing chain of $R$-submodules of $M_2$. Since $M_2$ is Noetherian, the chain terminates at finitely many steps, say $f(N_k)=f(N_{k+1})=\cdots$. Since $f$ is injective, this means that $N_k=N_{k+1}=\cdots$ so that the chain of $R$-submodules of $M_1$ terminates at finitely many steps. Hence $M_1$ is Noetherian. \\~\\
+
+Now let $T_1\subseteq\cdots\subseteq T_k\subseteq\cdots$ be an increasing chain of $R$-submodules of $M_3$. Since $g$ is surjective, $g^{-1}(T_1)\subseteq\cdots\subseteq g^{-1}(T_k)\subseteq\cdots$ is an increasing chain of $R$-submodules of $M_2$. Since $M_2$ is Noetherian, the chain terminates at finitely many steps, say $g^{-1}(T_k)=g^{-1}(T_{k+1})=\cdots$. Hence $T_k=T_{k+1}=\cdots$ so that $M_3$ is Noetherian. \\~\\
+
+Suppose that $M_1$ and $M_3$ are Noetherian. Let $H_1\subseteq\cdots\subseteq H_k\subseteq\cdots$ be an increasing chain of $R$-submodules of $M_2$. Then $f^{-1}(H_1)\subseteq\cdots\subseteq f^{-1}(H_k)\subseteq\cdots$ is an increasing chain of $R$-submodules of $M_1$. Similarly $g(H_1)\subseteq\cdots\subseteq g(H_k)\subseteq\cdots$ is an increasing chain of $R$-submodules of $M_3$. Suppose they terminate at say $k_1\in\N$ and $k_2\in\N$ respectively. Then they certainly both terminate at $k=\max\{k_1,k_2\}$. I claim that $H_k=H_{k+1}$. We know that $H_k\subseteq H_{k+1}$. Let $x\in H_{k+1}$. Then $g(x)\in g(H_{k+1})=g(H_k)$. Hence there exists $y\in H_k$ such that $g(x)=g(y)$. This means that $x-y\in\ker(g)=\im(f)$. So $f(z)=x-y$ for some $z\in f^{-1}(H_{k+1})=f^{-1}(H_k)$. This means that $f(z)\in H_k$. Then $y\in H_k$ and $f(z)\in H_k$ implies $x=y+f(z)\in H_k$. Hence $H_k=H_{k+1}$. The argument is similar for $H_{k+1}=H_{k+2}$ and so on. Hence the increasing chain terminates so that $M_2$ is so Noetherian. 
+\end{proof}
+\end{prp}
+
+\begin{crl}{}{} Let $R$ be a ring. Let $M$ be a left $R$-module. Then the following are true. 
+\begin{itemize}
+\item If $N$ is an $R$-submodule of $M$, then $M$ is Noetherian if and only if $N$ and $M/N$ is Noetherian
+\item If $N$ is an left $R$-module, then $M\oplus N$ is Noetherian if and only if $M$ and $N$ are Noetherian
+\item If $R$ is Noetherian and $I$ is a left ideal of $R$, then $R/I$ is Noetherian. 
+\end{itemize} \tcbline
+\begin{proof}
+We just have to note for once that the following are all exact sequences of $R$-modules: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & N & M & {\frac{M}{N}} & 0 \\
+	0 & M & {M\oplus N} & N & 0 \\
+	0 & I & R & {\frac{R}{I}} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-3, to=2-4]
+	\arrow[from=2-4, to=2-5]
+	\arrow[from=3-1, to=3-2]
+	\arrow[from=3-2, to=3-3]
+	\arrow[from=3-3, to=3-4]
+	\arrow[from=3-4, to=3-5]
+\end{tikzcd}}\\~\\
+By the above proposition we conclude. 
+\end{proof}
+\end{crl}
+
+\begin{crl}{}{} Let $R$ be a Noetherian ring. Let $M$ be a left $R$-module. Then $M$ is Noetherian if and only if $M$ is a finitely generated $R$-module. \tcbline
+\begin{proof}
+Suppose that $M$ is Noetherian. Then by 7.1.3 $M$ is a finitely generated $R$-module. Now suppose that $M$ is finitely generated. Then there exists a surjective homomorphism $\phi:R^n\to M$ for some $n$. Then we have an exact sequence \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {\ker(\phi)} & {R^n} & M & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[hook, from=1-2, to=1-3]
+	\arrow["\phi", from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\~\\
+Since $R$ is Noetherian, $R^n$ is Noetherian by 7.1.5. Then by 7.1.4 we have that $M$ is Noetherian. 
+\end{proof}
+\end{crl}
+
+\subsection{Artinian Rings and Modules}
+\begin{defn}{Descending Chain Condition}{} An $R$-module $M$ is said to satisfy the descending chain condition if for any $M_1,M_2,\dots$ submodules of $M$ such that $$M_1\supseteq M_2\supseteq M_3\supseteq\cdots$$ is an ascending chain, then there is a positive integer $n$ such that $M_i=M_n$ for all $i\geq n$. 
+\end{defn}
+
+\begin{defn}{Artinian Rings and Modules}{} Let $R$ be a ring. Let $M$ be a left $R$-module. We say that $M$ is left (right) Artinian if $M$ satisfies the descending chain condition. We say that a ring $R$ is left (right) Artinian if $R$ is Artinian when viewed as an $R$-module. \\~\\
+
+An $R$-module or a ring is said to be Artinian if it is both left and right Artinian. 
+\end{defn}
+
+\begin{prp}{}{} Let $R$ be a ring and $M$ an $R$-module. Then $M$ is Artinian if and only if every non-empty collection of $R$-submodules of $M$ has a minimal element. \tcbline
+\begin{proof}
+Let $M$ be Artinian. Let $\{M_i\;|\;i\in I\}$ be a non-empty collection of $R$-submodules of $M$. Let $M_1\supseteq M_2\supseteq\cdots$ be a decreasing chain of $R$-submodules in the collection. Since $M$ is Artinian, the chain terminates at finitely many steps, say $M^n=M^{n+k}$ for all $k\in\N$. Then $M^n$ is clearly a minimal element. \\~\\
+
+Conversely, suppose every non-empty collection of $R$-submodules has a minimal element. Then in particular, any decreasing chain of $R$-submodules also has a minimal element, and so it terminates at finitely many steps. Hence $R$ is Artinian. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{} Let $R$ be a ring. Let $M_1,M_2,M_3$ be $R$-modules. Let $f:M_1\to M_2$ and $g:M_2\to M_3$ be $R$-module homomorphisms such that \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {M_1} & {M_2} & {M_3} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["f", from=1-2, to=1-3]
+	\arrow["g", from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\~\\
+is a short exact sequence. Then $M_2$ is Artinian if and only if $M_1$ and $M_3$ are Artinian. \tcbline
+\begin{proof}
+Suppose that $M_2$ is Artinian. Let $N_1\supseteq N_2\supseteq\cdots$ be a decreasing sequence of $R$-submodules of $M_1$. Then $\alpha(N_1)\supseteq\alpha(N_2)\supseteq\cdots$ is a decreasing sequence of $R$-submodules of $M_2$. It terminates since $M_2$ is Artinian. Then $\alpha(N_m)=\alpha(N_{m+k})$ for all $k$. Since $\alpha$ is injective, this implies that $N_m=N_{m+k}$ for all $k$. Hence $M_1$ is Artinian. \\~\\
+
+Now let $T_1\supseteq T_2\supseteq\cdots$ be a decreasing chain of $R$-submodules of $M_3$. Since $g$ is surjective, each $g^{-1}(T_k)$ is a well defined $R$-submodule of $M_2$. Hence $g^{-1}(T_1)\supseteq g^{-1}(T_2)\supseteq\cdots$ is a decreasing chain of $R$-submodules of $M_2$. Hence it terminates and so the original chain terminates. Thus $M_3$ is Artinian. \\~\\
+
+
+\end{proof}
+\end{prp}
+
+\begin{crl}{}{} Let $R$ be a ring. Let $M$ be a left $R$-module. Then the following are true. 
+\begin{itemize}
+\item If $N$ is an $R$-submodule of $M$, then $M$ is Artinian if and only if $N$ and $M/N$ is Artinian
+\item If $N$ is an left $R$-module, then $M\oplus N$ is Artinian if and only if $M$ and $N$ are Artinian
+\item If $R$ is Artinian and $I$ is a left ideal of $R$, then $R/I$ is Artinian. 
+\end{itemize} \tcbline
+\begin{proof}
+We just have to note for once that the following are all exact sequences of $R$-modules: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & N & M & {\frac{M}{N}} & 0 \\
+	0 & M & {M\oplus N} & N & 0 \\
+	0 & I & R & {\frac{R}{I}} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-3, to=2-4]
+	\arrow[from=2-4, to=2-5]
+	\arrow[from=3-1, to=3-2]
+	\arrow[from=3-2, to=3-3]
+	\arrow[from=3-3, to=3-4]
+	\arrow[from=3-4, to=3-5]
+\end{tikzcd}}\\~\\
+By the above proposition we conclude. 
+\end{proof}
+\end{crl}
+
+Recall that an ideal $I$ of a ring is nilpotent if $I^n=0$ for some $n\in\N$. 
+
+\begin{prp}{}{} Let $R$ be a ring. If $R$ is left Artinian, the Jacobson radical $J(R)$ is nilpotent. \tcbline
+\begin{proof}
+Consider the decreasing chain of $R$-modules $J(R)\supseteq J(R)^2\supseteq\cdots$. Since $R$ is left Artinian, there exists $n\in\N$ such that $J(R)^n=J(R)^{n+1}$. If $\text{Ann}_R(J(R)^n)\supseteq J(R)^n$, then we have $J(R)^{2n}\subseteq\text{Ann}_R(J(R)^n)J(R)^n=\{0\}$ and so we are done. So suppose not. Consider the quotient homomorphism $\pi:R\to R/\text{Ann}_R(J(R)^n)$. We know that $$\pi(J(R)^n)\subseteq\pi(J(R))\subseteq J(R/\text{Ann}_R(J(R)^n))$$ We are assuming that $\text{Ann}_R(J(R)^n)\not\supseteq J(R)^n$ and so $\pi(J(R))\neq\{0\}$. We know that $R/\text{Ann}_R(J(R)^n)$ is left Artinian since $R$ is left Artinian. So there exists a minimal left ideal $I$ of $R/\text{Ann}_R(J(R)^n)$ such that $I\subseteq\pi(J(R)^n)$. Having no subideals mean that $I$ is a simple $R$-module. By theorem 6.4.2, $J(R)$ is the intersection of the annihilator of all simple $R$-modules. Hence $\pi(J(R))I\subseteq J(R/\text{Ann}_R(J(R)^n))I=\{0\}$. Taking inverse image gives $J(R)\pi^{-1}(I)=\text{Ann}_R(J(R)^n)$. Then we have $$J(R)^n\pi^{-1}(I)=J(R)^{2n}\pi^{-1}(I)=J(R)^n(J(R)^n\pi^{-1}(I))\subseteq J(R)^n\text{Ann}_R(J(R)^n)=\{0\}$$ This implies that $\pi^{-1}(I)\subseteq\text{Ann}_R(J(R)^n)$ and so $I=\{0\}$, a contradiction. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{} Let $R$ be a ring. Let $M$ be a left Artinian $R$-module. Then $M$ is semisimple if and only if $\text{rad}(M)=0$. \tcbline
+\begin{proof}
+Lemma 2.5.4 proves one direction. So suppose that $\text{rad}(M)=0$. Then we obtain a descending chain using intersections of cosimple submodules $$N_1\supseteq N_1\cap N_2\supseteq\cdots\supseteq\text{rad}(M)=0$$ Since $M$ is Artinian, the chain stops after finitely many steps. Then this gives us finitely many cosimple modules $N_i$ such that $$N_1\cap\cdots\cap N_k=0$$ Consider the following homomorphism of $R$-modules $\psi:M\to\prod_{i=1}^k\frac{M}{N_i}$ defined by the individual projection homomorphism. It is injective since its kernel if $N_1\cap\cdots\cap N_k=0$. Since there are only finitely many submodules, together with surjectivity we have that $$M\cong\psi(M)\cong\bigoplus_{i=1}^k\frac{M}{N_i}$$ Thus $M$ is semisimple. 
+\end{proof}
+\end{prp}
+
+\begin{crl}{}{} Let $R$ be a ring. Then $R$ is semisimple if and only if $R$ is left artinian and $J(R)=0$. \tcbline
+\begin{proof}
+Direct from the above theorem. 
+\end{proof}
+\end{crl}
+
+\subsection{The Length of Modules}
+\begin{defn}{Length of a Module}{} Let $R$ be a ring and let $M$ be an $R$-module. Define the length of $M$ to be $$l_R(M)=\text{sup}\{n\in\N\;|\;0=M_0\subset M_1\subset\cdots\subset M_n=M\}$$
+\end{defn}
+
+\begin{eg}{}{} Let $k$ be a field. Let $V$ be a vector space over $k$. Then $\dim_k(V)=l_k(V)$. \tcbline
+\begin{proof}
+Indeed, any chain of vector subspaces increases the dimension by at least $1$ for every inclusion. 
+\end{proof}
+\end{eg}
+
+\begin{lmm}{}{} Let $R$ be a ring. Let $M$ be an $R$-module. Then $l_R(M)=1$ if and only if $M$ is simple. \tcbline
+\begin{proof}
+Trivial. 
+\end{proof}
+\end{lmm}
+
+\begin{lmm}{}{} Let $R$ be a ring. Let $0\to M'\to M\to M''\to 0$ be a short exact sequence of $R$-modules. Then $$l_R(M)=l_R(M')+l_R(M'')$$
+\end{lmm}
+
+\subsection{Composition Series}
+\begin{defn}{Composition Series}{} Let $R$ be a ring. Let $M$ be a left $R$-module. A composition series of $M$ is a sequence of $R$-submodules $$0=M_0\subset M_1\subset\cdots\subset M_k=M$$ such that $\frac{M_{i+1}}{M_i}$ is a simple $R$-module for $1\leq i<k$. 
+\end{defn}
+
+\begin{thm}{Jordan-Holder Theorem}{} Let $R$ be a ring. Let $M$ be a left $R$-module. Suppose that $M$ admits a composition series. Then any chain $$0=M_0\subset M_1\subset\cdots M_k\subset M$$ of $R$-submodules of $M$ can be extended to a composition series of $M$. 
+\end{thm}
+
+\begin{prp}{}{} Let $R$ be a ring. Let $M$ be a left $R$-module. Suppose that $M$ admits a composition series. Then the composition series is unique up to its permutation of its simple $R$-module quotients. 
+\end{prp}
+
+\begin{prp}{}{} Let $R$ be a ring. Let $M$ be an $R$-module. Then $l_R(M)$ is equal to the length of any composition series of $M$. 
+\end{prp}
+
+\begin{prp}{}{} Let $R$ be a ring. Let $M$ be a left $R$-module. Then $M$ has a composition series if and only if $M$ is left Noetherian and left Artinian. \tcbline
+\begin{proof}
+Suppose that $M$ has a composition series. Then $l_R(M)$ is finite. But $l_R(M)$ is also defined to be the supremum of all ascending chains of $R$-submodules of $M$. If $M$ is not Noetherian then $l_R(M)=\infty$ which is a contradiction. The proof for Artinian is similar. \\~\\
+
+Let $M$ be left Artinian and left Noetherian. We construct the composition series inductively. 
+\begin{itemize}
+\item When $i=1$, choose $M_1$ to be any simple $R$-module. 
+\item Assume that $\{0\}\subset M_1\subset\cdots\subset M_i$ has been constructed such that each $M_j/M_{j-1}$ is a simple $R$-module. The set of all $R$-submodules of $M$ containing $M_i$ has a minimal element $M_{i+1}$ since $M$ is Artinian. Then by the correspondence theorem, $M_{i+1}/M_i$ is simple, otherwise it contradicts the minimality of $M_{i+1}$. 
+\end{itemize}
+The induction terminates eventually since $M$ is Noetherian. 
+\end{proof}
+\end{prp}
+
+\begin{thm}{Akizuki–Hopkins–Levitzki Theorem}{} Let $R$ be a ring. If $R$ is Artinian, then $R$ is Noetherian. \tcbline
+\begin{proof}
+We know that the Jacobson radical is nilpotent. Therefore we obtain a chain of $R$-modules $$0=(J(R))^nR\subseteq\cdots\subseteq J(R)R\subseteq R$$ for some $n\in\N$. We induct on this chain. Clearly $0$ is Noetherian. Now suppose that $(J(R))^kR$ is Noetherian, we want to show that $(J(R))^{k-1}R$ is Noetherian. \\~\\
+
+Now notice that $\frac{(J(R))^{k-1}R}{(J(R))^kR}$ has the structure of an $\frac{R}{J(R)}$-module since $J(R)$ annihilates the quotient. Moreover, we know that $J(R)$ is nilpotent. Also, since $R$ is Artinian, any quotient of $R$ is also Artinian. In particular, we know that $R/J(R)$ is Artinian. Now $J(R/J(R))=0$. By 7.2.9, $R/J(R)$ is semisimple. In particular, every $R/J(R)$-module is semisimple by 3.3.7. Hence $\frac{(J(R))^{k-1}R}{(J(R))^kR}$ is semisimple. Then $\frac{(J(R))^{k-1}R}{(J(R))^kR}$ is a direct sum of simple $R/J(R)$-modules. By 7.2.5, $R$ is Artinian implies that the $R$-submodule $(J(R))^kR$ is Artinian. Using the same corollary, $\frac{(J(R))^{k-1}R}{(J(R))^kR}$ is Artinian. \\~\\
+
+We now have that $\frac{(J(R))^{k-1}R}{(J(R))^kR}$ is Artinian and is a direct sum of simple $R/J(R)$-modules. This implies that there are only a finite number of components of the direct sum, say $M_1,\dots,M_k$. Then $$0\subset M_1\subset M_1\oplus M_2\subset\cdots\subset\bigoplus_{i=1}^{k-1}M_i\subset\frac{(J(R))^{k-1}R}{(J(R))^kR}$$ is a composition series. By the above prp, $\frac{(J(R))^{k-1}R}{(J(R))^kR}$ is Noetherian. \\~\\
+
+We now know that $\frac{(J(R))^{k-1}R}{(J(R))^kR}$ and $(J(R))^kR$ are Noetherian, hence $(J(R))^{k-1}R$ is Noetherian, which completes the inductive step. 
+\end{proof}
+\end{thm}
+
+\pagebreak
+\section{Graded Structures}
+\subsection{Graded Rings}
+\begin{defn}{Graded Rings}{} Let $R$ be a ring. We say that $R$ is graded if the following are true. 
+\begin{itemize}
+\item The abelian group structure of $R$ decomposes into a direct sum $$R=\bigoplus_{k=0}^\infty R_k$$ where each $R_k$ is an abelian group 
+\item For $r_i\in R_i$ and $r_j\in R_j$, $r_ir_j\in R_{i+j}$. 
+\end{itemize}
+We say that an element $r\in R$ is homogenous if $r\in R_k$ for some $k\in\N$. 
+\end{defn}
+
+\begin{prp}{}{} The following are true for a graded ring $R=\bigoplus_{n\in\N}R_i$. 
+\begin{itemize}
+\item $R_0$ is a subring of $R$
+\item $R_n$ is an $R_0$-module for each $n$
+\item $R$ is an $R_0$-module
+\end{itemize} \tcbline
+\begin{proof}~\\
+\begin{itemize}
+\item $R_0$ is an abelian group by definition. We also have that $r_0\in R_0$ and $s_0\in R_0$ implies $r_0s_0\in R_0$ which means that multiplication is closed. 
+\item We have that for $r_0\in R_0$ and $r_n\in R_n$, $r_0\cdot r_n\in R_n$
+\item Since each $R_n$ is a $R_0$-module, the direct sum $R$ is also an $R_0$ module. 
+\end{itemize}
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{} Let $R=\bigoplus_{n\in\N}R_i$ be a graded ring. Then $R$ is Noetherian if and only if $R_0$ is Noetherian and $R$ is finitely generated as an $R_0$-module. 
+\end{prp}
+
+\begin{defn}{Associated Graded Ring}{} Let $R$ be a ring. Let $I$ be a left ideal of $R$. Define the graded ring associated to $R$ of $I$ to be $$\text{gr}_I(R)=\bigoplus_{n=0}^\infty\frac{I^n}{I^{n+1}}$$
+\end{defn}
+
+\begin{defn}{Graded Commutative Rings}{} Let $R=\bigoplus_{k=0}^\infty R_k$ be a graded ring. We say that $R$ is graded commutative if for all $r\in R_i$ and $r\in R_j$, $$r\cdot s=(-1)^{ij}s\cdot r$$
+\end{defn}
+
+\begin{defn}{Homomorphism of Graded Rings}{} Let $R,S$ be graded rings. Let $\varphi:R\to S$ be a ring homomorphism. We say that $\phi$ is a graded ring homomorphism if $$\phi(R_i)\subseteq S_i$$ for each $i\in\N$. 
+\end{defn}
+
+\begin{defn}{Isomorphism of Graded Rings}{} Let $R,S$ be graded rings. Let $\varphi:R\to S$ be a ring homomorphism. We say that $\phi$ is a graded ring isomorphism if it is a graded ring homomorphism and an isomorphism of rings. 
+\end{defn}
+
+\subsection{Graded Modules}
+\begin{defn}{Graded Modules over a Graded Ring}{} Let $R$ be a graded ring. Let $M$ be an $R$-module. We say that $M$ is a graded module over $R$ if there is a decomposition $$M=\bigoplus_{k=0}^\infty M_k$$ into abelian groups and $R_iM_j\subseteq M_{i+j}$. 
+\end{defn}
+
+\begin{prp}{}{} Let $R=\bigoplus_{i=0}^\infty R_i$ be a graded ring. Let $M=\bigoplus_{i=0}^\infty M_i$ be a graded $R$-module. Then the following are true. 
+\begin{itemize}
+\item $M$ is an $R_0$-module. 
+\item $M_n$ is an $R_0$-module for each $n\in\N$. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{} Let $R$ be a graded ring. Let $M,N$ be graded $R$-modules. Then the tensor product $M\otimes_RN$ is also a graded $R$-module, with grading given by $$\left(M\otimes_RN\right)_n=\frac{\bigoplus_{i+j=n}M_i\otimes_\Z N_j}{\left\langle rm\otimes n-m\otimes rn\;|\;\substack{m\in M_a, n\in N_b, r\in R_c\\\text{ such that }a+b+c=n}\right\rangle}$$
+\end{prp}
+
+\begin{prp}{}{} Let $R,S$ be graded rings considered as graded $\Z$-modules. Then the graded $\Z$-module $R\otimes_\Z S$ is also a graded ring, with multiplication defined by $$(r_1\otimes s_1)(r_2\otimes s_2)=(-1)^{\abs{s_1}\abs{r_2}}(r_1r_2\otimes s_1s_2)$$
+\end{prp}
+
+\begin{lmm}{}{} Let $R,S$ be graded rings. If $R$ and $S$ are graded commutative, then $R\otimes_\Z S$ is also graded commutative. 
+\end{lmm}
+
+\begin{defn}{Twisting Graded Modules}{} Let $R=\bigoplus_{i=0}^\infty R_i$ be a graded ring. Let $M=\bigoplus_{i=0}^\infty M_i$ be a graded $R$-module. Let $n\in\N$. Define the $n$th twisted module $M(n)$ of $M$ to be the graded module whose $d$th graded piece is given by $M(n)_d=M_{d+n}$. 
+\end{defn}
+
+\subsection{Homogenity}
+\begin{defn}{Homogenous Elements}{} Let $R$ be a graded ring. Let $M=\bigoplus_{i=0}^\infty M_i$ be a graded $R$-module. Let $m\in M$. We say that $m$ is homogenous if $m\in M_n$ for some $n\in\N$. 
+\end{defn}
+
+\begin{defn}{Homogenous Submodules}{} Let $R$ be a graded ring. Let $M$ be a graded $R$-module. Let $N\leq M$ be an $R$-submodule of $M$. We say that $N$ is homogenous if it is generated by homogenous elements of $N$. 
+\end{defn}
+
+\begin{lmm}{}{} Let $R$ be a graded ring. Let $M=\bigoplus_{i=0}^\infty M_i$ be a graded $R$-module. Let $N\leq M$ be an $R$-submodule of $M$. Then the following are equivalent. 
+\begin{itemize}
+\item $N$ is homogenous. 
+\item For each $x\in N$, write $x=\sum_ix_i$ for $x_i\in M_i$. Then $x_i\in N$ for all $i$. 
+\item $N=\sum_{i=0}^\infty(N\cap M_i)$
+\end{itemize}
+\end{lmm}
+
+\begin{prp}{}{} Let $R$ be a graded ring. Let $M=\bigoplus_{i=0}^\infty M_i$ be a graded $R$-module. Let $N\leq M$ be an $R$-submodule of $M$. If $N$ is homogenous, then $M/N$ is homogenous with grading given by $$\frac{M}{N}=\bigoplus_{i=0}^\infty\frac{M_i}{M_i\cap N}$$
+\end{prp}
+
+\begin{defn}{Homogeneous Ideals}{} Let $R$ be a graded ring. Let $I$ be an ideal of $R$. We say that $I$ is a homogeneous ideal if $I$ is homogenous as an $R$-submodule. 
+\end{defn}
+
+\begin{lmm}{}{} Let $R$ be a graded ring. Let $I,J$ be homogeneous ideals of $R$. Then the following are true. 
+\begin{itemize}
+\item $I+J$ is a homogeneous ideal
+\item $IJ$ is a homogeneous ideal
+\item $I\cap J$ is a homogeneous ideal
+\item $\sqrt{I}$ is a homogeneous ideal
+\end{itemize}
+\end{lmm}
+
+\begin{prp}{}{} Let $R$ be a graded ring. Let $I$ be a homogeneous ideal of $R$. Then $R/I$ is also a graded ring with decomposition given by $$\frac{R}{I}=\bigoplus_{k=0}^\infty\frac{R_k}{R_k\cap I}$$
+\end{prp}
+
+\subsection{Graded Algebras}
+\begin{defn}{Graded Algebra}{} A graded algebra $A$ over $R$ is an algebra that is also a graded ring. 
+\end{defn}
+
+\begin{prp}{}{} Let $R$ be a graded ring. Let $A,B$ be graded $R$-algebras. Then the tensor product $A\otimes_RB$ is also a graded $R$-algebra, with grading given by $$\left(A\otimes_RB\right)_n=\frac{\bigoplus_{i+j=n}A_i\otimes_\Z B_j}{\left\langle rm\otimes n-m\otimes rn\;|\;\substack{m\in A_a, n\in B_b, r\in R_c\\\text{ such that }a+b+c=n}\right\rangle}$$ and multiplication given by $$(r_1\otimes s_1)(r_2\otimes s_2)=(-1)^{\abs{s_1}\abs{r_2}}(r_1r_2\otimes s_1s_2)$$
+\end{prp}
+
+\pagebreak
+\section{Tensor Algebras}
+\subsection{Multilinear Maps of R-Modules}
+\begin{defn}{Multilinear Map}{} Let $M_1,\dots,M_n,N$ be $R$-modules. An $R$-module homomorphism $\varphi:M_1\times\cdots\times M_n\to N$ is said to be multilinear if the following is true. For $1\leq k\leq n$ and all $m_i\in M_i$ for $i\neq k$, the map $M_i\to N$ defined by $$x\mapsto\varphi(m_1,\dots,m_{k-1},x,m_{k+1},\dots,m_n)$$ is an $R$-module homomorphism. Denote the set of all multilinear maps from $M_1\times\cdots\times M_n$ to $N$ by $$\Hom^n(M_1\times\cdots\times M_n;N)$$
+\end{defn}
+
+\begin{defn}{Symmetric Map}{} A multilinear map $\varphi:M\times\cdots\times M\to N$ is called symmetric if interchanging $m_i$ and $m_j$ does not change the value of $\varphi$ for any $i,j$. 
+\end{defn}
+
+\begin{defn}{Alternating Map}{} A multilinear map $\varphi:M\times\cdots\times M\to N$ is called alternating if $m_i=m_{i+1}$ for some $i$ implies $\varphi(m_1,\dots,m_k)=0$. 
+\end{defn}
+
+
+\subsection{Tensor Algebra}
+In this section, $R$ is a commutative ring with identity and we assume that the left and right action on every $R$-module is the same. 
+
+\begin{defn}{$k$th Tensor Power}{} Let $M$ be an $R$-module. Let $k\in\N$. Define the $k$th tensor power of $M$ to be the tensor product $$M^{\otimes k}=M\otimes M\cdots\otimes M$$ where the tensor product over $M$ is taken $k$ times. By convention, define $M^{\otimes 0}$ to be $R$. 
+\end{defn}
+
+\begin{defn}{Tensor Algebra}{} Let $M$ be an $R$-module. Define the tensor algebra over $V$ to be the direct sum $$T(M)=\bigoplus_{k=0}^\infty M^{\otimes k}$$ Define multiplication in $T(M)$ to be the map $M^{\otimes k}\otimes M^{\otimes l}\to V^{\otimes k+l}$, defined by $$(m_1\otimes\cdots\otimes m_i)(m_1'\otimes\cdots\otimes m_j')=m_1\otimes m_i\otimes m_1'\otimes\cdots\otimes m_j'$$ and then extended by linearity to all of $T(M)$. 
+\end{defn}
+
+\begin{prp}{}{} Let $M$ be an $R$-module. Then $T(M)$ is a graded $R$-algebra with the above defined multiplication rule. 
+\end{prp}
+
+\begin{prp}{Universal Property}{} The tensor algebra $T(M)$ of an $R$-module $M$ satisfies the following universal property. Let $A$ be any $R$-algebra and $\varphi:M\to A$ an $R$-module homomorphism. Then there is a unique $R$-algebra homomorphism $\psi:T(M)\to A$ such that $\psi|_M=\varphi$. 
+\end{prp}
+
+\begin{prp}{}{} Let $V$ be a finite dimensional vector space over $\F$ with basis $B=\{v_1,\dots,v_n\}$. Then the $k$-tensors $$v_{i_1}\otimes\cdots\otimes v_{i_k}$$ with $v_{i_1},\dots,v_{i_k}\in B$ are a basis for $T^k(V)$ over $\F$. In particular, $\dim_\F(T^k(V))=n^k$. 
+\end{prp}
+
+\subsection{Exterior Algebra}
+\begin{defn}{Alternating Quotient}{} Let $R$ be a ring. Let $M$ be an $R$-module. Define the alternating quotient of $M$ to be the ideal $$A(M)=\langle m\otimes m\;|\;m\in M\rangle$$ of $T(M)$. 
+\end{defn}
+
+\begin{lmm}{}{} The ideal $A(M)$ is a homogenous ideal. 
+\end{lmm}
+
+\begin{defn}{Exterior Algebra}{} Let $R$ be a ring. Let $M$ be an $R$-module. Define the exterior algebra of $M$ to be the quotient $$\Lambda(M)=\frac{T(M)}{\langle m\otimes m\;|\;m\in M\rangle}$$ Elements of the form $m_1\otimes m_2$ are written as $m_1\wedge m_2$ by convention. 
+\end{defn}
+
+\begin{defn}{Exterior Powers}{} Let $R$ be a ring. Let $M$ be an $R$-module. Define the $k$th exterior power of $M$ to be $$\Lambda^k(M)=\frac{T^k(M)}{\langle m_1\otimes\cdots\otimes m_k\;|\;m_1,\dots,m_k\in M\text{ and }m_i=m_j\text{ for some }i\neq j\rangle}$$
+\end{defn}
+
+\begin{prp}{}{} Let $R$ be a ring. Let $M$ be an $R$-module. Then the following are true regarding the symmetric algebra. 
+\begin{itemize}
+\item $\Lambda(M)$ is a graded ring with homogenous components $\Lambda^k(M)$. 
+\item $\Lambda^0(M)=R$
+\item $\Lambda^1(M)=M$
+\item $\Lambda(M)$ is an $R$-algebra. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{} Let $\{v_1,\dots,v_n\}$ be a basis of the vector space $V$. Then $$\{v_{i_1}\wedge\dots\wedge v_{i_r}|1\leq i_1<\dots<i_r\leq n\}$$ is a basis of $\Lambda^r(V)$ and $$\dim(\Lambda^r(V))=\binom{n}{r}$$
+\end{prp}
+
+\begin{crl}{}{} Let $V$ be vector space over $\F$ of dimension $n$. For $k>n$, $\Lambda^k(M)=0$. 
+\end{crl}
+
+\begin{lmm}{}{} Let $M$ be an $R$-module. Then the following are true regarding the exterior algebra $\Lambda(M)$. 
+\begin{itemize}
+\item Alternating: $m\wedge m=0$ for all $m\in M$
+\item $m_1\wedge m_2=-m_2\wedge m_1$ for any $m_1,m_2\in M$
+\item $m_1\wedge m_2=(-1)^{rs}m_2\wedge m_1$ for any $m_1\in\Lambda^r(M)$ and $m_2\in\Lambda^s(M)$
+\end{itemize}
+\end{lmm}
+
+\subsection{Symmetric Algebra}
+\begin{defn}{Symmetric Quotient}{} Let $M$ be an $R$-module. The symmetric quotient is the ideal $$C(M)=\langle m_1\otimes m_2-m_2\otimes m_1|m_1,m_2\in M\rangle$$ of $T(M)$ generated by commutativity. 
+\end{defn}
+
+\begin{lmm}{}{} The ideal $C(M)$ is a homogenous ideal. 
+\end{lmm}
+
+\begin{defn}{Symmetric Algebra}{} Let $M$ be an $R$-module. Define the symmetric algebra of $M$ to be the quotient $$S(M)=T(M)/C(M)$$ Elements of the form $m_1\otimes m_2$ are written as $m_1m_2$ by convention. 
+\end{defn}
+
+Again here we are quotienting out symmetric objects so that we can treat them as the same thing. 
+
+\begin{prp}{}{} Let $M$ be an $R$-module. Then the following are true regarding the symmetric algebra. 
+\begin{itemize}
+\item $S(M)$ is a graded ring with homogenous components $S^k(M)=T^k(M)/C^k(M)$ called the $k$th symmetric power
+\item $S^0(M)=R$
+\item $S^1(M)=M$
+\item $S(M)$ is an $R$-algebra. 
+\end{itemize}
+\end{prp}
+
+\begin{thm}{}{} Let $M$ be an $R$-module. Let $$I=\langle m_1\otimes\cdots\otimes m_k-m_{\sigma(1)}\otimes\cdots\otimes m_{\sigma(k)}|m_1,\dots,m_k\in M, \sigma\in S_k\rangle$$ Then $S^k(M)=T^k(M)/I$. 
+\end{thm}
+
+\begin{thm}{Universal Property}{} The symmetric algebra $S(M)$ for an $R$-module $M$ satisfies the following universal property: Let $A$ be any commutative $R$-algebra and $\varphi:M\to A$ an $R$-module homomorphism. Then there exists a unique $R$-algebra homomorphism $\psi:S(M)\to A$ such that $\psi|_M=\varphi$. 
+\end{thm}
+
+\begin{crl}{}{} Let $V$ be an $n$-dimensional vector space over $\F$. Then $S(V)$ is isomorphic as a graded $\F$-algebra to $\F[x_1,\dots,x_n]$. This isomorphism is also a vector space isomorphism. In particular, $\dim_\F(S^k(V))=\binom{k+n-1}{n-1}$. 
+\end{crl}
+
+
+
+
+
+
+
+
+
+
+\end{document}

@@ -1,0 +1,198 @@
+\documentclass[a4paper]{article}
+
+\input{C:/Users/liula/Desktop/Latex/Headers.tex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Labix}
+\lhead{Introduction to P-Adic Numbers}
+\rfoot{\thepage}
+
+\title{Introduction to P-Adic Numbers}
+
+\author{Labix}
+
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+\end{abstract}
+\tableofcontents
+\pagebreak
+
+\section{Algebraic Properties}
+\subsection{Two Formulations of $p$-adic Numbers}
+\begin{defn}{Coherrent Sequence}{} Let $p$ be a prime. A coherrent sequence is a sequence $x_1,x_2,\dots$ of integers such that $$x_{n+1}\equiv x_n\;(\bmod\; p^n)$$ for $n\in\N\setminus\{0\}$. Two coherrent sequences are said to be equivalent if $$x_n\equiv y_n\;(\bmod\; p^n)$$ for $n\in\N\setminus\{0\}$. 
+\end{defn}
+
+Trivially the relation defines an equivalent relation in the set of all coherrent sequences. 
+
+\begin{defn}{$p$-adic Integers}{} Let $p$ be a prime. A $p$-adic integer is an equivalence class of coherrent sequences. 
+\end{defn}
+
+\begin{prp}{}{} The set of all $p$-adic integers for a fixed prime $p$ is an integral domain $\Z_p$ that contains the ring $\Z$. \tcbline
+\begin{proof}
+Addition is trivial for sequences in general. Multiplication in this ring is defined by term by term multiplication. To see that it is an integral domain, we require that multiplication of any two non-zero element in $\Z_p$ to be non-zero. This can also be seen easily since $x_ny_n\equiv0\;(\bmod\; p^n)$ if and only if one of $x_n$ or $y_n$ is divisible by $p^n$. 
+\end{proof}
+\end{prp}
+
+Now that we have defined $p$-adic integers through coherrent sequences, let us see an equivalent definition using power series. 
+
+\begin{defn}{$p$-adic Series}{} Let $p$ be a prime number. A $p$-adic series is a series of the form $$\sum_{k=0}^\infty a_kp^k$$ where every $a_k$ is a rational number $\frac{n_k}{d_k}$ such that none of $n_k$ and $d_k$ is divisible by $p$. 
+\end{defn}
+
+Notice that if each $a_k$ is an integer instead of a rational number, this is just a base $p$ number. 
+
+\begin{prp}{}{} Every $p$-adic series with integer coefficients represents a $p$-adic integer. \tcbline
+\begin{proof}
+Suppose that we are given a $p$-adic series $x=\sum_{k=0}^\infty a_kp^k$. Then define $b_n$ by $$b_n=\sum_{k=0}^{n-1}a_kp^k$$ Notice that taking modulo $p^n$ on $x$ gives precisely $b_n$. Thus $(b_1,b_2,\dots)$ as defined by the partial sums is a coherrent sequence. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{} Every $p$-adic integer represents a $p$-adic series with integer coefficients. \tcbline
+\begin{proof}
+Suppose that we have a coherrent sequence $x=(x_1,x_2,\dots)$. By definition, we know that $x_{n+1}-x_n\equiv 0\;(\bmod\;p^n)$. This means that $b_{n+1}=\frac{x_{n+1}-x_n}{p^n}$ is an integer. Setting $b_0=a_0$, we have that $$x=\sum_{k=0}^\infty b_kp^k$$ and we are done. 
+\end{proof}
+\end{prp}
+
+Now we have established a correpsondence between these two system of integers. Taking the field of fractions with $\Z_p$ allows us to form $p$-adic series with coefficients in $\Q$. 
+
+\begin{defn}{$p$-adic Numbers}{} Define the field of fractions of $\Z_p$, the $p$-adic integers to be the $p$-adic numbers, denoted $\Q_p$. 
+\end{defn}
+
+\begin{lmm}{}{} Let $p$ be a prime. Then $\Q_p$ contains $\Q$ as a subring and $\Z_p$ contains $\Z$ as a subring. 
+\end{lmm}
+
+\subsection{Divisibility in $\Z_p$}
+Although division is properly defined for commutative rings, we will restate a bunch of definitions from commutative rings theory. 
+
+\begin{defn}{Divisibility}{} Let $x,y\in\Z_p$. We say that $x$ divides $y$ if there exists $k\in\Z_p$ such that $xk=y$. In this case we say that $x|y$. 
+\end{defn}
+
+\begin{prp}{}{} Let $k\in\N$. Then $p^k$ divides $(x_1,x_2,\dots)\in\Z_p$ if and only if $p^k|x_k$. \tcbline
+\begin{proof}
+Suppose that there exists some $y\in\Z_p$ such that $p^ky=x$. Then in particular, $p^ky_k=x_k$ thus $p^k|x_k$. Suppose for the contrary that $p^k|x_k$. Then by coherence, we have that $p^k|x_n$ for all $n<k$. Define a coherent sequence $y$ by $$y_n=\begin{cases}
+0 & \text{if }n<k\\
+\frac{x_n}{p^k} & \text{if }n\geq k
+\end{cases}$$
+Then $p^ky=x$. Indeed for $n<k$, we must have $x_n\equiv x_k\equiv 0\equiv p^ky_n\;(\bmod\;p^n)$. 
+\end{proof}
+\end{prp}
+
+In this proof, the main thing to take away is that once there factor of $p^k$ in $x_k$, it will naturall be in $x_n$ for $n\geq k$ from the fact that $x_{k+1}\equiv x_k\;(\bmod\;p^k)$ etc. So we can properly divide out $\frac{x_n}{p^k}$ to get an integer. This allows $y$ to be nonzero despite having a bunch of zeroes at the begining. \\~\\
+
+Recall that units in a ring are precisely those that have a multiplicative inverse inside the ring. 
+
+\begin{lmm}{}{} If $x\in\Z_p$, then $x$ is a unit if and only if $p$ does not divide $x$. \tcbline
+\begin{proof}
+Suppose that $p|x$. From the above proposition we see that $p|x_1$. This means that the first element in the coherrent squence is $0$. Now since $x_2\equiv x_1\;(\bmod\;p)$, we have that $x_2\equiv 0\;(\bmod\;p)$. Moreover, since $x_{n+1}\equiv x_n\;(\bmod\; p^n)$, it is easy to see by induction that $x_n$ for all $n$ will contain a factor of $p$ and thus $p|x$ would be imply that $x$ is the additive identity of $\Z_p$, the coherrent sequence $(0,0,\dots)$ and thus does not have an inverse and is not a unit. \\~\\
+Now suppose that $p$ does not divide $x$. By the same argument, since $p$ does not divide $x_1$, $p$ will not divide $x_n$ for all $n\in\N$. This would imply that $p^n$ also does not divide $x_n$. By modular arithmetic there exists $y_n$ such that $x_ny_n\equiv 1\;(\bmod\;p^n)$. Thus $(y_1,y_2,\dots)$ will be an inverse of $x$. 
+\end{proof}
+\end{lmm}
+
+\begin{crl}{}{} Any non-zero element of $\Z_p$ has the form $p^mu$ where $m\in\N$ and $u\in\Z_p$ is a unit. 
+\end{crl}
+
+\subsection{$\Q_p$ as an Euclidean Domain}
+Now that we have derived some properties of units in $\Z_p$, we proceed to define a valuation on $\Q_p$ so that it forms an Euclidean domain. Recall that in order for $\Q_p$ to be an Euclidean domain, we need to define a valuation. 
+
+\begin{defn}{$p$-adic valuation}{} Define the $p$-adic valuation to be a function $v_p:\Q_p\to\N$ defined by $$v_p(x)=\max\{k\in\N|p^k\text{ divides }x\}$$ if $x\in\Z_p$. For $\frac{x}{y}\in\Q_p$, define the $p$-adic valuation to be $$v_p\left(\frac{x}{y}\right)=v_p(x)-v_p(y)$$
+\end{defn}
+
+With this proposition, $\Z_p$ naturally inherits properties of PID as well as UFD. 
+
+\begin{prp}{}{} Let $p$ be a prime. Then $\Q_p$ is an Euclidean domain with Euclidean valuation defined by the function $v_p(x)$. \tcbline
+\begin{proof}
+We show that the norm defined above satifies the properties of a Euclidean valuation. Let $a,b\in\Z_p$. If $a|b$ then there exists $k\in\Z_p$ such that $ka=b$. Then trivially $v_p(0)=0<v_p(b)$ and we are done. If $a$ does not divide $b$ then 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{} Let $x,y\in\Q_p$. Then the following are true. 
+\begin{itemize}
+\item $v_p(xy)=v_p(x)+v_p(y)$
+\item $v_p(x+y)\geq\min\{v_p(x),v_p(y)\}$
+\end{itemize}
+\end{prp}
+
+\pagebreak
+\section{Topological Properties}
+\subsection{Norm}
+\begin{defn}{$p$-adic Norm}{} Define the $p$-adic norm for $x\in\Q_p$ to be $$\abs{x}_p=\frac{1}{p^{v_p(x)}}$$ Define $\abs{0}_p=0$ for convention. 
+\end{defn}
+
+The idea behind the notion is that the distance is measured by how large of a power of $p$ can divide $x$. The larger the power, the closer it is to $0$. 
+
+\begin{prp}{}{} The $p$-adic norm on $\Q_p$ satisfies the properties of a norm and thus $\Q_p$ is a normed space. 
+\end{prp}
+
+Recall that the notion of a Valuation and that of a norm is slightly different. The codomain of valuations are natural numbers while that of norms are non-negative real numbers. 
+
+\begin{defn}{Non-Archimedean Norm}{} We say that a norm $\abs{\cdot}:X\to\R^+\cup\{0\}$ is non-achimedean if for all $x,y\in X$, we have the ultrametric inequality $$\abs{x+y}\leq\max\{\abs{x},\abs{y}\}$$ Otherwise we say that it is Archimedean. 
+\end{defn}
+
+\begin{lmm}{}{} The $p$-adic norm is a non-achimedean norm on $\Q_p$. 
+\end{lmm}
+
+\begin{thm}{Ostrowski's Theorem}{} Every nontrivial norm on $\Q$ is equivalent to either the standard norm or one of the $p$-adic norms. 
+\end{thm}
+
+\subsection{Metric Properties}
+Recall that norms give rise to metrics. 
+
+\begin{prp}{}{} The function $d_p:\Z_p\times\Z_p\to\R^+\cup\{0\}$ defined by $$d_p(x,y)=\abs{x-y}_p$$ is a metric on $\Z_p$. Similarly, the the function $d_p:\Q_p\times\Q_p\to\R^+\cup\{0\}$ defined by $$d_p(x,y)=\abs{x-y}_p$$ is a metric on $\Q_p$. 
+\end{prp}
+
+\begin{prp}{}{} The metric space $\Z_p$ is a completion of $\Z$ with respect to the $p$-adic metric. Similaarly, the metric space $\Q_p$ is a completion of $\Q$ with respect to the $p$-adic metric. 
+\end{prp}
+
+Think of coherrent sequences in $\Q_p$ as rational approximations to irrational numbers as in the completion of $\Q$ by $\R$. Recall that irrational numbers can be defined alternatively by a sequence of converging rational numbers. This is why $\Q_p$, as a sequence of rational numbers, is also doing some sort of approximation to fill in the gaps of the sparse $\Q$, just in a different way as $\R$. 
+
+\subsection{Topological Properties}
+\begin{thm}{}{} Let $B_r(x)$ be an open ball in $\Q_p$. Then $B_r(x)$ is also closed. 
+\end{thm}
+
+\begin{crl}{}{} $\Z_p$ is both an open and closed subset of $\Q_p$. 
+\end{crl}
+
+\subsection{Geometry of $\Q_p$}
+\begin{thm}{}{} In $\Q_p$, all triangles are isoceles. 
+\end{thm}
+
+\begin{lmm}{}{} No three distinct points in $\Q_p$ are collinear. 
+\end{lmm}
+
+\subsection{Relation to Hensel's Lemma}
+We can reformulate Hensel's lemma with the $p$-adic norm. 
+
+\begin{prp}{Hensel's Lemma}{} Let $f\in\Z_p[x]$. Suppose that there exists $x\in\Z_p$ and $k\in\Z$ such that $$\abs{f'(x)}_p=p^{-k}$$ and $p^{2k+1}|f(x)$. Then there exists a unique $y\in\Z_p$ such that $$f(y)=0\text{ and }y\equiv x\;(\bmod\;p^{k+1})$$
+\end{prp}
+
+In practise, we build the root from the ground up, which is we start from the case $k=0$. This gives the following special case of Hensel's lemma. 
+
+\begin{lmm}{}{} Let $f\in\Z_p[x]$. Suppose that there exists $x\in\Z_p$ such that $f(x)\equiv 0\;(\bmod\;p)$ and $f'(x)$ not congruent to $0$ modulo $p$. Then there exists a unique $y\in\Z_p$ such that $f(y)=0$ and $y\equiv x\;(\bmod\;p)$. \tcbline
+\begin{proof}
+Take $k=0$ in Hensel's lemma. 
+\end{proof}
+\end{lmm}
+
+We give a procedure in calculating the actual roots of the polynomial based on the constructive proof of Hensel's lemma. I tacitly assume that we start from the ground up. \\~\\
+Step1: Break apart the congruence into coprime congruences if the modulo in question is not the power of a prime. 
+Step 2: Find the actual $x\in\Z_p$ that satisfies Hensel's lemma. Rename it to $a_1$ (or $b_1$ depending on the following method used). \\
+Step 3: Compute $a_{k+1}$ using the recursion formula $$a_{k+1}\equiv a_k-f(a_k)[f'(a_1)]^{-1}\;(\bmod\;p^{k+1})$$ or $$b_{k+1}f'(b_k)\equiv-\frac{f(b_k)}{p^k}\;(\bmod\;p)$$
+Step 4: If you used the first formula, then $a_n$ will be your answer to the particular modulo if the question asks for $f\in\Z[x]$ modulo $p^n$. If you used the second formula, then $b=b_1+b_2p+b_3p^2+\dots+b_np^{n-1}$ will be your answer to the particular modulo. \\
+Step 5: Combine the different answers into one single answer that solves the original question using the Chinese Remainder Theorem. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

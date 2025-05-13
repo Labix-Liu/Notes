@@ -1,0 +1,200 @@
+\documentclass[a4paper]{article}
+
+\input{C:/Users/liula/Desktop/Latex/Headers V1.2.tex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Labix}
+\lhead{Measure Theory}
+\rfoot{\thepage}
+
+\title{Measure Theory}
+
+\author{Labix}
+
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+\end{abstract}
+\pagebreak
+\tableofcontents
+\pagebreak
+
+\section{Measure Theory}
+\subsection{$\sigma$-Algebra}
+\begin{defn}{$\sigma$-algebra}{} Let $X$ be a set. Let $\mF\subseteq\mP(X)$. We say that $\mF$ is a $\sigma$-algebra if the following are true. 
+\begin{itemize}
+\item $S\in\mF$. 
+\item If $A\in\mF$, then $X\setminus A\in\mF$. 
+\item If $A_k\in\mF$ for $k\in\N\setminus\{0\}$, then $\bigcup_{k=1}^\infty A_k\in\mF$
+\end{itemize}
+We say that $A\in\mF$ is a measurable set. 
+\end{defn}
+
+\begin{lmm}{}{} Let $X$ be a set. Let $\mF$ a $\sigma$-algebra. Then the following are true. 
+\begin{itemize}
+\item $\emptyset\in\mF$. 
+\item If $A_k\in\mF$ for $k\in\N$, then $\bigcap_{k=0}^\infty A_k\in\mF$. 
+\end{itemize}
+\end{lmm}
+
+\begin{defn}{Smallest $\sigma$-algebra Containing a Set}{} Let $X$ be a set. Let $P\subseteq P(X)$. Define the smallest $\sigma$-algebra containing $P$ by $\sigma(P)$. 
+\end{defn}
+
+\begin{lmm}{}{} Let $X$ be a set. Let $P\subseteq P(X)$ be a subset. Then we have $$\sigma(P)=\bigcap_{\substack{\mF\supseteq P\\\mF\text{ is measurable}}}\mF$$
+\end{lmm}
+
+\subsection{Measures}
+\begin{defn}{Measure}{} Let $X$ be a set. Let $\mF$ be a $\sigma$-algebra of $X$. Let $\mu:\mF\to[0,\infty)$ be a function. We say that $\mu$ is a measure if the following are true. 
+\begin{itemize}
+\item $\mu(\emptyset)=0$
+\item If $A_1,\dots,A_k,\dots$ are pairwise disjoint in $\mF$, then $$\mu\left(\bigcup_{k=1}^\infty A_k\right)=\sum_{k=1}^\infty\mu(A_k)$$
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{} Let $X$ be a set. Let $\mF$ be a $\sigma$-algebra of $X$. Let $\mu:\mF\to[0,\infty)$ be a measure on $X$. 
+\begin{itemize}
+\item If $A_1,A_2\in\mF$ and $A_1\subseteq A_2$, then $$\mu(A_1)\leq\mu(A_2)$$
+\item If $A_k\in\mF$ for $k\in\N\setminus\{0\}$, then we have $$\mu\left(\bigcup_{k=1}^\infty A_k\right)\leq\sum_{k=1}^\infty\mu(A_k)$$
+\item For any $A_1,A_2\in\mF$, we have $$\mu(A_1)+\mu(A_2)=\mu(A_1\cup A_2)-\mu(A_1\cap A_2)$$
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{} Let $X$ be a set. Let $\mF$ be a $\sigma$-algebra of $X$. Let $\mu:\mF\to[0,\infty)$ be a measure on $X$. The the following are true. 
+\begin{itemize}
+\item If $A_1\subseteq A_2\subseteq\cdots\subseteq A_k\subseteq\cdots$ are measurable subsets, then we have $$\mu\left(\bigcup_{k=1}^\infty A_k\right)=\lim_{k\in\N}\mu(A_k)$$
+\item If $B_1\supseteq B_2\supseteq\cdots\supseteq B_k\supseteq\cdots$ are measurable subsets, then we have $$\mu\left(\bigcap_{k=1}^\infty B_k\right)=\lim_{k\in\N}\mu(B_k)$$
+\end{itemize}
+\end{prp}
+
+\begin{defn}{Outer Measures}{} Let $X$ be a set. Let $\nu:P(X)\to\emptyset$. We say that $\nu$ is an outer measure. 
+\begin{itemize}
+\item $\nu(\emptyset)=0$. 
+\item If $A_1\subseteq A_2$, then $$\nu(A_1)\leq\nu(A_2)$$
+\item If $A_1,\dots,A_k,\dots$ are subsets, then $$\nu\left(\bigcup_{k=1}^\infty A_k\right)\leq\sum_{k=1}^\infty\nu(A_k)$$
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{} Let $X$ be a set. Let $\mF$ be a $\sigma$-algebra. Let $\mu$ be a measure. Then $\mu$ is an outer measure. 
+\end{lmm}
+
+\subsection{Borel Measures}
+\begin{defn}{Borel $\sigma$-algebra}{} Let $(X,\mT)$ be a topological space. Define the Borel $\sigma$-algebra of $X$ to be $$\mB(X)=\sigma(\mT)$$
+\end{defn}
+
+\begin{defn}{Borel Measure}{} Let $X$ be a topological space. A Borel measure is a measure $\mu:\mB(X)\to[0,\infty)$ on $X$. 
+\end{defn}
+
+\begin{defn}{Radon Measure}{} Let $X$ be a topological space. Let $\mu$ be a Borel measure. We say that $X$ is Radon if for any compact subset $K\in\mB(X)$, we have $$\mu(K)<\infty$$
+\end{defn}
+
+\pagebreak
+\section{Measure Spaces}
+\subsection{Measure Spaces}
+\begin{defn}{Measurable Space}{} Let $X$ be a set. We say that $X$ is measurable if there exists a $\sigma$-algebra $\mF$ and a measure $\mu:\mF\to[0,\infty)$ on $X$. 
+\end{defn}
+
+\begin{defn}{Measure Space}{} A measure space $(X,\mF,\mu)$ consists of a set $X$, a $\sigma$-algebra $\mF$ and a measure $\mu$ on $X$. 
+\end{defn}
+
+\begin{defn}{Finiteness of Measure Spaces}{} Let $(X,\mF,\mu)$ be a measure space. 
+\begin{itemize}
+\item We say that $X$ is finite if $\mu(X)<\infty$. 
+\item We say that $X$ is $\sigma$-finite if there exists a collection $\{U_k\in\mF\;|\;k\in\N\setminus\{0\}\}$ such that $X=\bigcup_{k=1}^\infty U_k$ and $\mu(U_k)<\infty$. 
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{} Let $(X,\mF,\mu)$ be a measure space. If $X$ is finite, then $X$ is $\sigma$-finite. 
+\end{lmm}
+
+\subsection{Measurable Functions}
+\begin{defn}{Measurable Functions}{} Let $(E,\mE)$ and $(F,\mF)$ be measurable spaces. Let $f:E\to F$. We say that $f$ is measurable if for all $A\in\mF$, $f^{-1}(A)\in\mE$. 
+\end{defn}
+
+\begin{lmm}{}{} Let $(E,\mE)$, $(F,\mF)$ and $(G,\mG)$ be measurable spaces. Then the following are true. 
+\begin{itemize}
+\item If $f:E\to F$ and $g:F\to G$ are measurable functions, then $g\circ f$ is measurable. 
+\item $\text{id}_E:E\to E$ is measurable. 
+\end{itemize}
+\end{lmm}
+
+\begin{defn}{Pushforward Measure}{} Let $(E,\mE)$ and $(F,\mF)$ be measurable spaces. Let $f:E\to F$ be a measurable function. Let $\mu:\mE\to[0,\infty)$ be a measure. Define the push forward measure $\mu_\ast:\mF\to[0,\infty)$ by $$\mu_\ast(A)=\mu(f^{-1}(A))$$
+\end{defn}
+
+\subsection{Convergence}
+\begin{defn}{Convergence Almost Everywhere}{} Let $(E,\mE)$ and $(F,\mF)$ be measurable spaces. Let $\mu:\mE\to[0,\infty)$ be a measure. Let $(f_n:E\to F)_{n\in\N\setminus\{0\}}$ be a sequence of measurable functions. We say that $(f_n)_{n\in\N\setminus\{0\}}$ converges almost everywhere to a measurable function $f:E\to F$ if $$\mu(\{x\in E\;|\;(f_n(x))_{n\in\N\setminus\{0\}}\text{ does not converge to }f(x)\})=0$$
+\end{defn}
+
+\begin{defn}{Convergence in Measure}{} Let $(E,\mE)$ be a measurable space. Let $\mu:\mE\to[0,\infty)$ be a measure. Let $(f_n:E\to \R)_{n\in\N\setminus\{0\}}$ be a sequence of measurable functions. We say that $(f_n)_{n\in\N\setminus\{0\}}$ converges in measure to a measurable function $f:E\to F$ if $$\mu(\{x\in E\;|\;\abs{f(x)-f_n(x)}>\varepsilon\})\to0$$ as $n\to\infty$. 
+\end{defn}
+
+\pagebreak
+\section{Integration Theory}
+\subsection{Integration of Measurable Functions}
+\begin{defn}{Simple Functions}{} Let $(E,\mE,\mu)$ be a measure space. A simple function is a function of the form $$f(x)=\sum_{k=1}^na_k1_{A_k}(x)$$ for $A_1,\dots,A_n$ disjoint measurable sets and $a_k\in[0,\infty)$. 
+\end{defn}
+
+\begin{defn}{Lebesgue Integral for Simple Functions}{} Let $(E,\mE,\mu)$ be a measure space. Let $f(x)=\sum_{k=1}^na_k1_{A_k}(x)$ be a simple function. Define the Lebesgue integral of $f$ to be $$\int f\;d\mu=\sum_{k=1}^na_k\mu(A_k)$$
+\end{defn}
+
+\begin{lmm}{}{}
+\end{lmm}
+
+\begin{defn}{Lebesgue Integral for Positive Functions}{} Let $(E,\mE,\mu)$ be a measure space. Let $f:E\to\R$ be a positive measurable function. Define the Lebesgue integral of $f$ to be $$\int f\;d\mu=\sup\left\{\int g\;d\mu\;|\;g\text{ is a simple function and }g\leq f\right\}$$
+\end{defn}
+
+\begin{defn}{Lebesgue Integral for General Functions}{} Let $(E,\mE,\mu)$ be a measure space. Let $f:E\to\R$ be a measurable function. Let $f_+$ be the positive part of $f$ and let $f_-$ be the negative part of $f$. Define the Lebesgue integral of $f$ to be $$\int f\;d\mu=\int f_+\;d\mu+\int -f_-\;d\mu$$
+\end{defn}
+
+\subsection{Properties of the Lebesgue Integral}
+\begin{thm}{Monotone Convergence Theorem}{} Let $(E,\mE,\mu)$ be a measure space. Let $f:E\to[0,\infty)$ be a non-negative measurable function. Let $(f_n:E\to[0,\infty))_{n\in\N\setminus\{0\}}$ be a sequence of non-negative measurable functions. If $(f_n)\uparrow f$, then $$\int f_n\;d\mu\uparrow\int f\;d\mu$$
+\end{thm}
+
+\begin{prp}{Beppo-Levi}{} Let $(E,\mE,\mu)$ be a measure space. Let $(f_n:E\to\R)_{n\in\N\setminus\{0\}}$ be a sequence of measurable functions. Then we have $$\int\sum_nf_n\;d\mu=\sum_n\int f_n\;d\mu$$
+\end{prp}
+
+\begin{thm}{Fatou's Lemma}{} Let $(E,\mE,\mu)$ be a measure space. Let $(f_n:E\to[0,\infty))_{n\in\N\setminus\{0\}}$ be a sequence of non-negative measurable functions. Then we have $$\int\left(\liminf_nf_n\right)\;d\mu\leq\liminf_n\int f_n\;d\mu$$
+\end{thm}
+
+\begin{thm}{Dominated Convergence Theorem}{} Let $(E,\mE,\mu)$ be a measure space. Let $(f_n:E\to\R)_{n\in\N\setminus\{0\}}$ be a sequence of measurable functions. Let $f:E\to\R$ be a measurable function such that $f_n$ converges to $f$ almost everywhere. Suppose that there exists a positive function $g:E\to\R$ such that $\abs{f}\leq g$ and $\abs{f_n}\leq g$ for all $n$ and $\int g<\infty$. Then we have $$\lim_n\int f_n\;d\mu=\int f\;d\mu$$
+\end{thm}
+
+\subsection{Comparison to Riemann Integrability}
+
+\subsection{The Space of Measurable Functions}
+\begin{defn}{The $L^p$ Space of a Measure Space}{} Let $(E,\mE,\mu)$ be a measure space. Let $p\geq 1$. Define the associated $L^p$ space of $E$ to be the set of measurable functions $$L^p(E)=\{f:E\to\R\;|\;f\text{ is measurable }\}$$ together with the norm function $\|\cdot\|_p:L^p(E)\to\R$ defined by $$\|f\|_p=\left(\int\abs{f}^p\;d\mu\right)^{1/p}$$
+\end{defn}
+
+\begin{lmm}{}{} Let $(E,\mE,\mu)$ be a measure space. Let $p\geq 1$. Then $L^p(E)$ is a normed space. 
+\end{lmm}
+
+\begin{prp}{Holder's Inequality}{} Let $(E,\mE,\mu)$ be a measure space. Let $p,q\geq 1$ such that $1/p+1/q=1$. Let $f,g:E\to\R$ be measurable functions. Then we have $$\|fg\|_1\leq\|f\|_p\|g\|_q$$
+\end{prp}
+
+\begin{prp}{Minkowski's Inequality}{} Let $(E,\mE,\mu)$ be a measure space. Let $p\geq 1$. Let $f,g:E\to\R$ be measurable functions. Then we have $$\|f+g\|_p\leq\|f\|_p+\|g\|_p$$
+\end{prp}
+
+\begin{prp}{Markov's Inequality}{} Let $(E,\mE,\mu)$ be a measure space. Let $f:E\to[0,\infty)$ be a non-negative measurable function. Let $\lambda>0$. Then we have $$\mu(\{x\in E\;|\;f(x)>\lambda\})\leq\frac{1}{\lambda}\int f\;d\mu$$
+\end{prp}
+
+\pagebreak
+\section{Differentiation}
+\subsection{Existence of Anti-Derivatives}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

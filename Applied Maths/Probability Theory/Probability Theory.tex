@@ -1,0 +1,582 @@
+\documentclass[a4paper]{article}
+
+\input{C:/Users/liula/Desktop/Latex/Headers V1.2.tex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Labix}
+\lhead{Probability Theory}
+\rfoot{\thepage}
+
+
+\title{Probability Theory}
+
+\author{Labix}
+
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+Notes for the basics of Probability Theory. 
+\end{abstract}
+\tableofcontents
+\pagebreak
+
+\section{Foundations of Probability Theory}
+\subsection{Definition of Probability}
+\begin{defn}{Probability Space}{} A probability space is a measure space $(\Omega,\mF,P)$ where the measure $P$ lands in $[0,1]$. 
+\end{defn}
+
+Explicitly, a probability space is a triple $(\Omega,\mF,P)$ consisting of the following data: 
+\begin{itemize}
+\item $\Omega\neq\emptyset$ is a set called the sample space. 
+\item $\mF\subseteq\mP(\Omega)$ is a $\sigma$-algebra called events.  \item $P:\mF\to[0,1]$ is a set function. 
+\end{itemize}
+such that the following are true: 
+\begin{itemize}
+\item $P(\Omega)=1$. 
+\item If $\{A_n\;|\;n\in\N\}\subseteq\mF$ are pairwise disjoint, then $$P\left(\bigcup_{k=1}^\infty A_k\right)=\sum_{k=1}^{\infty}P(A_k)$$
+\end{itemize}
+
+\begin{prp}{}{} Let $(\Omega,\mF,P)$ be a probability space. Let $A,B\in\mF$ be events. Then the following are true. 
+\begin{itemize}
+\item $P(\Omega\setminus A)=1-P(A)$
+\item $A\subset B\implies P(A)\leq P(B)$
+\end{itemize} \tcbline
+\begin{proof} Let $A\subset B\subset\Omega$ be events in $\Omega$. 
+\begin{itemize}
+\item $A$ and $\Omega\setminus A$ are disjoint and $P(\Omega)=P(A)+P(\Omega\setminus A)$ and $P(\Omega\setminus A)=1-P(A)$
+\item We have that $A$ and $B\setminus A$ are disjoint. Thus $P(B)=P(A)+P(B\setminus A)$. Since $P(B\setminus A)\geq 0$, we have $P(A)\leq P(B)$.  
+\end{itemize}
+\end{proof}
+\end{prp}
+
+\begin{defn}{Uniform Probability Measure}{} Let $\Omega$ be a sample space. A probability measure $P$ is uniform if fo all $a,b\in\Omega$, $$P(\{a\})=P(\{b\})$$
+\end{defn}
+
+\begin{thm}{}{} Let $\Omega$ be a sample space and $P$ a uniform probability measure of $\Omega$. Then for all $A\subset\Omega$, $$P(A)=\frac{\abs{A}}{\abs{\Omega}}$$
+\end{thm}
+\begin{proof} Suppose that $A$ consists of $\abs{A}$ distinct elements and the event space $\abs{\Omega}$ contains $\abs{\Omega}$ distinct elements. Since every singleton set is pairwise disjoint, we have $P(A)=\abs{A}P(\{a\})$ for any $a\in A$. Similarly, we have $P(\Omega)=\abs{\Omega}P(\{a\})$.  Thus we have that $P(A)=\frac{\abs{A}P(\Omega)}{\abs{\Omega}}$ and $P(A)=\frac{\abs{A}}{\abs{\Omega}}$
+\end{proof}
+
+\begin{thm}{Principle of Inclusion Exclusion}{} Let $A,B\subset\Omega$ be a sample space and $P$ the probability measure. $$P(A\cup B)=P(A)+P(B)-P(A\cap B)$$
+\end{thm}
+\begin{proof} Note that 
+\begin{align*}
+A\cup(B\setminus A)&=A\cup(B\cap A^c)\\
+&=(A\cup B)\cap(A\cup A^c)\\
+&=A\cup B
+\end{align*} Note also that $A\cap (B\setminus A)=\emptyset$. Thus $P(A\cup B)=P(A)+P(B\setminus A)=P(A)+P(B)-P(A\cap B)$
+\end{proof}
+
+\begin{thm}{Extended Principle of Inclusion Exclusion}{} Let $A_k\subset\Omega$ be a sample space and $P$ the probability measure for all $k\leq n\in\mathbb{N}$. Then $$P\left(\bigcup_{k=1}^n A_k\right)=\sum_{k=1}^n(-1)^{k+1}\sum_{1\leq i_1\leq\dots\leq n}P(A_{i_1}\cap A_{i_2}\cap\dots\cap A_{i_k})$$
+\end{thm}
+
+\subsection{Multiplication Principle}
+\begin{thm}{The Multiplication Principle}{} Suppose that Experiment A has $a$ outcomes and Experiment B has $b$ outcomes. Then the performing both $A$ and $B$ results in $ab$ possible outcomes. 
+\end{thm}
+
+\begin{thm}{Sampling with replacement - Ordered}{} In the case of sampling $k$ balls with replacement from an urn containing $n$ balls, there are $\abs{\Omega}=n^k$ possible outcomes when the order of the objects matters, where $\Omega=\{(s_1,\dots,s_k):s_i\in\{1,\dots,n\}\forall i\in\{1,\dots,k\}\}$. 
+\end{thm}
+
+\begin{thm}{Sampling without replacement - Ordered}{} In the case of sampling $k$ balls without replacement from an urn containing $n$ balls, there are $\abs{\Omega}=\frac{n!}{(n-k)!}$ possible outcomes when the order of the objects matters, where $\Omega=\{(s_1,\dots,s_k):s_i\in\{1,\dots,n\}\forall i\in\{1,\dots,k\},i\neq j\implies s_i\neq s_j\}$. 
+\end{thm}
+
+\begin{thm}{Sampling without replacement - Unordered}{} In the case of sampling $k$ balls without replacement from an urn containing $n$ balls, there are $\abs{\Omega}=\binom{n}{k}$ possible outcomes when the order of the objects does not matter, where $\Omega=\{\omega\subset\{1,\dots,n\}:\abs{\omega}=k\}$. 
+\end{thm}
+
+\begin{thm}{Sampling with replacement - Unordered}{} In the case of sampling $k$ balls with replacement from an urn containing $n$ balls, there are $\abs{\Omega}=\binom{n+k-1}{k}$ possible outcomes when the order of the objects does not matter, where $\Omega=\{\omega\subset\{1,\dots,n\}:\omega\text{ is a $k$ element multiset with elements from }\{1,\dots,n\}\}$. 
+\end{thm}
+
+\subsection{Conditional Probability}
+\begin{defn}{Conditional Probability}{} Consider a probability space $(\Omega,P)$. Let $A,B\subset\Omega$ with $P(B)>0$. Then the conditional probability of $A$ given $B$, denoted by $P(A|B)$ is defined as $$P(A|B)=\frac{P(A\cap B)}{P(B)}$$
+\end{defn}
+
+\begin{thm}{Multiplication Rule}{} Let $n\in\mathbb{N}$. Then for any events $A_1,\dots,A_n$ such that $P(A_2\cap\dots\cap A_n)>0$, we have $$P(A_1\cap\dots\cap A_n)=P(A_1)P(A_2|A_1)P(A_3|A_1\cap A_2)\dots P(A_n|A_1\cap\dots\cap A_{n-1})$$
+\end{thm}
+\begin{proof} From the right hand side, we have
+\begin{align*}
+&P(A_1)P(A_2|A_1)P(A_3|A_1\cap A_2)\dots P(A_n|A_1\cap\dots\cap A_{n-1})\\
+&=P(A_1)\frac{P(A_2\cap A_1)}{P(A_1)}\frac{P(A_3\cap A_2\cap A_1)}{P(A_2\cap A_1)}\dots \frac{P(A_n\cap\dots\cap A_1)}{P(A_1\cap\dots\cap A_{n-1})}\\
+&=P(A_1\cap\dots\cap A_n)
+\end{align*}
+\end{proof}
+
+\begin{thm}{Bayes' Rule}{} Let $(\Omega,P)$ be a probability measure. Let $A,B\subset\Omega$ with $P(A),P(B)>0$. Then $$P(A|B)=\frac{P(B|A)P(A)}{P(B)}$$
+\end{thm}
+\begin{proof} We have that $P(A\cap B)=P(A|B)P(B)$ and $P(A\cap B)=P(B|A)P(A)$. 
+\end{proof}
+
+\begin{thm}{Law of Total Probability}{} Let $(\Omega,P)$ be a probability measure. Let $A_1,\dots,A_n$ be a partition of $\Omega$ with $P(A_i)>0$ for all $i=1,\dots,n$. Then for any $B\subset\Omega$, $$P(B)=\sum_{k=1}^nP(A_k)P(B|A_k)$$
+\end{thm}
+\begin{proof} Note that since $A_1,\dots,A_n$ is a partition, $B\cap A_1,\dots,B\cap A_n$ is also a parition. 
+\begin{align*}
+\sum_{k=1}^nP(A_k)P(B|A_k)&=\sum_{k=1}^nP(B\cap A_k)\\
+&=P\left(\bigcup_{k=1}^nB\cap A_k\right)\\
+&=P(B\cap\Omega)\\
+&=P(B)
+\end{align*}
+\end{proof}
+
+\begin{thm}{General Bayes' Rule}{} Let $(\Omega,P)$ be a probability measure. Let $A_1,\dots,A_n$ be a partition of $\Omega$ with $P(A_i)>0$ for all $i=1,\dots,n$. Then for any $B\subset\Omega$ with $P(B)>0$, $$P(A_i|B)=\frac{P(B|A_i)P(A_i)}{P(B)}=\frac{P(B|A_i)P(A_i)}{\sum_{k=1}^nP(B|A_i)P(A_i)}$$
+\end{thm}
+\begin{proof} Apply Bayes' rule and apply the mulitplication rule. 
+\end{proof}
+
+\subsection{Independence of Events}
+\begin{defn}{Independent Events}{} Two events $A,B$ are said to be independent if $$P(A\cap B)=P(A)P(B)$$
+\end{defn}
+
+\begin{prp}{}{} If $A,B$ are independent, then $A^c,B$, $A,B^c$ and $A^c,B^c$ are independent. 
+\end{prp}
+\begin{proof} We only proof the first and third item. 
+\begin{itemize}
+\item Without loss of generality we prove the first and reader mirrors the second. 
+\begin{align*}
+P(A^c\cap B)&=P(B)-P(A\cap B)\\
+&=P(B)(1-P(A))\\
+&=P(B)P(A^c)
+\end{align*}
+\item Note that $P(A\cap B)=P(A)P(B)$
+\begin{align*}
+P(A^c\cap B^c)&=1-P(A\cap B)\\
+&=1-P(A)-P(B)+P(A\cap B)\\
+&=1-P(A)-P(B)+P(A)P(B)\\
+&=(1-P(A))(1-P(B))\\
+&=P(A^c)P(B^c)
+\end{align*}
+\end{itemize}
+\end{proof}
+
+\pagebreak
+\section{Probability Distributions}
+\subsection{Random Variables and its Distribution}
+\begin{defn}{Random Variable}{} Let $(\Omega,\mathcal{F},P)$ be a probability space. Let $(E,\mE)$ be a measurable space. An $(E,\mathcal{E})$ valued random variable is an $\mF$-measurable function $X:\Omega\to E$. 
+\end{defn}
+
+\begin{defn}{Independent Random Variables}{} Let $(\Omega,\mF,P)$ be a probability space. Let $(E,\mE)$ be a measurable space. Let $X,Y:\Omega\to E$ be random variables. We say that $X$ and $Y$ are independent if for any $A,B\in\mE$, we have that $X^{-1}(A)$ and $Y^{-1}(B)$ are independent events in $\mF$. 
+\end{defn}
+
+\begin{defn}{Discrete and Continuous Random Variables}{} Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a random variable. 
+\begin{itemize}
+\item We say that $X$ is discrete if $\im(X)$ is a countable subset of $\R$. 
+\item We say that $X$ is continuous otherwise. 
+\end{itemize}
+\end{defn}
+
+Recall that $X$ is an $\mF$-measurable function if $X^{-1}(B)\in\mF$ for $B\in\mE$. 
+
+\begin{defn}{Probability Distribution}{} Let $(\Omega,E,\Prj)$ be a probability space. Let $(E,\mE)$ be a measurable space. Let $X:\Omega\to E$ be a measurable function. Define the probability distribution of $X$ to be the pushforward measure $P\circ X^{-1}=P_X:\mE\to[0,1]$ defined by $$P_X(A)=P(X^{-1}(A))$$ for $A\in\mE$. 
+\end{defn}
+
+\begin{defn}{Probability Density Function}{} Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a random variable. Define the probability density function of $X$ to be the Radon–Nikodym derivative $$f_X=\frac{d X_\ast P}{d\mu}$$ where $\mu$ is the Lebesgue measure. 
+\end{defn}
+
+Recall that this means that $f_X$ satisfies the property that $$P_X(A)=\int_A f_X d\mu$$ for any measurable set $A\subseteq\R$. In particular, if $A=\{a\}\subseteq\mF$, then we have $$P_X(a)=f_X(a)$$ The probability distribution function has its input as every measurable subset of $\R$, while the probability density function takes input as individual points of $\R$. They are really the same thing because having its probability be determined on singletons is sufficient to determine the probability of every measurable subset. 
+
+\begin{prp}{}{} Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a discrete random variable. Let $g:\R\to\R$ be a function. Then the probability density function of $Y=g\circ X$ is given by $$f_Y(y)=\sum_{x\in g^{-1}(y)}f_X(x)$$
+\end{prp}
+
+\begin{prp}{}{} Suppose that $X$ is a continuous random variable with density $f_X$ and $g:\mathbb{R}\to\mathbb{R}$ is strictly monotone and differentiable with inverse function denoted $g^{-1}$, then $Y=g(X)$ has density $$f_Y(y)=f_X(g^{-1}(y))\abs{\frac{d}{dy}(g^{-1}(y))}$$ for all $y\in\mathbb{R}$
+\end{prp}
+
+\begin{eg}{Bernoulli Distribution}{} Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a random variable. We say that $X$ has a Bernoulli distribution if the probability density function of $X$ is given by $$f_X(x)=\begin{cases}
+p & \text{ if }x=1\\
+1-p & \text{ if }x=0\\
+0 & \text{otherwise}
+\end{cases}$$ for some $p\in [0,1]$. 
+\end{eg}
+
+\begin{eg}{Binomial Distribution}{} Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a random variable. We say that $X$ has a binomial distribution if the probability density function of $X$ is given by $$f_X(x)=\binom{n}{x}p^x(1-p)^{n-x}$$ for some $p\in[0,1]$. 
+\end{eg}
+
+\begin{defn}{Poisson Distribution}{} A discrete random variable $X$ is said to have Poisson Distribution with parameter $\lambda>0$ if $\im(X)=\mathbb{N}_0$ and $$p_X(x)=\frac{\lambda^x}{x!}e^{-x}$$
+\end{defn}
+
+\begin{defn}{Geometric Distribution}{} A discrete random variable $X$ is said to have Geometric Distribution with parameter $p\in(0,1)$ if $\im(X)=\mathbb{N}_0$ and $$p_X(x)=p(1-p)^{x-1}$$
+\end{defn}
+
+Let $I\subseteq\R$ be an interval. Recall that $\mB(I)$ refers to the borel measurable subsets of $I$. Denote $\lambda$ the Lebesgue measure on $\R^n$. 
+
+\begin{eg}{Uniform Distribution}{} Let $[a,b]\subseteq\R$ be an interval. Let $X$ be a random variable on the probability space $([a,b],\mB([a,b]),P)$. We say that $X$ has a uniform distribution if its probability density function is given by $$f_X(A)=\frac{\lambda(A)}{b-a}$$ for $A\subseteq[a,b]$.
+\end{eg}
+
+In particular, when $A=\{c\}\subseteq[a,b]$ is the one-point set, we have $P_X(c)=\frac{1}{b-a}$ so that the probability of any one point set is uniform. 
+
+\begin{eg}{}{} Let $X$ be a uniform distribution on $[a,b]$. Then the probability density function of $X$ is given by $$F_X(x)=\frac{1}{b-a}$$
+\end{eg}
+
+\begin{eg}{Normal Distribution}{} Let $X$ be a random variable on the probability space $(\R,\mB(\R),P)$. We say that $X$ has a normal distribution if its probability density function is given by $$f_X(x)=\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}$$ for some $\mu\in\R$ and $\sigma>0$. 
+\end{eg}
+
+\begin{defn}{Exponential Distribution}{} A conitnuous random variable $X$ is said to have Exponential Distribution with parameter $\lambda>0$ if its density function is given by $$f_X(x)=\begin{cases}
+\lambda e^{-\lambda x} & \text{if $x>0$}\\
+0 & \text{otherwise}
+\end{cases}$$ and its cumulative function given by $$F_X(x)=\begin{cases}
+0 & \text{if $x\leq 0$}\\
+1-e^{-\lambda x} & \text{if $x>0$}
+\end{cases}$$
+\end{defn}
+
+\begin{defn}{Gamma Distribution}{} A conitnuous random variable $X$ is said to have Gamma Distribution with shape parameter $\alpha>0$ and rate parameter $\beta>0$ if its density function is given by $$f_X(x)=\begin{cases}
+\frac{\beta^\alpha}{\Gamma(\alpha)}x^{\alpha-1}e^{-\beta x} & \text{if $x>0$}\\
+0 & \text{otherwise}
+\end{cases}$$
+\end{defn}
+
+\subsection{Cumulative Density Functions}
+\begin{defn}{Cummulative Distribution Function}{} Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a random variable. Define the cummulative distribution function $F_X:\R\to\R$ of $X$ to be $$F_X(x)=P_X(X\leq x)$$
+\end{defn}
+
+\begin{prp}{}{} Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a random variable. Then the following are true. 
+\begin{itemize}
+\item $f_X=\frac{dF_X}{dx}$. 
+\item $F_X(x)=\int_{-\infty}^xf_X(t)\;dt$
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{} Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a random variable. Then the following are true regarding the cumulative distribution function $F_X$. 
+\begin{itemize}
+\item $F_X$ is monotonically increasing: $x\leq y\implies F_X(x)\leq F_X(y)$
+\item $F_x$ is right continuous: If $(x_n)$ is a sequence such that $x_1\geq\dots\geq x_n\geq x_{n+1}\geq\dots\geq x$ and $(x_n)\to x$, then $F_X(x_n)\to F_X(x)$
+\item $F_X(-\infty)=0$ and $F_X(\infty)=1$
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{} Suppose that $X$ is a random variable on a probability space $(\Omega,E,\Prj)$ with cumulative distribution function $F_X$. If $a<b$, then $\Prj(a<X\leq b)=F_X(b)-F_X(a)$
+\end{prp}
+
+\subsection{Multivariate Random Variables}
+Let $(\Omega,E,\Prj)$ be a probability space. The definition of random variables and probability distribution is well-adapted to the case when the random variable $X$ lands in $\R^n$. In this case, we may find the relationship between the probability density function of $X$ and the probability density function of its individual components. 
+
+
+
+
+
+
+\begin{defn}{Joint Probability Mass Function}{} Let $X,Y$ be discrete random variables. The joint probability mass function of $X$ and $Y$ is the function $$p_{X,Y}(x,y)=P(\{\omega\in\Omega:X(\omega)=x,Y(\omega)=y\})=P((X,Y)=(x,y))$$ for all $(x,y)\in\mathbb{R}^2$
+\end{defn}
+
+\begin{thm}{}{} Let $p_{X,Y}$ be the joint probability mass function of two random variables $X,Y$. 
+\begin{itemize}
+\item $p_X(x)=\sum_{y}p_{X,Y}(x,y)$
+\item $p_Y(y)=\sum_{x}p_{X,Y}(x,y)$
+\end{itemize}
+\end{thm}
+
+\begin{defn}{Joint Cumulative Distribution Function}{} Let $X,Y$ be random variables. The joint cumulative distribution function of $X$ and $Y$ is the function $$F_{X,Y}(x,y)=P(\{\omega\in\Omega:X(\omega)\leq x,Y(\omega)\leq y\})=P(X\leq x,Y\leq y)$$ for all $(x,y)\in\mathbb{R}^2$
+\end{defn}
+
+\begin{thm}{}{} Let $F_{X,Y}$ be the joint cumulative distribution function of two random variables $X,Y$. 
+\begin{itemize}
+\item $\lim_{x,y\to-\infty}F_{X,Y}(x,y)=0$
+\item $\lim_{x,y\to\infty}F_{X,Y}(x,y)=1$
+\item $x\leq x'$ and $y\leq y'$ implies $F_{X,Y}(x,y)\leq F_{X,Y}(x',y')$
+\item $F_X(x)=\lim_{y\to\infty}F_{X,Y}(x,y)$
+\item $F_Y(x)=\lim_{x\to\infty}F_{X,Y}(x,y)$
+\end{itemize}
+\end{thm}
+
+\begin{defn}{Jointly Continuous}{} Let $X,Y$ be random variables. $X$ and $Y$ are jointly continuous if $$F_{X,Y}(x,y)=\int_{-\infty}^{x}\int_{-\infty}^{y}f_{X,Y}(u,v)\,dv\,du$$ for a function $f_{X,Y}:\mathbb{R}^2\to\mathbb{R}^2$ satisfying
+\begin{itemize}
+\item $f_{X,Y}(u,v)\geq 0$
+\item $\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}f_{X,Y}(u,v)\,dv\,du=1$
+\end{itemize}
+We call $f_{X,Y}$ the joint density function of $(X,Y)$. 
+\end{defn}
+
+\begin{thm}{}{} Let $F_{X,Y}$ be the joint cumulative distribution function of two random variables $X,Y$. 
+\begin{itemize}
+\item $f_{X,Y}(x,y)=\begin{cases}
+\frac{\partial^2}{\partial x\partial y}F_{X,Y}(x,y)&\text{if the derivative exists at $(x,y)$}\\
+0&\text{otherwise}
+\end{cases}$
+\item $f_X(x)=\int_{-\infty}^{\infty}f_{X,Y}(x,y)\,dy$
+\item $f_Y(x)=\int_{-\infty}^{\infty}f_{X,Y}(x,y)\,dx$
+\end{itemize}
+\end{thm}
+
+\begin{prp} Let $(\Omega,E,\Prj)$ be a probability space. Let $(E,\mE)$ be a measurable space. Let $X,Y:\Omega\to\R$ be a random variables. Then the following are equivalent. 
+\begin{itemize}
+\item $X$ and $Y$ are independent. 
+\item $f_{(X,Y)}=f_Xf_Y$. 
+\item $F_{(X,Y)}=F_XF_Y$
+\end{itemize}
+\end{prp}
+
+\subsection{Algebra of Random Variables}
+\begin{prp}{}{} Let $(\Omega,E,\Prj)$ be a probability space. Let $X,Y:\Omega\to\R$ be a random variables. Then we have $$f_{X+Y}(z)=\int_{-\infty}^\infty f_{(X,Y)}(t,z-t)\;dt$$
+\end{prp}
+
+
+\begin{prp}{}{} Let $X\approx$Poi$(\lambda)$ and $Y\approx$Poi$(\mu)$ be independent. $X+Y\approx$Poi$(\lambda+\mu)$. 
+\end{prp}
+\begin{proof} 
+\begin{align*}
+p_{X+Y}(m)&=\sum_{k\in\Z}\frac{\lambda^k}{k!}e^{-k}\frac{\mu^{m-k}}{(m-k)!}e^{k-m}\\
+&=\frac{1}{m!}e^{-m}\sum_{k=0}^mm!\frac{\lambda^k}{k!}\frac{\mu^{m-k}}{(m-k)!}\\
+&=\frac{1}{m!}e^{-m}\sum_{k=0}^m\binom{m}{k}\lambda^k\mu^{m-k}\\
+&=\frac{(\lambda+\mu)^m}{m!}e^{-m}
+\end{align*}
+\end{proof}
+
+\begin{prp}{}{} Let $X_1,\dots,X_n\approx$Bern$(p)$ be independent. $X_1+\dots+X_n\approx$Bin$(n,p)$. 
+\end{prp}
+\begin{proof} We prove by induction. When $n=2$,
+\begin{align*}
+p_{X_1+X_2}(0)&=p_{X_1}(0)p_{X_2}(0)\\
+&=1-2p+p^2\\
+p_{X_1+X_2}(1)&=p_{X_1}(0)p_{X_2}(1)+p_{X_1}(1)p_{X_2}(0)\\
+&=(1-p)(p)+p(1-p)\\
+&=2p(1-p)\\
+p_{X_1+X_2}(2)&=p_{X_1}(0)p_{X_2}(2)+p_{X_1}(1)p_{X_2}(1)+p_{X_1}(2)p_{X_2}(0)\\
+&=p^2\\
+p_{\text{Bin}(2,p)}(x)&=\binom{2}{x}p^x(1-p)^{n-x}\\
+\end{align*} For $x\in\{0,1,2\}$, the two probability density functions match thus for the case $n=2$, it is true. Now suppose that $X_1+\dots+X_{n-1}\approx$Bin$(n-1,p)$. Let $Y=$Bin$(n-1,p)+X_n$. For $m\in\{0,\dots,n\}$,
+\begin{align*}
+p_Y(m)&=\sum_{k\in\Z}p_{\text{Bin}(n-1,p)}(k)p_{X_n}(m-k)\\
+&=\sum_{k=0}^mp_{\text{Bin}(n-1,p)}(k)p_{X_n}(m-k)\\
+&=\sum_{k=0}^m\binom{n-1}{k}p^k(1-p)^{n-1-k}p_{X_n}(m-k)\\
+&=\sum_{k=m-1}^m\binom{n-1}{k}p^k(1-p)^{n-1-k}p_{X_n}(m-k)\\
+&=\binom{n-1}{m-1}p^{m-1}(1-p)^{n-m}p_{X_n}(1)+\binom{n-1}{m}p^m(1-p)^{n-1-m}p_{X_n}(0)\\
+&=\binom{n-1}{m-1}p^{m}(1-p)^{n-m}+\binom{n-1}{m}p^m(1-p)^{n-m}\\
+&=\binom{n}{m}p^{m}(1-p)^{n-m}
+\end{align*} Thus for the case $X_1+\dots+X_n$ it is true. 
+\end{proof}
+
+\begin{prp}{}{} Let $X\approx$Bin$(m,p)$ and $Y\approx$Bin$(n,p)$ be independent. $X+Y\approx$Bin$(m+n,p)$. 
+\end{prp}
+\begin{proof}
+\begin{align*}
+p_{X+Y}(t)&=\sum_{k\in\Z}p_X(k)p_Y(t-k)\\
+&=\sum_{k=0}^t\binom{m}{k}p^k(1-p)^{m-k}\binom{n}{t-k}p^{t-k}(1-p)^{n-t+k}\\
+&=\sum_{k=0}^t\binom{m}{k}\binom{n}{t-k}p^t(1-p)^{m+n-t}\\
+&=p^t(1-p)^{m+n-t}\sum_{k=0}^t\frac{m!}{k!(m-k)!}\frac{n!}{(t-k)!(n-t+k)!}\\
+\end{align*}
+\end{proof}
+
+\begin{prp}{}{} Let $\lambda>0$. Let $n\in\mathbb{N}$. Let $T_1,\dots,T_n$ be independent random variables with exponential distribution parameter $\lambda$. Then $$Z=\sum_{k=1}^nT_k\approx\text{Gamma}(n,\lambda)$$
+\end{prp}
+\begin{proof} We prove by induction. When $n=2$, 
+\begin{align*}
+f_Z(z)&=\int_{-\infty}^\infty f_{T_1}(x)f_{T_2}(z-x)\,dx\\
+&=\int_0^z\lambda e^{-\lambda x}\lambda e^{-\lambda(z-x)}\,dx\\
+&=\lambda^2e^{-\lambda z}\int_0^z\,dx\\
+&=\lambda^2ze^{-\lambda z}
+\end{align*} Thus the case $n=2$ is true. Suppose that it is true for $n=k-1$. Let $X\approx$Gamma$(n-1,\lambda)$. 
+\begin{align*}
+f_Z(z)&=\int_{-\infty}^\infty f_X(x)f_{T_n}(z-x)\,dx\\
+&=\int_0^z\frac{\lambda^{n-1}}{\Gamma(n-1)}x^{n-2}e^{-\lambda x}\lambda e^{-\lambda(z-x)}\,dx\\
+&=\frac{\lambda^{n}}{\Gamma(n-1)}e^{-\lambda z}\int_0^zx^{n-2}\,dx\\
+&=\frac{\lambda^{n}}{\Gamma(n-1)}e^{-\lambda z}\frac{1}{n-1}z^{n-1}\\
+&=\frac{\lambda^{n}}{\Gamma(n)}z^{n-1}e^{-\lambda z}\\
+\end{align*} Thus we are done
+\end{proof}
+
+\begin{prp}{}{} Let $m,n\in\mathbb{N}$ and $\lambda>0$. Let $X\approx$Gamma$(m,\lambda)$ and $Y\approx$Gamma$(n,\lambda)$ be independent. $X+Y\approx$Gamma$(m+n,\lambda)$. 
+\end{prp}
+\begin{proof}
+\begin{align*}
+f_Z(z)&=\int_{-\infty}^\infty f_X(x)f_Y(z-x)\,dx\\
+&=\int_0^z\frac{\lambda^{m}}{\Gamma(m)}x^{m-1}e^{-\lambda x}\frac{\lambda^{n}}{\Gamma(n)}(z-x)^{n-1}e^{-\lambda(z-x)}\,dx\\
+&=\frac{\lambda^{m+n}}{\Gamma(m)\Gamma(n)}e^{-\lambda z}\int_0^zx^{m-1}(z-x)^{n-1}\,dx\\
+&=\frac{\lambda^{m+n}}{\Gamma(m)\Gamma(n)}e^{-\lambda z}\int_0^zx^{m-1}\sum_{k=0}^{n-1}\binom{n-1}{k}z^{n-1-k}(-x)^k\,dx\\
+&=\frac{\lambda^{m+n}}{\Gamma(m)\Gamma(n)}e^{-\lambda z}\sum_{k=0}^{n-1}\binom{n-1}{k}z^{n-1-k}(-1)^k\int_0^zx^{m-1+k}\,dx\\
+&=\frac{\lambda^{m+n}}{\Gamma(m)\Gamma(n)}z^{m+n-1}e^{-\lambda z}\sum_{k=0}^{n-1}\binom{n-1}{k}(-1)^k\frac{1}{m+k}\\
+\end{align*}
+\end{proof}
+
+\begin{thm}{}{} Suppose that $T_1,T_2,\dots$ are independent random variables with exponential distribution parameter $\lambda$. Define for $t\geq0$, $$N_t=\begin{cases}
+0&\text{if $T_1>t$}\\
+1&\text{if $T_1\leq t<T_1+T_2$}\\
+2&\text{if $T_1+T_2\leq t<T_1+T_2+T_3$}\\
+\cdots\\
+\end{cases}$$
+Then, for any $t\geq0$, we have that $N_t\approx$Poi$(\lambda t)$. 
+\end{thm}
+
+\begin{defn}{Poisson Process}{} The family of random variables $\{N_t:t\geq 0\}$ is said to be Poisson process of intensity $\lambda$ if 
+\begin{itemize}
+\item $N_0=0$
+\item for any $t_0,\dots,t_n$ with $0=t_0<t_1<t_2<\dots<t_n$, the random variables $N_{t_1}$, $N_{t_2}-N_{t_1}$, $N_{t_3}-N_{t_2}$, $\dots$, $N_{t_n}-N_{t_{n-1}}$ are independent, and $N_{t_i}-N_{t_{i-1}}\approx$Poi$(\lambda(t_i-t_{i-1}))$
+\end{itemize}
+\end{defn}
+
+\pagebreak
+\section{Expectation and Variance}
+\subsection{Expectations}
+\begin{defn}{Expectations}{} Let $(\Omega,\mathcal{F},P)$ be a probability space. Let $X:\Omega\to\R$ be a random variable. Define the expectation of $X$ to be $$E[X]=\int_\Omega XdP$$
+\end{defn}
+
+\begin{lmm}{}{} Let $(\Omega,\mathcal{F},P)$ be a probability space. Let $X:\Omega\to\R$ be a random variable. Then we have $$E[X]=\int_\R xf_X(x)\;dx$$
+\end{lmm}
+
+\begin{prp}{Law of the Unconscious Staticians}{} Let $(\Omega,\mathcal{F},P)$ be a probability space. Let $X_1,\dots,X_n:\Omega\to\R$ be random variables. Let $g:\R\to\R$ be a function. Then we have $$E[g\circ(X_1,\dots,X_n)]=\int_{\R^n}g(x_1,\dots,x_n)f_{(X_1,\dots,X_n)}(x_1,\dots,x_n)\;dx_1\cdots dx_n$$
+\end{prp}
+
+\begin{prp}{}{} Let $(\Omega,\mathcal{F},P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random variables. Then the following are true. 
+\begin{itemize}
+\item If $X,Y$ are random variables and $a,b\in\R$, then $$E[aX+bY]=aE[X]+bE[Y]$$
+\item If $P(X\geq Y)=1$, then $$E[X]\geq E[Y]$$
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{} Let $(\Omega,\mathcal{F},P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random variables. Then $X,Y$ are independent if and only if $$E[g(X)h(Y)]=E[g(X)]E[h(Y)]$$ for any two functions $g,h:\R\to\R$. 
+\end{prp}
+
+\subsection{Variance and Covariance}
+\begin{defn}{Variance}{} Let $(\Omega,\mathcal{F},P)$ be a probability space. Let $X:\Omega\to\R$ be a random variable. Define the variance of $X$ to be $$\text{Var}(X)=E[(X-E[X])^2]$$
+\end{defn}
+
+\begin{lmm}{}{} Let $(\Omega,\mathcal{F},P)$ be a probability space. Let $X:\Omega\to\R$ be a random variable. Then the following are true. 
+\begin{itemize}
+\item $\text{Var}(X)\geq 0$. 
+\item $\text{Var}(X)=0$ if and only if $P_X(E[X])=1$. 
+\item $\text{Var}(X)=E[X^2]-E[X]^2$
+\item $\text{Var}(aX+b)=a^2\text{Var}(X)$ for any $a,b\in\R$. 
+\end{itemize}
+\end{lmm}
+
+\begin{prp}{}{} Suppose that $X_1,\dots,X_n$ are independent variables with finite variance. Then $$\vari\left(\sum_{k=1}^nX_k\right)=\sum_{k=1}^n\vari(X_k)$$
+\end{prp}
+
+\begin{defn}{Covariance}{} Let $X,Y$ be two random variables. The covariance of $X,Y$ is defined as $$\cov(X,Y)=E[(X-E(X))(Y-E(Y))]$$
+\end{defn}
+
+\begin{prp}{}{} Suppose that $X,Y$ are random variables. 
+\begin{itemize}
+\item $\cov(X,Y)=\cov(Y,X)$
+\item $\cov(X,X)=\vari(X)$
+\item $\cov(X,Y)=E(XY)-E(X)E(Y)$
+\item If $X,Y$ are independent, $\cov(X,Y)=0$
+\item $\cov(aX+bY,Z)=a\cov(X,Z)+b\cov(Y,Z)$
+\end{itemize}
+\end{prp}
+
+\begin{prp}{Variance of Sums}{} For random variables $X_1,\dots,X_n$, we have $$\vari\left(\sum_{i=1}^{n}X_i\right)=\sum_{i=1}^n\vari\left(X_i\right)+2\sum_{1\leq i<j\leq n}\cov\left(X_i,X_j\right)$$
+\end{prp}
+
+\begin{thm}{}{} Given two random variables $X$ and $Y$, we have $$\abs*{\cov(X,Y)}\leq\sqrt{\vari(X)\vari(Y)}$$
+\end{thm}
+
+\begin{thm}{Correlation Coefficient}{} The correlation coefficient between two random variables $X$ and $Y$ is given by $$\rho(X,Y)=\frac{\cov(X,Y)}{\sqrt{\vari(X)\vari(Y)}}$$
+\end{thm}
+
+\begin{prp}{}{} Let $X$ and $Y$ be random variables. We have $$-1\leq\rho(X,Y)\leq 1$$ Moreover, for any $a,b,c,d\in\mathbb{R}$ with $a,c>0$, we have $$\rho(aX+b,cY+d)=\rho(X,Y)$$
+\end{prp}
+
+\begin{prp}{}{} Let $X$, $Y$ be random variables. 
+\begin{itemize}
+\item $\rho(X,X)=1$
+\item $\rho(X,-X)=-1$
+\item $X,Y$ are uncorrelated if $\rho(X,Y)=0$
+\end{itemize}
+\end{prp}
+
+\subsection{Moments}
+\begin{defn}{$k$th Moment}{} Let $X$ be a random variable. For $k\in\mathbb{N}$ we define the $k$th  moment of $X$ as $E[X^k]$ whenever the expectation exists. 
+\end{defn}
+
+\begin{defn}{Moment Generating Function}{} The moment-generating function of a random variable $X$ is the function $M_X$ defined as $$M_X(t)=E[e^{tX}]$$ for all $t\in\mathbb{R}$ for which the expectation is well defined. 
+\end{defn}
+
+\begin{thm}{}{} Assume that $M_X$ exists in a neighbourhood of $0$, that is, there exists $\epsilon>0$ such that for all $t\in(-\epsilon,\epsilon)$ we have $M_X(t)<\infty$. Then for all $k\in\mathbb{N}$ the $k$th moment of $X$ exists, and $$E[X^k]=\frac{d^k}{dt^k}M_X(t)\bigg|_{t=0}$$
+\end{thm}
+\begin{proof} We have that $E[X^k]=\int_{-\infty}^\infty x^kf_X(x)\,dx$ for any continuous cummulative probability. On the other hand, 
+\begin{align*}
+\frac{d^k}{dt^k}M_X(t)\bigg|_{t=0}&=\frac{d^k}{dt^k}\int_{-\infty}^\infty e^{tx}f_X(x)\,dx\bigg|_{t=0}\\
+&=\int_{-\infty}^\infty\frac{\partial^k}{\partial t^k}e^{tx}f_X(x)\,dx\bigg|_{t=0}\\
+&=\int_{-\infty}^\infty x^ke^{tx}f_X(x)\,dx\bigg|_{t=0}\\
+&=\int_{-\infty}^\infty x^kf_X(x)\,dx\\
+\end{align*}
+\end{proof}
+
+\begin{prp}{}{} Assume that all expectations in the statement are well defined. 
+\begin{itemize}
+\item For any $a,b\in\mathbb{R}$, $M_{aX+b}(t)=e^{tb}M_X(at)$
+\item If $X$, $Y$ are independent, then $M_{X+Y}(t)=M_X(t)M_Y(t)$
+\end{itemize}
+\end{prp}
+
+\begin{thm}{}{} Let $X$, $Y$ be two random variables. Assume that the moment generating functions of $X$, $Y$ exists and are finite on an interval of the form $(-\epsilon,\epsilon)$. Assume further that $M_X(t)=M_Y(t)$ for all $t\in(-\epsilon,\epsilon)$. Then $X$, $Y$ have the same distribution. 
+\end{thm}
+
+\begin{thm}{}{} Let $X$ be a non-negative random variable whose expectation is well defined. We then have $$P(X\geq x)\leq\frac{E(X)}{x}$$
+\end{thm}
+
+\begin{thm}{}{} Let $X$ be a random variable whose variance is well defined. Then $$P(\abs{X-E(X)}\geq x)\leq\frac{\vari(X)}{x^2}$$ for all $x>0$
+\end{thm}
+
+\subsection{Conditional Expectations}
+\begin{defn}{Conditional Expectations on Subalgebras}{} Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a random variable. Let $\mH$ be a $\sigma$-subalgebra of $\mF$. Define $E[X\;|\;\mH]:\Omega\to\R$ to be a random variable such that the following are true. 
+\begin{itemize}
+\item $E[X\;|\;\mH]$ is $\mH$-measurable. 
+\item For any $A\in\mH$, we have $E[X\cdot 1_A]=E[E[X\;|\;\mH]\cdot 1_A]$
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{} Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a random variable. Let $\mH$ be a $\sigma$-subalgebra of $\mF$. Then the random variable $E[X\;|\;\mH]$ exists and is unique up to almost surely equality. 
+\end{lmm}
+
+\begin{lmm}{}{} Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random variables. Let $\mH$ be a $\sigma$-subalgebra of $\mF$. Then the following are true. 
+\begin{itemize}
+\item Stability: If $X$ is $\mH$-measurable, then $E[XY\;|\;\mH]=XE[Y\;|\;\mH]$. 
+\item Independence: If $\sigma(X)$ and $\mH$ are independent, then $E[X\;|\;\mH]=E[X]$. 
+\end{itemize}
+\end{lmm}
+
+\begin{defn}{Conditional Expectation on Random Variables}{} Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random variables. Define the conditional expectation of $X$ on $Y$ to be $$E[X\;|\;Y]=E[X\;|\;\sigma(Y)]$$
+\end{defn}
+
+\begin{defn}{Conditional Density}{} Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random variables. Define the conditional density of $X$ on the event $\{\omega\in\Omega\;|\;Y(\omega)=y\}$ by $$f_{X\;|\;Y}(x,y)=\frac{f_{X,Y}(x,y)}{f_Y(y)}$$
+\end{defn}
+
+\begin{lmm}{}{} Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random variables. Then we have $$E[X\;|\;Y](\omega)=E[X\;|\;Y=Y(\omega)]=\int_{-\infty}^\infty xf_{X\;|\;Y}(x,Y(\omega))\;dx$$
+\end{lmm}
+
+\pagebreak
+\section{Convergence of Random Variables}
+\subsection{Different Notions of Convergences}
+\begin{defn}{Convergence in Mean Square}{} We say that a sequence of random variables $X_1,X_2,\dots$ converges in mean square to a random variable $X$ if $$\lim_{n\to\infty}E[(X_n-X)^2]=0$$
+\end{defn}
+
+\begin{defn}{Convergence in Probability}{} We say that a sequence of random variables $X_1,X_2,\dots$ converges in probability to a random variable $X$ if for every $\epsilon>0$, we have $$\lim_{n\to\infty}P(\abs{X_n-X}>\epsilon)=0$$
+\end{defn}
+
+\begin{defn}{Convergence in Distribution}{} We say that a sequence of random variables $X_1,X_2,\dots$ converges in distribution to a random variable $X$ if $$\lim_{n\to\infty}F_{X_n}(x)=F_X(x)$$ for every $x$ in the set $C=\{x\in\mathbb{R}:F_X\text{ is continuous at } x\}$. 
+\end{defn}
+
+\begin{prp}{}{} Let $(\Omega,\mF,P)$ be a probability space. Let $X_n:\Omega\to\R$ be a sequence of random variables for $n\in\N\setminus\{0\}$. Let $X:\Omega\to\R$ also be a random variable. Then the following are true. 
+\begin{itemize}
+\item If $X_n$ converges in mean square to $X$, then $X_n$ converges in probability to $X$. 
+\item If $X_n$ converges in probability to $X$, then $X_n$ converges in distribution to $X$. 
+\end{itemize}
+\end{prp}
+
+\subsection{Law of Large Numbers}
+\begin{thm}{Markov Inequality}{} Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a random variable. If $E[X]<\infty$, then we have $$P(\abs{X}\geq a)\leq\frac{E[X]}{a}$$ for any $a>0$. 
+\end{thm}
+
+\begin{thm}{Chebyshev Inequality}{} Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a random variable. If $E[X^2]<\infty$, then we have $$P(\abs{X}\geq a)\leq\frac{E[X^2]}{a}$$ for any $a>0$. 
+\end{thm}
+
+\begin{thm}{Weak law of large numbers}{} Let $(\Omega,\mF,P)$ be a probability space. Let $X_n:\Omega\to\R$ for $n\in\N\setminus\{0\}$ be a sequence of independently identically distributed random variables with mean $\mu$. Let $S_n=\frac{1}{n}\sum_{i=1}^nX_i$. Then we have $$\lim_{n\to\infty}P(\abs{S_n-\mu}>\varepsilon)=0$$ for all $\varepsilon>0$. In other words, $(S_n)_{n\in\N\setminus\{0\}}$ converges in probability to $\mu$. 
+\end{thm}
+
+\begin{thm}{Law of large numbers in mean square}{} Let $X_1,X_2,\dots$ be a sequence of independent random variable, each with mean $\mu$ and variance $\sigma^2$. Then $$\lim_{n\to\infty}\frac{X_1+\dots+X_n}{n}\to\mu$$ in mean square. 
+\end{thm}
+
+\subsection{Central Limit Theorem}
+\begin{thm}{Central Limit Theorem}{} Let $(\Omega,\mF,P)$ be a probability space. Let $X_n:\Omega\to\R$ be a sequence of independent and identically distributed random variables for $n\in\N\setminus\{0\}$, each with mean $\mu$ and variance $\sigma^2\neq 0$. Let $S_n=X_1+\dots+X_n$. Then the standardized version of $S_n$, $$Z_n=\frac{S_n-E(S_n)}{\sqrt{\vari(S_n)}}=\frac{S_n-n\mu}{\sigma\sqrt{n}}$$ converges in distribution as $n\to\infty$ to a Gaussian random variable with mean $0$ and variance $1$. That is, $$\lim_{n\to\infty}P(Z_n\leq x)=\lim_{n\to\infty}F_{Z_n}(x)=F_Y(y)=\int_{-\infty}^{x}-\frac{1}{\sqrt{2\pi}}e^{-y^2/2}$$
+\end{thm}
+
+
+
+
+
+
+
+
+
+
+\end{document}

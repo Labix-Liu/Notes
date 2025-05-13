@@ -1,0 +1,402 @@
+\documentclass[a4paper]{article}
+
+\input{C:/Users/liula/Desktop/Latex/Headers V1.2.tex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Labix}
+\lhead{Geometric Group Theory}
+\rfoot{\thepage}
+
+\title{Geometric Group Theory}
+
+\author{Labix}
+
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+Potentially good books: Humphreys, Erdmann and Wildson
+\end{abstract}
+\pagebreak
+\tableofcontents
+
+\pagebreak
+\section{Quasi-Isometries}
+\subsection{Some Metric Properties}
+\begin{defn}{Proper Metric Spaces}{} Let $X$ be a metric space. We say that $X$ is proper if $B_r(x)$ is compact for all $r\in R$ and $x\in X$. 
+\end{defn}
+
+\begin{defn}{}{} Let $X$ be a metric space. We say that $X$ is geodesic if for all $x,y\in X$, there exists a geodesic from $x$ to $y$. 
+\end{defn}
+
+\subsection{Quasi-Isometric Spaces}
+\begin{defn}{Quasi-Isometric Embeddings}{} Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces. Let $f:X\to Y$ be a function of sets. We say that $f$ is a quasi-isometric embedding if there exists $A\geq 1$ and $B\geq 0$ such that $$\frac{1}{A}d_X(x_1,x_2)-B\leq d_Y(f(x),f(y))\leq Ad_X(x,y)+B$$ for all $x_1,x_2\in X$. 
+\end{defn}
+
+\begin{defn}{Quasi-Isometries}{} Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces. Let $f:X\to Y$ be a function of sets. We say that $f$ is a quasi-isometry if the following are true. 
+\begin{itemize}
+\item $f$ is a quasi-isometric embedding. 
+\item There exists $C\geq 0$ and $x_0\in X$ such that $$d_Y(y,f(x_0))\leq C$$ for all $y\in Y$. 
+\end{itemize}
+In this case we say that $X$ and $Y$ are quasi-isometric. 
+\end{defn}
+
+\begin{prp}{}{} Quasi-isometry is an equivalence relation on metric spaces. 
+\end{prp}
+
+\begin{prp}{}{} Let $X$ and $Y$ be metric spaces. If $X$ and $Y$ are Lipshitz equivalence, then $X$ and $Y$ are quasi-isometric. 
+\end{prp}
+
+\subsection{Quasi-Geodesics}
+\begin{defn}{Quasi-Geodesics}{} Let $X$ be a metric space. Let $\gamma:I\to X$ be as path in $X$. We say that $\gamma$ is a quasi-geodesic if $\gamma$ is a quasi-isometric embedding. 
+\end{defn}
+
+\pagebreak
+\section{The Geometry of Presentations}
+\subsection{The Cayley Graph of a Group}
+\begin{defn}{The Cayley Graph of a Group}{} Let $G$ be a group. Let $S$ be a generating set of $G$. Define the Cayley graph $\text{Cay}(G,S)$ of $G$ with respect to $S$ to consist of the following data. 
+\begin{itemize}
+\item The vertices are given by $V(\text{Cay}(G,S))=G$
+\item The edges are given by $E(\text{Cay}(G,S))=\{(g,gs)\;|\;g\in G,s\in S\}$
+\end{itemize}
+\end{defn}
+
+Let $(V,E)$ be a graph. Recall that a graph automorphism consists of a bijective map of vertices and a bjective map of edges such that $$\{\phi(v),\phi(w)\}\in E$$ for all $\{v,w\}\in E$. They form a group by composition. 
+
+\begin{lmm}{The Action Lemma}{} Let $G$ be a group. Let $S$ be a generating set of $G$. Then $G$ acts on the Cayley graph $\text{Cay}(G,S)$ of $G$ with respect to $S$ via tha map $$\cdot:G\times\text{Cay}(G,S)\to\text{Cay}(G,S)$$ defined by $h\cdot g=hg$ and $h\cdot (g,gs)=(hg,hgs)$. Moreover, the action is faithful. 
+\end{lmm}
+
+\begin{prp}{}{} Let $G$ be a group. Let $S$ be a generating set of $G$. Then the following are true regarding $\text{Cay}(G,S)$. 
+\begin{itemize}
+\item $\text{Cay}(G,S)$ has no embedded cycles. 
+\item $\text{Cay}(G,S)$ is connected. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{} Let $S$ be a set. Then $\text{Cay}(F_S,S)$ is a tree. 
+\end{prp}
+
+\begin{prp}{}{} Let $G$ be a group. Let $S$ be a generating set of $G$. Then $\text{Cay}(F_S,S)$ is a universal cover of $\text{Cay}(G,S)$. 
+\end{prp}
+
+\subsection{The Word Metric on a Cayley Graph}
+Given a graph $\Gamma$, there are two ways to specify a path in $\Gamma$. 
+\begin{itemize}
+\item We can define a path by a sequence $\gamma_V:[n]\to V(\Gamma)$ of adjacent vertices. 
+\item We can also define a path by a sequence $\gamma_E:[n-1]\to E(\Gamma)$ of edges. 
+\end{itemize}
+
+The above notation also indicates that any path is determined by either $n$ vertices or $n-1$ edges. 
+
+\begin{defn}{The Word Metric}{} Let $G$ be a group. Let $S$ be a generating set of $G$. Define the word metric on $\text{Cay}(G,S)$ to be the map $$d_S:V(\text{Cay}(G,S))\times V(\text{Cay}(G,S))\to\N$$ given by $$d_S(g,h)=\min\{n\in\N\;|\;\gamma_V:[n]\to V(\text{Cay}(G,S))\text{ is a path from }g\text{ to }h\}$$
+\end{defn}
+
+\begin{lmm}{}{} Let $G$ be a group. Let $S$ be a generating set of $G$. Then $d_S$ is a metric on $\text{Cay}(G,S)$. 
+\end{lmm}
+
+\begin{prp}{}{} Let $G$ be a group. Let $S$ be a generating set of $G$. Let $g\in G$ be fixed. Then the map $$(h,k)\mapsto(gh,gk)$$ given by the action lemma is an isometry. In other words, $$d_S(h,k)=d_S(gh,gk)$$
+\end{prp}
+
+Let $X$ be a metric space with two metrics $d_1$ and $d_2$. Recall that $d_1$ and $d_2$ are bilipschitz equivalent if there exists two constants $0<c_1\leq c_2<\infty$ such that $$c_1d_1(x,y)\leq d_2(x,y)\leq c_2d_1(x,y)$$ for all $x,y\in X$. 
+
+\begin{lmm}{}{} Let $G$ be a group. Let $S,T$ be generating sets of $G$. Then $d_S$ and $d_T$ are bilipschitz equivalent. 
+\end{lmm}
+
+\begin{defn}{The Word Norm}{} Let $G$ be a group. Let $S$ be a generating set of $G$. Let $\text{Cay}(G,S)$ be the Cayley complex of $G$ and $S$. Define the word norm of $g\in G$ to be $$\|g\|_S=d_S(1_G,g)$$
+\end{defn}
+
+\begin{lmm}{}{} Let $G$ be a group. Let $S$ be a generating set of $G$. Then the following are true. 
+\begin{itemize}
+\item $d_S(g,h)=\|g^{-1}h\|_S$ for all $g,h\in G$. 
+\item $\|g^{-1}\|_S=\|g\|_S$ for all $g\in G$. 
+\item $\|gh\|_S\leq\|g\|_S+\|h\|_S$ for all $g,h\in G$. 
+\end{itemize}
+\end{lmm}
+
+\subsection{Realizing the Cayley Graph as a Connected Space}
+We have proved that Cayley graphs are connected as graphs, in the sense that any two vertices are connected by a path. But a priori the graph is not connected as a topological space, whose topology is generated by the metric. 
+
+\begin{defn}{Geometric Realization of Cayley Graphs}{} Let $G$ be a group. Let $S$ be a generating set of $G$. Define the geometric realization $\abs{\text{Cay}(G,S)}$ of the Cayley graph to be the space $$\abs{\text{Cay}(G,S)}=\frac{E(\text{Cay}(G,S))\times I}{\sim}$$ where $((g_1,g_1s_1),t_1)\sim((g_2,g_2s_2),t_2)$ if one of the following are true. 
+\begin{itemize}
+\item They describe the same vertex (with different representations of elements in $G$): $((g_1,g_1s_1),t_1)=((g_2,g_2s_2),t_2)$. 
+\item They describe the same vertex but they lie on different edges: Either one of the following
+\begin{itemize}
+\item $g_1=g_2$ and $t_1=t_2=0$
+\item $g_1=g_2s_2$ and $t_1=0$, $t_2=1$
+\item $g_1s_1=g_2s_2$ and $t_1=t_2=1$
+\item $g_1s_1=g_2$ and $t_1=1$, $t_2=0$
+\end{itemize}
+\item They describe the same point on an edge but different orientations: $(g_1,g_1s_1)=(g_2,g_2s_2^{-1})$ and $t_1=1-t_2$. 
+\end{itemize}
+\end{defn}
+
+In particular, this gives a $1$-dimensional CW complex. \\
+
+We can also give a metric on the realization so that its restriction to the actual Cayley graph recovers the word metric. 
+
+\begin{defn}{Metric on realization}{} Let $G$ be a group. Let $S$ be a generating set of $G$. Define a metric $d:\abs{\text{Cay}(G,S)}\times\abs{\text{Cay}(G,S)}\to\R$ as follows. $$d([((g_1,g_1s_1)t_1)],[((g_2,g_2s_2),t_2)])=\begin{cases}
+\abs{t_1-t_2} & \text{ if } (g_1,g_1s_1)=(g_2,g_2s_2)\\
+\abs{t_1-(1-t_2)} & \text{ if }(g_1,g_1s_1)=(g_2s_2,g_2)\\
+\min\left\{\substack{t_1+d_S(g_1,g_2)+t_2\\t_1+d_S(g_1,g_2s_2)+1-t_2\\1-t_1+d_S(g_1s_1,g_2)+t_2\\1-t_1+d_S(g_1s_1,g_2s_2)+1-t_2}\right\} & \text{otherwise}
+\end{cases}$$
+\end{defn}
+
+We abuse notation sometimes and freely interchange the use of the Cayley graph and its geometric realization when the context is clear. 
+
+\subsection{Realizing the Cayley Graph as a Presentation Complex}
+
+\pagebreak
+\section{Metric Properties of Cayley Graphs}
+\subsection{The Svarc-Milnor Lemma}
+Let $G$ be a group acting on a space $X$. Recall that $G$ is a properly discontinuous group action if for every compact set $K\subseteq X$, we have $$(g\cdot K)\cap K\neq\emptyset$$ for finitely many $g\in G$. 
+
+\begin{thm}{The Svarc-Milnor Lemma}{} Let $X$ be a geodesic metric space such that $B_r(x)$ is compact for all $x\in X$ and $r\in\R_{\geq 0}$. Let $G$ be a group acting on $X$ such that the action is properly discontinuous and $X/G$ is compact. Then the following are true. 
+\begin{itemize}
+\item $G$ is finitely generated. 
+\item For any finite generating set $S$ of $G$, $\abs{\text{Cay}(G,S)}$ is quasi-isometric to $(X,d)$
+\end{itemize}
+\end{thm}
+
+\begin{prp}{}{} Let $G$ be a group. Let $S,T$ be a finite generating sets of $G$. Then $\abs{\text{Cay}(G,S)}$ and $\abs{\text{Cay}(G,T)}$ are quasi-isometric via the identity map on $G$. 
+\end{prp}
+
+\subsection{Geodesics on Cayley Graphs}
+\begin{prp}{}{} Let $G$ be a group. Let $S$ be a finite generating set. Then the following are true. 
+\begin{itemize}
+\item $\abs{\text{Cay}(G,S)}$ is proper. 
+\item $\abs{\text{Cay}(G,S)}$ is complete. 
+\item $\abs{\text{Cay}(G,S)}$ is geodesic. 
+\end{itemize}
+\end{prp}
+
+\begin{defn}{Geodesic Words}{} Let $G$ be a group. Let $S$ be a generating set. Let $\gamma_V:[n]\to V(\text{Cay}(G,S))$ be a path in $\text{Cay}(G,S)$. We say that $\gamma_V$ is a geodesic word if $$d_S(\gamma_V(0),\gamma_V(n))=n$$
+\end{defn}
+
+This is not the same definition as geodesics in metric spaces. (It doesn't make sense to talk about paths in $\text{Cay}(G,S)$ because it is a discrete topological space when we consider the topology generated by the metric). \\
+
+Recalling that the metric on $\text{Cay}(G,S)$ is defined as the minimum length of a path between two elements, we see that geodesics are precisely paths that realizes such a distance minimizing path. 
+
+\begin{prp}{}{} Let $G$ be a group. Let $S$ be a generating set of $G$. Then $\gamma_V:[n]\to V(\text{Cay}(G,S))$ is a geodesic word if and only if $\abs{\gamma_V}:[0,n]\to\abs{\text{Cay}(G,S)}$ is a geodesic in the sense of metric spaces. 
+\end{prp}
+
+\begin{lmm}{}{} Let $G$ be a group. Let $S$ be a generating set. If $\gamma_V:[n]\to\text{Cay}(G,S)$ is a geodesic, then $\gamma_V(0)\ast\cdots\ast\gamma_V(n)$ is a reduced word. 
+\end{lmm}
+
+Note: The converse is not true. Consider $G=\langle a,b\rangle a^3=b^2$. Both $a^3$ and $b^2$ are reduced words but they have different lengths. \\
+
+\subsection{Representing Geodesics in a Canonical Way}
+Note: geodesics are not the unique distance minimizing curve between two elements. Therefore we want to find a representative. 
+
+\begin{defn}{Short Lex Ordering}{} Let $G$ be a group. Let $S$ be a finite generating set of $G$. Let $u,v\in F(S)$. We say that $$u<_{sl}v$$ if one of the following are true. 
+\begin{itemize}
+\item $\abs{u}<\abs{v}$
+\item $\abs{u}=\abs{v}$ and there exists $w$ such that $u=w\ast u'$, $v=w\ast v'$ and $u'<_{sl}v'$. 
+\end{itemize}
+We call $<_{sl}$ the short lex ordering on $F(S)$. 
+\end{defn}
+
+\begin{lmm}{}{} Let $G$ be a group. Let $S$ be a generating set. Then $<_{sl}$ is a total order on $F(S)$. 
+\end{lmm}
+
+\begin{defn}{Short Lex Representative}{} Let $G$ be a group. Let $S$ be a generating set of $G$. Let $g\in G$. Define the short lex representative of $g$ with respect to $S$ to be $$\min_{<_{sl}}\left\{s\in F(S)\;|\;s=g\text{ in G}\right\}$$
+\end{defn}
+
+\begin{lmm}{}{} Let $G$ be a group. Let $S$ be a generating set of $G$. Any subword of a short lex representative with respect to $S$ is a short lex representative. 
+\end{lmm}
+
+\begin{crl}{}{} Let $G$ be a group. Let $S$ be a generating set of $G$. Then the set of paths in $\text{Cay}(G,S)$ consisting of short lex representatives form a spanning tree for $\text{Cay}(G,S)$. 
+\end{crl}
+
+\pagebreak
+\section{The Growth Type of Groups}
+\subsection{Growth Function}
+\begin{defn}{Ball Around an Element}{} Let $G$ be a group. Let $S$ be a finite generating set of $G$. Let $R>0$. Define the ball around $g\in G$ with radius $n$ to be $$B_n^{G,S}(g)=\{h\in G\;|\;d_S(g,h)\leq n\}$$
+\end{defn}
+
+\begin{prp}{}{} Let $G$ be a group. Let $S$ be a finite generating set. Let $g,h\in G$. Then $$\abs{B_n^G(g)}=\abs{B_m^G(h)}$$ for any $n\in\N$. 
+\end{prp}
+
+\begin{defn}{Growth Function}{} Let $G$ be a group. Let $S$ be a finite generating set of $G$. Let $R>0$. Define the growth function $\Gamma_{G,S}:\N\to\N$ of $G$ with respect to $S$ to be $$\Gamma_{G,S}(n)=\abs{B_n^{G,S}(1_G)}$$ for $n\in\N$. 
+\end{defn}
+
+\begin{prp}{}{} Let $G$ be a group Let $S$ be a finite generating set of $G$. Then the following are true. 
+\begin{itemize}
+\item $\Gamma_{G,S}(m+n)\leq\Gamma_{G,S}(m)\Gamma_{G,S}(n)$ for all $m,n\in\N$
+\item $\Gamma_{G,S}(n)\leq(2\abs{S}+1)^n$ for all $n\in\N$. 
+\end{itemize} \tcbline
+\begin{proof}
+For any pair $(h,k)$ of elements of $G$ such that $d_S(1,h)=m$ and $d_S(1,k)=n$, we have that $$d_S(1_G,hk)\leq d_S(1_G,h)+d_S(h,hk)=d_S(1_G,h)+d_S(1_G,k)=m+n$$ This means that for any unique pair of elements $(h,k)$ with $h\in B_m^{G,S}(1_G)$ and $k\in B_n^{G,S}(1_G)$, there exists a possibly non-unique element $hk\in B_{m+n}^{G,S}(1_G)$. Hence $$\abs{B_{m+n}^{G,S}(1_G)}\leq\abs{B_m^{G,S}(1_G)}\cdot\abs{B_n^{G,S}(1_G)}$$ and so $\Gamma_{G,S}(m+n)\leq\Gamma_{G,S}(m)\Gamma_{G,S}(n)$. \\~\\
+
+Notice that $\Gamma_{G,S}(1)=(2\abs{S}+1)$ since the paths of the Cayley graph is given by $S$ and their inverses. Together with the identity element which has zero norm gives the formula. We can then recursively apply the above inequality to get $$\Gamma_{G,S}(n)\leq\left(\Gamma_{G,S}(1)\right)^n=(2\abs{S}+1)^n$$
+\end{proof}
+\end{prp}
+
+\begin{lmm}{}{} Let $G$ be a group Let $S$ be a finite generating set of $G$. Then the following are true. 
+\begin{itemize}
+\item $\Gamma_{G,S}(n)\leq\Gamma_{F(S),S}(n)$ for all $n\in\N$. 
+\item $\Gamma_{G,S}(n)=\Gamma_{F(S),S}(n)$ for all $n\in\N$ if and only if $G\cong F(S)$. 
+\end{itemize} \tcbline
+\begin{proof}
+The induced homomorphism $\phi:F(S)\to G$ sends $B_n^{F(S),S}(1_{F(S)})$ surjectively to $B_n^{F(S),S}(1_{F(S)})$. Indeed if $\gamma_V:[n]\to F(S)$ is a geodesic, then $\phi\circ\gamma_V$ may not be a geodesic so that $d_S(1_G,\phi\circ\gamma_V(n))\leq n$. This means that $\phi\circ\gamma_V(n)\in B_n^{G,S}(1_G)$. Conversely, if $g\in B_n^{G,S}(1_G)$ then $g=w_1\cdots w_n$ is a reduced word in $G$ for $w_1,\dots,w_n\in S$. Then $w_1\cdots w_n$ is also a reduced word in $F(S)$ and hence lie in $B_n^{F(S),S}(1_{F(S)})$. Moreover, $\phi(w_1\cdots w_n)=g$. Hence $\phi$ is surjective on the two balls. Then we have $$\Gamma_{G,S}(n)=\abs{B_n^{G,S}(1_G)}=\abs{\phi\left(B_n^{F(S),S}(1_{F(S)})\right)}\leq\abs{B_n^{F(S),S}(1_{F(S)})}=\Gamma_{F(S),S}(n)$$
+\end{proof}
+\end{lmm}
+
+\begin{lmm}{}{} Let $S$ be a finite set. Then $$\Gamma_{F(S),S}(n)=\frac{1-\abs{S}(2\abs{S}-1)^n}{1-\abs{S}}$$ \tcbline
+\begin{proof}
+I claim that the number of reduced words of length $n$ is $2\abs{S}(2\abs{S}-1)^{n-1}$ when $n\geq 1$. We induct on $n$. When $n=1$, then any reduced word is just the choice of a letter. Hence there are $2\abs{S}$ number of reduced words of length $1$. Now suppose that the number of reduced words of length $k$ is given by $2\abs{S}(2\abs{S}-1)^{k-1}$. Any reduced word of length $k+1$ is given by the concatenation of a reduced word of length $k$ and a choice of letter that is not the inverse of the last element of the given word. Thus there are $2\abs{S}(2\abs{S}-1)^{k-1}\cdot(2\abs{S}-1=2\abs{S}(2\abs{S}-1)^k)$ number of reduced words of length $k+1$. This completely the induction step. \\~\\
+
+Then we have 
+\begin{align*}
+\Gamma_{F(S),S}(n)&=1+\sum_{i=1}^n2\abs{S}(2\abs{S}-1)^{n-1}\\
+&=1+2\abs{S}\sum_{i=0}^{n-1}(2\abs{S}-1)^i\\
+&=1+2\abs{S}\frac{1-(2\abs{S}-1)^n}{1-2\abs{S}+1}\\
+&=1+\abs{S}\frac{1-(2\abs{S}-1)^n}{1-\abs{S}}\\
+&=\frac{1-\abs{S}+\abs{S}\left(1-(2\abs{S}-1)^n\right)}{1-\abs{S}}\\
+&=\frac{1-\abs{S}(2\abs{S}-1)^n}{1-\abs{S}}
+\end{align*}
+\end{proof}
+\end{lmm}
+
+\begin{prp}{}{} Let $G$ be a group Let $S$ be a finite generating set of $G$. Then the following are equivalent. 
+\begin{itemize}
+\item $G$ is a finite group. 
+\item $\Gamma_{G,S}$ is bounded. 
+\item $\Gamma_{G,S}(n)=\Gamma_{G,S}(n+1)$ for some $n\in\N$. 
+\end{itemize}
+\end{prp}
+
+\begin{lmm}{}{} Let $G$ be a group. Let $S,T$ be finite generating sets of $G$. Then there exists $C,D>0$ such that $$\Gamma_{G,S}(n)\leq C\Gamma_{G,T}(n)\;\;\;\;\text{ and }\;\;\;\;\Gamma_{G,T}(n)\leq D\Gamma_{G,S}(n)$$ for all $n\in\N$. 
+\end{lmm}
+
+\begin{thm}{}{} There exists a finitely generated group $G$ with finite generators $S$ such that $\Gamma_{G,S}$ has superpolynomial growth but subexponential growth. 
+\end{thm}
+
+\begin{thm}{[Hirsch 1958]}{} Let $G$ be a finitely generated nilpotent group. Let $H\leq G$ be a subgroup of $G$. Then $[G:H]$ is finite and $H$ is torsion-free. 
+\end{thm}
+
+\begin{thm}{[Jennings 1955]}{} Let $H$ be a finitely generated torsion-free and nilpotent group. Then $H$ is isomorphic to a subgroup of $H_d(\Z)$ for some $d\geq 1$. 
+\end{thm}
+
+Note: $H_d(\Z)$ is the upper triangular matrices of $SL_d(\Z)$. 
+
+\begin{thm}{[Gromov 1981]}{} Let $G$ be a finitely generated group such that $\Gamma_{G,S}$ has at most polynomial growth. Then there exists some subgroup $H\leq G$ such that $[G:H]$ is finite and $H$ is nilpotent. 
+\end{thm}
+
+\begin{thm}{[Bass 1972, Guivarch 1973]}{} Let $G$ be a finitely generated nilpotent group. Then there exists $C,D,d\in\N$ such that $$Cn^d\leq\Gamma_{G,S}(n)\leq Dp^d$$ ($\Gamma_{G,S}$ has polynomial growth rate). 
+\end{thm}
+
+\subsection{Distortion}
+\begin{defn}{Undistorted Subgroups}{} Let $G$ be a group. Let $S,T$ be generating sets of $G$. Let $H\leq G$ be a subgroup. We say that $H$ is undistorted in $G$ if there exists $C>0$ such that $$d_T(g,h)\leq C d_S(g,h)$$ for all $g,h\in H$. 
+\end{defn}
+
+Intuitively, this means that when we restrict the metric to the subgroup, the shortest path when we had in $H$ for two elements is still the shortest when we consider the two elements in $G$. 
+
+\subsection{The Dehn Function}
+\begin{defn}{Area of an Element}{} Let $G$ be a group. Let $G=\langle S\;|\;R\rangle$ be a finite presentation of $G$. Let $p:F_S\to G$ be the induced map by the universal property. Let $w\in F_S$ be such that $p(w)=1_G$. Define the area of $w$ to be $$A(w)=\min\left\{n\in\N\;\bigg{|}\;w=\prod_{i=1}^na_ir_ia_i^{-1}\text{ for }a_i\in F(S)\text{ and }r_i\in R\right\}$$
+\end{defn}
+
+\begin{defn}{Dehn Functions}{} Let $G$ be a group. Let $G=\langle S\;|\;R\rangle$ be a finite presentation of $G$. Let $p:F_S\to G$ be the induced map by the universal property. Define the Dehn function of $G$ with respect to the presentation to be $\text{Dehn}_{\langle S\;|\;R\rangle}:\N\to\N$ given by $$\text{Dehn}_{\langle S\;|\;R\rangle}(n)=\max\{A(s_1\cdots s_k)\;|\;0\leq k\leq n, s_1,\dots,s_k\in F_S, p(s_1\cdots s_k)=1_G\}$$
+\end{defn}
+
+\pagebreak
+\section{The Word Problem for Groups}
+\subsection{The Word Problem is Undecidable}
+\begin{defn}{Solvable Word Problem}{} Let $G$ be a group. Let $G=\langle S\;|\;R\rangle$ be a finite presentation for $G$. Let $W$ be the set of all words of $S$. We say that $G$ has a solvable word problem if $\{w\in W\;|\;w=1_G\text{ in }G\}$ is decidable. 
+\end{defn}
+
+\begin{thm}{}{} There exists a finitely presented group with an unsolvable word problem. 
+\end{thm}
+
+\subsection{Dehn Presentations and The Word Problem}
+Recall that a group is finitely presented if $G\cong\langle S\;|\;R\rangle$ if $S$ and $R$ are finite sets. 
+
+\begin{defn}{Dehn Presentations}{} Let $G$ be a group. Let $G=\langle S\;|\;R\rangle$ be a finite presentation of $G$. Let $p:F_S\to G$ be the induced map by the universal property. We say that $\langle S\;|\;R\rangle$ is a Dehn presentation for $G$ if for all $w\in F(S)$ such that $p(w)=1_G$, there exists $r_1r_2^{-1}\in F(S)$ such that the following are true. 
+\begin{itemize}
+\item $\|r_1\|>\|r_2\|$. 
+\item $r_1$ is a subword of $w$. 
+\item Some cyclic permutation of the letters in $r_1r_2^{-1}$ or $r_2^{-1}r_1$ lies in $R$. 
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{} The presentation $$\pi_1(\Sigma_2)\cong\langle a,b,c,d\;|\;abcda^{-1}b^{-1}c^{-1}d^{-1}\rangle$$ for the fundamental group of the compact orientable surface of genus $2$ is a Dehn presentation. \tcbline
+\begin{proof}
+Recall that $\Sigma_2$ can be represented as an octagon whose edges are given by $abcda^{-1}b^{-1}c^{-1}d^{-1}$. Let $p$ be the starting point of $a$. Then the starting and ending point of $a,b,c,d$ are all $p$ via the identification. In particular, the point $p$ has $4$ edges in and $4$ edges out of it. By definition of the universal covering space (it is a local homeomorphism), every point in the inverse image of $p$ of covering space intersects eight octagons at an vertex. This justifies why every vertex is the intersection of eight octagons at a vertex. This is the Cayley graph of $F(a,b,c,d)$ with generators $a,b,c,d$. In particular, it is the tiling of $\H^2$ using the octagon representing $\Sigma_2$. \\~\\
+
+Pick a lift of $\Sigma_2$ into the Cayley graph of $F(a,b,c,d)$. Call it $R_0$. Assuming $R_n$ is defined, we define $R_{n+1}$ to be the union of all octagons that intersect $R_n$ but does not intersect $R_{n-1}$ (by convention take $R_{-1}=\emptyset$. \\~\\
+
+Let $w\in F(a,b,c,d)$ such that $w$ is the identity in $\pi_1(\Sigma_2)$. By translation, without loss of generality we can take $w$ to start at the identity element of the free group. Moreover, without loss of generality take $w$ to be a reduced word. If $w$ is not the empty word, then since $w$ has finite length, it reaches the outer boundary of $R_n$ for some maximal $n\in\N$ and descends to $R_{n-1}$. It must run through the outermost boundary non-trivially (otherwise $w$ is not reduced), and hence runs through at least $5$ sides of some octagonal tile. Suppose it runs through $5\leq n\leq 8$ sides. In this case, choose $u$ to be the $n$ (consecutive) sides and $v$ to be the remaining sides such that $u\ast v$ is a cyclic permutation of $abcda^{-1}b^{-1}c^{-1}d^{-1}$ (this is possible since $u$ is a consecutive subword of some cyclic permutation of $abcda^{-1}b^{-1}c^{-1}d^{-1}$). Then the pair $u$ and $v$ satisfies the requirements for $\langle a,b,c,d\;|\;abcda^{-1}b^{-1}c^{-1}d^{-1}\rangle$ to be a Dehn presentation for all reduced words $w$. Hence we are done. 
+\end{proof}
+\end{prp}
+
+\begin{thm}{Dehn's Algorithm}{} Let $G$ be a group. If $G$ admits a Dehn presentation, then the word problem for $G$ is solvable. 
+\end{thm}
+
+\pagebreak
+\section{The Geometry of Boundaries}
+\subsection{Ends of a Group via Geodesic Rays}
+\begin{defn}{Geodesic Ray}{} Let $G$ be a group. Let $S$ be a finite generating set of $G$. A geodesic ray in $\text{Cay}(G,S)$ is a continuous map $$\phi:[0,\infty)\to\text{Cay}(G,S)$$ such that if $B\subseteq\text{Cay}(G,S)$ is bounded then $\phi^{-1}(B)$ is bounded. 
+\end{defn}
+
+This is called proper rays in Loh. 
+
+\begin{defn}{Ends of a Group}{} Let $G$ be a group. Let $S$ be a finite generating set of $G$. Define $$\text{Ends}(G,S)=\{\phi:[0,\infty)\to\text{Cay}(G,S)\;|\;\phi\text{ is a geodesic ray }\}/\sim$$ where $\phi_1\sim\phi_2$ if for all $n\in\N$, there exists $t\in\R$ such that $\im(\phi_1)\setminus B_n^{G,S}(1)$ and $\im(\phi_2)\setminus B_n^{G,S}(1)$ lie in the same path component of $\text{Cay}(G,S)\setminus B_n^{G,S}(1)$. 
+\end{defn}
+
+\subsection{Infinite Connected Components at Infinity}
+\begin{defn}{Infinite Connected Components}{} Let $G$ be a group. Let $S$ be a finite generating set of $G$. Define the set of infinite connected components of $G$ with respect to $S$ by $$E_S(n)=\{[X]\in\pi_0(\text{Cay}(G,S)\setminus B_n^{G,S}(1))\;|\;\abs{X}=\infty\}$$
+\end{defn}
+
+\begin{defn}{}{} Let $G$ be a group. Let $S$ be a finite generating set of $G$. Define $$C_S(n)=\text{Cay}(G,S)\setminus\bigcup_{A\in E_S(n)}A$$
+\end{defn}
+
+\subsection{Basic Properties of Ends}
+(ends are a quasi-isometry invariant)
+
+\begin{thm}{(Stallings)}{} Let $G$ be a finitely generated group. Then $$\abs{\text{End}(G)}=0,1,2\text{ or }\infty$$
+\end{thm}
+
+\pagebreak
+\section{Hyperbolic Groups}
+\subsection{Hyperbolic Metric Spaces}
+\begin{defn}{Geodesic Triangle}{} Let $(X,d)$ be a geodesic metric space. Let $x,y,z\in X$. Define the geodesic triangle to be a triple $$T(x,y,z)=\{\alpha,\beta,\gamma\}$$ such that $\alpha,\beta,\gamma:I\to X$ are geodesics with starting points $x,y,z$ and ending points $y,z,x$ respectively. 
+\end{defn}
+
+Let $(M,d)$ be a metric space. Recall that the neighbourhood of a set $U\subseteq M$ of size $r$ is the set $$N_r(U)=\{x\in M\;|\;d(U,x)\leq r\}$$
+
+\begin{defn}{Gromov Hyperbolic Metric Space}{} Let $(X,d)$ be a geodesic metric space. Let $\delta>0$. We say that $X$ is a Gromov $\delta$-hyperbolic metric space if for all geodesic triangles $T(x,y,z)$ for $x,y,z\in X$, we have $$\alpha\subseteq N_\delta(\im(\beta))\cup N_\delta(\im(\gamma))$$
+\end{defn}
+
+\subsection{Gromov Hyperbolic Groups}
+\begin{defn}{Gromov Hyperbolic Groups}{} Let $G$ be a group. Let $\delta>0$. We say that $G$ is $\delta$-hyperbolic if there exists a finite generating set $S$ of $G$ such that $\abs{\text{Cay}(G,S)}$ is a Gromov $\delta$-hyperbolic metric space. 
+\end{defn}
+
+Examples: finite groups, free groups. 
+
+\begin{thm}{}{} Let $G$ be a group. Then the following are equivalent. 
+\begin{itemize}
+\item $G$ is a Gromov hyperbolic group. 
+\item $G$ admits a Dehn presentation. 
+\item There exists a finite presentation of $G$ for which the Dehn function is linear. 
+\end{itemize}
+\end{thm}
+
+\begin{crl}{}{} Let $G$ be a group. If $G$ is a Gromov hyperbolic group, then the following are true. 
+\begin{itemize}
+\item $G$ is finitely presented. 
+\item The word problem for $G$ is decidable. 
+\end{itemize}
+\end{crl}
+
+\subsection{The Conjugacy Problem}
+\begin{defn}{The Conjugacy Problem}{} Let $G$ be a group. Let $S$ be a finite generating set for $G$. The conjugacy problem asks for an algorithm to input $u,v\in F(S)$ and out put $w\in F(S)$ such that $uw=wv$ in $G$. 
+\end{defn}
+
+\begin{thm}{}{} Let $G$ be a group. Let $S$ be a finite generating set for $G$. If $G$ is $\delta$-hyperbolic, then the conjugacy problem admits a solution. 
+\end{thm}
+
+
+
+
+
+\end{document}

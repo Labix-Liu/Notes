@@ -1,0 +1,34 @@
+\section{Introduction}
+\subsection{Motivation and Organization}
+Recall that if $X$ is a space and $X=A\cup B$ are two open sets, then \\~\\
+\adjustbox{scale=0.8,center}{\begin{tikzcd}
+	{A\cap B} & A \\
+	B & X
+	\arrow[hook, from=1-1, to=1-2]
+	\arrow[hook, from=1-1, to=2-1]
+	\arrow[hook, from=1-2, to=2-2]
+	\arrow[hook, from=2-1, to=2-2]
+\end{tikzcd}} \\~\\
+is a pushout in $\bold{Top}$. We think of $X$ to be built out of the smaller spaces $A$ and $B$. Algebraic invariants of a complex space such as homotopy groups and homology groups are difficult to compute. One can tackle the problem by computing the invariants of smaller and simpler subspaces and hope that we can piece together invariants of the total space. 
+
+The Seifert-Van Kampen theorem and the Mayer-Vietoris theorem are two such computational tools that tell us how to relate algebraic invariants of subspaces to the total space. However, for higher homotopy groups, there is no excision theorem similar to that for homology that gives a sequence similar to that of the Mayer-Vietoris theorem. We will show that there is a similar sequence for a weaker version of pullbacks called homotopy pullbacks \ref{prp:LESHpull}, which, under certain assumptions, can have the weak homotopy type of the ordinary pullback. 
+
+However, pushouts are the correct way to think of the total space as being decomposed into smaller subspaces, not pullbacks. Therefore we may ask the question of whether certain pushouts diagrams of inclusions are also a homotopy pullback diagram. The Blakers-Massey theorem addresses this issue, and one can think of the Blakers-Massey theorem as the reason that the excision property fails for homotopy groups. We will discuss the homotopy compatible version of pushouts and pullbacks in section 2. 
+
+More generally, we may ask the question of which functors of spaces sends homotopy pushout squares to homotopy pullback squares. These functors are called excisive. The Blakers-Massey theorem then tells us that the identity functor is not excisive, but there is a wide class of excisive functors  coming from spectra. We will discuss this in section 3. In fact, this completely classifies all excisive functors up to equivalence. We will use the language of infinity categories to illustrate this in section 4. 
+
+The reason that such functors are called excisive is precisely because post-composing with the homotopy groups gives a reduced homology theory. The main reason that homotopy groups fail to be a homology theory is because of the failure of the excision theorem. However, using excisive functors, we can take homotopy pushout squares and homotopy pullback squares, and then invoke the associated long exact sequence to deduce the excision theorem. We will explore the connection between excisive functors, spectra and reduced homology theories in section 5. 
+
+\subsection{Notation}
+\begin{itemize}
+\item $I$ refers to the unit interval $[0,1]\subset\R$ with the subspace topology. $S^n$ is the $n$-sphere defined by the subset $\{x\in\R^n\;|\;\abs{x}=1\}$ with the subspace topology. 
+\item By spaces, we mean a compactly generated and weakly Hausdorff space. By the category of spaces $\bold{Top}$ we mean the category of compactly generated weakly Hausdorff spaces. The pointed version is denoted by $\bold{Top}_\ast$. Under this assumption, for any pointed spaces $X$ and $Y$, the set $\text{Map}_\ast(X,Y)=\Hom_{\bold{Top}_\ast}(X,Y)$ is equipped with a canonical topology such that there is are natural isomorphisms $$\Hom_{\bold{Top}_\ast}(Z\times X,Y)\cong\Hom_{\bold{Top}_\ast}(Z,\text{Map}_\ast(X,Y))$$ Some more notable properties of the category include: It is complete and cocomplete. The smash product operation is commutative and associative. We refer to \cite{CGWH} for a detailed exposition on this topic. 
+\item We assume all spaces are well-pointed. Some authors refer to well-pointed spaces as having a non-degenerate base-point. In particular, CW-complexes are well-pointed. We refer to chapter 1 of \cite{CHT} for its discussion. 
+\item Let $X$ be a space. $\Sigma X$ is the reduced suspension defined by $$\Sigma X=\frac{X\times I}{X\times\{0\}\cup X\times\{1\}\cup\{x_0\}\times I}$$ Depending on context it can be given a basepoint, which is the equivalent class of $X\times\{0\}\cup X\times\{1\}\cup\{x_0\}\times I$. There is also a notion of unreduced suspension. Assuming that all spaces are well-pointed, reduced suspension is homotopy equivalent to unreduced suspension. Again refer to \cite{CHT}
+\item Let $X$ be a space. $\Omega X$ is the loopspace defined by $$\Omega X=\text{Map}_\ast(S^1,X)$$
+\item There will be two instances in which the more general notion of homotopy colimits will appear. We refer to chapter 8 of \cite{CHT} for an explicit construction. We will not be utilizing any proofs involving general homotopy colimits. In the case of sequential homotopy colimits we refer to a construction in the appendix based on both \cite{CHT} and \cite{FSHT}
+\item Let $f:X\to Y$ be a map. The mapping path space of $f$ is the space $$P_f=\{(x,\gamma)\in X\times\text{Map}(I,Y)\;|\;\gamma(0)=f(x)\}$$ and the mapping cylinder of $f$ is the space $$M_f=\frac{(X\times I)\amalg Y}{f(x)\sim(x,0)}$$ as given in \cite{CHT}. We will make use of the factorization described in \ref{prp:Factorization}.
+\item A spectrum is a sequence of spaces $\{X_k\;|\;k\in\N\}$ together with structure maps $\Sigma X_k\to X_{k+1}$. An $\Omega$-spectrum is a spectrum in which the adjoints of the structure maps $X_k\to\Omega X_{k+1}$ is a weak equivalence. 
+\item We refer to chapter 2 of \cite{CHT} for the definition of fibrations and cofibrations. In particular, we take the definition of fibrations to be maps that have the lifting property with respect to all spaces (in other words a Hurewicz fibration). 
+\item Let $f:X\to Y$ be a map of spaces. We say that $f$ is an acyclic fibration if $f$ is a weak equivalence and a fibration. We say that $f$ is an acyclic cofibration if $f$ is a weak equivalence and a cofibration. 
+\end{itemize}

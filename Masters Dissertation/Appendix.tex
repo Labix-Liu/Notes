@@ -1,0 +1,403 @@
+\section{Appendix}
+\subsection{Pushouts and Pullbacks}
+\begin{prp}\label{prp:Pasting1} Let the following be a commutative diagram of spaces: \\~\\
+\adjustbox{scale=0.8,center}{\begin{tikzcd}
+	{X_1} & {X_2} & {X_3} \\
+	{Y_1} & {Y_2} & {Y_3}
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=1-3, to=2-3]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+\end{tikzcd}}\\~\\
+Suppose that the right square is a pullback square. Then the outer rectangle is a pullback square if and only if the left square is a pullback square. 
+\begin{proof}
+Suppose first that the outer rectangle is a pullback square. Let $W\to X_2$ and $W\to Y_1$ be morphisms such that the following square commutes: \\~\\
+\adjustbox{scale=0.8,center}{\begin{tikzcd}
+	W & {X_2} \\
+	{Y_1} & {Y_2}
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+Post composing with the morphisms $X_2\to X_3$ and $Y_1\to Y_3$, we can invoke the universal property of the outer pullback square to obtain a unique map from $W\to X_1$. This proves that the left square is a pullback square. 
+
+Conversely, suppose that the left square is a pullback square. Let $W\to X_3$ and $W\to Y_1$ be morphisms making the following square commute: \\~\\
+\adjustbox{scale=0.8,center}{\begin{tikzcd}
+	W & {X_3} \\
+	{Y_1} & {Y_3}
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+By the universal property of the right square, we find a unique morphism $W\to X_2$ making an appropriate diagram commute. Then by the universal property of the left square, we find a unique morphism $W\to X_1$ and making the desired diagram commute. 
+\end{proof}
+\end{prp}
+
+\subsection{Homotopy Groups}
+\begin{defn} Let $X,Y\in\bold{Top}_\ast$ be pointed spaces. Define $$[X,Y]_\ast=\Hom_{\bold{Top}_\ast}(X,Y)/\sim$$ where $f\sim g$ if $f$ and $g$ are homotopic. 
+\end{defn}
+
+\begin{defn} Let $(X,x_0)$ be a pointed space. Let $n\in\N$. Define the set $$\pi_n(X,x_0)=[(S^n,\ast),(X,x_0)]_\ast$$ 
+\end{defn}
+
+For the group structure when $n\geq 1$ we refer to the construction given in chapter 4 of \cite{AT}. 
+
+The following theorem from 4.7.4 of \cite{ATTD} gives a long exact sequence of homotopy groups associated to the homotopy fiber of a map. 
+
+\begin{thm}\label{thm:FiberSeq} Let $f:X\to Y$ be a map of pointed spaces where $y_0$ is the base point of $Y$. Let $n\in\N$. Then there is a long exact sequence of homotopy groups: \\~\\
+\adjustbox{scale=0.8,center}{\begin{tikzcd}
+	\cdots & {\pi_n(\Omega\text{hofib}_{y_0}(f))} & {\pi_n(\Omega X)} & {\pi_n(\Omega Y)} & {\pi_n(\text{hofib}_{y_0}(f))} & {\pi_n(X)} & {\pi_n(Y)}
+	\arrow[from=1-1, to=1-2]
+	\arrow["{\Omega\text{incl}_\ast}", from=1-2, to=1-3]
+	\arrow["{(\Omega f)_\ast}", from=1-3, to=1-4]
+	\arrow["{i_\ast}", from=1-4, to=1-5]
+	\arrow["{\text{incl}_\ast}", from=1-5, to=1-6]
+	\arrow["{f_\ast}", from=1-6, to=1-7]
+\end{tikzcd}}\\~\\
+where the map $i:\Omega Y\to\text{hofib}_y(f)$ is defined as in 4.7.1 of \cite{ATTD}. 
+\begin{proof}
+Refer to section 4.7 of \cite{ATTD}. 
+\end{proof}
+\end{thm}
+
+\begin{prp}\label{prp:HomGrpPHocolim} Let the following be a sequence of spaces and maps: \\~\\
+\adjustbox{scale=1,center}{\begin{tikzcd}
+	{X_0} & {X_1} & {X_2} & \cdots
+	\arrow["{f_0}", from=1-1, to=1-2]
+	\arrow["{f_1}", from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+\end{tikzcd}}\\~\\
+Then there is an isomorphism $$\pi_n(\underset{k}{\text{hocolim}}X_k)\cong\underset{k}{\text{colim}}\pi_n(X_k)$$
+\begin{proof}
+Appendix of \cite{FSHT}. 
+\end{proof}
+\end{prp}
+
+This section and its proofs refer to section 2.6 of \cite{CHT}. 
+
+\begin{defn}{}{} Let $X$ be a space. Let $n\in\N$. We say that $X$ is $n$-connected if for all $-1\leq k\leq n$, any map $S^k\to X$ is homotopic to the constant map to the base point. 
+\end{defn}
+
+Every non-empty space is $(-1)$-connected. 
+
+\begin{defn}{}{} Let $(X,A)$ be a pointed pair of spaces. Let $n\in\N$. We say that $(X,A)$ is $n$-connected if for all $-1\leq k\leq n$, any map $(D^k,\partial D^k)\to(X,A)$ is homotopic to a map $(D^k,\partial D^k)\to (A,A)$ relative to boundary. 
+\end{defn}
+
+\begin{defn}{}{} Let $X,Y$ be spaces. Let $f:X\to Y$ be a map. We say that $f$ is $n$-connected if $(M_f,X)$ is $n$-connected. 
+\end{defn}
+
+\begin{prp}{}{} Let $X$ be a space. Let $n\in\N$. Then the following are equivalent. 
+\begin{itemize}
+\item $X$ is $n$-connected. 
+\item For all $x\in X$, $\pi_k(X,x)=0$ for all $0\leq k\leq n$. 
+\item For all $-1\leq k\leq n$, every map $S^k\to X$ extends to a map $D^{k+1}\to X$. 
+\item $(CX,X)$ is $(n+1)$-connected. 
+\end{itemize}
+\begin{proof}
+Refer to 2.6.2 and 2.6.5 of \cite{CHT}. 
+\end{proof}
+\end{prp}
+
+\begin{prp}\label{prp:MapConnectCon} Let $X,Y$ be spaces. Let $f:X\to Y$ be a map. Let $n\in\N$. If $X$ is not empty, then the following are equivalent. 
+\begin{itemize}
+\item $f$ is $n$-connected
+\item $\text{hofiber}_y(f)$ is $n$-connected for all $y\in Y$. 
+\item For all $0\leq k<n$ and all $x\in X$, the map $$\pi_k(f):\pi_k(X,x)\to\pi_k(Y,f(x))$$ is an isomorphism and $\pi_n(f):\pi_n(X,x)\to\pi_n(Y,f(x))$ is surjective. 
+\end{itemize}
+\begin{proof}
+Refer to 2.6.9 of \cite{CHT}. 
+\end{proof}
+\end{prp}
+
+In particular, every map is $(-1)$-connected since every non-empty space is $(-1)$-connected. 
+
+\begin{prp}\label{prp:PairConnectCon} Let $(X,A)$ be a space. Let $n\in\N$. Then the following are equivalent. 
+\begin{itemize}
+\item $(X,A)$ is $n$-connected
+\item For all $0<k\leq n$, $\pi_k(X,A)=0$ and $\pi_0(A)\to\pi_0(X)$ is surjective. 
+\item $\iota:A\hookrightarrow X$ is $n$-connected. 
+\end{itemize}
+\begin{proof}
+See paragraph below example 4.4 of \cite{AT}. 
+\end{proof}
+\end{prp}
+
+\begin{lmm}{}{} Let $X,Y,Z$ be spaces. Let $f:X\to Y$ and $g:Y\to Z$ be maps. Let $n\in\N$. If $f$ is $(n-1)$-connected and $g\circ f$ is $n$-connected, then $g$ is $n$-connected. 
+\begin{proof}
+We know that $g$ must be at least $(n-1)$-connected. It remains to show that $\pi_{n-1}(g)$ is an isomorphism and $\pi_n(g)$ is a surjection for all base points. 
+
+Let $y\in Y$. If $y=f(x)$ for some $x\in X$, then $\pi_{n-1}(g\circ f):\pi_{n-1}(X,x)\to\pi_{n-1}(Z,g(f(x)))$ is an isomorphism. By funtoriality, $\pi_{n-1}(f):\pi_{n-1}(X,x)\to\pi_{n-1}(Y,f(x))$ is injective, and hence an isomorphism. Hence $\pi_{n-1}(g)$ is an isomorphism. Also, since $\pi_n(g\circ f)$ is a surjection, we know that $\pi_n(g)$ is a surjection. 
+
+We now treat the cases where $y$ is not in the image of $f$. If $n\geq 1$, then $\pi_0(f)$ is a surjection. For any $y\in Y$, there exists $x\in X$ such that $f(x)$ and $y$ lie in the same path component. Then consider the following diagram: \\~\\
+\adjustbox{scale=0.8,center}{\begin{tikzcd}
+	{\pi_{n-1}(Y,f(x))} & {\pi_{n-1}(Z,g(f(x)))} \\
+	{\pi_{n-1}(Y,y)} & {\pi_{n-1}(Z,g(y))}
+	\arrow[from=1-1, to=1-2]
+	\arrow["\cong"', from=1-1, to=2-1]
+	\arrow["\cong", from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+whose vertical maps are given by conjugation, and hence isomorphisms. By the above paragraph, the top arrow is an isomorphism, and hence the bottom arrow is also an isomorphism. The same method shows that $\pi_n(g)$ is surjective when the base point $y$ is not in the image of $f$.
+
+It remains to treat the case $n=0$. But notice that $\pi_0(g\circ f):\pi_0(X)\to\pi_0(Z)$ is surjective implies that $\pi_0(g)$ is surjective by functoriality of $\pi_0$. So we are done. 
+\end{proof}
+\end{lmm}
+
+\begin{prp}\label{prp:SmashConn} Let $X,Y$ be spaces such that $X$ is $n$-connected and $Y$ is $m$-connected for $m,n\geq -1$. Then $X\wedge Y$ is $(n+m+1)$-connected. 
+\begin{proof}
+Refer to 3.7.23 of \cite{CHT}. 
+\end{proof}
+\end{prp}
+
+We think of weak equivalences as the limiting notion of connectedness. 
+
+\begin{defn}{Weak Equivalences}{} Let $f:X\to Y$ be a map of spaces. We say that $f$ is a weak equivalence if for all $x\in X$, $f$ induces an isomorphism $$f_\ast:\pi_n(X,x)\to\pi_n(Y,f(x))$$ for all $n\in\N$. Here two sets are isomorphic if they are isomorphic in the category of sets, i.e. a bijection. 
+\end{defn}
+
+\begin{prp}\label{prp:2o3} Let $X,Y,Z$ be spaces. Let $f:X\to Y$ and $g:Y\to Z$ be maps. If any two of $f,g,g\circ f$ are weak equivalences, then so is the third one. 
+\begin{proof}
+If $f$ and $g$ are weak equivalences then it is clear that $g\circ f$ is a weak equivalence. If $g$ and $g\circ f$ are weak equivalence but $f$ is not, then there exists $n$ such that $\pi_n(f):\pi_n(X,x_0)\to\pi_n(Y,f(x_0))$ is not an isomorphism for some $x_0\in X$. Since $\pi_n(g):\pi_n(Y,f(x_0))\to\pi_n(Z,g(f(x_0)))$ is an isomorphism, this means that $\pi_n(g)\circ\pi_n(f)$ is not an isomorphism. This is a contradiction since $\pi_n(g\circ f)$ is a weak equivalence. \\~\\
+
+Finally suppose that $f$ and $g\circ f$ are weak equivalences. If $f$ is surjective, suppose for a contradiction that $\pi_n(g):\pi_n(Y,y_0)\to\pi_n(Z,g(y_0))$ is not an isomorphism for some $n$ and $y_0\in Y$. Then $\pi_n(f)$ being an isomorphism implies that for any $x_0\in f^{-1}(y_0)$ ($f$ is surjective) then $\pi_n(g)\circ\pi_n(f)$ is not an isomorphism. This is a contradiction since $\pi_n(g\circ f)$ is an isomorphism. For the case that $f$ is not surjective, there exists $y_0\in Y$ that does not lie in $\im(f)$. Since $\pi_0(f)$ is an isomorphism, there exists some $x\in X$ such that $f(x)$ and $y$ lie in the same path component. Let $\gamma:I\to Y$ be a path from $f(x)$ to $y$. Then the following diagram commutes: \\~\\
+\adjustbox{scale=0.8,center}{\begin{tikzcd}
+	{\pi_n(Y,f(x))} & {\pi_n(Z,g(f(x)))} \\
+	{\pi_n(Y,y_0)} & {\pi_n(Z,g(y_0))}
+	\arrow[from=1-1, to=1-2]
+	\arrow["\cong"', from=1-1, to=2-1]
+	\arrow["\cong", from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+where the vertical maps are induced by conjugation with $\gamma$, and therefore the diagram is commutative. From the case where we assumed that $f$ is surjective, we can conclude that if $f$ and $g\circ f$ are weak equivalences, then $g|_{\im(f)}$ is a weak equivalence. Hence the top arrow is an isomorphism. Since three out of the four arrows in the commutative diagram is an isomorphism, the last arrow is also an isomorphism. Hence $g$ is a weak equivalence. 
+\end{proof}
+\end{prp}
+
+\subsection{Fibrations and Cofibrations}
+\begin{prp}\label{prp:Lift} Let the following be a diagram in $\bold{Top}$: \\~\\
+\adjustbox{scale=0.8,center}{\begin{tikzcd}
+	W & Y \\
+	X & Z
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+If $W\to X$ is an acyclic cofibration, and $Y\to Z$ is a fibration, then there exists a map $X\to Y$ such that the following diagram commutes: \\~\\
+\adjustbox{scale=0.8,center}{\begin{tikzcd}
+	W & Y \\
+	X & Z
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow["\exists", dashed, from=2-1, to=1-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}}
+\begin{proof}
+Refer to 2.5.4 of \cite{CHT}. 
+\end{proof}
+\end{prp}
+
+\begin{prp}\label{prp:Factorization} Let $f:X\to Y$ be a map of spaces. Then the following diagram is commutative: \\~\\
+\adjustbox{scale=0.8,center}{\begin{tikzcd}
+	X && Y \\
+	& {P_f}
+	\arrow["f", from=1-1, to=1-3]
+	\arrow["{\text{incl.}}"', from=1-1, to=2-2]
+	\arrow["{\text{ev}}"', from=2-2, to=1-3]
+\end{tikzcd}}\\~\\
+where $\text{ev}:P_f\to Y$ is the map $(x,\gamma)\mapsto\gamma(0)$. Moreover, the inclusion map $X\to P_f$ is a homotopy equivalence and $\text{ev}$ is a fibration. 
+\begin{proof}
+See section 6 of \cite{LNAT}. 
+\end{proof}
+\end{prp}
+
+Dually, we can factorize any map $f:X\to Y$ into a cofibration $X\to M_f$ and a homotopy equivalence $M_f\to Y$. 
+\
+\begin{prp}\label{prp:PullPFib} Let $W,X,Y,Z$ be spaces such that the following diagram is a pullback: \\~\\
+\adjustbox{scale=0.8,center}{\begin{tikzcd}
+	W & Y \\
+	X & Z
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+If $Y\to Z$ is a fibration, then $W\to X$ is a fibration. 
+\begin{proof}
+See 2.1.16 of \cite{CHT}. 
+\end{proof}
+\end{prp}
+
+\begin{prp}\label{prp:PullFibPWeak} Let $W,X,Y,Z$ be spaces such that the following diagram is a pullback: \\~\\
+\adjustbox{scale=0.8,center}{\begin{tikzcd}
+	W & Y \\
+	X & Z
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+Let $Y\to Z$ be a fibration. If $X\to Z$ is a weak equivalence, then $W\to Y$ is a weak equivalence. 
+\begin{proof}
+See 2.1.23 of \cite{CHT}. 
+\end{proof}
+\end{prp}
+
+\begin{prp}\label{prp:WeakLims} Let $X,Y,Z,V$ be spaces such that we have the following diagram: \\~\\
+\adjustbox{scale=0.8,center}{\begin{tikzcd}
+	& X \\
+	& Y \\
+	V & Z
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=2-2, to=3-2]
+	\arrow[from=3-1, to=3-2]
+\end{tikzcd}}\\~\\
+If $V\to Z$ is a fibration and $X\to Y$ is a weak equivalence, then the canonical map $$\lim(V\rightarrow Z\leftarrow X)\to\lim(V\rightarrow Z\leftarrow Y)$$ induced by the universal property is a weak equivalence. 
+\begin{proof}
+Follows from \ref{prp:PullFibPWeak}. 
+\end{proof}
+\end{prp}
+
+\subsection{Proof of the Blakers-Massey Theorem}\label{ss:BMT}
+\begin{defn}{(Degenerative) Cubes}{} Let $a=(a_1,\dots,a_n)\in\R^n$. Let $\delta>0$. Let $L\subseteq\{1,\dots,n\}$. A cube in $\R^n$ is a set of the form $$W=W(a,\delta,L)=\{x\in\R^n\;|\;a_i\leq x\leq a_i+\delta\text{ for }i\in L\text{ and }x_i=a_i\text{ for }i\notin L\}$$
+\end{defn}
+
+\begin{defn}{Special Sub-cube of a Cube}{} Let $W=W(a,\delta,L)$ be a cube in $\R^n$. Let $j=1$ or $2$. Suppose that $1\leq p\leq\abs{L}$. Define $$K_p^j(W)=\left\{(x_1,\dots,x_n)\in W\;\bigg{|}\;\frac{\delta(j-1)}{2}+a_i<x_i<\frac{\delta j}{2}+a_i\text{ for at least }p\text{ values of }i\in L\right\}$$
+\end{defn}
+
+The following two technical lemma is a geometric lemma whose proof is unrelated to homotopy pushouts and pullback squares. We present its proof in the appendix. 
+
+\begin{lmm}{}{} Let $Y$ be a space. Let $B\subseteq Y$ be a subspace of $Y$. Let $W=W(a,\partial, L)$ be a cube in $\R^n$. Let $f:W\to Y$ be a map. Let $j=1$ or $2$. Suppose that there exists some $p\leq\abs{L}$ such that $$f^{-1}(B)\cap C\subset K_p^j(C)$$ for all cubes $C\subset\partial W$. Then there exists a map $g:W\to Y$ such that $g\overset{\partial W}{\simeq} f$ and $$g^{-1}(B)\subset K_p^j(W)$$ 
+\end{lmm}
+
+\begin{lmm}{}{} Let $X$ be a space. Let $X_0,X_1,X_2\subseteq X$ be subspaces of $X$ such that $$X=X_1\cup X_2$$ and $X_0=X_1\cap X_2$ is non-empty. Assume that for each $i=1,2$, $(X_i,X_0)$ is $k_i$-connected with $k_i\geq 0$. Let $f:I^n\to X$ be a map. Let $$I^n=\bigcup_k W_k$$ be the decomposition of $I^n$ into cubes $W_k$ such that $f(W_k)\subseteq X_i$ for one of $i=0,1,2$ by the Lebesgue covering lemma. Then there exists a homotopy $$H:I^n\times I\to X$$ such that the following are true. 
+\begin{itemize}
+\item $f(-)=H(-,0)$
+\item If $f(W)\subset X_i$, then $H(W,t)\subset X_i$ for all $t\in I$. 
+\item If $f(W)\subset X_0$, then $H(W,t)=f(W)$ for all $t\in I$. 
+\item If $f(W)\subset X_i$, then $\left((H(-,1))^{-1}(X_i\setminus X_0)\right)\cap W\subset K_{k_i+1}^i(W)$. 
+\end{itemize} 
+\end{lmm}
+
+We can then prove a weaker version of Blakers-Massey theorem. 
+
+\begin{lmm}{}{} Let $Y$ be a space. Let $B\subseteq Y$ be a subspace of $Y$. Let $W=W(a,\partial, L)$ be a cube in $\R^n$. Let $f:W\to Y$ be a map. Let $j=1$ or $2$. Suppose that there exists some $p\leq\abs{L}$ such that $$f^{-1}(B)\cap C\subset K_p^j(C)$$ for all cubes $C\subset\partial W$. Then there exists a map $g:W\to Y$ such that $g\overset{\partial W}{\simeq} f$ and $$g^{-1}(B)\subset K_p^j(W)$$ 
+\begin{proof}
+(Proof by Munson in Cubical Homotopy Theory)Firstly, notice that any cube $W$ is homeomorphic to $I^n$ for some $n$, so we can just prove the statement for when $W=I^n$. In this case, our parameters of the cube is given by $I^n=W(a=0,\delta=1,L=\{1,\dots,n\})$ and our $K_p^j(W)$ is given by $$K_p^j(W)=\left\{(x_1,\dots,x_n)\in C\;\bigg{|}\;\frac{j-1}{2}<x_i<\frac{j}{2}\text{ for at least }p\text{ values of }i\in\{1,\dots,n\}\right\}$$
+
+Let $p_j$ be the center of the sub-cube $\left[\frac{j-1}{2},\frac{ji}{2}\right]^n$ inside $I^n$ for $j=1,2$. Let $R$ be a ray with starting point $p_j$. Let $P(R,p_j)$ be the intersection of $R$ and $\partial\left[\frac{j-1}{2},\frac{ji}{2}\right]^n$. Let $Q(R,p_j)$ be the intersection of $R$ and $\partial I^n$. By construction, the points $p_j$, $P(R,p_j)$ and $Q(R,p_j)$ are collinear with $P(R,p_j)$ always being the mid point and $P(R,p_j)$ is possibly equal to $Q(R,p_j)$. Being a line, we can define a linear homotopy from the line $[p_j,P(R,p_j)]$ to the line $[p_j,Q(R,p_j)]$ that fixes the point $p_j$ and sends $P(R,p_j)$ to $Q(R,p_j)$. Denote the homotopy by $h(y,t)$ for $y\in[p_j,P(R,p_j)]$ and $t$ the time variable. 
+
+Now we can define a homotopy $H_j:I^n\times I\to I^n$ as follows: For each $y\in I^n$, there exists a unique ray $R$ starting at $p_j$ and passing through $y$. Then we obtain a homotopy $h$ from $[p_j,P(R,p_j)]$ to $[p_j,Q(R,p_j)]$ as above. Define $H(y,t)=h(y,t)$. It is clear that $H_j(q,1)=q$ for all $q\in\partial I^n$ so that $H_j$ is a homotopy from the identity, relative to the boundary $\partial I^n$. 
+
+Let $g=f\circ H_j(-,1)$. From the properties of the homotopy $H_j$, we notice that $f\circ H_j:I^n\times I\to Y$ is a homotopy from $f\circ H(-,0)=f\circ\text{id}=f$ to $f\circ H(-,1)=g$, relative to the boundary $\partial I^n$. Thus we now have a homotopy from $f$ to a map $g$ relative to the boundary. It remains to show that $g^{-1}(B)\subset K_p^j(C)$. 
+
+Let $z=(z_1,\dots,z_n)\in g^{-1}(B)$. If $z\in\left[\frac{j-1}{2},\frac{j}{2}\right]^n$ then clearly $z\in K_p^j(C)$ is true. So suppose instead that $z=(z_1,\dots,z_n)\in g^{-1}(B)$ satisfies the fact that either $z_a\geq\frac{j}{2}$ or $z_b\leq\frac{j-1}{2}$ for $1\leq a,b\leq n$. Let $R$ be the ray from $p_j$ passing through $z$. Then the condition on $z$ means that $z\in[P(R,p_j),Q(R,p_j)]$. Hence under the homotopy $H$, $z$ is mapped to $\partial I^n$. But $\partial I^n$ is a union $n-1$ dimensional faces of $I^n$ which are cubes. So $H(z,1)$ lies in some cube $C\subseteq\partial I^n$. By construction of $g$, $g(z)=f(H(z,1))$ and $g(z)\in B$ implies that $H(z,1)\in f^{-1}(B)$. Then $H(z,1)\in f^{-1}(B)$ and $H(z,1)\in C$ implies that $$H(z,1)\in f^{-1}(B)\cap C\subseteq K_p^j(C)$$ by the assumption on $f$. Write $H(z,1)=(w_1,\dots,w_n)\in\partial I^n$. This means that $\frac{j-1}{2}<w_i<\frac{j}{2}$ for at least $p$ of the coordinates of $H(z,1)$. 
+
+Now the ray starting at $p_j$ and passing through $z$ is parametrized by the line $p_j+t(z-p_j)$ for $t\geq 0$. Since $H(z,1)$ lies behind the two points $z$ and $p_j$, we can write $H(z,1)=p_j-t_0(z-p_j)$ for some $t_0\geq 1$. By definition, $p_j$ is the point given in coordinates by $\left(\frac{2j-1}{4},\dots,\frac{2j-1}{4}\right)$. Hence the $i$th coordinate of $H(z,1)$ can be written as $$w_i=\frac{2j-1}{4}+t_0\left(z_i-\frac{2j-1}{4}\right)$$ Recall that in the previous paragraph we found that $\frac{j-1}{2}<w_i<\frac{j}{2}$ for at least $p$ of the coordinates of $H(z,1)$. Substituting $w_i$ into the inequality and simplifying gives $$-\frac{1}{4t_0}+\frac{2j-1}{4}<z_i<\frac{1}{4t_0}+\frac{2j-1}{4}$$ Since $t_0\geq 1$, we get $$-\frac{1}{4}+\frac{2j-1}{4}<-\frac{1}{4t_0}+\frac{2j-1}{4}<z_i<\frac{1}{4t_0}+\frac{2j-1}{4}<\frac{1}{4}+\frac{2j-1}{4}$$ The leftmost and rightmost terms bound $z_i$ between $\frac{j-1}{2}$ and $\frac{j}{2}$ for at least $p$ amount of coordinates $z_i$ of $z$. Hence $z\in K_p^j(C)$. This completes the proof. 
+\end{proof}
+\end{lmm}
+
+\begin{lmm}{}{} Let $X$ be a space. Let $X_0,X_1,X_2\subseteq X$ be subspaces of $X$ such that $$X=X_1\cup X_2$$ and $X_0=X_1\cap X_2$ is non-empty. Assume that for each $i=1,2$, $(X_i,X_0)$ is $k_i$-connected with $k_i\geq 0$. Let $f:I^n\to X$ be a map. Let $$I^n=\bigcup_k W_k$$ be the decomposition of $I^n$ into cubes $W_k$ such that $f(W_k)\subseteq X_i$ for one of $i=0,1,2$ by the Lebesgue covering lemma. Then there exists a homotopy $$H:I^n\times I\to X$$ such that the following are true. 
+\begin{itemize}
+\item $f(-)=H(-,0)$
+\item If $f(W)\subset X_i$, then $H(W,t)\subset X_i$ for all $t\in I$. 
+\item If $f(W)\subset X_0$, then $H(W,t)=f(W)$ for all $t\in I$. 
+\item If $f(W)\subset X_i$, then $\left((H(-,1))^{-1}(X_i\setminus X_0)\right)\cap W\subset K_{k_i+1}^i(W)$. 
+\end{itemize} 
+\begin{proof}
+Let $C^d$ be the union of all cubes of dimension $\leq d$. We induct on $d$, the existence of such a homotopy $H:C^d\times I\to X$ that holds the required conditions true for all cubes $W$ with dimension $\leq d$. 
+
+We first construct the homotopy for all cubes of dimension $0$. When $\dim(W)=0$, there are two cases: 
+\begin{itemize}
+\item If $f(W)\subset X_0$, define $H|_{W\times I}$ by $H(w,t)=f(w)$
+\item If $f(W)\subset X_j$ and $f(W)\not\subset X_i$ for $1\leq i\neq j\leq 2$, $(X_j,X_0)$ is $(k_j\geq 0)$-connected implies that there exists a path $\gamma:I\to X$ from $f(W)$ to a point in $X_0$. Define $H|_{W\times I}$ by $H(w,t)=\gamma(t)$ (again $W=\{w\}$ is a one point set). 
+\end{itemize}
+Thus we now have a well defined map $H:C^0\times I\to X$. We need to show that this map satisfies the required conditions. 
+\begin{itemize}
+\item For each $z\in C^0$, either $H(z,0)=f(z)$ from the first case or $H(z,0)=\gamma(0)=f(z)$. 
+\item If $f(W)\subset X_i$, then by construction $H(W,t)\subset X_i$ from the second case. 
+\item If $f(W)\subset X_0$, then $H(W,t)=f(W)$ by the first case. 
+\item $K_{k_i+1}^i(W)=\{w\}$ is a one point set and $(H(-,1))^{-1}(X_i\setminus X_0)\cap W\subseteq W$ means that this condition is satisfied. 
+\end{itemize}
+
+Now $H$ is built on three pieces: the union of cubes landing in $X_i$ for $i=0,1,2$. The second and third conditions guarantee that each of the three pieces define a homotopy on each piece respectively. Since $\partial W\hookrightarrow W$ is a cofibration, we can extend these pieces of homotopy from $0$-dimensional cubes to $1$-dimensional. Recursively we are able to define a homotopy for all cubes of all dimensions inside $I^n$ that satisfy the first three conditions. 
+
+Therefore now we can invoke the inductive hypothesis, so that there exists a homotopy from $f$ so that the new function satisfy all our required conditions for all cubes of dimension $<d$. With abuse of notation, call the restriction of our newly acquired function to $C^{d-1}$ also by the name $f$. Let $W$ be a cube of dimension $d$. 
+\begin{itemize}
+\item If $f(W)\subseteq X_0$, define $H|_{W\times I}$ by $H(w,t)=f(w)$
+\item If $f(W)\subset X_1$ and $f(W)\not\subset X_2$ and $\dim(W)=d\leq k_1$, $(X_j,X_0)$ is $(k_j\geq 0)$-connected implies there exists a homotopy $K:W\times I\to X$ from $f$ relative to $\partial W$ such that $K(W,1)\subseteq X_0$. Define $H|_{W\times I}$ by $H=K$. 
+\item If $f(W)\subset X_1$ and $f(W)\not\subset X_2$ and $\dim(W)=d>k_1$, then by induction we have $$f^{-1}(X_1\setminus X_0)\cap W'\subset K_d^1(W')\subset K_{k_1+1}^1(W')$$ for all $W'\subset\partial W$ (induction is applicable since $\dim(W')<\dim(W)$). By the above lemma, there exists a map $g:W\to X$ such that $g$ and $f$ are homotopic relative to $\partial W$ such that $g^{-1}(X_1\setminus X_0)\subset K_{k_1+1}^1(W)$. Call this homotopy from $f$ to $g$ by $R:W\times I\to X$. Then we define $H|_{W\times I}$ by $H=R$. 
+\end{itemize}
+(WLOG the cases where $X_1$ is swapped with $X_2$ and $k_1$ is swapped with $k_2$ and $K_p^1(W)$ is swapped with $K_p^2(W)$ in the last two sub-cases has a symmetrical argument). Finally we show that our required conditions are satisfied. 
+\begin{itemize}
+\item In all cases, $H(-,0)=f$ as one can immediately see. 
+\item The second condition holds for all cubes of dimension $<d$ by inductive hypothesis. It also holds for our first and second case since $X_0\subset X_1,X_2$. For the third case, $H$ is a homotopy relative to $\partial W$. Since by induction hypothesis $f(\partial W)\subseteq X_1$, we also have $g(\partial W)\subseteq X_1$. Since $g$ is continuous then $H(W,1)=g(W)\subseteq X_1$. 
+\item The third condition holds for all cubes of dimension $<d$ by inductive hypothesis, and holds true for all cubes of dimension $d$ by the first case. 
+\item The fourth condition holds true by our argument in the third case, and is vacuously true in the second case since $H(W,1)\subseteq X_0$ implies that $(H(-,1))^{-1}(X_1\setminus X_0)=\emptyset$. 
+\end{itemize}
+Thus the proof is complete. 
+\end{proof}
+\end{lmm}
+
+\begin{lmm}{}{} Using the notation as in the proof of prp2.30, the pair of space $$(C\cup \text{hofib}_y(Y\setminus\{p_2\}\to Y),C\cup\text{hofib}_y(Y\setminus\{p_1,p_2\}\to Y\setminus\{p_1\}))$$ is $(d_1+d_2-3)$-connected. 
+\begin{proof}
+To simplify notations let us write the pair as $(A,B)$. Let $\phi:(I^n,\partial I^n)\to(A,B)$ be a map. Recall that $A=\{(x,\phi)\in Y\times\text{Map}(I,Y)\;|\;\phi(0)=y,\phi(1)=x\}$. The first variable is determined by the end point of $\phi$ so giving a map $I^n\to A$ is the same as giving a map $I^n\to\text{Map}(I,Y)$ for which all paths in the image has starting point $y$ and ending point in $Y\setminus\{p_2\}$. By the hom-product adjunction, this is equivalent to giving a map $\psi:I^n\times I\to Y$ such that $\psi(z,0)=y$ is the base point and $\psi(z,1)\in Y\setminus\{p_2\}$. Similarly, we can consider the map $\phi:\partial I^n\to B$ and deduce that $\phi(z)$ is a path lying entirely in the codomain of the map of the homotopy fiber $C=\text{hofib}_y(Y\setminus\{p_2\}\to Y\setminus\{p_2\})$ or it is a path lying entirely in the codomain of the map of the homotopy fiber $\text{hofib}_y(Y\setminus\{p_1,p_2\}\to Y\setminus\{p_1\}))$. By the same adjunction we conclude that our $\psi$ above must also satisfy for any fixed $z\in\partial I^n$, $\psi(z,t)$ lies entirely in either $Y\setminus\{p_1\}$ or $Y\setminus\{p_2\}$ (and conversely these information give a map $(I^n,\partial I^n)\to(A,B))$ by the adjunction).  
+
+To summarize: we have a map $$\psi:I^n\times I\to Y$$ such that 
+\begin{itemize}
+\item $\psi(z,0)=y$ is the base point for all $z\in I^n$. 
+\item $\psi(z,1)\in Y\setminus\{p_2\}$ for all $z\in I^n$. 
+\item For any fixed $z\in\partial I^n$, $\psi(z,t)$ lies entirely in $Y\setminus\{p_1\}$ or $Y\setminus\{p_2\}$ for varying $t$. 
+\end{itemize}
+The goal is to make a homotopy from $\psi$ to a map whose third condition holds for any $z\in I^n$ when $n\leq d_1+d_2-3$. Then passing through the adjunction again we see that our original map $(I^n,\partial I^n)\to(A,B)$ is homotopic to the constant map as required. Apply 5.1.4 to obtain a homotopy $H:I^n\times I\times I\to Y$ from $\psi$ to a new map $\eta:I^n\times I\to Y$, such that we have a decomposition of $I^n\times I$ into cubes $W$ and the following are true. 
+\begin{enumerate}
+\item $\psi(W)\subset Y\setminus\{p_2\}$ implies $H(W,r)\subset Y\setminus\{p_2\}$ for all $r\in I$. 
+\item $\psi(W)\subset Y\setminus\{p_1\}$ implies $H(W,r)\subset Y\setminus\{p_1\}$ for all $r\in I$. 
+\item $\psi(W)\subset Y\setminus\{p_1,p_2\}$ implies $H(W,r)=\psi(W)$ for all $r\in I$. 
+\item $\psi(W)\subset Y\setminus\{p_2\}$ then $(H(-,1)^{-1}(\{p_1\}))\cap W\subset K_{d_1}^1(W)$
+\item $\psi(W)\subset Y\setminus\{p_1\}$ then $(H(-,1)^{-1}(\{p_2\}))\cap W\subset K_{d_2}^2(W)$
+\end{enumerate}
+We claim that $H(z,t,r)$ satisfies the three bullet points for all fixed $r$. 
+
+Firstly, we already know that $\psi(z,0)=y$ is the base point for all $z\in I^n$. So for all cubes $W\subseteq I^n\times\{0\}$, we have $\psi(W)=\{y\}\subset Y\setminus\{p_1,p_2\}$. By 3., we conclude that $H(W,r)=\psi(W)=\{y\}$. Secondly, we know that $\psi(z,1)\in Y\setminus\{p_2\}$ for all $z\in I^n$. So for all cubes $W\subseteq I^n\times\{1\}$, we have $\psi(W)\subset Y\setminus\{p_2\}$. By 1., we conclude that $H(W,r)\subset Y\setminus\{p_2\}$ for all $r\in I$. Finally, according to the third bullet point, $\psi(z,I)$ lies entirely in $Y\setminus\{p_1\}$ or $Y\setminus\{p_2\}$ for $z\in\partial I^n$ WLOG lets say it lies entirely in $Y\setminus\{p_i\}$. Choose cubes $W_1,\dots,W_k$ in the decomposition of $I^n\times I$ so that it forms a minimal cover for $\{z\}\times I\subset W_1\cup\cdots\cup W_k$. By definition of the decomposition, these cubes firstly contain at least one point in $\{z\}\times I$, and $\psi(\{z\}\times I)\subset Y\setminus\{p_j\}$ implies that $\psi(W_1),\dots,\psi(W_k)\subset Y\setminus\{p_j\}$. By 1., we conclude that $H(W_1,r),\dots,H(W_k,r)\subset Y\setminus\{p_j\}$ so that $H(W_1\cup\cdots\cup W_k,r)\subset Y\setminus\{p_j\}$. 
+
+It remains to show that $\eta(-,-)=H(-,-,1)$ satisfies the stronger condition of the third bullet point as desired. Let $n\leq d_1+d_2-3$. We want to show that $\eta(z,I)\subset Y\setminus\{p_j\}$ for some $j$. I claim that this is equivalent to saying $$\text{proj}\left(\eta^{-1}(\{p_1\})\right)\cap\text{proj}\left(\eta^{-1}(\{p_2\})\right)=\emptyset$$ where $\text{proj}$ is the projection to the first coordinate. Indeed if $\eta(z,I)$ always lie inside one of $Y\setminus\{p_j\}$, $j=1,2$, then $\text{proj}\left(\eta^{-1}(\{p_1\})\right)=\{z\in I^n\;|\;\eta(z,I)\subset Y\setminus\{p_1\}\}$ and similarly for the other projection so that their intersection is empty. Conversely if one of $\eta(z,I)$ does not entirely in $Y\setminus\{p_2\}$ then the intersection is non-empty. 
+
+So it suffices to prove that the intersection given above is empty. So suppose it is non-empty with an element $z_0$. Then there exists $t_1,t_2\in I$ such that $\eta(z_0,t_1)\in Y\setminus\{p_2\}$ and $\eta(z_0,t_2)\in Y\setminus\{p_1\}$. Choose cubes $W_1=W(a_1,\delta_1,L_1),W_2=W(a_2,\delta_2,L_2)$ in the given decomposition of $I^n\times I$ so that $(z_0,t_1)\in W_1$ and $(z_0,t_2)\in W_2$. By 4. and 5. we have $(z_0,t_1)\in\eta^{-1}(\{p_1\})\cap W_1\subset  K_{d_1}^1(W_1)$ and similarly for $(z_0,t_2)$. Then $(z_0,t_j)$ has at least $d_j$ coordinates satisfying the inequalities to lie in $K_{d_j}^1$. Hence $z_0=\text{proj}(z_0,t)$ has at least $d_j-1$ coordinates satisfying those inequalities for each $j=1,2$. For each $j$, $\text{proj}(W_j)$ is a cube containing $z_0$. Subdivide the cubes $W_1$ and $W_2$ further so that $\text{proj}(W_1)=\text{proj}(W_2)$. Since $\text{proj}(z_0,t)=z_0$, this means that $z_0$ has at least $d_j-1$ coordinates satisfying the inequalities of $K_{d_1}^1(W_1)$ and $K_{d_2}^2(W_2)$. But notice that the inequalities of $K_{d_1}^1(W_1)$ and $K_{d_2}^2(W_2)$ are disjoint (one concerns whether the points are at the front of the cube, the other at the back). So these conditions are disjoint and $z_0$ must have at least $d_1+d_2-2$ conditions on its coordinates. This is impossible if $z_0$ has less than $d_1+d_2-3$ coordinates. Hence we are done. 
+
+Notice that the proof required $d_1,d_2\geq 1$. Assume WLOG that $d_2=0$, then right from the beginning we are considering the map of homotopy fibers $$\text{hofib}_y(X\to X\cup e^{d_2})\to\text{hofib}_y(X\cup e{d_1}\to X\cup e^{d_1}\cup e^{d_2})$$ where $X\cup e^{d_1}$ is now the disjoint union of $X$ with a base point. Then $\text{hofib}_y(X\to X\amalg\ast)$ consists of pairs $(x,\phi)\in X\times\text{Map}(I,X\amalg\ast)$ such that $\phi(0)\in X$ and $\phi(1)=\ast$. But $\ast$ is disjoint from $X$ means that no pairs satisfy this conditions and the homotopy fiber is the empty set. Similarly for the target homotopy fiber. Hence the map of homotopy fibers is the identity and it is trivially true. The proof is similar for $d_1=0$. 
+\end{proof}
+\end{lmm}
+
+\subsection{Infinity Categories}
+Similar to pushouts in ordinary categories, there is a pasting law for pushouts in infinity categories. 
+
+\begin{prp}\label{prp:Pasting3} Let $\mathcal{C}$ be an infinity category. Let the following be a diagram in $\mathcal{C}$: \\~\\
+\adjustbox{scale=0.8,center}{\begin{tikzcd}
+	{X_1} & {X_2} & {X_3} \\
+	{Y_1} & {Y_2} & {Y_3}
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=1-3, to=2-3]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+\end{tikzcd}}\\~\\
+Suppose that the left square is a pushout square. Then the outer rectangle is a pushout square if and only if the right square is a pushout square. 
+\begin{proof}
+Refer to 4.4.2.1 of \cite{HTT}
+\end{proof}
+\end{prp}
+
+The following result from I.39 of \cite{AHKT} allows us to compute limits and colimits of functors object-wise. 
+
+\begin{prp}\label{prp:TermwiseLim} Let $\mathcal{C},\mathcal{D},\mathcal{E}$ be infinity categories. Let $F:\mathcal{D}\to\mathcal{E}$ be a functor. Then the induced functor $$-\circ F:\text{Func}(\mathcal{E},\mathcal{C})\to\text{Func}(\mathcal{D},\mathcal{C})$$ preserves limits and colimits. 
+\end{prp}
+
+In particular, by choosing the inclusion functor $\{d\}\hookrightarrow\mathcal{D}$, we obtain the (co)limit preserving functor $$\text{ev}_d:\text{Func}(\mathcal{D},\mathcal{C})\to\text{Func}(\{d\},\mathcal{C})\simeq\mathcal{C}$$ Now given any diagram $X:K\to\text{Func}(\mathcal{D},\mathcal{C})$ that admits a limit, $\lim_K X$ is an object $\text{Func}(\mathcal{D},\mathcal{C})$. To compute the value of this functor at $d\in\mathcal{D}$, we use the evaluation map to get $$\left(\lim_K X\right)(d)=\text{ev}_d\left(\lim_KX\right)=\lim_K(\text{ev}_d\circ X)$$ where the limit on the right is now an object in $\mathcal{C}$, and the diagram of the limit is given on objects by $F(d)$ for all $F$ in the image of $X$. 
+

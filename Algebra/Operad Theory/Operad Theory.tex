@@ -1,0 +1,182 @@
+\documentclass[a4paper]{article}
+
+\input{C:/Users/liula/Desktop/Latex/Headers V1.2.tex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Labix}
+\lhead{Operad Theory}
+\rfoot{\thepage}
+
+\title{Operad Theory}
+
+\author{Labix}
+
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+\begin{itemize}
+\end{itemize}
+\end{abstract}
+\pagebreak
+\tableofcontents
+\pagebreak
+
+\section{The Theory of Operads}
+\subsection{General Operads}
+\begin{defn}{(Planar) Operads}{} Let $(\mC,\otimes,I)$ be a symmetric monoidal category. An operad in $\mC$ consists of the following data
+\begin{itemize}
+\item A sequence $P=\{P(n)\;|\;n\in\N\}$ of objects in $\mC$
+\item A composition function $$\gamma:P(n)\otimes P(k_1)\otimes\cdots\otimes P(k_n)\to P(k_1+\cdots+k_n)$$
+\item An unit $\mu:I\to P(1)$
+\end{itemize}
+such that the following compatibility conditions are satisfied. 
+\begin{itemize}
+\item Associativity in the first symmetric product: \\~\\
+\adjustbox{scale=0.8,center}{\begin{tikzcd}
+	{P(n)\otimes\left(\bigotimes_{k=1}^n\left(P(i_k)\otimes\bigotimes_{t=1}^{i_k}P(j_{k,t})\right)\right)} & {P(n)\otimes\left(\bigotimes_{k=1}^nP\left(\sum_{t=1}^{i_k}j_{k,t}\right)\right)} \\
+	&& {P\left(\sum_{k=1}^n\sum_{t=1}^{i_k}j_{k,t}\right)} \\
+	{P(n)\otimes\left(\bigotimes_{k=1}^nP(j_k)\right)\otimes\left(\bigotimes_{k=1}^n\bigotimes_{t=1}^{t_k}P(j_{k,t})\right)} & {P\left(\sum_{u=1}^ki_u\right)\otimes\left(\bigotimes_{k=1}^n\bigotimes_{t=1}^{i_k}P(j_{k,t})\right)}
+	\arrow["{\text{id}_{P(n)}\otimes\gamma}"', from=1-1, to=1-2]
+	\arrow["\cong", from=1-1, to=3-1]
+	\arrow["\gamma"', from=1-2, to=2-3]
+	\arrow["{\gamma\otimes\text{id}_{\otimes\otimes}}", from=3-1, to=3-2]
+	\arrow["\gamma", from=3-2, to=2-3]
+\end{tikzcd}}\\~\\
+\item Unitality: \\~\\
+\adjustbox{scale=1,center}{\begin{tikzcd}
+	{P(n)\otimes P(1)^{\otimes n}} & {P(n)\otimes I^{\otimes n}} & {I\otimes P(n)} & {P(1)\otimes P(n)} \\
+	& {P(n)} & {P(n)}
+	\arrow["\gamma"', from=1-1, to=2-2]
+	\arrow["{\text{id}_{P(n)}\otimes\mu^{\otimes n}}"', from=1-2, to=1-1]
+	\arrow["\cong", from=1-2, to=2-2]
+	\arrow["{\mu\otimes\text{id}_{P(n)}}", from=1-3, to=1-4]
+	\arrow["\cong"', from=1-3, to=2-3]
+	\arrow["\gamma", from=1-4, to=2-3]
+\end{tikzcd}}\\~\\
+\end{itemize}
+\end{defn}
+
+TBA: An operad is a monoid in the monoidal category $(\text{Func}(\bold{S},\mC),\circ,I)$
+
+\begin{defn}{Symmetric Operads}{} Let $(\mC,\otimes)$ be a symmetric monoidal category. A symmetric operad is an operad $(P,\gamma,\mu)$ on $\mC$ such that the following are true. 
+\begin{itemize}
+\item Each $P(n)$ is an $S_n$-module for each $n\in\N$. 
+\item $\gamma:P(n)\otimes P(k_1)\otimes\cdots\otimes P(k_n)\to P(k_1+\cdots+k_n)$ is equivariant in the following sense: 
+\begin{align*}
+\gamma(c\cdot\sigma,d_1,\dots,d_n)&=\gamma(c,d_{\sigma^{-1}(1)},\dots,d_{\sigma^{-1}(n)})\cdot\sigma(k_1,\dots,k_n)\\
+\gamma(c,d_1\cdot\tau_1,\dots,d_n\cdot\tau_n)&=\gamma(c,d_1,\dots,d_n)\cdot(\tau_1\oplus\cdots\oplus\tau_n)
+\end{align*}
+\end{itemize}
+\end{defn}
+
+The symmetric monoidal category one usually considers are algebraic. For instance, ${_R}\bold{Mod}$, $\bold{Ch}(R)_{\geq 0}$
+
+\begin{defn}{Morphisms of Operads}{} Let $(\mC,\otimes,I)$ be a symmetric monoidal category. Let $(P,\gamma,\mu)$ and $(P,\gamma',\mu')$ be operads in $\mC$. A morphism $\varphi:P\to P'$ of operads consists of the following data. 
+\begin{itemize}
+\item For each $n\in\N$, a map $\varphi_n:P(n)\to P'(n)$ in $\mC$
+\item Compatible with composition. This means that for any $n,k_1,\dots,k_n\in\N$, the following diagram commutes: \\~\\
+\adjustbox{scale=1,center}{\begin{tikzcd}
+	{P(n)\otimes P(k_1)\otimes\cdots\otimes P(k_n)} &&& {P'(n)\otimes P'(k_1)\otimes\cdots\otimes P'(k_n)} \\
+	{P(k_1+\dots+k_n)} &&& {P'(k_1+\dots+k_n)}
+	\arrow["{\varphi_n\otimes\varphi_{k_1}\otimes\cdots\otimes\varphi_{k_n}}", from=1-1, to=1-4]
+	\arrow["\gamma"', from=1-1, to=2-1]
+	\arrow["{\gamma'}", from=1-4, to=2-4]
+	\arrow["{\varphi_{k_1+\cdots+k_n}}", from=2-1, to=2-4]
+\end{tikzcd}}\\~\\
+\item Compatible with the identity. This means that the following diagram holds: \\~\\
+\adjustbox{scale=1,center}{\begin{tikzcd}
+	& I \\
+	{P(1)} && {P'(1)}
+	\arrow["\mu"', from=1-2, to=2-1]
+	\arrow["{\mu'}", from=1-2, to=2-3]
+	\arrow["{\varphi_1}"', from=2-1, to=2-3]
+\end{tikzcd}}\\~\\
+\end{itemize}
+\end{defn}
+
+\subsection{Operads as a Monoid in a Monoidal Category}
+
+\subsection{The Endomorphism Operad and Algebra Operads}
+\begin{defn}{The Endomorphism Operad}{} Let $(\mC,\otimes,I)$ be a symmetric monoidal category. Let $X\in\mC$ be an object. Define the endomorphism operad $\mE\text{nd}(X)$ on $X$ to consist of the following data. 
+\begin{itemize}
+\item For each $n\in\N$, $\mE\text{nd}(X)(n)=\Hom_\mC(X^{\otimes n},X)$
+\item Composition is given by the following: \\~\\
+\adjustbox{scale=0.74,center}{\begin{tikzcd}
+	{\Hom_\mC(X^{\otimes n},X)\otimes\bigotimes_{i=1}^n\Hom_\mC(X^{\otimes k_i},X)} & {\Hom_\mC(X^{\otimes n},X)\otimes\Hom_\mC(X^{\otimes k_1+\dots+k_n},X^{\otimes n})} && {\Hom_\mC(X^{\otimes k_1+\cdots+k_n},X)}
+	\arrow["{\text{id}\otimes\bigotimes}", from=1-1, to=1-2]
+	\arrow["{\text{Composition}}", from=1-2, to=1-4]
+\end{tikzcd}}\\~\\
+\item The unit map $\mu:I\to\Hom_\mC(X,X)$ is the image of identity map $\text{id}_X$ under the adjunction $$\Hom_\mC(X,X)\cong\Hom_\mC(I,\Hom_\mC(X,X))$$
+\end{itemize}
+\end{defn}
+
+\begin{defn}{The (Non-Unital) Planar Associative Operad}{} Let $(\mC,\otimes,I)$ be a symmetric monoidal category with initial object $\emptyset$. Define the planar associative operad $\mA\text{ss}$ of $\mC$ to consist of the following data. 
+\begin{itemize}
+\item For each $n\in\N\setminus\{0\}$, $\mA\text{ss}(n)=\{I\}$ and $\mA\text{ss}(0)=\emptyset$
+\item The composition function is uniquely determined by the unique map of the terminal object (in other words the identity $\text{id}_I$)
+\item The unit $\{\ast\}\to\mA\text{ss}(1)=\{\ast\}$ is also uniquely determined by the unique object
+\end{itemize}
+\end{defn}
+
+\begin{defn}{The Symmetric Associative Operad}{} Define the planar associative operad $\mA\text{ss}$ to consist of the following data. 
+\begin{itemize}
+\item For each $n\in\N$, $\mA\text{ss}(n)=S_n$ where $S_n$ is the symmetric group
+\item 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{The Commutative Operad}{}
+\end{defn}
+
+\pagebreak
+\section{Coloured Operads}
+\subsection{Coloured Operads}
+\begin{defn}{Coloured Operads}{} Let $(\mC,\otimes,I)$ be a symmetric monoidal category. A coloured operad in $\mC$ consists of the following data. 
+\begin{itemize}
+\item A set $S$ of objects in $\mC$ called colours
+\item For each $n\in\N$, and each $C_1,\dots,C_n,C\in S$, an object $P(C_1,\dots,C_n,C)\in\mC$
+\item For each $(n+1)$-tuple $C_1,\dots,C_n,C$ and $n$ other tuples $(D_{1,1},\dots,D_{1,k_1}),\dots,(D_{n,1},\dots,D_{n,k_n})$, there is a morphism $$P(C_1,\dots,C_n,C)\otimes\bigotimes_{i=1}^nP(D_{i,1},\dots,D_{i,k_i},C_i)\to P(D_{1,1},\dots,D_{n,k_n},C)$$ called the composition operation
+\item For each $C\in S$, a morphism $$1_C:I\to P(C,C)$$ called the identity
+\end{itemize}
+such that composition is associativity and unital. 
+\end{defn}
+
+\subsection{The Category of Operators}
+Every coloured operad defines and is defined by a category called the category of operators. Recall the category of finite sets to consist of objects of the form $[n]=\{0,\dots,n\}$. 
+
+\begin{defn}{The Category of Pointed Finite Sets}{} Define the category of pointed finite sets $$\bold{Fin}_\ast$$ to consist of the following data. 
+\begin{itemize}
+\item The objects consists of $\langle n\rangle=\{\ast,1,\dots,n\}$ together with the chosen point $\ast$
+\item For $\langle n\rangle$ and $\langle m\rangle $ in $\bold{Fin}_\ast$, a morphism is a function $f:\langle n\rangle\to\langle m\rangle$ such that $f(\ast)=\ast$. 
+\item Composition is given by the composition of functions. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{The Category of Operators}{} Let $A$ be a symmetric coloured operad in $\bold{Set}$. Define the category of operators $\mC_A$ as follows. 
+\begin{itemize}
+\item The objects are finite sequences $C_1,\dots,C_n$ of colours in $A$
+\item For two tuples $(C_1,\dots,C_n)$ and $(D_1,\dots,D_m)$, a morphism $F:(C_1,\dots,C_n)\to(D_1,\dots,D_m)$ is given as a tuple $(\phi,f_1,\dots,f_m)$ where $\phi:\langle n\rangle\to\langle m\rangle$ is a morphism in $\bold{Fin}_\ast$ and each $f_i$ for $1\leq i\leq m$ an operation $$f_i\in\Hom_A((C_k)_{k\in\phi^{-1}(i)},D_i)$$ in $A$
+\item Composition is given component wise in $\bold{Fin}_\ast$ and in $A$. 
+\end{itemize}
+This is often paired with the canonical forgetful functor $p:\mC_A\to\bold{Fin}_\ast$. 
+\end{defn}
+
+We can reconstruct the operad $A$ from the category of operators in the following way. 
+
+\pagebreak
+\section{Infinity Operads}
+\
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

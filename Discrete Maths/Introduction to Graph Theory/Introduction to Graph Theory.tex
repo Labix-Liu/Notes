@@ -1,0 +1,285 @@
+\documentclass[a4paper]{article}
+
+\input{C:/Users/liula/Desktop/Latex/Headers V1.2.tex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Labix}
+\lhead{Introduction to Graph Theory}
+\rfoot{\thepage}
+
+\title{Introduction to Graph Theory}
+
+\author{Labix}
+
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+\end{abstract}
+
+References: 
+\pagebreak
+\tableofcontents
+
+\pagebreak
+\section{Basic Definition of Graphs}
+\subsection{Graphs and Graph Homomorphisms}
+\begin{defn}{Graphs}{} A graph $G$ consists of the following data. 
+\begin{itemize}
+\item A set $V$ called the vertices of $G$
+\item A set $E$ is called the edges of $G$
+\item A function $\phi_G:E\to\{\{v,w\}\;|\;v,w\in V\}$ that assigns to each edge two vertices. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Finite Graphs}{} Let $G=(V,E)$ be a graph. We say that $G$ is a finite graph if $\abs{V}$ and $\abs{E}$ are finite. 
+\end{defn}
+
+\begin{defn}{Graph Homomorphism}{} Let $G=(V(G),E(G))$ and $H=(V(H),E(H))$ be two graphs. A graph homomorphism $$f:G\to H$$ consists of the following data: 
+\begin{itemize}
+\item A map of sets $f:V(G)\to V(H)$
+\item A map of sets $f:E(G)\to E(H)$ such that $\phi_G(e)=\{v,w\}$ implies $\phi_H(f(e))=\{f(v),f(w)\}$
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Graph Isomorphism}{} Let $G=(V(G),E(G))$ and $H=(V(H),E(H))$ be two graphs. Let $\phi:G\to H$ be a graph homomorphism. We say that $\phi$ is a graph isomorphism if there exists a graph homomorphism $\psi:H\to G$ such that $\psi\circ\phi=\text{id}_G$ and $\phi\circ\psi=\text{id}_H$. 
+\end{defn}
+
+\begin{lmm}{}{} Let $G=(V(G),E(G))$ and $H=(V(H),E(H))$ be two graphs. Let $\phi:G\to H$ be a graph isomorphism. Then $$\abs{V(G)}=\abs{V(H)}\;\;\;\;\text{ and }\;\;\;\;\abs{E(G)}=\abs{E(H)}$$
+\end{lmm}
+
+\subsection{Subgraphs of a Graph}
+\begin{defn}{Subgraphs}{} Let $G,H$ be graphs. We say that $H$ is a subgraph of $G$ if the following are true. 
+\begin{itemize}
+\item $V(H)\subseteq V(G)$
+\item $E(H)\subseteq E(G)$
+\item $\phi_H=\phi_G|_{E(H)}$
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Spanning Subgraph}{} Let $G$ be a graph. Let $H\subseteq G$ be a subgraph of $G$. We say that $H$ is a spanning subgraph of $G$ if $V(H)=V(G)$. 
+\end{defn}
+
+\begin{defn}{Induced Subgraphs of Vertices}{} Let $G=(V(G),E(G))$ be a graph. Let $W\subseteq V(G)$ be a subset of vertices of $G$. Define the induced subgraph $G[W]$ by the following data. 
+\begin{itemize}
+\item $V(G[W])=W$
+\item $E(G[W])=\{e\in E(G)\;|\;\phi_G(e)\subseteq W\}$
+\item $\phi_{G[W]}=\phi_G|_W$
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Induced Subgraphs of Edges}{} Let $G=(V(G),E(G))$ be a graph. Let $F\subseteq E(G)$ be a subset of edges of $G$. Define the induced subgraph $G[F]$ by the following data. 
+\begin{itemize}
+\item $V(G[W])=\{v\in V\;|\;v\in\phi_G(e)\text{ for some }e\in E\}$
+\item $E(G[W])=F$
+\item $\phi_{G[F]}=\phi_G|_{V(G[W])}$
+\end{itemize}
+\end{defn}
+
+\subsection{The Degree of Vertices}
+\begin{defn}{Degree of a Vertex}{} Let $G$ be a graph. Let $v\in V$ be a vertex. Define the degree of $v$ to be $$\deg(v)=\abs{\{e\in E\;|\;v\in\phi(e)\}}$$
+\end{defn}
+
+In other words, the degree of a vertex is the number of edges incident with $v$. Notice that loops count for two such incidents. 
+
+\begin{prp}{}{} Let $G$ be a finite graph. Then $$\sum_{v\in V}\deg(v)=2\abs{E}$$
+\end{prp}
+
+\begin{crl}{}{} Let $G$ be a finite graph. Then the number of vertices with odd degree is even. 
+\end{crl}
+
+\begin{defn}{Neighbouring Vertices}{} Let $G$ be a graph. Let $S\subseteq V$ be a set of vertices of $G$. Define the neighbours of the vertices of $S$ to be $$N(S)=\{v\in V\;|\;\{v,s\}\in\phi_G(e)\text{ for some }e\in E\text{ and some }s\in S\}$$
+\end{defn}
+
+\pagebreak
+\section{Walking in a Graph}
+\subsection{Walks, Path and Cycles}
+\begin{defn}{Walks in a Graph}{} Let $G$ be a graph. A walk $W$ in $G$ is a finte sequence $$W=v_1,e_1,v_2,e_2,\dots,v_{k-1}e_{k-1}v_k$$ of alternating vertices and edges that start and end with vertices, such that $\phi_G(e_i)=\{v_{i-1},v_i\}$ for all $1\leq i<k$. In this case we say that the walk has length $k$. 
+\end{defn}
+
+\begin{defn}{Paths in a Graph}{} Let $G$ be a graph. Let $W=v_1,e_1,v_2,e_2,\dots,v_{k-1}e_{k-1}v_k$ be a walk. We say that $W$ is a path if the following are true. 
+\begin{itemize}
+\item Each of $v_1,\dots,v_k\in V$ are distinct. 
+\item Each of $e_1,\dots,e_{k-1}\in E$ are distinct. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Closed Walks in a Graph}{} Let $G$ be a graph. Let $W=v_1,e_1,v_2,e_2,\dots,v_{k-1}e_{k-1}v_k$ be a walk in $G$. We say that $W$ is closed if $v_1=v_k$. 
+\end{defn}
+
+\begin{defn}{Cycles in a Graph}{} Let $G$ be a graph. Let $W=v_1,e_1,v_2,e_2,\dots,v_{k-1}e_{k-1}v_k$ be a walk in $G$. We say that $W$ is a cycle in $G$ if the following are true. 
+\begin{itemize}
+\item $v_1=v_k$. 
+\item Each $v_1,\dots,v_{k-1}\in V$ are distinct. 
+\end{itemize}
+We say that $W$ is odd (even) if $k$ is odd (even). 
+\end{defn}
+
+\begin{lmm}{}{} Let $G$ be a graph. Let $W$ be a cycle in $G$. Then $W$ is closed. 
+\end{lmm}
+
+\subsection{Connected Components of a Graph}
+\begin{defn}{Connected Vertices}{} Let $G$ be a graph. Let $v,w\in V$ be vertices. We say that $v$ and $w$ are connected if there exists a path in $G$ from $v$ to $w$. 
+\end{defn}
+
+\begin{lmm}{}{} Let $G$ be a graph. Then connectedness of vertices is an equivalence relation in the vertices $V$ of $G$. 
+\end{lmm}
+
+\subsection{Euler Tours}
+\begin{defn}{Tours in a Graph}{} Let $G$ be a graph. Let $W$ be a walk in $G$. We say that $W$ is a tour in $G$ if every edge in $G$ is contained in the sequence $W$. 
+\end{defn}
+
+\begin{defn}{Euler Tours in a Graph}{} Let $G$ be a graph. Let $W$ be a walk in $G$. We say that $W$ is an Euler tour in $G$ if every edge in $G$ is contained in the sequence $W$ exactly once. 
+\end{defn}
+
+\begin{defn}{Eulerian Graphs}{} Let $G$ be a graph. We say that $G$ is Eulerian if $G$ contains an Euler tour. 
+\end{defn}
+
+\begin{prp}{}{} Let $G$ be a non-empty connected graph. Then $G$ is Eulerian if and only if $G$ contains no vertices of odd degree. 
+\end{prp}
+
+\subsection{Hamiltonian Cycles}
+\begin{defn}{Hamiltonian Path}{} Let $G$ be a graph. Let $W$ be a walk in $G$. We say that $W$ is a Hamiltonian path if $W$ is a path and every vertex in $G$ is contained in the sequence $W$. 
+\end{defn}
+
+\begin{defn}{Hamiltonian Cycle}{} Let $G$ be a graph. Let $W$ be a walk in $G$. We say that $W$ is a Hamiltonian cycle if $W$ is a cycle and every vertex in $G$ is contained in the sequence $W$. 
+\end{defn}
+
+\begin{defn}{Hamiltonian Graphs}{} Let $G$ be a graph. We say that $G$ is Hamiltonian if $G$ contains an Hamiltonian cycle. 
+\end{defn}
+
+\pagebreak
+\section{Matchings of Edges}
+\subsection{Different Types of Matchings}
+\begin{defn}{Matchings}{} Let $G$ be a graph. Let $M\subseteq E$ be a subset of edges. We say that $M$ is a matching if no two edges share a common vertex. 
+\end{defn}
+
+\begin{defn}{Maximal Matchings}{} Let $G$ be a graph. Let $M\subseteq E$ be a matching. We say that $M$ is maximal if $M\subseteq T\subseteq E$ is another matching, then $T=M$. 
+\end{defn}
+
+\begin{defn}{Maximum Matchings}{} Let $G$ be a graph. Let $M\subseteq E$ be a matching. We say that $M$ is a maximum matching if $M$ contains the largest number of edges possible. 
+\end{defn}
+
+\begin{defn}{Alternating Paths}{} Let $G$ be a graph. Let $M\subseteq E$ be a matching. Let $P$ be a path in $G$. We say that $P$ is $M$-alternating if the subsequence of edges in $P$ alternates between $M$ and $E\setminus M$. 
+\end{defn}
+
+\begin{defn}{Augmenting Paths}{} Let $G$ be a graph. Let $M\subseteq E$ be a matching. Let $P$ be a path in $G$. We say that $P$ is $M$-augmenting if it is $M$-alternating and the sequence of edges begins and ends in $E\setminus M$. 
+\end{defn}
+
+\begin{prp}{}{} Let $G$ be a graph. Let $M\subseteq E$ be a matching. Then $M$ is maximum if and only if $G$ contains no $M$-augmenting paths. 
+\end{prp}
+
+\subsection{Coverings}
+\begin{defn}{Coverings}{} Let $G$ be a graph. Let $T\subseteq E$ be a subset of edges. A covering of $T$ is a subset $W\subseteq V$ of vertices such that for all $e\in T$, there exists $v\in W$ such that $v\in\phi_G(e)$. 
+\end{defn}
+
+\begin{lmm}{}{} Let $G$ be a graph. Let $M\subseteq E$ be a matching. Let $W\subseteq V$ be a covering of $M$. Then $\abs{M}\leq\abs{W}$. 
+\end{lmm}
+
+\subsection{Maximum Matchings and Minimum Coverings}
+\begin{defn}{Minimum Coverings}{} Let $G$ be a graph. Let $T\subseteq E$ be a subset of edges. Let $W\subseteq V$ be a covering for $T$. We say that $W$ is a minimum covering if for any covering $X$ of $T$, $\abs{W}\leq\abs{X}$. 
+\end{defn}
+
+\begin{lmm}{}{} Let $G$ be a graph. Let $M\subseteq E$ be a matching. Let $W\subseteq V$ be a covering of $M$. If $\abs{M}=\abs{W}$, then $M$ is a maximum matching and $W$ is a minimum covering. 
+\end{lmm}
+
+\subsection{Perfect Matchings}
+\begin{defn}{Perfect Matchings}{} Let $G$ be a graph. Let $M\subseteq E$ be a matching. We say that $M$ is perfect if for all $v\in V$, there exists some $e\in M$ for which $v\in\phi_G(e)$. 
+\end{defn}
+
+\begin{prp}{}{} Let $G$ be a graph. Then $G$ contains a perfect matching if and only if $$O(G\setminus S)\leq\abs{S}$$ for all $S\subseteq V$ vertices, where $O(G\setminus S)$ refers to the number of odd vertices of $G\setminus S$. 
+\end{prp}
+
+\pagebreak
+\section{Special Types of Graphs}
+\subsection{Simple Graphs}
+\begin{defn}{Loops}{} Let $(V,E)$ be a graph. Let $e=\{v_1,v_2\}\in E$ be an edge. We say that $e$ is a loop if $v_1=v_2$. 
+\end{defn}
+
+\begin{defn}{Simple Graphs}{} Let $G=(V,E)$ be a graph. We say that $G$ is simple if the following are true. 
+\begin{itemize}
+\item $G$ has no loops. 
+\item For any $v,w\in V$ with $v\neq w$, $\abs{\phi^{-1}(\{v,w\})}\leq 1$. 
+\end{itemize}
+\end{defn}
+
+The condition says that for any two distinct vertices, there is at most one edge connecting the two. 
+
+\subsection{Complete Graphs}
+\begin{defn}{Complete Graphs}{} Let $G=(V,E)$ be a graph. We say that $G$ is complete if the following are true. 
+\begin{itemize}
+\item $G$ has no loops. 
+\item For any $v,w\in V$ with $v\neq w$, $\abs{\phi^{-1}(\{v,w\})}=1$. 
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{} Every complete graph is simple. 
+\end{lmm}
+
+\begin{prp}{}{} Let $n\in\N$. Then there exists a unique (up to isomorphism) complete graph with $n$ vertices. 
+\end{prp}
+
+\begin{lmm}{}{} Let $G=(V,E)$ be a simple finite graph. Then $\abs{E}=\binom{\abs{V}}{2}$ if and only if $G$ is a complete graph. 
+\end{lmm}
+
+\begin{defn}{Standard Complete Graph}{} Let $n\in\N\setminus\{0\}$. Define the standard complete graph $K_n$ to be graph consisting of the following data. 
+\begin{itemize}
+\item $V(K_n)=\{1,\dots,n\}$. 
+\item $E=\{e_{i,j}\;|\;1\leq i<j\leq n\}$
+\item $\phi_{K_n}(e_{i,j})=\{i,j\}$
+\end{itemize}
+\end{defn}
+
+\subsection{Regular Graphs}
+\begin{defn}{Regular Graphs}{} Let $G$ be a graph. We say that $G$ is regular if there exists $k\in\N$ such that $$\deg(v)=k$$ for all $v\in V$. 
+\end{defn}
+
+\begin{lmm}{}{} Let $G$ be a graph. If $G$ is complete, then $G$ is regular. 
+\end{lmm}
+
+\subsection{Trees}
+\begin{defn}{Acyclic Graphs}{} Let $G$ be a graph. We say that $G$ is acyclic if $G$ contains no cycles. 
+\end{defn}
+
+\begin{defn}{Trees}{} Let $G$ be a graph. We say that $G$ is a tree if $G$ is connected and acyclic. 
+\end{defn}
+
+\begin{prp}{}{} Let $G$ be a graph. Then the following are equivalent. 
+\begin{itemize}
+\item $G$ is tree. 
+\item $G$ is acyclic and for any graph $H$ such that $G\subseteq H$ and $E(H)>E(G)$, then $H$ contains a cycle. 
+\item $G$ is connected and any proper subgraph of $G$ is disconnected. 
+\item Any two vertices in $G$ are connected by a unique path. 
+\end{itemize}
+\end{prp}
+
+\begin{lmm}{}{} Let $G$ be a finite graph. Then $G$ is tree if and only if $G$ is connected and $\abs{E}=\abs{V}-1$. 
+\end{lmm}
+
+\begin{prp}{}{} Let $G$ be a finite connected graph. Then $G$ contains a spanning tree. 
+\end{prp}
+
+\begin{lmm}{}{} Let $G$ be a finite connected graph. Then $\abs{E}\geq\abs{V}-1$. 
+\end{lmm}
+
+\subsection{Bipartite Graphs}
+\begin{defn}{Bipartite Graphs}{} Let $G=(V,E)$ be a graph. We say that $G$ is bipartite if there exist a partition $X\amalg Y=V$ of $V$ such that for each $e\in E$, $\phi_G(e)$ has one element in $X$ and one element in $Y$. 
+\end{defn}
+
+\begin{prp}{}{} Let $G$ be a graph. Then $G$ is bipartite if and only if it contains no odd cycles. 
+\end{prp}
+
+\begin{prp}{}{} Let $G$ be a bipartite graph. Let $M\subseteq E$ be a matching. Let $W\subseteq V$ be a covering of $M$. Then $\abs{M}=\abs{W}$ if and only if $M$ is a maximum matching and $W$ is a minimum covering. 
+\end{prp}
+
+\begin{thm}{Hall's Theorem}{} Let $G$ be a bipartite graph with partition $V=X\amalg Y$. Then $G$ contains a matching $M\subseteq E$ for which for all $v\in V$, there exists $e\in E$ such that $v\in\phi_G(e)$ if and only if $$\abs{N(S)}\geq\abs{S}$$ for all $S\subseteq X$. 
+\end{thm}
+
+\begin{thm}{Marriage Theorem}{} Let $G$ be $k$-regular bipartite graph for $k>0$. Then $G$ contains a perfect matching. 
+\end{thm}
+
+
+
+
+\end{document}

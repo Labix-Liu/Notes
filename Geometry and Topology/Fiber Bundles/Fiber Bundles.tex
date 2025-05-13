@@ -1,0 +1,414 @@
+\documentclass[a4paper]{article}
+
+\input{C:/Users/liula/Desktop/Latex/Headers V1.2.tex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Labix}
+\lhead{Fiber Bundles}
+\rfoot{\thepage}
+
+\title{Fiber Bundles}
+
+\author{Labix}
+
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+\begin{itemize}
+\item Notes on Algebraic Topology by Oscar Randal-Williams
+\end{itemize}
+\end{abstract}
+\pagebreak
+\tableofcontents
+
+\pagebreak
+\section{Fiber Bundles with a Group Structure}
+\subsection{G-Bundles and the Structure Groups}
+We would now like to enrich the structure of a fiber bundle with a group action on the fibers. Recall that a topological group is a group with the structure of a topology such that multiplication $(g_1,g_2)\mapsto g_1g_2$ and the inverse $g\mapsto g^{-1}$ are both continuous maps. \\~\\
+
+Also, recall that a group action is faithful if for all $g\in G$, $g\cdot x\neq x$ for all $x\in X$. 
+
+\begin{defn}{G-Atlas}{} Let $(F,E,B)$ be a fiber bundle. Let $G$ be topological group with a continuous faithful action on $F$. A $G$-atlas on $(F,E,B)$ is a set of local trivalization charts $\{(U_k,\varphi_k)\;|\;k\in I\}$ such that the following are true. 
+\begin{itemize}
+\item For $(U_k,\varphi_k)$ a chart, define $\varphi_{i,x}:F\to F$ by $f\mapsto\varphi_i(x,f)$. Then the homeomorphism $$\varphi_{j,x}\circ\varphi_{i,x}^{-1}:F\to F$$ for $x\in U_i\cap U_j\neq\emptyset$ is an element of $G$. 
+\item For $i,j\in I$, the map $g_{ij}:U_i\cap U_j\to G$ defined by $$g_{ij}(x)=\varphi_{j,x}\circ\varphi_{i,x}^{-1}$$ is continuous. These $g_{ji}$ are called coordinate transformations. 
+\end{itemize}
+\end{defn}
+
+Notice that for non empty intersections $U_i\cap U_j$ for $U_i,U_j$ open sets in $B$, there is a well defined homeomorphism $$\varphi_j\circ\varphi_i^{-1}:(U_i\cap U_j)\times F\to(U_i\cap U_j)\times F$$ This is reminiscent of properties of an atlas on $M$. 
+
+\begin{lmm}{}{} Let $(F,E,B)$ be a fiber bundle and let $G$ be a topological group. Let $\{(U_k,\varphi_k)\;|\;k\in I\}$ be a $G$-atlas on $(F,E,B)$. Then the following are true regarding the coordinate transformations $g_{ji}(x)=\varphi_{j,x}\circ\varphi_{i,x}^{-1}$
+\begin{itemize}
+\item Cocycle condition: $g_{ki}(x)=g_{kj}(x)g_{ji}(x)$ for all $x\in U_i\cap U_j\cap U_k$. 
+\item $g_{ji}(x)=(g_{ij}(x))^{-1}$ for all $x\in U_i\cap U_j$
+\item $g_{ii}(x)=1$ for all $x\in U_i$
+\end{itemize}
+\end{lmm}
+
+\begin{defn}{Equivalent $G$-Atlas}{} Let $G$ be a topological group. Let $(F,E,B)$ be a fiber bundle and let $\{(U_i,\varphi_i\;|\;i\in I\}$ and $\{(V_j,\phi_j)\;|\;j\in J\}$ be two $G$-atlas on the fiber bundle. We say that they are equivalent if for all $x\in U_i\cap V_j$, $$\overline{g}_{ji}(x)=\phi_{j,x}\circ\phi_{i,x}^{-1}$$ is an element of $G$ and the map $$\overline{g}_{ji}:U_i\cap V_j\to G$$ defined by $x\mapsto\overline{g}_{ji}(x)$ is continuous. 
+\end{defn}
+
+It is clear that this is an equivalent relation. It is reflexive directly from definitions of a $G$-atlas. ???
+
+\begin{defn}{G-Bundle}{} Let $G$ be a topological group. A $G$-bundle is a fiber bundle $(F,E,B)$ together with an equivalence class of $G$-atlas. In this case, $G$ is said to be the structure group of the fiber bundle. 
+\end{defn}
+
+Similar to the case of manifolds, an maximal atlas is exactly such an equivalence class of atlases. Therefore one can also think of a $G$-bundle as a fiber bundle equipped with a maximal $G$-atlas. \\~\\
+
+A morphism of $G$-bundles must now take into account of the group $G$. 
+
+\begin{defn}{Morphisms of $G$-Bundles}{} Let $G$ be a topological group. Let $(F,E_1,B_1)$ and $(F,E_2,B_2)$ be two $G$-bundles with common fiber. A morphism of $G$-bundles is a morphism of bundles $$(\overline{h}:E_1\to E_2,h:B_1\to B_2)$$ such that the following are true. \\~\\
+
+Let $\{(U_i,\varphi_i)\;|\;i\in I\}$ and $\{(V_j,\phi_j)\;|\;j\in J\}$ be local trivialities. 
+\begin{itemize}
+\item For all $x\in U_i\cap h^{-1}(V_j)$, the map $$\overline{g_{ji}}(x)=\phi_{j,x}\circ h|_{F_x}\circ\varphi_{i,x}^{-1}:F\to F$$ is an element of $G$. 
+\item The map $$\overline{g_{ij}}:U_i\cap h^{-1}(V_j)\to G$$ defined by $x\mapsto\overline{g_{ji}}(x)$ is continuous. 
+\end{itemize}
+\end{defn}
+
+Since morphisms of fiber bundles preserve fibers, morphisms of $G$-bundles also preserve fibers. 
+
+It is easy to see that the mapping transformations $\widetilde{g_{ij}}$ satisfy the following two relations: 
+\begin{itemize}
+\item $\widetilde{g_{jk}}(x)\cdot g_{ij}(x)=\widetilde{g_{ik}}(x)$ for all $x\in U_i\cap U_j\cap h^{-1}(V_k)$
+\item $g_{jk}'(h(x))\cdot\widetilde{g_{ij}}(x)=\widetilde{g_{ik}}(x)$ for all $x\in U_i\cap h^{-1}(V_j\cap V_k)$
+\end{itemize}
+
+$g_{jk}'$ here refers to the transition charts in $(F,E_2,B_2)$. \\~\\
+
+Just as the structure groups and trivialization charts determine the isomorphism type of a fiber bundle, the $\widetilde{g_{ij}}$ and a map of base space $h:B_1\to B_2$ completes determines a morphism of $G$-bundle. 
+
+\begin{thm}{}{} Let $(F,E_1,B_1)$ and $(F,E_2,B_2)$ be two $G$-bundles for a topological group $G$ with the same fiber $F$. Suppose that we have the following. 
+\begin{itemize}
+\item A map $h:B_1\to B_2$ of base space
+\item A collection $\{\widetilde{g_{ij}}:U_i\cap h^{-1}(V_j)\to G\;|\;i\in I,j\in J\}$ of continuous maps such that \begin{gather*}
+\widetilde{g_{jk}}(x)\cdot g_{ij}(x)=\widetilde{g_{ik}}(x)\;\;\;\;\text{ for all }\;\;\;\;x\in U_i\cap U_j\cap h^{-1}(V_k)\\
+g_{jk}'(h(x))\cdot\widetilde{g_{ij}}(x)=\widetilde{g_{ik}}(x)\;\;\;\;\text{ for all }\;\;\;\;x\in U_i\cap h^{-1}(V_j\cap V_k)
+\end{gather*}
+\end{itemize}
+Then there exists a unique $G$-bundle morphism having $h$ as the map of base space and having $\{\widetilde{g_{ij}}\;|\;i,j\in I\}$ as its mapping transformations. 
+\end{thm}
+
+We end the section by noting that a collection of coordinate transformations satisfying the cocyle condition uniquely determines the structure of a fiber bundle. 
+
+\begin{thm}{}{} Let $X$ be a space. Let $G$ be a topological group. Then the coordinate transformations uniquely determines and is determined by a fiber bundle in the following sense: $$\left\{\substack{G\text{-bundles over }B\\\text{with fiber }F}\right\}\;\;\;\;\overset{1:1}{\longleftrightarrow}\;\;\;\;\left\{\substack{\text{An open cover }\{U_i\;|\;i\in I\}\text{ of }B\\\text{Maps }\{\phi_{i,j}:U_i\cap U_j\to G\;|\;i,j\in I\}\text{ satisfying the cocyle condition}\\\text{A space }F\text{ such that }G\text{ acts continuously on}}\right\}$$ For each $G$-bundle, the coordinate transformations satisfy the cocyle condition. For a collection of coordinate transformations $\{\phi_{i,j}:U_i\cap U_j\to G\;|\;i,j\in I\}$, consider the space $$E=\frac{\bigcup_{i\in I}U_i\times F}{\sim}$$ where $(x,k)\sim(x,k\phi_{j,i}(x))$ for $x\in U_i\cap U_j$. Then $E$ defines a fiber bundle with an appropriate ???? continuous map. 
+\end{thm}
+
+\subsection{Associated Bundle}
+\begin{defn}{Associated Bundles with Specified Fiber}{} Let $G$ be a topological group. Let $(F,E,B)$ be a fiber bundle with structure group $G$ and open cover $\{U_i\;|\;i\in I\}$ and coordinate transformations $\{g_{i,j}\;|\;i,j\in I\}$. If $F$ is a $G$-space, then define the associated bundle with fiber $F$ to be given by theorem 2.1.7 using the following data: 
+\begin{itemize}
+\item The open cover $\{U_i\;|\;i\in I\}$
+\item The coordinate transformations $g_{ij}:U_i\cap U_j\to G$
+\item The $G$-space $F$
+\end{itemize}
+\end{defn}
+
+\subsection{The Bundle Structure Theorem}
+\begin{thm}{The Bundle Structure Theorem}{} Let $B$ be a topological group and let $G$ be a closed subgroup of $B$. Let $H$ be a closed subgroup of $G$. Suppose that $B/G$ has a local cross section at $G\in B/G$. Then the induced map of cosets $$p:B/H\to B/G$$ give a $G/H_0$-bundle with fiber $G/H$, where $$H_0=\bigcap_{g\in G}gHg^{-1}$$
+\end{thm}
+
+\begin{thm}{}{} Let $B$ be a topological group and let $G$ be a closed subgroup of $B$. Let $H$ be a closed subgroup of $G$. Then any two local cross sections of $B/G$ at $G\in B/G$ induces equivalent bundles. 
+\end{thm}
+
+\begin{crl}{}{} Let $B$ be a topological group and let $G$ be a closed subgroup of $B$. Then the projection map $p:B\to B/G$ is a $G$-bundle with fiber $G$. 
+\end{crl}
+
+\subsection{Reduction of the Structure Group}
+
+\pagebreak
+\section{Principal Bundles and Classifying Spaces}
+\subsection{Point Set Topology Principal G-Bundles}
+Let us recall some definitions from Groups and Rings. Let $G$ be a group acting on a set $X$. We say that a group action is free if $g\cdot x=x$ for all $x\in X$ implies that $g=1_G$. A group action is transitive if for any $x,y\in X$ there exists $g\in G$ such that $g\cdot x=y$. 
+
+\begin{defn}{Principal Bundles}{} Let $G$ be a topological group. A principal $G$-bundle is a $G$-bundle $(F,E,B)$ together with a continuous group action $G$ on $E$ such that the following are true. 
+\begin{itemize}
+\item The action of $G$ preserves fibers. This means that $g\cdot x\in E_b$ if $x\in E_b$. (This also means that $G$ is a group action on each fiber)
+\item The action of $G$ on each fiber is free and transitive
+\item The map $G\to F$ defined by sending $g\mapsto g\cdot x$ for any $x\in X$ is a homeomorphism. 
+\item Local triviality condition: Each local triviality map $\varphi_U:p^{-1}(U)\to U\times F$ are $G$-equivariant maps. 
+\end{itemize}
+\end{defn}
+
+Recall that even if $G$ acts freely and transitively on $X$, $G$ is still not homeomorphic to $X$. This is because the map $G\to X$ defined by $g\mapsto g\cdot x$ for any $x\in X$ is continuous and bijective. One usually requires that either $G$ is compact or more in general, the above map is an open map then $G$ will be homeomoprhic to $X$. \\~\\
+
+For those who know what homogenous spaces are, principal bundles are $G$-bundles such that $F$ is a principal homogenous space for the left action of $G$ itself. 
+
+\begin{prp}{}{} Let $G$ be a topological group. Let $p:E\to B$ be a principal $G$-bundle. Then there is a homeomorphism $$\frac{E}{G}\cong B$$ where $E/G$ is the orbit space. 
+\end{prp}
+
+Conversely, given a continuous group action on a space, we can ask in what conditions will the space be a principal bundle over the orbit space. 
+
+\begin{prp}{}{} Let $X$ be a space with a free $G$ action. Let $p:X\to X/G$ be the projection map to the orbit space. If for all $x\in X/G$, there is a neighbourhood $U$ of $x$ and a continuous map $s:U\to X$ such that $p\circ s=\text{id}_U$, then $(G,X,X/G)$ is a principal $G$-bundle. 
+\end{prp}
+
+This proposition essentially means that if for each point in $X/G$, there is a local section, then it is sufficient for $X$ to be a principal $G$ bundle over $X/G$. 
+
+\begin{prp}{}{} Let $X$ be a space. Let $p:\tilde{X}\to X$ be a covering space. If $p$ is a normal covering space, then $p$ is a principal $G$-bundle for some group $G$. 
+\end{prp}
+
+\subsection{Morphisms of Principal G-Bundles}
+\begin{defn}{Morphism of Principal Bundles}{} Let $G$ be a topological group. Let $p_1:E_1\to B_1$ and $p_2:E_2\to B_2$ be two prinicipal $G$-bundle. A morphism of principal $G$-bundles is a morphism of fiber bundles $(\tilde{f},f)$ such that $\tilde{f}$ is a $G$-equivariant map. 
+\end{defn}
+
+\begin{defn}{Isomorphism of Principal Bundles}{} Let $G$ be a topological group. Let $p_1:E_1\to B_1$ and $p_2:E_2\to B_2$ be two prinicipal $G$-bundle. We say that they are isomorphic if there exists a morphism of principal bundles $(\tilde{f},f)$ such that it is an isomorphism in the sense of 1.1.6. 
+\end{defn}
+
+Principal bundles enjoy a very unique property. If one can construct a morphism between two principal bundles then the structure of a fiber as the structure group ensures that the two bundles are isomorphic. 
+
+\begin{prp}{}{} Every morphism of principal bundles is an isomorphism of principal bundles. 
+\end{prp}
+
+\begin{thm}{}{} Let $G$ be topological group. A principal $G$-bundle is trivial if and only if it admits a global section. 
+\end{thm}
+
+This is entirely untrue for general bundles. For examples, the zero section of a fiber bundle is a global section. 
+
+\subsection{Associated Principal Bundles}
+Principal bundles are easier to understand than fiber bundles with structure group because their fibers are isomorphic to the group $G$ and its action is just left translations. If we are able to translate some properties of fiber bundles to principal bundles we can simplify proofs. 
+
+\begin{defn}{Associated Principal Bundles}{} Let $G$ be a topological group. Let $(F,E,B)$ be a fiber bundle with structure group $G$. The associated principal $G$-bundle is defined to be the associated bundle with fiber $G$, and $G$ acts on itself by left translations. 
+\end{defn}
+
+\begin{prp}{}{} Let $G$ be a topological group. Let $(F,E,B)$ be a fiber bundle with structure group $G$. Then the associated principal bundle of the bundle is a principal bundle in its own right. 
+\end{prp}
+
+\begin{thm}{}{} Two fiber bundles are equivalent if and only if their associated principal bundles are equivalent. 
+\end{thm}
+
+\begin{crl}{}{} A fiber bundle is equivalent to the trivial bundle if and only if its associated principal bundle admits a cross section. 
+\end{crl}
+
+\subsection{Universal Principal Bundles}
+Recall that homotopic maps give isomorphic fiber bundles. (???: Descends to isomorphic principal $G$-bundles)
+
+\begin{defn}{Principal Bundle Functor}{} Let $G$ be a topological group and $X$ a space. Define a contravariant functor $\text{Prin}_G:\bold{hTop}\to\bold{Set}$ as follows. 
+\begin{itemize}
+\item For $X$ a topological space, $\text{Prin}_G(X)$ is the set of isomorphism classes of principal $G$-bundles over $X$. 
+\item If $[f:X\to Y]$ is a homotopy class of continuous maps, $$\text{Prin}_G([f]):\text{Prin}_G(Y)\to\text{Prin}_G(X)$$ is defined as follows. If $[p:E\to Y]$ is an isomorphism class of principal $G$-bundles over $Y$, then it is sent to $[f^\ast(E)]$ the isomorphism class of the pullback of $p$. 
+\end{itemize}
+\end{defn}
+
+\begin{thm}{}{} Let $G$ be ta topological group. Then the principal bundle functor is representable. Explicitly, this means that there exists a principal $G$-bundle $EG\to BG$ together with a natural isomorphism $$\psi:[X,BG]\to\text{Prin}_G(X)$$ This natural isomorphism is defined by $f\mapsto[f^\ast(EG)]$. 
+\end{thm}
+
+\begin{defn}{Universal G-Bundles}{} Let $G$ be a topological group. A principal $G$-bundle $(F,E,B)$ is said to be universal if it represents the principal bundle functor. 
+\end{defn}
+
+\begin{thm}{}{} Let $(F,E,B)$ be a principal $G$-bundle. If $E$ is contractible then $(F,E,B)$ is a universal $G$-bundle. 
+\end{thm}
+
+A surprising thing is that $BG$ is not determined by its isomorphism type but instead by the weaker condition of its homotopy type. 
+
+\begin{thm}{}{} Let $(F,E_1,B_1)$ and $(F,E_2,B_2)$ be universal principal $G$-bundles. Then there exists a bundle map \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{E_1} & {E_2} \\
+	{B_1} & {B_2}
+	\arrow["{\tilde{f}}", from=1-1, to=1-2]
+	\arrow["{p_1}"', from=1-1, to=2-1]
+	\arrow["{p_2}", from=1-2, to=2-2]
+	\arrow["f"', from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+such that $f$ is a homotopy equivalence. In particular, this means that any two universal principal $G$-bundles are homotopy equivalent. 
+\end{thm}
+
+\subsection{The Classifying Space of a Group}
+\begin{defn}{Classifying Space}{} Let $G$ be a topological group. The classifying space $BG$ of $G$ is the homotopy type of the universal principal $G$-bundle. Denote the total space of $BG$ by $EG$. 
+\end{defn}
+
+TBA: Functoriality of $B:\bold{Grp}\to\bold{Top}$. 
+
+\begin{prp}{}{} The following are true regarding the classifying space of the limits of the orthogonal and unitary groups. 
+\begin{itemize}
+\item There is a homeomorphism $BO\cong\lim_{n\to\infty}BO(n)$
+\item There is a homeomorphism $BU\cong\lim_{n\to\infty}BU(n)$
+\end{itemize}
+\end{prp}
+
+\pagebreak
+\section{Vector Bundles and Principal Bundles}
+\subsection{Relation to Principal Bundles}
+\begin{defn}{Frame Bundle}{} Let $p:E\to B$ be a vector bundle. Define the frame bundle to be the associated principal bundle of $p:E\to B$ viewed as a fiber bundle. \\~\\
+
+Explicitly, the total space is given by $$E=\frac{\bigcup_{i\in I}U_i\times\text{GL}(n,\R)}{\sim}$$ where $(x,A)\sim(x,A\phi_{j,i}(x))$ for $x\in U_i\cap U_j$. 
+\end{defn}
+
+\begin{defn}{Set of All Vector Bundles}{} Let $X$ be a space. Denote the isomorphism classes of all $\R$-vector bundles of dimension $n$ and $\C$-vector bundles of dimension $n$ respectively by $$\text{Vect}_n^\R(X)\;\;\;\;\text{ and }\;\;\;\;\text{Vect}_n^\C(X)$$ Denote the isomorphism classes of all $\R$ (respectively $\C$) vector bundles regardless of rank by $\text{Vect}^\R(X)$ (respectively $\text{Vect}^\C(X)$). 
+\end{defn}
+
+\begin{thm}{}{} Let $X$ be a space. Then there is a natural bijection $$\phi:\text{Prin}_{\text{GL}(n,\R)}(X)\overset{\cong}{\longrightarrow}\text{Vect}_n^\R(X)$$ given by mapping $p:E\to B$ to the frame bundle $F(E)$. Similarly, there is a natural bijection $$\phi:\text{Prin}_{\text{GL}(n,\C)}(X)\overset{\cong}{\longrightarrow}\text{Vect}_n^\C(X)$$
+\end{thm}
+
+\subsection{The Orthogonal Group as the Structure Group}
+\begin{thm}{}{} Let $n\in\N$, then there is an isomorphism in the classifying spaces $$B\text{GL}(n,\R)\cong BO(n)\cong\text{GL}_n(\R^\infty)$$
+\end{thm}
+
+\begin{thm}{}{} Let $n\in\N$, then there is an isomorphism in the classifying spaces $$B\text{GL}(n,\C)\cong BU(n)$$
+\end{thm}
+
+\begin{thm}{}{} Let $X$ be a paracompact space. Then there is a natural bijection $$\phi:\text{Prin}_{O(n)}(X)\overset{\cong}{\longrightarrow}\text{Vect}_n^\R(X)$$ given by mapping $p:E\to B$ to the frame bundle $F(E)$. Similarly, there is a natural bijection $$\phi:\text{Prin}_{U(n)}(X)\overset{\cong}{\longrightarrow}\text{Vect}_n^\C(X)$$
+\end{thm}
+
+
+\subsection{The Tautological Bundle}
+
+\subsection{The Thom Isomorphism}
+\begin{defn}{Unit Sphere and Unit Disc Bundle}{} Let $p:E\to B$ be an $n$-dimensional vector bundle over $\R$. Let $\langle-,-\rangle:E\times E\to\R$ be a smoothly varying inner product on $E$. Define the disc bundle to be $$D(E)=\{e\in E\;|\;\langle e,e\rangle\leq 1\}$$ together with the map $p|_{D(E)}:D(E)\to B$. Define the sphere bundle to be $$S(E)=\{e\in E\;|\;\langle e,e\rangle=1\}$$ together with the map $p|_{S(E)}:S(E)\to B$. 
+\end{defn}
+
+\begin{defn}{Thom Space}{} Let $p:E\to B$ be an $n$-dimensional vector bundle over $\R$ such that $B$ is paracompact. Define the Thom space of $E$ to be $$T(E)=\frac{D(E)}{S(E)}$$ The base point is taken as the equivalent class $S(E)$ if needed. 
+\end{defn}
+
+\begin{lmm}{}{} Let $p:E\to B$ be an $n$-dimensional vector bundle over $\R$. Let $E_0$ denote the zero section of $E$. Then there is a natural isomorphism $$\widetilde{H}^n(T(E);G)=H^n(E,E\setminus E_0)$$ for any abelian group $G$. 
+\end{lmm}
+
+\begin{thm}{The Thom Isomorphism}{} Let $p:E\to B$ be an $n$-dimensional vector bundle over $\R$. Let $E_0$ denote the zero section of $E$. Then there exists a unique $u\in H^n(E,E\setminus E_0;\Z/2\Z)$ such that $$u|_{(F_b,F_b\setminus\{0\})}\in H^n(F_b,F_b\setminus\{0\};\Z/2\Z)$$ is non-zero for all $b\in B$. Moreover, there is an isomorphism $$\Phi:H^k(E;\Z/2\Z)\to\widetilde{H}^{k+n}(E,E\setminus E_0;\Z/2\Z)\cong\widetilde{H^n}(T(E);\Z/2\Z)$$ given by $y\mapsto y\smile u$ for all $k\in\Z$. 
+\end{thm}
+
+Ref: Milnor
+
+\subsection{Orientation of a Bundle}
+\begin{defn}{Orientation of a Vector Space}{} Let $V$ be a finite dimensional vector space over $F$. An orientation on $V$ is an equivalence class of bases, where we say that two ordered bases $\{v_1,\dots,v_n\}$ and $\{w_1,\dots,w_n\}$ are equivalent if the matrix defined by the equations $$w_i=\sum_{k=0}^na_kv_k$$ has positive determinant. 
+\end{defn}
+
+\begin{lmm}{}{} Let $V$ be a finite dimensional vector space. Then there are only two possible orientations on $V$. 
+\end{lmm}
+
+\begin{defn}{}{} Let $p:E\to B$ be a vector bundle with fiber $F$. An orientation on $E$ is an assignment of an orientation to each fiber of $E$ such that the following local compatibility condition is satisfied. \\~\\
+
+For every $b\in B$, there exists a local coordinate system $(U,\varphi)$ of $b$ and $\varphi:U\times\R^n\to p^{-1}(U)$ such that for all $x\in U$, the homomorphism $\varphi(b,-):\R^n\to F$ is orientation preserving. 
+\end{defn}
+
+\begin{thm}{}{} Let $p:E\to B$ be a vector bundle with fiber $F$. An orientation on $E$ is equivalent to the following data. To each $b\in B$ there is assignment $$u_b\in H^n(F_b,F_b\setminus\{0\};\Z)$$ called the orientation class of $F_b$, such that for every $b\in B$, there exists a neighbourhood $U$ of $b$ and a cohomology class $$u\in H^n(p^{-1}(U),p^{-1}(U)\setminus 0;)$$ where $0$ is the zero section such that for every $x\in U$, $$u|_{(F_x,F_x\setminus\{0\})}\in H^n(F_x,F_x\setminus\{0\}\;\Z)$$ is equal to $u_b$. 
+\end{thm}
+
+\begin{thm}{The Thom Isomorphism}{} Let $p:E\to B$ be an orientable $n$-dimensional vector bundle over $\R$. Let $R$ be a ring. Let $E_0$ denote the zero section of $E$. Then there exists a unique $u\in H^n(E,E\setminus E_0;R)$ such that $$u|_{(F_b,F_b\setminus\{0\})}\in H^n(F_b,F_b\setminus\{0\};R)$$ gives precisely the orientation class on $F_b$ for all $b\in B$. Moreover, there is an isomorphism $$\Phi:H^k(E;R)\to\widetilde{H}^{k+n}(E,E\setminus E_0;R)$$ given by $y\mapsto y\smile u$ for all $k\in\Z$. 
+\end{thm}
+
+\pagebreak
+\section{Characteristic Classes}
+\subsection{Characteristic Classes as a Ring}
+\begin{defn}{Characteristic Classes}{} Let $G$ be a topological group and $X$ a space. Denote $\text{Prin}_G(X)$ the isomorphism classes of principal $G$-bundles over $X$. Let $H^\ast(-)$ be a cohomology functor. A characteristic class for $G$ is a natural transformation $$c:\text{Prin}_G(-)\Rightarrow H^\ast(-)$$
+
+Explicitly, if $p:E\to X$ is a principal $G$-bundle, then $c$ assigns $p$ to the collection of cohomology groups $c(p)\in H^\ast(X)$. 
+\end{defn}
+
+Here cohomology can be taken for example singular cohomology with coefficients in a fixed group. 
+
+\begin{lmm}{}{} Let $G$ be a topological group. Let $c$ be a characteristic class for $G$. If $e$ is the trivial $G$-bundle, then $c(e)=0$. 
+\end{lmm}
+
+\begin{defn}{Ring of Characteristic Classes}{} Let $G$ be a topological group. Let $R$ be a commutative ring. Define $\text{Char}_G(R)$ to be the set of all characteristic classes for principal $G$-bundles that take values in $H^\ast(-;R)$. 
+\end{defn}
+
+\begin{prp}{}{} Let $G$ be a topological group. Let $R$ be a commutative ring. Then $\text{Char}_G(R)$ is a ring with unit the constant characteristic class. 
+\end{prp}
+
+\begin{thm}{}{} Let $G$ be a topological group and let $R$ be a commutative ring. Then there is an isomorphism $$\text{Char}_G(R)\cong H^\ast(BG;R)$$
+\end{thm}
+
+\subsection{The Stiefel-Whitney Class}
+\begin{defn}{The Stiefel-Whitney Class}{} Consider the group $O(n)$. Let $$w_i:\text{Prin}_{O(n)}(-)\to H^i(-,\Z/2\Z)$$ be a collection of natural transformations. We say that they form a Stiefel-Whitney class if the following are satisfied. 
+\begin{enumerate}
+\item Rank: If $E$ is a principal $O(n)$-bundle, then $w_0(E)=1$ and $w_i(E)=0$ for $i>\rank(E)$. 
+\item Naturality: Let $p:E\to X$ be a principal $O(n)$-bundle and let $f:Y\to X$ be a map. Then $$w_i(f^\ast(E))=f^\ast(w_i(E))$$
+\item Whitney Product Formula: If $E_1,E_2$ are principal $O(n)$-bundles, then $$w_k(E_1\oplus E_2)=\sum_{i=0}^kw_i(E_1)\smile w_{k-i}(E_2)$$
+\item Normalization: If $\gamma$ is the tautological line bundle over $\Prj^1(\R)$, then $w_1(\gamma)$ is non-zero. 
+\end{enumerate}
+The total Stiefel-Whitney class $$w=\sum_{k=0}^\infty w_k:\text{Prin}_{O(n)}(-)\to H^\ast(-,\Z/2\Z)$$ is well defined by the rank axiom. The Whitney product formula then translates to $w(E_1\oplus E_2)=w(E_1)w(E_2)$. 
+\end{defn}
+
+\begin{thm}{}{} The Stiefel-Whitney class exists and is unique. 
+\end{thm}
+
+\begin{prp}{}{} The following are true regarding the Stiefel-Whitney class. 
+\begin{itemize}
+\item If $p_1:E_1\to B_1$ and $p_2:E_2\to B_2$ are isomorphic principal $O(n)$-bundles, then $w(E_1)=w(E_2)$
+\item If $e=B\otimes\R^n$ is the trivial bundle, then $w(e\oplus E)=w(E)$ for any principal $O(n)$-bundle $E$. 
+\item 
+\end{itemize}
+\end{prp}
+
+\begin{thm}{}{} Let $n\in\N$, then the ring of characteristic classes of $O(n)$ is isomorphic to $$\text{Char}_{O(n)}(\Z/2\Z)\cong\Z/2\Z[w_1,\dots,w_n]$$ a polynomial ring in $n$ variables for $w_i\in H^i(BO(n),\Z/2\Z)$. 
+\end{thm}
+
+\begin{prp}{}{} Let $X$ be a space. Then the function $$w_1:\text{Vect}_1^\R(X)\to H^1(X;\Z/2\Z)$$ is a homomorphism. It is an isomorphism if $X$ is homotopy equivalent to a CW complex. 
+\end{prp}
+
+\begin{crl}{}{} Let $X$ be homotopy equivalent to a CW complex. Then any vector bundle $E\to X$ is orientable if and only if $w_1(E)=0$. 
+\end{crl}
+
+\subsection{The Chern Class}
+\begin{defn}{The Chern Class}{} Consider the group $U(n)$. Let $$c_i:\text{Prin}_{U(n)}(-)\to H^{2i}(-,\Z/2\Z)$$ be a collection of natural transformations. We say that they form a Chern class if the following are satisfied. 
+\begin{enumerate}
+\item Rank: If $E$ is a principal $U(n)$-bundle, then $c_0(E)=1$ and $c_i(E)=0$ for $i>\rank(E)$. 
+\item Naturality: Let $p:E\to X$ be a principal $O(n)$-bundle and let $f:Y\to X$ be a map. Then $$c_i(f^\ast(E))=f^\ast(c_i(E))$$
+\item Whitney Product Formula: If $E_1,E_2$ are principal $O(n)$-bundles, then $$c_k(E_1\oplus E_2)=\sum_{i=0}^kc_i(E_1)\smile c_{k-i}(E_2)$$
+\item Normalization: If $\gamma$ is the tautological line bundle over $\Prj^1(\R)$, then $c_1(\gamma)$ is non-zero. 
+\end{enumerate}
+The total Chern class $$c=\sum_{k=0}^\infty c_k:\text{Prin}_{O(n)}(-)\to H^\ast(-,\Z/2\Z)$$ is well defined by the rank axiom. The Whitney product formula then translates to $c(E_1\oplus E_2)=c(E_1)c(E_2)$. 
+\end{defn}
+
+\begin{thm}{}{} The Chern class exists and is unique. 
+\end{thm}
+
+\begin{thm}{}{} Let $E$ be an $n$-dimensional complex vector bundle over $X$. Then $c_1(E)=0$ if and only if $E$ has an $SU(n)$-structure. 
+\end{thm}
+
+TBA: First chern class is complete invariant of complex line bundles. First Stiefel-Whitney class is a complete invariant of real line bundle. 
+
+\begin{thm}{}{} Let $n\in\N$, then the ring of characteristic classes of $U(n)$ is isomorphic to $$\text{Char}_{U(n)}(\Z)\cong\Z[c_1,\dots,c_n]$$ a polynomial ring in $n$ variables for $c_i\in H^{2i}(BU(n),\Z)$ the Chern classes. 
+\end{thm}
+
+Combined with theorem 5.1.3, this means that we can now compute the cohomology of the  classifying space of $U(n)$. Namely, we have an isomorphism $$H^\ast(BU(n);\Z)\cong\Z[c_1,\dots,c_n]$$
+
+\begin{prp}{}{} Let $X$ be a space. Then the function $$c_1:\text{Vect}_1^\C(X)\to H^2(X;\Z)$$ is a homomorphism. It is an isomorphism if $X$ is homotopy equivalent to a CW complex. 
+\end{prp}
+
+\subsection{The Euler Class}
+The Euler class can be thought of as a refinement of the Stiefel-Whitney class in the orientable case. 
+
+\begin{defn}{The Euler Class}{} Let $p:E\to B$ be an $n$-dimensional orientable vector bundle over $\R$. Let $E_0\subseteq E$ denote the zero section. Consider the inclusion $B\hookrightarrow E$ as $E_0$. Let $u\in H^n(E,E\setminus E_0;\Z)$ be the orientation class. Define the euler class of $E$ $$e(E)\in H^n(B;\Z)$$ to be the image of $u$ under the compositions \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{H^n(E,E\setminus E_0;\Z)} & {H^n(E,\Z)} & {H^n(B;\Z)}
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+\end{tikzcd}}\\~\\
+that is induced by the sequence of inclusions $(B,\emptyset)\hookrightarrow(E,\emptyset)\hookrightarrow(E,E\setminus E_0)$.
+\end{defn}
+
+\begin{prp}{}{} Let $p:E\to B$ be an $n$-dimensional orientable vector bundle over $\R$. Then the following are true regarding the Euler class. 
+\begin{itemize}
+\item If $f:C\to B$ is a map, then $e(f^\ast(E))=f^\ast(e(E))$
+\item If the orientation of $E$ is reversed, then $e(E)$ changes sign. 
+\item If $F$ is another orientable vector bundle, then $e(E\oplus F)=e(E)\smile e(F)$. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{} Let $p:E\to B$ be an orientable vector bundle over $\R$. If the dimension of the bundle is odd, then $2e(E)=0$. 
+\end{prp}
+
+\begin{prp}{}{} Let $p:E\to B$ be an $n$-dimensional orientable vector bundle over $\R$. The natural homomorphism $$H^n(B;\Z)\to H^n(B;\Z/2\Z)$$ sends the Euler class $e(E)$ to the top Stiefel-Whitney class $w_n(E)$. 
+\end{prp}
+
+\begin{prp}{}{} Let $p:E\to B$ be an $n$-dimensional orientable vector bundle over $\R$. If $E$ possess a nowhere $0$ section, then $e(E)=0$. 
+\end{prp}
+
+\subsection{The Pontrjagin Class}
+
+\pagebreak
+\section{Cohomology of Fiber Bundles}
+
+\begin{thm}{Leray-Hirsch Theorem}{} Let $p:E\to B$ be a fiber bundle with fiber $F$. Suppose the for some ring $R$, the following are true. 
+\begin{itemize}
+\item $H^n(F;R)$ is a finitely generated free $R$-module for all $n\in\N$
+\item For each fiber $F$ and inclusion $i:F\to E$, there exists $c_j\in H^{k_j}(E;R)$ such that the collection $i^\ast(c_j)\in H^{k_j}(F;R)$ form a basis for the free $R$-module $H^\ast(F;R)$
+\end{itemize}
+Then the map $$\Phi:H^\ast(B;R)\otimes_R H^\ast(F;R)\to H^\ast(E;R)$$ defined by $\sum_{i,j}b_i\otimes_R i^\ast(c_j)\mapsto\sum_{i,j} p^\ast(b_i)\smile c_j$ is an isomorphism. 
+\end{thm}
+
+\pagebreak
+\section{Obstruction Theory}
+
+\end{document}

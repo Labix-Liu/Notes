@@ -1,0 +1,1083 @@
+\documentclass[a4paper]{article}
+
+\input{C:/Users/liula/Desktop/Latex/Headers V1.2.tex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Labix}
+\lhead{Model Category Theory}
+\rfoot{\thepage}
+
+\title{Model Category Theory}
+
+\author{Labix}
+
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+
+\end{abstract}
+References: 
+\begin{itemize}
+\item Model Category by Mark Hovey
+\end{itemize}
+\pagebreak
+\tableofcontents
+
+\pagebreak
+\section{Model Categories}
+We have performed homotopies in no less than three categories: The classical homotopies in $\bold{Top}$, the simplicial homotopies in $\bold{sSet}$ and the chain homotopies in $\text{Ch}(\mA)$ for some abelian category $\mA$. In what categories does the notion of homotopies make sense? The definition of a model category is an attempt to answer the following question. Model categories extract the important properties of these categories and put it in a general context. In turns out that there are quite a number of categories in which the notion of homotopies make sense. Such algebra which was initiated by homotopy is called homotopical algebra, which is in parallel to homological algebra. 
+
+\subsection{Basic Definitions}
+In our royal road of algebraic topology, we have again and again weakened our notion of ``isomorphism'' for our convenience. We began with the notion of homeomorphisms, which are too strict for any algebraic invariant to classify. Therefore we turned to a weaker notion, namely that of homotopy equivalences. This has the added benefit of the direct definitions of the homotopy groups which are the main invariants in algebraic topology. While the celebrated Whitehead's theorem shows that the homotopy groups are a complete invariant for CW complexes up to homotopy equivalence, the same cannot be said for arbitrary spaces. \\~\\
+
+We therefore weaken the notion once again, where we defined the notion of weak homotopy equivalences, which is directly based on isomorphisms of the homotopy group as an invariant. This is evident when we defined the homology and cohomology functors as we have weakened the definition so that such a functor only needs to preserve isomorphisms of (co)homology groups in weak homotopy equivalence. Up until this point, we thus have such a tower of ``isomorphisms'': $$\text{Homeomorphisms}\subset\text{Homotopy Equivalences}\subset\substack{\text{Weak Homotopy}\\\text{Equivalences}}$$ The homotopy category $\text{Ho}(\bold{Top})$ is defined so that weak equivalences are isomorphisms in the category by definition. But in this process we have lost too much information. We really wanted weak homotopy equivalences to be our appropriate notion of homotopy equivalence (not the stronger notion of ``isomorphisms''). A model structure precisely reflects the type of maps that make up the class of homotopy equivalences in the category $\bold{Top}$. This gives us the classical model structure on $\bold{Top}$. Our goal is to extract the essence of homotopy theory so that we can forcibly make weak homotopy equivalences into formal ``homotopy equivalences'' of our categories. \\~\\
+
+The first thing we need is a general notion of retracts and lifts. They form the foundation of homotopy because we want homotopies to investigate lifting and retract properties. 
+
+\begin{defn}{Retract of Morphisms}{} Let $\mC$ be a category. Let $f:X\to Y$ and $g:A\to B$ be morphisms in $\mC$. We say that $f$ is a retract of $g$ if the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	X & A & X \\
+	Y & B & Y
+	\arrow[from=1-1, to=1-2]
+	\arrow["{\text{id}_X}", bend left = 20, from=1-1, to=1-3]
+	\arrow["f"', from=1-1, to=2-1]
+	\arrow[from=1-2, to=1-3]
+	\arrow["g"', from=1-2, to=2-2]
+	\arrow["f", from=1-3, to=2-3]
+	\arrow[from=2-1, to=2-2]
+	\arrow["{\text{id}_Y}"', bend right = 20, from=2-1, to=2-3]
+	\arrow[from=2-2, to=2-3]
+\end{tikzcd}}\\~\\
+where $X\to A$, $A\to X$, $Y\to B$ and $B\to Y$ are any morphisms such that $X\to A\to X$ and $Y\to B\to Y$ are the respective identities. 
+\end{defn}
+
+\begin{defn}{Lifting Properties}{} Let $\mC$ be a category. Let the following be a commutative square in $\mC$: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	A & X \\
+	B & Y
+	\arrow[from=1-1, to=1-2]
+	\arrow["i"', from=1-1, to=2-1]
+	\arrow["p", from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+We say that $i$ has the left lifting property with respect to $p$, and $p$ has the right lifting property with respect to $i$ if there exists $h:B\to Y$ such that the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	A & X \\
+	B & Y
+	\arrow[from=1-1, to=1-2]
+	\arrow["i"', from=1-1, to=2-1]
+	\arrow["p", from=1-2, to=2-2]
+	\arrow["\exists h", dashed, from=2-1, to=1-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+\end{defn}
+
+We are now in position to define the notion of a model category. Such a category not only has a distinguished class of morphisms which are the weak equivalences we would like, but also two more classes of morphisms called fibrations and cofibrations. Indeed in homotopy theory fibrations and cofibrations play a crucial role. 
+
+\begin{defn}{Model Category}{} A model category is a category $\mC$ together with a distinguished class of morphisms
+\begin{itemize}
+\item $\mW$ called weak equivalences
+\item $\mC\text{of}$ called cofibrations
+\item $\mF\text{ib}$ called fibrations
+\end{itemize}
+such that the following axioms are true. 
+\begin{itemize}
+\item (M1) The category is complete and cocomplete. 
+\item (M2) Two out of Three (2/3): If $f:X\to Y$ and $g:Y\to Z$ are morphisms of $\mC$ and two out of three of $f,g,g\circ f$ are in $\mW$, then the last one is also in $\mW$. 
+\item (M3) Let $g$ be a morphism and let $f$ be a retract of $g$. If $g$ is a weak equivalence / cofibration / fibration, then $f$ is also an equivalence / cofibration / fibration respectively. 
+\item (M4) The lifting problem \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	A & X \\
+	B & Y
+	\arrow[from=1-1, to=1-2]
+	\arrow["i"', from=1-1, to=2-1]
+	\arrow["p", from=1-2, to=2-2]
+	\arrow[dashed, from=2-1, to=1-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+has a solution provided that one of the following two conditions are true: 
+\begin{itemize}
+\item $i\in\mC\text{of}\cap\mW$ and $p\in\mF\text{ib}$
+\item $i\in\mC\text{of}$ and $p\in\mF\text{ib}\cap\mW$
+\end{itemize}
+In other words, if the two morphisms $i$ and $p$ satisfy the one of the two cojoint conditions above, then $i$ has the left lifting property with respect to $p$, $p$ has the right lifting property with respect to $i$. 
+\item (M5) Any map $X\to Z$ in $\mC$ admits factorizations of the following two forms: 
+\begin{itemize}
+\item $X\overset{f}{\longrightarrow}Y\overset{g}{\longrightarrow}Z$ where $f\in\mC\text{of}\cap\mW$ and $g\in\mF\text{ib}$
+\item $X\overset{h}{\longrightarrow}Y\overset{k}{\longrightarrow}Z$ where $h\in\mC\text{of}$ and $k\in\mF\text{ib}\cap\mW$
+\end{itemize}
+\end{itemize}
+In this case, we say that $\mW$, $\mC\text{of}$ and $\mF\text{ib}$ define a model structure on $\mC$. 
+\end{defn}
+
+The following naming conventions will prove to be useful. 
+
+\begin{defn}{Trivial / Acyclic Fibrations}{} Let $\mC$ be a model category. Let $f:X\to Y$ be a morphism in $\mC$. 
+\begin{itemize}
+\item We say that $f$ is a trivial / acyclic fibration if $f$ is a fibration and a weak equivalence. 
+\item We say that $f$ is a trivial / acyclic cofibration if $f$ is a cofibration and a weak equivalence. 
+\end{itemize}
+\end{defn}
+
+One should always return to the canonical example of model categories for intuition. This is similar to how $\bold{Set}$ is the canonical example of categories. In particular, in Algebraic Topology 3 we have proved the following that $\bold{Top}$ is a model category with the following data. 
+
+\begin{itemize}
+\item The weak equivalences are the homotopy equivalences
+\item The fibrations are the Hurewicz fibrations
+\item The cofibrations are the Hurewicz cofibrations
+\end{itemize}
+
+\begin{lmm}{}{} Let $\mC$ be a category. Then $\mC$ is a model category with the following data. 
+\begin{itemize}
+\item $\mW$ is all the isomorphisms in $\mC$
+\item $\mC\text{of}$ and $\mF\text{ib}$ are all the morphisms in $\mC$
+\end{itemize}
+\end{lmm}
+
+\begin{prp}{}{} Let $\mC$ be a model category with model $(\mW,\mC\text{of},\mF\text{ib})$. Then $\mC^\text{op}$ is also a model category with model $(\mW, \mF\text{ib},\mC\text{of})$ so that the cofibrations of $\mC$ are the fibrations of $\mC^\text{op}$, and the fibrations of $\mC$ are the cofibrations of $\mC^\text{op}$. 
+\end{prp}
+
+\begin{prp}{}{} Let $\mC$ be a model category. Let $A\in\mC$ be an object. Then the under category $A/\mC$ can be given the structure of a model category where 
+\begin{itemize}
+\item The weak equivalences are precisely the weak equivalences in $\mC$
+\item The cofibrations are precisely the cofibrations in $\mC$
+\item The fibrations are precisely the fibrations in $\mC$. 
+\end{itemize}
+\end{prp}
+
+The following categories and classes of morphisms define model categories. 
+\begin{center}
+\begin{tabular}{ |c|c|c|c| } 
+\hline
+$\bold{Category}$ & $\bold{Weak Equivalences}$ & $\bold{Fibrations}$ & $\bold{Cofibrations}$ \\
+\hline
+Top & \thead{Classical \\ Weak Equivalences} & Serre Fibrations & \thead{Retracts of \\ Relative Cell Complexes}\\
+\hline
+Top & Homotopy Equivalences & Hurewicz Fibrations & Hurewicz Cofibrations \\
+\hline
+sSet & \thead{Weak \\ Homotopy Equivalences} & Kan Fibrations & Levelwise Injections \\
+\hline
+$\text{Ch}_R$ & Quasi-Isomorphisms & Degree-wise Surjections & \thead{Degree-wise $\text{DG}_R$ \\ with projective kernels}\\
+\hline
+\end{tabular}
+\end{center}~\\~\\
+
+$\text{Ch}_R=$ chain complexes over a commutative ring $R$. $\text{DG}_R=$ differential graded algebra over a commutative ring $R$. 
+
+\begin{defn}{Fibrant and Cofibrant Objects}{} Let $\mC$ be a model category. Let $X\in\mC$ be an object. 
+\begin{itemize}
+\item We say that $X$ is cofibrant if the unique map $\emptyset\to X$ from the initial object is a cofibration. 
+\item We say that $X$ is fibrant if the unique map $X\to\ast$ to the terminal object is a fibration. 
+\item We say that $X$ is bifibrant if $X$ is both fibrant and cofibrant. 
+\end{itemize}
+\end{defn}
+
+All object of sSet are cofibrant and all object of $\text{Ch}_R$ is fibrant. 
+
+\subsection{Fibrations and Cofibrations Determine Each Other}
+\begin{defn}{Morphisms of Lifting Properties}{} Let $\mC$ be a category. Let $\mW$ be a class of morphisms in $\mC$. 
+\begin{itemize}
+\item Define $\mW_\perp$ to be all morphisms in $\mC$ that have the right lifting property with respect to all morphisms in $\mW$. 
+\item Define ${_\perp\mW}$ to be all morphisms in $\mC$ that have the left lifting property with respect to all morphisms in $\mW$. 
+\end{itemize}
+\end{defn}
+
+\begin{thm}{}{} Let $\mC$ be a category with model structure $\mW,\mC\text{of}$ and $\mF\text{ib}$. Then the following are true. 
+\begin{itemize}
+\item $\mC\text{of}_\perp=\mF\text{ib}\cap\mW$
+\item $\mC\text{of}={_\perp(\mF\text{ib}\cap\mW)}$
+\item $(\mC\text{of}\cap\mW)_\perp=\mF\text{ib}$
+\item $\mC\text{of}\cap\mW={_\perp\mF\text{ib}}$
+\end{itemize}
+In particular, this means that the fibrations of a model category determines and is determined by the cofibrations. 
+\end{thm}
+
+\pagebreak
+\section{Homotopy Theory in Model Categories}
+\subsection{Cylinder and Path Objects}
+In this section, we will attempt to define the notion of homotopies for model categories. Recall that homotopy in classical algebraic topology gives us an equivalence relation on the set of all maps $$\Hom_{\bold{Top}}(X,Y)$$ between two spaces. 
+
+\begin{defn}{Cylinder Objects}{} Let $\mC$ be a model category. Let $X\in\mC$ be an object. A cylinder object $CX$ of $X$ is a factorization \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{X\coprod X} && X \\
+	& {CX}
+	\arrow["\nabla", from=1-1, to=1-3]
+	\arrow["i"', from=1-1, to=2-2]
+	\arrow["\simeq"', from=2-2, to=1-3]
+\end{tikzcd}}\\~\\
+of the codiaongal morphism $\nabla:X\coprod X\to X$ such that $p:CX\to X$ is a weak equivalence. Such a cylinder object $CX$ is said to be 
+\begin{itemize}
+\item Good if $i$ is a cofibration
+\item Very good if $i$ is a cofibration and $p$ is a fibration
+\end{itemize}
+Denote the maps $X\to X\coprod X\overset{i}{\longrightarrow}CX$ by $i_1$ and $i_2$. 
+\end{defn}
+
+\begin{lmm}{}{} Let $\mC$ be a model category. Let $X\in\mC$ be cofibrant. If $CX$ is a good cylinder object for $X$, then the structure maps $i_1,i_2:X\to CX$ are acylic cofibrations
+\end{lmm}
+
+Dually, there is also the notion of path objects. 
+
+\begin{defn}{Path Objects}{} Let $\mC$ be a model category. Let $X\in\mC$ be an object. A path object $PX$ of $X$ is a factorization \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	X && {X\times X} \\
+	& {PX}
+	\arrow["\Delta", from=1-1, to=1-3]
+	\arrow["\simeq"', from=1-1, to=2-2]
+	\arrow["p"', from=2-2, to=1-3]
+\end{tikzcd}}\\~\\
+of the diaongal morphism $\Delta:X\to X\times X$ such that $i$ is a weak equivalence. Such a path object $PX$ is said to be 
+\begin{itemize}
+\item Good if $p$ is a fibration
+\item Very good if $i$ is a cofibration and $p$ is a fibration
+\end{itemize}
+Denote the maps $PX\overset{p}{\longrightarrow}X\times X\to X$ by $p_1$ and $p_2$. 
+\end{defn}
+
+\begin{lmm}{}{} Let $\mC$ be a model category. Then every object $X\in\mC$ has a very good cylinder object and a very good path object. \tcbline
+\begin{proof}
+This is true by the axiom MC5 of a model category, which states that every map has a factorization into either an a cofibration followed by an acylic fibration or an acylic cofibration followed by a fibration. 
+\end{proof}
+\end{lmm}
+
+\subsection{Left and Right Homotopies}
+\begin{defn}{Left Homotopies}{} Let $\mC$ be a model category. Let $f,g:X\to Y$ be two morphisms in $\mC$. We say that $f$ and $g$ are left homotopic if there is a lift $H:CX\to Y$ such that the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{CX} \\
+	{X\coprod X} & Y
+	\arrow["{\exists H}", dashed, from=1-1, to=2-2]
+	\arrow[from=2-1, to=1-1]
+	\arrow["{(f,g)}"', from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+In this case we write $f\overset{l}{\simeq}g$. We say that $H$ is a 
+\begin{itemize}
+\item Good left homotopy if $CX$ is a good cylinder object
+\item Very good left homotopy if $CX$ is a very good cylinder object
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{} Let $\mC$ be a model category. Let $f\overset{l}{\simeq}g$. Then $f$ is a homotopy equivalence if and only if $g$ is a homotopy equivalence. 
+\end{lmm}
+
+\begin{prp}{}{} Let $\mC$ be a model category. Let $f,g:X\to Y$ be morphisms in $\mC$. If $f\overset{l}{\simeq}g$, then there exists a good left homotopy from $f$ to $g$. Moreover, if $Y$ is fibrant, then there exists a very good left homotopy from $f$ to $g$. 
+\end{prp}
+
+\begin{prp}{}{} Let $\mC$ be a model category. Let $A\in\mC$ be an cofibrant object. Then for any $X\in\mC$, left equivalent homotopies define an equivalence relation on $\Hom_\mC(A,X)$. 
+\end{prp}
+
+\begin{defn}{Right Homotopies}{} Let $\mC$ be a model category. Let $f,g:X\to Y$ be two morphisms in $\mC$. We say that $f$ and $g$ are right homotopic if there is a lift $H:X\to Y^I$ such that the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	& {Y^I} \\
+	X & {Y\times Y}
+	\arrow[from=1-2, to=2-2]
+	\arrow["{\exists H}", dashed, from=2-1, to=1-2]
+	\arrow["{f\times g}"', from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+In this case we write $f\overset{r}{\simeq}g$. We say that $H$ is a 
+\begin{itemize}
+\item Good right homotopy if $Y^I$ is a good path object
+\item Very right left homotopy if $Y^I$ is a very good path object
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{} Let $\mC$ be a model category. Let $f,g:X\to Y$ be morphisms in $\mC$. If $f\overset{r}{\simeq}g$, then there exists a good right homotopy from $f$ to $g$. Moreover, if $Y$ is fibrant, then there exists a very good right homotopy from $f$ to $g$. 
+\end{prp}
+
+\begin{prp}{}{} Let $\mC$ be a model category. Let $A\in\mC$ be an fibrant object. Then for any $X\in\mC$, right equivalent homotopies define an equivalence relation on $\Hom_\mC(X,A)$. 
+\end{prp}
+
+\begin{thm}{}{} Let $\mC$ be a model category. Let $f,g:X\to Y$ be morphisms. Then the following are true. 
+\begin{itemize}
+\item If $X$ is a cofibrant object and $f\overset{l}{\simeq}g$, then $f\overset{r}{\simeq}g$
+\item If $Y$ is a fibrant object and $f\overset{r}{\simeq}g$, then $f\overset{l}{\simeq}g$
+\item If $X$ if cofibrant and $Y$ is fibrant, then $f\overset{l}{\simeq}g$ if and only if $f\overset{r}{\simeq}g$. 
+\end{itemize} \tcbline
+\begin{proof}
+We first proof the first statement. Suppose that $f\overset{l}{\simeq}g$ and $X$ is cofibrant. By 1.3.6, there exists a good left homotopy from $f$ to $g$. This means that there is a good cylinder object $j:CX\overset{\simeq}{\longrightarrow} X$ of $X$ and a homotopy $H:CX\to Y$ from $f$ to $g$. By 1.3.2, the structure maps $i_1,i_2:X\to CX$ are acyclic cofibrations. Choose a good path object $q:Y\overset{\simeq}{\longrightarrow}PY$ of $Y$. By MC4 of the model category axioms, the following lifting problem \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	X & PY \\
+	CX & {Y\times Y}
+	\arrow["{q\circ f}", from=1-1, to=1-2]
+	\arrow["{i_1}"', from=1-1, to=2-1]
+	\arrow["p", from=1-2, to=2-2]
+	\arrow["\exists K"{description}, dashed, from=2-1, to=1-2]
+	\arrow["{(f\circ j,H)}"', from=2-1, to=2-2]
+\end{tikzcd}}\\~\\ 
+Then $K\circ i_1:X\to PY$ is the desired right homotopy and so we are done. The second statement is the dual of the first statement. The last statement is a combination of the first two. 
+\end{proof}
+\end{thm}
+
+If $X$ and $Y$ are both bifibrant, then there is no longer a need to distinguish between left and right homotopies. 
+
+\begin{defn}{Equivalence Classes of Homotopic Maps}{} Let $\mC$ be a model category. Let $X\in\mC$ be an object. 
+\begin{itemize}
+\item If $X$ is a cofibrant object, define $$\pi^l(X,Y)=\Hom_\mC(X,Y)/\simeq$$ to be the equivalence classes of maps from $X$ to $Y$ under the equivalence relation of left homotopies. 
+\item If $Y$ is a fibrant object, define $$\pi^r(X,Y)=\Hom_\mC(X,Y)/\simeq$$ to be the equivalence classes of maps from $X$ to $Y$ under the equivalence relation of right homotopies. 
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{} Let $\mC$ be a model category. Let $f:X\to Y$ be a map. Then the following are true. 
+\begin{itemize}
+\item If $A$ is cofibrant and $f$ is an acyclic fibration, then the map $$f_\ast:\pi^l(A,X)\to\pi^l(A,Y)$$ is a bijection
+\item If $B$ is fibrant and $f$ is an acyclic cofibration, then the map $$f^\ast:\pi^r(Y,B)\to\pi^r(X,B)$$ is a bijection
+\end{itemize}
+\end{lmm}
+
+\begin{defn}{Homotopy Equivalence}{} Let $\mC$ be a model category. Let $X,Y$ be bifibrant. We say that $f:X\to Y$ is a homotopy equivalence if there exists $g:Y\to X$ such that $g\circ f\simeq\text{id}_X$ and $f\circ g\simeq\text{id}_Y$. In this case we say that $X$ and $Y$ are homotopy equivalent and denote it by $X\simeq Y$. 
+\end{defn}
+
+\begin{thm}{Whitehead's Theorem in Model Categories}{} Let $\mC$ be a model category. Let $X$ and $Y$ be bifibrant objects. Then $f:X\to Y$ is a weak equivalence if and only if $f$ is a homotopy equivalence. \tcbline
+\begin{proof}
+Suppose that $f$ is a weak equivalence. By M5 axiom we can factorize it into $X\overset{a}{\longrightarrow}Z\overset{b}{\longrightarrow}Y$ where $a$ is an acyclic cofibration and $b$ is a fibration. Since $a$ and $f=b\circ a$ are weak equivalences, by M2 $b$ is a weak equivalence. Since $X$ is fibrant and $a$ is an acyclic cofibration, the following lifting problem \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	X & X \\
+	Z & {\ast}
+	\arrow["{\text{id}_X}", from=1-1, to=1-2]
+	\arrow["{a}"', from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow["\exists r"{description}, dashed, from=2-1, to=1-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}}\\~\\ 
+has a solution $r:Z\to X$. By 2.29, $a^\ast:\pi^r(Z,Z)\to\pi^r(X,Z)$ is a bijection. In particular $$a^\ast([a\circ r])=[a\circ r\circ a]=[a]$$ At the same time, $a^\ast([\text{id}_Z])=[a]$. The bijection implies that $a\circ r\overset{r}{\simeq}\text{id}_Z$. Thus $r$ is a two sided homotopy inverse of $a$. A dual argument shows that $b:Z\to Y$ has a two sided homotopy inverse $s$. Then $r\circ s$ is a two sided homotopy inverse of $f=b\circ a$. \\~\\
+
+Now suppose that $f$ is a homotopy equivalence. By M5 axiom we can factorize it into $X\overset{a}{\longrightarrow}Z\overset{b}{\longrightarrow}Y$ where $a$ is an acyclic cofibration and $b$ is a fibration. Let $g:Y\to X$ be a homotopy inverse of $f$. Let $H:CY\to Y$ provide the homotopy between $f\circ g$ and $\text{id}_Y$. By M4 axiom, the following lifting problem \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	Y & Z \\
+	CY & Y
+	\arrow["a\circ g", from=1-1, to=1-2]
+	\arrow["i_0"', from=1-1, to=2-1]
+	\arrow["b", from=1-2, to=2-2]
+	\arrow["\exists H'"{description}, dashed, from=2-1, to=1-2]
+	\arrow["H", from=2-1, to=2-2]
+\end{tikzcd}}\\~\\ 
+has a solution $H':CY\to Z$. Let $s=H'\circ i_1:Y\to Z$. Then $b\circ s=\text{id}_Y$. Since $a$ is a weak equivalence, we just proved that $a$ has a homotopy inverse $r:Z\to X$. Since $f=b\circ a$, we have that $f\circ r\simeq b$. Since $Y$ and $CY$ are weakly equivalent, we also have that $s\simeq a\circ g$ and it follows that $$s\circ b\simeq a\circ g\circ b\simeq a\circ g\circ f\circ r\simeq a\circ r\simeq\text{id}_Z$$ By ???, we conclude that $s\circ b$ is a weak equivalence. We thus have the following diagram \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	Z & Z & Z \\
+	Y & Z & Y
+	\arrow["{\text{id}_Z}", from=1-1, to=1-2]
+	\arrow["b"', from=1-1, to=2-1]
+	\arrow["{\text{id}_Z}", from=1-2, to=1-3]
+	\arrow["{s\circ b}", from=1-2, to=2-2]
+	\arrow["b", from=1-3, to=2-3]
+	\arrow["s"', from=2-1, to=2-2]
+	\arrow["b"', from=2-2, to=2-3]
+\end{tikzcd}}\\~\\ 
+which is commutative. This show that $b$ is a retract of $s\circ b$. By M3 axiom, $b$ is a weak equivalence. By M2, $b$ and $a$ are weak equivalences hence $f=b\circ a$ is a weak equivalence. 
+\end{proof}
+\end{thm}
+
+\subsection{Fibrant and Cofibrant Replacement}
+\begin{defn}{Fibrant and Cofibrant Replacements}{} Let $\mC$ be a model category. Let $X\in\mC$ be an object. 
+\begin{itemize}
+\item By M5, we can choose a factorization of the unique map $\emptyset\to X$ into \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\emptyset & QX & X
+	\arrow[from=1-1, to=1-2]
+	\arrow["p_X", from=1-2, to=1-3]
+\end{tikzcd}}\\~\\ 
+where $QX$ is cofibrant and $p$ is an acyclic fibration. Define $QX$ to be the cofibrant replacement of $X$. 
+\item By M5, we can choose a factorization of the unique map $X\to\ast$ into \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	X & FX & \ast
+	\arrow["i_X", from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+\end{tikzcd}}\\~\\ 
+where $FX$ is fibrant and $i$ is an acyclic cofibration. Define $FX$ to be the fibrant replacement of $X$. 
+\end{itemize}
+\end{defn}
+
+The point is this is that because we realistically only care about classes of objects up to weak equivalence, we can replace each object in a model category with fibrant / cofibrant objects so that the homotopy category is defined using the fibrant / cofibrant replacement. The following propositions show that not only can we replace regular objects with fibrant / cofibrant objects up to weak equivalence, we can also replace maps. 
+
+\begin{prp}{}{} Let $\mC$ be a model category. Let $f:X\to Y$ be a map. Then there exists a map $\overline{f}:QX\to QY$ such that the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	QX & QY \\
+	X & Y
+	\arrow["{\overline{f}}", from=1-1, to=1-2]
+	\arrow["{p_X}"', from=1-1, to=2-1]
+	\arrow["{p_Y}", from=1-2, to=2-2]
+	\arrow["f"', from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+The map $\overline{f}$ satisfies the following: 
+\begin{itemize}
+\item The map $\overline{f}$ is a weak equivalence if and only if $f$ is a weak equivalence
+\item If $Y$ is fibrant then $\overline{f}$ depends up to left / right homotopy on the left homotopy class of $f$
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{} Let $\mC$ be a model category. Let $f:X\to Y$ be a map. Then there exists a map $\overline{f}:QX\to QY$ such that the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	X & Y \\
+	FX & FY
+	\arrow["{f}", from=1-1, to=1-2]
+	\arrow["{i_X}"', from=1-1, to=2-1]
+	\arrow["{i_Y}", from=1-2, to=2-2]
+	\arrow["{\overline{f}}"', from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+The map $\overline{f}$ satisfies the following: 
+\begin{itemize}
+\item The map $\overline{f}$ is a weak equivalence if and only if $f$ is a weak equivalence
+\item If $X$ is cofibrant then $\overline{f}$ depends up to left / right homotopy on the right homotopy class of $f$
+\end{itemize}
+\end{prp}
+
+\begin{defn}{Subcategories of a Model Category}{} Let $\mC$ be a model category and let $\mW$ be its weak equivalences. Define the following associated categories. 
+\begin{itemize}
+\item $\mC_f$ is the full subcategory consisting of all fibrant objects of $\mC$. 
+\item $\mC_c$ is the full subcategory consisting of all cofibrant objects of $\mC$. 
+\item $\mC_{fc}$ is the full subcategory consisting of all fibrant and cofibrant objects of $\mC$. 
+\item $\pi\mC_f$ is the category consisting of all fibrant objects and left homotopy classes of maps
+\item $\pi\mC_c$ is the category consisting of all cofibrant objects and right homotopy classes of maps
+\item $\pi\mC_{fc}$ is the category consisting of all bifibrant objects and right homotopy classes of maps
+\end{itemize}
+\end{defn}
+
+\begin{defn}{The Fibrant Replacement Functor}{} Let $\mC$ be a model category. Define the fibrant replacement functor $F:\mC\to\pi\mC_f$ with the following data. 
+\begin{itemize}
+\item Every object $X\in\mC$ is sent to its fibrant replacement $FX$
+\item For $f:X\to Y$ a morphism, $F(f)=[\overline{f}]$ where $\overline{f}:FX\to FY$ is the fibrant replacement of the map $f$
+\end{itemize}
+\end{defn}
+
+\begin{defn}{The Cofibrant Replacement Functor}{} Let $\mC$ be a model category. Define the cofibrant replacement functor $Q:\mC\to\pi\mC_c$ with the following data. 
+\begin{itemize}
+\item Every object $X\in\mC$ is sent to its cofibrant replacement $QX$
+\item For $f:X\to Y$ a morphism, $Q(f)=[\overline{f}]$ where $\overline{f}:QX\to QY$ is the cofibrant replacement of the map $f$
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{} Let $\mC$ be a model category. The following are true regarding the fibrant and cofibrant replacement functor. 
+\begin{itemize}
+\item The restriction of the fibrant replacement functor $F:\mC\to\pi\mC_f$ to $\mC_c$ induces a functor $F':\pi\mC_c\to\pi\mC_{fc}$
+\item The restriction of the cofibrant replacement functor $Q:\mC\to\pi\mC_c$ to $\mC_f$ induces a functor $Q':\pi\mC_f\to\pi\mC_{fc}$
+\end{itemize}
+\end{lmm}
+
+\subsection{The Homotopy Category of a Model Category}
+\begin{defn}{Homotopy Category}{} Let $\mC$ be a model category. Define the homotopy category $\text{Ho}(\mC)$ of $\mC$ as follows. 
+\begin{itemize}
+\item The objects of $\text{Ho}(\mC)$ are precisely the objects of $\mC$
+\item For $X,Y$ two objects in $\text{Ho}(\mC)$, define $$\Hom_{\text{Ho}(\mC)}(X,Y)=\Hom_\mC(QFX,QFY)/\simeq$$ where $\simeq$ is the equivalence relation of homotopies of bifibrant objects. 
+\end{itemize}
+\end{defn}
+
+It is now clear that we are losing information by passing a model category into its homotopy category because we only care about objects up to weak equivalence, and we have replaced maps between objects by maps between their bifibrant replacements. 
+
+\begin{defn}{The Homotopy Functor}{} Let $\mC$ be a model category. Define the homotopy functor $\gamma:\mC\to\text{Ho}(\mC)$ by the following data. 
+\begin{itemize}
+\item $\gamma$ is the identity on objects
+\item For each morphism $f:X\to Y$, $\gamma(f)=QFf$
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{} Let $\mC$ be a model category. Let $f:X\to Y$ be a morphism in $\mC$. Then $\gamma(f)$ is an isomorphism in $\text{Ho}(\mC)$ if and only if $f$ is a weak equivalence in $\mC$. 
+\end{lmm}
+
+\begin{thm}{}{} Let $\mC$ be a model category with weak equivalences $\mW$. Then the homotopy functor $\gamma:\mC\to\text{Ho}(\mC)$ defines a localization of $\mC$ with respect to $\mW$. In other words, there is a natural isomorphism $$\text{Ho}(\mC)\cong\mW^{-1}\mC$$
+\end{thm}
+
+Some authors instead require the objects of the homotopy category to only consist of bifibrant objects. But since we are only considering morphisms up to homotopy equivalence, and the definition of the morphisms in $\text{Ho}(\mC)$ already involves transforming the object into the bifibrant object $QFX$ that is weakly equivalent to $X$, there is no difference in considering whether the objects are all of the objects of $\mC$ or only bifibrant objects of $\mC$, at least up to natural isomorphism. This is made concrete below. 
+
+\begin{thm}{}{} Let $\mC$ be a model category. The inclusion functors from the respective full subcategories of $\mC$ to $\mC$ induces equivalence of categories: $$\mW^{-1}\mC_c,\mW^{-1}\mC_f,\mW^{-1}\mC_{fc}\cong\mW^{-1}\mC$$ Moreover, there is an equivalence of categories: $$\text{Ho}(\mC)\cong\text{Ho}(\mC_f)\cong\text{Ho}(\mC_c)\cong\text{Ho}(\mC_{fc})$$
+\end{thm}
+
+This crucial theorem shows us that if we only really care about maps up to homotopies, we can forget about objects that are not bifibrant. The above theorem says that leaving only the bifibrant objects will still give us the same homotopy category. In particular, every object is weakly equivalent to a bifibrant object. And since we only really care about spaces up to weakly equivalence classes, we can forget about non-bifibrant objects. 
+
+\subsection{Derived Functors}
+\begin{defn}{Left Derived Functors}{} Let $\mC$ be a model category. Let $\mD$ be a category. Let $F:\mC\to\mD$ be a functor. A left derived functor of $F$ is a functor $$LF:\text{Ho}(\mC)\to\mD$$ together with a natural transformation $t:LF\circ\gamma\Rightarrow F$ that is universal in the following sense: \\~\\
+
+If $G:\text{Ho}(\mC)\to\mD$ is a another functor and $s:G\circ\gamma\Rightarrow F$ is a another a natural transformation, then there exists a unique natural transformation $p:G\Rightarrow LF$ such that the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{G\circ\gamma} & {LF\circ\gamma} \\
+	& F
+	\arrow["{p\circ\gamma}", from=1-1, to=1-2, Rightarrow]
+	\arrow["s"', from=1-1, to=2-2, Rightarrow]
+	\arrow["t", from=1-2, to=2-2, Rightarrow]
+\end{tikzcd}}\\~\\
+\end{defn}
+
+\begin{defn}{Right Derived Functors}{} Let $\mC$ be a model category. Let $\mD$ be a category. Let $F:\mC\to\mD$ be a functor. A right derived functor of $F$ is a functor $$RF:\text{Ho}(\mC)\to\mD$$ together with a natural transformation $t:F\Rightarrow RF\circ\gamma$ that is universal in the following sense: \\~\\
+
+If $G:\text{Ho}(\mC)\to\mD$ is a another functor and $s:F\Rightarrow G\circ\gamma$ is a another a natural transformation, then there exists a unique natural transformation $p:RF\circ\gamma\Rightarrow G\circ\gamma$ such that $s=p\circ t$. 
+\end{defn}
+
+\begin{prp}{}{} Let $\mC,\mD$ be model categories. Let $F:\mC\to\mD$ be a functor. Let $X,Y\in\mC$ be cofibrant objects and let $f:X\to Y$ be a weak equivalence. If $F(f)$ is an isomorphism, then $LF$ exists and the map $$t_X:LF(X)\to F(X)$$ is an isomorphism in $\mD$. 
+\end{prp}
+
+\begin{defn}{Total Derived Functors}{} Let $\mC,\mD$ be model categories. Let $F:\mC\to\mD$ be a functor. 
+\begin{itemize}
+\item The total left derived functor $$\L F:\text{Ho}(\mC)\to\text{Ho}(\mD)$$ of $F$ is the left derived functor of the composite $\gamma_D\circ F:\mC\to\text{Ho}(\mD)$. 
+\item The total right derived functor $$\R F:\text{Ho}(\mC)\to\text{Ho}(\mD)$$ of $F$ is the right derived functor of the composite $\gamma_D\circ F:\mC\to\text{Ho}(\mD)$. 
+\end{itemize}
+\end{defn}
+
+
+\pagebreak
+\section{Quillen Adjunctions and Quillen Equivalence}
+\subsection{Quillen Adjunctions}
+\begin{defn}{Quillen Adjunction}{} Let $\mC$ and $\mD$ be model categories. Let $$F:\mC\rightleftarrows\mD:G$$ be an adjuction. We say that $F$ and $G$ define a Quillen adjunction if $F$ preserves cofibrations and $G$ preserves fibrations. In this case we say that $F$ is a left Quillen functor and $G$ is a right Quillen functor. 
+\end{defn}
+
+\begin{thm}{}{} Let $\mC$ and $\mD$ be model categories. Let $$F:\mC\rightleftarrows\mD:G$$ be an adjuction. Then the following are equivalent. 
+\begin{itemize}
+\item $F$ and $G$ are a pair of Quillen adjunction
+\item $F$ preserves cofibrations and trivial cofibrations
+\item $G$ preserves fibrations and trivial fibrations
+\end{itemize}
+\end{thm}
+
+\begin{prp}{}{} Let $\mC$ and $\mD$ be model categories. Let $$F:\mC\rightleftarrows\mD:G$$ be a Quillen adjuction. Then the following are true. 
+\begin{itemize}
+\item $F$ preserves weak equivalences between cofibrant objects
+\item $F$ preserves weak equivalences between fibrant objects
+\end{itemize}
+\end{prp}
+
+\subsection{Relation to Total Derived Functors}
+\begin{thm}{}{} Let $\mC,\mD$ be model categories and let $F:\mC\rightleftarrows\mD:G$ be a Quillen adjunction. Then the total derived functors of $F$ and $G$ exists and $$\L F:\text{Ho}(\mC)\rightleftarrows\text{Ho}(\mD):\R G$$ form an adjoint pair. 
+\end{thm}
+
+\begin{prp}{}{} Let $\mC$ and $\mD$ be model categories. Let $$F:\mC\rightleftarrows\mD:G$$ be a Quillen adjuction. Then the following are true. 
+\begin{itemize}
+\item The left derived functor $LF$ preserves coproducts, pushouts and cylinder objects
+\item The right derived functor $RG$ preserves products, pullbacks and path objects
+\end{itemize}
+\end{prp}
+
+\subsection{Quillen Equivalence}
+\begin{defn}{Quillen Equivalence}{} Let $\mC$ and $\mD$ be model categories. Let $F:\mC\rightleftarrows\mD:G$ be a Quillen adjuction. We say that $F$ and $G$ define a Quillen equivalence if $LF$ or $RG$ define an equivalence of localized categories between $\mW^{-1}\mC$ and $\mV^{-1}\mD$. 
+\end{defn}
+
+\begin{thm}{}{} Let $\mC,\mD$ be model categories and let $F:\mC\rightleftarrows\mD:G$ be a Quillen adjunction Suppose for each cofibrant object $A$ of $\mC$ and fibrant object $B$ of $\mD$, $f:A\to G(B)$ is a weak equivalence in $\mC$ if and only if its adjoint $\overline{f}:F(A)\to B$ is a weak equivalence in $\mD$. Then $\L F$ and $\R G$ are a Quillen equivalence. 
+\end{thm}
+
+\pagebreak
+\section{Model Structures on Standard Categories}
+\subsection{Cofibrantly Generated Model Structures}
+\begin{defn}{}{} Let $\mC$ be a model category. We say that $\mC$ is cofibrantly generated if there are sets $I$ and $J$ such that the following are true. 
+\begin{itemize}
+\item ?
+\end{itemize}
+\end{defn}
+
+\begin{thm}{Recognition Theorem}{} Let $\mC$ be a category with small limits and colimits. Let $\mW$ be a class of morphisms which is closed under composition and contains all the identity morphisms. Let $I$ and $J$ be sets of morphisms in $\mC$ such that $\mW$, $I$ and $J$ satisfy the following. 
+\begin{itemize}
+\item $\mW$ satisfies the 2 out of 3 property
+\item ??
+\item ??
+\item ??
+\item ??
+\item ??
+\item ??
+\end{itemize}
+\end{thm}
+
+\subsection{Model Structure on $\bold{Top}$}
+We have seen from Algebraic Topology 3 that $\bold{Top}$ can be given the structure of a model category. We will give a complete proof of the axioms here. 
+
+\begin{thm}{}{} The category $\bold{Top}$ of topological spaces is a model category with the following model. 
+\begin{itemize}
+\item The weak equivalences are the homotopy equivalences
+\item The fibrations are the Hurewicz fibrations
+\item The cofibrations are the Hurewicz cofibrations
+\end{itemize}
+\end{thm}
+
+The homotopy category of $\bold{Top}$ under this model structure gives the usual homotopy category $\text{Ho}(\bold{Top})$. However, such a model structure on $\bold{Top}$ is far from unique. There are in particular two more canonical model structures on $\bold{Top}$. One such model structure is given by the Serre fibrations. 
+
+\begin{thm}{}{} The category $\bold{Top}$ of topological spaces is a model category with the following model. 
+\begin{itemize}
+\item The weak equivalences are the classical weak equivalences
+\item The fibrations are the Serre fibrations
+\item The cofibrations are the retracts of relative cell complexes
+\end{itemize}
+We denote the model structure together with the category by $\bold{Top}_\text{Quillen}$
+\end{thm}
+
+In this model structure the homotopy category is in fact the homotopy category of CW complexes. Indeed every space is weakly equivalent to a CW complex (CW approximation) and Serre fibrations satisfy the homotopy lifting property with respect only to all CW complexes. \\~\\
+
+Using the fact that under categories of a model category inherits the model structure, we can show the following: 
+
+\begin{lmm}{}{} The category $\bold{Top}_\ast$ can be equipped with a model structure inherited from either one of the model structures on $\bold{Top}$. 
+\end{lmm}
+
+\begin{thm}{}{} The category $\bold{CG}$ of topological spaces is a model category with the restriction of the model structure on $\bold{Top}_\text{Quillen}$. 
+\end{thm}
+
+
+\subsection{Model Structure on the Category of Chain Complexes}
+\begin{thm}{}{} Let $R$ be a ring. Then $\bold{Ch}_{\geq 0}(\bold{Mod}_R)$ is a model category with the following data. 
+\begin{itemize}
+\item The weak equivalences are the quasi-isomorphisms
+\item The cofibrations are the morphism of chain complexes $f_\bullet:C_\bullet\to D_\bullet$ such that each $f_k$ is a monomorphism with a projective $R$-module as kernel
+\item The fibrations are the morphism of chain complexes $f_\bullet:C_\bullet\to D_\bullet$ such that each $f_k$ is an epimorphism. 
+\end{itemize}
+\end{thm}
+
+\subsection{Model Structure on $\bold{sSet}$}
+In this subsection, we consider the model category $\bold{Top}$ where the model structure is given by the classical weak equivalences. 
+
+\begin{thm}{}{} The category $\bold{sSet}$ of simplicial sets admits a model structure with the following data. 
+\begin{itemize}
+\item The weak equivalences are morphisms $f:C\to D$ of simplicial sets such that $\abs{f}:\abs{C}\to\abs{D}$ is a weak equivalence in $\bold{Top}$ under the geometric relization functor
+\item The cofibrations are the morphism $f:C\to D$ of simplicial sets such that each map $f_n:C_n\to D_n$ is a monomorphism
+\item The fibrations are the morphisms $f:C\to D$ such that $f$ has the right lifting property with respect to acyclic cofibrations
+\end{itemize}
+\end{thm}
+
+\begin{lmm}{}{} Acyclic cofibrations in $\bold{sSet}$ are precisely the Kan fibrations. 
+\end{lmm}
+
+Recall that in Simplicial Methods of Topology, we defined the singular functor $S:\bold{Top}\to\bold{sSet}$ by sending every topological space to its set of all $n$-simplices for all $n$. We also showed that $S$ and the geometric realization functor are adjoint. Here we will show that they are in fact a Quillen adjunction, and a Quillen equivalence. 
+
+\begin{thm}{}{} The singular functor and geometric realization functor $$\abs{\;\cdot\;}:\text{Top}\rightleftarrows\text{sSet}:S$$ form a Quillen adjunction. Moreover, the Quillen adjunction is a Quillen equivalence and hence descends to an model equivalence of categories $$\text{Ho}(\bold{sSet})\cong\text{Ho}(\bold{Top})$$
+\end{thm}
+
+\pagebreak
+\section{Homotopy Limits and Colimits}
+\subsection{A Try-Out with Homotopy Pushouts and Pullbacks}
+Pushouts and pullbacks are not generally well-behaved with respect to homotopy. We remedy this by defining the notion of homotopy pushouts and pullbacks. 
+
+\begin{prp}{}{} Let $\mJ$ be the category $A\leftarrow B\rightarrow C$. Let $\mC$ be a model category. Then $\mC^\mJ$ has the structure of a model category with the following data: 
+\begin{itemize}
+\item The weak equivalences are the morphisms \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{X(A)} & {X(B)} & {X(C)} \\
+	{Y(A)} & {Y(B)} & {Y(C)}
+	\arrow["{f_A}", from=1-1, to=2-1]
+	\arrow[from=1-2, to=1-1]
+	\arrow[from=1-2, to=1-3]
+	\arrow["{f_B}", from=1-2, to=2-2]
+	\arrow["{f_C}", from=1-3, to=2-3]
+	\arrow[from=2-2, to=2-1]
+	\arrow[from=2-2, to=2-3]
+\end{tikzcd}}\\~\\
+such that $f_A$, $f_B$ and $f_C$ are weak equivalences in $\mC$
+\item For a morphism \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{X(A)} & {X(B)} & {X(C)} \\
+	{Y(A)} & {Y(B)} & {Y(C)}
+	\arrow["{f_A}", from=1-1, to=2-1]
+	\arrow[from=1-2, to=1-1]
+	\arrow[from=1-2, to=1-3]
+	\arrow["{f_B}", from=1-2, to=2-2]
+	\arrow["{f_C}", from=1-3, to=2-3]
+	\arrow[from=2-2, to=2-1]
+	\arrow[from=2-2, to=2-3]
+\end{tikzcd}}\\~\\ in $\mC^\mJ$, write $\partial_A(f)$ to be the pushout of the diagram $Y(B)\leftarrow X(B)\rightarrow X(A)$ and $\partial_C(f)$ the pushout of the diagram $Y(B)\leftarrow X(B)\rightarrow X(C)$. They fit into the following diagram: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	& {X(A)} & {X(B)=\partial_B(f)} & {X(C)} \\
+	& {\partial_A(f)} & {Y(B)} & {\partial_C(f)} \\
+	{Y(A)} &&&& {Y(C)}
+	\arrow[from=1-2, to=2-2]
+	\arrow["{f_A}"', from=1-2, to=3-1]
+	\arrow[from=1-3, to=1-2]
+	\arrow[from=1-3, to=1-4]
+	\arrow["{f_B=i_B(f)}", from=1-3, to=2-3]
+	\arrow[from=1-4, to=2-4]
+	\arrow["{f_C}", from=1-4, to=3-5]
+	\arrow["{\exists! i_A(f)}"{description}, dashed, from=2-2, to=3-1]
+	\arrow[from=2-3, to=2-2]
+	\arrow[from=2-3, to=2-4]
+	\arrow[from=2-3, to=3-1]
+	\arrow[from=2-3, to=3-5]
+	\arrow["{\exists !i_C(f)}"{description}, dashed, from=2-4, to=3-5]
+\end{tikzcd}}\\~\\
+by the universal property of pushouts. The cofibrations are such morphisms such that $i_A(f)$, $i_B(f)$ and $i_C(f)$ are cofibrations in $\mC$
+\item The fibrations are the morphisms such that $f_A$, $f_B$ and $f_C$ are fibrations in $\mC$
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{} Let $\mJ$ be the category $A\leftarrow B\rightarrow C$. Let $\mC$ be a model category. Then the following are true. 
+\begin{itemize}
+\item The fibrant objects of $\mC^\mJ$ are of the form $X\rightarrow Z\leftarrow Y$ where $Z$ is fibrant in $\mC$, and the two arrows are fibrations. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{} Let $\mJ$ be the category $A\rightarrow B\leftarrow C$. Let $\mC$ be a model category. Then $\mC^\mJ$ has the structure of a model category with the following data: 
+\begin{itemize}
+\item The weak equivalences are the morphisms \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{X(A)} & {X(B)} & {X(C)} \\
+	{Y(A)} & {Y(B)} & {Y(C)}
+	\arrow["{f_A}", from=1-1, to=2-1]
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-3, to=1-2]
+	\arrow["{f_B}", from=1-2, to=2-2]
+	\arrow["{f_C}", from=1-3, to=2-3]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-3, to=2-2]
+\end{tikzcd}}\\~\\
+such that $f_A$, $f_B$ and $f_C$ are weak equivalences in $\mC$
+\item The cofibrations are the morphisms such that $f_A$, $f_B$ and $f_C$ are cofibrations in $\mC$
+\item For a morphism \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{X(A)} & {X(B)} & {X(C)} \\
+	{Y(A)} & {Y(B)} & {Y(C)}
+	\arrow["{f_A}", from=1-1, to=2-1]
+	\arrow[from=1-2, to=1-1]
+	\arrow[from=1-2, to=1-3]
+	\arrow["{f_B}", from=1-2, to=2-2]
+	\arrow["{f_C}", from=1-3, to=2-3]
+	\arrow[from=2-2, to=2-1]
+	\arrow[from=2-2, to=2-3]
+\end{tikzcd}}\\~\\ in $\mC^\mJ$, write $\partial_A(f)$ to be the pullback of the diagram $Y(B)\rightarrow X(B)\leftarrow X(A)$ and $\partial_C(f)$ the pullback of the diagram $Y(B)\rightarrow X(B)\leftarrow X(C)$. They fit into the following diagram: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{X(A)} &&&& {X(C)} \\
+	& {\partial_A(f)} & {X(B)=\partial_B(f)} & {\partial_C(f)} \\
+	& {Y(A)} & {Y(B)} & {Y(C)}
+	\arrow["{\exists!p_A(f)}"{description}, dashed, from=1-1, to=2-2]
+	\arrow["{f_A}"', from=1-1, to=3-2]
+	\arrow[from=1-5, to=2-3]
+	\arrow["{\exists!p_C(f)}"{description}, dashed, from=1-5, to=2-4]
+	\arrow["{f_C}", from=1-5, to=3-4]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-2, to=3-2]
+	\arrow[from=1-1, to=2-3]
+	\arrow["{f_B=p_B(f)}", from=2-3, to=3-3]
+	\arrow[from=2-4, to=2-3]
+	\arrow[from=2-4, to=3-4]
+	\arrow[from=3-3, to=3-2]
+	\arrow[from=3-3, to=3-4]
+\end{tikzcd}}\\~\\
+by the universal property of pullbacks. The fibrations are such morphisms such that $p_A(f)$, $p_B(f)$ and $p_C(f)$ are fibrations in $\mC$
+\end{itemize}
+\end{prp}
+
+Recall that because a model category $\mC$ is complete and cocomplete, the diagonal functor $\Delta:\mC\to\mC^\mJ$ admits a left adjoint $\text{colim}_\mJ(-)$. This means that we have a natural isomorphism $$\Hom_{\mC^\mJ}(\text{colim}_\mJ(-),-)\cong\Hom_\mC(-,\Delta(-))$$
+
+\begin{prp}{}{} Let $\mJ$ be the category $A\leftarrow B\rightarrow C$. Let $\mC$ be a model category. The the adjunction $$\text{colim}_\mJ:\mC^\mJ\rightleftarrows\mC:\Delta$$ is a Quillen adjunction, and hence admits total derived functors $$\L\text{colim}_\mJ:\text{Ho}(\mC^\mJ)\rightleftarrows\text{Ho}(\mC):\R\Delta$$
+\end{prp}
+
+\begin{defn}{The Homotopy Pushout Functor}{} Let $\mJ$ be the category $A\leftarrow B\rightarrow C$. Let $\mC$ be a model category. Define the homotopy pushout functor to be the total derived functor $$\L\text{colim}_\mJ:\text{Ho}(\mC^\mJ)\to\text{Ho}(\mC)$$ of the functor $\text{colim}_\mJ:\mC^\mJ\to\mC$. 
+\end{defn}
+
+We have already seen homotopy pushouts in $\bold{Top}$ and $\bold{sSet}$. To show that they coincide with the definition here we need to show that they are weakly equivalent. 
+
+\begin{prp}{}{} Let $\mJ$ be the category $A\leftarrow B\rightarrow C$. Let $\mC$ be a model category. The the adjunction $$\Delta:\mC^\mJ\rightleftarrows\mC:\text{lim}_\mJ$$ is a Quillen adjunction, and hence admits total derived functors $$\L\Delta:\text{Ho}(\mC^\mJ)\rightleftarrows\text{Ho}(\mC):\R\text{lim}_\mJ$$
+\end{prp}
+
+\begin{defn}{The Homotopy Pullback Functor}{} Let $\mJ$ be the category $A\leftarrow B\rightarrow C$. Let $\mC$ be a model category. Define the homotopy pullback functor to be the total derived functor $$\R\text{lim}_\mJ:\text{Ho}(\mC^\mJ)\to\text{Ho}(\mC)$$ of the functor $\text{lim}_\mJ:\mC^\mJ\to\mC$. 
+\end{defn}
+
+\subsection{Model Structure on General Functor Categories}
+\begin{thm}{}{} Let $\mJ$ be a small category. Let $\mC$ be a cofibrantly generated model category with generating cofibrations $I$ and generating trivial cofibrations $J$. Then $\mC^\mJ$ is a cofibrantly generated model category with the following data. 
+\begin{itemize}
+\item The generating cofibrations are given as $\{X\Rightarrow Y\in\mC^\mJ\;|\;\}$
+\item The generating trivial cofibrations are ?
+\end{itemize}
+\end{thm}
+
+\begin{prp}{}{} Let $\mJ$ be a small category. Let $\mC$ be a cofibrantly generated model category with generating cofibrations $I$ and generating trivial cofibrations $J$. Then the model category structure of $\mC^\mJ$ consists of the following data: 
+\begin{itemize}
+\item The weak equivalences are the natural transformations $X\Rightarrow Y$ such that $X(C)\to Y(C)$ is a weak equivalence for all $C\in\mC$
+\item The fibrations are the natural transformations $X\Rightarrow Y$ such that $X(C)\to Y(C)$ is a fibration for all $C\in\mC$
+\item The cofibrations are the natural transformations $X\Rightarrow Y$ that is a retract of a transfinite compositions of pushouts of elements of 
+\end{itemize}
+\end{prp}
+
+\pagebreak
+\section{Simplicial Model Categories}
+\subsection{Simplicial Model Categories}
+\begin{defn}{Simplicial Model Categories}{} Let $\mC$ be a model category. We say that $\mC$ is a simplicial model category if the following are true. 
+\begin{itemize}
+\item $\mC$ is enriched over $\bold{sSet}$
+\item For every cofibration $i:A\to B$ and every fibration $p:X\to Y$ in $\mC$, the morphism of simplicial sets $$\Hom_\mC(B,X)\overset{-\circ i\times p\circ -}{\longrightarrow}\Hom_\mC(A,X)\times_{\Hom_\mC(A,Y)}\Hom_\mC(B,Y)$$ is a Kan fibration. Moreover, if $i$ or $p$ is acyclic, then the Kan fibration is acyclic. 
+\end{itemize}
+\end{defn}
+
+\subsection{Coends and Ends}
+
+\subsection{A Local Definition for Homotopy Colimits}
+\begin{defn}{Homotopy Colimits}{} Let $\mC$ be a simplicial model category. Let $\mJ$ be a small category. Let $X:\mJ\to\mC$ be a diagram. Define the homotopy colimit of $X$ to be the coequalizer of the maps \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\coprod_{(\sigma:\alpha\to\alpha')\in\mJ}X(\alpha)\otimes N(\alpha'/\mJ)^\text{op}} && {\coprod_{\alpha\in\mJ}X(\alpha)\otimes N(\alpha/\mJ)^\text{op}}
+	\arrow["\phi", shift left, from=1-1, to=1-3]
+	\arrow["\psi"', shift right, from=1-1, to=1-3]
+\end{tikzcd}}\\~\\
+where $\phi$ and $\psi$ are given as follows. 
+\begin{itemize}
+\item The map $\phi$ is defined as follows. On each summand $X_\alpha\otimes N(\alpha'/\mJ)^\text{op}$ in the domain, $\phi$ is the composition of the map \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{X(\alpha)\otimes N(\alpha'/\mJ)^\text{op}} && {X(\alpha')\otimes N(\alpha'/\mJ)^\text{op}} && {\coprod_{\alpha\in\mJ}X(\alpha)\otimes N(\alpha/\mJ)^\text{op}}
+	\arrow["{X(\sigma)\otimes\text{id}_{{N(\alpha'/\mJ)}^\text{op}}}", from=1-1, to=1-3]
+	\arrow["{\text{incl.}}", hook, from=1-3, to=1-5]
+\end{tikzcd}}\\~\\
+\item The map $\psi$ is defined as follows. On each summand $X_\alpha\otimes N(\alpha'/\mJ)^\text{op}$ in the domain, $\psi$ is the composition of the map \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{X(\alpha)\otimes N(\alpha'/\mJ)^\text{op}} && {X(\alpha)\otimes N(\alpha/\mJ)^\text{op}} && {\coprod_{\alpha\in\mJ}X(\alpha)\otimes N(\alpha/\mJ)^\text{op}}
+	\arrow["{\text{id}_{X(\alpha)}\otimes N(\sigma/\mJ)^\text{op}}", from=1-1, to=1-3]
+	\arrow["{\text{incl.}}", hook, from=1-3, to=1-5]
+\end{tikzcd}}\\~\\
+\end{itemize}
+We denote the homotopy colimit as $$\text{Hocolim}_\mJ X$$
+\end{defn}
+
+Ref: NOTES ON HOMOTOPY COLIMITS AND HOMOTOPY LIMITS (A WORK IN PROGRESS) PHILIP S. HIRSCHHORN\\
+
+Some computational aspects???\\
+
+Transferring homotopy colimits???
+
+\begin{prp}{}{} Let $\mC$ be a simplicial model category. Let $\mJ$ be a small category. Let $X:\mJ\to\mC$ be object-wise cofibrant in $\mC$. Then there exists the following: 
+\begin{itemize}
+\item A natural object-wise cofibrant diagram $\widetilde{X}:\mJ\to\mC$ in $\mC$
+\item A natural isomorphism $R:\colim_\mJ\widetilde{X}\overset{\cong}{\longrightarrow}\text{Hocolim}_\mJ X$
+\item A natural object-wise equivalence $p:\widetilde{X}\to X$
+\end{itemize}
+such that the induced map the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\colim_\mJ\widetilde{X}} && {\colim_\mJ X} \\
+	{\text{Hocolim}_\mJ X} & {X\otimes N(-/\mC)^\text{op}} & {X\otimes P}
+	\arrow["{\colim_\mJ(p)}", from=1-1, to=1-3]
+	\arrow["{R,\cong}", from=1-1, to=2-1]
+	\arrow["{=}", from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow["\cong", from=2-3, to=1-3]
+\end{tikzcd}}\\~\\
+where $P$ is the constant diagram in $\mJ^\text{op}$ at a point. 
+\end{prp}
+
+Prp 10.10 Hirschhorn notes. 
+
+\begin{prp}{}{} Let $\mC$ be a simplicial model category. Let $\mJ$ be a small category. Let $X:\mJ\to\mC$ and $K:\mJ^\text{op}\to\bold{sSet}$ be diagrams. Then there is a natural isomorphism of sets $$\Hom_\mC(X\otimes_\mJ K,Z)\cong\Hom_{\bold{sSet}^{\mJ^\text{op}}}(K,\Hom_\mC(X,Z))$$ for any object $Z\in\mC$. 
+\end{prp}
+
+Hirschhorn: Model Categories and their Localizations 18.3.10\\
+
+Note: We have $\text{Hocolim}_\mJ X=X\otimes_\mJ N(-/\mC)^\text{op}$. Plugging this in gives $$\Hom_\mC(\text{Hocolim}_\mJ X,Z)\cong\Hom_{\bold{sSet}^{\mJ^\text{op}}}(N(-/\mC)^\text{op},\Hom_\mC(X,Z))$$ This means that given a morphism of simplicial sets $K\to\Hom_\mC(X,Z)$, we obtain a map $$\text{Hocolim}_\mJ X\to Z$$ (This is the universal property of the homotopy colimit?)
+
+\subsection{A Local Definition for Homotopy Limits}
+
+\pagebreak
+\section{Cofibrantly Generated Model Categories}
+\subsection{Cofibrantly Generated Model Categories}
+
+\subsection{A Global Definition of Homotopy Colimits}
+\begin{defn}{Projective Model Structure}{} Let $M$ be a cofibrantly generated model category. Let $I$ be a smll category. 
+\end{defn}
+
+Recall that we write $\Delta:\mC\to\mC^\mJ$ for the constant functor. 
+
+\begin{prp}{}{} Let $M$ be a cofibrantly generated model category. Let $\mJ$ be a small category. Then the categorical adjunction $$\colim_\mJ:\mC^\mJ\leftrightarrows\mC:\Delta$$ is a Quillen adjunction where $\mC^\mJ$ is given the projective model structure. 
+\end{prp}
+
+\begin{defn}{Homotopy Colimits for Cofibrantly Generated Model Categories}{} Let $\mC$ be a cofibrantly generated model category. Let $\mJ$ be a small category. Let $X:\mJ\to\mC$ be a diagram in $\mC$. Define the homotopy colimit of $X$ in $\mC$ to be $$\left(\L\colim_\mJ\right)(X)\in\text{Ho}(\mC)$$ where $\L\colim_\mJ:\text{Ho}(\mC^\mJ)\to\text{Ho}(\mC)$ is the total left derived functor of $\colim:\mC^\mJ\to\mC$. 
+\end{defn}
+
+P.91 A primer on homotopy colimits
+
+\subsection{Combinatorial Model Categories}
+\begin{defn}{Injective Model Structure}{} Let $M$ be a combinatorial model category. Let $I$ be a smll category. 
+\end{defn}
+
+Recall that we write $\Delta:\mC\to\mC^\mJ$ for the constant functor. 
+
+\begin{prp}{}{} Let $M$ be a combinatorial model category. Let $\mJ$ be a small category. Then the categorical adjunction $$\Delta:\mC\leftrightarrows\mC^\mJ:\lim_\mJ$$ is a Quillen adjunction where $\mC^\mJ$ is given the projective model structure. 
+\end{prp}
+
+\begin{defn}{Homotopy Limits for Combinatorial Model Categories}{} Let $\mC$ be a combinatorial model category. Let $\mJ$ be a small category. Let $X:\mJ\to\mC$ be a diagram in $\mC$. Define the homotopy limit of $X$ in $\mC$ to be $$\left(\R\lim_\mJ\right)(X)\in\text{Ho}(\mC)$$ where $\R\lim_\mJ:\text{Ho}(\mC^\mJ)\to\text{Ho}(\mC)$ is the total right derived functor of $\lim:\mC^\mJ\to\mC$. 
+\end{defn}
+
+P.91 A primer on homotopy colimits
+
+
+\pagebreak
+\section{Pointed Model Categories}
+Model categories are categories in which one can construct homotopies. Stable model categories are then categories in which one can observe stable phenomena on homotopies. In this section, we will provide the foundations of stable model categories which will be used in Stable Homotopy Theory. 
+
+\subsection{The Suspension and Loopspace Functor}
+\begin{defn}{Pointed Category}{} Let $\mC$ be a category. We say that $\mC$ is a pointed category if $\mC$ has a zero object. 
+\end{defn}
+
+\begin{defn}{Suspension Functor}{} Let $\mC$ be a pointed model category. Define the suspension functor $\Sigma:\text{Ho}(\mC)\to\text{Ho}(\mC)$ as follows. 
+\begin{itemize}
+\item For each fibrant object $X\in\mC$, $\Sigma(X)$ is pushout of the diagram: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\ast & {X\coprod X} & {CX}
+	\arrow[from=1-2, to=1-1]
+	\arrow["{(i_0,i_1)}", from=1-2, to=1-3]
+\end{tikzcd}}\\~\\
+\item For $f:X\to Y$, choose cylinder objects $CX$ and $CY$ for $X$ and $Y$ respectively. There is then a commutative diagram of the form \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\ast & {X\coprod X} & CX \\
+	\ast & {Y\coprod Y} & CY
+	\arrow["{\exists!}", from=1-1, to=2-1]
+	\arrow[from=1-2, to=1-1]
+	\arrow[from=1-2, to=1-3]
+	\arrow["{f\coprod f}", from=1-2, to=2-2]
+	\arrow["{\exists!Cf}", from=1-3, to=2-3]
+	\arrow[from=2-2, to=2-1]
+	\arrow[from=2-2, to=2-3]
+\end{tikzcd}}\\~\\
+The universal property of pushouts thus induce a unique morphism $\Sigma f:\Sigma X\to\Sigma Y$. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Loopspace Functor}{} Let $\mC$ be a pointed model category. Define the loopspace functor $\Omega:\text{Ho}(\mC)\to\text{Ho}(\mC)$ as follows. 
+\begin{itemize}
+\item For each cofibrant object $X\in\mC$, $\Omega(X)$ is pullback of the diagram: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{PX} & {X\times X} & \ast
+	\arrow[from=1-1, to=1-2]
+	\arrow["{(p_0,p_1)}", from=1-3, to=1-2]
+\end{tikzcd}}\\~\\
+\item For $f:X\to Y$, choose path objects $PX$ and $PY$ for $X$ and $Y$ respectively. There is then a commutative diagram of the form \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	PX & {X\times X} & \ast \\
+	PY & {Y\times Y} & \ast
+	\arrow[from=1-1, to=1-2]
+	\arrow["Pf", from=1-1, to=2-1]
+	\arrow["{f\times f}", from=1-2, to=2-2]
+	\arrow[from=1-3, to=1-2]
+	\arrow["{\exists!}", from=1-3, to=2-3]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-3, to=2-2]
+\end{tikzcd}}\\~\\
+The universal property of pullbacks thus induce a unique morphism $\Omega f:\Omega X\to\Omega Y$. 
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{} Let $\mC$ and $\mD$ be pointed model categories. Let $$F:\mC\rightleftarrows\mD:G$$ be a Quillen adjuction. Then for $X\in\text{Ho}(\mC)$ and $Y\in\text{Ho}(\mD)$ there are natural isomorphisms $$LF(\Sigma X)\cong\Sigma(LF(X))\;\;\;\;\text{ and }\;\;\;\; RG(\Omega Y)\cong\Omega(RG(Y))$$
+\end{prp}
+
+\begin{thm}{}{} Let $\mC$ be a pointed model category. Then the suspension and loopspace functor are adjoints $$\Sigma:\text{Ho}(\mC)\rightleftarrows\text{Ho}(\mC):\Omega$$ In other words, there are isomorphisms $$[\Sigma X,Y]\cong[X,\Omega Y]$$ that are natural in both $X,Y\in\text{Ho}(\mC)$. 
+\end{thm}
+
+\begin{thm}{}{} Let $\mC$ be a pointed model category. Let $X,Y\in\text{Ho}(\mC)$. Then the following are true. 
+\begin{itemize}
+\item $[\Sigma X,Y]$ is a group with binary operation the concatenation of left homotopies. 
+\item $[X,\Omega Y]$ is a group with binary operation the concatenation of right homotopies. 
+\end{itemize}
+In particular, the natural isomorphism $$[\Sigma X,Y]\cong[X,\Omega Y]$$ given by the adjunction is a group isomorphism. 
+\end{thm}
+
+\begin{crl}{}{} Let $\mC$ be a pointed model category. Let $X\in\mC$. Then $\Sigma X$ is a cogroup object and $\Omega X$ is a group object respectively in $\text{Ho}(\mC)$. 
+\end{crl}
+
+\begin{crl}{}{} Let $\mC$ be a pointed model category. Let $X,Y\in\mC$. Then $[\Sigma^2 X,Y]$ and $[X,\Omega^2Y]$ are abelian groups. 
+\end{crl}
+
+\subsection{Fibre and Cofibre Sequences}
+\begin{defn}{Fibre and Cofibre}{} Let $\mC$ be a pointed model category. Let $f:A\to B$ be a map in $\mC$. 
+\begin{itemize}
+\item The cofibre of $f$ is the pushout of the diagram \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\ast & {A} & {B}
+	\arrow[from=1-2, to=1-1]
+	\arrow["{f}", from=1-2, to=1-3]
+\end{tikzcd}}\\~\\
+\item The fibre of $f$ is the pullback of the diagram \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{A} & {B} & \ast
+	\arrow["{f}", from=1-1, to=1-2]
+	\arrow[from=1-3, to=1-2]
+\end{tikzcd}}\\~\\
+\end{itemize}
+\end{defn}
+
+\begin{thm}{}{} Let $\mC$ be a pointed model category. Let $f:A\to B$ be a cofibration of cofibrant objects with cofibre $C$. Then the map $$\cdot:[C,X]\times[\Sigma A,X]\to[C,X]$$ defines a group action for any $X\in\mC$. It is moreover natural in $X$. \\~\\
+
+Dually, let $g:X\to Y$ be a fibration of fibrant objects with fibre $Z$. Then the map $$\cdot:[A,Z]\times[A,\Omega Y]\to[A,Z]$$ defines a group action for any $A\in\mC$. It is moreover natural in $A$. 
+\end{thm}
+
+??? define the action in Foundations of Stable Homotopy Theory P.111
+
+\subsection{Stable Model Categories}
+\begin{defn}{Stable Model Categories}{} Let $\mC$ be a pointed model category. We say that $\mC$ is a stable model category if the suspension functor $\Sigma:\text{Ho}(\mC)\to\text{Ho}(\mC)$ and the loop space functor $\Omega:\text{Ho}(\mC)\to\text{Ho}(\mC)$ defines equivalence of categories. 
+\end{defn}
+
+While $\bold{Top}_\ast$ is a model category, it is not a stable homotopy category. $\bold{Top}_\ast$ has the classical suspension and loopspace functors which inputs a space $X$ and outputs the usual suspension $\Sigma X$ and loopspace $\Omega X$ respectively. However, notice that $\Sigma X$ and $\Omega X$ does not give categorical equivalence. Consider $X=S^1$. It is clear that $X$ and $\Sigma X$ and $\Sigma X$ are not isomorphic objects. Indeed they are not even weakly equivalent because they have different homotopy groups. 
+
+\begin{thm}{}{} Let $\mC$ be a stable model category. Then $\text{Ho}(\mC)$ is an additive category. 
+\end{thm}
+
+\begin{thm}{}{} Let $\mC$ and $\mD$ be stable model categories. If $F:\mC\to\mD$ is a left or right Quillen functor, then $F$ is an additive functor. 
+\end{thm}
+
+\subsection{The Compatible Symmetric Monoidal Structures}
+\begin{thm}{}{} Let $(\mC,\otimes,I,\text{HOM})$ be a symmetric monoidal stable model category. Then $$(\text{Ho}(\mC),\otimes^\L,I,\R\text{HOM})$$ is a triangulated category that is closed and symmetric monoidal. 
+\end{thm}
+
+\pagebreak
+\section{Localization Techniques in Model Categories}
+\subsection{General Localizations}
+\begin{defn}{Left Localizations}{} Let $\mC$ be a model category and let $\mW$ be a class of morphisms in $\mC$. A left localization of $\mC$ with respect to $\mW$ is a model category $$L_\mW\mC$$ together with a left Quillen functor $j:\mC\to L_\mW\mC$ such that the following are true. 
+\begin{itemize}
+\item The total left derived functor $\mL j:\text{Ho}(\mC)\to\text{Ho}(L_\mW\mC)$ of $j$ takes the images in $\text{Ho}(\mC)$ into isomorphisms in $\text{Ho}(L_\mW\mC)$. 
+\item The above property is universal in the following sense: If $\mD$ is another model category together with a left Quillen functor $k:\mC\to\mD$ such that $\mL k$ takes images in $\text{Ho}(\mC)$ into isomorphisms in $\text{Ho}(\mD)$, then there exists a functor $\delta:\text{Ho}(L_\mW\mC)\to\text{Ho}(\mD)$ such that the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\text{Ho}(\mC)} & {\text{Ho}(L_\mW\mC)} \\
+	& {\text{Ho}(\mD)}
+	\arrow["{\mL j}", from=1-1, to=1-2]
+	\arrow["{\mL k}"', from=1-1, to=2-2]
+	\arrow["{\exists!\delta}", dashed, from=1-2, to=2-2]
+\end{tikzcd}}\\~\\
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{} Let $\mC$ be a model category and let $\mW$ be a class of morphisms in $\mC$. Then the left localization of $\mC$ with respect to $\mW$ is unique up to unique isomorphism, should it exists. 
+\end{prp}
+
+\subsection{Local Objects and Morphisms}
+\begin{defn}{$\mW$-Local Objects and Morphisms}{} Let $\mC$ be a model category and let $\mW$ be a class of morphisms. 
+\begin{itemize}
+\item We say that an object $C\in\mC$ is $\mW$-local if $C$ is fibrant and $$f^\ast:\Hom_{\text{Ho}(\mC)}(B,C)\to\Hom_{\text{Ho}(\mC)}(A,C)$$ is a weak equivalence for all $f:A\to B$ in $\mC$. 
+\item We say that a morphism $f:A\to B$ is an $\mW$-local equivalence if $$f^\ast:\Hom_{\text{Ho}(\mC)}(B,C)\to\Hom_{\text{Ho}(\mC)}(A,C)$$ is a weak equivalence for all $\mW$-local objects $C\in\mC$. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{$\mW$-Localizations}{} Let $\mC$ be a model category and let $\mW$ be a class of morphisms. We say that a morphism $f:A\to B$ is an $\mW$-localization if $f$ is an $\mW$-equivalence and $B$ is $\mW$-local. In this case we say that $A$ has an $\mW$-localization. \\~\\
+
+If all objects in $\mC$ has $\mW$-localizations, then we say that $\mC$ has $\mW$-localizations. 
+\end{defn}
+
+\begin{prp}{}{} Let $\mC$ be a model category and let $\mW$ be a class of morphisms. Let $X\in\mC$ be an object. If $f_1:X\to Y_1$ and $f_2:X\to Y_2$ are two $\mW$-localizations of $X$, then they are isomorphic in $\text{Ho}(\mC)$. 
+\end{prp}
+
+\pagebreak
+\section{Bousfield Localization}
+\subsection{General Properties of Bousfield Localizations}
+\begin{defn}{Left Bousfield Localization}{} Let $\mC$ be a model category and let $\mW$ be a class of morphisms. Define the left Bousfield localization of $\mC$ with respect to $\mW$ to be the model category structure on $$L_\mW\mC$$ consisting of the following data: 
+\begin{itemize}
+\item The weak equivalences are the class of $\mW$-local equivalences in $\mC$. 
+\item The cofibrations are the cofibrations of $\mC$
+\item The fibrations are determined by the other two classes of maps. ($f$ is a fibration in $L_\mW\mC$ if and only if $f$ has the right lifting property with respect to all morphisms that are cofibrations and $\mW$-local equivalences)
+\end{itemize}
+\end{defn}
+
+We will show later that the fibrant objects of $L_\mW\mC$ are precisely the $\mW$-local objects. Let us now compare the model structure of $\mC$ and $L_\mW\mC$. 
+
+\begin{thm}{}{} Let $\mC$ be a model category and let $\mW$ be a class of morphisms. Then the following are true regarding the left Bousfield localization $L_\mW\mC$. 
+\begin{itemize}
+\item Every weak equivalence of $\mC$ is a weak equivalence of $L_\mW\mC$
+\item Every fibration of $\mC$ is a fibration of $L_\mW\mC$
+\item Every trivial cofirbation of $\mC$ is a trivial cofibration of $L_\mW\mC$
+\item Trivial fibrations of $\mC$ are exactly the trivial fibrations of $L_\mW\mC$
+\end{itemize}
+Moreover, there is a Quillen adjunction given by $$\text{id}_\mC:\mC\rightleftarrows L_\mW\mC:\text{id}_\mC$$
+\end{thm}
+
+In particular, notice that we have successfully enlarged the class of morphisms that are weak equivalences in $\mC$. We can also give a criterion for when weak equivalence in $L_\mW\mC$ are weak equivalences in $\mC$. 
+
+\begin{prp}{}{} Let $\mC$ be a model category and let $\mW$ be a class of morphisms. Let $f:X\to Z$ and $g:Y\to Z$ be fibrations in $L_\mW\mC$. If $h:X\to Y$ is weak equivalence in $L_\mW\mC$ such that the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	X && Y \\
+	& Z
+	\arrow["h", from=1-1, to=1-3]
+	\arrow["f"', from=1-1, to=2-2]
+	\arrow["g", from=1-3, to=2-2]
+\end{tikzcd}}\\~\\
+then $h$ is a weak equivalence in $\mC$. 
+\end{prp}
+
+\subsection{Existence of Bousfield Localizations}
+\begin{thm}{Existence Theorem for Left Bousfield Localizations}{} Let $\mC$ be a left proper cellular model category. Let $\mW$ be a set of maps in $\mC$. Then $L_\mW\mC$ exists. 
+\end{thm}
+
+
+
+
+
+\end{document}

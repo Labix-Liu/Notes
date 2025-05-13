@@ -1,0 +1,169 @@
+\documentclass[a4paper]{article}
+
+\input{C:/Users/liula/Desktop/Latex/Headers V1.2 M.tex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Labix}
+\lhead{Complex Analysis 2}
+\rfoot{\thepage}
+
+\title{Complex Analysis 2}
+
+\author{Labix}
+
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+Complex Numbers are  introduced when cubic functions does not have roots in the reals. Over time, it has developed into fields, functions and more. Naturally mathematicians ask if complex functions are continuous, differentiable, integrable much similar to real functions. \\
+\begin{itemize}
+\item Complex Analysis by I. Stewart \& D. Tall
+\end{itemize}
+\end{abstract}
+\tableofcontents
+\pagebreak
+
+\section{Cauchy's Theorem: Homotopy}
+\subsection{Winding Numbers Under Homotopies}
+\begin{thm}{}{} Let $w\in\C$. If $\gamma_1,\gamma_2:[a,b]\to\C\setminus\{w\}$ are homotopic relative to end points, then $I(\gamma_1,w)=I(\gamma_2,w)$
+\end{thm}
+
+\begin{crl}{}{} Let $\Omega\subseteq\C$ be open and simply connected. Let $\gamma:[a,b]\to\C\setminus\Omega$ be a continuous closed path. Then for every $w\in\C\setminus\Omega$, we have $$I(\gamma,w)=0$$
+\end{crl}
+
+\subsection{Homotopy Version of Cauchy's Theorem}
+\begin{thm}{Deformation Theorem on Simply Connected Domains}{} Let $\Omega\subseteq\C$ be a simply connected open set. Let $f:\Omega\to\C$ be holomorphic. If $\gamma_1$ and $\gamma_2$ are homotopic relative to end points, then $$\int_{\gamma_1}f(z)dz=\int_{\gamma_2}f(z)dz$$
+\end{thm}
+
+\begin{thm}{Cauchy's Theorem on Simply Connected Domains}{} Let $\Omega\subset\C$ be simply connected. Let $\gamma$ be a closed contour in $\Omega$. Then $$\int_{\gamma}f=0$$
+\end{thm}
+
+\begin{thm}{}{} Let $U\subseteq\C$ be open. Let $f:U\to\C$ be holomorphic. If $\gamma_1,\gamma_2:[a,b]\to U$ are homotopic relative to end points, then $$\int_{\gamma_1}f(z)dz=\int_{\gamma_2}f(z)dz$$
+\end{thm}
+
+\pagebreak
+\section{Riemann Mapping Theorem}
+\subsection{Locally Uniform Convergence}
+\begin{defn}{Locally Uniform Convergence}{} Let $\Omega\subset\C$ be open. Let $f_n:\Omega\to\C$ be a sequence of holomorphic functions. We say that $f_n$ converges locally uniformly to $f$ if for every compact set $K\subset\Omega$, the sequence of restricted functions $f_n|_K$ converges uniformly to $f|_K$. 
+\end{defn}
+
+It is easy to see that uniformly convergent function is necessarily a locally uniformly convergent function. 
+
+\begin{thm}{Weierstrass Convergence Theorem}{} Let $\Omega\subset\C$ be open. Let $f_n:\Omega\to\C$ be a sequence of holomorphic functions. If $f_n$ converges locally uniformly to a function $f:\Omega\to\C$, then the following are true. 
+\begin{itemize}
+\item $f$ is holomorphic
+\item Smooth local convergence: For all $k\in\N$, $f_n^{(k)}$ converges locally uniformly to $f^{(k)}$
+\end{itemize} \tcbline
+\begin{proof}
+Since $f$ is the local uniform limit of a sequence of continuous functions, we know that it is continuous. By Goursat's theorem, we have that $$0=\int_{\partial T}f_n(z)\,dz\to\int_{\partial T}f(z)\,dz$$ in which the integral convergences by uniform convergence of $f_n$ on $\partial T$. By Morera's theorem, we thus have that $f$ is holomorphic. \\~\\
+
+For the second part, suppose that $K\subset\Omega$ is compact. Choose $\delta>0$ sufficiently small so that for every $z\in K$, we have $B_{2\delta}(z)\subset\Omega$. This is possible by compactness of $K$. Now define $$K_\delta=\bigcup_{z\in K}\overline{B_\delta(z)}$$ which is another compact subset of $\Omega$. By Cauchy's integral formula, for every $z\in K$, and $k\in\N$, we have that $$f_n^{(k)}-f^{(k)}(z)=\frac{k!}{2\pi i}\int_{\partial B_\delta(z)}\frac{f_n(w)-f(w)}{(w-z)^{k+1}}\,dw$$ By the estimate lemma, we have 
+\begin{align*}
+\abs{f_n^{(k)}(z)-f^{(k)}(z)}\leq\frac{k!}{2\pi}(2\pi\delta)\sup_{w\in\partial B_\delta(z)}\frac{\abs{f_n(w)-f(w)}}{\delta^{k+1}}\\
+\leq\frac{k!}{\delta^k}\sup_{w\in K_\delta}\abs{f_n(w)-f(w)}
+\end{align*}
+Since the final term is independent of $z\in K$, it converges to $0$ by the uniform convergence and so we are done. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{Hurwitz's Theorem}{} Let $\Omega\subseteq\C$ be open and connected. Let $f_n:\Omega\to\C$ be a sequence of holomorphic functions that converge locally uniformly to $f$. Suppose that for some $k\in\N$, each function $f_n$ has at most $k$ zeroes (counting multiplicity). Then one of the following below are true. 
+\begin{itemize}
+\item $f$ is the zero function
+\item $f$ has at most $k$ zeroes (counting multiplicity)
+\end{itemize} \tcbline
+\begin{proof}
+Suppose that the theorem is false. Then we can find a situation satisfying the hypothesis of the theorem where the function $f$ has strictly more than $k$ zeroes without being identically $0$. All the zeroes of $f$ must be of finite order, otherwise $f$ is identically $0$ throughout the connected open set $\Omega$. Thus each $0$ is isolated. If we pick enough of them, say $z_1,\dots,z_K$ with order $m_1,\dots,m_K$, then we have $\sum_{m_i}>k$. \\~\\
+
+Because there are finitely many $z_i$ and each are isolated in the set of zeroes, we can pick a small radius $\delta>0$ so that the $K$ closed balls $\overline{B_\delta(z_i)}$ are pairwise disjoint sets lying in $\Omega$, and so that there are no zeroes of any type in any of the sets $\overline{B_\delta(z_i)}\setminus\{z_i\}$. Consider now the union of circles $$\sum=\bigcup_{i=1}^K\partial B_\delta(z_i)$$ By compactness of $\sum$ and continuity of $\abs{f}$, we have that $$\epsilon=\min_{z\in\sum}\abs{f(z)}>0$$ By uniform convergence of $f_n$ to $f$ on $\sum$, after deleting finitely many terms in the sequence $f_n$, we may assume that $\abs{f_n(z)-f(z)}<\epsilon$ for all $z\in\sum$. Rouche's theorem applied with $f$ and $f_n-f$ implies that each $f_n$ has also exactly $m_i$ zeroes in the ball $B_\delta(z_i)$ for each $i$. The total number of zeroes of each $f_n$ is strictly larger than $k$, giving a contradiction. 
+\end{proof}
+\end{thm}
+
+\begin{crl}{}{}  Let $\Omega\subseteq\C$ be open and connected. Let $f_n:\Omega\to\C$ be a sequence of injective holomorphic functions that converge locally uniformly to $f$. Then one of the following below are true. 
+\begin{itemize}
+\item $f$ is the zero function
+\item $f$ is injective
+\end{itemize}
+\end{crl}
+
+\subsection{Locally Uniformly Bounded}
+\begin{defn}{Locally Uniformly Bounded}{} Let $\Omega\subseteq\C$ be open. A sequence of functions $f_n:\Omega\to\C$ is said to be locally uniformly bounded if for all compact sets $K\subset\Omega$, $f_n|_K:K\to\C$ are uniformly bounded. 
+\end{defn}
+
+\begin{defn}{Uniformly Equicontinuous}{} Let $K\subseteq\C$ be compact. A sequence of functions $f_n:K\to\C$ is said to be uniformly equicontinuous if for all $\epsilon>0$, there exists $\delta>0$ such that for all $n\in\N$, and all $z,w\in K$ with $\abs{z-w}<\delta$, we have $$\abs{f_n(z)-f_n(w)}<\epsilon$$
+\end{defn}
+
+Recall the Ascoli-Arzela theorem: It says in particular that for $K\subset\C$ a compact set and $f_n:K\to\C$ uniformly bounded and uniformly equicontinuous, there exists a subsequence $f_{n_k}$ that converges uniformly to a continuous function $f:K\to\C$. 
+
+\begin{thm}{Montel's Theorem}{} Every locally uniformly bounded sequence of holomorphic functions has a locally uniformly convergent subsequence. 
+\end{thm}
+
+\subsection{The Final Stretch}
+\begin{lmm}{}{} Let $\Omega$ be open and simply connected. Let $g:\Omega\to\C\setminus\{0\}$ be holomorphic. Then there exists a holomorphic function $l:\Omega\to\C$ such that $g(z)=e^{l(z)}$ for all $z\in\Omega$. 
+\end{lmm}
+
+\begin{lmm}{Stretching Lemma}{} Suppose that $U\subset D$ is open and simply connected such that $0\in U$. Then there exists an injective holomorphic function $H:U\to D$ with $H(0)=0$ such that $\abs{H'(0)}>1$. 
+\end{lmm}
+
+\begin{thm}{Riemann Mapping Theorem}{} Let $\Omega\subset\C$ be any simply connected domain strictly smaller than $\C$. Then $\Omega$ is conformally equivalent to the unit disk $D$. \tcbline
+\begin{proof}
+Step 1: The domain $\Omega$ is conformally equivalent to some open subset of $D$. \\
+Notice first that if $\Omega$ is bounded then the result is trivial. In this case, the function $\varphi(z)=\frac{z}{R}$ where $\Omega\subset B_R(0)$ gives conformal equivalence. More generally, if $\Omega$ omits some small ball, we can find some $w_0\in\C$ and $\delta>0$ such that $B_\delta(w_0)\cap\Omega=\emptyset$, then we can simply set $\varphi(z)=\frac{\delta}{z-w_0}$. Consequently, it is sufficient to show that there exists an injective holomorphic function $\psi:\Omega\to\C\setminus B_\delta(w_0)$ for some $\delta>0$ and $w_0\in\C$. \\~\\
+
+Since $\Omega\neq\C$, after possibly translating $\Omega$ we may assume that $0\notin\Omega$. Applying corollary 5.1.7 in Complex Analysis 1 to the case $g(z)=z$ gives an injective holomorphic branch of the square root $\psi:\Omega\to\C$ defined by $$\psi(z)=e^{\frac{1}{2}l(z)}$$ so $\psi(z)^2=z$ for all $z\in\Omega$. We now show that essentially that the image of $\Omega$ under the square root function $\psi$ consists of less than half of $\C$. Indeed, if $w\in\psi(\Omega)$, then we cannot have $-w\in\psi(\Omega)$ because the only point that can map to either is $z=w^2=(-w)^2$. If we pick any $w_1\in\psi(\Omega)$, then the open mapping theorem implies that the image $\psi(\Omega)$ must contain some ball $B_\delta(w_1)$. Thus the ball $B_\delta(-w_1)$ is disjoint form the image $\psi(\Omega)$. By setting $w_0=-w-1$, we have that $\Omega$ is conformally equivalent to some open subset of $D$. \\~\\
+
+Intermediate step: \\
+We may assume now that $\Omega\subset D$. We may also assume $0\in\Omega$. Because if not, then we can always shrink $\Omega$ by a factor of two and the translate it. Consider the following set $$\mF=\{f:\Omega\to D\;|\;f\text{ is holomorphic and injective and }f(0)=0\}$$ The function $f(z)=z$ lies in $\mF$, so $\mF$ is non empty. Our goal will be done if $\mF$ contains at least one surjective function. \\~\\
+
+Step 2: If $f\in\mF$ is not surjective, then there exists a different function $F\in\mF$ with $\abs{f'(0)}<\abs{F'(0)}$. \\
+If $f\in\mF$ is not surjective, then we can apply the stretching lemma with $U=f(\Omega)$ to give an injective holomorphic function $H:U\to D$ with $H(0)=0$ and $\abs{H'(0)}>1$. We can then define an injective holomorphic function $F:\Omega\to D$ with $F(0)=0$ by $F=H\circ f$. The chain rule gives $F'(z)=H'(f(z))f'(z)$ so that $$\abs{F'(0)}=\abs{H'(0)}\abs{f'(0)}>\abs{f'(0)}$$ as required. \\~\\
+
+The Riemann mapping theorem will follow if can find $f\in\mF$ with maximal $\abs{f'(0)}$. \\~\\
+
+Step 3: There exists $f\in\mF$ such that $\abs{f'(0)}=\sup\{\abs{g'(0)}\;|\;g\in\mF\}=S$. \\
+The supremum is strictly positive since $g(z)=z$ lies in $\mF$. Moreover, we have that $S<\infty$ because if we pick $\delta$ small enough, so that $B_\delta(0)\subset\Omega$, then by Schwarz's lemma, we have that $\abs{g'(0)}\leq\frac{1}{\delta}$ for all $g\in\mF$. Let $f_n$ be a sequence in $\mF$ with $\abs{f_n'(0)}$ an increasing sequence in $S$. By Montel's theorem, we can pass to a subsequence in which is has local uniform convergence to a limit function $f:\Omega\to\C$. By Weierstrass convergence theorem, the limit $f$ is a holomorphic function. By the local uniform convergence we have $f(0)=\lim_{n\to\infty}f_n(0)=0$. \\~\\
+
+Again by Weierstrass convergence theorem, the derivatives $f_n'$ converge locally uniformly to $f'$, and in particular pointwise at $z=0$. This means that $\abs{f'(0)}=S$. Since $S$ is positive, $f$ cannot be constant and by Hurwitz's theorem, or its corollary, $f$ is injective. As $f$ is the locally uniform limit of the $f_n$, we have $\abs{f(z)}\leq 1$ for all $z\in\Omega$ so that $f(\Omega)\subset\overline{D}$. But by the maximum modulus principle, we must have $\abs{f(z)}<1$ for all $z\in\Omega$, meaning that $f(\Omega)\subset D$. Hence $f\in\mF$ and $\abs{f'(0)}=S$ and so we are done. 
+\end{proof}
+\end{thm}
+
+\pagebreak
+\section{Analytic Continuation}
+Given a holomorphic function with isolated singularities, we know from Taylor's theorem that for any open ball in the domain we can represent this function in a power series. We can then do this for each $z$ in the domain to obtain all kinds of different power series expressions of the same function on different domains. How will these Taylor's series interact? It is clear that on the intersection of the domains they will attain the same values. \\~\\
+
+Now given a Taylor series, does there exists a unique way of extending the Taylor series to the rest of $\C$? This leads to the concept of analytic continuation. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

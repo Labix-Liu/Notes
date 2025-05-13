@@ -1,0 +1,1034 @@
+\documentclass[a4paper]{article}
+
+\input{C:/Users/liula/Desktop/Latex/Headers V1.2.tex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Labix}
+\lhead{Representation Theory}
+\rfoot{\thepage}
+
+\title{Representation Theory}
+
+\author{Labix}
+
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+\end{abstract}
+\pagebreak
+\tableofcontents
+\pagebreak
+
+\pagebreak
+\section{Group Representations}
+\subsection{Matrix and Linear Representations}
+Recall the result stating that for $G=\langle S|R\rangle$ where $S$ is finite, if $H$ is a group with elements $h_1,\dots,h_n\in H$. Then there exists a homomorphism $\phi:G\to H$ satisfying $\phi(s_i)=h_i$ if and only if every relation $r\in R$ is also satisfied by the $h_i$. In this case $\phi$ is unique. 
+
+\begin{defn}{Matrix Representations}{} Let $G$ be a group and $F$ a field. A matrix representation is a homomorphism $$\rho:G\to\GL(n,F)$$ for some $n$. The degree of $\rho$ is the integer $n$. 
+\end{defn}
+
+In some sense we are enabling a geometric picture of a group by visualizing them through a subgroups consisting of matrices. And since matrices act on the plane $\R^n$, we can visualize what the group is doing through this. 
+
+\begin{lmm}{}{} Let $\rho:G\to GL(n,F)$ be a matrix representation. Let $A\in\GL(n,F)$. Then the homomorphism $\rho':G\to\GL(n,F)$ defined by $$\rho'(g)=A\rho(g)A^{-1}$$ is a matrix representation. \tcbline
+\begin{proof}
+We just have to show that $\rho'$ is a group homomorphism. We have that 
+\begin{align*}
+\rho'(gh)&=A\rho(gh)A^{-1}\\
+&=A\rho(g)\rho(h)A^{-1}\\
+&=A\rho(g)A^{-1}A\rho(h)A^{-1}\\
+&=\rho'(g)\rho'(h)
+\end{align*}
+Thus we are done. 
+\end{proof}
+\end{lmm}
+
+\begin{defn}{Equivalent Representations}{} Let $\rho_1:G\to\GL(n,F)$ and $\rho_2:G\to\GL(n,F)$ be two representations. We say that $\rho_1$ and $\rho_2$ are equivalent if $n=m$ and there exists a matrix $P\in\GL(n,F)$ such that $\rho_2(g)=P\rho_1(g)P^{-1}$ for all $g\in G$. 
+\end{defn}
+
+\begin{lmm}{}{} The equivalence of representations is an equivalence relation. 
+\end{lmm}
+
+\begin{lmm}{}{} Degree $1$ representations $\rho_1,\rho_2:G\to\GL(1,F)=F^\ast$ are equivalent if and only if they are equal. \tcbline
+\begin{proof}
+Suppose that $\rho_1,\rho_2$ are equivalent. Then we have that $\rho_1(g)=u\rho_2(g)u^{-1}$ for some $u\in F^\ast$. But $F$ is commutative so $\rho_1(g)=\rho_2(g)$. \\~\\
+If $\rho_1$ and $\rho_2$ are equal then they are clearly equivalent, 
+\end{proof}
+\end{lmm}
+
+\begin{defn}{Faithful Representations}{} A representation $\rho:G\to\GL(n,F)$ is said to be faithful if it is injective. 
+\end{defn}
+
+\begin{defn}{Linear Representations}{} Let $G$ be a group. A linear representation of $G$ is a pair $(V,\rho)$ where $V$ is a vector space and $\rho$ is a homomorphism $\rho:G\to\GL(V)$. The dimension of $V$ is called the degree of the representation. 
+\end{defn}
+
+Recalling that by choosing a basis, we can show that $\GL(V)\cong\GL(n,\C)$ if $\dim(V)=n$. Linear representations are often used for when we do not want to choose a basis and leave it arbitrary. In practical calculations matrix representations may be useful but in the abstract theory itself, using an arbitrary vector space is more useful. 
+
+\subsection{KG-Modules}
+\begin{defn}{Group Ring}{} Let $G$ be a group and $R$ a ring. The group ring $RG$ is the ring whose elements are the $R$-linear combinations $\sum_{g\in G}\lambda_gg$ for finitely many non-zero $\lambda_g\in R$, where operations are defined as follows: 
+\begin{itemize}
+\item Addition: $\left(\sum_{g\in G}\lambda_g\cdot g\right)+\left(\sum_{g\in G}\mu_g\cdot g\right)=\sum_{g\in G}(\lambda_g+\mu_g)\cdot g$
+\item Multiplication: $\left(\sum_{g\in G}\lambda_gg\right)\cdot\left(\sum_{h\in G}\mu_h h\right)=\sum_{g,h\in G}(\lambda_g\mu_h)h$
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{} Let $G$ be a group and $K$ a field. Then the group ring $KG$ is a $K$-vector space with basis $G$. Moreover, $KG$ is a $K$-algebra. 
+\end{lmm}
+
+There is a very rich structure in $KG$-modules. In ring and modules we know that algebras over a field can be seen as a vector space. Vector spaces can also be seen as a module over a field. 
+\begin{defn}{KG-Submodule}{} Let $G$ be a group, $K$ a field and $V$ a $KG$-module. We say that $W$ is a $KG$-submodule if the following are true. 
+\begin{itemize}
+\item $W$ is a $K$-subspace of $V$
+\item $g\cdot w\in W$ for all $w\in W$ and $g\in G$
+\end{itemize}
+\end{defn}
+
+We know that any $R$-submodule $N$ of $M$ is also an $R$-module. This property is inherited and thus $KG$-submodules are also $KG$-modules in its own right. 
+
+\begin{defn}{G-Linear Map}{} Let $V,W$ be $KG$-modules. We say that a linear transformation $\phi:V\to W$ is $G$-linear if $$\phi(g\cdot v)=g\cdot\phi(v)$$ for all $g\in G$ and $v\in V$. In other words, $\phi$ is $G$-equivariant. Denote the set of all $G$-morphisms by $$\Hom_G(V,W)$$
+\end{defn}
+
+\begin{lmm}{}{} Let $\pi:V\to W$ be a morphism of $KG$-modules. Then $\ker(\pi)$ and $\im(\pi)$ are $KG$-submodules of $V$ and $W$ respectively. 
+\end{lmm}
+
+\subsection{Equivalence Between KG-Modules and Representations}
+\begin{defn}{Linear Action}{} Let $G$ be a group and $V$ a vector space. A linear action of $G$ on $V$ is a map $\gamma:G\times V\to V$ such that the following holds: 
+\begin{itemize}
+\item Identity: $\gamma(1_G,v)=v$ for all $v\in V$
+\item Associativity: $\gamma(hg,v)=\gamma(h,\gamma(g,v))$ for all $g,h\in G$, $v\in V$
+\item Linearity on $V$: $\gamma(g,u+v)=\gamma(g,u)+\gamma(g,v)$ for all $g\in G$, $u,v\in V$
+\item Linearity on $V$: $\gamma(g,av)=a\gamma(g,v)$ for all $g\in G$ and $v\in V$ and $a\in K$
+\end{itemize}
+This means that $G$ acts on $V$ and that $\rho(g):V\to V$ defined by $v\mapsto\gamma(g,v)$ is a linear map. 
+\end{defn}
+
+\begin{prp}{}{} Let $G$ be a group. If $V$ is a $KG$-module then the action of $G$ on $V$ is a linear action. Conversely, if $V$ is a $K$-vector space with a linear action $G$ then $V$ is a $KG$-module. 
+\end{prp}
+
+There is also a 1-1 correspondence between linear representations and $KG$-modules. 
+
+\begin{thm}{}{} Let $G$ be a group. Then linear representations of $G$ and $KG$-modules are the same in the following sense. 
+\begin{itemize}
+\item If $\rho:G\to\GL(V)$ is a linear representation, $\rho$ gives rise to a $KG$-module structure on $V$, where the composition law $KG\times V\to V$ is defined by $$\left(\sum_{g\in G}\lambda_gg,v\right)\mapsto\left(\sum_{g\in G}\lambda_gg\right)\cdot v=\sum_{g\in G}\lambda_g\rho(g)(v)$$
+\item Conversely, given a $KG$-module $V$, the map $\rho_V:G\to\GL(V)$ defined by $$g\mapsto\rho_V(g):V\to V$$ where $\rho_V(g)$ is defined by $\rho_V(g)(v)=g\cdot v$ is in fact a linear representation. 
+\end{itemize}
+\end{thm}
+
+One can think of the $KG$-module action on $V$ as an extension of the $K$-action on $V$. 
+
+\begin{lmm}{}{} Two representations $\rho_1:G\to\GL(V_2)$ and $\rho_2:G\to\GL(V_2)$ are equivalent if and only if $V_1\cong V_2$ as $KG$-modules. 
+\end{lmm}
+
+Essentially, one can think of $KG$-modules being a vector space (module) over $K$ together with a group action. Thus later when we encounter $KG$-submodules and morphisms we can simply regard them as vector subspaces (submodules) and linear transformations that respect the group action. 
+
+\begin{prp}{}{} Let $G$ be a group and let $\rho:G\to\text{GL}(V)$ be a representation. Suppose that $U\subseteq V$ is a subrepresentation of $\rho$. Then $$\overline{\rho}:G\to\text{GL}(V/U)$$ defined by $\rho(g)(v+U)=gv+U$ is also a representation of $G$. \tcbline
+\begin{proof}
+By the corresponding between $KG$-modules and representations of $G$, $V$ and $U$ are both $KG$-module and in particular, $U$ is a $KG$-submodule of $V$. We have seen from Rings and Modules that $V/U$ is also a $KG$-module. Thus $V/U$ together $\overline{\rho}$ is a representation of $G$. 
+\end{proof}
+\end{prp}
+
+\subsection{Irreducible Representations}
+Recall the notion of an irreducible module. 
+
+\begin{defn}{Irreducible Representations}{} Let $V$ be a $KG$-module. We say that $V$ is irreducible if $V$ is a simple $KG$-module. 
+\end{defn}
+
+Equivalently, a representation $\rho:G\to GL(V)$ is irreducible if there are no proper, non-trivial subspace of $V$ that is invariant under the action of $G$. 
+
+\begin{thm}{Schur's Lemma III}{} Let $G$ be a group. Let $V$ be an irreducible $\C G$-module of finite degree. Let $\pi:V\to V$ be a $G$-linear map. Then $\pi=\lambda I_V$ for some $\lambda\in\C$. \tcbline
+\begin{proof}
+Since $\pi$ is a $\C$-linear map from an irreducible module, by Schur's lemma in Rings and Modules, either $\pi=0$ or $\pi$ is an isomorphism. Since $V$ is finite dimensional, $\pi$ has an eigenvalue $\lambda\in\C$. Let $u\in V$ be the corresponding eigenvector. Define $\pi':V\to V$ by $\pi'(v)=\pi(v)-\lambda v$. It is clear that $\pi'$ is a linear transformation. Moreover, for $g\in G$, we have that 
+\begin{align*}
+\pi'(g\cdot v)&=\pi(g\cdot v)-\lambda(g\cdot v)\\
+&=g\cdot\pi(v)-g\cdot(\lambda v)\\
+&=g\cdot(\pi(v)-\lambda v)\\
+&=g\cdot\pi'(v)
+\end{align*}
+Thus $\pi'$ is a $G$-linear map. By Schur's lemma again, we must have that $\pi'$ is $0$ or an isomorphism. But $\pi'(u)=0$ hence $\pi'$ is the $0$ map. Thus $\pi(v)=\lambda v$ for all $v\in V$. 
+\end{proof}
+\end{thm}
+
+\begin{lmm}{The Averaging Trick}{} Let $G$ be a finite group and $K$ a field. Suppose that $\abs{G}\cdot 1_K\neq 0$. Let $V,U$ be $KG$-modules and let $\pi:V\to U$ be a linear transformation. Define $\pi':V\to U$ by $$\pi'(v)=\frac{1}{\abs{G}}\sum_{g\in G}g\cdot\pi(g^{-1}\cdot v)$$ Then $\pi'$ is a morphism of $KG$-modules. \tcbline
+\begin{proof}
+Firstly, since each $g\in G$ acts on $V$ as a linear transformation, $g\pi g^{-1}$ is also a linear transformation. Now we want to show that $\pi'$ preserves the action. Now note that the action of $g$ on $G$ is transitive. This means that $G=\{hg\in G\;|\;g\in G\}$ for any fixed $h\in G$. We have that 
+\begin{align*}
+\pi'(h\cdot v)&=\frac{1}{\abs{G}}\sum_{g\in G}g\cdot\pi'(g^{-1}h\cdot v)\\
+&=\frac{1}{\abs{G}}\sum_{k\in G}hk^{-1}\cdot\pi'(k\cdot v)\tag{$k=g^{-1}h$}\\
+&=h\left(\frac{1}{\abs{G}}\sum_{u\in G}u\cdot\pi'(u^{-1}\cdot v)\right)\tag{$k^{-1}=u$}\\
+&=h\pi(v)\tag{$k^{-1}=u$}
+\end{align*}
+Hence we conclude. 
+\end{proof}
+\end{lmm}
+
+Recall the notion of semisimple modules: An $R$-module is semisimple if it is the direct sum of simple submodules. The following is a version of the Maschke's theorem proved in Rings and Modules. (Edit: Rings and Modules Maschke's theorem is not the most general version)
+
+\begin{thm}{Maschke's Theorem}{} Let $G$ be a finite group. Let $K$ be a field such that $\abs{G}\cdot 1_K\neq 0_K$. Then the group algebra $KG$ is semisimple. \tcbline
+\begin{proof}
+Suppose that $KG$ is semisimple. Consider $K$ as the trivial $KG$-module defined by $g\cdot x=x$ for all $x\in K$ and $g\in G$ and extend it by linearity. Then there is a homomorphism of $KG$-modules $\psi:KG\to\F$ defined by $$\psi\left(\sum_{g\in G}\lambda_gg\right)=\sum_{g\in G}\lambda_g$$ Since $KG$ is semisimple, $\ker(\psi)$ has a direct complement $L$. By proposition 2.2.2, and the first isomorphism theorem for modules, we have that $L\cong K$. Since $L\cong K$, $hx=x$ for all $h\in G$. Thus $$\sum_{g\in G}\lambda_g(hg)=\sum_{g\in G}\lambda_gg$$ for all $h\in G$. Thus all $\lambda_g$ are equal. Hence $L=\cong Kz$ where $z=\sum_{g\in G}g$. If $n=\abs{G}$ is finite and $p\;|\;n$, then $\psi(z)=n=0_K$ and $\psi:L\to K$ is not surjective, contradicting proposition 2.2.2. Thus $p$ does not divide $n$. \\~\\
+
+By Artin-Wedderburn theorem, it suffices to show that if $V$ is a $KG$-module, then $V$ is semisimple. So suppose that $V$ is an $KG$-module. Let $U$ be a $KG$-submodule of $V$. Then $U$ is a $K$-vector subspace of $V$ hence there exists a projection map $\pi:V\to U$. Consider the map $\varphi:V\to U$ defined by $$\varphi(x)=\frac{1}{\abs{G}}\sum_{g\in G}g\cdot\pi(g^{-1}\cdot x)$$ By the averaging trick, $\varphi$ is a morphism of $KG$-modules. \\~\\
+
+We claim that $\varphi:V\to U$ is a projection. It is clear that $\varphi$ is a linear transformation. Let $u\in U$. We have that 
+\begin{align*}
+\varphi(u)&=\frac{1}{\abs{G}}\sum_{g\in G}g\cdot\pi(g^{-1}\cdot u)\\
+&=\frac{1}{\abs{G}}\sum_{g\in G}g\cdot(g^{-1}\cdot u)\tag{$\pi$ is a projection}\\
+&=\frac{1}{\abs{G}}\sum_{g\in G}u\tag{$\pi$ is a projection}\\
+&=u
+\end{align*}
+Now it is clear that $V=U\oplus\ker(\varphi)$ as $K$-vector spaces. We want to show that this decomposition extends to a decomposition of $KG$-submodules. But 1.2.5 proves that $\ker(\varphi)$ is a $KG$-submodule of $V$. Hence $V$ is completely reducible and so that $V$ is semisimple. 
+\end{proof}
+\end{thm}
+
+This is great. Maschke's theorem says that every $\C G$-module is irreducible. 
+
+\begin{crl}{}{} Let $V\neq 0$ be a $KG$-module of finite degree, where $G$ is a finite group and $\abs{G}\cdot 1_K\neq 0$. Then there exists irreducible submodules $U_1,\dots U_k$ such that $$V=U_1\oplus\dots\oplus U_k$$ \tcbline
+\begin{proof}
+This is true since $V$ is a non-trivial $KG$-module and $KG$-modules are semisimple. 
+\end{proof}
+\end{crl}
+
+Character theory will then be to show that this decomposition of $KG$-submodules is essentially unique assuming that $K=\C$. 
+
+\subsection{Regular and Permutation Representations}
+Given a group $G$, Cayley's theorem tells us that $G$ is isomorphic to a permutation group and hence we can think of every group $G$ as a permutation group on any set $X$ with $\abs{G}$ number of elements. In particular, for any group $G$ there will always be a representation where the vector space has dimension $\abs{G}$. 
+
+\begin{defn}{Regular Representations}{} Let $G$ be a group. Let $V$ be a vector space of dimension $\abs{G}$ with basis $E=\{e_1,\dots,e_n\}$ and that $G$ acts on the basis by $\cdot:G\times E\to E$. Define the regular representation of $G$ to be the group homomorphism $\text{reg}:G\to GL(V)$ defined as $$\text{reg}(g)\left(\sum_{i=1}^na_ie_i\right)=\sum_{i=1}^na_i(g\cdot e_i)$$
+\end{defn}
+
+We can generalize regular representations in the form of group actions. 
+
+\begin{defn}{Permutation Representation}{} Let $G$ be a finite group acting on a finite set $X$. Let $\C X$ be the $\C$-vector space with basis $X$. Define the permutation representation of $G$ to be $$\rho:G\to\text{GL}(\C X)$$ where for $g\in G$, $\rho(g):\C X\to\C X$ is the map defined on the basis elements $x\in X$ by $\rho(g)(x)=g\cdot x$ and then extending it $\C$-linearly. 
+\end{defn}
+
+If $X=G$ and $G$ acts on $X=G$ by left multiplication, then one can easily see that we recover the notion of a regular representation from permutation representations. 
+
+\pagebreak
+\section{Character Theory}
+Recall that given a representation, there exists irreducible subrepresentations that break down the given representation. Our goal is now to find all describe all irreducible representations and to find the multiplicity of each irreducible subrepresentation lying in a given representation. 
+
+\subsection{Trace of a Matrix}
+\begin{defn}{Trace of a Matrix}{} Let $A\in M_{n\times n}(K)$ for $K=\R$ or $\C$ where we write $$A=\begin{pmatrix}
+a_{11} & \cdots & a_{1n}\\
+\vdots & \ddots & \vdots\\
+a_{n1} & \cdots & a_{nn}
+\end{pmatrix}$$ Define the trace of $A$ to be $$\text{tr}(A)=\sum_{i=1}^na_{ii}$$ which is the sum of the diagonal entries of $A$. 
+\end{defn}
+
+\begin{prp}{}{} Let $A\in M_{n\times n}(K)$ for $K=\R$ or $\C$. Then the trace of $A$ is the coefficient of $x^{n-1}$ in the characteristic polynomial $c_A(x)$ and the determinant is the constant term. 
+\end{prp}
+
+Recall that two matrices $A$ and $B$ are said to be similar if there exists some invertible matrix $P$ such that $A=P^{-1}BP$. In particular this means that $A$ and $B$ must be square matrices of the same dimensions. 
+
+\begin{lmm}{}{} Let $A,B$ be similar $d\times d$ matrices. Then $A$ and $B$ have the same trace. \tcbline
+\begin{proof}
+Since similar matrices have the same characteristic polynomial and that the trace of a matrix is the coefficient of the characteristic polynomial at the $x^{d-1}$ term, we have that $A$ and $B$ have the same trace. 
+\end{proof}
+\end{lmm}
+
+\begin{lmm}{}{} Let $A\in\GL(d,\C)$ such that $A^n=I$ for some $n\in\N\setminus\{0\}$. Then the following are true regarding the trace of $A$. 
+\begin{itemize}
+\item $\abs{\text{tr}(A)}\leq d$
+\item $\abs{\text{tr}(A)}=d$ if and only if $A=\theta I_d$ where $\theta$ is some $n$th root of unity. 
+\item $\text{tr}(A)=d$ if and only if $A=I$
+\item $\text{tr}(A^{-1})=\overline{\text{tr}(A)}$
+\end{itemize} \tcbline
+\begin{proof}~\\
+\begin{itemize}
+\item By lemma $1.2.2$, there is some matrix $Q$ and $n$th roots of unity $\theta_1,\dots,\theta_d$ such that $Q^{-1}AQ=\text{diag}(\theta_1,\dots,\theta_d)$. It follows that $\text{tr}(A)=\text{tr}(Q^{-1}AQ)=\sum_{i=1}^d\theta_i$ and that $$\abs{\text{tr}(A)}\leq\sum_{i=1}^d\abs{\theta_i}$$
+\item Suppose that $\abs{\text{tr}(A)}=d$ Then this means that $\abs{\text{tr}(A)}=\sum_{i=1}^d\abs{\theta_i}$. This happens precisely when each $\theta_i$ have the same angle, which means they are positive multiples of each other. Since $\abs{\theta_1}=1$, we have $\theta_1=\dots=\theta_d$. Thus $A=\theta I_d$ for some $\theta$ an $n$th root of $1$. \\~\\
+Conversely, If $A=\theta I_d$ then $\text{tr}(A)=d\cdot\theta$ and thus we are done. 
+\item It follows immediately from the second item
+\item We have that $$Q^{-1}A^{-1}Q=(Q^{-1}AQ)^{-1}=\text{diag}(\theta_1^{-1},\dots,\theta_d^{-1})$$ This means that $\text{tr}(A^{-1})=\sum_{i=1}^d\theta_i^{-1}$. But since $\theta_i$ is a root of unity, we have that $\overline{\theta_i}=\theta_i^{-1}$. Thus we are done. 
+\end{itemize}
+\end{proof}
+\end{lmm}
+
+\subsection{Characters of a Representation}
+\begin{defn}{Character of a Representation}{} Let $\rho:G\to\GL(d,\C)$ be a degree $d$ complex matrix representation. Define the character of $\rho$ as the function $\chi_\rho:G\to\C$ defined by $$\chi_\rho(g)=\text{tr}(\rho(g))$$
+\end{defn}
+
+\begin{lmm}{}{} Equivalent matrix representations have the same character. \tcbline
+\begin{proof}
+Suppose $\rho_1,\rho_2:G\to\GL(d,\C)$ are equivalent matrix representations. Then $\rho_1,\rho_2$ are similar for each $g$ and so they have the same trace. Thus they have the same characteristic. 
+\end{proof}
+\end{lmm}
+
+In fact the inverse of this lemma is also true, which we will see later in the notes. This makes characteristics a powerful invariant for representations. 
+
+\begin{prp}{}{} Let $G$ be a finite group. Let $\rho:G\to\GL(d,\C)$ be a complex matrix representation. Then the following are true regarding the character $\chi$ of the representation. 
+\begin{itemize}
+\item $\abs{\chi(g)}\leq d$ for all $g$
+\item $\chi(g)=d$ if and only if $\rho(g)=I_d$
+\item $\chi(g^{-1})=\overline{\chi(g)}$ for all $g\in G$. 
+\item $\chi(hgh^{-1})=\chi(g)$ for all $g,h\in G$
+\end{itemize}
+\end{prp}
+
+In particular, $\chi$ is invariant under conjugacy classes. This means that we can think of $\chi$ as class functions instead. Class functions are functions that are constant on conjugacy classes so that we can think of their input are conjugacy classes. 
+
+\begin{lmm}{}{} Let $V$ be a $\C G$-module of finite degree. Suppose $V=U\oplus W$ where $U$ and $W$ are submodules. Then $$\chi_V=\chi_U+\chi_W$$
+\end{lmm}
+
+\begin{defn}{Irreducible Character}{} Let $G$ be a finite group. A character is said to be irreducible if it is the character of an irreducible $\C G$-module. 
+\end{defn}
+
+\begin{lmm}{}{} Let $V=U_1\oplus\dots\oplus U_k$ be a decomposition of a $\C G$-module into irreducible $\C G$-submodules. Then $$\chi_V=\sum_{i=1}^k\chi_{U_i}$$
+\end{lmm}
+
+Thus to compute the character of a $\C G$-module, one only has to compute the character of the submodules. 
+
+\begin{defn}{Set of all Irreducible Characters of a Group}{} Let $G$ be a finite group. Denote the set of all complex irreducible representations of $G$ by $\hat{G}$. 
+\end{defn}
+
+\subsection{Orthogonality Relations of Characters}
+\begin{defn}{Set of Functions from Group to $\C$}{} Let $G$ be a finite group. Denote $$\C[G]=\{\phi:G\to\C\;|\;\phi\text{ is a map of sets }\}$$ the set of all functions from $G$ to $\C$. 
+\end{defn}
+
+\begin{lmm}{}{} Let $V$ be a finite dimensional irreducible $\C G$-module. Let $f:V\to V$ be a $G$-linear map. Define $$\tilde{f}(v)=\frac{1}{\abs{G}}\sum_{g\in G}g\cdot(f(g^{-1}\cdot v))$$ Then we must have that $$\tilde{f}=\frac{\text{tr}(f)}{\dim(V)}I_V$$ \tcbline
+\begin{proof}
+It is clear by the averaging trick that $\tilde{f}$ is a $G$-linear map. By Schur's lemma III, we conclude that $\tilde{f}=\lambda I_V$ for some $\lambda$. Now we have that 
+\begin{align*}
+\text{tr}\left(\frac{1}{\abs{G}}\sum_{g\in G}g(f(g^{-1}))\right)&=\text{tr}(\lambda I_V)\\
+\frac{1}{\abs{G}}\sum_{g\in G}\text{tr}\left(g(f(g^{-1}))\right)&=\text{tr}(\lambda I_V)\\
+\frac{1}{\abs{G}}\sum_{g\in G}\text{tr}(f)&=\lambda\cdot\dim(V)\\
+\text{tr}(f)&=\lambda\cdot\dim(V)
+\end{align*}
+We conclude that $\tilde{f}=\lambda I_V=\frac{\text{tr}(f)}{\dim(V)}I_V$. 
+\end{proof}
+\end{lmm}
+
+\begin{thm}{}{} Let $G$ be a finite group. Then $\C[G]$ is an inner product space over $\C$ where the Hermitian product $\langle\;,\;\rangle:\C[G]\times \C[G]\to\C$ is defined by $$\langle \phi,\psi\rangle=\frac{1}{\abs{G}}\sum_{g\in G}\phi(g)\overline{\psi(g)}$$
+Moreover, $\dim_\C(\C[G])=\abs{G}$. \tcbline
+\begin{proof}
+It is clear that $\langle-,-\rangle$ is linear in the first variable and anti-linear in the second variable. We also have that $$\overline{\langle\phi,\psi\rangle}=\overline{\frac{1}{\abs{G}}\sum_{g\in G}\phi(g)\overline{\psi(g)}}=\frac{1}{\abs{G}}\sum_{g\in G}\psi(g)\overline{\phi(g)}=\langle\psi,\phi\rangle$$ We also have that $$\langle\phi,\phi\rangle=\frac{1}{\abs{G}}\sum_{g\in G}\abs{\phi(g)}^2>0$$ Thus $\C[G]$ is an inner product space. \\~\\
+
+I claim that a basis of $\C[G]$ is given by $\delta_g:G\to\C$ which is the Kronecker-delta function. It is clear that they are linearly independent for varying $g$ because if $\sum_{g\in G}\lambda_g\delta_g=0$, then applying $g$ to both sides gives $\lambda_g=0$. Moreover, any $\psi:G\to\C$ assigns each $g\in G$ to a complex number $\psi(g)$. Then $$\psi=\sum_{g\in G}\psi(g)\delta_g$$ shows that $\psi$ can be decomposed into linear combinations of the Kronecker-delta functions. 
+\end{proof}
+\end{thm}
+
+In particular, since $\dim_{\C}(\C[G])$ is $\abs{G}$ and $\C G$ is also a vector space of dimension $G$, this means that $$\C[G]\cong\C G$$
+
+\begin{thm}{}{} Let $U,V$ be finite dimensional $\C G$-modules. Then $$\langle\chi_U,\chi_V\rangle=\begin{cases}
+1 & \text{ if }U\sim V\\
+0 & \text{ otherwise }
+\end{cases}$$
+Moreover, $U\sim V$ if and only if $\chi_U=\chi_V$. \tcbline
+\begin{proof}
+We have that 
+\begin{align*}
+\langle\chi_U,\chi_V\rangle&=\frac{1}{\abs{G}}\sum_{g\in G}\chi_U(g)\chi_V(g^{-1})\\
+&=\frac{1}{\abs{G}}\sum_{g\in G}\left(\sum_i(\rho_U(g))_{ii}\sum_j(\rho_V(g^{-1}))_{jj}\right)\\
+&=\sum_{i,j}\left(\frac{1}{\abs{G}}\sum_{g\in G}\rho_U(g)_{ii}\rho_V(g^{-1})_{jj}\right)\\
+&=\sum_{i,j}\left(\frac{1}{\abs{G}}\sum_{g\in G}e_i^T\rho_U(g)_{ii}e_ie_j^T\rho_V(g^{-1})_{jj}e_j\right)\\
+&=\sum_{i,j}e_i^T\left(\frac{1}{\abs{G}}\sum_{g\in G}\rho_U(g)_{ii}E_{i,j}\rho_V(g^{-1})_{jj}\right)e_j
+\end{align*}
+Let $\widetilde{E_{i,j}}=\frac{1}{\abs{G}}\sum_{g\in G}\rho_U(g)_{ii}E_{i,j}\rho_V(g^{-1})_{jj}$. Now $\widetilde{E_{i,j}}$ is a linear transformation $V\to U$ and hence lies in $\Hom(V,U)$. Moreover, $g\cdot\widetilde{E_{i,j}}=\widetilde{E_{i,j}}$ hence $\widetilde{E_{i,j}}\in\Hom_G(V,U)$. \\~\\
+
+If $U$ is not similar to $V$, then by Schur's lemma the $G$-morphism $\widetilde{E_{i,j}}:V\to U$ is $0$. If $U\sim V$, then $\chi_U=\chi_V$. Then it suffices to prove the case for when $U=V$ by lemma 1.2.6. Then we have that $\widetilde{E_{i,j}}$ is an isomorphism by Schur's lemma and hence can only be a diagonal matrix since it is a $G$-morphism. Then we have that 
+\begin{align*}
+\sum_{i,j}e_i^T\widetilde{E_{i,j}}e_j&=\sum_ie_i^T\widetilde{E_{i,i}}e_i\\
+&=\text{tr}(\widetilde{E_{i,j}})\\
+&=\dim(V)\frac{1}{\dim(V)}\text{tr}(E_{i,i})\tag{2.3.2}\\
+&=1
+\end{align*}~\\
+
+It remains to show that $U\sim V$ if and only if $\chi_U=\chi_V$. If $U\sim V$, then 2.2.2 implies that $U$ and $V$ have the same characteristic. Now suppose that $U$ and $V$ have the same characteristic. Let $W_1,\dots,W_k$ be a complete list of pairwise non-isomorphic irreducible $\C G$-modules. By Maschke's theorem, we have that $U\sim\bigoplus_{i=1}^k(W_i)^{\oplus n_i}$ and $V\sim\bigoplus_{i=1}^k(W_i)^{\oplus m_i}$. By lemma 2.2.6, we have that $\chi_U=\sum_{i=1}^kn_i\chi_{W_i}$ and $\chi_V=\sum_{i=1}^km_i\chi_{W_i}$. By the above theorem, the $\chi_{W_i}$ are linearly independent. By assumption, $\chi_U=\chi_V$ implies that $n_i=m_i$. Hence we conclude that $$U\sim\bigoplus_{i=1}^k(W_i)^{\oplus n_i}=\bigoplus_{i=1}^k(W_i)^{\oplus m_i}\sim V$$ and so we are done. 
+\end{proof}
+\end{thm}
+
+This shows that $\chi$ is a complete invariant for $\C G$-modules. 
+
+\begin{lmm}{}{} Let $U$ be a finite dimensional $\C G$-module. Then $U$ is irreducible if and only if $\langle\chi_U,\chi_U\rangle=1$. \tcbline
+\begin{proof}
+Suppose that $U$ is irreducible. Then trivially $U\sim U$ hence by 2.3.4 we conclude that $\langle\chi_U,\chi_U\rangle=1$. Now suppose that $\langle\chi_U,\chi_U\rangle=1$ and let $U\sim\bigoplus_{i=1}^k(W_k)^{\oplus n_i}$ where $W_1,\dots,W_k$ is a complete list of pairwise non-isomorphic irreducibles. Then $\chi_U=\sum_{i=1}^kn_i\chi_{W_i}$. We have that 
+\begin{align*}
+\langle\chi_U,\chi_U\rangle&=\langle\sum_{i=1}^kn_i\chi_{W_i},\sum_{i=1}^kn_i\chi_{W_i}\rangle\\
+&=\sum_{i,j=1}^kn_in_j\langle\chi_{W_i},\chi_{W_j}\rangle\\
+&=\sum_{i=1}^k(n_i)^2
+\end{align*}
+By assumption, this is equal to $1$. But the sum if strictly positive and hence there exists $j$ such that $n_j=1$ and $n_i=0$ for all $i\neq j$. Hence $U\sim W_j$ and so $U$ is irreducible. 
+\end{proof}
+\end{lmm}
+
+\subsection{Multiplicity and the Isotypic Decomposition}
+\begin{defn}{Multiplicity}{} Let $G$ be a finite group. Let $V$ be a non-trivial finite dimensional $\C G$-module. Suppose that $V$ decomposes into $V=\bigoplus_{i=1}^rU_i$ where each $U_i$ is irreducible. Let $U$ be an irreducible $\C G$-module. Define the multiplicity of $U$ in $V$ as $$\text{mult}_U(V)=\abs{\{U_i\;|\;U\cong U_i\}}$$
+\end{defn}
+
+Intuitively multiplicity means that the number of isomorphic copies of $U$ lying inside $V$, for each irreducible $U$. 
+
+\begin{lmm}{}{} Let $G$ be a finite group. Let $V$ be a non-trivial finite dimensional $\C G$-module. Let $U$ be an irreducible $\C G$-module. Then we have that $$\text{mult}_U(V)=\langle\chi_U,\chi_V\rangle$$ \tcbline
+\begin{proof}
+Let $V=\bigoplus_{i=1}^rU_i$ where each $U_i$ is irreducible. Let $W_1,\dots,W_k$ be a complete list of pairwise non-isomorphic irreducibles. Then each $U_i$ is isomorphic to $W_j$ for some $1\leq j\leq k$. We have that $$\chi_V=\sum_{i=1}^r\chi_{U_i}=\sum_{j=1}^kn_j\chi_{W_j}$$ where $n_j=\text{mult}_{W_j}(V)$. We have that 
+\begin{align*}
+\langle\chi_U,\chi_V\rangle&=\langle\chi_U,\sum_{j=1}^kn_j\chi_{W_j}\rangle\\
+&=\sum_{j=1}^kn_j\langle\chi_U,\chi_{W_j}\rangle
+\end{align*}
+Using 2.3.4, the terms in the sum is non-zero if and only if $U$ is isomorphic to $W_j$. Each $W_1,\dots,W_k$ are distinct and hence $U$ is only isomorphic to exactly one of $W_j$. In this case the sum becomes $n_j=\text{mult}_{W_j}(V)=\text{mult}_{U}(V)$. 
+\end{proof}
+\end{lmm}
+
+Thus given a decomposition $$U\sim\bigoplus_{i=1}^k(W_i)^{\oplus n_i}$$ of a $\C G$-module into a complete list of irreducible $\C G$-modules, $\text{mult}_{W_i}(U)$ is simply the exponent $n_i$ in the decomposition. In particular, the above lemma says that $$n_i=\langle\chi_U,\chi_{W_i}\rangle$$
+
+\begin{lmm}{}{} Let $V$ be a finite dimensional $\C G$-module. Let $W_1,\dots, W_k$ be the complete list of pairwise non-isomorphic irreducible $\C G$-submodules of $V$. Then $$\sum_{i=1}^k(\dim(W_i))^2=\abs{G}$$
+\end{lmm}
+
+Recall the Artin-Wedderburn theorem from Rings and Modules, which states that if $R$ a ring considered as a left $R$-module that is semisimple, then one can decompose $R$ into the direct product of matrix rings over division rings. The following theorem applies the result to $\C G$ considered as a $\C G$-module over itself. We will give an independent proof of the result. 
+
+\begin{thm}{Result of Artin-Wedderburn Theorem}{} Let $G$ be a finite group. Let $V$ be a finite dimensional $\C G$-module. Let $W_1,\dots, W_k$ be the complete list of pairwise non-isomorphic irreducible $\C G$-submodules of $V$. Let $$f:\C G\to\text{End}(W_1)\times\cdots\times\text{End}(W_k)$$ be defined by $f(g)=(\rho_{W_1}(g),\dots,\rho_{W_k}(g))$ and extended linearly. Then $f$ is a $\C$-algebra isomomorphism. \tcbline
+\begin{proof}
+It is clear that $f$ is a $G$-homomorphism. Moreover, $f$ sends identity to identity. Write $W=\text{End}(W_1)\times\cdots\times\text{End}(W_k)$. Now I claim that $f$ is a ring homomorphism. This is because
+\begin{align*}
+f\left(\left(\sum_{g\in G}\alpha_gg\right)\left(\sum_{h\in G}\beta_hh\right)\right)&=f\left(\sum_{g,h\in G}\alpha_g\beta_hgh\right)\\
+&=\sum_{g,h\in G}\alpha_g\beta_hf(gh)\\
+&=\sum_{g,h\in G}\alpha_g\beta_h\left(\rho_W(gh)f(1)\right)\\
+&=\sum_{g,h\in G}\alpha_g\beta_h\left(\rho_W(gh)1_W\right)\\
+&=\sum_{g,h\in G}\alpha_g\beta_h\left(\rho_W(g)1_W\right)\cdot_W(\rho_V(h)1_W)\\
+&=\left(\sum_{g\in G}\alpha_g\rho_W(g)1_W\right)\cdot_W\left(\sum_{h\in G}\beta_h\rho_W(h)1_W\right)\tag{$W$ is a $\C G$-module}\\
+&=\left(\sum_{g\in G}\alpha_g\rho_W(g)f(1)\right)\cdot_W\left(\sum_{h\in G}\beta_h\rho_W(h)f(1)\right)\\
+&=\left(\sum_{g\in G}\alpha_gf(g\cdot 1)\right)\cdot_W\left(\sum_{h\in G}\beta_hf(h\cdot 1)\right)\\
+&=f\left(\sum_{g\in G}\alpha_gg\right)\cdot_Wf\left(\sum_{h\in G}\beta_hh\right)\\
+\end{align*}
+Thus $f$ is a $\C$-algebra homomorphism. By the above lemma, we have that 
+\begin{align*}
+\dim(\C G)&=\abs{G}\\
+&=\sum_{i=1}^k(\dim(W_i))^2\\
+&=\dim(W)
+\end{align*}
+Hence we just have to show that $f$ is injective. Suppose that $a=\sum_{g\in G}\alpha_gg\in\ker(f)$. Then $\rho_{W_i}(a)=0$ for all $i$. Therefore $\rho_{W_i}(a)(w)=0$ for all $w\in W$. Since $W_1,\dots,W_k$ is a complete list of pairwise non-isomorphic irreducibles, by Maschke's theorem, for every $V$ a $\C G$-module, we must have $\rho_V(a)=0$. In particular, for $V=\C G$ we have that $a\cdot_{\C G}b=0$ for all $b\in\C G$. By choosing $b=1$, we conclude that $a=0$. Thus $\ker(f)=0$ and so we conclude. 
+\end{proof}
+\end{thm}
+
+\begin{prp}{}{} Let $G$ be a group. Denote $\text{Cl}_G$ the set of conjugacy classes in $G$. Then $$\dim(Z(\C G))=\abs{\text{Cl}_G}$$
+\end{prp}
+
+\begin{thm}{}{} Let $G$ be a finite group. Then $$\abs{\hat{G}}=\abs{\text{Cl}_G}$$ Moreover, the characters of the irreducible representations form an orthonormal basis of the vector space $\C[\text{Cl}_G]$. \tcbline
+\begin{proof}
+By 2.4.4, there is an isomorphism $\C G\cong\text{End}_{W_1}\times\cdots\text{End}_{W_k}$. Now since $Z(\text{End}_{W_i})=\C I_{W_i}$, we have that $$Z(\text{End}_{W_1})\times\cdots\times Z(\text{End}_{W_k})=Z(\C G)$$ Thus $Z(\C G)=k$. By 2.4.5, we conclude that $k=\abs{\text{Cl}_G}$. \\~\\
+\end{proof}
+\end{thm}
+
+\begin{defn}{Isotypic Components}{} Let $V$ be a finite dimensional $\C G$-module. Let $W_l$ be an irreducible representation of $G$. We call the spaces $$V_l=\bigoplus_{j=1}^{\text{mult}_{W_l}(V)}U_{l,j}$$ given above where $U_{l,j}\cong W_l$ the isotypic components of $V$. \\~\\
+
+A representation is said to be isotypic if it contains only one non-zero isotypic component. 
+\end{defn}
+
+While the decomposition of $V$ into irreducible subrepresentations is not unique, the isotypic decomopsition is unique up to reordering the summands. 
+
+\begin{thm}{}{} Let $W_1,\dots,W_k$ be a complete list of pairwise nonisomorphic irreducible representations of $G$. For $1\leq i\leq k$, let $$a_i=\frac{\dim(W)}{\abs{G}}\sum_{g\in G}\overline{\chi_{W_i}(g)}g\in\C G$$ Let $V$ be a finite dimensional $\C G$-module. Consider the decomposition into irreducibles: $$V=\bigoplus_{l=1}^k\bigoplus_{j=1}^{\text{mult}_{W_l}(V)}U_{l,j}$$ with each $U_{l,j}\cong W_l$. Then $\rho_V(a_i)\in\text{End}(V)$ is the projection onto the $i$th isotypic component of $V$. In particular, the space $V_i$ is independent of the finer decomposition of $V$ into the direct sum of the $U_{l,j}$. 
+\end{thm}
+
+\subsection{Character Tables}
+\begin{defn}{Character Tables}{} Let $G$ be a finite group. The character table of $G$ is a table
+\begin{center}
+\begin{tabular}{ c|ccc } 
+$G$ & $\text{Cl}_G(g_1)$ & $\text{Cl}_G(g_2)$ & $\cdots$ \\\hline
+$\chi_1$ & & & \\
+$\chi_2$ & & & \\
+$\vdots$ & & & \\
+\end{tabular}
+\end{center} where the rows are the irreducible characters and the columns are the conjugacy classes of $G$. 
+\end{defn}
+
+Recall that the set of irreducible characters of a finite group $G$ forms the basis for the vector space $\C[\text{Cl}_G]$ of all class functions. Moreover, the size of such a basis is equal to $\abs{Cl}_G$. This means that the character table is a square. Moreover, using the orthonormal property of the basis of irreducible characters, we can deduce a number of consequences which can be easily visualized in the character table. \\~\\
+
+Conversely, we can also use these orthonormal properties to deduce the character table of a group. For instance, a matrix has orthonormal columns if and only if it has orthonormal rows. This is very powerful because the characters is a complete invariant for representations. 
+
+\begin{defn}{Augmented Character Tables}{} Let $G$ be a finite group. The augmented character table of $G$ is a character table of $G$ with each column $\text{Cl}_G(g)$ multiplied by $\frac{\sqrt{\abs{\text{Cl}_G(g)}}}{\sqrt{\abs{G}}}$. 
+\end{defn}
+
+\begin{prp}{}{} Let $G$ be a finite group. Write the elements of the augmented character table of $G$ into a square matrix $A$. Then $A$ is orthonormal. \tcbline
+\begin{proof}
+If $\chi_1$ and $\chi_2$ are two irreducible characters, the inner product of the two rows of $A$ is 
+\begin{align*}
+\sum_{\text{Cl}_G(g)\in\text{Cl}_G}\left(\frac{\sqrt{\abs{\text{Cl}_G(g)}}}{\sqrt{\abs{G}}}\chi_1(g)\right)\left(\frac{\sqrt{\abs{\text{Cl}_G(g)}}}{\sqrt{\abs{G}}}\overline{\chi_2(g)}\right)&=\frac{1}{\abs{G}}\sum_{\text{Cl}_G(g)\in\text{Cl}_G}\left(\abs{\text{Cl}_G(g)}\chi_1(g)\overline{\chi_2(g)}\right)\\
+&=\frac{1}{\abs{G}}\sum_{g\in G}\left(\chi_1(g)\overline{\chi_2(g)}\right)\tag{$\chi$ is a class function}\\
+&=\langle\chi_1,\chi_2\rangle
+\end{align*}
+If $\chi_1\neq\chi_2$, then by 2.3.4 we conclude that the sum is $0$ and hence the rows of $A$ are orthogonal. If $\chi_1=\chi_2$ then by 2.3.4 we conclude that the sum is $1$ and hence the rows of $A$ are orthonormal. Thus we are done. 
+\end{proof}
+\end{prp}
+
+\begin{crl}{}{} Let $G$ be a finite group. Then the following are true regarding the character table of $G$. 
+\begin{itemize}
+\item The rows of the character table are orthogonal. This means that $$\sum_{\text{Cl}_G(g)\in\text{Cl}_G}\chi_1(g)\chi_2(g)=0$$ for any irreducible characters $\chi_1$ and $\chi_2$. 
+\item The columns of the character table are orthogonal. This means that if $g_1$ and $g_2$ are not in the same conjugacy classes then $$\sum_{\chi\text{ is irr.}}\chi(g_1)\overline{\chi(g_2)}=0$$ where the sum is over all irreducible characters.
+\end{itemize} \tcbline
+\begin{proof}
+Write the character table of $G$ into a square matrix $A$ and write the augmented character table of $G$ into a square matrix $B$. Then $B$ is obtained from $A$ by scaling the columns of $A$. But $B$ is orthonormal and scaling the rows does not change orthogonality hence $A$ is still an orthogonal matrix (but no longer orthonormal). 
+\end{proof}
+\end{crl}
+
+\begin{crl}{}{} Let $G$ be a finite group and $g\in G$. Then we have $$\sum_{\chi\text{ is irr.}}\chi(g)\overline{\chi(g)}=\frac{\abs{G}}{\abs{\text{Cl}_G(g)}}$$ where the sum is over all irreducible characters. \tcbline
+\begin{proof}
+Write the augmented character table of $G$ into a square matrix $A$. Then $A$ is orthonormal. This means that $$\sum_{\chi\text{ is irr. }}\left(\frac{\sqrt{\abs{\text{Cl}_G(g)}}}{\sqrt{\abs{G}}}\chi(g)\right)\left(\frac{\sqrt{\abs{\text{Cl}_G(g)}}}{\sqrt{\abs{G}}}\overline{\chi(g)}\right)=1$$ Thus we have that 
+\begin{align*}
+\sum_{\chi\text{ is irr. }}\left(\frac{\sqrt{\abs{\text{Cl}_G(g)}}}{\sqrt{\abs{G}}}\chi(g)\right)\left(\frac{\sqrt{\abs{\text{Cl}_G(g)}}}{\sqrt{\abs{G}}}\overline{\chi(g)}\right)&=1\\
+\frac{\abs{\text{Cl}_G(g)}}{\abs{G}}\sum_{\chi\text{ is irr. }}\chi(g)\overline{\chi(g)}&=1\\
+\sum_{\chi\text{ is irr. }}\chi(g)\overline{\chi(g)}&=\frac{\abs{G}}{\abs{\text{Cl}_G(g)}}
+\end{align*}
+and so we conclude. 
+\end{proof}
+\end{crl}
+
+\pagebreak
+\section{Induced Representations}
+\subsection{Restricted and Induced Representations}
+\begin{defn}{Restriction of Representations}{} Let $H\leq G$ be a subgroup. Let $V$ be a finite dimensional $\C G$-module. Then $H$ acts on $V$ and we denote the corresponding $\C H$-module by $$\text{Res}_H^GV:H\to GL(V)$$ We write the restriction of the characters as $$\text{Res}_H^G\chi_V=\chi_{\text{Res}_H^GV}:H\to\text{GL}(V)$$
+\end{defn}
+
+Note that if $V$ is an irreducible $\C G$-module, $\text{Res}_H^GV$ may not be irreducible. 
+
+\begin{defn}{Induced Representation}{} Let $H$ be a subgroup of $G$ of index $l$. Let $g_1H,\dots,g_kH$ represent all the distinct cosets of $H$ in $G$. Let $\rho:H\to GL(n,\C)$ be a representation. Define the induced representation $$\text{Ind}_H^G\rho:G\to GL\left(\bigoplus_{i=1}^kg_iV\right)$$ where each $g_i V$ is isomorphic to $V$ via the map $g_iv\mapsto v$, by the following formula. For $g\in G$, the map $\rho(g):\bigoplus_{i=1}^kg_iV\to\bigoplus_{i=1}^kg_iV$ is given by the formula $$\left(\sum_{i=1}^kg_iv_i\right)\mapsto\left(\sum_{i=1}^k(gg_i)v_i\right)$$
+\end{defn}
+
+We need to show that the matrix on the right is invertible for all $g$ in order for $\text{Ind}_H^G\rho$ to formally be called as a representation. This is the content of the following theorem. 
+
+\begin{prp}{}{} Let $G,H$ be groups. Let $V$ be a $\C G$-module and let $W$ be a $\C H$-module. Then there is an isomorphism $$\Hom_{\C H}(W,\text{Res}_H^GV)=\Hom_{\C G}(\text{Ind}_H^GW,V)$$ Explicitly, this means that any $\C H$-module homomorphism $W\to V$ extends uniquely to a $\C G$-homomorphism $\text{Ind}_H^GW\to V$. 
+\end{prp}
+
+\begin{thm}{Frobenius Reciprocity}{} Let $G$ be a finite group and let $H$ be a subgroup of $G$. Let $\chi$ be a character of $G$ and let $\rho$ be a character of $H$. Then $$\left\langle\text{Ind}_H^G\psi,\chi\right\rangle_G=\left\langle\psi,\text{Res}_H^G\chi\right\rangle_H$$
+\end{thm}
+
+\begin{prp}{}{} Let $G$ be a finite group and $H$ a subgroup of $G$ of index $n$. Let $1:H\to\text{GL}(1,\C)$ be the trivial $1$-dimensional representation. Then the induced representation $\text{Ind}_H^G1:G\to\text{End}(\C^n)$ is equivalent to the representation $\rho:G\to\text{GL}(\C\mH)$. \tcbline
+\begin{proof}
+We want to show that $\text{Ind}_H^G1(g)=\rho(g)$ for any $g\in G$. Since $\rho(g)$ acts by permutation on the basis, the matrix $\rho(g)$ only consists of $0$ and $1$. Similarly, $\text{Ind}_H^G1(g)$ by definition has entries either $0$ or $1$. Now we have that 
+\begin{align*}
+\text{Ind}_H^G1(g)_{i,j}=1&\iff t_i^{-1}gt_j\in H\\
+&\iff gt_jH=t_iH\\
+&\iff\rho(g)_{i,j}=1
+\end{align*}
+Thus we conclude. 
+\end{proof}
+\end{prp}
+
+\begin{defn}{The Coset Module}{} Let $G$ be a finite group and let $H$ be a subgroup of $G$. Write $\mH$ the set of cosets of $H$. Define the coset module to be the permutation representation $\rho:G\to\text{GL}(\C\mH)$ where $\rho(g):\C\mH\to\C\mH$ is defined on the basis by sending $t_iH$ to $gt_iH$. 
+\end{defn}
+
+Notice that since $G$ acts on $G/H$, then similar to the case of regular representations, $\C\mH$ becomes a $\C G$-module and hence a representation. 
+
+\begin{thm}{}{} Suppose that $\mH=\{t_1H,\dots,t_lH\}$ are $\mH'=\{s_1H,\dots,s_lH\}$ are two representations of the set of cosets of $H$ in $G$. Then the two representations constructed from $\mH$ and $\mH'$ are isomorphic. 
+\end{thm}
+
+\begin{lmm}{}{} Let $G$ be a finite group and let $H$ be a subgroup of $G$. Let $\rho:H\to GL(V)$ be a representation with character $\chi$. Then for all $g\in G$, we have that $$\text{Ind}_H^G\chi(g)=\frac{1}{\abs{H}}\sum_{x\in G}\chi_V(x^{-1}gx)$$ where $\chi(g)=0$ if $g\notin H$. 
+\end{lmm}
+
+\subsection{Decomposition of Regular Representations}
+
+\pagebreak
+\section{Computations of Representations}
+\subsection{Representations of Abelian Groups}
+Let $\rho:G\to\text{GL}(V)$ be a representation. Then for an arbitrary choice of $g\in G$, $\rho(g):V\to V$ is necessarily a linear map but may not be a $G$-linear map. Indeed, $\rho(g):V\to V$ is a $G$-linear map if and only if for all $h\in G$, we have 
+\begin{align*}
+\rho(g)(h\cdot v)&=h\cdot\rho(g)(v)\\
+\rho(g)(\rho(h)(v))&=\rho(h)(\rho(g)(v))\\
+\rho(gh)(v)&=\rho(hg)(v)
+\end{align*}
+for all $v\in V$. Thus $g\in Z(G)$. When $G$ is abelian, we can show that if $V$ is irreducible then $V$ is one dimensional over $\C$. 
+
+\begin{thm}{}{} Let $G$ be an abelian. If $V$ is an irreducible representation of $G$ over $\C$, then $\dim(V)=1$. \tcbline
+\begin{proof}
+Assume that $V$ is irreducible. Then $\rho(g):V\to V$ is a $G$-linear map. Indeed we have that 
+\begin{align*}
+\rho(g)(h\cdot v)&=\rho(g)(\rho(h)(v))\\
+&=\rho(gh)(v)\\
+&=\rho(hg)(v)\\
+&=h\cdot(\rho(g)(v))
+\end{align*}
+Thus $\rho(g):V\to V$ is a $G$-linear map. by Schur's lemma III, we conclude that $\rho(g)=\lambda v$ for some eigenvector $\lambda$ of $\rho(g)$. This means that every subspace of $V$ is $G$-invariant. Since $V$ is irreducible, $\dim(V)=1$. 
+\end{proof}
+\end{thm}
+
+\subsection{Representations of the Cyclic Group}
+Since $C_n$ is an abelian group, the irreducible representations of $C_n$ are all $1$-dimensional. Let us compute their character tables. 
+
+\begin{thm}{}{} Denote $C_n=\langle x\rangle$ the cyclic group. The set of all complex irreducible representations (up to equivalence) of $C_n$ are precisely $$\{\phi_k:C_n\to\C^\ast\;|\;k=0,\dots,n-1\}$$ defined as follows. For each $k\in\{0,\dots,n-1\}$, the multiplication map $\phi_k(x^m):\C\to\C$ is defined by $$\phi_k(x^m)(z)=e^{\frac{2\pi ikm}{n}}z$$ \tcbline
+\begin{proof}
+Since $C_n$ is abelian, we only need to find the $1$-dimensional complex representations. Suppose that $\phi:C_n\to\C^\ast$ is a complex representation. Now $\phi(x)$ is an invertible complex number. But $$1=\phi(1)=\phi(x^n)=\phi(x)^n$$ implies that $\phi(x)$ must be an $n$th root of unity. There are in fact $n$ of them. Thus we have obtained $n$ representations $\phi_k:C_n\to\C^\ast$ defined by $$\phi_k(x)(z)=e^{\frac{2\pi ik}{n}}z$$ They are in fact distinct from each other. If $\phi_k$ is equivalent to $\phi_j$, then there exists $x\in\text{GL}(1,\C)=\C^\ast$ such that $$x^{-1}e^{\frac{2\pi ikm}{n}}x=e^{\frac{2\pi ijm}{n}}$$ This implies that $e^{\frac{2\pi ikm}{n}}=e^{\frac{2\pi ijm}{n}}$ and hence $k\equiv j\;(\bmod\;n)$. Thus we conclude. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{}{} The character table of $C_n$ is given as follows. 
+\begin{center}
+\begin{tabular}{ c|cccccc } 
+$G$ & $1$ & $x$ & $\cdots$ & $x^u$ & $\cdots$ & $x^{n-1}$ \\\hline
+$\text{Trivial}$ & $1$ & $1$ & $\cdots$ & $1$ & $\cdots$ & $1$ \\
+$\chi_{\phi_1}$ & $1$ & $e^{\frac{2\pi i}{n}}$ & $\cdots$ & $e^{\frac{2\pi iu}{n}}$ & $\cdots$ & $e^{\frac{2\pi i(n-1)}{n}}$ \\
+$\vdots$ & $\vdots$ & $\vdots$ & $\ddots$ & $\vdots$ & $\ddots$ & $\vdots$ \\
+$\chi_{\phi_k}$ & $1$ & $e^{\frac{2\pi ik}{n}}$ & $\cdots$ & $e^{\frac{2\pi iku}{n}}$ & $\cdots$ & $e^{\frac{2\pi ik(n-1)}{n}}$ \\
+$\vdots$ & $\vdots$ & $\vdots$ & $\ddots$ & $\vdots$ & $\ddots$ & $\vdots$ \\
+$\chi_{\phi_{n-1}}$ & $1$ & $e^{\frac{2\pi i(n-1)}{n}}$ & $\cdots$ & $e^{\frac{2\pi i(n-1)u}{n}}$ & $\cdots$ & $e^{\frac{2\pi i(n-1)(n-1)}{n}}$ \\
+\end{tabular}
+\end{center}
+\end{thm}
+
+We will also compute the real representations of $C_n$. 
+
+\begin{lmm}{}{} Let $A\in GL(d,\C)$ be a matrix such that $A^n=I$ for some $n\in\N$. Then there is a matrix $Q\in GL(d,\C)$ such that $$Q^{-1}AQ=\begin{pmatrix}
+\theta_1 & & \\
+& \ddots &\\
+& & \theta_d
+\end{pmatrix}$$ where $\theta_1,\dots,\theta_d$ are $n$th roots of unity and the matrix is everywhere else $0$. \tcbline
+\begin{proof}
+Let $f(X)=X^n-1$. Then Clearly $f(A)=0$. This means that the minimal polynomial $\mu_A(X)$ of $A$ divides $f(X)=X^n-1$. The roots of $f$ are the $n$-roots of $1$, namely $1,\zeta,\dots,\zeta^{n-1}$ where $\zeta=e^{2\pi i/n}$. Since $\mu_A(X)$ divides $f(X)$, the roots of $\mu_A$ are the $n$-roots of $1$. Moreover, $f(X)=X^n-1$ has distinct roots, and so $\mu_A$ has distinct roots. Hence we know that $A$ is diagonalizable with entries the $n$-roots of unity. 
+\end{proof}
+\end{lmm}
+
+\begin{thm}{}{} Denote $C_n=\langle x\rangle$ the cyclic group. Let $\rho:C_n\to GL(d,\C)$ be a representation. Then there exists $\theta_1,\dots,\theta_d$ which are $n$th rots of unity such that the representation $\rho':C_n\to GL(d,\C)$ defined by $$\rho'(x^k)=\begin{pmatrix}
+\theta_1^k & & \\
+& \ddots &\\
+& & \theta_d^k
+\end{pmatrix}$$ is equivalent to $\rho$. \tcbline
+\begin{proof}
+Let $A=\rho(x)$. Since $x^n=1$ and $\rho$ is a homomorphism we have $A^n=\rho(x^n)=\rho(1)=1$. By the above lemma there exists $Q\in GL(d,\C)$ and $\theta_1,\dots,\theta_d$ $n$th roots of unity such that $Q^{-1}\rho(x)Q=\text{diag}(\theta_1,\dots,\theta_d)$. Define $\rho':C_n\to GL(d,\C)$ by $$\rho'(x^k)=Q^{-1}\rho(x)Q$$ This is a representation equivalent to $\rho$ by lemma 1.1.2. Finally we have that 
+\begin{align*}
+\rho'(x^k)&=Q^{-1}\rho(x^k)Q\\
+&=Q^{-1}A^kQ\\
+&=(Q^{-1}AQ)^k\\
+&=\begin{pmatrix}
+\theta_1^k & & \\
+& \ddots &\\
+& & \theta_d^k
+\end{pmatrix}
+\end{align*} Thus we are done. 
+\end{proof}
+\end{thm}
+
+\subsection{Representations of the Quaternion Group}
+\begin{thm}{}{} The one dimensional complex representations of $$Q_8=\langle a,b\;|\;a^4,a^2b^{-2},abab^{-1}\rangle$$ are given as follows. Let $\psi_{(u,v)}:Q_8\to\C^\ast$ be map sending $a$ to $u$ and $b$ to $v$. Then the full list of one dimensional complex representations is given by $$\{\psi_{(1,1)},\psi_{(1,-1)},\psi_{(-1,1)},\psi_{(-1,-1)}\}$$ \tcbline
+\begin{proof}
+By the universal property of the free group, if $\psi:Q_8\to\C^\ast$ is a group homomorphism, then $\phi(a)^4=1$, $\phi(a)^2=\phi(b)^2$ and $\psi(b)\psi(a)\psi(b)^{-1}=\psi(a)^{-1}$ which implies that $\psi(a)=\psi(a)^{-1}$ since $\C^\ast$ is abelian. It is then clear that $\psi(a)^4=\psi(b)^4=1$ implies that $\psi(a),\psi(b)=1,i,-1$ or $-i$. \\~\\
+
+If $\psi(a)=1$, then $\psi(b)=1$ gives the trivial representation. Using the given relations, we deduce that $\psi(b)^2=1$ hence specifying that $\psi(b)=-1$ gives another representation. \\~\\
+
+If $\psi(a)=-1$, then $\psi(b)^2=1$ hence $\psi(b)=\pm1$. Note that the final relation is also satisfied. Hence this gives two possible representations. \\~\\
+
+If $\psi(a)=\pm i$, then $\psi(b)=\pm i$. But $i^{-1}=-i$ hence the last relation cannot be satisfied. Thus there are no representations coming from this case. Thus we conclude. 
+\end{proof}
+\end{thm}
+
+\begin{prp}{}{} Write the quaternion group with the following free group presentation: $$Q_8=\langle a,b\;|\;a^4,a^2b^{-2},abab^{-1}\rangle$$ There is a two dimensional complex irreducible representation $\phi:Q_8\to\text{GL}(2,\C)$ given by $$\phi(a)=\begin{pmatrix}
+i & 0\\
+0 & -i
+\end{pmatrix}\;\;\;\;\text{ and }\;\;\;\;\phi(b)=\begin{pmatrix}
+0 & 1\\
+-1 & 0
+\end{pmatrix}$$ \tcbline
+\begin{proof}
+By the universal property of the free group with relations, we just have to show that $\phi(a)^4=I$, $\phi(a)^2=\phi(b)^2$ and $\phi(a)\phi(b)\phi(a)\phi(b)^{-1}=I$. We have that $$\phi(a)^4=\begin{pmatrix}
+i^4 & 0\\
+0 & (-i)^4
+\end{pmatrix}=I$$ Thus the first relation is satisfied. For the second relation, we have that $$
+\phi(a)^2=\begin{pmatrix}
+i^2 & 0\\
+0 & (-i)^2
+\end{pmatrix}=\begin{pmatrix}
+-1 & 0\\
+0 & -1
+\end{pmatrix}$$ and $$\phi(b)^2=\begin{pmatrix}
+0 & 1\\
+-1 & 0
+\end{pmatrix}\begin{pmatrix}
+0 & 1\\
+-1 & 0
+\end{pmatrix}=\begin{pmatrix}
+-1 & 0\\
+0 & -1
+\end{pmatrix}$$ Thus the second relation is satisfied. For the third relation, we have that 
+\begin{align*}
+\phi(a)\phi(b)\phi(a)\phi(b)^{-1}&=\begin{pmatrix}
+i & 0\\
+0 & -i
+\end{pmatrix}\begin{pmatrix}
+0 & 1\\
+-1 & 0
+\end{pmatrix}\begin{pmatrix}
+i & 0\\
+0 & -i
+\end{pmatrix}\begin{pmatrix}
+0 & 1\\
+-1 & 0
+\end{pmatrix}^{-1}\\
+&=\begin{pmatrix}
+i & 0\\
+0 & -i
+\end{pmatrix}\begin{pmatrix}
+0 & 1\\
+-1 & 0
+\end{pmatrix}\begin{pmatrix}
+i & 0\\
+0 & -i
+\end{pmatrix}\begin{pmatrix}
+0 & -1\\
+1 & 0
+\end{pmatrix}\\
+&=\begin{pmatrix}
+i & 0\\
+0 & -i
+\end{pmatrix}\begin{pmatrix}
+0 & 1\\
+-1 & 0
+\end{pmatrix}\begin{pmatrix}
+0 & -i\\
+-i & 0
+\end{pmatrix}\\
+&=\begin{pmatrix}
+i & 0\\
+0 & -i
+\end{pmatrix}\begin{pmatrix}
+-i & 0\\
+0 & i
+\end{pmatrix}\\
+&=I
+\end{align*}
+We conclude that $\phi$ is a group homomorphism. It is irreducible since $\phi(a)$ and $\phi(b)$ has no common eigenvector and hence no subspace is preserved by both $\phi(a)$ and $\phi(b)$. 
+\end{proof}
+\end{prp}
+
+\begin{thm}{}{} The complete list of complex irreducible representations of $Q_8=\langle a,b\;|\;a^4,a^2b^{-2},abab^{-1}\rangle$ is given by $$\{\psi_{(1,1)},\psi_{(1,-1)},\psi_{(-1,1)},\psi_{(-1,-1)},\phi\}$$ \tcbline
+\begin{proof}
+We have that $$\dim(\psi_{(1,1)})+\dim(\psi_{(1,-1)})+\dim(\psi_{(-1,1)})+\dim(\psi_{(-1,-1)})+\dim(\phi)=4+4=8=\abs{Q_8}$$ By 2.4.3, we conclude. 
+\end{proof}
+\end{thm}
+
+\begin{prp}{}{} There are $5$ conjugacy classes of $Q_8$ and is given as follows: $$\{1\},\{a,a^3\},\{ab,a^3b\},\{b,a^2b\},\{a^2\}$$
+\end{prp}
+
+\begin{thm}{}{} The character table of $Q_8$ is given as follows. 
+\begin{center}
+\begin{tabular}{ c|ccccc } 
+$G$ & $1$ & $\{a,a^3\}$ & $\{ab,a^3b\}$ & $\{b,a^2b\}$ & $\{a^2\}$ \\\hline
+$\chi_{\psi_{(1,1)}}$ & $1$ & $1$ & $1$ & $1$ & $\cdots$ \\
+$\chi_{\psi_{(1,-1)}}$ & $1$ & $1$ & $-1$ & $-1$ & $1$ \\
+$\chi_{\psi_{(-1,1)}}$ & $1$ & $-1$ & $-1$ & $1$ & $1$ \\
+$\chi_{\psi_{(-1,-1)}}$ & $1$ & $-1$ & $1$ & $-1$ & $1$ \\
+$\chi_{\phi}$ & $2$ & $0$ & $0$ & $0$ & $-2$ \\
+\end{tabular}
+\end{center}
+\end{thm}
+
+\subsection{Representations of the Dihedral Group}
+Let us first compute the one dimensional complex representations of $D_{2n}$. 
+
+\begin{thm}{}{} Let $n\in\N$. The one dimensional complex representations of $$D_{2n}=\langle r,s\;|\;r^n,s^2,rs=sr^{-1}\rangle$$ are given as follows. Let $\phi_{(u,v)}:D_{2n}\to\C^\ast$ be the map sending $r$ to $u$ and $s$ to $v$.
+\begin{itemize}
+\item If $n$ is odd, then the full list of representations is given by $$\left\{\phi_{(1,1)},\phi_{(1,-1)}\right\}$$
+\item If $n$ is even, then the full list of representations is given by $$\left\{\phi_{(1,1)},\phi_{(1,-1)},\phi_{(-1,1)},\phi_{(-1,-1)}\right\}$$
+\end{itemize} \tcbline
+\begin{proof}
+By the universal property of a free group with relations, any group homomorphism $\phi:D_{2n}\to\C^\ast$ is determined by the elements $r$ and $s$ such that $\phi(r)^n=1$ and $\phi(s)^2=1$ and $\phi(r)\phi(s)=\phi(s)\phi(r)^{-1}$. Since $\C^\ast$ is abelian, the last condition becomes $\phi(r)=\phi(r)^{-1}$ which means that $\phi(r)=\pm1$. Similarly, we have $\phi(s)=\pm1$. When $n$ is even, we precisely have four non-equivalent representations. When $n$ is odd, then $(-1)^n\neq 1$ so $\phi(r)^n=1$ is no longer satisfied if we choose $\phi(r)=-1$. This leaves only two choices. Thus we conclude. 
+\end{proof}
+\end{thm}
+
+\begin{prp}{}{} Let $n\in\N$. Write $D_{2n}=\langle r,s\;|\;r^n,s^2,rs=sr^{-1}\rangle$ the dihedral group. For $h\in\Z$, define $\rho^h:D_{2n}\to\text{GL}(2,\C)$ by $$\rho^h(r^k)=\begin{pmatrix}
+\zeta^{hk} & 0\\
+0 & \zeta^{-hk}
+\end{pmatrix}\;\;\;\;\text{ and }\;\;\;\;\rho^h(sr^k)=\begin{pmatrix}
+0 & \zeta^{hk}\\
+\zeta^{-hk} & 0
+\end{pmatrix}$$ where $\zeta=e^{2\pi i/n}$. Then the following are true. 
+\begin{itemize}
+\item $\rho^h$ is a representation of $D_{2n}$
+\item $\rho^h$ is equivalent to $\text{Ind}_{C_n}^{D_{2n}}\rho_{\phi_h}$ where $\phi_h$ is as in theorem 4.2.1.  
+\item $\rho^h=\rho^{h+n}$
+\item $\rho^h$ is equivalent to $\rho^{n-h}$
+\end{itemize} \tcbline
+\begin{proof}
+It is clear that $\rho^h$ is a a representation since the following are true. 
+\begin{itemize}
+\item $(\rho^h(r))^n=\begin{pmatrix}
+\zeta^{h} & 0\\
+0 & \zeta^{-h}
+\end{pmatrix}^n=\begin{pmatrix}
+\zeta^{hn} & 0\\
+0 & \zeta^{-hn}
+\end{pmatrix}=I$
+\item $(\rho^h(s))^2=\begin{pmatrix}
+0 & 1\\
+1 & 0
+\end{pmatrix}^2=I$
+\item $\rho^h(s)\rho^h(r)\rho^h(s)=\begin{pmatrix}
+0 & 1\\
+1 & 0
+\end{pmatrix}\begin{pmatrix}
+\zeta^{h} & 0\\
+0 & \zeta^{-h}
+\end{pmatrix}\begin{pmatrix}
+0 & 1\\
+1 & 0
+\end{pmatrix}=\begin{pmatrix}
+\zeta^{-h} & 0\\
+0 & \zeta^{h}
+\end{pmatrix}=(\rho^h(r))^{-1}$
+\end{itemize}
+We have by definition of the induced representation that $$\text{Ind}_{C^n}^{D_{2n}}\phi_k(r^t)=\begin{pmatrix}
+\phi_k(r^t) & \phi_k(r^ts)\\
+\phi_k(sr^t) & \phi_k(sr^ts)
+\end{pmatrix}=\begin{pmatrix}
+\phi_k(r^t) & \phi_k(r^ts)\\
+\phi_k(sr^t) & \phi_k(r^{-t})
+\end{pmatrix}=\begin{pmatrix}
+\zeta^{kt} & 0\\
+0 & \zeta^{-kt}
+\end{pmatrix}$$ and we have that $$\text{Ind}_{C^n}^{D_{2n}}\phi_k(sr^t)=\begin{pmatrix}
+\phi_k(sr^t) & \phi_k(sr^ts)\\
+\phi_k(r^t) & \phi_k(r^ts)
+\end{pmatrix}=\begin{pmatrix}
+\phi_k(sr^t) & \phi_k(r^{-t})\\
+\phi_k(r^t) & \phi_k(r^ts)
+\end{pmatrix}=\begin{pmatrix}
+0 & \zeta^{-kt}\\
+\zeta^{kt} & 0
+\end{pmatrix}$$ But $\begin{pmatrix}
+0 & \zeta^{-kt}\\
+\zeta^{kt} & 0
+\end{pmatrix}$ is similar to $\begin{pmatrix}
+0 & \zeta^{kt}\\
+\zeta^{-kt} & 0
+\end{pmatrix}$ via the invertible matrix $$\begin{pmatrix}
+0 & 1\\
+1 & 0
+\end{pmatrix}$$ Hence $\text{Ind}_{C_n}^{D_{2n}}\phi_k$ is equivalent to $\rho^k$. \\~\\
+
+For the third item, notice that $\zeta$ is the $n$th root of unity so $\zeta^{hk}=\zeta^{(h+n)k}$ and hence $\rho^h=\rho^{h+n}$. \\~\\
+
+Finally, notice that $\begin{pmatrix}
+0 & 1\\
+1 & 0
+\end{pmatrix}$ is such that $\rho^h(x)$ and $\rho^{n-h}(x)$ to be similar matrices for any $x\in D_{2n}$. Indeed we have that $$\begin{pmatrix}
+0 & 1\\
+1 & 0
+\end{pmatrix}\rho^{n-h}(r^k)\begin{pmatrix}
+0 & 1\\
+1 & 0
+\end{pmatrix}=\begin{pmatrix}
+\zeta^{-(n-h)k} & 0\\
+0 & \zeta^{(n-h)k}
+\end{pmatrix}\sim\begin{pmatrix}
+\zeta^{hk} & 0\\
+0 & \zeta^{hk}
+\end{pmatrix}=\rho^h(r^k)$$ and $$\begin{pmatrix}
+0 & 1\\
+1 & 0
+\end{pmatrix}\rho^{n-h}(sr^k)\begin{pmatrix}
+0 & 1\\
+1 & 0
+\end{pmatrix}=\begin{pmatrix}
+0 & \zeta^{-(n-h)k}\\
+\zeta^{(n-h)k} & 0
+\end{pmatrix}\sim\begin{pmatrix}
+0 & \zeta^{hk}\\
+\zeta^{hk} & 0
+\end{pmatrix}=\rho^h(sr^k)$$
+\end{proof}
+\end{prp}
+
+The above proposition shows that the only meaningful $2$-dimensional representations of $D_{2n}$ of the above form is $\rho^h$ for $0\leq h\leq n/2$. 
+
+\begin{prp}{}{} Let $n\in\N$. Write $D_{2n}=\langle r,s\;|\;r^n,s^2,rs=sr^{-1}\rangle$ the dihedral group. For $0<h<n/2$, define $\rho^h:D_{2n}\to\text{GL}(2,\C)$ by $$\rho^h(r^k)=\begin{pmatrix}
+\zeta^{hk} & 0\\
+0 & \zeta^{-hk}
+\end{pmatrix}\;\;\;\;\text{ and }\;\;\;\;\rho^h(sr^k)=\begin{pmatrix}
+0 & \zeta^{hk}\\
+\zeta^{-hk} & 0
+\end{pmatrix}$$ where $\zeta=e^{2\pi i/n}$. Then all the $\rho^h$ for $0<h<n/2$ are pairwise non-equivalent and irreducible. \tcbline
+\begin{proof}
+Notice that $\rho^h(r)$ stretches the axis thus the eigenspaces of $\rho^h(r)$ are the coordinate axes. But these are not stable under the complex reflection $\rho^h(s)$. Thus there are no subspaces of $\C^2$ that is fixed by $\rho^h$. Thus $\rho^h$ is irreducible. Now the characters for $\chi_{\rho^h}$ is given by $$\chi_{\rho^h}(r^k)=\zeta^{hk}+\zeta^{-hk}=2\cos\left(\frac{2\pi hk}{n}\right)$$ and $\chi_{\rho^h}(sr^k)=0$. But $\chi$ is a complete invariant of representations hence for $0<h\neq t<n/2$, $\chi_{\rho^h}(r^k)\neq\chi_{\rho^t}(r^k)$ implies $\chi_{\rho^h}\neq\chi_{\rho^t}$ implies $\rho^h$ and $\rho^t$ are not equivalent. 
+\end{proof}
+\end{prp}
+
+\begin{thm}{}{} Let $n\in\N$. Then the group $D_{2n}=\langle r,s\;|\;r^n,s^2,rs=sr^{-1}\rangle$ has the following complete list of irreducible complex representations. 
+\begin{itemize}
+\item If $n$ is odd, then the full list is given by $$\left\{\phi_{(1,1)},\phi_{(1,-1)}\right\}\cup\left\{\rho^h\;|\;0<h<\frac{n}{2}\right\}$$
+\item If $n$ is even, then the full list is given by $$\left\{\phi_{(1,1)},\phi_{(1,-1)},\phi_{(-1,1)},\phi_{(-1,-1)}\right\}\cup\left\{\rho^h\;|\;0<h<\frac{n}{2}\right\}$$
+\end{itemize} \tcbline
+\begin{proof}
+We have seen that the above lists consists only of irreducible representations. When $n$ is odd, we have that $$\dim(\phi_{(1,1)})+\dim(\phi_{(1,-1)})+\sum_{h=1}^{(n-1)/2}\dim(\rho^h)=1+1+\left(\frac{n-1}{2}\right)\cdot 4=2n$$ By lemma 2.4.3, we conclude that the given list is the complete list of irreducible complex representations for $D_{2n}$ when $n$ is odd. \\~\\
+
+When $n$ is even, we have that $$\dim(\phi_{(1,1)})+\dim(\phi_{(1,-1)})++\dim(\phi_{(-1,1)})+\dim(\phi_{(-1,-1)})+\sum_{h=1}^{n/2-1}\dim(\rho^h)=1+1+1+1+\left(\frac{n}{2}-1\right)\cdot 4$$ which is equal to $2n$. By lemma 2.4.3, we conclude that the given list is the complete list of irreducible complex representations for $D_{2n}$ when $n$ is even. 
+\end{proof}
+\end{thm}
+
+\pagebreak
+\section{Some Combinatorics}
+\subsection{Partitions}
+(To be separated to notes on combinatorics:)
+\begin{defn}{Partitions of an Integer}{} Let $n\in\N$. A partition $\lambda$ of $n$ is a list $(\lambda_1,\lambda_2,\dots,\lambda_l)$ with $\lambda_1\geq\lambda_2\geq\cdots\geq\lambda_l>0$ and $\sum_{i=1}^l\lambda_i=n$. 
+\end{defn}
+
+\begin{defn}{Dominance of Partitions}{} Let $\lambda$ and $\mu$ be two partitions of $n$. We say that $\lambda$ dominates $\mu$ if for all $k\in\N$, $$\sum_{i=1}^k\lambda_i\geq\sum_{i=1}^k\mu_i$$ In this case we denote it as $\lambda\trianglerighteq\mu$. 
+\end{defn}
+
+\begin{lmm}{}{} Let $n\in\N$. Then the set of partitions of $n$ together with dominance forms a poset. 
+\end{lmm}
+
+\begin{defn}{Lexicographical Ordering}{} Let $\lambda$ and $\mu$ be partitions of $n$. We say that $\lambda<\mu$ if for some $i\in\N$, the following are true. 
+\begin{itemize}
+\item For all $j<i$, $\lambda_j=\mu_i$
+\item $\lambda_i<\mu_i$
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{} Let $n\in\N$. Then the lexicographical order on the set of all partitions of $n$ form a total ordering. 
+\end{lmm}
+
+\begin{prp}{}{} Let $\lambda$ and $\mu$ be partitions of $n$. If $\lambda\trianglerighteq\mu$, then $\lambda\geq\mu$. 
+\end{prp}
+
+\subsection{Young Diagrams and Young Tabloids}
+\begin{defn}{Young Diagram}{} Let $\lambda$ be a partition of $n$. The young diagram of $\lambda$ is a collection of boxes arranged in left-justified rows, such that row $i$ has $\lambda_i$ many boxes. 
+\end{defn}
+
+\begin{defn}{Young Tableau}{} Let $\lambda$ be a partition of $n$. A Young tableau is obtained by filling in the boxes of the Young diagram of $\lambda$ with the numbers $1,\dots,n$. It is also called a $\lambda$-tableau. 
+\end{defn}
+
+\begin{defn}{Tabloids}{} Let $\lambda$ be a partition of $n$. Let $t_1$ and $t_2$ be two Young tableaux. We say that $t_1$ and $t_2$ are row equivalent if for all $i$, the $i$th row of $t_1$ and $t_2$ contain the same element. A $\lambda$-tabloid is an equivalence class of $\lambda$-tableau. 
+\end{defn}
+
+\begin{prp}{}{} Let $\lambda$ be a partition of $n$. Let $T$ be the set of all $\lambda$-tabloids. Then $S_n$ acts on $T$ by $$\tau\cdot[t_j]=[\tau(t_j)]$$
+\end{prp}
+
+\begin{defn}{Young Subgroup}{} Let $\lambda$ be a partition of $n$. Define the Young subgroup of $S_\lambda\leq S_n$ to $\lambda$ is defined as $$S_\lambda=S_{1,\dots,\lambda_1}\times S_{\lambda_1+1,\dots,\lambda_1+\lambda_2}\times\cdots\times S_{n-\lambda_l+1,\dots,n}$$
+\end{defn}
+
+\begin{defn}{Row and Column Stabilizers}{} Let $t$ be a tableau with rows $R_1,\dots,R_l$ and columns $C_1,\dots,C_k$. Define the row stabilizer of $t$ to be the group $$R_t=S_{R_1}\times\cdots\times S_{R_l}$$ Define the column stabilizer of $t$ to be the group $$C_t=S_{C_1}\times\cdots\times S_{C_k}$$
+\end{defn}
+
+For $\tau\in R_t$, we have that $\tau([t])=[t]$. In fact every element of $[t]$ is given in this way. Thus by writing $$R_tt=\{\tau(t)\;|\;\tau\in R_t\}$$ we can identify the tabloid as $$[t]=R_tt$$
+
+
+\pagebreak
+\section{Representations of the Symmetric Group}
+\subsection{Representations Associated to a Partition}
+Recall that a partition $\lambda=(\lambda_1,\dots,\lambda_k)$ of an integer $n$ gives a Young diagram, which $n$ left-aligned boxes with $\lambda_i$ boxes on row $i$. By writing $1,\dots,n$ in the boxes, we obtain a Young tableau. We then consider its equivalence class of Young tableau, in which we say that two Young tableau are equivalent if row $i$ of the two tableau contains the same element for all $i$. Such an equivalence class is called a Young tabloid of shape $\lambda$. \\~\\
+
+We have also seen that $S_n$ acts on the set of all tabloids by permuting the numbers in the boxes. The stabilizer of a tabloid $t$ is precisely the row stabilizers $R_t=S_{R_1}\times\cdots\times S_{R_l}$, for $R_1,\dots,R_l$ the rows of the tabloid. 
+
+\begin{defn}{Permutation Module Associated to a Partition}{} Let $\lambda$ be a partition of $n$. Let $[t_1],\dots,[t_k]$ be a complete list of $\lambda$-tabloids. Define the permutation module associated to $\lambda$ to be $$M^\lambda=\C\langle[t_1],\dots,[t_k]\rangle$$ This means that $\rho:S_n\to\text{GL}(M^\lambda)$ where $$\rho(\tau):M^\lambda\to M^\lambda$$ for $\tau\in S_n$ is defined on the basis by sending $[t_j]$ to $[\tau(t_j)]$. 
+\end{defn}
+
+\begin{prp}{}{} Let $\lambda$ be a partition of $n$. Let $T=S_n/S_\lambda$ be the set of cosets of $S_\lambda$. Then the following representations are equivalent. 
+\begin{itemize}
+\item The induced representation $\text{Ind}_{S_\lambda}^{S_n}1$
+\item The permutation representation $\rho:S_n\to\text{GL}(\C T)$ where $\rho(\tau):\C T\to\C T$ for $\tau\in S_n$ is defined on the basis by sending $\pi_kS_\lambda$ to $\tau\pi_kS_\lambda$
+\item The permutation module $\psi:S_n\to\text{GL}(M^\lambda)$ corresponding to $\lambda$
+\end{itemize}
+\end{prp}
+
+Recall that for a tableau $t$, the columns stabilizer of $t$ is given by $$C_t=S_{C_1}\times\cdots\times S_{C_k}$$ if $C_1,\dots,C_k$ are the columns of the tableau. 
+
+\begin{defn}{Associated Polytabloid}{} Let $\lambda$ be a partition of $n$. Let $t$ be a $\lambda$-tableau. Define the associated polytabloid $e_t\in M^\lambda$ by $$e_t=\sum_{\pi\in C_t}\text{sign}(\pi)(\pi\cdot[t])$$
+\end{defn}
+
+\begin{lmm}{}{} Let $t$ be a tableau of $n$ boxes and let $\pi\in S_n$ be a permutation. Then the following are true. 
+\begin{itemize}
+\item $R_{\pi t}=\pi R_t\pi^{-1}$
+\item $C_{\pi t}=\pi C_t\pi^{-1}$
+\item $\kappa_{\pi t}=\pi\kappa_t\pi^{-1}$
+\item $e_{\pi t}=\pi e_t$. 
+\end{itemize}
+\end{lmm}
+
+\subsection{Representations of the Symmetric Group}
+\begin{defn}{Specht Module}{} Let $\lambda$ be a partition of $n$. Define the Specht module $S^\lambda$ to be the submodule of $M^\lambda$ where $$S^\lambda=\C\langle e_t\;|\;t\text{ has shape }\lambda\rangle$$
+\end{defn}
+
+\begin{lmm}{}{} Let $n\in\N$. Then the following are true 
+\begin{itemize}
+\item Then the representation $\rho:S_n\to\text{GL}(S^{(n)})$ is the trivial representation. 
+\item The representation $\rho:S_n\to\text{GL}(S^{(1^n)})$ is equivalent to the sign representation. 
+\end{itemize}
+\end{lmm}
+
+\begin{lmm}{}{} Let $\lambda$ and $\mu$ be partitions of $n$. Let $t$ be a $\lambda$-tableau and let $s$ be a $\mu$-tableau. Then the following are true. 
+\begin{itemize}
+\item If $\sum_{\pi\in C_t}\text{sign}(\pi)(\pi\cdot[s])\neq 0$, then $\lambda\trianglerighteq\mu$. 
+\item If $\lambda=\mu$, then $\sum_{\pi\in C_t}\text{sign}(\pi)(\pi\cdot[s])\in\{-e_t,e_t\}$. 
+\end{itemize}
+\end{lmm}
+
+\begin{thm}{The Submodule Theorem}{} Let $\lambda$ be a partition of $n$. Let $U$ be a submodule of $M^\lambda$. Then either $S^\lambda\subseteq U$ or $U\subseteq(S^\lambda)^\perp$. 
+\end{thm}
+
+\begin{lmm}{}{} Let $\lambda$ and $\mu$ be partitions of $n$. Let $f\in\Hom_{S_n}(S^\lambda,M^\mu)$ be non-zero. Then $\lambda\trianglerighteq\mu$. If $\lambda=\mu$ then $f$ is multiplication by a scalar. \tcbline
+\begin{proof}
+$S^\lambda$ is generated by $e_t$ by definition. Since $f\neq 0$, there exists a tableau $t$ such that $f(e_t)\neq 0$. Since $S^\lambda$ is a submodule of $M^\lambda$, we have that $M^\lambda=S^\lambda\oplus(S^\lambda)^\perp$. Define an extension $\tilde{f}:M^\lambda\to M^\mu$ of $f$ as follows. For $v\in(S^\lambda)^\perp$, set $\tilde{f}(v)=0$. Now we have that ??? (5.4.2)
+\end{proof}
+\end{lmm}
+
+\begin{thm}{}{} Let $n\in\N$. Then the set of all $S^\lambda$ for $\lambda$ a partition of $n$ forms a complete list of irreducible $S_n$-representations. \tcbline
+\begin{proof}
+We first prove that $S^\lambda$ is irreducible. Let $U\subseteq S^\lambda$ be a subrepresentation. By the submodule theorem, either $S^\lambda\subseteq U$ or $U\subseteq(S^\lambda)^\perp$. Thus $S^\lambda=U$ or $U\subseteq S^\lambda\cap(S^\lambda)^\perp=0$. \\~\\
+
+It is clear that the number of conjugacy classes of $S_n$ is equal to the number of partitions of $n$. Thus the set of all $S^\lambda$ for $\lambda$ a partition of $n$ has cardinality equal to the the number of conjugacy classes of $S_n$. By theorem 2.4.6, the number of pairwise non-isomorphic irreducible representations of $S_n$ is equal to the number of conjugacy classes of $S_n$. Thus it remains to show that they are pairwise non-isomorphic. \\~\\
+
+Suppose that $S^\lambda$ is equivalent to $S^\mu$ for some partitions $\lambda$ and $\mu$ of $n$. Then there exists a non-zero $f\in\Hom_{S_n}(S^\lambda,S^\mu)$ which can be interpreted as an element of $\Hom_{S_n}(S^\lambda,M^\mu)$. By the above lemma, we conclude that $\lambda\trianglerighteq\mu$. Similarly, we conclude that $\mu\trianglerighteq\lambda$. Thus $\lambda=\mu$. 
+\end{proof}
+\end{thm}
+
+\subsection{Character Tables for $S_3$}
+\begin{prp}{The Sign Representation}{} Let $n\in\N$. Then the map $\rho:S_n\to\C^\ast$ defined by $$\rho(\tau)=\text{sign}(\tau)$$ for $\tau\in S_n$ is a one dimensional complex representation of $S_n$. 
+\end{prp}
+
+Recall that any two permutations in $S_n$ of the same cycle type are conjugate. This completely determines the conjugacy classes of $S_n$. In particular, this means that the number of conjugacy classes of $S_n$ is given by the number of integer partitions of $n$. 
+
+\begin{prp}{}{} Let $X=\{a,b,c\}$ such that $S_3$ acts on $X$ by permutation. Consider the permutation representation $\rho:S_3\to\text{GL}(\C X)$. Then the subspace $$U=\C\langle a+b+c\rangle$$ of $\C X$ is a subrepresentation of $G$. \tcbline
+\begin{proof}
+We want to show that $tau\cdot u\in U$ for all $u\in U$. We just have to check this for the basis. We have that $$tau\cdot(a+b+c)=\tau(a)+\tau(b)+\tau(c)$$ Since $\tau$ is a permutation, $\{\tau(a),\tau(b),\tau(c)\}=\{a,b,c\}$ hence we are done. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{} Let $X=\{a,b,c\}$ such that $S_3$ acts on $X$ by permutation. Consider the permutation representation $\rho:S_3\to\text{GL}(\C X)$ and the subrepresentation $U=\C\langle a+b+c\rangle$ of $\C X$. Then $V/U$ is an irreducible representation of $G$. \tcbline
+\begin{proof}
+We already know that $V/U$ is a representation, it remains to show that it is irreducible. We wish to invoke 2.3.5. The representation $\overline{\rho}:S_3\to\text{GL}(V/U)$ is given by $\rho(\tau)(v+U)=\tau(v)+U$. We give a non-canonical basis of $\{a+V/U,b+V/U\}$ to $V/U$. The character of $V/U$ is given as follows. \\~\\
+
+There are three conjugacy classes of $S_3$ given by $\{1\},\{(a,b),(b,c),(a,c)\}$ and $\{(a,b,c),(a,c,b)\}$. We have that 
+\begin{itemize}
+\item $\chi_{\overline{\rho}}(1)=\text{tr}(I)=2$
+\item Under the given basis, the matrix of $\overline{\rho}(a,b)$ is $\begin{pmatrix}
+0 & 1\\
+1 & 0
+\end{pmatrix}$. Hence $\chi_{\overline{\rho}}((a,b))=0$
+\item Under the given basis, the matrix of $\overline{\rho}(a,b,c)$ is $\begin{pmatrix}
+0 & -1\\
+1 & -1
+\end{pmatrix}$. Hence $\chi_{\overline{\rho}}((a,b,c))=-1$
+\end{itemize}
+Now we have that 
+\begin{align*}
+\langle\chi_{\overline{\rho}},\chi_{\overline{\rho}}\rangle&=\frac{1}{\abs{S_3}}\sum_{\tau\in S_3}\chi_{\overline{\rho}}(\tau)^2\\
+&=\frac{1}{6}(1\cdot 2^2+3\cdot 0+2\cdot(-1)^2)\\
+&=1
+\end{align*}
+By lemma 2.3.5, we conclude that $V/U$ is irreducible. 
+\end{proof}
+\end{prp}
+
+\begin{thm}{}{} There are a total of three irreducible complex representations of $S_3$ given by 
+\begin{itemize}
+\item The trivial representation $\rho_1(\tau)=1$
+\item The sign representation $\rho_2(\tau)=\text{sign}(\tau)$
+\item The representation $\overline{\rho}$ given by 6.3.3. 
+\end{itemize} \tcbline
+\begin{proof}
+We have seen that each of these are irreducible. There are three conjugacy classes of $S_3$. By 2.4.6 we conclude that we have exhausted all the irreducible representations. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{}{} The character table of $S_3$ is given as follows. 
+\begin{center}
+\begin{tabular}{ c|ccc } 
+$G$ & $1$ & $\{(1,2),(1,3),(2,3)\}$ & $\{(1,2,3),(1,3,2)\}$ \\\hline
+$\chi_{\text{trivial}}$ & $1$ & $1$ & $1$ \\
+$\chi_{\text{sign}}$ & $1$ & $-1$ & $1$ \\
+$\chi_{\overline{\rho}}$ & $2$ & $0$ & $-1$ \\
+\end{tabular}
+\end{center}
+\end{thm}
+
+
+\subsection{Representations of the Alternating Group}
+
+
+\end{document}

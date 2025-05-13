@@ -1,0 +1,1769 @@
+\documentclass[a4paper]{article}
+
+\input{C:/Users/liula/Desktop/Latex/Headers V1.2.tex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Labix}
+\lhead{Lie Groups and Lie Algebra}
+\rfoot{\thepage}
+
+\title{Lie Groups and Lie Algebra}
+
+\author{Labix}
+
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+Potentially good books: Humphreys, Erdmann and Wildson
+\end{abstract}
+\pagebreak
+\tableofcontents
+\pagebreak
+
+\section{Introduction to Lie Algebras}
+\subsection{Lie Brackets and Lie Algebras}
+\begin{defn}{Lie Brackets}{} Let $V$ be a vector space over a field $k$. Let $[-,-]:V\times V\to V$ be a bilinear map. We say that $[-,-]$ is a Lie bracket if the following are true. 
+\begin{itemize}
+\item The Alternating Property: $[X,X]=0$
+\item Jacobi identity: $[[X,Y],Z]+[[Y,Z],X]+[[Z,X],Y]=0$
+\end{itemize}
+\end{defn}
+
+Consider the cross product $\times:\R^3\times\R^3\to\R^3$ in $\R^3$. It is easy to see that it is a Lie bracket. 
+
+\begin{defn}{Lie Algebras}{} A Lie algebra is a vector space $V$ over a field $K$ together with a Lie bracket $$[-,-]:V\times V\to V$$
+\end{defn}
+
+For $k$ a field, $M_n(k)$ for any $n\geq 1$ is a Lie algebra with Lie bracket defined as $[A,B]=AB-BA$ for $A,B\in M_n(k)$. 
+
+\begin{lmm}{}{} Let $L$ be a Lie Algebra. Then for all $x,y\in L$, we have that $$[x,y]=-[y,x]$$ In other words, the Lie bracket is anti-commutative. \tcbline
+\begin{proof}
+We have that 
+\begin{align*}
+[x,y]+[y,x]&=[x,x]+[x,y-x]+[y,y]+[y,x-y]\tag{Bilinearity}\\
+&=[x,x]+[y,y]-[x-y,x-y]\tag{Bilinearity}\\
+&=0\tag{Alternating}
+\end{align*}
+and so we conclude. 
+\end{proof}
+\end{lmm}
+
+Lie Algebras are not algebras (in the sense of Rings and Modules) because the Lie bracket fails associativity. Therefore we have to redefine all the standard notions one has in algebra. 
+
+While Lie Algebras are not in general algebras, every associative algebra can be equipped with a Lie algebra. For $A$ an associative algebra over a field, we can define a bilinear map on $A$ by $$[a,b]=ab-ba$$ for all $a,b\in A$. There may also be more than one way to equip an algebra with a Lie algebra structure. One should not think that Lie Algebras encompasses associative algebras because of the different Lie algebras one can equip. Instead, we think of the Lie bracket as an extra structure on associative algebras such that they become Lie algebras. 
+
+\begin{defn}{Structure Constants}{} Let $L$ be a Lie algebra such that its underlying vector space has basis $e_1,\dots,e_n$. Define the structure constants of $L$ to be the elements $c_{ij}^k\in\F$ such that $$[e_i,e_j]=\sum_{k=1}^nc_{ij}^ke_k$$ for all $1\leq i,j\leq n$. 
+\end{defn}
+
+The structure constants are useful in the following sense. Let $L$ be a Lie algebra and let $a=\sum_{k=1}^na_ke_k$ and $b=\sum_{k=1}^nb_ke_k$ be elements of $L$. Then there Lie bracket can be written as $$[a,b]=\sum_{1\leq i<j\leq n}(a_ib_j-a_jb_i)[e_i,e_j]$$ by bilinearity. Plugging in the structure constants, we obtain $$[a,b]=\sum_{1\leq i<j\leq n}(a_ib_j-a_jb_i)\sum_{k=1}^nc_{ij}^ke_k$$ Thus we can write $[a,b]$ in terms of the basis $e_1,\dots,e_n$ using structure constants. 
+
+\subsection{Lie Subalgebras and Ideals}
+\begin{defn}{Lie Subalgebra}{} Let $V$ be a Lie algebra over $K$. A lie subalgebra of $V$ is a subset $W\subseteq V$ such that 
+\begin{itemize}
+\item $W$ is a vector subspace of $V$
+\item $[w_1,w_2]\in W$ for all $w_1,w_2\in W$
+\end{itemize}
+\end{defn}
+
+It is clear that a Lie subalgebra is also a Lie algebra in its own right. 
+
+\begin{defn}{Ideal}{} Let $V$ be a Lie algebra over $K$. Let $I$ be a subset of $V$. Then $I$ is an ideal of $V$ if the following are true. 
+\begin{itemize}
+\item $I$ is a vector subspace of $V$
+\item $[v,i]\in I$ for all $v\in V$ and $i\in I$. 
+\end{itemize}
+\end{defn}
+
+It is clear from definitions that every ideal of a Lie algebra is a Lie subalgebra. However, the converse is not always true. 
+
+\begin{prp}{}{} Let $V$ be a Lie algebra and $I,J$ ideals of $V$. Then the following are also ideals of $V$. 
+\begin{itemize}
+\item The intersection $I\cap J$
+\item The sum $I+J=\{i+j\;|\;i\in I\text{ and }j\in J\}$
+\end{itemize} \tcbline
+\begin{proof}~\\
+\begin{itemize}
+\item It is clear that $I\cap J$ is a vector subspace of $V$. Since $I$ is an ideal, $[V,I\cap J]\subseteq [V,I]\subseteq I$. Similarly, $[V,I\cap J]\subseteq[V,J]\subseteq J$. Hence $[V,I\cap J]\subseteq I\cap J$. 
+\item It is clear that $I+J$ is a vector subspace of $V$. Let $i+j\in I+J$. Let $v\in V$. Then we have $$[v,i+j]=[v,i]+[v,j]\in I+J$$ Hence $I+J$ is an ideal of $V$. 
+\end{itemize}
+\end{proof}
+\end{prp}
+
+\begin{defn}{The Lie Bracket of Ideals}{} Let $V$ be a Lie algebra. Let $I,J$ be ideals of $V$. Define the Lie bracket of $I$ and $J$ to be $$[I,J]=\langle[i,j]\;|\;i\in I\text{ and }j\in J\rangle$$
+\end{defn}
+
+\begin{lmm}{}{} Let $V$ be a Lie algebra. Let $I,J$ be ideals of $V$. Then the Lie bracket $[I,J]$ is an ideal of $V$. \tcbline
+\begin{proof}
+By definition, $[I,J]$ is a vector subspace of $V$. Let $v\in V$ and $\sum_{k=1}^na_k[i_k,j_k]\in[I,J]$. Then we have
+\begin{align*}
+\left[v,\sum_{k=1}^na_k[i_k,j_k]\right]&=\sum_{k=1}^na_k[v,[i_k,j_k]]\\
+&=\sum_{k=1}^na_k[v,[i_k,j_k]]\\
+&=-\sum_{k=1}^na_k[[i_k,j_k],v]\\
+&=-\sum_{k=1}^na_k\left(-[[j_k,v],i_k]-[[v,i_k],j_k]\right)\\
+&=-\sum_{k=1}^na_k\left([[v,j_k],i_k]-[[v,i_k],j_k]\right)\\
+&=\sum_{k=1}^na_k\left([[v,i_k],j_k]-[[v,j_k],i_k]\right)\\
+\end{align*}
+Since $I$ and $J$ are ideals, $s_k=[v,i_k]\in I$ and $t_k=[v,j_k]\in J$. We now have $$\left[v,\sum_{k=1}^na_k[i_k,j_k]\right]=\sum_{k=1}^na_k\left([s_k,j_k]-[t_k,i_k]\right)$$ But $[s_k,j_k],[t_k,i_k]$ are generators of $[I,J]$. Hence the sum also lies in $[I,J]$. 
+\end{proof}
+\end{lmm}
+
+\subsection{Products and Quotients of Lie Algebras}
+\begin{defn}{Direct Sum of Lie Algebras}{} Let $L_1$ and $L_2$ be Lie algebras. Define the direct sum of $L_1$ and $L_2$ by $$L_1\oplus L_2=\{(a_1,a_2)\;|\;a_1\in L_1,a_2\in L_2\}$$ together with component wise addition and scalar multiplication and Lie bracket operation $$[(a_1,a_2),(b_1,b_2)]=([a_1,b_1],[a_2,b_2])$$ which is component wise application of the Lie bracket for $(a_1,a_2),(b_1,b_2)\in L_1\oplus L_2$. 
+\end{defn}
+
+\begin{prp}{}{} Let $L_1$ and $L_2$ be Lie algebras. Then the following are true. 
+\begin{itemize}
+\item $[L_1\oplus L_2,L_1\oplus L_2]=[L_1,L_1]\oplus[L_2,L_2]$
+\item $\{(x,0)\;|\;x\in L_1\}\cong L_1$ is an ideal of $L_1\oplus L_2$
+\item $\{(0,y)\;|\;y\in L_2\}\cong L_2$ is an ideal of $L_1\oplus L_2$
+\end{itemize}
+\end{prp}
+
+\begin{defn}{Quotient Lie Algebra}{} Let $V$ be a Lie algebra. Let $U$ be an ideal of $V$. Define the quotient Lie algebra to be the set $$V/U=\{v+U\;|\;v\in V\}$$ together with the Lie bracket defined by $[v+U,w+U]=[v,w]+U$. 
+\end{defn}
+
+\subsection{The Centers and Centralizers of Lie Algebras}
+\begin{defn}{Center of a Lie Algebra}{} Let $L$ be a Lie algebra. Define the center of $L$ by $$Z(L)=\{z\in L\;|\;[z,x]=0\text{ for all }x\in L\}$$
+\end{defn}
+
+\begin{lmm}{}{} Let $L$ be a Lie algebra. Then $Z(L)$ is an ideal of $L$. 
+\end{lmm}
+
+\begin{prp}{}{} Let $L_1,L_2$ be Lie algebras over the same field $K$. Then $$Z(L_1\oplus L_2)=Z(L_1)\oplus Z(L_2)$$
+\end{prp}
+
+\begin{defn}{The Centralizer of a Subset}{} Let $L$ be a Lie algebra. Let $A\subseteq L$ be a subset. Define the centralizer of $A$ in $L$ to be the set $$C_L(A)=\{x\in L\;|\;[x,a]=0\text{ for all }a\in A\}$$
+\end{defn}
+
+\begin{lmm}{}{} Let $L$ be a Lie algebra. Let $A\subseteq L$ be a subset. Then $C_L(A)$ is a Lie subalgebra of $L$. 
+\end{lmm}
+
+\subsection{The Lie Algebra of Endomorphisms}
+\begin{defn}{The Lie Algebra of Endomorphisms}{} Let $V$ be a vector space over a field $k$. Define the Lie algebra of endomorphisms of $V$ to be the vector space $$\mathfrak{gl}_k(V)=\text{End}_k(V)=\{T:V\to V\;|\;T\text{ is linear}\}$$ over $k$ together with Lie bracket $[-,-]:\mathfrak{gl}_k(V)\to\mathfrak{gl}_k(V)$ given by $$[T,S]=T\circ S-S\circ T$$
+\end{defn}
+
+A priori one needs to check that the above map is indeed a Lie bracket. Let $A\text{End}_k(V)$. Then $[A,A]=A^2-A^2=0$ so that the alternating property is satisfied. For the Jacobi identity, we have that 
+\begin{align*}
+[[A,B],C]+[[B,C],A]+[[C,A],B]&=[A,B]C-C[A,B]+[B,C]A-A[B,C]+[C,A]B-B[C,A]\\
+&=ABC-BAC-CAB+CBA+BCA-CBA\\
+&\;\;\;\;-ABC+ACB+CAB-ACB-BCA+BAC\\
+&=0
+\end{align*}
+for all $A,B,C\in\text{End}_k(V)$. 
+
+\begin{defn}{The Lie Algebra of the Matrix Ring}{} Let $k$ be a field. Let $n\in\N\setminus\{0\}$. The Lie algebra of the matrix ring $\mathfrak{gl}_n(k)=M_n(k)$ is given by the Lie bracket $[-,-]:\mathfrak{gl}_n(k)\to\mathfrak{gl}_n(k)$ defined by $$[A,B]=AB-BA$$
+\end{defn}
+
+\begin{prp}{}{} Let $k$ be a field. Let $n\in\N\setminus\{0\}$. Choose a basis $\{e_1,\dots,e_n\}$ of $k^n$. Then the map $\mathfrak{gl}_n(k)\to M_n(k)$ defined by $$T\mapsto\begin{pmatrix}&&\\
+T(e_1) & \cdots & T(e_n)\\
+&&
+\end{pmatrix}$$ is a Lie algebra isomorphism. 
+\end{prp}
+
+\begin{lmm}{}{} Let $V$ be a vector space over a field $k$. Let $T,S,R\in\mathfrak{gl}_k(V)$. Then $$\text{tr}([T,S]\circ R)=\text{tr}(T\circ [S,R])$$
+\end{lmm}
+
+\begin{defn}{Lie Sub-algebra of 0 trace}{} Let $k$ be a field. Let $n\in\N\setminus\{0\}$. Define $$\mathfrak{sl}_n(k)=\{A\in\mathfrak{gl}_n(k)\;|\;\text{tr}(A)=0\}$$
+\end{defn}
+
+\begin{defn}{Lie Sub-algebra of Upper Triangular Matrices}{} Let $k$ be a field. Let $n\in\N\setminus\{0\}$. Define the Lie sub-algebra of upper triangular matrices to be $$\mathfrak{b}_n(k)=\{A\in\mathfrak{gl}_n(k)\;|\;\text{tr}(A)=0\}$$
+\end{defn}
+
+\begin{defn}{Lie Sub-algebra of Strictly Upper Triangular Matrices}{} Let $k$ be a field. Let $n\in\N\setminus\{0\}$. Define the Lie sub-algebra of strictly upper triangular matrices to be $$\mathfrak{u}_n(k)=\{A\in\mathfrak{gl}_n(k)\;|\;\text{tr}(A)=0\}$$
+\end{defn}
+
+\begin{defn}{Sympletic Lie Algebra}{} Let $k$ be a field. Let $n\in\N$. Define the sympletic Lie algebra to be $$\text{sp}_{2n}=\left\{
+\begin{pmatrix}
+A & B\\
+C & -A^T
+\end{pmatrix}\in\mathfrak{gl}_{2n}(k)\;\bigg{|}\;A,B,C\in\mathfrak{gl}_n(k), B=B^T, C=C^T\right\}$$
+\end{defn}
+
+\begin{defn}{Special Orthogonal Lie Algebra}{} Let $k$ be a field. Let $n\in\N$. Define the even dimensional special orthogonal Lie algebra to be $$\text{so}_{2n}=\left\{
+\begin{pmatrix}
+A & B\\
+C & -A^T
+\end{pmatrix}\in\mathfrak{gl}_{2n}(k)\;\bigg{|}\;A,B,C\in\mathfrak{gl}_n(k), B=-B^T, C=-C^T\right\}$$ Define the odd dimensional special orthogonal Lie algebra to be $$\text{so}_{2n+1}=\left\{
+\begin{pmatrix}
+0 & E^T & -D^T\\
+D^T & A & B\\
+-E & C & -A^T
+\end{pmatrix}\in\mathfrak{gl}_{2n}(k)\;\bigg{|}\;A,B,C\in\mathfrak{gl}_n(k), D,E\in M_{n\times 1}(k), B=-B^T, C=-C^T\right\}$$
+\end{defn}
+
+\begin{prp}{}{} Let $k$ be a field. Let $n\in\N\setminus\{0\}$. Then the following are true. 
+\begin{itemize}
+\item $\mathfrak{sl}_n(k)$ is a Lie sub-algebra of $\mathfrak{gl}_n(k)$ of dimension $n^2-1$. 
+\item $\mathfrak{b}_n(k)$ is a Lie sub-algebra of $\mathfrak{gl}_n(k)$ of dimension $\frac{n^2+n}{2}$. 
+\item $\mathfrak{u}_n(k)$ is a Lie sub-algebra of $\mathfrak{gl}_n(k)$ of dimension $\frac{n^2-n}{2}$. 
+\item $\mathfrak{sp}_{2n}(k)$ is a Lie sub-algebra of dimension $2n^2+n$. 
+\item $\mathfrak{so}_{2n}(k)$ is a Lie sub-algebra of dimension $2n^2+n$
+\item $\mathfrak{so}_{2n+1}(k)$ is a Lie sub-algebra of dimension $2n^2+3n$
+\end{itemize}
+\end{prp}
+
+\begin{eg}{}{} Write $e=\begin{pmatrix}
+0 & 1\\0 & 0
+\end{pmatrix}$, $f=\begin{pmatrix}
+0 & 0\\1 & 0
+\end{pmatrix}$,  $h=\begin{pmatrix}
+1 & 0\\0 & -1
+\end{pmatrix}$. The structural constants of $\mathfrak{sl}_2(\C)$ is given by $$[e,f]=h\;\;\;\;[e,h]=-2e\;\;\;\;[f,h]=2f$$
+\tcbline
+\begin{proof}
+We have 
+\begin{align*}
+[e,f]=ef-fe=\begin{pmatrix}
+1 & 0\\0 & 0
+\end{pmatrix}-\begin{pmatrix}
+0 & 0\\0 & 1
+\end{pmatrix}=h\\
+[e,h]=eh-he=\begin{pmatrix}
+0 & -1\\0 & 0
+\end{pmatrix}-\begin{pmatrix}
+0 & 1\\0 & 0
+\end{pmatrix}=-2e\\
+[f,h]=fh-hf=\begin{pmatrix}
+0 & 0\\1 & 0
+\end{pmatrix}-\begin{pmatrix}
+0 & 0\\-1 & 0
+\end{pmatrix}=2f
+\end{align*}
+\end{proof}
+\end{eg}
+
+\pagebreak
+\section{Lie Algebra Homomorphisms}
+\subsection{Lie Algebra Homomorphisms}
+\begin{defn}{Homomorphism of Lie algebra}{} Let $V$ and $W$ be Lie algebras over a field $K$. A homomorphism from $V$ to $W$ is an $K$-linear map $F:V\to W$ such that $$[F(a),F(b)]=F\left([a,b]\right)$$ for all $a,b\in V$. 
+\end{defn}
+
+\begin{defn}{Kernel of a Lie Algebra Homomorphism}{} Let $V$ and $W$ be Lie algebras over a field $K$. Let $F:V\to W$ be a Lie algebra homomorphism. Define the kernel of $F$ to be $$\ker(F)=\{v\in V\;|\;F(v)=0_W\}$$
+\end{defn}
+
+\begin{lmm}{}{} Let $V$ and $W$ be Lie algebras over a field $K$. Let $F:V\to W$ be a Lie algebra homomorphism. Then $\ker(F)$ is a Lie subalgebra of $V$. \tcbline
+\begin{proof}
+It is clear that $\ker(F)$ is a vector subspace of $V$. Let $k_1,k_2\in\ker(F)$. Then we have 
+\begin{align*}
+F([k_1,k_2])&=[F(k_1),F(k_2)]\tag{$F$ is a Lie algebra homomorphism}\\
+&=[0,0]\\
+&=0
+\end{align*}
+Hence $[k_1,k_2]\in\ker(F)$ and $\ker(F)$ is a Lie subalgebra of $V$. 
+\end{proof}
+\end{lmm}
+
+\begin{defn}{Isomorphisms of Lie Algebras}{} Let $V$ and $W$ be Lie algebras over a field $k$. Let $\phi:V\to W$ be a Lie algebra homomorphism. We say that $F$ is a Lie algebra isomorphism if there exists a Lie algebra homomorphism $\Phi:W\to V$ such that $\Phi\circ\phi=\text{id}_V$ and $\phi\circ\Phi=\text{id}_W$. 
+\end{defn}
+
+\begin{prp}{}{} Let $V$ and $W$ be Lie algebras over a field $k$. Let $\phi:V\to W$ be a Lie algebra isomorphism. Then $\phi$ is a vector space isomorphism. 
+\end{prp}
+
+\begin{thm}{First Isomorphism Theorem}{} Let $\phi:L_1\to L_2$ be a homomorphism of Lie algebras. Then the following are true. 
+\begin{itemize}
+\item $\ker(\phi)$ is an ideal of $L_1$
+\item $\im(\phi)$ is a Lie subalgebra of $L_2$
+\end{itemize}
+Moreover, we have an isomorphism $$\frac{L_1}{\ker(\phi)}\cong\im(\phi)$$
+\end{thm}
+
+\begin{thm}{Second Isomorphism Theorem}{} Let $L$ be a Lie algebra. Let $I$ and $J$ be ideals of $L$. Then the following are true. 
+\begin{itemize}
+\item $I$ and $J$ are ideals of $I+J$
+\item $I\cap J$ is an ideal of $I$ and $J$
+\end{itemize}
+Moreover, we have an isomorphism $$\frac{I+J}{J}\cong\frac{I}{I\cap J}$$
+\end{thm}
+
+\begin{thm}{Third Isomorphism Theorem}{} Let $L$ be a Lie algebra. Let $I$ and $J$ be ideals of $L$ such that $I\subseteq J$. Then $J/I$ is an ideal of $L/I$. Moreover, there is an isomorphism $$\frac{L/I}{J/I}\cong\frac{L}{J}$$
+\end{thm}
+
+\begin{thm}{Correspondence Theorem}{} Let $L$ be a Lie algebra with ideal $I$. Then there exists a bijective correspondence $$\{J\;|\;J\text{ is an ideal of }L\text{ and }I\subseteq J\}\;\;\;\;\overset{1:1}{\longleftrightarrow}\;\;\;\;\{K\;|\;K\text{ is an ideal of }L/I\}$$
+\end{thm}
+
+\subsection{The Adjoint Homomorphism}
+\begin{defn}{The Adjoint Homomorphism}{} Let $V$ be a Lie algebra. Define the adjoint homomorphism $\text{ad}:V\to\text{End}(V)$ to be the map given by $$\text{ad}(x)(y)=[x,y]$$
+\end{defn}
+
+\begin{lmm}{}{} Let $V$ be a Lie algebra. Then then the adjoint homomorphism $\text{ad}:V\to\text{End}(V)$ is a Lie algebra homomorphism. \tcbline
+\begin{proof}~\\
+\begin{itemize}
+\item Linearity: Let $x,y\in V$ and let $a,b\in F$. For any $z\in V$, we have
+\begin{align*}
+\text{ad}(ax+by)(z)&=[ax+by,z]\\
+&=a[x,z]+b[y,z]\\
+&=a\text{ad}(x)(z)+b\text{ad}(y)(z)\\
+&=\left(a\text{ad}(x)+b\text{ad}(y)\right)(z)
+\end{align*}
+so that $\text{ad}:V\to\text{End}(V)$ is a linear map. 
+\item Preserving the Lie bracket: Let $x,y\in V$. For any $z\in V$, we have
+\begin{align*}
+[\text{ad}(x),\text{ad}(y)](z)&=\left(\text{ad}(x)\text{ad}(y)-\text{ad}(y)\text{ad}(x)\right)(z)\\
+&=\text{ad}(x)\left(\text{ad}(y)(z)\right)-\text{ad}(y)\left(\text{ad}(x)(z)\right)\\
+&=\text{ad}(x)([y,z])-\text{ad}(y)([x,z])\\
+&=[x,[y,z]]-[y,[x,z]]\\
+&=-[[y,z],x]+[[x,z],y]\\
+&=-[[y,z],x]-[[z,y],x]-[[y,x],z]\\
+&=-[[y,z],x]+[[y,z],x]-[[y,x],z]\\
+&=[[x,y],z]\\
+&=\text{ad}([x,y])(z)
+\end{align*}
+Thus we have showed that $[\text{ad}(x),\text{ad}(y)]=\text{ad}([x,y])$. 
+\end{itemize}
+\end{proof}
+\end{lmm}
+
+\begin{lmm}{}{} Let $V$ be a Lie algebra. Then the kernel of the adjoint homomorphism is equal to $$\ker(\text{ad})=Z(V)$$ the center of $V$. \tcbline
+\begin{proof}
+Let $k\in\ker(\text{ad})$. Let $v\in V$. Then $[k,v]=\text{ad}(k)(v)=0$ since $\text{ad}(k)=0\in\text{End}(V)$. Hence $k\in Z(V)$. Conversely, if $z\in Z(V)$ then we have $$\text{ad}(z)(v)=[z,v]=0$$ for all $v\in V$. Hence $\text{ad}(z)=0\in\text{End}(V)$ and $z\in\ker(\text{ad})$. 
+\end{proof}
+\end{lmm}
+
+\begin{defn}{Ad-Nilpotency}{} Let $L$ be a Lie algebra. Let $x\in L$. We say that $x$ is ad-nilpotent if $\text{ad}(x)$ is a nilpotent in $\mathfrak{gl}(V)$. (as an element of a ring). 
+\end{defn}
+
+\begin{lmm}{}{} Let $V$ be a vector space. Let $L\subseteq\text{End}(V)$ be a Lie subalgebra. If $x\in L$ is nilpotent, then $x$ is ad-nilpotent. 
+\end{lmm}
+
+Let $V$ be a vector space over a field $k$. Let $T\in\text{End}(V)$. Recall from Linear Algebra that a Jordan-Chevalley decomposition is two linear maps $D,S\in\text{End}(V)$ such that the following are true: 
+\begin{itemize}
+\item $T=D+S$
+\item $D$ is diagonal and $S$ is nilpotent. 
+\item $DS=SD$
+\end{itemize}
+We showed that such a decomposition always exists and is unique. 
+
+\begin{prp}{}{} Let $V$ be a finite dimensional vector space over a field $k$. Let $T\in\text{End}_k(V)$. Let $T=D+S$ be the unique Jordan-Chevalley decomposition. Then $$\text{ad}(T)=\text{ad}(D)+\text{ad}(S)$$ is the Jordan-Chevalley decomposition of $\text{ad}(T)\in\text{End}(\text{End}(V))$. \tcbline
+\begin{proof}
+Let $T\in\text{End}_k(V)$ be an endomorphism. Let $T=D+S$ be the Jordan-Chevalley decomposition of $T$. Since $\text{ad}$ is linear, we have that $$\text{ad}(T)=\text{ad}(D)+\text{ad}(S)$$ \\~\\
+
+For any $C\in\text{End}_k(V)$, $\text{ad}(D)$ is defined by $\text{ad}(D)(C)=DC-CD$. Since $D$ is diagonalizable, we can choose a basis $B=\{b_1,\dots,b_n\}$ of $V$ such that the matrix representing $D$ given by $D_B=\text{diag}(\alpha_1,\dots,\alpha_r)$ is diagonal on the basis. For the standard basis $\{e_{i,j}\;|\;1\leq i,j\leq n\}$ on $\text{End}_k(V)$, we have that $$\text{ad}(D)(e_{i,j})=[D_B,e_{i,j}]=(\alpha_i-\alpha_j)e_{i,j}$$ which shows that every standard basis vector is an eigenvector of $\text{ad}(D)$. Hence $\text{ad}(D)$ is diagonal. On the other hand, since $S$ is nilpotent, by the above $\text{ad}(S)$ is nilpotent. \\~\\
+
+Finally, we have that $$(\text{ad}(D)\circ\text{ad}(S)-\text{ad}(S)\circ\text{ad}(D))(C)=[\text{ad}(D),\text{ad}(S)](C)=\text{ad}([D,S])(C)=\text{ad}(0)(C)=0$$ for all $C\in\text{End}_k(V)$. Hence $\text{ad}(D)$ and $\text{ad}(S)$ commutes. Thus $\text{ad}(T)=\text{ad}(D)+\text{ad}(S)$ is a Jordan-Chevalley decomposition. 
+\end{proof}
+\end{prp}
+
+\pagebreak
+\section{Weights and Weight Spaces}
+\subsection{Weights}
+\begin{defn}{Common Eigenvectors}{} Let $k$ be a field. Let $V$ be a vector space over $k$. Let $W$ be a vector subspace of $\text{End}_k(V)$. A common eigenvector of $W$ is a vector $v\in V$ such that for all $T\in W$, $v$ is an eigenvector of $T$. 
+\end{defn}
+
+\begin{defn}{Weights}{} Let $k$ be a field. Let $V$ be a vector space over $k$. Let $W$ be a vector subspace of $\text{End}_k(V)$. Let $v\in V$ be an eigenvector of $W$. A weight of $W$ for $v$ is an assignment $\lambda:W\to k$ such that the eigenvalue of $T$ corresponding to $v$ is $\lambda(T)$. 
+\end{defn}
+
+\begin{lmm}{}{} Let $k$ be a field. Let $V$ be a vector space over $k$. Let $W$ be a vector subspace of $\text{End}_k(V)$. Let $\lambda:W\to k$ be a weight of $W$. Then $\lambda\in W^\ast$. 
+\end{lmm}
+
+\subsection{Weight Spaces}
+\begin{defn}{Weight Spaces}{} Let $k$ be a field. Let $V$ be a vector space over $k$. Let $W$ be a vector subspace of $\text{End}_k(V)$. Let $\lambda\in W^\ast$ be a weight of $W$. Define the weight space of $\lambda$ to be $$V_\lambda=\{v\in V\;|\;T(v)=\lambda(T)v\text{ for all }T\in W\}$$
+\end{defn}
+
+\begin{lmm}{}{} Let $k$ be a field. Let $V$ be a vector space over $k$. Let $W$ be a vector subspace of $\text{End}_k(V)$. Let $\lambda\in W^\ast$ be a weight of $W$. Then $V_\lambda$ is a vector subspace of $V$. 
+\end{lmm}
+
+\begin{prp}{}{} Let $k$ be a field. Let $V$ be a vector space over $k$. Let $L$ be a Lie-subalgebra of $\mathfrak{gl}_k(V)$. Let $I$ be an ideal of $L$. Then $$V_0=\{v\in V\;|\;T(v)=0\text{ for all }T\in I\}$$ is an $L$-invariant subspace of $V$. \tcbline
+\begin{proof}
+Let $y\in L$ and $m\in V_0$. We want to show that $y(m)\in V_0$. So let $T\in I$ be arbitrary. We compute that $$T(y(m))=T(y(m))-y(T(0))=[T,y](m)$$ since the bracket of $I$ is the bracket of $L$, which is the bracket of $\mathfrak{gl}(V)$. Also, $[T,y](m)=0$ since $I$ is an ideal implies that $[T,y]\in I$ so that $m\in\ker([T,y])$ since $m\in V_0$. Thus $V_0$ is an invariant subspace of $L$. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{} Let $k$ be a field. Let $V$ be a finite dimensional vector space over $k$. Let $L$ be a Lie-subalgebra of $\mathfrak{gl}_k(V)$. Let $I$ be an ideal of $L$. Let $\lambda$ be a weight of $I$. Then $V_\lambda$ is an $L$ invariant subspace of $V$. \tcbline
+\begin{proof}
+Let $x\in L$ and $w\in V_\lambda$. We want to show that $x(w)\in V_\lambda$. So let $T\in I$. We compute that $$T(x(w))=[T,x](w)+x(T(w))=\lambda([T,x])w+\lambda(T)x(w)$$ since $[T,x]\in I$. Therefore it suffices to show that $\lambda([T,x])=0$. \\~\\
+
+Consider the subspace $$W=\C\langle x^k(w)\;|\;k\in\N\rangle\subseteq V$$ Since $V$ is finite dimensional, there exists $k\in\N$ such that $\{w,x(w),\dots,x^k(w)\}$ is a basis for $W$. I claim that for any $W$ is $I$-invariant. Let $T\in I$. We inductively show that $T(x^i(w))\in W$. When $i=0$, $T(w)=\lambda(T)(w)\in W$. Then we also have $$T(x^i(w))=[T,x](x^{i-1}(w))+x(T(x^{i-1}(w)))=\lambda([T,x])x^{i-1}(w)+\lambda(T)x^i(w)$$ by applying the inductive hypothesis. Then $x^{i-1}(w),x^i(w)\in W$ implies that $T(x^i(w))\in W$. Then the matrix of the restriction of $T\in I$ to $W$ with respect to our basis of $W$ is given by $$T=\begin{pmatrix}
+\lambda(T) & \ast & \ast & \cdots & \ast\\
+0 & \lambda(T) & \ast & \cdots & \ast\\
+0 & 0 & \lambda(T) & \cdots & \ast\\
+\vdots & \vdots & \vdots & \ddots & \vdots\\
+0 & 0 & 0 & 0 & \lambda(T)
+\end{pmatrix}$$
+Since this is true for any $T\in I$, we can apply this to any $z=[T,x]\in [L,I]\subseteq I$ to get that $\text{tr}(z)=(k+1)\lambda(z)$. Now $\text{tr}(z)=\text{tr}([T,x])=\text{tr}(Tx-xT)=0$ so that $(k+1)\lambda(z)=0$. Hence $\lambda([T,x])=\lambda(z)=0$ as required. 
+\end{proof}
+\end{prp}
+
+\pagebreak
+\section{Types of Lie Algebras}
+\subsection{Abelian Lie Algebras}
+Lie algebras that are Abelian are the simplest Lie algebra there is to study. 
+
+\begin{defn}{Abelian Lie Algebras}{} Let $L$ be a Lie algebra. We say that $L$ is abelian if $$[x,y]=0$$ for all $x,y\in L$. 
+\end{defn}
+
+\begin{lmm}{}{} Let $L$ be a Lie algebra. Then $Z(L)$ is abelian. \tcbline
+\begin{proof}
+True by definition of $Z(L)$. 
+\end{proof}
+\end{lmm}
+
+\begin{lmm}{}{} Let $L$ be a Lie algebra. Let $I$ be an ideal of $L$. Then $L/I$ is abelian if and only if $$[L,L]\subseteq I$$ \tcbline
+\begin{proof}
+Let $L/I$ be abelian. Let $v,w\in L$. Since $L/I$ is abelian, we have that $[v+I,w+I]=I$. But $[v+I,w+I]=[v,w]+I$ implies that $[v,w]\in I$. Conversely, suppose that $[L,L]\subseteq I$. Then for any $v+I,w+I\in L/I$, $[v+I,w+I]=[v,w]+I=I$. Hence $L/I$ is abelian. 
+\end{proof}
+\end{lmm}
+
+We can think of this as saying $I=[L,L]$ is the smallest ideal of $L$ for which $L/I$ is abelian. 
+
+\begin{prp}{}{} Let $L$ be a Lie algebra of dimension $1$. Then $L$ is abelian. \tcbline
+\begin{proof}
+If $L$ is $1$-dimensional over a field $k$, let $x$ be a spanning element of $L$. Then for $s,t\in L$, there exists $a,b\in k$ such that $s=ax$ and $t=bx$. Now we have that $$[ax,bx]=ab[x,x]=0$$ Hence $L$ is abelian. 
+\end{proof}
+\end{prp}
+
+\subsection{Nilpotent Lie Algebras}
+\begin{defn}{Lower Central Series}{} Let $L$ be a Lie algebra. Define the lower central series $L^0,L^1,\dots,L^n,\dots$ as follows. 
+\begin{itemize}
+\item For $n=0$, define $L^0=L$
+\item For $n\in\N\setminus\{0\}$, define $$L^n=[L,L^{n-1}]$$
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{} Let $L$ be a Lie algebra. Then the following are true. 
+\begin{itemize}
+\item For all $n\in\N$, $L^{n+1}\subseteq L^n$. 
+\item For all $n\in\N$, $L^n$ is an ideal of $L$. 
+\end{itemize} \tcbline
+\begin{proof}
+When $n=0$, both statements are clearly true. Suppose that they are true for some $k\in\N$. Then by lemma 1.2.5, $L^{k+1}=[L,L^k]$ is an ideal of $L$, and therefore $L^{k+1}\subseteq L^k$. By induction, both statements are true for all $n\in\N$. 
+\end{proof}
+\end{lmm}
+
+\begin{lmm}{}{} Let $L_1,L_2$ be Lie algebras. Let $\phi:L_1\to L_2$ be a Lie algebra homomorphism. Then $$\phi(L^k)=(\phi(L))^k$$ for all $k\in\N$. \tcbline
+\begin{proof}
+We prove by induction. The base case $k=0$ is clear. Suppose that $\phi(L^k)=(\phi(L))^k$. Then we have that 
+\begin{align*}
+\phi(L^{k+1})&=\phi([L,L^k])\\
+&=[\phi(L),\phi(L^k)]\\
+&=[\phi(L),\phi(L)^k]\\
+&=(\phi(L))^{k+1}
+\end{align*}
+By induction, we conclude. 
+\end{proof}
+\end{lmm}
+
+\begin{defn}{Nilpotent Lie Algebras}{} Let $L$ be a Lie algebra. We say that $L$ is nilpotent if there exists $n\in\N$ such that $$L^n=0$$
+\end{defn}
+
+\begin{lmm}{}{} Let $L$ be a Lie algebra. If $L$ is abelian, then $L$ is nilpotent. \tcbline
+\begin{proof}
+Let $L$ be abelian. Then $L^1=[L,L]=0$. 
+\end{proof}
+\end{lmm}
+
+\begin{eg}{}{} Consider the following Lie algebras. 
+\begin{itemize}
+\item $SL(2,\C)$ is nilpotent. 
+\item $b_n(\C)$ is not nilpotent for all $n\geq 2$. 
+\end{itemize}
+\end{eg}
+
+\begin{eg}{}{} Let $n\in\N$ such that $n\geq 2$. Let $k$ be a field. Then $\mathfrak{u}_n(k)$ is nilpotent. \tcbline
+\begin{proof}
+Write $e_{i,j}$ the matrix with $1$ at the $(i,j)$th position and $0$ everywhere else. Notice that a basis for $\mathfrak{u}_2(\C)$ is given by $\{e_{i,j}\;|\;1\leq i< j\leq n\}$. Moreover, one can compute that $[e_{i,j},e_{k,l}]=\delta_{j,k}e_{i,l}-\delta_{i,l}e_{k,j}$. \\~\\
+
+I claim that $$\mathfrak{u}_n(k)^p=\langle e_{i,j}\;|\;1\leq i, i+p<j\leq n\rangle$$ for all $0\leq p\leq n-1$. We proceed by induction. The base case is trivial. \\~\\
+
+Assume the result is true for some $p\leq n-2$. Let $a,b\in\N$ be such that $a+p+1<b$. Then notice that $e_{a,b}=[e_{a,a+1},e_{a+p+1,b}]\in[\mathfrak{u}_n(k),\mathfrak{u}_n(k)^p]=\mathfrak{u}_n(k)^{p+1}$ However, notice that $e_{a,a+p+1}$ does not lie in $\mathfrak{u}_n(k)^{p+1}$. By anti-symmetry notice that we just need to consider the case $j=k$ in $[e_{i,j},e_{k,l}]$. But $i+p<j+p<l$ implies that $l-i>p+1$. But $(a+p+1)-a=p+1$ means that no $i,l\in\N$ is such that $e_{a,a+p+1}=[e_{i,j},e_{j,l}]$. Hence we are done. 
+
+The it is clear that $\mathfrak{u}_n(k)^{n-1}=0$. So $\mathfrak{u}_n(k)$ is nilpotent. 
+\end{proof}
+\end{eg}
+
+\begin{lmm}{}{} Let $L$ be a Lie algebra. Then the following are true. 
+\begin{itemize}
+\item Let $M$ be a Lie subalgebra of $L$. If $L$ is nilpotent, then $M$ is nilpotent. 
+\item If $L\neq 0$ is nilpotent, then $Z(L)\neq 0$
+\item If $L/Z(L)$ is nilpotent, then $L$ is nilpotent. 
+\end{itemize} \tcbline
+\begin{proof}~\\
+\begin{itemize}
+\item Let $M$ be a Lie subalgebra of $L$. I claim that $M^k\subseteq L^k$ for all $k\in\N$. The base case $k=0$ is clearly true. Suppose that $M^k\subseteq L^k$. Let $x\in[M,M^k]=M^{k+1}$. Then $x=[m,t]$ for some $m\in M$ and $t\in M^k$. Then $t\in L^k$. Also $m\in L$ implies that $x=[m,t]\in[L,L^k]=L^{k+1}$. Thus $M^{k+1}\subseteq L^{k+1}$. Now since $L$ is nilpotent, there exists $n\in\N$ such that $L^n=0$. Then $M^n\subseteq L^n=0$ so that $M$ is also nilpotent. 
+\item Suppose that $n\in\N$ is the smallest natural number such that $L^n=0$. Then $[L,L^{n-1}]=0$. Let $x\in L$. Then for all $y\in L^{n-1}$, we have that $[x,y]=0$. Thus $x\in Z(L)$. 
+\item Since $L/Z(L)$ is nilpotent, there exists $n\in\N$ such that $(L/Z(L))^n=0$. Let $\pi:L\to L/Z(L)$ be the quotient homomorphism. Since $\pi$ is surjective, we use the above lemma to find that $$\pi(L^n)=\pi(L)^n=\left(\frac{L}{Z(L)}\right)^n=\frac{L^n+Z(L)}{Z(L)}=0$$ This means that $L^n\subseteq Z(L)$. It follows that $L^{n+1}=[L,L^n]\subseteq[L,Z(L)]=0$ and we conclude. 
+\end{itemize}
+\end{proof}
+\end{lmm}
+
+\begin{prp}{}{} Let $k$ be a field. Let $V$ be a vector space over $k$. Let $L\subseteq\mathfrak{gl}(V)$ be a Lie sub-algebra such that for all $T\in L$, $T$ is nilpotent. Then $$V_0=\{v\in V\;|\;T(v)=0\text{ for all }T\in L\}\neq\{0\}$$ \tcbline
+\begin{proof}
+We induct on the dimension of $V$. When $\dim(L)=1$, we have $L=\langle T\rangle$ for some non-zero $T\in\mathfrak{gl}(V)$. Suppose that $T^n=0$ but $T^{n-1}\neq 0$. Suppose that $x\in V$ is such that $T^{n-1}(x)=y\neq 0$. Then for any $S\in L=\langle T\rangle$, write $S=\lambda T$ for some $\lambda\in k$. Then we have $$S(y)=\lambda T(T^{n-1}(x))=0$$ since $T^n=0$. Thus $0\neq x\in V_0\neq\{0\}$. \\~\\
+
+Suppose the result is true for all Lie sub-algebras of $\mathfrak{gl}(V)$ of dimension $<k$. Let $L$ be a Lie sub-algebra of $\mathfrak{gl}(V)$ of dimension $k$. Let $M$ be a maximal proper Lie sub-algebra of $L$. Such a Lie sub-algebra exists since $L$ is finite dimensional and $\{0\}$ is a proper Lie sub-algebra. 
+
+Step 1: Apply inductive hypothesis ro homomorphic image of $M$. \\
+Define $f:M\to\mathfrak{gl}(L/M)$ by $$f(m)(x+M)\mapsto[m,x]+M$$ I claim that $f$ is a Lie algebra homomorphism. Such a map is well defined since $x\in M$ implies that $[m,x]\in M$. Moreover, since $[-,-]$ is bilinear, the map $f(m)$ lies in $\mathfrak{gl}(L/M)$ and that $f$ is linear. Finally, we check that 
+\begin{align*}
+[f(m_1),f(m_2)](x+M)&=(f(m_1)f(m_2)-f(m_2)f(m_1))(x+M)\\
+&=f(m_1)([m_2,x]+M)-f(m_2)([m_1,x]+M)\\
+&=[m_1,[m_2,x]]-[m_2,[m_1,x]]+M\\
+&=-[[m_2,x],m_1]+[[m_1,x],m_2]+M\\
+&=-[[m_2,x],m_1]-[[x,m_1],m_2]+M\\
+&=[[m_1,m_2],x]+M\tag{Jacobi Identity}\\
+&=f([m_1,m_2])(x+M)
+\end{align*}
+for all $m_1,m_2\in M$ and $x\in L$. Thus $f$ is a Lie algebra homomorphism.  Let $m\in M\subseteq L$. Then $m$ is nilpotent, and so $m$ is ad-nilpotent by lemma 2.2.5. This means that $\text{ad}(m)^n=0$ for some $n\in\N\setminus\{0\}$. Then we have $$f(m)^n(x+M)=\text{ad}(m)^n(x)+M=M$$ and that $f(m)$ is nilpotent. Now we have that $\dim(f(M))\leq\dim(M)<\dim(L)=k$ and all elements of $f(M)$ are nilpotent. We can apply the induction hypothesis to conclude that there exists $x\in L\setminus M$ such that $$x+M\in\{y\in L/M\;|\;T(y)=0\text{ for all }T\in f(M)\}$$~\\
+
+Step 2: Apply inductive hypothesis to $M$. \\
+I claim that $M\oplus\langle x\rangle$ is a Lie sub-algebra of $L$. To see this, let $n_1,n_2\in M\oplus\langle x\rangle$, which we can write as $n_1=m_1+\lambda_1x$ and $n_2=m_2+\lambda_2x$ for some $m_1,m_2\in M$ and $\lambda_1,\lambda_2\in k$. Then we check that $$[n_1,n_2]=[m_1+\lambda_1x,m_2+\lambda_2x]=[m_1+m_2]+\lambda_1[x,m_2]+\lambda_2[m_1,x]\in M$$ so that $M\oplus\langle x\rangle$ is indeed a Lie sub-algebra of $L$. Since $M$ is maximal and $\dim(M\oplus\langle x\rangle)>\dim(M)$, we conclude that $M\oplus\langle x\rangle=L$. Moreover, $M$ is an ideal of $L$ since we can check that for any $z\in L$ and $m\in M$, we can write $z=m+\lambda x$ for $m\in M$ and $\lambda\in k$ and compute that $$[z,m']=[m,m']+\lambda[x,m']\in M$$ for any $m'\in M$. Now apply the inductive hypothesis on $M$ to get that $$W=\{v\in V\;|\;T(v)=0\text{ for all }T\in M\}$$ is a non-trivial subspace of $L$. 
+
+Step 3: Find the element in $L$ satisfying the hypothesis. \\
+By 3.2.3, $W$ is an $L$-invariant subspace. This means that $x(w)\in W$ for all $w\in W$ and $x\in L$. Since $x\in L$, $x$ is nilpotent. Suppose that $x^t=0$ but $x^{t-1}\neq 0$. This means that there exists $w\in W$ such that $q=x^{t-1}(w)\neq 0$, and $x(q)=0$. Let $T\in L$ be arbitrary. Since $L=M\oplus\langle x\rangle$, we can write $T=m+\lambda x$ for some $m\in M$ and $\lambda\in k$. Then we have $$T(q)=m(q)+\lambda x(q)=0$$ because $q\in W$ implies that $m(q)=0$ for all $m\in M$. Thus $0\neq q\in V_0$ so that we conclude. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{Engel's Theorem for Lie Sub-algebras of $\mathfrak{gl}(V)$}{} Let $k$ be a field. Let $V$ be a finite dimensional vector space over $k$. Let $L$ be a Lie subalgebra of $\text{End}(V)$. If all $x\in L$ are nilpotent, then the following are true. 
+\begin{itemize}
+\item There exists a basis for $V$ such that all elements of $L$ are strictly upper triangular. 
+\item $L$ is nilpotent. 
+\end{itemize} \tcbline
+\begin{proof}
+We induct on the dimension of $V$. When $\dim(V)=1$, then $\mathfrak{gl}(V)\cong k$ as vector spaces. The only nilpotent element of $k$ is $0$. Thus $L=\{0\}$ and we are done. \\~\\
+
+Assume the results are true for all vector spaces $V$ with $\dim(V)<k$. Let $V$ be a $k$ dimensional vector space. By prp4.2.9, there exists $v\in V$ such that $0\neq v\in V_0$. Let $W=V/\langle v\rangle$. Define a map $\phi:L\to\mathfrak{gl}(W)$ by $$\phi(x)(u+\langle v\rangle)=x(u)+\langle v\rangle$$ Notice that this is well defined since $u\in\langle v\rangle$ implies that $x(u)=0$ by definition of $v$. Moreover, $\phi(x)$ is a well defined linear map since $x$ is a linear map. Finally, $\phi$ is a linear map since addition in $\mathfrak{gl}(V)$ is defined pointwise. It is also a Lie algebra homomorphism since 
+\begin{align*}
+\phi([x,y])(u+\langle v\rangle)&=[x,y](u)+\langle v\rangle\\
+&=x(y(u))-y(x(u))+\langle v\rangle\\
+&=\phi(x)(\phi(y)(u))-\phi(y)(\phi(x)(u))+\langle v\rangle\\
+&=[\phi(x),\phi(y)](u+\langle v\rangle)
+\end{align*}
+Hence $\phi(L)$ is a Lie sub-algebra of $\mathfrak{gl}(W)$. \\~\\
+
+Recall that all $x\in L$ are nilpotent, say $x^n=0$. Then we have $$\phi(x)^n(u+\langle v\rangle)=x^n(u)+\langle v\rangle=\langle v\rangle$$ so that all elements of $\phi(L)$ are nilpotent. Since $\dim(W)=\dim(V)-1$, we can apply the induction hypothesis to get a basis $u_1+\langle v\rangle,\dots,u_{k-1}+\langle v\rangle$ such that all elements of $\mathfrak{gl}(W)$ are strictly upper triangular. I claim that $v,u_1,\dots,u_{k-1}$ is a basis for $L$ so that all elements of $L$ are strictly upper triangular. Let $x\in L$. The matrix of $x$ is given by the matrix of $x|_{\langle v\rangle}$ and the block sum of the matrix of $x|_W=\phi(x)$. By assumption $\phi(x)$ is upper triangular with respect to $u_1+\langle v\rangle,\dots,u_{k-1}+\langle v\rangle$. Since $x(v)=0$ by construction, we conclude that $x$ is upper triangular with respect to the basis $v,u_1,\dots,u_{k-1}$ and so the first part is complete. \\~\\
+
+For the second part, we know that $V$ has a basis for which all elements of $L$ are strictly upper triangular. This means that $L$ is a Lie subalgebra of $\mathfrak{u}_n(k)$ for $n=\dim(V)$. By 3.2.7 and 3.2.8 we conclude that $L$ is nilpotent. 
+\end{proof}
+\end{prp}
+
+\begin{thm}{Engel's Theorem}{} Let $L$ be a finite dimensional Lie algebra. Then $L$ is nilpotent if and only if all $x\in L$ are ad-nilpotent. \tcbline
+\begin{proof}
+Let $L$ be nilpotent. Then $L^n=0$ for some $n\in\N$. Since $\text{ad}(x)^n(y)\in L^n$ for all $x$ and $y$, we conclude that $x$ is ad-nilpotent. \\~\\
+
+Conversely, suppose that all $x\in L$ are ad-nilpotent. Consider the adjoint homomorphism $\text{ad}:L\to\mathfrak{gl}(L)$. Since all $x\in L$ are ad-nilpotent, this means that $\text{ad}(x)\in\mathfrak{gl}(L)$ is nilpotent for all $\text{ad}(x)\in\text{ad}(L)$. Then by Engel's theorem for Lie sub-algebras of $\mathfrak{gl}(V)$, we conclude that $\text{ad}(L)$ is nilpotent. Since $\text{ad}(L)\cong\frac{L}{\text{ad}}=\frac{L}{Z(L)}$, by 3.2.8 we conclude that $L$ is nilpotent. 
+\end{proof}
+\end{thm}
+
+\subsection{Soluble Lie Algebras}
+\begin{defn}{Derived Series}{} Let $L$ be a Lie algebra. Define the derived series $L^{(n)}$ of $L$ to be the sequence recursively defined as follows. 
+\begin{itemize}
+\item For $n=0$, define $L^{(0)}=L$
+\item When $n\in\N\setminus\{0\}$, define $$L^{(n)}=[L^{(n-1)},L^{(n-1)}]$$
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{} Let $L$ be a Lie algebra. Then the following are true. 
+\begin{itemize}
+\item For all $n\in\N$, $L^{(n+1)}\subseteq L^{(n)}$. 
+\item For all $n\in\N$, $L^{(n)}$ is an ideal of $L$. 
+\end{itemize} \tcbline
+\begin{proof}
+Both are clear when $n=0$. Suppose that they are true for some $k\in\N$. Then by lemma 1.2.5, $L^{(k+1)}=[L^{(k)},L^{(k)}]$ is an ideal of $L$, and hence $L^{(k+1)}\subseteq L^{(k)}$. By induction, both cases are true for all $n\in\N$. 
+\end{proof}
+\end{lmm}
+
+\begin{lmm}{}{} Let $L_1,L_2$ be Lie algebras. Let $\phi:L_1\to L_2$ be a Lie algebra homomorphism. Then $$\phi(L_1^{(k)})=\phi(L_1)^{(k)}$$ \tcbline
+\begin{proof}
+When $k=0$, the lemma is trivial. Assume that it is true for some $k$. Then we have $$\phi(L^{(k+1)})=\phi([L^{(k)},L^{(k)}])=[\phi(L^{(k)}),\phi(L^{(k)})]=[\phi(L)^{(k)},\phi(L)^{(k)}]=\phi(L)^{(k+1)}$$ By induction we conclude. 
+\end{proof}
+\end{lmm}
+
+\begin{defn}{Soluble Lie Algebras}{} Let $L$ be a Lie algebra. We say that $L$ is soluble if there exists $n\in\N$ such that $$L^{(n)}=0$$
+\end{defn}
+
+\begin{lmm}{}{} Let $L$ be a Lie algebra. Then the following are true. 
+\begin{itemize}
+\item If $L$ is abelian, then $L$ is soluble. 
+\item If $L$ is nilpotent, then $L$ is soluble. 
+\end{itemize} \tcbline
+\begin{proof}
+Let $L$ be abelian. Then $L^{(1)}=[L,L]=0$. \\~\\
+
+I claim that $L^{(n)}\subseteq L^n$. When $n=0$, the case is trivial. Suppose that $L^{(k)}\subseteq L^k$ for some $k\in\N$. Then we have $$L^{(k+1)}=[L^{(k)},L^{(k)}]\subseteq[L,L^{(k)}]\subseteq[L,L^k]=L^{k+1}$$ By induction, we conclude that $L^{(n)}=L^n$ for all $n\in\N$. If $L$ is nilpotent, then $L^n=0$ for some $n$ so that $L^{(n)}=0$. Then $L$ is soluble. 
+\end{proof}
+\end{lmm}
+
+\begin{prp}{}{} Let $L$ be a Lie algebra of dimension $2$. Then $L$ is soluble. \tcbline
+\begin{proof}
+If $L$ is abelian, then lmm 2.2.4 implies that $L$ is soluble. So suppose that $L$ is non-abelian. Then $L^{(1)}=[L,L]\neq 0$. Suppose for a contradiction that $[L,L]=L$. Let $v,w\in L$ be non-zero. Define $x=[v,w]$ and extend it to a basis $\{x,y\}$ of $L$. Suppose that $v=ax+by$ and $w=cx+dy$. Then we have that $$x=[v,w]=[ax+by,cx+dy]=(ad-bc)[x,y]$$ Since $[L,L]=L$, there exists $f,g\in L$ such that $[f,g]=y$. Let $f=px+qy$ and $g=rx+sy$. Then we have that $$y=[f,g]=[px+qy,rx+sy]=(ps-qr)[x,y]$$ Then we have that $$\frac{1}{ad-bc}x=[x,y]=\frac{1}{(ps-qr)}y$$ which means that $x$ and $y$ are linearly dependent. This is a contradiction. Hence $[L,L]\neq L$. \\~\\
+
+Since $[L,L]$ is a Lie subalgebra of $L$, $[L,L]$ must be $1$-dimensional. By the classification of $1$-dimensional Lie algebras, $L^{(1)}=[L,L]$ is abelian. Hence $L^{(2)}=[L^{(1)},L^{(1)}]=0$. Thus $L$ is soluble. 
+\end{proof}
+\end{prp}
+
+\begin{eg}{}{} The Lie algebras $\mathfrak{gl}_2(\C)$ and $\mathfrak{sl}_2(\C)$ are not soluble. \tcbline
+\begin{proof}
+Using a similar method as Example3.2.7, recall that a basis for $\mathfrak{gl}_2(\C)$ is given by $\{e_{1,1},e_{1,2},e_{2,1},e_{2,2}\}$. Then we compute that $\mathfrak{gl}_2(\C)^{(1)}$ is spanned by the elements
+\begin{itemize}
+\item $[e_{1,1},e_{1,2}]=e_{1,2}$
+\item $[e_{1,1},e_{2,1}]=-e_{2,1}$
+\item $[e_{1,1},e_{2,2}]=0$
+\item $[e_{1,2},e_{2,1}]=e_{1,1}-e_{2,2}$
+\item $[e_{1,2},e_{2,2}]=e_{1,2}$
+\item $[e_{2,1},e_{2,2}]=-e_{2,1}$
+\end{itemize}
+So that $\mathfrak{gl}_2(\C)^{(1)}=\mathfrak{sl}_2(\C)$. We can then compute $\mathfrak{gl}_2(\C)^{(2)}=\mathfrak{sl}_2(\C)^{(1)}$ which is spanned by 
+\begin{itemize}
+\item $[e_{1,2},e_{2,1}]=e_{1,1}-e_{2,2}$
+\item $[e_{1,2},e_{1,1}-e_{2,2}]=-2e_{1,2}$
+\item $[e_{2,1},e_{1,1}-e_{2,2}]=e_{2,1}+e_{2,2}$
+\end{itemize}
+So that $\mathfrak{gl}_2(\C)^{(2)}=\mathfrak{sl}_2(\C)^{(1)}=\mathfrak{sl}_2(\C)$. Since both of the derived series stabilizes, we conclude that they are not soluble. 
+\end{proof}
+\end{eg}
+
+\begin{eg}{}{} Let $n\geq 2$. Then $\mathfrak{b}_2(\C)$ is soluble. \tcbline
+\begin{proof}
+Using a similar method as Example3.2.7, we conclude that $\mathfrak{b}_n(\C)^{(1)}=[\mathfrak{b}_n(\C),\mathfrak{b}_n(\C)]=\mathfrak{u}_n(\C)$. Assume that $\mathfrak{b}_n(\C)^{(k)}=\mathfrak{u}_n(\C)^{(k-1)}$. Then we have $$\mathfrak{b}_n(\C)^{(k+1)}=[\mathfrak{b}_n(\C)^{(k)},\mathfrak{b}_n(\C)^{(k)}]=[\mathfrak{u}_n(\C)^{(k-1)},\mathfrak{u}_n(\C)^{(k-1)}]=\mathfrak{u}_n(\C)^{(k)}$$ So by induction we have $\mathfrak{b}_n(\C)^{(n+1)}=\mathfrak{u}_n(\C)^{(n)}$ for all $n\in\N$. Since $\mathfrak{u}_n(\C)$ is nilpotent, it is also soluble. Hence $\mathfrak{b}_n(\C)$ is also soluble. 
+\end{proof}
+\end{eg}
+
+\begin{prp}{}{} Let $L$ be a Lie algebra. Let $I$ and $J$ be ideals of $L$. Then the following are true. 
+\begin{itemize}
+\item Let $\phi:L\to K$ be a Lie algebra homomorphism. If $L$ is soluble then $\phi(L)$ is soluble. 
+\item Let $M$ be a Lie subalgebra of $L$. If $L$ is soluble, then $M$ is soluble. 
+\item If $L$ is soluble, then $L/I$ is soluble. 
+\item If $I$ and $L/I$ are soluble, then $L$ is soluble. 
+\item If $I$ and $J$ are soluble, then $I+J$ is soluble. 
+\end{itemize} \tcbline
+\begin{proof}~\\
+\begin{itemize}
+\item Suppose that $L^{(n)}=0$ for some $n$. Then $0=\phi(L^{(n)})=\phi(L)^{(n)}$ so we are done. 
+\item When $k=0$, we have $M^{(0)}=M\subseteq L=L^{(0)}$. Assume that $M^{(k)}\subseteq L^{(k)}$ for some $k\in\N$. Then we have $$M^{(k+1)}=[M^{(k)},M^{(k)}]\subseteq[L^{(k)},L^{(k)}]=L^{(k+1)}$$ So by induction we have $M^{(n)}\subseteq L^{(n)}$ for all $n$. If $L$ is soluble, then $L^{(n)})=0$ for some $n$ so that $M^{(n)}\subseteq L^{(n)}=0$. 
+\item Suppose that $L^{(n)}=0$ for some $n\in\N$. Let $\pi:L\to L/I$ be the projection map. Then we have $$0=\pi(L^{(n)})=(L/I)^{(n)}$$ so we are done. 
+\item Suppose that $(L/I)^{(n)}=0$ for some $n\in\N$. Let $\pi:L\to L/I$ be the projection map. Since $\pi$ is surjective, we have $$\pi(L^{(n)})=(L/I)^{(n)}=0$$ This means that $L^{(n)}\subseteq I$. We know that $I$ being soluble means that $I^{(k)}=0$ for some $k$. Therefore we have $$L^{(n+k)}\subseteq I^{(k)}=0$$ so that $L$ is soluble. 
+\item By the third isomorphism theorem, we have a Lie algebra isomorphism $\frac{I+J}{J}\cong\frac{I}{I\cap J}$. Since $I$ is soluble, $\frac{I}{I\cap J}$ is soluble by the above. Hence $\frac{I+J}{J}$ is soluble. Since $J$ is also soluble, from the above we conclude that $I+J$ is soluble. 
+\end{itemize}
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{} Let $V$ be a vector space over $\C$. Let $L$ be a Lie sub-algebra of $\mathfrak{gl}(V)$. If $L$ is soluble, then there exists $0\neq v\in V$ such that $v$ is an eigenvector for $T$ for all $T\in L$. \tcbline
+\begin{proof}
+We proceed by induction on the dimension of $L$. When $\dim(L)=1$ it is clear. Suppose that the result is true for any Lie algebra of dimension $<n$. Let $L$ be a Lie algebra of dimension $n$. \\~\\
+
+Step 1: Find an ideal $M$ of dimension $\dim(L)-1$ containing $[L,L]$. \\
+Since $L$ is soluble, $[L,L]\neq L$. Let $M$ be a vector space containing $[L,L]$ of dimension $n-1$. I claim that $M$ is an ideal of $L$. Indeed, let $x\in L$ and $m\in M$. Then we have $$[x,m]\in [L,L]\subseteq M$$ Let $z\in L/M$ such that $L=M\oplus\langle z\rangle$. \\~\\
+
+Step 2: Apply induction hypothesis to $M$. \\
+Since $\dim(M)=\dim(L)-1$, we can apply the inductive hypothesis to see that there exists $w\in V$ that is a common eigvevector for all $m\in M$. Let $\lambda:M\to\C$ be the corresponding weight of $m$. By 3.2.4, $V_\lambda$ is $L$-invariant and also $\langle z\rangle$-invariant. This means that there exists $0\neq v\in V_\lambda$ that is an eigenvector for both $z$ and hence $\langle z\rangle$, and $M$. 
+\end{proof}
+\end{prp}
+
+\begin{thm}{Lie's Theorem}{} Let $V$ be a vector space over $\C$. Let $L$ be a soluble Lie sub-algebra of $\mathfrak{gl}(V)$. Then there exists a basis $B$ of $V$ such that for all $T\in L$, $T$ is upper triangular. 
+\end{thm}
+
+\begin{prp}{}{} Let $L$ be a Lie algebra over $\C$. Then $L$ is soluble if and only if $[L,L]$ is nilpotent. \tcbline
+\begin{proof}
+Suppose that $[L,L]$ is nilpotent. Then $[L,L]$ is soluble by 3.3.5. Since $L/[L,L]$ is abelian, it is also soluble. Hence by 3.3.9, $L$ is soluble. \\~\\
+
+Suppose that $L$ is soluble. Then $\text{ad}(L)\leq\mathfrak{gl}(L)$ is soluble by 3.3.9. By Lie's theorem, there exists a basis $B$ of $V$ such that for all $T\in\text{ad}(L)$, $T$ is upper triangular. Hence $\text{ad}(L)$ is isomorphic as Lie algebras to a Lie sub-algebra of $\mathfrak{b}_n(\C)$. Since $\text{ad}(L)^1=\mathfrak{b}_n(\C)^1=\mathfrak{u}_n(\C)$ and the latter is nilpotent, we conclude that $\text{ad}(L)$ is nilpotent. Then $\text{ad}([L,L])=[\text{ad}(L),\text{ad}(L)]$ implies that $\text{ad}(x)$ is nilpotent for all $x\in [L,L]$. By Engel's theorem, $[L,L]$ is nilpotent
+\end{proof}
+\end{prp}
+
+\subsection{Low Dimensional Lie Algebras}
+\begin{prp}{}{} Let $L$ be a Lie algebra over a field $k$ such that $\dim(L)=1$. Then $L$ is isomorphic to $k$ equipped with the trivial Lie bracket. In particular, $L$ is abelian. 
+\end{prp}
+
+\begin{prp}{}{} Let $L$ be a Lie algebra over a field $k$ such that $\dim(L)=2$. Then $L$ is isomorphic to one of the following. 
+\begin{itemize}
+\item The vector space $k^2$ together with the trivial Lie bracket. 
+\item The vector space $k^2=\langle x,y\rangle$ together with the Lie bracket defined by $[x,y]=x$. 
+\end{itemize} 
+In both cases, $L$ is soluble. \tcbline
+\begin{proof}
+Let $L$ be non-abelian. Then $[L,L]$ must have dimension at least $1$. It must also have dimension at most $1$, otherwise $[L,L]=L$ implies that $L$ is not soluble. Thus $\dim([L,L])=1$. Suppose that $x$ spans $[L,L]$. Let $y\in L$ be such that $\{x,y\}$ is a basis for $L$. Then $[x,y]=\lambda x$ for some $\lambda\neq 0$. Then let $y'=\frac{1}{\lambda}y$ so that $[x,y']=x$. Hence $L$ has a basis $\{x,y\}$ such that $[x,y]=x$ and we are done. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{} Let $L$ be a Lie algebra over $\C$ such that $\dim(L)=3$. Then $L$ is isomorphic to one of the following. 
+\begin{itemize}
+\item The vector space $\C^3$ together with the trivial Lie bracket. 
+\item $\mathfrak{u}_3(\C)$. (Case $\dim([L,L])=1$ and $[L,L]\subseteq Z(L)$)
+\item The direct sum of the non-abelian $\C^2$ Lie algebra and $\C$. (Case $\dim([L,L])=1$ and $[L,L]\not\subseteq Z(L)$)
+\item (Case $\dim([L,L])=2$)
+\item $\mathfrak{sl}_2(\C)$ (Case $\dim([L,L])=3$)
+\end{itemize}
+\end{prp}
+
+\begin{lmm}{}{} Let $L$ be a Lie algebra such that $\dim(L)=3$. If $Z(L)\neq\emptyset$ then $L$ is nilpotent. 
+\end{lmm}
+
+\subsection{Semisimple Lie Algebras}
+\begin{lmm}{}{} Let $L$ be a Lie algebra. Then there exists a unique soluble ideal $S$ of $L$ such that for any soluble ideal $J\subseteq L$, we have $J\subseteq S$. \tcbline
+\begin{proof}
+Every Lie algebra has a soluble ideal $Z(L)$. Hence the set of all soluble ideals of $L$ is non-empty. Then it has a maximal element $S$. For any other soluble ideal $I$, $S+I$ is soluble and is either $S+I=L$ or $S+I=S$. Hence $S$ is  the unique maximal soluble ideal containing all other soluble ideals. 
+\end{proof}
+\end{lmm}
+
+\begin{defn}{Radical Ideals}{} Let $L$ be a Lie algebra. Define the radical ideal $\text{rad}(L)\subseteq L$ of $L$ to be the unique soluble ideal of $L$ that contains all other soluble ideals. 
+\end{defn}
+
+\begin{defn}{Semisimple Lie Algebras}{}{} Let $L$ be a Lie algebra. We say that $L$ is semisimple if $$\text{rad}(L)=\{0\}$$
+\end{defn}
+
+\begin{lmm}{}{} Let $L$ be a Lie algebra. If $L$ is semisimple, then $\dim(L)\geq 3$. \tcbline
+\begin{proof}
+Any Lie algebra of dimension $1$ or $2$ must be soluble, and cannot be semisimple. 
+\end{proof}
+\end{lmm}
+
+\begin{lmm}{}{} Let $L$ be a Lie algebra. Then $L/\text{rad}(L)$ is semisimple. \tcbline
+\begin{proof}
+Let $K$ be a soluble ideal of $L/\text{rad}(L)$. By the correspondence theorem, there exists an ideal $I$ of $L$ such that $\text{rad}(L)\subseteq I$ and $K=I/\text{rad}(L)$. Since $\text{rad}(L)$ and $K$ are soluble, we conclude that $I$ is soluble. Hence $I\subseteq\text{rad}(L)$. We conclude that $I=\text{rad}(L)$. Hence $K=\{0\}$. Thus $L/\text{rad}(L)$ is semisimple. 
+\end{proof}
+\end{lmm}
+
+\begin{lmm}{}{} Let $L$ be a Lie algebra. Then $L$ is not semisimple if and only if $L$ contains a non-trivial abelian ideal. \tcbline
+\begin{proof}
+If $L$ is not semisimple, then $\text{rad}(L)\neq\{0\}$ is a non-trivial soluble ideal. This means that there exists a smallest $n\in\N$ such that $\text{rad}(L)^{(n)}=0$. But this is the same as saying that $$[\text{rad}(L)^{(n-1)},\text{rad}(L)^{(n-1)}]=\text{rad}(L)^{(n)}=0$$ This means that $\text{rad}(L)^{(n-1)}$ is an abelian ideal. In particular, it is non-trivial since $n$ is the smallest number for which $\text{rad}(L)^{(n)}$ is zero. \\~\\
+
+If $L$ contains a non-trivial abelian ideal $I$, then by lmm 2.2.4 we have that $I$ is soluble. Hence $I\subseteq\text{rad}(L)$ and $\text{rad}(L)$ is non-zero. Hence $L$ is not semisimple. 
+\end{proof}
+\end{lmm}
+
+\begin{eg}{}{} The following are true. 
+\begin{itemize}
+\item $\mathfrak{gl}_2(\C)$ is not semisimple. 
+\item $\mathfrak{sl}_2(\C)$ is semisimple. 
+\end{itemize} \tcbline
+\begin{proof}
+Since $Z(\mathfrak{gl}_2(\C))$ is abelian, it is soluble. Hence $Z(\mathfrak{gl}_2(\C))\subseteq\text{rad}(\mathfrak{gl}_2(\C))$. Thus $\mathfrak{gl}_2(\C)$ is not semisimple. \\~\\
+
+I claim that $$\text{rad}(\mathfrak{gl}_2(\C))=Z(\mathfrak{gl}_2(\C))=\{aI_2\;|\;a\in\C\}$$ The second equality is clear. Notice that if the dimension of $\text{rad}(\mathfrak{gl}_2(\C))$ is $2$ or $3$, then $\frac{\mathfrak{gl}_2(\C)}{\text{rad}(\mathfrak{gl}_2(\C))}$ has dimension $1$ or $2$. In both cases, we have seen that it must be soluble. This is a contradiction since $\text{rad}(\mathfrak{gl}_2(\C))$ being soluble implies that $\mathfrak{gl}_2(\C)$ is soluble. Therefore $\dim_\C(\text{rad}(\mathfrak{gl}_2(\C)))=1$. Since $Z(\mathfrak{gl}_2(\C))$ also has dimension $1$, we conclude that $Z(\mathfrak{gl}_2(\C))=\text{rad}(\mathfrak{gl}_2(\C))$. \\~\\
+
+Consider the composite Lie algebra homomorphism given by the inclusion $\mathfrak{sl}_2(\C)\hookrightarrow\mathfrak{gl}_2(\C)$ composed with the projection $\mathfrak{gl}_2(\C)\to\frac{\mathfrak{gl}_2(\C)}{Z(\mathfrak{gl}_2(\C))}$. They both have dimension $3$. Moreover, it is injective because if $\begin{pmatrix}
+a & b\\
+c & -a
+\end{pmatrix}\in Z(\mathfrak{gl}_2(\C))$, then we conclude that $a=b=c=0$. Therefore the composite map is a Lie algebra isomorphism. By the above theorem, we have that $$\text{rad}(\mathfrak{sl}_2(\C))\cong\text{rad}\left(\frac{\mathfrak{gl}_2(\C)}{Z(\mathfrak{gl}_2(\C))}\right)=\text{rad}\left(\frac{\mathfrak{gl}_2(\C)}{\text{rad}(\mathfrak{gl}_2(\C))}\right)=0$$ Thus $\mathfrak{sl}_2(\C)$ is semisimple. 
+\end{proof}
+\end{eg}
+
+\subsection{Simple Lie Algebras}
+\begin{defn}{Simple Lie Algebras}{} Let $L$ be a Lie algebra. We say that $L$ is simple if $L$ is non-abelian and has no proper non-zero ideals. 
+\end{defn}
+
+\begin{lmm}{}{} Let $L$ be a Lie algebra. If $L$ is simple, then $L$ is semisimple. \tcbline
+\begin{proof}
+Since $L$ has no non-trivial proper ideals, $\text{rad}(L)=\{0\}$ or $L$. If $\text{rad}(L)=L$, then $L$ is abelian and hence a contradiction. 
+\end{proof}
+\end{lmm}
+
+\begin{eg}{}{} $\mathfrak{sl}_2(\C)$ is a simple Lie algebra. \tcbline
+\begin{proof}
+We know that $\dim_\C(\mathfrak{sl}_2(\C))=3$. Let $I$ be a proper non-zero ideal of $\mathfrak{sl}_2(\C)$. Then $I$ has dimension $1$ or $2$. As a Lie algebra $I$ must be soluble. Then $I\subseteq\text{rad}(\mathfrak{sl}_2(\C))\neq\{0\}$ so that $\mathfrak{sl}_2(\C)$ is not semisimple, a contradiction. 
+\end{proof}
+\end{eg}
+
+\pagebreak
+\section{The Killing Form of a Lie Algebra}
+\subsection{The Killing Form}
+Let $A=(a_{i,j})$ be an $n\times n$ matrix. Recall that the trace of $A$ is defined as $$\text{tr}(A)=\sum_{k=1}^na_{k,k}$$ Now let $T:V\to V$ be a linear map. Then we can also define the trace of $T$ abstractly so that any choice of representation of $T$ with a matrix gives coinciding trace. This is also given in Linear Algebra. The formula is $$\text{tr}(T)=\sum_{i=1}^n\langle T(e_i),e_i\rangle$$
+
+\begin{defn}{The Killing Form}{} Let $L$ be a Lie algebra over $\C$. Define the killing form of $L$ to be the function $$k_L:L\times L\to\C$$ given by $k_L(x,y)=\text{tr}(\text{ad}(x)\circ\text{ad}(y))$. 
+\end{defn}
+
+\begin{lmm}{}{} Let $L$ be a Lie algebra. Then then following are true. 
+\begin{itemize}
+\item The killing form on $L$ is a symmetric bilinear form. 
+\item $k_L([x,y],z)=k_L(x,[y,z])$ for all $x,y,z\in L$. 
+\end{itemize} \tcbline
+\begin{proof}
+Let $L$ be a Lie algebra over a field $\F$. Let $x,y\in L$. Then we have that $$k_L(x,y)=\text{tr}(\text{ad}(x)\circ\text{ad}(y))=\text{tr}(\text{ad}(y)\circ\text{ad}(x))=k_L(y,x)$$ since the trace function preserve commutation. Thus $k_L$ is symmetric. Because it is symmetric, it is sufficient to show that $k_L$ is linear in the first variable for bilinearity. But the adjoint homomorphism is linear and composition preserves linearity. Hence $k_L$ is bilinear. \\~\\
+
+Finally, we have that 
+\begin{align*}
+k_L([x,y],z)&=\text{tr}(\text{ad}([x,y])\circ\text{ad}(z))\\
+&=\text{tr}([\text{ad}(x),\text{ad}(y)]\circ\text{ad}(z))\tag{$\text{ad}$ is a Lie algebra Hom}\\
+&=\text{tr}(\text{ad}(x)\circ[\text{ad}(y),\text{ad}(z)])\tag{lmm1.6.2}\\
+&=k_L(x,[y,z])
+\end{align*}
+\end{proof}
+\end{lmm}
+
+\begin{lmm}{}{} Let $L$ be a finite dimensional Lie algebra. Let $I$ be an ideal of $L$. Then we have $$k_I=k_L|_{I\times I}$$ \tcbline
+\begin{proof}
+Let $I$ be an ideal of $L$ so that $I$ is also a Lie subalgebra of $L$. Let $B_I$ be a basis for $I$. Extend it to a basis $B_L$ of $L$. Let $x\in I$. Then we have a Lie algebra homomorphism $\text{ad}(x):L\to I$ since $[x,z]\in I$ for all $z\in L$. We can then represent $\text{ad}(x)$ in the basis $B$ using the matrix $$T=\begin{pmatrix}
+A_x & B_x\\
+0 & 0
+\end{pmatrix}$$ where $A_x$ is the matrix representing the linear map $\text{ad}(x)|_I:I\to I$. For any $x,y\in I$, we have that 
+\begin{align*}
+k_L(x,y)&=\text{tr}(\text{ad}(x)\circ\text{ad}(y))\\
+&=\text{tr}\left(\begin{pmatrix}
+A_x & B_x\\
+0 & 0
+\end{pmatrix}\begin{pmatrix}
+A_y & B_y\\
+0 & 0
+\end{pmatrix}\right)\\
+&=\text{tr}\left(\begin{pmatrix}
+A_xA_y & A_xB_y\\
+0 & 0
+\end{pmatrix}\right)\\
+&=\text{tr}(A_xA_y)\\
+&=k_I(x,y)
+\end{align*}
+\end{proof}
+\end{lmm}
+
+\subsection{Cartan's Two Criteria}
+\begin{lmm}{}{} Let $V$ be a vector space over a field $k$. Let $T:V\to V$ be a linear map. Let $T=D+N$ be the Jordan-Chevalley decomposition of $T$. Then there exists $p,q\in\C[t]$ such that $p(T)=D$ and $q(T)=N$. 
+\end{lmm}
+
+\begin{prp}{}{} Let $V$ be a vector space over a field $k$. Let $L\leq\mathfrak{gl}(V)$ be a Lie sub-algebra. If $\text{tr}(xy)=0$ for all $x,y\in L$, then $L$ is soluble. \tcbline
+\begin{proof}
+Let $x\in [L,L]$. Let $x=d+n$ be the Jordan decomposition of $x\in\mathfrak{gl}(V)$. Choose a basis $B$ for $V$ such that $d$ is diagonal. Then $x$ is in its Jordan canonical form. Since $x\in[L,L]$, there exists $y_1,\dots,y_r,z_1,\dots,z_r\in L$ such that $x=\sum_{i=1}^r[y_i,z_i]$. Then we have $$\text{tr}(\overline{d}x)=\text{tr}\left(\overline{d}\sum_{i=1}^r[y_i,z_i]\right)=\sum_{i=1}^r\text{tr}(\overline{d}[y_i,z_i])=\sum_{i=1}^r\text{tr}([\overline{d},y_i]z_i)$$ By 2.2.6, the Jordan decomposition of $\text{ad}(x)$ is $\text{ad}(x)=\text{ad}(d)+\text{ad}(n)$. By the above lemma and ???, there exists a polynomial $p\in\C[t]$ such that $p(\text{ad}(x))=\text{ad}(\overline{d})$. Since $\text{ad}(x):L\to L$, we have that $\text{ad}(\overline{d})=p(\text{ad}(x)):L\to L$. Hence $\text{ad}(\overline{d})(y_i)=[\overline{d},y_i]\in L$. Then $z_i\in L$ and $\text{ad}(\overline{d})\in L$ implies that $\text{tr}([\overline{d},y_i]z_i)=0$. Since $\text{tr}(\overline{d}x)$ is the sum of the square of the absolute values of the elements in $\overline{d}$ and it is equal to $0$, we conclude that $\overline{d}=0$ and hence $d=0$. So that $x$ is nilpotent. \\~\\
+
+Then $x$ is ad-nilpotent so by Engel's theorem, $[L,L]$ is nilpotent. Then by 4.3.12, $L$ is soluble. 
+\end{proof}
+\end{prp}
+
+\begin{thm}{Cartan's First Criterion}{} Let $L$ be a Lie algebra over $\C$. Then $L$ is soluble if and only if $k(x,y)=0$ for all $x\in L$ and $y\in[L,L]$. \tcbline
+\begin{proof}
+Let $L$ be soluble. Then $\text{ad}(L)=[L,L]$ is a Lie subalgebra of $L$ and is soluble by 4.3.9. By Lie's theorem, there exists a basis $B$ of $L$ such that every element of $\text{ad}(L)\leq\text{End}_\C(L)$ is upper triangular. Hence every element of $\text{ad}([L,L])=[\text{ad}(L),\text{ad}(L)]$ is represented by a strictly upper triangular matrix since $[\mathfrak{b}_n(k),\mathfrak{b}_n(k)]=\mathfrak{u}_n(k)$. Hence $\text{tr}(\text{ad}(x)\circ\text{ad}(y))=0$ for all $x\in L$ and $y\in[L,L]$. \\~\\
+
+Now suppose that $\text{tr}(\text{ad}(x)\circ\text{ad}(y))=0$ for all $x\in L$ and $y\in[L,L]$. This means that $\text{ad}([L,L])=[\text{ad}(L),\text{ad}(L)]$ is soluble by the above proposition. By 4.1.3 we know that $\text{ad}(L)/([\text{ad}(L),\text{ad}(L)])$ is abelian. By prp4.3.9, we conclude that $\text{ad}(L)$ is soluble. Since $Z(L)$ is abelian, $Z(L)$ is soluble. Hence by the same proposition we conclude that $L$ is soluble since $\text{ad}(L)=L/Z(L)$. 
+\end{proof}
+\end{thm}
+
+Let $L$ be a Lie algebra. The killing form allows $L$ to be an inner product space. Recall from Linear Algebra that the orthogonal complement of a subspace $W$ of $L$ is given by $$W^\perp=\{x\in L\;|\;k(x,w)=0\text{ for all }w\in W\}$$
+
+\begin{lmm}{}{} Let $L$ be a Lie algebra. Let $I$ be an ideal of $I$. Then $I^\perp$ is an ideal of $L$. \tcbline
+\begin{proof}
+We already know that $I^\perp$ is a vector space. We want to show that $[x,i]\in I^\perp$ for all $x\in L$ and $i\in I^\perp$. Let $j\in I$ be arbitrary. Then we have $$k([x,i],j)=k(x,[i,j])=0$$ since $[i,j]\in I$. Hence $[x,i]\in I^\perp$ and we are done. 
+\end{proof}
+\end{lmm}
+
+Recall from Linear Algebra that a bilinear form is non-degenerate if $$\{v\in V\;|\;\tau(v,w)=0\text{ for all }w\in V\}=\{0\}$$ Because the killing form is symmetric, this is the same as saying that the orthogonal complement $V^\perp=\{0\}$ is trivial. 
+
+\begin{thm}{Cartan's Second Criterion}{} Let $L$ be a Lie algebra over $\C$. Then $L$ is semisimple if and only if $k$ is non-degenerate. \tcbline
+\begin{proof}
+Assume that $k$ is degenerate. Then $L^\perp\neq\{0\}$ and hence a non-trivial ideal of $L$. Let $x\in L^\perp$ and $y\in[L^\perp,L^\perp]\subseteq L$. Then $k(x,y)=0$ by definition of $L^\perp$. Then $k_{L^\perp}=0$. By Cartan's first criterion, $L^\perp$ is soluble. Hence $L^\perp\subseteq\text{rad}(L)$ and $L$ is not semisimple. \\~\\
+
+Now suppose that $L$ is not semisimple. Then $L$ contains a non-trivial abelian ideal $I$. Let $x\in L$ and $i\in I$. Then we have that $$\left(\text{ad}(i)\circ\text{ad}(x)\circ\text{ad}(i)\right)(y)=[i,[x,[i,y]]]=0$$ for any $y\in L$ because $[x,[i,y]]\in I$ and $I$ is abelian. Applying $\text{ad}(x)$ on both sides show that $$\left(\text{ad}(x)\circ\text{ad}(i)\right)^2=0$$ Thus $\text{ad}(x)\circ\text{ad}(i)$ is nilpotent in $\text{End}(L)$. By Engel's theorem, we can find a basis of $L$ such that $\text{ad}(x)\circ\text{ad}(i)$ is strictly upper triangular. This means that $k(x,i)=\text{tr}(\text{ad}(x)\circ\text{ad}(i))=0$. But this means that $I\subseteq L^\perp$ since $i\in I\subseteq L$ is such that $k(i,x)=0$ for all $x\in L$. Since $I$ is non-trivial, $L^\perp$ is non-trivial. Thus $k$ is degenerate. 
+\end{proof}
+\end{thm}
+
+\begin{lmm}{}{} Let $L$ be a Lie algebra over $\C$. Let $I$ be an ideal of $L$. If $L$ is semisimple, then the following are true. 
+\begin{itemize}
+\item $I\cap I^\perp=\{0\}$
+\item $L=I\oplus I^\perp$ as Lie algebras
+\item $I$ and $I^\perp$ are semisimple
+\end{itemize} \tcbline
+\begin{proof}~\\
+\begin{itemize}
+\item We know that $I\cap I^\perp$ is also an ideal of $L$. For $x,y\in I\cap I^\perp$, $x\in I$ and $y\in I^perp$ implies that $k_L(x,y)=0$. Moreover, we know that $k_{I\cap I^\perp}=k_L|_{I\cap I^\perp\times I\cap I^\perp}$. Hence $k_{I\cap I^\perp}=0$. By Cartan's first criterion, $I\cap I^\perp$ is soluble, and so $I\cap I^\perp\subseteq\text{rad}(L)=\{0\}$. Hence $I\cap I^\perp=\{0\}$. 
+\item By the same reasoning, $V=I\cap I^\perp$ as vector spaces. But this is also true as Lie algebras because $[I,I^\perp]\subseteq I\cap I^\perp=\{0\}$. 
+\item Assume that $I$ is not semisimple. Then $k_I$ is degenerate. So there exists $0\neq i\in I$ such that $k_I(i,x)=0$ for all $x\in I$. Then $k_L(i,x)=k_I(i,x)=0$ for all $x\in I$ implies that $i\in I^\perp$. Hence $i\in I\cap I^\perp=\{0\}$, a contradiction. The proof is identical for $I^\perp$ since $I^\perp$ is also an ideal of $L$. 
+\end{itemize}
+\end{proof}
+\end{lmm}
+
+\begin{thm}{}{} Let $L$ be a Lie algebra over $\C$. Then $L$ is semisimple if and only if there exists simple ideals $I_1,\dots,I_k$ of $L$ such that $$L=I_1\oplus\cdots\oplus I_k$$ \tcbline
+\begin{proof}
+Suppose that $L$ is semisimple. We induct on the dimension of $L$. We have seen that $1$-dimensional and $2$-dimensional Lie algebras cannot be semisimple. So we begin with the base case $\dim(L)=3$. If $L$ has a proper non-trivial ideal $I$, then $I$ is either $1$-dimensional or $2$-dimensional. Then $I$ is soluble by the classification theorems. This means that $I\subseteq\text{rad}(L)$ is non-zero. This is a contradiction since we assumed that $L$ is semisimple. Hence $L$ has no proper non-trivial ideals. Hence $L$ is simple. \\~\\
+
+Now suppose the result holds for all Lie algebras of dimension $<n$. Let $\dim(L)=n$. Let $I$ be a non-zero minimal ideal of $L$. By lmm 4.2.6, $L=I\oplus I^\perp$ where $I$ and $I^\perp$ are both semisimple. If $L=I$ then we are done. If $L\neq I$ then $I$ has dimension strictly less than $n$. By inductive hypothesis, there exists simple ideals $I_1,\dots,I_k$ of $I$ and simple ideals $J_1,\dots,J_s$ such that $$I=\bigoplus_{i=1}^k I_i\;\;\;\;\text{ and }\;\;\;\;I^\perp=\bigoplus_{j=1}^sJ_j$$ Now we want to show that $I_i$ and $J_j$ are ideals of $L$. Let $x\in L$. Then $x=a+b$ for $a\in I$ and $b\in I^\perp$. If $z\in I_i$, then $$[x,z]=[a,z]+[b,z]=[a,z]\in I_i$$ since $[b,z]\in I\cap I^\perp=\{0\}$. Similarly, one can show that $[x,r]\in J_j$ whenever $r\in J_j$. Thus $I_i$ and $J_j$ are ideals of $L$. Hence we obtain a direct sum decomposition $$L=I\oplus I^\perp=\bigoplus_{i=1}^kI_i\oplus\bigoplus_{j=1}^sJ_j$$ Thus the induction is complete. \\~\\
+
+Now let $L=\bigoplus_{j=1}^kI_j$. Assume that $\text{rad}(L)\neq\{0\}$. This means that $R_j=\text{rad}(L)\cap I_j$ is a soluble ideal of $L$ and $I_j$. Since $I_j$ is simple, $I_j$ is semisimple. Hence $R_j=\{0\}$ so that $$[R,I_j]\subseteq R\cap I_j=R_j=\{0\}$$ Let $x\in R$ and $y\in L$. Then we can write $y$ as $y=y_1+\dots+y_k$ for $y_j\in I_j$. Since $[R,I_j]=\{0\}$, we have that $[x,y_j]=0$ so that $[x,y]=0$. Thus $x\in Z(L)$. This means that $R\subseteq Z(L)$. But $Z(L)$ is abelian so $Z(L)\subseteq R$. Hence $R=Z(L)$. By prp 1.5.3, we have that $$Z(L)=\bigoplus_{j=1}^kZ(I_j)=\{0\}\oplus\cdots\oplus\{0\}=\{0\}$$ Hence $R=\{0\}$ and $L$ is semisimple. 
+\end{proof}
+\end{thm}
+
+Given a Lie algebra $L$ over $\C$, the following are now equivalent. 
+\begin{itemize}
+\item $L$ is semisimple ($\text{rad}(L)=\{0\}$)
+\item $L$ contains no non-zero abelian ideals. 
+\item The killing form $k:L\times L\to L$ is non-degenerate. 
+\item $L$ decomposes into a finite direct sum of simple Lie algebras. 
+\end{itemize}
+
+\begin{eg}{}{} For all $n\geq 2$, $\mathfrak{sl}_n(\C)$ is semi-simple. \tcbline
+\begin{proof}
+Recall that a basis for $\mathfrak{sl}_n(\C)$ is given by $$\{e_{i,j}\;|\;1\leq i\neq j\leq n\}\cup\{e_{i,i}-e_{i+1,i+1}\;|\;1\leq i\leq n-1\}$$ Notice that the killing form can be written as $$k_{\mathfrak{sl}_2(\C)}(x,y)=2n\text{tr}(xy)$$ Suppose that $k$ is degenerate. Then there exists $0\neq x\in\mathfrak{sl}_n(\C)$ such that $k(x,e_{i,j})=0$ for $i\neq j$. Write $x$ in terms of the basis vectors $\{e_{i,j}\;|\;1\leq i,j\leq n\}$ by $$x=\sum_{1\leq i,j\leq n}a_{i,j}e_{i,j}$$ Then we have $$0=k(x,e_{k,l})=2n\text{tr}\left(\sum_{1\leq i,j\leq n}a_{i,j}e_{i,j},e_{k,l}\right)=2n\text{tr}\left(\sum_{1\leq i\leq n}a_{i,k}e_{i,l}\right)=2na_{l,k}$$ This implies $a_{l,k}=0$ for all $l\neq k$ and so $x$ is diagonal. Now write $x=\sum_{i=1}^na_ie_{i,i}$. Then we have 
+\begin{align*}
+k(x,e_{k,k}-e_{k+1,k+1})&=2n\text{tr}\left(\sum_{i=1}^na_ie_{i,i}e_{k,k}-\sum_{i=1}^na_ie_{i,i}e_{k+1,k+1}\right)\\
+&=2n\text{tr}(a_ke_{k,k}-a_{k+1}e_{k+1})\\
+&=2n(a_k-a_{k+1})
+\end{align*}
+Since $k(x,e_{k,k}-e_{k+1,k+1})=0$, we have that $a_k=a_{k+1}$ for $1\leq k\leq n-1$. Since the trace of $x$ is $0$, We can only have $a_1=a_2=\cdots=a_n=0$. Hence $x=0$, a contradiction. By Cartan's second criterion, $\mathfrak{sl}_n(\C)$ is semi-simple. 
+\end{proof}
+\end{eg}
+
+\pagebreak
+\section{Special Subalgebras of a Lie Algebra}
+\subsection{Derivations of Lie Algebras}
+ Let $\F$ be a field. Let $V$ be an algebra over $\F$. Recall that a derivation of $V$ is a linear map $\phi:V\to V$ such that the Leibniz rule holds true: $$\phi(ab)=a\phi(b)+\phi(a)b$$ Clearly it is a $\F$-subalgebra of $\text{End}(V)$. Now that we know that $\text{End}(V)$ can be equipped with a Lie algebra structure, we can also give the $\F$-subalgebra a Lie bracket. 
+
+\begin{defn}{The Lie Subalgebra of All Derivations}{} Let $\F$ be a field. Let $V$ be an algebra over $\F$. Define the Lie subalgebra of derivations to be the set $$\text{Der}_\F(V)=\{\phi\in\mathfrak{gl}(V)\;|\;\phi\text{ is a derivation }\}$$ together with Lie algebra structure inherited from $\mathfrak{gl}_\F(V)$. 
+\end{defn}
+
+\begin{lmm}{}{} Let $\F$ be a field. Let $V$ be an algebra over $\F$. Then $\text{Der}_\F(V)$ is a Lie sub-algebra of $\mathfrak{gl}(V)$. \tcbline
+\begin{proof}
+We know that $\text{Der}_\F(V)$ is a vector subspace of $\mathfrak{gl}(V)$. Let $f_1,f_2\in\text{Der}_\F(V)$. For any $a,b\in V$ we have 
+\begin{align*}
+[f_1,f_2](ab)&=f_1(f_2(ab))-f_2(f_1(ab))\\
+&=f_1(f_2(a)b+af_2(b))-f_2(f_1(a)b+af_1(b))\\
+&=f_1(f_2(a))b+f_2(a)f_1(b)+f_1(a)f_2(b)+af_1(f_2(b))\\
+&\;\;\;-f_2(f_1(a))b-f_1(a)f_2(b)-f_2(a)f_1(b)-af_2(f_1(b))\\
+&=f_1(f_2(a))b+af_1(f_2(b))-f_2(f_1(a))b-af_2(f_1(b))\\
+&=a[f_1,f_2](b)+[f_1,f_2](a)b
+\end{align*}
+so that the bracket operator is closed. 
+\end{proof}
+\end{lmm}
+
+\begin{lmm}{}{} Let $\F$ be a field. Let $L$ be a Lie algebra over $\F$. Then $\text{ad}(L)$ is an ideal of $\text{Der}_\F(L)$. \tcbline
+\begin{proof}
+Let $x\in L$. I claim that $\text{ad}(x)$ is a derivation. Indeed, for $y,z\in L$, we have 
+\begin{align*}
+\text{ad}(x)([y,z])&=[x,[y,z]]\\
+&=-[[y,z],x]\\
+&=[[z,x],y]+[[x,y],z]\\
+&=-[\text{ad}(x)z,y]+[\text{ad}(x)(y),z]\\
+&=[\text{ad}(x)(y),z]+[y,\text{ad}(x)(z)]
+\end{align*}
+Thus $\text{ad}(L)\subseteq\text{Der}_\C(L)$. \\~\\
+
+Let $x\in L$ and $\phi\in\text{Der}_\F(L)$. It remains to show that $[\phi,\text{ad}(x)]$ is the adjoint homomorphism of some element. We compute that 
+\begin{align*}
+[\phi,\text{ad}(x)](y)&=\phi(\text{ad}(x)(y))-\text{ad}(x)(\phi(y))\\
+&=\phi([x,y])-[x,\phi(y)]\\
+&=[x,\phi(y)]+[\phi(x),y]-[x,\phi(y)]\\
+&=[\phi(x),y]\\
+&=\text{ad}(\phi(x))(y)
+\end{align*}
+for any $y\in L$. Hence we are done. 
+\end{proof}
+\end{lmm}
+
+\begin{prp}{}{} Let $L$ be a semisimple Lie algebra over $\C$. Then $$\text{Der}_\C(L)=\{\text{ad}(x):L\to L\;|\;x\in L\}=\text{ad}(L)$$ In other words, the only derivations of $L$ is given exactly by the adjoints. \tcbline
+\begin{proof}
+We know that $\text{ad}(L)$ is an ideal of $\text{Der}_\F(L)$. By lemma 4.1.3 we know that the killing form of $\text{ad}(L)^\perp$ is just the restriction of $k_{\text{Der}_\F(L)}$ to the ideal. So we compute that 
+\begin{align*}
+\text{ad}(L)\cap\text{ad}(L)^\perp&=\text{ad}(L)\cap\{\phi\in\text{Der}_\F(L)\;|\;k_{\text{Der}_\F(L)}(\phi,\Phi)=0\text{ for all }\Phi\in M\}\\
+&=\{\phi\in\text{ad}(L)\;|\;k|_{\text{ad}(L)}(\phi,\Phi)=0\text{ for all }\Phi\in\text{ad}(L)\}
+\end{align*}
+But this is precisely the orthogonal complement of $\text{ad}(L)$ in $\text{ad}(L)$. Since $\text{ad}(L)\cong L$ is semisimple, by Cartan's second criterion $k|_{\text{ad}(L)}$ is non-degenerate. Hence the orthogonal complement of $\text{ad}(L)$ in $\text{ad}(L)$ is $0$, and hence $\text{ad}(L)\cap\text{ad}(L)^\perp=\{0\}$ in $\text{Der}_\F(V)$. Let $\phi\in\text{ad}(L)^\perp$. For any $x\in L$, we have that $\text{ad}(\phi(x))=[\phi,\text{ad}(x)]$ by the above lemma. Since $\text{ad}(L)^\perp$ and $\text{ad}(L)$ are both ideals, this element lies in $\text{ad}(L)\cap\text{ad}(L)^\perp=\{0\}$. Hence $\phi(x)\in\ker(\text{ad})=\{0\}$ for all $x\in L$. This implies that $\phi$ is the zero map, and so $\text{ad}(L)^\perp=\{0\}$. \\~\\
+
+There are now two cases to consider. If $\text{Der}_\F(V)$ is degenerate, then $\text{Der}_\F(V)^\perp\neq\{0\}$. Then $\{0\}=\text{ad}(L)^\perp\supseteq\text{Der}_\F(V)^\perp\neq\{0\}$ is a contradiction. Then $\text{Der}_\F(V)$ must be non-degenerate. From Linear Algebra we have that $\text{Der}(L)=\text{ad}(L)\oplus\text{ad}(L)^\perp$ since $\text{ad}(L)\cap\text{ad}(L)^\perp=\{0\}$. Since $\text{ad}(L)^\perp=\{0\}$, we conclude that $\text{ad}(L)\oplus\{0\}=\text{Der}_\F(V)$. 
+\end{proof}
+\end{prp}
+
+Recall the we have seen from Linear Algebra the following fact: If $T\in GL(V)$ is a linear map on $V$ with minimal polynomial factorizing as $$\mu_T=(x-\lambda_1)^{a_1}\cdots(x-\lambda_k)^{a_k}$$ where the eigenvalues $\lambda_i$ are distinct and $a_i\geq 1$, then $V$ decomposes as a direct sum of $T$-invariant subspaces $$V=V_1\oplus\cdots\oplus V_k$$ where $V_i=\ker(T-\lambda_i I)^{a_i}$ is the generalized eigenspace. 
+
+\begin{lmm}{}{} Let $L$ be a Lie algebra over $\C$. Let $\phi\in\text{Der}_\C(L)$ be a derivation with Jordan-Chevalley decomposition given by $\phi=d_\phi+n_\phi$ as an element of $\mathfrak{gl}(L)$. Then $d_\phi,n_\phi\in\text{Der}_\C(L)$. \tcbline
+\begin{proof}
+Let $\lambda$ be an eigenvalue of $\phi$. Recall that the generalized eigenspace of $d_\phi$ is given by $$L_\lambda=\{x\in L\;|\;x\in\ker(\phi-\lambda I)^n\text{ for some }n\in\N\}$$ Since $d_\phi$ is the diagonal part of the decomposition of $\phi$, $\phi$ and $d_\phi$ share the same eigenvalues. The primary decomposition from Linear Algebra also yields $$L=\bigoplus_{\lambda\text{ an eigenvalue of }\phi}L_\lambda$$~\\
+
+I claim that $[L_\lambda,L_\mu]\subseteq L_{\lambda+\mu}$. Let $x\in L_\lambda$ and $y\in L_\mu$. We induct on $k\in\N$ to show that $$(\phi-(\lambda+\mu)I)^k([x,y])=\sum_{i=0}^k\binom{k}{i}\left[(\phi-\lambda I)^k(x),(\phi-\mu I)^{k-i}(y)\right]$$ When $k=0$, it is trivial. Suppose that it is true for some $k\in\N$. Then we have 
+\begin{align*}
+&(\phi-(\lambda+\mu)I)^{k+1}([x,y])\\
+=&(\phi-(\lambda+\mu)I)^k((\phi-(\lambda+\mu)I)([x,y]))\\
+=&(\phi-(\lambda+\mu)I)^k([(\phi-\lambda I)(x),y]+[x,(\phi-\mu I)(y)])\\
+=&\sum_{i=0}^k\binom{k}{i}\left[(\phi-\lambda I)^{i+1}(x),(\phi-\mu I)^{k-i}(y)\right]+\sum_{i=0}^k\binom{k}{i}\left[(\phi-\lambda I)^i(x),(\phi-\mu I)^{k+1-i}(y)\right]\\
+=&\sum_{i=1}^{k+1}\binom{k}{i-1}\left[(\phi-\lambda I)^i(x),(\phi-\mu I)^{k+1-i}(y)\right]+\sum_{i=0}^k\binom{k}{i}\left[(\phi-\lambda I)^i(x),(\phi-\mu I)^{k+1-i}(y)\right]\\
+=&\left[x,(\phi-\mu I)^{k+1}(y)\right]+\sum_{i=1}^k\left(\binom{k}{i-1}+\binom{k}{i}\right)\left[(\phi-\lambda I)^i(x),(\phi-\mu I)^{k+1-i}(y)\right]+\left[(\phi-\lambda I)^{k+1}(x),y\right]\\
+=&\left[x,(\phi-\mu I)^{k+1}(y)\right]+\sum_{i=1}^k\binom{k+1}{i}\left[(\phi-\lambda I)^i(x),(\phi-\mu I)^{k+1-i}(y)\right]+\left[(\phi-\lambda I)^{k+1}(x),y\right]\\
+=&\sum_{i=0}^{k+1}\binom{k+1}{i}\left[(\phi-\lambda I)^i(x),(\phi-\mu I)^{k+1-i}(y)\right]
+\end{align*}
+so the induction is complete. Now since $x\in L_\lambda$, there exists $p\in\N$ such that $(\phi-\lambda I)^p(x)=0$. Similarly, there exists $q\in\N$ such that $(\phi-\mu I)^q(y)=0$. Then choose $k=p+1$, we see that $[x,y]\in L_{\lambda+\mu}$ by the above formula. \\~\\
+
+Since $\phi$ and $d_\phi$ share the same eigenvalues and $d_\phi$ is diagonalizable, the above generalized eigenspaces collapses to the usual eigenspace. So every vector $v\in L_\lambda$ is an eigenvector of $d_\phi$ with eigenvalue $\lambda$. To check that $d_\phi$ is a derivation, we see that for $x\in L_\lambda$ and $y\in L_\mu$, we have $$d_\phi([x,y])=(\lambda+\mu)([x,y])=[x,\mu y]+[\lambda x,y]=[x,d_\phi(y)]+[d_\phi(x),y]$$ By bilinearity this extends to all elements of $L$. Hence $d_\phi\in\text{Der}_\F(L)$. Finally, $\phi$ and $d_\phi$ in $\text{Der}_\F(L)$ implies that $n_\phi=\phi-d_\phi\in\text{Der}_\F(L)$ hence we are done. 
+\end{proof}
+\end{lmm}
+
+\subsection{Cartan Subalgebras}
+Let $V$ be a vector space. Then any element of $\mathfrak{gl}(V)$ admits a Jordan-Chevalley decomposition using the Jordan decomposition form. This means that for any $T\in\mathfrak{gl}(V)$, there exists $D,N\in\mathfrak{gl}(V)$ such that the following are true. 
+\begin{itemize}
+\item $T=D+N$. 
+\item $D$ is diagonalizable and $N$ is nilpotent. 
+\item $DN=ND$. 
+\end{itemize}
+
+However let $L\leq\mathfrak{gl}(V)$ be a Lie subalgebra. Then consider an element $T\in L$. There is no guarantee that components of the Jordan-Chevalley decomposition lies in $L$. Therefore we have the notion of abstract Jordan decomposition. 
+
+\begin{defn}{Abstract Jordan Decomposition}{} Let $L$ be a semisimple Lie algebra over $\C$. Let $x\in L$. Define an abstract Jordan decomposition of $x$ to be a pair of elements $d,n\in L$ such that the following are true. 
+\begin{itemize}
+\item $x=d+n$
+\item $\text{ad}(d)\in\text{End}_\C(L)$ is diagonalizable and $\text{ad}(n)\in\text{End}_\C(L)$ is nilpotent. 
+\item $[d,n]=0$
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{} Let $L$ be a semisimple Lie algebra over $\C$. Let $x\in L$ be an element. Then there exists a unique abstract Jordan decomposition of $x$. \tcbline
+\begin{proof}
+Let $x\in L$. Since $\text{ad}(x)\in\mathfrak{gl}(L)$, there exists a unique Jordan-Chevalley decomposition $$\text{ad}(x)=D+N$$ for some diagonalizable map $D$ and nilpotent map $N$, such that they commute. By 5.1.5, we know that $\text{ad}(x)\in\text{ad}(L)=\text{Der}_\C(L)$ implies that $D,N\in\text{Der}_\C(L)$. This means that there exists $d,n\in L$ such that $D=\text{ad}(d)$ and $N=\text{ad}(n)$. Since $\text{ad}$ is a linear map, we have that $\text{ad}(x)=\text{ad}(d)+\text{ad}(n)$ implies that $\text{ad}(x)=\text{ad}(d+n)$. Since $L$ and $\text{ad}(L)$ are isomorphic ($L$ is semisimple over $\C$). we thus have $x=d+n$. It remains to show that $[d,n]=0$. We have that $$\text{ad}([d,n])=[\text{ad}(d),\text{ad}(n)]=0$$ Since $\text{ad}$ is an isomorphism, we have $[d,n]=0$. 
+\end{proof}
+\end{lmm}
+
+\begin{prp}{}{} Let $L$ be a semisimple Lie algebra over $\C$. Let $V$ be a vector space over $\C$. Let $\phi:L\to\mathfrak{gl}(V)$ be a Lie algebra homomorphism. Let $x=d+n$ be the abstract Jordan decomposition of $x\in L$. Then $$\phi(x)=\phi(d)+\phi(n)$$ is the Jordan-Chevalley decomposition of $\phi(x)$. 
+\end{prp}
+
+\begin{defn}{Cartan Subalgebra}{} Let $L$ be a Lie algebra. Let $H\leq L$ be a Lie subalgebra of $L$. We say that $H$ is a Cartan subalgebra of $L$ if the following are true. 
+\begin{itemize}
+\item $H$ is abelian. 
+\item For each $h\in H$, $\text{ad}(h)$ is diagonalizable. 
+\item $H$ is maximal with respect to these two properties. 
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{} Let $L$ be a semisimple Lie algebra over $\C$. Then there exists a non-trivial Cartan subalgebra. \tcbline
+\begin{proof}
+If for all $x\in L$, the diagonalizable part of the abstract Jordan decomposition is $0$, then $x$ is $\text{ad}$-nilpotent. By Engel's theorem, $L$ is nilpotent. Then $L$ is soluble and so $\text{rad}(L)\neq\{0\}$, a contradiction. \\~\\
+
+Hence there exists at least one element $x\in L$ whose diagonalizable part is non-zero. Let the diagonalizable part be $h$. Then $\C\langle h\rangle$ is an abelian subalgebra of $L$ consisting entirely of diagonalizable elements. Hence the set of all abelian subalgebras consisting only of diagonalizable elements is non-empty, and has a maximal element. 
+\end{proof}
+\end{lmm}
+
+\pagebreak
+\section{Representation Theory of Lie Algebras}
+\subsection{Modules over Lie Algebras}
+\begin{defn}{Modules over Lie Algebras}{} Let $L$ be a Lie algebra over $k$. An $L$-module consists of a vector space $V$ over $k$ together with an action $$\cdot:L\times V\to V$$ such that the following are true. 
+\begin{itemize}
+\item Linearity in $L$: For all $a,b\in k$ and $x,y\in L$, we have that $$(ax+by)\cdot v=a(x\cdot v)+b(y\cdot v)$$ for all $v\in V$. 
+\item Linearity in $V$: For all $x\in L$, we have that $$x\cdot(av+bw)=a(x\cdot v)+b(x\cdot w)$$ for all $a,b\in k$ and $v,w\in V$. 
+\item Commutes with the Lie bracket: $[x,y]\cdot v=x\cdot(y\cdot v)-y\cdot(x\cdot v)$. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Submodule of Modules over Lie Algebras}{} Let $L$ be a Lie algebra. Let $V$ be an $L$-module. A submodule of $V$ is a vector subspace $W$ that is a module over $L$ in its own right. 
+\end{defn}
+
+\begin{defn}{L-Module Homomorphisms}{} Let $L$ be a Lie algebra. Let $V,W$ be $L$-modules. An $L$-module homomorphism is a linear transformation $\phi:V\to W$ such that $$\phi(x\cdot v)=x\cdot\phi(v)$$ for all $x\in L$ and $v\in V$. 
+\end{defn}
+
+\begin{defn}{L-Module Isomorphisms}{} Let $L$ be a Lie algebra. Let $V,W$ be $L$-modules. Let $\phi:V\to W$ be an $L$-module homomorphism. We say that $\phi$ is an $L$-module isomorphism if $\phi$ is an isomorphism of vector spaces. 
+\end{defn}
+
+\subsection{Reducibility of Modules over Lie Algebras}
+\begin{defn}{Direct Sum of Modules over Lie Algebras}{} Let $L$ be a Lie algebra. Let $V$ be an $L$-module. Let $U$ and $W$ be vector subspaces of $V$. We say that $V$ is the direct sum of $U$ and $W$ if $$V=U\oplus W$$ as vector spaces and $U$ and $W$ are $L$-submodules of $V$. 
+\end{defn}
+
+\begin{defn}{Irreducible Modules over Lie Algebras}{} Let $L$ be a Lie algebra. Let $V$ be an $L$-module. We say that $V$ is irreducible (simple) if $V$ has no proper non-trivial $L$-submodules. 
+\end{defn}
+
+\begin{defn}{Completely Reducible}{} Let $L$ be a Lie algebra. Let $V$ be an $L$-module. We say that $V$ is completely reducible if for all $L$-submodules $W$, there exists an $L$-submodule $U$ of $V$ such that $$V=W\oplus U$$
+\end{defn}
+
+Simple modules are thus vacuously completely reducible. 
+
+\begin{thm}{Weyl's Theorem}{} Let $L$ be a semi-simple Lie algebra over $\C$. Let $V$ be an $L$-module. Then $V$ is completely reducible. 
+\end{thm}
+
+\begin{crl}{}{} Let $L$ be a semi-simple Lie algebra over $\C$. Let $V$ be an $L$-module such that $V$ is a finite dimensional vector space. Then there exists irreducible $V$-submodules $W_1,\dots,W_n$ such that $$V=\bigoplus_{i=1}^nW_i$$
+\end{crl}
+
+\subsection{Representations of Lie Algebras}
+\begin{defn}{Representations of a Lie Algebra}{} Let $L$ be a Lie algebra. Let $V$ be a vector space. A representation of $L$ is a Lie algebra homomorphism $$\rho:L\to\mathfrak{gl}(V)$$
+\end{defn}
+
+\begin{prp}{}{} Let $L$ be a Lie algebra over $k$. Then representations of $L$ and $L$-modules are in bijection $$\{V\text{ an }L\text{-module}\}\;\;\overset{1:1}{\leftrightarrow}\;\;\{L\to\mathfrak{gl}(V)\text{ a Lie algebra representation}\}$$ This bijection is given by sending an $L$-module $\cdot:L\times V\to V$ to the Lie algebra homomorphism $\phi:L\to\mathfrak{gl}(V)$ defined by $\phi(l)(v)=l\cdot v$. 
+\end{prp}
+
+These two ways two think about the same thing is natural. Recall that a representation of a group can be thought of as either group homomorphism $G\to GL(V)$ or a $k[G]$-module. \\
+
+Idea???? This bijection is a ???-homomorphism. 
+
+\begin{lmm}{}{} Let $L$ be a Lie algebra over $k$. Then above bijection restricts to a bijection: $$\{W\text{ an }L\text{-submodule of }L\}\;\;\overset{1:1}{=}\;\;\{\text{Ideals of }L\}$$ \tcbline
+\begin{proof}
+Let $W$ be an $L$-submodule of $L$. Then $W$ is a vector subspace of $L$. Moreover, for any $x\in L$ and $w\in W$, we have $[x,w]=x\cdot w\in W$ so that $W$ is an ideal of $L$. \\~\\
+
+Conversely, let $I$ be an ideal of $L$. Then $I$ is a vector subspace of $L$. Moreover, for any $x\in L$ and $i\in I$, we have that $x\cdot i=[x,i]\in I$. Hence $I$ is an $L$-submodule of $L$. 
+\end{proof}
+\end{lmm}
+
+\subsection{The Case of $\mathfrak{sl}(2,\C)$}
+We wish to classify all $\mathfrak{sl}_2(\C)$-modules. Since $\mathfrak{sl}_2(\C)$ is semisimple, Weyl's theorem implies that it suffices to classify all irreducible $\mathfrak{sl}_2(\C)$-modules. \\
+
+Recall that the polynomial ring $\C[x,y]$ is graded by total degree. We write $\C[x,y]_d$ for the $d$th homogeneous component of the graded ring. \\
+
+A basis for $\mathfrak{sl}_2(\C)$ is given by $$\mathfrak{sl}_2(\C)=\C\left\langle e=\begin{pmatrix}
+0 & 1\\0 & 0
+\end{pmatrix}, f=\begin{pmatrix}
+0 & 0\\1 & 0
+\end{pmatrix}, h=\begin{pmatrix}
+1 & 0\\0 & -1
+\end{pmatrix}\right\rangle$$
+
+\begin{prp}{}{} Let $d\in\N$. The map $\phi_d:\mathfrak{sl}_2(\C)\to\mathfrak{gl}(\C[x,y]_d)$ defined on basis vectors by $$\phi_d(e)=x\frac{\partial}{\partial y}\;\;\;\;\text{ and }\;\;\;\;\phi_d(f)=y\frac{\partial}{\partial x}\;\;\;\;\text{ and }\;\;\;\;\phi_d(h)=x\frac{\partial}{\partial x}-y\frac{\partial}{\partial y}$$ is an irreducible representation of $\mathfrak{sl}_2(\C)$ (Equivalently $\C[x,y]_d$ is an irreducible $\mathfrak{sl}_2(\C)$-module). \tcbline
+\begin{proof}
+Linearity of $\phi_d$ is clear since $\phi_d(e),\phi_d(f)$ and $\phi_d(h)$ are linear combinations of partial derivatives. Also, we have 
+\begin{align*}
+\left[\phi_d(e),\phi_d(f)\right]&=\phi_d(e)\circ\phi_d(f)-\phi_d(f)\circ\phi_d(e)\\
+&=\phi_d(e)\left(y\frac{\partial}{\partial x}\right)-\phi_d(f)\left(x\frac{\partial}{\partial y}\right)\\
+&=x\frac{\partial}{\partial x}+xy\frac{\partial^2}{\partial y\partial x}-y\frac{\partial}{\partial y}-xy\frac{\partial^2}{\partial x\partial y}\\
+&=\phi_d(h)\\
+&=\phi_d([e,f])
+\end{align*}
+Similarly, we have 
+\begin{align*}
+\left[\phi_d(e),\phi_d(h)\right]&=\phi_d(e)\circ\phi_d(h)-\phi_d(h)\circ\phi_d(e)\\
+&=\phi_d(e)\left(x\frac{\partial}{\partial x}-y\frac{\partial}{\partial y}\right)-\phi_d(h)\left(x\frac{\partial}{\partial y}\right)\\
+&=x^2\frac{\partial^2}{\partial y\partial x}-x\frac{\partial}{\partial y}-xy\frac{\partial^2}{\partial y^2}-x\frac{\partial}{\partial y}-x^2\frac{\partial^2}{\partial x\partial y}+xy\frac{\partial^2}{\partial y^2}\\
+&=-x\frac{\partial}{\partial y}-x\frac{\partial}{\partial y}\\
+&=\phi_d(-2e)\\
+&=\phi_d([e,h])
+\end{align*}
+The proof that $\left[\phi_d(f),\phi_d(h)\right]=\phi_d([f,h])$ is similar. Hence $\phi_d$ is a representation of $\mathfrak{sl}_2(\C)$. \\~\\
+
+We are left to show that $\phi_d$ is an irreducible representation. Using the basis $\{x^iy^{d-i}\;|\;0\leq i\leq d\}$, we see that the matrix representation of $\phi_d(e),\phi_d(f),\phi_d(h)$ is given by $$\phi_d(e)=\begin{pmatrix}
+0 & 1 & 0 & \cdots & 0\\
+0 & 0 & 2 & \cdots & 0\\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & 0 & \cdots & d & 0\\
+0 & 0 & 0 & \cdots & 0 & 0
+\end{pmatrix}\;\;\;\;\phi_d(f)=\begin{pmatrix}
+0 & 0 & \cdots & 0 & 0\\
+d & 0 & \cdots & 0 & 0\\
+0 & d-1 & \cdots & 0 & 0\\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & 0 & \cdots & 1 & 0
+\end{pmatrix}$$ and $$\phi_d(h)=\begin{pmatrix}
+d & 0 & \cdots & 0 & 0\\
+0 & d-2 & \cdots & 0 & 0\\
+\vdots & \vdots & \ddots & \vdots & \vdots\\
+0 & 0 & \cdots & -(d-2) & 0\\
+0 & 0 & \cdots & 0 & -d
+\end{pmatrix}$$
+Let $U\subseteq\mathfrak{gl}(\C[x,y]_d)$ be a sub-module of $\mathfrak{sl}_2(\C)$. Then $\phi_d(h)(U)\subseteq U$. Since $\phi_d(h)$ is diagonal, $\phi_d(h)|_U$ is also diagonalizable. Since all eigenvalues of $\phi_d(h)$ are different, all its eigenspaces are one dimensional and is spanned by $x^iy^{d-i}$ for each $i$. Hence $U$ contains some monomial $x^iy^{d-i}$. I claim that $U$ contains all other monomials and hence $U=\mathfrak{gl}_2(\C[x,y]_d)$. Indeed, if $x^iy^{d-i}\in U$, then $\phi_d\left(\frac{f}{d-i}\right)(x^iy^{d-i})=x^{i-1}y^{d-i+1}\in U$. Hence $x^iy^{d-i},\dots,x^{i-1}y^{d-i+1},\dots,y^d\in U$. Then $\phi_d(e^{d+1})\in\C\langle x^d\rangle$. Hence $x^d\in U$ and so all monomials lie in $U$. 
+\end{proof}
+\end{prp}
+
+\begin{lmm}{}{} Let $p:\mathfrak{sl}_2(\C)\to\mathfrak{gl}(V)$ be a representation. Let $v\in V$ be an eigenvector of $p(h)$ with eigenvalue $\lambda$. Then the following are true. 
+\begin{itemize}
+\item Either $p(e)(v)=0$ or $p(e)(v)$ is an eigenvector of $p(h)$ with eigenvalue $\lambda+2$. 
+\item Either $p(f)(v)=0$ or $p(f)(v)$ is an eigenvector of $p(h)$ with eigenvalue $\lambda-2$. 
+\end{itemize} \tcbline
+\begin{proof}~
+\begin{itemize}
+\item If $p(e)(v)\neq 0$, then we have $$p(h)(p(e)(v))=p([h,e])(v)+p(e)(p(h)(v))=p(2e)(v)+p(e)(\lambda v)=(\lambda+2)p(e)(v)$$
+\item If $p(f)(v)\neq 0$, then we have $$p(h)(p(f)(v))=p([h,f])(v)+p(f)(p(h)(v))=p(-2f)(v)+p(f)(\lambda v)=(\lambda-2)p(f)(v)$$
+\end{itemize}
+\end{proof}
+\end{lmm}
+
+\begin{lmm}{}{} Let $p:\mathfrak{sl}_2(\C)\to\mathfrak{gl}(V)$ be a finite dimensional representation. Then there exists an eigenvector $v\in V$ for $p(h)$ such that the following are true. 
+\begin{itemize}
+\item $p(e)(v)=0$
+\item $p(f)^d(v)\neq 0$ and $p(f)^{d+1}(v)=0$ for some $d\in\N$. 
+\end{itemize} \tcbline
+\begin{proof}
+Since $V$ is a vector space over $\C$, $p(h)$ must contain at least one eigenvector $w$ with eigenvalue $\lambda$. Consider the set $\{p(e)^n(w)\;|\;n\in\N\}$. This set must be finite, otherwise by the above lemma $p(h)$ has an infinite number of eigenvalues, and hence infinitely many eigenvectors which are linearly independent. Hence there exists the smallest $k\in\N$ such that $p(e)^k(w)\neq 0$ but $p(e)^{k+1}(w)=0$. Setting $v=p(e)^{k+1}(w)$ gives us the first part. The second part is similar. 
+\end{proof}
+\end{lmm}
+
+\begin{thm}{Classification of Irreducible Representations of $\mathfrak{sl}_2(\C)$}{} Let $V$ be an irreducible $\mathfrak{sl}_2(\C)$-module. Then $V$ is isomorphic to $\C[x,y]_d$ as $\mathfrak{sl}_2(\C)$-modules for some $d\in\N$. \tcbline
+\begin{proof}
+Let $v\in V$ be an eigenvalue with the properties in the above lemma. I claim that $\{v,\dots,f^d\cdot v\}$ is a basis for $V$, and that $v$ has eigenvalue $\lambda=d$. We know that they are linearly independent since they have different eigenvalues. By construction, $U$ is invariant under $f$ and $h$. It suffices to show that the basis vectors are invariant under $r$. We proceed by induction. When $i=0$, $e\cdot (f^i\cdot v)=e\cdot v=0$ by the above lemma. Suppose that $e\cdot(f^i\cdot v)\in U$ for some $i$. Then we have $$e\cdot(f^{i+1}\cdot v)=[e,f]\cdot(f^i\cdot v)+f\cdot(e\cdot(f^i\cdot v))=h\cdot (f^i\cdot v)+f\cdot (e\cdot (f^i\cdot v))$$ The first term lies in $U$ since $U$ is invariant under $h$ and $f$. The second term also lies in $U$ since $U$ is invariant under $f$ by induction hypothesis, $U$ is invariant under $e$. Hence $U$ is a sub-module of $V$. But $V$ is an irreducible module. Hence $U=V$. \\~\\
+
+Now $\{v,\dots,f^d\cdot v\}$ are distinct eigenvectors of $h$ because they have distinct eigenvalues. The matrix of $h\cdot-$ with respect to the basis is diagonal, and its trace is $$\text{tr}(h\cdot -)=\lambda+(\lambda-2)+\dots+(2-\lambda)+(-\lambda)=(d+1)(\lambda-d)$$ by lemma 7.4.2. Since $h\cdot -=[e\cdot-,f\cdot-]\in\mathfrak{gl}(V)$ is a commutator of some matrices, $h\cdot-$ must have zero trace. Hence $\lambda=d$. \\~\\
+
+Define $\Phi:V\to\C[x,y]_d$ by the formula $$\Phi(f^i\cdot v)=\phi_d(f)^i(x^d)=f^i\cdot x^d=(d-i-1)!x^{d-i}y^i$$ Clearly it sends the basis to basis, hence it is a vector space isomorphism. It remains to show that it is a $\mathfrak{sl}_2(\C)$-module homomorphism. Clearly we have $$\Phi(f\cdot(f^i\cdot v))=f^{i+1}\cdot(x^d)=f\cdot\Phi(f^i\cdot v)$$ Also, we have $$\Phi(h\cdot (f^i\cdot v))=\Phi((\lambda-2i)(f^i\cdot v))=(\lambda-2i)f^i(v)=h\cdot(f^i\cdot v)=h\cdot\Phi(f^i\cdot v)$$ and 
+\begin{align*}
+\Phi(e\cdot(f^i\cdot v))&=\Phi([e,f]\cdot(f^{i-1}\cdot v)+f\cdot(e\cdot (f^{i-1}\cdot v)))\\
+&=\Phi(h\cdot(f^{i-1}\cdot v)+f\cdot(e\cdot (f^{i-1}\cdot v)))\\
+&=h\cdot\Phi(f^{i-1}\cdot v)+f\cdot\Phi(e\cdot(f^{i-1}\cdot v))\\
+&=h\cdot\Phi(f^{i-1}\cdot v)+f\cdot(e\cdot\Phi(f^{i-1}\cdot v))\tag{Induction}\\
+&=[e,f]\cdot\Phi(f^{i-1}\cdot v)+f\cdot(e\cdot\Phi(f^{i-1}\cdot v))\\
+&=e\cdot\Phi(f^i\cdot v)
+\end{align*}
+by induction. Hence we are done. 
+\end{proof}
+\end{thm}
+
+\pagebreak
+\section{Introduction to Lie Groups}
+\subsection{Lie Groups}
+\begin{defn}{Lie Groups}{} A Lie group $G$ is a group $G$ that is also a smooth manifold such that the following are true. 
+\begin{itemize}
+\item The multiplication map $\cdot:G\times G\to G$ defined by $$(g,h)\mapsto gh$$ is a smooth map of manifolds. 
+\item The inverse map $(-)^{-1}:G\times G$ defined by $$g\mapsto g^{-1}$$ is a smooth map of manifolds. 
+\end{itemize}
+\end{defn}
+
+Some immediate examples of Lie groups include the following: 
+\begin{itemize}
+\item Any finite group is discrete and hence are zero-dimensional manifolds. So they are Lie groups. 
+\item $(\R^n,+)$ and $(\R^n\setminus\{0\},\times)$. 
+\item The torus $(\R^n/\Z^n,+)$. 
+\item $\GL(V)$ for any finite dimensional real vector space $V$. 
+\item $U(n), SU(n), O(n), SO(n), SL(n), PSL(n)$ for any $n\in\N$. 
+\end{itemize}
+
+\begin{prp}{}{} Let $G$ be a Lie group. Let $H$ be a subgroup of $G$. If $H$ is closed in $G$, then $H$ inherits the structure of a Lie group from $G$. 
+\end{prp}
+
+\begin{defn}{Lie Group Homomorphism}{} Let $G,H$ be Lie groups. A Lie group homomorphism is a map of sets $$\phi:G\to H$$ that is a group homomorphism and a smooth map. 
+\end{defn}
+
+\subsection{Relation between Lie Groups and Lie Algebras}
+For a group $G$, denote the left multiplication map of $h\in G$ by $l_h$. If $G$ is a Lie group, we have seen that $l_h$ is a smooth map, and so it induces a differential $(l_h)_\ast$. 
+
+\begin{defn}{Left Invariant Vector Field}{} Let $G$ be a Lie group and $X$ a vector field on $G$. We say that $X$ is left invariant if $$(l_h)_\ast(X_g)=X_{hg}$$ for all $X_g\in T_g(G)$. 
+\end{defn}
+
+\begin{prp}{}{} Let $G$ be a Lie group. The vector space of left invariant vector fields of $G$ is a Lie algebra of dimension $\dim(G)$. 
+\end{prp}
+
+\begin{prp}{}{} Let $G$ be a Lie group. Let $v\in T_{1_G}(G)$ be a tangent vector at the identity. Then there exist a unique left invariant vector field $X:G\to TG$ on $G$ such that $X({1_G})=v$. 
+\end{prp}
+
+\begin{defn}{Lie Algebra of a Lie Group}{} Let $G$ be a Lie group. Define the Lie algebra of $G$ to be the Lie algebra $T_{1_G}(G)$. 
+\end{defn}
+
+Recall that given a homomorphism of Lie groups $\phi:G\to H$, it induces a differential $\phi_\ast:T_g(G)\to T_{\phi(g)}(H)$. 
+
+\begin{prp}{}{} Let $\phi:G\to H$ be a homomorphism of Lie groups with Lie algebras $V$ and $W$ respectively. Then the induced map from the differential $$(\phi_\ast)_{1_G}:T_{1_G}G\to T_{1_H}H$$ is a Lie algebra homomorphism. 
+\end{prp}
+
+In other words, we constructed a functor from Lie groups to Lie algebras sending a Lie group to the tangent space at the identity. 
+
+\subsection{The Exponential Map}
+
+\pagebreak
+\section{Root Systems of Vector Spaces}
+\subsection{Properties of Root Systems}
+\begin{defn}{Root Systems of an Inner Product Space over $\R$}{} Let $(E,(-,-))$ be a finite dimensional inner product space over $\R$. Let $R\subseteq E$. Write $$\langle x,y\rangle=\frac{2(x,y)}{(y,y)}$$ for $x,y\in E$. We say that $R$ is a root system in $E$ if the following are true. 
+\begin{itemize}
+\item $R$ is finite and $0\notin R$
+\item $\R\langle R\rangle=E$ ($R$ spans $E$)
+\item If $a\in R$, the $ca\in R$ if and only if $c=\pm1$
+\item If $a,b\in R$, then $$\sigma_a(b)=b-2\frac{(a,b)}{(a,a)}a=b-\langle a,b\rangle a$$ is an element of $R$. 
+\item If $a,b\in R$, then $\langle a,b\rangle\in\Z$
+\end{itemize}
+\end{defn}
+
+\begin{eg}{}{} Let $\{e_1,\dots,e_{n+1}\}$ be the standard basis vectors of $\R^{n+1}$. Let $E$ be the inner product space $$E=\{(c_1,\dots,c_{n+1})\subseteq\R^{n+1}\;|\;c_1+\dots+c_n=0\}\cong\R^n$$ equipped with the standard inner product of $\R^{n+1}$. Then the set $$R=\{e_i-e_j\;|\;1\leq i\neq j\leq n+1\}$$ is a root system of $E$. 
+\end{eg}
+
+\begin{lmm}{}{} Let $E$ be a finite dimensional inner product space over $\R$. Let $R$ be a root system of $E$. Let $\alpha,\beta\in R$. Then the following are true. 
+\begin{itemize}
+\item The value of $\langle\alpha,\beta\rangle\langle\beta,\alpha\rangle$ must lie in the set $\{0,1,2,3\}$
+\item The angle between $\alpha$ and $\beta$ must lie in the set $$\left\{\frac{\pi}{2},\frac{\pi}{3},\frac{2\pi}{3},\frac{\pi}{4},\frac{3\pi}{4},\frac{\pi}{6},\frac{5\pi}{6}\right\}$$
+\end{itemize}
+\end{lmm}
+
+We can draw a table of the possible values of $\langle\alpha,\beta\rangle$ and the corresponding angle between $\alpha$ and $\beta$: 
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+$\langle\alpha,\beta\rangle\langle\beta,\alpha\rangle$ & $\langle\alpha,\beta\rangle$ & $\langle\beta,\alpha\rangle$ & $\theta$         \\ \hline
+$0$                                                    & $0$                          & $0$                          & $\frac{\pi}{2}$  \\[1.5ex] \hline
+\multirow{2}{*}{$1$}                                   & $1$                          & $1$                          & $\frac{\pi}{3}$  \\[1.5ex] \cline{2-4} 
+                                                       & $-1$                         & $-1$                         & $\frac{2\pi}{3}$ \\[1.5ex] \hline
+\multirow{2}{*}{$2$}                                   & $1$                          & $2$                          & $\frac{\pi}{4}$  \\[1.5ex] \cline{2-4} 
+                                                       & $-1$                         & $-2$                         & $\frac{3\pi}{4}$ \\[1.5ex] \hline
+\multirow{2}{*}{$3$}                                   & $1$                          & $3$                          & $\frac{\pi}{6}$  \\[1.5ex] \cline{2-4} 
+                                                       & $-1$                         & $-3$                         & $\frac{5\pi}{6}$ \\[1.5ex] \hline
+\end{tabular}
+\end{table}
+
+Here we assume $\|\alpha\|\leq\|\beta\|$ so we exclude for instance the case $\langle\alpha,\beta\rangle=2$ and $\langle\beta,\alpha\rangle=1$. 
+
+\begin{prp}{}{} The only root system in $\R^1$ is given by $R=\{\alpha,-\alpha\}$ for any $\alpha\in\R$. 
+\end{prp}
+
+\begin{prp}{}{} There are exactly four possible root systems in $\R^2$. Let $\alpha,\beta\in\R^2$ be linearly independent such that $\|\alpha\|\leq\|\beta\|$. Let $\theta$ be the angle between $\alpha$ and $\beta$. 
+\begin{itemize}
+\item $A_1\times A_1=\{\pm\alpha,\pm\beta\}$ and $\theta=\frac{\pi}{2}$. 
+\item $A_2=\{\pm\alpha,\pm\beta,\pm(\alpha+\beta)\}$ and $\theta=\frac{2\pi}{3}$. 
+\item $B_2=\{\pm\alpha,\pm\beta,\pm(\alpha+\beta),\pm(2\alpha+\beta)\}$ and $\theta=\frac{3\pi}{4}$. 
+\item $G_2=\{\pm\alpha,\pm\beta,\pm(\alpha+\beta),\pm(2\alpha+\beta),\pm(3\alpha+\beta),\pm(3\alpha+2\beta)\}$
+\end{itemize}
+\end{prp}
+
+\subsection{Decomposing Root Systems into Irreducibles}
+\begin{defn}{Irreducible Root Systems}{} Let $(E,(-,-))$ be a finite dimensional inner product space over $\R$. Let $R$ be a root system of $E$. We say that $R$ is reducible if there exists two disjoint root systems $R_1$ and $R_2$ of $E$ such that $(r_1,r_2)=0$ for $r_1\in R_1$ and $r_2\in R_2$. Otherwise, we say that $R$ is irreducible. 
+\end{defn}
+
+\begin{prp}{}{} Let $E$ be a finite dimensional inner product space over $\R$. Let $R$ be a root system of $E$. Then the following are true. 
+\begin{itemize}
+\item There is a decomposition $$R=R_1\amalg\cdots\amalg R_k$$ where each $R_i$ is an irreducible root system of $E_i=\R\langle R_i\rangle$
+\item There is a decomposition $$E=E_1\oplus\cdots\oplus E_k$$ where $E_i$ is orthogonal to $E_j$ for $i\neq j$. 
+\end{itemize}
+\end{prp}
+
+\begin{defn}{Isomorphic Root Systems}{} Let $E,F$ be a finite dimensional inner product spaces over $\R$. Let $R$ and $S$ be root systems of $E$ and $F$ respectively. We say that $R$ and $S$ are isomorphic if there exists an isomorphism $$\phi:E\to F$$ of vector spaces such that the following are true. 
+\begin{itemize}
+\item $\phi(R)=S$
+\item For all $a,b\in R$, $\langle\phi(a),\phi(b)\rangle=\langle a,b\rangle$. 
+\end{itemize}
+\end{defn}
+
+\begin{eg}{}{} The following are true. 
+\begin{itemize}
+\item $A_1\times A_1=\{\pm\alpha,\pm\beta\}$ is reducible into the product of $A_1$ and $A_1$. 
+\item $A_2,B_2,G_2$ are irreducible. 
+\end{itemize}
+\end{eg}
+
+\subsection{Bases for Root Systems}
+\begin{defn}{Bases for Root Systems}{} Let $E$ be a finite dimensional inner product space over $\R$. Let $R$ be a root system of $E$. Let $B\subseteq R$. We say that $B$ is a base of $R$ if the following are true. 
+\begin{itemize}
+\item $B$ is a basis for $E$
+\item For any $r\in R$, there is a decomposition $$r=\sum_{b\in B}k_b\cdot b$$ where $k_b\in\Z$ and either all $k_b$ are positive or negative. 
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{} Let $E$ be a finite dimensional inner product space over $\R$. Let $R$ be a root system of $E$. Then $R$ admits a base. 
+\end{prp}
+
+\subsection{The Weyl Group of a Root System}
+Recall that $\sigma_a(b)=b-2\frac{\langle a,b\rangle}{\langle a,a\rangle}a$ for any $a,b$ in a root system $R$ of a finite dimensional inner product space $E$. In particular, they are elements of the general linear group $GL(E)$. 
+
+\begin{defn}{The Weyl Group of a Root System}{} Let $E$ be a finite dimensional inner product space over $\R$. Let $R$ be a root system of $E$. Define the Weyl group of $R$ to be the subgroup $$W(R)=\langle\sigma_a\;|\;a\in R\rangle\leq GL(E)$$
+\end{defn}
+
+\begin{eg}{}{} The Weyl group of $A_2$ is given by $$W(A_2)\cong S_3$$
+\end{eg}
+
+\begin{prp}{}{} Let $E$ be a finite dimensional inner product space over $\R$. Let $R$ be a root system of $E$. Let $B$ be a base of $R$. Then we have $$W(R)=\langle\sigma_a\;|\;a\in B\rangle$$
+\end{prp}
+
+\begin{lmm}{}{} Let $E$ be a finite dimensional inner product space over $\R$. Let $R$ be a root system of $E$. Let $B$ be a base of $R$. Then for all $\alpha\in R$, there exists $w\in W(R)$ and $\beta\in B$ such that $$w(\beta)=\alpha$$
+\end{lmm}
+
+\begin{prp}{}{} Let $E$ be a finite dimensional inner product space over $\R$. Let $R$ be a root system of $E$. Let $B,B'$ be bases of $R$. Then there exists $w\in W$ such that $$B'=\{g(\alpha)\;|\;\alpha\in B\}$$
+\end{prp}
+
+\subsection{Dynkin Diagrams and Cartan Matrices}
+\begin{defn}{The Dynkin Diagram of a Root System}{} Let $E$ be a finite dimensional inner product space over $\R$. Let $R$ be a root system of $E$. Let $B$ be a base of $R$. Define a graph $\Delta(R)$ as follows. 
+\begin{itemize}
+\item There is one vertex $v_b$ for each $b\in B$
+\item For any two vertices $v_a$ and $v_b$, there are $d_{a,b}=\langle a,b\rangle\langle b,a\rangle$ number of undirected edges between $v_a$ and $v_b$. 
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{} Let $E,F$ be a finite dimensional inner product spaces over $\R$. Let $R$ and $S$ be root systems of $E$ and $F$ respectively. Then $R\cong S$ if and only if $\Delta(R)\cong\Delta(S)$. 
+\end{prp}
+
+\begin{prp}{}{} Let $E$ be a finite dimensional inner product space. Let $R$ be a root system of $E$. Then $R$ is irreducible if and only if $\Delta(R)$ is a connected graph. 
+\end{prp}
+
+\begin{defn}{The Cartan Matrix}{} Let $E$ be a finite dimensional inner product space over $\R$. Let $R$ be a root system of $E$. Let $B=\{\alpha_1,\dots,\alpha_r\}$ be a base of $R$. Define the Cartan matrix of $R$ to be $$\begin{pmatrix}
+\langle\alpha_1,\alpha_1\rangle & \cdots & \langle\alpha_1,\alpha_r\rangle\\
+\vdots & \ddots & \vdots\\
+\langle\alpha_r,\alpha_1\rangle & \cdots & \langle\alpha_r,\alpha_r\rangle
+\end{pmatrix}$$
+\end{defn}
+
+\begin{prp}{}{} Let $E$ be a finite dimensional inner product space over $\R$. Let $R$ be a root system of $E$. Then the Cartan matrix of $R$ is unique up to reordering. 
+\end{prp}
+
+\subsection{Classification of Irreducible Root Systems}
+\begin{thm}{Classification of Irreducible Root Systems}{} Let $E$ be a finite dimensional inner product space over $\R$. Let $R$ be an irreducible root system of $E$. Then $\Delta(R)$ is isomorphic to one of the following: 
+\begin{itemize}
+\item $A_n$ for $n\geq 1$. 
+\item $B_n$ for $n\geq 2$. 
+\item $C_n$ for $n\geq 3$. 
+\item $D_n$ for $n\geq 4$. 
+\item $G_2,F_4,E_6,E_7,E_8$. 
+\end{itemize}
+Conversely, any of the above types can be realized as the Dynkin diagram of some irreducible root system. 
+\end{thm}
+
+\pagebreak
+\section{Classification of Semisimple Lie Algebras over $\C$}
+\subsection{Root Space Decomposition}
+Let $V$ be a vector space. We denote the dual space of $V$ by $V^\ast$. \\
+
+Let $L$ be semisimple over $\C$. Let $H$ be a Cartan subalgebra. By lmm 5.1.2, we can choose a basis $v_1,\dots,v_m$ of $GL(V)$ such that $\text{ad}(h)$ is diagonal for all $h\in H$. In particular, such a basis consists of common eigenvectors of $\text{ad}(h)$. Fix such a common eigenvector $v$ and write its eigenvalue by $\alpha(\text{ad}(h))$ (dependent on $h$). Then we have $$\text{ad}(h)(v)=\alpha(\text{ad}(h))(v)$$ and in particular $\alpha:\text{ad}(H)\to\C$ is a weight of $\text{ad}(H)$. Since $L$ is semisimple, we have an isomorphism $\text{ad}(H)\cong H$. So we can think of the weight as an element $$\alpha:H\cong\text{ad}(H)\to\C$$ of the dual space $H^\ast$. This motivates the following definition. 
+
+\begin{defn}{Roots of Lie Algebra relative to a Cartan Subalgebra}{} Let $L$ be a semi-simple Lie algebra over $\C$. Let $H\leq L$ be a Cartan subalgebra of $L$. A root of $L$ relative to $H$ is an element $\alpha\in H^\ast$ such that $\alpha\neq 0$ and the weight space $$L_\alpha=\{x\in L\;|\;[h,x]=\alpha(h)(x)\text{ for all }h\in H\}$$ is non-zero. In this case, we call $L_\alpha$ the root space of $\alpha$. 
+\end{defn}
+
+For $x\in L_\alpha$, notice that $x$ is a common eigenvector for $\text{ad}(h)$ for all $h\in H$. 
+
+\begin{defn}{The Set of Roots relative to a Cartan Subalgebra}{} Let $L$ be a semi-simple Lie algebra over $\C$. Let $H\leq L$ be a Cartan subalgebra of $L$. Define the set of roots of $L$ relative to $H$ to be $$\Phi=\{\alpha\in H^\ast\;|\;\alpha\text{ is a root of }L\text{ with respect to }H\}$$
+\end{defn}
+
+Note that $\Phi$ is finite if $L$ is finite dimensional. 
+
+\begin{lmm}{}{} Let $V$ be a vector space over $k$. Suppose that $T_1,\dots,T_n\in GL(V)$ is diagonalizable. Then there exists a basis of $GL(V)$ such that $T_1,\dots,T_n$ are diagonal if and only if $T_1,\dots,T_n$ pairwise commute. In particular, the basis are precisely common eigenvectors of $T_1,\dots,T_n$. 
+\end{lmm}
+
+\begin{lmm}{}{} Let $L$ be a semisimple Lie algebra over $\C$. Let $H$ be a Cartan sub-algebra of $L$. Let $\Phi$ be the set of roots of $L$ relative to $H$. Then there is a decomposition of direct sums $$L=L_0\oplus\bigoplus_{\alpha\in\Phi}L_\alpha$$ given by the primary decomposition (eigenspace decomposition) of any $\text{ad}(h)\in\text{ad}(H)$. \tcbline
+\begin{proof}
+Let $h\in H$. Recall that $\text{ad}(h)$ is diagonalizable by definition. By the primary decomposition theorem (or eigenspace decomposition), we can decompose $L$ as one-dimensional invariant subspaces: $$L=\bigoplus_{i=1}^r\ker(\text{ad}(h)-\lambda_i(h)I)$$ where $\lambda_1(h),\dots,\lambda_r(h)$ is the complete list of distinct eigenvalues of $\text{ad}(h)$. \\~\\
+
+Since $H$ is abelian, elements of $H$ pairwise commute. By the above lemma, all elements of $\text{ad}(H)$ share a common set of eigenvectors. In particular, for any $h'\in H$, $\text{ad}(h)$ we have $\ker(\text{ad}(h)-\lambda_i(h)I)=\ker(\text{ad}(h')-\lambda_i(h')I)$. Then the linear functions $\lambda_i$ are precisely roots of $L$ relative to $H$, and so we can rewrite the decomposition as $$L=L_0\oplus\bigoplus_{\alpha\in\Phi}L_\alpha$$
+\end{proof}
+\end{lmm}
+
+\begin{prp}{}{} Let $L$ be a semisimple Lie algebra over $\C$. Let $H\leq L$ be a Cartan sub-algebra of $L$. Let $\alpha,\beta$ be roots of $L$ relative to $H$. Then the following are true. 
+\begin{itemize}
+\item $[L_\alpha,L_\beta]\subseteq L_{\alpha+\beta}$
+\item If $\alpha+\beta\neq 0$, then $k(L_\alpha,L_\beta)=0$ where $k$ is the killing form of $L$. 
+\item $L_0\cap L_0^\perp=\{0\}$. In particular, $k|_{L_0}$ is non-degenerate. 
+\end{itemize} \tcbline
+\begin{proof}~\\
+\begin{itemize}
+\item Let $x\in L_\alpha$ and $y\in L_\beta$. Then we have 
+\begin{align*}
+[h,[x,y]]&=-[[x,y],h]\\
+&=[[y,h],x]+[[h,x],y]\\
+&=-[\beta(h)y,x]+[\alpha(h)x,y]\\
+&=\alpha(h)[x,y]+\beta(h)[x,y]\\
+&=(\alpha+\beta)(h)[x,y]
+\end{align*}
+so that $[x,y]\in L_{\alpha+\beta}$. 
+\item Let $x\in L_\alpha$ and $y\in L_\beta$. Since $\alpha+\beta\neq 0$, there exists $h\in H$ such that $\alpha(h)+\beta(h)\neq 0$. Then $$(\alpha+\beta)(h)k(x,y)=k(\alpha(h)x,\beta(h)y)=k([h,x],[h,y])=-k([x,h],[h,y])=-k(x,[h,[h,y]])=0$$ implies that $k(x,y)=0$. 
+\item Assume that $a\in L_0\cap L_0^\perp$. Then $k(a,b)=0$ for all $b\in L_0$. For any $v\in L$, we can use the above decomposition to get $v=v_0+\sum_{\alpha\in\Phi}v_\alpha$ for $v_0\in L_0$ and $v_\alpha\in L_\alpha$. Then we have $$k(a,v)=k(a,v_0)+\sum_{\alpha\in\Phi}k(a,v_\alpha)=0$$ since $a\in L_0$ and $v_\alpha\in L_\alpha$ implies $k(a,v_\alpha)=0$ by the above. This proves that $a\in L_0^\perp$. Since $L$ is semisimple, $k$ is non-degenerate so that $L_0^\perp=\{0\}$. Hence $a=0$ and $L_0\cap L_0^\perp=\{0\}$. 
+\end{itemize}
+\end{proof}
+\end{prp}
+
+\begin{lmm}{}{} Let $L$ be a semisimple Lie algebra over $\C$. Let $H\leq L$ be a Cartan sub-algebra of $L$. Let $\Phi$ be the set of roots of $L$ relative to $H$. Then the following are true. 
+\begin{itemize}
+\item For all $0\neq h\in H$, there exists $\alpha\in\Phi$ such that $\alpha(h)\neq 0$. 
+\item $H^\ast=\C\langle\Phi\rangle$. 
+\item If $\alpha\in\Phi$, then $-\alpha\in\Phi$. 
+\end{itemize} \tcbline
+\begin{proof}
+Suppose that $-\alpha\notin\Phi$. Then $k(L_\alpha,L_\beta)=0$ for all $\beta\in\Phi$. Hence $L_\alpha\subseteq L^\perp=\{0\}$. This is a contradiction since $L_\alpha$ is assumed to be non-zero. 
+\end{proof}
+\end{lmm}
+
+\begin{prp}{}{} Let $L$ be a semisimple Lie algebra over $\C$. Then we have $$H=C_L(H)=C_L(h_0)$$ for any $h_0\in H$ such that $\dim(C_L(h_0))\leq\dim(C_L(H))$ for all $h\in H$. \tcbline
+\begin{proof}
+It is clear that $H\subseteq C_L(H)\subseteq C_L(h_0)$ since $H$ is abelian. \\~\\
+
+Suppose for a contradiction that $a\in H$ but $a\notin Z(C_L(h_0))$. Since $C_L(a)\cap C_L(h_0)$ is abelian, choose a basis $\{e_1,\dots,e_k\}$ of common eigenvectors for $C_L(a)\cap C_L(h_0)$. 
+\end{proof}
+\end{prp}
+
+\begin{thm}{Root Space Decomposition}{} Let $L$ be a semisimple Lie algebra over $\C$. Let $H$ be a Cartan sub-algebra of $L$. Let $\Phi$ be the set of roots of $L$ relative to $H$. Then there is a decomposition of direct sums $$L=H\oplus\bigoplus_{\alpha\in\Phi}L_\alpha$$ given by the primary decomposition (eigenspace decomposition) of any $\text{ad}(h)\in\text{ad}(H)$. \tcbline
+\begin{proof}
+Since $L_0=C_L(H)=H$, we conclude by 9.1.5. 
+\end{proof}
+\end{thm}
+
+Notice that 9.1.6 then implies that the killing form on $H$ restricted to $L$ is non-degenerate. 
+
+\begin{eg}{}{} A Cartan sub-algebra of $\mathfrak{sl}_2(\C)$ is $\C\langle h\rangle$, and we obtain a decomposition $$\mathfrak{sl}_2(\C)=\C\langle h\rangle\oplus L_\alpha\oplus L_{-\alpha}$$ where $\alpha(h)=2$. \tcbline
+\begin{proof}
+Notice that since $\C\langle h\rangle$ is one-dimensional, it is abelian and is contained in some Cartan subalgebra of $\mathfrak{sl}_2(\C)$. Since $[e,h]=-2e$ and $[f,h]=2f$ we see that the Cartan subalgebra containing $h$ is $\C\langle h\rangle$. Moreover, from the two equations we see that $\alpha\in H^\ast$ defined by $\alpha(h)=2$ is a root of $\mathfrak{sl}_2(\C)$ since $L_\alpha\supseteq\C\langle e\rangle$ and $L_{-\alpha}\supseteq\C\langle f\rangle$. These make up at least a three dimensional subspace of $\mathfrak{sl}_2(\C)$, hence we deduce the desired decomposition. 
+\end{proof}
+\end{eg}
+
+\subsection{Copies of $\mathfrak{sl}_2(\C)$ as Sub-algebras}
+Let $V$ be a vector space over $\C$. Let $\tau:V\to V\to\C$ be a bilinear map. Recall that $\tau$ is non-degenerate if and only if $v\mapsto\tau(v,-)$ is an isomorphism between $V$ and $V^\ast$. In this case, every linear map $T\in V^\ast$ determines a unique element $v\in V$ such that $T(-)=\tau(v,-)$. \\
+
+Applying the above, we know that the killing form on $H$ is non-degenerate, so any root $\alpha\in\Phi\subseteq H^\ast$ can be represented using the killing form. 
+
+\begin{lmm}{}{} Let $L$ be a semisimple Lie algebra over $\C$. Let $H$ be a Cartan sub-algebra of $L$. Let $\Phi$ be a set of roots of $L$ relative to $H$. Let $\alpha\in\Phi$. There exists $$t_\alpha\in H\setminus\{0\}$$ such that the following are true. 
+\begin{itemize}
+\item $\alpha(-)=k(t_\alpha,-):H\to\C$ as elements of $H^\ast$. 
+\item $[x,y]=k(x,y)t_\alpha$ for all $x\in L_\alpha$ and $y\in L_{-\alpha}$. 
+\item $[L_\alpha,L_{-\alpha}]=\C\langle t_\alpha\rangle$. 
+\item $\alpha(t_\alpha)\neq 0$. 
+\item $t_\alpha=-t_{-\alpha}$
+\end{itemize} \tcbline
+\begin{proof}
+By 10.1.6, $k_H=k_L|_{H\times H}$ is non-degenerate. By Linear Algebra, there is an isomorphism $H\cong H^\ast$ given by $h\mapsto k_H(h,-)$. Since $\alpha\in H^\ast$, there exists $t_\alpha\in H$ such that $\alpha(-)=k_H(t_\alpha,-)$, proving the first item. $t_\alpha$ is non-zero otherwise $k_H(t_\alpha,-)=\alpha(-)$ is the zero map. \\~\\
+
+Since $x\in L_\alpha$ and $y\in L_{-\alpha}$, we know that $[x,y]\in L_0=H$. Since $\alpha\neq 0$, there exists $t_\alpha\in H\setminus\{0\}$ such that $\alpha(t_\alpha)\neq 0$. Then for any $h\in H$ we have $$k(h,[x,y])=k([h,x],y)=k(\alpha(h)x,y)=\alpha(h)k(x,y)=k(t_\alpha,h)k(x,y)$$ Similarly, we compute that $$k(h,k(x,y)t_\alpha)=k(x,y)k(t_\alpha,h)$$ This means that $k(h,[x,y]-k(x,y)t_\alpha)=0$ for all $h\in H$. Since $h,[x,y]-k(x,y)t_\alpha\in H$, this implies that $[x,y]-k(x,y)t_\alpha\in H^\ast$. Proposition 10.1.6 implies that $H\cap H^\perp=\{0\}$. Hence $[x,y]=k(x,y)t_\alpha$, proving the second item. \\~\\
+
+For arbitrary $x\in L_\alpha$ and $y\in L_{-\alpha}$ we proved that $[x,y]\in\C\langle t_\alpha\rangle$. Hence $[L_\alpha,L_{-\alpha}]\subseteq\C\langle t_\alpha\rangle$. It remains to show that there exists $x\in L_\alpha$ and $y\in L_{-\alpha}$ such that $[x,y]\neq 0$. If this is not the case, then $[x,y]=0$ for some $x$ and $y$. Then $k(x,y)=0$. By 10.1.6, $k(L_\alpha,L_\beta)=0$ for $\alpha\neq-\beta$. This shows that $k(x,z)=0$ for all $z\in L$. Hence $x\in L^\perp=\{0\}$. Then $L_\alpha=\{0\}$ is a contradiction. This proves the third item. 
+
+For the fourth item, suppose for a contradiction that $\alpha(t_\alpha)=0$. For all $x\in L_\alpha$, we have $[t_\alpha,x]=\alpha(t_\alpha)x=0$. Similarly, for all $y\in L_{-\alpha}$ we have $[t_\alpha,y]=0$. Then $\alpha([x,y])=k(x,y)\alpha(t_\alpha)=0$. Hence $t_\alpha\subseteq Z(\C\langle x,y, [x,y]\rangle)$. By 4.4.4, $\C\langle x,y,[x,y]\rangle$ is nilpotent and hence soluble. Since $L$ is semisimple, $\text{ad}$ is an isomorphism. Hence $\text{ad}(\C\langle x,y,[x,y]\rangle)\cong\C\langle x,y,[x,y]\rangle$. By Lie's theorem, there exists a basis such that every element of $\text{ad}(\C\langle x,y,[x,y]\rangle)$ is upper triangular. Since $t_\alpha\in[\C\langle x,y,[x,y]\rangle,\C\langle x,y,[x,y]\rangle]$, $\text{ad}(t_\alpha)$ is strictly upper triangular. Thus $\text{ad}(t_\alpha)$ is nilpotent and so $t_\alpha$ is nilpotent. This is a contradiction since every element of $H$ has non-zero diagaonalizable part. \\~\\
+
+For any $h\in H$, $k(t_\alpha,h)=\alpha(h)$. So we have $$k(t_\alpha+t_{-\alpha},h)=k(t_\alpha,h)+k(t_{-\alpha},h)=\alpha(h)-\alpha(h)=0$$ Since this is true for all $h\in H$, we have that $t_\alpha+t_{-\alpha}\in H^\perp$. Since $H\cap H^\perp=\{0\}$, we conclude. 
+\end{proof}
+\end{lmm}
+
+\begin{defn}{Lie Sub-algebra associated to a Root}{} Let $L$ be a semisimple Lie algebra over $\C$. Let $\alpha$ be a root of $L$. Let $x\in L_\alpha$ and $y\in L_{-\alpha}$ be non-zero. Define the Lie sub-algebra associated to $\alpha$ by $$M_\alpha=\C\langle x,y,[x,y]=k(x,y)t_\alpha\rangle$$
+\end{defn}
+
+\begin{prp}{}{} Let $L$ be a semisimple Lie algebra over $\C$. Let $\alpha$ be a root of $L$. Then the following are true. Denote $$e_\alpha=x\;\;\text{ and }\;\;f_\alpha=\frac{2}{k(t_\alpha,t_\alpha)k(x,y)}y\;\;\text{ and }\;\;h_\alpha=\frac{2}{k(t_\alpha,t_\alpha)}t_\alpha$$ Then the following are true. 
+\begin{itemize}
+\item $h_\alpha=-h_{-\alpha}$. 
+\item $\alpha(h_\alpha)=2$. 
+\item There is a Lie algebra isomorphism $$M_\alpha\cong\C\langle e_\alpha,f_\alpha,h_\alpha\rangle$$
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{} Let $L$ be a semisimple Lie algebra over $\C$. Let $\alpha$ be a root of $L$. Then $$M_\alpha\cong\mathfrak{sl}_2(\C)$$ \tcbline
+\begin{proof}
+We check the structural constants: 
+\begin{align*}
+[e_\alpha,f_\alpha]=\left[x,\frac{2}{k(t_\alpha,t_\alpha)k(x,y)}y\right]=\frac{2}{k(t_\alpha,t_\alpha)k(x,y)}[x,y]=\frac{2}{k(t_\alpha,t_\alpha)}t_\alpha=h_\alpha\\
+[e_\alpha,h_\alpha]=\frac{2}{k(t_\alpha,t_\alpha)}[x,t_\alpha]=-\frac{2}{k(t_\alpha,t_\alpha)}\alpha(t_\alpha)x=-\frac{2}{k(t_\alpha,t_\alpha)}k(t_\alpha,t_\alpha)x=2e_\alpha
+\end{align*} and 
+\begin{align*}
+[f_\alpha,h_\alpha]&=\frac{4}{k(t_\alpha,t_\alpha)^2k(x,y)}[y,t_\alpha]\\
+&=-\frac{4}{k(t_\alpha,t_\alpha)^2k(x,y)}\alpha(t_\alpha)y\\
+&=-\frac{4}{k(t_\alpha,t_\alpha)^2k(x,y)}k(t_\alpha,t_\alpha)y\\
+&=-\frac{4}{k(t_\alpha,t_\alpha)k(x,y)}y\\
+&=-2f_\alpha
+\end{align*}
+It has the same structural constants as $\mathfrak{sl}_2(\C)$ so $M_\alpha$ is isomorphic to $\mathfrak{sl}_2(\C)$. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{} Let $L$ be a semisimple Lie algebra over $\C$. Let $\alpha$ be a root of $L$. Let $V$ be an $M_\alpha$-submodule of $L$, then the eigenvalues of the map $\text{ad}(h_\alpha)$ are integers. 
+\end{prp}
+
+\subsection{The Dimension of the Subspaces in Root Space Decompositions}
+\begin{lmm}{}{} Let $L$ be a semisimple Lie algebra over $\C$. Let $\Phi$ be the set of roots relative to some Cartan sub-algebra of $L$. Let $\alpha\in\Phi$. Then there is a decomposition $$H\oplus\bigoplus_{c\alpha\in\Phi}L_{c\alpha}=\ker(\alpha)\oplus M_\alpha$$ \tcbline
+\begin{proof}
+Write $U_\alpha=H\oplus\bigoplus_{c\alpha\in\Phi}L_{c\alpha}$. Write $e_\alpha,f_\alpha,h_\alpha$ as the basis of $M_\alpha$. Recall that $M_\alpha$ is spanned by $\{x,y,[x,y]\}$ where $x\in L_\alpha$, $y\in L_{-\alpha}$. Since $[L_\alpha,L_{-\alpha}]\subseteq L_0=H$, we have that $M_\alpha\subseteq U_\alpha$. \\~\\
+
+Step 1: $U_\alpha$ is an $M_\alpha$-submodule of $L$. \\
+Let $h\in H$. Then we have 
+\begin{align*}
+[e_\alpha,h]=-[h,e_\alpha]=-\alpha(h)e_\alpha\in M_\alpha\subseteq U_\alpha\\
+[f_\alpha,h]=-[h,f_\alpha]=\alpha(h)f_\alpha\in M_\alpha\subseteq U_\alpha\\
+[h_\alpha,h]=0\tag{Since $H=C_L(H)$}
+\end{align*}
+Hence $[M_\alpha,U_\alpha]\subseteq U_\alpha$. Now for any $c\alpha\in\Phi$, we have 
+\begin{align*}
+[e_\alpha,L_{c\alpha}]\subseteq L_{(c+1)\alpha}\subseteq U_\alpha\\
+[f_\alpha,L_{c\alpha}]\subseteq L_{(c-1)\alpha}\subseteq U_\alpha\\
+[h_\alpha,L_{c\alpha}]\subseteq L_{c\alpha}\subseteq U_\alpha
+\end{align*}
+so we are done. \\~\\
+
+Step 2: $\ker(\alpha)$ is a trivial $M_\alpha$-submodule of $U_\alpha$. \\
+Let $h\in\ker(\alpha)\subseteq H$. Then we compute that 
+\begin{align*}
+[e_\alpha,h]=-[h,e_\alpha]=-\alpha(h)e_\alpha=0\\
+[f_\alpha,h]=-[h,f_\alpha]=\alpha(h)f_\alpha=0\\
+[h_\alpha,h]=0\tag{Since $H=C_L(H)$}
+\end{align*}
+So we are done. \\~\\
+
+Step 3: $M_\alpha$ is an irreducible $M_\alpha$-submodule of $U_\alpha$. \\
+Clearly $M_\alpha$ is a submodule of $U_\alpha$. Since sub-modules of $M_\alpha$ correspond bijectively to ideals of $M_\alpha$ and $M_\alpha\cong\mathfrak{sl}_2(\C)$ is simple, we conclude that $M_\alpha$ is irreducible. \\~\\
+
+Step 4: $\ker(\alpha)\oplus M_\alpha$ is an $M_\alpha$-submodule of $U_\alpha$. \\
+It suffices to show that $\ker(\alpha)\cap M_\alpha=\{0\}$. Since $\ker(\alpha)\cap M_\alpha\subseteq H$ and $H\cap M_\alpha=\C\langle h_\alpha\rangle$, as well as $e_\alpha,f_\alpha\notin L_0=H$, we conclude that $\ker(\alpha)\cap M_\alpha=\{0\}$. \\~\\
+
+By Weyl's theorem, there exists an $M_\alpha$-submodule of $U_\alpha$ so that $$U_\alpha=M_\alpha\oplus\ker(\alpha)\oplus W$$~\\
+
+Step 5: $W=\{0\}$. \\
+Suppose that $W$ is non-zero. Then there exists an irreducible $M_\alpha$-submodule $V$ of $W$. By the classification of irreducible $\mathfrak{sl}_2(\C)$-modules, we know that $V\cong W_d$ for some $d\in\N$. By 6.4.1 and 6.4.2, we knwo that the eigenvalues of $\text{ad}(h_\alpha)$ is given by $d,d-2,\dots,-d$. They are either all even or all odd. \\~\\
+
+If $d$ is even, then $\text{ad}(h_\alpha)$ has an eigenvector $0\neq v\in V$ whose eigenvalue is $0$. Now the eigenspace of $\text{ad}(h)$ corresponding to the eigenvalue $0$ is $H$ because $H=L_0=C_L(H)$. Hence $v\in H$ so that $v\in H\cap V$. At the same time, $H\subseteq\ker(\alpha)\oplus M_\alpha$ and $(\ker(\alpha)\oplus M_\alpha)\cap W=\{0\}$ implies that $H\cap V=\{0\}$, a contradiction. \\~\\
+
+If $d$ is odd, then $\text{ad}(h_\alpha)$ has an eigenvector $0\neq v\in V$ whose eigenvalue is $1$. By 9.2.4, $\alpha(h_\alpha)=2$. The linear map $\text{ad}(h):L_{c\alpha}\subseteq U_\alpha\o L_{c\alpha}\subseteq U_\alpha$ by definition satisfies the equation $\text{ad}(h_\alpha)(w)=c\alpha(h_\alpha)w=2cw$. When $v=w$, its eigenvalue is $1$ and this implies that $c=1/2$ so that both $\alpha/2$ and $\alpha$ are roots. I claim that this is a contradiction. By 9.2.4, $\frac{\alpha}{2}(h_{\alpha/2})=2$ so that $\text{ad}(\alpha/2)$ has eigenvalue $2$ on $L_\alpha\subseteq U_{\alpha/2}$. Then the eigenvalues of $\text{ad}(h_{\alpha/2}$ on $\ker(\alpha/2)\oplus M_{\alpha/2}$ is $0$ and $\pm2$. This implies that $W_d$ is a submodule of $W$ for some even $d$, and by the even case this is impossible. Hence we reached a contradiction. \\~\\
+
+The fact that $W=\{0\}$ then implies that $U_\alpha=\ker(\alpha)\oplus M_\alpha$ as required. 
+\end{proof}
+\end{lmm}
+
+\begin{prp}{}{} Let $L$ be a semi-simple Lie algebra over $\C$. Let $\Phi$ be the set of roots relative to some Cartan sub-algebra of $L$. Let $\alpha\in\Phi$. If $c\alpha\in\Phi$, then $c=\pm1$. \tcbline
+\begin{proof}
+We know that $H\oplus\bigoplus_{c\alpha} L_{c\alpha}=\ker(\alpha)\oplus M_\alpha$. Analyzing the right hand side, the fact that $\alpha(h_\alpha)=2$ implies that the only eigenvalues for $\text{ad}(h_\alpha)$ on $\ker(\alpha)\oplus M_\alpha$ can only be $0$ or $\pm2$. Analyzing the left hand side, the eigenvalue of $\text{ad}(h_\alpha)$ on $H$ is $0$ and the eigenvalue of $\text{ad}(h)$ on $L_{c\alpha}$ is $c\alpha$ by construction. This proves that $c=\pm1$. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{} Let $L$ be a semi-simple Lie algebra over $\C$. Let $\Phi$ be the set of roots relative to some Cartan sub-algebra of $L$. Let $\alpha\in\Phi$. Then we have $$\dim(L_\alpha)=1$$ \tcbline
+\begin{proof}
+We have that $$\dim(H)+2=\dim\left(H\oplus L_\alpha\oplus L_{-\alpha}\right)=\dim(\ker(\alpha)\oplus M_\alpha)=\dim(\ker\alpha)+3$$ $\dim(\ker(\alpha)=1$ since $\alpha:H\to\C$ is a root. Since both $L_\alpha$ and $L_{-\alpha}$ are non-trivial vector spaces, we are left with $\dim(L_\alpha)+\dim(L_{-\alpha})=2$ which implies that $\dim(L_\alpha)=1$. 
+\end{proof}
+\end{prp}
+
+\subsection{Root Strings}
+\begin{defn}{Root Strings}{} Let $L$ be a semisimple Lie algebra over $\C$. Let $\Phi$ be a root system of $L$. Let $\alpha\in\Phi$ and $\beta\in\Phi\cup\{0\}$. Define the $\alpha$-root string through $\beta$ to be $$S_{\alpha,\beta}=\bigoplus_{\substack{c\in\Z\\\beta+c\alpha\in\Phi}}L_{\beta+c\alpha}$$
+\end{defn}
+
+\begin{lmm}{}{} Let $L$ be a semisimple Lie algebra over $\C$. Let $\Phi$ be a root system of $L$. Let $\alpha,beta\in\Phi$ such that $\beta\neq\pm\alpha$. Then the following are true. 
+\begin{itemize}
+\item There exists $k_1,k_2\in\Z$ such that for any $c\in\Z$, $\beta+c\alpha\in\Phi$ if and only if $k_2<c<k_1$. Moreover, $\beta(h_\alpha)=k_1-k_2$. 
+\item $\beta-\beta(h_\alpha)\alpha\in\Phi$. 
+\end{itemize}
+\end{lmm}
+
+\begin{prp}{}{} Let $L$ be a semisimple Lie algebra over $\C$. Let $\Phi$ be a root system of $L$. Let $\alpha\in\Phi$ and $\beta\in\Phi\cup\{0\}$. Then $S_{\alpha,\beta}$ is an irreducible $M_\alpha\cong\mathfrak{sl}_2(\C)$-module. 
+\end{prp}
+
+\begin{eg}{}{} Let $\varepsilon_i\in H^\ast$ be the map defined by $\varepsilon_i(e_{j,j})=\delta_{i,j}$. Recall that a root system of $\mathfrak{sl}_3(\C)$ is given by $\Phi=\{\varepsilon_i-\varepsilon_j\;|\;1\leq i,j\leq 3\}$ and a base for the root system is given by $$\{\alpha_1=\varepsilon_1-\varepsilon_2, \alpha_2=\varepsilon_2-\varepsilon_3\}$$
+\begin{itemize}
+\item The $\alpha_2$-root string through $\alpha_1$ is given by $$L_{\alpha_1}\oplus L_{\alpha_1+\alpha_2}=\C\langle e_{1,2}, e_{1,3}\rangle$$
+\item The $-\alpha_1$-root string through $-\alpha_2$ is given by $$L_{-\alpha_2}\oplus L_{-\alpha_2-\alpha_1}=\C\langle e_{3,2},e_{3,1}\rangle$$
+\item The $\alpha_1$-root string through $0$ is given by $$L_{-\alpha_1}\oplus L_0\oplus L_{-\alpha_1}=\C\langle e_{1,1}-e_{2,2},e_{1,2}, e_{2,1}\rangle$$
+\end{itemize}
+\end{eg}
+
+\subsection{The Set of Roots as a Root System}
+\begin{prp}{}{} Let $L$ be a semi-simple Lie algebra over $\C$. Let $H$ be a Cartan subalgebra of $L$. Let $\Phi$ be the set of roots relative to $H$. Let $\alpha_1,\dots,\alpha_r\in\Phi$ be a basis for $H^\ast$. Then $\R[\alpha_1,\dots,\alpha_r]\subset H^\ast$ is an inner product space whose symmetric bilinear form is given by $$B(\phi,\psi)= k(t_\phi,t_\psi)$$ (as in the notation of 9.2.1). 
+\end{prp}
+
+\begin{prp}{}{} Let $L$ be a semi-simple Lie algebra over $\C$. Let $H$ be a Cartan subalgebra of $L$. Let $\Phi$ be the set of roots relative to $H$. Let $\alpha_1,\dots,\alpha_r\in\Phi$ be a basis for $H^\ast$. Then $\Phi$ is a root system for the inner product space $(\R[\alpha_1,\dots,\alpha_r],B)$. 
+\end{prp}
+
+\begin{prp}{}{} Let $L$ be a semi-simple Lie algebra over $\C$. Let $H$ and $K$ be two Cartan subalgebras of $L$. Let $\Phi_H$ and $\Phi_K$ be the set of roots relative to $H$ and $K$ respectively. Then $\Phi_H\cong\Phi_K$. 
+\end{prp}
+
+This proves that although the set of roots come from a chosen Cartan subalgebra of the Lie algebra $L$, it is an invariant of $L$ and not the Cartan subalgebra. Up until this point, we have constructed an invariant for Lie algebras following the below schematic: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	&&& \begin{array}{c} \substack{\text{Associated}\\\text{Weyl Group}} \end{array} \\
+	\begin{array}{c} \substack{\text{Semi-Simple}\\\text{Lie Algebras}} \end{array} & \begin{array}{c} \substack{\text{Set of Cartan}\\\text{Sub-Algebras}} \end{array} & \begin{array}{c} \substack{\text{Associated}\\\text{Root System}} \end{array} \\
+	&&& \begin{array}{c} \substack{\text{Dynkin}\\\text{Diagram}} \end{array}
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-3, to=1-4]
+	\arrow[from=2-3, to=3-4]
+\end{tikzcd}} \\
+
+We will now show that Simple Lie algebras give rise to irreducible Dynkin diagrams and vice versa. 
+
+\begin{eg}{}{} The following are true regarding $\mathfrak{sl}_n(\C)$. 
+\begin{itemize}
+\item A Cartan sub-algebra of $\mathfrak{sl}_n(\C)$ is given by $H=\mathfrak{d}_n(\C)\cap\mathfrak{sl}_n(\C)$
+\item Let $\varepsilon_i\in H^\ast$ be the map defined by $\varepsilon_i(e_{j,j})=\delta_{i,j}$. Then the set of roots of $L$ with respect to $H$ is given by $$\Phi=\{\varepsilon_i-\varepsilon_j\;|\;1\leq i,j\leq n\}$$
+\item A copy of $\mathfrak{sl}_2(\C)$ in $\mathfrak{sl}_n(\C)$ is given by $$\C\langle e_{i,j},e_{j,i}, e_{i,i}-e_{j,j}\rangle$$ for $i\neq j$. 
+\item A base for $\Phi$ is given by $$\{\varepsilon_i-\varepsilon_{i+1}\;|\;1\leq i\leq n-1\}$$
+\end{itemize}
+\end{eg}
+
+\subsection{The Classification Theorem}
+\begin{prp}{}{} Let $L$ be a semisimple Lie algebra over $\C$. Let $\Phi$ be a root system of $L$ with base $B=\{\alpha_1,\dots,\alpha_r\}$. Let $\mathfrak{sl}_2(\C)\overset{\Phi_i}{\cong}M_{\alpha_i}$ be the corresponding Lie subalgebra of $L$ generated by the elements $$e_i=\Phi\left(\begin{pmatrix}
+0 & 1\\
+0 & 0
+\end{pmatrix}\right)\;\;\;\;f_i=\Phi\left(\begin{pmatrix}
+0 & 0\\
+1 & 0
+\end{pmatrix}\right)\;\;\;\;h_i=\Phi\left(\begin{pmatrix}
+1 & 0\\
+0 & -1
+\end{pmatrix}\right)$$ Then the following are true. 
+\begin{itemize}
+\item $L=\C\langle e_i,f_i\;|\;1\leq i\leq r\rangle$. 
+\item $[h_s,h_t]=0$ for $1\leq s,t\leq l$. 
+\item $[h_s,e_t]=\langle\alpha_t,\alpha_s\rangle e_t$ for $1\leq s,t\leq l$. 
+\item $[h_s,f_t]=-\langle\alpha_t,\alpha_s\rangle f_t$ for $1\leq s,t\leq l$. 
+\item $[e_s,f_t]=\begin{cases}
+h_s & \text{ if } s=t\\
+0 & \text{otherwise}
+\end{cases}$
+\item $\left(\text{ad}(e_s)\right)^{1-\langle\alpha_t,\alpha_s\rangle}(e_t)=0=\left(\text{ad}(f_s)\right)^{1-\langle\alpha_t,\alpha_s\rangle}(f_t)$ for $1\leq s,t\leq l$. 
+\end{itemize}
+\end{prp}
+
+\begin{thm}{Serre's Theorem}{} Let $R$ be a root system over $\R^n$ with base $B=\{\alpha_1,\dots,\alpha_l\}$. Let $L$ be the Lie algebra defined by $$L=\C\langle e_i,f_i,h_i, 1\leq i\leq l\;|\;S\rangle$$ where $S$ are the following relations: 
+\begin{itemize}
+\item $[h_s,h_t]=0$ for $1\leq s,t\leq l$. 
+\item $[h_s,e_t]=\langle\alpha_t,\alpha_s\rangle e_t$ for $1\leq s,t\leq l$. 
+\item $[h_s,f_t]=-\langle\alpha_t,\alpha_s\rangle f_t$ for $1\leq s,t\leq l$. 
+\item $[e_s,f_t]=\begin{cases}
+h_s & \text{ if } s=t\\
+0 & \text{otherwise}
+\end{cases}$
+\item $\left(\text{ad}(e_s)\right)^{1-\langle\alpha_t,\alpha_s\rangle}(e_t)=0=\left(\text{ad}(f_s)\right)^{1-\langle\alpha_t,\alpha_s\rangle}(f_t)$ for $1\leq s,t\leq l$. 
+\end{itemize}
+Then the following are true. 
+\begin{itemize}
+\item $L$ is finite dimensional and semi-simnple. 
+\item $H=\C\langle h_1,\dots,h_l\rangle$ is a Cartan sub-algebra of $L$. 
+\item The root system $\Phi_H$ of $H$ is equal to $R$. 
+\end{itemize}
+\end{thm}
+
+\begin{crl}{}{} There is a bijection $$\frac{\text{Semisimple Lie algebras over }\C}{\cong}\;\;\overset{1:1}{\leftrightarrow}\;\;\frac{\text{Root Systems over }\R^n\text{ for all }n}{\cong}$$ given as follows. 
+\begin{itemize}
+\item For a semisimple Lie algebra over $\C$, choose a Cartan sub-algebra $H$ of $L$. Then $H$ has an associated root system. 
+\item For a root system $R$, Serre's theorem gives a semisimple Lie algebra over $\C$. 
+\end{itemize} \tcbline
+\begin{proof}
+The forward map is well defined since the associated root system is independent of the chosen Cartan sub-algebra by 9.3.4. The backwards map is well defined by construction. \\~\\
+
+Let $L$ be a semisimple Lie algebra over $\C$. Then using its root system, we can construct a new semisimple Lie algebra over $\C$ by Serre's theorem. We need to show that these two semisimple Lie algebras over $\C$ are isomorphic. \\~\\
+
+Given a root system $R$, Serre's theorem gives a semisimple Lie algebra over $\C$ whose associated root system is equal to $R$. Hence the backward maps composed with the forward map is the identity. 
+\end{proof}
+\end{crl}
+
+\subsection{Simple Lie Algebras and Irreducible Dynkin Diagrams}
+We now want to enrich the above diagram: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	&&& \begin{array}{c} \substack{\text{Associated}\\\text{Weyl Group}} \end{array} \\
+	\begin{array}{c} \substack{\text{Semi-Simple}\\\text{Lie Algebras}} \end{array} & \begin{array}{c} \substack{\text{Set of Cartan}\\\text{Sub-Algebras}} \end{array} & \begin{array}{c} \substack{\text{Associated}\\\text{Root System}} \end{array} \\
+	&&& \begin{array}{c} \substack{\text{Dynkin}\\\text{Diagram}} \end{array} \\
+	\begin{array}{c} \substack{\text{Simple}\\\text{Lie Algebras}} \end{array} && \begin{array}{c} \substack{\text{Irreducible}\\\text{Root System}} \end{array} & \begin{array}{c} \substack{\text{Connected}\\\text{Dynkin Diagram}} \end{array}
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-3, to=1-4]
+	\arrow[from=2-3, to=3-4]
+	\arrow[from=4-1, to=4-3]
+	\arrow[from=4-3, to=4-4]
+\end{tikzcd}} \\
+
+\begin{prp}{}{} Let $L$ be a simple Lie algebra over $\C$. Let $H$ be a Cartan sub-algebra of $L$. Let $\Phi$ be the root system associated to $H$. Then $\Phi$ is irreducible. 
+\end{prp}
+
+\begin{crl}{}{} Let $\Phi$ be an irreducible root system. Then there exists a simple Lie algebra over $\C$ such that its associated root system is $\Phi$. 
+\end{crl}
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+Root System                                        & Rank & Simple Lie Algebra         & Dimension & Number of Roots \\ \hline
+$A_n\;\;(n\geq 1)$ & $n$  & $\mathfrak{sl}_{n+1}(\C)$      & $n^2+2n$  & $n^2+n$         \\
+$B_n\;\;(n\geq 2)$ & $n$  & $\mathfrak{so}_{2n+1}(\C)$ & $2n^2+n$  & $2n^2$          \\
+$C_n\;\;(n\geq 3)$ & $n$  & $\mathfrak{sp}_{2n}(\C)$   & $2n^2+n$  & $2n^2$          \\
+$D_n\;\;(n\geq 4)$ & $n$  & $\mathfrak{so}_{2n}(\C)$   & $2n^2-n$  & $2n^2-2n$       \\
+$G_2$                                              & $2$  & $\mathfrak{g}_2(\C)$      & $14$      & $12$            \\
+$F_4$                                              & $4$  & $\mathfrak{f}_4(\C)$       & $52$      & $48$            \\
+$E_6$                                              & $6$  & $\mathfrak{e}_6(\C)$       & $78$      & $72$            \\
+$E_7$                                              & $7$  & $\mathfrak{e}_7(\C)$       & $133$     & $126$           \\
+$E_8$                                              & $8$  & $\mathfrak{e}_8(\C)$       & $248$     & $240$           \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{crl}{}{} There are no semisimple Lie algebras of dimension $1,2,4,5,7$. 
+\end{crl}
+
+Another table of simple Lie algebras, indexed by the dimension. 
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+Dimension & Simple Lie Algebras                              & Root System \\ \hline
+$3$       & $\mathfrak{sl}_2(\C)$                     & $A_1$       \\
+$8$       & $\mathfrak{sl}_3(\C)$                     & $A_2$       \\
+$10$      & $\mathfrak{so}_5(\C)$                     & $B_2$       \\
+$14$      & $\mathfrak{g}_2(\C)$                     & $G_2$       \\
+$15$      & $\mathfrak{sl}_4(\C)$                     & $A_3$       \\
+$21$      & $\mathfrak{so}_7(\C),\mathfrak{sp}_6(\C)$ & $B_3,C_3$   \\
+$24$      & $\mathfrak{sl}_5(\C)$                     & $A_4$       \\
+$28$      & $\mathfrak{so}_8(\C)$                     & $D_4$       \\ \hline
+\end{tabular}
+\end{table}
+
+Finally, a table of semisimple Lie algebras. 
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+Dimension & Lie Algebras                                                                                                                                                    & Total Number \\ \hline
+$3$       & $\mathfrak{sl}_2(\C)$                                                                                                                                           & $1$          \\
+$6$       & $\mathfrak{sl}_2(\C)^{\oplus 2}$                                                                                                                                & $1$          \\
+$8$       & $\mathfrak{sl}_3(\C)$                                                                                                                                           & $1$          \\
+$9$       & $\mathfrak{sl}_2(\C)^{\oplus 3}$                                                                                                                                & $1$          \\
+$10$      & $\mathfrak{so}_5(\C)$                                                                                                                                           & $1$          \\
+$11$      & $\mathfrak{sl}_2(\C)\oplus\mathfrak{sl}_3(\C)$                                                                                                                  & $1$          \\
+$12$      & $\mathfrak{sl}_2(\C)^{\oplus 4}$                                                                                                                                & $1$          \\
+$13$      & $\mathfrak{sl}_2(\C)\oplus\mathfrak{so}_5(\C)$                                                                                                                  & $1$          \\
+$14$      & $\mathfrak{g}_2(\C),\;\;\;\;\mathfrak{sl}_2(\C)^{\oplus 2}\oplus\mathfrak{sl}_3(\C)$                                                                            & $2$          \\
+$15$      & $\mathfrak{sl}_4(\C),\;\;\;\;\mathfrak{sl}_2(\C)^{\oplus 5}$                                                                                                    & $2$          \\
+$16$      & $\mathfrak{sl}_3(\C)^{\oplus 2},\;\;\;\;\mathfrak{sl}_2(\C)^{\oplus 2}\oplus\mathfrak{so}_5(\C)$                                                                & $2$          \\
+$17$      & $\mathfrak{sl}_2(\C)^{\oplus 3}\oplus\mathfrak{sl}_3(\C),\;\;\;\;\mathfrak{sl}_2(\C)\oplus\mathfrak{g}_2(\C)$                                                   & $2$          \\
+$18$      & $\mathfrak{sl}_2(\C)^{\oplus 6},\;\;\;\;\mathfrak{sl}_3(\C)\oplus\mathfrak{so}_5(\C),\;\;\;\;\mathfrak{sl}_4(\C)\oplus\mathfrak{sl}_2(\C)$                      & $3$          \\
+$19$      & $\mathfrak{sl}_2(\C)\oplus\mathfrak{sl}_3(\C)^{\oplus 2},\;\;\;\;\mathfrak{sl}_2(\C)^{\oplus 3}\oplus\mathfrak{so}_5(\C)$                                       & $2$          \\
+$20$      & $\mathfrak{sl}_2(\C)^{\oplus 4}\oplus\mathfrak{sl}_3(\C),\;\;\;\;\mathfrak{sl}_2(\C)^{\oplus 2}\oplus\mathfrak{g}_2(\C),\;\;\;\;\mathfrak{so}_5(\C)^{\oplus 2}$ & $3$          \\ \hline
+\end{tabular}
+\end{table}
+
+
+
+
+
+
+\end{document}

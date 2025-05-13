@@ -1,0 +1,350 @@
+\documentclass[a4paper]{article}
+
+\input{C:/Users/liula/Desktop/Latex/Headers V1.2.tex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Labix}
+\lhead{Algebraic Geometry 2}
+\rfoot{\thepage}
+
+\title{Algebraic Geometry 2}
+
+\author{Labix}
+
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+Algebraic Geometry is such a messy subject in a sense that a different books and lecture notes introduce different materials in a different orders, as well as having different prerequisites. After understanding a bit more in the subject, I believe that there is the need to give a clear distinction between traditional algebraic geometry and contemporary algebraic geometry. Although there are undoubtedly many overlapping between the two, I attempt to separate them to make clear their motivations as well as their results. \\~\\
+
+This book will mainly cover traditional algebraic geometry in the sense that the construction of affine and projective varieties will be covered, as well as the Hilbert Nullstellensatz theorems, morphisms, tangent maps and smoothness as well as classical constructions of some varieties. Affine schemes and sheaf theory are left for another time where they attempt to reinvent the fundamentals of algebraic geometry. \\~\\
+
+Knowledge on commutative algebra is required as a prerequisite. These set of notes make use of
+\begin{itemize}
+\item Algebraic Geometry I by I. R. Shafarevich and V. I. Danilov
+\item Algebraic Geometry by R. Hartshorne
+\item An Invitation to Algebraic Geometry by Karen. S, Pekka. K, Lauri .K, William .T
+\end{itemize}
+\end{abstract}
+\pagebreak
+\tableofcontents
+
+\pagebreak
+\section{The Tangent Space and Smooth Points}
+\subsection{The Tangent Space of Affine Varieties}
+\begin{defn}{The Tangent Space of an Affine Variety}{} Let $k$ be a field. Let $V=\V(f_1,\dots,f_r)$ be an affine variety over $k$. Define the tangent space of $V$ at $p\in V$ to be the zero set $$T_pV=\V\left(\sum_{k=1}^n\frac{\partial f_1}{\partial x_k}\bigg{|}_p(x_k-p_k),\dots,\sum_{k=1}^n\frac{\partial f_r}{\partial x_k}\bigg{|}_p(x_k-p_k)\right)$$
+\end{defn}
+
+It should first be made sense that the definition is independent of the choice of polynomials $f_1,\dots,f_r$ of the zero set. 
+
+\begin{prp}{}{} Let $V$ be a closed affine variety over $\C$. Let $p\in V$. Let $m_p$ denote the corresponding maximal ideal. Then there is an isomorphism $$T_pV\cong\left(\frac{m_p}{m_p^2}\right)^\ast$$ given by ?????. In particular, we have the identity $$\dim(T_pV)=\dim_{\C[V]/m_p}(m_p/m_p^2)$$
+\end{prp}
+
+\begin{defn}{The Jacobian Matrix}{} Let $k$ be a field. Let $V=\V(f_1,\dots,f_m)\subseteq\A_k^n$ be an affine variety. Let $p\in V$. Define the Jacobian matrix of $V$ at $p$ to be the $m\times n$ matrix $$J_{V,p}=\begin{pmatrix}
+\frac{\partial f_1}{\partial x_1}\bigg{|}_p & \cdots & \frac{\partial f_1}{\partial x_n}\bigg{|}_p\\
+\vdots & \ddots & \vdots\\
+\frac{\partial f_m}{\partial x_1}\bigg{|}_p & \cdots & \frac{\partial f_m}{\partial x_n}\bigg{|}_p
+\end{pmatrix}$$
+\end{defn}
+
+\begin{prp}{}{} Let $k$ be a field. Let $V=\V(f_1,\dots,f_m)\subseteq\A_k^n$ be an affine variety. Let $p=(p_1,\dots,p_n)\in V$. Then $$T_pV=\left\{(x_1,\dots,x_n)\in\A_k^n\;\bigg{|}\;J_{V,p}\cdot\begin{pmatrix}x_1-p_1\\\vdots\\x_n-p_n\end{pmatrix}=0\right\}$$
+\end{prp}
+
+\subsection{Smooth Points of an Affine Variety}
+We continue to restrict our attention to affine varieties. 
+
+\begin{defn}{Smooth and Singular Points of Affine Varieties}{} Let $k$ be a field. Let $X$ be an irreducible affine variety over $k$. Let $p\in X$ be a point. We say that $p$ is a smooth point of $X$ if $$\dim(T_p(X))=\dim(X)$$ Otherwise, we say that $p$ is a singular point of $X$. 
+\end{defn}
+
+\begin{prp}{}{} Let $V=\V(f_1,\dots,f_m)\subseteq\A_\C^n$ be an irreducible affine variety. Let $p\in V$. Then the following are equivalent. 
+\begin{itemize}
+\item $p$ is a smooth point of $V$. 
+\item $\rank(J_{V,p})=n-\dim(V)$. 
+\item $\mO_{V,p}$ is a regular local ring. 
+\end{itemize}
+\end{prp}
+
+In particular, this shows that smoothness is independent of the choice of generators of $V$, because we have given a characterization in terms of a property of the local ring $\mO_{V,p}$. \\
+
+Hard to prove: smoothness is preserved by isomorphisms. 
+
+\subsection{The Tangent Space of Varieties in General}
+\begin{defn}{The Tangent Space of a Quasi-Projective Variety}{} Let $k$ be a field. Let $V$ be a quasi-projective variety over $k$. Let $p\in V$. Define the tangent space of $V$ at $p$ to be $$T_pV=\left(\frac{m_p}{m_p^2}\right)^\ast$$ where $m_p$ is the unique maximal ideal of the local ring $\mO_{V,p}$. 
+\end{defn}
+
+\subsection{Smooth Points of a Variety in General}
+We can now motivate the definition of a smooth point using the purely algebraic characterization. 
+
+\begin{defn}{Smooth and Singular Points of A General Variety}{} Let $X$ be a variety. We say $p\in X$ is a smooth point of $X$ if the local ring $\mO_{X,p}$ is a regular local ring. Otherwise, we say that $p$ is a singular point of $X$. 
+\end{defn}
+
+\begin{thm}{}{} Let $X$ be a variety. Then the set of singular points of $X$ is a proper closed subset of $X$. 
+\end{thm}
+
+\begin{prp}{}{} Let $X$ be a variety. If $p\in X$ is a smooth point, then $\mO_{X,p}$ is a UFD. 
+\end{prp}
+
+\begin{prp}{}{} Let $X$ be a variety and let $Y\subseteq X$ be an irreducible subvariety of $X$. If $p\in X$ is non-singular, then there exists an affine neighbourhood $U\subseteq X$ of $x$ together with $f_1,\dots,f_k\in k[U]$
+\end{prp}
+
+\pagebreak
+\section{The Algebra of Rational Functions}
+\subsection{Rational Functions and The Function Field}
+\begin{defn}{Function Field}{} Let $k$ be a field. Let $V$ be a variety over $k$. Define the set of rational functions on $V$ to be $$K(V)=\{(U,f)\;|\;U\subseteq V\text{ open and }f:U\to k\text{ is regular }\}/\sim$$ where we say that $(U,f)\sim(V,g)$ if there exists $W\subseteq U\cap V$ open such that $f|_W=g|_W$. Elements of the function field are called rational functions. 
+\end{defn}
+
+\begin{lmm}{}{} Let $k$ be a field. Let $V$ be an variety over $k$. Define the operations $$(U,f)+(V,g)=(U\cap V,f+g)\;\;\;\;\text{ and }\;\;\;\;(U,f)\cdot(V,g)=(U\cap V,fg)$$ Then they induce well defined operations on $K(V)$ so that it is a $k$-algebra. Moreover, it is a field. 
+\end{lmm}
+
+\begin{lmm}{}{} Let $V$ be a variety over $\C$. Then the following are true. 
+\begin{itemize}
+\item The map $\mO_V(V)\to\mO_{V,p}$ given by $f\mapsto(V,f)$ is injective for any $p\in V$. 
+\item The map $\mO_{V,p}\to k(V)$ given by $(V,f)\mapsto(V,f)$ is injective for any $p\in V$. 
+\end{itemize}
+\end{lmm}
+
+\begin{prp}{}{} Let $k$ be an algebraically closed field. Let $V\subseteq\A_k^n$ be an irreducible affine variety. Then there is an isomorphism $$K(V)\cong\text{Frac}(k[V])$$ Moreover, $K(V)$ is a finitely generated field extension of $\C$. 
+\end{prp}
+
+\begin{prp}{}{} Let $k$ be an algebraically closed field. Let $V\subseteq\A_k^n$ be an irreducible affine variety. Then we have $$\text{trdeg}_k(K(V))=\dim(V)$$
+\end{prp}
+
+\begin{prp}{}{} Let $k$ be an algebraically closed field. Let $V\subseteq\Prj^n$ be an irreducible projective variety over $k$. Then there is a $k$-algebra isomorphism $$K(X)\cong(k[V]_{(0)})_0$$ where the zero refers to taking the degree zero part of the graded ring. \tcbline
+\begin{proof}
+\end{proof}
+\end{prp}
+
+\subsection{Rational Maps between Varieties}
+\begin{defn}{An Equivalence Class of Maps}{} Let $X,Y$ be irreducible varieties. Let $U_1,U_2\subseteq X$ be open. Let $f_1:U_1\to Y$ and $f_2:U_2\to Y$ be morphisms of varieties. We say that $f_1$ and $f_2$ are equivalent if there exists an open subset $W\subseteq U_1\cap U_2$ such that $$f_1|_W=f_2|_W:W\to Y$$
+\end{defn}
+
+\begin{defn}{Rational Maps}{} Let $X,Y$ be irreducible varieties. A rational map $f:X\to Y$ is an equivalent class of morphisms of varieties $f:U\to Y$ for some open subset $U\subseteq X$. 
+\end{defn}
+
+Since open subsets of a variety dense, rational maps are maps that are defined almost entirely on $X$. In particular, notice that rational functions on an irreducible variety $V$ is the same as a rational map $V\to k$. \\
+
+Moreover, if $f:X\to Y$ is a regular map (morphism of varieties), then $[(X,f)]$ is also a rational map. 
+
+\begin{defn}{Dominant Maps}{} Let $X,Y$ be irreducible varieties. Let $f:X\to Y$ be a rational map defined on $U\subseteq X$. We say that $f$ is dominant if $f(U)$ contains an open subset. 
+\end{defn}
+
+It only makes sense to compose rational maps if the former one is dominant. 
+
+\begin{prp}{}{} Let $X,Y,Z$ be irreducible varieties. Let $f:X\to Y$ and $g:Y\to Z$ be rational maps. If $f$ is dominant, then $g\circ f$ is rational. 
+\end{prp}
+
+\begin{defn}{Induced Map on Rational Functions}{} Let $k$ be a field. Let $X,Y$ be irreducible varieties over $k$. Let $\phi:X\to Y$ be a dominant rational map. Define the induced map on rational functions to be $$\phi^\ast:K(Y)\to K(X)$$ given by $(U,f)\mapsto (\phi^{-1}(U),f\circ\phi)$. 
+\end{defn}
+
+\begin{prp}{}{} Let $k$ be a field. Let $X,Y$ be irreducible varieties over $k$. Let $\phi:X\to Y$ be a dominant rational map. Then the induced map $\phi^\ast:K(Y)\to K(X)$ is a $k$-algebra homomorphism. 
+\end{prp}
+
+\begin{prp}{}{} Let $k$ be a field. Let $X,Y$ be irreducible varieties over $k$. Then there is a one-to-one correspondence $$\left\{\substack{\text{Dominant Rational Maps}\\X\to Y}\right\}\;\;\overset{1:1}{\longleftrightarrow}\left\{\substack{k\text{-algebra homomorphisms}\\K(Y)\to K(X)}\right\}$$ given by $\phi\mapsto\phi^\ast$. 
+\end{prp}
+
+TBA: Equivalence of categories between irreducible varieties and dominant rational maps, and field extensions of $k$ and $k$-algebra homomorphisms. 
+
+\subsection{Birational Equivalence}
+\begin{defn}{Birational Maps}{} Let $X,Y$ be irreducible varieties. Let $f:X\to Y$ be a dominant rational map defined on $U\subseteq X$. We say that $f$ is a birational map if there exists a dominant rational map $g:Y\to X$ such that $$g\circ f=\text{id}_U\;\;\;\;\text{ and }\;\;\;\;f\circ g=\text{id}_V$$ for some open subsets $U\subseteq X$ and $V\subseteq Y$. In this case, we say that $X$ and $Y$ are birational. 
+\end{defn}
+
+\begin{prp}{}{} Let $k$ be a field. Let $X,Y$ be irreducible varieties over $k$. The the following conditions are equivalent. 
+\begin{itemize}
+\item $X$ and $Y$ are birationally equivalent
+\item There exists open subsets $U\subseteq X$ and $V\subseteq Y$ with $U$ isomorphic to $V$
+\item $K(X)$ and $K(Y)$ are isomorphic $k$-algebras
+\end{itemize}
+\end{prp}
+
+\begin{lmm}{}{} Let $n\in\N$. Then $\A^n$ is birationally equivalent to $\Prj^n$. \tcbline
+\begin{proof}
+The function field of $\A^n$ is given by $K(\A^n)=K(x_1,\dots,x_n)$. On the other hand, we can compute the function field of $\Prj^n$ to get 
+\begin{align*}
+K(\Prj^n)&=\left(k[x_0,\dots,x_n]_{(0)}\right)_0\\
+&=\left(k(x_0,\dots,x_n)\right)_0
+\end{align*}
+The zeroth graded component of $k(x_0,\dots,x_n)$ is given by $$(k(x_0,\dots,x_n))_0=\left\{\frac{f}{g}\in k(x_0,\dots,x_n)\;|\;\deg(f)=\deg(g)\right\}$$ Define a map $\phi:(k(x_0,\dots,x_n))_0\to k(x_1,\dots,x_n)$ by the map $$f(x_0,\dots,x_n)/g(x_0,\dots,x_n)\mapsto f(1,x_1,\dots,x_n)/g(1,x_1,\dots,x_n)$$ Evaluation of the zeroth variable with $1$ is a well defined $\C$-algebra homomorphism. I claim that this is a bijection. Define another map $\psi:k(x_1,\dots,x_n)\to(k(x_0,\dots,x_n))_0$ by $$h/k\mapsto x_0^d h(x_1/x_0,\dots,x_n/x_0)/x_0^d k(x_1/x_0,\dots,x_n/x_0)$$ where $d=\max\{\deg(f),\deg(g)\}$. By construction we see that $x_0^d h(x_1/x_0,\dots,x_n/x_0)$ has the same degree as $x_0^d k(x_1/x_0,\dots,x_n/x_0)$ and that they are homogeneous polynomials (similar to the homogenization of a polynomial). Moreover it is clear that $\psi$ and $\phi$ are inverses of each other. Hence we obtain an isomorphism of $\C$-algebras. 
+\end{proof}
+\end{lmm}
+
+\begin{defn}{Rational Varieties}{} Let $k$ be a field. Let $X$ be a variety over $k$. We say that $X$ is rational if $X$ is birationally equivalent to $\Prj_k^n$ for some $n\in\N$. 
+\end{defn}
+
+\pagebreak
+\section{Differential Forms on Varieties}
+\subsection{Differential Forms as the Module of Kahler Differentials}
+\begin{defn}{Differential Forms on Varieties}{} Let $k$ be a field. Let $X$ be a variety over $k$. Define the module of Kahler differentials of $X$ to be the module $$\Omega_X^1=\Omega_{k[X]/k}^1$$
+\end{defn}
+
+\begin{defn}{Differential $n$-Forms on Varieties}{} Let $k$ be a field. Let $X$ be a variety over $k$. Define the module of differential $n$-forms of $X$ to be the module $$\Omega_X^n=\bigwedge_{i=1}^n\Omega_{k[X]/k}^1$$
+\end{defn}
+
+\subsection{The Geometric Genus}
+\begin{defn}{Geometric Genus}{} Let $k$ be a field. Let $X$ be a variety over $k$. Define the geometric genus of $X$ to be $$p_g(X)=\dim_k\left(\Omega_X^{\dim(X)}\right)$$
+\end{defn}
+
+\pagebreak
+\section{Different Types of Morphisms}
+\subsection{Embeddings}
+\begin{defn}{Embeddings}{} Let $k$ be a field. Let $X,Y$ be varieties over $k$. Let $\phi:X\to Y$ be a regular map. We say that $\phi$ is an embedding if $X$ is isomorphic to $\phi(X)$ via $\phi$. 
+\end{defn}
+
+\begin{prp}{}{} Let $k$ be a field. Let $X,Y$ be varieties over $k$. Let $\phi:X\to Y$ be a regular map. Then $\phi$ is an embedding if and only if the following are true. 
+\begin{itemize}
+\item $\phi$ is injective. 
+\item For all $p\in X$, the induced linear map $$\phi^\ast:\frac{m_{\phi(p)}}{m_{\phi(p)}^2}\to\frac{m_p}{m_p^2}$$ is surjective. 
+\end{itemize}
+\end{prp}
+
+\subsection{Proper Morphisms}
+
+\subsection{Finite Morphisms}
+\begin{defn}{Finite Morphisms Between Varieties}{} Let $k$ be a field. Let $X,Y$ be varieties over $k$. Let $f:X\to Y$ be a morphism of varieties. We say that $f$ is finite if there exists an affine cover $W_1,\dots,W_k$ of $Y$ such that $f^{-1}(W_i)$ is affine and that via the map $$f|_{f^{-1}(W_i)}:f^{-1}(W_i)\to W_i$$ we have that $k[f^{-1}(W)]$ is a finitely generated $k[W]$-module . 
+\end{defn}
+
+\begin{prp}{}{} Let $k$ be a field. Let $X,Y$ be varieties over $k$. Let $f:X\to Y$ be a morphism of varieties. If $f$ is finite and dominant, then the induced map $$K(Y)\to K(X)$$ is a finite field extension. 
+\end{prp}
+
+\begin{prp}{}{} Let $k$ be a field. Let $X,Y$ be varieties over $k$. Let $f:X\to Y$ be a morphism of varieties. Then $f$ is finite if and only if $f$ is proper and $\abs{\phi^{-1}(q)}<\infty$ is finite for all $q\in Y$. 
+\end{prp}
+
+\begin{defn}{Degree of Finite Morphism}{} Let $k$ be a field. Let $X,Y$ be varieties over $k$. Let $f:X\to Y$ be a finite and dominant morphism of varieties. Define the the degree of $f$ to be $$\deg(f)=\dim_{K(Y)}K(X)$$
+\end{defn}
+
+\pagebreak
+\section{Normal Varieties}
+\subsection{Normal Varieties}
+\begin{defn}{Normal Varieties}{} Let $k$ be a field. Let $X$ be a variety over $k$. We say that $X$ is normal if $\mO_{X,p}$ is a normal domain for all $p\in X$. 
+\end{defn}
+
+\begin{prp}{}{} Let $k$ be an algebraically closed field. Let $X\subseteq\A^n$ be an affine variety. Then $X$ is normal if and only if $k[X]$ is a normal domain. 
+\end{prp}
+
+\begin{eg}{}{} Let $k$ be an algebraically closed field. Then $V=\V(y^2-x^3)\subseteq\A_k^2$ is not a normal variety. \tcbline
+\begin{proof}
+The coordinate ring of the variety is given by $k[V]=\frac{k[x,y]}{(y^2-x^3)}$. I claim that $\overline{k[V]}=k[[y]/[x]]$. \\~\\
+
+Firstly, $k[t]$ is a normal domain since any element in $k\in k[t]$ is integral, and $t$ is integral in $k[t]$ by the monic polynomial $z-t\in k[t][z]$. Since sums and products of integral elements are integral, we have that $\overline{k[t]}\subseteq k[t]$. Hence $\overline{k[t]}=k[t]$. Now we have that $k[t^2,t^3]\subseteq k[t]$ which implies that $$\overline{k[t^2,t^3]}\subseteq\overline{k[t]}=k[t]$$ On the other hand, notice that any $a\in k$ is integral over $k[t^2,t^3]$ via the monic polynomial $z-a\in k[t^2,t^3][z]$. Also, $t\in k[t]$ is integral over $k[t^2,t^3]$ via the monic polynomial $z^2-t^2\in k[t^2,t^3][z]$. Since sums and products of integral elements are integral, we thus have that $k[t]\subseteq\overline{k[t^2,t^3]}$. Hence $k[t]=\overline{k[t^2,t^3]}$. Finally we have that $\text{Frac}(k[t^2,t^3])=k(t)$. \\~\\
+
+Consider the following diagram: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{k[V]} & {\overline{k[V]}} & {k(V)} \\
+	{k[t^2,t^3]} & {\overline{k[t^2,t^3]}=k[t]} & {k(t)}
+	\arrow[hook, from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[hook, from=1-2, to=1-3]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=1-3, to=2-3]
+	\arrow[hook, from=2-1, to=2-2]
+	\arrow[hook, from=2-2, to=2-3]
+\end{tikzcd}} \\~\\
+It is commutative since all the vertical maps are given by $[x]\mapsto t^2$ and $[y]\mapsto t^3$. I claim that the first map is an isomorphism. To see this, consider the map $\varphi:k[x,y]\to k[t]$ defined by $x\mapsto t^2$ and $y\mapsto t^3$. Notice that $(y^2-x^3)\subseteq\ker(\varphi)$. Now let $f\in\ker(\varphi)$. By the division algorithm, $f=(y^2-x^3)g(x,y)+h(x,y)$ for some $g,h\in k[x,y]$ and the degree of $y$ in $h$ is less than or equal to $1$. Then $f\in\ker(\varphi)$ implies that $h(x,y)=0$. But $h(t^2,t^3)=0$ if and only if $h(x,y)=0$ by inspecting coefficients. Hence $(y^2-x^3)=\ker(\varphi)$. It then follows that the third map is an isomorphism and hence the second map is an isomorphism. \\~\\
+
+Now the preimage of $k[t]$ in the isomorphism is $k[[y]/[x]]$. Hence we have computed the integral closure of $k[V]$. 
+\end{proof}
+\end{eg}
+
+\subsection{Normalization}
+\begin{defn}{Normalization of an Affine Variety}{} Let $k$ be a field. Let $X$ be an affine variety over $k$. Define the normalization of $X$ to be the affine variety $\widetilde{X}$ whose coordinate is given by $k[\widetilde{X}]=\overline{k[X]}$. 
+\end{defn}
+
+\begin{prp}{Universal Property of Normalization}{} Let $k$ be a field. Let $X$ be an affine variety over $k$. Then the normalization $\widetilde{X}$ of $X$ satisfies the following universal property. 
+\begin{itemize}
+\item Universal Property: If $Z$ is a normal variety, then for any dominant map $\varphi:Z\to X$, there exists a unique morphism $\widetilde{\varphi}:Z\to\widetilde{X}$ such that the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	Z & {\widetilde{X}} \\
+	& X
+	\arrow["{\exists!\widetilde{\varphi}}", dashed, from=1-1, to=1-2]
+	\arrow["\varphi"', from=1-1, to=2-2]
+	\arrow["\pi", from=1-2, to=2-2]
+\end{tikzcd}}\\~\\
+where $\pi$ is the induced map from the inclusion $k[X]\hookrightarrow\overline{k[X]}=k[\widetilde{X}]$. 
+\item $\widetilde{X}$ is the unique normal variety (up to unique isomorphism) that satisfies this property. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{} Let $k$ be an algebraically closed field. Let $X$ be an affine variety over $k$. Then the following are true regarding the induced map $$\pi:\widetilde{X}\to X$$ from the inclusion $k[X]\hookrightarrow k[\widetilde{X}]=\overline{k[X]}$. 
+\begin{itemize}
+\item The map is birational. 
+\item The map is surjective. 
+\item $\pi^{-1}(p)$ is finite for any $p\in X$. 
+\end{itemize}
+\end{prp}
+
+\subsection{Projectively Normal}
+
+\pagebreak
+\section{Resolution of Singularities}
+\subsection{Blowing Ups}
+\begin{defn}{Blowing Up at $\A^n$}{} Let $n\in\N$. Define the blowing up of $\A^n$ at the point $0\in\A^n$ to be $$\text{BL}_0(\A^n)=\V\{(x_iy_j-x_jy_i\;|\;1\leq i,j\leq n\})\subseteq\A^n\times\Prj^{n-1}$$ together with the projection map $$\varphi:\text{BL}_0(\A^n)\hookrightarrow\A^n\times\Prj^{n-1}\overset{\text{proj.}}{\rightarrow}\A^n$$ defined by $(x_1,\dots,x_n,[y_1:\cdots:y_n])\mapsto(x_1,\dots,x_n)$. 
+\end{defn}
+
+\begin{prp}{}{} The following are true regarding the blowing up $\text{BL}_0(\A^n)$ of $\A^n$ at $0$ and the projection map $\varphi:\text{BL}_0(\A^n)\to\A^n$. 
+\begin{itemize}
+\item $\varphi^{-1}(p)$ is a single point for $0\neq p\in\A^n$. 
+\item $\varphi^{-1}(0)=\{0\}\times\Prj^{n-1}$. 
+\item $\text{BL}_0(\A^n)$ is irreducible. 
+\end{itemize}
+\end{prp}
+
+\begin{defn}{The Blowing Up of a Variety}{} Let $X\subseteq\A^n$ be a closed variety such that $0\in X$. Define the blowing up of $X$ at $0$ to be the set $$\widetilde{X}=\overline{\varphi^{-1}(X\setminus\{0\})}$$ If $X$ passes through $p\in X$, then the blowing up of $X$ at $p$ is obtained by translating $p$ to the origin and blowing up. 
+\end{defn}
+
+Note: if $X$ is a curve we call this the exceptional divisor. 
+
+\subsection{Normalization}
+
+\pagebreak
+\section{Theory of Divisors}
+\subsection{Divisors of a Variety}
+\begin{defn}{Divisors of a Variety}{} Let $X$ be an irreducible variety. Define the free group of divisors of $X$ by $$\text{Div}(X)=\Z\left\langle C\;|\;C\substack{\text{ is an irreducible closed}\\\text{subvariety of codimension }1}\right\rangle$$ We call an element of the free group a divisor of $X$. We call generators of the free group prime divisors. 
+\end{defn}
+
+\begin{defn}{Effective Divisor}{} Let $X$ be an irreducible variety. We say that a divisor $$D=\sum_{i=1}^rk_iC_i$$ of $X$ is effective if $k_i\geq 0$ for all $i$. In this case we write $D>0$. 
+\end{defn}
+
+Let $Y$ be an irreducible closed subvariety of a variety $X$ of codimension $1$. Recall that $\mO_{X,Y}$ is a local ring. 
+
+\begin{defn}{Regular in Codimension $1$}{} Let $k$ be a field. Let $X$ be an irreducible variety over $k$. We say that $X$ is regular in codimension $1$ if for all irreducible closed subvariety $Y$ of $X$ of codimension $1$, we have that $\mO_{X,Y}$ is a regular local ring. 
+\end{defn}
+
+\begin{defn}{Divisor of a Function}{} Let $k$ be an algebraically closed field. Let $X$ be an irreducible variety that is regular in codimension $1$. Let $f\in K(X)$. Define the divisor of $f$ to be $$\text{div}(f)=\sum_{p\in X}v_p(f)\cdot p$$ where $v_p$ is the discrete valuation of the regular local ring $\mO_{X,p}$. 
+\end{defn}
+
+A lot of varieties have the property that $\mO_{X,p}$ is a regular local ring. A large class of them comes from smooth varieties, but normal? varieties also has this property. 
+
+\begin{lmm}{}{} Let $k$ be an algebraically closed field. Let $X$ be an irreducible variety over $k$ that is regular in codimension $1$. Let $f\in K(X)$. Then we have $\text{div}(f)\in\text{Div}(X)$ is a divisor of $X$. 
+\end{lmm}
+
+\begin{defn}{Principal Divisors}{} Let $k$ be an algebraically closed field. Let $X$ be an irreducible variety over $k$ that is regular in codimension $1$. Define the subgroup of principal divisors of $X$ to be $$\text{Prin}(X)=\{\text{div}(f)\;|\;f\in K(X)\}\leq\text{Div}(X)$$
+\end{defn}
+
+\begin{defn}{Divisor Class Group}{} Let $k$ be an algebraically closed field. Let $X$ be an irreducible variety over $k$ that is regular in codimension $1$. Define the divisor class group of $X$ to be $$\text{Pic}(X)=\frac{\text{Div}(X)}{\text{Prin}(X)}$$ We say that two divisors $D$ and $D'$ of $X$ are linearly equivalent if $[D]=[D']\in\text{Cl}(X)$. 
+\end{defn}
+
+\begin{defn}{Degree of a Divisor}{} Let $X$ be an irreducible variety. Define the degree homomorphism $\deg:\text{Div}(X)\to\Z$ to be $$\deg\left(\sum_{i=1}^rk_iY_i\right)=\sum_{i=1}^rk_i$$ 
+\end{defn}
+
+\begin{prp}{}{} Let $k$ be an algebraically closed field. Let $X$ be an irreducible variety over $k$ that is regular in codimension $1$. Then we have $$\ker(\deg)=\text{Prin}(D)$$ In particular, $D\in\text{Div}(X)$ is a principal divisor if and only if $\deg(D)=0$. 
+\end{prp}
+
+\pagebreak
+\section{Intersection Theory}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

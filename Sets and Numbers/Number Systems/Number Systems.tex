@@ -1,0 +1,433 @@
+\documentclass[a4paper]{article}
+
+\input{C:/Users/liula/Desktop/Latex/Headers V1.2.tex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Labix}
+\lhead{Number Systems}
+\rfoot{\thepage}
+
+\title{Number Systems}
+
+\author{Labix}
+
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+These notes will act as a development for the number systems from the natural numbers to the complex numbers. 
+\end{abstract}
+\pagebreak
+\tableofcontents
+
+\pagebreak
+\section{The Set of Integers}
+\subsection{Integers as an Equivalence Relation}
+\begin{defn}{Natural Numebers}{} The set of natural numbers $\N$, formulated in ZFC set theory via peano axioms, is the set $$\N=\{0,1,2,\dots\}$$ of natural numbers. Addition and multiplication is also defined. 
+\end{defn}
+
+\begin{defn}{Relation on $\N^2$}{} Define a relation $\sim$ on $\N^2$ as follows. We say that $(r,s)\in\N^2$ is related to $(p,q)\in\N^2$ if $r+q=s+p$. We write the relation as $(r,s)\sim(p,q)$. 
+\end{defn}
+
+\begin{lmm}{}{} The above relation on $\N^2$ is an equivalence relation. \tcbline
+\begin{proof}
+Let $(r,s)\in\N^2$. Since addition in $\N$ is commutative, we have $r+s=s+r$ so that $(r,s)\sim(s,r)$. Thus $\sim$ is reflexive. \\~\\
+
+Suppose that $(r,s)\sim(p,q)$. Then $r+q=s+p$. Rewriting the expression as $p+s=q+r$ by commutativity of addition, we conclude that $(p,q)\sim(r,s)$. The same argument shows that $(p,q)\sim(r,s)$ implies $(r,s)\sim(p,q)$. Thus $\sim$ is symmetric. \\~\\
+
+Suppose that $(r,s)\sim(p,q)$ and $(p,q)\sim(v,w)$. Then we have that $r+q=s+p$ and $p+w=q+v$. We can deduce that 
+\begin{align*}
+r+q&=s+p\\
+r+q+v&=s+p+v\\
+r+p+w&=s+p+v\\
+r+w&=s+v
+\end{align*}
+Hence $(r,s)\sim(v,w)$ and $\sim$ is transitive. We conclude that $\sim$ is an equivalence relation. 
+\end{proof}
+\end{lmm}
+
+\begin{defn}{Integers}{} Define the set of integers $\Z$ to be the set of equivalence classes of $\N\times\N$ under $\sim$. 
+\end{defn}
+
+
+
+\subsection{Divisibility}
+\begin{defn}{Divisibility}{} Let $a,b\in\Z$. We define the relation $$a|b$$ if and only if there exists some $k\in\Z$ such that $b=ak$. We say that $a$ divides $b$ in this case. 
+\end{defn}
+
+\begin{prp}{}{} Let $d,m,n\in\Z$. The relation $|$ has the following properties and thus is a partial order in $\mathbb{N}$. 
+\begin{itemize}
+\item Reflexive: $n|n$
+\item Anti-symmetric: $m|n$ and $n|m\implies m=n$
+\item Transitive: $d|n$ and $n|m\implies d|m$
+\item Linear: $d|n$ and $d|m\implies d|(an+bm)$ for any $a,b\in\Z$
+\item $1|n$
+\item $n|0$
+\end{itemize} \tcbline
+\begin{proof} We prove antisymmetry and transitivity and leave the others for the reader. Let $m,n,d\in\Z$. 
+\begin{itemize}
+\item (Antisymmetry) If $m|n$ and $n|m$ then there exists some $k_1,k_2\in\mathbb{N}$ such that $n=k_1m$ and $m=k_2n$ thus $n=k_1k_2n$. Then $k_1k_2=1\implies k_1=k_2=1$ and $m=n$
+\item (Linearity) If $d|n$ and $n|m$ then there exists $k_1k_2\in\mathbb{N}$ such that $n=k_1d$ and $m=k_2n$. Then $m=k_2k_1d$ thus $d|m$
+\end{itemize}
+\end{proof}
+\end{prp}
+
+These properties will come up again and again and will be the foundation of number theory. It is safe to say that number theory is built upon the notion of divisibility. 
+
+\subsection{The Division Algorithm}
+This section is dedicated to develop the Euclidean algorithm, a means to find the greatest common divisor. The gcd is a central notion in number theory as well. 
+\begin{defn}{Greatest Common Divisor}{} Suppose that $m,n\in\Z$. A number $d\in\mathbb{N}$ such that 
+\begin{itemize}
+\item $d\geq 0$
+\item $d|m$ and $d|n$
+\item $e|a$ and $e|b\implies e|d$
+\end{itemize}
+is called the greatest common divisor of $m$ and $n$, denoted $\gcd{(m,n)}$.
+\end{defn}
+
+In contrast to the greatest common divisor, we also have the lowest common multiple. Although they work as a pair, we often see the notion of gcd come up more than lcm. 
+
+\begin{defn}{Lowest Common Multiple}{} Suppose that $m,n\in\Z$. A number $l\in\mathbb{N}$ such that 
+\begin{itemize}
+\item $l\geq 0$
+\item $m|l$ and $n|l$
+\item $m|e$ and $n|e\implies l|e$
+\end{itemize}
+is called the lowest common multiple of $m$ and $n$, denoted $\lcm{(m,n)}$.
+\end{defn}
+
+Beware that both of these definitions does not imply the uniqueness of such a number. However, with a little work, we will see that both of them are indeed unique. Readers should think about whether the existence of these numbers is guaranteed as well. 
+
+\begin{prp}{}{} Let $m,n\in\Z$. Then the numbers $\gcd(m,n)$ and $\lcm(m,n)$ are unique. 
+\end{prp}
+\begin{proof}
+By the third property of both numbers, we must have if $c,d$ are $\gcd(m,n)$/$\lcm(m,n)$, then $c|d$ and $d|c$ thus $c=d$ and $\gcd(m,n)$/$\lcm(m,n)$ is unique. 
+\end{proof}
+
+We will see more on gcd and lcm when we deal with factorization. For now, we turn our heads to the division algorithm. This algorithm proves to us that upon dividing two integers, as long as they are not divisible by one or the other, you can always guarantee a remainder smaller than the divident. 
+
+\begin{thm}{The Division Algorithm}{} Let $a\in\N$ and $b\in\Z$ with $b\neq 0$. Then there exists unique $q,r\in\Z$ such that $$b=aq+r$$ with $0\leq r<a$. \tcbline
+\begin{proof}
+We prove existence first by considering three cases. \\
+Cases 1: $b$ is divisible by $a$.  If $b$ is divisible by $a$ then there exists $k\in\Z$ such that $b=ka$ thus $k=q$ and $r=0$. \\~\\
+Case 2: $b$ is positive and $a$ does not divide $b$. Let $$S=\{b-ka\in\N|k\in\N\}$$ Then $S\subseteq\N$ thus we can apply the well-ordering principle to $S$. Let $r$ be the least natural number in $S$. Then $r\in S$ implies $r=b-ka$ for some $k\in\N$. Thus $b=ka+r$ for some $k$ and $r$. We show that $r<a$. Suppose for a contradiction that $r\geq a$. Then $u=r-a\in\N$ and $$b=ka+r\implies b=ka+(u-a)\implies b=(k-1)a+u$$ thus $u\in S$ and $u<r$, contradicting the fact that $r$ is the least element in $S$. Thus $r\leq a$. If $r=a$, then $$b=ka+a\implies b=(k+1)a$$ which means that $a|b$ which is false in our case. Thus we must have $r<a$. \\~\\
+Case 3: $b$ is negative and $a$ does not divide $b$. Then apply the exact same argument to the number $-b$ to get $(-b)=ka+r$ and $b=-ka-r$. Let $k'=-k-1$ and $r'=-r+a$. Then $$b=-ka-r=k'a+a+r'-a=k'a+r'$$ Since we have $0\leq r<a$, we have $-a<-r\leq 0$ and $0<r'\leq a$. Again $r'\neq a$ or else $a|b$ which contradicts our assumption. \\~\\
+We now prove uniqueness. Suppose that $b=aq_1+r_1$ and $b=aq_2+r_2$. Then $r_1-r_2=a(q_2-q_1)$. We know that $-a<r_1-r_2<a$ thus $-a<a(q_2-q_1)<a$ and $-1<q_2-q_1<1$ which is impossible for integers $q_1,q_2$ unless $q_1=q_2$. If $q_1=q_2$ then $r_1=r_2$ and we are done. 
+\end{proof}
+\end{thm}
+
+The division algorithm does not require $b$ to be larger than $a$. In fact, if $a$ is larger than $b$, then the division algorithm simply gives $a$ itself as the remainder. Before we reach our conclusion, we need one more proposition. 
+
+\begin{prp}{}{} Suppose that $m\geq n>0$ are natural numbers with $m=qn+r$ for some $q,r\in\mathbb{N}$. Then $$\gcd{(m,n)}=\gcd{(n,r)}$$ \tcbline
+\begin{proof}
+Suppose that $d=\gcd(m,n)$. Then we know that $d<n$ from definition. We want to show that $d$ satisfies the three results of a gcd but in terms of $n$ and $r$. Since $d|n$ and $d|m$, by linearity we must have $d|r$. \\~\\
+Now suppose for a contradiction that there exists $e$ such that $e$ is a common divisor of $n$ and $r$ and $e>d$. Then $e|n$ and $e|r$ by definition thus $e|m$ by linearity. $e|m$ and $e|n$ implies that $e$ is a larger common divisor of $m$ and $n$ than $d$. However this is not possible since $d$ is assumed to be the largest among the common divisors. This is a contradiction thus $d=\gcd(n,r)$ and we are done. 
+\end{proof}
+\end{prp}
+
+\begin{thm}{Euclid's Algorithm}{} Suppose that $m\geq n>0$ are natural numbers. We have the following inequalities. 
+$$m=nq_1+r_1\text{ with }0<r_1<n$$
+$$n=r_1q_2+r_2\text{ with }0<r_2<n$$
+$$r_1=r_2q_3+r_3\text{ with }0<r_3<n$$
+$$\cdots\cdots\cdots\cdots\cdots\cdots\cdots\cdots\cdots\cdots$$
+$$r_{k-2}=r_{k-1}q_k+r_k\text{ with }0<r_k<r_{k-1}$$
+$$r_{k-1}=r_kq_{k-1}$$
+From this, we have $r_k|r_{k-1}$, $r_k|r_{k-2}\dots r_k|n$ and $r_k|m$. \tcbline
+\begin{proof} The first part of the results is due to the repeated use of the division algorithm. For the second part, we have $$\gcd(m,n)=\gcd(n,r_1)=\gcd(r_1,r_2)=\dots=\gcd(r_{k-1},r_k)=r_k$$ and we are done. 
+\end{proof}
+\end{thm}
+
+\begin{lmm}{Bezout's Lemma}{} Let $a,b\in\Z$ such that they are not both $0$. Then there exists $x,y\in\Z$ such that $$ax+by=\gcd(a,b)$$ \tcbline
+\begin{proof} Reconstruct $x$ and $y$ using the Euclidean Algorithm. This is possible since $\gcd(m,n)=r_k$ and every $r_1,\dots,r_{k-1}$ has a factor of $r_k$ in it. 
+\end{proof}
+\end{lmm}
+
+\begin{lmm}{}{} Let $a,b\in\Z$ such that they are not both $0$. Then the equation $$ax+by=\gcd(a,b)$$ has an infinite number of integer solutions. \tcbline
+\begin{proof} Using Bezout's Lemma, we conclude that $(x_0,y_0)$ is a solution to the equation. But then $$(x_0-bt,y+at)$$ are also solutions for $t\in\Z$ since $$a(x_0-bt)+b(y+at)=ax+by=\gcd(a,b)$$
+\end{proof}
+\end{lmm}
+
+\begin{crl}{}{} Let $a,b\in\Z$ such that they are not both $0$ and $d\in\Z$. Then $d$ divides $a$ and $b$ if and only if $d|\gcd(a,b)$. 
+\end{crl}
+
+\subsection{Unique Factorization}
+\begin{defn}{Prime Numbers}{} We say that $n\in\mathbb{N}$ is a prime number if and only if it has exactly two factors, which is $1$ and $n$. Else $n$ is composite. 
+\end{defn}
+
+\begin{lmm}{}{} Every integer is divisible by a prime. 
+\end{lmm}
+
+\begin{lmm}{}{} Every integer $n>1$ can be written as a product of primes. 
+\end{lmm}
+
+\begin{thm}{}{} There is an infinite number of primes. 
+\end{thm}
+
+\begin{prp}{Euclid's Lemma}{} Suppose that $p,m,n\in\mathbb{N}$, with $p$ prime and $m,n>1$. Suppose that $p|mn$. Then $p$ divides at least one of $m$ or $n$. 
+\end{prp}
+
+\begin{prp}{}{} Suppose that $p$ is a prime such that $p|a_1a_2\cdots a_k$. Then $p|a_i$ for some $i\in\{1,2,\dots,k\}$
+\end{prp}
+
+\begin{thm}{Fundamental Theorem of Arithmetic}{} Suppose that $n\neq 0$ is a natural number. Then there exists exactly one prime factorization for every $n$, meaning that the decomposition $$n=\prod_{k=1}^np_k^{s_k}$$ where $p_k$ is prime exists and is unique. 
+\end{thm}
+
+\begin{thm}{}{} Suppose that $m,n\in\mathbb{N}$. Suppose that 
+$$m=p_1^{\alpha_1}p_2^{\alpha_2}\cdots p_r^{\alpha_r}$$
+$$n=p_1^{\beta_1}p_2^{\beta_2}\cdots p_q^{\beta_q}$$
+with $p_1=2$, $p_2=3$, $p_3=5\dots$. Without loss of generality $r\leq q$. Then $$\gcd{(m,n)}=p_1^{\min{(\alpha_1,\beta_1)}}p_2^{\min{(\alpha_2,\beta_2)}}\cdots p_q^{\min{(\alpha_q,\beta_q)}}$$
+$$\lcm{(m,n)}=p_1^{\max{(\alpha_1,\beta_1)}}p_2^{\max{(\alpha_2,\beta_2)}}\cdots p_q^{\max{(\alpha_q,\beta_q)}}$$
+\end{thm}
+
+\begin{prp}{}{} Suppose that $m$ and $n$ are natural numbers. Then $$\gcd{(m,n)}\times\lcm{(m,n)}=m\times n$$
+\begin{proof} Since $\min\{a,b\}\cdot\max\{a,b\}=ab$, from the above theorem, we have that $\gcd{(m,n)}\times\lcm{(m,n)}=m\times n$ and we are done. 
+\end{proof}
+\end{prp}
+
+\pagebreak
+\section{Rational Numbers}
+\subsection{Introduction to Rationals}
+\begin{defn}{}{} Define a relation $\sim$ on $\Z^2$ as follows. We say that $(a,b)\in\Z^2$ is related to $(c,d)\in\Z^2$ if $ad=bc$. We write the relation as $(a,b)\sim(c,d)$. 
+\end{defn}
+
+\begin{lmm}{}{} The above relation $\sim$ on $\Z^2$ is an equivalence relation. 
+\end{lmm}
+
+\begin{defn}{Rational Numbers}{} Define the set of rational numbers $\Q$ to be the set of equivalence classes of $\Z\times\Z$ under $R$. Each equivalence class $E_{(a,b)}$ is denoted by $\frac{a}{b}$. 
+\end{defn}
+
+\begin{defn}{Reduced Form}{} Suppose that $a\in\mathbb{Q}$. $a=\frac{r}{s}$ is a reduced form if
+\begin{itemize}
+\item $s>0$
+\item $\gcd{(r,s)}=1$
+\end{itemize}
+\end{defn}
+
+\begin{thm}{}{} For every $x\in\mathbb{Q}$, $x$ has exactly one reduced form. 
+\end{thm}
+
+\pagebreak
+\section{Real Numbers}
+\subsection{Real Numbers as Dedekind Cuts}
+\begin{defn}{Dedekind Cuts}{} A dedekind cut $A$ is a subset of $\Q$ such that the following are true. 
+\begin{itemize}
+\item $A$ is non-empty
+\item $A\neq\Q$
+\item For all $x,y\in\Q$ such that $x<y$ and $y\in A$, we have that $x\in A$
+\item For all $x\in A$, there exists $y\in A$ such that $x<y$
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Real Numbers}{} We define the set of real numbers $\R$ as the set of all dedekind cuts of $\Q$. 
+\end{defn}
+
+\begin{prp}{}{} Define addition, subtraction, multiplication, division as follows. Then the resulting set is also a dedekind cut. 
+\begin{itemize}
+\item $A+B=\{a+b:a\in A\text{ and }b\in B\}$
+\item $A-B=\{a-b:a\in A\text{ and }b\in \mathbb{Q}\setminus B\}$
+\item $A\times B=\{a\times b:a\in A\text{ and }b\in B\}$ if $A,B\geq 0$ or $A,B\leq 0$. If at one of $A,B<0$ then use the identity $-(-A\times B)$ or $-(A\times -B)$ depending on whether $A<0$ or $B<0$ respectively. 
+\item $A/B=\{a/b:a\in A\text{ and }b\in \mathbb{Q}\setminus B\}$ if $A,B\geq 0$ or $A,B\leq 0$. Use the similar approach as multiplication when one of $A,B<0$. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{} The following are true regarding addition of real numbers. 
+\begin{itemize}
+\item Associative: For all $x,y,z\in\R$, $(x+y)+z=x+(y+z)$
+\item Additive Identity: $0\in\R$ is a real number that satisfies $x+0=x=0+x$ for all $x\in\R$. 
+\item Additive Inverse: For all $x\in\R$, $-x\in\R$ is a real number that satisfies $x+(-x)=0=(-x)+x$
+\item Commutative: For all $x,y\in\R$, $x+y=y+x$
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{} The following are true regarding multiplication of real numbers. 
+\begin{itemize}
+\item Associative: For all $x,y,z\in\R$, $(x\cdot y)\cdot z=x\cdot(y\cdot z)$
+\item Multiplicative Identity: $1\in\R$ is a real number that satisfies $x\cdot 1=x=1\cdot x$ for all $x\in\R\setminus\{0\}$. 
+\item Multiplicative Inverse: For all $x\in\R\setminus\{0\}$, $x^{-1}$ is a real number that satisfies $x\cdot x^{-1}=1=x^{-1}\cdot x$. 
+\item Commutative: For all $x,y\in\R$, $xy=yx$. 
+\end{itemize}
+\end{prp}
+
+\subsection{Irrational Numbers}
+\begin{prp}{}{} The function $\iota:\Q\to\R$ given by $$\iota(p)=\{p\in\Q\;|\;x<q\}$$ defines a bijection from $\Q$ to $\iota(\Q)$. 
+\end{prp}
+
+This shows that we can identify $\Q$ as a subset of $\R$. 
+
+\begin{defn}{Irrational Numbers}{} Let $x\in\R$. We say that $x$ is an irrational number if $x\notin\im(\iota)$. 
+\end{defn}
+
+\begin{thm}{}{} There exists an irrational number. \tcbline
+\begin{proof} We want to show that there is an irrational number represented by a dedekind cut such that its square is 2. Consider the set $A=\{x\in\mathbb{Q}:x<0\text{ or }x^2<2\}$. $A$ is non-empty since $0\in A$. $A\neq\mathbb{Q}$ since $3\notin A$. Suppose $p\in A$. We then need to show that $q\in A$ whenever $q<p$. When $0\leq q<p$, we have $0\leq q^2<p^2$ from ordering of rationals. When $q<0$, then $q\in A$ by definition of $A$. Thus this is true. Now we need to show that there is always a rational $q$ larger than $p$ which is in $A$. Choose $q=\frac{2p+2}{p+2}$, then $p<q$ and $q^2<2$. Thus $A$ is a dedekind cut. \\~\\
+Now consider $A\times A$. We have $A\times A\leq 2$ since for all $x,y\in A$, we have $x^2<2$ and $y^2<2$ and thus $xy<2$ whenever $xy\geq 0$. Thus the set $A\times A=\{r\in\mathbb{Q}:r<0\text{ or }r=xy\text{ for some }x,y\in A\text{ and }x,y>0\}$ is less than or equal to 2. We know that $A\times A$ is a dedekind cut. But we want to know if $A\times A$ represents the number $2$. Suppose that $u\in A\times A$. Then we know that from $A$, there exists a number $v\in A$ such that $u<v^2<2$. And this applies for every $u$. Then we know that $A\times A=2$ since $A\times A=\{x\in\mathbb{Q}:x<2\}$, which is our definition of rational numbers with dedekind cut. \\~\\
+We have proved that there exists a dedekind cut such that its square is 2. But is that dedekind cut irrational? We now represent $A$ with $\sqrt2$. Suppose that $\sqrt2$ is rational. Then we can write it is as $\frac{m}{n}$ in reduced form. Then we have $2n^2=m^2$. Then $2|m^2$ thus $2|m$. Let $m=2k$ for some $k\in\mathbb{N}$. Then $2k^2=n^2$ which similarly implies that $2|n$. This contradicts the fact that $\frac{m}{n}$ is in reduced form, thus $\sqrt{2}$ is in fact not rational, and is an irrational number. 
+\end{proof}
+\end{thm}
+
+\subsection{Ordering and Absolute Values}
+\begin{defn}{Order}{} If $A,B$ are dedekind cuts then we say that $A<B$ if and only if $A\subset B$. 
+\end{defn}
+
+\begin{thm}{Bernoulli's Inequality}{} For all $x\geq-1$ and $n\in\N$, $$(1+x)^n\geq1+nx$$\tcbline
+\begin{proof} We prove the inequality by induction on $n$. In the case of $n=1$, we have $1+x\geq1+x$, which is true for all $x$. Now suppose that the inequality works for some $n\in\N$. We have 
+\begin{align*}
+(1+x)^{n+1}&\geq(1+x)(1+nx) \tag{Induction Hypothesis and $x\geq-1$} \\
+&=1+(n+1)x+nx^2 \\
+&\geq1+(n+1)x \tag{since $x^2\geq0$}
+\end{align*}
+Thus we have the Bernoulli's Inequality by the principle of mathematical induction. 
+\end{proof}
+\end{thm}
+
+The absolute value is an important function when it comes to defining useful concepts such as distances in the field of real. 
+
+\begin{defn}{The Absolute Value}{} The absolute value of a real number $x$ is defined by
+$$|x|=\begin{cases}
+x & \text{if $x\geq0$} \\
+-x & \text{if $x\leq0$}
+\end{cases}$$
+\end{defn}
+
+The absolute value has some properties that are extremely useful in certain circumstances, notably number 4 and 5. 
+
+\begin{prp}{}{} The absolute Value has the folowing properties
+\begin{enumerate}
+\item $|x|\geq0$
+\item $|xy|=|x||y|$
+\item $\abs*{\frac{x}{y}}=\frac{|x|}{|y|}$
+\item $|x+y|\leq|x|+|y|$
+\item $\abs*{|x|-|y|}\leq|x-y|$
+\end{enumerate}
+\end{prp}
+\begin{proof}  I left out the proofs of (2) and (3) since they are simplay obtained via case by case analysis. 
+\begin{enumerate}
+\item When $x\geq0$ we have $\abs{x}=x\geq0$. When $x<0$ we have $\abs{x}=-x>0$
+\item We start by squaring the left hand side of the inequality. 
+\begin{align*}
+\abs{x+y}^2&=(x+y)^2 \\
+&=x^2+2xy+y^2 \\
+&\leq \abs{x}^2+2\abs{x}\abs{y}+\abs{y}^2 \\
+&=(\abs{x}+\abs{y})^2
+\end{align*}
+Since the both sides of the inequality is non-negative, we can take the square root on both sides, thus obtaining $|x+y|\leq|x|+|y|$. 
+\item Choose $x$ to be $x-y$ in (4) and we obtain $\abs{x}-\abs{y}\leq\abs{x-y}$. Similarly, choosing $y$ to be $y-x$ in (4), we find that $\abs{y}-\abs{x}\leq\abs{y-x}=\abs{x-y}$. Thus we have $\abs*{|x|-|y|}\leq|x-y|$. 
+\end{enumerate}
+\end{proof}
+
+\subsection{The Binomial Theorem}
+\begin{defn}{The Binomial Coefficient}{} Let $n,r\in\mathbb{N}$ with $n>0$. We define the binomial coefficient $\binom{n}{r}$ to mean the number $\frac{n!}{r!(n-r)!}$ when $r\leq n$. When $r>m$ then $\binom{n}{r}=0$. 
+\end{defn}
+
+\begin{prp}{}{} Let $n,r\in\mathbb{N}$ with $0<r<n$, we have $\binom{n}{r}=\binom{n}{n-r}$. 
+\end{prp}
+
+\begin{prp}{}{} Let $n,r\in\mathbb{N}$ with $0<r<n$, we have $\binom{n}{r-1}+\binom{n}{r}=\binom{n+1}{r}$. 
+\end{prp}
+
+\begin{thm}{The Binomial Theorem}{} Suppose $a,b\in\mathbb{R}$. Then $$(a+b)^n=\sum_{k=0}^n\binom{n}{k}a^{n-k}b^k$$
+\end{thm}
+
+\begin{thm}{}{}[Vandermonde's Theorem] Suppose that $a,b,n\in\mathbb{N}$. Then $$\binom{a+b}{n}=\sum_{k=0}^{n}\binom{a}{k}\binom{b}{n-k}$$
+\end{thm}
+
+\pagebreak
+\section{Complex Numbers}
+\subsection{Introduction to Complex Numbers}
+\begin{defn}{Complex Numbers}{} Define the set of complex numbers $\C$ to be $\R^2$. For each pair of real numbers $(a,b)\in\R^2$. 
+\end{defn}
+
+For each pair of real numbers $(a,b)\in\R^2$, we write $a+b\sqrt{-1}$ to represent the pair $(a,b)$ to indicate that we are working over the complex numbers. 
+
+\begin{defn}{Complex Addition}{} Define complex addition to be the function $+:\C\times\C\to\C$ given by $$(a,b)+(c,d)=(a+c,b+d)$$
+\end{defn}
+
+\begin{defn}{Complex Multiplication}{} Define complex multiplication to be the function $\cdot:\C\times\C\to\C$ given by $$(a,b)\cdot(c,d)=(ac-bd,ad+bc)$$
+\end{defn}
+
+\begin{prp}{}{} The following are true regarding addition of complex numbers. 
+\begin{itemize}
+\item Associative: For all $x,y,z\in\C$, $(x+y)+z=x+(y+z)$
+\item Additive Identity: $0=(0,0)\in\C$ is a complex number that satisfies $x+0=x=0+x$ for all $x\in\C$. 
+\item Additive Inverse: For all $x\in\C$, $-x\in\C$ is a complex number that satisfies $x+(-x)=0=(-x)+x$
+\item Commutative: For all $x,y\in\C$, $x+y=y+x$
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{} The following are true regarding multiplication of complex numbers. 
+\begin{itemize}
+\item Associative: For all $x,y,z\in\C$, $(x\cdot y)\cdot z=x\cdot(y\cdot z)$
+\item Multiplicative Identity: $1=(1,0)\in\C$ is a complex number that satisfies $x\cdot 1=x=1\cdot x$ for all $x\in\C\setminus\{0\}$. 
+\item Multiplicative Inverse: For all $x\in\C\setminus\{0\}$, $x^{-1}$ is a complex number that satisfies $x\cdot x^{-1}=1=x^{-1}\cdot x$. 
+\item Commutative: For all $x,y\in\C$, $xy=yx$. 
+\end{itemize}
+\end{prp}
+
+\begin{defn}{Conjugation}{} Define conjugation to be a function $\overline{\cdot}:\C\to\C$ given by $$\overline{(a,b)}=(a,-b)$$ We say that $(a,-b)$ is the conjugation of the complex number $(a,b)\in\C$. 
+\end{defn}
+
+\begin{prp}{}{} The following are true regarding conjugation. 
+\begin{itemize}
+\item For all $z\in\C$, $\overline{\overline{z}}=z$
+\item For all $z,w\in\C$, $\overline{z+w}=\overline{z}+\overline{w}$
+\item For all $z,w\in\C$, $\overline{zw}=\overline{z}\overline{w}$
+\end{itemize}
+\end{prp}
+
+\subsection{Polar Representation of Complex Numbers}
+\begin{defn}{Modulus}{} Define modulus to be the function $\abs{\cdot}:\C\to\R$ given by $$\abs{(a,b)}=\sqrt{a^2+b^2}$$ We say that $\abs{(a,b)}$ is the modulus of the complex number $(a,b)\in\C$. 
+\end{defn}
+
+\begin{prp}{}{} Then the following are true regarding the modulus. 
+\begin{itemize}
+\item $\abs{z}^2=\abs{z}\abs{\bar{z}}$
+\item $\abs{\bar{z}}=\abs{z}$
+\item $\abs{zw}=\abs{z}\abs{w}$
+\item $z\bar{z}=\abs{z}^2$
+\item $\abs{z+w}\leq\abs{z}+\abs{w}$
+\item $\abs{z-w}=\abs*{\abs{z}-\abs{w}}$
+\end{itemize}
+\end{prp}
+
+\begin{defn}{Argument}{} Define argument to be the function $\arg:\C\to\mP(\R)$ given by $$\arg((a,b))=\left\{\theta\in\R\;|\;\cos(\theta)=\frac{a}{\abs{(a,b}}\text{ and }\sin(\theta)=\frac{b}{\abs{(a,b}}\right\}$$
+\end{defn}
+
+\begin{prp}{}{} The following are true regarding the argument. 
+\begin{itemize}
+\item $\arg{(zw)}=\arg{(z)}+\arg{(w)}=\{\theta+\phi\;|\;\theta\in\arg(z), \phi\in\arg(w)\}$
+\item $\arg{(\bar{z})}=-\arg{(z)}$
+\end{itemize}
+\end{prp}
+
+\begin{lmm}{}{} Let $z\in\C$ be a complex number. Then there exists a unique real number $\theta\in\R$ such that $\theta\in\arg(z)$ and $-\pi<\theta\leq\pi$. 
+\end{lmm}
+
+\begin{defn}{Principal Argument}{} Define the principal argument function $\text{Arg}:\C\to\R$ to be the function sending $z\in\C$ to the unique real number $\text{Arg}(z)\in\R$ such that $-\pi<\text{Arg}(z)\leq\pi$ and $\text{Arg}(z)\in\arg(z)$. 
+\end{defn}
+
+\begin{lmm}{}{} Let $z\in\C$ be a complex number. Then $$\arg(z)=\{\text{Arg}(z)+2\pi k\;|\;k\in\Z\}$$
+\end{lmm}
+
+\begin{defn}{Polar Form}{} Let $z\in\C$ be a complex number. Define the polar form of $z$ to be the expression $$z=\abs{z}\left(\cos(\text{Arg}(z))+\sqrt{-1}\sin(\text{Arg}(z))\right)$$
+\end{defn}
+
+\begin{prp}{}{} Suppose that $z=r(\cos{(\theta)}+i\sin{(\theta)})$ and $w=s(\cos{(\phi)}+i\sin{(\phi)})$. 
+\begin{itemize}
+\item $zw=rs(\cos{(\theta+\phi)}+i\sin{(\theta+\phi)})$
+\item $\frac{1}{z}=\frac{1}{r}(\cos{(-\theta)}+i\sin{(-\theta)})$
+\item $\frac{z}{w}=\frac{r}{s}(\cos{(\theta-\phi)}+i\sin{(\theta-\phi)})$
+\item $\bar{z}=r(\cos{(-\theta)}+i\sin{(-\theta)})$
+\end{itemize}
+\end{prp}
+
+\subsection{Roots of Complex Numbers}
+\begin{defn}{$n$th Roots}{} Let $w\neq0$ be a complex number and $n$ a positive integer. A number $z$ is called the $n$th root of $w$ if and only if $z^n=w$. 
+\end{defn}
+
+\begin{thm}{De Moivre's Theorem}{} Suppose that $r\in\mathbb{Q}$. Then $(\cos{\theta}+i\sin{\theta})^r=\cos{(r\theta)}+i\sin{(r\theta)}$
+\end{thm}
+
+\begin{thm}{Roots of Unity}{} Suppose that $z=re^{i\theta}$. Then the $n$th roots of $z$ are $$r^{\frac{1}{n}}\left[\cos{\left(\frac{(\theta+2\pi k)i}{n}\right)}+i\sin{\left(\frac{(\theta+2\pi k)i}{n}\right)}\right]$$ where $k=0,1,\dots,n-1$. 
+\end{thm}
+
+\end{document}

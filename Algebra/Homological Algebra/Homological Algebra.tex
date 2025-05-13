@@ -1,0 +1,1693 @@
+\documentclass[a4paper]{article}
+
+\input{C:/Users/liula/Desktop/Latex/Headers V1.2.tex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Labix}
+\lhead{Homological Algebra}
+\rfoot{\thepage}
+
+\title{Homological Algebra}
+
+\author{Labix}
+
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+\end{abstract}
+\pagebreak
+\tableofcontents
+
+\pagebreak
+\section{Abelian Categories and its Properties}
+\subsection{Additive Categories}
+\begin{defn}{Pre-Additive Categories}{} Let $\mC$ be a category. We say that $\mC$ is pre-additive if the following is true. 
+\begin{itemize}
+\item For any $X,Y\in\mC$, the Hom set $$\Hom_\mC(X,Y)\in\bold{Ab}$$ has the structure of an abelian group. 
+\item For any $X,Y,Z\in\mC$, the composition of morphisms $$\circ:\Hom_\mC(X,Y)\times\Hom_\mC(Y,Z)\to\Hom_\mC(X,Z)$$ is bilinear. This means that if $f,g\in\Hom_\mC(X,Y)$ and $h,k\in\Hom_\mC(Y,Z)$ are morphisms, then $$h\circ(f+g)=h\circ f+h\circ g\;\;\;\;\text{ and }\;\;\;\;(h+k)\circ f=h\circ f+k\circ f$$
+\end{itemize}
+\end{defn}
+
+We also say that $\mC$ is enriched over $\bold{Ab}$. This relates to enriched category theory. 
+
+\begin{defn}{Additive Categories}{} A category $\mA$ is additive if in addition to being pre-additive, it also satisfies the following: 
+\begin{itemize}
+\item $\mA$ has a zero object, denoted $0$
+\item $\mA$ has finite products
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{} Let $\mA$ be an additive category. Then the coproducts and products of $\mA$ coincide. In other words, there is an isomorphism $$X\times Y\cong X\amalg Y$$ for any $X,Y\in Obj(\A)$. 
+\end{lmm}
+
+\subsection{Abelian Categories}
+\begin{defn}{Abelian Categories}{} An additive category $\mA$ is said to be abelian if it satisfies the following: 
+\begin{itemize}
+\item Every morphism in $\mA$ has a kernel and a cokernel
+\item Every monic morphism is the kernel of its cokernel
+\item Every epic morphism is the cokernel of its kernel
+\end{itemize}
+\end{defn}
+
+\begin{thm}{}{} Let $R$ be a ring. Then the category ${_R}\bold{Mod}$ of $R$-modules is an abelian category. 
+\end{thm}
+
+\begin{thm}{}{} Let $\mA$ be an abelian category whose objects form a set. Then there exists a ring $R$ and an exact functor $$F:\mA\to{{_R}\bold{Mod}}$$ which is an embedding on objects and an isomorphism on $\text{Hom}$ sets. 
+\end{thm}
+
+\begin{defn}{Injectivity and Surjectivity}{} Let $f:X\to Y$ be a morphism in an abelian category. 
+\begin{itemize}
+\item We say that $f$ is injective if $\ker(f)=0$
+\item We say that $f$ is surjective if $\text{coker}(f)=0$
+\end{itemize}
+\end{defn}
+
+In particular, these notions coincide that of epics and monics in an abelian category. 
+
+\begin{prp}{}{} Let $f:X\to Y$ be a morphism in an abelian category. Then the following are true. 
+\begin{itemize}
+\item $f$ is injective if and only if $f$ is a monomorphism
+\item $f$ is surjective if and only if $f$ is epimorphism
+\end{itemize}
+\end{prp}
+
+\subsection{Short Exact Sequences}
+\begin{defn}{Short Exact Sequence}{} Let $\mA$ be an abelian category. A short exact sequence in $\mA$ consists of three objects $A,B,C\in\mA$ and two morphisms $f:A\to B$ and $g:B\to C$ in $\mA$ written in diagram form as \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+0\arrow[r] & A\arrow[r, "f"] & B\arrow[r, "g"] & C\arrow[r] & 0
+\end{tikzcd}}\\~\\
+such that the following are true: 
+\begin{itemize}
+\item $f$ is a monomorphism
+\item $g$ is an epimorphism
+\item $\im(f)=\ker(g)$
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Split Exact Sequence}{} Let $\mA$ be an abelianc category. Let $A,B,C\in\mA$ such that \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+0\arrow[r] & A\arrow[r, "f"] & B\arrow[r, "g"] & C\arrow[r] & 0
+\end{tikzcd}}\\~\\
+is a short exact sequence. We say that it is split exact if $B\cong A\oplus C$. 
+\end{defn}
+
+The following is an important equivalent characterization of split exact sequence. 
+
+\begin{thm}{The Splitting Lemma}{1.2.6} Let $\mA$ be an abelianc category. Let $A,B,C\in\mA$. Then the following are equivalent for a short exact sequence \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+0\arrow[r] & A\arrow[r, "f"] & B\arrow[r, "g"] & C\arrow[r] & 0
+\end{tikzcd}}\\
+\begin{itemize}
+\item The short exact sequence is split exact sequence
+\item There exists a morphism $p:B\to A$ such that $p\circ f=\text{id}_A$
+\item There exists a morphism $s:C\to B$ such that $g\circ s=\text{id}_C$
+\end{itemize} 
+\end{thm}
+
+\begin{lmm}{Five Lemma}{} Consider the commutative diagram \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+A\arrow[r, "f"]\arrow[d, "l"] & B\arrow[r, "g"]\arrow[d, "m"] & C\arrow[r, "h"]\arrow[d, "n"] & D\arrow[r, "j"]\arrow[d, "p"] & E\arrow[d, "q"]\\
+A'\arrow[r, "r"] & B'\arrow[r, "s"] & C'\arrow[r, "t"] & D'\arrow[r, "u"] & E'
+\end{tikzcd}}\\~\\
+where all the objects lie in an abelian group $\mA$. If the two rows are exact, $m:B\to B',p:D\to D'$ are isomorphisms, $l:A\to A'$ is an epimorphism and $q:E\to E'$ is an monomorphism, then $n$ is an isomorphism. 
+\end{lmm}
+
+\begin{lmm}{Snake Lemma}{} Consider the commutative diagram \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+ & A\arrow[r, "f"]\arrow[d, "a"] & B\arrow[r, "g"]\arrow[d, "b"] & C\arrow[r]\arrow[d, "c"] & 0\\
+0\arrow[r] & A'\arrow[r, "f'"] & B'\arrow[r, "g'"] & C' & 
+\end{tikzcd}}\\~\\
+where all the objects lie in an abelian group $\mA$. If the two rows are exact, then there is an exact sequence relating the kernels and cokernels of $a,b,c$ \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+\ker(a)\arrow[r] & \ker(b)\arrow[r] & \ker(c)\arrow[r, "d"] & \coker(a)\arrow[r] & \coker(b)\arrow[r] & \coker(c)
+\end{tikzcd}}\\~\\
+where $d$ is called the connecting homomorphism. 
+\end{lmm}
+
+\subsection{Exact Functors}
+\begin{defn}{Additive Functors}{} Let $\mA,\mB$ be abelian categories. We say that a functor $F:\mA\to\mB$ is additive if for every $X,Y\in\mA$, the map $$\Hom_\mA(X,Y)\to\Hom_\mB(F(X),F(Y))$$ is a homomorphism of abelian groups. 
+\end{defn}
+
+\begin{prp}{}{} Let $F:\mA\to\mB$ be an additive functor. Then $F$ preserves split exact sequences. 
+\end{prp}
+
+\begin{defn}{Exact Functors}{} Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be an additive functor. Let $0\to A\to B\to C\to 0$ be an exact sequence in $\mA$. We say that $F$ is exact if the sequence $$0\to F(A)\to F(B)\to F(C)\to 0$$ is exact. 
+\end{defn}
+
+\begin{lmm}{}{} Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a functor. If $F$ is an equivalence of categories, then $F$ is an exact functor. 
+\end{lmm}
+
+\begin{defn}{Left and Right Exact Functors}{} Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be an additive functor. Let $0\to A\to B\to C\to 0$ be an exact sequence in $\mA$. 
+\begin{itemize}
+\item We say that $F$ is right exact if the sequence $$F(A)\to F(B)\to F(C)\to 0$$ is exact. 
+\item We say that $F$ is left exact if the sequence $$0\to F(A)\to F(B)\to F(C)$$ is exact. 
+\end{itemize}
+\end{defn}
+
+\begin{lmm} Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be an additive functor. Then $F$ is exact if and only if $F$ is left exact and right exact. 
+\end{lmm}
+
+\begin{prp}{}{} Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a functor. Then the following are true. 
+\begin{itemize}
+\item $F$ is additive and left exact if and only if $F$ preserves all finite limits. 
+\item $F$ is additive and right exact if and only if $F$ preserves all finite colimits. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{} Let $\mA$ be an abelian category. Let $M\in\mA$. Then the following are true. 
+\begin{itemize}
+\item The covariant functor $\Hom(M,-):\mA\to\bold{Ab}$ is left exact. 
+\item The contravariant functor $\Hom(-,M):\mA\to\bold{Ab}$ is right exact. 
+\end{itemize}
+\end{prp}
+
+Let $\mC$ be a category and let $\mJ$ be a diagram. Recall that if $\mC$ is complete, then the limit can be thought of as a functor $\lim_\mJ:\mC^\mJ\to\mC$. Dually, if $\mC$ is cocomplete, the colimit can be thought of as a functor $\text{colim}_\mJ:\mC^\mJ\to\mC$. If $\mC$ is an abelian category, it makes sense to ask whether these two functors preserve exact sequences. 
+
+\begin{prp}{}{} Let $\mA$ be an abelian category. Let $\mJ$ be a small category. Then the following are true. 
+\begin{itemize}
+\item If $\mA$ is complete, then the functor $\lim_\mJ:\mC^\mJ\to\mC$ is left exact
+\item If $\mA$ is cocomplete, then the functor $\text{colim}_\mJ:\mC^\mJ\to\mC$ is right exact
+\end{itemize}
+\end{prp}
+
+\subsection{Freyd-Mitchell Embedding Theorem}
+\begin{thm}{Freyd-Mitchell Embedding Theorem}{} Let $\mA$ be a small abelian category. Then there exists a ring $R$ and an exact, fully faithful functor $F:\mA\to{_R\bold{Mod}}$. This means that there is an isomorphism of sets $$\Hom_{\mA}(M,N)\cong\Hom_R(F(M),F(N))$$ 
+\end{thm}
+
+Such a functor allows us think about diagrams in $\mA$ as if they were diagrams in ${_R\bold{Mod}}$
+
+\begin{lmm}{}{} The Freyd-Mitchell embedding preserves kernels and cokernels. Moreover, it maps the zero object to the zero object. 
+\end{lmm}
+
+\pagebreak
+\section{Chain Complexes in an Abelian Category}
+\subsection{The Category of Chain Complexes}
+\begin{defn}{Chain Complexes}{} Let $\mA$ be an abelian category. A chain complex $(C_\bullet,\partial_\bullet)$ in $\mA$ is a family of objects $C_n\in\mA$ for $n\in\Z$ and morphisms $\partial_n:C_n\to C_{n-1}$ in $\mA$ such that $\partial_n\circ\partial_{n+1}=0$ for all $n$. \\~\\
+In other words, we have the diagram: \\
+\adjustbox{scale=1.1,center}{\begin{tikzcd}
+\cdots\arrow[r] & C_{n+1}\arrow[r, "\partial_{n+1}"] & C_n\arrow[r, "\partial_n"] & C_{n-1}\arrow[r] & \cdots
+\end{tikzcd}}\\~\\
+for which we require that $$\im(\partial_{n+1})\subseteq\ker(\partial_n)$$ for each $n$. 
+\end{defn}
+
+\begin{defn}{Chain Map}{} Let $(C_\bullet,\partial_\bullet)$ and $(C_\bullet',\partial_\bullet')$ be two chain complexes in an abelian category $\mA$. A chain map $f_\bullet:C_\bullet\to C_\bullet'$ is a family of maps $$f_n:C_n\to C_n'$$ in $\mA$ such that $\partial_n'\circ f_n=f_{n-1}\circ\partial_n$ for all $n$. \\~\\
+In other words, we have the following commutative diagram: \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+\cdots\arrow[r] & C_{n+1}\arrow[r, "\partial_{n+1}"]\arrow[d, "f_{n+1}"] & C_n\arrow[r, "\partial_n"]\arrow[d, "f_n"] & C_{n-1}\arrow[r]\arrow[d, "f_{n-1}"] & \cdots\\
+\cdots\arrow[r] & C_{n+1}'\arrow[r, "\partial_{n+1}'"] & C_n'\arrow[r, "\partial_n'"] & C_{n-1}'\arrow[r] & \cdots
+\end{tikzcd}}
+\end{defn}
+
+\begin{prp}{}{} Let $f_\bullet:C_\bullet\to D_\bullet$ and $g_\bullet:D_\bullet\to E_\bullet$ be two chain maps. Then $g_\bullet\circ f_\bullet$ is also a chain map. \tcbline
+\end{prp}
+
+\begin{defn}{Category of Chain Complexes}{} Let $\mA$ be an abelian category. Define $$\bold{Ch}(\mA)$$ to be the category of chain complexes where 
+\begin{itemize}
+\item The objects are chain complexes of objects in $\mA$. 
+\item The morphisms are chain maps. 
+\item Composition is given by composition of functions. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Variants of the Category of Chain Complexes}{} Let $\mA$ be an abelian category. 
+\begin{itemize}
+\item Define the category $$\bold{Ch}_{\geq 0}(\mA)$$ of non-negative chain complexes to be the full subcategory of $\bold{Ch}(\mA)$ consisting of chain complexes that is $0$ in negative degrees. 
+\item Define the category $$\bold{Ch}_{\leq 0}(\mA)$$ of non-positive chain complexes to be the full subcategory of $\bold{Ch}(\mA)$ consisting of chain complexes that is $0$ in positive degrees. 
+\end{itemize}
+\end{defn}
+
+\begin{thm}{}{} Let $\mA$ be an abelian category. Then $\bold{Ch}(\mA)$ is also an abelian category. 
+\end{thm}
+
+\begin{defn}{The Homology Groups of a Chain Complex}{} Let $(C_\bullet,\partial_\bullet)$ be a chain complex in an abelian category $\mA$. Define $Z_n(C_\bullet)=\ker(\partial_n)$ and $B_n(C_\bullet)=\im(\partial_{n+1})$. Define the $n$th homology of $(C_\bullet,\partial_\bullet)$ to be $$H_n(C_\bullet)=\frac{Z_n(C_\bullet)}{B_n(C_\bullet)}=\frac{\ker(\partial_n)}{\im(\partial_{n+1})}$$
+Elements of $Z_n(C_\bullet)=\ker(\partial_n)$ are called $n$-cycles and elements of $B_n(C_\bullet)=\im(\partial_{n+1})$ are called $n$-boundaries. 
+\end{defn}
+
+\begin{defn}{The Homology Functor}{} Let $\mA$ be an abelian category. Let $n\in\N$. Define the homology functors $$H_n(-):\bold{Ch}(\mA)\to\mA$$ for each $n$ as follows. 
+\begin{itemize}
+\item For each chain complex $C_\bullet$ over $\mA$, $H_n(C_\bullet)$ is the $n$th homology group of $C_\bullet$. 
+\item For each chain map $f:C_\bullet\to C_\bullet'$, $$H_n(f):H_n(C_\bullet)\to H_n(C_\bullet')$$ is the induced map on homology. 
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{1.1.4} A chain map $f_\bullet:C_\bullet\to C_\bullet'$ induces group homomorphisms $$f_\ast:H_n(C_\bullet)\to H_n(C_\bullet')$$ between homology groups defined by $f_\ast([z])=[f(z)]$. \tcbline
+\begin{proof}
+For every map $f_n:C_n\to C_n'$, we can restrict the domain to cycles so that we obtain a map $f_n:Z_n(C_\bullet)\to C_n'$. Using the relation given between the boundary operator and the family of maps, we check that this map descends to a map in homology. \\~\\
+
+Firstly, $f_n(Z_n(C_\bullet))\subseteq Z_n(C_\bullet')$. Indeed let $x\in Z_n(C_\bullet)$. Then we have that $$\partial_n'(f_n(x))=f_{n-1}(\partial_n(x))=f_{n-1}(0)=0$$ which means that $f_n(x)$ lies in the kernel of $\partial_n'$. Now we have a map $f_n:Z_n(C_\bullet)\to Z_n(C_\bullet')$. At the same time, $f_n$ also restricts to a map $f_n:B_n(C_\bullet)\to B_n(C_\bullet')$. Indeed if $b\in B_n(C_\bullet)$, then there exists some $c\in C_{n+1}$ such that $\partial_{n+1}(c)=b$. Applying $f_n$ on both sides give 
+\begin{align*}
+f_n(\partial_{n+1}(c))&=f_n(b)\\
+\partial_{n+1}'(f_{n+1}(c))&=f_n(b)
+\end{align*}
+This means that $f_n(b)$ is the boundary of the element $f_{n+1}(c)\in C_{n+1}$, and so $f_n$ restricts to a map of boundaries. Now $f_n:H_n(C_\bullet)\to H_n(C_\bullet')$ is well defined. Indeed if $b_1,b_2\in B_n(C_\bullet)$ lie in the same coset, then $b_1B_n(C_\bullet)=b_2(C_\bullet)$ so that $b_1-b_2\in B_(C_\bullet)$. Then $f_n(b_1-b_2)\in B_n(C_\bullet')$ so that $f_n(b_1)$ and $f_n(b_2)$ lie in the same coset. Thus $f_n$ is well defined. 
+\end{proof}
+\end{lmm}
+
+It is customary to drop the $n\in\N$ in the notation as it is usually implicit. So for example the condition for chain map becomes $\partial'\circ f=f\circ\partial$. \\~\\
+
+We then have functoriality of the induced map. 
+
+\begin{prp}{}{1.1.5} Let $f_\bullet:C_\bullet\to D_\bullet$ and $g_\bullet:D_\bullet\to E_\bullet$ be two chain maps. Then $g_\bullet\circ f_\bullet$ is also a chain map. Moreover, the induced map on the homology groups satisfy the following: 
+\begin{itemize}
+\item $g_\ast\circ f_\ast=(g\circ f)_\ast$
+\item $\text{id}_\ast=\text{id}_{H_n}$
+\end{itemize} \tcbline
+\begin{proof}
+Firstly, we have that $$\partial\circ g_n\circ f_n=g_{n-1}\circ\partial\circ f_n=g_{n-1}\circ f_{n-1}\circ\partial$$ so that $g\circ f$ is indeed a chain map. \\~\\
+
+We have that $g_\ast(f_\ast([z]))=g_\ast([f(z)])=[g(f(z))]=(g_\ast\circ f_\ast)([z])$. Also, we have that $$\text{id}_\ast([z])=[\text{id}(z)]=[z]=\text{id}_{H^n}([z])$$ and so we conclude. 
+\end{proof}
+\end{prp}
+
+\begin{defn}{Quasi-Isomorphisms}{} Let $C_\bullet,D_\bullet$ be chain complexes. Let $f:C_\bullet\to D_\bullet$ be a chain map. We say that $f$ is a quasi-isomorphism if the induced map in homology $f_\ast:H_n(C_\bullet)\to H_n(D_\bullet)$ is an isomorphism for all $n\in\N$. 
+\end{defn}
+
+\subsection{The Category of Cochain Complexes}
+\begin{defn}{Cochain Complexes}{} Let $\mA$ be an abelian category. A cochain complex $(C^\bullet,\partial^\bullet)$ is a family objects $C^n\in\mA$ for $n\in\Z$ and morphisms $\delta^n:C^{n-1}\to C^n$ such that $\delta^{n+1}\circ\delta^n=0$ for all $n$. In other words, we have the diagram: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+\cdots & C^{n+1}\arrow[l] & C^n\arrow[l, "\delta^{n+1}"'] & C^{n-1}\arrow[l, "\delta^n"'] & \cdots\arrow[l]
+\end{tikzcd}}
+\end{defn}
+
+Notice that algebraically, there is no difference between a chain complex and a cochain complex, other than the fact that the boundary maps run in the other direction. For $(C_\bullet,\partial_\bullet)$ a chain complex, we can form a cochain complex by setting $C^n=C_{-n}$ and then using the same boundary maps. 
+
+\begin{defn}{Category of Cochain Complexes}{} Let $\mA$ be an abelian category. Define the category of cochain complexes $$\bold{CCh}(\mA)$$ to consist of the following data. 
+\begin{itemize}
+\item The objects are the cochain complexes over $\mA$
+\item The morphisms are the chain maps
+\item Composition is given by the composition of maps on all levels of the chain map. 
+\end{itemize}
+\end{defn}
+
+Because cochain complexes is the same data as a chain complex, we can also define homology groups for cochain complexes. We call them the cohomology groups of the cochain complex. 
+
+\begin{defn}{Cohomology Groups}{} Let $\mA$ be an abelian category. Let $(C^\bullet,\partial^\bullet)$ be a cochain complex. Define the $n$th cohomology group of the cochain complex to be $$H^n(C^\bullet,\partial^\bullet)=\frac{\ker(\partial^{n+1}:C^n\to C^{n+1})}{\im(\partial^n:C^{n-1}\to C^n)}=H_n(C^\bullet,\partial^\bullet)$$ for $n\in\N$. 
+\end{defn}
+
+The construction of cohomology groups are functorial because the homology groups of a chain complex also are. 
+
+\begin{defn}{The Cohomology Functor}{} Let $\mA$ be an abelian category. Let $n\in\N$. Define the $n$th cohomology functor to be the functor $$H^n:\bold{CCh}(\mA)\to\mA$$ to consist of the following data. 
+\begin{itemize}
+\item For each cochain complex $(C^\bullet,\delta^\bullet)$ over $\mA$, define $H^n(C^\bullet,\delta^\bullet)$ to be the $n$th cohomology group of the cochain complex. 
+\item For each chain map $f^\bullet:(C^\bullet,\delta^\bullet)\to(D^\bullet,\delta^\bullet)$, the induced map $$f^\ast:H^n(C^\bullet,\delta^\bullet)\to H^n(C^\bullet,\delta^\bullet)$$ is defined by $[z]\mapsto[f^n(z)]$. 
+\end{itemize}
+\end{defn}
+
+\subsection{Chain Homotopy}
+\begin{defn}{Chain Homotopy}{} Let $\mA$ be an abelian category. Let $a_\bullet,b_\bullet:C_\bullet\to C_\bullet'$ be two chain maps in $\bold{Ch}(\mA)$. Then a chain homotopy from $a$ to $b$ is a collection of morphisms $$\eta_n:C_n\to C_{n+1}'$$ in $\mA$ such that $$b_n-a_n=\partial_{n+1}'\eta_n+\eta_{n-1}\partial_n$$ for all $n\in\Z$. In this case, $a$ and $b$ are said to be chain homotopic. \\~\\
+In other words, we have the diagram: \\~\\
+\adjustbox{scale=1.15,center}{\begin{tikzcd}
+	\cdots && {C_{n+1}} && {C_n} && {C_{n-1}} && \cdots \\
+	\\
+	\cdots && {C_{n+1}'} && {C_n'} && {C_{n-1}'} && \cdots
+	\arrow[from=1-1, to=1-3]
+	\arrow["{\partial_{n+1}}", from=1-3, to=1-5]
+	\arrow["{\partial_n}", from=1-5, to=1-7]
+	\arrow[from=3-1, to=3-3]
+	\arrow["{\partial_{n+1}'}", from=3-3, to=3-5]
+	\arrow["{\partial_n'}", from=3-5, to=3-7]
+	\arrow["{\eta_{n+1}}"{description}, from=1-3, to=3-1]
+	\arrow["{\eta_n}"{description}, from=1-5, to=3-3]
+	\arrow["{\eta_{n-1}}"{description}, from=1-7, to=3-5]
+	\arrow["{b_{n+1}-a_{n+1}}"{description}, from=1-3, to=3-3]
+	\arrow["{b_n-a_n}"{description}, from=1-5, to=3-5]
+	\arrow["{b_{n-1}-a_{n-1}}"{description}, from=1-7, to=3-7]
+	\arrow[from=1-7, to=1-9]
+	\arrow[from=3-7, to=3-9]
+\end{tikzcd}}\\~\\
+
+In this case we write $f\simeq g$. 
+\end{defn}
+
+\begin{lmm}{}{} Let $a,b$ be chain homotopic. Then their induced maps in homology are equal. Meaning $$a_n=b_n:H_n(X)\to H_n(Y)$$ \tcbline
+\begin{proof}
+Let $c\in\ker(\partial_n)$ be an $n$-cycle. Using the equation for chain homotopy, we have that 
+\begin{align*}
+b(c)-a(c)&=\partial_{n+1}'(\eta_n(c))+\eta_{n-1}(\partial(c))\\
+&=\partial_{n+1}'(\eta(c))
+\end{align*}
+ is a boundary in $\im(\partial_{n+1}')\subseteq C_n'$. Thus $b_n(c)$ and $a_n(c)$ are of the same coset in $H_n(X)$. 
+\end{proof}
+\end{lmm}
+
+\begin{prp}{}{} Let $\mA$ be an abelian group. Let $f_1,g_1:C_\bullet\to D_\bullet$ and $f_2,g_2:D_\bullet\to E_\bullet$ be chain maps in $\bold{Ch}(\mA)$. If $f_1$ and $g_1$ are chain homotopic and $f_2$ and $g_2$ are chain homotopic, then $f_2\circ f_1$ is chain homotopic to $g_2\circ g_1$. \tcbline
+\begin{proof}
+The chain homotopies between $f_1$ and $g_1$ imposes the identity $$\partial\eta+\eta\partial=g_1-f_1$$ for $\eta:C_\bullet\to D_\bullet$ the given chain homotopy. Similarly, for $\nu:D_\bullet\to E_\bullet$ we have the identity $$\partial\nu+\nu\partial=g_2-f_2$$ Then we have that 
+\begin{align*}
+g_2\circ g_1-f_2\circ f-1&=g_2\circ g_1-g_2\circ f_1+g_2\circ f_1-f_2\circ f_1\\
+&=g_2(g_1-f_1)+(g_2-f_2)\circ f_1\\
+&=g_2(\partial\eta+\eta\partial)+(\partial\nu+\nu\partial)\circ f_1\\
+&=\partial g_2\eta+g_2\eta\partial+\partial\nu f_1+\nu f_1\partial\\
+&=\partial(g_2\eta+\nu f_1)+(g_2\eta+\nu f_1)\partial
+\end{align*}
+Thus $g_2\eta+\nu f_1:C_n\to E_{n+1}$ would be a valid chain homotopy from $g_2\circ g_1$ to $f_2\circ f_1$. 
+\end{proof}
+\end{prp}
+
+\begin{lmm}{}{} Let $\mA$ be an abelian category. Let $C_\bullet$ and $D_\bullet$ be two chain complexes in $\bold{Ch}(\mA)$. Then the relation $\simeq$ on the chain maps from $C_\bullet$ to $D_\bullet$ is an equivalence relation. 
+\end{lmm}
+
+\begin{defn}{Chain Homotopy Equivalence}{} Let $\mA$ be an abelian category. Let $C_\bullet$ and $D_\bullet$ be two chain complexes in $\bold{Ch}(\mA)$. We say that they are chain homotopy equivalence if there exists chain maps $a_\bullet:C_\bullet\to D_\bullet$ and $b_\bullet:C_\bullet\to D_\bullet$ such that there are chain homotopies $$b_\bullet\circ a_\bullet\simeq\text{id}_{C_\bullet}\;\;\;\;\text{ and }\;\;\;\;a_\bullet\circ b_\bullet\simeq\text{id}_{D_\bullet}$$
+\end{defn}
+
+\begin{lmm}{}{} Let $\mA$ be an abelian category. Let $C_\bullet$ and $D_\bullet$ be chain homotopy equivalent in $\bold{Ch}(\mA)$. Then the chain maps induces an isomorphism $$H_n(C_\bullet)\cong H_n(D_\bullet)$$ in all degrees $n\in\N$. \tcbline
+\begin{proof}
+We know that $b_\bullet\circ a_\bullet\simeq\text{id}_{C_\bullet}$ which means that they induce the same map: $$b_\ast\circ a_\ast=\text{id}_{H_n(C_\bullet)}$$ Similarly the chain homotopies $a_\bullet\circ b_\bullet\simeq\text{id}_{D_\bullet}$ induce the same map $$a_\ast\circ b_\ast:\text{id}_{H_n(D_\bullet)}$$ as the identity. Then these two identities mean that $a_\ast$ is both injective and surjective. 
+\end{proof}
+\end{lmm}
+
+\begin{prp}{}{} Let $\mA$ be an abelian category. Then chain homotopy equivalence defines an equivalence relation on all chain complexes in $\bold{Ch}(\mA)$. \tcbline
+\begin{proof}
+Clearly any chain complex is chain homotopy equivalent to itself by the identity map. If $C_\bullet$ and $D_\bullet$ are chain homotopy equivalent by the chain maps $a_\bullet:C_\bullet\to D_\bullet$ and $b_\bullet:D_\bullet\to C_\bullet$, then we have the identities $b_\bullet\circ a_\bullet=\text{id}_{C_\bullet}$ and $a_\bullet\circ b_\bullet=\text{id}_{D_\bullet}$. We can then read them in reverse so that $D_\bullet$ and $C_\bullet$ are chain homotopy equivalence by the maps $b_\bullet$ and $a_\bullet$. \\~\\
+
+Suppose further that $D_\bullet$ and $E_\bullet$ are chain homotopy equivalent via the maps $u_\bullet:D_\bullet\to E_\bullet$ and $v_\bullet:E_\bullet\to D_\bullet$. Then the maps $u_\bullet\circ a_\bullet$ and $b_\bullet\circ v_\bullet$ give a chain homotopy equivalence between $C_\bullet$ and $E_\bullet$. Indeed, upon composition, we have that they are chain  homtopic to the identity maps. 
+\end{proof}
+\end{prp}
+
+\subsection{Mapping Cones and Mapping Cylinders}
+
+\subsection{Sequences of Chain Complexes}
+One can even define short exact sequences of chain complexes themselves. 
+
+\begin{defn}{Short Exact Sequence of Chain Complexes}{} Let $A_\bullet,B_\bullet,C_\bullet$ be chain complexes in an abelian category $\mA$. Let $i:A_\bullet\to B_\bullet$ and $j:B_\bullet\to C_\bullet$ be chain maps in $\bold{Ch}(\mA)$. A short exact sequence of chain complexes is a diagram of the form \\~\\
+\adjustbox{scale=1.1,center}{\begin{tikzcd}
+& 0\arrow[d] & 0\arrow[d] & 0\arrow[d] &\\
+\cdots\arrow[r] & A_{n+1}\arrow[r, "d_A"]\arrow[d, "i"] & A_n\arrow[r, "d_A"]\arrow[d, "i"] & A_{n-1}\arrow[r]\arrow[d, "i"] & \cdots\\
+\cdots\arrow[r] & B_{n+1}\arrow[r, "d_B"]\arrow[d, "j"] & B_n\arrow[r, "d_B"]\arrow[d, "j"] & B_{n-1}\arrow[r]\arrow[d, "j"] & \cdots\\
+\cdots\arrow[r] & C_{n+1}\arrow[r, "d_C"]\arrow[d] & C_n\arrow[r, "d_C"]\arrow[d] & C_{n-1}\arrow[r]\arrow[d] & \cdots\\
+& 0 & 0 & 0 &
+\end{tikzcd}}\\~\\
+such that for each $n$ (vertically in the diagram), the sequence \\~\\
+\adjustbox{scale=1.0, center}{\begin{tikzcd}
+0\arrow[r] & A_n\arrow[r, "i"] & B_n\arrow[r, "j"] & C_n\arrow[r] & 0
+\end{tikzcd}}\\~\\ is a short exact sequence. We write this as \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+0\arrow[r] & A_\bullet\arrow[r, "i"] & B_\bullet\arrow[r, "j"] & C_\bullet\arrow[r] & 0
+\end{tikzcd}}
+\end{defn}
+
+\begin{thm}{}{} Let $\mA$ be an abelian category. Let $A_\bullet,B_\bullet,C_\bullet$ be a chain complexes in $\bold{Ch}(\mA)$ such that \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+0\arrow[r] & A_\bullet\arrow[r, "i"] & B_\bullet\arrow[r, "j"] & C_\bullet\arrow[r] & 0
+\end{tikzcd}}\\~\\
+is a short exact sequence of chain complexes. Then there exists a connecting homomorphism $\partial:H_n(C_\bullet)\to H_{n-1}(A_\bullet)$ such that the following sequence of homology  \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+\cdots\arrow[r] & H_{n+1}(C_\bullet)\arrow[r, "\partial"] & H_n(A_\bullet)\arrow[r, "i_\ast"] & H_n(B_\bullet)\arrow[r, "j_\ast"] & H_n(C_\bullet)\arrow[r, "\partial"] & H_{n-1}(A_\bullet)\arrow[r] & \cdots
+\end{tikzcd}}\\~\\
+is an exact sequence. 
+\end{thm}
+
+\begin{thm}{}{} Let $A_\bullet,B_\bullet,C_\bullet,A_\bullet',B_\bullet',C_\bullet'$ be six chain complexes in an abelian category $\mA$ and let the following \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {A_\bullet} & {B_\bullet} & {C_\bullet} & 0 \\
+	0 & {A_\bullet'} & {B_\bullet'} & {C_\bullet'} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["i", from=1-2, to=1-3]
+	\arrow["j", from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+	\arrow[from=2-1, to=2-2]
+	\arrow["{i'}"', from=2-2, to=2-3]
+	\arrow["{j'}"', from=2-3, to=2-4]
+	\arrow[from=2-4, to=2-5]
+\end{tikzcd}}\\~\\
+be two short exact sequence of chain complexes. Let the following diagram be a morphism of the two short exact sequence of chain complexes in $\bold{Ch}(\mA)$. \\~\\
+\adjustbox{scale=0.9,center}{\begin{tikzcd}
+	&&& 0 && 0 && 0 \\
+	&& 0 && 0 && 0 \\
+	& \cdots && {A_{n+1}'} && {A_n'} && {A_{n-1}'} && \cdots \\
+	\cdots && {A_{n+1}} && {A_n} && {A_{n-1}} && \cdots \\
+	& \cdots && {B_{n+1}'} && {B_n'} && {B_{n-1}'} && \cdots \\
+	\cdots && {B_{n+1}} && {B_n} && {B_{n-1}} && \cdots \\
+	& \cdots && {C_{n+1}'} && {C_n'} && {C_{n-1}'} && \cdots \\
+	\cdots && {C_{n+1}} && {C_n} && {C_{n-1}} && \cdots \\
+	&&& 0 && 0 && 0 \\
+	&& 0 && 0 && 0
+	\arrow[from=1-4, to=3-4]
+	\arrow[from=1-6, to=3-6]
+	\arrow[from=1-8, to=3-8]
+	\arrow[from=3-2, to=3-4]
+	\arrow["\partial"{pos=0.3}, from=3-4, to=3-6]
+	\arrow["{i'}"{pos=0.7}, from=3-4, to=5-4]
+	\arrow["\partial"{pos=0.3}, from=3-6, to=3-8]
+	\arrow["{i'}"{pos=0.7}, from=3-6, to=5-6]
+	\arrow[from=3-8, to=3-10]
+	\arrow["{i'}"{pos=0.7}, from=3-8, to=5-8]
+	\arrow[from=4-1, to=4-3]
+	\arrow["\alpha"{description}, from=4-3, to=3-4]
+	\arrow["\alpha"{description}, from=4-5, to=3-6]
+	\arrow["\alpha"{description}, from=4-7, to=3-8]
+	\arrow[from=5-2, to=5-4]
+	\arrow["\partial"{pos=0.3}, from=5-4, to=5-6]
+	\arrow["{j'}"{pos=0.7}, from=5-4, to=7-4]
+	\arrow["\partial"{pos=0.3}, from=5-6, to=5-8]
+	\arrow["{j'}"{pos=0.7}, from=5-6, to=7-6]
+	\arrow[from=5-8, to=5-10]
+	\arrow["{j'}"{pos=0.7}, from=5-8, to=7-8]
+	\arrow[from=6-1, to=6-3]
+	\arrow["\beta"{description}, from=6-3, to=5-4]
+	\arrow["\beta"{description}, from=6-5, to=5-6]
+	\arrow["\beta"{description}, from=6-7, to=5-8]
+	\arrow[from=7-2, to=7-4]
+	\arrow["\partial"{pos=0.3}, from=7-4, to=7-6]
+	\arrow[from=7-4, to=9-4]
+	\arrow["\partial"{pos=0.3}, from=7-6, to=7-8]
+	\arrow[from=7-6, to=9-6]
+	\arrow[from=7-8, to=7-10]
+	\arrow[from=7-8, to=9-8]
+	\arrow[from=8-1, to=8-3]
+	\arrow["\gamma"{description}, from=8-3, to=7-4]
+	\arrow[from=8-3, to=10-3]
+	\arrow["\gamma"{description}, from=8-5, to=7-6]
+	\arrow[from=8-5, to=10-5]
+	\arrow["\gamma"{description}, from=8-7, to=7-8]
+	\arrow[from=8-7, to=10-7]
+	\arrow[from=2-3, to=4-3, crossing over]
+	\arrow[from=2-5, to=4-5, crossing over]
+	\arrow[from=2-7, to=4-7, crossing over]
+	\arrow["\partial"{pos=0.7}, from=4-3, to=4-5, crossing over]
+	\arrow["\partial"{pos=0.7}, from=4-5, to=4-7, crossing over]
+	\arrow[from=4-7, to=4-9, crossing over]
+	\arrow["\partial"{pos=0.7}, from=6-3, to=6-5, crossing over]
+	\arrow["\partial"{pos=0.7}, from=6-5, to=6-7, crossing over]
+	\arrow[from=6-7, to=6-9, crossing over]
+	\arrow["\partial"{pos=0.7}, from=8-3, to=8-5, crossing over]
+	\arrow["\partial"{pos=0.7}, from=8-5, to=8-7, crossing over]
+	\arrow[from=8-7, to=8-9, crossing over]
+	\arrow["i"{pos=0.3}, from=4-3, to=6-3, crossing over]
+	\arrow["i"{pos=0.3}, from=4-5, to=6-5, crossing over]
+	\arrow["i"{pos=0.3}, from=4-7, to=6-7, crossing over]
+	\arrow["j"{pos=0.3}, from=6-3, to=8-3, crossing over]
+	\arrow["j"{pos=0.3}, from=6-5, to=8-5, crossing over]
+	\arrow["j"{pos=0.3}, from=6-7, to=8-7, crossing over]
+\end{tikzcd}}\\~\\
+Then the induced diagram \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\cdots & {H_n(A)} & {H_n(B)} & {H_n(C)} & {H_{n-1}(A)} & \cdots \\
+	\cdots & {H_n(A')} & {H_n(B')} & {H_n(C')} & {H_{n-1}(A')} & \cdots
+	\arrow[from=1-1, to=1-2]
+	\arrow["{i_\ast}", from=1-2, to=1-3]
+	\arrow["{\alpha_\ast}", from=1-2, to=2-2]
+	\arrow["{j_\ast}", from=1-3, to=1-4]
+	\arrow["{\beta_\ast}", from=1-3, to=2-3]
+	\arrow["\partial", from=1-4, to=1-5]
+	\arrow["{\gamma_\ast}", from=1-4, to=2-4]
+	\arrow[from=1-5, to=1-6]
+	\arrow["{\alpha_\ast}", from=1-5, to=2-5]
+	\arrow[from=2-1, to=2-2]
+	\arrow["{i_\ast'}"', from=2-2, to=2-3]
+	\arrow["{j_\ast'}"', from=2-3, to=2-4]
+	\arrow["\partial"', from=2-4, to=2-5]
+	\arrow[from=2-5, to=2-6]
+\end{tikzcd}}\\~\\
+is a commutative diagram. 
+\end{thm}
+
+\subsection{Double Complexes}
+\begin{defn}{Double Complexes}{} Let $\mA$ be an abelian category. A double complex $(C_{\bullet,\bullet},d^h,d^v)$ in $\mA$ is a sequence of objects $C_{p,q}\in\mA$ that is bigraded $p,q\in\Z$, together with the horizontal differentials $d^h:C_{p,q}\to C_{p+1,q}$ and vertical differentials $d^v:C_{p,q}\to C_{p,q+1}$ such that the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	& \vdots & \vdots & \vdots \\
+	\cdots & {C_{p-1,q+1}} & {C_{p,q+1}} & {C_{p+1,q+1}} & \cdots \\
+	\cdots & {C_{p-1,q}} & {C_{p,q}} & {C_{p+1,q}} & \cdots \\
+	\cdots & {C_{p-1,q-1}} & {C_{p,q-1}} & {C_{p+1,q-1}} & \cdots \\
+	& \vdots & \vdots & \vdots
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=1-2]
+	\arrow["{d^h}", from=2-2, to=2-3]
+	\arrow[from=2-3, to=1-3]
+	\arrow["{d^h}", from=2-3, to=2-4]
+	\arrow[from=2-4, to=1-4]
+	\arrow[from=2-4, to=2-5]
+	\arrow[from=3-1, to=3-2]
+	\arrow["{d^v}", from=3-2, to=2-2]
+	\arrow["{d^h}", from=3-2, to=3-3]
+	\arrow["{d^v}", from=3-3, to=2-3]
+	\arrow["{d^h}", from=3-3, to=3-4]
+	\arrow["{d^v}", from=3-4, to=2-4]
+	\arrow[from=3-4, to=3-5]
+	\arrow[from=4-1, to=4-2]
+	\arrow["{d^v}", from=4-2, to=3-2]
+	\arrow["{d^h}", from=4-2, to=4-3]
+	\arrow["{d^v}", from=4-3, to=3-3]
+	\arrow["{d^h}", from=4-3, to=4-4]
+	\arrow["{d^v}", from=4-4, to=3-4]
+	\arrow[from=4-4, to=4-5]
+	\arrow[from=5-2, to=4-2]
+	\arrow[from=5-3, to=4-3]
+	\arrow[from=5-4, to=4-4]
+\end{tikzcd}}\\~\\
+\end{defn}
+
+\begin{defn}{Tensor Product Double Complex}{} Let $\mA$ be an abelian category. Let $(C_\bullet,d^C)$ and $(D_\bullet,d^D)$ be two chain complexes. Define the tensor product of $C_\bullet$ and $D_\bullet$ to be the double complex $C_\bullet\otimes D_\bullet$ with the horizontal differential and vertical differential is defined by $$d^h=d^{C_p}\otimes\text{id}_{D_q}\;\;\;\;\text{ and }\;\;\;\;d^v=(-1)^p\text{id}_{C_p}\otimes d^{D_q}$$ respectively. 
+\end{defn}
+
+\subsection{Total Complexes}
+\begin{defn}{The Total Complex of a Double Complex}{} Let $\mA$ be an abelian category where $\oplus$ denotes the product. Let $(C_{\bullet,\bullet},d^h,d^v)$ be a double complex. Define the total complex $\text{Tot}^\oplus(C)_\bullet$ to be the chain complex in $\mA$ constructed as follows. 
+\begin{itemize}
+\item For each $n\in\Z$, define $$\text{Tot}^\oplus(C)_n=\bigoplus_{p+q=n}C_{p,q}$$
+\item For each $n\in\Z$, define $d_n:\text{Tot}^\oplus(C)_n\to\text{Tot}^\oplus(C)_{n-1}$ by $$d_n=d_n^v+(-1)^nd_n^h$$
+\end{itemize}
+In other words, the chain complex is of the form: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\cdots & {\bigoplus_{p+q=n+1}C_{p,q}} && {\bigoplus_{p+q=n}C_{p,q}} && {\bigoplus_{p+q=n-1}C_{p,q}} & \cdots
+	\arrow[from=1-1, to=1-2]
+	\arrow["{d_{n+1}^v+(-1)^{n+1}d_{n+1}^h}", from=1-2, to=1-4]
+	\arrow["{d_n^v+(-1)^nd_n^h}", from=1-4, to=1-6]
+	\arrow[from=1-6, to=1-7]
+\end{tikzcd}}\\~\\
+\end{defn}
+
+\begin{defn}{Total Homology of a Double Chain Complex}{} Let $\mA$ be an abelian category. Let $(C_{\bullet,\bullet},d^h,d^v)$ be a double complex in $\mA$. Define the total homology of $C$ to be the homology $$H_\bullet^\text{Tot}(C_{\bullet,\bullet},d^h,d^v)=H_\bullet(\text{Tot}^\oplus(C)_\bullet,d)$$ of the total complex $(\text{Tot}^\oplus(C)_\bullet,d)$
+\end{defn}
+
+\begin{defn}{Tensor Product Chain Complex}{} Let $\mA$ be an abelian category. Let $(C_\bullet,d^C)$ and $(D_\bullet,d^D)$ be two chain complexes. Define the tensor product chain complex of $C_\bullet$ and $D_\bullet$ to be the chain complex $$(C\otimes D)_\bullet=\text{Tot}^\oplus(C_\bullet\otimes D_\bullet)$$
+\end{defn}
+
+Note that this is different from the tensor product double complex of two chain complexes, although they are closely related. Although the tensor product double complex makes more intuitive sense, the canonical product for $\bold{Ch}(\mA)$ is in fact the tensor product chain complex. Moreover, this product is the symmetric monoidal product of $\bold{Ch}(\mA)$. 
+
+\pagebreak
+\section{Derived Functors}
+\subsection{Injective and Projective Objects}
+Injectivity and Projectivity objects are created just for the sake of allowing the $\Hom$ functor to be exact. Therefore its definition is also direct. 
+
+\begin{defn}{Projective and Injective Objects}{} Let $\mA$ be an abelian category. Let $Y\in\mA$ be an object. 
+\begin{itemize}
+\item We say that $Y$ is injective if the functor $\Hom(-,Y):\mA\to\bold{Ab}$ is exact. 
+\item We say that $Y$ is projective if the functor $\Hom(Y,-):\mA\to\bold{Ab}$ is exact. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Enough Injectives and Enough Projectives}{} Let $\mA$ be an abelian category. $\mA$ is said to have enough injectives if every object is the subobject of an injective object. $\mA$ is said to have enough projectives if every object is the quotient of an projective object. 
+\end{defn}
+
+There are however equivalent definitions from the categorical point of view. 
+
+\subsection{Resolutions of Objects}
+There are in general, four types of resolutions. Namely injective resolutions, projective resolutions, free resolutions and acyclic resolutions. We will study all four of them and their relations in this section. 
+
+\begin{defn}{Injective Resolution}{} Let $\mA$ be an abelian category. An injective resolution of an object $A\in\mA$ is an exact sequence \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+0\arrow[r] & A\arrow[r, "\epsilon"] & I^0\arrow[r] & I^1\arrow[r] & I^2\arrow[r] & \cdots
+\end{tikzcd}}\\~\\
+where each $I^k$ is injective. 
+\end{defn}
+
+\begin{prp}{}{} Let $\mA$ be an abelian category. Then $\mA$ has enough injectives if and only if every object of $\mA$ has an injective resolution. 
+\end{prp}
+
+\begin{prp}{}{} Let $\phi:A\to A'$ be a morphism in an abelian category $\mA$. Suppose that there are injective resolutions \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & A & {I^0} & {I^1} & \cdots \\
+	0 & {A'} & {J^0} & {J^1} & \cdots
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow["\phi"', from=1-2, to=2-2]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-3, to=2-4]
+	\arrow[from=2-4, to=2-5]
+\end{tikzcd}}\\~\\
+for $A$ and $A'$ respectively. Then there exists a chain map extending $\phi$ such that the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & A & {I^0} & {I^1} & \cdots \\
+	0 & {A'} & {J^0} & {J^1} & \cdots
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow["\phi"', from=1-2, to=2-2]
+	\arrow[from=1-3, to=1-4]
+	\arrow["{\phi^0}"', from=1-3, to=2-3]
+	\arrow[from=1-4, to=1-5]
+	\arrow["{\phi^1}"', from=1-4, to=2-4]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-3, to=2-4]
+	\arrow[from=2-4, to=2-5]
+\end{tikzcd}}\\~\\
+Moreover, any two such chain maps are homotopic. 
+\end{prp}
+
+\begin{lmm}{}{} Let $\mA$ be an abelian category. Then any two injective resolutions of an object $A$ are homotopically equivalent. 
+\end{lmm}
+
+\begin{defn}{Projective Resolution}{} Let $\mA$ be an abelian category. An projective resolution of an object $A$ is an exact sequence \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+\cdots\arrow[r] & P_2\arrow[r] & P_1\arrow[r] & P_0\arrow[r, "d"] & A\arrow[r] & 0
+\end{tikzcd}}\\~\\
+where each $P_k$ is projective. 
+\end{defn}
+
+\begin{prp}{}{} Let $\mA$ be an abelian category. Then $\mA$ has enough projectives if and only if every object of $\mA$ has a projective resolution. 
+\end{prp}
+
+\begin{prp}{}{} Let $\phi:A\to A'$ be a morphism in an abelian category $\mA$. Suppose that there are projective resolutions \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\cdots & {P_2} & {P_1} & A & 0 \\
+	\cdots & {Q_2} & {Q_1} & {A'} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+	\arrow["\phi"', from=1-4, to=2-4]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-3, to=2-4]
+	\arrow[from=2-4, to=2-5]
+\end{tikzcd}}\\~\\
+for $A$ and $A'$ respectively. Then there exists a chain map extending $\phi$ such that the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\cdots & {P_2} & {P_1} & A & 0 \\
+	\cdots & {Q_2} & {Q_1} & {A'} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow["{\phi_2}"', from=1-2, to=2-2]
+	\arrow[from=1-3, to=1-4]
+	\arrow["{\phi_1}"', from=1-3, to=2-3]
+	\arrow[from=1-4, to=1-5]
+	\arrow["\phi"', from=1-4, to=2-4]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-3, to=2-4]
+	\arrow[from=2-4, to=2-5]
+\end{tikzcd}}\\~\\
+Moreover, any two such chain maps are homotopic. 
+\end{prp}
+
+\begin{lmm}{}{} Let $\mA$ be an abelian category. Then any two projective resolutions of an object $A$ are homotopically equivalent. 
+\end{lmm}
+
+\subsection{Derived Functors}
+\begin{defn}{Right Derived Functors}{} Let $F:\mA\to\mB$ be a left exact functor. Suppose that $\mA$ has enough injectives. Define the right derived functors $R^iF:\mA\to\mB$ for $i\geq 0$ as follows. 
+\begin{itemize}
+\item On objects, $R^iF(A)=H^i(F(I^\bullet))$ where $d:A\to I^\bullet$ is an injective resolution of $A$
+\item On Morphisms, $R^iF(\phi:A\to B)=H^i(F(\phi^\bullet:I^\bullet\to (I')^\bullet))$ where $\phi^\bullet:I^\bullet\to(I')^\bullet$ is an extension of $\phi$ to resolutions. 
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{} Let $F:\mA\to\mB$ be a left exact functor. The $n$th right derived functor $R^nF$ is an additive functor from $\mA$ to $\mB$. 
+\end{prp}
+
+\begin{lmm}{}{} Let $A$ be an injective object, then $R^nF(A)=0$ for $n\neq 0$. 
+\end{lmm}
+
+\begin{crl}{}{} If $F:\mA\to\mB$ is a left exact functor, then $R^0F=F$. 
+\end{crl}
+
+\begin{thm}{}{} Let $\mA,\mB$ be abelian categories with enough injectives. Let $F:\mA\to\mB$ be a left exact functor. For any short exact sequence \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+0\arrow[r] & A\arrow[r] & B\arrow[r] & C\arrow[r] & 0
+\end{tikzcd}}\\~\\
+there is a canonical long exact sequence \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & A & B & C & {R^1(A)} & {R^1(B)} & {R^1(C)} & {R^2(A)} & \cdots
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+	\arrow[from=1-5, to=1-6]
+	\arrow[from=1-6, to=1-7]
+	\arrow[from=1-7, to=1-8]
+	\arrow[from=1-8, to=1-9]
+\end{tikzcd}}\\~\\
+\end{thm}
+
+\begin{defn}{Left Derived Functors}{} Let $F:\mA\to\mB$ be a right exact functor. Suppose that $\mA$ has enough projectives. Define the left derived functors $L_iF:\mA\to\mB$ for $i\geq 0$ as follows. 
+\begin{itemize}
+\item On objects, $L_iF(A)=H_i(F(P^\bullet))$ where $d:P_\bullet\to A$ is an projective resolution of $A$
+\item On Morphisms, $L_iF(\phi:A\to B)=L_i(F(\phi_\bullet:P_\bullet\to (P')_\bullet))$ where $\phi_\bullet:P_\bullet\to(P')_\bullet$ is an extension of $\phi$ to resolutions. 
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{} Let $F:\mA\to\mB$ be a right exact functor. The $n$th left derived functor $L_nF$ is an additive functor from $\mA$ to $\mB$. 
+\end{prp}
+
+\begin{lmm}{}{} Let $A$ be a projective object, then $L_nF(A)=0$ for $n\neq 0$. 
+\end{lmm}
+
+\begin{crl}{}{} If $F:\mA\to\mB$ is a right exact functor, then $L_0F=F$. 
+\end{crl}
+
+\begin{thm}{}{} Let $\mA,\mB$ be abelian categories with enough projectives. Let $F:\mA\to\mB$ be a right exact functor. For any short exact sequence \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+0\arrow[r] & A\arrow[r] & B\arrow[r] & C\arrow[r] & 0
+\end{tikzcd}}\\~\\
+there is a canonical long exact sequence \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\cdots & {L_2(C)} & {L_1(A)} & {L_1(B)} & {L_1(C)} & A & B & C & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+	\arrow[from=1-5, to=1-6]
+	\arrow[from=1-6, to=1-7]
+	\arrow[from=1-7, to=1-8]
+	\arrow[from=1-8, to=1-9]
+\end{tikzcd}}\\~\\
+\end{thm}
+
+\subsection{$\delta$-Functors}
+\begin{defn}{$\delta$-Functors}{} Let $\mA$ and $\mB$ be abelian categories. A homological $\delta$-functor is a collection $\{T_n:\mA\to\mB\;|\;n\in\N\}$ of additive functors such that for any short exact sequence \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & A & B & C & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\~\\
+there are morphisms $\delta_n:T_n(C)\to T_n(A)$ for $n\in\N$ such that the following are true. 
+\begin{itemize}
+\item There is a long exact sequence \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\cdots & {T_{n+1}(C)} & {T_n(A)} & {T_n(B)} & {T_n(C)} & {T_{n-1}(A)} & \cdots
+	\arrow[from=1-1, to=1-2]
+	\arrow["{\delta_{n+1}}", from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+	\arrow["{\delta_n}", from=1-5, to=1-6]
+	\arrow[from=1-6, to=1-7]
+\end{tikzcd}}\\~\\
+\item If there is a morphism of short exact sequences \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & A & B & C & 0 \\
+	0 & {A'} & {B'} & {C'} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-3, to=2-3]
+	\arrow[from=1-4, to=1-5]
+	\arrow[from=1-4, to=2-4]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-3, to=2-4]
+	\arrow[from=2-4, to=2-5]
+\end{tikzcd}}\\~\\
+the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{T_n(C)} & {T_{n-1}(A)} \\
+	{T_n(C')} & {T_{n-1}(A')}
+	\arrow["{\delta_n}", from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow["{\delta_n'}", from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+\end{itemize}
+\end{defn}
+
+
+\pagebreak
+\section{A Second Course on Modules}
+\subsection{The Hom and Tensor Functor}
+\begin{thm}{Tensor-Hom Adjunction}{} Let $R$ be a ring and let $M$ be an $R$-module. Then there is an adjunction $-\otimes_RM:{_R\bold{Mod}}\rightleftarrows{_R\bold{Mod}}:\Hom(M,-)$. Explicitly, there is a natural isomorphism $$\Hom_{_R\bold{Mod}}(-\otimes_RM,-)\cong\Hom_{_R\bold{Mod}}(-,\Hom_{_R\bold{Mod}}(M,-))$$ 
+\end{thm}
+
+More generally, the tensor-hom adjunction is a phenomena that exhibits ${_R}\bold{Mod}$  as a closed monoidal category. 
+
+\begin{prp}{}{} Let $R$ be a ring. Then $({_R}\bold{Mod},\otimes_R,R)$ is a symmetric monoidal category. Moreover, it is a closed monoidal category with internal hom given by the usual hom functor $\text{HOM}_{{_R}\bold{Mod}}(-,-)=\Hom_R(-,-)$. 
+\end{prp}
+
+We have seen that the left and right Hom functors $$\Hom(M,-):{_R\bold{Mod}}\to{_R\bold{Mod}}\;\;\;\;\text{ and }\;\;\;\;\Hom(-,M):{_R\bold{Mod}}\to{_R\bold{Mod}}$$ are left exact functors. Using the tensor-hom adjunction, we can deduce the following. 
+
+\begin{prp}{}{} Let $R$ be a ring and let $M$ be an $R$-module. Then both $$-\otimes_R M:{_R\bold{Mod}}\to{_R\bold{Mod}}\;\;\;\;\text{ and }\;\;\;\;M\otimes_R-:{_R\bold{Mod}}\to{_R\bold{Mod}}$$ are right exact functors. 
+\end{prp}
+
+We find it important to notice the relation between all four functor here. Notice that because there is a canonical isomorphism $M\otimes_RN\cong N\otimes_RM$, we can replace $-\otimes_RM$ in the natural isomorphism $$\Hom_{_R\bold{Mod}}(-\otimes_RM,-)\cong\Hom_{_R\bold{Mod}}(-,\Hom_{_R\bold{Mod}}(M,-))$$ with $M\otimes_R-$. This leaves us with the question: What is the functor $\Hom(-,M)$ adjoint to? The answer is itself! $$\Hom_R(A,\Hom_R(B,C))\cong\Hom(B,\Hom(A,C))$$ Therefore it is more often to discuss $\Hom(M,-)$ in conjunction with $-\otimes_RM$, while $\Hom(-,M)$ is often left behind. \\~\\
+
+\subsection{Projective and Injective Modules}
+Let $R$ be a ring. Recall that an $R$-module $P$ is projective if $\Hom(P,-)$ is an exact functor. 
+
+\begin{lmm}{}{} Every free module is projective. \tcbline
+\begin{proof}
+Let $R$ be a ring and let $F$ be a free $R$-module. Suppose that $F$ has basis $B$. Let $M,N$ be $R$-modules. Suppose that $f:N\to M$ is surjective and there exists an $R$-module homomorphism $g:R^n\to M$. Since $f$ is surjective, for each $b\in B$, we can choose a pre-image for $g(b)$ in $N$ for all $b\in B$. Call it $n_b$. Now define $h:F\to N$ by $b\mapsto n_b$ and then extend it $R$-linearly. Now if $\sum_{b\in B}k_bb\in F$, we have that 
+\begin{align*}
+(f\circ h)\left(\sum_{b\in B}k_bb\right)&=f\left(\sum_{b\in B}k_bh(b)\right)\\
+&=f\left(\sum_{b\in B}k_bn_b\right)\\
+&=f\left(\sum_{b\in B}k_bn_b\right)\\
+&=\sum_{b\in B}k_bf(n_b)\\
+&=\sum_{b\in B}k_bg(b)\\
+&=g\left(\sum_{b\in B}k_bb\right)
+\end{align*}
+so that $f\circ h=g$. Thus $F$ is projective. 
+\end{proof}
+\end{lmm}
+
+\begin{prp}{}{} Let $R$ be a ring. Let $P$ be an $R$-module. Then the following are equivalent. 
+\begin{itemize}
+\item $P$ is projective 
+\item For every surjective homomorphism $f:N\twoheadrightarrow M$ and every $R$-module homomorphism $g:P\to M$, there exists a module homomorphism $h:P\to N$ such that the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+& N\arrow[d, "f", twoheadrightarrow]\\
+P\arrow[ru, "\exists h", dashed]\arrow[r, "g"'] & M
+\end{tikzcd}} \\
+\item $P\oplus Q$ is a free $R$-module for some $R$-module $Q$. 
+\end{itemize} \tcbline
+\begin{proof}~\\
+\begin{itemize}
+\item $(3)\implies(1)$: Suppose that there exists a module $Q$ such that $P\oplus Q$ is free. Let $f:N\to M$ be a surjective $R$-module homomorphism and let $g:P\to M$ be an $R$-module homomorphism. 
+\end{itemize}
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{} Let $R$ be a ring. Let $P_i$ be an $R$-module for each $i\in I$. Then the direct sum $\bigoplus_{i\in I}P_i$ is projective if and only if each $P_i$ is projective. 
+\end{prp}
+
+Now recall that an $R$-module $I$ is injective if $\Hom(-,I)$ is an exact functor. 
+
+\begin{prp}{}{} Let $R$ be a ring. Let $I$ be an $R$-module. Then $I$ is injective if and only if for every injective homomorphism $f:N\rightarrowtail M$ and every module homomorphism $g:N\to I$, there exists a module homomorphism $h:M\to I$ such that the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+N\arrow[d, "f"', rightarrowtail]\arrow[rd, "g"''] &\\
+M\arrow[r, "\exists h"', dashed] & I
+\end{tikzcd}} \\
+\end{prp}
+
+\begin{eg}{}{} Let $k$ be a field. Then every $k$-module is injective. 
+\end{eg}
+
+\begin{eg}{}{} Let $R$ be a DVR. Let $t$ be a uniformizing parameter of $R$. Then $R[1/t]/R$ is an injective $R$-module. 
+\end{eg}
+
+\begin{prp}{Baer's Criterion}{} Let $R$ be a ring. Let $M$ be a left $R$-module. Then $M$ is injective if and only if for every left ideal $I$ of $R$ and $R$-module homomorphism $\phi:I\to M$, there exists a map $\overline{\phi}$ such that the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	I & M \\
+	R
+	\arrow["\phi", from=1-1, to=1-2]
+	\arrow[hook, from=1-1, to=2-1]
+	\arrow["{\exists\overline{\phi}}"', dashed, from=2-1, to=1-2]
+\end{tikzcd}} \\
+\end{prp}
+
+\subsection{Divisible Groups}
+(can be removed to Infinite Abelian Groups)
+
+\begin{defn}{Divisible Groups}{} Let $A$ be an abelian group. Let $n\in\N\setminus\{0\}$. We say that $A$ is $n$-divisible if for all $g\in A$, there exists $h\in A$ such that $nh=g$. 
+\end{defn}
+
+\begin{prp}{}{} Let $A$ be an abelian group. Let $n\in\N\setminus\{0\}$. Then the following are equivalent. 
+\begin{itemize}
+\item $A$ is $n$-divisible. 
+\item $nA=A$. 
+\item $A$ is an injective $\Z$-module. 
+\end{itemize}
+\end{prp}
+
+\begin{defn}{The Prüfer p-Group}{} Let $p$ be a prime. Define the Prüfer p-Group to be the quotient group $$\Z(p^\infty)=\frac{\Z[1/p]}{\Z}$$
+\end{defn}
+
+\begin{eg}{}{} The following are divisible groups. 
+\begin{itemize}
+\item $\Q$. 
+\item $\Z[1/p]/\Z$. 
+\end{itemize}
+\end{eg}
+
+\begin{thm}{Structure Theorem for Divisible Groups}{} Let $A$ be an abelian group. If $A$ is divisible, then there is an isomorphism $$A\cong\left(\bigoplus_{p\text{ is prime}}\frac{\Z[1/p]}{\Z}^{k_p}\right)\oplus\Q^I$$ for some choice of indexing sets $I$ and some $k_p\in\N$. 
+\end{thm}
+
+\subsection{Flat Modules}
+While projective modules allows the exactness of $\Hom(M,-)$, flat modules allows the exactness of $-\otimes_RM$. 
+
+\begin{defn}{Flat Modules}{} Let $R$ be a ring. An $R$-module $M$ is said to be flat if for every injective linear map $\phi:K\to L$ of $R$-modules, the map $$\phi\otimes\text{id}_M:K\otimes_RM\to L\otimes_RM$$ is also injective. 
+\end{defn}
+
+\begin{prp}{}{} Let $R$ be a ring and $M$ an $R$-module. Then $M$ is a flat module if and only if for every short exact sequence $0\to K\to L\to J\to 0$, the sequence $$0\to K\otimes_RM\to L\otimes_RM\to J\otimes_RM\to 0$$ is also exact. 
+\end{prp}
+
+\begin{prp}{}{} Let $R$ be a ring. Then the following are true. 
+\begin{itemize}
+\item Product: If $A$ and $B$ are flat over $R$ then $A\otimes_R B$ is flat over $R$
+\item Base Change: Let $S$ be an $R$-algebra ($R\to S$ a ring hom). Then $M\otimes_RS$ is flat over $S$ for any flat $R$-module $M$
+\item Transitivity: Let $S$ be an $R$-algebra such that $S$ is flat over $R$. If $C$ is flat over $S$ then $C$ is flat over $R$. 
+\end{itemize}
+\end{prp}
+
+We have the following inclusion of modules $$\text{Free Modules}\subset\text{Projective Modules}\subset\text{Flat Modules}\subset\text{Torsion Free Modules}$$ It is important to note that the ``duality'' between projective and injective modules is given from the bifunctor $\Hom(-,-)$ while the ``duality'' given between projective and flat modules is given by the tensor-hom adjunction. 
+
+\subsection{Finitely Presented Modules}
+\begin{defn}{Finitely Presented Modules}{} Let $R$ be a ring. Let $M$ be a left $R$-module. We say that $M$ is finitely presented if there exists an exact sequence of the form \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{R^m} & {R^n} & M & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+\end{tikzcd}} \\
+\end{defn}
+
+\begin{lmm}{}{} Let $R$ be a ring. Let $M$ be a left $R$-module. If $M$ is finitely presented, then $M$ is finitely generated. 
+\end{lmm}
+
+\begin{prp}{}{} Let $R$ be a ring. Let the following be an exact sequence of left $R$-modules. \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & M_1 & M_2 & M_3 & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["f", from=1-2, to=1-3]
+	\arrow["g", from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\~\\
+Then the following are true. 
+\begin{itemize}
+\item If $M_1$ and $M_3$ are finitely presented, then $M_2$ is finitely presented. 
+\item If $M_2$ is finitely presented and $M_1$ is finitely generated, then $M_3$ is finitely presented. 
+\item If $M_2$ is finitely generated and $M_3$ is finitely presented, then $M_1$ is finitely generated. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{} Let $R$ be a commutative ring. Let $S$ be an $R$-algebra. Let $M,N$ be left $R$-modules. If $S$ is flat over $R$ and $M$ is finitely presented, then there is an isomorphism $$S\otimes_R\Hom_R(M,N)\cong\Hom_S(S\otimes_RM,S\otimes_RN)$$
+\end{prp}
+
+\subsection{Derived Functors in the Category of R-Modules}
+\begin{defn}{The Ext Functor}{} Let $R$ be a ring and let $A$ be an $R$-module. Define the right derived functor of the left exact functor $\Hom(A,-):{_R\bold{Mod}}\to\bold{Ab}$ to be $$\text{Ext}_R^i(A,-)=R^i(\Hom(A,-)):{_R\bold{Mod}}\to\bold{Ab}$$ 
+\end{defn}
+
+Explicitly, for $$0\to A\to I^0\to I^1\to\cdots$$ an injective resolution, form the cochain complex $$0\to\Hom_R(A,I^0)\to\Hom_R(A,I^1)\to\cdots$$ and define $\text{Ext}$ to be the cohomology group $$\text{Ext}_R^i(A,B)=\frac{\ker(\Hom_R(A,I^i)\to\Hom_R(A,I^{i+1}))}{\im(\Hom_R(A,I^{i-1})\to\Hom_R(A,I^i))}$$~\\
+
+Notice how although $A$ is viewed as a fixed $R$-module, it is written as if it was a variable for the functor $\text{Ext}$. Indeed, we can define the Ext functor in another manner. 
+
+\begin{thm}{}{} Let $R$ be a ring and let $A,B$ be $R$-modules. Then there is an isomorphism $$\text{Ext}_R^i(A,B)=R^i(\Hom(A,-))(B)\cong R^i(\Hom(-,B))(A)$$ that is natural in $A$ and $B$. 
+\end{thm}
+
+\begin{thm}{}{} Let $A,B$ be $R$-modules. Then the following are true regarding the Ext group. 
+\begin{itemize}
+\item $\text{Ext}_R^0(A,B)\cong\Hom_R(A,B)$
+\item $\text{Ext}_R^i(A,B)=0$ for all $i>0$ if $A$ is projective or $B$ is injective
+\item $\text{Ext}_R^i(A,B)=0$ for all $i\geq 2$ if $A,B$ are $\Z$-modules. 
+\end{itemize}
+\end{thm}
+
+\begin{defn}{The Tor Functor}{} Let $R$ be a ring and let $B$ be an $R$-module. Define the left derived functor of the right exact functor $-\otimes_RB:{ _R\bold{Mod}}\to{_R\bold{Mod}}$ to be $$\text{Tor}_i^R(-,B)=L_i(-\otimes_RB):{_R\bold{Mod}}\to\bold{Ab}$$ 
+\end{defn}
+
+Explicitly, for $$\cdots\to P_1\to P_0\to B\to 0$$ an injective resolution, form the chain complex $$\cdots\to P_1\otimes_RB\to P_0\otimes_RB\to 0$$ and define $\text{Tor}$ to be the homology group $$\text{Tor}_i^R(A,B)=\frac{\ker(P_i\otimes_RB\to P_{i-1}\otimes_RB)}{\im(P_{i+1}\otimes_RB\to P_i\otimes_RB)}$$
+
+\begin{thm}{}{} Let $R$ be a ring and let $A,B$ be $R$-modules. Then there is an isomorphism $$\text{Tor}_i^R(A,B)=L_i(-\otimes_RB)(A)\cong L_i(A\otimes_R-)(B)$$ that is natural in $A$ and $B$. 
+\end{thm}
+
+\subsection{Extensions and Torsions}
+\begin{defn}{Extensions}{} Let $R$ be a ring. Let $M,N$ be $R$-modules. An extension of $M$ by $N$ is a short exact sequence \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+0\arrow[r] & N\arrow[r] & E\arrow[r] & M\arrow[r] & 0
+\end{tikzcd}} \\~\\
+of $R$-modules. 
+\end{defn}
+
+\begin{defn}{Equivalent Extensions}{} Let $R$ be a ring. Let $M,N$ be $R$-modules. We say that two extensions \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & N & E & M & 0 \\
+	0 & N & F & M & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-3, to=2-4]
+	\arrow[from=2-4, to=2-5]
+\end{tikzcd}} \\~\\
+are equivalent if there exists an $R$-module homomorphism $\phi:E\to F$ such that the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & N & E & M & 0 \\
+	0 & N & F & M & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow["{\text{id}_N}", from=1-2, to=2-2]
+	\arrow[from=1-3, to=1-4]
+	\arrow["\phi", from=1-3, to=2-3]
+	\arrow[from=1-4, to=1-5]
+	\arrow["{\text{id}_M}", from=1-4, to=2-4]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-3, to=2-4]
+	\arrow[from=2-4, to=2-5]
+\end{tikzcd}} \\~\\
+\end{defn}
+
+\begin{prp}{}{} Let $R$ be a ring. Let $M,N$ be $R$-modules. Suppose that the following two extensions are equivalent: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & N & E & M & 0 \\
+	0 & N & F & M & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow["{\text{id}_N}", from=1-2, to=2-2]
+	\arrow[from=1-3, to=1-4]
+	\arrow["\phi", from=1-3, to=2-3]
+	\arrow[from=1-4, to=1-5]
+	\arrow["{\text{id}_M}", from=1-4, to=2-4]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-3, to=2-4]
+	\arrow[from=2-4, to=2-5]
+\end{tikzcd}} \\~\\
+Then $\phi$ is an isomorphism. Moreover, equivalent extensions is an equivalence relation. 
+\end{prp}
+
+\begin{defn}{Split Extensions}{} Let $R$ be a ring. Let $M,N$ be $R$-modules. We say that an extension splits if it is equivalent to the following extension \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+0\arrow[r] & N\arrow[r] & N\oplus M\arrow[r] & M\arrow[r] & 0
+\end{tikzcd}} \\~\\
+of $R$-modules. The above extension is called a trivial extension. 
+\end{defn}
+
+\begin{thm}{}{} Let $R$ be a ring. Let $M,N$ be $R$-modules. There is a bijection $$\frac{\{\text{Extensions of }M\text{ by }N\}}{\cong}\;\;\;\;\overset{1:1}{\longleftrightarrow}\;\;\;\;\text{Ext}_R^1(M,N)$$ where $\cong$ means equivalence of extensions. Moreover, the trivial extension corresponds to the zero element of $\text{Ext}_R^1(M,N)$. 
+\end{thm}
+
+\pagebreak
+\section{(Co)Homology Theories for Rings}
+\subsection{Koszul Complexes}
+The following definitions requires the use of central elements. Recall that when $R$ is commutative, this condition is null and so we can choose any element in $R$. 
+
+\begin{defn}{Koszul Complexes}{} Let $R$ be a ring. Let $x\in Z(R)$ be a central element. Define the Koszul complex $K(x)$ of $x$ in $R$ to be the chain complex \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & R & R & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["x", from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+\end{tikzcd}} \\~\\
+\end{defn}
+
+\begin{defn}{Generalized Koszul Complexes}{} Let $R$ be a ring. Let $x_1,\dots,x_n\in Z(R)$ be central elements. Define the generalized Koszul complex $K(x_1,\dots,x_n)$ of $x_1,\dots,x_n$ in $R$ to be the chain complex given by $$K(x_1,\dots,x_n)=\text{Tot}^\oplus\left(K(x_1)\otimes_R\cdots\otimes_R K(x_n)\right)$$ If $M$ is an $R$-module, define the generalized Koszul complex of $M$ to be $$K(x_1,\dots,x_n;M)=K(x_1,\dots,x_n)\otimes_R M$$
+\end{defn}
+
+\begin{prp}{}{} Let $R$ be a ring. Let $x_1,\dots,x_n\in Z(R)$ be central elements. Then there is an isomorphism $$\bigwedge_{i=1}^kR^n\cong K(x_1,\dots,x_n)_k$$ given on the basis elements by $$e_{i_1}\wedge\cdots\wedge e_{i_k}\mapsto1\otimes\cdots\otimes 1\otimes e_{i_1}\otimes\cdots\otimes e_{i_k}\otimes 1\otimes\cdots\otimes 1$$
+\end{prp}
+
+\begin{thm}{}{} Let $R$ be a ring. Let $x_1,\dots,x_n\in Z(R)$ be central elements. Then the Koszul complex $K(x_1,\dots,x_n)$ is given explicitly as \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {\bigwedge_{i=1}^nR^n} & {\bigwedge_{i=1}^{n-1}R^n} & \cdots & {R^n} & R & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["{d_n}", from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+	\arrow["{d_1}", from=1-5, to=1-6]
+	\arrow[from=1-6, to=1-7]
+\end{tikzcd}}\\~\\
+where the differential $d_k:\bigwedge_{i=1}^kR^n\to\bigwedge_{i=1}^{k-1}R^n$ is given on basis elements by $$d(e_{i_1}\wedge\cdots\wedge e_{i_k})=\sum_{j=1}^k(-1)^{j+1}x_{i_j}e_{i_1}\wedge\cdots\wedge\hat{e}_{i_j}\wedge\cdots\wedge e_{i_k}$$ where $e_1,\dots,e_n\in R^n$ are the standard generators of $R^n$. 
+\end{thm}
+
+For an example, let $R$ be a commutative ring. Let $x,y\in R$. Then the Koszul complex $K(x,y)$ is given by \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {R^2\wedge R^2} & {R^2} & R & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\~\\
+The differentials are given as follows. 
+\begin{itemize}
+\item The first differential $R^2\to R$ is given by $(r,s)\mapsto rx+sy$. It can also be given as a $1\times 2$ matrix as $\begin{pmatrix}x & y\end{pmatrix}$. Also alternatively, we can write an $R$-basis for $R^2$ with $(1,0)$ and $(0,1)$. Then define the map $R^2\to R$ by $(1,0)\mapsto x$ and $(0,1)\mapsto y$. 
+\item Now recall that $R^2\wedge R^2$ has $R$-basis given by $(1,0)\wedge(0,1)$ and so there is an isomorphism $R^2\wedge R^2\cong R$. Then the second differential $R\to R^2$ is given by $1\mapsto(x,-y)$. 
+\end{itemize}
+
+\begin{defn}{Koszul (Co)Homology}{} Let $R$ be a ring. Let $x_1,\dots,x_n\in Z(R)$ be central elements. Let $M$ be an $R$-module. Define the Koszul homology of $M$ with respect to $x_1,\dots,x_n$ by $$H_k^\text{Kos}(x_1,\dots,x_n;M)=H_k(K(x_1,\dots,x_n;M))$$ Define the Koszul cohomology of $M$ with respect to the central elements by $$H_\text{Kos}^k(x_1,\dots,x_n;M)=H^k(\Hom_R(K(x_1,\dots,x_n)),M)$$
+\end{defn}
+
+\begin{lmm}{}{} Let $R$ be a ring. Let $x_1,\dots,x_n\in Z(R)$ be central elements. Let $M$ be an $R$-module. Then the following are true. 
+\begin{itemize}
+\item $H_0^\text{Kos}(x_1,\dots,x_n;M)=\frac{M}{(x_1,\dots,x_n)M}$
+\item $H_\text{Kos}^0(x_1,\dots,x_n;M)=\{m\in M\;|\;x_im=0\text{ for all }i\}$
+\end{itemize}
+\end{lmm}
+
+\begin{thm}{Kunneth Theorem}{} Let $R$ be a ring. Let $x_1,\dots,x_n\in R$ be central elements. Let $C_\bullet$ be a chain complex of $R$-modules. Then there is an exact sequence given by \\~\\
+\adjustbox{scale=0.9,center}{\begin{tikzcd}
+	0 & {H_0(x_1,\dots,x_n;H_q(C_\bullet))} & {H_q^\text{Tot}(K(x_1,\dots,x_n)\otimes_RC_\bullet)} & {H_1(x_1,\dots,x_n;H_{q-1}(C_\bullet))} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}
+\end{thm}
+
+\begin{thm}{Self Duality of the Koszul Complex}{} Let $R$ be a ring. Let $x_1,\dots,x_n\in Z(R)$ be central elements. Let $M$ be a left $R$-module. Then there is a natural isomorphism of chain complexes $$\Hom(K(x_1,\dots,x_n);M)\cong K(x_1,\dots,x_n;M)$$
+\end{thm}
+
+The self duality of the Koszul complex means that we could have equally defined the differential to be going up the chain instead of down. In this case, the complex can be defined as \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {\bigwedge_{i=1}^nR^n} & {\bigwedge_{i=1}^{n-1}R^n} & \cdots & {R^n} & R & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["{d_n}", from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+	\arrow["{d_1}", from=1-5, to=1-6]
+	\arrow[from=1-6, to=1-7]
+\end{tikzcd}}\\~\\
+where the differential $d_k:\bigwedge_{i=1}^{k-1}R^n\to\bigwedge_{i=1}^kR^n$ is now defined by $$d(e_{i_1}\wedge\cdots\wedge e_{i_{k-1}})=\sum_{j=1}^nx_je_j\wedge e_{i_1}\wedge\cdots\wedge e_{i_{k-1}}$$
+
+\begin{crl}{}{} Let $R$ be a ring. Let $x_1,\dots,x_n\in Z(R)$ be central elements. Let $M$ be a left $R$-module. Then there is an isomorphism $$H_p^\text{Kos}(x_1,\dots,x_n;M)\cong H_{\text{Kos}}^{n-p}(x_1,\dots,x_n;M)$$
+\end{crl}
+
+\subsection{Local Cohomology}
+
+\pagebreak
+\section{Spectral Sequences}
+\subsection{General Spectral Sequences}
+\begin{defn}{Homological Spectral Sequences}{} Let $\mA$ be an abelian category. A homological spectral sequence consists of the following data.  
+\begin{itemize}
+\item A collection of objects $E_{\bullet,\bullet}^r=\{E_{p,q}^r\in\mA\;|\;p,q\in\Z\}$ called pages for each $r\in\N$. So that there is a sequence $$E_{\bullet,\bullet}^1,E_{\bullet,\bullet}^2,E_{\bullet,\bullet}^3,\dots$$ of family of objects
+\item A degree $(p,q)$ map $$d_{p,q}^r:E_{p,q}^r\to E_{p-r,q+r-1}^r$$ for each $p,q\in\Z$ and $r\in\N$ such that $d^r\circ d^r=0$
+\item Isomorphisms of the form $E_{\bullet,\bullet}^{r+1}=H_\bullet(E_{\bullet,\bullet}^r,d^r)$. This means that $$E_{p,q}^{r+1}=\frac{\ker(d^r:E_{p,q}^r\to E_{p-r,q+r-1}^r)}{\im(d^r:E_{p+r,q-r+1}^r\to E_{p,q}^r)}$$
+\end{itemize}
+We say that the total degree of $E_{p,q}^r$ is $n=p+q$. 
+\end{defn}
+
+\begin{defn}{Cohomological Spectral Sequences}{} Let $\mA$ be an abelian category. A cohomological spectral sequence consists of the following data.  
+\begin{itemize}
+\item A collection of objects $E_r^{\bullet,\bullet}=\{E_r^{p,q}\in\mA\;|\;p,q\in\Z\}$ called pages for each $r\in\N$. So that there is a sequence $$E_1^{\bullet,\bullet},E_2^{\bullet,\bullet},E_3^{\bullet,\bullet},\dots$$ of family of objects
+\item A degree $(p,q)$ map $$d_r^{p,q}:E_r^{p,q}\to E_r^{p-r,q+r-1}$$ for each $p,q\in\Z$ and $r\in\N$ such that $d_r\circ d_r=0$
+\item Isomorphisms of the form $E_{r+1}^{\bullet,\bullet}=H^\bullet(E_r^{\bullet,\bullet},d_r)$. This means that $$E_{r+1}^{p,q}=\frac{\ker(d_r:E_r^{p,q}\to E_r^{p-r,q+r-1})}{\im(d_r:E_r^{p+r,q-r+1}\to E_r^{p,q})}$$
+\end{itemize}
+\end{defn}
+
+Notice that cohomological spectral sequences are really the same thing as homological spectral sequences, just reindex the objects by $E_r^{p,q}=E_{-p,-q}^r$. 
+
+\begin{defn}{Bounded Spectral Sequences}{} Let $(E_{\bullet,\bullet}^r,d^r)$ be a homological spectral sequence. We say that it is bounded if for each $n\in\N$, there are only finitely many non-zero terms of total degree $n$ in $E_{\bullet,\bullet}^r$ for each $r\in\N$. \\~\\
+
+We say that it is bounded below if there exists $s_n\in\Z$ for each $n\in\N$ such that terms $E_{\bullet,\bullet}^r$ of total degree $n$ are $0$ for all $p<s$. 
+\end{defn}
+
+\begin{lmm}{}{} Let $(E_{\bullet,\bullet}^r,d^r)$ be a bounded homological spectral sequence. Then for each $(p,q)\in\Z^2$, there exists $r_0\in\N$ such that $E_{p,q}^{r+1}\cong E_{p,q}^r$ for all $r\geq r_0$. 
+\end{lmm}
+
+\begin{defn}{Stable Values}{} Let $(E_{\bullet,\bullet}^r,d^r)$ be a bounded homological spectral sequence. Let $(p,q)\in\Z^2$ and $r_0\in\N$ such that $E_{p,q}^{r+1}=E_{p,q}^r$ for all $r\geq r_0$. Define the stable values of the sequence to be $$E_{p,q}^\infty=E_{p,q}^{r_0}$$
+\end{defn}
+
+\subsection{The Spectral Sequence of Exact Couples}
+\begin{defn}{Exact Couple}{} An exact couple consists of bigraded abelian groups $E_{\bullet,\bullet}$ and $A_{\bullet,\bullet}$ and maps $i:A_{\bullet,\bullet}\to A_{\bullet,\bullet}$ of degree $(a,a')$, $j:A_{\bullet,\bullet}\to E_{\bullet,\bullet}$ of degree $(b,b')$ and $k:E_{\bullet,\bullet}\to A_{\bullet,\bullet}$ of degree $(c,c')$ such that the triangle \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{A_{\bullet,\bullet}} && {A_{\bullet,\bullet}} \\
+	& {E_{\bullet,\bullet}}
+	\arrow["i", from=1-1, to=1-3]
+	\arrow["j", from=1-3, to=2-2]
+	\arrow["k", from=2-2, to=1-1]
+\end{tikzcd}}\\~\\
+is exact at each vertex ($\im(i)=\ker(j)$ and so on). We write the exact couple as $(A,E,i,j,k)$. 
+\end{defn}
+
+Notice that this actually just the data of a long exact sequence. If we look at what happens nearby $E_{p,q}$, we see that we can expand out the triangle ad infinum: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\cdots & {A_{p-a,q-a'}} & {E_{p,q}} & {A_{p+a,q+a'}} & {A_{p+a+b,q+a'+b'}} & \cdots
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+	\arrow[from=1-5, to=1-6]
+\end{tikzcd}}\\~\\
+
+\begin{defn}{Derived Couple}{} Suppose that there is an exact couple of the form \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{A_{\bullet,\bullet}} && {A_{\bullet,\bullet}} \\
+	& {E_{\bullet,\bullet}}
+	\arrow["i", from=1-1, to=1-3]
+	\arrow["j", from=1-3, to=2-2]
+	\arrow["k", from=2-2, to=1-1]
+\end{tikzcd}}\\~\\ for some gradation of $i,j,k$. Define the derived couple with the following data. Write $d=j\circ k$. 
+\begin{itemize}
+\item For each $p,q\in\Z$, define $$E_{p,q}'=\frac{\ker(d:E_{p,q}\to E_{p+c+b,q+c'+b'})}{\im(d:E_{p-c-b,q-c'-b'}\to E_{p,q})}$$ so that $E_{\bullet,\bullet}'$ is bigraded. 
+\item For each $p,q\in\Z$, define $$A_{p,q}'=\im(i:A_{p,q}\to A_{p+a,q+a'})$$ so that $A_{\bullet,\bullet}'$ is bigraded. 
+\item For each $p,q\in\Z$, define $$i':A_{p,q}'\subseteq A_{p+a,q+a'}\to A_{p+a,q+a}'\subseteq A_{p+2a,q+2a'}$$ by $i'=i|_{A_{p,q}'}$. We simplify and write it as $i':A_{\bullet,\bullet}'\to A_{\bullet,\bullet}'$
+\item For each $p,q\in\Z$, define $$j':A'_{p-b,q-b'}\to E_{p,q}'$$ as follows. For all $i(t)\in A_{p-b,q-b'}'$ where $t\in A_{p-b,q-b'}$, $j'(i(t))=[j(t)]\in E_{p,q}'$. We simplify and write it as $j':A_{\bullet,\bullet}'\to E_{\bullet,\bullet}'$
+\item For each $p,q\in\Z$, define $$k':E_{p,q}'\to A_{p+c,q+c'}'$$ as follows. For all $[e]\in E_{p,q}'$, $k'([e])=k(e)$. We simplify and write it as $k':E_{\bullet,\bullet}'\to A_{\bullet,\bullet}'$
+\end{itemize}
+We write the derived couple as $(A^1,E^1,i^1,j^1,k^1)$
+\end{defn}
+
+\begin{thm}{}{} The derived couple of any exact couple is also an exact couple with the same grading of maps. 
+\end{thm}
+
+\begin{thm}{}{} Let $(A,E,i,j,k)$ be an exact couple. Then $E,E^1,E^2,\dots$ together with maps $d^r=j^r\circ k^r$ for $r\in\N$ defines a homological spectral sequence. 
+\end{thm}
+
+\subsection{The Spectral Sequence of Filtrations}
+\begin{defn}{Filtered Chain Complexes}{} Let $\mA$ be an abelian category. Let $C\in\bold{Ch}(\mA)$ be a chain complex. A filtered chain complex is a sequence of subchain complexes of $C$ with inclusions $$\cdots\subseteq F_pC\subseteq F_{p+1}C\subseteq\cdots$$ such that the boundary map $d:C_n\to C_{n-1}$ of $C$ has the property that $$d(F_pC_n)\subseteq F_pC_{n-1}$$
+\end{defn}
+
+\begin{defn}{Exhaustive Filtered Chain Complexes}{} Let $\mA$ be an abelian category. Let $C\in\bold{Ch}(\mA)$ be a chain complex. A filtered chain complex $F_pC$ is said to be exhaustive if $\bigcup_{p\in\Z}F_pC=C$. 
+\end{defn}
+
+\begin{defn}{Spectral Sequence Arising from Filtered Chain Complexes}{} Let $\mA$ be an abelian category. Let $(C_\bullet,d_\bullet)\in\bold{Ch}(\mA)$ be a chain complex. Let $F_pC$ be a filtered chain complex that is exhaustive. Define the following objects and subobjects in $\mA$. 
+\begin{itemize}
+\item Define an object $E_{p,q}^0=\frac{F_pC_{p+q}}{F_{p-1}C_{p+q}}$ and a chain complex $E_p^0=\frac{F_pC}{F_{p-1}C}$. 
+\item For each $p,r\in\N$, define $$A_p^r=\{c\in F_pC\;|\;d(c)\in F_{p-r}C\}$$ called approximately cycles
+\item Write $\eta_p:F_pC\to\frac{F_pC}{F_{p-1}C}=E_p^0$ for the sujection, which is a chain map. 
+\item For each $p,r\in\N$, define $$Z_p^r=\eta_p(A_p^r)\subseteq E_p^0$$
+\item For each $p,r\in\N$, define $$B_{p-r}^{r+1}=\eta_{p-r}(d(A_p^r))\subseteq E_{p-r}^0$$
+\item For each $p\in\N$, define $$Z_p^\infty=\bigcap_{r=1}^\infty Z_p^r\;\;\;\;\text{ and }\;\;\;\; B_p^\infty=\bigcup_{r=1}^\infty B_p^r$$
+\end{itemize}
+Evidently, there is a tower of subobjects of $E_p^0$ given by $$0=B_p^0\subseteq B_p^1\subseteq\cdots B_p^\infty\subseteq Z_p^\infty\subseteq\cdots Z_p^1\subseteq Z_p^0=E_p^0$$ Thus we finally define $$E_p^r=\frac{Z_p^r}{B_p^r}\;\;\;\text{ for all }r\in R\;\;\;\;\text{ and }\;\;\;\;E_p^\infty=\frac{Z_p^\infty}{B_p^\infty}$$ together with $d:E_p^r\to E_{p-r}^r$ to be the differential induced by the differential of $C$. 
+\end{defn}
+
+\begin{lmm}{}{} Let $\mA$ be an abelian category. Let $(C_\bullet,d_\bullet)\in\bold{Ch}(\mA)$ be a chain complex. Let $F_pC$ be a filtered chain complex that is exhaustive. Then the following are true. 
+\begin{itemize}
+\item For any $p,r\in\N$, $A_p^r+F_{p-1}C=A_{p-1}^{r-1}$
+\item For any $p,r\in\N$, $Z_p^r\cong A_p^r/A_{p-1}^{r-1}$
+\item For any $p,r\in\N$, there are isomorphisms $$E_p^r=\frac{Z_p^r}{B_p^r}\cong\frac{A_p^r+F_{p-1}C}{d(A_{p+r-1}^{r-1})+F_{p-1}C}\cong\frac{A_p^r}{d(A_{p+r-1}^{r-1})+A_{p-1}^{r-1}}$$
+\end{itemize}
+\end{lmm}
+
+\begin{thm}{}{} Let $\mA$ be an abelian category. Let $(C_\bullet,d_\bullet)\in\bold{Ch}(\mA)$ be a chain complex. Let $F_pC$ be a filtered chain complex that is exhaustive. Then the map $d:E_p^r\to E_{p-r}^r$ determines an isomorphism $$\frac{Z_p^r}{Z_p^{r+1}}\cong\frac{B_{p-r}^{r+1}}{B_{p-r}^r}$$ Moreover, this concludes that $(E_{p,q}^r,d)$ is a spectral sequence. 
+\end{thm}
+
+\subsection{Convergence}
+\begin{defn}{Weakly Convergent}{} Let $(E_{\bullet,\bullet}^r,d^r)$ be a spectral sequence. We say that it is weakly convergent if there is a graded object $H_\bullet$ together with an exhaustive filtration $F_\bullet H_n$ for every $n\in\N$, together with isomorphisms $$\beta_{p,q}:E_{p,q}^\infty\overset{\cong}{\longrightarrow}\frac{F_pH_{p+q}}{F_{p-1}H_{p+q}}$$
+\end{defn}
+
+\begin{defn}{Convergent Spectral Sequences}{} Let $(E_{\bullet,\bullet}^r,d^r)$ be a spectral sequence. We say that it is convergent if the following are true. 
+\begin{itemize}
+\item It is weakly convergent with filtrations $F_\bullet H_n$ for each $n\in\N$
+\item $\bigcap_{k=0}^\infty F_kH_\bullet=0$
+\end{itemize}
+\end{defn}
+
+
+\subsection{The Spectral Sequence of Double Complexes}
+
+\subsection{Hyperhomology and Hypercohomology}
+\begin{defn}{Cartan-Eilenberg Resolution}{} Let $\mA$ be an abelian category with enough projectives. Let $A_\bullet\in\bold{Ch}(\mA)$ be a chain complex as follows: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\cdots & {A_{p-1}} & {A_p} & {A_{p+1}} & \cdots
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\~\\
+A Cartan-Eilenberg resolution of $A_\bullet$ is an upper half double complex $P_{\bullet,\bullet}$ together with augmentation maps $\varepsilon:P_{P,\bullet}\to A_p$ as follows: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	& \vdots & \vdots & \vdots \\
+	\cdots & {P_{p-1,1}} & {P_{p,1}} & {P_{p+1,1}} & \cdots \\
+	\cdots & {P_{p-1,0}} & {P_{p,0}} & {P_{p+1,0}} & \cdots \\
+	\cdots & {A_{p-1}} & {A_p} & {A_{p+1}} & \cdots
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=1-3, to=2-3]
+	\arrow[from=1-4, to=2-4]
+	\arrow[from=2-2, to=2-1]
+	\arrow[from=2-2, to=3-2]
+	\arrow[from=2-3, to=2-2]
+	\arrow[from=2-3, to=3-3]
+	\arrow[from=2-4, to=2-3]
+	\arrow[from=2-4, to=3-4]
+	\arrow[from=2-5, to=2-4]
+	\arrow[from=3-2, to=3-1]
+	\arrow["\varepsilon", from=3-2, to=4-2]
+	\arrow[from=3-3, to=3-2]
+	\arrow["\varepsilon", from=3-3, to=4-3]
+	\arrow[from=3-4, to=3-3]
+	\arrow["\varepsilon", from=3-4, to=4-4]
+	\arrow[from=3-5, to=3-4]
+	\arrow[from=4-2, to=4-1]
+	\arrow[from=4-3, to=4-2]
+	\arrow[from=4-4, to=4-3]
+	\arrow[from=4-5, to=4-4]
+\end{tikzcd}}\\~\\
+such that the following are true. 
+\begin{itemize}
+\item If $A_p=0$ then $P_{p,\bullet}=0$
+\item For each $p\in\Z$, the chain complex $(B_\bullet,d^v)$ of boundaries where $B_q=d^h(P_{p+1,q})$ form a projective resolution of $A_p$. This means that the vertical chain complexes \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\vdots \\
+	{d^h(P_{p,0})\subseteq P_{p,1}} \\
+	{d^h(P_{p+1,0})\subseteq P_{p,0}} \\
+	{A_p}
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=2-1, to=3-1]
+	\arrow["\varepsilon", from=3-1, to=4-1]
+\end{tikzcd}}\\~\\
+are projective resolutions. 
+\item For each $p\in\Z$, the chain complex $(H_\bullet,d^v)$ of the homology groups where $$H_q=H_p(P_{\bullet,q},d^h)$$ form a projective resolution of $H_p(A_\bullet)$. This means that the vertical chain complexes \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\vdots \\
+	{H_p(P_{\bullet,1},d^h)} \\
+	{H_p(P_{\bullet,0},d^h)} \\
+	{H_p(A_\bullet)}
+	\arrow[from=1-1, to=2-1]
+	\arrow["{d^v}", from=2-1, to=3-1]
+	\arrow["\varepsilon", from=3-1, to=4-1]
+\end{tikzcd}}\\~\\
+are projective resolutions. 
+\end{itemize}
+\end{defn}
+
+\begin{thm}{}{} Let $\mA$ be an abelian category. Then every chain complex $A_\bullet\in\bold{Ch}(\mA)$ has a Cartan-Eilenberg resolution $P_{\bullet,\bullet}\to A_\bullet$. 
+\end{thm}
+
+\begin{defn}{Left Hyperderived Functors}{} Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a right exact functor. Define the left hyperderived functors $$\L_i F:\bold{Ch}(\mA)\to\mB$$ by the following. 
+\begin{itemize}
+\item For $A_\bullet$ a chain complex in $\mA$, choose a Cartan-Eilenberg resolution $P_{\bullet,\bullet}\to A_\bullet$ of $A_\bullet$. Then $$\L_i F(A_\bullet)=H_i(\text{Tot}^\oplus(F(P_{\bullet,\bullet})))$$
+\item For $f:A_\bullet\to B_\bullet$ a chain map, choose Cartan-Eilenberg resolutions for both complexes and consider the induced map $\overline{f}:P_{\bullet,\bullet}\to Q_{\bullet,\bullet}$. Define $$\L_i F(f)=H_i(\text{Tot}^\oplus(\overline{f})):\L_iF(A_\bullet)\to\L_iF(B_\bullet)$$
+\end{itemize}
+\end{defn}
+
+
+\begin{defn}{Right Hyperderived Functors}{} Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a left exact functor. Define the right hyperderived functors $$\R^i F:\bold{CCh}(\mA)\to\mB$$ by the following. 
+\begin{itemize}
+\item For $A_\bullet$ a cochain complex in $\mA$, choose a Cartan-Eilenberg resolution $A_\bullet\to I_{\bullet,\bullet}$ of $A_\bullet$. Then $$\R^i F(A_\bullet)=H^i(\text{Tot}^\oplus(F(I_{\bullet,\bullet})))$$
+\item For $f:A_\bullet\to B_\bullet$ a chain map, choose Cartan-Eilenberg resolutions for both complexes and consider the induced map $\overline{f}:I_{\bullet,\bullet}\to J_{\bullet,\bullet}$. Define $$\R^i F(f)=H^i(\text{Tot}^\oplus(\overline{f})):\R^iF(A_\bullet)\to\R^iF(B_\bullet)$$
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{} Let $\mA$ and $\mB$ be abelian categories. Let $X\in\mA$ be an object. Then the following are true. 
+\begin{itemize}
+\item Let $F:\mA\to\mB$ be right exact. By considering $X$ as a chain complex with only non-zero term in degree $0$, the hyperderived left functor $\L_i F(X)=L_iF(X)$ is the same as the usual left derived functor. 
+\item Let $F:\mA\to\mB$ be left exact. By considering $X$ as a cochain complex with only non-zero term in degree $0$, the hyperderived right functor $\R^iF(X)=R^iF(X)$ is the same as the usual right derived functor. 
+\end{itemize}
+\end{lmm}
+
+\begin{lmm}{}{} Let $\mA$ and $\mB$ be abelian categories. Then the following are true. 
+\begin{itemize}
+\item Let $F:\mA\to\mB$ be right exact. Then the restriction of $\L_i F:\bold{Ch}(\mA)\to\mB$ to $\bold{Ch}^+(\mA)$ are precisely the left derived functor $L_i (H_0F):\bold{Ch}^+(\mA)\to\mB$ of the functor $H_0F:\bold{Ch}(\mA)^+\to\mB$. 
+\item Let $F:\mA\to\mB$ be left exact. Then the restriction of $\R^i F:\bold{CCh}(\mA)\to\mB$ to $\bold{CCh}^+(\mA)$ are precisely the left derived functor $R^i (H^0F):\bold{CCh}^+(\mA)\to\mB$ of the functor $H^0F:\bold{CCh}(\mA)^+\to\mB$. 
+\end{itemize}
+\end{lmm}
+
+\begin{lmm}{}{} Let $\mA$ and $\mB$ be abelian categories. Let the following \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & A & B & C & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\~\\
+be a short exact sequence of chain complexes in $\bold{Ch}^+(\mA)$. Let $F:\mA\to\mB$ be right exact. Then there exists a long exact sequence \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\cdots & {\L_{i+1}F(C)} & {\L_iF(A)} & {\L_iF(B)} & {\L_iF(C)} & {\L_{i-1}F(A)} & \cdots
+	\arrow[from=1-1, to=1-2]
+	\arrow["\delta", from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+	\arrow["\delta", from=1-5, to=1-6]
+	\arrow[from=1-6, to=1-7]
+\end{tikzcd}}\\~\\
+\end{lmm}
+
+\begin{prp}{}{} There is always a convergent spectral sequence $$E_{pq}^2=(L_pF)(H_q(A))\Rightarrow\L_{p+q}F(A)$$
+\end{prp}
+
+\begin{crl}{}{} Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a right exact functor. Then the following are true. 
+\begin{itemize}
+\item If $A$ is exact, then $\L_iF(A)=0$ for all $i$. 
+\item If $f:A\to B$ is a quasi-isomorphism, then it induces isomorphisms $\L_iF(A)\cong\L_iF(B)$
+\end{itemize}
+\end{crl}
+
+Next: dual versions of the above propositions. 
+
+\pagebreak
+\section{Triangulated Categories}
+\subsection{Axioms of a Triangulated Category}
+\begin{defn}{Triangles}{} Let $\mC$ be a category and $T:\mC\to\mC$ an automorphism functor. Let $A,B,C\in\mC$. A triangle on $(A,B,C)$ is a triple $(u,v,w)$ of morphisms in $\mC$ where $u:A\to B$, $v:B\to C$, $w:C\to T(A)$. \\~\\
+
+Define similarly the homotopy categories $K^+(\mA)$, $K^-(\mA)$ and $K^b(\mA)$ for $\bold{CCh}^+(\mA)$, $\bold{CCh}^-(\mA)$ and $\bold{CCh}^b(\mA)$ respectively. 
+\end{defn}
+
+\begin{defn}{Morphisms of Triangles}{} Let $\mC$ be a category and $T:\mC\to\mC$ an automorphism functor. Let $(u,v,w)$ and $(u',v',w')$ be triangles in $\mC$. A morphism of triangles is a triple $(f,g,h)$ such that the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	A & B & C & {T(A)} \\
+	{A'} & {B'} & {C'} & {T(A')}
+	\arrow["u", from=1-1, to=1-2]
+	\arrow["f"', from=1-1, to=2-1]
+	\arrow["v", from=1-2, to=1-3]
+	\arrow["g"', from=1-2, to=2-2]
+	\arrow["w", from=1-3, to=1-4]
+	\arrow["h"', from=1-3, to=2-3]
+	\arrow["{T(f)}", from=1-4, to=2-4]
+	\arrow["{u'}"', from=2-1, to=2-2]
+	\arrow["{v'}"', from=2-2, to=2-3]
+	\arrow["{w'}"', from=2-3, to=2-4]
+\end{tikzcd}}\\~\\
+\end{defn}
+
+\begin{defn}{Triangulated Categories}{} Let $\mC$ be an additive category. We say that $\mC$ is a triangulated category if there is a functor $T:\mC\to\mC$ and a family $\{(u,v,w)\;|\;u,v,w\in\text{Mor}(\mC)\}$ of triangles called exact triangles such that the following hold. 
+\begin{itemize}
+\item For any morphism $u:A\to B$, there exists an exact triangle $(u,v,w)$: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	A & B & C & {T(A)}
+	\arrow["u", from=1-1, to=1-2]
+	\arrow["v", from=1-2, to=1-3]
+	\arrow["{\exists w}", dashed, from=1-3, to=1-4]
+\end{tikzcd}}\\~\\ 
+If $(u,v,w)$ is a triangle on $(A,B,C)$ isomorphic to an exact triangle $(u',v',w')$ on $(A',B',C')$, then $(u,v,w)$ is also exact: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	A & B & C & {T(A)} \\
+	{A'} & {B'} & {C'} & {T(A')}
+	\arrow["u", from=1-1, to=1-2]
+	\arrow["\cong"', from=1-1, to=2-1]
+	\arrow["v", from=1-2, to=1-3]
+	\arrow["\cong"', from=1-2, to=2-2]
+	\arrow["w", from=1-3, to=1-4]
+	\arrow["\cong"', from=1-3, to=2-3]
+	\arrow["\cong", from=1-4, to=2-4]
+	\arrow["{u'}"', from=2-1, to=2-2]
+	\arrow["{v'}"', from=2-2, to=2-3]
+	\arrow["{w'}"', from=2-3, to=2-4]
+\end{tikzcd}}\\~\\ 
+Finally, $(\text{id}_A,0,0)$ is exact: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	A & A & 0 & {T(A)}
+	\arrow["{\text{id}_A}", from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+\end{tikzcd}}\\~\\ 
+\item Rotations: If $(u,v,w)$ is an exact triangle on $(A,B,C)$, then both rotations $(v,w,-T(u))$ and $(-T^{-1}(w),u,v)$ are exact triangles on $(B,C,T(A))$ and $(T^{-1}(C),A,B)$ respectively. 
+\item Morphisms: Let the following be exact triangles: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	A & B & C & {T(A)} \\
+	{A'} & {B'} & {C'} & {T(A')}
+	\arrow["u", from=1-1, to=1-2]
+	\arrow["v", from=1-2, to=1-3]
+	\arrow["w", from=1-3, to=1-4]
+	\arrow["{u'}", from=2-1, to=2-2]
+	\arrow["{v'}", from=2-2, to=2-3]
+	\arrow["{w'}", from=2-3, to=2-4]
+\end{tikzcd}}\\~\\
+Suppose that there exists morphisms $f:A\to A'$ and $g:B\to B'$ such that $g\circ u=u'\circ f$. Then there exists $h:C\to C'$ such that $(f,g,h)$ is a morphism of triangles: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	A & B & C & {T(A)} \\
+	{A'} & {B'} & {C'} & {T(A')}
+	\arrow["u", from=1-1, to=1-2]
+	\arrow["f"', from=1-1, to=2-1]
+	\arrow["v", from=1-2, to=1-3]
+	\arrow["g"', from=1-2, to=2-2]
+	\arrow["w", from=1-3, to=1-4]
+	\arrow["{\exists h}"', dashed, from=1-3, to=2-3]
+	\arrow["{T(f)}", from=1-4, to=2-4]
+	\arrow["{u'}"', from=2-1, to=2-2]
+	\arrow["{v'}"', from=2-2, to=2-3]
+	\arrow["{w'}"', from=2-3, to=2-4]
+\end{tikzcd}}\\~\\
+
+\item The Octahedral Axiom: Let the following be exact triangles: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	A & B & {C'} & {T(A)} \\
+	B & C & {A'} & {T(B)} \\
+	A & C & {B'} & {T(A)}
+	\arrow["u", from=1-1, to=1-2]
+	\arrow["j", from=1-2, to=1-3]
+	\arrow["k", from=1-3, to=1-4]
+	\arrow["v", from=2-1, to=2-2]
+	\arrow["l", from=2-2, to=2-3]
+	\arrow["i", from=2-3, to=2-4]
+	\arrow["{v\circ u}", from=3-1, to=3-2]
+	\arrow["m", from=3-2, to=3-3]
+	\arrow["n", from=3-3, to=3-4]
+\end{tikzcd}}\\~\\
+Then there exists an exact triangle: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{C'} & {B'} & {A'} & {T(C')}
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["g", from=1-2, to=1-3]
+	\arrow["h", from=1-3, to=1-4]
+\end{tikzcd}}\\~\\
+such that $l=g\circ m$, $k=n\circ f$, $h=T(j)\circ i$, $i\circ g=T(u)\circ n$ and $f\circ j=m\circ v$. In other words, the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	&& {B'} \\
+	\\
+	{C'} &&&& {A'} \\
+	\\
+	A &&&& C \\
+	\\
+	&& B
+	\arrow["{\exists g}", dashed, from=1-3, to=3-5]
+	\arrow["{\exists f}", dashed, from=3-1, to=1-3]
+	\arrow["k"', from=3-1, to=5-1]
+	\arrow["{h=T(j)\circ i}", from=3-5, to=3-1]
+	\arrow["i"', from=3-5, to=7-3]
+	\arrow["u"', from=5-1, to=7-3]
+	\arrow["l", from=5-5, to=3-5]
+	\arrow["j"', from=7-3, to=3-1]
+	\arrow["v"', from=7-3, to=5-5]
+	\arrow["n"', from=1-3, to=5-1, crossing over]
+	\arrow["{v\circ u}", from=5-1, to=5-5, crossing over]
+	\arrow["m"', from=5-5, to=1-3, crossing over]
+\end{tikzcd}}\\~\\
+Where we abused notation by drawing $k:C'\to T(A)$ as a morphism $C'\to A$ etc so that the drawing becomes compact. 
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{} Let $(\mC,T)$ be a triangulated category. Let $(u,v,w)$ be an exact triangle. Then $v\circ u$, $w\circ v$ and $T(u)\circ w$ are $0$ in $\mC$. 
+\end{lmm}
+
+\begin{lmm}{}{} Let $(\mC,T)$ be a triangulated category. Let $(f,g,h)$ be a morphism of exact triangles. If both $f$ and $g$ are isomorphisms, then $h$ is an isomorphism. 
+\end{lmm}
+
+\subsection{Morphisms of Triangulated Categories}
+\begin{defn}{Morphisms of Triangulated Categories}{} Let $\mC$ and $\mD$ be triangulated categories. A morphism from $\mC$ to $\mD$ is a functor $F:\mC\to\mD$ such that the following are true. 
+\begin{itemize}
+\item $F$ is an additive functor
+\item $F$ commutes with the translation functor. If $T$ is the automorphism of $\mC$ and $S$ is the automorphism of $\mD$, then $$F\circ T=S\circ F$$
+\item $F$ sends exact triangles to exact triangles
+\end{itemize}
+\end{defn}
+
+\pagebreak
+\section{Derived Categories}
+\subsection{The Homotopy Category of Cochain Complexes}
+\begin{defn}{Homotopy Category of Cochain Complexes}{} Let $\mA$ be an abelian category. Define the homotopy category of chain complexes $$K(\mA)$$ to be the category defined as follows. 
+\begin{itemize}
+\item The objects are the objects of $\bold{CCh}(\mA)$
+\item The morphisms are homotopy classes of chain maps
+\item Composition is given by composition of chain maps
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{} Let $\mA$ be an abelian category. Then the cohomology functors $H^\bullet:\bold{CCh}(\mA)\to\mA$ induces a well defined functor from $K(\mA)$ to $\mA$. 
+\end{lmm}
+
+\begin{prp}{}{} Let $\mA$ be an abelian category. The homotopy category of cochain complexes satisfy the following universal property. \\~\\
+
+If $F:\bold{CCh}(\mA)\to\mD$ is a functor that sends chain homotopy equivalences to isomorphisms, then $F$ factors uniquely through $K(\mA)$: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\bold{CCh}(\mA)} & {K(\mA)} \\
+	& \mD
+	\arrow[from=1-1, to=1-2]
+	\arrow["F"', from=1-1, to=2-2]
+	\arrow["{\exists!}", dashed, from=1-2, to=2-2]
+\end{tikzcd}}
+\end{prp}
+
+\begin{defn}{Distinguished Triangles in K($\mA$)}{} Let $\mA$ be an abelian category. We say that a triangle \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	A & B & C & {T(A)}
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+\end{tikzcd}}\\~\\
+is distinguished in $K(\mA)$ if it is isomorphic to a triangle of the form \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	X & Y & C(f) & {T(X)}
+	\arrow["{f}", from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+\end{tikzcd}}
+\end{defn}
+
+\begin{lmm}{}{} Let $\mA$ be an abelian category. Then $K(\mA)$, $K^+(\mA)$, $K^-(\mA)$ and $K^b(\mA)$ are all triangulated categories with distinguished triangles given by the above definition. 
+\end{lmm}
+
+\subsection{Localization of Categories}
+\begin{defn}{Localization of a Category}{} Let $\mC$ be a category and let $S$ be a collection of morphisms in $\mC$. A localization of $\mC$ with respect to $S$ is a category $S^{-1}\mC$ together with a functor $q:\mC\to S^{-1}\mC$ such that the following are true. 
+\begin{itemize}
+\item For all $s\in S$, $q(s)$ is an isomorphism in $S^{-1}\mC$
+\item If $F:\mC\to\mD$ is a functor such that $F(s)$ is an isomorphism for all $s\in S^{-1}\mC$, then there exists a unique functor $G:S^{-1}\mC\to\mD$ such that the following diagram commute: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\mC & {S^{-1}\mC} \\
+	& \mD
+	\arrow["q", from=1-1, to=1-2]
+	\arrow["F"', from=1-1, to=2-2]
+	\arrow["{\exists !G}", dashed, from=1-2, to=2-2]
+\end{tikzcd}}
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{} Let $\mA$ be an abelian category. Then $K(\mA)$ is a localization of $\mA$ with respect to all homotopy equivalences. 
+\end{lmm}
+
+Not all localizations are well defined by set-theoretic issues. Morphisms that one wants to invert may not form a set or even a collection. We will give a way of explicitly constructing the localization of some specific categories below. 
+
+\begin{defn}{Multiplicative System}{}
+\end{defn}
+
+\begin{defn}{Locally Small Multiplicative System}{}
+\end{defn}
+
+\begin{thm}{Gabriel-Zisman Theorem}{}
+\end{thm}
+
+\begin{crl}{}{} Let $\mC$ be a category containing the zero object $0$ and let $q:\mC\to S^{-1}\mC$ be a localization of $\mC$. Then $q(X)\cong 0$ if and only if the $S$ contains the $0$ map $0:X\to X$. 
+\end{crl}
+
+\begin{crl}{}{} Let $\mC$ be a category and let $q:\mC\to S^{-1}\mC$ be a localization of $\mC$. If $\mC$ is additive, then $S^{-1}\mC$ and $q$ are both additive. 
+\end{crl}
+
+\subsection{Derived Categories}
+\begin{defn}{Derived Categories}{} Let $\mA$ be an abelian category and let $\bold{CCh}(\mA)$ be any category of chain complexes of $\mA$. Define the derived category $$D(\mA)=\bold{CCh}(\mA)[\mW^{-1}]$$ of $\mA$ where $\mW$ is all the quasi-isomorphisms in $\bold{CCh}(\mA)$. \\~\\
+
+Respectively, for $\bold{CCh}^+(\mA)$ and $\bold{CCh}^b(\mA)$ define their derived categories to be the localization of the categories with respect to quasi-isomorphisms, denoted by $D^+(\mA)$ and $D^b(\mA)$ respectively. 
+\end{defn}
+
+\begin{thm}{}{} Let $\mA$ be an abelian category. Let $K(\mA)$ be the homotopy category of chain complexes of $\mA$. Let $\mW$ be all the quasi-isomorphisms in $\bold{CCh}(\mA)$. Then there is an equivalence of categories $$D(\mA)=K(\mA)[\mW^{-1}]$$
+\end{thm}
+
+\begin{defn}{Distinguished Triangles in D($\mA$)}{} Let $\mA$ be an abelian category. We say that a triangle \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	A & B & C & {T(A)}
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+\end{tikzcd}}\\~\\
+is distinguished in $D(\mA)$ if it is isomorphic to a triangle of the form \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	X & Y & C(f) & {T(X)}
+	\arrow["{f}", from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+\end{tikzcd}}
+\end{defn}
+
+\begin{thm}{}{} Let $\mA$ be an abelian category. Then $D(\mA)$ is a triangulated triangles with distinguished triangles given by the above definition. 
+\end{thm}
+
+\begin{defn}{Full Subcategory of Complexes}{} Let $\mA$ and $\mB$ be abelian categories such that $\mA$ is a subcategory of $\mB$. Define $$D_\mA^(\mB)$$ to be the full triangulated subcategory of complexes with cohomology in $\mA$. 
+\end{defn}
+
+\subsection{Derived Functors of Derived Categories}
+\begin{defn}{Total Right Derived Functors}{} Let $\mA$ and $\mB$ be abelian categories. Let $F:K(\mA)\to K(\mB)$ be a morphism of triangulated categories. A total right derived functor of $F$ is a morphism $$RF:D(\mA)\to D(\mB)$$ together with a natural transformation $\xi:(K(\mA)\to K(\mB)\to D(\mB))\Rightarrow(K(\mA)\to D(\mA)\to D(\mB))$ using the following diagram: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{K(\mA)} & {K(\mB)} \\
+	{D(\mA)} & {D(\mB)}
+	\arrow["F", from=1-1, to=1-2]
+	\arrow["{\exists!}"', from=1-1, to=2-1]
+	\arrow["{\exists!}", from=1-2, to=2-2]
+	\arrow["RF"', from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+from the top-right path to the lower-left path which is universal in the following sense. If $G:D(\mA)\to D(\mB)$ is another morphism equipped with the same natural transformation $\chi$, then there exists a unique natural transformation $$\eta:RF\Rightarrow G$$ such that $\chi=\eta\circ\xi$. 
+\end{defn}
+
+\begin{defn}{Total Left Derived Functors}{} Let $\mA$ and $\mB$ be abelian categories. Let $F:K(\mA)\to K(\mB)$ be a morphism of triangulated categories. A total right derived functor of $F$ is a morphism $$LF:D(\mA)\to D(\mB)$$ together with a natural transformation $\xi:(K(\mA)\to D(\mA)\to D(\mB))\Rightarrow(K(\mA)\to K(\mB)\to D(\mB))$ using the following diagram: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{K(\mA)} & {K(\mB)} \\
+	{D(\mA)} & {D(\mB)}
+	\arrow["F", from=1-1, to=1-2]
+	\arrow["{\exists!}"', from=1-1, to=2-1]
+	\arrow["{\exists!}", from=1-2, to=2-2]
+	\arrow["RF"', from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+from the lower-left path to the top-right path which is universal in the following sense. If $G:D(\mA)\to D(\mB)$ is another morphism equipped with the same natural transformation $\chi$, then there exists a unique natural transformation $$\eta:G\Rightarrow LF$$ such that $\chi=\eta\circ\xi$. 
+\end{defn}
+
+\begin{lmm}{}{} Let $\mA$ and $\mB$ be abelian categories. Let $F:K(\mA)\to K(\mB)$ be a morphism of triangulated categories. If $F$ is exact, then $F$ is its own left and right total derived functor. 
+\end{lmm}
+
+\begin{thm}{}{} Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a functor. Then the following are true. 
+\begin{itemize}
+\item If $F$ is left exact and $\mA$ has enough injectives, then $$\R^iF=H^i(RF):\bold{CCh}(\mA)\to\mB$$
+\item If $F$ is right exact and $\mA$ has enough projectives, then $$\L_iF=H_i(LF):\bold{Ch}(\mA)\to\mB$$
+\end{itemize}
+\end{thm}
+
+Notice that in particular, if $X\in\mA$ is an object considered as a chain complex in degree $0$, we have seen that $\L_iF=L_iF:\bold{\mA}\to\bold{\mB}$ hence $L_iF=H_i(LF):\bold{\mA}\to\bold{\mB}$. This is similar for the dual version. 
+
+
+
+
+
+
+\end{document}

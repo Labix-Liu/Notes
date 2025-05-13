@@ -1,0 +1,242 @@
+\documentclass[a4paper]{article}
+
+\input{C:/Users/liula/Desktop/Latex/Headers V1.2.tex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Labix}
+\lhead{Category Theory 2}
+\rfoot{\thepage}
+
+\title{Category Theory 2}
+
+\author{Labix}
+
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+\end{abstract}
+\pagebreak
+\tableofcontents
+
+\pagebreak
+\section{Categorical Algebra}
+\subsection{Monoid Objects}
+\begin{defn}{Monoid Objects}{} Let $(\mC,\otimes,I)$ be a symmetric monoidal category. We say that $M\in\mC$ is a monoid object if there exists
+\begin{itemize}
+\item A morphism called multiplication $\mu:M\otimes M\to M$
+\item A morphism called the unit $\eta:I\to M$
+\end{itemize}
+such that the following coherence conditions hold. 
+\begin{itemize}
+\item Associativity: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{(M\otimes M)\otimes M} && {M\otimes M} \\
+	&& M \\
+	{M\otimes(M\otimes M)} && {M\otimes M}
+	\arrow["{\mu\otimes\text{id}_M}", from=1-1, to=1-3]
+	\arrow["\cong"', from=1-1, to=3-1]
+	\arrow["\mu", from=1-3, to=2-3]
+	\arrow["{\text{id}_M\otimes\mu}"', from=3-1, to=3-3]
+	\arrow["\mu"', from=3-3, to=2-3]
+\end{tikzcd}}\\~\\
+\item Identity: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{I\otimes M} & {M\otimes M} & {M\otimes I} \\
+	& M
+	\arrow["{\eta\otimes\text{id}_M}", from=1-1, to=1-2]
+	\arrow["\cong"', from=1-1, to=2-2]
+	\arrow["\mu"{description}, from=1-2, to=2-2]
+	\arrow["{\text{id}_M\otimes\mu}"', from=1-3, to=1-2]
+	\arrow["\cong", from=1-3, to=2-2]
+\end{tikzcd}}\\~\\
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{} A monoid object in $(\bold{Set},\times,\ast)$ is a monoid. 
+\end{prp}
+
+There is an interesting categorization that can be seen here from the traditional algebraic structures. Recall that a monoid is a set $M$ together with a binary operation $+:M\times M\to M$ such that addition is associativity, and that there exists an identity element $e$ for which for any $m\in M$, we have $e+m=m=m+e$. Reorganizing the data, we can write this as the following: A monoid is a set together with 
+\begin{itemize}
+\item A multiplication map $+:M\times M\to M$
+\item An unit map $\eta:\ast\to M$
+\end{itemize}
+such that the following conditions are satisfied: 
+\begin{itemize}
+\item The multiplication map is associative
+\item The unit map is such that multiplication with the unit returns itself. 
+\end{itemize}
+
+This is starting point of formalizing monoid objects in category theory. An algebraic object in general consists of a set, some binary operations together with some coherence conditions for the binary operations. The coherence conditions are in particular provided by the associator and unitor of the underlying symmetric monoidal structure. One can in particular think of the unit map $\eta:\ast\to M$ as picking out a point in $M$ to be the identity in $M$. \\~\\
+
+It is important to make clear what are the data of an object and what are the conditions the data are subject to. In our case, the data consists a set, a binary operation and an identity element. These data are subject to conditions called associativity and unity which is dependent on the symmetric monoidal structure. 
+
+\subsection{Group Objects}
+\begin{defn}{Group Objects}{} Let $(\mC,\otimes,I)$ be a symmetric monoidal category. We say that $G\in\mC$ is a group object if there exists
+\begin{itemize}
+\item A morphism called multiplication $\mu:G\otimes G\to G$
+\item A morphism called the unit $\eta:I\to M$
+\item A morphism called the inverse $\text{inv}:G\to G$
+\end{itemize}
+such that the following coherence conditions hold. 
+\begin{itemize}
+\item Associativity: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{(G\otimes G)\otimes G} && {G\otimes G} \\
+	&& G \\
+	{G\otimes(G\otimes G)} && {G\otimes G}
+	\arrow["{\mu\otimes\text{id}_G}", from=1-1, to=1-3]
+	\arrow["\cong"', from=1-1, to=3-1]
+	\arrow["\mu", from=1-3, to=2-3]
+	\arrow["{\text{id}_G\otimes\mu}"', from=3-1, to=3-3]
+	\arrow["\mu"', from=3-3, to=2-3]
+\end{tikzcd}}\\~\\
+\item Identity: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{I\otimes G} & {G\otimes G} & {G\otimes I} \\
+	& M
+	\arrow["{\eta\otimes\text{id}_G}", from=1-1, to=1-2]
+	\arrow["\cong"', from=1-1, to=2-2]
+	\arrow["\mu"{description}, from=1-2, to=2-2]
+	\arrow["{\text{id}_G\otimes\mu}"', from=1-3, to=1-2]
+	\arrow["\cong", from=1-3, to=2-2]
+\end{tikzcd}}\\~\\
+\item Inverse: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	G & {G\otimes G} \\
+	{G\otimes G} & G
+	\arrow["{(\text{id}_G,\text{inv})}", from=1-1, to=1-2]
+	\arrow["{(\text{inv},\text{id}_G)}"', from=1-1, to=2-1]
+	\arrow["{\text{id}_G}"{description}, from=1-1, to=2-2]
+	\arrow["\mu", from=1-2, to=2-2]
+	\arrow["\mu"', from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{} Let $\mC$ be a symmetric monoidal category. Then every group object in $\mC$ is also a monoid object. 
+\end{lmm}
+
+\begin{thm}{}{} The following are group objects in particular categories. 
+\begin{itemize}
+\item The group objects in $(\bold{Set},\times,\ast)$ are groups
+\item The group objects in $(\bold{Grp},\times,\ast)$ are abelian groups
+\item The group objects in $(\bold{Ab},\oplus,\ast)$ are abelian groups
+\item The group objects in $(\bold{Top},\times,\ast)$ are topological groups
+\end{itemize}
+\end{thm}
+
+\subsection{Ring Objects}
+
+\subsection{Algebra Objects}
+
+\pagebreak
+\section{Enriched Categories}
+\subsection{Basic Definitions}
+\begin{defn}{Enriched Categories}{} Let $(\mS,\times,I,\alpha,\lambda,\rho)$ be a monoidal category. Let $\mC$ be a category. We say that $\mC$ is enriched over $\mS$ if the following are true. 
+\begin{itemize}
+\item For each $C,D\in\mC$, $\Hom_\mC(C,D)\in\mS$
+\item For each $C\in\mC$, there is a morphism $u_C:I\to\Hom_\mC(C,C)$ in $\mS$
+\item For each $C,D,E\in\mC$, there is a morphism in $\mS$ given by $$\circ:\Hom_\mC(D,E)\times\Hom_\mC(C,D)\to\Hom_\mC(C,E)$$
+\end{itemize}
+such that the following diagram commutes: 
+\begin{itemize}
+\item Associativity: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\Hom_\mC(E,F)\times(\Hom_\mC(D,E)\times\Hom_\mC(C,D))} & {\Hom_\mC(E,F)\times\Hom_\mC(C,E)} \\
+	& {\Hom_\mC(C,F)} \\
+	{(\Hom_\mC(E,F)\times\Hom_\mC(D,E))\times\Hom_\mC(C,D)} & {\Hom_\mC(D,F)\times\Hom_\mC(C,D)}
+	\arrow["{1\times\circ}", from=1-1, to=1-2]
+	\arrow["\circ", from=1-2, to=2-2]
+	\arrow["\alpha", from=3-1, to=1-1]
+	\arrow["{\circ\times 1}"', from=3-1, to=3-2]
+	\arrow["\circ"', from=3-2, to=2-2]
+\end{tikzcd}}\\~\\
+\item Identity: \\~\\
+\adjustbox{scale=0.85,center}{\begin{tikzcd}
+	{\Hom_\mC(C,D)\times I} & {\Hom_\mC(C,D)\times\Hom_\mC(C,C)} & {\Hom_\mC(D,D)\times\Hom_\mC(C,D)} & {I\times\Hom_\mC(C,D)} \\
+	& {\Hom_\mC(C,D)} & {\Hom_\mC(C,D)}
+	\arrow["{\text{id}\times u}", from=1-1, to=1-2]
+	\arrow["\cong"', from=1-1, to=2-2]
+	\arrow["\circ", from=1-2, to=2-2]
+	\arrow["\circ"', from=1-3, to=2-3]
+	\arrow["{u\times\text{id}}"', from=1-4, to=1-3]
+	\arrow["\cong", from=1-4, to=2-3]
+\end{tikzcd}}\\~\\
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{} Let $\mS$ be a symmetric monoidal closed category. Then $\mS$ is enriched over itself. 
+\end{prp}
+
+\subsection{Enriched Functors and Natural Transformations}
+\begin{defn}{}{} Let $(\mS,\otimes,I)$ be a monoidal category. Let $\mC$ and $\mD$ be categories enriched over $\mS$. An $\mS$-functor $F:\mC\to\mD$ consists of the following data. 
+\begin{itemize}
+\item $F:\mC\to\mD$ is a functor. 
+\item The assignment $F:\Hom_\mC(A,B)\to\Hom_\mC(F(A),F(B))$ is a morphism in $\mS$. 
+\end{itemize}
+Moreover, the following diagrams are commutative: 
+\begin{itemize}
+\item Composition axiom: \\~\\
+\adjustbox{scale=1,center}{\begin{tikzcd}
+	{\Hom_\mC(B,C)\otimes\Hom_\mC(A,B)} & {\Hom_\mC(A,C)} \\
+	{\Hom_\mC(F(B),F(C))\otimes\Hom_\mC(F(A),F(B))} & {\Hom_\mC(F(A),F(C))}
+	\arrow["\circ", from=1-1, to=1-2]
+	\arrow["{F\otimes F}"', from=1-1, to=2-1]
+	\arrow["F", from=1-2, to=2-2]
+	\arrow["\circ"', from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+\item Unit axiom: \\~\\
+\adjustbox{scale=1,center}{\begin{tikzcd}
+	I & {\Hom_\mC(A,A)} \\
+	& {\Hom_\mC(F(A),F(A))}
+	\arrow["u", from=1-1, to=1-2]
+	\arrow["u"', from=1-1, to=2-2]
+	\arrow["F", from=1-2, to=2-2]
+\end{tikzcd}}\\~\\
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Enriched Natural Transformations}{} Let $(\mS,\otimes,I)$ be a monoidal category. Let $\mC,\mD$ be $\mS$-categories. Let $F,G:\mC\rightrightarrows\mD$ be two $\mS$-functors. An $\mS$-natural transformation $\alpha:F\Rightarrow G$ consists of the following data. For each $C\in\mC$, a morphism $$\alpha_C:I\to\Hom_\mD(F(C),G(C))$$ such that the following diagram commutes in $\mS$: \\~\\
+\adjustbox{scale=0.85,center}{\begin{tikzcd}
+	& {\Hom_\mC(A,B)} \\
+	{\Hom_\mC(A,B)\otimes I} && {I\otimes\Hom_\mC(A,B)} \\
+	{\Hom_\mD(G(A),G(B))\otimes\Hom_\mD(F(A),G(A))} && {\Hom_\mD(F(B),G(B))\otimes\Hom_\mD(F(A),F(B))} \\
+	& {\Hom_\mD(F(A),G(B))}
+	\arrow["{\rho^{-1}}"', from=1-2, to=2-1]
+	\arrow["{\lambda^{-1}}", from=1-2, to=2-3]
+	\arrow["{G\otimes\alpha_A}"', from=2-1, to=3-1]
+	\arrow["{\alpha_B\otimes F}", from=2-3, to=3-3]
+	\arrow["\circ"', from=3-1, to=4-2]
+	\arrow["\circ", from=3-3, to=4-2]
+\end{tikzcd}}\\~\\
+\end{defn}
+
+\begin{defn}{Equivalence of Enriched Categories}{} Let $\mS$ be a monoidal category. Let $\mC,\mD$ be $\mS$-categories. We say that $\mC$ and $\mD$ are $\mS$-equivalent if there exists $\mS$-functors $F:\mC\to mD$ and $G:\mD\to\mC$ such that $$\lambda:1\overset{\cong}{\Rightarrow}F\circ G\;\;\;\;\text{ and }\;\;\;\;\eta:G\circ F\overset{\cong}{\Rightarrow}1$$ are $\mS$-isomorphisms. 
+\end{defn}
+
+TBA: Fully faithful essentially surjective. \\
+
+Fully faithful implies isomorphism of Hom sets in $\mS$. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
