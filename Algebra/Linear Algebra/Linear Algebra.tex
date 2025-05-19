@@ -1,6 +1,6 @@
 \documentclass[a4paper]{article}
 
-\input{C:/Users/liula/Desktop/Latex/Headers V1.2.tex}
+\input{C:/Users/liula/Desktop/Latex/Headers/Headers.tex}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -16,9 +16,9 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-Linear algebra is at the heart of mathematics. Almost all areas of mathematics make some use of the notion of vector spaces and its properties. It began with the study of systems of linear equations. \\~\\
+Linear algebra is at the heart of mathematics. Almost all areas of mathematics make some use of the notion of vector spaces and its properties. It began with the study of systems of linear equations. \\
 
-Nowadays as we understand vector spaces independently from systems of linear equations, we will also treat the material differently. The first three chapter begins with the basis definitions: vector spaces and the maps between them called linear maps. Eigenvalues and eigenspaces will be an important invariant for vector spaces. Together with the aid of matrices, we will have a good grasp of how to write a given vector space in a simpler form. Chapter 4 will then improve on the further simplifying a given matrix so that we can read information from each easily. \\~\\
+Nowadays as we understand vector spaces independently from systems of linear equations, we will also treat the material differently. The first three chapter begins with the basis definitions: vector spaces and the maps between them called linear maps. Eigenvalues and eigenspaces will be an important invariant for vector spaces. Together with the aid of matrices, we will have a good grasp of how to write a given vector space in a simpler form. Chapter 4 will then improve on the further simplifying a given matrix so that we can read information from each easily. \\
 
 The rest of the chapters will focus on particular properties of vector spaces and linear maps. They each correspond to an important class of matrices. For examples, quadratic form corresponds to matrices equivalent up to congruency while orthogonality of basis vectors give orthogonal matrices. 
 \end{abstract}
@@ -43,7 +43,7 @@ The rest of the chapters will focus on particular properties of vector spaces an
 \item $0\cdot \vb{u}=\vb{0}_V$
 \item $(-a)\vb{v}=-(a\vb{v})=a(-\vb{v})$
 \item $a\vb{v}=\vb{0}_V\implies a=0$ or $\vb{v}=\vb{0}_V$
-\end{itemize}\tcbline
+\end{itemize}
 \begin{proof} ~\\
 \begin{itemize}
 \item $a(\vb{0}_V)=a(\vb{0}_V+\vb{0}_V)=a\vb{0}_V+a\vb{0}_V$. Adding the additive inverse of $a\vb{0}_V$ on both sides gives our result. 
@@ -54,7 +54,7 @@ The rest of the chapters will focus on particular properties of vector spaces an
 \end{proof}
 \end{prp}
 
-\begin{prp}{}{} The additive identity, multiplicative identity, additive inverse of a vector space is unique. \tcbline
+\begin{prp}{}{} The additive identity, multiplicative identity, additive inverse of a vector space is unique. 
 \begin{proof} Suppose that $\vb{e}$ and $\vb{f}$ are additive identities. Then $\vb{e}+\vb{f}=\vb{e}$ and $\vb{e}+\vb{f}=\vb{f}$. Thus $\vb{e}=\vb{f}$. Suppose that $\vb{e}$ and $\vb{f}$ are multiplicative identities. Then $\vb{e}\vb{f}=\vb{e}$ and $\vb{e}\vb{f}=\vb{f}$ and $\vb{e}=\vb{f}$. Let $a\in V$. Suppose that $b,c\in V$ are additive inverses of $a$. Then 
 \begin{align*}
 a+b=a+c&\implies b+a+b=b+a+c\\
@@ -65,29 +65,43 @@ a+b=a+c&\implies b+a+b=b+a+c\\
 \end{prp}
 
 \subsection{Basis and Dimension}
-\begin{defn}{Linearly Independent}{} We say that a set of vectors $\{v_1,\dots,v_n\}$ of a vector space $V$ over $\F$ are linearly independent if $$\sum_{k=1}^na_kv_k=0$$ for $a_1,\dots,a_n\in\F$ implies $a_1=\dots=a_n=0$. 
+\begin{defn}{Linearly Independent Vectors}{}\\
+Let $\F$ be a field. Let $V$ be a vector space over $\F$. Let $S\subseteq V$ be a set of vectors. We say that the vectors in $S$ are linearly independent if for any $v_1,\dots,v_n\in S$ and $a_1,\dots,a_n\in\F$ such that $$\sum_{i=1}^na_iv_i=0$$ then we have $a_1=\dots=a_n=0$. 
 \end{defn}
 
-\begin{defn}{Span}{} We say that a set of vectors $\{v_1,\dots,v_n\}$ of a vector space $V$ over $\F$ spans $V$ if for all $v\in V$, there exists $a_1,\dots,a_n\in\F$ such that $$v=\sum_{k=1}^na_kv_k$$
+\begin{defn}{Span}{}\\
+Let $\F$ be a field. Let $V$ be a vector space over $\F$. Let $S\subseteq V$. Define the span of $S$ to be the set $$\text{Span}(S)=\left\{\sum_{i=1}^na_iv_i\;\bigg{|}\;a_1,\dots,a_n\in\F, v_1,\dots,v_n\in S\right\}$$
 \end{defn}
 
-\begin{defn}{Basis}{} We say that a set of vectors $\{v_1,\dots,v_n\}$ of a vector space forms a basis for $V$ if they are linearly independent and spans $V$. 
+We also write $\F\langle v_1,\dots,v_n\rangle$ if we want to mention the ground field. 
+
+\begin{defn}{Basis}{}\\
+Let $\F$ be a field. Let $V$ be a vector space over $\F$. Let $S\subseteq V$. We say that $S$ is a basis for $V$ if the vectors in $S$ are linearly independent and $\text{Span}(S)=V$. 
 \end{defn}
 
-\begin{defn}{Dimension}{} We say that the dimension of a vector space $V$ is the number of elements in a basis of $V$. If a basis has $n$ elements, then we say that $\dim(V)=n$. \\~\\
-If $n$ is a finite number, then we say that $V$ is finite dimensional. 
+\begin{lmm}{}{}\\
+Let $\F$ be a field. Let $V$ be a vector space over $\F$. Then $V$ admits a basis. 
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $\F$ be a field. Let $V$ be a vector space over $\F$. Let $S,T\subseteq V$. If $S$ and $T$ are bases for $V$, then $$\abs{S}=\abs{T}$$
+\end{lmm}
+
+\begin{defn}{Dimension}{}\\
+Let $\F$ be a field. Let $V$ be a vector space over $\F$. Let $S\subseteq V$ be a basis for $V$. Define the dimension of $V$ to be $$\dim(V)=\abs{S}$$ We say that $V$ is finite dimensional if $\abs{S}<\infty$. 
 \end{defn}
 
 We have yet to shown that the dimension of a vector space is well defined since we do not know whether the cardinality of any two bases are the same. Therefore we have the following important theorem for finite dimensional vector space. 
 
-\begin{thm}{Steinitz Exchange Lemma}{} Let $U,W$ be finite subsets of a finite dimensional vector space $V$. If $U$ is a set of linearly independent vectors and $W$ spans $V$, then 
+\begin{thm}{Steinitz Exchange Lemma}{}\\
+Let $V$ be a finite dimensional vector space. Let $U,W\subseteq V$ be finite subsets. If $U$ is a set of linearly independent vectors and $\text{Span}(W)=V$, then the following are true. 
 \begin{itemize}
 \item $\abs{U}\leq\abs{W}$
 \item There exists a set $W'\subset W$ with $\abs{W'}=\abs{W}-\abs{U}$ such that $U\cup W'$ spans $V$. 
-\end{itemize} \tcbline
-\begin{proof}
-Take $U=\{u_1,\dots,u_m\}$ and $W=\{w_1,\dots,w_n\}$. We will show that after reordering elements of $W$, we will have a set $\{u_1,\dots,u_m,w_m+1,\dots,w_n\}$ that it spans $V$. We proceed by induction on $m$. Suppose that $m=0$. In this case, $\abs{U}\leq\abs{W}$ necesssarily holds and by construction, $W$ already spans $V$. \\~\\
-Now suppose that the proposition is true for $m-1$. By the induction hypothesis, we may reorder elements of $W$ so that $\{u_1,\dots,u_{m-1},w_m,\dots,w_n\}$ spans $V$. Since $u_m\in V$, there exists $a_1,\dots,a_n$ such that $$u_m=\sum_{k=1}^{m-1}a_ku_k+\sum_{k=m}^na_kw_k$$ At least one of $a_m,\dots,a_n$ must be nonzero else the equality will contradict the linear independence of $u_1,\dots,u_m$. This must mean that $m\leq n$. \\~\\
+\end{itemize} 
+\begin{proof}\\
+Take $U=\{u_1,\dots,u_m\}$ and $W=\{w_1,\dots,w_n\}$. We will show that after reordering elements of $W$, we will have a set $\{u_1,\dots,u_m,w_m+1,\dots,w_n\}$ that it spans $V$. We proceed by induction on $m$. Suppose that $m=0$. In this case, $\abs{U}\leq\abs{W}$ necesssarily holds and by construction, $W$ already spans $V$. \\
+Now suppose that the proposition is true for $m-1$. By the induction hypothesis, we may reorder elements of $W$ so that $\{u_1,\dots,u_{m-1},w_m,\dots,w_n\}$ spans $V$. Since $u_m\in V$, there exists $a_1,\dots,a_n$ such that $$u_m=\sum_{k=1}^{m-1}a_ku_k+\sum_{k=m}^na_kw_k$$ At least one of $a_m,\dots,a_n$ must be nonzero else the equality will contradict the linear independence of $u_1,\dots,u_m$. This must mean that $m\leq n$. \\
 Now by reordering $a_mw_m,\dots,a_nw_n$, we may assume that $a_m\neq 0$. Thus we have that $$w_m=\frac{1}{a_m}\left(u_m-\sum_{k=1}^{m-1}a_ku_k-\sum_{k=m+1}^na_kw_k\right)$$ This means that $w_m$ lies in the span of $\{u_1,\dots,u_m,w_{m+1},\dots,w_n\}$. Since this span contains each of the vectors $u_1,\dots,u_{m-1},w_m,\dots,w_n$, by the inductive hypothesis it spans $V$. 
 \end{proof}
 \end{thm}
@@ -115,14 +129,14 @@ We now give a criterion with matrices to find whether a set of vectors span $V$ 
 \item $0_V\in U$
 \item For all $u_1,u_2\in U$, $u_1+u_2\in U$
 \item For all $u\in U$ and $\lambda\in\F$, $\lambda\cdot u\in U$
-\end{itemize} \tcbline
+\end{itemize} 
 \begin{proof}
-Suppose that $U$ is a subspace of $V$. Then necessarily $U$ is closed under vector addition and scalar multiplication and contains the zero vector. \\~\\
+Suppose that $U$ is a subspace of $V$. Then necessarily $U$ is closed under vector addition and scalar multiplication and contains the zero vector. \\
 Now suppose that the latter conditions are fulfilled by a subset $U$ of $V$. Then it is easy to see that $U$ satisfies all the criteria for being a vector space. 
 \end{proof}
 \end{prp}
 
-\begin{prp}{}{} If $U_1$ and $U_2$ are subspaces of $V$ then $U_1\cap U_2$ is also a subspace. \tcbline
+\begin{prp}{}{} If $U_1$ and $U_2$ are subspaces of $V$ then $U_1\cap U_2$ is also a subspace. 
 \begin{proof} Suppose that $\vb{v},\vb{w}\in U_1\cap U_2$. Then $\vb{v},\vb{w}\in U_1$ and $U_2$. Since $U_1,U_2$ are subspaces, $\vb{v}+\vb{w}\in U_1$ and $U_2$ thus $\vb{v}+\vb{w}\in U_1\cap U_2$. The proof is similar for scalar multiplication. 
 \end{proof}
 \end{prp}
@@ -130,9 +144,9 @@ Now suppose that the latter conditions are fulfilled by a subset $U$ of $V$. The
 \begin{defn}{Sum of Subspaces}{} Let $U,W$ be subspaces of the vector space $V$. Then define $$U+W=\{\vb{u}+\vb{w}:\vb{u}\in U\text{ and }\vb{w}\in W\}$$
 \end{defn}
 
-\begin{prp}{}{} Let $U,W$ be subspaces of a vector space $V$. Then $U+W$ is the smallest subspace of $V$ containing $U$ and $W$. \tcbline
+\begin{prp}{}{} Let $U,W$ be subspaces of a vector space $V$. Then $U+W$ is the smallest subspace of $V$ containing $U$ and $W$. 
 \begin{proof}
-We first show that $U+W$ is indeed a subspace of $V$. Suppose that $v\in U+W$. Then there exists $u\in U$ and $w\in W$ such that $v=u+w$. Then since $U$ and $W$ are closed individually under vector addition and scalar multiplication, any product and addition in $U+W$ can be decomposed into a sum of vectors in $U$ and $W$ and thus the new vector will also be able to be decomposed into $U$ and $W$ and thus lie in $U+W$. \\~\\
+We first show that $U+W$ is indeed a subspace of $V$. Suppose that $v\in U+W$. Then there exists $u\in U$ and $w\in W$ such that $v=u+w$. Then since $U$ and $W$ are closed individually under vector addition and scalar multiplication, any product and addition in $U+W$ can be decomposed into a sum of vectors in $U$ and $W$ and thus the new vector will also be able to be decomposed into $U$ and $W$ and thus lie in $U+W$. \\
 Now suppose that $S$ is a subspace of $V$ containing $U$ and $W$. This means that any linear combination of elements of $U$ and $W$ are contained in $S$ thus $U+W\subseteq S$. This means that if any subspace containing $U$ and $W$ must also contain $U+W$, which means that $U+W$ is the smallest subspace containing $U$ and $W$. 
 \end{proof}
 \end{prp}
@@ -143,7 +157,7 @@ Now suppose that $S$ is a subspace of $V$ containing $U$ and $W$. This means tha
 \begin{defn}{Direct Sum}{} A vector space is the direct sum of its subspaces $$V=W_1\oplus\dots\oplus W_n$$ if $W_1,\dots,W_n$ are independent and $V=W_1+\dots+W_n$. 
 \end{defn}
 
-\begin{crl}{}{} If $V=W_1\oplus\dots\oplus W_n$ then $$\dim(V)=\sum_{k=1}^n\dim(W_k)$$ \tcbline
+\begin{crl}{}{} If $V=W_1\oplus\dots\oplus W_n$ then $$\dim(V)=\sum_{k=1}^n\dim(W_k)$$ 
 \begin{proof}
 Each basis of $W_k$ are not contained in any other linear combination of all the basis of $W_1,\dots,W_{k-1},W_{k+1},\dots,W_n$. This means that the set of all the basis of $W_1,\dots,W_n$ are linearly independent. Since they each span $W_k$ independently, the set of all the basis of $W_1,\dots,W_n$ will span $W_1\oplus\dots\oplus W_n$ and thus is a basis of $V$. Thus we are done. 
 \end{proof}
@@ -151,10 +165,10 @@ Each basis of $W_k$ are not contained in any other linear combination of all the
 
 \subsection{Row and Column Ranks}
 The final section is devoted to matrices as we will soon see that matrices are particularly useful in a lot of things. 
-\begin{defn}{Row Space}{} Let $\F$ be a field and let $A\in M_{m\times n}(\F)$ be a matrix. The row space of $A$ is the subspace of $\mathbb{F}^m$, $$\Span\{r_1,\dots,r_m\}$$ where $r_i$ are the rows of $A$. The row rank of $A$ is defined to be the dimension of the row space of $A$. 
+\begin{defn}{Row Space}{} Let $\F$ be a field and let $A\in M_{m\times n}(\F)$ be a matrix. The row space of $A$ is the subspace of $\mathbb{F}^m$, $$\text{Span}\{r_1,\dots,r_m\}$$ where $r_i$ are the rows of $A$. The row rank of $A$ is defined to be the dimension of the row space of $A$. 
 \end{defn}
 
-\begin{defn}{Column Space}{} Let $\F$ be a field and let $A\in M_{m\times n}(\F)$ be a matrix. The column space of $A$ is the subspace of $\mathbb{F}^n$, $$\Span\{c_1,\dots,c_m\}$$ where $c_i$ are the columns of $A$. The column rank of $A$ is defined to be the dimension of the column space of $A$. 
+\begin{defn}{Column Space}{} Let $\F$ be a field and let $A\in M_{m\times n}(\F)$ be a matrix. The column space of $A$ is the subspace of $\mathbb{F}^n$, $$\text{Span}\{c_1,\dots,c_m\}$$ where $c_i$ are the columns of $A$. The column rank of $A$ is defined to be the dimension of the column space of $A$. 
 \end{defn}
 
 \begin{lmm}{}{} Applying row operations does not change the row space, row rank of a matrix and column rank of a matrix. 
@@ -191,12 +205,12 @@ We can now define the rank of a matrix without problem.
 \begin{itemize}
 \item $T(0_v)=0_w$
 \item $T(-v)=-T(v)$ for all $v\in V$
-\end{itemize}\tcbline
+\end{itemize}
 \begin{proof} Suppose that $v\in V$. Then $T(0\cdot v)=0\cdot T(v)=0$. Also we have that $T(0-v)=T(0)-T(v)=-T(v)$. 
 \end{proof}
 \end{lmm}
 
-\begin{prp}{}{} Let $U,V,W$ be vector spaces over a field $\F$. If $T:U\to V$ and $S:V\to W$ are linear then $$S\circ T:U\to W$$ is also linear. \tcbline
+\begin{prp}{}{} Let $U,V,W$ be vector spaces over a field $\F$. If $T:U\to V$ and $S:V\to W$ are linear then $$S\circ T:U\to W$$ is also linear. 
 \begin{proof} Let $au+bv\in U$. 
 \begin{align*}
 S\circ T(au+bv)&=S(aT(u)+bT(v))\\
@@ -205,14 +219,14 @@ S\circ T(au+bv)&=S(aT(u)+bT(v))\\
 \end{proof}
 \end{prp}
 
-\begin{prp}{Universal Property of Vector Spaces}{} Let $\F$ be a field. Let $V,W$ be vector spaces over $\F$. Let $B$ be a basis of $V$. Let $f:B\to W$ be a function. Then there exists a unique linear map $T:V\to W$ such that the following diagram commutes: \\~\\
+\begin{prp}{Universal Property of Vector Spaces}{} Let $\F$ be a field. Let $V,W$ be vector spaces over $\F$. Let $B$ be a basis of $V$. Let $f:B\to W$ be a function. Then there exists a unique linear map $T:V\to W$ such that the following diagram commutes: \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	B & V \\
 	& W
 	\arrow["\iota", hook, from=1-1, to=1-2]
 	\arrow["f"', from=1-1, to=2-2]
 	\arrow["{\exists!T}", dashed, from=1-2, to=2-2]
-\end{tikzcd}} \\~\\
+\end{tikzcd}} \\
 \end{prp}
 
 \subsection{Isomorphisms}
@@ -227,7 +241,7 @@ S\circ T(au+bv)&=S(aT(u)+bT(v))\\
 \end{itemize}
 \end{prp}
 
-\begin{crl}{}{} Every finite dimensional vector space over $\R$ is isomorphic to $\R^n$ for some $n\in\N\setminus\{0\}$. \tcbline
+\begin{crl}{}{} Every finite dimensional vector space over $\R$ is isomorphic to $\R^n$ for some $n\in\N\setminus\{0\}$. 
 \begin{proof} Direct consequence from the above. 
 \end{proof}
 \end{crl}
@@ -252,7 +266,7 @@ This corollary is especially important since it tells use that we only really ne
 \begin{itemize}
 \item $\im(T)$ is a subspace of $V$
 \item $\ker(T)$ is a subspace of $U$
-\end{itemize}\tcbline
+\end{itemize}
 \begin{proof} Let $T:U\to V$ be a linear map. 
 \begin{itemize}
 \item We prove that $\im(T)$ is a subspace of $V$. Let $\vb{u},\vb{v}\in\im(T)$ and $a\in\F$. Since $\vb{u},\vb{v}\in\im(T)$, there exists $\vb{u}_0,\vb{v}_0\in U$ such that $T(\vb{u}_0)=\vb{u}$ and $T(\vb{v}_0)=\vb{v}$. Note that $a\vb{u}_0\in U$ and $\vb{u}_0+\vb{v}_0\in U$. Consider $T(a\vb{u}_0)$. We have $T(a\vb{u}_0)=aT(\vb{u}_0)=a\vb{u}$. Thus $a\vb{u}\in\im(T)$. Similarly, $T(\vb{u}_0+\vb{v}_0)=T(\vb{u}_0)+T(\vb{v}_0)=\vb{u}+\vb{v}$. Thus $\vb{u}+\vb{v}\in\im(T)$. By the subspace criterion $\im(T)$ is a subspace of $V$. 
@@ -268,7 +282,8 @@ This corollary is especially important since it tells use that we only really ne
 \end{itemize}
 \end{defn}
 
-\begin{thm}{Rank Nullity Theorem}{} Let $T:U\to V$ be a linear map. Then $$\rank(T)+\nullity(T)=\dim(U)$$
+\begin{thm}{Rank Nullity Theorem}{}\\
+Let $V,W$ be vector spaces. Let $T:V\to W$ be a linear map. Then we have $$\rank(T)+\nullity(T)=\dim(V)$$
 \end{thm}
 
 \begin{thm}{}{} Let $T:U\to V$ be a linear map, where $\dim(U)=n$, $\dim(V)=m$. Let $e_1,\dots,e_n$ be a basis of $U$. Then the rank of $T$ is equal to the largest size of a linearly independent subset of $T(e_1),\dots,T(e_n)$. 
@@ -321,7 +336,7 @@ p_{n1}&\cdots&p_{nn}
 Then we have that $$A'=QAP^{-1}$$
 \end{thm}
 
-It is often easier to depict this as a diagram. Recall that we write $V_B$ to indicate the vector space $V$ is given the basis $B$. Using this notation we obtain the following commutative diagram as a result of the above theorem. \\~\\
+It is often easier to depict this as a diagram. Recall that we write $V_B$ to indicate the vector space $V$ is given the basis $B$. Using this notation we obtain the following commutative diagram as a result of the above theorem. \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	{V_B} & {W_C} \\
 	{V_{B'}} & {W_{C'}}
@@ -329,7 +344,7 @@ It is often easier to depict this as a diagram. Recall that we write $V_B$ to in
 	\arrow["P"', from=1-1, to=2-1]
 	\arrow["Q", from=1-2, to=2-2]
 	\arrow["{A'}"', from=2-1, to=2-2]
-\end{tikzcd}}\\~\\
+\end{tikzcd}}\\
 Even better, we could have equivalently stated in the theorem that this commutative diagram is the result. 
 
 \begin{defn}{Similar Matrices}{} Let $\F$ be a field. We say that two matrices $A,B\in M_{n\times n}(\F)$ are similar if there exists an invertible matrix $P\in M_{n\times n}(\F)$ such that $B=PAP^{-1}$. 
@@ -362,7 +377,7 @@ Notice that two eigenvectors can have the same eigenvalue. For instance, if $v$ 
 \begin{defn}{Eigenspace}{} Let $V$ be a vector space over a field $\F$. Let $T:V\to V$ be a linear map. Let $\lambda\in\F$ be an eigenvalue of $T$. Define the eigenspace of $\lambda$ to be the vector subspace $$E_\lambda=\{v\in V\;|\;T(v)=\lambda v\}$$
 \end{defn}
 
-\begin{lmm}{}{} Let $V$ be a vector space over a field $\F$. Let $T:V\to V$ be a linear map. Let $\lambda\in\F$ be an eigenvalue of $T$. Then $$E_\lambda=\ker(T-\lambda I)$$ \tcbline
+\begin{lmm}{}{} Let $V$ be a vector space over a field $\F$. Let $T:V\to V$ be a linear map. Let $\lambda\in\F$ be an eigenvalue of $T$. Then $$E_\lambda=\ker(T-\lambda I)$$ 
 \begin{proof}
 Let $v\in V$. We have that 
 \begin{align*}
@@ -379,7 +394,7 @@ and so we conclude.
 
 As we can see, distinct eigenvalues are linearly independent. Considering the span of each eigenvectors, we can clearly see that each of their spans are independent. 
 
-\begin{prp}{}{} If $\lambda_1,\dots,\lambda_n$ are distinct eigenvalues of a matrix $A$, then $E_{\lambda_1},\dots,E_{\lambda_n}$ are independent. \tcbline
+\begin{prp}{}{} If $\lambda_1,\dots,\lambda_n$ are distinct eigenvalues of a matrix $A$, then $E_{\lambda_1},\dots,E_{\lambda_n}$ are independent. 
 \begin{proof}
 Clear from the fact that the basis of eigenspaces of different eigenvalues are linearly independent. 
 \end{proof}
@@ -434,7 +449,7 @@ Although not stated in the theorem, this does not mean that linear maps without 
 \pagebreak
 \section{The Cayley-Hamilton Theorem}
 \subsection{The Minimal Polynomial}
-\begin{thm}{}{} Let $\F$ be a field. Let $A$ be a $n\times n$ matrix over $\F$. Then there is some non-zero polynomial $p\in\F[x]$ of degree at most $n^2$ such that $p(A)=\vb{0}_n$. \tcbline\begin{proof} Note that $\{I,A,\dots,A^{n^2}\}$ is linerarly dependent in the vector space of $n\times n$ matrices. Thus there exists constant $c_0,\dots,c_{n^2}$ that are not all zero such that $$c_0I+\dots+c_{n^2}A^{n^2}=\vb{0}_n$$ Thus $p(x)=c_0+c_1x+\dots+c_{n^2}x^{n^2}$ is our desired polynomial. 
+\begin{thm}{}{} Let $\F$ be a field. Let $A$ be a $n\times n$ matrix over $\F$. Then there is some non-zero polynomial $p\in\F[x]$ of degree at most $n^2$ such that $p(A)=\vb{0}_n$. \begin{proof} Note that $\{I,A,\dots,A^{n^2}\}$ is linerarly dependent in the vector space of $n\times n$ matrices. Thus there exists constant $c_0,\dots,c_{n^2}$ that are not all zero such that $$c_0I+\dots+c_{n^2}A^{n^2}=\vb{0}_n$$ Thus $p(x)=c_0+c_1x+\dots+c_{n^2}x^{n^2}$ is our desired polynomial. 
 \end{proof}
 \end{thm}
 
@@ -442,7 +457,7 @@ Although not stated in the theorem, this does not mean that linear maps without 
 \begin{itemize}
 \item There is a unique monic non-zero polynomial $p(x)$ with minimal degree and coefficients in $\F$ such that $p(A)=\vb{0}_n$
 \item If $q(x)$ is any polynomial with $q(A)=\vb{0}_n$, then $p|q$
-\end{itemize}\tcbline\begin{proof} By the previous theorem, there exists a polynomial such that $p(A)=0$. Divide the polynomial by $c_{n^2}$ gives us the desired monic polynomial. Suppose that $p_1,p_2$ are distinct monic polynomials that are minimal such that $p_1(A)=0$ and $p_2(A)=0$, then $p=p_1-p_2$ is a non zero polynomial with a smaller degree and $p(A)=0$, contradicting the minimality of degree. Thus $p$ is unique. \\~\\
+\end{itemize}\begin{proof} By the previous theorem, there exists a polynomial such that $p(A)=0$. Divide the polynomial by $c_{n^2}$ gives us the desired monic polynomial. Suppose that $p_1,p_2$ are distinct monic polynomials that are minimal such that $p_1(A)=0$ and $p_2(A)=0$, then $p=p_1-p_2$ is a non zero polynomial with a smaller degree and $p(A)=0$, contradicting the minimality of degree. Thus $p$ is unique. \\
 Let $p(x)$ be the minimal polynomial in the above proof. Let $q(A)=0$. By division algorithm there exists some $r$ with smaller degree than $p$ such that $q=sp+r$. If $r$ is non-zero, then $r(A)=q(A)-s(A)p(A)=0$, contradiction of minimality, thus $r=0$ and $p|q$. 
 \end{proof}
 \end{thm}
@@ -450,16 +465,16 @@ Let $p(x)$ be the minimal polynomial in the above proof. Let $q(A)=0$. By divisi
 \begin{defn}{The Minimal Polynomial}{} The unique monic non-zero polynomial $\mu_A(x)$ of minimal degree with $\mu_A(A)=\vb{0}_n$ is called the minimal polynomial of $A$. 
 \end{defn}
 
-\begin{prp}{}{} Similar matrices have the same minimal polynomial. \tcbline\begin{proof} Similar matrices represent the same linear map, thus both have their minimal polynomial same as $T$, the linear map. 
+\begin{prp}{}{} Similar matrices have the same minimal polynomial. \begin{proof} Similar matrices represent the same linear map, thus both have their minimal polynomial same as $T$, the linear map. 
 \end{proof}
 \end{prp}
 
-\begin{prp}{}{} Let $D$ be a diagonal matrix with $\{d_1,\dots,d_r\}$ its unqiue diagonal entries, then $$\mu_D(x)=(x-d_1)\cdots(x-d_r)$$\tcbline
+\begin{prp}{}{} Let $D$ be a diagonal matrix with $\{d_1,\dots,d_r\}$ its unqiue diagonal entries, then $$\mu_D(x)=(x-d_1)\cdots(x-d_r)$$
 \begin{proof} For any diagonal matrix, $$p(D)=\begin{pmatrix}p(d_{11}) & 0 & \cdots & 0\\ 0 & p(d_{22}) & \cdots & 0 \\ \vdots & \vdots & \ddots & \vdots\\ 0 & 0 & \cdots & p(d_{nn})\end{pmatrix}$$ Thus $p(D)=0$ if and only if $p(d_{kk})=0$ for $k\in\{1,\dots,n\}$. Thus the smallest-degree monic polynomial vanishing at these points is clearly the polynomial above. 
 \end{proof}
 \end{prp}
 
-\begin{crl}{}{} Every diagonalizable matrix has its minimal polynomial a product of distinct linear factors. \tcbline
+\begin{crl}{}{} Every diagonalizable matrix has its minimal polynomial a product of distinct linear factors. 
 \begin{proof} Since diagonalizable matrix is similar to some diagonal matrix and they both have the same minimal polynomial, by the above proposition it is a product of distinct linear factors. 
 \end{proof}
 \end{crl}
@@ -470,14 +485,14 @@ We will later see that in fact, the above criterion is a neccessary and sufficie
 \end{lmm}
 
 \subsection{Cayley-Hamilton Theorem}
-\begin{thm}{Cayley-Hamilton}{} Let $c_A(x)=\det(A-xI)$ be the characteristic polynomial of the $n\times n$ matrix $A$ over a field $\F$, then $c_A(A)=0$. \tcbline
+\begin{thm}{Cayley-Hamilton}{} Let $c_A(x)=\det(A-xI)$ be the characteristic polynomial of the $n\times n$ matrix $A$ over a field $\F$, then $c_A(A)=0$. 
 \begin{proof} Firstly note that if $P(x)=\sum_{i=1}^nP_ix^i$ and $Q(x)=\sum_{j=1}^mQ_jx^j$ are polynomials with matrix coefficients where the matrix is $n\times n$, and $R(x)=\sum_{k=1}^{n+m}R_kx^k$ is the product of the two polynomials with $R_k=\sum_{i+j=k}P_iQ_j$, then if $M$ is a $n\times n$ matrix that commmutes with all of $Q_j$, then we have $$R(M)=P(M)Q(M)$$
-This can be seen by expanding the sums out. \\~\\
+This can be seen by expanding the sums out. \\
 Now take $Q(x)=A-xI$ and $P(x)=\adj(Q)$. Then we have $P(x)Q(x)=\det(A-xI)I=c_A(x)I$ by property of the adjoint. And since $A$ commutes with all coefficients of the polynomial of $Q$, we have $$c_A(A)I=P(A)Q(A)=P(A)\cdot 0=0$$ Thus $c_A(A)=0$. 
 \end{proof}
 \end{thm}
 
-\begin{crl}{}{} For any $A_{n\times n}$ over $\F$, we have $\mu_A|c_A$, and $\deg(\mu_A)\leq n$. \tcbline
+\begin{crl}{}{} For any $A_{n\times n}$ over $\F$, we have $\mu_A|c_A$, and $\deg(\mu_A)\leq n$. 
 \begin{proof}
 This is clear since $c_A(A)=0$ and $\mu_A$ is the minimal polynomial such that $\mu_A(A)=0$ by division with remainder. Since $\deg(c_A)=n$, $\deg(\mu_A)\leq n$. 
 \end{proof}
@@ -485,22 +500,22 @@ This is clear since $c_A(A)=0$ and $\mu_A$ is the minimal polynomial such that $
 
 This lemma may help with finding out the minimal polynomial. 
 
-\begin{lmm}{}{} Let $\lambda$ be an eigenvalue of $A$. Then $\mu_A(\lambda)=0$. \tcbline
+\begin{lmm}{}{} Let $\lambda$ be an eigenvalue of $A$. Then $\mu_A(\lambda)=0$. 
 \begin{proof}
 Let $v$ be an eigenvector of the eigenvalue $\lambda$ of $A$. Trivially $\mu_A(A)v=0$. But also since $$A^nv=\lambda^nv$$ we have $0=\mu_A(A)v=\mu_A(\lambda)v$. Since $v$ is nonzero we must have $\mu_A(\lambda)=0$. 
 \end{proof}
 \end{lmm}
 
-In general, to deduce the formula for the minimal polynomial, we follow three steps. \\~\\
+In general, to deduce the formula for the minimal polynomial, we follow three steps. \\
 Step 1: Find out the eigenvalues of the matrix. \\
 Step 2: List out the possibilities of the minimal degree. This is done using the fact that $\mu_A(\lambda)=0$ and $\deg(\mu_A)\leq n$. \\
-Step 3: Plug in the matrix to find out which polynomial has its root at $A$. \\~\\
+Step 3: Plug in the matrix to find out which polynomial has its root at $A$. \\
 There is another method to find out the formula using the following lemma. 
 
 \begin{lmm}{}{} Let $T:V\to V$ be a linear map. Let $$V=W_1\oplus\dots\oplus W_k$$ be the direct sum of invariant subspaces, meaning $W_1,\dots,W_k$ are invariant subspaces of $T$. Let $\mu_i(x)$ be the minimal polynomial of $T|_{W_i}$. Then $$\mu_T(x)=\lcm(\mu_1,\dots,\mu_k)$$
 \end{lmm}
 
-Using this, we derive a better algorithm to find the minimal polynomial: \\~\\
+Using this, we derive a better algorithm to find the minimal polynomial: \\
 Step 1: Take $v\neq 0$ an eigenvector and set $W=\text{span}\{v,T(v),T^2(v),\dots\}$. Then $W$ is invariant under $T$. Let $d$ be the minimal positive integer such that $v,T(v),\dots,T^d(v)$ are linearly dependent. Then $v,T(v),\dots,T^{d-1}(v)$ are linearly independent. Then we know that $\mu_T(x)$ has degree larger than $d$ since else $\mu_T(x)v$ will never be $0$. Then there is a nontrivial linear dependency relation of the form $$T^d(v)+c_{d-1}T^{d-1}(v)+\dots+c_1T(v)+c_0v=0$$\\
 Step 2: Consider the polynomial $$x^d+c_{d-1}x^{d-1}+\dots+c_1x+c_0$$ Then this is precisely the minimal polynomial. 
 
@@ -519,7 +534,7 @@ In the last sections, we looked into what kinds of matrices can have "nice" look
 \begin{itemize}
 \item $N_1(T,\lambda)\subseteq N_2(T,\lambda)\subseteq N_3(T,\lambda)\subseteq\dots$
 \item There exists some $k\in\N\setminus\{0\}$ such that $N_k(T,\lambda)=N_{k+1}(T,\lambda)=\cdots$
-\end{itemize} \tcbline
+\end{itemize} 
 \begin{proof}
 Let $v\in N_i(T,\lambda)$. This means that $(T-\lambda\text{id}_V)^iv=0$. Applying the linear map $T-\lambda\text{id}_V$ on both sides show that $v\in N_{i+1}(T,\lambda)$. 
 \end{proof}
@@ -555,12 +570,12 @@ This version of the decomposition is applicable to any in vector space and linea
 \item For $1\leq i\leq k$, we have $v_i\in N_i(A,\lambda)$
 \item For $2\leq i\leq k$, $(T-\lambda\text{id}_V)(v_i)=v_{i-1}$
 \item The vectors $v_1,\dots,v_k$ are linearly independent. 
-\end{itemize} \tcbline
+\end{itemize} 
 \begin{proof}
 \end{proof}
 \end{lmm}
 
-\begin{prp}{}{} Let $V$ be a vector space over a field $\F$. Let $T\in\text{End}_k(V)$. Let $\lambda$ be an eigenvalue of $T$. Let $v_1,\dots,v_k\in V$ be a Jordan chain of length $k$ with respect to $T$ and $\lambda$. Then the subspace $\F\langle v_1,\dots,v_k\rangle$ is invariant under $T$. \tcbline
+\begin{prp}{}{} Let $V$ be a vector space over a field $\F$. Let $T\in\text{End}_k(V)$. Let $\lambda$ be an eigenvalue of $T$. Let $v_1,\dots,v_k\in V$ be a Jordan chain of length $k$ with respect to $T$ and $\lambda$. Then the subspace $\F\langle v_1,\dots,v_k\rangle$ is invariant under $T$. 
 \begin{proof}
 Note that we just have to find out where $v_1,\dots,v_k$ are mapped to since they are a basis of our subspace. But $T(v_i)=\lambda v_i+v_{i-1}$ for $i\in\{2,\dots,k\}$ which is a linear combination of our basis, we must have that the subspace is invariant. 
 \end{proof}
@@ -585,12 +600,12 @@ The matrix is denoted by $J_{\lambda,k}$.
 \begin{itemize}
 \item Consider $A$ as a linear transformation $\F^n\to\F^n$. Then a Jordan basis for $A$ exists. 
 \item $A$ is similar to a direct sum of Jordan blocks. 
-\end{itemize} \tcbline
-\begin{proof} We will construct the basis with $3$ methods. They each contribute to part of the Jordan Basis. Firstly, we will obtain a basis of a subspace. We induct on $n$. The case of $n=1$ is trivial. \\~\\
-Now suppose $T:V\to V$ is a linear map with $\dim(V)=n$. We want to find a restriction of $T$ that is an automorphism to apply the induction hypothesis. Fix $\lambda$ to be one of the eigenvalues of $T$. This will be used throughout the entire proof. This $\lambda$ is possible because the ground field is algebraically closed. Now I claim that $U=\im(T-\lambda I)$ is invariant under $T$. If this is true, then $T|_U:U\to U$ can be used to apply induction hypothesis. So all we have to show is that $U$ is $T$-invariant and that $\dim(U)<\dim(V)$. The second item must be true by the rank nullity theorem. There must be an eigenvector in $\ker(T-\lambda I)$. Thus $\ker(T-\lambda I)\geq 1$ which implies that $\dim(U)<n$ by the rank nullity theorem. Now we prove that $U$ is invariant. Let $u\in U$, I show that $T(u)\in U$. If $u\in U$, then $u=(T-\lambda I)(v)$ for some $v\in V$, hence $$T(u)=T(T-\lambda I)(v)=(T-\lambda I)(T(v))\in\im(T-\lambda I)=U$$ Thus we have proven that $T|_U:U\to U$. Apply induction hypothesis here to obtain a Jordan Basis for $T_U$. Call that Jordan Basis $e_1,\dots,e_m$. \\~\\
-We now construct our second set of vectors. Recall that a Jordan Basis is a string of $l$ Jordan Chains. Let $v_1,\dots,v_k$ denote one of the Jordan Chains. We can extend this Jordan Chain one more by setting $(T-\lambda I)^{k+1}(v_{k+1})=0$. Do the same thing for everey Jordan Chain, and relabel them to $w_1,\dots,w_l$. As a side note, the two set of vectors we have now still form a Jordan Basis because we simply extended every Jordan Chain one more. \\~\\
-For the final set of vectors, observe that the first vector of each of the $l$ Jordan Chains are eigenvectors of $T|_U$ with its eigenvalue being $\lambda$. This is because by definition of Jordan Chains, $T|_U(v_1)=\lambda v_1$. Also note that those $l$ vectors are linearly independent. Thus the first vectors of each of the $l$ Jordan Chains span an $l$ dimensional subspace of the eigenspace of $\lambda$. Recall that the eigenspace of $\lambda$ has dimension $\dim(V)-\dim(U)=\dim(\ker(T-\lambda I))$. To minimize notation let $m=\dim(U)$. Thus by extension theorem we can extend the basis of the $l$ dimensional subspace to $\ker(T-\lambda I)$. Call the extension vectors $w_{l+1},\dots,w_{n-m}$. As a side note, these $n-m-l$ vectors each Jordan Chains of length $1$. Thus we have complete our last set of vectors. \\~\\
-We have $n$ vectors $$e_1,\dots,e_m,w_1,\dots,w_l,w_{l+1},\dots,w_{n-m}$$ Thus we only need to prove that they are linearly independent. Let $x=\sum_{k=1}^m\beta_me_m$. Let $$\sum_{i=1}^{n-m}\alpha_iw_i+x=0$$ Applying $T-\lambda I$ on both sides give $$\sum_{i=1}^{l}\alpha_i(T-\lambda I)w_i+(T-\lambda I)(x)=0$$ Since $w_{l+1},\dots,w_{n-m}$ is in $\ker(T-\lambda I)$, they become $0$. Now recall that our construction of $w_1,\dots,w_l$ is made by extending our Jordan Chains. So applying $(T-\lambda I)$ moves down our Jordan Chain. This means that $(T-\lambda I)x$ no longer contains the last term of each Jordan Chain and are linear combinations of $\{e_1,\dots,e_m\}\setminus\{\text{Last Term of each Jordan Chain}\}$, while all of the $(T-\lambda I)(w_1),\dots,(T-\lambda I)(w_l)$ are all last members of ecah Jordan Chain. From the fact that $e_1,\dots,e_m$ are a basis, we have $\alpha_1=\dots=\alpha_l=0$. \\~\\
+\end{itemize} 
+\begin{proof} We will construct the basis with $3$ methods. They each contribute to part of the Jordan Basis. Firstly, we will obtain a basis of a subspace. We induct on $n$. The case of $n=1$ is trivial. \\
+Now suppose $T:V\to V$ is a linear map with $\dim(V)=n$. We want to find a restriction of $T$ that is an automorphism to apply the induction hypothesis. Fix $\lambda$ to be one of the eigenvalues of $T$. This will be used throughout the entire proof. This $\lambda$ is possible because the ground field is algebraically closed. Now I claim that $U=\im(T-\lambda I)$ is invariant under $T$. If this is true, then $T|_U:U\to U$ can be used to apply induction hypothesis. So all we have to show is that $U$ is $T$-invariant and that $\dim(U)<\dim(V)$. The second item must be true by the rank nullity theorem. There must be an eigenvector in $\ker(T-\lambda I)$. Thus $\ker(T-\lambda I)\geq 1$ which implies that $\dim(U)<n$ by the rank nullity theorem. Now we prove that $U$ is invariant. Let $u\in U$, I show that $T(u)\in U$. If $u\in U$, then $u=(T-\lambda I)(v)$ for some $v\in V$, hence $$T(u)=T(T-\lambda I)(v)=(T-\lambda I)(T(v))\in\im(T-\lambda I)=U$$ Thus we have proven that $T|_U:U\to U$. Apply induction hypothesis here to obtain a Jordan Basis for $T_U$. Call that Jordan Basis $e_1,\dots,e_m$. \\
+We now construct our second set of vectors. Recall that a Jordan Basis is a string of $l$ Jordan Chains. Let $v_1,\dots,v_k$ denote one of the Jordan Chains. We can extend this Jordan Chain one more by setting $(T-\lambda I)^{k+1}(v_{k+1})=0$. Do the same thing for everey Jordan Chain, and relabel them to $w_1,\dots,w_l$. As a side note, the two set of vectors we have now still form a Jordan Basis because we simply extended every Jordan Chain one more. \\
+For the final set of vectors, observe that the first vector of each of the $l$ Jordan Chains are eigenvectors of $T|_U$ with its eigenvalue being $\lambda$. This is because by definition of Jordan Chains, $T|_U(v_1)=\lambda v_1$. Also note that those $l$ vectors are linearly independent. Thus the first vectors of each of the $l$ Jordan Chains span an $l$ dimensional subspace of the eigenspace of $\lambda$. Recall that the eigenspace of $\lambda$ has dimension $\dim(V)-\dim(U)=\dim(\ker(T-\lambda I))$. To minimize notation let $m=\dim(U)$. Thus by extension theorem we can extend the basis of the $l$ dimensional subspace to $\ker(T-\lambda I)$. Call the extension vectors $w_{l+1},\dots,w_{n-m}$. As a side note, these $n-m-l$ vectors each Jordan Chains of length $1$. Thus we have complete our last set of vectors. \\
+We have $n$ vectors $$e_1,\dots,e_m,w_1,\dots,w_l,w_{l+1},\dots,w_{n-m}$$ Thus we only need to prove that they are linearly independent. Let $x=\sum_{k=1}^m\beta_me_m$. Let $$\sum_{i=1}^{n-m}\alpha_iw_i+x=0$$ Applying $T-\lambda I$ on both sides give $$\sum_{i=1}^{l}\alpha_i(T-\lambda I)w_i+(T-\lambda I)(x)=0$$ Since $w_{l+1},\dots,w_{n-m}$ is in $\ker(T-\lambda I)$, they become $0$. Now recall that our construction of $w_1,\dots,w_l$ is made by extending our Jordan Chains. So applying $(T-\lambda I)$ moves down our Jordan Chain. This means that $(T-\lambda I)x$ no longer contains the last term of each Jordan Chain and are linear combinations of $\{e_1,\dots,e_m\}\setminus\{\text{Last Term of each Jordan Chain}\}$, while all of the $(T-\lambda I)(w_1),\dots,(T-\lambda I)(w_l)$ are all last members of ecah Jordan Chain. From the fact that $e_1,\dots,e_m$ are a basis, we have $\alpha_1=\dots=\alpha_l=0$. \\
 Our sum now becomes $(T-\lambda I)x=0$. Which means that $x\in\ker(T-\lambda I)$. Now our original sum becomes $$\sum_{i=l+1}^{n-m}\alpha_iw_i+x=0$$ By construction, $w_{l+1},\dots,w_{n-m}$ extends a basis of the eigenspace of $T|_U$ for $\lambda$, thus $\alpha_{l+1}=\dots=\alpha_{n-m}=0$. Also since $e_1,\dots,e_m$ is a basis of $U$, we have $\beta_1=\dots=\beta_m=0$. 
 Finally by the above corollary, in a Jordan Basis, the matrix of $T$ is a direct sum of Jordan Blocks. 
 \end{proof}
@@ -606,7 +621,7 @@ Finally by the above corollary, in a Jordan Basis, the matrix of $T$ is a direct
 \begin{itemize}
 \item The number of Jordan Blocks of $J$ with eigenvalue $\lambda$ is equal to $\dim(\ker(A-\lambda I))$
 \item The number of Jordan Blocks of $J$ with eigenvalue $\lambda$ of degree at least $i$ is equal to $\dim(N_i(A,\lambda))-\dim(N_{i-1}(A,\lambda))$
-\end{itemize}\tcbline\begin{proof} Since similar matrices have the same dimensions for their generalized eigenspaces corresponding to their eigenvalue, WLOG take $A=J=J_{\lambda_1,k_1}\oplus\dots\oplus J_{\lambda_s,k_s}$. However, note that the dimension of $N_i(A\oplus B,\lambda)$ is equal to $\dim(N_i(A,\lambda))+\dim(N_i(B,\lambda))$. So we just have to  prove the theorem for a single Jordan Block. \\~\\
+\end{itemize}\begin{proof} Since similar matrices have the same dimensions for their generalized eigenspaces corresponding to their eigenvalue, WLOG take $A=J=J_{\lambda_1,k_1}\oplus\dots\oplus J_{\lambda_s,k_s}$. However, note that the dimension of $N_i(A\oplus B,\lambda)$ is equal to $\dim(N_i(A,\lambda))+\dim(N_i(B,\lambda))$. So we just have to  prove the theorem for a single Jordan Block. \\
 Since $(J_{\lambda,k}-\lambda I)^i$ has a single diagonal line of ones $i$ places above the diagonal for $i<k$, and is $0$ for $i\geq k$, the dimension of its kernel is $i$ for $0\leq i\leq k$ and k for $i\geq k$. 
 \end{proof}
 \end{prp}
@@ -636,15 +651,15 @@ Since $(J_{\lambda,k}-\lambda I)^i$ has a single diagonal line of ones $i$ place
 \end{itemize}
 \end{prp}
 
-To finish this section, we show the process of determining the Jordan Canonical form of a matrix. The steps are usually as follows: \\~\\
+To finish this section, we show the process of determining the Jordan Canonical form of a matrix. The steps are usually as follows: \\
 Step 1: Find out the nullity of $A-\lambda I$ as this gives us the number of Jordan Blocks with eigenvalue $\lambda$. \\
-Step 2: To find out the number of Jordan blocks with eigenvalue $\lambda$ and size at least $i$, we calculate $\dim(\ker(A-\lambda I_n)^i)-\dim(\ker(A-\lambda I)^{i-1})$. \\~\\
-To find out the change of basis matrix, meaning the Jordan Chains, we do the following step: \\~\\
-Step 3: Find out the last one in the chain $v_k$ by solving $(A-\lambda I)^kv_k=0$ while restricting $v_k$ such that $(A-\lambda I)^{k-1}v_k\neq 0$, and then proceed to find out $v_{k-1}$ by $(A-\lambda I)^{k-1}v_k=v_{k-1}$ and vice versa. \\~\\
+Step 2: To find out the number of Jordan blocks with eigenvalue $\lambda$ and size at least $i$, we calculate $\dim(\ker(A-\lambda I_n)^i)-\dim(\ker(A-\lambda I)^{i-1})$. \\
+To find out the change of basis matrix, meaning the Jordan Chains, we do the following step: \\
+Step 3: Find out the last one in the chain $v_k$ by solving $(A-\lambda I)^kv_k=0$ while restricting $v_k$ such that $(A-\lambda I)^{k-1}v_k\neq 0$, and then proceed to find out $v_{k-1}$ by $(A-\lambda I)^{k-1}v_k=v_{k-1}$ and vice versa. \\
 
 There are also extra information that we can use to determine the JCF: \\
 The degree of $(x-\lambda)$ in $\mu_A$ indicates the maximum size of Jordan Blocks with eigenvalue $\lambda$. \\
-The degree of $(x-\lambda)$ in $c_A$ indicates the total size of used in the JCF of all Jordan Blocks with eigenvalue $\lambda$. \\~\\
+The degree of $(x-\lambda)$ in $c_A$ indicates the total size of used in the JCF of all Jordan Blocks with eigenvalue $\lambda$. \\
 
 We give an example of finding the JCF of a matrix. 
 
@@ -652,16 +667,16 @@ We give an example of finding the JCF of a matrix.
 1 & 0 & 1\\
 0 & 1 & 0\\
 0 & 1 & 2
-\end{pmatrix}$$ \tcbline
+\end{pmatrix}$$ 
 \begin{proof}
-We begin by finding out the eigenvalues of $A$. We have that $c_A(x)=\det(A-xI)=(1-x)^2(2-x)$. This means that the eigenvalues are $1$ and $2$. Now we begin with step 1. \\~\\
+We begin by finding out the eigenvalues of $A$. We have that $c_A(x)=\det(A-xI)=(1-x)^2(2-x)$. This means that the eigenvalues are $1$ and $2$. Now we begin with step 1. \\
 For eigenvalue $1$, we have that row reduced form of $A-I$ is $$\begin{pmatrix}
 0 & 1 & 0\\
 0 & 0 & 1\\
 0 & 0 & 0
 \end{pmatrix}$$
-Thus the nullity of $A-I$ is $1$. This means that the number of Jordan blocks with eigenvalue $1$ is $1$. Using information from $c_A$, we know that the total size used for the eigenvalue $1$ is $2$. This means that there is exactly one Jordan block of size $2$ in the JCF of $A$. \\~\\
-This leaves the fact that the remaining Jordan block of size $1$ being the eigenvalue $2$. \\~\\
+Thus the nullity of $A-I$ is $1$. This means that the number of Jordan blocks with eigenvalue $1$ is $1$. Using information from $c_A$, we know that the total size used for the eigenvalue $1$ is $2$. This means that there is exactly one Jordan block of size $2$ in the JCF of $A$. \\
+This leaves the fact that the remaining Jordan block of size $1$ being the eigenvalue $2$. \\
 With this, we complete the JCF of $A$ with $$J=\begin{pmatrix}
 1 & 1 & 0\\
 0 & 1 & 0\\
@@ -698,7 +713,7 @@ We can choose $v_3=\begin{pmatrix}1\\ 0\\ 1\end{pmatrix}$. This means that $$P=\
 
 We note here that if we consider vector spaces as a $k$-module, then saying $V$ semisimple is the same as saying $V$ is diagonalizable. 
 
-\begin{prp}{}{} Let $k$ be a field. Let $V$ be a finite dimensional vector space over $k$. Let $T\in\text{End}(V)$. Then $T$ admits a unique Jordan-Chevalley decomposition. \tcbline
+\begin{prp}{}{} Let $k$ be a field. Let $V$ be a finite dimensional vector space over $k$. Let $T\in\text{End}(V)$. Then $T$ admits a unique Jordan-Chevalley decomposition. 
 \begin{proof}
 Let $T=PJP^{-1}$ be the Jordan canonical form of $x$. Then $J$ has non-zero entries exactly at the $(i,i)$th and $(i,i+1)$ positions. Therefore we can decompose $J$ as a sum of a diagonal matrix $D_J$ and a matrix $D_J$ with non-zero entry only on $(i,i+1)$th positions. But $S_J$ must then be nilpotent. Since $J$ is given in block form, we can also consider $D_J$ and $S_J$ as blocks. But diagonal matrices commute with all matrices. Hence $D_JS_J=S_JD_J$. Now let $D=PD_JP^{-1}$ and $S=PS_JP^{-1}$. I claim that $D,S$ consist of ta Jordan-Chevalley decomposition. We have that $T=PJP^{-1}=P(D_J+S_J)P^{-1}=PD_JP^{-1}+PS_JP^{-1}=D+S$. Also, $D$ is diagonalizable since $D=PD_JP^{-1}$ and $D_J$ is diagonalizable. Now we know that $S_J^n=0$ for some $n\in\N$. Then $S^n=PS_J^nP^{-1}=0$ hence $S$ is also nilpotent. Finally, we have that $$DS=PD_JP^{-1}PS_JP^{-1}=PD_JS_JP^{-1}=PS_JD_JP^{-1}=SD$$ hence we proved the existence of such a decomposition. 
 \end{proof}
@@ -755,7 +770,7 @@ Explicitly, the vector space operations are defined as follows.
 \begin{defn}{The Double Dual}{} Let $V$ be a vector space over a field $\F$. Define the double dual of $V$ to be the vector space $$V^{\ast\ast}=\Hom(\Hom(V,\F),\F)$$
 \end{defn}
 
-\begin{thm}{}{} Let $V$ be a vector space over a field $k$. Define the function $\text{ev}_V:V\to V^{\ast\ast}$ by $$\text{ev}(v)=\left(\substack{E_v:V^\ast\to\R\\f\mapsto f(v)}\right)$$ Then $\text{ev}$ is an injective linear transformation. Moreover $\text{ev}_V$ is natural in the following sense. If $W$ is another vector space over $k$ and $\phi:V\to W$ is a linear map, then the following diagram commutes: \\~\\
+\begin{thm}{}{} Let $V$ be a vector space over a field $k$. Define the function $\text{ev}_V:V\to V^{\ast\ast}$ by $$\text{ev}(v)=\left(\substack{E_v:V^\ast\to\R\\f\mapsto f(v)}\right)$$ Then $\text{ev}$ is an injective linear transformation. Moreover $\text{ev}_V$ is natural in the following sense. If $W$ is another vector space over $k$ and $\phi:V\to W$ is a linear map, then the following diagram commutes: \\
 \adjustbox{scale=1,center}{\begin{tikzcd}
 	V & W \\
 	{V^{\ast\ast}} & {W^{\ast\ast}}
@@ -763,7 +778,7 @@ Explicitly, the vector space operations are defined as follows.
 	\arrow["{\text{ev}_V}"', from=1-1, to=2-1]
 	\arrow["{\text{ev}_W}", from=1-2, to=2-2]
 	\arrow["{\phi^{\ast\ast}}"', from=2-1, to=2-2]
-\end{tikzcd}}\\~\\
+\end{tikzcd}}\\
 \end{thm}
 
 \begin{lmm}{}{} Let $V$ be a vector space over a field. Then the map $$\text{ev}:V\to V^{\ast\ast}$$ is an isomorphism. 
@@ -781,7 +796,7 @@ Explicitly, the vector space operations are defined as follows.
 \frac{1}{2}a_{21} & a_{22} & \cdots & \frac{1}{2}a_{2n}\\
 \vdots & \vdots & \ddots & \vdots\\
 \frac{1}{2}a_{n1} & \frac{1}{2}a_{n2} & \dots & a_{nn}
-\end{pmatrix}\begin{pmatrix}x_1 \\ \vdots \\ x_n\end{pmatrix}$$ In particular, this matrix is symmetric with $a_{ij}=a_{ji}$ for $i,j\in\{1,\dots,n\}$. \tcbline
+\end{pmatrix}\begin{pmatrix}x_1 \\ \vdots \\ x_n\end{pmatrix}$$ In particular, this matrix is symmetric with $a_{ij}=a_{ji}$ for $i,j\in\{1,\dots,n\}$. 
 \begin{proof}
 Multiplying out the entries of the matrix multiplication gives the original quadratic form. 
 \end{proof}
@@ -798,9 +813,9 @@ Multiplying out the entries of the matrix multiplication gives the original quad
 
 Using this we can establish a one-to-one correspondence $$\left\{q:\F^n\to\F\;|\;q\text{ is a quadratic form}\right\}\;\;\overset{1:1}{\longleftrightarrow}\;\;\frac{\left\{M\in M_{n\times n}(\F)\;|\;M\text{ is symmetric}\right\}}{\cong}$$ where $\cong$ denotes the congruence relation. Moreover, within each congruence class of a quadratic form $q$ contains all possible symmetric matrices that represent $q$ in all possible bases. 
 
-\begin{thm}{}{} Let $q(x_1,\dots,x_n)$ be a quadratic form in $n$ variables over a field $K$ whose characteristic is not $2$. Then there exists a basis such that $q(y_1,\dots,y_n)=c_1y_1^2+\dots+c_ny_n^2$ for some $c_1,\dots,c_n\in K$. \tcbline
+\begin{thm}{}{} Let $q(x_1,\dots,x_n)$ be a quadratic form in $n$ variables over a field $K$ whose characteristic is not $2$. Then there exists a basis such that $q(y_1,\dots,y_n)=c_1y_1^2+\dots+c_ny_n^2$ for some $c_1,\dots,c_n\in K$. 
 \begin{proof}
-There is a shorter proof for this theorem, but for the sake of the construction of $c_1,\dots,c_n$, we will prove the theorem constructively. Suppose that $q$ is represented by the symmetric matrix $A=(a_{ij})_{n\times n}$ with respect to the basis $b_1,\dots,b_n$. There are three steps in the construction. I use $b_1,\dots,b_n$ to indicate the old basis and $b_1',\dots,b_n'$ to indicate the basis after the step. \\~\\
+There is a shorter proof for this theorem, but for the sake of the construction of $c_1,\dots,c_n$, we will prove the theorem constructively. Suppose that $q$ is represented by the symmetric matrix $A=(a_{ij})_{n\times n}$ with respect to the basis $b_1,\dots,b_n$. There are three steps in the construction. I use $b_1,\dots,b_n$ to indicate the old basis and $b_1',\dots,b_n'$ to indicate the basis after the step. \\
 Step 1: Arrange such that $q(b_1)\neq 0$. There are four cases here. 
 \begin{itemize}
 \item If $a_{11}\neq 0$, then we are done. 
@@ -815,7 +830,7 @@ a_{1n}+a_{kn} & a_{n2} & \cdots & a_{nk} & \cdots & 0
 \end{pmatrix}$$
 \item If $a_{ij}=0$ for all $i,j\in\{1,\dots,n\}$ then it is the zero function. 
 \end{itemize}
-In this step the change of basis matrix is just the elementary matrices. \\~\\
+In this step the change of basis matrix is just the elementary matrices. \\
 
 Step 2: Now we modify $b_2,\dots,b_n$ to make them orthogonal to $b_1$. Now set $b_k'=b_k-\frac{a_{1k}}{a_{11}}b_1$. This way, the matrix entry $a_{1k}$ becomes zero. Now the change of basis matrix becomes $$P=\begin{pmatrix}
 1 & -\frac{a_{12}}{a_{11}} & \cdots & -\frac{a_{1n}}{a_{11}}\\
@@ -823,7 +838,7 @@ Step 2: Now we modify $b_2,\dots,b_n$ to make them orthogonal to $b_1$. Now set 
 \vdots & \vdots & \ddots & \vdots\\
 0 & 0 & \cdots & 0
 \end{pmatrix}$$
-After this step all the change of basis matrix should be compiled and calculated so that the new matrix for the quadratic form can be formed. \\~\\
+After this step all the change of basis matrix should be compiled and calculated so that the new matrix for the quadratic form can be formed. \\
 Step 3: Since the matrix for the quadratic form is now $$\begin{pmatrix}
 a_{11} & 0 & \cdots & 0\\
 0 & ? & \cdots & ?\\
@@ -836,7 +851,7 @@ We can induct on $n$ by repeating the process of step 1 with the entry $a_{22}$ 
 
 This main theorem of quadratic forms shows that every quadratic form is congruent to a diagonal matrix. It also proves that within every equivalence class of congruent matrices, there must be at least one diagonal matrix. To illustrate the process of reduction, we look an example. 
 
-\begin{eg}{}{} Find a nice basis for the quadratic form $q\left(\begin{pmatrix}x\\y\\z\end{pmatrix}\right)=xy+3yz-5xz$. \tcbline
+\begin{eg}{}{} Find a nice basis for the quadratic form $q\left(\begin{pmatrix}x\\y\\z\end{pmatrix}\right)=xy+3yz-5xz$. 
 \begin{proof}
 Using the formula, we construct the matrix of $q$ as $$A=\begin{pmatrix}
 0 & \frac{1}{2} & -\frac{5}{2}\\
@@ -853,7 +868,7 @@ To change $A$ into the new matrix $A'$, we simply replace $r_1$ by $r_1+r_2$ and
 \frac{1}{2} & 0 & \frac{3}{2}\\
 -1 & \frac{3}{2} & 0
 \end{pmatrix}$$
-We keep track of changing the basis for clarity. We now have $A'=(P')^TAP'$. \\~\\
+We keep track of changing the basis for clarity. We now have $A'=(P')^TAP'$. \\
 The next step is to set the new basis to $b_2''=b_2'-\frac{1}{2}b_1'$ and $b_3''=b_3'+b_1'$. This means that the new basis is now $\{b_1+b_2,\frac{1}{2}(b_2-b_1),b_1+b_2+b_3\}$. The change of basis from this basis back to the old one is now $$P''=\begin{pmatrix}
 1 & -\frac{1}{2} & 1\\
 1 & \frac{1}{2} & 1\\
@@ -863,7 +878,7 @@ The next step is to set the new basis to $b_2''=b_2'-\frac{1}{2}b_1'$ and $b_3''
 0 & -\frac{1}{4} & 2\\
 0 & 2 & -1
 \end{pmatrix}$$
-We now have $A''=(P'')^TAP''$. \\~\\
+We now have $A''=(P'')^TAP''$. \\
 Now we perform the next change of basis. We set $b_3'''=b_3''-\frac{2}{-\frac{1}{4}}b_2''=b_3''+8b_2''$. Now the new basis is $\{b_1+b_2,\frac{1}{2}(b_2-b_1),-3b_1+5b_2+b_3\}$. The change of basis matrix is now $$P'''=\begin{pmatrix}
 1 & -\frac{1}{2} & -3\\
 1 & \frac{1}{2} & 5\\
@@ -894,7 +909,7 @@ In general, this result of diagonalization is different from that of similar mat
 \end{pmatrix}$$
 \end{defn}
 
-\begin{prp}{}{} Let $\F$ be a field. Let $V,W$ be finite dimensional vector spaces over $\F$. Let $E$ be a basis of $V$ and let $F$ be a basis of $W$. Let $\tau:V\times W\to\F$ be a bilinear map. Let $A$ be the matrix representing $\tau$ under the given bases. Then for any $v\in V$ and $w\in W$, we have $$\tau(v,w)=v^TAw$$ \tcbline
+\begin{prp}{}{} Let $\F$ be a field. Let $V,W$ be finite dimensional vector spaces over $\F$. Let $E$ be a basis of $V$ and let $F$ be a basis of $W$. Let $\tau:V\times W\to\F$ be a bilinear map. Let $A$ be the matrix representing $\tau$ under the given bases. Then for any $v\in V$ and $w\in W$, we have $$\tau(v,w)=v^TAw$$ 
 \begin{proof}
 Simple to see by expanding the matrix multiplication. 
 \end{proof}
@@ -952,7 +967,7 @@ Then we have that $$B=P^TAQ$$
 \item $q$ is a quadratic form
 \item $q(cv)=c^2v$ for $c\in K$ and $v\in V$ and $\tau(v,w)=\frac{1}{2}(q(v+w)-q(v)-q(w))$ is a bilinear form on $V$
 \item $q(v)=\tau(v,v)$ is a symmetric bilinear form on $V$
-\end{itemize} \tcbline
+\end{itemize} 
 \begin{proof}
 Let $q:V\to K$ be a function. 
 \begin{itemize}
@@ -1034,7 +1049,7 @@ In this case $V$ is called an inner product space.
 \begin{prp}{}{} Let $\F=\R$ or $\C$. Let $(V,\langle-,-\rangle)$ be an inner product space over $\F$. Then the map $\|-\|:V\to\F$ defined by $$\|v\|=\langle v,v\rangle$$ is a norm for $V$. 
 \end{prp}
 
-\begin{prp}{Cauchy-Schwartz Inquality}{} Let $\F=\R$ or $\C$. Let $(V,\langle-,-\rangle)$ be an inner product space over $\F$. Let $\|-\|$ be the induced norm from the inner product. For all $x,y\in V$, we have $$\abs{\langle x,y\rangle}\leq\|x\|\cdot\|y\|$$ with equality if and only if $y=\lambda x$ for some $\lambda\in\F$. \tcbline
+\begin{prp}{Cauchy-Schwartz Inquality}{} Let $\F=\R$ or $\C$. Let $(V,\langle-,-\rangle)$ be an inner product space over $\F$. Let $\|-\|$ be the induced norm from the inner product. For all $x,y\in V$, we have $$\abs{\langle x,y\rangle}\leq\|x\|\cdot\|y\|$$ with equality if and only if $y=\lambda x$ for some $\lambda\in\F$. 
 \begin{proof} Let $z=x-\frac{\abs{\langle x,y\rangle}}{\|y\|^2}y$. We have $\|z\|\geq0$. 
 \begin{align*}
 \|z\|^2&=\left\langle x-\frac{\abs{\langle x,y\rangle}}{\|y\|^2}y,x-\frac{\abs{\langle x,y\rangle}}{\|y\|^2}y\right\rangle\\
@@ -1056,7 +1071,7 @@ Note that we have equality if and only if $\|z\|=0$, meaning $x=\frac{\abs{\lang
 \begin{defn}{The Adjoint of a Linear Map}{} Let $V$ be an inner product space. Let $T\in\text{End}(V)$ be a linear map. A map $T^\ast\in\text{End}(V)$ is said to be the adjoint of $T$ if $$\langle T(v), w\rangle=\langle v, T^\ast(w)\rangle$$ for all $v,w\in V$. 
 \end{defn}
 
-\begin{prp}{}{} Let $V$ be an inner product space and $T:V\to V$ be a linear map. Then the adjoint of $T$ exists and is unique. \tcbline
+\begin{prp}{}{} Let $V$ be an inner product space and $T:V\to V$ be a linear map. Then the adjoint of $T$ exists and is unique. 
 \begin{proof}
 Let $T$ be a linear map. Then the function $\tau(v,w)=\langle T(v), w\rangle$ is a bilinear form since the inner product is bilinear. But we know that bilinear forms can be represented by a matrix multiplication, namely $\tau(v,w)=v^TAw$ where $A$ is defined as in theorem 1.3.2. Then treating $Aw$ as the linear map $T^\ast(w)$ and since $v^Tw=v\cdot w$, we have that $\tau(v,w)=v\cdot T^\ast(w)$ thus proving existence. Uniqueness follows naturally by construction of the matrix $A$. 
 \end{proof}
@@ -1068,7 +1083,7 @@ Let $T$ be a linear map. Then the function $\tau(v,w)=\langle T(v), w\rangle$ is
 \begin{defn}{Self-Adjoint}{} Let $V$ be an inner product space. Let $T\in\text{End}(V)$ be a linear map. We say that $T$ is self-adjoint if $T=T^\ast$. 
 \end{defn}
 
-\begin{prp}{}{} Let $V$ be an finite dimensional inner product space. Let $T\in\text{End}(V)$ be a linear map. Let $A$ be a matrix representing $T$. Then $T$ is self-adjoint if and only if $A$ is symmetric. \tcbline
+\begin{prp}{}{} Let $V$ be an finite dimensional inner product space. Let $T\in\text{End}(V)$ be a linear map. Let $A$ be a matrix representing $T$. Then $T$ is self-adjoint if and only if $A$ is symmetric. 
 \begin{proof}
 Let $T$ be self-adjoint. Then $Av\cdot w=v\cdot Aw$ for all $v,w\in V$. 
 \end{proof}
@@ -1124,7 +1139,7 @@ TBA: Invariance under choice of basis.
 \subsection{Orthogonality with Inner Products}
 With the added benefit of positive definiteness, we can produce bases for inner product spaces that are pairwise orthogonal. 
 
-\begin{thm}{Pythagorean Theorem}{} Let $\F=\R$ or $\C$. Let $(V,\langle-,-\rangle$ be an inner product space over $\F$. Let $\|-\|$ be the induced norm. If $u,v\in V$ are orthogonal, then we have $$\|u+v\|^2=\|u\|^2+\|v\|^2$$ \tcbline
+\begin{thm}{Pythagorean Theorem}{} Let $\F=\R$ or $\C$. Let $(V,\langle-,-\rangle$ be an inner product space over $\F$. Let $\|-\|$ be the induced norm. If $u,v\in V$ are orthogonal, then we have $$\|u+v\|^2=\|u\|^2+\|v\|^2$$ 
 \begin{proof}
 We have that 
 \begin{align*}
@@ -1136,7 +1151,7 @@ We have that
 \end{proof}
 \end{thm}
 
-\begin{thm}{Orthogonal Decomposition}{} Let $\F=\R$ or $\C$. Let $(V,\langle-,-\rangle$ be an inner product space over $\F$. Let $\|-\|$ be the induced norm. Let $u,v\in V$ and $v\neq 0$. Set $c=\frac{\langle u,v\rangle}{\|v\|^2}$ and $w=u-\frac{\langle u,v\rangle}{\|v\|^2}v$. Then $\langle w,v\rangle=0$ and $u=cv+w$. \tcbline
+\begin{thm}{Orthogonal Decomposition}{} Let $\F=\R$ or $\C$. Let $(V,\langle-,-\rangle$ be an inner product space over $\F$. Let $\|-\|$ be the induced norm. Let $u,v\in V$ and $v\neq 0$. Set $c=\frac{\langle u,v\rangle}{\|v\|^2}$ and $w=u-\frac{\langle u,v\rangle}{\|v\|^2}v$. Then $\langle w,v\rangle=0$ and $u=cv+w$. 
 \begin{proof}
 The fact that $u=cv+w$ is natural so we only have to prove that $\langle w,v\rangle=0$. We have that 
 \begin{align*}
@@ -1150,7 +1165,7 @@ Thus we are done.
 \end{proof}
 \end{thm}
 
-\begin{prp}{}{} Let $\F=\R$ or $\C$. Let $(V,\langle-,-\rangle)$ be an inner product space over $\F$. Let $v_1,\dots,v_n\in V\setminus\{0\}$ be pairwise orthogonal. Then $v_1,\dots,v_n$ are linearly independent.  \tcbline
+\begin{prp}{}{} Let $\F=\R$ or $\C$. Let $(V,\langle-,-\rangle)$ be an inner product space over $\F$. Let $v_1,\dots,v_n\in V\setminus\{0\}$ be pairwise orthogonal. Then $v_1,\dots,v_n$ are linearly independent.  
 \begin{proof}
 We want to show that $v_n=\sum_{k=1}^{n-1}a_kv_k$ implies $a_1=\dots=a_{n-1}=0$. For $i\neq n$, we have that $$0=\langle v_n, v_i\rangle=\sum_{k=1}^{n-1}a_k\tau(v_k,v_i)=a_i\langle v_i,v_i\rangle$$ Since $\langle-,-\rangle$ is positive definite, $\langle v_i,v_i\rangle\neq 0$. Then $a_i=0$. 
 \end{proof}
@@ -1168,7 +1183,7 @@ We want to show that $v_n=\sum_{k=1}^{n-1}a_kv_k$ implies $a_1=\dots=a_{n-1}=0$.
 \begin{itemize}
 \item $\|v\|^2=\sum_{k=1}^n\abs{a_k}^2$
 \item $v=\sum_{k=1}^n\langle v,b_k\rangle b_k$
-\end{itemize} \tcbline
+\end{itemize} 
 \begin{proof}
 We have that 
 \begin{align*}
@@ -1177,7 +1192,7 @@ We have that
 &=\sum_{i=1}^n\sum_{j=1}^na_ia_j\delta_{ij}\\
 &=\sum_{k=1}^n\abs{a_k}^2
 \end{align*}
-and we are done. \\~\\
+and we are done. \\
 
 Applying the inner product with $b_i$ for each $i\in\{1,\dots,n\}$ gives $a_i=\langle v,b_i\rangle$ since $\langle b_i,b_k\rangle=0$ for any $k\neq i$. Thus if $v=\sum_{k=1}^na_kb_k$ then $v=\sum_{k=1}^n\langle v,b_k\rangle b_k$ and we are done. 
 \end{proof}
@@ -1191,7 +1206,7 @@ Applying the inner product with $b_i$ for each $i\in\{1,\dots,n\}$ gives $a_i=\l
 Then $b_1,\dots,b_m$ are orthonormal and has the same span as $v_1,\dots,v_m$. 
 \end{thm}
 
-\begin{crl}{}{} Every finite dimensional inner product space has an orthonormal basis. \tcbline
+\begin{crl}{}{} Every finite dimensional inner product space has an orthonormal basis. 
 \begin{proof}
 By the Gram-Schmidt procedure, every basis can be transformed into an orthonormal basis. 
 \end{proof}
@@ -1208,11 +1223,11 @@ One can think of orthgonal maps as orthgonality preserving maps. If $\langle v,w
 \item $A$ is orthogonal
 \item $T^\ast=T^{-1}$. 
 \item $T$ maps orthonormal bases to orthonormal bases
-\end{itemize} \tcbline
+\end{itemize} 
 \begin{proof} Suppose that $T:V\to V$ is represented by $A$. 
 \begin{itemize}
 \item $(1)\iff(2)$: We have that $\langle T(v),T(w)\rangle=v^TA^TAw$. Thus it is equal to $v^Tw$ if and only if $A^TA=I$. 
-\item $(1)\iff(3)$: Suppose that $T$ is orthogonal. Suppose that $\{b_1,\dots,b_n\}$ is orthonormal. Then $\langle T(b_i),T(b_j)\rangle=\langle b_i,b_j\rangle=0$ for $i,j\in\{1,\dots,n\}$. Thus $\{T(b_1),\dots,T(b_n)\}$ is orthogonal. But they are also orthonormal since $\|T(b_i)\|^2=\langle T(b_i),T(b_i)\rangle=\langle b_i,b_i\rangle=\|b_i\|^2=1$. This means that $\|T(b_i)\|=1$ for $i\in\{1,\dots,n\}$. \\~\\
+\item $(1)\iff(3)$: Suppose that $T$ is orthogonal. Suppose that $\{b_1,\dots,b_n\}$ is orthonormal. Then $\langle T(b_i),T(b_j)\rangle=\langle b_i,b_j\rangle=0$ for $i,j\in\{1,\dots,n\}$. Thus $\{T(b_1),\dots,T(b_n)\}$ is orthogonal. But they are also orthonormal since $\|T(b_i)\|^2=\langle T(b_i),T(b_i)\rangle=\langle b_i,b_i\rangle=\|b_i\|^2=1$. This means that $\|T(b_i)\|=1$ for $i\in\{1,\dots,n\}$. \\
 Now suppose that $T$ maps orthonormal bases to orthonormal bases. Then if $\{b_1,\dots,b_n\}$ is orthonormal, we have 
 \begin{align*}
 \langle T(v),T(w)\rangle&=\left\langle\left(\sum_{k=1}^nv_kT(b_k)\right),\left(\sum_{k=1}^nw_kT(b_k)\right)\right\rangle\\
@@ -1228,25 +1243,25 @@ Thus we are done.
 \pagebreak
 \section{Reductions and Decompositions of Linear Maps over Real Vector Spaces}
 \subsection{Reduction of Quadratic Forms over $\R$}
-Orthogonality is interesting for real matrices because the notion of similarity and congruence coinincide under orthogonality. Notice that being similar and congruent to a diagonal matrix at the same time means that there exists an invertible $P$ such that $P^TAP=P^{-1}AP=D$. \\~\\
+Orthogonality is interesting for real matrices because the notion of similarity and congruence coinincide under orthogonality. Notice that being similar and congruent to a diagonal matrix at the same time means that there exists an invertible $P$ such that $P^TAP=P^{-1}AP=D$. \\
 
 In the remaining sections we treat the adjugate in the case of $\R^n$ and save the case for $\C^n$ in another chapter. Then $V$ in the remaining sections will only denote $\R^n$. 
 
 \begin{prp}{}{} A function $b:V\times V\to\R$ is an inner product over $\R$ if and only if $b$ is bilinear and positive definite. 
 \end{prp}
 
-\begin{lmm}{Polarization Identity}{} For $x,y\in\R^n$, $$\langle x,y\rangle=\frac{1}{4}\|x+y\|^2-\frac{1}{4}\|x-y\|^2$$\tcbline
+\begin{lmm}{Polarization Identity}{} For $x,y\in\R^n$, $$\langle x,y\rangle=\frac{1}{4}\|x+y\|^2-\frac{1}{4}\|x-y\|^2$$
 \begin{proof} Simple proof using the fact that $\|x\|^2=\langle x,x\rangle$. 
 \end{proof}
 \end{lmm}
 
-\begin{prp}{Sylvester's Law of Inertia}{} A quadratic form $q$ over $\R$ has the form $$q(x_1,\dots,x_n)=\sum_{k=1}^tx_k^2-\sum_{k=1}^ux_k^2$$ where $t+u=\text{rank}(q)$. The pair $(t,u)$ is called the signature of $q$. This reduced quadratic form is also unique in the sense that the number of positives and number of negatives of any two reduced forms are the same. \\~\\ Moreover, every symmetric matrix is congruent to a matrix of the form $$\begin{pmatrix}
+\begin{prp}{Sylvester's Law of Inertia}{} A quadratic form $q$ over $\R$ has the form $$q(x_1,\dots,x_n)=\sum_{k=1}^tx_k^2-\sum_{k=1}^ux_k^2$$ where $t+u=\text{rank}(q)$. The pair $(t,u)$ is called the signature of $q$. This reduced quadratic form is also unique in the sense that the number of positives and number of negatives of any two reduced forms are the same. \\ Moreover, every symmetric matrix is congruent to a matrix of the form $$\begin{pmatrix}
 I_t & 0 & 0\\
 0 & -I_u & 0\\
 0 & 0 & 0\\
-\end{pmatrix}$$ where $(t,u)$ is the signature of the quadratic form. \tcbline
+\end{pmatrix}$$ where $(t,u)$ is the signature of the quadratic form. 
 \begin{proof}
-We saw in theorem 1.2.7 that every quadratic form can be expressed as $$q(y_1,\dots,y_n)=\sum_{k=1}^nc_ky_k^2$$ By doing a basis change with $b_k'=\frac{1}{\sqrt{c_k}}b_k$ whenever $c_k\neq 0$ will give us the above sum. For those that have $c_k=0$, the terms vanish and are exactly in the kernel of the quadratic form thus $t+u=\text{rank}(q)$. \\~\\
+We saw in theorem 1.2.7 that every quadratic form can be expressed as $$q(y_1,\dots,y_n)=\sum_{k=1}^nc_ky_k^2$$ By doing a basis change with $b_k'=\frac{1}{\sqrt{c_k}}b_k$ whenever $c_k\neq 0$ will give us the above sum. For those that have $c_k=0$, the terms vanish and are exactly in the kernel of the quadratic form thus $t+u=\text{rank}(q)$. \\
 The second part is direct from the fact that same quadratic forms with different matrix representations imply their representations are similar. 
 \end{proof}
 \end{prp}
@@ -1255,19 +1270,19 @@ The second part is direct from the fact that same quadratic forms with different
 \begin{defn}{Dot Product}{} The dot product in $\R^n$ is defined to be the inner product given by $$x\cdot y=x_1y_1+\dots+x_ny_n$$ in standard basis. 
 \end{defn}
 
-\begin{thm}{}{} Let $\langle \cdot,\cdot\rangle$ be an inner product on a real vector space $V$. Then there exists an basis $b_1,\dots,b_n$ of $V$ such that the inner product, when represented in the orthonormal basis, takes the form of exactly the dot product. \tcbline
+\begin{thm}{}{} Let $\langle \cdot,\cdot\rangle$ be an inner product on a real vector space $V$. Then there exists an basis $b_1,\dots,b_n$ of $V$ such that the inner product, when represented in the orthonormal basis, takes the form of exactly the dot product. 
 \begin{proof}
-Let $\langle \cdot,\cdot\rangle$ be our inner product in question. Define a quadratic form by $$q(x)=\langle x,x\rangle=\|x\|^2$$ We know that this quadratic form can be reduced to $$q(x_1,\dots,x_n)=x_1^2+\dots+x_t^2-x_{t+1}^2-\dots x_{t+u}^2$$ Now we must have $u=0$ since if $u>0$, then the basis vector $b_{t+1}$ satisfies $q(b_{t+1})=-1$ and $q(b_{t+1})=\langle b_{t+1},b_{t+1}\rangle$ which is a contradiction since inner products are positive definite. Also $t=n$ since if $t<n$, then $\langle b_{t+1},b_{t+1}\rangle=0$ which is again a contradiction. \\~\\
+Let $\langle \cdot,\cdot\rangle$ be our inner product in question. Define a quadratic form by $$q(x)=\langle x,x\rangle=\|x\|^2$$ We know that this quadratic form can be reduced to $$q(x_1,\dots,x_n)=x_1^2+\dots+x_t^2-x_{t+1}^2-\dots x_{t+u}^2$$ Now we must have $u=0$ since if $u>0$, then the basis vector $b_{t+1}$ satisfies $q(b_{t+1})=-1$ and $q(b_{t+1})=\langle b_{t+1},b_{t+1}\rangle$ which is a contradiction since inner products are positive definite. Also $t=n$ since if $t<n$, then $\langle b_{t+1},b_{t+1}\rangle=0$ which is again a contradiction. \\
 Using polarization, we see that $\langle x,y\rangle=x_1y_1+\dots+x_ny_n$ in that basis and we are done. 
 \end{proof}
 \end{thm}
 
-With this theorem, we know that any inner product can be expressed in the dot product as long as it is under a suitable basis. Thus we now reduce our discussion to only the dot product, as our standard inner product in $\R^n$. \\~\\
+With this theorem, we know that any inner product can be expressed in the dot product as long as it is under a suitable basis. Thus we now reduce our discussion to only the dot product, as our standard inner product in $\R^n$. \\
 The below theorem, while unrelated to the reduction of inner products, is a result of Gram-schmidt process that is only true for real matrices. 
 
-\begin{thm}{QR Decomposition}{} Let $A$ be an $n\times n$ matrix over $\R$. Then we can write $A=QR$ where $Q$ is orthogonal and $R$ is upper triangular. \tcbline
-\begin{proof}We split the matrices into two cases. Firstly consider the case where $A$ is invertible. We can treat $A$ as a change of basis matrix from the basis $\{a_1,\dots,a_n\}$ where $a_k$ is the column of $A$ for $k\in\{1,\dots,n\}$. This change of basis matrix takes $\{a_1,\dots,a_n\}$ to $\{e_1,\dots,e_n\}$ which is the standard basis. Apply the Gram-schmidt process to $\{a_1,\dots,a_n\}$ to get $\{b_1,\dots,b_n\}$ which is an orthonormal basis. Let $Q$ be the change of basis matrix from $\{b_1,\dots,b_n\}$ to $\{e_1,\dots,e_n\}$. Let $R$ be the change of basis matrix from $\{a_1,\dots,a_n\}$ to $\{b_1,\dots,b_n\}$. Then clearly $A=QR$. We just have to show that $Q$ is orthogonal and $R$ is upper triangular. \\~\\
-$Q$ being orthonormal is trivial since columns of $Q$ are just $b_1,\dots,b_n$. Using the Gram-schimdt process, we can see that the change of basis from $\{b_1,\dots,b_n\}$ to $\{a_1,\dots,a_n\}$, each $b_k$ is only affected by $a_1,\dots,a_k$ from the old basis. This means that the change of basis matrix must be upper triangular and its inverse must also be upper triangular. \\~\\
+\begin{thm}{QR Decomposition}{} Let $A$ be an $n\times n$ matrix over $\R$. Then we can write $A=QR$ where $Q$ is orthogonal and $R$ is upper triangular. 
+\begin{proof}We split the matrices into two cases. Firstly consider the case where $A$ is invertible. We can treat $A$ as a change of basis matrix from the basis $\{a_1,\dots,a_n\}$ where $a_k$ is the column of $A$ for $k\in\{1,\dots,n\}$. This change of basis matrix takes $\{a_1,\dots,a_n\}$ to $\{e_1,\dots,e_n\}$ which is the standard basis. Apply the Gram-schmidt process to $\{a_1,\dots,a_n\}$ to get $\{b_1,\dots,b_n\}$ which is an orthonormal basis. Let $Q$ be the change of basis matrix from $\{b_1,\dots,b_n\}$ to $\{e_1,\dots,e_n\}$. Let $R$ be the change of basis matrix from $\{a_1,\dots,a_n\}$ to $\{b_1,\dots,b_n\}$. Then clearly $A=QR$. We just have to show that $Q$ is orthogonal and $R$ is upper triangular. \\
+$Q$ being orthonormal is trivial since columns of $Q$ are just $b_1,\dots,b_n$. Using the Gram-schimdt process, we can see that the change of basis from $\{b_1,\dots,b_n\}$ to $\{a_1,\dots,a_n\}$, each $b_k$ is only affected by $a_1,\dots,a_k$ from the old basis. This means that the change of basis matrix must be upper triangular and its inverse must also be upper triangular. \\
 Now we also have the case when $A$ is not invertible. 
 \end{proof}
 \end{thm}
@@ -1278,16 +1293,16 @@ We now give an example of QR decomposition, in conjunction with the Gram-schmidt
 -1 & 0 & -2\\
 2 & 0 & -1\\
 0 & -2 & -2
-\end{pmatrix}$$ \tcbline
+\end{pmatrix}$$ 
 \begin{proof}
-A quick check shows that $A$ is invertible. Let $a_1,a_2,a_3$ be the columns of $A$. We start the Gram-schimdt process by taking the new basis $f_1=\frac{a_1}{\|a_1\|}=\begin{pmatrix}-\frac{1}{\sqrt{5}}\\ \frac{2}{\sqrt{5}}\\ 0\end{pmatrix}$. We also need to keep track on the change of basis matrix. We have that $a_1=\sqrt{5}f_1$. \\~\\
+A quick check shows that $A$ is invertible. Let $a_1,a_2,a_3$ be the columns of $A$. We start the Gram-schimdt process by taking the new basis $f_1=\frac{a_1}{\|a_1\|}=\begin{pmatrix}-\frac{1}{\sqrt{5}}\\ \frac{2}{\sqrt{5}}\\ 0\end{pmatrix}$. We also need to keep track on the change of basis matrix. We have that $a_1=\sqrt{5}f_1$. \\
 For the next step, we find that 
 \begin{align*}
 f_2&=\frac{a_2-(a_2\cdot f_1)f_1}{\|a_2-(a_2\cdot f_1)f_1\|}\\
 &=\frac{a_2}{\|a_2\|}\\
 &=\begin{pmatrix} 0\\ 0\\ -1\end{pmatrix}
 \end{align*}
-This means that $a_2=2f_2$. \\~\\
+This means that $a_2=2f_2$. \\
 Finally, we have that 
 \begin{align*}
 f_3&=\frac{a_3-(a_3\cdot f_1)f_1-(a_3\cdot f_2)f_2}{\|a_3-(a_3\cdot f_1)f_1-(a_3\cdot f_2)f_2\|}\\
@@ -1312,7 +1327,7 @@ We have that $a_3=2f_2+\sqrt{5}f_3$. Combining everything together, we have that
 \end{eg}
 
 \subsection{Self-Adjoints in $\R^n$}
-\begin{prp}{}{} Let $T:\R^n\to\R^n$ be self-adjoint. Then every eigenvalues of $T$ are real. \tcbline
+\begin{prp}{}{} Let $T:\R^n\to\R^n$ be self-adjoint. Then every eigenvalues of $T$ are real. 
 \begin{proof}
 Suppose that $T(v)=Av$ where $A$ is a representation of $T$. Suppose that $\lambda$ is an eigenvalue of $T$. Then $Av=\lambda v$ for some eigenvector $v\in\R^n$. Then taking complex conjugates give 
 \begin{align*}
@@ -1328,20 +1343,20 @@ But $v^T\overline{v}=v_1\overline{v_1}+\dots+v_n\overline{v_n}=\abs{v_1}^2+\dots
 \end{proof}
 \end{prp}
 
-\begin{thm}{}{} Let $T:\R^n\to\R^n$ be a linear map on the inner product space $\R^n$ that is seldf-adjoint. Then there exists an orthonormal basis consisting of eigenvectors of $T$. \\~\\
-Equivalently, for every quadratic form $q$ on $V$, there exists an orthonormal basis $b_1,\dots,b_n$ such that $$q(x_1,\dots,x_n)=\sum_{k=1}^nc_kx_k^2$$ for some $c_1,\dots,c_n\in\R$. \tcbline
+\begin{thm}{}{} Let $T:\R^n\to\R^n$ be a linear map on the inner product space $\R^n$ that is seldf-adjoint. Then there exists an orthonormal basis consisting of eigenvectors of $T$. \\
+Equivalently, for every quadratic form $q$ on $V$, there exists an orthonormal basis $b_1,\dots,b_n$ such that $$q(x_1,\dots,x_n)=\sum_{k=1}^nc_kx_k^2$$ for some $c_1,\dots,c_n\in\R$. 
 \begin{proof}
-Notice that the two statements are exactly the same and I will ommit the reason. \\~\\
-We prove by induction on $n$. Suppose that the theorem holds for $n-1$. Let $T$ be the linear map. By the above we know that $T$ has at least one eigenvalue in $\R$, say $\lambda_1$. Let $f_1$ be the corresponding eigenvector with magnitude $1$. \\~\\
-Consider the orthogonal complement $W=\{w\in V|w\cdot f_1=0\}$ of $f_1$. Since $W$ is the kernel of the linear map $S:V\to\R$ defined by $S(v)=v\cdot f_1$, it is a subspace of $V$ dimension $n-1$. I claim that $T(W)\subseteq W$. \\~\\
-Let $w\in W$. We have $$T(w)\cdot f_1=w\cdot T(f_1)=w\cdot\lambda_1f_1=0$$ by self-adjoint. Thus we have shown that $T(W)\subseteq W$. \\~\\
+Notice that the two statements are exactly the same and I will ommit the reason. \\
+We prove by induction on $n$. Suppose that the theorem holds for $n-1$. Let $T$ be the linear map. By the above we know that $T$ has at least one eigenvalue in $\R$, say $\lambda_1$. Let $f_1$ be the corresponding eigenvector with magnitude $1$. \\
+Consider the orthogonal complement $W=\{w\in V|w\cdot f_1=0\}$ of $f_1$. Since $W$ is the kernel of the linear map $S:V\to\R$ defined by $S(v)=v\cdot f_1$, it is a subspace of $V$ dimension $n-1$. I claim that $T(W)\subseteq W$. \\
+Let $w\in W$. We have $$T(w)\cdot f_1=w\cdot T(f_1)=w\cdot\lambda_1f_1=0$$ by self-adjoint. Thus we have shown that $T(W)\subseteq W$. \\
 Applying the induction hypothesis on $W$, we have an orthonormal basis $f_2,\dots,f_n$ of $W$ consisting of eigenvectors of $T$. By definition, $f_1,\dots,f_n$ is an orthonormal basis and we are done. 
 \end{proof}
 \end{thm}
 
 Notice that the above two statements are also equivalent to saying that every real symmetric matrix is congruent and similar to a diagonal matrix. 
 
-\begin{prp}{}{} If $T:\R^n\to\R^n$ is self-adjoint, and $\lambda,\mu$ are distinct eigenvalues of $T$ with eigenvectors $v,w$, then $v\cdot w=0$. \tcbline
+\begin{prp}{}{} If $T:\R^n\to\R^n$ is self-adjoint, and $\lambda,\mu$ are distinct eigenvalues of $T$ with eigenvectors $v,w$, then $v\cdot w=0$. 
 \begin{proof}
 We have that
 \begin{align*}
@@ -1380,7 +1395,7 @@ We present an example of singular value decomposition for illustration.
 \begin{eg}{}{} Find the singular value decomposition of the matrix $$A=\begin{pmatrix}
 4 & 11 & 14\\
 8 & 7 & -2
-\end{pmatrix}$$ \tcbline
+\end{pmatrix}$$ 
 \begin{proof}
 Step 1: We compute the singular values of $A$, which is just the squareroot of the eigenvalues of $A^TA$. Now 
 $$A^TA=\begin{pmatrix}

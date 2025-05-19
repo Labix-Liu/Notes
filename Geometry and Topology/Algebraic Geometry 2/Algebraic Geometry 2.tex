@@ -1,6 +1,6 @@
 \documentclass[a4paper]{article}
 
-\input{C:/Users/liula/Desktop/Latex/Headers V1.2.tex}
+\input{C:/Users/liula/Desktop/Latex/Headers/Headers.tex}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -33,13 +33,15 @@ Knowledge on commutative algebra is required as a prerequisite. These set of not
 \pagebreak
 \section{The Tangent Space and Smooth Points}
 \subsection{The Tangent Space of Affine Varieties}
-\begin{defn}{The Tangent Space of an Affine Variety}{} Let $k$ be a field. Let $V=\V(f_1,\dots,f_r)$ be an affine variety over $k$. Define the tangent space of $V$ at $p\in V$ to be the zero set $$T_pV=\V\left(\sum_{k=1}^n\frac{\partial f_1}{\partial x_k}\bigg{|}_p(x_k-p_k),\dots,\sum_{k=1}^n\frac{\partial f_r}{\partial x_k}\bigg{|}_p(x_k-p_k)\right)$$
-\end{defn}
-
-It should first be made sense that the definition is independent of the choice of polynomials $f_1,\dots,f_r$ of the zero set. 
-
-\begin{prp}{}{} Let $V$ be a closed affine variety over $\C$. Let $p\in V$. Let $m_p$ denote the corresponding maximal ideal. Then there is an isomorphism $$T_pV\cong\left(\frac{m_p}{m_p^2}\right)^\ast$$ given by ?????. In particular, we have the identity $$\dim(T_pV)=\dim_{\C[V]/m_p}(m_p/m_p^2)$$
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $V\subseteq\A_k^n$ be an affine variety. Let $p=(p_1,\dots,p_n)\in V$. Suppose that $f_1,\dots,f_r,g_1,\dots,g_s\in k[x_1,\dots,x_n]$ such that $V=\V(f_1,\dots,f_r)=\V(g_1,\dots,g_s)$. Then we have $$\V\left(\sum_{k=1}^n\frac{\partial f_1}{\partial x_k}\bigg{|}_p(x_k-p_k),\dots,\sum_{k=1}^n\frac{\partial f_r}{\partial x_k}\bigg{|}_p(x_k-p_k)\right)=\V\left(\sum_{k=1}^n\frac{\partial g_1}{\partial x_k}\bigg{|}_p(x_k-p_k),\dots,\sum_{k=1}^n\frac{\partial g_s}{\partial x_k}\bigg{|}_p(x_k-p_k)\right)$$
+\begin{proof}\\
+Without loss of generality, it suffices to prove that the former set is contained in the latter one. Since $g_i$ vanishes on $V$, we must have that $g_i\in(f_1,\dots,f_r)$. Hence there exists $h_1,\dots,h_r\in k[x_1,\dots,x_n]$ such that $g_i=\sum_{i=1}^rh_if_i$. Then by the chain rule, we have $$\frac{\partial g}{\partial x_k}\bigg{|}_p=\sum_{i=1}^rh_j(p)\frac{\partial f}{\partial x_k}\bigg{|}_p$$ since $f_j(p)=0$. Then we have $$\sum_{k=1}^n\frac{\partial g}{\partial x_k}\bigg{|}_p(x_k-p_k)=\sum_{k=1}^n\sum_{i=1}^rh_j(p)\frac{\partial f}{\partial x_k}\bigg{|}_p(x_k-p_k)=\sum_{j=1}^rh_j(p)\sum_{k=1}^n\frac{\partial f}{\partial x_k}\bigg{|}_p(x_k-p_k)$$ If $q=(q_1,\dots,q_n)$ vanishes in the former set, then the above calculation shows that $\sum_{k=1}^n\frac{\partial g_i}{x_k}\bigg{|}_p(q_k-p_k)=0$. Hence $q$ lies in the latter set. 
+\end{proof}
 \end{prp}
+
+\begin{defn}{The Tangent Space of an Affine Variety}{} Let $k$ be a field. Let $V\subseteq\A_k^n$ be an affine variety. Suppose that $V=\V(f_1,\dots,f_r)$ for $f_1,\dots,f_r\in k[x_1,\dots,x_n]$. Define the tangent space of $V$ at $p\in V$ to be the zero set $$T_pV=\V\left(\sum_{k=1}^n\frac{\partial f_1}{\partial x_k}\bigg{|}_p(x_k-p_k),\dots,\sum_{k=1}^n\frac{\partial f_r}{\partial x_k}\bigg{|}_p(x_k-p_k)\right)$$
+\end{defn}
 
 \begin{defn}{The Jacobian Matrix}{} Let $k$ be a field. Let $V=\V(f_1,\dots,f_m)\subseteq\A_k^n$ be an affine variety. Let $p\in V$. Define the Jacobian matrix of $V$ at $p$ to be the $m\times n$ matrix $$J_{V,p}=\begin{pmatrix}
 \frac{\partial f_1}{\partial x_1}\bigg{|}_p & \cdots & \frac{\partial f_1}{\partial x_n}\bigg{|}_p\\
@@ -48,7 +50,20 @@ It should first be made sense that the definition is independent of the choice o
 \end{pmatrix}$$
 \end{defn}
 
-\begin{prp}{}{} Let $k$ be a field. Let $V=\V(f_1,\dots,f_m)\subseteq\A_k^n$ be an affine variety. Let $p=(p_1,\dots,p_n)\in V$. Then $$T_pV=\left\{(x_1,\dots,x_n)\in\A_k^n\;\bigg{|}\;J_{V,p}\cdot\begin{pmatrix}x_1-p_1\\\vdots\\x_n-p_n\end{pmatrix}=0\right\}$$
+\begin{eg}{}{} Let $V=\V(y-x^2,z-x^3)\subseteq\A_\C^3$. The Jacobian matrix of $V$ at $(1,1,1)$ is given by $$J_{V,(1,1,1)}=\begin{pmatrix}
+-2 & 1 & 0\\
+-3 & 0 & 1
+\end{pmatrix}$$
+\end{eg}
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $V=\V(f_1,\dots,f_m)\subseteq\A_k^n$ be an affine variety. Let $p=(p_1,\dots,p_n)\in V$. Then $$T_pV=\left\{(x_1,\dots,x_n)\in\A_k^n\;\bigg{|}\;J_{V,p}\cdot\begin{pmatrix}x_1-p_1\\\vdots\\x_n-p_n\end{pmatrix}=0\right\}$$
+\begin{proof}\\
+Clear from definitions. 
+\end{proof}
+\end{lmm}
+
+\begin{prp}{}{} Let $V$ be a closed affine variety over $\C$. Let $p\in V$. Let $m_p$ denote the corresponding maximal ideal. Then there is an isomorphism $$T_pV\cong\left(\frac{m_p}{m_p^2}\right)^\ast$$ given by ?????. In particular, we have the identity $$\dim(T_pV)=\dim_{\C[V]/m_p}(m_p/m_p^2)$$
 \end{prp}
 
 \subsection{Smooth Points of an Affine Variety}
@@ -69,11 +84,10 @@ In particular, this shows that smoothness is independent of the choice of genera
 
 Hard to prove: smoothness is preserved by isomorphisms. 
 
-\subsection{The Tangent Space of Varieties in General}
+\subsection{Smoothness in General Varieties}
 \begin{defn}{The Tangent Space of a Quasi-Projective Variety}{} Let $k$ be a field. Let $V$ be a quasi-projective variety over $k$. Let $p\in V$. Define the tangent space of $V$ at $p$ to be $$T_pV=\left(\frac{m_p}{m_p^2}\right)^\ast$$ where $m_p$ is the unique maximal ideal of the local ring $\mO_{V,p}$. 
 \end{defn}
 
-\subsection{Smooth Points of a Variety in General}
 We can now motivate the definition of a smooth point using the purely algebraic characterization. 
 
 \begin{defn}{Smooth and Singular Points of A General Variety}{} Let $X$ be a variety. We say $p\in X$ is a smooth point of $X$ if the local ring $\mO_{X,p}$ is a regular local ring. Otherwise, we say that $p$ is a singular point of $X$. 
@@ -110,7 +124,7 @@ We can now motivate the definition of a smooth point using the purely algebraic 
 \begin{prp}{}{} Let $k$ be an algebraically closed field. Let $V\subseteq\A_k^n$ be an irreducible affine variety. Then we have $$\text{trdeg}_k(K(V))=\dim(V)$$
 \end{prp}
 
-\begin{prp}{}{} Let $k$ be an algebraically closed field. Let $V\subseteq\Prj^n$ be an irreducible projective variety over $k$. Then there is a $k$-algebra isomorphism $$K(X)\cong(k[V]_{(0)})_0$$ where the zero refers to taking the degree zero part of the graded ring. \tcbline
+\begin{prp}{}{} Let $k$ be an algebraically closed field. Let $V\subseteq\Prj^n$ be an irreducible projective variety over $k$. Then there is a $k$-algebra isomorphism $$K(X)\cong(k[V]_{(0)})_0$$ where the zero refers to taking the degree zero part of the graded ring. 
 \begin{proof}
 \end{proof}
 \end{prp}
@@ -157,7 +171,7 @@ TBA: Equivalence of categories between irreducible varieties and dominant ration
 \end{itemize}
 \end{prp}
 
-\begin{lmm}{}{} Let $n\in\N$. Then $\A^n$ is birationally equivalent to $\Prj^n$. \tcbline
+\begin{lmm}{}{} Let $n\in\N$. Then $\A^n$ is birationally equivalent to $\Prj^n$. 
 \begin{proof}
 The function field of $\A^n$ is given by $K(\A^n)=K(x_1,\dots,x_n)$. On the other hand, we can compute the function field of $\Prj^n$ to get 
 \begin{align*}
@@ -221,7 +235,7 @@ The zeroth graded component of $k(x_0,\dots,x_n)$ is given by $$(k(x_0,\dots,x_n
 \begin{prp}{}{} Let $k$ be an algebraically closed field. Let $X\subseteq\A^n$ be an affine variety. Then $X$ is normal if and only if $k[X]$ is a normal domain. 
 \end{prp}
 
-\begin{eg}{}{} Let $k$ be an algebraically closed field. Then $V=\V(y^2-x^3)\subseteq\A_k^2$ is not a normal variety. \tcbline
+\begin{eg}{}{} Let $k$ be an algebraically closed field. Then $V=\V(y^2-x^3)\subseteq\A_k^2$ is not a normal variety. 
 \begin{proof}
 The coordinate ring of the variety is given by $k[V]=\frac{k[x,y]}{(y^2-x^3)}$. I claim that $\overline{k[V]}=k[[y]/[x]]$. \\~\\
 
