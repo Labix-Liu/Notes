@@ -1,6 +1,6 @@
 \documentclass[a4paper]{article}
 
-\input{C:/Users/liula/Desktop/Latex/Headers V1.2.tex}
+\input{C:/Users/liula/Desktop/Latex/Headers/Headers.tex}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -16,8 +16,8 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-The aim of these notes is to develop the notion of continuity, differentiability and some parts of integrability in $\R^n$ by attempting to generalize the same ideas in $\R$. Another major aim is to investigate non linear transformations  through the lens of linear algebra. \linebreak\linebreak
-Assumes knowledge of Linear Algebra 1, Real analysis. \\~\\
+The aim of these notes is to develop the notion of continuity, differentiability and some parts of integrability in $\R^n$ by attempting to generalize the same ideas in $\R$. Another major aim is to investigate non linear transformations  through the lens of linear algebra. \\
+Assumes knowledge of Linear Algebra 1, Real analysis. \\
 Note: $M_{m\times n}(\R)$ means the set of all matrices with $m$ rows and $n$ columns. 
 \end{abstract}
 \pagebreak
@@ -28,7 +28,7 @@ Note: $M_{m\times n}(\R)$ means the set of all matrices with $m$ rows and $n$ co
 \begin{defn}{Euclidean Metric}{} The Euclidean Metric of $x,y\in\R^n$ is defined to be $$d(x,y)=\left(\sum_{k=1}^n(x_k-y_k)^2\right)^{\frac{1}{2}}$$ We denote it as $\abs{x-y}$. 
 \end{defn}
 
-\begin{prp}{}{} $\R^n$ and the Euclidean Metric forms a metric space. \tcbline
+\begin{prp}{}{} $\R^n$ and the Euclidean Metric forms a metric space. 
 \begin{proof} We show that the Euclidean Metric is indeed a metric on $\R^n$. Let $x,y,z\in\R^n$. 
 \begin{itemize}
 \item $(x_k-y_k)^2\geq 0$ for all $k\in\{1,\dots,n\}$ with equality if and only if $x_k=y_k$
@@ -41,7 +41,7 @@ Note: $M_{m\times n}(\R)$ means the set of all matrices with $m$ rows and $n$ co
 \begin{defn}{Convergence in $\R^n$}{} A sequence $\{x_n\}\subseteq\R^n$ is said to converge to $x\in\R^n$ if for every $\epsilon>0$ there exists $N\in\N$ such that $d(x_n,x)<\epsilon$ for all $n>N$. 
 \end{defn}
 
-\begin{prp}{Componentwise Convergence}{} $x _k\in\R^n$ converges if and only if $x _{i,k}$ converges for every $i\in\{1,\dots,n\}$. \tcbline
+\begin{prp}{Componentwise Convergence}{} $x _k\in\R^n$ converges if and only if $x _{i,k}$ converges for every $i\in\{1,\dots,n\}$. 
 \begin{proof}
 Suppose that $\abs{x _k-x }<\epsilon$. Then in particular $\abs{x _{i,k}-x _i}<\abs{x _k-x }<\epsilon$ and thus is convergent componentwise. Suppose that $\{x _k\}$ is convergent componentwise. Then there exists $N_1,\dots,N_n$ such that $n_j>N_j$ implies $\abs{x _{j,k}-x _j}<\epsilon$ for $j\in\{1,\dots,n\}$. Take the max of all $N_1,\dots,N_n$. Then 
 \begin{align*}
@@ -51,12 +51,12 @@ Suppose that $\abs{x _k-x }<\epsilon$. Then in particular $\abs{x _{i,k}-x _i}<\
 \end{proof}
 \end{prp}
 
-\begin{thm}{Bolzano-Weierstrass Theorem}{} Any bounded sequence in $\R^n$ has a convergent subsequence. \tcbline
+\begin{thm}{Bolzano-Weierstrass Theorem}{} Any bounded sequence in $\R^n$ has a convergent subsequence. 
 \begin{proof} Let $\{x_n\}\subset\R^n$ be bounded. By Bolzano-Weierstrass Theorem on $\R$, the sequence $\{x_{1,m}\}\subset\R$ has a convergent subsequence $\{x_{1,m_k}\}$. Apply Bolzano-Weierstrass Theorem to $\{x_{2,m_k}\}$ and keep going until you reach the $n$th component. We will end up with a subsequence that converges for all components and thus is convergent in $\R^n$. 
 \end{proof}
 \end{thm}
 
-\begin{prp}{Sum Rule of Sequences}{} Let $\{x_n\}\subset\R^n$ converge to $x\in\R^n$ and $\{y_n\}\subset\R^n$ converge to $y\in\R^n$. Let $a,b\in\R$. Then $$ax_n+by_n\to ax+by$$ \tcbline
+\begin{prp}{Sum Rule of Sequences}{} Let $\{x_n\}\subset\R^n$ converge to $x\in\R^n$ and $\{y_n\}\subset\R^n$ converge to $y\in\R^n$. Let $a,b\in\R$. Then $$ax_n+by_n\to ax+by$$ 
 \begin{proof}
 Trivial using the characterization of componentwise convergence and real analysis. 
 \end{proof}
@@ -69,9 +69,9 @@ Trivial using the characterization of componentwise convergence and real analysi
 \begin{defn}{Continuity}{} Let $f:U\subseteq\R^n\to\R^m$. We say that $f$ is continuous at $a\in U$ if $$\lim_{x \to a}f(x)=f(a)$$
 \end{defn}
 
-\begin{thm}{Componentwise Continuity}{} Let $f:U\subseteq\R^n\to\R^m$ be a function. Then $f$ is continuous if and only if each of its components $f_1,\dots,f_n:U\to\R$ is continuous. \tcbline
+\begin{thm}{Componentwise Continuity}{} Let $f:U\subseteq\R^n\to\R^m$ be a function. Then $f$ is continuous if and only if each of its components $f_1,\dots,f_n:U\to\R$ is continuous. 
 \begin{proof}
-Suppose that $f$ is continuous at $a\in\R^n$. Let $\epsilon>0$. Then there exists $\delta>0$ from continuity such that $\|x-a\|<\delta$ implies $\|f(x)-f(a)\|<\epsilon$. Then $\|x-a\|<\delta$ implies $$\|f_i(x)-f_i(a)\|\leq\|f(x)-f(a)\|<\epsilon$$ Thus each component is continuous. \\~\\
+Suppose that $f$ is continuous at $a\in\R^n$. Let $\epsilon>0$. Then there exists $\delta>0$ from continuity such that $\|x-a\|<\delta$ implies $\|f(x)-f(a)\|<\epsilon$. Then $\|x-a\|<\delta$ implies $$\|f_i(x)-f_i(a)\|\leq\|f(x)-f(a)\|<\epsilon$$ Thus each component is continuous. \\
 Now let $f$ be component wise continuous at $a\in\R^n$. Let $\epsilon>0$. For each component $f_i:\R^n\to\R$, using continuity with $\frac{\epsilon}{\sqrt{n}}>0$there exists $\delta_i>0$ such that $\|x-a\|<\delta$ implies $\|f_i(x)-f_i(a)\|<\frac{\epsilon}{\sqrt{n}}$. Choose $\delta=\max\{\delta_1,\dots,\delta_n\}$. Then $\|x-a\|<\delta$ implies that 
 \begin{align*}
 \|f(x)-f(a)\|^2&=\sum_{k=1}^n\|f_k(x)-f_k(a)\|^2\\
@@ -84,13 +84,13 @@ Thus $f$ is continuous.
 \end{proof}
 \end{thm}
 
-\begin{thm}{Sequential Continuity}{} Let $f:U\subseteq\R^n\to\R^m$. Then $f$ is continuous at $c\in U$ if and only if for every sequence $\{x_n|n\in\N\}\subset U$ that $x_n\to c\in U$ it has the property that $$f(x_n)\to f(c)$$ \tcbline
+\begin{thm}{Sequential Continuity}{} Let $f:U\subseteq\R^n\to\R^m$. Then $f$ is continuous at $c\in U$ if and only if for every sequence $\{x_n|n\in\N\}\subset U$ that $x_n\to c\in U$ it has the property that $$f(x_n)\to f(c)$$ 
 \begin{proof}
 Exactly the same proof as that of real analysis. 
 \end{proof}
 \end{thm}
 
-\begin{prp}{Sum Rule}{} Let $f,g:U\subseteq\R^n\to\R^m$ be continuous at $p\in\R^n$. Then for any $a,b\in\R^m$, $af(x)+bg(x)$ is continuous at $p$. \tcbline
+\begin{prp}{Sum Rule}{} Let $f,g:U\subseteq\R^n\to\R^m$ be continuous at $p\in\R^n$. Then for any $a,b\in\R^m$, $af(x)+bg(x)$ is continuous at $p$. 
 \begin{proof}
 Simple proof involving componentwise continuity and real analysis. 
 \end{proof}
@@ -100,13 +100,13 @@ Simple proof involving componentwise continuity and real analysis.
 \begin{itemize}
 \item $f(x)g(x)$ is continuous at $p$
 \item $\frac{f(x)}{g(x)}$ is continuous at $p$ given that $g(x)\neq 0$ for all $x\in U$
-\end{itemize} \tcbline
+\end{itemize} 
 \begin{proof}
 Also a simple proof involving componentwise continuity and real analysis. 
 \end{proof}
 \end{prp}
 
-\begin{prp}{Composition Rule}{} Let $f:U\subseteq\R^n\to\R^m$ and $g:V\subseteq\R^m\to\R^k$ be continuous at $p\in\R^n$ and $f(p)\in V$ respectively. Then $g(f(x))$ is continuous at $p$. \tcbline
+\begin{prp}{Composition Rule}{} Let $f:U\subseteq\R^n\to\R^m$ and $g:V\subseteq\R^m\to\R^k$ be continuous at $p\in\R^n$ and $f(p)\in V$ respectively. Then $g(f(x))$ is continuous at $p$. 
 \begin{proof}
 Another simple proof involving componentwise continuity and real analysis. 
 \end{proof}
@@ -139,9 +139,9 @@ We will only develop sufficient topological properties so that we can apply it t
 \end{itemize}
 \end{defn}
 
-\begin{prp}{}{} Let $U\subseteq\R^n$ is closed if and only if for every sequence $(x_n)_{n\in\N}\subset U$ that converges to $x\in\R^n$, $x\in U$. \tcbline
+\begin{prp}{}{} Let $U\subseteq\R^n$ is closed if and only if for every sequence $(x_n)_{n\in\N}\subset U$ that converges to $x\in\R^n$, $x\in U$. 
 \begin{proof}
-Suppose that $U$ is closed. Suppose that $(x_n)_{n\in\N}\subset U$ is a sequence such that it converges to some $x\in\R^n$. Suppose for a contradiction that $x\in\R^n\setminus U$. Then $\R^n\setminus U$ being open means that there exists some $r>0$ such that $B_r(x)\subseteq\R^m\setminus U$. By definition of convergent, there exists $N\in\N$ such that $x_n\in B_r(x)$ for all $n>N$. But this contradicts the fact that $x_n\in U$. Thus we must have $x\in U$. \\~\\
+Suppose that $U$ is closed. Suppose that $(x_n)_{n\in\N}\subset U$ is a sequence such that it converges to some $x\in\R^n$. Suppose for a contradiction that $x\in\R^n\setminus U$. Then $\R^n\setminus U$ being open means that there exists some $r>0$ such that $B_r(x)\subseteq\R^m\setminus U$. By definition of convergent, there exists $N\in\N$ such that $x_n\in B_r(x)$ for all $n>N$. But this contradicts the fact that $x_n\in U$. Thus we must have $x\in U$. \\
 Now suppose that every sequence $(x_n)_{n\in\N}\subset U$ has limit $x\in U$. Suppose for a contradiction that $U$ is not closed. Then $\R^n\setminus U$ is not open and that there exists $x\in\R^n\setminus U$ such that for all $r>0$, $B_r(x)$ is not a subset of $\R^n\setminus U$. Let $(y_n)_{n\in\N}$ be a sequence with the property that $y_n\in B_{1/k}(x)$ but $y_n\notin\R^n\setminus U$. Then $y_n\in U$ and $y_n\to x\in\R^n\setminus U$, a contradiction. 
 \end{proof}
 \end{prp}
@@ -155,10 +155,10 @@ Now suppose that every sequence $(x_n)_{n\in\N}\subset U$ has limit $x\in U$. Su
 \item $V\subseteq\R^k$ is open implies $f^{-1}(V)$ is open
 \item $U\subseteq\R^k$ is closed implies $f^{-1}(U)$ is closed
 \end{itemize}
-\tcbline
+
 \begin{proof}
-Suppose that $f$ is continuous. Then $V$ being open means that if $f(x)\in V$, then $B_\epsilon(f(x))\subseteq V$ for some $\epsilon>0$. For this $\epsilon$, apply continuity. Then there exists $\delta>0$ such that $f(B_\delta(x))\subseteq B_\epsilon(f(x))$. Then this means that $$B_\delta(x)\subseteq f^{-1}(B_\epsilon(f(x)))\subseteq f^{-1}(V)$$ and we are done. \\~\\
-Now suppose that $f$ has the second property. Let $f(x)\in V\subseteq\R^k$ be open. Then there exists $\epsilon>0$ such that $B_\epsilon(f(x))\subseteq V$. Thus $f^{-1}(B_\epsilon(f(x)))$ is also open. This being open means that there exists $\delta>0$ such that $B_\delta(x)\subseteq f^{-1}(B_\epsilon(f(x)))$ and $$f(B_\delta(x))\subseteq B_\epsilon(f(x))$$ and we are done. \\~\\
+Suppose that $f$ is continuous. Then $V$ being open means that if $f(x)\in V$, then $B_\epsilon(f(x))\subseteq V$ for some $\epsilon>0$. For this $\epsilon$, apply continuity. Then there exists $\delta>0$ such that $f(B_\delta(x))\subseteq B_\epsilon(f(x))$. Then this means that $$B_\delta(x)\subseteq f^{-1}(B_\epsilon(f(x)))\subseteq f^{-1}(V)$$ and we are done. \\
+Now suppose that $f$ has the second property. Let $f(x)\in V\subseteq\R^k$ be open. Then there exists $\epsilon>0$ such that $B_\epsilon(f(x))\subseteq V$. Thus $f^{-1}(B_\epsilon(f(x)))$ is also open. This being open means that there exists $\delta>0$ such that $B_\delta(x)\subseteq f^{-1}(B_\epsilon(f(x)))$ and $$f(B_\delta(x))\subseteq B_\epsilon(f(x))$$ and we are done. \\
 For the closed property, simply take the complements of the entire proof. 
 \end{proof}
 \end{thm}
@@ -166,20 +166,20 @@ For the closed property, simply take the complements of the entire proof.
 \begin{defn}{Sequential Compactness}{} Let $K\subset\R^n$ be a set. Then $K$ is sequentially compact if every sequence $(x_n)_{n\in\N}\subset K$ has a convergent subsequence $(x_{n_j})_{j\in\N}$ that converges to some $k\in K$. 
 \end{defn}
 
-\begin{prp}{Heine-Borel Theorem}{} $K\subset\R^n$ is sequentially compact if and only if $K$ is closed and bounded. \tcbline
+\begin{prp}{Heine-Borel Theorem}{} $K\subset\R^n$ is sequentially compact if and only if $K$ is closed and bounded. 
 \begin{proof}
-Let $K$ be compact. Let $(x_n)_{n\in\N}\subset K$ be a convergent sequence. By sequential compactness, $(x_{n_k})_{k\in\N}$ is a subsequence that converges to $x\in K$. But $(x_n)_{n\in\N}$ has the same limit as its subsequence thus $x_n\to x$. Now suppose for a contradiction that $K$ is unbounded. Then there exists a sequence $(x_n)_{n\in\N}$ such that $\abs{x_n}\geq n$ for all $n\in\N$. By sequential compactness, there is a subsequence $(x_{n_k})_{k\in\N}$ such that its limit is $x\in K$. This means that $(x_{n_k})_{k\in\N}$ is bounded, a contradiction. \\~\\
+Let $K$ be compact. Let $(x_n)_{n\in\N}\subset K$ be a convergent sequence. By sequential compactness, $(x_{n_k})_{k\in\N}$ is a subsequence that converges to $x\in K$. But $(x_n)_{n\in\N}$ has the same limit as its subsequence thus $x_n\to x$. Now suppose for a contradiction that $K$ is unbounded. Then there exists a sequence $(x_n)_{n\in\N}$ such that $\abs{x_n}\geq n$ for all $n\in\N$. By sequential compactness, there is a subsequence $(x_{n_k})_{k\in\N}$ such that its limit is $x\in K$. This means that $(x_{n_k})_{k\in\N}$ is bounded, a contradiction. \\
 Now suppose that $K$ is closed and bounded. Let $(x_n)_{n\in\N}$ be a sequence in $K$. Then $K$ being bounded means that $(x_n)_{n\in\N}$ is bounded. By the Bolzano-Weierstrass theorem, it has a convergent subsequence $(x_{n_k})_{k\in\N}$ with limit in $K$ since $K$ is closed. 
 \end{proof}
 \end{prp}
 
-\begin{thm}{}{} Let $f:K\subset\R^n\to\R^m$ be continuous and $K$ sequentially compact. Then $f(K)$ is sequentially compact. \tcbline
+\begin{thm}{}{} Let $f:K\subset\R^n\to\R^m$ be continuous and $K$ sequentially compact. Then $f(K)$ is sequentially compact. 
 \begin{proof}
 Let $(y_n)_{n\in\N}$ be a sequence in $f(K)$. Then there exists a sequence $(x_n)_{n\in\N}$ such that $y_n=f(x_n)$ for all $n\in\N$. By sequential compactness, there exists a subsequence $(x_{n_k})_{k\in\N}$ that is convergent to $x\in K$. By sequential continuity of $f$ at $x$, $y_{n_k}\to f(x)$ and we are done. 
 \end{proof}
 \end{thm}
 
-\begin{thm}{Extreme Value Theorem}{} Let $f:K\subset\R^n\to\R$ be continuous and $K$ sequentially compact. Then there exists $a,b\in K$ such that $$f(a)\leq f(x)\leq f(b)$$ for all $x\in K$. \tcbline
+\begin{thm}{Extreme Value Theorem}{} Let $f:K\subset\R^n\to\R$ be continuous and $K$ sequentially compact. Then there exists $a,b\in K$ such that $$f(a)\leq f(x)\leq f(b)$$ for all $x\in K$. 
 \begin{proof}
 We know that $f(K)$ is closed and bounded. Thus it must have a supremum $M$ and infinum $m$ that are finite. Then we must have $(a_n)_{n\in\N}$ and $(b_n)_{n\in\N}$ such that $a_n\to m$ and $b_n\to M$ by definition of supremum and infinum. Since $f(K)$ is closed, $m,M\in f(K)$ and we are done. 
 \end{proof}
@@ -204,13 +204,13 @@ The definition of the opaertor norm given on $S^{n-1}$ is particularly useful be
 
 We want to compare the two norms and show that they are equivalent. But they are in two different vector spaces. We need to associate the two vector space into the same one first. 
 
-\begin{prp}{}{} Both $\mathcal{L}(\R^n,\R^k)$ and $M_{k\times n}(\R)$ is a vector space over $\R$ where $n,k\in\N\setminus\{0\}$. Moreover, we have $$\mathcal{L}(\R^n,\R^k)\cong M_{k\times n}(\R)\cong\R^{nk}$$ \tcbline
+\begin{prp}{}{} Both $\mathcal{L}(\R^n,\R^k)$ and $M_{k\times n}(\R)$ is a vector space over $\R$ where $n,k\in\N\setminus\{0\}$. Moreover, we have $$\mathcal{L}(\R^n,\R^k)\cong M_{k\times n}(\R)\cong\R^{nk}$$ 
 \begin{proof}
 The fact that $\mathcal{L}(\R^n,\R^k)$ and $M_{k\times n}(\R)$ is a vector space is trivial. Since they have the same dimension and we know that all finite dimensional vector space is isomorphic to $\R^p$ for some $p\in\N\setminus\{0\}$, we get the desired result. 
 \end{proof}
 \end{prp}
 
-\begin{prp}{}{} The frobenius norm and the operator norm are equivalent. \tcbline
+\begin{prp}{}{} The frobenius norm and the operator norm are equivalent. 
 \begin{proof}
 Given that the they actually act on the same vector space, we can associate every linear transformation $T$ with the matrix $A$. Now we have 
 \begin{align*}
@@ -220,7 +220,7 @@ Given that the they actually act on the same vector space, we can associate ever
 &\leq\|T\|^2\sum_{j=1}^n\abs{e_j}^2\tag{$\frac{\abs{T(x)}}{\abs{x}}\leq\|T\|$}\\
 &=n\|T\|^2
 \end{align*}
-Thus we have $\|A\|_F\leq\sqrt{n}\|T\|$. \\~\\
+Thus we have $\|A\|_F\leq\sqrt{n}\|T\|$. \\
 Now for any $x\in\R^n$, we also have 
 \begin{align*}
 \abs{T(x)}^2&=\abs{Ax}^2\\
@@ -240,7 +240,7 @@ Thus we now have $$\|T\|\leq\|A\|_F\leq\sqrt{n}\|T\|$$ and we are done.
 
 Now we can make sense of using the operator norm for matrices, and the frobenius norm for linear maps. 
 
-\begin{prp}{}{} Let $T\in\mathcal{L}(\R^n,\R^k)$ and $S\in\mathcal{L}(\R^k,\R^m)$. Then $$\|S\circ T\|\leq\|S\|\|T\|$$ \tcbline
+\begin{prp}{}{} Let $T\in\mathcal{L}(\R^n,\R^k)$ and $S\in\mathcal{L}(\R^k,\R^m)$. Then $$\|S\circ T\|\leq\|S\|\|T\|$$ 
 \begin{proof}
 We have that 
 \begin{align*}
@@ -251,13 +251,13 @@ Thus we are done.
 \end{proof}
 \end{prp}
 
-\begin{prp}{}{} The function $\det(\cdot):\R^{n\times n}\to\R$, which is the determinant, is continuous with respect to the elements of the matrix. \tcbline
+\begin{prp}{}{} The function $\det(\cdot):\R^{n\times n}\to\R$, which is the determinant, is continuous with respect to the elements of the matrix. 
 \begin{proof}
 Note that $\R^{n\times n}\cong\R^{n^2}$ thus the determinant really is just a linear form of $\R^{n^2}$ since the determinant is defined by a polynomial. Polynomials are clearly continuous thus we are done. 
 \end{proof}
 \end{prp}
 
-\begin{prp}{}{} Let $n\in\N\setminus\{0\}$. Then $$GL(n,\R)\subset L(\R^n)$$ is open. \tcbline
+\begin{prp}{}{} Let $n\in\N\setminus\{0\}$. Then $$GL(n,\R)\subset L(\R^n)$$ is open. 
 \begin{proof}
 Consider the function $\det(\cdot):\R^{n\times n}\to\R$. We have that $\det(GL(n,\R))=\R\setminus\{0\}$ and image is clearly open in $\R$. Thus by continuity with open sets, $GL(n,\R)$ is open. 
 \end{proof}
@@ -266,7 +266,7 @@ Consider the function $\det(\cdot):\R^{n\times n}\to\R$. We have that $\det(GL(n
 \begin{prp}{}{} Let $A\in GL(n,\R)$. If $B\in M_{n\times n}(\R)$ and $\|B-A\|<\frac{1}{\|A^{-1}\|}$, then $B$ is invertible. This means that $$B_{1/\|A^{-1}\|}(A)\subset GL(n,\R)$$ is open in $M_{n\times n}(\R)$. Furthermore, we must have $$\|B^{-1}\|\leq\frac{1}{\frac{1}{\|A^{-1}\|}-\|B-A\|}$$
 \end{prp}
 
-\begin{prp}{}{} Let $f:\R\to M_{k\times n}(\R)$ be a function. Then $f$ is continuous if and only if every item in the matrix is a continuous function in the sense of a real function. \tcbline
+\begin{prp}{}{} Let $f:\R\to M_{k\times n}(\R)$ be a function. Then $f$ is continuous if and only if every item in the matrix is a continuous function in the sense of a real function. 
 \begin{proof}
 This is clear since $M_{k\times n}(\R)\cong\R^{kn}$ and we have proved this in the above section. 
 \end{proof}
@@ -283,11 +283,11 @@ It is important that this definition uses a linear map as an approximation rathe
 \begin{defn}{Derivative Operator}{} Let $f:U\subseteq\R^n\to\R^m$ be differentiable for all $x\in U$. We define the operator $D$ on $f$ to be the function that takes $x$ to $Df(x)$. This means that $Df:U\subseteq\R^n\to M_{m\times n}(\R)$. 
 \end{defn}
 
-Note the notational differences. $Df$ is a function that takes in $x$ and spits out $Df(x)$. $Df(x)$ itself is a linear map $\mathcal{L}(\R^n,\R^m)$. It can also be a function $Df(x):\R^n\to\R^m$ that takes a direction $v\in\R^n$ and spits out the directional derivative $Df(x)v\in\R^m$. \\~\\
+Note the notational differences. $Df$ is a function that takes in $x$ and spits out $Df(x)$. $Df(x)$ itself is a linear map $\mathcal{L}(\R^n,\R^m)$. It can also be a function $Df(x):\R^n\to\R^m$ that takes a direction $v\in\R^n$ and spits out the directional derivative $Df(x)v\in\R^m$. \\
 
 We then have the extension of theorems as in the one-dimensional case. 
 
-\begin{thm}{}{} The linear transformation representing the derivative is unique if it exists. \tcbline
+\begin{thm}{}{} The linear transformation representing the derivative is unique if it exists. 
 \begin{proof}
 Suppose that $A,B$ both represent the derivative of $f:U\subseteq\R^n\to\R^m$. Then fix $\epsilon>0$. There exists $\delta_1,\delta_2$ such that $\abs{h}<\min\{\delta_1,\delta_2\}$ implies $$\frac{\abs{f(x+h)-f(x)-Ah}}{\abs{h}}<\epsilon$$ and $$\frac{\abs{f(x+h)-f(x)-Bh}}{\abs{h}}<\epsilon$$ Then we have 
 \begin{align*}
@@ -300,7 +300,7 @@ Thus $A=B$ by definition of limit and we are done.
 \end{proof}
 \end{thm}
 
-\begin{prp}{}{} If $f:U\subseteq\R^n\to\R^m$ is differentiable at $x\in U$, then $f$ is continuous at $x$. \tcbline
+\begin{prp}{}{} If $f:U\subseteq\R^n\to\R^m$ is differentiable at $x\in U$, then $f$ is continuous at $x$. 
 \begin{proof}
 Since $f$ is continuous at $x$, there exists $A\in\R^{m\times n}$ such that $$\lim_{h\to 0}\frac{\abs{f(x+h)-f(x)-Ah}}{\abs{h}}=0$$ Fix $\epsilon>0$, there exists $\delta_1>0$ such that $\abs{h}<\delta_1$ 
 \begin{align*}
@@ -319,13 +319,13 @@ Similar to continuity, differentiability in higher dimensions can be broken down
 
 The rest of this section are also extensions of one-dimensional case. 
 
-\begin{prp}{}{} If $f:\R^n\to\R^m$ is a constant function then $Df(x)=0$. \tcbline
+\begin{prp}{}{} If $f:\R^n\to\R^m$ is a constant function then $Df(x)=0$. 
 \begin{proof}
 Suppose that $f(x)=k$ for some $k\in\R^m$. Then I claim that $Df(x)=0$. Indeed since $$\lim_{h\to 0}\frac{\abs{0+0-0h}}{\abs{h}}=0$$ thus the definition of differentiability is satisfied. 
 \end{proof}
 \end{prp}
 
-\begin{prp}{}{} If $A\in\R^{m\times n}$ and $f:U\subseteq\R^n\to\R^m$ is defined by $f(x)=Ax$, then $Df(x)=A$. \tcbline
+\begin{prp}{}{} If $A\in\R^{m\times n}$ and $f:U\subseteq\R^n\to\R^m$ is defined by $f(x)=Ax$, then $Df(x)=A$. 
 \begin{proof}
 Clearly $Df(x)=A$ satisfies the definition of differentiability since $$\lim_{h\to 0}\frac{\abs{A(x+h)-Ax-Ah}}{\abs{h}}=0$$
 \end{proof}
@@ -338,7 +338,7 @@ Clearly $Df(x)=A$ satisfies the definition of differentiability since $$\lim_{h\
 \begin{prp} If $f:U\subseteq\R^n\to\R^k$ has a directional derivative along $v\in\R^n$, then $f$ is linearly continuous along $v$. 
 \end{prp}
 
-\begin{prp}{}{} Let $f:U\subseteq\R^n\to\R^k$ be a function. If $Df$ exists then $\partial_vf(x)=Df(x)v$. Moreover, $\partial_vf(x)$ is linear. Meaning $$\partial_{av+bw}f(x)=a\partial_vf(x)+b\partial_wf(x)$$ for all $a,b\in\R$ and for all $v,w\in\R^n$. \tcbline
+\begin{prp}{}{} Let $f:U\subseteq\R^n\to\R^k$ be a function. If $Df$ exists then $\partial_vf(x)=Df(x)v$. Moreover, $\partial_vf(x)$ is linear. Meaning $$\partial_{av+bw}f(x)=a\partial_vf(x)+b\partial_wf(x)$$ for all $a,b\in\R$ and for all $v,w\in\R^n$. 
 \begin{proof}
 Suppose that $Df$ exists. Then using the definition of differentiability, we have that 
 \begin{align*}
@@ -352,7 +352,7 @@ Linearity follows since $Df(x)$ is matrix and matrix multiplication on a vector 
 \end{proof}
 \end{prp}
 
-We should make absolutely clear distinction with the existence of frechet derivatives and the existence of directional derivatives. Even if the directional derivatives exists, as long as they are not linear, the matrix for the frechet derivative will not exist. In particular, it is possible to write out the Jacobian matrix as we see below, but this Jacobian matrix will not be equal to the matrix in the frechet derivative. \\~\\
+We should make absolutely clear distinction with the existence of frechet derivatives and the existence of directional derivatives. Even if the directional derivatives exists, as long as they are not linear, the matrix for the frechet derivative will not exist. In particular, it is possible to write out the Jacobian matrix as we see below, but this Jacobian matrix will not be equal to the matrix in the frechet derivative. \\
 
 The above theorem is also useful for detecting non-differentiability. By verifying the directional derivatives are non-linear, one can use the contrapositive to prove that $f$ would not be differentiable. 
 
@@ -379,7 +379,7 @@ Now we have the six notions, namely continuity, linear continuity, separate cont
 
 Clearly the existence of the Jacobian matrix simply relies on the existence of partial derivatives. Note that in order for $Df$ to exist, we require the directional derivatives to be linear. 
 
-\begin{thm}{}{} If $f:U\subseteq\R^n\to\R^k$ is differentiable at $x\in U$ and $v\in\R^n$, then $$Df(x)v=\partial f(x)v$$ \tcbline
+\begin{thm}{}{} If $f:U\subseteq\R^n\to\R^k$ is differentiable at $x\in U$ and $v\in\R^n$, then $$Df(x)v=\partial f(x)v$$ 
 \begin{proof}
 Note that we have
 \begin{align*}
@@ -393,7 +393,7 @@ Df(x)v&=Df(x)\sum_{k=1}^nv_ie_i\\
 
 The above theorem shows us that as long as $f$ is differentiable, the Jacobian and the matrix given in the frechet derivative will be equal and interchangable. 
 
-\begin{lmm}{}{} If $f:U\subseteq\R^n\to\R^m$ is differentiable at $x\in U$ and $v\in\R^n$, then $$Df(x)v=\partial f(x)v=\partial_vf(x)$$ \tcbline
+\begin{lmm}{}{} If $f:U\subseteq\R^n\to\R^m$ is differentiable at $x\in U$ and $v\in\R^n$, then $$Df(x)v=\partial f(x)v=\partial_vf(x)$$ 
 \begin{proof}
 This immediately follows from previous theorems. 
 \end{proof}
@@ -409,20 +409,20 @@ This theorem also shows that if $f$ is differentiable, then $f$ must have direct
 \frac{f(x+h)-f(x)-Ah}{\abs{h}} & \text{if $h\neq0$}\\
 0 & \text{if $h=0$}
 \end{cases}$$
-Then $f$ is differentiable at $x$ with $Df(x)=A$ if and only if $\Delta_{x,A}$ is continuous at $0$. \tcbline
+Then $f$ is differentiable at $x$ with $Df(x)=A$ if and only if $\Delta_{x,A}$ is continuous at $0$. 
 \begin{proof}
-Let $\Delta_{x,A}$ be continuous at $0$. Then $$\lim_{h\to 0}\abs{\Delta_{x,A}f(h)}=\abs{\Delta_{x,A}f(0)}=0$$ Thus by definition of differentiability $f$ is differentiable at $x$ with $Df(x)=A$. \\~\\
+Let $\Delta_{x,A}$ be continuous at $0$. Then $$\lim_{h\to 0}\abs{\Delta_{x,A}f(h)}=\abs{\Delta_{x,A}f(0)}=0$$ Thus by definition of differentiability $f$ is differentiable at $x$ with $Df(x)=A$. \\
 Now let $f$ be differentiable at $x$ and set $A=Df(x)$. Then by definition of differentiability we have that $$\lim_{h\to 0}\abs{\frac{f(x+h)-f(x)-Ah}{\abs{h}}}=\lim_{h\to 0}\abs{\Delta_{x,A}f(h)}=0=\Delta_{x,A}f(0)$$ Thus $\Delta_{x,A}f(x)$ is continuous at $0$. 
 \end{proof}
 \end{lmm}
 
-\begin{lmm}{}{} Let $\tau>0$. Let $\xi:B_r(0)\to\R$ be bounded and $\nu:B_r(0)\to\R^k$ be continuous at $0\in B_r(0)$ and $\nu(0)=0$. Then $$\delta(h)=\xi(h)\nu(h)$$ where $0<\abs{h}<\tau$ and $\delta(0)=0$ is continuous at $0\in B_r(0)$. \tcbline
+\begin{lmm}{}{} Let $\tau>0$. Let $\xi:B_r(0)\to\R$ be bounded and $\nu:B_r(0)\to\R^k$ be continuous at $0\in B_r(0)$ and $\nu(0)=0$. Then $$\delta(h)=\xi(h)\nu(h)$$ where $0<\abs{h}<\tau$ and $\delta(0)=0$ is continuous at $0\in B_r(0)$. 
 \begin{proof}
 By continuity of $\nu$ at $0$, let $\epsilon>0$. Then there exists $\delta\in(0,\tau)$ such that $\abs{h}<\tau$ implies $\abs{\nu(h)}<\epsilon$. By boundedness of $\xi$, there exists $M>0$ such that $\abs{\xi}<M$ for all $h\in B_r(0)\setminus\{0\}$. Thus $0<\abs{h}<\delta$ implies $\abs{\delta(h)}<M\epsilon$, meaning $\lim_{h\to 0}\delta(h)=0=\delta(0)$ thus we are done. 
 \end{proof}
 \end{lmm}
 
-\begin{prp}{Chain Rule}{} Let $f:U\subset\R^n\to\R^m$ and $g:V\subset\R^m\to\R^k$ be two differentiable functions. Let $x \in U$. Then $g\circ f$ is differentiable and $$D(g\circ f)(x)=(Dg)(f(x))\cdot Df(x)$$ \tcbline
+\begin{prp}{Chain Rule}{} Let $f:U\subset\R^n\to\R^m$ and $g:V\subset\R^m\to\R^k$ be two differentiable functions. Let $x \in U$. Then $g\circ f$ is differentiable and $$D(g\circ f)(x)=(Dg)(f(x))\cdot Df(x)$$ 
 \begin{proof}
 Let $$\Delta_xf(h)=\begin{cases}
 \frac{f(x+h)-f(x)-Df(x)h}{\abs{h}} & \text{if } h\neq 0\\
@@ -443,7 +443,7 @@ Since $\lim_{h\to 0}\abs{\Delta_xf(h)}=0$ by construction, we are done. Now let 
 \end{prp}
 
 \subsection{Mean Value Inequality}
-\begin{thm}{Mean Value Theorem}{} Let $x,y\in\R^n$. Let $r:[a,b]\to\R^n$ be continuously differentiable. Let $f: C^1(r([a,b]),\R^k)$ and there exists some $M$ such that $\abs{\partial f(x)}\leq M$ for all $x\in U$. Then $$\abs{f(r(b))-f(r(a))}\leq M\int_a^b\abs{r'(t)}\,dt$$ \tcbline
+\begin{thm}{Mean Value Theorem}{} Let $x,y\in\R^n$. Let $r:[a,b]\to\R^n$ be continuously differentiable. Let $f: C^1(r([a,b]),\R^k)$ and there exists some $M$ such that $\abs{\partial f(x)}\leq M$ for all $x\in U$. Then $$\abs{f(r(b))-f(r(a))}\leq M\int_a^b\abs{r'(t)}\,dt$$ 
 \begin{proof}
 We have that 
 \begin{align*}
@@ -459,7 +459,7 @@ Thus we are done.
 
 Notive that $\int_a^b\abs{r'(t)}\,dt$ is exactly the length of the path $r$ from $a$ to $b$. 
 
-\begin{prp}{}{} Suppose that $U\subseteq\R^n$ is path-connected and every path is differentiable. Let $f:U\subseteq\R^n\to\R^m$ be differentiable and that $\partial f(x)=0$ for all $x\in U$. Then $f$ is constant on $U$. \tcbline
+\begin{prp}{}{} Suppose that $U\subseteq\R^n$ is path-connected and every path is differentiable. Let $f:U\subseteq\R^n\to\R^m$ be differentiable and that $\partial f(x)=0$ for all $x\in U$. Then $f$ is constant on $U$. 
 \begin{proof}
 Let $x,y\in U$, then any path $r:[a,b]\to U$ with $r(a)=x$ and $r(b)=y$ is differentiable. Then 
 \begin{align*}
@@ -473,11 +473,11 @@ Thus $f(x)=f(y)$ for any $x,y\in U$.
 \end{prp}
 
 \subsection{Conditions for Differentiability}
-\begin{thm}{}{} Let $f:U\subseteq\R^n\to\R^k$ and suppose that $B_r(x_0)\subset U$ for some $r>0$. Suppose that the Jacobian $\partial f(x)$ exists and is continuous for all $x\in B_r(x_0)$. Then $f$ is differentiable. \tcbline
+\begin{thm}{}{} Let $f:U\subseteq\R^n\to\R^k$ and suppose that $B_r(x_0)\subset U$ for some $r>0$. Suppose that the Jacobian $\partial f(x)$ exists and is continuous for all $x\in B_r(x_0)$. Then $f$ is differentiable. 
 \begin{proof}
 We show this for the case that $k=1$ since $f:\R^n\to\R^k$ is differentiable if and only if each component $f_1,\dots,f_k$ is differentiable. Thus now $f:\R^n\to\R$. Suppose that $\partial f$ is continuous in $B_r(x)$ for fixed $x$. This means that $\partial_{x_j}f_i$ is continuous for any $j\in\{1,\dots,n\}$ and $i\in\{1,\dots,k\}$. Take a point $x+h\in B_r(x)$. Define $h=\begin{pmatrix}
 h_1\\ \vdots\\ h_n
-\end{pmatrix}$ and $$h_k'=\begin{pmatrix}h_1\\\vdots\\ h_k\\0\\\vdots\\0\end{pmatrix}$$ Trivially define $h_0'=0$ and $h_0=0$ for convenience. Now $f(x+h_k')-f(x+h_{k-1}')$ is just a one variable function on the $k$th slot, thus we can apply the mean value theorem in real analysis and conclude that there exists $\theta_{k}\in(0,1)$ such that $f(x+h_k')-f(x+h_{k-1}')=\partial_{x_k}f(x+h_{k-1}'+(\theta_kh_k)e_k)h_k$. \\~\\
+\end{pmatrix}$ and $$h_k'=\begin{pmatrix}h_1\\\vdots\\ h_k\\0\\\vdots\\0\end{pmatrix}$$ Trivially define $h_0'=0$ and $h_0=0$ for convenience. Now $f(x+h_k')-f(x+h_{k-1}')$ is just a one variable function on the $k$th slot, thus we can apply the mean value theorem in real analysis and conclude that there exists $\theta_{k}\in(0,1)$ such that $f(x+h_k')-f(x+h_{k-1}')=\partial_{x_k}f(x+h_{k-1}'+(\theta_kh_k)e_k)h_k$. \\
 Summing all these up, we have that 
 \begin{align*}
 \sum_{k=1}^nf(x+h_k')-f(x+h_{k-1}')&=\sum_{k=1}^n\partial_{x_k}f(x+h_{k-1}'+(\theta_kh_k)e_k)h_k\\
@@ -490,7 +490,7 @@ We now use the continuity of the partial derivatives. Given $\epsilon>0$, there 
 &<\epsilon\sum_{k=1}^n\abs{h_k}\\
 &<\epsilon\sqrt{n}\abs{h}
 \end{align*}
-if $\abs{h}<\delta$. The second inequality is due to the fact that $\sum_{k=1}^nh_k\leq\sqrt{n}\abs{h}$. \\~\\
+if $\abs{h}<\delta$. The second inequality is due to the fact that $\sum_{k=1}^nh_k\leq\sqrt{n}\abs{h}$. \\
 
 Now define $A\in\mathcal{L}(\R^n,\R)$ by $A(h)=(\partial f)h$. This makes sense in matrix multiplication since $\partial f\in M_{1\times n}(\R)$. Then $0<\abs{h}<\delta$ implies 
 \begin{align*}
@@ -500,13 +500,13 @@ Now define $A\in\mathcal{L}(\R^n,\R)$ by $A(h)=(\partial f)h$. This makes sense 
 \end{proof}
 \end{thm}
 
-Notice that in the above proof, in order to show that $f$ is differentiable at $x$, we need to know the partial derivatives of its neighbours. \\~\\
+Notice that in the above proof, in order to show that $f$ is differentiable at $x$, we need to know the partial derivatives of its neighbours. \\
 
 The below theorem acts as a summary or recollection of the relationships between differentiability and continuous Jacobian Matrices. 
 
-\begin{thm}{}{} Let $U$ be an open subset of $\R^n$. Then $f:U\subseteq\R^n\to\R^k$ is continuously differentiable on $U$ if and only if $\partial f:U\subseteq\R^n\to\R^{k\times n}$ is continuous on $U$. \tcbline
+\begin{thm}{}{} Let $U$ be an open subset of $\R^n$. Then $f:U\subseteq\R^n\to\R^k$ is continuously differentiable on $U$ if and only if $\partial f:U\subseteq\R^n\to\R^{k\times n}$ is continuous on $U$. 
 \begin{proof}
-Suppose that $f$ is differentiable at $x$ and its derivative $Df(x)$ is continuous. Then $Df(x)=\partial f(x)$ thus $\partial f(x)$ is also continuous. \\~\\
+Suppose that $f$ is differentiable at $x$ and its derivative $Df(x)$ is continuous. Then $Df(x)=\partial f(x)$ thus $\partial f(x)$ is also continuous. \\
 Now suppose that $\partial f(x)$ is continuous in $U$. Then by the above theorem $f$ is differentiable and thus we have $Df(x)=\partial f(x)$. Hence $Df(x)$ is also continuous. 
 \end{proof}
 \end{thm}
@@ -515,13 +515,13 @@ Now suppose that $\partial f(x)$ is continuous in $U$. Then by the above theorem
 \section{More Properties of Differentiability}
 \subsection{Inverse Function Theorem}
 The inverse function theorem is a powerful multidimensional analog of finding the derivative of an inverse function. The function has a few conditions to satisfy in order for it to be applied. Since the proof is exceptionally long, I will split it to a number of theorems and prepositions. 
-\begin{prp}{}{} Suppose that $\Psi:U\to V$ is a bijection which is differentiable at $x\in U$. Suppose that $\Psi^{-1}$ is differentiable at $y=\Psi(x)\in V$. Then $D\Psi(x)$ and $D\Psi^{-1}(y)$ are both invertible and $$(D\Psi^{-1})(y)=(D\Psi(\Psi^{-1}(y)))^{-1}$$ \tcbline
+\begin{prp}{}{} Suppose that $\Psi:U\to V$ is a bijection which is differentiable at $x\in U$. Suppose that $\Psi^{-1}$ is differentiable at $y=\Psi(x)\in V$. Then $D\Psi(x)$ and $D\Psi^{-1}(y)$ are both invertible and $$(D\Psi^{-1})(y)=(D\Psi(\Psi^{-1}(y)))^{-1}$$ 
 \begin{proof}
 Differentiating the relation $\Psi(\Psi^{-1}(y))=y$ gives $$D\Psi(\Psi^{-1}(y))\circ D\Psi^{-1}(y)=I_n$$ which is the identity transformation thus we are done. 
 \end{proof}
 \end{prp}
 
-\begin{lmm}{}{} $T\in\mathcal{L}(\R^n,\R^k)$ is injective if and only if there exists $a>0$ such that $\abs{T(x)}\geq a\abs{x}$ for all $x\in\R^n$. \tcbline
+\begin{lmm}{}{} $T\in\mathcal{L}(\R^n,\R^k)$ is injective if and only if there exists $a>0$ such that $\abs{T(x)}\geq a\abs{x}$ for all $x\in\R^n$. 
 \begin{proof}
 Firstly suppose that there exists $a>0$ such that $\abs{T(x)}\geq a\abs{x}$ for all $x\in\R^n$. Let $T(x)=T(y)$. Then 
 \begin{align*}
@@ -529,7 +529,7 @@ Firstly suppose that there exists $a>0$ such that $\abs{T(x)}\geq a\abs{x}$ for 
 \abs{T(x)-T(y)}&\geq a\abs{x-y}\\
 0&\geq a\abs{x-y}
 \end{align*}
-Since $a>0$ we must have $x=y$. \\~\\
+Since $a>0$ we must have $x=y$. \\
 Now suppose that for all $a>0$, $\abs{T(x)}<a\abs{x}$ for all $x\in\R^n$. This means that $\frac{\abs{T(x)}}{\abs{x}}<a$ for all $a>0$. This is precisely the definition of a limit. We can find a sequence $(x_j)_{j\in\N}$ such that $$\frac{\abs{T(x_j)}}{\abs{x_j}}\to 0$$ Now consider a new sequence defined by $y_j=\frac{x_j}{\abs{x_j}}$. Clearly $(y_j)_{j\in\N}\subset S^{n-1}$. But $S^{n-1}$ is compact by the Heine-Borel theorem. Thus there exists $(y_{j_m})_{m\in\N}$ such that it has its limit in $S^{n-1}$. But then $$T(y_j)=\frac{T(x_j)}{\abs{x_j}}$$ thus $\abs{T(y_j)}\to 0$. All the $y_j$ are clearly nonzero, this means that $T$ has a non-trivial kernel and thus $T$ is not injective. 
 \end{proof}
 \end{lmm}
@@ -556,7 +556,7 @@ Now we have
 \abs{\Psi(x)-\Psi(p)}&\geq\frac{1}{2}\epsilon\abs{x-p}\\
 &=\frac{1}{4}\epsilon\delta
 \end{align*}
-For all $x\in\partial K$. Set $\rho=\frac{1}{8}\epsilon\delta$ and fix $y\in B_\rho(\Psi(p))$. We will show that $$y\in\Psi(B_{\frac{1}{2}\delta}(p))$$ to finish the proof. Define a new function $\phi:K\to \R$ by $\phi(x)=\abs{\Psi(x)-y}$. Then $\phi$ is continuous by composition of continuous functions. By the extreme value theorem, there exists $c\in K$ such that $\phi(c)\leq\phi(x)$ for all $x\in K$. \\~\\
+For all $x\in\partial K$. Set $\rho=\frac{1}{8}\epsilon\delta$ and fix $y\in B_\rho(\Psi(p))$. We will show that $$y\in\Psi(B_{\frac{1}{2}\delta}(p))$$ to finish the proof. Define a new function $\phi:K\to \R$ by $\phi(x)=\abs{\Psi(x)-y}$. Then $\phi$ is continuous by composition of continuous functions. By the extreme value theorem, there exists $c\in K$ such that $\phi(c)\leq\phi(x)$ for all $x\in K$. \\
 Now I will show that $c\in B_{\frac{1}{2}\delta}(p)$ by showing that $c\notin\partial K$ and using the fact that $B_{\frac{1}{2}\delta}(p)=K\setminus\partial{K}$. $c\notin\partial K$ can be proved by $\phi(x)>\phi(p)$ for all $x\in\partial K$. Now if $x\in\partial K$, we have
 \begin{align*}
 \phi(x)&=\abs{\Psi(x)-y}\\
@@ -566,7 +566,7 @@ Now I will show that $c\in B_{\frac{1}{2}\delta}(p)$ by showing that $c\notin\pa
 &>\abs{y-\Psi(p)}\\
 &=\phi(p)
 \end{align*}
-Thus we are done with this part. \\~\\
+Thus we are done with this part. \\
 Now since $D\Psi(p)$ is surjective, there exists $h\in\R^n$ such that $D\Psi(p)h=y-\Psi(c)$ (by nuisances). Since $c\in B_{\frac{1}{2}\delta}(p)$, there exists $\nu>0$ such that $\abs{t}<\nu$ implies $\abs{c+th-p}<\frac{1}{2}\delta$. Thus we have 
 \begin{align*}
 \Psi(c+th)-y&=\Psi(c+th)-\Psi(c)-tD\Psi(p)h+(\Psi(c)-y+tD\Psi(p)h)\\
@@ -584,20 +584,20 @@ Since this holds for all $\abs{t}<\nu$, we must have that $\phi(c)=0$, which imp
 \end{proof}
 \end{prp}
 
-\begin{crl}{}{} Let $U\subset\R^n$ be open. Let $\Psi\in\mathcal{C}^1(U,\R^n)$ and suppose that $D\Psi(p)$ is invertible for all points $p\in U$, then $\Psi$ maps open subsets of $U$ to open subsets of $\R^n$. \tcbline
+\begin{crl}{}{} Let $U\subset\R^n$ be open. Let $\Psi\in\mathcal{C}^1(U,\R^n)$ and suppose that $D\Psi(p)$ is invertible for all points $p\in U$, then $\Psi$ maps open subsets of $U$ to open subsets of $\R^n$. 
 \begin{proof}
 Let $V\subset U$ be open. By the above proposition applied to $\Psi|_V$, we have for all $p\in V$, there exists $\rho>0$ such that $$B_{\rho}(\Psi(p))\subset\Psi(V)$$, thus $\Psi(V)$ is open. 
 \end{proof}
 \end{crl}
 
-\begin{thm}{Inverse Function Theorem}{} Let $U$ be an open subset of $\R^n$ and suppose that $\Psi\in\mathcal{C}^1(U,\R^n)$. Assume that $D\Psi(p)$ is invertible at a point $p\in U$. Let $q=\Psi(p)$. Then there exists a neighbourhood $N_p$ and $N_q$ such that $\Psi:N_p\to N_q$ is a bijection and $\Psi^{-1}:N_q\to N_p$ is continuously differentiable and $$(D\Psi^{-1})(y)=(D\Psi(\Psi^{-1}(y)))^{-1}$$ for all $y\in N_q$. \tcbline
+\begin{thm}{Inverse Function Theorem}{} Let $U$ be an open subset of $\R^n$ and suppose that $\Psi\in\mathcal{C}^1(U,\R^n)$. Assume that $D\Psi(p)$ is invertible at a point $p\in U$. Let $q=\Psi(p)$. Then there exists a neighbourhood $N_p$ and $N_q$ such that $\Psi:N_p\to N_q$ is a bijection and $\Psi^{-1}:N_q\to N_p$ is continuously differentiable and $$(D\Psi^{-1})(y)=(D\Psi(\Psi^{-1}(y)))^{-1}$$ for all $y\in N_q$. 
 \begin{proof}
-Clearly $\Psi$ satisfies the above two propositions. Thus this means that there exists $\epsilon>0$ such that $\abs{Df(p)h}\geq\epsilon\abs{h}$ for all $h\in\R^n$ and that there exists $\delta>0$ such that $x\in B_\delta(p)\subset U$ implies $$\|Df(p)-Df(x)\|<\frac{1}{2}\epsilon$$ Using these two facts and the rank nullity theorem we deduce that $D\Psi(x)$ is invertible for all $x\in B_\delta(p)$. The above corollary implies that $\Psi(B_\delta(p))$ is open. Thus $\Psi|_{B_\delta(p)}:B_\delta(p)\to\Psi(B_\delta(p))$ is a bijection. \\~\\
+Clearly $\Psi$ satisfies the above two propositions. Thus this means that there exists $\epsilon>0$ such that $\abs{Df(p)h}\geq\epsilon\abs{h}$ for all $h\in\R^n$ and that there exists $\delta>0$ such that $x\in B_\delta(p)\subset U$ implies $$\|Df(p)-Df(x)\|<\frac{1}{2}\epsilon$$ Using these two facts and the rank nullity theorem we deduce that $D\Psi(x)$ is invertible for all $x\in B_\delta(p)$. The above corollary implies that $\Psi(B_\delta(p))$ is open. Thus $\Psi|_{B_\delta(p)}:B_\delta(p)\to\Psi(B_\delta(p))$ is a bijection. \\
 Now we show that $\Psi^{-1}$ is continuously differentiable. 
 \end{proof}
 \end{thm}
 
-Note that there could be multiple $p$ such that $\Psi$ maps $p$ to $q$. The inverse function theorem guarantees that as long as $D\Psi(p)$ is invertible, then they will have bijective neighbourhoods. This is why we can have multiple branches for the inverse. A good example would be $y=x^2$. It has two inverses, namely $\sqrt{x}$ and $-\sqrt{x}$ precisely because of this reason. In this case the two neighbourhoods would be $\R^+$ and $\R^-$ respectively. \\~\\
+Note that there could be multiple $p$ such that $\Psi$ maps $p$ to $q$. The inverse function theorem guarantees that as long as $D\Psi(p)$ is invertible, then they will have bijective neighbourhoods. This is why we can have multiple branches for the inverse. A good example would be $y=x^2$. It has two inverses, namely $\sqrt{x}$ and $-\sqrt{x}$ precisely because of this reason. In this case the two neighbourhoods would be $\R^+$ and $\R^-$ respectively. \\
 
 Furthermore, even if there are multiple $p$ mapping to $q$, not every $p$ could have a neighbourhood such that they are bijective because we must require the fact that $D\Psi(p)\neq 0$. 
 
@@ -627,9 +627,9 @@ for $1\leq i\leq n$ if it exists. This is done by treating $\partial_jf$ as a fu
 
 With $f:\R^n\to\R$, to say that $Df$ is differentiable means that there exists a linear operator $T$ such that $$\lim_{h\to 0}\frac{\abs{Df(x+h)-Df(x)-T(h)}}{\abs{h}}=0$$ as defined by the definition of differentiability. Notice that $Df(x)\in\mathcal{L}(\R^n,\R)$. This means that $T$ must take the form $T:\R^n\to\mathcal{L}(\R^n,\R)$ so that $T(h)\in\mathcal{L}(\R^n,\R)$ makes sense. Thus $T\in\mathcal{L}(\R^n,\mathcal{L}(\R^n,\R))$. This leads to the following identification: 
 
-\begin{prp}{}{} Let $n\in\N\setminus\{0\}$. Then $$\mathcal{L}(\R^n,\mathcal{L}(\R^n,\R))\cong\mathcal{L}^2(\R^n,\R)$$ where $\mathcal{L}^2(\R^n,\R)$ is the space of all bilinear forms $\R^n\times\R^n\to\R$. \tcbline
+\begin{prp}{}{} Let $n\in\N\setminus\{0\}$. Then $$\mathcal{L}(\R^n,\mathcal{L}(\R^n,\R))\cong\mathcal{L}^2(\R^n,\R)$$ where $\mathcal{L}^2(\R^n,\R)$ is the space of all bilinear forms $\R^n\times\R^n\to\R$. 
 \begin{proof}
-Let $T\in\mathcal{L}(\R^n,\mathcal{L}(\R^n,\R))$. Then for every $x\in\R^n$, $T(x):\R^n\to\R$. Thus $T(x)(y)\in\R$ with $x,y\in\R^n$. Obviously we can write it into $T(x)(y)=B(x,y)$. Conversely any bilinear form can be written into the above form. In particular they both are vector spaces of dimension $n^2$. \\~\\
+Let $T\in\mathcal{L}(\R^n,\mathcal{L}(\R^n,\R))$. Then for every $x\in\R^n$, $T(x):\R^n\to\R$. Thus $T(x)(y)\in\R$ with $x,y\in\R^n$. Obviously we can write it into $T(x)(y)=B(x,y)$. Conversely any bilinear form can be written into the above form. In particular they both are vector spaces of dimension $n^2$. \\
 From linear algebra we know that $B(x,y)=x^TAy$ for some matrix $A$. If $T(x)=Cx$ with $C$ representing $T$, then $$B(x,y)=(T(x))\cdot y=(Cx)^Ty=x^TC^Ty$$
 \end{proof}
 \end{prp}
@@ -676,7 +676,7 @@ Before we define integration of functions, we need to make sense of the domain o
 Also define the boundary of a region, $\partial\Omega$ to be $\{x\in\R^n|f(x)=0\}$. 
 \end{defn}
 
-\begin{prp}{}{} Let $\Omega\subset\R^n$ be a region with boundary $f(x)=0$. Then there exists $0<l<n$ and $r:\R^l\to\R^n$ such that $f(r(x))=0$. We say that $r$ is the parametrization of $\partial\Omega$. \tcbline
+\begin{prp}{}{} Let $\Omega\subset\R^n$ be a region with boundary $f(x)=0$. Then there exists $0<l<n$ and $r:\R^l\to\R^n$ such that $f(r(x))=0$. We say that $r$ is the parametrization of $\partial\Omega$. 
 \begin{proof}
 Since $\nabla f(p)\neq 0$ for all $p\in\R^n$, we can apply the implicit function theorem to find function $g:\R^l\to\R^{n-l}$ such that $f(x,g(x))=0$ for any $p\in f^{-1}(0)$. Now define $r:\R^l\to\R^n$ by $r(x)=(x,g(x))$. Then clearly $f(r(x))=0$. 
 \end{proof}
@@ -710,7 +710,7 @@ This section is dedicated to vector functions, which are functions with domain $
 \begin{defn}{Arc Length Function and Parametrization}{} Let $r:I\to\R^n$ be a function. Define the Arc Length Function by $$s(t)=\int_{t_0}^{t}\abs{\vb{r}'(u)}du$$ Define the Arc Length Parametrization by $\vb{r}(s)$. 
 \end{defn}
 
-\begin{lmm}{}{} Let $r:I\to\R^n$ be a function. Denote the arc length function by $s(t)$. Then we have $$\abs{r'(s(t))}=1$$ \tcbline
+\begin{lmm}{}{} Let $r:I\to\R^n$ be a function. Denote the arc length function by $s(t)$. Then we have $$\abs{r'(s(t))}=1$$ 
 \begin{proof} We show that $\abs{\vb{r}'(s)}=1$. By the chain rule, 
 \begin{align*}
 \abs{\frac{d}{ds}\vb{r}(s(t))}&=\abs{\frac{d\vb{r}}{dt}\cdot\frac{dt}{ds}}\\
@@ -796,7 +796,7 @@ The conditions for $f$ being a local bijection is given by the inverse function 
 \begin{defn}{Curl}{} Let $v:U\subseteq\R^2\to\R^2$ be a continuously differentiable planar vector field given by $v(x,y)=\left(a(x,y),b(x,y)\right)$. Define the curl of $v$ to be $$\text{curl}(v)=\frac{\partial b}{\partial x}-\frac{\partial a}{\partial y}$$
 \end{defn}
 
-\begin{thm}{Green's Theorem for a Rectangular Region}{} Let $v:U\subseteq\R^2\to\R^2$ be a continuously differentiable planar vector field where $v(x,y)=\begin{pmatrix}v_1(x,y)\\v_2(x,y)\end{pmatrix}$. Let $\Omega=\{(x,y)\in\R^2|a\leq x\leq b,c\leq y\leq d\}$ such that $\partial\Omega\subset U$. Then $$\iint_\Omega\text{curl}(v)\,dA=\int_{\partial\Omega}v\cdot\,dr$$ where $r$ is positively oriented. \tcbline
+\begin{thm}{Green's Theorem for a Rectangular Region}{} Let $v:U\subseteq\R^2\to\R^2$ be a continuously differentiable planar vector field where $v(x,y)=\begin{pmatrix}v_1(x,y)\\v_2(x,y)\end{pmatrix}$. Let $\Omega=\{(x,y)\in\R^2|a\leq x\leq b,c\leq y\leq d\}$ such that $\partial\Omega\subset U$. Then $$\iint_\Omega\text{curl}(v)\,dA=\int_{\partial\Omega}v\cdot\,dr$$ where $r$ is positively oriented. 
 \begin{proof}
 Clearly, we have $$\iint_\Omega\text{curl}(v)\,dA=\int_a^bv_1(x,c)\,dx+\int_b^cv_2(d,y)\,dy+\int_c^av_1(x,d)\,dx+\int_d^bv_2(a,y)\,dy$$
 \end{proof}

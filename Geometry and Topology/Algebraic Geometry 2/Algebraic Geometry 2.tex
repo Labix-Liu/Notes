@@ -32,16 +32,46 @@ Knowledge on commutative algebra is required as a prerequisite. These set of not
 
 \pagebreak
 \section{The Tangent Space and Smooth Points}
-\subsection{The Tangent Space of Affine Varieties}
+\subsection{The Tangent Space}
+\begin{defn}{Tangent Space}{} Let $k$ be a field. Let $V$ be a variety over $k$. Let $p\in V$. Denote the unique maximal ideal of $\mO_{V,p}$ by $m_p$. Define the tangent space of $V$ at $p$ to be $$T_pV=\left(\frac{m_p}{m_p^2}\right)^\ast$$
+\end{defn}
+
+\begin{eg}{}{}\\
+Let $p$ be a point in curve $\V(y^2-x^2(x+1))\subseteq\A_\C^2$. Then the following are true. 
+\begin{itemize}
+\item If $p\neq(0,0)$, then $\dim(T_pV)=1$. 
+\item If $p=(0,0)$, then $\dim(T_pV)=2$. 
+\end{itemize}
+\begin{proof}\\
+For each $p\in V$, the maximal ideal $m_p$ of $\mO_{V,p}$ is the ideal $(x-p_1,y-p_2)$ generated over $\mO_{V,p}$. Hence we have that $$\frac{m_p}{m_p^2}=k\langle [x-p_1],[y-p_2]\rangle$$ There are now two cases. \\
+
+Suppose that $p\neq(0,0)$. I claim that the generators $[x-p_1]$ and $[y-p_2]$ are linearly dependent. Indeed, consider the scalars $[-((x^2+p_1x+p_1^2)+(x+p_1)]$ and $[y+p_2]$ in $\mO_{V,p}/m_p\cong k$. We have that 
+\begin{align*}
+[-((x^2+p_1x+p_1^2)+(x+p_1)][x-p_1]+[y+p_2][y-p_2]&=[-(x^3-p_1^3)-(x^2-p_1^2)]+[y^2-p_2^2]\\
+&=[y^2-x^3-x^2-(p_2^2-p_1^3-p_1^2)]\\
+&=[y^2-x^3-x^2]-[p_2^2-p_1^3-p_1^2]\\
+&=0
+\end{align*}
+Where the element $[y^2-x^3-x^2]$ is $0$ in $m_p/m_p^2$ because $y^2-x^3-x^2\in m_p$ and $m_p$ is an ideal of $\mO_{V,p}\cong\frac{\C[x,y]_{m_p}}{(y^2-x^3-x^2)_{m_p}}$ so that $y^2-x^3-x^2=0$, and the element $[p_2^2-p_1^3-p_1^2]=0$ in $m_p/m_p^2$ because $(p_1,p_2)$ is a point in the curve. \\
+
+It remains to show that the scalars are exhibited for the linear dependence are actually not both zero. We have that $[y+p_2]=[0]$ if and only if $y+p_2\in m_p$. This happens if and only if $p_2$ is a root of $y+p_2$, which happens if and only if $p_2=0$. Since $(p_1,p_2)$ is a point on the curve, we conclude that $p_1=0$ or $1$. By case assumption $(p_1,p_2)\neq 0$ and so we just have to deal with the case $p_1=1$. But if $p_1=1$ then the other scalar becomes $[-x^2]\in \mO_{V,p}/m_p$ and this is clearly non-zero since $[-x^2]=0$ if and only if $x^2\in m_p$ if and only if $p_1=0$. \\
+
+We are left with the case $p=(0,0)$. We want to show that $[x]$ and $[y]$ in $m_p/m_p^2$ are linearly independent. Assume that they are not. Then there exists $f,g\in\mO_{V,p}$ such that $[f],[g]\in\mO_{V,p}/m_p\cong k$ are scalars such that $[f][x]+[g][y]=0$ in $m_p/m_p^2$ and that not both of $[f]$ and $[g]$ are zero. This means that $xf+yg\in m_p^2=(x^2,xy,y^2)$. Hence $xf+yg$ must be a polynomial with no terms of degree $0$ and $1$. Since the only relation with can possibly apply to $xf+yg$ is $y^2-x^3-x^2=0$ and it has no degree $0$ and degree $1$ terms, we conclude that $f$ and $g$ cannot have constant terms. Then $f,g\in m_p$ and so $[f]$ and $[g]$ are both zero as scalars, a contradiction. 
+\end{proof}
+\end{eg}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $V$ be a variety over $k$. Let $p\in V$. Denote the unique maximal ideal of $\mO_{V,p}$ by $m_p$. Then there is an isomorphism $$\frac{m_p}{m_p^2}\cong\Omega_{\mO_{V,p}/k}^1\otimes_{\mO_{V,p}} k$$ given by $[f]\mapsto df\otimes 1$ for $d$ the universal derivation. 
+\end{prp}
+
+Our definition of tangent spaces does not depend on the choice of embedding of the variety. When we have a closed subvariety of $\A_k^n$, the tangent space can be computed using the defining equations of the affine variety. In fact, the definition of tangent spaces makes for a more intuitive definition using the differentials of the defining equations. 
+
 \begin{prp}{}{}\\
 Let $k$ be a field. Let $V\subseteq\A_k^n$ be an affine variety. Let $p=(p_1,\dots,p_n)\in V$. Suppose that $f_1,\dots,f_r,g_1,\dots,g_s\in k[x_1,\dots,x_n]$ such that $V=\V(f_1,\dots,f_r)=\V(g_1,\dots,g_s)$. Then we have $$\V\left(\sum_{k=1}^n\frac{\partial f_1}{\partial x_k}\bigg{|}_p(x_k-p_k),\dots,\sum_{k=1}^n\frac{\partial f_r}{\partial x_k}\bigg{|}_p(x_k-p_k)\right)=\V\left(\sum_{k=1}^n\frac{\partial g_1}{\partial x_k}\bigg{|}_p(x_k-p_k),\dots,\sum_{k=1}^n\frac{\partial g_s}{\partial x_k}\bigg{|}_p(x_k-p_k)\right)$$
 \begin{proof}\\
 Without loss of generality, it suffices to prove that the former set is contained in the latter one. Since $g_i$ vanishes on $V$, we must have that $g_i\in(f_1,\dots,f_r)$. Hence there exists $h_1,\dots,h_r\in k[x_1,\dots,x_n]$ such that $g_i=\sum_{i=1}^rh_if_i$. Then by the chain rule, we have $$\frac{\partial g}{\partial x_k}\bigg{|}_p=\sum_{i=1}^rh_j(p)\frac{\partial f}{\partial x_k}\bigg{|}_p$$ since $f_j(p)=0$. Then we have $$\sum_{k=1}^n\frac{\partial g}{\partial x_k}\bigg{|}_p(x_k-p_k)=\sum_{k=1}^n\sum_{i=1}^rh_j(p)\frac{\partial f}{\partial x_k}\bigg{|}_p(x_k-p_k)=\sum_{j=1}^rh_j(p)\sum_{k=1}^n\frac{\partial f}{\partial x_k}\bigg{|}_p(x_k-p_k)$$ If $q=(q_1,\dots,q_n)$ vanishes in the former set, then the above calculation shows that $\sum_{k=1}^n\frac{\partial g_i}{x_k}\bigg{|}_p(q_k-p_k)=0$. Hence $q$ lies in the latter set. 
 \end{proof}
 \end{prp}
-
-\begin{defn}{The Tangent Space of an Affine Variety}{} Let $k$ be a field. Let $V\subseteq\A_k^n$ be an affine variety. Suppose that $V=\V(f_1,\dots,f_r)$ for $f_1,\dots,f_r\in k[x_1,\dots,x_n]$. Define the tangent space of $V$ at $p\in V$ to be the zero set $$T_pV=\V\left(\sum_{k=1}^n\frac{\partial f_1}{\partial x_k}\bigg{|}_p(x_k-p_k),\dots,\sum_{k=1}^n\frac{\partial f_r}{\partial x_k}\bigg{|}_p(x_k-p_k)\right)$$
-\end{defn}
 
 \begin{defn}{The Jacobian Matrix}{} Let $k$ be a field. Let $V=\V(f_1,\dots,f_m)\subseteq\A_k^n$ be an affine variety. Let $p\in V$. Define the Jacobian matrix of $V$ at $p$ to be the $m\times n$ matrix $$J_{V,p}=\begin{pmatrix}
 \frac{\partial f_1}{\partial x_1}\bigg{|}_p & \cdots & \frac{\partial f_1}{\partial x_n}\bigg{|}_p\\
@@ -57,50 +87,71 @@ Without loss of generality, it suffices to prove that the former set is containe
 \end{eg}
 
 \begin{lmm}{}{}\\
-Let $k$ be a field. Let $V=\V(f_1,\dots,f_m)\subseteq\A_k^n$ be an affine variety. Let $p=(p_1,\dots,p_n)\in V$. Then $$T_pV=\left\{(x_1,\dots,x_n)\in\A_k^n\;\bigg{|}\;J_{V,p}\cdot\begin{pmatrix}x_1-p_1\\\vdots\\x_n-p_n\end{pmatrix}=0\right\}$$
-\begin{proof}\\
-Clear from definitions. 
+Let $k$ be a field. Let $V=\V(f_1,\dots,f_r)\subseteq\A_k^n$ be an affine variety. Let $p\in V$. Then we have $$\V\left(\sum_{k=1}^n\frac{\partial f_1}{\partial x_k}\bigg{|}_p(x_k-p_k),\dots,\sum_{k=1}^n\frac{\partial f_r}{\partial x_k}\bigg{|}_p(x_k-p_k)\right)=\left\{q\in\A_k^n\;\bigg{|}\;J_{V,p}(q-p)=0\right\}$$
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $V=\V(f_1,\dots,f_r)\subseteq\A_k^n$ be an affine variety that passes through $0$. Then there is a $k$-vector space isomorphism $$T_0V\cong\ker(J_{V,0})$$
+\end{prp}
+
+\subsection{Smooth and Singular Points}
+\begin{defn}{Smooth and Singular Points}{}\\
+Let $k$ be a field. Let $V$ be a variety over $k$. Let $p\in V$. We say that $p$ is a smooth point of $V$ if $\mO_{V,p}$ is a regular local ring. We say that $p$ is a singular point of $V$ otherwise. 
+\end{defn}
+
+\begin{thm}{}{}\\
+Let $k$ be a field. Let $V$ be a variety over $k$. Then the set of singular points of $X$ is a proper closed subset of $V$. 
+\end{thm}
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $V$ be a projective variety over $k$. Let $p\in V$. If $p$ lies in the intersection of at least two irreducible components of $V$, then $p$ is a singular point. 
+\begin{proof}
+It suffices to show that $\mO_{V,p}$ is not a integral domain because every regular local ring is a UFD and hence an integral domain. 
 \end{proof}
 \end{lmm}
 
-\begin{prp}{}{} Let $V$ be a closed affine variety over $\C$. Let $p\in V$. Let $m_p$ denote the corresponding maximal ideal. Then there is an isomorphism $$T_pV\cong\left(\frac{m_p}{m_p^2}\right)^\ast$$ given by ?????. In particular, we have the identity $$\dim(T_pV)=\dim_{\C[V]/m_p}(m_p/m_p^2)$$
-\end{prp}
+An arbitrary point on a projective variety is either contained in a unique irreducible component or lies in the intersection of at least two irreducible components. The first lemma says that points in the latter case cannot be smooth, we are left to deal with the former case, hence without loss of generality we assume for the rest of the section that we deal with irreducible projective varieties. 
 
-\subsection{Smooth Points of an Affine Variety}
-We continue to restrict our attention to affine varieties. 
+\begin{lmm}{}{}\\
+Let $k$ be an algebraically closed field. Let $V$ be an irreducible projective variety over $k$. Let $p\in V$. Then $p$ is a smooth point if and only if $\dim(T_pV)=\dim(V)$
+\begin{proof}\\
+If $p$ is a smooth point, then we have $\dim(V)=\dim(\mO_{V,p})=\dim(m_p/m_p^2)=\dim(T_pV)$. Conversely, if $\dim(V)=\dim(T_pV)$, then $\mO_{V,p}$ is a regular local ring because $\dim(\mO_{V,p})=\dim(V)=\dim(T_pV)=\dim(m_p/m_p^2)$. 
+\end{proof}
+\end{lmm}
 
-\begin{defn}{Smooth and Singular Points of Affine Varieties}{} Let $k$ be a field. Let $X$ be an irreducible affine variety over $k$. Let $p\in X$ be a point. We say that $p$ is a smooth point of $X$ if $$\dim(T_p(X))=\dim(X)$$ Otherwise, we say that $p$ is a singular point of $X$. 
-\end{defn}
-
-\begin{prp}{}{} Let $V=\V(f_1,\dots,f_m)\subseteq\A_\C^n$ be an irreducible affine variety. Let $p\in V$. Then the following are equivalent. 
+\begin{prp}{}{}\\
+Let $k$ be an algebraically closed field. Let $V\subseteq\A_k^n$ be an irreducible affine variety. Let $p\in V$. Then the following are equivalent. 
 \begin{itemize}
 \item $p$ is a smooth point of $V$. 
-\item $\rank(J_{V,p})=n-\dim(V)$. 
-\item $\mO_{V,p}$ is a regular local ring. 
+\item $\dim(T_pV)=\dim(V)$. 
+\item For any choice of defining equations $V=\V(f_1,\dots,f_r)$, $\rank(J_{V,p})=n-\dim(V)$. 
 \end{itemize}
+\begin{proof}\\
+We have seen $(1)\iff(2)$ above. It suffices to prove $(1)\iff(3)$. For a point $p$, let $m_p\in k[V]$ be the corresponding maximal ideal given by the Hilbert nullstellensatz. Consider the map $\phi:m_pk[V]_{m_p}\to k^n$ by $$\phi(f)=\left(\frac{\partial f}{\partial x_1}\bigg{|}_p,\dots,\frac{\partial f}{\partial x_n}\bigg{|}_p\right)$$ We first check that the map is well defined. Suppose that $f=\frac{g_1}{h_1}=\frac{g_2}{h_2}$ for $g_1,g_2\in m_pk[V]_{m_p}$ and $h_1,h_2\in k[V]_{m_p}\setminus m_pk[V]_{m_p}$. For $j=1$ or $2$ we have that $$\frac{\partial g_j/h_j}{\partial x_i}\bigg{|}_p=\frac{\frac{\partial g_j}{\partial x_i}|_p}{h_j(p)}$$ Now since $k[V]$ is an integral domain, we have $\frac{g_1}{h_1}=\frac{g_2}{h_2}$ if and only if $h_2g_1-h_1g_2=0$. Then we have 
+\begin{align*}
+\frac{\partial h_2g_1-h_1g_2}{\partial x_i}\bigg{|}_p&=0\\
+\frac{\partial h_2}{\partial x_i}\bigg{|}_pg_1(p)+\frac{\partial g_1}{\partial x_i}\bigg{|}_ph_2(p)-\frac{\partial h_1}{\partial x_i}\bigg{|}_pg_2(p)-\frac{\partial g_2}{\partial x_i}\bigg{|}_ph_1(p)&=0\\
+\frac{\partial g_1}{\partial x_i}\bigg{|}_ph_2(p)-\frac{\partial g_2}{\partial x_i}\bigg{|}_ph_1(p)&=0
+\end{align*}
+Since $h_1(p)$ and $h_2(p)$ is non-zero, we are done. Clearly $\phi$ is a $k$-linear map since differentiation is $k$-linear. Now suppose that $g,h\in m_pk[V]_{m_p}$. I claim that $\phi(gh)=0$ so that $\phi$ descends to a well defined map on $\frac{m_pk[V]_{m_p}}{m_p^2k[V]_{m_p}}$. Indeed, we have $$\frac{\partial gh}{\partial x_i}\bigg{|}_p=\frac{\partial g}{\partial x_i}\bigg{|}_ph(p)+\frac{\partial h}{\partial x_i}\bigg{|}_pg(p)=0$$ because $g,h\in m_pk[V]_{m_p}$. \\
+
+We now have a well defined $k$-linear map $\phi:\frac{m_pk[V]_{m_p}}{m_p^2k[V]_{m_p}}\to k^n$. 
+\end{proof}
 \end{prp}
 
-In particular, this shows that smoothness is independent of the choice of generators of $V$, because we have given a characterization in terms of a property of the local ring $\mO_{V,p}$. \\
+\begin{eg}{}{}\\
+A point $p=(p_1,p_2)$ in the affine variety $\V(y^2-x^3)\subseteq\A_\C^2$ is singular if and only if $p=(0,0)$. 
+\begin{proof}\\
+The Jacobian at the point $p$ is given by $$J_{\V(y^2-x^3),(p_1,p_2)}=\begin{pmatrix}
+-3p_1^2 & 2p_2
+\end{pmatrix}$$
+The Jacobian has rank strictly less than $1$ if and only if it is the zero matrix. And this is true if and only if $p_1=p_2=0$. 
+\end{proof}
+\end{eg}
 
-Hard to prove: smoothness is preserved by isomorphisms. 
-
-\subsection{Smoothness in General Varieties}
-\begin{defn}{The Tangent Space of a Quasi-Projective Variety}{} Let $k$ be a field. Let $V$ be a quasi-projective variety over $k$. Let $p\in V$. Define the tangent space of $V$ at $p$ to be $$T_pV=\left(\frac{m_p}{m_p^2}\right)^\ast$$ where $m_p$ is the unique maximal ideal of the local ring $\mO_{V,p}$. 
+\begin{defn}{Smooth Varieties}{}\\
+Let $k$ be a field. Let $V$ be a variety over $k$. We say that $V$ is smooth if every point of $V$ is smooth. 
 \end{defn}
-
-We can now motivate the definition of a smooth point using the purely algebraic characterization. 
-
-\begin{defn}{Smooth and Singular Points of A General Variety}{} Let $X$ be a variety. We say $p\in X$ is a smooth point of $X$ if the local ring $\mO_{X,p}$ is a regular local ring. Otherwise, we say that $p$ is a singular point of $X$. 
-\end{defn}
-
-\begin{thm}{}{} Let $X$ be a variety. Then the set of singular points of $X$ is a proper closed subset of $X$. 
-\end{thm}
-
-\begin{prp}{}{} Let $X$ be a variety. If $p\in X$ is a smooth point, then $\mO_{X,p}$ is a UFD. 
-\end{prp}
-
-\begin{prp}{}{} Let $X$ be a variety and let $Y\subseteq X$ be an irreducible subvariety of $X$. If $p\in X$ is non-singular, then there exists an affine neighbourhood $U\subseteq X$ of $x$ together with $f_1,\dots,f_k\in k[U]$
-\end{prp}
 
 \pagebreak
 \section{The Algebra of Rational Functions}
@@ -136,9 +187,23 @@ We can now motivate the definition of a smooth point using the purely algebraic 
 \begin{defn}{Rational Maps}{} Let $X,Y$ be irreducible varieties. A rational map $f:X\to Y$ is an equivalent class of morphisms of varieties $f:U\to Y$ for some open subset $U\subseteq X$. 
 \end{defn}
 
-Since open subsets of a variety dense, rational maps are maps that are defined almost entirely on $X$. In particular, notice that rational functions on an irreducible variety $V$ is the same as a rational map $V\to k$. \\
+Since open subsets of a variety are dense, rational maps are maps that are defined almost entirely on $X$. In particular, notice that rational functions on an irreducible variety $V$ is the same as a rational map $V\to k$. \\
 
 Moreover, if $f:X\to Y$ is a regular map (morphism of varieties), then $[(X,f)]$ is also a rational map. 
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $V,W$ be irreducible varieties over $k$. Let $\phi:V\to W$ be a rational map. Then $$\phi(x)=[\phi_0(x):\cdots\phi_n(x)]$$ for some $\phi_0,\dots,\phi_n\in K(V)$. 
+\begin{proof}\\
+This means that there exists an open subset $U\subseteq V$ such that $\phi|_U$ is a morphism of varieties. Morphism of varieties into projective space are given in coordinates by $[\phi_0:\cdots:\phi_n]$ where $\phi_i$ is a regular map, or that $\phi_i\in\Hom_\bold{Var}(U,k)$. Moreover, $\phi_0,\dots,\phi_n$ must not simultaneously vanish on $U$ (but it is allowed to simultaneously vanish on some point in $V$). In particular, $\phi_i$ is an element of $K(V)$ by definition. 
+\end{proof}
+\end{lmm}
+
+\begin{eg}{}{}\\
+Let $k$ be a field. The map of sets $\phi:\Prj_k^1\to\Prj_k^2$ defined by $$\phi([s:t])=\left[\frac{s+t}{s}:\frac{st+t^2}{(s-t)^2}:\frac{s^2-t^2}{t^2}\right]$$ is a rational map. 
+\begin{proof}\\
+The map of sets is not well defined when any denominator is $0$, or when the three coordinates simultaneously vanish. For the former, this happens when $s=0$ or $t=0$ or $s=t$. This gives three points $[0:1],[1:0],[1:1]$. The numerators simultaneously vanish when $s=-t$, $t(s+t)=0$ and $(s+t)(s-t)$. Solving this gives the point $[1:-1]$. Hence this map is a rational map, but not a morphism of varieties. 
+\end{proof}
+\end{eg}
 
 \begin{defn}{Dominant Maps}{} Let $X,Y$ be irreducible varieties. Let $f:X\to Y$ be a rational map defined on $U\subseteq X$. We say that $f$ is dominant if $f(U)$ contains an open subset. 
 \end{defn}
@@ -170,6 +235,22 @@ TBA: Equivalence of categories between irreducible varieties and dominant ration
 \item $K(X)$ and $K(Y)$ are isomorphic $k$-algebras
 \end{itemize}
 \end{prp}
+
+\begin{eg}{}{}\\
+The cuspidal cubic $\V(y^2-x^3)\subseteq\A_\C^2$ is birational to $\A_\C^1$. 
+\begin{proof}\\
+Recall that $\C(\A_\C^1)\cong\C(t)$. Define a $\C$-algebra homomorphism $\phi:\C(t)\to\left(\frac{\C[x,y]}{(y^2-x^3)}\right)_{(0)}$ by $t\mapsto y/x$. Since $\phi$ is a map of fields it is injective. It remains to show that $\phi$ is surjective. Notice that $x$ and $y$ generate the latter $\C$-algebra and so it suffices to find preimages of $x$ and $y$. But notice that $t^2\mapsto y^2/x^2=x$ and $t^3\mapsto y^3/x^3=yx^3/x^3=y$. Hence we are done. 
+\end{proof}
+\end{eg}
+
+\begin{eg}{}{}\\
+The nodal cubic $\V(y^2-x^3-x^2)\subseteq\A_\C^2$ is birational to $\A_\C^1$. 
+\begin{proof}
+Again recall that $\C(\A_\C^1)\cong\C(t)$. Define a $\C$-algebra homomorphism $\phi:\C(t)\to\left(\frac{\C[x,y]}{(y^2-x^3-x^2)}\right)_{(0)}$ by $t\mapsto y/x$. Since $\phi$ is a map of fields it is injective. It remains to show that $\phi$ is surjective. Notice that $x$ and $y$ generate the latter $\C$-algebra and so it suffices to find preimages of $x$ and $y$. But notice that $t^2-1\mapsto y^2/x^2-1=(x^3+x^2)/x^2-1=x$ and $t^3-t\mapsto y^3/x^3-y/x=y$. Hence we are done. 
+\end{proof}
+\end{eg}
+
+The idea of the $\C$-algebra isomorphism above comes from the parameterization $t\mapsto(t^2-1,t^3-t)$ of the nodal cubic. 
 
 \begin{lmm}{}{} Let $n\in\N$. Then $\A^n$ is birationally equivalent to $\Prj^n$. 
 \begin{proof}
@@ -214,7 +295,7 @@ The zeroth graded component of $k(x_0,\dots,x_n)$ is given by $$(k(x_0,\dots,x_n
 \subsection{Proper Morphisms}
 
 \subsection{Finite Morphisms}
-\begin{defn}{Finite Morphisms Between Varieties}{} Let $k$ be a field. Let $X,Y$ be varieties over $k$. Let $f:X\to Y$ be a morphism of varieties. We say that $f$ is finite if there exists an affine cover $W_1,\dots,W_k$ of $Y$ such that $f^{-1}(W_i)$ is affine and that via the map $$f|_{f^{-1}(W_i)}:f^{-1}(W_i)\to W_i$$ we have that $k[f^{-1}(W)]$ is a finitely generated $k[W]$-module . 
+\begin{defn}{Finite Morphisms}{} Let $k$ be a field. Let $X,Y$ be varieties over $k$. Let $f:X\to Y$ be a morphism of varieties. We say that $f$ is finite if there exists an affine cover $W_1,\dots,W_k$ of $Y$ such that $f^{-1}(W_i)$ is affine and that via the map $$f|_{f^{-1}(W_i)}:f^{-1}(W_i)\to W_i$$ we have that $k[f^{-1}(W)]$ is a finitely generated $k[W]$-module . 
 \end{defn}
 
 \begin{prp}{}{} Let $k$ be a field. Let $X,Y$ be varieties over $k$. Let $f:X\to Y$ be a morphism of varieties. If $f$ is finite and dominant, then the induced map $$K(Y)\to K(X)$$ is a finite field extension. 
@@ -232,16 +313,25 @@ The zeroth graded component of $k(x_0,\dots,x_n)$ is given by $$(k(x_0,\dots,x_n
 \begin{defn}{Normal Varieties}{} Let $k$ be a field. Let $X$ be a variety over $k$. We say that $X$ is normal if $\mO_{X,p}$ is a normal domain for all $p\in X$. 
 \end{defn}
 
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $V$ be a variety over $k$. If $V$ is smooth, then $V$ is normal. 
+\begin{proof}\\
+If $V$ is smooth, then $\mO_{X,p}$ is a regular local ring, and so it is a UFD and hence a normal domain. 
+\end{proof}
+\end{lmm}
+
+If $V$ is a curve then the converse also holds. 
+
 \begin{prp}{}{} Let $k$ be an algebraically closed field. Let $X\subseteq\A^n$ be an affine variety. Then $X$ is normal if and only if $k[X]$ is a normal domain. 
 \end{prp}
 
 \begin{eg}{}{} Let $k$ be an algebraically closed field. Then $V=\V(y^2-x^3)\subseteq\A_k^2$ is not a normal variety. 
 \begin{proof}
-The coordinate ring of the variety is given by $k[V]=\frac{k[x,y]}{(y^2-x^3)}$. I claim that $\overline{k[V]}=k[[y]/[x]]$. \\~\\
+The coordinate ring of the variety is given by $k[V]=\frac{k[x,y]}{(y^2-x^3)}$. I claim that $\overline{k[V]}=k[[y]/[x]]$. \\
 
-Firstly, $k[t]$ is a normal domain since any element in $k\in k[t]$ is integral, and $t$ is integral in $k[t]$ by the monic polynomial $z-t\in k[t][z]$. Since sums and products of integral elements are integral, we have that $\overline{k[t]}\subseteq k[t]$. Hence $\overline{k[t]}=k[t]$. Now we have that $k[t^2,t^3]\subseteq k[t]$ which implies that $$\overline{k[t^2,t^3]}\subseteq\overline{k[t]}=k[t]$$ On the other hand, notice that any $a\in k$ is integral over $k[t^2,t^3]$ via the monic polynomial $z-a\in k[t^2,t^3][z]$. Also, $t\in k[t]$ is integral over $k[t^2,t^3]$ via the monic polynomial $z^2-t^2\in k[t^2,t^3][z]$. Since sums and products of integral elements are integral, we thus have that $k[t]\subseteq\overline{k[t^2,t^3]}$. Hence $k[t]=\overline{k[t^2,t^3]}$. Finally we have that $\text{Frac}(k[t^2,t^3])=k(t)$. \\~\\
+Firstly, $k[t]$ is a normal domain since any element in $k\in k[t]$ is integral, and $t$ is integral in $k[t]$ by the monic polynomial $z-t\in k[t][z]$. Since sums and products of integral elements are integral, we have that $\overline{k[t]}\subseteq k[t]$. Hence $\overline{k[t]}=k[t]$. Now we have that $k[t^2,t^3]\subseteq k[t]$ which implies that $$\overline{k[t^2,t^3]}\subseteq\overline{k[t]}=k[t]$$ On the other hand, notice that any $a\in k$ is integral over $k[t^2,t^3]$ via the monic polynomial $z-a\in k[t^2,t^3][z]$. Also, $t\in k[t]$ is integral over $k[t^2,t^3]$ via the monic polynomial $z^2-t^2\in k[t^2,t^3][z]$. Since sums and products of integral elements are integral, we thus have that $k[t]\subseteq\overline{k[t^2,t^3]}$. Hence $k[t]=\overline{k[t^2,t^3]}$. Finally we have that $\text{Frac}(k[t^2,t^3])=k(t)$. \\
 
-Consider the following diagram: \\~\\
+Consider the following diagram: \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	{k[V]} & {\overline{k[V]}} & {k(V)} \\
 	{k[t^2,t^3]} & {\overline{k[t^2,t^3]}=k[t]} & {k(t)}
@@ -252,10 +342,10 @@ Consider the following diagram: \\~\\
 	\arrow[from=1-3, to=2-3]
 	\arrow[hook, from=2-1, to=2-2]
 	\arrow[hook, from=2-2, to=2-3]
-\end{tikzcd}} \\~\\
-It is commutative since all the vertical maps are given by $[x]\mapsto t^2$ and $[y]\mapsto t^3$. I claim that the first map is an isomorphism. To see this, consider the map $\varphi:k[x,y]\to k[t]$ defined by $x\mapsto t^2$ and $y\mapsto t^3$. Notice that $(y^2-x^3)\subseteq\ker(\varphi)$. Now let $f\in\ker(\varphi)$. By the division algorithm, $f=(y^2-x^3)g(x,y)+h(x,y)$ for some $g,h\in k[x,y]$ and the degree of $y$ in $h$ is less than or equal to $1$. Then $f\in\ker(\varphi)$ implies that $h(x,y)=0$. But $h(t^2,t^3)=0$ if and only if $h(x,y)=0$ by inspecting coefficients. Hence $(y^2-x^3)=\ker(\varphi)$. It then follows that the third map is an isomorphism and hence the second map is an isomorphism. \\~\\
+\end{tikzcd}} \\
+It is commutative since all the vertical maps are given by $[x]\mapsto t^2$ and $[y]\mapsto t^3$. I claim that the first map is an isomorphism. To see this, consider the map $\varphi:k[x,y]\to k[t]$ defined by $x\mapsto t^2$ and $y\mapsto t^3$. Notice that $(y^2-x^3)\subseteq\ker(\varphi)$. Now let $f\in\ker(\varphi)$. By the division algorithm, $f=(y^2-x^3)g(x,y)+h(x,y)$ for some $g,h\in k[x,y]$ and the degree of $y$ in $h$ is less than or equal to $1$. Then $f\in\ker(\varphi)$ implies that $h(x,y)=0$. But $h(t^2,t^3)=0$ if and only if $h(x,y)=0$ by inspecting coefficients. Hence $(y^2-x^3)=\ker(\varphi)$. It then follows that the third map is an isomorphism and hence the second map is an isomorphism. \\
 
-Now the preimage of $k[t]$ in the isomorphism is $k[[y]/[x]]$. Hence we have computed the integral closure of $k[V]$. 
+Now the preimage of $k[t]$ in the isomorphism is $k[[y]/[x]]$. Hence we have computed the integral closure of $k[V]$. By the above prp clearly $k[V]$ is a not a normal domain and so $V$ is not a normal variety. 
 \end{proof}
 \end{eg}
 
@@ -265,14 +355,14 @@ Now the preimage of $k[t]$ in the isomorphism is $k[[y]/[x]]$. Hence we have com
 
 \begin{prp}{Universal Property of Normalization}{} Let $k$ be a field. Let $X$ be an affine variety over $k$. Then the normalization $\widetilde{X}$ of $X$ satisfies the following universal property. 
 \begin{itemize}
-\item Universal Property: If $Z$ is a normal variety, then for any dominant map $\varphi:Z\to X$, there exists a unique morphism $\widetilde{\varphi}:Z\to\widetilde{X}$ such that the following diagram commutes: \\~\\
+\item Universal Property: If $Z$ is a normal variety, then for any dominant map $\varphi:Z\to X$, there exists a unique morphism $\widetilde{\varphi}:Z\to\widetilde{X}$ such that the following diagram commutes: \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	Z & {\widetilde{X}} \\
 	& X
 	\arrow["{\exists!\widetilde{\varphi}}", dashed, from=1-1, to=1-2]
 	\arrow["\varphi"', from=1-1, to=2-2]
 	\arrow["\pi", from=1-2, to=2-2]
-\end{tikzcd}}\\~\\
+\end{tikzcd}}\\
 where $\pi$ is the induced map from the inclusion $k[X]\hookrightarrow\overline{k[X]}=k[\widetilde{X}]$. 
 \item $\widetilde{X}$ is the unique normal variety (up to unique isomorphism) that satisfies this property. 
 \end{itemize}
@@ -306,8 +396,6 @@ where $\pi$ is the induced map from the inclusion $k[X]\hookrightarrow\overline{
 \end{defn}
 
 Note: if $X$ is a curve we call this the exceptional divisor. 
-
-\subsection{Normalization}
 
 \pagebreak
 \section{Theory of Divisors}
