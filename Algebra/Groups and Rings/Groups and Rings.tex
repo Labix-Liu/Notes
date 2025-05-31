@@ -39,12 +39,14 @@ We begin our venture to abstract algebra with group theory. Group theorists are 
 \subsection{Basic Concepts of Groups}
 We begin not by the definition of a group, but by that of a binary operation. It will serve as a central notion differentiating an ordinary set and a group. 
 
-\begin{defn}{Binary Operation}{} A binary operation $\ast$ on a set $G$ is a function $$\ast:G\times G\to G$$
+\begin{defn}{Binary Operation}{}\\
+A binary operation $\ast$ on a set $G$ is a function $$\ast:G\times G\to G$$
 \end{defn}
 
 Notice that the definition of a binary operation depends on both the underlying set and the definition on how the operation works on each element. To define a binary operation, one must show how any two elements of a set are combined. The new element must more over lie within the set. 
 
-\begin{defn}{Groups}{} A group is an ordered pair $(G,\ast)$ where $G$ is a set and $\ast:G\times G\to G$ is a binary operation on $G$ satisfying the following axioms. 
+\begin{defn}{Groups}{}\\
+A group is an ordered pair $(G,\ast)$ where $G$ is a set and $\ast:G\times G\to G$ is a binary operation on $G$ satisfying the following axioms. 
 \begin{itemize}
 \item Associativity: $a\ast(b\ast c)=(a\ast b)\ast c$ for all $a,b,c\in G$
 \item Identity element: There exists an element $e\in G$, called an identity of G, such that for all $a\in G$ we have $a\ast e=e\ast a=a$
@@ -52,14 +54,25 @@ Notice that the definition of a binary operation depends on both the underlying 
 \end{itemize}
 \end{defn}
 
-We say that the above 3 defining properties the group axioms. It does feel out of place to call them axioms because they are not universal truths. To check that a set emits a group structure, we must also check that the operation defined on the set is a binary operation. This means that we actually have four axioms to check, with the fourth one being called the closure property, closure meaning that the operation on two elements lands in the same set. \\
+We often call the binary operation the group operation of $(G,\ast)$ to distinguish other algebraic structures on $(G,\ast)$ if it exists. It is common to omit the binary operation when defining a group. 
 
-We often call the binary operation the group operation of $(G,\ast)$ to distinguish other algebraic structures on $(G,\ast)$ if it exists. Later on we often shorthand the notion of $(G,\ast)$ to just $G$, either when notation is clear or implicit. 
+\begin{eg}{}{}\\
+Let $G=\{z\in\C\;|\;z^n=1\text{ for some }n\in\N\}$. Then $G$ is a group with complex multiplication. 
+\end{eg}
 
-\begin{defn}{Abelian Groups}{} A group $(G,\ast)$ is abelian if $a\ast b=b\ast a$ for all $a,b\in G$. More generally, two elements $g,h$ in a general group $(H,\ast)$ is said to commute if $g\ast h=h\ast g$. 
+\begin{defn}{Abelian Groups}{}\\
+Let $(G,\ast)$ be a group. We say that $G$ is abelian if for all $a,b\in G$, we have $$a\ast b=b\ast a$$
 \end{defn}
 
-Simply put, it is a group where its elements are commutative with each other. Most groups that one naturally think of maybe abelian, due to the readers previously being accustomed to it. However groups that are non-abelian are also central in the study of algebraic structures. Some important examples of non-abelian groups would be the dihedral group and the symmetric group. 
+Simply put, it is a group where its elements are commutative with each other. Most groups that one naturally think of maybe abelian, due to the readers previously being accustomed to it. However groups that are non-abelian are also central in the study of algebraic structures. 
+
+\begin{eg}{}{} The following are true. 
+\begin{itemize}
+\item $(\N,+)$ is not a group. 
+\item $(\Z,+)$ is an abelian group. 
+\item $(\R\setminus\{0\},\times)$ is an abelian group. 
+\end{itemize}
+\end{eg}
 
 \begin{lmm}{}{} Let $(G,\ast)$ be a group. Then the following are true regarding the identity and inverses within $G$. 
 \begin{itemize}
@@ -133,6 +146,10 @@ The idea of a subgroup is that some (not all) elements in a group can also form 
 
 Subgroups are still part of the larger group. This means that if $H$ is a subgroup of $G$, then certain properties of $H$ are inherited from $G$. For example, the uniqueness of the identity element ensures that $H$ and $G$ share the same identity element. 
 
+\begin{eg}{}{}\\
+Let $n\in\N^+$. Then $n\Z=\{nk\;|\;k\in\Z\}$ is a subgroup of $\Z$. 
+\end{eg}
+
 \begin{lmm}{}{} Let $G$ be a group and $H\leq G$. Then $1_H=1_G$. 
 \begin{proof}
 If $1_H\neq 1_G$ then there will be two identities in $H$. 
@@ -141,7 +158,7 @@ If $1_H\neq 1_G$ then there will be two identities in $H$.
 
 To check that a subset of a group is a subgroup, it is not necessary to go through the four axioms of a group as it is rather tedious. Instead, we may turn to an easier criterion which involves less work. 
 
-\begin{thm}{Criterion for a Subgroup}{} Let $(G,\ast)$ be a group. A subset $H$ of $G$ is a subgroup if and only if the following are true. 
+\begin{prp}{Criterion for a Subgroup}{} Let $(G,\ast)$ be a group. A subset $H$ of $G$ is a subgroup if and only if the following are true. 
 \begin{itemize}
 \item If $a,b\in H$ then $a\ast b\in H$
 \item If $a\in H$ then $a^{-1}\in H$
@@ -149,7 +166,7 @@ To check that a subset of a group is a subgroup, it is not necessary to go throu
 \begin{proof} We first prove the forward implication. Suppose that $H$ is a subgroup. Then by definition of a group the above are all true.\\
 Suppose that $H$ is satisfies the above two conditions. We show that it implies the four definitions of a group. Since $a,b\in H$ implies $ab\in H$, closure is satisfied. Since $H\subseteq G$, and $G$ is associative, $H$ is also associative. If $a\in H$ then $a^{-1}\in H$ thus inverse exists. Finally since $H$ is closed, $aa^{-1}=1\in H$ thus identity is in $H$. Thus $H$ is a group. 
 \end{proof}
-\end{thm}
+\end{prp}
 
 We thern have subgroups that exists within every group. They are called trivial since we usually do not want to deal with them. 
 
@@ -168,59 +185,6 @@ The final proposition gives a new way of generating a subgroup given two subgrou
 \item Suppose that $a\in H\cap K$ since $H$ and $K$ are subgroups respectively, $a^{-1}\in H$ and $a^{-1}\in K$ thus $a^{-1}\in H\cap K$. 
 \end{itemize}
 The subgroup criterion is satisfied thus $H\cap K$ is a subgroup of $G$. 
-\end{proof}
-\end{prp}
-
-\subsection{Generators of a Group}
-Cyclic groups appear in a lot of diverse areas of mathematics such as topology and number theory. It structure is simple enough to be employed in different areas while the notions it encapsulates is broad. 
-
-\begin{defn}{Cyclic Subgroups}{} Let $G$ be a group. Define $$\langle g\rangle=\{g^k|k\in\Z\}$$ to be the cyclic subgroup generated by $g$. In this case, $g$ is the generator of $\langle g\rangle$. \\
-A group $G$ is called cyclic if there exists some $g\in G$ such that $G=\langle g\rangle$. 
-\end{defn}
-
-Cyclic subgroups arise in the simplest context in any group. The following proposition demonstrates that every group contains a cyclic subgroup. 
-
-\begin{prp}{}{} Let $G$ be a group and $g\in G$. Then $\langle g\rangle$ is a subgroup of $G$. 
-\begin{proof} We prove that it satifies the subgroup criterion. 
-\begin{itemize}
-\item $g^0=1$ thus $1\in\langle g\rangle$ 
-\item $g^{-1}$ is in $\langle G\rangle$ is trivial
-\item Let $a,b\in\langle g\rangle$. Then $a=g^n$ and $b=g^m$ for some $n,m\in\Z$ thus $ab=g^{n+m}\in\langle g\rangle$. 
-\end{itemize}
-The subgroup criterion is satisfied thus we are done. 
-\end{proof}
-\end{prp}
-
-In particular, the cyclic subgroup of a group $G$ can be constructed simply by taking any one element in $G$ and consider all the powers (positive and negative) of the element. \\
-
-it is easy to see that cyclic groups commute through their power. 
-
-\begin{lmm}{}{} Cyclic groups are abelian. 
-\begin{proof}
-Let $\langle g\rangle$ be a cyclic group. Then for any $g^m,g^n\in\langle g\rangle$, we have that $$g^m\cdot g^n=g^{m+n}=g^{n+m}=g^n\cdot g^m$$ and so we conclude. 
-\end{proof}
-\end{lmm}
-
-The following result would seem quite trivial at first sight. It makes sense to think that a subgroup of a cyclic group would be cyclic. The proof however does not look trivial at all. It is one of the first proofs that uses some notion in number theory, showing some linkage between the two subjects. 
-
-\begin{prp}{}{} Let $G=\langle g\rangle $ be a cyclic group. Then any subgroup $H$ of $G$ is also cyclic. 
-\begin{proof} Let $H\leq G=\langle g\rangle$. Every element in $H$ is of the form $g^n$ for some $n\in\Z$. Take the smallest positive $k$ such that $g^k\in H$. Consider another element $g^n\in H$. By the division algorithm, $n=qk+r$ for some $r\in\{0,\dots,k-1\}$. Thus we have $$g^n=g^{kq+r}\iff g^r=(g^k)^{-q}(g^n)$$ Now since $g^k\in H$, $(g^k)^{-1}\in H$ and $(g^k)^q\in H$ thus $(g^k)^q\in H$ and $(g^k)^q(g^n)\in H$ by inverse and closure of a group. Thus $g^r\in H$. However this is a contradiction since $k$ is the least power of $g$ such that $g^k\in H$ but $g^r$ with $r<k$ is now in $H$. Thus we must have $r=0$ and $g^n=(g^k)^q$. This applies for every $g^n\in H$ thus $H=\langle g^k\rangle$. 
-\end{proof}
-\end{prp}
-
-One can also show that in the case of a cyclic group, the order of the group is equal to the order of the generator. However the converse is not always true. That is, the order of the group and the order of one particular element being the same does not imply that the group is cyclic. 
-
-\begin{prp}{}{} Suppose that $G=\langle g\rangle $. Then $\abs{G}=\abs{g}$. 
-\begin{proof} Suppose that $\abs{g}=n$ Note that $g^{n+k}=g^k$ for any $k\in\{0,\dots,n-1\}$. Thus $\{g^n|n\in\mathbb{Z}\}$ has $n$ distinct elements. Thus $\abs{G}=n$. \\
-If $\abs{g}=\infty$ then $g^n\neq 1$ for all $n$ not equal to $0$. Thus $\{g^n|n\in\mathbb{Z}\}$ are all distinct and $\abs{G}=\infty$.
-\end{proof}
-\end{prp}
-
-Using cyclic subgroups, we can impose a stronger condition so that the order of the product of two elements can be given an explicit formula. 
-
-\begin{prp}{}{} Let $G$ be a group and $a,b\in G$ such that $a,b$ commutes. If furthermore $\langle a\rangle\cap\langle b\rangle=\{1\}$, then $$\abs{ab}=\lcm(\abs{a},\abs{b})$$ 
-\begin{proof}
-Let $n=\abs{ab}$. Since $a$ and $b$ commute, we have that $$1=(ab)^n=a^nb^n$$ so that $a^n=b^{-n}$. Thus $a^n\in\langle b\rangle$. But $a^n\in\langle a\rangle\cap\langle b\rangle=\{1\}$ implies that $a^n=1$. Similarly, we have that $b^n=1$. This means that we have $\abs{a},\abs{b}$ divides $n$. and thus $\lcm(\abs{a},\abs{b})$. We know from groups and rings that $\abs{ab}$ divides $\lcm(\abs{a},\abs{b})$ and so we conclude. 
 \end{proof}
 \end{prp}
 
@@ -303,7 +267,12 @@ And so we conclude.
 \end{proof}
 \end{prp}
 
-Isomorphisms capture more sturcture than homomorphism such as orders, commutativity, subgroups of particular orders and whether the group is cyclic. Most of the classification results require groups to be identified up to isomorphism. \\
+Isomorphisms capture more sturcture than homomorphism such as orders, commutativity, subgroups of particular orders and whether the group is cyclic. Most of the classification results require groups to be identified up to isomorphism. 
+
+\begin{eg}{}{}\\
+The groups $\Z,\Q,\R$ are not isomorphic to each other. 
+\end{eg}
+
 To provide more examples of group, we can construct the automorphism group from a group. 
 
 \begin{defn}{The Automorphism Group}{} Let $G$ be a group. An automorphism of $G$ is a group homomorphism $\phi:G\to G$. Define the automorphism group $G$ to be $$\text{Aut}(G)=\{\phi:G\to G\;|\;\phi\text{ is an isomorphism }\}$$
@@ -317,30 +286,92 @@ Composing bijective maps also gives bijective maps and so composition is a binar
 
 We will see it reappear later on when inner automorphisms is defined. For now, treat it as another example for you to work on as a group. 
 
-\subsection{The Cyclic Groups}
-The collection of all cyclic groups is one of the many classes of groups that serves as the equivalent of primes in the collection of all groups. These groups are called finite simple groups. 
-
-\begin{defn}{The Cyclic Group $C_n$}{} Let $n\in\N$. The cyclic group of order $n$ is defined to be the group $$C_n=\{1,g,g^2,\dots,g^{n-1}\}=\langle g\rangle$$ where multiplication is defined by $g^m\cdot g^k=g^{m+k}$. It may also be denoted as $Z_n$
+\pagebreak
+\section{Generating a Group}
+\subsection{Generating Sets}
+\begin{defn}{Subgroups Generated by a Set}{} Let $G$ be a group and $A$ a subset of $G$. Define the subgroup generated by $A$ to be $$\langle A\rangle=\{a_1^{e_1}\cdots a_n^{e_n}\;|\;n\in\N^+, a_1,\dots,a_n\in A, e_1,\dots,e_n\in\{\pm1\}\}$$ the subgroup of all elements of $G$ that can be expressed as the finite product of elements in $A$ and their inverses. 
 \end{defn}
 
-This class of groups form an infinite family since two cyclic groups are isomorphic if and only if they have the same order. However, there may be more than $1$ generators for the group, all of which are demonstrated in the following theorem. 
+If $A=\{a_1,\dots,a_r\}$ is finite, we often write the generated subgroup as $\langle A\rangle=\langle a_1,\dots,a_r\rangle$, omitting the brackets. \\
 
-\begin{thm}{}{} Let $n\in\N$ and $0\leq k\leq n-1$ be an integer. Then $g^k$ is a generator of $C_n$ if and only if $\gcd(k,n)=1$. 
+\begin{prp}{}{} Let $G$ be a group and $A$ a subset of $G$. Then we have that $$\langle A\rangle=\bigcap_{A\subseteq H\leq G}H$$
+\end{prp}
+
+This means that the generated subgroup is the smallest subgroup of $G$ containing $A$. 
+
+\begin{defn}{Generating Set of a Group}{} Let $G$ be a group and $S$ a subset of $G$. We say that $S$ is a generating set of $G$ if $G=\langle S\rangle$. 
+\end{defn}
+
+\subsection{Cyclic Groups}
+\begin{defn}{Cyclic Groups}{} Let $G$ be a group. We say that $G$ is cyclic if there exists $g\in G$ such that $$G=\langle g\rangle$$
+\end{defn}
+
+\begin{lmm}{}{} Let $G$ be a group. If $G$ is cyclic, then $G$ is abelian. 
+\begin{proof}
+Let $\langle g\rangle$ be a cyclic group. Then for any $g^m,g^n\in\langle g\rangle$, we have that $$g^m\cdot g^n=g^{m+n}=g^{n+m}=g^n\cdot g^m$$ and so we conclude. 
+\end{proof}
+\end{lmm}
+
+\begin{prp}{}{} Let $G$ be a cyclic group. Then any subgroup $H$ of $G$ is also cyclic. 
+\begin{proof} Let $H\leq G=\langle g\rangle$. Every element in $H$ is of the form $g^n$ for some $n\in\Z$. Take the smallest positive $k$ such that $g^k\in H$. Consider another element $g^n\in H$. By the division algorithm, $n=qk+r$ for some $r\in\{0,\dots,k-1\}$. Thus we have $$g^n=g^{kq+r}\iff g^r=(g^k)^{-q}(g^n)$$ Now since $g^k\in H$, $(g^k)^{-1}\in H$ and $(g^k)^q\in H$ thus $(g^k)^q\in H$ and $(g^k)^q(g^n)\in H$ by inverse and closure of a group. Thus $g^r\in H$. However this is a contradiction since $k$ is the least power of $g$ such that $g^k\in H$ but $g^r$ with $r<k$ is now in $H$. Thus we must have $r=0$ and $g^n=(g^k)^q$. This applies for every $g^n\in H$ thus $H=\langle g^k\rangle$. 
+\end{proof}
+\end{prp}
+
+One can also show that in the case of a cyclic group, the order of the group is equal to the order of the generator. However the converse is not always true. That is, the order of the group and the order of one particular element being the same does not imply that the group is cyclic. 
+
+\begin{prp}{}{} Let $G$ be a cyclic group. Let $g$ be a generator of $G$. Then $\abs{G}=\abs{g}$. 
+\begin{proof} Suppose that $\abs{g}=n$ Note that $g^{n+k}=g^k$ for any $k\in\{0,\dots,n-1\}$. Thus $\{g^n|n\in\mathbb{Z}\}$ has $n$ distinct elements. Thus $\abs{G}=n$. \\
+If $\abs{g}=\infty$ then $g^n\neq 1$ for all $n$ not equal to $0$. Thus $\{g^n|n\in\mathbb{Z}\}$ are all distinct and $\abs{G}=\infty$.
+\end{proof}
+\end{prp}
+
+Using cyclic subgroups, we can impose a stronger condition so that the order of the product of two elements can be given an explicit formula. 
+
+\begin{prp}{}{} Let $G$ be a group and $a,b\in G$ such that $a,b$ commutes. If furthermore $\langle a\rangle\cap\langle b\rangle=\{1\}$, then $$\abs{ab}=\lcm(\abs{a},\abs{b})$$ 
+\begin{proof}
+Let $n=\abs{ab}$. Since $a$ and $b$ commute, we have that $$1=(ab)^n=a^nb^n$$ so that $a^n=b^{-n}$. Thus $a^n\in\langle b\rangle$. But $a^n\in\langle a\rangle\cap\langle b\rangle=\{1\}$ implies that $a^n=1$. Similarly, we have that $b^n=1$. This means that we have $\abs{a},\abs{b}$ divides $n$. and thus $\lcm(\abs{a},\abs{b})$. We know from groups and rings that $\abs{ab}$ divides $\lcm(\abs{a},\abs{b})$ and so we conclude. 
+\end{proof}
+\end{prp}
+
+\subsection{Classifying Cyclic Groups}
+\begin{defn}{Finite Cyclic Groups}{}\\
+Let $n\in\N^+$. Define the cyclic group of order $n$ to be the set $$C_n=\{e^{2\pi i k/n}\;|\;0\leq k\leq n-1\}$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $n,m\in\N^+$. Then $C_n\cong C_m$ if and only if $n=m$. 
+\end{prp}
+
+\begin{lmm}{}{}\\
+Let $G$ be a cyclic group. Then $G$ is isomorphic to one of the following. 
+\begin{itemize}
+\item $C_n$ for some $n\in\N$. 
+\item $\Z$. 
+\end{itemize}
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $n\in\N$ and $0\leq k\leq n-1$ be an integer. Then $g^k$ is a generator of $C_n$ if and only if $\gcd(k,n)=1$. 
 \begin{proof}
 Suppose that $g^k$ is a generator of $C_n$. Then $g=g^{ak}$ for some $a\in\Z$. Since $g^n=1$, there exists $b\in\Z$ such that $g^{ak-bn}=g$ and $0\leq ak-bn\leq n-1$. Then $ak-bn=1$ has a solution if and only if $\gcd(k,n)=1$ thus we are done. \\
 Now suppose that $\gcd(k,n)=1$. Then $\abs{g^k}=\frac{n}{\gcd(k,n)=n}$ thus we are done. 
 \end{proof}
-\end{thm}
+\end{prp}
 
 \pagebreak
-\section{Cosets and Quotient Groups}
-\subsection{Cosets}
-\begin{defn}{Cosets}{} Let $H$ be a subgroup of $G$. Let $g\in G$. 
+\section{Normal Subgroups and Quotient Groups}
+\subsection{Lagrange's Theorem}
+\begin{defn}{Left and Right Cosets}{}\\
+Let $G$ be a group. Let $H$ be a subgroup of $G$. 
 \begin{itemize}
-\item $gH=\{gh|h\in H\}$ the left cosets of $H$ generated by $H$
-\item $Hg=\{hg|h\in H\}$ the right cosets of $H$ generated by $H$
+\item A left coset of $H$ is a set of the form $gH=\{gh\;|\;h\in H\}$ for some $g\in G$. 
+\item A right coset of $H$ is a set of the form $Hg=\{hg\;|\;h\in H\}$ for some $g\in G$. 
 \end{itemize}
 \end{defn}
+
+\begin{eg}{}{}\\
+Let $n\geq 2$. Then $1+n\Z=\{1+nk\;|\;k\in\Z\}$ is a coset of $n\Z$ in $\Z$. 
+\end{eg}
 
 \begin{prp}{}{} Let $H$ be a subgroup of $G$ and let $g_1,g_2\in G$. Then the following are equivalent. 
 \begin{itemize}
@@ -391,7 +422,6 @@ The set of all left (right) cosets is also important for the construction of quo
 \begin{defn}{Set of Cosets}{} Let $G$ be a group and $H$ a subgroup. Define $$\frac{G}{H}=\{gH\;|\;g\in G\}$$ the set of cosets of $H$ in $G$. 
 \end{defn}
 
-\subsection{Lagrange's Theorem}
 Lagrange's theorem is a powerful theorem that has many applications. Some indirect results include the class equation and orbit stabilizer theorem as we will later see. 
 
 \begin{thm}{Lagrange's Theorem}{} Let $G$ be a finite group and $H$ a subgroup of $G$. Then $$\abs{G}=[G:H]\abs{H}$$ 
@@ -423,9 +453,7 @@ Given we have defined the set of cosets $\frac{G}{H}$ for a group $G$ and a subg
 \begin{defn}{Conjugates}{} Let $H$ be a subgroup of $G$. The set $$gHg^{-1}=\{ghg^{-1}|h\in H\}$$ is called the conjugate of $H$. 
 \end{defn}
 
-It does not need deep results to see that conjugations and normal subgroups are related notions. 
-
-\begin{thm}{Normality Test}{} Let $N$ be a subgroup of $G$. The following are equivalent. 
+\begin{prp}{}{} Let $N$ be a subgroup of $G$. The following are equivalent. 
 \begin{itemize}
 \item $N$ is normal in $G$
 \item $gNg^{-1}\subseteq N$ for all $g\in G$
@@ -439,17 +467,22 @@ It does not need deep results to see that conjugations and normal subgroups are 
 \item $(3)\implies(2)$ is trivial. 
 \end{itemize}
 \end{proof}
-\end{thm}
+\end{prp}
 
-While the second item above is simply for ease of proving things, the important thing to take away here is that as long as conjugating results in the same group, that group would be normal. 
+\begin{eg}{}{}\\
+Let $G$ be an abelian group. Then any subgroup of $G$ is abelian. 
+\begin{proof}
+Let $H$ be a subgroup of $G$. Since $G$ is abelian, we have $gHg^{-1}=gg^{-1}H=H$ for any $g\in G$. Hence $H$ is abelian. 
+\end{proof}
+\end{eg}
 
-\begin{thm}{}{} Let $H$ be a subgroup of a group $G$. Write $g_1H\cdot g_2H=\{ab|a\in g_1H,b\in g_2H\}$. Then $$g_1H\cdot g_2H=(g_1g_2)H$$ for all $g_1,g_2\in G$ if and only if $H\trianglelefteq G$. 
+\begin{prp}{}{} Let $H$ be a subgroup of a group $G$. Write $g_1H\cdot g_2H=\{ab\;|\;a\in g_1H,b\in g_2H\}$. Then $$g_1H\cdot g_2H=(g_1g_2)H$$ for all $g_1,g_2\in G$ if and only if $H\trianglelefteq G$. 
 \begin{proof}
 Suppose first that $g_1H\cdot g_2H=(g_1g_2)H$. Let $g\in G$. We want to show that $gHg^{-1}\subseteq H$. Notice that $gH\cdot g^{-1}H=H$. For any $h\in H$, we have $gh\in gH$ and $g^{-1}\in g^{-1}H$ so that $ghg^{-1}\in G$. \\
 
 Now suppose that $N$ is normal. Let $g_1h_1\in g_1H$ and $g_2h_2\in g_2H$. Then we have $$g_1h_1g_2h_2=g_1g_2h_3h_2\in(g_1g_2)H$$ since $N$ is normal and $h_1g_2=g_2h_3$. Thus $g_1H\cdot g_2H\subseteq(g_1g_2)H$. Now suppose that $g_1g_2h\in(g_1g_2)H$. Then in particular this element lies in $g_1H\cdot g_2 H$ because $g_1g_2h=g_1\cdot 1\cdot g_2\cdot h$. And so we conclude. 
 \end{proof}
-\end{thm}
+\end{prp}
 
 This theorem shows that if $N$ is a normal subgroup, then the above operation is a binary operation on $G/N$. The rest of the conditions to check that $G/N$ forms a group is fairly straight forward. 
 
@@ -468,9 +501,14 @@ All the group axioms are satisfied and so we conclude.
 \begin{defn}{Quotient Group}{} Let $G$ be a group and $N$ a normal subgroup of $G$. Define the quotient group of $G$ with $N$ to be the group $G/N$. 
 \end{defn}
 
+\begin{eg}{}{}\\
+Let $n\in\N^+$. Then $\Z/n\Z$ is a group isomorphic to $C_n$. 
+\end{eg}
+
 Normal subgroups are also closely related to kernels. This is because for any group $G$ and normal subgroup $N$, there is a canonical projection map $p:G\to G/N$. 
 
-\begin{prp}{}{} A subgroup $N$ of the group $G$ is normal if and only if it is the kernel of some homomorphism. 
+\begin{prp}{}{}\\
+Let $G$ be a group. Let $N$ be a subgroup of $G$. Then $N$ is a normal subgroup if and only if $N$ is the kernel of some group homomorphism. 
 \begin{proof}
 Suppose that $N$ is a normal subgroup of $G$. Then consider the homomorphism $\phi:G\to G/N$ defined by $\phi(g)=gN$. Then
 \begin{align*}
@@ -483,8 +521,6 @@ Suppose that $N$ is a normal subgroup of $G$. Then consider the homomorphism $\p
 Let $N$ be the kernel of the homomorphism $\phi:G\to H$. Then $\ker(\phi)=\{g\in G|\phi(g)=1\}=N$. By the normality test, showing that $gng^{-1}\in N$ is sufficient for $n\in N$ and $g\in G$. We have that $$\phi(gng^{-1})=\phi(g)\phi(n)\phi(g^{-1})=\phi(g)\phi(g)^{-1}=1$$ thus $gng^{-1}\in\ker(\phi)=N$ thus we are done. 
 \end{proof}
 \end{prp}
-
-Undoubtedly aside from the construction of the quotient group, the above proposition is the main result of this section. It is equivalent to say that a normal subgroup is exactly the kernel of some homomorphism. 
 
 \subsection{Normalizers}
 Sometimes, not every element in a group allows a subgroup $H$ to normalize. Therefore can obtain a subset of $G$ that  contains all the elements that allows $H$ to be normal. 

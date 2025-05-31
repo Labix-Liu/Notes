@@ -23,51 +23,21 @@ Note: $M_{m\times n}(\R)$ means the set of all matrices with $m$ rows and $n$ co
 \pagebreak
 \tableofcontents
 \pagebreak
-\section{Analysis on $\R^n$ and $M_{m\times n}(\R)$}
-\subsection{Sequences on $\R^n$}
-\begin{defn}{Euclidean Metric}{} The Euclidean Metric of $x,y\in\R^n$ is defined to be $$d(x,y)=\left(\sum_{k=1}^n(x_k-y_k)^2\right)^{\frac{1}{2}}$$ We denote it as $\abs{x-y}$. 
-\end{defn}
 
-\begin{prp}{}{} $\R^n$ and the Euclidean Metric forms a metric space. 
-\begin{proof} We show that the Euclidean Metric is indeed a metric on $\R^n$. Let $x,y,z\in\R^n$. 
-\begin{itemize}
-\item $(x_k-y_k)^2\geq 0$ for all $k\in\{1,\dots,n\}$ with equality if and only if $x_k=y_k$
-\item $(x_k-y_k)^2=(y_k-x_k)^2$ for all $k\in\{1,\dots,n\}$
-\item $d(x,y)\leq d(x,z)+d(y,z)$ for any $z\in\R^n$
-\end{itemize}
-\end{proof}
-\end{prp}
-
-\begin{defn}{Convergence in $\R^n$}{} A sequence $\{x_n\}\subseteq\R^n$ is said to converge to $x\in\R^n$ if for every $\epsilon>0$ there exists $N\in\N$ such that $d(x_n,x)<\epsilon$ for all $n>N$. 
-\end{defn}
-
-\begin{prp}{Componentwise Convergence}{} $x _k\in\R^n$ converges if and only if $x _{i,k}$ converges for every $i\in\{1,\dots,n\}$. 
-\begin{proof}
-Suppose that $\abs{x _k-x }<\epsilon$. Then in particular $\abs{x _{i,k}-x _i}<\abs{x _k-x }<\epsilon$ and thus is convergent componentwise. Suppose that $\{x _k\}$ is convergent componentwise. Then there exists $N_1,\dots,N_n$ such that $n_j>N_j$ implies $\abs{x _{j,k}-x _j}<\epsilon$ for $j\in\{1,\dots,n\}$. Take the max of all $N_1,\dots,N_n$. Then 
-\begin{align*}
-\abs{x _k-x }&=\left(\sum_{j=1}^n(x _{j}-x _{j,k})\right)^{\frac{1}{2}}\\
-&<\sqrt{n}\epsilon
-\end{align*}
-\end{proof}
-\end{prp}
-
+\section{Metric Properties of Euclidean Space}
+\subsection{Component-wise Properties}
 \begin{thm}{Bolzano-Weierstrass Theorem}{} Any bounded sequence in $\R^n$ has a convergent subsequence. 
 \begin{proof} Let $\{x_n\}\subset\R^n$ be bounded. By Bolzano-Weierstrass Theorem on $\R$, the sequence $\{x_{1,m}\}\subset\R$ has a convergent subsequence $\{x_{1,m_k}\}$. Apply Bolzano-Weierstrass Theorem to $\{x_{2,m_k}\}$ and keep going until you reach the $n$th component. We will end up with a subsequence that converges for all components and thus is convergent in $\R^n$. 
 \end{proof}
 \end{thm}
 
-\begin{prp}{Sum Rule of Sequences}{} Let $\{x_n\}\subset\R^n$ converge to $x\in\R^n$ and $\{y_n\}\subset\R^n$ converge to $y\in\R^n$. Let $a,b\in\R$. Then $$ax_n+by_n\to ax+by$$ 
-\begin{proof}
-Trivial using the characterization of componentwise convergence and real analysis. 
-\end{proof}
+\begin{prp}{}{}\\
+Let $m\in\N$. Let $(x_n)_{n\in\N}$ and $(y_n)_{n\in\N}$ be sequences in $\R^m$. Suppose that $(x_n)_{n\in\N}$ converges to $x\in\R^m$ and $(y_n)_{n\in\N}$ converges to $y\in\R^m$. Then the following are true. 
+\begin{itemize}
+\item If $\lambda,\mu\in\R$, then $(\lambda x_n+\mu y_n)_{n\in\N}$ converges to $\lambda x+\mu y$. 
+\item $(x_ny_n)_{n\in\N}$ converges to $xy$. 
+\end{itemize}
 \end{prp}
-
-\subsection{Continuity on $\R^n$}
-\begin{defn}{Limits}{} Let $f:U\subset\R^n\to\R^m$. Let $a\in\R^n$ be a limit point of $U$. Let $b\in\R^m$. We say that $$\lim_{x\to a}f(x)=b$$ if for every $\epsilon>0$ there is some $\delta>0$ such that for every $\epsilon>0$ there exists some $\delta>0$ such that for all $x\in U$, $$\|x-a\|<\delta\implies\|f(x)-b\|<\epsilon$$
-\end{defn}
-
-\begin{defn}{Continuity}{} Let $f:U\subseteq\R^n\to\R^m$. We say that $f$ is continuous at $a\in U$ if $$\lim_{x \to a}f(x)=f(a)$$
-\end{defn}
 
 \begin{thm}{Componentwise Continuity}{} Let $f:U\subseteq\R^n\to\R^m$ be a function. Then $f$ is continuous if and only if each of its components $f_1,\dots,f_n:U\to\R$ is continuous. 
 \begin{proof}
@@ -84,102 +54,36 @@ Thus $f$ is continuous.
 \end{proof}
 \end{thm}
 
-\begin{thm}{Sequential Continuity}{} Let $f:U\subseteq\R^n\to\R^m$. Then $f$ is continuous at $c\in U$ if and only if for every sequence $\{x_n|n\in\N\}\subset U$ that $x_n\to c\in U$ it has the property that $$f(x_n)\to f(c)$$ 
-\begin{proof}
-Exactly the same proof as that of real analysis. 
-\end{proof}
-\end{thm}
-
-\begin{prp}{Sum Rule}{} Let $f,g:U\subseteq\R^n\to\R^m$ be continuous at $p\in\R^n$. Then for any $a,b\in\R^m$, $af(x)+bg(x)$ is continuous at $p$. 
-\begin{proof}
-Simple proof involving componentwise continuity and real analysis. 
-\end{proof}
-\end{prp}
-
-\begin{prp}{Product and Quotient Rule}{} Let $f,g:U\subseteq\R^n\to\R$ be continuous at $p\in\R^n$. Then 
+\begin{prp}{}{} Let $U\subseteq\R^n$ be a subset. Let $f,g:U\to\R^m$ be continuous functions. Then the following are true. 
 \begin{itemize}
-\item $f(x)g(x)$ is continuous at $p$
-\item $\frac{f(x)}{g(x)}$ is continuous at $p$ given that $g(x)\neq 0$ for all $x\in U$
-\end{itemize} 
-\begin{proof}
-Also a simple proof involving componentwise continuity and real analysis. 
-\end{proof}
-\end{prp}
-
-\begin{prp}{Composition Rule}{} Let $f:U\subseteq\R^n\to\R^m$ and $g:V\subseteq\R^m\to\R^k$ be continuous at $p\in\R^n$ and $f(p)\in V$ respectively. Then $g(f(x))$ is continuous at $p$. 
-\begin{proof}
-Another simple proof involving componentwise continuity and real analysis. 
-\end{proof}
-\end{prp}
-
-\begin{defn}{Linear Continuity}{} A function $f:\R^n\to\R^m$ is linearly continuous if given any line $g(t)=x_0+tv$ in $\R^n$ where $x_0,v\in\R^n$, we have that $$\lim_{t\to 0}f(x_0+tv)=f(x_0)$$
-\end{defn}
-
-\begin{defn}{Separate Continuity}{} A function $f:\R^2\to\R$ is separately continuous at $(x_0,y_0)$ if $g(x)=f(x,y_0)$ and $h(y)=f(x_0,y)$ are both continuous. 
-\end{defn}
-
-\begin{prp}{}{} Let $f:\R^n\to\R^m$ be continuous. If $f$ is continuous, then $f$ is linearly continuous. If $f$ is linearly continuous, then $f$ is seapartely continuous. 
-\end{prp}
-
-Beware that none of the inverse implications hold. But we can use the contrapositive to prove that functions are not continuous. Namely if we can prove that $f$ is not separately continuous, then clearly $f$ will not be continuous. This is precisely why we made this definitions in the first place. 
-
-\begin{prp}{}{} Let $g:U\subset\R\to\R$. Define $U_i=\{x\in\R^n|x_i\in U\}$. This $U_i$ is the set of all $\R^n$ such that the $i$th element is in $U$. Define $f:U_i\subset\R^n\to\R$ by $f(x)=g(x_i)$. If $g$ is continuous at $a\in U$ then $f$ is continuous at $\{x\in\R^n|x_i=a\}$. 
-\end{prp}
-
-\subsection{Topological Properties}
-We will only develop sufficient topological properties so that we can apply it to our proofs. The complete development of topology is in another set of notes. 
-
-\begin{defn}{Open Ball}{} Let $p\in\R^n$ and $r>0$. The open ball at $p$ with radius $r$ is defined to be $$B_r(p)=\{x\in\R^n|\abs{x-p}<r\}$$
-\end{defn}
-
-\begin{defn}{Open and Closed Sets}{} We say that a set $U\subset\R^n$ is 
-\begin{itemize}
-\item open if for all $p\in U$ there exists $r>0$ such that $B_r(p)\subseteq U$
-\item closed if $\R^n\setminus U$ is open
+\item If $\lambda,\mu\in\R$, then $\lambda f+\mu g$ is continuous. 
+\item $fg$ is continuous. 
+\item If $g(x)\neq 0$ for all $x\in U$, then $\frac{f}{g}$ is continuous. 
 \end{itemize}
-\end{defn}
-
-\begin{prp}{}{} Let $U\subseteq\R^n$ is closed if and only if for every sequence $(x_n)_{n\in\N}\subset U$ that converges to $x\in\R^n$, $x\in U$. 
-\begin{proof}
-Suppose that $U$ is closed. Suppose that $(x_n)_{n\in\N}\subset U$ is a sequence such that it converges to some $x\in\R^n$. Suppose for a contradiction that $x\in\R^n\setminus U$. Then $\R^n\setminus U$ being open means that there exists some $r>0$ such that $B_r(x)\subseteq\R^m\setminus U$. By definition of convergent, there exists $N\in\N$ such that $x_n\in B_r(x)$ for all $n>N$. But this contradicts the fact that $x_n\in U$. Thus we must have $x\in U$. \\
-Now suppose that every sequence $(x_n)_{n\in\N}\subset U$ has limit $x\in U$. Suppose for a contradiction that $U$ is not closed. Then $\R^n\setminus U$ is not open and that there exists $x\in\R^n\setminus U$ such that for all $r>0$, $B_r(x)$ is not a subset of $\R^n\setminus U$. Let $(y_n)_{n\in\N}$ be a sequence with the property that $y_n\in B_{1/k}(x)$ but $y_n\notin\R^n\setminus U$. Then $y_n\in U$ and $y_n\to x\in\R^n\setminus U$, a contradiction. 
-\end{proof}
 \end{prp}
 
-\begin{defn}{Bounded Sets}{} We say that a set $U\subset\R^n$ is bounded if there exists an open ball $B_r(p)$ such that $U\subset B_r(p)$. 
+\begin{defn}{Limits}{}\\
+Let $U\subseteq\R^n$ be a subset. Let $f:U\to\R^m$ be a function. Let $c\in U$. We say that the limit of $f$ at $c$ is $L\in\R^m$ if for all $\varepsilon>0$, there exists $\delta>0$ such that $\abs{x-c}<\delta$ implies $$\abs{f(x)-L}<\varepsilon$$ In this case, we write $L=\lim_{x\to c}f(x)$. 
 \end{defn}
 
-\begin{thm}{}{} Let $f:\R^n\to\R^k$ be a function. Then the following are equivalent. 
-\begin{itemize}
-\item $f$ is continuous
-\item $V\subseteq\R^k$ is open implies $f^{-1}(V)$ is open
-\item $U\subseteq\R^k$ is closed implies $f^{-1}(U)$ is closed
-\end{itemize}
+\begin{lmm}{}{}\\
+Let $U\subseteq\R^n$ be a subset. Let $f:U\to\R^m$ be a function. Let $c\in U$. Let $L=(L_1,\dots,L_m)\in\R^m$. Suppose that $f$ is given by $f(x)=(f_1(x),\dots,f_m(x))$ for $f_i:U\to\R$. Then $\lim_{x\to c}f(x)=L$ if and only if $\lim_{x\to c}f_i(x)=L_i$ for $1\leq i\leq m$. 
+\end{lmm}
 
-\begin{proof}
-Suppose that $f$ is continuous. Then $V$ being open means that if $f(x)\in V$, then $B_\epsilon(f(x))\subseteq V$ for some $\epsilon>0$. For this $\epsilon$, apply continuity. Then there exists $\delta>0$ such that $f(B_\delta(x))\subseteq B_\epsilon(f(x))$. Then this means that $$B_\delta(x)\subseteq f^{-1}(B_\epsilon(f(x)))\subseteq f^{-1}(V)$$ and we are done. \\
-Now suppose that $f$ has the second property. Let $f(x)\in V\subseteq\R^k$ be open. Then there exists $\epsilon>0$ such that $B_\epsilon(f(x))\subseteq V$. Thus $f^{-1}(B_\epsilon(f(x)))$ is also open. This being open means that there exists $\delta>0$ such that $B_\delta(x)\subseteq f^{-1}(B_\epsilon(f(x)))$ and $$f(B_\delta(x))\subseteq B_\epsilon(f(x))$$ and we are done. \\
-For the closed property, simply take the complements of the entire proof. 
-\end{proof}
-\end{thm}
+\begin{lmm}{}{}\\
+Let $U\subseteq\R^n$ be a subset. Let $f:U\to\R^m$ be a function. Let $c\in U$. Then $f$ is continuous at $c$ if and only if $\lim_{x\to c}f(x)=f(c)$. 
+\end{lmm}
 
-\begin{defn}{Sequential Compactness}{} Let $K\subset\R^n$ be a set. Then $K$ is sequentially compact if every sequence $(x_n)_{n\in\N}\subset K$ has a convergent subsequence $(x_{n_j})_{j\in\N}$ that converges to some $k\in K$. 
-\end{defn}
-
-\begin{prp}{Heine-Borel Theorem}{} $K\subset\R^n$ is sequentially compact if and only if $K$ is closed and bounded. 
+\subsection{Compactness in $\R^n$}
+\begin{thm}{Heine-Borel Theorem}{}\\
+Let $K\subseteq\R^n$ be a subset. Then $K$ is compact if and only if $K$ is closed and bounded. 
 \begin{proof}
 Let $K$ be compact. Let $(x_n)_{n\in\N}\subset K$ be a convergent sequence. By sequential compactness, $(x_{n_k})_{k\in\N}$ is a subsequence that converges to $x\in K$. But $(x_n)_{n\in\N}$ has the same limit as its subsequence thus $x_n\to x$. Now suppose for a contradiction that $K$ is unbounded. Then there exists a sequence $(x_n)_{n\in\N}$ such that $\abs{x_n}\geq n$ for all $n\in\N$. By sequential compactness, there is a subsequence $(x_{n_k})_{k\in\N}$ such that its limit is $x\in K$. This means that $(x_{n_k})_{k\in\N}$ is bounded, a contradiction. \\
 Now suppose that $K$ is closed and bounded. Let $(x_n)_{n\in\N}$ be a sequence in $K$. Then $K$ being bounded means that $(x_n)_{n\in\N}$ is bounded. By the Bolzano-Weierstrass theorem, it has a convergent subsequence $(x_{n_k})_{k\in\N}$ with limit in $K$ since $K$ is closed. 
 \end{proof}
-\end{prp}
-
-\begin{thm}{}{} Let $f:K\subset\R^n\to\R^m$ be continuous and $K$ sequentially compact. Then $f(K)$ is sequentially compact. 
-\begin{proof}
-Let $(y_n)_{n\in\N}$ be a sequence in $f(K)$. Then there exists a sequence $(x_n)_{n\in\N}$ such that $y_n=f(x_n)$ for all $n\in\N$. By sequential compactness, there exists a subsequence $(x_{n_k})_{k\in\N}$ that is convergent to $x\in K$. By sequential continuity of $f$ at $x$, $y_{n_k}\to f(x)$ and we are done. 
-\end{proof}
 \end{thm}
 
-\begin{thm}{Extreme Value Theorem}{} Let $f:K\subset\R^n\to\R$ be continuous and $K$ sequentially compact. Then there exists $a,b\in K$ such that $$f(a)\leq f(x)\leq f(b)$$ for all $x\in K$. 
+\begin{thm}{Extreme Value Theorem}{} Let $f:K\subset\R^n\to\R$ be continuous and $K$ compact. Then there exists $a,b\in K$ such that $$f(a)\leq f(x)\leq f(b)$$ for all $x\in K$. 
 \begin{proof}
 We know that $f(K)$ is closed and bounded. Thus it must have a supremum $M$ and infinum $m$ that are finite. Then we must have $(a_n)_{n\in\N}$ and $(b_n)_{n\in\N}$ such that $a_n\to m$ and $b_n\to M$ by definition of supremum and infinum. Since $f(K)$ is closed, $m,M\in f(K)$ and we are done. 
 \end{proof}
@@ -188,30 +92,13 @@ We know that $f(K)$ is closed and bounded. Thus it must have a supremum $M$ and 
 \subsection{The Space of Matrices}
 \begin{defn}{Frobenius Norm}{} Let $A\in M_{k\times n}(\R)$. Define the Frobenius norm to be $$\|A\|_F=\left(\sum_{j=1}^n\sum_{i=1}^ka_{ij}^2\right)^{\frac{1}{2}}$$
 \end{defn}
-
-\begin{defn}{Operator Norm}{} Let $T\in\mathcal{L}(\R^n,\R^k)$. Define the operator norm to be $$\|T\|=\sup_{x\in\R^n\setminus\{0\}}\frac{\abs{T(x)}}{\abs{x}}=\sup_{\substack{x\in\R^n\\\abs{x}=1}}\abs{T(x)}$$
+ 
+\begin{defn}{Operator Norm}{} Let $T\in\Hom_\R(\R^n,\R^k)$ be a linear map. Define the operator norm of $T$ to be $$\|T\|=\sup\{\abs{T(x)}\;|\;x\in\R^n\text{ such that }\abs{x}=1\}$$
 \end{defn}
 
-The definition of the opaertor norm given on $S^{n-1}$ is particularly useful because $S^{n-1}$ is sequentially compact. Since $\|A\|$ is a supermum, there must exist a sequence $(x_n)_{n\in\N}$ such that $\abs{Ax_n}\to\|A\|$. 
-
-\begin{prp}{}{} Let $T,S\in L(\R^n,\R^k)$. The operator norm satisfies the following and thus is a norm on $L(\R^n,\R^k)$
-\begin{itemize}
-\item $\|T\|=0$ if and only if $T$ is the zero mapping
-\item $\|\lambda T\|=\abs{\lambda}\|T\|$ for any $\lambda\in\R$
-\item $\|T+S\|\leq\|T\|+\|S\|$
-\end{itemize}
-\end{prp}
-
-We want to compare the two norms and show that they are equivalent. But they are in two different vector spaces. We need to associate the two vector space into the same one first. 
-
-\begin{prp}{}{} Both $\mathcal{L}(\R^n,\R^k)$ and $M_{k\times n}(\R)$ is a vector space over $\R$ where $n,k\in\N\setminus\{0\}$. Moreover, we have $$\mathcal{L}(\R^n,\R^k)\cong M_{k\times n}(\R)\cong\R^{nk}$$ 
-\begin{proof}
-The fact that $\mathcal{L}(\R^n,\R^k)$ and $M_{k\times n}(\R)$ is a vector space is trivial. Since they have the same dimension and we know that all finite dimensional vector space is isomorphic to $\R^p$ for some $p\in\N\setminus\{0\}$, we get the desired result. 
-\end{proof}
-\end{prp}
-
-\begin{prp}{}{} The frobenius norm and the operator norm are equivalent. 
-\begin{proof}
+\begin{prp}{}{}\\
+Let $T\in\Hom_\R(\R^n,\R^k)$. Let $A$ be the matrix of $T$ with respect to the standard basis. Then $\|T\|=\|A\|_F$. 
+\begin{proof}\\
 Given that the they actually act on the same vector space, we can associate every linear transformation $T$ with the matrix $A$. Now we have 
 \begin{align*}
 \|A\|_F^2&=\sum_{j=1}^n\sum_{i=1}^ka_{ij}^2\\
@@ -240,7 +127,7 @@ Thus we now have $$\|T\|\leq\|A\|_F\leq\sqrt{n}\|T\|$$ and we are done.
 
 Now we can make sense of using the operator norm for matrices, and the frobenius norm for linear maps. 
 
-\begin{prp}{}{} Let $T\in\mathcal{L}(\R^n,\R^k)$ and $S\in\mathcal{L}(\R^k,\R^m)$. Then $$\|S\circ T\|\leq\|S\|\|T\|$$ 
+\begin{prp}{}{} Let $T\in\Hom_\R(\R^n,\R^k)$ and $S\in\Hom_\R(\R^k,\R^m)$. Then $$\|S\circ T\|\leq\|S\|\|T\|$$ 
 \begin{proof}
 We have that 
 \begin{align*}
@@ -257,6 +144,10 @@ Note that $\R^{n\times n}\cong\R^{n^2}$ thus the determinant really is just a li
 \end{proof}
 \end{prp}
 
+\begin{prp}{}{}\\
+Let $n\in\N\setminus\{0\}$. Then $GL(n,\R)$ is an open subset of $M_n(\R)$. 
+\end{prp}
+
 \begin{prp}{}{} Let $n\in\N\setminus\{0\}$. Then $$GL(n,\R)\subset L(\R^n)$$ is open. 
 \begin{proof}
 Consider the function $\det(\cdot):\R^{n\times n}\to\R$. We have that $\det(GL(n,\R))=\R\setminus\{0\}$ and image is clearly open in $\R$. Thus by continuity with open sets, $GL(n,\R)$ is open. 
@@ -266,28 +157,13 @@ Consider the function $\det(\cdot):\R^{n\times n}\to\R$. We have that $\det(GL(n
 \begin{prp}{}{} Let $A\in GL(n,\R)$. If $B\in M_{n\times n}(\R)$ and $\|B-A\|<\frac{1}{\|A^{-1}\|}$, then $B$ is invertible. This means that $$B_{1/\|A^{-1}\|}(A)\subset GL(n,\R)$$ is open in $M_{n\times n}(\R)$. Furthermore, we must have $$\|B^{-1}\|\leq\frac{1}{\frac{1}{\|A^{-1}\|}-\|B-A\|}$$
 \end{prp}
 
-\begin{prp}{}{} Let $f:\R\to M_{k\times n}(\R)$ be a function. Then $f$ is continuous if and only if every item in the matrix is a continuous function in the sense of a real function. 
-\begin{proof}
-This is clear since $M_{k\times n}(\R)\cong\R^{kn}$ and we have proved this in the above section. 
-\end{proof}
-\end{prp}
-
 \pagebreak
 \section{Differentiation}
 \subsection{Frechet Derivative}
-\begin{defn}{Frechet Derivatives}{} Let $f:U\subseteq\R^n\to\R^m$ with $U$ open and $x\in U$. We say that $f$ is differentiable at $x\in U$ if there exists a linear map $T\in\mathcal{L}(\R^n,\R^m)$ such that $$\lim_{h\to 0}\frac{\abs{f(x +h)-f(x)-T(h)}}{\abs{h}}=0$$ If $T$ has a matrix representation $A$ we write $Df(x)=A$ as the derivative of $f$ at $x$. 
+\begin{defn}{Frechet Derivatives}{} Let $f:U\subseteq\R^n\to\R^m$ with $U$ open and $x\in U$. We say that $f$ is differentiable at $x\in U$ if there exists a linear map $Df\in\Hom_\R(\R^n,\R^m)$ such that $$\lim_{h\to 0}\frac{\abs{f(x +h)-f(x)-Df(h)}}{\abs{h}}=0$$ In this case, we say that the derivative of $f$ is $Df$. 
 \end{defn}
 
-It is important that this definition uses a linear map as an approximation rather than a matrix so that in higher order derivatives, we can quit using matrices for the approximation and instead use bilinear forms and more. 
-
-\begin{defn}{Derivative Operator}{} Let $f:U\subseteq\R^n\to\R^m$ be differentiable for all $x\in U$. We define the operator $D$ on $f$ to be the function that takes $x$ to $Df(x)$. This means that $Df:U\subseteq\R^n\to M_{m\times n}(\R)$. 
-\end{defn}
-
-Note the notational differences. $Df$ is a function that takes in $x$ and spits out $Df(x)$. $Df(x)$ itself is a linear map $\mathcal{L}(\R^n,\R^m)$. It can also be a function $Df(x):\R^n\to\R^m$ that takes a direction $v\in\R^n$ and spits out the directional derivative $Df(x)v\in\R^m$. \\
-
-We then have the extension of theorems as in the one-dimensional case. 
-
-\begin{thm}{}{} The linear transformation representing the derivative is unique if it exists. 
+\begin{prp}{}{} The linear transformation representing the derivative is unique if it exists. 
 \begin{proof}
 Suppose that $A,B$ both represent the derivative of $f:U\subseteq\R^n\to\R^m$. Then fix $\epsilon>0$. There exists $\delta_1,\delta_2$ such that $\abs{h}<\min\{\delta_1,\delta_2\}$ implies $$\frac{\abs{f(x+h)-f(x)-Ah}}{\abs{h}}<\epsilon$$ and $$\frac{\abs{f(x+h)-f(x)-Bh}}{\abs{h}}<\epsilon$$ Then we have 
 \begin{align*}
@@ -298,7 +174,7 @@ Suppose that $A,B$ both represent the derivative of $f:U\subseteq\R^n\to\R^m$. T
 \end{align*}
 Thus $A=B$ by definition of limit and we are done. 
 \end{proof}
-\end{thm}
+\end{prp}
 
 \begin{prp}{}{} If $f:U\subseteq\R^n\to\R^m$ is differentiable at $x\in U$, then $f$ is continuous at $x$. 
 \begin{proof}
@@ -356,24 +232,16 @@ We should make absolutely clear distinction with the existence of frechet deriva
 
 The above theorem is also useful for detecting non-differentiability. By verifying the directional derivatives are non-linear, one can use the contrapositive to prove that $f$ would not be differentiable. 
 
-\begin{defn}{Partial Derivatives}{} Let $f:U\subseteq\R^n\to\R^k$. Define $$\partial_jf(x)=\lim_{t\to0}\frac{f(x +t\vb{e}_j)-f(x)}{t}$$ which is the directional derivatives with standard basis as the direction. In particular, $$\partial_jf_i(x)=\lim_{t\to0}\frac{f_i(x +t\vb{e}_j)-f_i(x )}{t}$$ is just the one dimensional differentiation in real analysis and $$\partial_jf(x)=\begin{pmatrix}
-\partial_jf_1(x)\\
-\vdots\\
-\partial_jf_n(x)
-\end{pmatrix}$$
+\begin{defn}{Partial Derivatives}{} Let $e_1,\dots,e_n$ be the standard basis for $\R^n$. Let $U\subseteq\R^n$ be a subset. Let $f:U\to\R^m$ be a function whose components are given by $f(x)=(f_1(x),\dots,f_m(x))$ for $f_1,\dots,f_m:U\to\R$. Let $p\in U$. Define the partial derivative of $f_i$ at $p$ with respect to the $j$th coordinate to be $$\frac{\partial f_i}{\partial x_j}\bigg{|}_p=\lim_{t\to 0}\frac{f_i(x+te_j)-f_i(x)}{t}$$
 \end{defn}
-
-The partial derivatives are simply the special case of directional derivatives, when taken their direction to be unit vectors. Therefore we also have the following lemma. 
-
-\begin{prp} If the partial derivatives of $f:U\subseteq\R^n\to\R^k$ exists, then $f$ is separately continuous along $v$. 
-\end{prp}
 
 Now we have the six notions, namely continuity, linear continuity, separate continuity, differentiable, directional derivatives and partial derivatives interconnected with each other. Namely each type of differentiability implies its own continuity. 
 
-\begin{defn}{Jacobian Matrix}{} Let $f:U\subseteq\R^n\to\R^k$ be a function and let $x\in U$. Define the Jacobian matrix at $x$ to be $$\partial f(x)=\begin{pmatrix}
-\partial_1f_1(x) & \cdots & \partial_nf_1(x)\\
-\vdots & & \vdots\\
-\partial_1f_k(x) & \cdots & \partial_nf_k(x)
+\begin{defn}{Jacobian Matrix}{}\\
+Let $U\subseteq\R^n$ be a subset. Let $f:U\to\R^m$ be a function. Let $p\in U$. Define the Jacobian of $f$ at $p$ to be the matrix $$J_f(u)=\begin{pmatrix}
+\frac{\partial f_1}{\partial x_1}\bigg{|}_p & \cdots & \frac{\partial f_1}{\partial x_n}\bigg{|}_p\\
+\vdots & \ddots & \vdots\\
+\frac{\partial f_m}{\partial x_1}\bigg{|}_p & \cdots & \frac{\partial f_m}{\partial x_n}\bigg{|}_p
 \end{pmatrix}$$
 \end{defn}
 
@@ -492,7 +360,7 @@ We now use the continuity of the partial derivatives. Given $\epsilon>0$, there 
 \end{align*}
 if $\abs{h}<\delta$. The second inequality is due to the fact that $\sum_{k=1}^nh_k\leq\sqrt{n}\abs{h}$. \\
 
-Now define $A\in\mathcal{L}(\R^n,\R)$ by $A(h)=(\partial f)h$. This makes sense in matrix multiplication since $\partial f\in M_{1\times n}(\R)$. Then $0<\abs{h}<\delta$ implies 
+Now define $A\in\Hom_\R(\R^n,\R)$ by $A(h)=(\partial f)h$. This makes sense in matrix multiplication since $\partial f\in M_{1\times n}(\R)$. Then $0<\abs{h}<\delta$ implies 
 \begin{align*}
 \frac{\abs{f(x+h)-f(x)-Ah}}{\abs{h}}&\leq\epsilon\sqrt{n}\frac{\abs{h}}{\abs{h}}\\
 &=\epsilon\sqrt{n}
@@ -521,7 +389,7 @@ Differentiating the relation $\Psi(\Psi^{-1}(y))=y$ gives $$D\Psi(\Psi^{-1}(y))\
 \end{proof}
 \end{prp}
 
-\begin{lmm}{}{} $T\in\mathcal{L}(\R^n,\R^k)$ is injective if and only if there exists $a>0$ such that $\abs{T(x)}\geq a\abs{x}$ for all $x\in\R^n$. 
+\begin{lmm}{}{} $T\in\Hom_\R(\R^n,\R^k)$ is injective if and only if there exists $a>0$ such that $\abs{T(x)}\geq a\abs{x}$ for all $x\in\R^n$. 
 \begin{proof}
 Firstly suppose that there exists $a>0$ such that $\abs{T(x)}\geq a\abs{x}$ for all $x\in\R^n$. Let $T(x)=T(y)$. Then 
 \begin{align*}
@@ -538,7 +406,7 @@ We split the inverse function theorem into its injective and surjective part for
 
 \begin{prp}{Injective Part of Inverse Function Theorem}{} Let $U$ be an open subset of $\R^n$ and suppose that $\Psi:\R^n\to\R^m$ such that it is differentiable and its derivative is continuous in $U$. Assume that $D\Psi(p)$ is injective at a point $p\in U$. Then there exists $\delta>0$ such that $B_\delta(p)\subset U$ and such that $f$ is injective on $B_\delta(p)$. 
 \begin{proof}
-From the above lemma, $D\Psi(p)$ being injective means that there exists $a>0$ such that $$\abs{Df(p)h}\geq\epsilon\abs{h}$$ for all $h\in\R^n$. Since $Df:U\to\mathcal{L}(\R^n,\R^k)$ is continuous, there exists $\delta>0$ such that $x\in B_\delta(p)\subset U$ implies $$\|Df(p)-Df(x)\|<\frac{1}{2}\epsilon$$ Define a new function $F:U\to\R^k$ by $F(x)=f(x)-Df(p)x$. Then $F$ is differentiable since $Df(p)x$ is just a linear transformation and we have $$DF(x)=Df(x)-Df(p)$$ Thus we now have $$\|DF(x)\|=\|Df(x)-Df(p)\|<\frac{1}{2}\epsilon$$ We can now apply the mean value inequality to get $$\abs{F(z)-F(x)}\leq\frac{1}{2}\epsilon\abs{z-x}$$ for all $x,z\in B_\delta(p)$. Finally we have 
+From the above lemma, $D\Psi(p)$ being injective means that there exists $a>0$ such that $$\abs{Df(p)h}\geq\epsilon\abs{h}$$ for all $h\in\R^n$. Since $Df:U\to\Hom_\R(\R^n,\R^k)$ is continuous, there exists $\delta>0$ such that $x\in B_\delta(p)\subset U$ implies $$\|Df(p)-Df(x)\|<\frac{1}{2}\epsilon$$ Define a new function $F:U\to\R^k$ by $F(x)=f(x)-Df(p)x$. Then $F$ is differentiable since $Df(p)x$ is just a linear transformation and we have $$DF(x)=Df(x)-Df(p)$$ Thus we now have $$\|DF(x)\|=\|Df(x)-Df(p)\|<\frac{1}{2}\epsilon$$ We can now apply the mean value inequality to get $$\abs{F(z)-F(x)}\leq\frac{1}{2}\epsilon\abs{z-x}$$ for all $x,z\in B_\delta(p)$. Finally we have 
 \begin{align*}
 \abs{f(x)-f(z)}&=\abs{Df(p)(x-z)-(F(z)-F(x))}\\
 &\geq\epsilon\abs{x-z}-\frac{1}{2}\epsilon\abs{x-z}\\
@@ -602,10 +470,25 @@ Note that there could be multiple $p$ such that $\Psi$ maps $p$ to $q$. The inve
 Furthermore, even if there are multiple $p$ mapping to $q$, not every $p$ could have a neighbourhood such that they are bijective because we must require the fact that $D\Psi(p)\neq 0$. 
 
 \subsection{Implicit Function Theorem}
-\begin{thm}{Implicit Function Theorem}{} Let $U$ be an open subset of $\R^{n+l}$ and $c\in\R^l$. Suppose that $F\in\mathcal{C}^1(U,\R^l)$ and that the equation $F(x,y)=c$ has a solution $(x_0,y_0)\in U$ such that $\det(\partial_yF(x_0,y_0))\neq 0$. Then there exists an open set $x_0\in N_{x_0}\subset\R^n$ and $g\in\mathcal{C}^1(N_{x_0},\R^l)$ such that 
+\begin{thm}{Implicit Function Theorem}{}\\
+Let $U$ be an open subset of $\R^{n+l}$. Let $F\in\mC^1(U,\R^l)$. Let $c\in\R^l$. Suppose that there exists $a=(a_1,\dots,a_{n+l})\in\R^{n+l}$ is such that $F(a)=c$ and $$\begin{vmatrix}
+\frac{\partial F_1}{\partial x_{n+1}}\bigg{|}_a & \cdots & \frac{\partial F_1}{\partial x_{n+l}}\bigg{|}_a\\
+\vdots & \ddots & \vdots\\
+\frac{\partial F_m}{\partial x_{n+1}}\bigg{|}_a & \cdots & \frac{\partial F_m}{\partial x_{n+l}}\bigg{|}_a
+\end{vmatrix}\neq 0$$ Then there exists a neighborhood $N\subseteq\R^n$ of $(a_1,\dots,a_n)$ and $g\in\mC^1(N,\R^l)$ such that the following are true. 
 \begin{itemize}
-\item $g(x_0)=y_0$, $\{(x,g(x)):x\in N_{x_0}\}\subset U$ and $F(x,g(x))=c$ for all $x\in N_{x_0}$
-\item $\partial_yF(x,g(x))$ is invertible for all $x\in N_{x_0}$ and $$\partial g(x)=-(\partial_yF(x,g(x)))^{-1}\cdot\partial_xF(x,g(x))$$ for all $x\in N_{x_0}$
+\item $g(a_1,\dots,a_n)=(a_{n+1},\dots,a_{n+l})$
+\item $\{(x,g(x))\;|\;x\in N\}\subset U$
+\item $F(x,g(x))=c$ for all $x\in N$. 
+\item The Jacobian of $g$ is given by $$J_g(x)=-\begin{pmatrix}
+\frac{\partial F_1}{\partial x_{n+1}}\bigg{|}_x & \cdots & \frac{\partial F_1}{\partial x_{n+l}}\bigg{|}_x\\
+\vdots & \ddots & \vdots\\
+\frac{\partial F_m}{\partial x_{n+1}}\bigg{|}_x & \cdots & \frac{\partial F_m}{\partial x_{n+l}}\bigg{|}_x
+\end{pmatrix}^{-1}\begin{pmatrix}
+\frac{\partial F_1}{\partial x_1}\bigg{|}_x & \cdots & \frac{\partial F_1}{\partial x_n}\bigg{|}_x\\
+\vdots & \ddots & \vdots\\
+\frac{\partial F_m}{\partial x_1}\bigg{|}_x & \cdots & \frac{\partial F_m}{\partial x_n}\bigg{|}_x
+\end{pmatrix}$$ for all $x\in N$
 \end{itemize}
 \end{thm}
 
@@ -625,16 +508,16 @@ for $1\leq i\leq n$ if it exists. This is done by treating $\partial_jf$ as a fu
 \end{pmatrix}$$
 \end{defn}
 
-With $f:\R^n\to\R$, to say that $Df$ is differentiable means that there exists a linear operator $T$ such that $$\lim_{h\to 0}\frac{\abs{Df(x+h)-Df(x)-T(h)}}{\abs{h}}=0$$ as defined by the definition of differentiability. Notice that $Df(x)\in\mathcal{L}(\R^n,\R)$. This means that $T$ must take the form $T:\R^n\to\mathcal{L}(\R^n,\R)$ so that $T(h)\in\mathcal{L}(\R^n,\R)$ makes sense. Thus $T\in\mathcal{L}(\R^n,\mathcal{L}(\R^n,\R))$. This leads to the following identification: 
+With $f:\R^n\to\R$, to say that $Df$ is differentiable means that there exists a linear operator $T$ such that $$\lim_{h\to 0}\frac{\abs{Df(x+h)-Df(x)-T(h)}}{\abs{h}}=0$$ as defined by the definition of differentiability. Notice that $Df(x)\in\Hom_\R(\R^n,\R)$. This means that $T$ must take the form $T:\R^n\to\Hom_\R(\R^n,\R)$ so that $T(h)\in\Hom_\R(\R^n,\R)$ makes sense. Thus $T\in\Hom_\R(\R^n,\Hom_\R(\R^n,\R))$. This leads to the following identification: 
 
-\begin{prp}{}{} Let $n\in\N\setminus\{0\}$. Then $$\mathcal{L}(\R^n,\mathcal{L}(\R^n,\R))\cong\mathcal{L}^2(\R^n,\R)$$ where $\mathcal{L}^2(\R^n,\R)$ is the space of all bilinear forms $\R^n\times\R^n\to\R$. 
+\begin{prp}{}{} Let $n\in\N\setminus\{0\}$. Then $$\Hom_\R(\R^n,\Hom_\R(\R^n,\R))\cong\Hom_\R^2(\R^n,\R)$$ where $\Hom_\R^2(\R^n,\R)$ is the space of all bilinear forms $\R^n\times\R^n\to\R$. 
 \begin{proof}
-Let $T\in\mathcal{L}(\R^n,\mathcal{L}(\R^n,\R))$. Then for every $x\in\R^n$, $T(x):\R^n\to\R$. Thus $T(x)(y)\in\R$ with $x,y\in\R^n$. Obviously we can write it into $T(x)(y)=B(x,y)$. Conversely any bilinear form can be written into the above form. In particular they both are vector spaces of dimension $n^2$. \\
+Let $T\in\Hom_\R(\R^n,\Hom_\R(\R^n,\R))$. Then for every $x\in\R^n$, $T(x):\R^n\to\R$. Thus $T(x)(y)\in\R$ with $x,y\in\R^n$. Obviously we can write it into $T(x)(y)=B(x,y)$. Conversely any bilinear form can be written into the above form. In particular they both are vector spaces of dimension $n^2$. \\
 From linear algebra we know that $B(x,y)=x^TAy$ for some matrix $A$. If $T(x)=Cx$ with $C$ representing $T$, then $$B(x,y)=(T(x))\cdot y=(Cx)^Ty=x^TC^Ty$$
 \end{proof}
 \end{prp}
 
-\begin{prp}{}{} Let $f:U\subseteq\R^n\to\R$ be differentiable for all $x\in U$ and $Df:U\subseteq\R^n\to\mathcal{L}(\R^n,\R)$ be differentiable. Then $D(Df)(x)=H_f(x)$. Moreover, $H_f(x)$ is symmetric and all second order partial derivatives commute. 
+\begin{prp}{}{} Let $f:U\subseteq\R^n\to\R$ be differentiable for all $x\in U$ and $Df:U\subseteq\R^n\to\Hom_\R(\R^n,\R)$ be differentiable. Then $D(Df)(x)=H_f(x)$. Moreover, $H_f(x)$ is symmetric and all second order partial derivatives commute. 
 \end{prp}
 
 \begin{lmm}{}{} If all second order partial derivatives of $f:U\subseteq\R^n\to\R$ at $x$ is continuous for $x\in U$, then $$\frac{\partial^2}{\partial x_i\partial x_j}f(x)=\frac{\partial^2}{\partial x_j\partial x_i}f(x)$$
@@ -670,17 +553,25 @@ Before we define integration of functions, we need to make sense of the domain o
 \begin{defn}{Regions}{} A region in $\R^n$ is a bounded open subset $\Omega$ of $\R^n$ such that there exists a function $f:\R^n\to\R$ with the property that 
 \begin{itemize}
 \item all partial derivatives of $f$ are continuous
-\item $\Omega=\{x\in\R^n|f(x)<0\}$
-\item $\nabla f(p)\neq 0$ for all $p\in\R^n$ such that $f(p)=0$. 
+\item $\Omega=\{x\in\R^n\;|\;f(x)\leq 0\}$
+\item If $p\in\R^n$ is such that $f(p)=0$, then the partial derivatives of $f$ do not simultaneously vanish. 
 \end{itemize}
 Also define the boundary of a region, $\partial\Omega$ to be $\{x\in\R^n|f(x)=0\}$. 
 \end{defn}
 
-\begin{prp}{}{} Let $\Omega\subset\R^n$ be a region with boundary $f(x)=0$. Then there exists $0<l<n$ and $r:\R^l\to\R^n$ such that $f(r(x))=0$. We say that $r$ is the parametrization of $\partial\Omega$. 
+\begin{eg}{}{}\\
+Let $R>0$. Consider the function $f:\R^3\to\R$ defined by $f(x,y,z)=x^2+y^2+z^2-R^2$. Then $\{x\in\R^n\;|\;f(x)<0\}$ is a region in $\R^3$. 
+\end{eg}
+
+\begin{prp}{}{} Let $\Omega\subset\R^n$ be a region with boundary $f(x)=0$. Then there exists $0<l<n$ and $r:\R^l\to\R^n$ such that $f(r(x))=0$. 
 \begin{proof}
 Since $\nabla f(p)\neq 0$ for all $p\in\R^n$, we can apply the implicit function theorem to find function $g:\R^l\to\R^{n-l}$ such that $f(x,g(x))=0$ for any $p\in f^{-1}(0)$. Now define $r:\R^l\to\R^n$ by $r(x)=(x,g(x))$. Then clearly $f(r(x))=0$. 
 \end{proof}
 \end{prp}
+
+\begin{eg}{}{}\\
+Let $R>0$. Let $f:\R^3\to\R$ be the function defined by $f(x,y,z)=x^2+y^2+z^2-R^2$. Consider the region $\{x\in\R^n\;|\;f(x)<0\}$. 
+\end{eg}
 
 In particular, if $l=1$, then we call $r$ a curve. If $l=2$, then $r$ would be a surface. This is precisely the parametrization of a boundary, be it a curve or a surface. 
 

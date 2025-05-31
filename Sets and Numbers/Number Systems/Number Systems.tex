@@ -1,6 +1,6 @@
 \documentclass[a4paper]{article}
 
-\input{C:/Users/liula/Desktop/Latex/Headers V1.2.tex}
+\input{C:/Users/liula/Desktop/Latex/Headers/Headers.tex}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -24,17 +24,16 @@ These notes will act as a development for the number systems from the natural nu
 \pagebreak
 \section{The Set of Integers}
 \subsection{Integers as an Equivalence Relation}
-\begin{defn}{Natural Numebers}{} The set of natural numbers $\N$, formulated in ZFC set theory via peano axioms, is the set $$\N=\{0,1,2,\dots\}$$ of natural numbers. Addition and multiplication is also defined. 
-\end{defn}
+Recall that using axioms in ZFC, we constructed the set of natural numbers $$\N=\{0,1,2,\dots\}$$ together with addition and multiplication. 
 
 \begin{defn}{Relation on $\N^2$}{} Define a relation $\sim$ on $\N^2$ as follows. We say that $(r,s)\in\N^2$ is related to $(p,q)\in\N^2$ if $r+q=s+p$. We write the relation as $(r,s)\sim(p,q)$. 
 \end{defn}
 
-\begin{lmm}{}{} The above relation on $\N^2$ is an equivalence relation. \tcbline
+\begin{lmm}{}{} The above relation on $\N^2$ is an equivalence relation. 
 \begin{proof}
-Let $(r,s)\in\N^2$. Since addition in $\N$ is commutative, we have $r+s=s+r$ so that $(r,s)\sim(s,r)$. Thus $\sim$ is reflexive. \\~\\
+Let $(r,s)\in\N^2$. Since addition in $\N$ is commutative, we have $r+s=s+r$ so that $(r,s)\sim(s,r)$. Thus $\sim$ is reflexive. \\
 
-Suppose that $(r,s)\sim(p,q)$. Then $r+q=s+p$. Rewriting the expression as $p+s=q+r$ by commutativity of addition, we conclude that $(p,q)\sim(r,s)$. The same argument shows that $(p,q)\sim(r,s)$ implies $(r,s)\sim(p,q)$. Thus $\sim$ is symmetric. \\~\\
+Suppose that $(r,s)\sim(p,q)$. Then $r+q=s+p$. Rewriting the expression as $p+s=q+r$ by commutativity of addition, we conclude that $(p,q)\sim(r,s)$. The same argument shows that $(p,q)\sim(r,s)$ implies $(r,s)\sim(p,q)$. Thus $\sim$ is symmetric. \\
 
 Suppose that $(r,s)\sim(p,q)$ and $(p,q)\sim(v,w)$. Then we have that $r+q=s+p$ and $p+w=q+v$. We can deduce that 
 \begin{align*}
@@ -47,10 +46,9 @@ Hence $(r,s)\sim(v,w)$ and $\sim$ is transitive. We conclude that $\sim$ is an e
 \end{proof}
 \end{lmm}
 
-\begin{defn}{Integers}{} Define the set of integers $\Z$ to be the set of equivalence classes of $\N\times\N$ under $\sim$. 
+\begin{defn}{Integers}{}\\
+Define the set of integers to be the set of equivalence classes $$\Z=\frac{\N\times\N}{\sim}$$ We write $-n$ for the equivalence class $[(0,n)]$. 
 \end{defn}
-
-
 
 \subsection{Divisibility}
 \begin{defn}{Divisibility}{} Let $a,b\in\Z$. We define the relation $$a|b$$ if and only if there exists some $k\in\Z$ such that $b=ak$. We say that $a$ divides $b$ in this case. 
@@ -64,7 +62,7 @@ Hence $(r,s)\sim(v,w)$ and $\sim$ is transitive. We conclude that $\sim$ is an e
 \item Linear: $d|n$ and $d|m\implies d|(an+bm)$ for any $a,b\in\Z$
 \item $1|n$
 \item $n|0$
-\end{itemize} \tcbline
+\end{itemize} 
 \begin{proof} We prove antisymmetry and transitivity and leave the others for the reader. Let $m,n,d\in\Z$. 
 \begin{itemize}
 \item (Antisymmetry) If $m|n$ and $n|m$ then there exists some $k_1,k_2\in\mathbb{N}$ such that $n=k_1m$ and $m=k_2n$ thus $n=k_1k_2n$. Then $k_1k_2=1\implies k_1=k_2=1$ and $m=n$
@@ -107,21 +105,21 @@ By the third property of both numbers, we must have if $c,d$ are $\gcd(m,n)$/$\l
 
 We will see more on gcd and lcm when we deal with factorization. For now, we turn our heads to the division algorithm. This algorithm proves to us that upon dividing two integers, as long as they are not divisible by one or the other, you can always guarantee a remainder smaller than the divident. 
 
-\begin{thm}{The Division Algorithm}{} Let $a\in\N$ and $b\in\Z$ with $b\neq 0$. Then there exists unique $q,r\in\Z$ such that $$b=aq+r$$ with $0\leq r<a$. \tcbline
+\begin{thm}{The Division Algorithm}{} Let $a\in\N$ and $b\in\Z$ with $b\neq 0$. Then there exists unique $q,r\in\Z$ such that $$b=aq+r$$ with $0\leq r<a$. 
 \begin{proof}
 We prove existence first by considering three cases. \\
-Cases 1: $b$ is divisible by $a$.  If $b$ is divisible by $a$ then there exists $k\in\Z$ such that $b=ka$ thus $k=q$ and $r=0$. \\~\\
-Case 2: $b$ is positive and $a$ does not divide $b$. Let $$S=\{b-ka\in\N|k\in\N\}$$ Then $S\subseteq\N$ thus we can apply the well-ordering principle to $S$. Let $r$ be the least natural number in $S$. Then $r\in S$ implies $r=b-ka$ for some $k\in\N$. Thus $b=ka+r$ for some $k$ and $r$. We show that $r<a$. Suppose for a contradiction that $r\geq a$. Then $u=r-a\in\N$ and $$b=ka+r\implies b=ka+(u-a)\implies b=(k-1)a+u$$ thus $u\in S$ and $u<r$, contradicting the fact that $r$ is the least element in $S$. Thus $r\leq a$. If $r=a$, then $$b=ka+a\implies b=(k+1)a$$ which means that $a|b$ which is false in our case. Thus we must have $r<a$. \\~\\
-Case 3: $b$ is negative and $a$ does not divide $b$. Then apply the exact same argument to the number $-b$ to get $(-b)=ka+r$ and $b=-ka-r$. Let $k'=-k-1$ and $r'=-r+a$. Then $$b=-ka-r=k'a+a+r'-a=k'a+r'$$ Since we have $0\leq r<a$, we have $-a<-r\leq 0$ and $0<r'\leq a$. Again $r'\neq a$ or else $a|b$ which contradicts our assumption. \\~\\
+Cases 1: $b$ is divisible by $a$.  If $b$ is divisible by $a$ then there exists $k\in\Z$ such that $b=ka$ thus $k=q$ and $r=0$. \\
+Case 2: $b$ is positive and $a$ does not divide $b$. Let $$S=\{b-ka\in\N|k\in\N\}$$ Then $S\subseteq\N$ thus we can apply the well-ordering principle to $S$. Let $r$ be the least natural number in $S$. Then $r\in S$ implies $r=b-ka$ for some $k\in\N$. Thus $b=ka+r$ for some $k$ and $r$. We show that $r<a$. Suppose for a contradiction that $r\geq a$. Then $u=r-a\in\N$ and $$b=ka+r\implies b=ka+(u-a)\implies b=(k-1)a+u$$ thus $u\in S$ and $u<r$, contradicting the fact that $r$ is the least element in $S$. Thus $r\leq a$. If $r=a$, then $$b=ka+a\implies b=(k+1)a$$ which means that $a|b$ which is false in our case. Thus we must have $r<a$. \\
+Case 3: $b$ is negative and $a$ does not divide $b$. Then apply the exact same argument to the number $-b$ to get $(-b)=ka+r$ and $b=-ka-r$. Let $k'=-k-1$ and $r'=-r+a$. Then $$b=-ka-r=k'a+a+r'-a=k'a+r'$$ Since we have $0\leq r<a$, we have $-a<-r\leq 0$ and $0<r'\leq a$. Again $r'\neq a$ or else $a|b$ which contradicts our assumption. \\
 We now prove uniqueness. Suppose that $b=aq_1+r_1$ and $b=aq_2+r_2$. Then $r_1-r_2=a(q_2-q_1)$. We know that $-a<r_1-r_2<a$ thus $-a<a(q_2-q_1)<a$ and $-1<q_2-q_1<1$ which is impossible for integers $q_1,q_2$ unless $q_1=q_2$. If $q_1=q_2$ then $r_1=r_2$ and we are done. 
 \end{proof}
 \end{thm}
 
 The division algorithm does not require $b$ to be larger than $a$. In fact, if $a$ is larger than $b$, then the division algorithm simply gives $a$ itself as the remainder. Before we reach our conclusion, we need one more proposition. 
 
-\begin{prp}{}{} Suppose that $m\geq n>0$ are natural numbers with $m=qn+r$ for some $q,r\in\mathbb{N}$. Then $$\gcd{(m,n)}=\gcd{(n,r)}$$ \tcbline
+\begin{prp}{}{} Suppose that $m\geq n>0$ are natural numbers with $m=qn+r$ for some $q,r\in\mathbb{N}$. Then $$\gcd{(m,n)}=\gcd{(n,r)}$$ 
 \begin{proof}
-Suppose that $d=\gcd(m,n)$. Then we know that $d<n$ from definition. We want to show that $d$ satisfies the three results of a gcd but in terms of $n$ and $r$. Since $d|n$ and $d|m$, by linearity we must have $d|r$. \\~\\
+Suppose that $d=\gcd(m,n)$. Then we know that $d<n$ from definition. We want to show that $d$ satisfies the three results of a gcd but in terms of $n$ and $r$. Since $d|n$ and $d|m$, by linearity we must have $d|r$. \\
 Now suppose for a contradiction that there exists $e$ such that $e$ is a common divisor of $n$ and $r$ and $e>d$. Then $e|n$ and $e|r$ by definition thus $e|m$ by linearity. $e|m$ and $e|n$ implies that $e$ is a larger common divisor of $m$ and $n$ than $d$. However this is not possible since $d$ is assumed to be the largest among the common divisors. This is a contradiction thus $d=\gcd(n,r)$ and we are done. 
 \end{proof}
 \end{prp}
@@ -133,17 +131,17 @@ $$r_1=r_2q_3+r_3\text{ with }0<r_3<n$$
 $$\cdots\cdots\cdots\cdots\cdots\cdots\cdots\cdots\cdots\cdots$$
 $$r_{k-2}=r_{k-1}q_k+r_k\text{ with }0<r_k<r_{k-1}$$
 $$r_{k-1}=r_kq_{k-1}$$
-From this, we have $r_k|r_{k-1}$, $r_k|r_{k-2}\dots r_k|n$ and $r_k|m$. \tcbline
+From this, we have $r_k|r_{k-1}$, $r_k|r_{k-2}\dots r_k|n$ and $r_k|m$. 
 \begin{proof} The first part of the results is due to the repeated use of the division algorithm. For the second part, we have $$\gcd(m,n)=\gcd(n,r_1)=\gcd(r_1,r_2)=\dots=\gcd(r_{k-1},r_k)=r_k$$ and we are done. 
 \end{proof}
 \end{thm}
 
-\begin{lmm}{Bezout's Lemma}{} Let $a,b\in\Z$ such that they are not both $0$. Then there exists $x,y\in\Z$ such that $$ax+by=\gcd(a,b)$$ \tcbline
+\begin{lmm}{Bezout's Lemma}{} Let $a,b\in\Z$ such that they are not both $0$. Then there exists $x,y\in\Z$ such that $$ax+by=\gcd(a,b)$$ 
 \begin{proof} Reconstruct $x$ and $y$ using the Euclidean Algorithm. This is possible since $\gcd(m,n)=r_k$ and every $r_1,\dots,r_{k-1}$ has a factor of $r_k$ in it. 
 \end{proof}
 \end{lmm}
 
-\begin{lmm}{}{} Let $a,b\in\Z$ such that they are not both $0$. Then the equation $$ax+by=\gcd(a,b)$$ has an infinite number of integer solutions. \tcbline
+\begin{lmm}{}{} Let $a,b\in\Z$ such that they are not both $0$. Then the equation $$ax+by=\gcd(a,b)$$ has an infinite number of integer solutions. 
 \begin{proof} Using Bezout's Lemma, we conclude that $(x_0,y_0)$ is a solution to the equation. But then $$(x_0-bt,y+at)$$ are also solutions for $t\in\Z$ since $$a(x_0-bt)+b(y+at)=ax+by=\gcd(a,b)$$
 \end{proof}
 \end{lmm}
@@ -258,9 +256,9 @@ This shows that we can identify $\Q$ as a subset of $\R$.
 \begin{defn}{Irrational Numbers}{} Let $x\in\R$. We say that $x$ is an irrational number if $x\notin\im(\iota)$. 
 \end{defn}
 
-\begin{thm}{}{} There exists an irrational number. \tcbline
-\begin{proof} We want to show that there is an irrational number represented by a dedekind cut such that its square is 2. Consider the set $A=\{x\in\mathbb{Q}:x<0\text{ or }x^2<2\}$. $A$ is non-empty since $0\in A$. $A\neq\mathbb{Q}$ since $3\notin A$. Suppose $p\in A$. We then need to show that $q\in A$ whenever $q<p$. When $0\leq q<p$, we have $0\leq q^2<p^2$ from ordering of rationals. When $q<0$, then $q\in A$ by definition of $A$. Thus this is true. Now we need to show that there is always a rational $q$ larger than $p$ which is in $A$. Choose $q=\frac{2p+2}{p+2}$, then $p<q$ and $q^2<2$. Thus $A$ is a dedekind cut. \\~\\
-Now consider $A\times A$. We have $A\times A\leq 2$ since for all $x,y\in A$, we have $x^2<2$ and $y^2<2$ and thus $xy<2$ whenever $xy\geq 0$. Thus the set $A\times A=\{r\in\mathbb{Q}:r<0\text{ or }r=xy\text{ for some }x,y\in A\text{ and }x,y>0\}$ is less than or equal to 2. We know that $A\times A$ is a dedekind cut. But we want to know if $A\times A$ represents the number $2$. Suppose that $u\in A\times A$. Then we know that from $A$, there exists a number $v\in A$ such that $u<v^2<2$. And this applies for every $u$. Then we know that $A\times A=2$ since $A\times A=\{x\in\mathbb{Q}:x<2\}$, which is our definition of rational numbers with dedekind cut. \\~\\
+\begin{thm}{}{} There exists an irrational number. 
+\begin{proof} We want to show that there is an irrational number represented by a dedekind cut such that its square is 2. Consider the set $A=\{x\in\mathbb{Q}:x<0\text{ or }x^2<2\}$. $A$ is non-empty since $0\in A$. $A\neq\mathbb{Q}$ since $3\notin A$. Suppose $p\in A$. We then need to show that $q\in A$ whenever $q<p$. When $0\leq q<p$, we have $0\leq q^2<p^2$ from ordering of rationals. When $q<0$, then $q\in A$ by definition of $A$. Thus this is true. Now we need to show that there is always a rational $q$ larger than $p$ which is in $A$. Choose $q=\frac{2p+2}{p+2}$, then $p<q$ and $q^2<2$. Thus $A$ is a dedekind cut. \\
+Now consider $A\times A$. We have $A\times A\leq 2$ since for all $x,y\in A$, we have $x^2<2$ and $y^2<2$ and thus $xy<2$ whenever $xy\geq 0$. Thus the set $A\times A=\{r\in\mathbb{Q}:r<0\text{ or }r=xy\text{ for some }x,y\in A\text{ and }x,y>0\}$ is less than or equal to 2. We know that $A\times A$ is a dedekind cut. But we want to know if $A\times A$ represents the number $2$. Suppose that $u\in A\times A$. Then we know that from $A$, there exists a number $v\in A$ such that $u<v^2<2$. And this applies for every $u$. Then we know that $A\times A=2$ since $A\times A=\{x\in\mathbb{Q}:x<2\}$, which is our definition of rational numbers with dedekind cut. \\
 We have proved that there exists a dedekind cut such that its square is 2. But is that dedekind cut irrational? We now represent $A$ with $\sqrt2$. Suppose that $\sqrt2$ is rational. Then we can write it is as $\frac{m}{n}$ in reduced form. Then we have $2n^2=m^2$. Then $2|m^2$ thus $2|m$. Let $m=2k$ for some $k\in\mathbb{N}$. Then $2k^2=n^2$ which similarly implies that $2|n$. This contradicts the fact that $\frac{m}{n}$ is in reduced form, thus $\sqrt{2}$ is in fact not rational, and is an irrational number. 
 \end{proof}
 \end{thm}
@@ -269,7 +267,7 @@ We have proved that there exists a dedekind cut such that its square is 2. But i
 \begin{defn}{Order}{} If $A,B$ are dedekind cuts then we say that $A<B$ if and only if $A\subset B$. 
 \end{defn}
 
-\begin{thm}{Bernoulli's Inequality}{} For all $x\geq-1$ and $n\in\N$, $$(1+x)^n\geq1+nx$$\tcbline
+\begin{thm}{Bernoulli's Inequality}{} For all $x\geq-1$ and $n\in\N$, $$(1+x)^n\geq1+nx$$
 \begin{proof} We prove the inequality by induction on $n$. In the case of $n=1$, we have $1+x\geq1+x$, which is true for all $x$. Now suppose that the inequality works for some $n\in\N$. We have 
 \begin{align*}
 (1+x)^{n+1}&\geq(1+x)(1+nx) \tag{Induction Hypothesis and $x\geq-1$} \\

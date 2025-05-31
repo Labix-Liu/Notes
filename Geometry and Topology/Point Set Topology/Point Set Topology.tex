@@ -1,6 +1,6 @@
 \documentclass[a4paper]{article}
 
-\input{C:/Users/liula/Desktop/Latex/Headers V1.2.tex}
+\input{C:/Users/liula/Desktop/Latex/Headers/Headers.tex}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -16,8 +16,8 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-Topology is the most general setting ever to study any properties of a so called space as it requires only set-theoretic notation to define. This allows this definition to encapsulate a wide range of different spaces as well as allowing some very weird sets to appear as topological space. \\~\\
-This subject in maths is the main gateway to higher level mathematics: almost every other mathematical subject requires a space to work on. Therefore it is important to layout the foundations. \\~\\
+Topology is the most general setting ever to study any properties of a so called space as it requires only set-theoretic notation to define. This allows this definition to encapsulate a wide range of different spaces as well as allowing some very weird sets to appear as topological space. \\
+This subject in maths is the main gateway to higher level mathematics: almost every other mathematical subject requires a space to work on. Therefore it is important to layout the foundations. \\
 As expected by some readers, this subject will be definition heavy, since it involves the classfication and identification of different types of spaces. We classify it so that our theories can work on some spaces that contain more sturcture, instead of the general setting. 
 \end{abstract}
 \textbf{References}
@@ -30,16 +30,19 @@ As expected by some readers, this subject will be definition heavy, since it inv
 \pagebreak
 \section{Topological Spaces}
 \subsection{Basic Definitions}
-We begin with our main object of study. 
-\begin{defn}{Topological Space}{} A topological space is a pair of objects $(X,\mathcal{T})$ where $X$ is a set and $\mathcal{T}$ is a collection of subsets of $X$ satisfying
+\begin{defn}{Topological Space}{}\\
+A topological space is a pair $(X,\mT)$ where $X$ is a set and $\mT\subseteq\mP(X)$ such that the following are true. 
 \begin{itemize}
-\item $\emptyset,X\in\mathcal{T}$
-\item $\{G_i:i\in I\}\subseteq\mathcal{T}\implies\bigcup_{i\in I}G_i\in\mathcal{T}$
-\item $G_1,\dots,G_n\in\mathcal{T}\implies\bigcap_{k=1}^nG_k\in\mathcal{T}$
-\end{itemize} The collection $\mathcal{T}$ is called the topology on $X$ and sets in $\mathcal{T}$ are called open sets. 
+\item $\emptyset,X\in\mT$. 
+\item Let $W\subseteq\mT$. Then we have $\bigcup_{U\in W}U\in\mT$. 
+\item Let $n\in\N$. Let $U_1,\dots,U_n\in\mT$. Then we have $\bigcap_{i=1}^nU_i\in\mT$. 
+\end{itemize}
+We call $\mT$ the topology on $X$ and elements of $\mT$ are called open sets of $X$. 
 \end{defn}
 
-The definition of a topological space requires only set-theoretic language. This allows for a wide range of potentialy spaces that we want to encapsulate with this structure since its definition simply relies on sets and not other additional structures. Later on we will meet a lot of fancy names for some more sets in a topological space, below is one of them. 
+\begin{eg}{}{}\\
+Let $X=\{1,2,3,4\}$. Let $\mT=\{\emptyset,\{1\},\{1,2\},\{1,3\},\{1,2,3\},X\}$. Then $(X,\mT)$ is a topological space. 
+\end{eg}
 
 \begin{defn}{Closed Sets}{} A subset $A$ of a topological space $X$ is said to be closed if $X\setminus A$ is open. 
 \end{defn}
@@ -51,7 +54,7 @@ Beware that this definition means that sets which are both open and closed could
 \item $X$ and $\emptyset$ is closed
 \item If $U_1,\dots,U_n$ are closed then $\bigcup_{k=1}^nU_k$ is closed
 \item If $\{U_i:i\in I\}$ is closed for all $i$ then $\bigcap_{i\in I}U_i$ is closed
-\end{itemize}\tcbline
+\end{itemize}
 \begin{proof}
 Let $(X,\mathcal{T})$ be a topological space. 
 \begin{itemize}
@@ -62,14 +65,6 @@ Let $(X,\mathcal{T})$ be a topological space.
 \end{proof}
 \end{prp}
 
-It is an alternative definition in the sense that by defining closed sets in a topological space, its open sets becomes apparent by taking complements. Just like how specifying open sets automatically creates the collection of all closed sets in that particular space. \\
-And then we have the problem of the amount of open sets. 
-
-\begin{defn}{Refinements}{} Let $X$ be a set. Let $\mathcal{T}_1,\mathcal{T}_2$ be topologies on $X$. We say that $\mathcal{T}_1$ refines $\mathcal{T}_2$ if $\mathcal{T}_1\supset\mathcal{T}_2$
-\end{defn}
-
-We could define two different topologies on the same set so long as it satisfies the axioms of a toplogical space. This is why we may have the notion of coarse and fine topologies relative to each other. 
-
 \begin{defn}{Basis}{} Let $X$ be a set. A collection of sets $\mathcal{B}\subseteq\mathcal{P}(X)$ is called a basis on $X$ if
 \begin{itemize}
 \item For every $x\in X$, there exists $B\in\mathcal{B}$ such that $x\in B$, meaning $\bigcup_{B\in\mathcal{B}}B=X$
@@ -79,7 +74,7 @@ We could define two different topologies on the same set so long as it satisfies
 
 Similar to a vector space, we allow a smaller collection of open sets to "generate" the entire topology. This allows us to simply define the topology based on some smaller collection of open sets instead of having to write out every single open set in the topology. We prove this fact with the below proposition. 
 
-\begin{prp}{}{} Let $X$ be a set and $\mathcal{B}$ be a basis on $X$. Then $$\mathcal{T}_\mathcal{B}=\left\{\bigcup_{X\in\mathcal{C}}X:\mathcal{C}\subseteq\mathcal{B}\right\}$$ is a topology of $X$ generated by $\mathcal{B}$. \tcbline
+\begin{prp}{}{} Let $X$ be a set and $\mathcal{B}$ be a basis on $X$. Then $$\mathcal{T}_\mathcal{B}=\left\{\bigcup_{X\in\mathcal{C}}X:\mathcal{C}\subseteq\mathcal{B}\right\}$$ is a topology of $X$ generated by $\mathcal{B}$. 
 \begin{proof} We prove that $\mathcal{T}_\mathcal{B}$ satisfies the three definitions of a topology. Note that $\emptyset\subseteq\mathcal{B}$ and $\bigcup_{X\in\emptyset}X=\emptyset$ thus $\emptyset\in\mathcal{T}_\mathcal{B}$. Also $\bigcup_{B\in\mathcal{B}}B=X$. Now let $\{V_i:i\in I\}\subseteq\mathcal{T}_\mathcal{B}$. $V_i\in\mathcal{T}_\mathcal{B}$ means that there exists some $C_i\in\mathcal{B}$ such that $\bigcup_{X\in C_i}X=V_i$. Now consider $\bigcup_{i\in I}\bigcup_{X\in\mathcal{C}_i}X$. 
 \begin{align*}
 \bigcup_{i\in I}\bigcup_{X\in\mathcal{C}_i}X&=\bigcup_{X\in\bigcup_{i\in I}\mathcal{C}_i}X
@@ -94,7 +89,7 @@ Aside from the concept of a basis which generates a topology, sub basis also gen
 
 Comparing the two notions of basis in a topology, a basis generates the topology by creating unions of sets while a sub basis generates a topology using finite intersections. In practice both are useful in their respectful places. Often sub basis consists of less sets, but requires you to think about finite intersections which may or may not be harder depending on the situation. 
 
-\begin{prp}{}{} If $\mathcal{B}$ is any collection of subsets of a set $X$, and $\bigcup_{B\in\mathcal{B}}B=X$ then there exists a unique topology $\mathcal{T}$ on $X$ with sub basis $\mathcal{B}$. In particular, $$\mathcal{T}=\{\text{Union of finite intersections of sets of }\mathcal{B}\}$$ \tcbline
+\begin{prp}{}{} If $\mathcal{B}$ is any collection of subsets of a set $X$, and $\bigcup_{B\in\mathcal{B}}B=X$ then there exists a unique topology $\mathcal{T}$ on $X$ with sub basis $\mathcal{B}$. In particular, $$\mathcal{T}=\{\text{Union of finite intersections of sets of }\mathcal{B}\}$$ 
 \begin{proof}
 Let $\mathcal{B}$ be a sub basis of a topology $\mathcal{T}$. Then by definition, since every $U\in\mathcal{T}$ is a finite intersection of sets from $\mathcal{B}$, the collection of finite intersections precisely form a basis for $\mathcal{T}$. 
 \end{proof}
@@ -105,8 +100,8 @@ We give some more names to some more random sets.
 \begin{defn}{Neighbourhood}{} A neighbourhood of $x\in X$ a topological space is a set $U\subset X$ such that $x\in B\subset U$ for some $B\in\mathcal{T}$. 
 \end{defn}
 
-The neighbourhood acts like the open ball in metric spaces. Since we have no open balls in a topological space, this acts like the open ball for more potential structures such as limits. In fact the open balls are stricter than open neighbourhoodds in a metric space, but they are mostly interchangable. \\~\\
-Also, the $B$ seems quite random in the definition, but is in fact neccessary. There are some topological spaces where sets like $\{x\}$ does not exists. To talk about the surrounding of $x$, we must somehow quantify it. Therefore we first use some set that contains $x$, then surround it with another set. \\~\\
+The neighbourhood acts like the open ball in metric spaces. Since we have no open balls in a topological space, this acts like the open ball for more potential structures such as limits. In fact the open balls are stricter than open neighbourhoodds in a metric space, but they are mostly interchangable. \\
+Also, the $B$ seems quite random in the definition, but is in fact neccessary. There are some topological spaces where sets like $\{x\}$ does not exists. To talk about the surrounding of $x$, we must somehow quantify it. Therefore we first use some set that contains $x$, then surround it with another set. \\
 
 In the remainder of the section, three operations will be given to sets in a topological space. They each have unique properties which will soon prove itself useful. 
 
@@ -115,7 +110,7 @@ In the remainder of the section, three operations will be given to sets in a top
 
 You can think of closure as the boundary of a set plus the set itself.  It sort of completes the set by closing it. Inherently it implies that $\overline{A}$ is the smallest closed set containing $A$. Indeed if there were an even smaller closed set $F$ between $A$ and $\overline{A}$, then it should be contained in the intersection as well, which means that $\overline{A}\subset F$, a contradiction of the construction of $F$. We dedicate the next few theorems in establishing properties of closure. 
 
-\begin{lmm}{}{} Let $X$ be a topological space. Let $A\subset X$. Then $\overline{A}$ is closed. \tcbline
+\begin{lmm}{}{} Let $X$ be a topological space. Let $A\subset X$. Then $\overline{A}$ is closed. 
 \begin{proof}
 $\overline{A}$ is necessarily closed since it is the intersection of closed subsets. 
 \end{proof}
@@ -123,9 +118,9 @@ $\overline{A}$ is necessarily closed since it is the intersection of closed subs
 
 Closed sets are special in the sense that limits of convergence sequences will be contained in these sets (in particularly nice spaces), as we will see later, by taking the closure of a set, we are implicitly containing all all limits of sequences into the original set. And as you ahve already seem, closed intervals in real analysis give rise to many interesting theorems such as Bolzano-Weierstrass theorem as well as a bunch of continuity theorems that actually depend on the fact that its domain is a closed set . 
 
-\begin{prp}{}{} Let $(X,\mathcal{T})$ be a topological space. Let $A\subset X$. $A$ is closed if and only if $\overline{A}=A$. \tcbline
+\begin{prp}{}{} Let $(X,\mathcal{T})$ be a topological space. Let $A\subset X$. $A$ is closed if and only if $\overline{A}=A$. 
 \begin{proof}
-First let $A$ be closed. Then $A$ is the smallest subset of $X$ that contains $A$. Thus the intersection of all closed subsets larger than $A$ is equal to $A$. Thus $\overline{A}=A$. \\~\\
+First let $A$ be closed. Then $A$ is the smallest subset of $X$ that contains $A$. Thus the intersection of all closed subsets larger than $A$ is equal to $A$. Thus $\overline{A}=A$. \\
 Suppose that $\overline{A}=A$. Then $\overline{A}$ is proved to be closed already. 
 \end{proof}
 \end{prp}
@@ -138,25 +133,25 @@ That gives us a neat condition to show that whether a set is closed instead of h
 \item $A\subseteq\overline{A}$
 \item $A\subseteq B\implies\overline{A}\subseteq\overline{B}$
 \item $\overline{A\cup B}=\overline{A}\cup\overline{B}$
-\end{itemize}\tcbline
+\end{itemize}
 \begin{proof} Let $X$ be a topological space and $A\subset X$. 
 \begin{itemize}
 \item Immediate from the above two proposition. 
 \item The closure is defined by taking intersection of subsets $U$ of $X$ where $A\subseteq U$. Thus necessarily $A$ is also a subset of the intersection of those subsets. 
 \item Suppose that $A\subseteq B$. Then by definition any closed set containing $B$ must contain $A$ thus $$\bigcap_{\substack{A\subseteq U\subseteq X\\U\text{ is closed}}}U\subseteq\bigcap_{\substack{B\subseteq U\subseteq X\\U\text{ is closed}}}U$$ and we are done. 
-\item We first prove that $\overline{A\cup B}\subseteq\overline{A}\cup\overline{B}$. Notice that $\overline{A}\cup\overline{B}$ is closed and contains $A$ and $B$. By definition, $\overline{A\cup B}$ is the smallest closed set containing $A$ and $B$ thus any closed set containing $A$ and $B$ must contain $\overline{A\cup B}$. \\~\\
+\item We first prove that $\overline{A\cup B}\subseteq\overline{A}\cup\overline{B}$. Notice that $\overline{A}\cup\overline{B}$ is closed and contains $A$ and $B$. By definition, $\overline{A\cup B}$ is the smallest closed set containing $A$ and $B$ thus any closed set containing $A$ and $B$ must contain $\overline{A\cup B}$. \\
 Now we prove the opposite inclusion. Notice that since $A,B\subseteq A\cup B$, we have that $\overline{A},\overline{B}\subseteq\overline{A\cup B}$ thus $\overline{A}\cup\overline{B}\subseteq\overline{A\cup B}$ and we are done. 
 \end{itemize}
 \end{proof}
 \end{prp}
 
-Notice that $\overline{A \cap B}=\overline{A}\cap\overline{B}$ is generally wrong. A typical counter example would be two unit sqaures not including boundaries centered at $(0.5,0)$ and $(-0.5,0)$ respectively. Since they don't include their boudaries their intersection is empty, and taking closure of the mptyset is the emptyset. But if you take closure before you intersect them, their boundaries will meet and taking intersewctions would give the line segment between $(0,0.5)$ and $(0,-0.5)$. \\~\\
+Notice that $\overline{A \cap B}=\overline{A}\cap\overline{B}$ is generally wrong. A typical counter example would be two unit sqaures not including boundaries centered at $(0.5,0)$ and $(-0.5,0)$ respectively. Since they don't include their boudaries their intersection is empty, and taking closure of the mptyset is the emptyset. But if you take closure before you intersect them, their boundaries will meet and taking intersewctions would give the line segment between $(0,0.5)$ and $(0,-0.5)$. \\
 
 We finish the topic of closure with the following characterization of closure. 
 
-\begin{thm}{}{} Let $(X,\mathcal{T})$ be a topological space, let $A\subset X$. Then $$\overline{A}=\{x\in X|\;\forall\;U\in\mathcal{T}\text{ with }x\in U,U\cap A\neq\emptyset\}$$ \tcbline
+\begin{thm}{}{} Let $(X,\mathcal{T})$ be a topological space, let $A\subset X$. Then $$\overline{A}=\{x\in X|\;\forall\;U\in\mathcal{T}\text{ with }x\in U,U\cap A\neq\emptyset\}$$ 
 \begin{proof}
-Let $x\in\overline{A}$. Suppose for a contradiction that there exists an open set $U$ containing $x$ such that $U\cap A=\emptyset$. Then $X\setminus U$ does not contain $x$ and is closed. Then $\overline{A}\subseteq X\setminus U$ which is a contradiction since $x$ in $\overline{A}$ but $x\notin X\setminus U$. \\~\\
+Let $x\in\overline{A}$. Suppose for a contradiction that there exists an open set $U$ containing $x$ such that $U\cap A=\emptyset$. Then $X\setminus U$ does not contain $x$ and is closed. Then $\overline{A}\subseteq X\setminus U$ which is a contradiction since $x$ in $\overline{A}$ but $x\notin X\setminus U$. \\
 Now suppose that $x\in X$ such that for all open sets $U$, $U\cap A\neq\emptyset$. Suppose for a contradiction that $x\notin\overline{A}$. Then there exists a closed set $F$ such that $x\notin F$ and $A\subseteq F$. Then $X\setminus F$ is open and contains $x$ but $X\setminus F\cap A=\emptyset$ thus this is a contradiction. 
 \end{proof}
 \end{thm}
@@ -168,25 +163,25 @@ If we can "complete" a set into its closed form by closure, we could also dig ou
 
 We have the following equivalent characterization of interiors. 
 
-\begin{prp}{}{} Let $(X,\mathcal{T})$ be a topological space and $A\subset X$. Then $A^\circ$ is the union of all open sets of $X$ contained in $A$. In other words, $$A^\circ=\bigcup_{\substack{U\subset A\\U\text{ is open}}}U$$\tcbline
+\begin{prp}{}{} Let $(X,\mathcal{T})$ be a topological space and $A\subset X$. Then $A^\circ$ is the union of all open sets of $X$ contained in $A$. In other words, $$A^\circ=\bigcup_{\substack{U\subset A\\U\text{ is open}}}U$$
 \begin{proof}
-Let $x\in\bigcup_{\substack{U\subset A\\U\text{ is open}}}U$. Then $x\in U$ for some open set $U\subset A$. Thus $\bigcup_{\substack{U\subset A\\U\text{ is open}}}U\subseteq A^\circ$. \\~\\
+Let $x\in\bigcup_{\substack{U\subset A\\U\text{ is open}}}U$. Then $x\in U$ for some open set $U\subset A$. Thus $\bigcup_{\substack{U\subset A\\U\text{ is open}}}U\subseteq A^\circ$. \\
 Let $x\in A^\circ$. Then there exists $U\in\mathcal{T}$ such that $x\in U\subset A$ with $U$ open. Thus $x\in\bigcup_{\substack{U\subset A\\U\text{ is open}}}U$ and we are done. 
 \end{proof}
 \end{prp}
 
 Similar to the observation in closure, from this definition we see that $A^\circ$ is the largest open set contained in $A$ because if there were an even larger set, then taking union of that set will imply that $A^\circ\subset A^\circ\cup U\subset A$ which means that $A^\circ\cup U$ should be contained in $A^\circ$, a contradiction. 
 
-\begin{prp}{}{} Let $(X,\mathcal{T})$ be a topological space and $A\subset X$. Then $A$ is open if and only if $A=A^\circ$. \tcbline
+\begin{prp}{}{} Let $(X,\mathcal{T})$ be a topological space and $A\subset X$. Then $A$ is open if and only if $A=A^\circ$. 
 \begin{proof}
-Let $A$ be open. Since $A$ is open and $A$ is the largest subset of $A$, by the equivalent characterization $A^\circ=A$ thus we are done. \\~\\
+Let $A$ be open. Since $A$ is open and $A$ is the largest subset of $A$, by the equivalent characterization $A^\circ=A$ thus we are done. \\
 Let $A^\circ=A$. Then $A$ is the union of open subsets thus $A$ is also open. 
 \end{proof}
 \end{prp}
 
 The following lemma is already implicitly used above but for completeness I will state it here. 
 
-\begin{lmm}{}{} Let $(X,\mathcal{T})$ be a topological space and $A\subset X$. Then $A^\circ$ is open. \tcbline
+\begin{lmm}{}{} Let $(X,\mathcal{T})$ be a topological space and $A\subset X$. Then $A^\circ$ is open. 
 \begin{proof}
 $A^\circ$ is a union of open sets. 
 \end{proof}
@@ -200,22 +195,22 @@ If taking closure has the useful property that all its limits will be included (
 \item $A^\circ\subseteq A$
 \item $A\subseteq B\implies A^\circ\subseteq B^\circ$
 \item $(A\cap B)^\circ=A^\circ\cap B^\circ$
-\end{itemize}\tcbline
+\end{itemize}
 \begin{proof} Let $A,B\subset X$. 
 \begin{itemize}
 \item Immediate from the above two propositions
 \item Direct from the definition
 \item Every open set that $A$ contains $B$ must also contain. Thus $x\in A^\circ$ implies there exists $U$ open such that $x\in U\subset A\subset B$ which implies $x\in B^\circ$. 
-\item We first prove that $(A\cap B)^\circ\subseteq A^\circ\cap B^\circ$. Note that $A\cap B\subseteq A,B$, taking the interior gives $(A\cap B)^\circ\subseteq A^\circ,B^\circ$. Thus $(A\cap B)^\circ\subseteq A^\circ\cap B^\circ$. \\~\\
+\item We first prove that $(A\cap B)^\circ\subseteq A^\circ\cap B^\circ$. Note that $A\cap B\subseteq A,B$, taking the interior gives $(A\cap B)^\circ\subseteq A^\circ,B^\circ$. Thus $(A\cap B)^\circ\subseteq A^\circ\cap B^\circ$. \\
 Now we prove the opposite inclusion. Notice that $A^\circ\cap B^\circ$ is open and contains $A\cap B$. Since $(A\cap B)^\circ$ is the largest open set contained in $A\cap B$. It should also contain $A^\circ\cap B^\circ$ thus we are done. 
 \end{itemize}
 \end{proof}
 \end{prp}
 
-In general, $(A\cup B)^\circ\neq A^\circ\cup B^\circ$. Try and consider the two unit squares again but this time include their boundaries. \\~\\
+In general, $(A\cup B)^\circ\neq A^\circ\cup B^\circ$. Try and consider the two unit squares again but this time include their boundaries. \\
 Finally, we relate the two operations by the following rule. 
 
-\begin{prp}{}{} Let $(X,\mathcal{T})$ be a topological space. Let $A\subset X$. Then $$A^\circ=X\setminus\overline{(X\setminus A)}\text{ and }\overline{A}=X\setminus(X\setminus A)^\circ$$ \tcbline
+\begin{prp}{}{} Let $(X,\mathcal{T})$ be a topological space. Let $A\subset X$. Then $$A^\circ=X\setminus\overline{(X\setminus A)}\text{ and }\overline{A}=X\setminus(X\setminus A)^\circ$$ 
 \begin{proof}
 Let $(X,\mathcal{T})$ be a topological space and $A\subset X$. 
 \begin{itemize}
@@ -236,14 +231,14 @@ If you are able to concretely graspe the meaning of interiors and closures, you 
 \item $\partial A=\overline{A}\cap\overline{X\setminus A}$
 \item $\overline{A}=A\cup\partial A$
 \item $\partial A=\overline{A}\setminus A^\circ$
-\end{itemize} \tcbline
+\end{itemize} 
 \begin{proof}~\\
 \begin{itemize}
-\item Let $x\in\partial A$. Then for every open neighbourhood $U$ of $x$, $U\cap A\neq\emptyset$ implies that $x\in\overline{A}$ and $U\cap(X\setminus A)\neq\emptyset$ implies that $x\in\overline{X\setminus A}$. \\~\\
+\item Let $x\in\partial A$. Then for every open neighbourhood $U$ of $x$, $U\cap A\neq\emptyset$ implies that $x\in\overline{A}$ and $U\cap(X\setminus A)\neq\emptyset$ implies that $x\in\overline{X\setminus A}$. \\
 The above statements can all be reversed thus we are done. 
-\item Let $x\in\overline{A}$. Then for every open neighbourhood $U$ of $x$, $U\cap A\neq\emptyset$. This has two cases, either $U\subseteq A$ or $U\not\subseteq A$. For the first case, $x\in U\subseteq A$ then we are done. For the latter case assume that $x\notin U\cap A$. Then $x\in U\cap X\setminus A\neq\emptyset$. This implies that $U\in\partial A$ thus we are done. \\~\\
+\item Let $x\in\overline{A}$. Then for every open neighbourhood $U$ of $x$, $U\cap A\neq\emptyset$. This has two cases, either $U\subseteq A$ or $U\not\subseteq A$. For the first case, $x\in U\subseteq A$ then we are done. For the latter case assume that $x\notin U\cap A$. Then $x\in U\cap X\setminus A\neq\emptyset$. This implies that $U\in\partial A$ thus we are done. \\
 Now suppose that $x\in A\cup\partial A$. If $x\in A$, we are done. Suppose that $x\in\partial A$. Then for every open set $U$ containing $x$, $U\cap A\neq\emptyset$. But this is the definition of $x\in\overline{A}$ thus we are done. 
-\item Let $x\in\partial A$, by the above, we know that $\partial A\subseteq\overline{A}$. We need to show that $x\notin A^\circ$. Suppose for a contradiction that $x\in A^\circ$. Then there exists an open set $U$ containing $x$ such that $x\in U\subseteq A$. But this is a contradiction of the definition of boundary since we require that $U\cap X\setminus A\neq\emptyset$ for every open set $U$. \\~\\
+\item Let $x\in\partial A$, by the above, we know that $\partial A\subseteq\overline{A}$. We need to show that $x\notin A^\circ$. Suppose for a contradiction that $x\in A^\circ$. Then there exists an open set $U$ containing $x$ such that $x\in U\subseteq A$. But this is a contradiction of the definition of boundary since we require that $U\cap X\setminus A\neq\emptyset$ for every open set $U$. \\
 Now suppose that $x\in\overline{A}\setminus A^\circ$. Then since $x\in\overline{A}$, every open set $U$ containing $x$ has the property that $U\cap A\neq\emptyset$. Also $x\notin A^\circ$ implies that if $U$ is open and contains $x$, then $U\not\subseteq A$ which implies that $U\cap X\setminus A\neq\emptyset$. Then this is precisely the definition of boundary thus $x\in\partial A$ thus we are done. 
 \end{itemize}
 \end{proof}
@@ -264,13 +259,13 @@ The final type of sets are called dense sets, which accurately as its name indic
 \begin{defn}{Dense Sets}{} Let $(X,\mathcal{T})$ be a topological space. Let $D\subseteq X$. $D$ is said to be dense if $\overline{D}=X$
 \end{defn}
 
-\begin{lmm}{}{} Every set is dense in and of itself. \tcbline
+\begin{lmm}{}{} Every set is dense in and of itself. 
 \begin{proof}
 Let $X$ be a toplogical space. Then $X$ is trivially closed thus $\overline{X}=X$. 
 \end{proof}
 \end{lmm}
 
-Unfortunately this lemma does not give much insight as to why this is the case. A good example would be that $\Q$ is dense in $\Q$ and also dense in $\R$. The meaning of dense here is something we have already seen in real analysis. We already know that rational numbers are dense in the sense that there exists a countably amount of rational numbers between any two. It is also dense in $\R$ because there are an countable number of real numbers between any two rational numbers. (In fact there should be an infinite amount instead of countably infinite but we have yet to seen this result). \\~\\
+Unfortunately this lemma does not give much insight as to why this is the case. A good example would be that $\Q$ is dense in $\Q$ and also dense in $\R$. The meaning of dense here is something we have already seen in real analysis. We already know that rational numbers are dense in the sense that there exists a countably amount of rational numbers between any two. It is also dense in $\R$ because there are an countable number of real numbers between any two rational numbers. (In fact there should be an infinite amount instead of countably infinite but we have yet to seen this result). \\
 Another way to think about this is that since I have secretly told you that taking closure will include the limit points of the original set, we know that every irrational number can be approximated by a sequence of rational numbers. Thus every real number is a limit of some sequence in $\Q$, which gives the name dense its meaning. 
 
 \begin{prp}{}{} Let $(X,\mathcal{T})$ be a topological space. $D$ is dense if and only if for all non-empty $U\subset X$, $D\cap U\neq\emptyset$. 
@@ -280,7 +275,7 @@ Another way to think about this is that since I have secretly told you that taki
 \end{defn}
 
 \subsection{Continuity and Homeomorphism}
-We would like to classify different types of spaces by similar properties they hold. One way to do this is to define homeomorphisms betwene spaces. Similar to how isomorphism will preserve structure between groups, hoemoemorphism preserves strucutres called topological invariants which we will soon see what properties fall under this category. \\~\\
+We would like to classify different types of spaces by similar properties they hold. One way to do this is to define homeomorphisms betwene spaces. Similar to how isomorphism will preserve structure between groups, hoemoemorphism preserves strucutres called topological invariants which we will soon see what properties fall under this category. \\
 We first define the notion of continuity, slightly different from that of $\R$. 
 \begin{defn}{Continuity}{} Let $(X,\mathcal{T})$ and $(Y,\mathcal{U})$ be topological spaces. Let $f:X\to Y$ be a function. We say that $f$ is continuous if $f^{-1}(U)\in\mathcal{T}$ for every $U\in\mathcal{U}$. 
 \end{defn}
@@ -319,9 +314,9 @@ We first define the notion of continuity, slightly different from that of $\R$.
 \begin{itemize}
 \item $f$ is a homeomorphism
 \item $U\subset X$ is open if and only if $f(U)\subset Y$ is open
-\end{itemize} \tcbline
+\end{itemize} 
 \begin{proof}
-Suppose that $f$ is a homeomorphism. Then $U\subset X$ being open implies $f(U)\subset Y$ being open is clear by continuity of $f^{-1}$. $f(U)\subset Y$ being open implies $U\subset X$ being open is also clear from the continuity of $f$. \\~\\
+Suppose that $f$ is a homeomorphism. Then $U\subset X$ being open implies $f(U)\subset Y$ being open is clear by continuity of $f^{-1}$. $f(U)\subset Y$ being open implies $U\subset X$ being open is also clear from the continuity of $f$. \\
 The only if part of the statement is also clear from the definition of continuity. 
 \end{proof}
 \end{prp}
@@ -339,19 +334,19 @@ We begin by considering subsets of a topological space.
 \begin{defn}{Subspace Topology}{} Let $(X,\mathcal{T})$ be a topological space. Let $Y\subset X$. Define the subspace topology $\mathcal{T}_Y$ on $Y$ by $$\mathcal{T}_Y=\{U\cap Y|U\in\mathcal{T}\}$$
 \end{defn}
 
-\begin{prp}{}{} In the above definition $\mathcal{T}_Y$ is a topology on $Y$. \tcbline
+\begin{prp}{}{} In the above definition $\mathcal{T}_Y$ is a topology on $Y$. 
 \begin{proof}
-Trivially, $\emptyset$ and $Y$ are in $\mathcal{T}_Y$. \\~\\
-Now let $\{A_i|i\in I\}\subseteq\mathcal{T}_Y$. Then $$\bigcup_{i\in I}A_i=\bigcup_{i\in I}(U_i\cap Y)=\left(\bigcup_{i\in I}U_i\right)\cap Y$$ and since $X$ is a topological space, $V=\bigcup_{i\in I}U_i\in\mathcal{T}$ and thus $V\cap Y\in\mathcal{T}_Y$ and we have proved the second property. \\~\\
+Trivially, $\emptyset$ and $Y$ are in $\mathcal{T}_Y$. \\
+Now let $\{A_i|i\in I\}\subseteq\mathcal{T}_Y$. Then $$\bigcup_{i\in I}A_i=\bigcup_{i\in I}(U_i\cap Y)=\left(\bigcup_{i\in I}U_i\right)\cap Y$$ and since $X$ is a topological space, $V=\bigcup_{i\in I}U_i\in\mathcal{T}$ and thus $V\cap Y\in\mathcal{T}_Y$ and we have proved the second property. \\
 Let $A,B\in\mathcal{T}_Y$. Then $$A\cap B=(U_A\cap Y)\cap(U_B\cap Y)=(U_A\cap U_B)\cap Y\in\mathcal{T}_Y$$ thus we are done. 
 \end{proof}
 \end{prp}
 
 We have seen that open sets are inherited from the original topological space. In fact, basis elements can also be inherited from the parent space. 
 
-\begin{prp}{}{} Let $(X,\mathcal{T})$ be a topological space and let $\mathcal{B}$ be a basis on $X$ that generates $\mathcal{T}$. Let $Y\subset X$. The collection $$\mathcal{B}_Y=\{B\cap Y|B\in\mathcal{B}\}$$ is a basis on $Y$ that generates the subspace topology $\mathcal{T}_Y$ on $Y$. \tcbline
+\begin{prp}{}{} Let $(X,\mathcal{T})$ be a topological space and let $\mathcal{B}$ be a basis on $X$ that generates $\mathcal{T}$. Let $Y\subset X$. The collection $$\mathcal{B}_Y=\{B\cap Y|B\in\mathcal{B}\}$$ is a basis on $Y$ that generates the subspace topology $\mathcal{T}_Y$ on $Y$. 
 \begin{proof}
-Let $y\in Y$. Then there exists $B\in\mathcal{B}$ such that $y\in B$. Then $B\cap Y\in\mathcal{B}_Y$ and $y\in B\cap Y$ and the first property is proven. \\~\\
+Let $y\in Y$. Then there exists $B\in\mathcal{B}$ such that $y\in B$. Then $B\cap Y\in\mathcal{B}_Y$ and $y\in B\cap Y$ and the first property is proven. \\
 Let $B_1,B_2\in\mathcal{B}_Y$. Then there exists $A_1,A_2\in\mathcal{B}$ such that $B_1=A_1\cap Y$ and $B_2=A_2\cap Y$.  Let $y\in B_1\cap B_2=A_1\cap A_2\cap Y$. By definition of a basis there exists $A\in\mathcal{B}$ such that $y\in A\subset A_1\cap A_2$. Then $y\in A\cap Y\subset B_1\cap B_2$ and $A\cap Y\in\mathcal{B}$. Thus we are done. 
 \end{proof}
 \end{prp}
@@ -365,13 +360,13 @@ Let $B_1,B_2\in\mathcal{B}_Y$. Then there exists $A_1,A_2\in\mathcal{B}$ such th
 \begin{prp}{}{} Let $(X,\mathcal{T})$ be a topological space and let $Y$ be a subspace of $X$. For any $Z\subset Y$, $\overline{Z}_Y=Y\cap\overline{Z}_X$, where $\overline{Z}_Y$ is the closure of $Z$ in $Y$. 
 \end{prp}
 
-\begin{prp}{}{} Let $(X,\mathcal{T})$ be a topological space and let $Y$ be a subspace of $X$. The inclusion map $i:Y\to X$ given by $i(x)=x$ is continuous. \tcbline
+\begin{prp}{}{} Let $(X,\mathcal{T})$ be a topological space and let $Y$ be a subspace of $X$. The inclusion map $i:Y\to X$ given by $i(x)=x$ is continuous. 
 \begin{proof}
 Trivial by proposition 2.1.4. 
 \end{proof}
 \end{prp}
 
-\begin{prp}{}{} Let $f:X\to Y$ be a continuous function and $A\subset X$ is a subspace. Then $f|_A:A\to Y$ is continuous. \tcbline
+\begin{prp}{}{} Let $f:X\to Y$ be a continuous function and $A\subset X$ is a subspace. Then $f|_A:A\to Y$ is continuous. 
 \begin{proof}
 Trivial by considering $f|_A:A\to f(A)$. 
 \end{proof}
@@ -380,7 +375,7 @@ Trivial by considering $f|_A:A\to f(A)$.
 \begin{lmm}{Pasting Lemma}{} Let $(X,\mathcal{T})$ and $(Y,\mathcal{U})$ be topological spaces. Let $A,B\subset X$, either both open or both closed, such that $X=A\cup B$ and both are subspaces of $X$. Let $f:A\to Y$ and $g:B\to Y$ be continuous functions that agree on $A\cap B$. Define $h:X\to Y$ by $$h(x)=\begin{cases}
 f(x) & \text{ if }x\in A\\
 g(x) & \text{ if }x\in B
-\end{cases}$$ Then $h$ is continuous. \tcbline
+\end{cases}$$ Then $h$ is continuous. 
 \begin{proof}
 Problem arises when an open set that is part of both $A$ and $B$ is considered. Otherwise they are continuous in its own way. 
 \end{proof}
@@ -408,7 +403,7 @@ Problem arises when an open set that is part of both $A$ and $B$ is considered. 
 \begin{prp}{}{} Let $(X,\mathcal{T})$ and $(Y,\mathcal{U})$ be topological spaces. Let $\mathcal{B}_X$ and $\mathcal{B}_Y$ be bases on $X$ and $Y$ that generate $\mathcal{T}$ and $\mathcal{U}$, respectively. Then $$\mathcal{B}=\{U\times V|U\in\mathcal{B}_X, V\in\mathcal{B}_Y\}$$ is a basis for the product topology on $X\times Y$. 
 \end{prp}
 
-\begin{prp}{}{} Let $(X,\mathcal{T})$ and $(Y,\mathcal{U})$ be topological spaces. Let $x\in X$. Define a map $f:Y\to X\times Y$ by $f(y)=(x,y)$ for all $y\in Y$. Then $f$ is a homeomorphism. \tcbline
+\begin{prp}{}{} Let $(X,\mathcal{T})$ and $(Y,\mathcal{U})$ be topological spaces. Let $x\in X$. Define a map $f:Y\to X\times Y$ by $f(y)=(x,y)$ for all $y\in Y$. Then $f$ is a homeomorphism. 
 \begin{proof}
 The subspace $\{x\}\cup Y$ has open sets of the form $\emptyset\times U$ or $\{x\}\times U$ for $U\in\mathcal{U}$. Then $f$ is continuous since $f^{-1}(\{x\}\cup U)=U$ and $f^{-1}(\emptyset\cup U)=\emptyset$. $f$ is bijective since they have the same cardinality. The inverse map is also continuous since $f(U)=\{x\}\times U$ is open for open sets $U$. 
 \end{proof}
@@ -417,9 +412,9 @@ The subspace $\{x\}\cup Y$ has open sets of the form $\emptyset\times U$ or $\{x
 \begin{defn}{Projection Maps}{} Let $(X_1,\mathcal{T}_1),\dots,(X_n,\mathcal{T}_n)$ be topological spaces. Define the projection maps $$\pi_k:\prod_{i=1}^nX_i\to X_k$$ for $k\in\{1,\dots,n\}$ by $$\pi_k(x_1,\dots,x_n)=x_k$$
 \end{defn}
 
-\begin{prp}{Universal Property of Product Spaces}{} Let $(X,\mT_X)$ and $(Y,\mT_Y)$ be topological spaces. Then the product space $X\times Y$ satisfies the following universal property. \\~\\
+\begin{prp}{Universal Property of Product Spaces}{} Let $(X,\mT_X)$ and $(Y,\mT_Y)$ be topological spaces. Then the product space $X\times Y$ satisfies the following universal property. \\
 
-For any topological space $(Z,\mT_Z)$ and continuous functions $f:Z\to X$ and $g:Z\to Y$, there exists a unique continuous function $u:Z\to X\times Y$ such that the following diagram commutes: \\~\\
+For any topological space $(Z,\mT_Z)$ and continuous functions $f:Z\to X$ and $g:Z\to Y$, there exists a unique continuous function $u:Z\to X\times Y$ such that the following diagram commutes: \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	Z \\
 	& {X\times Y} & X \\
@@ -429,7 +424,7 @@ For any topological space $(Z,\mT_Z)$ and continuous functions $f:Z\to X$ and $g
 	\arrow["g"', from=1-1, to=3-2, bend right = 25]
 	\arrow["{\pi_1}"', from=2-2, to=2-3]
 	\arrow["{\pi_2}", from=2-2, to=3-2]
-\end{tikzcd}} \\~\\
+\end{tikzcd}} \\
 \end{prp}
 
 \begin{prp}{}{} Let $X,Y,Z$ be topological spaces. Suppose that $f:Z\to X\times Y$ is a function. Then $f$ is continuous if and only if $\pi_1\circ f:Z\to X$ and $\pi_2\circ f:Z\to Y$ are continuous. 
@@ -439,20 +434,20 @@ For any topological space $(Z,\mT_Z)$ and continuous functions $f:Z\to X$ and $g
 \begin{defn}{Quotient Topology}{} Let $X$ be a topological space. Let $\sim$ be an equivalence relation on $X$ and write $\pi:X\to X/\sim$ the quotient map of sets. Define a topology on $X/\sim$ as follows. We say that $U\subseteq X/\sim$ is open if and only if $\pi^{-1}(U)$ is open in $X$. 
 \end{defn}
 
-One can perform quotient on subspaces as follows. For $U\subseteq X$ a subset, we define an equivalence relation on $X$ by declaring that $x\sim y$ if and only if $x,y\in U$. Then we write the quotient space as $$\frac{X}{U}$$ In particular, this has the effect of considering $U$ as a single point in $X$. \\~\\
+One can perform quotient on subspaces as follows. For $U\subseteq X$ a subset, we define an equivalence relation on $X$ by declaring that $x\sim y$ if and only if $x,y\in U$. Then we write the quotient space as $$\frac{X}{U}$$ In particular, this has the effect of considering $U$ as a single point in $X$. \\
 
 Notice that the function $\pi:X\to X/\sim$ in the definition becomes continuous by definition. 
 
-\begin{thm}{Universal Property of Quotient Spaces}{} Let $X$ be a topological space and $\sim$ an equivalence relation on $X$. Then the quotient space $X/\sim$ satisfy the following universal property. \\~\\
+\begin{thm}{Universal Property of Quotient Spaces}{} Let $X$ be a topological space and $\sim$ an equivalence relation on $X$. Then the quotient space $X/\sim$ satisfy the following universal property. \\
 
-For any topological space $Y$ and a map $f:X\to Y$ such that $f(x)=f(y)$ for all $x\sim y$, then there exists a unique map $u:X/\sim\to Y$ such that the following diagram commutes: \\~\\
+For any topological space $Y$ and a map $f:X\to Y$ such that $f(x)=f(y)$ for all $x\sim y$, then there exists a unique map $u:X/\sim\to Y$ such that the following diagram commutes: \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	X & {\frac{X}{\sim}} \\
 	& Y
 	\arrow["\pi", from=1-1, to=1-2]
 	\arrow["f"', from=1-1, to=2-2]
 	\arrow["{\exists!u}", dashed, from=1-2, to=2-2]
-\end{tikzcd}} \\~\\
+\end{tikzcd}} \\
 \end{thm}
 
 \begin{prp}{}{} Let $X$ be a topological space and $\sim$ an equivalence relation on $X$. Let $f:X/\sim\to Y$ be a function. Then $f$ is continuous if and only if $f\circ\pi:X\to Y$ is continuous. 
@@ -493,7 +488,7 @@ Now comes the main space of study.
 
 Most analysis and well behaved spaces lie under this category. The reason is given by the following theorem. 
 
-\begin{thm}{}{} Let $(X,\mathcal{T})$ be a Hausdorff space. Then every sequence in $X$ converges to at most one point. \tcbline
+\begin{thm}{}{} Let $(X,\mathcal{T})$ be a Hausdorff space. Then every sequence in $X$ converges to at most one point. 
 \begin{proof}
 Let $x_n\to x$ and $x_n\to y$ with $x\neq y$. Since $X$ is Hausdorff there exists open sets $U,V$ such that $x\in U$, $y\in V$ and $U\cap V=\emptyset$. By definition of convergence, there exists $N_1\geq 1$ and $N_2\geq 1$ such that $x_n\in U$ for all $n\geq N_1$ and $x_n\in V$ for all $n\geq n_2$. This is a contradiction since $x\in U\cup V$ when $n\geq \max(N_1,N_2)$ but $U\cap V=\emptyset$. 
 \end{proof}
@@ -577,8 +572,8 @@ The following is a partial converse to the unique limit point proposition that i
 \end{thm}
 
 \pagebreak
-\section{Metric Spaces}
-Metric spaces are more closely related to analysis in both its proofs and possible question types when compared to a more set theoretic approach for topology. However topology provides a more general context than metric spaces to discuss properties such as compactness and connectedness. Therefore I have decide to include metric spaces into a set of notes for point set topology. However be aware that metric spaces require a more analytical approach. \\~\\
+\section{Relation to Metric Spaces}
+Metric spaces are more closely related to analysis in both its proofs and possible question types when compared to a more set theoretic approach for topology. However topology provides a more general context than metric spaces to discuss properties such as compactness and connectedness. Therefore I have decide to include metric spaces into a set of notes for point set topology. However be aware that metric spaces require a more analytical approach. \\
 One should also be clear on what properties are unique to metric spaces. This is often reflected in the proofs. If the techniques of the proofs make use of sets rather than closeness of points for instance, then it may be a more topological property. However Hausdorff and metric spaces are also closely related which we will see below. 
 
 \subsection{The Metric Topology}
@@ -626,7 +621,7 @@ We now investigate when will different metrics induce the same topology. The ans
 \end{lmm}
 
 \subsection{Induced Metric from Norms}
-\begin{prp}{}{} Let $(V,\|\cdot\|)$ be a normed vector space over $\R$. Then the function $d:V\times V\to\R$ defined by $$d(x,y)=\|x-y\|$$ defines a metric on $V$. \tcbline
+\begin{prp}{}{} Let $(V,\|\cdot\|)$ be a normed vector space over $\R$. Then the function $d:V\times V\to\R$ defined by $$d(x,y)=\|x-y\|$$ defines a metric on $V$. 
 \begin{proof} Can easily be seen that setting $d(x,y)=\|x-y\|$ allows the norm to become a metric. 
 \end{proof}
 \end{prp}
@@ -637,10 +632,10 @@ We now investigate when will different metrics induce the same topology. The ans
 \begin{prp}{}{} The equivalence on norms is an equivalent relation. 
 \end{prp}
 
-\begin{prp}{}{} Let $V$ be a vector space over $\R$. Let $\|\cdot\|_1$ and $\|\cdot\|_2$ be two norms on $V$. Let $d_1$ and $d_2$ be the induced metrics of the two norms respectively. Then $\|\cdot\|_1$ and $\|\cdot\|_2$ are equivalent norms if and only if $d_1$ and $d_2$ are topologically equivalent metrics. \tcbline
+\begin{prp}{}{} Let $V$ be a vector space over $\R$. Let $\|\cdot\|_1$ and $\|\cdot\|_2$ be two norms on $V$. Let $d_1$ and $d_2$ be the induced metrics of the two norms respectively. Then $\|\cdot\|_1$ and $\|\cdot\|_2$ are equivalent norms if and only if $d_1$ and $d_2$ are topologically equivalent metrics. 
 \begin{proof}
-Suppose that $\|\cdot\|_1$ and $\|\cdot\|_2$ are equivalent. Then define their corresponding metrics by $d_1(x,y)=\|x-y\|_1$ and $d_2(x,y)=\|x-y\|_2$ for $x,y$ in a normed vector space $X$. We show that the open sets coincide. \\~\\
-Suppose that $U\subseteq(X,d_1)$ is open. Then for every $x\in U$, there exists $r>0$ such that $B_r(x)\subset U$. From the equivalent norms, we have that there exists $c$ such that $\|x-y\|_2\leq c\|x-y\|_1$ and thus $$\left\{x\in X\bigg{|}\|x-y\|_2<\frac{r}{c}\right\}\subseteq\{x\in X|\|x-y\|_1<r\}$$ Thus $B_{\frac{r}{c}}(x)$ in the $d_2$ metric is a subset of $B_r(x)$ in the $d_1$ metric. This means that we have constructed an open ball in $(X,d_2)$ so that it is contained in $U$. Thus $U$ is also open in $(X,d_2)$. \\~\\
+Suppose that $\|\cdot\|_1$ and $\|\cdot\|_2$ are equivalent. Then define their corresponding metrics by $d_1(x,y)=\|x-y\|_1$ and $d_2(x,y)=\|x-y\|_2$ for $x,y$ in a normed vector space $X$. We show that the open sets coincide. \\
+Suppose that $U\subseteq(X,d_1)$ is open. Then for every $x\in U$, there exists $r>0$ such that $B_r(x)\subset U$. From the equivalent norms, we have that there exists $c$ such that $\|x-y\|_2\leq c\|x-y\|_1$ and thus $$\left\{x\in X\bigg{|}\|x-y\|_2<\frac{r}{c}\right\}\subseteq\{x\in X|\|x-y\|_1<r\}$$ Thus $B_{\frac{r}{c}}(x)$ in the $d_2$ metric is a subset of $B_r(x)$ in the $d_1$ metric. This means that we have constructed an open ball in $(X,d_2)$ so that it is contained in $U$. Thus $U$ is also open in $(X,d_2)$. \\
 Mirror this to show that the open sets of $(X,d_2)$ must also be open sets of $(X,d_1)$ using the fact that there exists $c$ such that $\|x-y\|_1\leq c\|x-y\|_2$ and we are done. 
 \end{proof}
 \end{prp}
@@ -684,7 +679,7 @@ Compactness is an important topological property that allows us to build contruc
 
 Below is a closed set characterization of compactness. 
 
-\begin{thm}{Finite Intersection Property}{} Let $\mathcal{F}$ be a collection of non-empty closed subsets of a space $X$ such that every finite subcollection of $\mathcal{F}$ has a non-empty intersection (finite intersection property). Then $X$ is compact if and only if the intersection of all sets from $\mathcal{F}$ is non-empty. \tcbline
+\begin{thm}{Finite Intersection Property}{} Let $\mathcal{F}$ be a collection of non-empty closed subsets of a space $X$ such that every finite subcollection of $\mathcal{F}$ has a non-empty intersection (finite intersection property). Then $X$ is compact if and only if the intersection of all sets from $\mathcal{F}$ is non-empty. 
 \begin{proof}
 Suppose that $X$ is compact. Suppose for a contradiction that $\bigcap_{F\in\mathcal{F}}F=\emptyset$. Then $$X\setminus\bigcap_{F\in\mathcal{F}}=\bigcup_{F\in\mathcal{F}}X\setminus F=X$$ which means that $\mathcal{F}$ is an open cover of $X$. By compactness, there exists a finite subcover of $\mathcal{F}$, namely $F_1,\dots, F_n$ such that $\bigcup_{k=1}^nF_k=X$. But then 
 \begin{align*}
@@ -692,16 +687,16 @@ Suppose that $X$ is compact. Suppose for a contradiction that $\bigcap_{F\in\mat
 X\setminus\bigcup_{k=1}^nF_k&=\emptyset\\
 \bigcap_{k=1}^nX\setminus F_k&=\emptyset
 \end{align*}
-which is a contradiction of the finite intersection property. \\~\\
+which is a contradiction of the finite intersection property. \\
 Now suppose that every finite subcollection of $\mathcal{F}$ has a non empty intersection and that $\bigcap_{F\in\mathcal{F}}F\neq\emptyset$. Suppose for a contradiction that $X$ is not compact. Let $\{U_\alpha|\alpha\in I\}$ be an open cover of $X$. Since $X$ is not compact, every finite union of the form $\bigcup_{k=1}^nU_{\alpha_k}\neq X$ for $\alpha_1,\dots,\alpha_n\in I$ which implies that $$\bigcap_{k=1}^nU_{\alpha_k}\neq\emptyset$$ This means that $\{X\setminus U_\alpha|\alpha\in I\}$ has the finite interseciton property and thus $$\bigcap_{\alpha\in I}X\setminus U_\alpha\neq\emptyset$$ But then taking complements of $X$ means that $\bigcup_{\alpha\in I}U_\alpha$ does not cover $X$ which contradicts our assumption. 
 \end{proof}
 \end{thm}
 
-\begin{prp}{}{} Compactness is finitely productive. \tcbline
+\begin{prp}{}{} Compactness is finitely productive. 
 \begin{proof}
-We show that $(X,\mathcal{T})$ and $(Y,\mathcal{S})$ are compact then $X\times Y$ is compact. Consider the product topology on $X\times Y$ given by $$\mathcal{B}=\{U\times V|U\in\mathcal{T},V\in\mathcal{S}\}$$ Let $(x,y)\in W\subseteq T\times S$ be open, then by definition of a basis there exists $U\times V\in\mathcal{B}$ such that $$(x,y)\in U\times V\subset W$$ Let $\mathcal{U}$ be an open cover of $X\times Y$. \\~\\
-Let $x\in X$. Then we can find $W_x\in\mathcal{U}$ such that $(x,y)\in W_x$. By the above, there exists $U_x\times V_x\in\mathcal{B}$ such that $(x,y)\in U_x\times V_x\subset W_x$. The sets $U_x$ form an open cover of $X$, thus contains a finite subcover $U_{x_1},\dots,U_{x_n}$. Let $$N(y)=\bigcap_{k=1}^nV_{x_k}$$ This definition makes sense since $y\in N(y)$ is a neighbourhood of $y$ that is open. We also have $$X\times N(y)\subset\bigcup_{k=1}^n(U_{x_k}\times V_{x_k})\subset\bigcup_{k=1}^nW_{x_k}$$ And thus $X\times N(y)$ has a finite subcover. \\~\\
-Since $\{N(y)|y\in Y\}$ forms an open cover, it has a finite subcover $N(y_1),\dots,N(y_m)$ that covers $Y$. Thus $$X\times Y=\bigcup_{k=1}^mX\times N(y_k)\subset\bigcup_{k=1}^m\bigcup_{j=1}^n(U_{x_j}\times V_{x_k})\subset\bigcup_{k=1}^m\bigcup_{j=1}^nW_{x_jk}$$ and $X\times Y$ has a finite subcover. \\~\\
+We show that $(X,\mathcal{T})$ and $(Y,\mathcal{S})$ are compact then $X\times Y$ is compact. Consider the product topology on $X\times Y$ given by $$\mathcal{B}=\{U\times V|U\in\mathcal{T},V\in\mathcal{S}\}$$ Let $(x,y)\in W\subseteq T\times S$ be open, then by definition of a basis there exists $U\times V\in\mathcal{B}$ such that $$(x,y)\in U\times V\subset W$$ Let $\mathcal{U}$ be an open cover of $X\times Y$. \\
+Let $x\in X$. Then we can find $W_x\in\mathcal{U}$ such that $(x,y)\in W_x$. By the above, there exists $U_x\times V_x\in\mathcal{B}$ such that $(x,y)\in U_x\times V_x\subset W_x$. The sets $U_x$ form an open cover of $X$, thus contains a finite subcover $U_{x_1},\dots,U_{x_n}$. Let $$N(y)=\bigcap_{k=1}^nV_{x_k}$$ This definition makes sense since $y\in N(y)$ is a neighbourhood of $y$ that is open. We also have $$X\times N(y)\subset\bigcup_{k=1}^n(U_{x_k}\times V_{x_k})\subset\bigcup_{k=1}^nW_{x_k}$$ And thus $X\times N(y)$ has a finite subcover. \\
+Since $\{N(y)|y\in Y\}$ forms an open cover, it has a finite subcover $N(y_1),\dots,N(y_m)$ that covers $Y$. Thus $$X\times Y=\bigcup_{k=1}^mX\times N(y_k)\subset\bigcup_{k=1}^m\bigcup_{j=1}^n(U_{x_j}\times V_{x_k})\subset\bigcup_{k=1}^m\bigcup_{j=1}^nW_{x_jk}$$ and $X\times Y$ has a finite subcover. \\
 Repeated application of the proof proves that compactness is finitely productive. 
 \end{proof}
 \end{prp}
@@ -710,21 +705,21 @@ Repeated application of the proof proves that compactness is finitely productive
 \end{thm}
 
 \subsection{Compactness, Closed Sets and Continuity}
-\begin{prp}{}{} Let $f:X\to Y$ be continuous. If $K\subset X$ is compact, then $f(K)$ is compact.  \tcbline
+\begin{prp}{}{} Let $f:X\to Y$ be continuous. If $K\subset X$ is compact, then $f(K)$ is compact.  
 \begin{proof}
-Let $K$ be compact. Let $\mathcal{U}$ be an open cover of $f(K)$. Since $f$ is continuous, for all $U\in\mathcal{U}$, $f^{-1}(U)$ are open and forms a cover of $K$. Since $K$ is compact, there exists a finite subcover of $K$, namely $f^{-1}(U_1),\dots,f^{-1}(U_n)$. \\~\\
+Let $K$ be compact. Let $\mathcal{U}$ be an open cover of $f(K)$. Since $f$ is continuous, for all $U\in\mathcal{U}$, $f^{-1}(U)$ are open and forms a cover of $K$. Since $K$ is compact, there exists a finite subcover of $K$, namely $f^{-1}(U_1),\dots,f^{-1}(U_n)$. \\
 Let $y\in f(K)$. Then $y=f(x)$ for some $x\in K$. But $x\in f^{-1}(U_k)$ for some $k$. Thus $y\in U_k$. Thus $U_1,\dots,U_n$ are a finite subcover of $f(K)$. 
 \end{proof}
 \end{prp}
 
-\begin{lmm}{}{} Compactness is a topological invariant but is not hereditary. \tcbline
+\begin{lmm}{}{} Compactness is a topological invariant but is not hereditary. 
 \begin{proof}
-From the above, if $X,Y$ is homeomorphic then $Y=f(X)$ and we are done. \\~\\
+From the above, if $X,Y$ is homeomorphic then $Y=f(X)$ and we are done. \\
 Considering $(0,1)\in\R$ as a metric subspace of $[0,1]\in\R$. 
 \end{proof}
 \end{lmm}
 
-\begin{prp}{}{} Let $(X,\mathcal{T})$ be a compact topological space. Let $C\subseteq X$ be a closed subset. Then $C$ is compact. \tcbline
+\begin{prp}{}{} Let $(X,\mathcal{T})$ be a compact topological space. Let $C\subseteq X$ be a closed subset. Then $C$ is compact. 
 \begin{proof}
 Let $U$ be a cover of $C$ by open subsets of $X$. Then $U\cup X\setminus C$ is an open cover of $X$, thus has a finite subcover. This provides an open subcover of $C$ since $X\setminus C$ is open and you can remove this element from the subcover. 
 \end{proof}
@@ -733,7 +728,7 @@ Let $U$ be a cover of $C$ by open subsets of $X$. Then $U\cup X\setminus C$ is a
 \begin{prp}{}{} Let $(X,\mathcal{T})$ be a compact Hausdorff space. Then $(X,\mathcal{T})$ is regular and normal. 
 \end{prp}
 
-\begin{prp}{}{} Let $(X,\mathcal{T})$ be a Hausdorff topological space. Let $K\subseteq X$ be compact. Then $K$ is closed. \tcbline
+\begin{prp}{}{} Let $(X,\mathcal{T})$ be a Hausdorff topological space. Let $K\subseteq X$ be compact. Then $K$ is closed. 
 \begin{proof}
 Let $a\in X\setminus K$. For each $x\in K$, there exists disjoint open sets $U_x$ containing $x$ and $V_x$ containing $a$ due to Hausdorff. Then $\{U_x|x\in K\}$ form an open cover of $K$, and thus has a finite subcover $U_{x_1},\dots,U_{x_n}$ of $K$. Then $$V=\bigcap_{k=1}^nV_{x_k}$$ is open and contains $a$ and is disjoint from $K$. This means that $X\setminus K$ is open and thus $K$ is closed. 
 \end{proof}
@@ -742,23 +737,23 @@ Let $a\in X\setminus K$. For each $x\in K$, there exists disjoint open sets $U_x
 The point of the finite subcover in the above proof is to make sure that since the $U_k$ are covering $K$, $V_k$ being disjoint from $U_k$ means that $V_k$ will not overlap with $K$. 
 
 \subsection{Compactness and the Hausdorff Property}
-\begin{prp}{}{} Let $(X,\mathcal{T})$ be a compact topological space. Let $(Y,\mathcal{U})$ be a Hausdorff topological space. Then any continuous bijection $f:X\to Y$ is a homeomorphism. \tcbline
+\begin{prp}{}{} Let $(X,\mathcal{T})$ be a compact topological space. Let $(Y,\mathcal{U})$ be a Hausdorff topological space. Then any continuous bijection $f:X\to Y$ is a homeomorphism. 
 \begin{proof}
 We want to show that $f^{-1}$ is continuous. Let $U\subset X$ be closed. Then $U$ is compact by proposition 5.2.3. By 5.2.1, $f(U)$ is compact. Since $Y$ is Hausdorff, $f(U)$ is closed by the above proposition. By the closed set characterization of continuous functions, $f^{-1}$ is continuous. 
 \end{proof}
 \end{prp}
 
-\begin{prp}{}{} Let $X,Y$ be spaces. Let $f:X\to Y$ be continuous. If $K\subseteq X$ is compact and $Y$ is Hausdorff, then $f(K)$ is closed. \tcbline
+\begin{prp}{}{} Let $X,Y$ be spaces. Let $f:X\to Y$ be continuous. If $K\subseteq X$ is compact and $Y$ is Hausdorff, then $f(K)$ is closed. 
 \begin{proof}
 Let $x\in X\setminus K$. For any $y\in K$, there exists open neighbourhoods $x\in U_y$ and $y\in V_y$ such that $U_y\cap V_y=\emptyset$ by the Hausdorff property. The collection $\{V_y\;|\;y\in Y\}$ forms an open cover of $K$. Since $K$ is compact, $K$ has a finite subcover $\{V_{y_1},\dots,V_{y_n}\}$. Let $$U=\bigcap_{i=1}^nU_{y_i}$$ Then $U$ is an open neighbourhood of $x$ and is disjoint from $K$. Since this is true for all $x\in X\setminus K$, we have that $X\setminus K$ is open. Hence $K$ is closed. 
 \end{proof}
 \end{prp}
 
-\begin{prp}{}{} Let $X$ be a compact space. Let $Y$ be a Hausdorff space. Let $f:X\to Y$ be a continuous and surjective map. Let $Z=\{f^{-1}(y)\subseteq X\;|\;y\in Y\}$ and equipped it with the quotient topology of $X$. Then the induced map $$\overline{f}:Z\to Y$$ defined by $\overline{f}(f^{-1}(y))=y$ is a homeomorphism. \tcbline
+\begin{prp}{}{} Let $X$ be a compact space. Let $Y$ be a Hausdorff space. Let $f:X\to Y$ be a continuous and surjective map. Let $Z=\{f^{-1}(y)\subseteq X\;|\;y\in Y\}$ and equipped it with the quotient topology of $X$. Then the induced map $$\overline{f}:Z\to Y$$ defined by $\overline{f}(f^{-1}(y))=y$ is a homeomorphism. 
 \begin{proof}
-Let $C\subseteq X$ be closed. By 5.2.3 we conclude that $C$ is compact in $X$. By 5.2.1 we have that $f(C)$ is compact in $Y$. By the above we conclude that $f(C)$ is closed. \\~\\
+Let $C\subseteq X$ be closed. By 5.2.3 we conclude that $C$ is compact in $X$. By 5.2.1 we have that $f(C)$ is compact in $Y$. By the above we conclude that $f(C)$ is closed. \\
 
-Let $U=\{f^{-1}(y)\;|\; y\in T\}\subseteq Z$ be open for some subset $T\subseteq Y$. By definition of the quotient topology, the set $$V=\{x\in X\;|\;f(x)\in T\}$$ is open in $X$. Then $X\setminus V$ is closed in $X$. By the above digression, we conclude that $$f(X\setminus V)=Y\setminus T$$ is closed. Hence $T=\overline{f}(U)$ is open in $Y$. \\~\\
+Let $U=\{f^{-1}(y)\;|\; y\in T\}\subseteq Z$ be open for some subset $T\subseteq Y$. By definition of the quotient topology, the set $$V=\{x\in X\;|\;f(x)\in T\}$$ is open in $X$. Then $X\setminus V$ is closed in $X$. By the above digression, we conclude that $$f(X\setminus V)=Y\setminus T$$ is closed. Hence $T=\overline{f}(U)$ is open in $Y$. \\
 
 Now let $U\subseteq Y$ be an open set. Then $$\overline{f}^{-1}(U)=\{z\in Z\;|\;\overline{f}(z)\in U\}=\{f^{-1}(y)\subseteq X\;|\;y\in U\}=f^{-1}(U)$$ is open in $X$. We conclude that $\overline{f}$ is a homeomorphism because it is also clear that $\overline{f}$ is a bijection. 
 \end{proof}
@@ -789,7 +784,7 @@ This section is dedicated to theorems related to compactness that is unique only
 
 Since there is no notion of boundedness in a general topological space, we have the following theorem special to metric spaces. 
 
-\begin{prp}{}{} A compact subset of a metric space is bounded. \tcbline
+\begin{prp}{}{} A compact subset of a metric space is bounded. 
 \begin{proof}
 Let $a\in X$. Let $x\in K$. Then $x\in B_r(a)$ for all $r>d(a,x)$. Thus $K$ is covered by the collection of open balls $B_r(a)$. Thus it has a finite subcover $B_{r_1}(a),\dots,B_{r_n}(a)$. Thus $$K\subset\bigcup_{k=1}^nB_{r_k}(a)=B_{\max\{r_1,\dots,r_n\}}(a)$$ and we are done. 
 \end{proof}
@@ -803,23 +798,23 @@ Let $a\in X$. Let $x\in K$. Then $x\in B_r(a)$ for all $r>d(a,x)$. Thus $K$ is c
 
 \subsection{Compactness in $\R^n$}
 We arrive at an important characterization of compact sets in $\R^n$. 
-\begin{thm}{Heine-Borel Theorem}{} A subset of $\R^n$ is compact if and only if it is closed and bounded. \tcbline
+\begin{thm}{Heine-Borel Theorem}{} A subset of $\R^n$ is compact if and only if it is closed and bounded. 
 \begin{proof}
-Let $K$ be a compact subset of $\R^n$. $K$ is closed by proposition 5.2.5 and $K$ is bounded by proposition 5.4.6. \\~\\
-Let $K$ be a closed and bounded subset of $\R^n$. If $K$ is bounded then $K\subset[-r,r]^n$ for some $r>0$. I claim that $[-r,r]^n$ is compact. Once it is compact, applying 5.2.3 to the closed subset $K$ of $[-r,r]^n$, we have that $K$ is compact. \\~\\
+Let $K$ be a compact subset of $\R^n$. $K$ is closed by proposition 5.2.5 and $K$ is bounded by proposition 5.4.6. \\
+Let $K$ be a closed and bounded subset of $\R^n$. If $K$ is bounded then $K\subset[-r,r]^n$ for some $r>0$. I claim that $[-r,r]^n$ is compact. Once it is compact, applying 5.2.3 to the closed subset $K$ of $[-r,r]^n$, we have that $K$ is compact. \\
 Let $(x_n)_{n\in\N}$ be a sequence in $[-r,r]$ by bolzano weierstrass it has a convergent subsequence. Thus $[-r,r]$ is sequentially compact and thus compact. Using the productivity of compact metric spaces, we have that $[-r,r]^n$ is compact thus we are done. 
 \end{proof}
 \end{thm}
 
 This concludes the Bolzano weierstrass theorem for $\R^n$ by considering seuqential compactness. We also have another important theorem upcoming but we need another theorem prior to it. 
 
-\begin{thm}{}{} Let $f:X\to\R$ be a continuious function from a non empty compact space $X$ to $\R$. Then $f$ is bounded and attains its bounds. \tcbline
+\begin{thm}{}{} Let $f:X\to\R$ be a continuious function from a non empty compact space $X$ to $\R$. Then $f$ is bounded and attains its bounds. 
 \begin{proof}
 Since $X$ is compact and $f$ is continuous, $f(X)\subset\R$ is compact. By the Heine-Borel theorem, $f(X)$ is closed and bounded. But every closed and bounded subset of $\R$ contains its supremum and infinum. Thus $f$ is bounded and attains its bounds. 
 \end{proof}
 \end{thm}
 
-\begin{thm}{}{} All norms on $\R^n$ are equivalent. This measn that norms on $\R^n$ induce the same topology, the standard topology. \tcbline
+\begin{thm}{}{} All norms on $\R^n$ are equivalent. This measn that norms on $\R^n$ induce the same topology, the standard topology. 
 \begin{proof}
 Let $\|\cdot\|$ be an arbitrary norm on $\R^n$. We show that it is equivalent to $\|\cdot\|_2$. Let $\{e_1,\dots,e_n\}$ be an orthonormal basis of $\R^n$. Then for any $x\in\R^n$, we have $x=\sum_{k=1}^nx_ke_k$. We have that 
 \begin{align*}
@@ -828,8 +823,8 @@ Let $\|\cdot\|$ be an arbitrary norm on $\R^n$. We show that it is equivalent to
 &\leq\left(\sum_{k=1}^n\abs{x_k}^2\right)^{\frac{1}{2}}\left(\sum_{k=1}^n\|e_k\|^2\right)^{\frac{1}{2}}\\
 &=\left(\sum_{k=1}^n\|e_k\|^2\right)^{\frac{1}{2}}\|x\|_2
 \end{align*}
-Thus we have that $\|x\|\leq c_2\|x\|_2$. \\~\\
-Now we have that $\|x-y\|\leq c_2\|x-y\|_2$ for $x,y\in\R^n$. Define a map $f:(\R^n,\|\cdot\|_2)\to\R)$ by $f(x)=\|x\|$. The above criteria means that $f$ is continuous by choosing $\delta<\epsilon$. Since $\partial B_1(0)$ with the standard norm is a closed and bounded subset of $\R^n$, it is compact by the Heine-Borel theorem. From the above theorem, $f(\partial B_1(0))$ is bounded and attains its bounds. This means that $0\leq c_1<f(\partial B_1(0))$ for some $c_1$. But $c_1\neq 0$ since if it is $0$, then there exists $x\in\partial B_1(0)$ such that $\|x\|_2=0$. \\~\\
+Thus we have that $\|x\|\leq c_2\|x\|_2$. \\
+Now we have that $\|x-y\|\leq c_2\|x-y\|_2$ for $x,y\in\R^n$. Define a map $f:(\R^n,\|\cdot\|_2)\to\R)$ by $f(x)=\|x\|$. The above criteria means that $f$ is continuous by choosing $\delta<\epsilon$. Since $\partial B_1(0)$ with the standard norm is a closed and bounded subset of $\R^n$, it is compact by the Heine-Borel theorem. From the above theorem, $f(\partial B_1(0))$ is bounded and attains its bounds. This means that $0\leq c_1<f(\partial B_1(0))$ for some $c_1$. But $c_1\neq 0$ since if it is $0$, then there exists $x\in\partial B_1(0)$ such that $\|x\|_2=0$. \\
 This means that $\|x\|_2=1$ implies $\|x\|\geq c_1$. Let $y\in\R^n$ be arbitrary. Then since $\left\|\frac{y}{\|y\|_2}\right\|=1$, we have that $$\left\|\frac{y}{\|y\|_2}\right\|\geq c_1$$ and $\|y\|\geq c_1\|y\|_2$. Since this $y$ is arbitrary, we are done. 
 \end{proof}
 \end{thm}
@@ -845,7 +840,7 @@ This means that $\|x\|_2=1$ implies $\|x\|\geq c_1$. Let $y\in\R^n$ be arbitrary
 \item $(X,\mathcal{T})$ is disconnected
 \item There exists non-empty disjoint closed sets $A,B\subseteq X$ such that $X=A\cup B$
 \item There exists a non-trivial clopen subset of $X$. 
-\end{itemize} \tcbline
+\end{itemize} 
 \begin{proof}~\\
 \begin{itemize}
 \item $(1)\implies(2)$: Suppose that $A,B$ are the sets satisfying the definition of a disconnceted space. Then since $A$ is open, $B=X\setminus A$ is closed thus vice versa $A$ is also closed. 
@@ -855,13 +850,13 @@ This means that $\|x\|_2=1$ implies $\|x\|\geq c_1$. Let $y\in\R^n$ be arbitrary
 \end{proof}
 \end{prp}
 
-\begin{prp}{}{} A topological space $(X,\mathcal{T})$ is disconnected if and only if there exists a continuous function $f:X\to\{0,1\}$ that is surjective. \tcbline
+\begin{prp}{}{} A topological space $(X,\mathcal{T})$ is disconnected if and only if there exists a continuous function $f:X\to\{0,1\}$ that is surjective. 
 \begin{proof}
 Suppose that $X$ is disconnected by $A$ and $B$. Then define $$f(x)=\begin{cases}
 0 &\text{ if }x\in A\\
 1 & \text{ if }x\in B
 \end{cases}$$
-Then $f$ is continuous since every open set in $\{0,1\}$ maps to an open set in $X$. Clearly it is also surjective. \\~\\
+Then $f$ is continuous since every open set in $\{0,1\}$ maps to an open set in $X$. Clearly it is also surjective. \\
 Now suppose that $f:X\to\{0,1\}$ is a surjective continuous function. Then define $A=f^{-1}(0)$ and $B=f^{-1}(1)$. $A,B$ are open by continuity. Since $f$ is surjective, we have $A\cup B=X$. Clearly they are disjoint else their common element will be mapped to both $0$ and $1$. Thus we are done. 
 \end{proof}
 \end{prp}
@@ -869,13 +864,13 @@ Now suppose that $f:X\to\{0,1\}$ is a surjective continuous function. Then defin
 An equivalent formulation of the above proposition is that $X$ is connected if and only if every continuous function from $X$ to $\{0,1\}$ is constant. 
 
 \subsection{Properties of Connectedness}
-\begin{prp}{}{} Let $(X,\mathcal{T})$ be connected. Let $(Y,\mathcal{U})$ be a topological space. Let $f:X\to Y$ be continuous. Then $f(X)$ is connected. \tcbline
+\begin{prp}{}{} Let $(X,\mathcal{T})$ be connected. Let $(Y,\mathcal{U})$ be a topological space. Let $f:X\to Y$ be continuous. Then $f(X)$ is connected. 
 \begin{proof}
 Suppose for a contradiction that $f(X)$ is disconnected. Suppose that it is disconnected by $A,B$. Then $f^{-1}(A)$ and $f^{-1}(B)$ is clearly disjoint since $A$ and $B$ are disjoint. Since $A\cup B=f(X)$, we must also have $f^{-1}(A)\cup f^{-1}(B)=X$. By continuity, $f^{-1}(A)$ and $f^{-1}(B)$ are open. Thus $f(X)$ is disconnected, a contradiction. 
 \end{proof}
 \end{prp}
 
-\begin{prp}{}{} Let $(X,\mathcal{T})$ be a topological space. Let $\{C_i|i\in I\}$ is a non-empty connected subsets of $X$ with the property that $\bigcap_{i\in I}C_i\neq\emptyset$. Then $\bigcup_{i\in I}C_i$ is connected. \tcbline
+\begin{prp}{}{} Let $(X,\mathcal{T})$ be a topological space. Let $\{C_i|i\in I\}$ is a non-empty connected subsets of $X$ with the property that $\bigcap_{i\in I}C_i\neq\emptyset$. Then $\bigcup_{i\in I}C_i$ is connected. 
 \begin{proof}
 Suppose that $x\in\bigcap_{i\in I}C_i$. Then $x\in C_i$ for all $i$. Let $f$ be a continuous function from $X$ to $\{0,1\}$. WLOG take $f(x)=0$. Then since each $C_i$ is connected, every $y\in C_i$ maps to $0$. Then every $y\in\bigcup_{i\in I}C_i$ maps to $0$ and thus $f$ is constant and we are done. 
 \end{proof}
@@ -883,9 +878,9 @@ Suppose that $x\in\bigcap_{i\in I}C_i$. Then $x\in C_i$ for all $i$. Let $f$ be 
 
 The following lemma is slightly different from the one above since we simply require the closure to have nonempty intersection. The two sets can be touching each other instead of intersecting each other to be connected. 
 
-\begin{lmm}{}{} Suppose that $C_1,C_2$ are connected subsets of a topological space $X$ and $\overline{C_1}\cap C_2\neq\emptyset$. Then $C_1\cup C_2$ is connected. \tcbline
+\begin{lmm}{}{} Suppose that $C_1,C_2$ are connected subsets of a topological space $X$ and $\overline{C_1}\cap C_2\neq\emptyset$. Then $C_1\cup C_2$ is connected. 
 \begin{proof}
-Suppose that $f:C_1\cup C_2\to\{0,1\}$ is continuous. WLOG take $f(C_1)=\{0\}$. Suppose for a contradiction that $f(C_2)=\{1\}$. Then $f^{-1}(1)$ is open thus there exists some $U\in\mathcal{T}$ such that $f^{-1}(1)=U\cap(C_1\cup C_2)$. Now let $x\in\overline{C}_1\cap C_2$. But $x\in C_2$ means that $f(x)=1$ thus $x\in U\cap(C_1\cup C_2)$ and $x\in U$. Then clearly $$U\cap C_1\neq\emptyset$$ since $x\in\overline{C}_1\cup C_2$. \\~\\
+Suppose that $f:C_1\cup C_2\to\{0,1\}$ is continuous. WLOG take $f(C_1)=\{0\}$. Suppose for a contradiction that $f(C_2)=\{1\}$. Then $f^{-1}(1)$ is open thus there exists some $U\in\mathcal{T}$ such that $f^{-1}(1)=U\cap(C_1\cup C_2)$. Now let $x\in\overline{C}_1\cap C_2$. But $x\in C_2$ means that $f(x)=1$ thus $x\in U\cap(C_1\cup C_2)$ and $x\in U$. Then clearly $$U\cap C_1\neq\emptyset$$ since $x\in\overline{C}_1\cup C_2$. \\
 But $C_1\subseteq C_1\cup C_2$ thus we have 
 \begin{align*}
 U\cap (C_1\cup C_2)\cap C_1&\neq\emptyset\\
@@ -895,7 +890,7 @@ This is a contradiction since $f(C_1)=\{0\}$ thus we are done.
 \end{proof}
 \end{lmm}
 
-\begin{thm}{}{} Let $C$ and $\{C_i|i\in I\}$ be connected subsets of a topological space $X$ and $C_i\cap\overline{C}\neq\emptyset$ for each $i$. Then $$C\cup\bigcup_{i\in I}C_i$$ is connected. \tcbline
+\begin{thm}{}{} Let $C$ and $\{C_i|i\in I\}$ be connected subsets of a topological space $X$ and $C_i\cap\overline{C}\neq\emptyset$ for each $i$. Then $$C\cup\bigcup_{i\in I}C_i$$ is connected. 
 \begin{proof}
 Apply the above lemma to $C\cup C_i$. This is the possible since $C_i\cap\overline{C}\neq\emptyset$. Thus each $C\cup C_i$ is connected. Trivially each pair $(C\cup C_i)\cap(C\cup C_j)$ is nonempty since it contains $C$. Thus we can apply the proposition above the lemma and we are done. 
 \end{proof}
@@ -903,7 +898,7 @@ Apply the above lemma to $C\cup C_i$. This is the possible since $C_i\cap\overli
 
 This theorem is slightly different then the one above since there is a central connected subset linking every other connected subset while in the first one, we simply require pairwise connectedness. 
 
-\begin{crl}{}{} If $C\subset X$ is a connected subset of a topological space $X$ then so is any set $K$ where $C\subseteq K\subseteq\overline{C}$. \tcbline
+\begin{crl}{}{} If $C\subset X$ is a connected subset of a topological space $X$ then so is any set $K$ where $C\subseteq K\subseteq\overline{C}$. 
 \begin{proof}
 Any $K$ between $C$ and $\overline{C}$ must contain some but not all of the boundary of $C$. Then we can apply the above theorem and we are done. 
 \end{proof}
@@ -913,7 +908,7 @@ Any $K$ between $C$ and $\overline{C}$ must contain some but not all of the boun
 \begin{prp}{}{} Connectedness is not Hereditary. 
 \end{prp}
 
-\begin{prp}{}{} Connectedness is finitely productive. \tcbline
+\begin{prp}{}{} Connectedness is finitely productive. 
 \begin{proof}
 Let $X,Y$ be connected spaces. Let $y\in Y$. Define $C=X\times\{y\}$ and $C_t=\{t\}\times Y$. Then $C$ is homeomorphic to $T$ and $C_t$ is homeomorphic to $S$. Thus they both are connected. Clearly we also have that $C_t\cap C\neq\emptyset$ since they both contain $(x,y)$ and $$X\times Y=C\cup\bigcup_{t\in X}C_t$$ thus $X\times Y$ is connected. 
 \end{proof}
@@ -929,7 +924,7 @@ Let $X,Y$ be connected spaces. Let $y\in Y$. Define $C=X\times\{y\}$ and $C_t=\{
 \begin{defn}{Path Connectedness}{} A topological space $(X,\mathcal{T})$ is called path connected if for any distinct $a,b\in X$, there is a path from $a$ to $b$. 
 \end{defn}
 
-\begin{prp}{}{} Every path connected space is connected. \tcbline
+\begin{prp}{}{} Every path connected space is connected. 
 \begin{proof}
 Let $u\in X$. Consider any $v\in X$. Then there exists a path from $u$ to $v$. Thus the image of the path is connected since it is the continuous image of $[0,1]$. Then $X=\{u\}\cup\bigcup_{v\in X}C_v$ and each $C_v$ contains $u$ thus $X$ is connected. 
 \end{proof}
@@ -954,7 +949,7 @@ Below is a partial converse of path connectedness implying connectedness over $\
 \section{Notable Topologies}
 \subsection{$\R$ and $\C$ with the Standard Topology}
 $\R$ and $\C$ being metric spaces allows a natural topology to be induced from the metric. 
-\begin{defn}{Standard Topology of $\R$ and $\C$}{} The standard topology on $\R$ induced by the Euclidean metric $d(x,y)=\abs{x-y}$ consists of $B_r(a)=\{x\in\R|\abs{x-a}<r\}$ for $a\in\R$ and $r>0$ being open sets aside from $\emptyset$ and $\R$. \\~\\
+\begin{defn}{Standard Topology of $\R$ and $\C$}{} The standard topology on $\R$ induced by the Euclidean metric $d(x,y)=\abs{x-y}$ consists of $B_r(a)=\{x\in\R|\abs{x-a}<r\}$ for $a\in\R$ and $r>0$ being open sets aside from $\emptyset$ and $\R$. \\
 The standard topology on $\C$ induced by the Euclidean metric $d(x,y)=\abs{x-y}$ consists of $B_r(a)=\{z\in\C|\abs{z-a}<r\}$ for $a\in\R$ and $r>0$ being open sets aside from $\emptyset$ and $\R$. 
 \end{defn}
 
@@ -997,62 +992,4 @@ The standard topology on $\C$ induced by the Euclidean metric $d(x,y)=\abs{x-y}$
 \begin{crl}{}{} Let $(X,\mathcal{T})$ be a nonempty compact topological space, then $C(T)$ is complete with maximum norm $$\|f\|_\infty=\max_{x\in T}\abs{f(x)}$$
 \end{crl}
 
-
-\pagebreak
-\section{Notable Metric Spaces}
-\subsection{$\R^n$ on Different Metrics}
-\begin{thm}{}{} Let $x=(x_1,\dots,x_n)\in\R^n$ and similarly for $y\in\R^n$. The following are all metrics of $\R^n$. 
-\begin{itemize}
-\item $l_p$ metric: $$d_p(x,y)=\left(\sum_{k=1}^n(x_k-y_k)^p\right)^{1/p}$$ for $1\leq p<\infty$
-\item $l_\infty$ metric: $$d_{\infty}(x,y)=\max_{k\in\{1,\dots,n\}}\{\abs{x_k-y_k}\}$$
-\item Jungle river metric on $\R^2$: $$d_{\text{Jr}}(x,y)=\begin{cases}
-\abs{x_2-y_2} & \text{ if }x_1=y_1\\
-\abs{y_2}+\abs{x_2}+\abs{x_1-y_1} & \text{ if }x_1\neq y_1
-\end{cases}$$
-\item French Railway Metric (Sunflower metric) on $\R^2$: $$d_{\text{Fr}}(x,y)=\begin{cases}
-\abs{x-y} & \text{ if there exists $\lambda\in\R$ such that } y=\lambda x\\
-\abs{x}+\abs{y} & \text{ otherwise }
-\end{cases}$$
-\item Discrete Metric: $$d_{\text{Discrete}}(x,y)=\begin{cases}
-0 & \text{ if } x=y\\
-1 & \text{ if } x\neq y
-\end{cases}$$
-\item British Railway Metric on $\R^2$: $$d(x,y)=\begin{cases}
-0 & \text{ if } x=y\\
-\abs{x}+\abs{y} & \text{ if } x\neq y
-\end{cases}$$
-\end{itemize}
-\end{thm}
-
-Do try and draw at least the unit ball for each of these metrics and see what happens (at least for $\R^2$). 
-
-\begin{prp}{}{} All $l_p$ metrics are topologically equivalent. \tcbline
-\begin{proof}
-The metric are all induced by the $l_p$ norms and we know that they are equivalent. Equivalent norms induce topologically equivalent metrics and we are done. 
-\end{proof}
-\end{prp}
-
-\begin{prp}{}{} Let $(X,d)$ be a metric space. Then the function $$d_\text{B}(x,y)=\min\{d(x,y),1\}$$ for any $x,y\in X$ is a metric on $X$. 
-\end{prp}
-
-\subsection{The Space of Continuous Functions}
-\begin{defn}{}{} We denote $C([a,b])$ the space of real valued continuous functions whose domain is $[a,b]$. 
-\end{defn}
-
-\begin{prp}{}{} Let $f\in C([a,b])$. Define the supremum norm of $f$ to be $$\|f\|_\infty=\sup_{x\in[a,b]}]\abs{f(x)}$$ Then the supremum norm is a norm on $C([a,b])$. 
-\end{prp}
-
-\begin{prp}{}{} Let $f\in C([a,b])$. Define the $L^p$ norm of $f$ to be $$\|f\|_{L^p}=\left(\int_a^b\abs{f(x)}^p\,dx\right)^{\frac{1}{p}}$$ for $p\in[1,\infty)$. Then the supremum norm is a norm on $C([a,b])$. 
-\end{prp}
-
-\subsection{Sequence Space}
-\begin{defn}{Sequence Space}{} The sequence space $l^p$ for $1\leq p<\infty$ consists of all sequences $\{x_n\}$ such that $$\sum_{k=1}^\infty\abs{x_k}^p<\infty$$ \\~\\
-If $p=\infty$ then $l^\infty$ is the space of all bound sequences. 
-\end{defn}
-
-\begin{prp}{}{} The function $$\|x\|_{l^p}=\left(\sum_{k=1}^\infty\abs{x_k}^p\right)^{\frac{1}{p}}$$ on $l^p$ space defines a norm on it. \\~\\ If $p=\infty$ then $\|x\|_{l^\infty}=\sup_{k\in\N}\abs{x_k}$ defines a norm on $l^\infty$. 
-\end{prp}
-
-\begin{prp}{}{} $l^p$ is a complete metric space with metric $$d(\{x_n\},\{y_n\})=\|x-y\|_{l^p}$$
-\end{prp}
 \end{document}
