@@ -1,0 +1,542 @@
+\documentclass[a4paper]{article}
+
+\input{C:/Users/liula/Desktop/Latex/Headers/Headers.tex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Labix}
+\lhead{Algebraic Groups}
+\rfoot{\thepage}
+
+\title{Algebraic Groups}
+
+\author{Labix}
+
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+\end{abstract}
+
+References: 
+\begin{itemize}
+\item Fourier-Mukai Transforms in Algebraic Geometry (Derived Categories for Algebraic Geometry)
+\end{itemize}
+\pagebreak
+\tableofcontents
+\pagebreak
+
+\section{Basic Definitions}
+\subsection{Group Schemes in General}
+\begin{defn}{Group Schemes}{}\\
+Let $k$ be a field. Let $X$ be a scheme of finite type over $k$. We say that $X$ is a group scheme if $X$ is group object in the category $\bold{Sch}_k$. 
+\end{defn}
+
+\begin{defn}{Commutative Group Schemes}{}\\
+Let $k$ be a field. Let $G$ be a scheme of finite type over $k$. We say that $G$ is a commutative group scheme if $G$ is an abelian group object in $\bold{Sch}_k$. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $G$ be a group scheme over $k$. Then $G$ is a commutative group scheme if and only if $G(R)$ is abelian for all $R\in\bold{FGAlg}_k$. 
+\end{lmm}
+
+\begin{defn}{Homomorphisms}{}\\
+Let $k$ be a field. Let $G,H$ be group schemes over $k$. Let $\varphi:G\to H$ be a morphism of schemes over $k$. We say that $\varphi$ is a homomorphism of group schemes if $\varphi$ is also a group homomorphism. 
+\end{defn}
+
+\subsection{Group Schemes as a Functor}
+Let $k$ be a field. Let $R$ be a finitely generated $k$-algebra. Let $X$ be a scheme over $k$. Recall that the $R$-points of $X$ is the set $$X(R)=\Hom_{\bold{Sch}_k}(\text{Spec}(R),X)$$
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $R$ be a finitely generated $k$-algebra. Let $G$ be a group scheme over $k$. Then $G(R)$ is a group. 
+\end{prp}
+
+When $k$ is algebraically closed, then the closed points of a group scheme over $k$ is equal to $G(k)$ and we get a group structure on the closed points. \\
+
+Now recall that we constructed a fully faithful functor $\widetilde{(-)}:\bold{Sch}_k\to\Hom_{\bold{Cat}}(\bold{FGAlg}_k,\bold{Set})$ that sends a scheme $X$ to its functor of points $X(-):\bold{FGAlg}_k\to\bold{Set}$. When $G$ is group scheme, $\widetilde{X}(R)$ is a group for all $R\in\bold{FGAlg}_k$. By fully faithfulness, to give a group scheme is the same as giving a functor $F:\bold{FGAlg}_k\to\bold{Grp}$ that lies in the essential image of $\widetilde{(-)}$. 
+
+\begin{defn}{Schematically Dense}{}\\
+Let $k$ be a field. Let $X$ be a scheme of finite type over $k$. Let $S$ be a subset of $X(k)$. We say that $S$ is schematically dense in $X$ if the map $\mO_X(X)\to\prod_{s\in S}k(s)$ defined by $f\mapsto(f(s))_{s\in S}$ is injective. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $G$ be a group scheme over $k$. Then the following are equivalent. 
+\begin{itemize}
+\item $G(k)$ is dense in $G$. 
+\item $G(k)$ is schematically dense in $G$. 
+\item $G$ is reduced and $G(k)$ is dense in the subspace of closed points of $G$. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $G$ be a group scheme over $k$. Then there is a one to one correspondence $$\{H\leq G\;|\;H(k)\text{ is schematically dense in }H\}\;\;\overset{1:1}{\longleftrightarrow}\;\;\{S\leq G(k)\;|\;S\text{ is a closed subgroup of G(k)}\}$$
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $G$ be a group scheme over $k$. Then there is a one to one correspondence $$\{H\leq G\;|\;H\text{ is a variety }\}\;\;\overset{1:1}{\longleftrightarrow}\;\;\{S\leq G(k)\;|\;S\text{ is a closed subgroup of G(k)}\}$$
+\end{prp}
+
+\begin{crl}{}{}\\
+Let $k$ be a separably closed field. Let $G$ be a group scheme over $k$. Then the above correspondence restricts to a one to one correspondence $$\{H\leq G\;|\;H\text{ is a variety }\}\;\;\overset{1:1}{\longleftrightarrow}\;\;\{S\leq G(k)\;|\;S\text{ is a closed subgroup of G(k)}\}$$
+\end{crl}
+
+\subsection{Properties of Group Schemes}
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $X$ be a group scheme over $k$. Then $X$ is separated. 
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $G$ be a group scheme over $k$. Then the following are equivalent. 
+\begin{itemize}
+\item $G$ is irreducible. 
+\item $G$ is connected. 
+\item $G$ is geometrically connected. 
+\item For all $x\in X$, $N(\mO_{X,x})$ is a prime ideal. 
+\end{itemize}
+\end{prp}
+
+\subsection{Group Subschemes}
+\begin{defn}{Group Subschemes}{}\\
+Let $k$ be a field. Let $G$ be a group scheme over $k$. Let $H$ be subscheme of $G$. We say that $H$ is a subgroup of $G$ if $H$ is a group scheme over $k$ and the inclusion homomorphism $i:H\to G$ is a homomorphism. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $G$ be a group scheme over $k$. Let $H$ be a subscheme of $G$. Then $H$ is a subgroup of $G$ if and only if for all $R\in\bold{FGAlg}_k$, $H(R)$ is a subgroup of $G(R)$. 
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $G$ be a group scheme over $k$. Let $H$ be a subgroup of $G$. Then $H$ is closed in $G$. 
+\end{prp}
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $G$ be a group scheme over $k$. If $G_{\text{red}}$ is geometrically reduced, then $G_{\text{red}}$ is a subgroup of $G$. 
+\end{lmm}
+
+\subsection{The Identity Component}
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $G$ be a group scheme over $k$. Then the following are true. 
+\begin{itemize}
+\item $G$ is irreducible if and only if $G$ is connected. 
+\item $G$ is the disjoint union of its irreducible components. 
+\end{itemize}
+\end{lmm}
+
+\begin{defn}{Identity Component}{}\\
+Let $k$ be a field. Let $G$ be a group scheme over $k$. Define the identity component $G^\circ$ of $G$ to be the unique irreducible component of $G$ that contains $1_G$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $G$ be a group scheme over $k$. Then the following are equivalent. 
+\begin{itemize}
+\item $G$ is smooth. 
+\item $G^\circ$ is smooth. 
+\item $\mO_{G,1_G}$ is a regular local ring. 
+\item $\dim(T_{1_G}G)=\dim(G)$. 
+\item $G$ is geometrically reduced. 
+\item For all $R\in\bold{FGAlg}_k$ and $I$ an ideal of $R$ such that $I^2=0$, we have that the map $G(R)\to G(R/I)$ is surjective. 
+\end{itemize}
+\end{prp}
+
+\pagebreak
+\section{Examples of Group Schemes}
+\subsection{The Additive Group}
+\begin{defn}{The Additive Group}{}\\
+Let $k$ be a field. Define the additive group to be the affine scheme $$\G_a=\text{Spec}(k[x])$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Then $\G_a$ is a group scheme. 
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Then the associated functor of $\G_a$ is given by the forgetful functor $\bold{FGAlg}_k\to\bold{Grp}$ given by $R\mapsto(R,+)$. 
+\end{lmm}
+
+\subsection{The Multiplicative Group}
+\begin{defn}{The Multiplicative Group}{}\\
+Let $k$ be a field. Define the multiplicative group to be the affine scheme $$\G_m=\text{Spec}(k[x,x^{-1}])$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Then $\G_m$ is a group scheme. 
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Then the associated functor of $\G_m$ is given by the forgetful functor $\bold{FGAlg}_k\to\bold{Grp}$ given by $R\mapsto(R^\times,\cdot)$. 
+\end{lmm}
+
+\subsection{The Group Scheme Associated to the $n$th Roots of Unity}
+\begin{defn}{The Group Scheme Associated to the $n$the Roots of Unity}{}\\
+Let $k$ be a field. Let $n\in\N\setminus\{0\}$. Define the group scheme associated to the $n$th Roots of Unity $$\mu_n=\text{Spec}\left(\frac{k[x]}{x^n-1}\right)$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $n\in\N\setminus\{0\}$. Then $\mu_n$ is a group scheme. 
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Then the associated functor of $\mu_n$ is given by the functor $R\mapsto\{r\in R\;|\;r^n=1\}$ for a finitely generated $k$-algebra $R$. 
+\end{lmm}
+
+\subsection{The General Linear Group}
+\begin{defn}{General Linear Group}{}\\
+Let $k$ be a field. Let $n\in\N\setminus\{0\}$. Define the general linear group to be the affine scheme $$GL_n(k)=\text{Spec}\left(\frac{k[x_{1,1},\dots,x_{n,n},x]}{\det(x_{i,j})x-1}\right)$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $n\in\N\setminus\{0\}$. Let $R\in\bold{FGAlg}_k$. Then we have $$GL_n(k)(R)=GL_n(R)$$
+\end{lmm}
+
+\begin{defn}{The Group of Automorphisms}{}\\
+Let $k$ be a field. Let $V$ be a finite dimensional vector space over $k$. Define the $GL_V$ to be the group scheme associated to the functor $\bold{FGAlg}_k\to\bold{Grp}$ defined by $$R\mapsto\text{Aut}_R(V\otimes_kR)$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $V$ be a finite dimensional vector space over $k$. Let $\phi:V\to k^n$ be a vector space isomorphism. Then for each $R\in\bold{FGAlg}_k$, the map $GL(V\otimes_kR)\to GL_n(R)$ defined by $T\mapsto\phi\circ T\circ\phi^{-1}$ is a natural isomorphism from $GL(V)$ to $GL_n(k)$. 
+\end{lmm}
+
+\begin{crl}{}{}\\
+Let $k$ be a field. Let $V$ be a finite dimensional vector space over $k$. Then $GL(V)$ is an affine group scheme. 
+\end{crl}
+
+\subsection{The Group Scheme Associated to a Vector Space}
+\begin{defn}{The Functor Associated to a Vector Space}{}\\
+Let $k$ be a field. Let $V$ be a finite dimensional vector space. Define the functor $$V_a:\bold{FGAlg}_k\to\bold{Grp}$$ as follows. 
+\begin{itemize}
+\item A finitely generated algebra $R$ over $k$ is associated to $V\otimes_kR$. 
+\item For $\varphi:R\to S$ a morphism of $k$-algebras, $V_a(\varphi)$ is the the morphism $\text{id}_V\otimes_k\varphi$
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $V$ be a finite dimensional vector space over $k$. Then $V_a$ is a group scheme. 
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $V$ be a finite dimensional vector space over $k$. Then there is an isomorphism of group schemes $$V_a\cong \G_a^{\text{dim}(V)}$$
+\end{prp}
+
+\subsection{The Affine Group Scheme of a Group Ring}
+Let $R$ be a commutative ring. Let $G$ be an abelian group. Recall that $R[G]$ is the group algebra whose elements are $R$-linear combination of elements of $G$ and multiplication is induced by the binary operation of $G$. 
+
+\begin{defn}{Group Scheme Associated to Group Algebra}{}\\
+Let $k$ be a field. Let $G$ be an abelian group. Define the affine group scheme associated to the group algebra of $G$ to be $\text{Spec}(k[G])$. 
+\end{defn}
+
+\begin{defn}{Functor Associated to Group Algebra}{}\\
+Let $k$ be a field. Let $G$ be an abelian group. Define the functor $$D(G):\bold{FGAlg}_k\to\bold{Grp}$$ as follows. 
+\begin{itemize}
+\item For each $k$-algebra $R$, define $D(G)(R)=\Hom_{\bold{Grp}}(G,R^\times)$. 
+\item For each $k$-algebra homomorphism, $\varphi:R\to S$ is sent to the group homomorphism $\Hom_{\bold{Grp}}(G,R^\times)\to\Hom_{\bold{Grp}}(G,S^\times)$ which is post composition with $\varphi$. 
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $G$ be an abelian group. Then the functor $D(G)$ represents the affine group scheme $\text{Spec}(k[G])$. 
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $G$ be a finitely generated abelian group. Suppose that $\varphi:G\to\bigoplus_{i=1}^r\Z/b_i\Z\oplus\Z^n$ is a group isomorphism. Then $\varphi$ induces an isomorphism of group schemes $$\text{Spec}(k[G])\cong\prod_{i=1}^r\mu_{b_i}\times\G_m^n$$
+\end{prp}
+
+\pagebreak
+\section{Affine Group Schemes}
+\subsection{Basic Properties}
+\begin{thm}{Cartier 1962}{}\\
+Let $k$ be a field of characteristic $0$. Let $G$ be an affine group scheme over $k$. Then $G$ is smooth. 
+\end{thm}
+
+\subsection{Relation to Hopf Algebra}
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $A$ be a finitely generated algebra over $k$. Let $\Delta:A\to A\otimes_kA$ be a $k$-algebra homomorphism. Then $(\text{Spec}(A),\text{Spec}(\Delta))$ is an affine group scheme over $k$ if and only if $(A,\Delta)$ is a Hopf algebra. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. There is an equivalence of categories $$\text{Spec}:\bold{HFGAlg}_k\overset{\cong}{\longrightarrow}\bold{AffGrpSch}_k$$ with inverse given by $\Gamma$. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $G$ be a group scheme over $k$. There is a one to one correspondence $$\{H\subseteq G\;|\;H\text{ is a subgroup of }G\}\;\;\overset{1:1}{\longleftrightarrow}\;\;\{I\subseteq\Gamma(G,\mO_G)\;|\;I\text{ is a Hopf ideal of }\Gamma(G,\mO_G)\}$$ given by the correspondence between closed subschemes and ideals of an affine scheme. 
+\end{prp}
+
+\subsection{Structure Theorem for Group Schemes}
+\begin{defn}{The Associated Affine Group Scheme}{}\\
+Let $k$ be a field. Let $G$ be a group scheme. Define the associated affine group scheme to be $$G^\text{aff}=\text{Spec}(\Gamma(G,\mO_G))$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $G$ be a group scheme. Then the following are true. 
+\begin{itemize}
+\item $G^\text{aff}$ is an affine group scheme. 
+\item There is a natural isomorphism $$\Hom_{\bold{GrpSch}_k}(G,H)\cong\Hom_{\bold{GrpSch}_k}(G^\text{aff},H)$$ given by factorizing through the natural map $\phi:G\to G^\text{aff}$ for any affine group scheme $H$ over $k$. 
+\item $\ker(\phi)$ is anti-affine. 
+\end{itemize}
+\end{prp}
+
+\begin{crl}{}{}\\
+Let $k$ be a field. Let $G$ be a group scheme. Then $G$ is an extension of affine algebraic group by an anti-affine algebraic group in a unique way. 
+\end{crl}
+
+\pagebreak
+\section{The Isomorphism Theorems for Group Schemes}
+\subsection{The Case of Affine Group Schemes}
+
+\subsection{Extending to General Group Schemes}
+
+\pagebreak
+\section{Representation Theory of Group Schemes}
+\subsection{Group Actions}
+\begin{defn}{Group Actions}{}\\
+Let $k$ be a field. Let $G$ be a group scheme over $k$. Let $X$ be a scheme of finite type over $k$. A group action of $G$ on $X$ is a morphism $\mu:G\times X\to X$ such that the following diagram commutes: \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{G\times G\times X} & {G\times X} && {\ast\times X} & {G\times X} \\
+	{G\times X} & X &&& X
+	\arrow["{m\times\text{id}_X}", from=1-1, to=1-2]
+	\arrow["{\text{id}_G\times\mu}"', from=1-1, to=2-1]
+	\arrow["\mu", from=1-2, to=2-2]
+	\arrow["{\text{incl.}}", from=1-4, to=1-5]
+	\arrow["\cong"', from=1-4, to=2-5]
+	\arrow["\mu", from=1-5, to=2-5]
+	\arrow["\mu"', from=2-1, to=2-2]
+\end{tikzcd}} \\
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $G$ be a group scheme over $k$. Let $X$ be a scheme of finite type over $k$. Let $\mu:G\times X\to X$ be a morphism. Then $\mu$ is a group action if and only if $\widetilde{\mu}:\widetilde{G}\times\widetilde{X}\to\widetilde{X}$ is a natural transformation such that for all $R\in\bold{FGAlg}_k$, $\mu(R):G(R)\times X(R)\to X(R)$ is a group action. 
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $G$ be a group scheme over $k$. Let $X$ be a scheme of finite type over $k$. Let $\mu:G\times X\to X$ be a group action. Then $\mu$ is faithfully flat. 
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $G$ be a group scheme over $k$. Let $X$ be a scheme of finite type over $k$. Let $\mu:G\times X\to X$ be a group action. Then the following are true. 
+\begin{itemize}
+\item If $G$ is smooth, then $\mu$ is smooth. 
+\item If $G$ is finite, then $\mu$ is finite. 
+\end{itemize}
+\end{lmm}
+
+\subsection{Representations of Affine Group Schemes}
+\begin{defn}{Representation of a Group Scheme}{}\\
+Let $k$ be a field. Let $G$ be a group scheme over $k$. A representation of $G$ is a vector space $V$ over $k$ together with a natural transformation $\rho:G\to GL(V)$. 
+\end{defn}
+
+We have seen that for any group scheme $H$, there is a natural isomorphism $$\Hom_{\bold{GrpSch}_k}(G,H)\cong\Hom_{\bold{GrpSch}_k}(G^\text{aff},H)$$ so it suffices to consider affine group schemes. 
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $G$ be an affine group scheme over $k$. Let $V$ be a finite dimensional vector space over $k$. If $\rho:G\to GL(V)$ is a natural transformation, then $\rho$ is a homomorphism of group schemes. 
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $G$ be an affine group scheme over $k$. Let $V$ be a finite dimensional vector space over $k$. Then there is a one to one correspondence $$\{\rho:G\to GL(V)\;|\;\rho\text{ is a representation }\}\;\;\overset{1:1}{\longleftrightarrow}\;\;\{\phi:G\times V_a\to V_a\;|\;\phi\text{ is a group action }\}$$
+\end{lmm}
+
+\begin{defn}{Comodule}{}
+\end{defn}
+
+\begin{prp}{}{}\\
+Correspondence between comodules and representations. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $G$ be an affine group scheme over $k$. Let $V$ be a vector space over $k$. Let $\rho:G\to GL(V)$ be a representation. Then $\rho$ is a filtered union of its finite dimensional subrepresentation. 
+\end{prp}
+
+Therefore it suffices to consider finite dimensional representations of affine group schemes. 
+
+\subsection{The Regular Representation}
+\begin{defn}{Faithful}{}\\
+Let $k$ be a field. Let $G$ be a group scheme over $k$. Let $V$ be a finite dimensional vector space over $k$. Let $\rho:G\to GL(V)$ be a representation. We say that $\rho$ is faithful if $\rho(R)$ is injective for all $R\in\bold{FGAlg}_k$. 
+\end{defn}
+
+\begin{defn}{The Regular Representation}{}
+\end{defn}
+
+\subsection{Linear Group Schemes}
+\begin{defn}{Linear Group Schemes}{}\\
+Let $k$ be a field. Let $G$ be a group scheme over $k$. We say that $G$ is linear if there exists a finite dimensional vector space $V$ over $k$ together with a faithful representation $\rho:G\to GL(V)$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $G$ be a group scheme over $k$. Then $G$ is a linear group scheme if and only if $G$ is an affine group scheme. 
+\end{prp}
+
+\pagebreak
+\section{Character Theory}
+\subsection{The Group of Characters}
+\begin{defn}{Characters}{}\\
+Let $k$ be a field. Let $G$ be an affine group scheme over $k$. A character of $G$ is a homomorphism $$\chi:G\to\G_m$$
+\end{defn}
+
+Recall that $\text{Spec}(\G_m)=k[x,x^{-1}]$. Since homomorphisms $G\to\G_m$ are given by $k$-algebra homomorphisms $\mO_{\G_m}(\G_m)\to G$, we see that giving a character is equivalent to a $k$-algebra homomorphism $k[x,x^{-1}]\to\mO_G(G)$, which is equivalent to giving an invertible element $a\in\mO_G(G)$ such that $\Delta(a)=a\otimes a$. 
+
+\begin{defn}{Group-like Elements}{}\\
+Let $k$ be a field. Let $G$ be an affine group scheme over $k$. Let $g\in G$. We say that $g$ is a group-like element of $G$ if $$\Delta(g)=g\otimes g$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $G$ be an affine group scheme over $k$. Then there is a one to one correspondence $$\{\chi:G\to\G_m\;|\;\chi\text{ is a character }\}\;\;\overset{1:1}{\longleftrightarrow}\;\;\{a\in G\;|\;a\text{ is a group-like element }\}$$
+\end{lmm}
+
+\begin{defn}{The Group of Characters}{}\\
+Let $k$ be a field. Let $G$ be an affine group scheme over $k$. Define the group of characters of $G$ to be the set $$\chi(G)=\{\chi:G\to\G_m\;|\;\chi\text{ is a character of }G\}$$ together with the binary operation on $\chi(G)$ defined as follows. Let $\chi,\chi'$ be characters. For each $R\in\bold{FGAlg}_k$, $(\chi+\chi')(R):G(R)\to R^\times$ is the group homomorphism defined by $$(\chi+\chi')(R)(g)=\chi(R)(g)\cdot\chi'(R)(g)$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $G$ be an affine group scheme over $k$. Then $\chi(G)$ is an abelian group. 
+\end{lmm}
+
+\subsection{Eigenspaces}
+\begin{defn}{Representations Acting through Characters}{}\\
+Let $k$ be a field. Let $G$ be an affine group scheme over $k$. Let $V$ be a vector space over $k$. Let $\rho:G\to GL(V)$ be a representation. Let $\chi\in\chi(G)$ be a character of $G$. We say that $G$ acts on $V$ through $\chi$ if $\rho$ factors through $\chi$ as \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	G && {GL(V)} \\
+	& {\G_m}
+	\arrow["\rho", from=1-1, to=1-3]
+	\arrow["\chi"', from=1-1, to=2-2]
+	\arrow["{\text{incl.}}"', hook, from=2-2, to=1-3]
+\end{tikzcd}}\\
+\end{defn}
+
+\begin{defn}{Eigenspaces}{}\\
+Let $k$ be a field. Let $G$ be an affine group scheme over $k$. Let $V$ be a vector space over $k$. Let $\rho:G\to GL(V)$ be a representation. Let $\chi\in\chi(G)$ be a character of $G$. Define the eigenspace $V_\chi$ of $V$ with respect to $\chi$ to be the largest subrepresentation of $V$ acting through $\chi$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $G$ be an affine group scheme over $k$. Let $V$ be a vector space over $k$. Let $\rho:G\to GL(V)$ be a representation. Let $\chi\in\chi(G)$ be a character of $G$. Let $\rho^\vee$ be the corresponding coaction of $\rho$. Then we have $$V_\chi=\{v\in V\;|\;\rho^\vee(v)=v\otimes a(\chi)\}$$ where $a(\chi)$ is the corresponding group-like element of $\chi$. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $G$ be an affine group scheme over $k$. Let $V$ be a vector space over $k$. Let $\rho:G\to GL(V)$ be a representation. Let $\chi\in\chi(G)$ be a character of $G$. If $V=\sum_{\chi\in\chi(G)}V_\chi$ is a sum of eigenspaces, then $$V=\bigoplus_{\chi\in\chi(G)}V_\chi$$ is a direct sum of eigenspaces. 
+\end{prp}
+
+\subsection{Diagonalizable Groups}
+\begin{defn}{Diagonlizable Groups}{}\\
+Let $k$ be a field. Let $G$ be an affine group scheme over $k$. We say that $G$ is diagonalizable if $$\mO_G(G)=k\langle g\in G\;|\;g\text{ is a group-like element }\rangle$$ as $k$-vector spaces. 
+\end{defn}
+
+\begin{defn}{The Category of Diagonalizable Group Schemes}{}\\
+Define the category $\bold{Diag}$ of diagonalizable affine group schemes over $k$ to be the full subcategory of $\bold{AffGrpSch}$ that consists of diagonalizable affine group schemes. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $G$ be an affine group scheme over $k$. Then $G$ is diagonalizable if and only if there exists a finitely generated abelian group $A$ such that $G\cong\text{Spec}(D(A))$ as group schemes. 
+\end{lmm}
+
+\begin{defn}{}{}\\
+Let $k$ be a field. Define the functor $$D:\bold{FGAb}\to\bold{Diag}_k$$ by the following data. 
+\begin{itemize}
+\item For each finitely generated abelian group $G$, $D(G)$ is the group scheme $\text{Spec}(k[G])$. 
+\item For each group homomorphism $\phi:G\to H$, $D(\phi)$ is homomorphism of group schemes induced by the natural map $k[G]\to k[H]$ by the universal property of the $k$-algebra $k[G]$. 
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Then the following are true. 
+\begin{itemize}
+\item $D:\bold{FGAb}\to\bold{Diag}_k$ is an equivalence of categories, with inverse given by $\chi$ sending a group scheme to its abelian group of characters. 
+\item $D$ is an exact functor. 
+\end{itemize}
+\end{prp}
+
+\begin{crl}{}{}\\
+Let $k$ be a field. Let $G$ be a diagonalizable affine group scheme over $k$. If $H\leq G$ is a subgroup of $G$, then $H$ and $G/H$ are diagonalizable. 
+\end{crl}
+
+\subsection{Diagonalizable Representations}
+\begin{defn}{Diagonalizable Representations}{}\\
+Let $k$ be a field. Let $G$ be an affine group scheme over $k$. Let $\rho:G\to GL(V)$ be a representation of $G$. We say that $\rho$ is diagonalizable if $\rho$ is the sum of $1$-dimensional representations. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $G$ be an affine group scheme over $k$. Then the following are equivalent. 
+\begin{itemize}
+\item $G$ is diagonalizable. 
+\item Every finite dimensional representation of $G$ is diagonalizable. 
+\item Every representation of $G$ is diagonalizable. 
+\item For every representation $\rho:G\to GL(V)$ of $G$, there is a decomposition $$V=\bigoplus_{\chi\in\chi(G)}V_\chi$$
+\end{itemize}
+\end{prp}
+
+
+\pagebreak
+\section{Group Varieties}
+\subsection{Algebraic Groups}
+\begin{defn}{Algebraic Groups}{}\\
+Let $k$ be field. Let $V$ be a geometrically reduced variety over $k$. We say that $V$ is an algebraic group (or a group variety) if $V$ is also a group scheme. 
+\end{defn}
+
+
+
+\begin{defn}{Algebraic Subgroups}{}\\
+Let $k$ be a field. Let $G$ be an algebraic group. Let $H\subseteq G$ be a subset of $G$. We say that $H$ is an algebraic subgroup of $G$ if $H$ is an algebraic group and the inclusion map $i:H\to G$ is a homomorphism. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $G$ be an algebraic group. Then $G$ is smooth. 
+\begin{proof}
+Since the set of all smooth points of a variety is an open subset, $G$ must have at least one smooth point. Moreover, the translation morphism $l_y:G\to G$ defined by $x\mapsto yx$ is an isomorphism of varieties. Hence every point of $G$ is smooth. 
+\end{proof}
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $G$ be an algebraic group. Let $H\leq G$ be a subgroup of $G$. Then the following are true. 
+\begin{itemize}
+\item If $H$ is closed, then $H$ is an algebraic group. 
+\item $\overline{H}$ is an algebraic group. 
+\end{itemize}
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $G,H$ be algebraic groups. Then $G\times H$ is an algebraic group. 
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $G,H$ be algebraic groups. Let $\varphi:G\to H$ be a homomorphism. Then the following are true. 
+\begin{itemize}
+\item $\ker(\varphi)$ is a closed subgroup of $G$. 
+\item $\im(\varphi)$ is a closed subgroup of $H$. 
+\item $\dim(G)=\dim(\ker(\varphi))+\dim(\im(\varphi))$. 
+\end{itemize}
+\end{lmm}
+
+\subsection{The Identity Component}
+\begin{lmm}{}{}\\
+Let $G$ be an algebraic group. Then $1_G$ is contained in exactly one irreducible component of $G$. 
+\end{lmm}
+
+\begin{defn}{The Identity Component}{}\\
+Let $G$ be an algebraic group. Define $G^\circ$ to be the unique irreducible component that contains $1_G$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $G$ be an algebraic group. Then the following are true. 
+\begin{itemize}
+\item $G^\circ$ is a normal subgroup of $G$. 
+\item $[G:G^\circ]<\infty$. 
+\item $G/G^\circ$ is precisely the set of connected irreducible components of $G$. 
+\item Let $H\leq G$ be a subgroup such that $[G:H]<\infty$. Then $G^\circ\subseteq H$. 
+\end{itemize}
+\end{prp}
+
+\begin{lmm}{}{}\\
+Let $G,H$ be algebraic groups. Let $\varphi:G\to H$ be a homomorphism. Then we have $$\varphi(G^\circ)=\varphi(G)^\circ$$
+\end{lmm}
+
+\begin{defn}{Connected Algebraic Groups}{}\\
+Let $G$ be an algebraic group. We say that $G$ is connected if $G=G^\circ$. 
+\end{defn}
+
+In other words, we say that $G$ is connected if $G$ is irreducible. 
+
+
+
+
+
+
+
+
+
+
+\end{document}

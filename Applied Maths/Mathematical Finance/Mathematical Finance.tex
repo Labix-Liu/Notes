@@ -1,6 +1,6 @@
 \documentclass[a4paper]{article}
 
-\input{C:/Users/liula/Desktop/Latex/Headers V1.2.tex}
+\input{C:/Users/liula/Desktop/Latex/Headers/Headers.tex}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -19,7 +19,115 @@
 \tableofcontents
 
 \pagebreak
-\section{Mathematical Finance}
+\section{Basic Concepts in Finance}
+\subsection{The Time Value of Money}
+\begin{cpt}{The Time Value of Money}{}\\
+The time value of money is a core financial principle that states the following. A dollar today is worth more than a dollar in the future. 
+\end{cpt}
+
+Most investments are based on this financial principle. There are a few reasons why the time value of money is relevant to the discussion of investment. 
+\begin{itemize}
+\item Money can earn interest over time. 
+\item Risk and inflation may reduce future value. 
+\item Investors prefer liquidity. 
+\end{itemize}
+
+There are three main types of financial instruments. 
+
+\begin{cpt}{Financial Instruments}{}\\
+A financial instrument is a contract that gives rise to a financial asset of one entity and a financial liability or equity instrument of another entity (IAS 32, 39). Some common types of instruments include
+\begin{itemize}
+\item Debt (Fixed Income): A type of investment under which the borrower or issuer is obliged to make payments of a fixed amount on a fixed schedule (e.g. bonds / loans). 
+\item Equity: Equity refers to ownership in an asset or a business (e.g. stocks / shares). 
+\item Derivatives: A derivative is a contract between a buyer and a seller (e.g. options / futures). 
+\end{itemize}
+\end{cpt}
+
+\begin{cpt}{The Time Value of Money in Fixed Income Instruments}{}\\
+Let $T\in\N$ be a unit of time (in years). Let $FV_t$ be the future value of an investment at time $t\in[0,T]$. Let $PV$ be the present value of the investment. Assuming the time value of money, let $r$ be the discount rate per period. Then the relationship between the $FV_t$ and $PV$ is described in three different equations depending the type of debt. 
+\begin{itemize}
+\item Discount: The investor pays an initial price ($PV$) and receives a single principal cash flow at maturity ($FV$). The relation between $FV$ and $PV$ is given by $$FV_t=PV(1+r)^t$$
+\item Periodic Interest: The investor pays an initial price ($PV$) and receives cash flow at fixed time intervals ($PMT_{t_i}$ at time $t_i\in[0,T]$ for $1\leq i\leq n$), as well as a principal cash flow at maturity ($FV$). The relation between $FV$ and $PV$ is given by $$PV=\sum_{i=1}^n\frac{PMT_i}{(1+r)^i}+\frac{FV_n}{(1+r)^n}$$ Perpetual bonds give periodic interest indefinitely with no maturity date. If $PMT_{t_i}=PMT_{t_{i+1}}$ for all $i$, then we take $n$ to infinity to get $$PV=\frac{PMT}{r}$$
+\item Level Payments: The investor pays an initial price ($PV$) and receives periodic payments at fixed time intervals consisting of principal cash flow and interest. At the end of each period, the annuity cash flow $(A_i)$ is given by the formula $$A_i=\frac{rPV}{1-(1+r)^{-t_i}}$$ for time periods $0<t_1<\cdots<t_n=T$. 
+\end{itemize}
+\end{cpt}
+
+\begin{cpt}{The Time Value of Money in Equity}{}\\
+Let $T\in\N$ be a unit of time (in years). Let $FV_t$ be the future value of an investment at time $t\in[0,T]$. Let $PV_t$ be the present value of the investment at time $t\in[0,T]$. Assuming the time value of money, let $r$ be the discount rate per period. Then the relationship between $FV_t$ and $PV$ is described in three different equations depending the type of equity. 
+\begin{itemize}
+\item Constant Dividends: The investor pays an initial price ($PV=PV_0$) and receives a fixed periodic dividend ($D$). The relation between $PV$ and $D$ is given by $$PV=\frac{D}{r}$$
+\item Constant Dividend Growth Rate: The investor pays an initial price ($PV=PV_0$) and receives a periodic dividend ($D_{t_i}$ at time $t_i$ for $1\leq i\leq n$) with a growth factor of $g$ (so $D_{t_{i+1}}=D_{t_i}(1+g)$). The relation between $PV_t$ and $D_t$ is given by $$PV_t=\frac{D_{t_i}(1+g)}{r-g}=\frac{D_{t_{i+1}}}{r-g}$$
+\item Changing Dividend Growth Rate: 
+\end{itemize}
+\end{cpt}
+
+If the future value and present value are known, we may solve for $r$. In this case $r$ is called the implied return instead and it measures how much investors expect to earn from an investment. 
+
+\begin{cpt}{Cash Flow Additivity Principle}{}\\
+The cash flow additivity principle is a core financial principle that states the following. The value of a set of cash flow at a given point in time is equal to the sum of values of individual cash flow. 
+\end{cpt}
+
+\subsection{Return Measures}
+To assess the performance of an investment, we use a collection of measures that are useful in different situations. They help investors understand how much they have earned relative to the amount invested. \\
+
+\begin{cpt}{}{}\\
+The rate of return $R$ of an investment is the sum $$R=\text{Risk Free Interest Rate}+\text{Premium}$$ The risk free interest rate reflects the time preferences of individuals for current versus future real consumption. There are four types of premium depending on the type of cash flow. 
+\begin{itemize}
+\item Inflation Premium
+\item Default Risk Premium
+\item Liquidity Premium
+\item Maturity Premium
+\end{itemize}
+\end{cpt}
+
+\begin{cpt}{Normalizing Returns}{}\\
+Return measures are often per annum. Given a rate of return that is not per annum, we can normalize it to obtain a rate of return that is per annum for comparison. If $r$ denotes the quoted rate and is compounded $m$ times per year, then $$R_\text{p.a.}=(1+r)^m-1$$ If $r$ is quoted per annum but compounded $m$ times, then $$R_\text{p.a.}=\left(1+\frac{r}{m}\right)^m-1$$
+\end{cpt}
+
+\begin{cpt}{The Different Types of Return Measures}{}\\
+There are different ways to measure the return of an investment depending on the scenario. Let $T$ be a unit of time (in years). For $t\in[0,T]$, denote $P_t$ the value of the investment at time $t$. Denote $C_t$ the cash flow towards the investment at end of time $t$ (e.g. $P_0=-C_0$ indicating that money is spent by the investor to put towards the investment). 
+\begin{itemize}
+\item Absolute Return: The naive percentage change that does not account for any other factors $$R=\frac{P_T-P_0}{P_0}$$
+\item Holding Period Return: Some financial instruments (such as stocks) provide income just for holding the instrument in the portfolio. $$R=\frac{P_T-P_0+I}{P_0}$$ where $I$ denotes the total income. If the investment reports are not annual, we may take the mean (AM, GM, HM) of the rates over a year for ease of comparison. 
+\item The Internal Rate of Return (Money Weighted Rate of Return): Factors in the timing of cash flows towards the investment. The internal rate of return is the percentage return required for the investment to break even with its investment value (usually used for comparing investments) given some prediction of future cash flows. It is given by solving the equation $$0=\sum_{t=0}^n\frac{C_t}{(1+R)^t}$$
+\item Time Weighted Rate of Return: Does the opposite of IRR since it exclude the factor of cash flow (usually to evaluate the performance of the investment solely). Suppose that cash flow occurs at discrete times $C_0,\dots,C_{t_n}$ where $t_n=T$. We obtain $n+1$ sub-periods $[0,t_1],\dots,[t_{n-1},t_n=T]$ in which each sub-period, no cash flow occurs. Let $r_i$ denote the rate of return at the sub-period $[t_{i-1},t_i]$. If $T=1$, the time weighted rate of return is given by $$R=\left(\prod_{i=1}^n(1+r_i)\right)-1$$ If $T>1$, denote the time weighted rate of return at the $j$th year by $R_j$. Then the overall time weighted rate of return is $$R=\left(R_1\cdots R_T\right)^{1/T}$$
+\item Continuously Compounded Return: As $m$ tends to infinity, $\left(1+\frac{R}{m}\right)^m$ tends to $e^R$. In this case $P_T=P_0e^R$. Motivated by this, we define the continuously compounded return to be $$R=\ln(P_T/P_0)$$ 
+\end{itemize}
+\end{cpt}
+
+Table for summary: 
+\begin{table}[ht]
+\small
+\centering
+\begin{tabular}{@{\hskip 2pt}l@{\hskip 2pt} l@{\hskip 2pt} l@{\hskip 2pt} p{5cm}@{\hskip 2pt}}
+\toprule
+\textbf{Return Measure} & \textbf{Time Factor?} & \textbf{Cash Flows?} & \textbf{Best Use Case} \\
+\midrule
+Absolute Return & No  & No  & Simple gains or losses \\
+HPR (Holding Period Return) & Yes & Yes & Specific investment periods \\
+MWRR / IRR (Money-Weighted Return) & Yes & Yes & Actual investor performance \\
+TWRR (Time-Weighted Return) & Yes & No & Comparing fund/manager performance \\
+Log Return (Cont. Compounded) & Yes & No & Quant models, short-term analysis \\
+\bottomrule
+\end{tabular}
+\caption{Compact Comparison of Return Measures}
+\label{tab:compact_returns}
+\end{table}
+
+Some more specific return measures:\\
+Gross and Net Return\\
+Pre and After Tax Returns\\
+Nominal and Real Returns (Tax related)\\
+Leveraged Returns
+
+\pagebreak
+\section{Debt}
+
+\pagebreak
+\section{Equity}
+
+\pagebreak
+\section{Derivatives}
 Assets: Items
 Stocks: Makes you own a small percentage of a company. 
 Shares: The unit for stocks. (Owning share = Owning a certain number of stocks)
@@ -89,7 +197,7 @@ Risk-neutral: A situation where investors do not expect an increase in return wh
 Risk-less: A portfolio is risk-less when regardless of the outcome, the net total is constant. 
 
 \subsection{One-Period Binomial Models}
-\begin{defn}{The Binomial Model}{} Suppose that $t$ is the current time. An asset has a current stock price of $S_0$ with an unknown option price $\mO$. After a time step of $dt$, the stock price either increase by a multiplicative factor of $u>1$ or the stock price decreases by a multiplicative factor of $d<1$. Denote the corresponding option value (the net gain from the option) by $\mO_u$ and $\mO_d$ respectively. \\~\\
+\begin{defn}{The Binomial Model}{} Suppose that $t$ is the current time. An asset has a current stock price of $S_0$ with an unknown option price $\mO$. After a time step of $dt$, the stock price either increase by a multiplicative factor of $u>1$ or the stock price decreases by a multiplicative factor of $d<1$. Denote the corresponding option value (the net gain from the option) by $\mO_u$ and $\mO_d$ respectively. \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	t && {t+dt} \\
 	&& \begin{array}{c} \substack{uS_0\\\mO_u} \end{array} \\
@@ -98,7 +206,7 @@ Risk-less: A portfolio is risk-less when regardless of the outcome, the net tota
 	\arrow["dt", from=1-1, to=1-3]
 	\arrow["p", from=3-1, to=2-3]
 	\arrow["{1-p}"', from=3-1, to=4-3]
-\end{tikzcd}} \\~\\
+\end{tikzcd}} \\
 The number $0<p<1$ is an unknown quantity denoting the probability that the stock price increases. 
 \end{defn}
 
@@ -109,7 +217,7 @@ The number $0<p<1$ is an unknown quantity denoting the probability that the stoc
 \begin{itemize}
 \item The probability $p$ that the stock price increases is given by $$p=\frac{e^{rdt}-d}{u-d}$$
 \item The option price is given by $$\mO=e^{-rdt}\left(p\mO_u+(1-p)\mO_d\right)$$
-\end{itemize} \tcbline
+\end{itemize} 
 \begin{proof}
 Accounting for the discount rate, we have $$V(t+dt)=(uS_0\Delta-\mO_u)e^{-rdt}=(dS_0\Delta-\mO_d)e^{-rdt}$$ by definition of $\Delta$. Equating $V(t)$ and $V(t+dt)$ gives the desired result. 
 \end{proof}
@@ -119,7 +227,7 @@ Accounting for the discount rate, we have $$V(t+dt)=(uS_0\Delta-\mO_u)e^{-rdt}=(
 \end{lmm}
 
 \subsection{Multi-Period Binomial Models}
-\begin{defn}{The Multi-Period Binomial Model}{} Suppose that $t$ is the current time. An asset has a current stock price of $S_0$ with an unknown option price $\mO$. After a time step of $dt$, the stock price either increase by a multiplicative factor of $u>1$ or the stock price decreases by a multiplicative factor of $d<1$. Denote the corresponding option value (the net gain from the option) by $\mO_u$ and $\mO_d$ respectively. \\~\\
+\begin{defn}{The Multi-Period Binomial Model}{} Suppose that $t$ is the current time. An asset has a current stock price of $S_0$ with an unknown option price $\mO$. After a time step of $dt$, the stock price either increase by a multiplicative factor of $u>1$ or the stock price decreases by a multiplicative factor of $d<1$. Denote the corresponding option value (the net gain from the option) by $\mO_u$ and $\mO_d$ respectively. \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	&&&& \begin{array}{c} \substack{u^2S_0\\\mO_{u^2}} \end{array} & \cdots \\
 	&& \begin{array}{c} \substack{uS_0\\\mO_u} \end{array} \\
@@ -132,7 +240,7 @@ Accounting for the discount rate, we have $$V(t+dt)=(uS_0\Delta-\mO_u)e^{-rdt}=(
 	\arrow["{1-p}"', from=3-1, to=4-3]
 	\arrow["p"', from=4-3, to=3-5]
 	\arrow["{1-p}"', from=4-3, to=5-5]
-\end{tikzcd}} \\~\\
+\end{tikzcd}} \\
 The number $0<p<1$ is an unknown quantity denoting the probability that the stock price increases. The process iterates for $n$-times. 
 \end{defn}
 

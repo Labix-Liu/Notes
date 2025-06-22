@@ -31,6 +31,10 @@
 \begin{defn}{Irreducible Spaces}{} Let $X$ be a space. We say that $X$ is irreducible if the following are true. For any closed sets $U,W\subseteq X$ such that $X=U\cup W$, we have that either $U=X$ or $W=X$. Otherwise, we say that $X$ is reducible. 
 \end{defn}
 
+\begin{lmm}{}{}\\
+Let $X$ be a space. If $X$ is irreducible, then $X$ is connected. 
+\end{lmm}
+
 \begin{prp}{}{} Let $X$ be a space. Let $f:X\to Y$ be continuous. If $X$ is irreducible, then $f(X)$ is irreducible. 
 \begin{proof}
 Suppose that $f(X)=Y_1\cup Y_2$ for some closed sets $Y_1,Y_2\subseteq Y$. Then we have that $X=f^{-1}(Y_1)\cup f^{-1}(Y_2)$ and both $f^{-1}(Y_1)$ and $f^{-1}(Y_2)$ are closed by continuity. Since $X$ is irreducible, we have that either $X=f^{-1}(Y_1)$ or $X=f^{-1}(Y_2)$. Without loss of generality, assume that $X=f^{-1}(Y_1)$. By surjectivity of $f$ onto $f(X)$, we conclude that $f(X)=Y_1$. Thus $Y$ is irreducible. 
@@ -1206,11 +1210,23 @@ Let $k$ be a field. Let $V\subseteq\A_k^n$ and $W\subseteq\A_k^m$ be closed subs
 \begin{defn}{Product of Quasi-Projective Varieties}{} Let $k$ be an algebraically closed field. Let $X\subseteq\Prj^n$ and $Y\subseteq\Prj^m$ be quasi-projective varieties. Define the product of $X$ and $Y$ to be $$X\times Y=\Sigma_{m,n}(X,Y)$$ together with the subspace topology of $\Prj^{(m+1)(n+1)-1}$. 
 \end{defn}
 
+\begin{lmm}{}{}\\
+Let $k$ be an algebraically closed field. Let $X,Y$ be varieties over $k$. Then we have $$\dim(X\times Y)=\dim(X)+\dim(Y)$$
+\end{lmm}
+
 \begin{lmm}{}{} Let $k$ be an algebraically closed field. Let $X\subseteq\Prj^n$ and $Y\subseteq\Prj^m$ be quasi-projective varieties. Then the following are true. 
 \begin{itemize}
 \item $X\times Y$ is a quasi-projective variety. 
 \item If $X$ and $Y$ are projective, then $X\times Y$ is projective. 
-\item If $X$ and $Y$ are affine, then $X\times Y$ is affine. 
+\item If $X$ and $Y$ are affine, then $X\times Y$ is affine
+\end{itemize}
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $k$ be an algebraically closed field. Let $X,Y$ be affine varieties. Then then following are true. 
+\begin{itemize}
+\item $k[X\times Y]\cong k[X]\otimes_kk[Y]$. 
+\item $\mO_{X\times Y,(x,y)}\cong\left(\mO_{X,x}\otimes_k\mO_{Y,y}\right)_{m_x\otimes_k\mO_{Y,y}+\mO_{X,x}\otimes_km_y}$
 \end{itemize}
 \end{lmm}
 
@@ -1356,8 +1372,8 @@ By 5.2.2, we obtain a further isomrphism $$\mO_{\varphi_i(U_i\cap V),\varphi(p)}
 \begin{defn}{Induced Map on Germs}{} Let $k$ be a field. Let $X,Y$ be varieties over $k$. Let $\phi:X\to Y$ be a morphism of varieties. Let $p\in X$ be a point. Define the induced map on germs to be the map $$\phi^\ast:\mO_{Y,f(p)}\to\mO_{X,p}$$ given by $(U,f)\mapsto(\phi^{-1}(U),f\circ\phi)$. 
 \end{defn}
 
-\subsection{Regular Functions Near a Variety}
-\begin{defn}{Ring of Germs}{} Let $X$ be a variety. Let $Y\subseteq X$ be a subvariety. Define the local ring of $X$ at $Y$ to be $$\mO_{X,Y}=\{(U,f)\;|\;U\subseteq X\text{ is open }, U\cap Y\neq\emptyset, f\text{is regular on }Y\}/\sim$$ where we say that $(U,f)\sim(V,g)$ if $f=g$ on $U\cap V$. 
+\subsection{Regular Functions on a Subvariety}
+\begin{defn}{Ring of Germs}{} Let $k$ be a field. Let $X$ be a variety over $k$. Let $Y\subseteq X$ be a an irreducible subvariety of $X$. Define the local ring of $X$ at $Y$ to be $$\mO_{X,Y}=\{(U,f:U\to k)\;|\;U\subseteq X\text{ is open }, U\cap Y\neq\emptyset, f\text{is regular on }Y\}/\sim$$ where we say that $(U,f)\sim(V,g)$ if there exists an open subset $W\subseteq U\cap V$ such that $f|_W=g|_W$. 
 \end{defn}
 
 \begin{prp}{}{} Let $X$ be a variety. Let $Y\subseteq X$ be a subvariety. Then the following are true. 
@@ -1388,6 +1404,138 @@ By 5.2.2, we obtain a further isomrphism $$\mO_{\varphi_i(U_i\cap V),\varphi(p)}
 \end{itemize}
 \end{prp}
 
+
+\pagebreak
+\section{The Algebra of Rational Functions}
+\subsection{Rational Functions and The Function Field}
+\begin{defn}{Function Field}{} Let $k$ be a field. Let $V$ be a variety over $k$. Define the set of rational functions on $V$ to be $$K(V)=\{(U,f)\;|\;U\subseteq V\text{ open and }f:U\to k\text{ is regular }\}/\sim$$ where we say that $(U,f)\sim(V,g)$ if there exists $W\subseteq U\cap V$ open such that $f|_W=g|_W$. Elements of the function field are called rational functions. 
+\end{defn}
+
+\begin{lmm}{}{} Let $k$ be a field. Let $V$ be an variety over $k$. Define the operations $$(U,f)+(V,g)=(U\cap V,f+g)\;\;\;\;\text{ and }\;\;\;\;(U,f)\cdot(V,g)=(U\cap V,fg)$$ Then they induce well defined operations on $K(V)$ so that it is a $k$-algebra. Moreover, it is a field. 
+\end{lmm}
+
+\begin{lmm}{}{} Let $V$ be a variety over $\C$. Then the following are true. 
+\begin{itemize}
+\item The map $\mO_V(V)\to\mO_{V,p}$ given by $f\mapsto(V,f)$ is injective for any $p\in V$. 
+\item The map $\mO_{V,p}\to k(V)$ given by $(V,f)\mapsto(V,f)$ is injective for any $p\in V$. 
+\end{itemize}
+\end{lmm}
+
+\begin{prp}{}{} Let $k$ be an algebraically closed field. Let $V\subseteq\A_k^n$ be an irreducible affine variety. Then there is an isomorphism $$K(V)\cong\text{Frac}(k[V])$$ Moreover, $K(V)$ is a finitely generated field extension of $k$. 
+\end{prp}
+
+\begin{prp}{}{} Let $k$ be an algebraically closed field. Let $V\subseteq\A_k^n$ be an irreducible affine variety. Then we have $$\text{trdeg}_k(K(V))=\dim(V)$$
+\end{prp}
+
+\begin{prp}{}{} Let $k$ be an algebraically closed field. Let $V\subseteq\Prj^n$ be an irreducible projective variety over $k$. Then there is a $k$-algebra isomorphism $$K(X)\cong(k[V]_{(0)})_0$$ where the zero refers to taking the degree zero part of the graded ring. 
+\begin{proof}
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $k$ be an algebraically closed field. Let $X$ be an irreducible variety over $k$. Then the following are true. 
+\begin{itemize}
+\item For any open subset $U\subseteq X$, we have $k(X)=k(U)$. 
+\item $k(X)$ is a finitely generated field extension. 
+\end{itemize}
+\begin{proof}
+If $[(V,f)]\in k(X)$, then $[(U\cap V,f|_{U\cap V})]$ by definition. But the latter is also an element of $k(U)$ so $k(X)\subseteq k(U)$. Conversely, if $(V,g)\in k(U)$, then $V$ is also an open subset of $X$, hence $(V,g)$ is an element of $k(X)$ and so $k(U)\subseteq k(X)$. \\
+
+Let $U$ be an open affine subset of $X$. Then $k(X)=k(U)$. Then by prp2.1.4 we know that $k(U)$ is a finitely generated field extension over $k$. 
+\end{proof}
+\end{prp}
+
+\begin{eg}{}{}\\
+Let $k$ be an algebraically closed field. Let $n\in\N$. Then we have $$k(\Prj^n)\cong k(x_1,\dots,x_n)$$
+\end{eg}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $K/k$ be a finitely generated field extension. Then there exists an irreducible variety $X$ over $k$ such that $K(X)=K$. 
+\end{prp}
+
+\subsection{Rational Maps between Varieties}
+\begin{defn}{An Equivalence Class of Maps}{} Let $X,Y$ be irreducible varieties. Let $U_1,U_2\subseteq X$ be open. Let $f_1:U_1\to Y$ and $f_2:U_2\to Y$ be morphisms of varieties. We say that $f_1$ and $f_2$ are equivalent if there exists an open subset $W\subseteq U_1\cap U_2$ such that $$f_1|_W=f_2|_W:W\to Y$$
+\end{defn}
+
+\begin{defn}{Rational Maps}{} Let $X,Y$ be irreducible varieties. A rational map $f:X\to Y$ is an equivalent class of morphisms of varieties $f:U\to Y$ for some open subset $U\subseteq X$. 
+\end{defn}
+
+Since open subsets of a variety are dense, rational maps are maps that are defined almost entirely on $X$. In particular, notice that rational functions on an irreducible variety $V$ is the same as a rational map $V\to k$. \\
+
+Moreover, if $f:X\to Y$ is a regular map (morphism of varieties), then $[(X,f)]$ is also a rational map. 
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $V,W$ be irreducible varieties over $k$. Let $\phi:V\to W$ be a rational map. Then $$\phi(x)=[\phi_0(x):\cdots\phi_n(x)]$$ for some $\phi_0,\dots,\phi_n\in K(V)$. 
+\begin{proof}\\
+This means that there exists an open subset $U\subseteq V$ such that $\phi|_U$ is a morphism of varieties. Morphism of varieties into projective space are given in coordinates by $[\phi_0:\cdots:\phi_n]$ where $\phi_i$ is a regular map, or that $\phi_i\in\Hom_\bold{Var}(U,k)$. Moreover, $\phi_0,\dots,\phi_n$ must not simultaneously vanish on $U$ (but it is allowed to simultaneously vanish on some point in $V$). In particular, $\phi_i$ is an element of $K(V)$ by definition. 
+\end{proof}
+\end{lmm}
+
+\begin{eg}{}{}\\
+Let $k$ be a field. The map of sets $\phi:\Prj_k^1\to\Prj_k^2$ defined by $$\phi([s:t])=\left[\frac{s+t}{s}:\frac{st+t^2}{(s-t)^2}:\frac{s^2-t^2}{t^2}\right]$$ is a rational map. 
+\begin{proof}\\
+The map of sets is not well defined when any denominator is $0$, or when the three coordinates simultaneously vanish. For the former, this happens when $s=0$ or $t=0$ or $s=t$. This gives three points $[0:1],[1:0],[1:1]$. The numerators simultaneously vanish when $s=-t$, $t(s+t)=0$ and $(s+t)(s-t)$. Solving this gives the point $[1:-1]$. Hence this map is a rational map, but not a morphism of varieties. 
+\end{proof}
+\end{eg}
+
+\begin{defn}{Dominant Maps}{} Let $X,Y$ be irreducible varieties. Let $f:X\to Y$ be a rational map defined on $U\subseteq X$. We say that $f$ is dominant if $f(U)$ contains an open subset. 
+\end{defn}
+
+It only makes sense to compose rational maps if the former one is dominant. 
+
+\begin{prp}{}{} Let $X,Y,Z$ be irreducible varieties. Let $f:X\to Y$ and $g:Y\to Z$ be rational maps. If $f$ is dominant, then $g\circ f$ is rational. 
+\end{prp}
+
+\begin{defn}{Induced Map on Rational Functions}{} Let $k$ be a field. Let $X,Y$ be irreducible varieties over $k$. Let $\phi:X\to Y$ be a dominant rational map. Define the induced map on rational functions to be $$\phi^\ast:K(Y)\to K(X)$$ given by $(U,f)\mapsto (\phi^{-1}(U),f\circ\phi)$. 
+\end{defn}
+
+\begin{prp}{}{} Let $k$ be a field. Let $X,Y$ be irreducible varieties over $k$. Let $\phi:X\to Y$ be a dominant rational map. Then the induced map $\phi^\ast:K(Y)\to K(X)$ is a $k$-algebra homomorphism. 
+\end{prp}
+
+\begin{prp}{}{} Let $k$ be a field. Let $X,Y$ be irreducible varieties over $k$. Then there is a one-to-one correspondence $$\left\{\substack{\text{Dominant Rational Maps}\\X\to Y}\right\}\;\;\overset{1:1}{\longleftrightarrow}\left\{\substack{k\text{-algebra homomorphisms}\\K(Y)\to K(X)}\right\}$$ given by $\phi\mapsto\phi^\ast$. 
+\end{prp}
+
+\subsection{Birational Equivalence}
+\begin{defn}{Birational Maps}{} Let $X,Y$ be irreducible varieties. Let $f:X\to Y$ be a dominant rational map defined on $U\subseteq X$. We say that $f$ is a birational map if there exists a dominant rational map $g:Y\to X$ such that $$g\circ f=\text{id}_U\;\;\;\;\text{ and }\;\;\;\;f\circ g=\text{id}_V$$ for some open subsets $U\subseteq X$ and $V\subseteq Y$. In this case, we say that $X$ and $Y$ are birational. 
+\end{defn}
+
+\begin{prp}{}{} Let $k$ be a field. Let $X,Y$ be irreducible varieties over $k$. The the following conditions are equivalent. 
+\begin{itemize}
+\item $X$ and $Y$ are birationally equivalent
+\item There exists open subsets $U\subseteq X$ and $V\subseteq Y$ with $U$ isomorphic to $V$
+\item $K(X)$ and $K(Y)$ are isomorphic $k$-algebras
+\end{itemize}
+\end{prp}
+
+\begin{eg}{}{}\\
+The cuspidal cubic $\V(y^2-x^3)\subseteq\A_\C^2$ is birational to $\A_\C^1$. 
+\begin{proof}\\
+Recall that $\C(\A_\C^1)\cong\C(t)$. Define a $\C$-algebra homomorphism $\phi:\C(t)\to\left(\frac{\C[x,y]}{(y^2-x^3)}\right)_{(0)}$ by $t\mapsto y/x$. Since $\phi$ is a map of fields it is injective. It remains to show that $\phi$ is surjective. Notice that $x$ and $y$ generate the latter $\C$-algebra and so it suffices to find preimages of $x$ and $y$. But notice that $t^2\mapsto y^2/x^2=x$ and $t^3\mapsto y^3/x^3=yx^3/x^3=y$. Hence we are done. 
+\end{proof}
+\end{eg}
+
+\begin{eg}{}{}\\
+The nodal cubic $\V(y^2-x^3-x^2)\subseteq\A_\C^2$ is birational to $\A_\C^1$. 
+\begin{proof}
+Again recall that $\C(\A_\C^1)\cong\C(t)$. Define a $\C$-algebra homomorphism $\phi:\C(t)\to\left(\frac{\C[x,y]}{(y^2-x^3-x^2)}\right)_{(0)}$ by $t\mapsto y/x$. Since $\phi$ is a map of fields it is injective. It remains to show that $\phi$ is surjective. Notice that $x$ and $y$ generate the latter $\C$-algebra and so it suffices to find preimages of $x$ and $y$. But notice that $t^2-1\mapsto y^2/x^2-1=(x^3+x^2)/x^2-1=x$ and $t^3-t\mapsto y^3/x^3-y/x=y$. Hence we are done. 
+\end{proof}
+\end{eg}
+
+The idea of the $\C$-algebra isomorphism above comes from the parameterization $t\mapsto(t^2-1,t^3-t)$ of the nodal cubic. 
+
+\begin{lmm}{}{} Let $n\in\N$. Then $\A^n$ is birationally equivalent to $\Prj^n$. 
+\begin{proof}
+The function field of $\A^n$ is given by $K(\A^n)=K(x_1,\dots,x_n)$. On the other hand, we can compute the function field of $\Prj^n$ to get 
+\begin{align*}
+K(\Prj^n)&=\left(k[x_0,\dots,x_n]_{(0)}\right)_0\\
+&=\left(k(x_0,\dots,x_n)\right)_0
+\end{align*}
+The zeroth graded component of $k(x_0,\dots,x_n)$ is given by $$(k(x_0,\dots,x_n))_0=\left\{\frac{f}{g}\in k(x_0,\dots,x_n)\;|\;\deg(f)=\deg(g)\right\}$$ Define a map $\phi:(k(x_0,\dots,x_n))_0\to k(x_1,\dots,x_n)$ by the map $$f(x_0,\dots,x_n)/g(x_0,\dots,x_n)\mapsto f(1,x_1,\dots,x_n)/g(1,x_1,\dots,x_n)$$ Evaluation of the zeroth variable with $1$ is a well defined $\C$-algebra homomorphism. I claim that this is a bijection. Define another map $\psi:k(x_1,\dots,x_n)\to(k(x_0,\dots,x_n))_0$ by $$h/k\mapsto x_0^d h(x_1/x_0,\dots,x_n/x_0)/x_0^d k(x_1/x_0,\dots,x_n/x_0)$$ where $d=\max\{\deg(f),\deg(g)\}$. By construction we see that $x_0^d h(x_1/x_0,\dots,x_n/x_0)$ has the same degree as $x_0^d k(x_1/x_0,\dots,x_n/x_0)$ and that they are homogeneous polynomials (similar to the homogenization of a polynomial). Moreover it is clear that $\psi$ and $\phi$ are inverses of each other. Hence we obtain an isomorphism of $\C$-algebras. 
+\end{proof}
+\end{lmm}
+
+\begin{defn}{Rational Varieties}{} Let $k$ be a field. Let $X$ be a variety over $k$. We say that $X$ is rational if $X$ is birationally equivalent to $\Prj_k^n$ for some $n\in\N$. 
+\end{defn}
 
 
 

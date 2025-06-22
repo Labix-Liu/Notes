@@ -1,14 +1,14 @@
 \documentclass[a4paper]{article}
 
-\input{C:/Users/liula/Desktop/Latex/Headers V1.2.tex}
+\input{C:/Users/liula/Desktop/Latex/Headers/Headers.tex}
 
 \pagestyle{fancy}
 \fancyhf{}
 \rhead{Labix}
-\lhead{Category Theory 2}
+\lhead{Topics in Category Theory}
 \rfoot{\thepage}
 
-\title{Category Theory 2}
+\title{Topics in Category Theory}
 
 \author{Labix}
 
@@ -30,7 +30,7 @@
 \end{itemize}
 such that the following coherence conditions hold. 
 \begin{itemize}
-\item Associativity: \\~\\
+\item Associativity: \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	{(M\otimes M)\otimes M} && {M\otimes M} \\
 	&& M \\
@@ -40,8 +40,8 @@ such that the following coherence conditions hold.
 	\arrow["\mu", from=1-3, to=2-3]
 	\arrow["{\text{id}_M\otimes\mu}"', from=3-1, to=3-3]
 	\arrow["\mu"', from=3-3, to=2-3]
-\end{tikzcd}}\\~\\
-\item Identity: \\~\\
+\end{tikzcd}}\\
+\item Identity: \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	{I\otimes M} & {M\otimes M} & {M\otimes I} \\
 	& M
@@ -50,7 +50,7 @@ such that the following coherence conditions hold.
 	\arrow["\mu"{description}, from=1-2, to=2-2]
 	\arrow["{\text{id}_M\otimes\mu}"', from=1-3, to=1-2]
 	\arrow["\cong", from=1-3, to=2-2]
-\end{tikzcd}}\\~\\
+\end{tikzcd}}\\
 \end{itemize}
 \end{defn}
 
@@ -68,7 +68,7 @@ such that the following conditions are satisfied:
 \item The unit map is such that multiplication with the unit returns itself. 
 \end{itemize}
 
-This is starting point of formalizing monoid objects in category theory. An algebraic object in general consists of a set, some binary operations together with some coherence conditions for the binary operations. The coherence conditions are in particular provided by the associator and unitor of the underlying symmetric monoidal structure. One can in particular think of the unit map $\eta:\ast\to M$ as picking out a point in $M$ to be the identity in $M$. \\~\\
+This is starting point of formalizing monoid objects in category theory. An algebraic object in general consists of a set, some binary operations together with some coherence conditions for the binary operations. The coherence conditions are in particular provided by the associator and unitor of the underlying symmetric monoidal structure. One can in particular think of the unit map $\eta:\ast\to M$ as picking out a point in $M$ to be the identity in $M$. \\
 
 It is important to make clear what are the data of an object and what are the conditions the data are subject to. In our case, the data consists a set, a binary operation and an identity element. These data are subject to conditions called associativity and unity which is dependent on the symmetric monoidal structure. 
 
@@ -81,7 +81,7 @@ It is important to make clear what are the data of an object and what are the co
 \end{itemize}
 such that the following coherence conditions hold. 
 \begin{itemize}
-\item Associativity: \\~\\
+\item Associativity: \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	{(G\otimes G)\otimes G} && {G\otimes G} \\
 	&& G \\
@@ -91,8 +91,8 @@ such that the following coherence conditions hold.
 	\arrow["\mu", from=1-3, to=2-3]
 	\arrow["{\text{id}_G\otimes\mu}"', from=3-1, to=3-3]
 	\arrow["\mu"', from=3-3, to=2-3]
-\end{tikzcd}}\\~\\
-\item Identity: \\~\\
+\end{tikzcd}}\\
+\item Identity: \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	{I\otimes G} & {G\otimes G} & {G\otimes I} \\
 	& M
@@ -101,8 +101,8 @@ such that the following coherence conditions hold.
 	\arrow["\mu"{description}, from=1-2, to=2-2]
 	\arrow["{\text{id}_G\otimes\mu}"', from=1-3, to=1-2]
 	\arrow["\cong", from=1-3, to=2-2]
-\end{tikzcd}}\\~\\
-\item Inverse: \\~\\
+\end{tikzcd}}\\
+\item Inverse: \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	G & {G\otimes G} \\
 	{G\otimes G} & G
@@ -111,7 +111,7 @@ such that the following coherence conditions hold.
 	\arrow["{\text{id}_G}"{description}, from=1-1, to=2-2]
 	\arrow["\mu", from=1-2, to=2-2]
 	\arrow["\mu"', from=2-1, to=2-2]
-\end{tikzcd}}\\~\\
+\end{tikzcd}}\\
 \end{itemize}
 \end{defn}
 
@@ -129,7 +129,124 @@ such that the following coherence conditions hold.
 
 \subsection{Ring Objects}
 
-\subsection{Algebra Objects}
+\subsection{Algebra and Coalgebra Objects}
+There is a need to revisit the definition of an algebra (over a field)
+
+\begin{prp}{}{} A vector space $V$ over a field $k$ is an algebra if and only if there is a following collection of data: 
+\begin{itemize}
+\item A $k$-linear map $m:V\otimes V\to V$ called the multiplication map
+\item An $k$-linear map $u:k\to V$ called the unital map
+\end{itemize}
+such that the following two diagrams are commutative: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{V\otimes V\otimes V} & {V\otimes V} && {k\otimes V} & {V\otimes V} \\
+	{V\otimes V} & V && V & {V\otimes k}
+	\arrow["{\text{id}\otimes m}", from=1-1, to=1-2]
+	\arrow["{m\otimes\text{id}}"', from=1-1, to=2-1]
+	\arrow["m", from=1-2, to=2-2]
+	\arrow["{u\otimes\text{id}}", from=1-4, to=1-5]
+	\arrow["\cong"', from=1-4, to=2-4]
+	\arrow["m"{description}, from=1-5, to=2-4]
+	\arrow["m"', from=2-1, to=2-2]
+	\arrow["{\text{id}\otimes u}"', from=2-5, to=1-5]
+	\arrow["\cong", from=2-5, to=2-4]
+\end{tikzcd}}\\~\\
+where the unnamed maps is the canonical isomorphisms. 
+\end{prp}
+
+Evidently, the map $\mu$ gives a multiplicative structure for $V$ and $\Delta$ gives the unitary structure of an algebra. The diagram on the left then represent associativity of multiplication. Notice that such additional structure on $V$ formally lives in the category $\bold{Vect}_k$ of vector spaces over a fixed field $k$. \\~\\
+
+Therefore we can formally dualize all arrows to obtain a new object. 
+
+\begin{defn}{Coalgebra}{} Let $V$ be a vector space over a field $k$. We say that $V$ is a coalgebra over $k$ if there is a collection of data: 
+\begin{itemize}
+\item A $k$-linear map $\Delta:V\to V\otimes V$ called the comultiplication map
+\item An $k$-linear map $\varepsilon:V\to k$ called the counital map
+\end{itemize} 
+such that the following diagrams are commutative: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{V\otimes V\otimes V} & {V\otimes V} && {k\otimes V} & {V\otimes V} \\
+	{V\otimes V} & V && V & {V\otimes k}
+	\arrow["{\varepsilon\otimes\Delta}"', from=1-2, to=1-1]
+	\arrow["{\varepsilon\otimes\text{id}}"', from=1-5, to=1-4]
+	\arrow["{\text{id}\otimes\varepsilon}", from=1-5, to=2-5]
+	\arrow["{\Delta\otimes\varepsilon}", from=2-1, to=1-1]
+	\arrow["\Delta"', from=2-2, to=1-2]
+	\arrow["\Delta", from=2-2, to=2-1]
+	\arrow["\cong", from=2-4, to=1-4]
+	\arrow["\Delta"{description}, from=2-4, to=1-5]
+	\arrow["\cong"', from=2-4, to=2-5]
+\end{tikzcd}}\\~\\
+where the unnamed maps is the canonical isomorphisms. 
+\end{defn}
+
+\begin{lmm}{}{} Every vector space $V$ over a field $k$ can be given the structure of a coalgebra where 
+\begin{itemize}
+\item $\Delta:V\to V\otimes V$ is defined by $\Delta(v)=v\otimes v$
+\item $\varepsilon:V\to k$ is defined by $\varepsilon(v)=1_k$
+\end{itemize}
+
+\end{lmm}
+
+We would like to formally invert the definitions of algebra homomorphisms in order to define coalgebra homomorphisms. 
+
+\subsection{Bialgebra Objects}
+\begin{defn}{Bialgebras}{} Let $V$ be a vector space over a field $k$. We say that $V$ is a bialgebra if there is a collection of data: 
+\begin{itemize}
+\item A $k$-linear map $m:V\otimes V\to V$ called the multiplication map
+\item An $k$-linear map $u:k\to V$ called the unital map
+\item A $k$-linear map $\Delta:V\to V\otimes V$ called the comultiplication map
+\item An $k$-linear map $\varepsilon:V\to k$ called the counital map
+\end{itemize}
+such that $(V,m,u)$ is an algebra over $k$ and $(V,\Delta,\varepsilon)$ is a coalgebra over $k$ and that the following diagrams are commutative: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{V\otimes V} & V & {V\otimes V} && k && k \\
+	{V\otimes V\otimes V\otimes V} && {V\otimes V\otimes V\otimes V} &&& V \\
+	\\
+	{V\otimes V} && V &&& {k\otimes k\cong k} \\
+	& {k\otimes k\cong k} &&& {V\otimes V} && V
+	\arrow["m", from=1-1, to=1-2]
+	\arrow["{\Delta\otimes\Delta}"', from=1-1, to=2-1]
+	\arrow["\Delta", from=1-2, to=1-3]
+	\arrow["{\text{id}}", from=1-5, to=1-7]
+	\arrow["u"', from=1-5, to=2-6]
+	\arrow["{\text{id}\otimes\tau\otimes\text{id}}"', from=2-1, to=2-3]
+	\arrow["{m\otimes m}"{description}, from=2-3, to=1-3]
+	\arrow["\varepsilon"', from=2-6, to=1-7]
+	\arrow["m", from=4-1, to=4-3]
+	\arrow["{\varepsilon\otimes\varepsilon}"', from=4-1, to=5-2]
+	\arrow["\varepsilon", from=4-3, to=5-2]
+	\arrow["{u\otimes u}"', from=4-6, to=5-5]
+	\arrow["u", from=4-6, to=5-7]
+	\arrow["\Delta", from=5-7, to=5-5]
+\end{tikzcd}}\\~\\
+where $\tau:V\otimes V\to V\otimes V$ is the commutativity map defined by $\tau(x\otimes y)=y\otimes x$. 
+\end{defn}
+
+\begin{thm}{}{} Let $V$ be a vector space over $k$. Suppose that $(V,m,u)$ is an algebra and $(V,\Delta,\varepsilon)$ is a coalgebra. Then the following conditions are equivalent. 
+\begin{itemize}
+\item $(V,m,u,\Delta,\varepsilon)$ is a bialgebra
+\item $m:V\otimes V\to V$ and $u:k\to V$ are coalgebra homomorphisms
+\item $\Delta:V\to V\otimes V$ and $\varepsilon:V\to k$ are algebra homomorphisms
+\end{itemize}
+\end{thm}
+
+\subsection{Hopf Algebra Objects}
+\begin{defn}{Hopf Algebra}{} Let $(H,m,u,\Delta,\varepsilon)$ be a bialgebra. We say that $H$ is a Hopf algebra if there is a $k$-linear map $S:H\to H$ called the antipode such that the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	& {H\otimes H} && {H\otimes H} \\
+	H && k && H \\
+	& {H\otimes H} && {H\otimes H}
+	\arrow["{S\otimes\text{id}}", from=1-2, to=1-4]
+	\arrow["m", from=1-4, to=2-5]
+	\arrow["\Delta", from=2-1, to=1-2]
+	\arrow["\varepsilon", from=2-1, to=2-3]
+	\arrow["\Delta"', from=2-1, to=3-2]
+	\arrow["u", from=2-3, to=2-5]
+	\arrow["{\text{id}\otimes S}"', from=3-2, to=3-4]
+	\arrow["m"', from=3-4, to=2-5]
+\end{tikzcd}}\\~\\
+\end{defn}
 
 \pagebreak
 \section{Enriched Categories}
@@ -142,7 +259,7 @@ such that the following coherence conditions hold.
 \end{itemize}
 such that the following diagram commutes: 
 \begin{itemize}
-\item Associativity: \\~\\
+\item Associativity: \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	{\Hom_\mC(E,F)\times(\Hom_\mC(D,E)\times\Hom_\mC(C,D))} & {\Hom_\mC(E,F)\times\Hom_\mC(C,E)} \\
 	& {\Hom_\mC(C,F)} \\
@@ -152,8 +269,8 @@ such that the following diagram commutes:
 	\arrow["\alpha", from=3-1, to=1-1]
 	\arrow["{\circ\times 1}"', from=3-1, to=3-2]
 	\arrow["\circ"', from=3-2, to=2-2]
-\end{tikzcd}}\\~\\
-\item Identity: \\~\\
+\end{tikzcd}}\\
+\item Identity: \\
 \adjustbox{scale=0.85,center}{\begin{tikzcd}
 	{\Hom_\mC(C,D)\times I} & {\Hom_\mC(C,D)\times\Hom_\mC(C,C)} & {\Hom_\mC(D,D)\times\Hom_\mC(C,D)} & {I\times\Hom_\mC(C,D)} \\
 	& {\Hom_\mC(C,D)} & {\Hom_\mC(C,D)}
@@ -163,7 +280,7 @@ such that the following diagram commutes:
 	\arrow["\circ"', from=1-3, to=2-3]
 	\arrow["{u\times\text{id}}"', from=1-4, to=1-3]
 	\arrow["\cong", from=1-4, to=2-3]
-\end{tikzcd}}\\~\\
+\end{tikzcd}}\\
 \end{itemize}
 \end{defn}
 
@@ -178,7 +295,7 @@ such that the following diagram commutes:
 \end{itemize}
 Moreover, the following diagrams are commutative: 
 \begin{itemize}
-\item Composition axiom: \\~\\
+\item Composition axiom: \\
 \adjustbox{scale=1,center}{\begin{tikzcd}
 	{\Hom_\mC(B,C)\otimes\Hom_\mC(A,B)} & {\Hom_\mC(A,C)} \\
 	{\Hom_\mC(F(B),F(C))\otimes\Hom_\mC(F(A),F(B))} & {\Hom_\mC(F(A),F(C))}
@@ -186,19 +303,19 @@ Moreover, the following diagrams are commutative:
 	\arrow["{F\otimes F}"', from=1-1, to=2-1]
 	\arrow["F", from=1-2, to=2-2]
 	\arrow["\circ"', from=2-1, to=2-2]
-\end{tikzcd}}\\~\\
-\item Unit axiom: \\~\\
+\end{tikzcd}}\\
+\item Unit axiom: \\
 \adjustbox{scale=1,center}{\begin{tikzcd}
 	I & {\Hom_\mC(A,A)} \\
 	& {\Hom_\mC(F(A),F(A))}
 	\arrow["u", from=1-1, to=1-2]
 	\arrow["u"', from=1-1, to=2-2]
 	\arrow["F", from=1-2, to=2-2]
-\end{tikzcd}}\\~\\
+\end{tikzcd}}\\
 \end{itemize}
 \end{defn}
 
-\begin{defn}{Enriched Natural Transformations}{} Let $(\mS,\otimes,I)$ be a monoidal category. Let $\mC,\mD$ be $\mS$-categories. Let $F,G:\mC\rightrightarrows\mD$ be two $\mS$-functors. An $\mS$-natural transformation $\alpha:F\Rightarrow G$ consists of the following data. For each $C\in\mC$, a morphism $$\alpha_C:I\to\Hom_\mD(F(C),G(C))$$ such that the following diagram commutes in $\mS$: \\~\\
+\begin{defn}{Enriched Natural Transformations}{} Let $(\mS,\otimes,I)$ be a monoidal category. Let $\mC,\mD$ be $\mS$-categories. Let $F,G:\mC\rightrightarrows\mD$ be two $\mS$-functors. An $\mS$-natural transformation $\alpha:F\Rightarrow G$ consists of the following data. For each $C\in\mC$, a morphism $$\alpha_C:I\to\Hom_\mD(F(C),G(C))$$ such that the following diagram commutes in $\mS$: \\
 \adjustbox{scale=0.85,center}{\begin{tikzcd}
 	& {\Hom_\mC(A,B)} \\
 	{\Hom_\mC(A,B)\otimes I} && {I\otimes\Hom_\mC(A,B)} \\
@@ -210,7 +327,7 @@ Moreover, the following diagrams are commutative:
 	\arrow["{\alpha_B\otimes F}", from=2-3, to=3-3]
 	\arrow["\circ"', from=3-1, to=4-2]
 	\arrow["\circ", from=3-3, to=4-2]
-\end{tikzcd}}\\~\\
+\end{tikzcd}}\\
 \end{defn}
 
 \begin{defn}{Equivalence of Enriched Categories}{} Let $\mS$ be a monoidal category. Let $\mC,\mD$ be $\mS$-categories. We say that $\mC$ and $\mD$ are $\mS$-equivalent if there exists $\mS$-functors $F:\mC\to mD$ and $G:\mD\to\mC$ such that $$\lambda:1\overset{\cong}{\Rightarrow}F\circ G\;\;\;\;\text{ and }\;\;\;\;\eta:G\circ F\overset{\cong}{\Rightarrow}1$$ are $\mS$-isomorphisms. 
