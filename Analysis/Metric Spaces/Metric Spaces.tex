@@ -92,9 +92,6 @@ Observe that $$X\setminus\bigcap_{k=1}^nU_k=\bigcup_{k=1}^n(X\setminus U_k)$$ an
 Let $X$ be a metric space. Let $U\subseteq X$ be a subset. We say that $U$ is bounded if $\text{diam}(U)<\infty$. 
 \end{defn}
 
-\begin{defn}{Neighbourhood of a Subset}{} Let $(M,d)$ be a metric space. Let $U,T\subseteq M$. Let $r\in\R_{\geq 0}$. Define the neighbourhood of $U$ with size $r$ to be $$N_r(U)=\{x\in M\;|\;d(U,\{x\})\leq r\}$$
-\end{defn}
-
 \subsection{Points in a Subset}
 \begin{defn}{Interior Points}{} Let $M$ be a metric space. Let $x\in U\subset M$. We say that $x$ is an interior point of $U$ if there exists $r$ such that $$B_r(x)\subset U$$ Denote the set of all interior points by $U^\circ$. 
 \end{defn}
@@ -115,7 +112,19 @@ Let $U\cap\partial U=\emptyset$. Let $x\in U$. Then $x\notin\partial U$. Thus by
 \begin{prp}{}{} Let $M$ be a metric space. Let $U\subset M$. Then $U$ is closed if and only $$\overline{U}=U$$
 \end{prp}
 
-\subsection{Sequences, Limits and Continuity}
+\subsection{Product Metrics}
+\begin{defn}{The p Metric}{} Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces. Let $p\in[1,\infty)$. Define the $p$ metric to be the map $d_p:(X\times Y)\times(X\times Y)\to\R$ given by $$d_p((x_1,y_1),(x_2,y_2))=\left(d_X(x_1,x_2)^p+d_Y(y_1,y_2)^p\right)^{1/p}$$
+\end{defn}
+
+\begin{prp}{}{} Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces. Let $p\in[1,\infty)$. Then $d_p$ is a metric on $X\times Y$. 
+\end{prp}
+
+\begin{prp}{}{} Let $X,Y$ be metrics spaces. Let $((x_n,y_n))_{n\in\N}$ be a sequence in $X\times Y$. Let $(x,y)\in X\times Y$. Then $((x_n,y_n))_{n\in\N}$ converges to $(x,y)$ if and only if $(x_n)_{n\in\N}$ converges to $x$ and $(y_n)_{n\in\N}$ converges to $y$. 
+\end{prp}
+
+\pagebreak
+\section{Limits and Continuity in Metric Spaces}
+\subsection{Sequences}
 \begin{defn}{Sequences}{} Let $X$ be a metric space. A sequence in $X$ is an ordered set of numbers $x_0,x_1,x_2,\dots$ such that they all are in $X$. We denote this sequence by $(x_n)_{n\in\N}$. 
 \end{defn}
 
@@ -131,10 +140,27 @@ Suppose that the right hand side is true. Suppose for a contradiction that $X\se
 \end{proof}
 \end{prp}
 
-\begin{defn}{Continuity}{} Let $(U,d_1)$, $(V,d_2)$ be metric spaces. $f:U\to V$ is said to be continuous at $p\in U$ if for every $\epsilon>0$, there exists $\delta>0$ such that $$x\in B_{\delta}(p)\implies f(x)\in B_{\epsilon}(f(p))$$ Or equivalently, $$f(B_{\delta}(p))\subset B_{\epsilon}(f(p))$$
+\subsection{Limits}
+\begin{defn}{Accumulation Points}{}\\
+Let $M$ be a metric space. Let $x\in M$. We say that $x$ is an accumulation point of $M$ if for all $r\in\R^+$, we have $$B_r(x)\setminus\{p\}\neq\emptyset$$
 \end{defn}
 
-\begin{prp}{}{} Let $f:X\to Y$ be a funciton between metric spaces. Then $f$ is continuous at $a$ if and only if for every sequence $x_n$ such that $\lim_{n\to\infty}x_n\to a$, we have $$\lim_{n\to\infty}f(x_n)=f(a)$$
+\begin{defn}{Limits}{}\\
+Let $(X,d_X),(Y,d_Y)$ be metric spaces. Let $f:X\to Y$ be a function. Let $p\in X$ be an accumulation point. We say that $L\in Y$ is the limit of $f$ at $p$ if for all $\varepsilon>0$, there exists $\delta>0$ such that for all $x\in M$ such that $0<d_X(x,p)<\delta$, we have $d_Y(f(x),L)<\varepsilon$. In this case, we write $$L=\lim_{x\to p}f(x)$$
+\end{defn}
+
+\subsection{Continuity}
+\begin{defn}{Continuity}{}\\
+Let $(X,d_X),(Y,d_Y)$ be metric spaces. Let $f:X\to Y$ be a function. Let $p\in X$. We say that $f$ is continuous at $p$ if for all $\varepsilon>0$, there exists $\delta>0$ such that for any $x\in X$ such that $0<d_X(x,p)<\delta$, we have $d_Y(f(x),f(p))<\varepsilon$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $X,Y$ be metric spaces. Let $f:X\to Y$ be a function. Let $p\in X$ be an accumulation point. Then the following are equivalent. 
+\begin{itemize}
+\item $f$ is continuous at $p$. 
+\item For every sequence $(x_n)_{n\in\N}\subseteq X$ such that $(x_n)_{n\in\N}\to x$, we have $(f(x_n))_{n\in\N}\to f(p)$. 
+\item $\lim_{x\to p}f(x)=f(p)$. 
+\end{itemize}
 \end{prp}
 
 \begin{prp}{}{} Let $U,V$ be metric spaces. Let $f:U\to V$ be a function. Then $f$ is continuous if and only if for every open subsets $\Omega\subset V$, $f^{-1}(\Omega)$ is open. 
@@ -148,46 +174,11 @@ and we are done.
 Let $X,Y,Z$ be metric spaces. Let $f:X\to Y$ and $g:Y\to Z$ be functions. If $f$ and $g$ are continuous, then $g\circ f$ is continuous. 
 \end{prp}
 
-\subsection{Product Metrics}
-\begin{defn}{The p Metric}{} Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces. Let $p\in[1,\infty)$. Define the $p$ metric to be the map $d_p:(X\times Y)\times(X\times Y)\to\R$ given by $$d_p((x_1,y_1),(x_2,y_2))=\left(d_X(x_1,x_2)^p+d_Y(y_1,y_2)^p\right)^{1/p}$$
-\end{defn}
-
-\begin{prp}{}{} Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces. Let $p\in[1,\infty)$. Then $d_p$ is a metric on $X\times Y$. 
-\end{prp}
-
-\begin{prp}{}{} Let $X,Y$ be metrics spaces. Let $((x_n,y_n))_{n\in\N}$ be a sequence in $X\times Y$. Let $(x,y)\in X\times Y$. Then $((x_n,y_n))_{n\in\N}$ converges to $(x,y)$ if and only if $(x_n)_{n\in\N}$ converges to $x$ and $(y_n)_{n\in\N}$ converges to $y$. 
-\end{prp}
-
-\pagebreak
-\section{Geometry of Metric Spaces}
-\subsection{Linear Isometries}
-\begin{defn}{Distance Preserving Maps}{} Let $(X,d_1)$ and $(X,d_2)$ be metric spaces. Let $f:X\to Y$ be a function. We say that $f$ is distance preserving if for any $p,q\in X$, we have $$d_2(f(p),f(q))=d_1(p,q)$$
-\end{defn}
-
-\begin{defn}{Isometries}{} Let $(X,d_1)$ and $(X,d_2)$ be metric spaces. Let $f:X\to Y$ be a distance preserving map. We say that $f$ is an isometry if there exists a distance preserving map $g:Y\to X$ such that $$g\circ f=\text{id}_X\;\;\;\;\text{ and }\;\;\;\;f\circ g=\text{id}_Y$$
-\end{defn}
-
-\begin{lmm}{}{} Let $(X,d_1)$ and $(X,d_2)$ be metric spaces. Let $f:X\to Y$ be a distance preserving map. Then $f$ is an isometry if and only if $f$ is bijective. 
-\end{lmm}
-
-\subsection{Geodesics}
-\begin{defn}{Geodesics}{} Let $(X,d)$ be a metric space. Let $\gamma:I=[0,1]\to X$ be a function. We say that $\gamma$ is a geodesic if $$d(\gamma(a),\gamma(b))=\abs{b-a}$$ for all $a,b\in I$. 
-\end{defn}
-
-\begin{prp}{}{} Let $(X,d)$ be a metric space. Let $\gamma:I\to X$ be a geodesic. Then the following are true. 
-\begin{itemize}
-\item $\gamma$ is continuous and injective
-\item $I$ is homeomorphic to $\im(\gamma)$. 
-\end{itemize}
-\end{prp}
-
-\begin{defn}{Geodesic Metric Spaces}{} Let $(X,d)$ be a metric space. We say that $X$ is geodesic if for all $a,b\in X$, there exists a geodesic $\gamma:I\to X$ from $a$ to $b$. 
-\end{defn}
-
 \pagebreak
 \section{Connectedness}
 \subsection{Definitions and Properties}
-\begin{defn}{Connectedness}{} Let $X$ be metric space. We say that $X$ is disconnected if there exists open subsets $\emptyset\neq U,V\subseteq X$ such that $X=U\cup V$. We say that $X$ is connected otherwise. 
+\begin{defn}{Connectedness}{}\\
+Let $X$ be a metric space. We say that $X$ is disconnected if there exists open subsets $\emptyset\neq U,V\subseteq X$ such that $X=U\cup V$. We say that $X$ is connected otherwise. 
 \end{defn}
 
 Notice that the definition of connectedness is implicit from the definition of disconnectedness. We give an explicit criteria to prove connectedness. 
@@ -454,5 +445,126 @@ Another name for this theorem would be Banach's Fixed Point Theorem.
 
 \begin{lmm}{}{} The Cantor set is uncountable. 
 \end{lmm}
+
+\pagebreak
+\section{Complex Numbers as a Metric Space}
+\subsection{Metric Properties of $\C$}
+\begin{defn}{The Standard Norm on $\C$}{}\\
+Define the standard norm on $\C$ to be the function $\abs{\cdot}:\C\to\R$ by $$\abs{a+bi}=\sqrt{a^2+b^2}$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+The standard norm on $\C$ is indeed a norm on $\C$. 
+\end{lmm}
+
+The norm thus induces a metric $d:\C\times\C\to\R$ on $\C$ given by $$d(z_1,z_2)=\abs{z_1-z_2}$$ Thus it makes sense to talk about sequences, limits and continuity of functions from $\C$ to $\C$. Since $\C$ is also a field, we would like to know how addition and multiplication interacts with sequences and limits. 
+
+\begin{prp}{}{}\\
+Let $f,g:\C\to\C$ be functions. Let $z_0\in\C$. Suppose that the limits $\lim_{z\to z_0}f(z)$ and $\lim_{z\to z_0}g(z)$ exists. Then the following are true. 
+\begin{itemize}
+\item $\lim_{z\to z_0}(f+g)(z)=\lim_{z\to z_0}f(z)+\lim_{z\to z_0}g(z)$. 
+\item $\lim_{z\to z_0}(fg)(z)=\lim_{z\to z_0}f(z)\cdot\lim_{z\to z_0}g(z)$. 
+\item If $\lim_{z\to z_0}g(z)\neq 0$, then we have $$\lim_{z\to z_0}\left(\frac{f}{g}\right)(z)=\frac{\lim_{z\to z_0}f(z)}{\lim_{z\to z_0}g(z)}$$
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{} Let $z_0=a+bi$. Let $f(x+yi)=u(x,y)+v(x,y)i$. $$\lim_{z\to z_0}f(z)=L=\alpha+\beta i$$ if and only if $u(x,y)\to\alpha$ and $v(x,y)\to\beta$ as $(x,y)\to(a,b)$
+\end{prp}
+
+\begin{prp}{}{} Let $f:\Omega\subset\C\to\C$. Then $f(x+yi)=u(x,y)+v(x,y)i$ is continuous at $z_0=x_0+y_0i$ if and only if $u,v$ are continuous at $(x_0,y_0)$
+\end{prp}
+
+\subsection{The Modulus and Argument of a Complex Number}
+\begin{defn}{Modulus}{}\\
+Let $a+bi\in\C$ be a complex number. Define the modulus of the number to be $$\abs{a+bi}=\sqrt{a^2+b^2}$$
+\end{defn}
+
+\begin{prp}{}{} Then the following are true regarding the modulus. 
+\begin{itemize}
+\item $\abs{z}^2=\abs{z}\abs{\bar{z}}$
+\item $\abs{\bar{z}}=\abs{z}$
+\item $\abs{zw}=\abs{z}\abs{w}$
+\item $z\bar{z}=\abs{z}^2$
+\item $\abs{z+w}\leq\abs{z}+\abs{w}$
+\item $\abs{z-w}=\abs*{\abs{z}-\abs{w}}$
+\end{itemize}
+\end{prp}
+
+Recall that from real analysis, we defined the power series $$\cos(x)=\sum_{k=0}^\infty\frac{(-1)^k}{(2k)!}x^{2k}\;\;\text{ and }\;\;\sin(x)=\sum_{k=0}^\infty\frac{(-1)^k}{(2k+1)!}x^{2k+1}$$
+
+\begin{defn}{Argument}{}\\
+Define the argument function $\text{arg}:\C\to\mP(\R)$ by the formula $$\text{arg}(a+bi)=\left\{\theta\in\R\;\bigg{|}\;\cos(\theta)=\frac{a}{\abs{a+bi}}\text{ and }\sin(\theta)=\frac{b}{\abs{a+bi}}\right\}$$
+\end{defn}
+
+\begin{prp}{}{} The following are true regarding the argument. 
+\begin{itemize}
+\item $\arg{(zw)}=\arg{(z)}+\arg{(w)}=\{\theta+\phi\;|\;\theta\in\arg(z), \phi\in\arg(w)\}$
+\item $\arg{(\bar{z})}=-\arg{(z)}$
+\end{itemize}
+\end{prp}
+
+\begin{lmm}{}{} Let $z\in\C$ be a complex number. Then there exists a unique real number $\theta\in\R$ such that $\theta\in\arg(z)$ and $-\pi<\theta\leq\pi$. 
+\end{lmm}
+
+\begin{defn}{Principal Argument}{} Define the principal argument function $\text{Arg}:\C\to\R$ to be the function sending $z\in\C$ to the unique real number $\text{Arg}(z)\in\R$ such that $-\pi<\text{Arg}(z)\leq\pi$ and $\text{Arg}(z)\in\arg(z)$. 
+\end{defn}
+
+\begin{lmm}{}{} Let $z\in\C$ be a complex number. Then $$\arg(z)=\{\text{Arg}(z)+2\pi k\;|\;k\in\Z\}$$
+\end{lmm}
+
+\subsection{The Complex Exponential and Logarithm}
+\begin{defn}{Exponential Function}{} The exponential function is defined to be the function $$e^z=\sum_{k=0}^\infty\frac{z^k}{k!}=\lim_{n\to\infty}\sum_{k=0}^n\frac{z^k}{k!}$$ for all $z\in\C$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+For all $z\in\C$, the limit $e^z$ is convergent. 
+\end{prp}
+
+\begin{prp}{}{} Let $z,z_1,z_2\in\C$. Then
+\begin{itemize}
+\item $e^{z_1+z_2}=e^{z_1}e^{z_2}$
+\item $e^{mn}=(e^{m})^n$
+\item $\frac{d}{dz}e^z=e^z$
+\item $e^{i\theta}=\cos(\theta)+i\sin(\theta)$ for $\theta\in\R$. 
+\end{itemize}
+\end{prp}
+
+From now on we denote the logarithm for the real numbers by $\text{Log}:\R\to\R$. 
+
+\begin{defn}{Logarithm of a Complex Number}{} Define the logarithm of $z\in\C$ to be $\log(z)=\text{Log}(\abs{z})+i\arg(z)$. In terms of the $\text{Arg}(z)$ function, we have $$\log(z)=\text{Log}(\abs{z})+i\text{Arg}(z)+2i\pi k$$ for $k\in\Z$. Define the principal branch of the Logarithm to be $$\log(z)=\text{Log}(z)+i\text{Arg}(z)$$
+\end{defn}
+
+\begin{defn}{Principal Branch}{} Let $z=re^{i\theta}$. Define the principal branch of the logarithm to be $\log(z)=\log(r)+i(\theta)$ where $-\pi<\theta\leq\pi$
+\end{defn}
+
+\subsection{The Polar Form and Exponential Form of Complex Numbers}
+\begin{defn}{Polar Form}{} Let $z\in\C$ be a complex number. Define the polar form of $z$ to be the expression $$z=\abs{z}\left(\cos(\text{Arg}(z))+\sqrt{-1}\sin(\text{Arg}(z))\right)$$
+\end{defn}
+
+\begin{prp}{}{} Suppose that $z=r(\cos{(\theta)}+i\sin{(\theta)})$ and $w=s(\cos{(\phi)}+i\sin{(\phi)})$. 
+\begin{itemize}
+\item $zw=rs(\cos{(\theta+\phi)}+i\sin{(\theta+\phi)})$
+\item $\frac{1}{z}=\frac{1}{r}(\cos{(-\theta)}+i\sin{(-\theta)})$
+\item $\frac{z}{w}=\frac{r}{s}(\cos{(\theta-\phi)}+i\sin{(\theta-\phi)})$
+\item $\bar{z}=r(\cos{(-\theta)}+i\sin{(-\theta)})$
+\end{itemize}
+\end{prp}
+
+\begin{thm}{The Exponential Form of a Complex Number}{} Every $z\in\C$ can be written in the form $$z=re^{i\theta}$$ where $r=\abs{z}>0$ and $\theta\in\arg(z)$. 
+\end{thm}
+
+\begin{lmm}{}{} Suppose that $\theta$ and $\phi$ are real numbers.Then $e^{i\theta}=e^{i\phi}$ if and only if there exists some $k\in\Z$ such that $\phi=\theta+2\pi k$. 
+\end{lmm}
+
+\subsection{Roots of Complex Numbers}
+\begin{defn}{$n$th Roots}{} Let $w\neq0$ be a complex number and $n$ a positive integer. A number $z$ is called the $n$th root of $w$ if and only if $z^n=w$. 
+\end{defn}
+
+\begin{thm}{De Moivre's Theorem}{} Suppose that $r\in\mathbb{Q}$. Then $(\cos{\theta}+i\sin{\theta})^r=\cos{(r\theta)}+i\sin{(r\theta)}$
+\end{thm}
+
+\begin{thm}{Roots of Unity}{} Suppose that $z=re^{i\theta}$. Then the $n$th roots of $z$ are $$r^{\frac{1}{n}}\left[\cos{\left(\frac{(\theta+2\pi k)i}{n}\right)}+i\sin{\left(\frac{(\theta+2\pi k)i}{n}\right)}\right]$$ where $k=0,1,\dots,n-1$. 
+\end{thm}
+
 
 \end{document}

@@ -120,6 +120,10 @@ T   & T   & T
 for two arguments $P$ and $Q$. 
 \end{defn}
 
+\subsection{Logic Systems}
+\begin{defn}{First Order Logic}{}
+\end{defn}
+
 \pagebreak
 \section{Introduction to Sets}
 \subsection{Logical Symbols for Sets}
@@ -586,8 +590,7 @@ Let $f:X\to Y$ be a function.
 Interested readers may look up left and right inverses of a function. They are characterized by the fourth and second item respecrtively. By combining these two properties, left and right inverses combine to become an inverse of a function in the sense that it maps $Y$ to $X$. \\
 
 \pagebreak
-
-\section{Number Systems}
+\section{The Natural Numbers}
 \subsection{The Axiom of Infinity}
 Before we formulate the natural numbers via set theoretic language, we need one more axiom to guarantee the existence of the set of natural numbers. 
 \begin{defn}{Successor}{} Define the successor of a set $x$ to be $$x^+=x\cup\{x\}$$
@@ -634,39 +637,35 @@ We now show that $n^+\in S$ if $n\in S$. Let $n\in S$. Then there exists a uniqu
 
 Expanding things out, we see that $u(0)=a$, $u(1)=f(a)$, $u(2)=f(f(a))$ and so on. We have constructed a function $u$ such that input the number in $u$ means that you are compositing that number of $f$ to the initial element. This is why through this theorem, we allowed the existence of recursive functions. The application of this immediate as we will use it to define addition and multplication through this theorem. 
 
-
 \subsection{Arithmetic}
 We begin by defining the notion of addition in natural numbers. 
-\begin{prp}{}{} For every natural number $m$ there exists a function $s_m:\mathbb{N}\to\mathbb{N}$ such that
+\begin{prp}{}{} For every natural number $m\in\N$ there exists a function $s_m:\N\to\N$ such that
 \begin{itemize}
 \item $s_m(0)=m$
 \item $s_m(n^+)=(s_m(n))^+$
 \end{itemize}
-$s_m(n)$ is by definition, the sum $m+n$. 
 \begin{proof}
-Set $X$ as $\N$, $f$ as the successor function in recursion theorem and we are done. 
+Set $X$ as $\N$, $f$ as the successor function in 6.2.2 and we are done. 
 \end{proof}
 \end{prp}
 
-The recursion here used is the repeated use of successors, meaning we are applying $+1$ a certain amount of times. \\
+The recursion here used is the repeated use of successors, meaning we are applying $+1$ a certain amount of times. 
+
+\begin{defn}{Addition}{}\\
+Define addition in $\N$ to be the function $+:\N\times\N\to\N$ given by $$m+n=s_m(n)$$
+\end{defn}
+
 We can now prove properties of addition in set theoretic language. 
 
-\begin{prp}{Properties of Addition}{} Let $x,y,z\in\mathbb{N}$. 
+\begin{prp}{Properties of Addition}{} Let $x,y,z\in\N$. 
 \begin{itemize} 
-\item (A1) $x+y\in\mathbb{N}$
-\item (A2) $(x+y)+z=x+(y+z)$
-\item (A3) $0+x=x=x+0$
-\item (A4) $x+y=y+x$
+\item Associative: $(x+y)+z=x+(y+z)$
+\item Existence of an Identity: $0+x=x=x+0$
+\item Commutativity: $x+y=y+x$
 \end{itemize}
-\begin{proof}
-\begin{itemize} We prove associativity, identity and commutativity in order. 
-\item The closure under addition is direct from the definition of addition. 
-\item For associativity, we induct on $z$. When $z=0$, we have 
-\begin{align*}
-(x+y)+0&=x+y \\
-&=x+(y+0)
-\end{align*}
-Suppose that $(x+y)+n=x+(y+n)$, we have
+\begin{proof}\\
+\begin{itemize}
+\item For associativity, we induct on $z$. When $z=0$, we have $$(x+y)+0=x+y=x+(y+0)$$ Suppose that $(x+y)+n=x+(y+n)$, then we have
 \begin{align*}
 (x+y)+n^+&=((x+y)+n)^+ \\
 &=(x+(y+n))^+ \tag{Induction Hypothesis}\\
@@ -684,7 +683,7 @@ Suppose that $0+n=n=n+0$, we have
 &=n^+ \tag{Induction Hypothesis}\\
 &=n^++0
 \end{align*}
-Thus by the principle of induction, we have identity. 
+Thus by the principle of induction, we have $0+x=x=x+0$ for all $x\in\N$. 
 \item For commutativity, we induct on $y$ first to show that $x^++y=(x+y)^+$. When $y=0$, we have $x^++0=x^+=(x+0)^+$. Now suppose that $x^++n=(x+n)^+$
 \begin{align*}
 x^++n^+&=(x^++n)^+ \\
@@ -705,22 +704,25 @@ Thus by the principle of induction, we have commutativity.
 
 We then proceed to multiplication. 
 
-\begin{prp}{}{} For every natural number $m$ there exists a function $p_m:\mathbb{N}\to\mathbb{N}$ such that 
+\begin{prp}{}{} For every natural number $m\in\N$ there exists a function $p_m:\N\to\N$ such that 
 \begin{itemize}
 \item $p_m(0)=0$
 \item $p_m(n^+)=p_m(n)+m$
 \end{itemize}
-$p_m(n)$ is by definition, multiplication $m\times n$. 
 \begin{proof}
-Take $X$ as $\N$ and $f$ as $f(x)=x+m$. Then using the recursion theorem we are done. 
+Take $X$ as $\N$ and $f$ as $f(x)=x+m$ for 6.2.2. 
 \end{proof}
 \end{prp}
 
-We note here, that the successor function $n^+$ is in fact equivalent to $n+1$ (using the definition of addition). This may be seen inherently when the successor notion is introduced, but it is only now that we can formulate it properly since addition is defined. \\
-Similarly, the recursion here is that repeated addition of $+m$. And we can also prove remaining properties of multiplication in set theoretic language. 
+Similarly, the recursion here is repeated the repeated addition of $m\in\N$. 
 
-\begin{prp}{}{} Let $x,y,z\in\mathbb{N}$. Addition and multiplication follow the distributive law $x\cdot(y+z)=x\cdot y+x\cdot z$. 
-\begin{proof} We prove the distributive law by induction on $z$. When $z=0$, we have $x\cdot(y+0)=x\cdot y$ and $x\cdot y+x\cdot 0=x\cdot y$. Now suppose that $x\cdot(y+n)=x\cdot y+x\cdot n$. 
+\begin{defn}{Multiplication}{}\\
+Define multiplication in $\N$ to be the function $\cdot:\N\times\N\to\N$ by $$m\cdot n=p_m(n)$$
+\end{defn}
+
+\begin{prp}{}{} Let $x,y,z\in\N$. Then addition distributes through multiplication: $$x\cdot(y+z)=x\cdot y+x\cdot z$$
+\begin{proof}\\
+We prove the distributive law by induction on $z$. When $z=0$, we have $x\cdot(y+0)=x\cdot y$ and $x\cdot y+x\cdot 0=x\cdot y$. Now suppose that $x\cdot(y+n)=x\cdot y+x\cdot n$. 
 \begin{align*}
 x(y+n^+)&=x(y+n)^+ \tag{Definition of Addition}\\
 &=x(y+n)+x \tag{Definition of Multiplication}\\
@@ -733,16 +735,14 @@ Thus by the principle of induction, we have the distributive law.
 \end{proof}
 \end{prp}
 
-
-\begin{prp}{}{} Let $x,y,z\in\mathbb{N}$. 
+\begin{prp}{}{}\\
+Let $x,y,z\in\N$. Then the following are true regarding multiplication. 
 \begin{itemize}
-\item (M1) $x\cdot y\in\mathbb{N}$
-\item (M2) $(x\cdot y)\cdot z=x\cdot(y\cdot z)$
-\item (M3) $1\cdot x=x=x\cdot 1$
-\item (M4) $x\cdot y=y\cdot x$
+\item Associativity: $(x\cdot y)\cdot z=x\cdot(y\cdot z)$
+\item Commutativity: $x\cdot y=y\cdot x$
+\item Existence of Identity: $1\cdot x=x=x\cdot 1$
 \end{itemize}
-\begin{proof} We prove associativity, commutativity, identity in this order. Note we first prove commutativity then prove identity. 
-\item The closure under Multiplication is direct from the definition of multiplication. 
+\begin{proof}\\
 \begin{itemize}
 \item We prove associativity by induction on $z$. When $z=0$, $(x\cdot y)\cdot 0=0$ and $x\cdot(y\cdot 0)=x\cdot 0=0$. Now suppose that $(x\cdot y)\cdot n=x\cdot(y\cdot n)$. We have
 \begin{align*}

@@ -39,22 +39,107 @@ We also say that $\mC$ is enriched over $\bold{Ab}$. This relates to enriched ca
 \end{itemize}
 \end{defn}
 
-\begin{lmm}{}{} Let $\mA$ be an additive category. Then the coproducts and products of $\mA$ coincide. In other words, there is an isomorphism $$X\times Y\cong X\amalg Y$$ for any $X,Y\in Obj(\A)$. 
+\begin{lmm}{}{}\\
+Let $\mA$ be an additive category. Let $X,Y\in\mA$. Then the universal property of limits and colimits induces an isomorphism $$X\times Y\cong X\coprod Y$$
+\begin{proof}\\
+I first claim that $X\times 0\cong X$. Since $0$ is a zero object, there exists a unique morphism $X\to 0$. Together with the identity map $X\to X$, the universal property of products imply that there exists a unique morphism $X\to X\times 0$ such that $X\to X\times 0\to X$ is the identity. Precomposing this composite with the projection map $X\times 0\to X$ gives $X\times 0\to X\to X\times 0\to X=X\times 0\to X$. Since the identity map in a category is unique, we must have that $X\times 0\to X\to X\times 0=\text{id}_X$. Hence $X\times 0\cong X$. \\
+
+Since $0$ is initial, there exists unique morphisms $(\text{id}_X,0):X\times 0\to X\times Y$ and $(0,\text{id}_Y):0\times Y\to X\times Y$ such that further composing with projection maps $\text{pr}_X:X\times Y\to X$ and $\text{pr}_Y:X\times Y\to 0\times Y$ give the identity. I claim that these maps give $X\times Y$ the universal property of coproducts. Let $Z\in\mA$ be an object and let $f_X:X\to Z$ and $f_Y:Y\to Z$ be morphisms. Define a morphism $X\times Y\to Z$ by $f_X\circ\text{pr}_X+f_Y\circ\text{pr}_Y$. We need to show that the following diagram is commutative: \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	&& Z \\
+	\\
+	&& {X\times Y} \\
+	{X\times 0} &&&& {0\times Y}
+	\arrow["{f_X\circ\text{pr}_X+f_Y\circ\text{pr}_Y}"{description}, from=3-3, to=1-3]
+	\arrow["{f_X}"', bend left = 20, from=4-1, to=1-3]
+	\arrow["{(\text{id}_X,0)}"', from=4-1, to=3-3]
+	\arrow["{f_Y}", bend right = 20, from=4-5, to=1-3]
+	\arrow["{(0,\text{id}_Y)}", from=4-5, to=3-3]
+\end{tikzcd}} \\~\\
+Indeed, we have 
+\begin{align*}
+(f_X\circ\text{pr}_X+f_Y\circ\text{pr}_Y)\circ(\text{id}_X,0)&=f_X\circ\text{pr}_X\circ i_X+f_Y\circ\text{pr}_Y\circ 0\tag{$\mA$ is pre-additive}\\
+&=f_X\circ\text{id}_X+f_Y\circ 0\\
+&=f_X+0\\
+&=f_X
+\end{align*}
+and similarly we have $(f_X\circ\text{pr}_X+f_Y\circ\text{pr}_Y)\circ(\text{id}_Y,0)=f_Y$. \\
+
+It remains to show that this map is unique such that the compositions $X\times 0\to X\times Y\to Z$ and $0\times Y\to X\times Y\to Z$ are the maps $f_X:X\to Z$ and $f_Y:Y\to Z$ respectively. Suppose that $\phi$ is another such map. I first claim that $$(\text{id}_X,0)\circ\text{pr}_X+(0,\text{id}_Y)\circ\text{pr}_Y=\text{id}_{X\times Y}$$
+
+
+We have that 
+\begin{align*}
+\phi&=\phi\circ\text{id}_{X\times Y}\\
+&=
+\end{align*}
+\end{proof}
 \end{lmm}
 
 \subsection{Abelian Categories}
-\begin{defn}{Abelian Categories}{} An additive category $\mA$ is said to be abelian if it satisfies the following: 
+\begin{defn}{Zero Morphism}{}\\
+Let $\mA$ be a category with a zero object. Let $C,D\in\mA$ be objects. Define the zero morphism from $C$ to $D$ to be the the unique morphism $$0:C\overset{\exists!}{\to}0\overset{\exists!}{\to}D$$
+\end{defn}
+
+\begin{defn}{Kernels and Cokernels}{}\\
+Let $\mA$ be a category with a zero object. Let $C,D\in\mA$ be objects. Let $f:C\to D$ be a morphism. 
 \begin{itemize}
-\item Every morphism in $\mA$ has a kernel and a cokernel
-\item Every monic morphism is the kernel of its cokernel
-\item Every epic morphism is the cokernel of its kernel
+\item Define the kernel of $f$ to be $$\ker(f)=\text{Eq}(f,0)$$ if it exists. 
+\item Define the cokernel of $f$ to be $$\coker(f)=\text{Coeq}(f,0)$$ if it exists. 
 \end{itemize}
 \end{defn}
 
-\begin{thm}{}{} Let $R$ be a ring. Then the category ${_R}\bold{Mod}$ of $R$-modules is an abelian category. 
-\end{thm}
+\begin{defn}{Pre-Abelian Category}{}\\
+Let $\mA$ be an additive category. We say that $\mA$ is a pre-abelian category if every morphisms in $\mA$ has a kernel and a cokernel. 
+\end{defn}
 
-\begin{thm}{}{} Let $\mA$ be an abelian category whose objects form a set. Then there exists a ring $R$ and an exact functor $$F:\mA\to{{_R}\bold{Mod}}$$ which is an embedding on objects and an isomorphism on $\text{Hom}$ sets. 
+\begin{defn}{Abelian Categories}{}\\
+Let $\mA$ be a pre-abelian category. We say that $\mA$ is an abelian category if the following are true. 
+\begin{itemize}
+\item Every monomorphism is the kernel of some morphism. 
+\item Every epimorphism is the cokernel of some morphism. 
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $\mA$ be pre-abelian category. Let $f:C\to D$ be a morphism. Then $f$ factors naturally and uniquely as $$C\to\text{coker}(\ker(f)\to C)\to\ker(D\to\text{coker}(f))\to D$$
+\begin{proof}
+Since $\ker(f)\to C\to D$ is $0$, we invoke the universal property of cokernels to obtain the following commutative diagram: \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	&& {\text{coker}(\ker(f)\to C)} \\
+	{\ker(f)} & C & D & {\text{coker}(f)}
+	\arrow["{\exists!}", dashed, from=1-3, to=2-3]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=1-3]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-3, to=2-4]
+\end{tikzcd}} \\~\\
+Now since $\mA$ is an abelian category, any epimorphism $h$ satisfies $a\circ h=0$ implies $a=0$. Since $C\to\text{coker}(\ker(f)\to C)$ is an epimorphism by 1.2.7 and $C\to\text{coker}(\ker(f)\to C)\to D\to\text{coker}(f)=0$, we conclude that $$\text{coker}(\ker(f)\to C)\to D\to\text{coker}(f)=0$$ Then by the universal property of kernels, we obtain the following commutative diagram: \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\text{coker}(\ker(f)\to C)} \\
+	{\ker(D\to\text{coker}(f))} & D & {\text{coker}(f)}
+	\arrow["{\exists!}"', dashed, from=1-1, to=2-1]
+	\arrow[from=1-1, to=2-2]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+\end{tikzcd}} \\
+It is natural since all morphisms are induced by a universal property. 
+\end{proof}
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $\mA$ be a pre-abelian category. Then the following are equivalent. 
+\begin{itemize}
+\item $\mA$ is an abelian category. 
+\item Every monomorphism is the kernel of its cokernel, and every epimorphism is the cokernel of its kernel. 
+\item For all morphisms $f\in\mA$, the unique morphism $$\text{coker}(\ker(f)\to C)\overset{\cong}{\to}\ker(D\to\text{coker}(f))$$ is an isomorphism. 
+\end{itemize}
+\begin{proof}
+$(2)\implies(3)$: Since $\text{coker}(\ker(f)\to C)=\ker(D\to\text{coker}(f))$ we are done. 
+\end{proof}
+\end{lmm}
+
+\begin{thm}{}{} Let $R$ be a ring. Then the category ${_R}\bold{Mod}$ of $R$-modules is an abelian category. 
 \end{thm}
 
 \begin{defn}{Injectivity and Surjectivity}{} Let $f:X\to Y$ be a morphism in an abelian category. 
@@ -73,38 +158,108 @@ In particular, these notions coincide that of epics and monics in an abelian cat
 \end{itemize}
 \end{prp}
 
-\subsection{Short Exact Sequences}
-\begin{defn}{Short Exact Sequence}{} Let $\mA$ be an abelian category. A short exact sequence in $\mA$ consists of three objects $A,B,C\in\mA$ and two morphisms $f:A\to B$ and $g:B\to C$ in $\mA$ written in diagram form as \\~\\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-0\arrow[r] & A\arrow[r, "f"] & B\arrow[r, "g"] & C\arrow[r] & 0
-\end{tikzcd}}\\~\\
-such that the following are true: 
+\begin{lmm}{}{}\\
+Let $\mA$ be an abelian category. Let $f:X\to Y$ be a morphism. Then the following are true. 
 \begin{itemize}
-\item $f$ is a monomorphism
-\item $g$ is an epimorphism
-\item $\im(f)=\ker(g)$
+\item The morphism $\ker(f)\to X$ is injective. 
+\item The morphism $Y\to\text{coker}(f)$ is surjective. 
+\end{itemize}
+\begin{proof}
+Let $\iota:\ker(f)\to X$ be universal morphism. Let $a,b:Z\to\ker(f)$ be morphisms such that $\iota\circ a=\iota\circ b$. Applying the universal property of kernels. We know that $f\circ\iota\circ a=f\circ\iota\circ b=0$ since $f\circ\iota=0$. Therefore we can apply the universal property of kernels to $\iota\circ a=\iota\circ b$ show that there exists a unique morphism $u:Z\to\ker(f)$ such that $\iota\circ u=\iota\circ a=\iota\circ b$. But since $u$ is unique, we must have $a=u=b$. \\
+
+The proof for cokernels is dual. 
+\end{proof}
+\end{lmm}
+
+\begin{defn}{The Image of a Morphism}{}\\
+Let $\mA$ be an abelian category. Let $C,D\in\mA$. Let $f:C\to D$ be a morphism. Define the image of $f$ to be $$\im(f)=\ker(D\to\text{coker}(f))\cong\text{coker}(\ker(f)\to C)$$
+\end{defn}
+
+Indeed, thinking in terms of modules over a ring $R$, the cokernel of an $R$-module homomorphism $f:M\to N$ is $\frac{N}{\im(f)}$ together with the canonical map $N\to\frac{N}{\im(f)}$. Then the kernel of this map is precisely $\im(f)$. On the other hand, the cokernel of the morphism $ker(f)\to M$ is $\frac{M}{\ker(f)}$ since the inclusion map is injective, and by the first isomorphism theorem $\frac{M}{\ker(f)}\cong\im(f)$. 
+
+\subsection{Exact Sequences}
+\begin{defn}{Exact Sequences}{}\\
+Let $\mA$ be an abelian category. Let the following be a diagram in $\mA$: \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	A & B & C
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["g", from=1-2, to=1-3]
+\end{tikzcd}}\\~\\
+We say that the sequence is exact $B$ if the following are true. 
+\begin{itemize}
+\item $g\circ f=0$. 
+\item Since $g\circ =0$, $g$ factors through $\text{coker}(f)$. Then the composite $\im(f)=\ker(B\to\text{coker}(f))\to B\overset{g}{\to} C$ is $0$ since $\im(f)\to B\to\text{coker}(f)=0$. By the universal property of kernels, there exists a unique morphism $\im(f)\to\ker(g)$: \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\im(f)=\ker(B\to\text{coker}(f))} \\
+	{\ker(g)} & B & {\text{coker}(f)} \\
+	&& C
+	\arrow["{\exists!}", dashed, from=1-1, to=2-1]
+	\arrow[from=1-1, to=2-2]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow["g"', from=2-2, to=3-3]
+	\arrow["{\exists!}", dashed, from=2-3, to=3-3]
+\end{tikzcd}}\\~\\
+We require that this morphism is an isomorphism. 
 \end{itemize}
 \end{defn}
 
-\begin{defn}{Split Exact Sequence}{} Let $\mA$ be an abelianc category. Let $A,B,C\in\mA$ such that \\~\\
+\begin{defn}{Short Exact Sequence}{}\\
+Let $\mA$ be an abelian category. A short exact sequence in $\mA$ is a diagram of the form \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
-0\arrow[r] & A\arrow[r, "f"] & B\arrow[r, "g"] & C\arrow[r] & 0
+	0 & A & B & C & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["f", from=1-2, to=1-3]
+	\arrow["g", from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
 \end{tikzcd}}\\~\\
-is a short exact sequence. We say that it is split exact if $B\cong A\oplus C$. 
+such that the sequence is exact in $A$, $B$ and $C$. 
 \end{defn}
 
-The following is an important equivalent characterization of split exact sequence. 
-
-\begin{thm}{The Splitting Lemma}{1.2.6} Let $\mA$ be an abelianc category. Let $A,B,C\in\mA$. Then the following are equivalent for a short exact sequence \\~\\
+\begin{prp}{}{}\\
+Let $\mA$ be an abelian category. Let the following be an exact sequence in $\mA$. \\~\\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
-0\arrow[r] & A\arrow[r, "f"] & B\arrow[r, "g"] & C\arrow[r] & 0
-\end{tikzcd}}\\
-\begin{itemize}
-\item The short exact sequence is split exact sequence
-\item There exists a morphism $p:B\to A$ such that $p\circ f=\text{id}_A$
-\item There exists a morphism $s:C\to B$ such that $g\circ s=\text{id}_C$
-\end{itemize} 
-\end{thm}
+	\cdots & {M_{k+1}} & {M_k} & {M_{k-1}} & \cdots
+	\arrow[from=1-1, to=1-2]
+	\arrow["{f_{k+1}}", from=1-2, to=1-3]
+	\arrow["{f_k}", from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\~\\
+Then for all $i\in\Z$, there are short exact sequences of the form \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {\im(f_{i+1})} & {M_i} & {\im(f_i)} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["{\text{incl.}}", from=1-2, to=1-3]
+	\arrow["{f_i}", from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}} 
+\begin{proof}
+Suppose we are given the long exact sequence and consider the 3 term sequence below. It is clear that the inclusion map is injective. Similarly, the map $f_i:M_i\to\im(f_i)$ is surjective tautologically. Finally, $\ker(f_i)=\im(f_{i+1})$ from the long exact sequence. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $\mA$ be an abelian category. Suppose that for each $i\in\Z$, there is a short exact sequence in $\mA$ of the form \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {N_{i+1}} & {M_i} & {N_i} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["{g_i}", from=1-2, to=1-3]
+	\arrow["{h_i}", from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}} \\~\\
+Then the following sequence \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\cdots & {M_{k+1}} & {M_k} & {M_{k-1}} & \cdots
+	\arrow[from=1-1, to=1-2]
+	\arrow["{g_i\circ h_{i+1}}", from=1-2, to=1-3]
+	\arrow["{g_{i-1}\circ h_i}", from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\~\\
+is a long exact sequence in $\mA$. 
+\begin{proof}
+Since $h_i$ is surjective, we have that $\im(g_i\circ h_{i+1})=\im(g_i)$. Similarly, since $g_i$ is injective, we have that $\ker(g_{i-1}\circ h_i)=\ker(h_i)$. But from the short exact sequence we know that $\im(g_i)=\ker(h_i)$. Hence we have $$\im(g_i\circ h_{i+1})=\im(g_i)=\ker(h_i)=\ker(g_{i-1}\circ h_i)$$ so that we have a long exact sequence. 
+\end{proof}
+\end{prp}
 
 \begin{lmm}{Five Lemma}{} Consider the commutative diagram \\~\\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
@@ -126,6 +281,26 @@ where all the objects lie in an abelian group $\mA$. If the two rows are exact, 
 where $d$ is called the connecting homomorphism. 
 \end{lmm}
 
+\begin{defn}{Split Exact Sequence}{} Let $\mA$ be an abelian category. Let $A,B,C\in\mA$ such that \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+0\arrow[r] & A\arrow[r, "f"] & B\arrow[r, "g"] & C\arrow[r] & 0
+\end{tikzcd}}\\~\\
+is a short exact sequence. We say that it is split exact if $B\cong A\oplus C$. 
+\end{defn}
+
+The following is an important equivalent characterization of split exact sequence. 
+
+\begin{thm}{The Splitting Lemma}{1.2.6} Let $\mA$ be an abelian category. Let $A,B,C\in\mA$. Then the following are equivalent for a short exact sequence \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+0\arrow[r] & A\arrow[r, "f"] & B\arrow[r, "g"] & C\arrow[r] & 0
+\end{tikzcd}}\\
+\begin{itemize}
+\item The short exact sequence is split exact sequence
+\item There exists a morphism $p:B\to A$ such that $p\circ f=\text{id}_A$
+\item There exists a morphism $s:C\to B$ such that $g\circ s=\text{id}_C$
+\end{itemize} 
+\end{thm}
+
 \subsection{Exact Functors}
 \begin{defn}{Additive Functors}{} Let $\mA,\mB$ be abelian categories. We say that a functor $F:\mA\to\mB$ is additive if for every $X,Y\in\mA$, the map $$\Hom_\mA(X,Y)\to\Hom_\mB(F(X),F(Y))$$ is a homomorphism of abelian groups. 
 \end{defn}
@@ -146,7 +321,7 @@ where $d$ is called the connecting homomorphism.
 \end{itemize}
 \end{defn}
 
-\begin{lmm} Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be an additive functor. Then $F$ is exact if and only if $F$ is left exact and right exact. 
+\begin{lmm}{}{} Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be an additive functor. Then $F$ is exact if and only if $F$ is left exact and right exact. 
 \end{lmm}
 
 \begin{prp}{}{} Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a functor. Then the following are true. 
@@ -155,6 +330,8 @@ where $d$ is called the connecting homomorphism.
 \item $F$ is additive and right exact if and only if $F$ preserves all finite colimits. 
 \end{itemize}
 \end{prp}
+
+Since right adjoints preserves limits, any right adjoint functor between abelian categories must be left exact. Moreover, since limits commutes with limits, the limit functor $\lim_\mJ(-):\mC^\mJ\to\mC$ is also left exact. Dually, left adjoints and the colimit functor must also be right exact. 
 
 \begin{prp}{}{} Let $\mA$ be an abelian category. Let $M\in\mA$. Then the following are true. 
 \begin{itemize}
@@ -173,7 +350,8 @@ Let $\mC$ be a category and let $\mJ$ be a diagram. Recall that if $\mC$ is comp
 \end{prp}
 
 \subsection{Freyd-Mitchell Embedding Theorem}
-\begin{thm}{Freyd-Mitchell Embedding Theorem}{} Let $\mA$ be a small abelian category. Then there exists a ring $R$ and an exact, fully faithful functor $F:\mA\to{_R\bold{Mod}}$. This means that there is an isomorphism of sets $$\Hom_{\mA}(M,N)\cong\Hom_R(F(M),F(N))$$ 
+\begin{thm}{Freyd-Mitchell Embedding Theorem}{}\\
+Let $\mA$ be a small abelian category. Then there exists a ring $R$ and an exact, fully faithful embedding $F:\mA\to{_R\bold{Mod}}$. 
 \end{thm}
 
 Such a functor allows us think about diagrams in $\mA$ as if they were diagrams in ${_R\bold{Mod}}$
@@ -182,14 +360,13 @@ Such a functor allows us think about diagrams in $\mA$ as if they were diagrams 
 \end{lmm}
 
 \pagebreak
-\section{Chain Complexes in an Abelian Category}
+\section{Chain Complexes as an Abelian Category}
 \subsection{The Category of Chain Complexes}
 \begin{defn}{Chain Complexes}{} Let $\mA$ be an abelian category. A chain complex $(C_\bullet,\partial_\bullet)$ in $\mA$ is a family of objects $C_n\in\mA$ for $n\in\Z$ and morphisms $\partial_n:C_n\to C_{n-1}$ in $\mA$ such that $\partial_n\circ\partial_{n+1}=0$ for all $n$. \\~\\
 In other words, we have the diagram: \\
 \adjustbox{scale=1.1,center}{\begin{tikzcd}
 \cdots\arrow[r] & C_{n+1}\arrow[r, "\partial_{n+1}"] & C_n\arrow[r, "\partial_n"] & C_{n-1}\arrow[r] & \cdots
-\end{tikzcd}}\\~\\
-for which we require that $$\im(\partial_{n+1})\subseteq\ker(\partial_n)$$ for each $n$. 
+\end{tikzcd}}\\
 \end{defn}
 
 \begin{defn}{Chain Map}{} Let $(C_\bullet,\partial_\bullet)$ and $(C_\bullet',\partial_\bullet')$ be two chain complexes in an abelian category $\mA$. A chain map $f_\bullet:C_\bullet\to C_\bullet'$ is a family of maps $$f_n:C_n\to C_n'$$ in $\mA$ such that $\partial_n'\circ f_n=f_{n-1}\circ\partial_n$ for all $n$. \\~\\
@@ -221,48 +398,54 @@ In other words, we have the following commutative diagram: \\
 \begin{thm}{}{} Let $\mA$ be an abelian category. Then $\bold{Ch}(\mA)$ is also an abelian category. 
 \end{thm}
 
-\begin{defn}{The Homology Groups of a Chain Complex}{} Let $(C_\bullet,\partial_\bullet)$ be a chain complex in an abelian category $\mA$. Define $Z_n(C_\bullet)=\ker(\partial_n)$ and $B_n(C_\bullet)=\im(\partial_{n+1})$. Define the $n$th homology of $(C_\bullet,\partial_\bullet)$ to be $$H_n(C_\bullet)=\frac{Z_n(C_\bullet)}{B_n(C_\bullet)}=\frac{\ker(\partial_n)}{\im(\partial_{n+1})}$$
-Elements of $Z_n(C_\bullet)=\ker(\partial_n)$ are called $n$-cycles and elements of $B_n(C_\bullet)=\im(\partial_{n+1})$ are called $n$-boundaries. 
-\end{defn}
-
-\begin{defn}{The Homology Functor}{} Let $\mA$ be an abelian category. Let $n\in\N$. Define the homology functors $$H_n(-):\bold{Ch}(\mA)\to\mA$$ for each $n$ as follows. 
+\begin{defn}{The Homology Groups of a Chain Complex}{}\\
+Let $\mA$ be an abelian category. Let $(C_\bullet,\partial_\bullet)$ be a chain complex in $\mA$. 
 \begin{itemize}
-\item For each chain complex $C_\bullet$ over $\mA$, $H_n(C_\bullet)$ is the $n$th homology group of $C_\bullet$. 
-\item For each chain map $f:C_\bullet\to C_\bullet'$, $$H_n(f):H_n(C_\bullet)\to H_n(C_\bullet')$$ is the induced map on homology. 
+\item Define the $n$-cycles of the chain complex to be $$Z_n(C_\bullet)=\ker(\partial_n)$$
+\item Define the $n$-boundaries of the chain complex to be $$B_n(C_\bullet)=\im(\partial_{n+1})$$
+\item Since $\partial_n\circ\partial_{n+1}=0$, we have that $\partial_n$ factors through $\text{coker}(\partial_{n+1})$. Then the composite $B_n(C_\bullet)\to C_n\overset{\partial_n}{\to} C_{n-1}$ is $0$ since $B_n(C_\bullet)\to C_n\to\text{coker}(\partial_{n+1})=0$. By the universal property of kernels, there exists a unique morphism $B_n(C_\bullet)\to Z_n(C_\bullet)$: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{B_n(C_\bullet)} \\
+	{Z_n(C_\bullet)} & C_n & {\text{coker}(\partial_{n+1})} \\
+	&& C_{n-1}
+	\arrow["{\exists!}", dashed, from=1-1, to=2-1]
+	\arrow[from=1-1, to=2-2]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow["\partial_n"', from=2-2, to=3-3]
+	\arrow["{\exists!}", dashed, from=2-3, to=3-3]
+\end{tikzcd}}\\~\\
+Define the $n$th homology of the chain complex to be $$H_n(C_\bullet)=\text{coker}(B_n(C_\bullet)\to Z_n(C_\bullet))=\text{coker}(\im(\partial_{n+1})\to\ker(\partial_n))$$
 \end{itemize}
 \end{defn}
 
-\begin{lmm}{}{1.1.4} A chain map $f_\bullet:C_\bullet\to C_\bullet'$ induces group homomorphisms $$f_\ast:H_n(C_\bullet)\to H_n(C_\bullet')$$ between homology groups defined by $f_\ast([z])=[f(z)]$. 
-\begin{proof}
-For every map $f_n:C_n\to C_n'$, we can restrict the domain to cycles so that we obtain a map $f_n:Z_n(C_\bullet)\to C_n'$. Using the relation given between the boundary operator and the family of maps, we check that this map descends to a map in homology. \\~\\
-
-Firstly, $f_n(Z_n(C_\bullet))\subseteq Z_n(C_\bullet')$. Indeed let $x\in Z_n(C_\bullet)$. Then we have that $$\partial_n'(f_n(x))=f_{n-1}(\partial_n(x))=f_{n-1}(0)=0$$ which means that $f_n(x)$ lies in the kernel of $\partial_n'$. Now we have a map $f_n:Z_n(C_\bullet)\to Z_n(C_\bullet')$. At the same time, $f_n$ also restricts to a map $f_n:B_n(C_\bullet)\to B_n(C_\bullet')$. Indeed if $b\in B_n(C_\bullet)$, then there exists some $c\in C_{n+1}$ such that $\partial_{n+1}(c)=b$. Applying $f_n$ on both sides give 
-\begin{align*}
-f_n(\partial_{n+1}(c))&=f_n(b)\\
-\partial_{n+1}'(f_{n+1}(c))&=f_n(b)
-\end{align*}
-This means that $f_n(b)$ is the boundary of the element $f_{n+1}(c)\in C_{n+1}$, and so $f_n$ restricts to a map of boundaries. Now $f_n:H_n(C_\bullet)\to H_n(C_\bullet')$ is well defined. Indeed if $b_1,b_2\in B_n(C_\bullet)$ lie in the same coset, then $b_1B_n(C_\bullet)=b_2(C_\bullet)$ so that $b_1-b_2\in B_(C_\bullet)$. Then $f_n(b_1-b_2)\in B_n(C_\bullet')$ so that $f_n(b_1)$ and $f_n(b_2)$ lie in the same coset. Thus $f_n$ is well defined. 
-\end{proof}
-\end{lmm}
-
-It is customary to drop the $n\in\N$ in the notation as it is usually implicit. So for example the condition for chain map becomes $\partial'\circ f=f\circ\partial$. \\~\\
-
-We then have functoriality of the induced map. 
-
-\begin{prp}{}{1.1.5} Let $f_\bullet:C_\bullet\to D_\bullet$ and $g_\bullet:D_\bullet\to E_\bullet$ be two chain maps. Then $g_\bullet\circ f_\bullet$ is also a chain map. Moreover, the induced map on the homology groups satisfy the following: 
+\begin{defn}{The Homology Functor}{}\\
+Let $\mA$ be an abelian category. Let $n\in\N$. Define the $n$th homology functor $H_n:\bold{Ch}(\mA)\to\mA$ by as follows. 
 \begin{itemize}
-\item $g_\ast\circ f_\ast=(g\circ f)_\ast$
-\item $\text{id}_\ast=\text{id}_{H_n}$
-\end{itemize} 
-\begin{proof}
-Firstly, we have that $$\partial\circ g_n\circ f_n=g_{n-1}\circ\partial\circ f_n=g_{n-1}\circ f_{n-1}\circ\partial$$ so that $g\circ f$ is indeed a chain map. \\~\\
-
-We have that $g_\ast(f_\ast([z]))=g_\ast([f(z)])=[g(f(z))]=(g_\ast\circ f_\ast)([z])$. Also, we have that $$\text{id}_\ast([z])=[\text{id}(z)]=[z]=\text{id}_{H^n}([z])$$ and so we conclude. 
-\end{proof}
-\end{prp}
+\item For a chain complex $C_\bullet$, we have $H_n(C_\bullet)$ is the $n$th homology of the chain complex. 
+\item For a chain map $C_\bullet\to C_\bullet'$, we obtain maps $Z_n(C_\bullet)\to Z_n(C_\bullet')$ and $B_n(C_\bullet)\to B_n(C_\bullet')$ since kernels and images are functorial. Since cokernels are also functorial, we obtain a morphism $H_n(C_\bullet)\to H_n(C_\bullet')$. 
+\end{itemize}
+\end{defn}
 
 \begin{defn}{Quasi-Isomorphisms}{} Let $C_\bullet,D_\bullet$ be chain complexes. Let $f:C_\bullet\to D_\bullet$ be a chain map. We say that $f$ is a quasi-isomorphism if the induced map in homology $f_\ast:H_n(C_\bullet)\to H_n(D_\bullet)$ is an isomorphism for all $n\in\N$. 
 \end{defn}
+
+\begin{thm}{The FHHF Theorem}{}\\
+Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a covariant functor. Then the following are true. 
+\begin{itemize}
+\item If $F$ is right exact, then there is a natural transformation $F\circ H_n\Rightarrow H_n\circ F$ for all $n\in\N$. 
+\item If $F$ is left exact, then there is a natural transformation $H_n\circ F\Rightarrow F\circ H_n$ for all $n\in\N$. 
+\item If $F$ is exact, then the above natural transformations isomorphisms and are inverses of each other. 
+\end{itemize}
+\end{thm}
+
+\begin{prp}{}{}\\
+Let $\mA$ be an abelian category. Let $\mJ$ be a filtered category. Let $F:\mJ\to\bold{Ch}(\mA)$ be a functor. Then there is a natural isomorphism $$\colim_\mJ H_n\circ F\cong H_n\left(\colim_\mJ F\right)$$ for all $n\in\N$. 
+\end{prp}
+
+\begin{eg}{}{}\\
+Since products are coproducts and coproducts are filtered colimits, the above prp shows that homology commutes with products. 
+\end{eg}
 
 \subsection{The Category of Cochain Complexes}
 \begin{defn}{Cochain Complexes}{} Let $\mA$ be an abelian category. A cochain complex $(C^\bullet,\partial^\bullet)$ is a family objects $C^n\in\mA$ for $n\in\Z$ and morphisms $\delta^n:C^{n-1}\to C^n$ such that $\delta^{n+1}\circ\delta^n=0$ for all $n$. In other words, we have the diagram: \\~\\
@@ -283,7 +466,8 @@ Notice that algebraically, there is no difference between a chain complex and a 
 
 Because cochain complexes is the same data as a chain complex, we can also define homology groups for cochain complexes. We call them the cohomology groups of the cochain complex. 
 
-\begin{defn}{Cohomology Groups}{} Let $\mA$ be an abelian category. Let $(C^\bullet,\partial^\bullet)$ be a cochain complex. Define the $n$th cohomology group of the cochain complex to be $$H^n(C^\bullet,\partial^\bullet)=\frac{\ker(\partial^{n+1}:C^n\to C^{n+1})}{\im(\partial^n:C^{n-1}\to C^n)}=H_n(C^\bullet,\partial^\bullet)$$ for $n\in\N$. 
+\begin{defn}{Cohomology}{}\\
+Let $\mA$ be an abelian category. Let $C^\bullet$ be a chain complex. Define the $n$th cohomology of $C^\bullet$ to be $$H^n(C^\bullet)=\text{coker}(\im(\delta^n)\to\ker(\delta^{n+1}))$$
 \end{defn}
 
 The construction of cohomology groups are functorial because the homology groups of a chain complex also are. 
@@ -799,8 +983,8 @@ the following diagram commutes: \\~\\
 
 \pagebreak
 \section{A Second Course on Modules}
-\subsection{The Hom and Tensor Functor}
-\begin{thm}{Tensor-Hom Adjunction}{} Let $R$ be a ring and let $M$ be an $R$-module. Then there is an adjunction $-\otimes_RM:{_R\bold{Mod}}\rightleftarrows{_R\bold{Mod}}:\Hom(M,-)$. Explicitly, there is a natural isomorphism $$\Hom_{_R\bold{Mod}}(-\otimes_RM,-)\cong\Hom_{_R\bold{Mod}}(-,\Hom_{_R\bold{Mod}}(M,-))$$ 
+\subsection{Adjunctions in the Category of Modules}
+\begin{thm}{Tensor-Hom Adjunction}{} Let $R$ be a ring and let $M$ be an $R$-module. Then there is an adjunction $$-\otimes_RM:{_R\bold{Mod}}\rightleftarrows{_R\bold{Mod}}:\Hom(M,-)$$ Explicitly, there is a natural isomorphism $$\Hom_{_R\bold{Mod}}(-\otimes_RM,-)\cong\Hom_{_R\bold{Mod}}(-,\Hom_{_R\bold{Mod}}(M,-))$$ 
 \end{thm}
 
 More generally, the tensor-hom adjunction is a phenomena that exhibits ${_R}\bold{Mod}$  as a closed monoidal category. 
@@ -814,6 +998,14 @@ We have seen that the left and right Hom functors $$\Hom(M,-):{_R\bold{Mod}}\to{
 \end{prp}
 
 We find it important to notice the relation between all four functor here. Notice that because there is a canonical isomorphism $M\otimes_RN\cong N\otimes_RM$, we can replace $-\otimes_RM$ in the natural isomorphism $$\Hom_{_R\bold{Mod}}(-\otimes_RM,-)\cong\Hom_{_R\bold{Mod}}(-,\Hom_{_R\bold{Mod}}(M,-))$$ with $M\otimes_R-$. This leaves us with the question: What is the functor $\Hom(-,M)$ adjoint to? The answer is itself! $$\Hom_R(A,\Hom_R(B,C))\cong\Hom(B,\Hom(A,C))$$ Therefore it is more often to discuss $\Hom(M,-)$ in conjunction with $-\otimes_RM$, while $\Hom(-,M)$ is often left behind. \\~\\
+
+\begin{thm}{Change of Base Ring I}{}\\
+Let $R,S$ be commutative rings. Let $\varphi:R\to S$ be a ring homomorphism. Then there is an adjunction $$-\otimes_RS:\bold{Mod}_R\overset{\dashv}{\rightleftarrows}\bold{Mod}_S:-|_R$$
+\end{thm}
+
+\begin{thm}{Change of Base Ring II}{}\\
+Let $R,S$ be commutative rings. Let $\varphi:R\to S$ be a ring homomorphism. Then there is an adjunction $$-|_R:\bold{Mod}_S\overset{\dashv}{\rightleftarrows}\bold{Mod}_R:\Hom_R(S,-)$$
+\end{thm}
 
 \subsection{Projective and Injective Modules}
 Let $R$ be a ring. Recall that an $R$-module $P$ is projective if $\Hom(P,-)$ is an exact functor. 
@@ -924,43 +1116,11 @@ While projective modules allows the exactness of $\Hom(M,-)$, flat modules allow
 
 We have the following inclusion of modules $$\text{Free Modules}\subset\text{Projective Modules}\subset\text{Flat Modules}\subset\text{Torsion Free Modules}$$ It is important to note that the ``duality'' between projective and injective modules is given from the bifunctor $\Hom(-,-)$ while the ``duality'' given between projective and flat modules is given by the tensor-hom adjunction. 
 
-\subsection{Finitely Presented Modules}
-\begin{defn}{Finitely Presented Modules}{} Let $R$ be a ring. Let $M$ be a left $R$-module. We say that $M$ is finitely presented if there exists an exact sequence of the form \\~\\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	{R^m} & {R^n} & M & 0
-	\arrow[from=1-1, to=1-2]
-	\arrow[from=1-2, to=1-3]
-	\arrow[from=1-3, to=1-4]
-\end{tikzcd}} \\
-\end{defn}
-
-\begin{lmm}{}{} Let $R$ be a ring. Let $M$ be a left $R$-module. If $M$ is finitely presented, then $M$ is finitely generated. 
-\end{lmm}
-
-\begin{prp}{}{} Let $R$ be a ring. Let the following be an exact sequence of left $R$-modules. \\~\\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	0 & M_1 & M_2 & M_3 & 0
-	\arrow[from=1-1, to=1-2]
-	\arrow["f", from=1-2, to=1-3]
-	\arrow["g", from=1-3, to=1-4]
-	\arrow[from=1-4, to=1-5]
-\end{tikzcd}}\\~\\
-Then the following are true. 
-\begin{itemize}
-\item If $M_1$ and $M_3$ are finitely presented, then $M_2$ is finitely presented. 
-\item If $M_2$ is finitely presented and $M_1$ is finitely generated, then $M_3$ is finitely presented. 
-\item If $M_2$ is finitely generated and $M_3$ is finitely presented, then $M_1$ is finitely generated. 
-\end{itemize}
-\end{prp}
-
-\begin{prp}{}{} Let $R$ be a commutative ring. Let $S$ be an $R$-algebra. Let $M,N$ be left $R$-modules. If $S$ is flat over $R$ and $M$ is finitely presented, then there is an isomorphism $$S\otimes_R\Hom_R(M,N)\cong\Hom_S(S\otimes_RM,S\otimes_RN)$$
-\end{prp}
-
 \subsection{Derived Functors in the Category of R-Modules}
 \begin{defn}{The Ext Functor}{} Let $R$ be a ring and let $A$ be an $R$-module. Define the right derived functor of the left exact functor $\Hom(A,-):{_R\bold{Mod}}\to\bold{Ab}$ to be $$\text{Ext}_R^i(A,-)=R^i(\Hom(A,-)):{_R\bold{Mod}}\to\bold{Ab}$$ 
 \end{defn}
 
-Explicitly, for $$0\to A\to I^0\to I^1\to\cdots$$ an injective resolution, form the cochain complex $$0\to\Hom_R(A,I^0)\to\Hom_R(A,I^1)\to\cdots$$ and define $\text{Ext}$ to be the cohomology group $$\text{Ext}_R^i(A,B)=\frac{\ker(\Hom_R(A,I^i)\to\Hom_R(A,I^{i+1}))}{\im(\Hom_R(A,I^{i-1})\to\Hom_R(A,I^i))}$$~\\
+Explicitly, for $$0\to B\to I^0\to I^1\to\cdots$$ an injective resolution, form the cochain complex $$0\to\Hom_R(A,I^0)\to\Hom_R(A,I^1)\to\cdots$$ and define $\text{Ext}$ to be the cohomology group $$\text{Ext}_R^i(A,B)=\frac{\ker(\Hom_R(A,I^i)\to\Hom_R(A,I^{i+1}))}{\im(\Hom_R(A,I^{i-1})\to\Hom_R(A,I^i))}$$~\\
 
 Notice how although $A$ is viewed as a fixed $R$-module, it is written as if it was a variable for the functor $\text{Ext}$. Indeed, we can define the Ext functor in another manner. 
 
@@ -978,7 +1138,7 @@ Notice how although $A$ is viewed as a fixed $R$-module, it is written as if it 
 \begin{defn}{The Tor Functor}{} Let $R$ be a ring and let $B$ be an $R$-module. Define the left derived functor of the right exact functor $-\otimes_RB:{ _R\bold{Mod}}\to{_R\bold{Mod}}$ to be $$\text{Tor}_i^R(-,B)=L_i(-\otimes_RB):{_R\bold{Mod}}\to\bold{Ab}$$ 
 \end{defn}
 
-Explicitly, for $$\cdots\to P_1\to P_0\to B\to 0$$ an injective resolution, form the chain complex $$\cdots\to P_1\otimes_RB\to P_0\otimes_RB\to 0$$ and define $\text{Tor}$ to be the homology group $$\text{Tor}_i^R(A,B)=\frac{\ker(P_i\otimes_RB\to P_{i-1}\otimes_RB)}{\im(P_{i+1}\otimes_RB\to P_i\otimes_RB)}$$
+Explicitly, for $$\cdots\to P_1\to P_0\to A\to 0$$ an injective resolution, form the chain complex $$\cdots\to P_1\otimes_RB\to P_0\otimes_RB\to 0$$ and define $\text{Tor}$ to be the homology group $$\text{Tor}_i^R(A,B)=\frac{\ker(P_i\otimes_RB\to P_{i-1}\otimes_RB)}{\im(P_{i+1}\otimes_RB\to P_i\otimes_RB)}$$
 
 \begin{thm}{}{} Let $R$ be a ring and let $A,B$ be $R$-modules. Then there is an isomorphism $$\text{Tor}_i^R(A,B)=L_i(-\otimes_RB)(A)\cong L_i(A\otimes_R-)(B)$$ that is natural in $A$ and $B$. 
 \end{thm}

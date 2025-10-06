@@ -16,34 +16,16 @@
 \date{\today}
 \begin{document}
 \maketitle
-\begin{abstract}
-These notes will survey one of the most basic constructions in the entirely of algebra. Algebra had came to be from the study of symmetry, and symmetric will the definitions of a group will be. Broadly speaking abstract algebra is the study of algebraic structures. \\
 
-The first 5 chapters are dedicated to group theory , which is what happens when a set can be endowed with a binary operation that achieves some level of symmetry through inverses and identities. In particular, Lagrange's theorem and results from normal subgroups such as the first isomorphism theorem form the technical foundation of group theory, while group actions can be widely seen from all areas of mathematics. \\
-
-The remaining chapters introduces the notion of rings, which is a set with two operations instead of one, again satisfying some level of symmetry with inverses and identities. Rings form an even larger class of objects than groups, in which we classify them according to what additional properties they and the ideals of the ring has. Two important types of rings include polynomials and fields, which are themselves closely related and we will lay the foundations here and will be extensively studied and field and Galois theory. \\
-
-Famous mathematicians who contributed to this area in mathematics include Joseph Louis Lagrange, Niels Henrik Abel and Évariste Galois and, Emmy Noether, Augustin Louis Cauchy, Arthur Cayley many more. \\
-\textbf{References}
-\begin{itemize}
-\item Abstract Algebra by David S. Dummit and Richard M. Foote
-\end{itemize}
-\end{abstract}
 \pagebreak
 \tableofcontents
 \pagebreak
 
 \section{Introduction to Groups}
-We begin our venture to abstract algebra with group theory. Group theorists are interested in a particular algebraic structure called a group. While they are not the simplest algebraic structure (semi groups are arguably simpler in definition), they serve as the foundation of most other algebraic structures. For example, rings, fields, vector spaces and modules can all be thought of as a group with additional structure. While semi groups and monoids are groups losing some of its constraints. 
-
 \subsection{Basic Concepts of Groups}
-We begin not by the definition of a group, but by that of a binary operation. It will serve as a central notion differentiating an ordinary set and a group. 
-
 \begin{defn}{Binary Operation}{}\\
 A binary operation $\ast$ on a set $G$ is a function $$\ast:G\times G\to G$$
 \end{defn}
-
-Notice that the definition of a binary operation depends on both the underlying set and the definition on how the operation works on each element. To define a binary operation, one must show how any two elements of a set are combined. The new element must more over lie within the set. 
 
 \begin{defn}{Groups}{}\\
 A group is an ordered pair $(G,\ast)$ where $G$ is a set and $\ast:G\times G\to G$ is a binary operation on $G$ satisfying the following axioms. 
@@ -64,24 +46,31 @@ Let $G=\{z\in\C\;|\;z^n=1\text{ for some }n\in\N\}$. Then $G$ is a group with co
 Let $(G,\ast)$ be a group. We say that $G$ is abelian if for all $a,b\in G$, we have $$a\ast b=b\ast a$$
 \end{defn}
 
-Simply put, it is a group where its elements are commutative with each other. Most groups that one naturally think of maybe abelian, due to the readers previously being accustomed to it. However groups that are non-abelian are also central in the study of algebraic structures. 
-
-\begin{eg}{}{} The following are true. 
+\begin{eg}{}{}\\
+The following are true. 
 \begin{itemize}
 \item $(\N,+)$ is not a group. 
 \item $(\Z,+)$ is an abelian group. 
 \item $(\R\setminus\{0\},\times)$ is an abelian group. 
 \end{itemize}
+\begin{proof}
+\begin{itemize}
+\item No element in $\N$ is an inverse for $1\in\N$. 
+\item Addition in $\Z$ is associative, commutative and has an identity as proved in Number Systems. 
+\item Multiplication in $\R\setminus\{0\}$ is associative, commutative and has an identity as proved in Number Systems. 
+\end{itemize}
+\end{proof}
 \end{eg}
 
-\begin{lmm}{}{} Let $(G,\ast)$ be a group. Then the following are true regarding the identity and inverses within $G$. 
+\begin{lmm}{}{}\\
+Let $G$ be a group. Then the following are true regarding the identity and inverses within $G$. 
 \begin{itemize}
-\item The identity of $G$ is unique
-\item For each $a\in G$, $a^{-1}$ is unique
-\item $(a^{-1})^{-1}=a$ for all $a\in G$
-\item $(a\ast b)^{-1}=(b^{-1})\ast(a^{-1})$
+\item The identity of $G$ is unique. 
+\item For each $a\in G$, $a^{-1}$ is unique. 
+\item For all $a\in G$, we have $(a^{-1})^{-1}=a$. 
+\item For all $a,b\in G$, we have $(ab)^{-1}=(b^{-1})(a^{-1})$. 
 \end{itemize}
-\begin{proof} Let $G$ be a group. 
+\begin{proof}
 \begin{itemize}
 \item Let $e,f$ be identities of $G$. Let $a\in G$. Since $e$ is the identity, $ef=e$. Since $f$ is the identity, $ef=f$. Thus $e=ef=f$. 
 \item Suppose that $b,c\in G$ are inverses of $a$. Since groups are associative, $(ba)c=b(ac)$. From the left, $(ba)c=ec=c$. From the right, $b(ac)=be=b$. Thus $b=(ba)c=b(ac)=c$. 
@@ -91,32 +80,39 @@ Simply put, it is a group where its elements are commutative with each other. Mo
 \end{proof}
 \end{lmm}
 
-Do be aware that since in general a group is not abelian, the inverse law above is rather important as taking the inverse also inverse the order of multiplication. It may be best to say here that we typically denote the identity as $1$. In the theory of abelian groups, the group operation will usually be denoted additively with $+$ so that the identity $0$ would make sense. However for non-abelian groups, $1$ being the identity is more common, together with the symbol of multiplication like $\cdot$ or $\times$. In these notes we will not distinguish between the two notions and we will predominantly use $1$ as the identity. Most of the time the identity should be understood through context, at least for the first few chapters on groups. \\
-
-It is also customary to write $1_G$ for the identity element of $G$ and $1_H$ for the identity element of $H$ and etc when we would like to distinguish between the identity of different groups. 
-
-\begin{defn}{Order of an Element}{} For a group $G$ and an element $x\in G$ define the order of $x$ to be the smallest integer $n$ such that $x^n=1$, and denote this integer by $$\abs{x}=\min\{n\in\N\;|\;x^n=1\}$$ If no positive power of $x$ is the identity, the order of $x$ is defined to be infinity and $x$ is said to be of infinite order. 
+\begin{defn}{Order of an Element}{}\\
+For a group $G$ and an element $x\in G$ define the order of $x$ to be the smallest integer $n$ such that $x^n=1$, and denote this integer by $$\abs{x}=\min\{n\in\N\;|\;x^n=1\}$$ If no positive power of $x$ is the identity, the order of $x$ is defined to be infinity and $x$ is said to be of infinite order. 
 \end{defn}
 
-Aside from the order of an element, we also have the order of the entire group, which is an easier definition. 
-
-\begin{defn}{Order of a Group}{} Let $G$ be a group. The order of $G$ is the number of elements that $G$ has, denoted by $\abs{G}$. We say that $G$ is a finite group if $\abs{G}$ is a finite number. Otherwise $G$ is an infinite group. 
+\begin{defn}{Order of a Group}{}\\
+Let $G$ be a group. The order of $G$ is the number of elements that $G$ has, denoted by $\abs{G}$. We say that $G$ is a finite group if $\abs{G}$ is a finite number. Otherwise $G$ is an infinite group. 
 \end{defn}
 
-Both finite groups and infinite groups form an important class of groups, both of which studied extensively in different areas of abstract algebra. \\
+A group does not necessarily have to contain an element of the same order of the group. 
 
-Be wary that a group does not necessarily have to contain an element of the same order of the group. However it is true that for any element $g\in G$ in a group, $\abs{g}\leq\abs{G}$. It is an easy consequence of Lagrange's theorem which we will see later. 
+\begin{eg}{The Klein Four Group}{}\\
+Let $K=\{1,a,b,c\}$. Define a binary operation $\cdot:K\times K\to K$ by the following rules. 
+\begin{itemize}
+\item For all $x\in K$, we have $1\cdot x=x=x\cdot 1$. 
+\item For all $x\in K$, we have $x\cdot x=1$. 
+\item $a\cdot b=b\cdot a=c$. 
+\item $a\cdot c=c\cdot a=b$. 
+\item $b\cdot c=c\cdot b=a$. 
+\end{itemize}
+Then $(K,\cdot)$ is a group. 
+\end{eg}
 
-\begin{lmm}{}{} Let $G$ be a group. Let $k\in\N$. Then $a^k=1$ if and only if $\abs{a}$ divides $k$. 
-\begin{proof}
+\begin{lmm}{}{}\\
+Let $G$ be a group. Let $k\in\N$. Then $a^k=1$ if and only if $\abs{a}$ divides $k$. 
+\begin{proof}\\
 If $k=n\abs{a}$ for some $n\in\N$ then we have $$a^k=a^{\abs{a}n}=(a^\abs{a})^n=1$$ Conversely if $a^k=1$, then since $\abs{a}$ is by definition the smallest number such that the $a^\abs{a}=1$, we can apply division algorithm to obtain $k=\abs{a}q+r$ for some $q\in\N$ and $0\leq r<n$. Now $a^{k}=a^{\abs{a}q+r}$ implies that $1=a^r$, which contradicts the minimality of $\abs{a}$. Thus we conclude. 
 \end{proof}
 \end{lmm}
 
-The following theorem gives a formula for calculating the order of the power of a given element. It is exceptionally useful given that we know of the element's order. 
-
-\begin{lmm}{}{} Let $G$ be a group and $g\in G$ an element of finite order $n$. Then $$\abs{g^k}=\frac{n}{\gcd(k,n)}=\frac{\lcm(k,n)}{k}$$ for any $k\in\N$
-\begin{proof} The equality between the two expressions is trivial since $\gcd(m,n)\times\lcm(m,n)=m\times n$. Now let $b=\frac{n}{\gcd(k,n)}$ and $c=\frac{k}{\gcd(k,n)}$. Then we must have $\gcd(b,c)=1$. Now
+\begin{lmm}{}{}\\
+Let $G$ be a group and $g\in G$ an element of finite order $n$. Then $$\abs{g^k}=\frac{n}{\gcd(k,n)}=\frac{\lcm(k,n)}{k}$$ for any $k\in\N$
+\begin{proof}\\
+The equality between the two expressions is trivial since $\gcd(m,n)\times\lcm(m,n)=m\times n$. Now let $b=\frac{n}{\gcd(k,n)}$ and $c=\frac{k}{\gcd(k,n)}$. Then we must have $\gcd(b,c)=1$. Now
 \begin{align*}
 (g^k)^b&=g^{kb}\\
 &=g^{\gcd(k,n)cb}\\
@@ -128,57 +124,51 @@ Thus we must have $\abs{g^k}$ divides $\frac{n}{\gcd(k,n)}$. Now we know that $g
 \end{proof}
 \end{lmm}
 
-In general finding the order of the product of elements is a hard problem. In the case that two elements commute, the order of their product is somehow determined by their individual orders, which makes it easier to deduce. 
-
-\begin{lmm}{}{} Let $G$ be a group. Let $a,b\in G$ be elements that commute with each other. Then $\abs{ab}$ divides $\lcm(\abs{a},\abs{b})$. 
-\begin{proof}
+\begin{lmm}{}{}\\
+Let $G$ be a group. Let $a,b\in G$ be elements that commute with each other. Then $\abs{ab}$ divides $\lcm(\abs{a},\abs{b})$. 
+\begin{proof}\\
 Let $l=\lcm(\abs{a},\abs{b})$. Since $a$ and $b$ commutes, we have that $$(ab)^l=a^lb^l=1$$ and so $\abs{ab}$ divides $l$. 
 \end{proof}
 \end{lmm}
 
-We will see in the section of cyclic groups that we can impose a stronger condition so that the above result is an equality. 
-
 \subsection{Subgroups}
 The idea of a subgroup is that some (not all) elements in a group can also form a group in and of itself. Most of the structure of a group carries on to its subgroup, while the converse may not necessarily be true. 
 
-\begin{defn}{Subgroups}{} If $(G,\ast)$ is a group and $H$ is a subset of $G$ such that $(H,\ast)$ is a group $(H,\ast)$. Then $H$ is called a subgroup of $G$ and is denoted $H\leq G$. 
+\begin{defn}{Subgroups}{}\\
+Let $(G,\ast)$ be a group. A subgroup of $G$ is a subset $H\subseteq G$ such that $(H,\ast)$ is a group. We denote that $H$ is a subgroup of $G$ by $H\leq G$. 
 \end{defn}
-
-Subgroups are still part of the larger group. This means that if $H$ is a subgroup of $G$, then certain properties of $H$ are inherited from $G$. For example, the uniqueness of the identity element ensures that $H$ and $G$ share the same identity element. 
 
 \begin{eg}{}{}\\
 Let $n\in\N^+$. Then $n\Z=\{nk\;|\;k\in\Z\}$ is a subgroup of $\Z$. 
 \end{eg}
 
-\begin{lmm}{}{} Let $G$ be a group and $H\leq G$. Then $1_H=1_G$. 
-\begin{proof}
-If $1_H\neq 1_G$ then there will be two identities in $H$. 
+Subgroups are still part of the larger group. This means that if $H$ is a subgroup of $G$, then certain properties of $H$ are inherited from $G$. For example, the uniqueness of the identity element ensures that $H$ and $G$ share the same identity element. 
+
+\begin{lmm}{}{}\\
+Let $G$ be a group and $H\leq G$. Then $1_H=1_G$. 
+\begin{proof}\\
+For all $h\in H$, we have $h\cdot 1_G=h$ since $h\in G$. Hence $1_G$ is the unique identity element of $H$. 
 \end{proof}
 \end{lmm}
 
-To check that a subset of a group is a subgroup, it is not necessary to go through the four axioms of a group as it is rather tedious. Instead, we may turn to an easier criterion which involves less work. 
+To check that a subset of a group is a subgroup, it is not necessary to go through the three axioms of a group as it is rather tedious. Instead, we may turn to an easier criterion which involves less work. 
 
-\begin{prp}{Criterion for a Subgroup}{} Let $(G,\ast)$ be a group. A subset $H$ of $G$ is a subgroup if and only if the following are true. 
+\begin{prp}{The Subgroup Criterion}{}\\
+Let $(G,\ast)$ be a group. A subset $H$ of $G$ is a subgroup if and only if the following are true. 
 \begin{itemize}
 \item If $a,b\in H$ then $a\ast b\in H$
 \item If $a\in H$ then $a^{-1}\in H$
 \end{itemize}
-\begin{proof} We first prove the forward implication. Suppose that $H$ is a subgroup. Then by definition of a group the above are all true.\\
+\begin{proof}\\
+If $H$ is a subgroup of $G$, then by definition of a group the above are all true.\\
 Suppose that $H$ is satisfies the above two conditions. We show that it implies the four definitions of a group. Since $a,b\in H$ implies $ab\in H$, closure is satisfied. Since $H\subseteq G$, and $G$ is associative, $H$ is also associative. If $a\in H$ then $a^{-1}\in H$ thus inverse exists. Finally since $H$ is closed, $aa^{-1}=1\in H$ thus identity is in $H$. Thus $H$ is a group. 
 \end{proof}
 \end{prp}
 
-We thern have subgroups that exists within every group. They are called trivial since we usually do not want to deal with them. 
-
-\begin{lmm}{Trivial Subgroups}{} Let $G$ be a group. Then $G$ and $\{1\}$ are subgroups of $G$. 
-\begin{proof} Both can easily be seen to satisfy the subgroup criterion. 
-\end{proof}
-\end{lmm}
-
-The final proposition gives a new way of generating a subgroup given two subgroups. In particular, their overlapping part is also a subgroup in itself. 
-
-\begin{prp}{}{} Let $G$ be a group and $H,K$ subgroups of $G$. Then $H\cap K$ is a subgroup of $G$. 
-\begin{proof} Suppose that $H,K$ are subgroups of $G$. We show that $H\cap K$ with the subgroup criterion. We have that 
+\begin{prp}{}{}\\
+Let $G$ be a group. Let $H,K\leq G$ be subgroups. Then $H\cap K\leq G$ is a subgroup. 
+\begin{proof}\\
+Suppose that $H,K$ are subgroups of $G$. We show that $H\cap K$ with the subgroup criterion. We have that 
 \begin{itemize}
 \item $1\in H$ and $1\in K$ thus $1\in H\cap K$
 \item Suppose that $a,b\in H\cap K$. Then since $ab\in H$ and $ab\in K$ we have $ab\in H\cap K$
@@ -249,7 +239,6 @@ Isomorphisms are stricter in the sense that the structure between the two groups
 \item $\abs{G}=\abs{H}$
 \item $\ker(\phi)=\{1\}$
 \item $G$ is abelian if and only if $H$ is abelian
-\item $G$ is cyclic if and only if $H$ is cyclic
 \item $\abs{x}=\abs{\phi(x)}$
 \item $G$ has a subgroup of order $k$ if and only if $H$ has a subgroup of order $k$. 
 \end{itemize}
@@ -259,23 +248,27 @@ Isomorphisms are stricter in the sense that the structure between the two groups
 \item Since $\phi$ is bijective, $\abs{G}=\abs{H}$
 \item Since $\phi$ is bijective and $1\in\ker(\phi)$, we must have $\ker(\phi)=\{1\}$
 \item Suppose that $G$ is abelian. $\phi(a)\phi(b)=\phi(ab)=\phi(ba)=\phi(b)\phi(a)$. Thus $H$ is abelian. Since $\phi$ is bijective it has a bijective inverse. Thus the backwards implication is proved. 
-\item Suppose that $x\in G$ has order $n$. $1_H=\phi(1_G)=\phi(x^n)=\phi(x)^n$
-\item If $\abs{x}=n$ then $\phi(x)^n=\phi(x^n)=\phi(1)=1$ thus we know that $\abs{\phi(x)}\bigg{|}n$. However for any $k<n$, $\phi(x)^k=\phi(x^k)\neq 1$ since $\phi$ is an isomorphism and $\ker(\phi)=\{1\}$. Thus we must have $\abs{\phi(x)^n}=1$. 
+\item Suppose that $\abs{x}$ and $\abs{\phi(x)}$ are finite. Then we have $$1_H=\phi(1_G)=\phi(x^\abs{x})=\phi(x)^\abs{x}$$ so that $\abs{\phi(x)}\;|\;\abs{x}$. By a similar argument using $\phi^{-1}$, we conclude that $\abs{x}\;|\;\abs{\phi(x)}$. Hence $\abs{\phi(x)}=\phi(x)$. Now suppose that $\abs{\phi(x)}$ is infinite. Then for all $n\in\N$, we have $\phi(x^n)=\phi(x)^n\neq 1_H$ and so $x^n\neq\phi^{-1}(1_H)=1_G$ by applying bijection $\phi^{-1}$ on both sides. By a similar argument, if $\abs{x}$ is infinite, then $\abs{\phi(x)}$ is infinite. Hence $\abs{x}=\abs{\phi(x)}$. 
 \item Suppose that $G$ has a subgroup of order $k$, then $\phi(G)$ is a subgroup as well and every element preserves its order, we have that $\phi(G)\leq H$ is order $k$. For the reverse statement, just take $\phi^{-1}$ to be the isomorphism. 
 \end{itemize}
 And so we conclude. 
 \end{proof}
 \end{prp}
 
-Isomorphisms capture more sturcture than homomorphism such as orders, commutativity, subgroups of particular orders and whether the group is cyclic. Most of the classification results require groups to be identified up to isomorphism. 
+When two groups are isomorphic, they share any and all properties of each other. We think of the isomorphic groups as two representations of the same abstract group. This is similar to how sets are uniquely determined by their cardinality, and elements in two bijective sets are only a renaming of one another. However, for groups, not only do we care about the number of elements, we also care about whether the group operation between the two sets are structurally the same. 
 
 \begin{eg}{}{}\\
 The groups $\Z,\Q,\R$ are not isomorphic to each other. 
+\begin{proof}\\
+Suppose that $\phi:\Z\to\Q$ is a group isomorphism. We know that $\phi(n)=n\phi(1)$ for all $n\in\Z$. Suppose that $\phi(1)=\frac{r}{s}\in\Q$ where $\gcd(r,s)=1$. Let $p$ be a prime number that does not divide $s$. I claim that $\frac{1}{p}\notin\im(\phi)$. Indeed if it does, then there exists $n\in\Z$ such that $\frac{nr}{s}=n\phi(1)=\phi(n)=\frac{1}{p}$, and $\frac{nr}{s}=\frac{1}{p}$ if and only if $nrp=s$. But this is impossible since $p$ does not divide $s$. Hence $\phi$ is not surjective and this is a contradiction. \\
+We also have $\Q$ and $\R$ are not isomorphic as groups since there is no bijection between $\Q$ and $\R$ by Cantor's diagonalization argument. 
+\end{proof}
 \end{eg}
 
 To provide more examples of group, we can construct the automorphism group from a group. 
 
-\begin{defn}{The Automorphism Group}{} Let $G$ be a group. An automorphism of $G$ is a group homomorphism $\phi:G\to G$. Define the automorphism group $G$ to be $$\text{Aut}(G)=\{\phi:G\to G\;|\;\phi\text{ is an isomorphism }\}$$
+\begin{defn}{The Automorphism Group}{}\\
+Let $G$ be a group. An automorphism of $G$ is a group homomorphism $\phi:G\to G$. Define the automorphism group $G$ to be $$\text{Aut}(G)=\{\phi:G\to G\;|\;\phi\text{ is an isomorphism }\}$$
 \end{defn}
 
 \begin{lmm}{}{} Let $G$ be a group. Then the automorphism group $\text{Aut}(G)$ is indeed a group. 
@@ -470,13 +463,14 @@ Given we have defined the set of cosets $\frac{G}{H}$ for a group $G$ and a subg
 \end{prp}
 
 \begin{eg}{}{}\\
-Let $G$ be an abelian group. Then any subgroup of $G$ is abelian. 
+Let $G$ be an abelian group. Then any subgroup of $G$ is normal. 
 \begin{proof}
-Let $H$ be a subgroup of $G$. Since $G$ is abelian, we have $gHg^{-1}=gg^{-1}H=H$ for any $g\in G$. Hence $H$ is abelian. 
+Let $H$ be a subgroup of $G$. Since $G$ is abelian, we have $gHg^{-1}=gg^{-1}H=H$ for any $g\in G$. Hence $H$ is normal. 
 \end{proof}
 \end{eg}
 
-\begin{prp}{}{} Let $H$ be a subgroup of a group $G$. Write $g_1H\cdot g_2H=\{ab\;|\;a\in g_1H,b\in g_2H\}$. Then $$g_1H\cdot g_2H=(g_1g_2)H$$ for all $g_1,g_2\in G$ if and only if $H\trianglelefteq G$. 
+\begin{prp}{}{}\\
+Let $G$ be a group. Let $H\leq G$ be a subgroup. Write $g_1H\cdot g_2H=\{ab\;|\;a\in g_1H,b\in g_2H\}$. Then $$g_1H\cdot g_2H=(g_1g_2)H$$ for all $g_1,g_2\in G$ if and only if $H\trianglelefteq G$. 
 \begin{proof}
 Suppose first that $g_1H\cdot g_2H=(g_1g_2)H$. Let $g\in G$. We want to show that $gHg^{-1}\subseteq H$. Notice that $gH\cdot g^{-1}H=H$. For any $h\in H$, we have $gh\in gH$ and $g^{-1}\in g^{-1}H$ so that $ghg^{-1}\in G$. \\
 
@@ -484,10 +478,13 @@ Now suppose that $N$ is normal. Let $g_1h_1\in g_1H$ and $g_2h_2\in g_2H$. Then 
 \end{proof}
 \end{prp}
 
-This theorem shows that if $N$ is a normal subgroup, then the above operation is a binary operation on $G/N$. The rest of the conditions to check that $G/N$ forms a group is fairly straight forward. 
+\begin{defn}{Quotient Groups}{}\\
+Let $G$ be a group. Let $N$ be a normal subgroup of $G$. Define the quotient group of $G$ by $N$ to be the set $$\frac{G}{N}=\{[g]=gN\;|\;g\in G\}$$ together with the binary operation $\cdot:G/N\times G/N\to G/N$ defined by $$(gN)\cdot(hN)=(gh)N$$
+\end{defn}
 
-\begin{prp}{}{} Let $G$ be a group and $N$ a normal subgroup of $G$. Then $G/N$ together with the binary operation $\cdot:G/N\times G/N\to G/N$ defined by $$(gN)\cdot(hN)=(gh)N$$ is a group. 
-\begin{proof}
+\begin{prp}{}{}\\
+Let $G$ be a group. Let $N$ be a normal subgroup of $G$. Then $G/N$ is a group. 
+\begin{proof}\\
 We check the group axioms: 
 \begin{itemize}
 \item Associativity: Let $gN$, $hN$ and $kN$ be in $G/N$. Then by two applications of the above theorem, we have that $((gN)\cdot(hN))\cdot(kN)=(ghN)\cdot(kN)=(gh)kN$ By associativity of $G$, we conclude. 
@@ -497,9 +494,6 @@ We check the group axioms:
 All the group axioms are satisfied and so we conclude. 
 \end{proof}
 \end{prp}
-
-\begin{defn}{Quotient Group}{} Let $G$ be a group and $N$ a normal subgroup of $G$. Define the quotient group of $G$ with $N$ to be the group $G/N$. 
-\end{defn}
 
 \begin{eg}{}{}\\
 Let $n\in\N^+$. Then $\Z/n\Z$ is a group isomorphic to $C_n$. 
@@ -1359,14 +1353,6 @@ Let $\{0,a_1,\dots,a_n\}$ be elements of a finite integral domain. We simply sho
 \end{proof}
 \end{prp}
 
-The following diagram shows roughly the relationship between different types of rings. 
-
-\begin{center}
-\includegraphics[scale = 0.3]{Ring Diagram}
-\end{center}
-
-There is a subtle sense of symmetry here. The conditions on the arrow is the condition for the ring in the tail to be a ring in the arrow head. For instance, if a domain $R$ satisfies the property that elements in $R$ are commutative, then $R$ is an integral domain. On the other hand, every integral domain will necessarily be a domain. 
-
 \subsection{Products of Rings}
 \begin{defn}{Direct Product of Rings}{} Let $\{R_i\;|\;i\in I\}$ be a collection of rings. Define the direct product of the collection of rings to be the set $$\prod_{i\in I}R_i=\{(r_i)_{i\in I}\;|\;r_i\in R_i\}$$ together with pointwise addition and multiplication. 
 \end{defn}
@@ -1433,39 +1419,8 @@ Since all $X\in\mC$ are proper ideals with $1\notin X$, then $1\notin Z$. Then $
 \end{proof}
 \end{prp}
 
-\begin{prp}{}{} Let $R$ be a ring. Let $I$ be an ideal of $R$. Then $I$ is a maximal left ideal if and only if $R/I$ is a division ring. 
-\begin{proof}
-Suppose that $I$ is a maximal ideal. Let $x\notin R$. We show that $x+I$ has an inverse. We know that $I+(x)$ is an ideal containing $I$. Since $I$ is maximal, we must have $I+(x)=R$. This means that $1\in I+(x)$ which means there exists $m\in I$ and $r\in R$ such that $1=m+rx$. Now consider $r+M$. We have that 
-\begin{align*}
-(x+I)(r+I)&=xr+I\\
-&=(1-m)+I\\
-&=1+I
-\end{align*}~\\
-Now suppose that $R/I$ is a field. Let $J$ be an ideal such that $I\subseteq J\subseteq R$ and $I\neq J$. Now let $x\in J\setminus I$. Then $I+x$ has a multiplicative inverse in $R/I$ since $I+x\neq I$, the additive identity. Let the inverse be $I+y$. Then $$I+1=(I+x)(I+y)=I+xy$$ Trivially $xy\in(x)$, thus $1\in I+(x)\subseteq J$. But if the identity is in the ideal, the ideal is equal to the ring thus we are done. 
-\end{proof}
-\end{prp}
-
-\begin{crl}{}{} Let $R$ be a commutative ring with identity and $M$ an ideal of $R$. Then $M$ is maximal if and only if $R/M$ is a field. 
-\begin{proof}
-Immediate from the above. 
-\end{proof}
-\end{crl}
-
 \begin{defn}{Prime Ideals}{} Let $R$ be a ring. Let $P\subseteq R$ be a proper ideal of $R$. We say that $P$ is a prime ideal of $R$ if $ab\in P$ implies that $a\in P$ or $b\in P$. 
 \end{defn}
-
-\begin{prp}{}{} Let $R$ be a commutative ring with identity not equal to $0$. Then $P$ is a prime ideal in $R$ if and only if $R/P$ is an integral domain. 
-\begin{proof}
-Suppose that $P$ is a prime ideal. Then let $(a+P)(b+P)=P$. Since we also have that $(a+P)(b+P)=ab+P$. This means that $ab\in P$ thus either $a\in P$ or $b\in P$ which in turns leads to either $a+P=P$ or $b+P=P$ and thus the cancellation law applies. \\
-Now suppose that $R/P$ is an integral domain. Let $ab\in P$. Since $R/P$ is an integral domain, we have that $$(a+P)(b+P)=ab+P=P$$ means that either $a+P=P$ or $b+P=P$ which means that either $a\in P$ or $b\in P$ and we are done. 
-\end{proof}
-\end{prp}
-
-\begin{crl}{}{} Let $R$ be a commutative ring. Let $I$ be an ideal of $R$. If $I$ is a maximal ideal, then $I$ is a prime ideal. 
-\begin{proof}
-If $M$ is maximal then $R/I$ being a field implies that $R/I$ is an integral domain thus $I$ is prime. 
-\end{proof}
-\end{crl}
 
 \subsection{Ideals and Generating Sets}
 \begin{defn}{Elements Generating an Ideal}{} Let $R$ be a ring. Let $I$ be an indexing set. Let $S=\{a_i\;|\;i\in I\}\subseteq R$ be a set of elements of $R$. Define $$(S)=(a_i\;|\;i\in I)=\left\{\sum_{k=1}^nr_ka_k\;|\;r_k\in R\right\}$$
@@ -1563,15 +1518,16 @@ Now suppose that $J$ is an ideal of $S$. Let $x,y\in\varphi^{-1}(J)$. Since $J$ 
 \end{proof}
 \end{lmm}
 
-\begin{lmm}{}{} Let $R,S$ be rings. Let $\varphi:R\to S$ be a ring homomorphism. Let $m$ be a maximal ideal of $S$. If $\varphi$ is surjective, then $\varphi^{-1}(m)$ is a maximal ideal of $R$. 
-\begin{proof}
-It is clear that $\varphi^{-1}(m)$ is an ideal. If it is not maximal, then there exists a proper ideal $I$ such that $\varphi^{-1}(m)\subset I\subset R$. Then we have $m\subseteq\varphi(I)\subseteq\varphi(R)=S$. Since $m$ is maximal, either $\varphi(I)=\varphi(R)$ or $\varphi(I)=m$. If it is the former, then 
-\end{proof}
-\end{lmm}
+\begin{lmm}{}{}\\
+Let $R,S$ be rings. Let $\varphi:R\to S$ be a ring homomorphism. Then the following are true. 
+\begin{itemize}
+\item Let $m$ be a maximal ideal of $S$. If $\varphi$ is surjective, then $\varphi^{-1}(m)$ is a maximal ideal of $R$. 
+\item Let $P$ be a prime ideal of $S$. Then $\varphi^{-1}(P)$ is a prime ideal of $R$. 
+\end{itemize}
+\begin{proof}\\
+It is clear that $\varphi^{-1}(m)$ is an ideal. If it is not maximal, then there exists a proper ideal $I$ such that $\varphi^{-1}(m)\subset I\subset R$. Then we have $m\subseteq\varphi(I)\subseteq\varphi(R)=S$. Since $m$ is maximal, either $\varphi(I)=\varphi(R)$ or $\varphi(I)=m$. If it is the former, then \\~\\
 
-\begin{lmm}{}{} Let $R,S$ be commutative rings. Let $\varphi:R\to S$ be a ring homomorphism. Let $P$ be a prime ideal of $S$. Then $\varphi^{-1}(P)$ is a prime ideal of $R$. 
-\begin{proof}
-
+We already know that $\varphi^{-1}(P)$ is an ideal. Let $ab\in\varphi^{-1}(P)$. Then $\varphi(ab)=\varphi(a)\varphi(b)\in P$. Since $P$ is a prime ideal, we have either $\varphi(a)\in P$ or $\varphi(b)\in P$. In both cases, this shows that either $a\in\varphi^{-1}(P)$ or $b\in\varphi^{-1}(P)$. Hence $P$ is a prime ideal. 
 \end{proof}
 \end{lmm}
 
@@ -1579,12 +1535,17 @@ It is clear that $\varphi^{-1}(m)$ is an ideal. If it is not maximal, then there
 \begin{defn}{Kernel}{} Let $R,S$ be rings. Let $\phi:R\to S$ be a ring homomorphism. Define the kernel of $\phi$ to be $$\ker(\phi)=\{r\in R\;|\;\phi(r)=0\}$$
 \end{defn}
 
-\begin{prp}{}{} Let $R,S$ be a ring. Let $\phi:R\to S$ be a ring homomorphism. Then $\ker(\phi)$ is an ideal of $R$. 
+\begin{prp}{}{}\\
+Let $R,S$ be a ring. Let $\phi:R\to S$ be a ring homomorphism. Then $\ker(\phi)$ is an ideal of $R$. 
 \end{prp}
 
-\begin{prp}{}{} Let $I$ be an ideal of a ring $R$. Then the cosets of $I$ in $R$, $$R/I=\{r+I\;|\;r\in R\}$$ is a ring with addition defined the same as quotient groups $$(r+I)+(s+I)=(r+s)+I$$ and multiplication defined as $$(r+I)(s+I)=\{ab\in R\;|\;a\in r+I,b\in s+I\}=rs+I$$ 
-\begin{proof}
-Since $(I,+)$ is a subgroup of $(R,+)$, we know that $R/I$ is already an abelian group. We simply show that multplication is well defined. Suppose that $x_1+I=x_2+I$ and $y_1+I=y_2+I$. Then 
+\begin{defn}{Quotient Rings}{} Let $R$ be a ring. Let $I$ be an ideal of $R$. Define the quotient ring of $R$ by $I$ to be the abelian group $$\frac{R}{I}=\{r+I\;|\;r\in R\}$$ together with multiplication defined by $$(r+I)\cdot(s+I)=rs+I$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $R$ be a ring. Let $I$ be an ideal of a ring $R$. Then $R/I$ is a ring. 
+\begin{proof}\\
+We already know that $R/I$ is an abelian group. We show that multplication is well defined. Suppose that $x_1+I=x_2+I$ and $y_1+I=y_2+I$. Then 
 \begin{align*}
 (x_1+I)(y_1+I)&=x_1y_1+I\\
 &=(x_1y_1-x_1y_2+x_1y_2-x_2y_2+x_2y_2)+I\\
@@ -1596,30 +1557,53 @@ Now we show that $1+I$ is the muplicative identity of $R/I$. Let $x+I\in R/I$. W
 \end{proof}
 \end{prp}
 
-\begin{defn}{Quotient Rings}{} Let $R$ be a ring. Let $I$ be an ideal of $R$. Define the quotient ring of $R$ by $I$ to be the abelian group $$\frac{R}{I}=\{r+I\;|\;r\in R\}$$ together with multiplication defined by $$(r+I)\cdot(s+I)=rs+I$$
-\end{defn}
-
-\begin{prp}{}{} Let $R$ be a ring. Let $I\subseteq R$ be a subset. Then $I$ is an ideal of $R$ if and only if it is the kernel of some ring homomorphism. 
+\begin{prp}{}{}\\
+Let $R$ be a ring. Let $I\subseteq R$ be a subset. Then $I$ is an ideal of $R$ if and only if it is the kernel of some ring homomorphism. 
 \end{prp}
+
+\begin{prp}{}{} Let $R$ be a ring. Let $I$ be an ideal of $R$. Then $I$ is a maximal left ideal if and only if $R/I$ is a division ring. 
+\begin{proof}
+Suppose that $I$ is a maximal ideal. Let $x\notin R$. We show that $x+I$ has an inverse. We know that $I+(x)$ is an ideal containing $I$. Since $I$ is maximal, we must have $I+(x)=R$. This means that $1\in I+(x)$ which means there exists $m\in I$ and $r\in R$ such that $1=m+rx$. Now consider $r+M$. We have that 
+\begin{align*}
+(x+I)(r+I)&=xr+I\\
+&=(1-m)+I\\
+&=1+I
+\end{align*}~\\
+Now suppose that $R/I$ is a field. Let $J$ be an ideal such that $I\subseteq J\subseteq R$ and $I\neq J$. Now let $x\in J\setminus I$. Then $I+x$ has a multiplicative inverse in $R/I$ since $I+x\neq I$, the additive identity. Let the inverse be $I+y$. Then $$I+1=(I+x)(I+y)=I+xy$$ Trivially $xy\in(x)$, thus $1\in I+(x)\subseteq J$. But if the identity is in the ideal, the ideal is equal to the ring thus we are done. 
+\end{proof}
+\end{prp}
+
+\begin{crl}{}{} Let $R$ be a commutative ring with identity and $M$ an ideal of $R$. Then $M$ is maximal if and only if $R/M$ is a field. 
+\begin{proof}
+Immediate from the above. 
+\end{proof}
+\end{crl}
+
+\begin{prp}{}{} Let $R$ be a commutative ring with identity not equal to $0$. Then $P$ is a prime ideal in $R$ if and only if $R/P$ is an integral domain. 
+\begin{proof}
+Suppose that $P$ is a prime ideal. Then let $(a+P)(b+P)=P$. Since we also have that $(a+P)(b+P)=ab+P$. This means that $ab\in P$ thus either $a\in P$ or $b\in P$ which in turns leads to either $a+P=P$ or $b+P=P$ and thus the cancellation law applies. \\
+Now suppose that $R/P$ is an integral domain. Let $ab\in P$. Since $R/P$ is an integral domain, we have that $$(a+P)(b+P)=ab+P=P$$ means that either $a+P=P$ or $b+P=P$ which means that either $a\in P$ or $b\in P$ and we are done. 
+\end{proof}
+\end{prp}
+
+\begin{crl}{}{} Let $R$ be a commutative ring. Let $I$ be an ideal of $R$. If $I$ is a maximal ideal, then $I$ is a prime ideal. 
+\begin{proof}
+If $M$ is maximal then $R/I$ being a field implies that $R/I$ is an integral domain thus $I$ is prime. 
+\end{proof}
+\end{crl}
 
 \subsection{Isomophism Theorem for Rings}
 The isomorphism theorem for rings is a direct result that extends the group isomorphism theorems. Their proofs are mostly the same except that we also have to check that multiplication is preserved so that the isomorphisms inherited from groups is indeed a ring isomorphism. 
 
-\begin{thm}{The First Isomorphism Theorem for Rings}{} If $\phi:R\to S$ is a homomorphism of rings, then the following are true. 
+\begin{thm}{The First Isomorphism Theorem for Rings}{}\\
+If $\phi:R\to S$ is a homomorphism of rings, then the following are true. 
 \begin{itemize}
 \item $\ker(\phi)$ is an ideal of $R$
 \item $\im(\phi)\leq S$ is a subring of $S$
 \end{itemize}
-Moreover, we have an isomorphism $$\frac{R}{\ker(\phi)}\cong\phi(R)$$ in rings. 
-\begin{proof}
-A group isomorphism $R/\ker(\phi)\cong\phi(R)$ can be established from the first isomorphism theorem for groups. Moreover we know that $\ker(\phi)$ is a normal subgroup. To show that $\ker(\phi)$ is an ideal, notice that for $r\in R$ and $k\in\ker\phi$, $\phi(rk)=\phi(r)\phi(k)=0$ thus $rk\in\ker(\phi)$. To show that $R/\ker(\phi)\cong\phi(R)$ is a ring isomorphism, suppose that $\pi$ is the induced group isomorphism. Notice that 
-\begin{align*}
-\pi((r_1+\ker(\phi))(r_2+\ker(\phi)))&=\pi(r_1r_2+\ker(\phi))\\
-&=\phi(r_1r_2)\\
-&=\phi(r_1)\phi(r_2)\\
-&=\pi(r_1+\ker(\phi))\pi(r_2+\ker(\phi))
-\end{align*}
-and so we conclude. 
+Moreover, $\phi$ induces an isomorphism $$\frac{R}{\ker(\phi)}\cong\phi(R)$$ of rings. 
+\begin{proof}\\
+Since $\phi$ is a homomorphism of the underlying groups, the first isomorphism theorem for groups gives a group isomorphism $$\overline{\phi}:\frac{R}{\ker(\phi)}\overset{\cong}{\to}\phi(R)$$ defined by $\overline{\phi}([r])=\phi(r)$ for $r\in R$. It remains to show that $\overline{\phi}$ is a ring isomorphism. Let $[r],[s]\in R/\ker(\phi)$. Then we have $$\overline{\phi}([r]\cdot[s])=\overline{\phi}([rs])=\phi(rs)=\phi(r)\phi(s)=\overline{\phi}([r])\overline{\phi}([s])$$ so we are done. 
 \end{proof}
 \end{thm}
 
@@ -1631,16 +1615,19 @@ and so we conclude.
 Moreover, we have an isomorphism $$\frac{A+B}{B}\cong\frac{A}{A\cap B}$$ in rings. 
 \end{thm}
 
-\begin{thm}{The Third Isomorphism Theorem for Rings}{} Let $I,J$ be ideals of $R$ with $I\subset J$. Then $J/I$ is an ideal of $R/I$ and $(R/I)/(J/I)\cong R/J$
+\begin{thm}{The Third Isomorphism Theorem for Rings}{}\\
+Let $R$ be a ring. Let $I,J$ be ideals of $R$ with $I\subset J$. Then $J/I$ is an ideal of $R/I$ and $(R/I)/(J/I)\cong R/J$
 \end{thm}
 
-\begin{thm}{The Correspondence Theorem}{} Let $R$ be a ring. Let $I$ be a left ideal of $R$. Then there is an inclusion preserving one-to-one bijection $$\left\{\substack{\text{Subrings of }R\\\text{containing }I}\right\}\;\;\overset{1:1}{\longleftrightarrow}\;\;\left\{\text{Subrings of }R/I\right\}$$ induced by the surjective ring homomorphism $\varphi:R\to R/I$. Moreover, there is an inclusion preserving one-to-one bijection $$\left\{\substack{\text{Ideals of }R\\\text{containing }I}\right\}\;\;\overset{1:1}{\longleftrightarrow}\;\;\left\{\text{Ideals of }R/I\right\}$$ given by the map $A\mapsto A/I$ for $A$ an ideal of $R$ containing $I$. 
+\begin{thm}{The Correspondence Theorem}{}\\
+Let $R$ be a ring. Let $I$ be a left ideal of $R$. Then there is an inclusion preserving one-to-one bijection $$\left\{\substack{\text{Subrings of }R\\\text{containing }I}\right\}\;\;\overset{1:1}{\longleftrightarrow}\;\;\left\{\text{Subrings of }R/I\right\}$$ induced by the surjective ring homomorphism $\varphi:R\to R/I$. Moreover, there is an inclusion preserving one-to-one bijection $$\left\{\substack{\text{Ideals of }R\\\text{containing }I}\right\}\;\;\overset{1:1}{\longleftrightarrow}\;\;\left\{\text{Ideals of }R/I\right\}$$ given by the map $A\mapsto A/I$ for $A$ an ideal of $R$ containing $I$. 
 \end{thm}
 
 \subsection{Chinese Remainder Theorem}
 In this section we develop the necessary notions in order to illustrate the Chinese Remainder Theorem. 
 
-\begin{defn}{Coprime Ideals}{} Let $R$ be a ring. Let $I,J$ be left ideals of $R$. We say that $I$ and $J$ are coprime if $$I+J=R$$
+\begin{defn}{Coprime Ideals}{}\\
+Let $R$ be a ring. Let $I,J$ be left ideals of $R$. We say that $I$ and $J$ are coprime if $$I+J=R$$
 \end{defn}
 
 Notice that in $\Z$, the prime ideals are exactly the ideals $(p)$ where $p$ is a prime. We also have a nice inclusion of ideals whenever $p\;|\;a$ which is $(a)\subseteq(p)$, which we will prove later. This means that in general, the smaller the number $a$ is, the larger the ideal $(a)$ is and indeed, the smaller the number is in $\Z$, the more numbers it can possibly divide. Now recall that if $a$ and $b$ are coprime in $\Z$, then their gcd will be $1$. Indeed we will develop the notion of gcd for ideals as well, which is to say that if $d=\gcd(a,b)$ in the usual sense, then $(a)\subseteq(d)$ and $(b)\subseteq(d)$. Then if $a$ and $b$ are coprime, their ideals are both subsets of $(1)$, which is exactly $R$. This leads to why we say that two ideals are coprime. 
@@ -1661,11 +1648,16 @@ We then induct on $k\geq 3$. For the base case, suppose that $I_1,I_2,I_3$ are p
 \end{prp}
 
 
-\begin{thm}{Chinese Remainder Theorem}{} Let $I_1,\dots, I_n$ be ideals of a ring $R$. Then the ring homomorphism $$\phi:R\to\frac{R}{I_1}\times\cdots\times\frac{R}{I_n}$$ defined by $\phi(x)=(x+I_1,\dots,x+I_n)$ has kernel $$I=\bigcap_{k=1}^nI_k$$ Moreover, if each $I_j$ and $I_k$ are pairwise coprime, then there is an isomorphism $$\frac{R}{I}\cong\frac{R}{I_1}\times\cdots\times\frac{R}{I_n}$$ given by $\phi$. 
+\begin{thm}{Chinese Remainder Theorem}{}\\
+Let $R$ be a ring. Let $I_1,\dots,I_n$ be two sided ideals of $R$. Let $\phi:R\to\prod_{k=1}^n\frac{R}{I_k}$ be the ring homomorphism defined by $\phi(r)=(r+I_1,\dots,r+I_n)$. Then the following are true. 
+\begin{itemize}
+\item We have $\ker(\phi)=\bigcap_{k=1}^nI_k$. 
+\item If $I_1,\dots,I_n$ are pairwise coprime, then $\phi$ induces an isomorphism $$\frac{R}{\bigcap_{k=1}^nI_k}\cong\prod_{k=1}^n\frac{R}{I_k}$$
+\end{itemize}
 \begin{proof}
 Since $\phi$ is a collection of projections on to each factor, $\phi$ is a ring homomorphism. It is clear that $I$ is the kernel of the homomorphism. Indeed given $x\in I$, then $x$ lies in each and every $I_k$ for $1\leq k\leq n$. Thus $\phi(x)=(x+I_1,\dots,x+I_n)=0$. Conversely, if $(x+I_1,\dots,x+I_n)$ is such that applying $\phi$ gives $0$, then $x\in I_1,\dots,I_n$ so that $x\in I$. \\
 
-When the ideals are pairwise corpime, consider the elements $e_k=(0,\dots,0,x+I_k,0,\dots,0)$ for $1\leq k\leq n$ (these are called full system of orthogonal central idempotents). Notice that they satisfy the equation $1=e_1+\dots+e_n$ and $e_k^2=e_k$ for $1\leq k\leq n$ for $i\neq j$, we have $e_ie_j=0$. Now since $I_i$ and $I_j$ are coprime, we have that $R=I_i+I_j$ so that $1=a_j+z_j$ for $a_j\in I_i$ (note the subscript) and $z_j\in I_j$. Define $x_i=z_1\cdots z_{i-1}\cdot z_{i+1}\cdots z_n$ for each $1\leq i\leq n$. Write the projection homomorphism as $\psi:R\to R/I_j$. If $i\neq j$, then $\phi_j(x_i)=0$ because $x_i$ contains the element $z_j$ that lies in $I_j$. Also, we have that $$\psi_i(z_j)=\psi_i(1-a_j)=\psi_i(1)-\psi_i(a_j)=\psi_i(1)=1$$ in $R/I_i$ since $a_j\in I_i$. Thus we have that $$\psi_i(x_i)=\psi_i(z_1)\cdots\psi_i(z_n)=1$$~\\
+When the ideals are pairwise corpime, consider the elements $e_k=(0,\dots,0,x+I_k,0,\dots,0)$ for $1\leq k\leq n$ (these are called full system of orthogonal central idempotents). Notice that they satisfy the equation $1=e_1+\dots+e_n$ and $e_k^2=e_k$ for $1\leq k\leq n$ for $i\neq j$, we have $e_ie_j=0$. Now since $I_i$ and $I_j$ are coprime, we have that $R=I_i+I_j$ so that $1=a_j+z_j$ for $a_j\in I_i$ (note the subscript) and $z_j\in I_j$. Define $x_i=z_1\cdots z_{i-1}\cdot z_{i+1}\cdots z_n$ for each $1\leq i\leq n$. Write the projection homomorphism as $\psi:R\to R/I_j$. If $i\neq j$, then $\phi_j(x_i)=0$ because $x_i$ contains the element $z_j$ that lies in $I_j$. Also, we have that $$\psi_i(z_j)=\psi_i(1-a_j)=\psi_i(1)-\psi_i(a_j)=\psi_i(1)=1$$ in $R/I_i$ since $a_j\in I_i$. Thus we have that $$\psi_i(x_i)=\psi_i(z_1)\cdots\psi_i(z_n)=1$$
 
 All this means that $x_i\in R$ is such that $\psi(x_i)=(0,\dots,0,1+I_i,0,\dots,0)$ for $1\leq i\leq n$. Now to prove surjectivity, let $(r_1,\dots,r_n)$ be an element in the product. Then we have that $$(r_1,\dots,r_n)=\sum_{j=1}^n\psi(r_i)e_i=\sum_{j=1}^n\psi(r_ix_i)$$ and so $r_1x_1+\dots+r_nx_n\in R$ is our desired element. And so we are done. 
 \end{proof}
@@ -1686,10 +1678,24 @@ Follows from the Chinese Remainder Theorem and the fact that $\prod_{i=1}^kI_i=\
 \end{proof}
 \end{crl}
 
+\begin{eg}{}{}\\
+Suppose that $x\in\Z$ satisfies $x\equiv 0\;(\bmod\;3)$, $x\equiv 3\;(\bmod\;4)$, $x\equiv 4\;(\bmod\;5)$. Then $x\equiv 39\;(\bmod\;60)$. 
+\begin{proof}\\
+In terms of ring theory, the problem can be translated to saying that $[x]=[0]\in\Z/3\Z$, $[x]=[3]\in\Z/4\Z$ and $[x]=[4]\in\Z/5\Z$. Consider the ideals $3\Z$, $4\Z$, $5\Z$ in $\Z$. They are pairwise coprime since their pairwise gcd is $1$. By the Chinese remainder theorem, there is an isomorphism $$\Z/60\Z\cong\Z/3\Z\times\Z/4\Z\times\Z/5\Z$$ given by $1\mapsto(1,1,1)$. The goal is to find $x\in\Z/60\Z$ so that under the above isomorphism, $[x]$ corresponds to the element $(0,3,4)$. It suffices to solve for $(0,1,0)$ and $(0,0,1)$ since ring homomorphism preserves addition and multiplication. By inspection, we have that $(0,1,0)$ corresponds to $45$ and $(0,0,1)$ corresponds to $36$. Hence $[x]=[3\cdot 45+4\cdot 36]=[279]=[39]\in\Z/60\Z$. 
+\end{proof}
+\end{eg}
+
+\begin{eg}{}{}\\
+The idempotents of $\Z/60\Z$ are precisely $\{[0],[1],[16],[21],[25],[36],[40],[45]\}$. 
+\begin{proof}\\
+Consider the ideals $3\Z$, $4\Z$, $5\Z$ in $\Z$. They are pairwise coprime since their pairwise gcd is $1$. By the Chinese remainder theorem, there is an isomorphism $$\Z/60\Z\cong\Z/3\Z\times\Z/4\Z\times\Z/5\Z$$ given by $1\mapsto(1,1,1)$. Let $(a,b,c)\in\Z/3\Z\times\Z/4\Z\times\Z/5\Z$ be an element. Then $(a,b,c)$ is an idempotent if and only if $a,b,c$ are each idempotents in the corresponding component in the product ring. The only idempotents in $\Z/3\Z$ and $\Z/4\Z$ and $\Z/5\Z$ are $0$ and $1$ respectively. This gives eight idempotents in the product by considering all possible combinations of $0$ and $1$. Through the ring isomorphism, we conclude that $(1,0,0)$ corresponds to $40$, $(0,1,0)$ corresponds to $45$ and $(0,0,1)$ corresponds to $36$. Hence we obtain the list of idempotents described above. 
+\end{proof}
+\end{eg}
+
 \pagebreak
 \section{Integral Domains}
 \subsection{Field of Fractions}
-\begin{defn}{Fractional Equivalence}{} Let $R$ be an integral domain. Let $$S=\{(a,b)\;|\;a,b\in R\text{ and }b\neq 0\}$$ Define a relation on $S$ by $(a,b)\sim(c,d)$ if $ad=bc$. 
+\begin{defn}{The Field of Fractions}{} Let $R$ be an integral domain. Let $$S=\{(a,b)\;|\;a,b\in R\text{ and }b\neq 0\}$$ Define a relation on $S$ by $(a,b)\sim(c,d)$ if $ad=bc$. 
 \end{defn}
 
 \begin{lmm}{}{} The relation $\sim$ between elements of $S$ is an equivalence relation. 
@@ -1808,12 +1814,8 @@ Suppose that $(a,b)=(d)$ for some $d\in R$. Then $a\in(d)$ and $b\in(d)$ already
 \end{prp}
 
 \subsection{Primes and Irreducibles}
-Primes and irreducibles are two similar concepts, their difference is only made clear in Euclidean domains that are not principles ideal domains, both of which we will see later. 
-
-\begin{defn}{Irreducibles}{} Let $D$ be an integral domain. A nonzero element $p\in D$ that is not a unit is said to be irreducible if $p=ab$ implies $a$ or $b$ is a unit. 
-\end{defn}
-
-\begin{defn}{Primes}{} Let $D$ be an integral domain. A nonzero element $p\in D$ that is not a unit is said to be a prime if $p\;|\;ab$ implies $p\;|\;a$ or $p\;|\;b$. 
+\begin{defn}{Primes}{}\\
+Let $R$ be a commutative ring. A nonzero element $p\in R$ that is not a unit is said to be a prime if $p\;|\;ab$ implies $p\;|\;a$ or $p\;|\;b$. 
 \end{defn}
 
 \begin{lmm}{}{} Let $D$ be an integral domain. Let $p$ be a non-unit. Then $p$ is prime if and only if $(p)$ is a prime ideal. 
@@ -1821,6 +1823,9 @@ Primes and irreducibles are two similar concepts, their difference is only made 
 Suppose that $p$ is prime. Suppose that $rp\in(p)$. Then $p\in P$ and we are done. Now suppose that $(p)$ is a prime ideal. Suppose that $p\;|\;ab$. Then $pd=ab$ for some $d\in D$ thus $ab\in(p)$. WLOG take $a\in(p)$ by definition of prime ideal. Then we are done since $a\in(p)$ implies $p\;|\;a$. 
 \end{proof}
 \end{lmm}
+
+\begin{defn}{Irreducibles}{} Let $D$ be an integral domain. A nonzero element $p\in D$ that is not a unit is said to be irreducible if $p=ab$ implies $a$ or $b$ is a unit. 
+\end{defn}
 
 \begin{prp}{}{} Let $D$ be an integral domain and $p\in D$. If $p$ is a prime then $p$ is irreducible. 
 \begin{proof}
@@ -1844,8 +1849,6 @@ We have already shown the forward implication. Now let $p$ be irreducible. We sh
 \end{proof}
 \end{prp}
 
-Notice that in the above proof, the fact that every prime is irreducible does not use the properties of UFD. This means that this is true in general integral domains. 
-
 \subsection{Principal Ideal Domains}
 \begin{defn}{Principal Ideal Domains}{} A principal ideal domain is an integral domain in which every ideal is principal, meaning every ideal is of the form $$(a)=\{ra:r\in R\}$$
 \end{defn}
@@ -1858,20 +1861,27 @@ Since $(d)=(x)+(y)$, there exists $r,s\in (x),(y)$ respectively such that $d=rx+
 \end{proof}
 \end{prp}
 
-\begin{prp}{}{} Let $R$ be a PID and $(p)$ a nonzero ideal in $R$. Then the following are equivalent. 
+\begin{prp}{}{}\\
+Let $R$ be a PID and $(p)$ a nonzero ideal in $R$. Then the following are equivalent. 
 \begin{itemize}
-\item $(p)$ is maximal
-\item $p$ is irreducible
-\item $p$ is prime ($(p)$ is prime)
-\end{itemize} 
-We have seen that every maximal ideal is a prime ideal. We have seen that if $(p)$ is a prime ideal then $p$ is prime. We have also seen that every prime is irreducible. We show separately that if $p$ is irreducible then $p$ is a prime, and also if $p$ is prime then $(p)$ is maximal. \\
-For the first part, suppose that $p$ is irreducible. Suppose that $p\;|\;ab$ for $a,b\in R$. By the above proposition, $d=\gcd(p,a)$ exists. Then for some $t\in R$, $p=dt$. Since $p$ is irreducible, either $d$ or $t$ is a unit. We consider both cases. If $t$ is a unit, then $p$ and $d$ are associates and thus $p\;|\;d$. Since $d\;|\;a$, we have that $p\;|\;a$ and we are done. Now if $d$ is a unit, then $d=ra+sp$ for some $r,s\in R$. Multplying both sides with $b$ gives $db=rab+spb$. Since $p\;|\;ab$ and $p\;|\;spb$, we have that $p\;|\;db$. Then $pu=db$ for some unit $u\in R$. Since $d$ is a unit, we have that $d^{-1}pu=b$, which means that $p\;|\;b$ and we are done. \\
+\item $(p)$ is maximal ideal. 
+\item $p$ is irreducible. 
+\item $p$ is prime. 
+\item $(p)$ is a prime ideal. 
+\end{itemize}
+\begin{proof}\\
+We have seen that every maximal ideal is a prime ideal. We have seen that if $(p)$ is a prime ideal then $p$ is prime. We have also seen that every prime is irreducible. Thus we have proved $(1)\implies(4)\iff(3)\implies(2)$. \\
+
+We first show that $(2)\implies(3)$. Suppose that $p$ is irreducible. Suppose that $p\;|\;ab$ for $a,b\in R$. By the above proposition, $d=\gcd(p,a)$ exists. Then for some $t\in R$, $p=dt$. Since $p$ is irreducible, either $d$ or $t$ is a unit. We consider both cases. If $t$ is a unit, then $p$ and $d$ are associates and thus $p\;|\;d$. Since $d\;|\;a$, we have that $p\;|\;a$ and we are done. Now if $d$ is a unit, then $d=ra+sp$ for some $r,s\in R$. Multplying both sides with $b$ gives $db=rab+spb$. Since $p\;|\;ab$ and $p\;|\;spb$, we have that $p\;|\;db$. Then $pu=db$ for some unit $u\in R$. Since $d$ is a unit, we have that $d^{-1}pu=b$, which means that $p\;|\;b$ and we are done. \\
+
 Now we show that if $p$ is a prime then $(p)$ is maximal. We know that $(p)$ is a prime ideal. Suppose that $(p)\subseteq(q)\subseteq R$ for some ideal $q$ of $R$. Since $p\in(q)$, $p=tq$ for some $t\in R$. Since $p\in(p)$, we have that $tq\in(p)$. Now $(p)$ is prime implies that either $t\in(p)$ or $q\in(p)$. If $q\in(p)$ then $(q)\subseteq(p)$ and thus $(q)=(p)$ and we are done. If $t\in(p)$, then $t=rp$ for some $r\in R$, which means that $p=rpq$. Then $rq=1$ by cancallation law in integral domains. This means that $1\in(q)$ thus $(q)=R$ and we are done. 
+\end{proof}
 \end{prp}
 
-\begin{prp}{}{} Every PID is a UFD. 
+\begin{prp}{}{}\\
+Let $R$ be a ring. If $R$ is a PID, then $R$ is a UFD. 
 \begin{proof}
-Suppose that $D$ is a principal ideal domain. Suppose for a contradiction that $x$, a non-unit cannot be factorized into a product of irreducibles. Clearly $x$ is not irreducible else a contradiction. Then there exists $x_1,y_1$ non unit such that $x=x_1y_1$. Since $x$ is assumed to be not a product of irreducibles, WLOG take $x_1$ to be not irreducible. Then we can repeat the process to get non units $x_2y_2$ such that $x_1=x_2y_2$. Notice that $(x)\subset(x_1)$ is a proper containment of ideals if $x_1\;|\;x$. Then we have a chain of ideals $$(x)\subset(x_1)\subset(x_2)\subset\dots$$ I claim that $$I=\bigcup_{k=0}^\infty(x_k)$$ is an ideal. Indeed if $r,s\in I$, then $r\in(x_m)$ and $s\in(x_n)$ for some $m,n\in\N$. WLOG rtake $m\leq n$. Then $(x_m)\subseteq(x_n)$ implies $r,s\in(x_n)$ thus $r+s\in(x_n)\subseteq I$. Also if $t\in R$, then $tr\in(x_m)\subseteq I$ thus $I$ is indeed an ideal. \\
+Suppose for a contradiction that $x$, a non-unit cannot be factorized into a product of irreducibles. Clearly $x$ is not irreducible else a contradiction. Then there exists $x_1,y_1$ non unit such that $x=x_1y_1$. Since $x$ is assumed to be not a product of irreducibles, WLOG take $x_1$ to be not irreducible. Then we can repeat the process to get non units $x_2y_2$ such that $x_1=x_2y_2$. Notice that $(x)\subset(x_1)$ is a proper containment of ideals if $x_1\;|\;x$. Then we have a chain of ideals $$(x)\subset(x_1)\subset(x_2)\subset\dots$$ I claim that $$I=\bigcup_{k=0}^\infty(x_k)$$ is an ideal. Indeed if $r,s\in I$, then $r\in(x_m)$ and $s\in(x_n)$ for some $m,n\in\N$. WLOG rtake $m\leq n$. Then $(x_m)\subseteq(x_n)$ implies $r,s\in(x_n)$ thus $r+s\in(x_n)\subseteq I$. Also if $t\in R$, then $tr\in(x_m)\subseteq I$ thus $I$ is indeed an ideal. \\
 Since $R$ is a PID, there exists some $d\in I$ such that $I=(d)$. This also means that $d\in(x_m)$ for some $m\in\N$. Then this means that $I=(d)\subseteq(x_m)$. This proves that the chain eventually stops and this is a contradiction since we assumed that the chain of ideals are properly contained. \\
 This menas that $x$ can indeed be factorized into a product of irreducibles. 
 \end{proof}
@@ -1904,22 +1914,21 @@ In general, we have that $$\text{Fields}\subset\text{Euclidean Domains}\subset\t
 
 \pagebreak
 \section{The Ring of Polynomials}
-\subsection{Polynomials over Commutative Rings}
-In this section we formulate the basic theory of generating polynomials from a ring. 
-\begin{defn}{Indeterminates}{} Let $R$ be a ring. A symbol $x$ is called an indeterminate over $R$ if $$a_0+a_1x+a_2x^2+\dots+a_nx^n=0$$ where $a_i\in R$, implies that $a_i=0$ for each $i$. 
+\subsection{Polynomials over General Rings}
+\begin{defn}{The Ring of Polynomials}{}\\
+Let $R$ be a ring. Define the ring of polynomials over $R$ to be the set $$R[x]=\left\{\sum_{i=0}^na_ix^i\;\bigg{|}\;a_0,\dots,a_n\in R, a_n\neq 0\right\}$$ together with two binary operations defined as follows. 
+\begin{itemize}
+\item For two elements $\sum_{i=0}^na_ix^i$ and $\sum_{j=0}^mb_jx^j$, define their sum to be $$\sum_{i=0}^na_ix^i+\sum_{j=0}^mb_jx^j=\sum_{k=0}^{\max\{n,m\}}(a_k+b_k)x^k$$
+\item For two elements $\sum_{i=0}^na_ix^i$ and $\sum_{j=0}^mb_jx^j$, define their product to be $$\sum_{i=0}^na_ix^i\cdot\sum_{j=0}^mb_jx^j=\sum_{k=0}^{n+m}\left(\sum_{s=0}^ka_sb_{k-s}\right)x^k$$
+\end{itemize}
+Elements of the set are called polynomials. 
 \end{defn}
 
-\begin{defn}{Polynomial over a Ring}{} Any expression of the form $$f(x)=\sum_{k=0}^na_kx^k$$ where $x$ is an indeterminate and $a_0,\dots,a_n\in R$ and $a_n\neq 0$ is called a polynomial over $R$. We define the the degree of $f$ in this case to be $n$. 
-\end{defn}
-
-\begin{defn}{Ring of Polynomials}{} Let $R$ a ring. Define $R[x]$ to be the set of all polynomials over $R$. 
-\end{defn}
-
-\begin{prp}{}{} Let $R$ be a commutative ring with identity. Then $R[x]$ is a commutative ring with identity. 
+\begin{lmm}{}{} Let $R$ be a commutative ring with identity. Then $R[x]$ is a commutative ring with identity. 
 \begin{proof}
 Since $R\leq R[x]$ by considering all the constant polynomials, the identity of $R$ is also the identity of $R[x]$. Let $f,g\in R[x]$. Then the coefficient of $x^n$ in $f(x)g(x)$ is $$c_n=\sum_{k=0}^na_kb_{n-k}$$ Since $a_kb_{n-k}=b_{n-k}a_k$, we have that $f(x)g(x)=g(x)f(x)$. 
 \end{proof}
-\end{prp}
+\end{lmm}
 
 \begin{defn}{The Evaluation Map}{} Let $R$ be a ring and let $a$ be an element in the center $Z(R)$ of $R$. Define the evaluation map $\phi_a:R[x]\to R$ by the formula $$\phi_a\left(\sum_{k=0}^nc_kx^k\right)=\sum_{k=0}^nc_ka^k$$
 \end{defn}
@@ -1946,11 +1955,11 @@ Thus $\phi_a$ is a ring homomorphism. To show that $\phi_a$ is surjective, let $
 \end{proof}
 \end{prp}
 
-\subsection{The Roots of a Polynomial}
-\begin{defn}{The Roots of a Polynomial}{} Let $R$ be a commutative ring. Let $f\in R[x]$. We say that $a\in R$ is a root of $f$ if $\phi_a(f)=0$. In this case we write $f(a)=0$. 
+\begin{defn}{Degree of a Polynomial}{} Let $R$ be a commutative ring. Let $f\in R[x]$ be written as $f=\sum_{k=0}^n a_kx^k$ so that $a_n\neq 0$. Then define the degree of $f$ to be $$\deg(f)=n$$
 \end{defn}
 
-\begin{defn}{Degree of a Polynomial}{} Let $R$ be a commutative ring. Let $f\in R[x]$ be written as $f=\sum_{k=0}^n a_kx^k$ so that $a_n\neq 0$. Then define the degree of $f$ to be $$\deg(f)=n$$
+\subsection{The Roots of a Polynomial}
+\begin{defn}{The Roots of a Polynomial}{} Let $R$ be a commutative ring. Let $f\in R[x]$. We say that $a\in R$ is a root of $f$ if $\phi_a(f)=0$. In this case we write $f(a)=0$. 
 \end{defn}
 
 \begin{thm}{Monic Linear Division Algorithm}{} Let $R$ be a commutative ring. Let $f\in R[x]$. Let $x-a\in R[x]$ be a polynomial. Then there exists $q\in R[x]$ and $r\in R$ such that $$f(x)=(x-a)q(x)+r$$ 
@@ -1985,7 +1994,8 @@ Now suppose that $R[x]$ is an integral domain. Then $R$ is a subring of $R[x]$ s
 \begin{prp}{}{} Let $R$ be an integral domain. Let $f\in R[x]$. Then $f$ has at most $\deg(f)$ roots in $R$. 
 \end{prp}
 
-\begin{prp}{}{} Let $R$ be an integral domain. Then $$\{r\in R\;|\;r\text{ is a unit}\}=\{f\in R[x]\;|\;f\text{ is a unit}\}$$ 
+\begin{prp}{}{}\\
+Let $R$ be an integral domain. Then we have $$R^\times=R[x]^\times$$
 \begin{proof}
 It is clear that $\subseteq$ is trivial. Now let $f\in R[x]$ such that $f$ is a unit. Suppose that $fg=1$ for some $g\in R[x]$. Write $f=\sum_{k=0}^na_kx^k$ and $g=\sum_{i=0}^mb_ix^i$ for $a_n\neq 0$. comparing top coefficients with $fg$ and $1$ shows that $a_nb_m=0$. Since $R$ is an integral domain, we conclude that $b_m=0$. We induct decreasin GLy on the coefficients of $g$. Suppose we showed that $b_n=\dots=b_{k+1}=0$ for some $k\geq 0$. Then the coefficient of $x^{k+n}$ in $fg$ is given by $$a_{k+n-m}b_m+\dots+a_{n-1}b_{k+1}+a_nb_k$$ Comparing coefficients with the polynomial $1$ shows that the above expression is $0$. Since $b_n=\dots=b_{k+1}=0$, we are left with $a_nb_k=0$. Since $a_n\neq 0$, we have that $b_k=0$. Thus $b_n=\dots=b_1=0$ by induction. We are left with the fact that $g$ is a constant, say $g(x)=b$. But now $a_0\cdot b=1$ implies that $b$ is a unit, hence the constant $g\in R$ is a unit. 
 \end{proof}
@@ -2011,20 +2021,20 @@ The primary goal of this chapter is to compute results relating to finding out i
 \begin{defn}{Primitive}{} Let $R$ be an integral domain. Let $f\in R[x]$ be non-zero and is given by $f=\sum_{k=0}^na_kx^k$ for $a_n\neq 0$. We say that $f$ is primitive if $\gcd(a_0,a_1,\dots,a_n)=1$. 
 \end{defn}
 
-\begin{prp}{}{} Let $R$ be a UFD. Let $f,g\in R[x]$ be primitive. Then $fg$ is also primitive. 
-\end{prp}
-
-\begin{thm}{Generalized Gauss's Lemma}{} Let $R$ be a UFD. Let $f\in R[x]$ be primitive. Then $f$ is irreducible if and only if $f$ is irreducible in $\text{Frac}(R)[x]$. 
-\end{thm}
-
-\begin{prp}{Eisentein's Criterion}{} Let $R$ be an integral domain. Let $f\in R[x]$ be primitive. Suppose that $P$ is a prime ideal of $R$ such that the following are true. 
+\begin{thm}{Eisentein's Criterion}{} Let $R$ be an integral domain. Let $f\in R[x]$ be primitive. Suppose that $P$ is a prime ideal of $R$ such that the following are true. 
 \begin{itemize}
 \item $a_n\notin P$. 
 \item $a_0,\dots,a_{n-1}\in P$. 
 \item $a_0\notin P^2$. 
 \end{itemize}
 Then $f$ is irreducible in $R[x]$. 
+\end{thm}
+
+\begin{prp}{}{} Let $R$ be a UFD. Let $f,g\in R[x]$ be primitive. Then $fg$ is also primitive. 
 \end{prp}
+
+\begin{thm}{Generalized Gauss's Lemma}{} Let $R$ be a UFD. Let $f\in R[x]$ be primitive. Then $f$ is irreducible if and only if $f$ is irreducible in $\text{Frac}(R)[x]$. 
+\end{thm}
 
 \subsection{Irreducibility over a Field}
 \begin{thm}{Polynomial Division Algorithm over Fields}{} Let $F$ be a field. Let $f,g\in F[x]$ such that $f\neq 0$. Then there exists unique $q,r\in F[x]$ such that 

@@ -15,13 +15,7 @@
 \date{\today}
 \begin{document}
 \maketitle
-\begin{abstract}
-\begin{itemize}
-\item Algebraic Geometry I by I. R. Shafarevich and V. I. Danilov
-\item Algebraic Geometry by R. Hartshorne
-\item An Invitation to Algebraic Geometry by Karen. S, Pekka. K, Lauri .K, William .T
-\end{itemize}
-\end{abstract}
+
 \pagebreak
 \tableofcontents
 
@@ -45,24 +39,35 @@ Suppose that $f(X)=Y_1\cup Y_2$ for some closed sets $Y_1,Y_2\subseteq Y$. Then 
 \end{lmm}
 
 \subsection{Noetherian Spaces}
-\begin{defn}{Noetherian Spaces}{} Let $X$ be a space. We say that $X$ is Noetherian if for every sequence $Y_1,Y_2,\dots$ of closed sets such that $$Y_1\supset Y_2\supset\cdots$$ there exists $n\in\N$ such that $Y_n=Y_{n+1}=\cdots$. 
+\begin{defn}{Noetherian Spaces}{} Let $X$ be a space. We say that $X$ is Noetherian if for every sequence $Y_1,Y_2,\dots$ of closed sets such that $$Y_1\supseteq Y_2\supseteq\cdots$$ there exists $n\in\N$ such that $Y_n=Y_{n+1}=\cdots$. 
 \end{defn}
 
-\begin{prp}{}{} Let $X$ be a space. Then $X$ is Noetherian if and only if for every sequence $U_1,U_2,\dots$ of open sets such that $$U_1\subset U_2\subset\cdots$$ there exists $n\in\N$ such that $U_n=U_{n+1}=\cdots$. 
+\begin{prp}{}{} Let $X$ be a space. Then $X$ is Noetherian if and only if for every sequence $U_1,U_2,\dots$ of open sets such that $$U_1\subseteq U_2\subseteq\cdots$$ there exists $n\in\N$ such that $U_n=U_{n+1}=\cdots$. 
 \begin{proof}
 A sequence of open subsets $U_1\subset u_2\subset\cdots$ terminates at a finite length if and only if the sequence of closed sets $X\setminus U_1\supset X\setminus U_2\supset\cdots$ terminates a finite length. This is true vice versa. 
 \end{proof}
 \end{prp}
 
-\begin{prp}{}{} Let $X$ be a space. If $X$ is Noetherian, then $X$ is compact. 
-\begin{proof}
-Let $X$ be Noetherian. Suppose that $X$ is not compact. Let $\mU=\{U_i\;|\;i\in I\}$ be an open cover of $X$. Let $U_1\in\mU$. For $n\geq 2$, choose $U_n$ such that $U_n\cap\bigcup_{i=1}^{n-1}U_i\neq\emptyset$. This is possible because $\mU$ is a cover of $X$ and $X$ is not compact. We now get an infinitely strictly increasing chain $$U_1\subset U_1\cup U_2\subset\cdots\subset\bigcup_{i=1}^nU_i\subset\cdots$$ which translates to an infinitely strictly decreasing chain $$X\supset X\setminus U_1\supset X\setminus(U_1\cup U_2)\supset\cdots$$ This is a contradiction since $X$ is Noetherian. Thus $X$ is compact. 
+\begin{prp}{}{}\\
+Every subspace of a Noetherian space is Noetherian. 
+\begin{proof}\\
+Let $X$ be a Noetherian space. Let $Y\subseteq X$ be a subspace of $X$. Let $U_1\subset U_2\subset\cdots$ be a sequence of open subsets in $Y$. Then in particular it is also a sequence of open subsets in $X$. Hence it terminates in finite steps. Hence $Y$ is Noetherian. 
 \end{proof}
 \end{prp}
 
-\begin{prp}{}{} Every subspace of a Noetherian space is Noetherian. 
-\begin{proof}
-Let $X$ be a Noetherian space. Let $Y\subseteq X$ be a subspace of $X$. Let $U_1\subset U_2\subset\cdots$ be a sequence of open subsets in $Y$. Then in particular it is also a sequence of open subsets in $X$. Hence it terminates in finite steps. Hence $Y$ is Noetherian. 
+\begin{prp}{}{}\\
+Let $X$ be a space. Then $X$ is Noetherian if and only if every open subset of $X$ is compact. 
+\begin{proof}\\
+Suppose that $X$ is Noetherian. Let $\{U_i\;|\;i\in I\}$ be an open cover of an open subset $U\subseteq X$. Choose $U_n$ for each $n\in\N\setminus\{0\}$. Then $$U_1\subseteq U_1\cup U_2\subseteq\cdots\subseteq\bigcup_{i=1}^nU_i\subseteq\cdots$$ is an increasing sequence of open subsets in $X$. Since $X$ is Noetherian, the chain must eventually terminate and since $\{U_i\;|\;i\in I\}$ is an open cover of $U$, there exists $n\in\N$ such that $\bigcup_{i=1}^nU_i=U$. Hence $U$ is compact. \\
+
+Now suppose that every open subset of $X$ is compact. Suppose that $$U_1\subseteq U_2\subseteq\cdots\subseteq U_n\subseteq\cdots$$ is an increasing sequence of open subsets of $X$. Notice that $\{U_n\;|\;n\in\N\setminus\{0\}\}$ is an open cover of $\bigcup_{i=1}^\infty U_i$. Hence it has a finite subcover $\bigcup_{i=1}^\infty U_i=U_{j_1}\cup\cdots\cup U_{j_n}$. But since $U_i\subseteq U_j$ for $i\leq j$, we must have $\bigcup_{i=1}^\infty U_i=U_{\max\{j_1,\dots,j_n\}}$. Hence the chain terminates at step $\max\{j_1,\dots,j_n\}$. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $X$ be a space. Let $U_1,\dots,U_n\subseteq X$ be Noetherian subspaces. Then $\bigcup_{i=1}^nU_i$ is Noetherian. 
+\begin{proof}\\
+Let $Y_1\supseteq Y_2\supseteq\cdots\supseteq Y_n\supseteq\cdots$ be a decreasing sequence of closed subsets of $\bigcup_{i=1}^nU_i$. By definition of the subspace topology, there exists closed subsets $Z_j$ of $X$ such that $Y_j=Z_j\cap\bigcup_{i=1}^nU_i$, and $Z_j\supseteq Z_{j+1}$. Thus we obtain a decreasing chain of closed subspaces of $X$. Since $U_i$ is Noetherian, the chain $$Z_1\cap U_i\supseteq Z_2\cap U_i\supseteq\cdots\supseteq Z_j\cap U_i\supseteq\cdots$$ eventually terminates at $j=m_i$. Let $m=\max\{m_1,\dots,m_n\}$. Then notice that $$Y_m=\bigcup_{i=1}^n(Z_m\cap U_i)$$ Since eacj $Z_m\cap U_i$ terminates, $Y_m$ must terminate and so we are done. 
 \end{proof}
 \end{prp}
 
@@ -1536,6 +1541,44 @@ The zeroth graded component of $k(x_0,\dots,x_n)$ is given by $$(k(x_0,\dots,x_n
 
 \begin{defn}{Rational Varieties}{} Let $k$ be a field. Let $X$ be a variety over $k$. We say that $X$ is rational if $X$ is birationally equivalent to $\Prj_k^n$ for some $n\in\N$. 
 \end{defn}
+
+\pagebreak
+\section{Smoothness in Varieties}
+\subsection{The Zariski Tangent Space}
+\begin{defn}{The Zariski Tangent Space}{}\\
+Let $k$ be a field. Let $X$ be a variety over $k$. Let $p\in X$. Define the Zariski tangent space at $p$ to be $$T_pX=\left(\frac{m_p}{m_p^2}\right)^\ast$$ where $m_p$ is the unique maximal ideal of $\mO_{X,p}$. 
+\end{defn}
+
+\begin{defn}{The Jacobian Matrix at a Point}{}\\
+Let $k$ be a field. Let $X$ be a variety over $k$. Let $p\in X$. Let $U=\V(f_1,\dots,f_r)\subseteq\A_k^n$ be an affine open subset of $X$ containing $p$. Define the Jacobian matrix of $X$ at $p$ to be the matrix $$J_pX=\begin{pmatrix}
+\frac{\partial f_1}{\partial x_1}\bigg{|}_p & \cdots & \frac{\partial f_1}{\partial x_n}\bigg{|}_p\\
+\vdots & \ddots & \vdots\\
+\frac{\partial f_r}{\partial x_1}\bigg{|}_p & \cdots & \frac{\partial f_r}{\partial x_n}\bigg{|}_p
+\end{pmatrix}$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $X$ be a variety over $k$. Let $p\in X$. Let $U=\V(f_1,\dots,f_r)\subseteq\A_k^n$ be an affine open subset of $X$ containing $p=(p_1,\dots,p_n)\in\A_k^n$. Then the following are true. 
+\begin{itemize}
+\item There is an isomorphism $$T_pX\cong\text{coker}(J_pX)$$
+\item There is a canonical bijection $$T_pX\;\;\overset{1:1}{\longleftrightarrow}\;\;\V\left(\sum_{i=1}^n\frac{\partial f_1}{\partial x_i}\bigg{|}_p(x_i-p_i),\dots,\sum_{i=1}^n\frac{\partial f_r}{\partial x_i}\bigg{|}_p(x_i-p_i)\right)$$
+\end{itemize}
+\end{prp}
+
+\subsection{Smooth and Singular Points}
+\begin{defn}{Smooth Points}{}\\
+Let $k$ be an algebraically closed field. Let $X$ be a variety over $k$. Let $p\in X$. We say that $p$ is a smooth point of $X$ if $\mO_{X,p}$ is a regular local ring. We say that $p$ is a singular point otherwise. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $k$ be an algebraically closed field. Let $X$ be a variety over $k$. Let $p\in X$. Then the following are equivalent. 
+\begin{itemize}
+\item $p$ is a smooth point of $X$. 
+\item $\dim(T_pX)=\dim(X)$. 
+\item If $\text{Spec}\left(\frac{k[x_1,\dots,x_n]}{(f_1,\dots,f_r)}\right)$ is an affine open cover containing $p$, then $\rank(J_pX)=n-\dim(X)$
+\end{itemize}
+\end{prp}
+
 
 
 

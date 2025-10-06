@@ -1,6 +1,6 @@
 \documentclass[a4paper]{article}
 
-\input{C:/Users/liula/Desktop/Latex/Headers V1.2.tex}
+\input{C:/Users/liula/Desktop/Latex/Headers/Headers.tex}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -15,71 +15,218 @@
 \date{\today}
 \begin{document}
 \maketitle
-\begin{abstract}
-Geometry is one of the oldest topics in mathematics. Almost every topic in mathematics has its origin from Geometry and a lot of mathematicians have somewhat been involved int development. In these notes note we study geometry with a bit of algebraic flavour in it, instead of dealing with axiomatic geometry. 
-\end{abstract}
-\tableofcontents
+
 \pagebreak
-\section{Euclidean Geometry}
-\subsection{Geometric Objects in Euclidean Space}
-\begin{defn}{Euclidean Metric}{} Let $x,y\in \R^n$. The Euclidean Metric is defined to be $$d(x,y)=\|x-y\|$$
+\tableofcontents
+
+\pagebreak
+\section{Geometry of Metric Spaces}
+\subsection{Distance Preserving Maps}
+\begin{defn}{Distance Preserving Maps}{}\\
+Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces. Let $f:X\to Y$ be a function. We say that $f$ is distance preserving if for any $p,q\in X$, we have $$d_Y(f(p),f(q))=d_X(p,q)$$
 \end{defn}
 
-\begin{defn}{Euclidean Space}{} An Euclidean Space is a metric space which is isometric to $\R^n$, with the Euclidean metric for some $n\in\N$. We use the notation $E^n$ to denote the Euclidean Space. 
-\end{defn}
-
-\begin{defn}{Lines}{} Let $n\in\N\setminus\{0\}$. Let $u,v\in\R^n$. Define the line through $u$ and $v$ to be the set $$L_{u,v}=\{u+\lambda v\;|\;\lambda\in\R\}\subset\R^n$$
-\end{defn}
-
-\begin{defn}{Collinearity}{} Let $n\in\N\setminus\{0\}$. Let $x,y,z\in\R^n$. We say that $x,y,z$ are collinear if there exists a line in $\R^n$ such that $$x,y,z\in L$$
-\end{defn}
-
-\begin{lmm}{Translation Preserves Collinearity}{} Let $x,y,z\in\R^n$ be distinct. They are collinear if and only if $x-z,y-z,0$ are collinear. \tcbline\begin{proof} $x,y,z$ is collinear if and only if $z=(1-\lambda)x+\lambda y\iff 0=(1-\lambda)(x-z)+\lambda(x-z)$. This means $x-z,y-z,0$ are collinear
+\begin{lmm}{}{}\\
+Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces. Let $f:X\to Y$ be a distance preserving map. Then $f$ is continuous. 
+\begin{proof}
+Let $p\in X$. Let $\varepsilon>0$. Choose $\delta=\varepsilon$, then for all $x\in X$ such that $0<d_X(x,p)<\delta$, we have $d_Y(f(x),f(p))=d_X(x,p)<\delta=\varepsilon$ so that $f$ is continuous. 
 \end{proof}
 \end{lmm}
 
-\begin{prp}{}{} $x,y,z\in\R^n$ are collinear if and only if $$d(x,y)=d(x,z)+d(z,y)$$ where $d(x,y)$ is the Euclidean metric. \tcbline
-\begin{proof} Suppose that $x,y,z$ are collinear with $z$ in the middle. Then $$z=(1-\lambda)x+\lambda y$$ for some $\lambda\in(0,1)$. Now we have 
-\begin{align*}
-d(x,z)+d(z,y)&=\|x-z\|+\|z-y\|\\
-&=\|x-(1-\lambda)x-\lambda y\|+\|(1-\lambda)x+\lambda y-y\|\\
-&=\|\lambda(x-y)\|+\|(1-\lambda)(x-y)\|\\
-&=\lambda\|x-y\|+(1-\lambda)\|x-y\|\\
-&=\|x-y\|\\
-&=d(x,y)
-\end{align*}
-Now assume that $d(x,y)=d(x,z)+d(z,y)$. We first translate it such that $d(x-z,y-z)=d(x-z,0)+d(0,y-z)$ and set $u=x-z$ and $v=y-z$. Thus are new equality is $d(u,v)=d(u,0)+d(0,v)$
-\begin{align*}
-\|u-v\|&=\|u\|+\|v\|\\
-\|u-v\|^2&=\|u\|^2+2\|u\|\|v\|+\|v\|^2\\
-\langle u-v,u-v\rangle&=\|u\|^2+2\|u\|\|v\|+\|v\|^2\\
-\|u\|^2-2\langle u,v\rangle+\|v\|^2&=\|u\|^2+2\|u\|\|v\|+\|v\|^2\\
--\langle u,v\rangle&=\|u\|\|v\|\\
-\implies\abs{\langle u,v\rangle}&=\|u\|\|v\|\\
-\end{align*}
-We know that this happens if and only if $v=\lambda u$ for some $\lambda\in\R$, which implies that $0,u,v$ are linear. 
+\begin{defn}{Isometries}{} Let $(X,d_1)$ and $(X,d_2)$ be metric spaces. Let $f:X\to Y$ be a distance preserving map. We say that $f$ is an isometry if there exists a distance preserving map $g:Y\to X$ such that $$g\circ f=\text{id}_X\;\;\;\;\text{ and }\;\;\;\;f\circ g=\text{id}_Y$$
+\end{defn}
+
+It is also common to use the term isometry to mean a distance preserving function and refer to our version of isometry as bijective isometries. 
+
+\begin{lmm}{}{} Let $(X,d_1)$ and $(X,d_2)$ be metric spaces. Let $f:X\to Y$ be a distance preserving map. Then $f$ is an isometry if and only if $f$ is bijective. 
+\begin{proof}\\
+Clearly, if $f$ is an isometry then $f$ has an inverse function. Conversely, suppose that $f$ is bijective. Then we have $$d_X(f^{-1}(p),f^{-1}(q))=d_Y(f(f^{-1}(p)),f(f^{-1}(q)))=d_Y(p,q)$$ for any $p,q\in Y$ since $f$ is distance preserving. Hence $f^{-1}$ is distance preserving. 
 \end{proof}
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $(X,d)$ be a metric space. Then $$\text{Isom}(X,d)$$ is a group. 
+\begin{proof}\\
+We have seen from Metric Spaces that inverses and compositions are isometries. Moreover, the identity is clearly an isometry. Hence $\text{Isom}(X,d)$ is a group. 
+\end{proof}
+\end{lmm}
+
+\subsection{Isometric Isomorphisms}
+\begin{defn}{Isometric Isomorphisms}{}\\
+Let $V,W$ be normed vector spaces. Let $T:V\to W$ be a function. We say that $T$ is an isometric isomorphism if $T$ is an isometry and a linear isomorphism. 
+\end{defn}
+
+\subsection{Geodesics}
+\begin{defn}{Euclidean Metric}{}\\
+Let $x,y\in \R^n$. The Euclidean Metric is defined to be $$d(x,y)=\|x-y\|$$
+\end{defn}
+
+Clearly the Euclidean metric indeed defines a metric on $\R^n$. Any subspaces of $\R^n$ inherits the subspace metric of $\R^n$. In particular, $I=[0,1]$ is given a metric. 
+
+\begin{defn}{Geodesics}{} Let $(X,d)$ be a metric space. A geodesic on $X$ is a distance preserving function $\gamma:I\subseteq\R\to X$. 
+\end{defn}
+
+\begin{defn}{Geodesic Metric Spaces}{} Let $(X,d)$ be a metric space. We say that $X$ is geodesic if for all $a,b\in X$, there exists a geodesic $\gamma:I\to X$ from $a$ to $b$. 
+\end{defn}
+
+\pagebreak
+\section{Affine Geometry}
+Affine geometry refers to the geometry done on spaces but ignoring the notions of coordinates and measures of angles and distance.
+
+\subsection{The Analytical Definition of Affine Space}
+We must first define a certain notion of space in order to discuss affine geometry. These spaces which has the barebone structure needed to talk about affine geometry is called affine spaces. We would like affine spaces to have the following properties. 
+
+\begin{itemize}
+\item Aside from the underlying set of the space, we would like a set of vectors so that we can add a vector with a given point into a new point. 
+\item Given any two points $x,y$ in the space, there is exactly one vector that sends $x$ to $y$. 
+\end{itemize}
+
+We take the following definition for the underlying space of affine geometry. 
+
+\begin{defn}{Affine Space}{}\\
+An affine space consists of the following data. 
+\begin{itemize}
+\item A set $A$. 
+\item A vector space $V$. 
+\item A free and transitive action of $V$ on $A$. 
+\end{itemize}
+\end{defn}
+
+The action of the vector space on the points give us addition of points and vectors, and the free and transitive action guarantees a unique vector connecting any two points. 
+
+\begin{lmm}{}{}\\
+Let $(A,V,+)$ be an affine space. Let $v\in V$. Then the function $A\to A$ defined by $a\mapsto a+v$ is a bijection. 
+\end{lmm}
+
+\begin{defn}{Subtraction}{}\\
+Let $(A,V,+)$ be an affine space. Let $a,b\in A$. Define the subtraction of $a$ from $b$ to be the unique vector $b-a\in V$ such that $$a+(b-a)=b$$
+\end{defn}
+
+\begin{defn}{Affine Subspaces}{}\\
+Let $(A,V,+)$ be an affine space. An affine subspace of $A$ is a set of the form $$a+W=\{a+w\;|\;w\in W\}$$ where $W\subseteq V$ is a subspace. 
+\end{defn}
+
+\subsection{Affine Transformations}
+\begin{defn}{Affine Transformations}{}\\
+Let $(A,V,+)$ and $(B,W,+)$ be affine spaces. Let $f:A\to B$ be a function. We say that $f$ is an affine transformation if the induced function $\overline{f}:V\to W$ defined by $$q-p\mapsto f(q)-f(p)$$ is a well defined linear map for $p,q\in A$. 
+\end{defn}
+
+\begin{defn}{Affine Isomorphism}{}\\
+Let $(A,V,+)$ and $(B,W,+)$ be affine spaces. Let $f:A\to B$ be an affine transformation. We say that $f$ is an affine isomorphism if $\overline{f}:V\to W$ is an isomorphism of vector spaces. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $(A,V,+)$ be an affine space. Let $a\in A$. Then there is a unique affine isomorphism $f:A\to V$ such that $f(a)=0_V$. 
 \end{prp}
 
-\subsection{Isomorphisms of Euclidean Spaces}
-\begin{prp}{}{} Let $n\in\N\setminus\{0\}$. Let $f:\R^n\to\R^n$ be an isometry. Then the following are true. 
+\subsection{The Synthetic Approach}
+
+
+\pagebreak
+\section{Euclidean Geometry}
+\subsection{Lines and Incidences}
+\begin{defn}{Euclidean Space}{}\\
+A Euclidean space is an affine space $(E,V)$ such that $V$ is a finite dimensional inner product space over $\R$. 
+\end{defn}
+
+In Linear Algebra, we classified that up to isomorphism, every finite dimensional inner product space is isomorphic to $\R^n$ equipped with the standard dot product. Since we have also seen that every affine space has a unique isomorphism to its underlying vector space by specifying the point of origin, we lose no generality by working with $\R^n$ and the standard dot product. Therefore some literature define Euclidean space to be $\R^n$ equipped with its standard dot product. 
+
+\begin{defn}{The Metric of Euclidean Spaces}{}\\
+Let $E$ be a Euclidean space. Define the metric $d:E\times E\to\R$ on $E$ to be $$d(P,Q)=\abs{\overrightarrow{PQ}}$$ where $\overrightarrow{PQ}$ is the unique vector such that $P+\overrightarrow{PQ}=Q$. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $E$ be a Euclidean space. Then $d:E\times E\to\R$ is indeed a metric on $E$. 
+\end{lmm}
+
+\begin{defn}{Line Segments}{}\\
+Let $(E,d)$ be an Euclidean space. Let $P,Q\in E$. Define the line from $P$ to $Q$ to be $$\overline{PQ}=\{R\in E\;|\;d(P,R)+d(R,Q)=d(P,Q)\}$$
+\end{defn}
+
+If $E=\R^n$ instead, another way to write the set of points that form the line segment between two points $P$ and $Q$ is $$\overline{PQ}=\{P+t(Q-P)\;|\;0\leq t\leq 1\}$$
+
+\begin{defn}{Lines}{}\\
+Let $(E,d)$ be an Euclidean space. Let $P,Q\in E$. Define the line from $P$ to $Q$ to be $$L_{P,Q}=\left\{R\in E\;\bigg{|}\;\substack{d(P,R)+d(R,Q)=d(P,Q)\text{ or}\\d(P,Q)+d(Q,R)=d(P,R)\text{ or}\\d(P,Q)+d(P,R)=d(Q,R)}\right\}$$
+\end{defn}
+
+Similarly, if $E=\R^n$ then there is an equality $$L_{P,Q}=\{P+t(Q-P)\;|\;t\in\R\}$$
+
+\begin{defn}{Collinearity}{}\\
+Let $E$ be an Euclidean space. Let $P,Q,R\in E$. We say that $P,Q,R$ are collinear if there exists a line $L\subseteq E$ such that $$P,Q,R\in L$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $E$ be an Euclidean space. Let $T:E\to E$ be an isometry. If $P,Q,R\in E$ are collinear, then $T(P),T(Q),T(R)$ are collinear. 
+\begin{proof}\\
+Let $P,Q,R\in E$ be collinear. Without loss of generality suppose that $d(P,Q)+d(Q,R)=d(P,R)$. Since $T$ is an isometry, we have $$d(T(P),T(Q))+d(T(Q),T(R))=d(T(P),T(R))$$ Hence $T(R)\in L_{T(P),T(Q)}$ and so $T(P),T(Q),T(R)$ are collinear. 
+\end{proof}
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $E$ be an Euclidean space. Let $T:E\to E$ be an isometry. Let $L\subseteq E$ be a line. Then $T(L)$ is also a line. 
+\begin{proof}\\
+I claim that $T(L)=L_{T(P),T(Q)}$ for any $P,Q\in L$. Let $W\in T(L)$. Then there exists $R\in L$ such that $W=T(R)$. Since $R\in L=L_{P,Q}$, $P,Q,R$ are collinear. Hence $T(P),T(Q),T(R)$ are collinear. Thus $T(R)\in L_{T(P),T(Q)}$. Hence $T(L)\subseteq L_{T(P),T(Q)}$. Conversely, suppose that $W\in L_{T(P),T(Q)}$, then $T(P),T(Q),W$ are collinear. Since $T$ is an isometry, there exists $R\in E$ such that $W=T(R)$. Moreover, $T^{-1}$ is also an isometry hence $T(P),T(Q),T(R)$ collinear implies that $P,Q,R$ are collinear. Hence $R\in L_{P,Q}=L$. Hence $R\in T(L)$ and so $T(L)=L_{P,Q}$. Hence $T(L)$ is a line. 
+\end{proof}
+\end{lmm}
+
+\begin{defn}{Parallel Lines}{}
+\end{defn}
+
+\begin{prp}{The Parallel Postulate is True in Euclidean Geometry}{}
+\end{prp}
+
+\begin{defn}{Perpendicular Lines}{}
+\end{defn}
+
+\subsection{Angles}
+Recall that from real analysis, we defined the power series $$\cos(x)=\sum_{k=0}^\infty\frac{(-1)^kx^{2k}}{(2k)!}\;\;\text{ and }\;\;\sin(x)=\sum_{k=0}^\infty\frac{(-1)^kx^{2k+1}}{(2k+1)!}$$ We have seen that $\cos(x)$ is strictly decreasing in the interval $[0,\pi]$ and so $\cos(x)=k$ for $-1\leq k\leq 1$ has a unique solution between $0$ and $\pi$. 
+
+\begin{defn}{Angles of a Euclidean Space}{}\\
+Let $E$ be a Euclidean space. Let $P,Q,R\in E$ be points. Define the angle between $\overline{PQ}$ and $\overline{QR}$ to be the unique real number $\angle PQR\in\R$ such that $$\cos(\angle PQR)=\frac{\overrightarrow{QP}\cdot\overrightarrow{QR}}{\abs{\overrightarrow{QP}}\abs{\overrightarrow{QR}}}$$ and $0\leq\angle PQR\leq\pi$. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $E$ be a Euclidean space. Let $P,Q,R\in E$ be points. If $Q\in\overline{PR}$, then $\angle PQR=\pi$. 
+\begin{proof}\\
+Since $Q\in\overline{PR}$, we have that $d(P,Q)+d(Q,R)=d(P,R)$, which translates to $\abs{\overrightarrow{PQ}}+\abs{\overrightarrow{QR}}=\abs{\overrightarrow{PR}}$. Hence the vectors $\overrightarrow{PQ}$ and $\overrightarrow{QR}$ are collinear in $\R^n$ as a Euclidean space. Thus there exists $\lambda>0$ such that $-\lambda\overrightarrow{QP}=\overrightarrow{QR}$. Then we have 
+\begin{align*}
+\cos(\angle PQR)&=\frac{\overrightarrow{QP}\cdot\overrightarrow{QR}}{\abs{\overrightarrow{QP}}\abs{\overrightarrow{QR}}}\\
+&=\frac{-\lambda\overrightarrow{QP}\cdot\overrightarrow{QP}}{\lambda\abs{\overrightarrow{QP}}\abs{\overrightarrow{QP}}}\\
+&=\frac{-\lambda\abs{\overrightarrow{QP}}^2}{\lambda\abs{\overrightarrow{QP}}^2}\\
+&=-1
+\end{align*}
+Since $\cos(x)$ is bijective in $[0,\pi]$ and $\cos(\pi)=-1$, we conclude that $\angle PQR=\pi$. 
+\end{proof}
+\end{lmm}
+
+\begin{prp}{Vertically Opposite Angles}{}\\
+Let $E$ be a Euclidean space. Let $P,Q,R,S\in E$ such that $\overline{PQ}$ meets $\overline{RS}$ at the unique point $T\in E$. Then we have $\angle PTR=\angle QTS$. 
+\end{prp}
+
+\begin{defn}{Triangles}{}\\
+Let $E$ be a Euclidean space. A triangle in $E$ consists of three distinct points $P,Q,R\in E$ together with the line segments $$\triangle PQR=\overline{PQ}\cup\overline{PR}\cup\overline{QR}$$
+\end{defn}
+
+\begin{thm}{Angle Sum of Triangle}{}\\
+Let $E$ be a Euclidean space. Let $\triangle P,Q,R\subseteq E$ be a triangle. Then we have $$\angle PQR+\angle QRP+\angle RPQ=\pi$$
+\end{thm}
+
+\begin{defn}{Isosceles Triangle}{}\\
+Let $E$ be a Euclidean space. Let $\triangle PQR\subseteq E$ be a triangle. We say that $\triangle PQR$ is isosceles if $\overline{PQ}=\overline{PR}$ (up to a permutation of $P,Q,R$). 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $E$ be a Euclidean space. Let $\triangle P,Q,R\subseteq E$ be a triangle. Then the following are equivalent. 
 \begin{itemize}
-\item For any isometry $g:\R^n\to\R^n$, $g\circ f:\R^n\to\R^n$ is an isometry. 
-\item The identity function $\text{id}_{\R^n}:\R^n\to\R^n$ is an isometry. 
-\item $f^{-1}:\R^n\to\R^n$ is an isometry. 
+\item $\triangle PQR$ is an isosceles triangle with $\overline{PQ}=\overline{PR}$. 
+\item $\angle PQR=\angle PRQ$. 
+\item There exists an isometry $\phi:E\to E$ such that $\phi(P)=P$, $\phi(Q)=R$, $\phi(R)=Q$. 
 \end{itemize}
 \end{prp}
 
-\begin{defn}{The Isometry Group}{} Let $n\in\N\setminus\{0\}$. Define the group of isometries of $(\R^n,d)$ to be the set $$\text{Isom}(\R^n,d)=\{f:\R^n\to\R^n\;|\;f\text{ is an isometry of }\R^n\}$$ together with group structure given by the composition of functions. 
-\end{defn}
+\subsection{The Four Centers of a Triangle}
 
-\begin{lmm}{}{} For any metric space $(X,d)$, $\text{Isom}(X,d)$ is a group. \tcbline
-\begin{proof} Note that if $f,g,h\in\text{Isom}(X,d)$, then $g\circ f$ is an isometry, $h\circ g\circ f$ is associative, the identity mapping $f(x)=x$ for all $x\in X$ is the identity of the group and since $f$ is bijective, there exists an inverse of $f$. 
-\end{proof}
-\end{lmm}
-
-\begin{prp}{}{} Let $n\in\N\setminus\{0\}$. Let $T:\R^n\to\R^n$ be an isometry. Let $x,y,z\in\R^n$. Then $x,y,z$ are collinear if and only if $T(x),T(y),T(z)$ are collinear. 
-\end{prp}
+\subsection{Theorems of Circles}
 
 \subsection{Classifying Isometries of Euclidean Space}
 \begin{defn}{Affine Maps}{} A map $T:\R^n\to\R^m$ is affine if it is of the form $$T(x)=Ax+b$$ for all $x\in\R^n$ for some linear map $A$ and $b\in\R^k$. 
@@ -90,7 +237,7 @@ We know that this happens if and only if $v=\lambda u$ for some $\lambda\in\R$, 
 \item $T$ is an affine map. 
 \item The map $L(x)=T(x)-T(0)$ is a linear map. 
 \item For all $\lambda\in\R$, $T(\lambda x+(1-\lambda)y)=\lambda T(x)+(1-\lambda)T(y)$
-\end{itemize}\tcbline
+\end{itemize}
 \begin{proof} Let $T:\R^n\to\R^k$ be a map. 
 \begin{itemize}
 \item $(1)\iff(2)$: Define $L(x)=T(x)-T(0)$. Then $T$ is affine if and only if $L$ is linear, if and only if $L(\lambda x+\mu y)=\lambda L(x)+\mu L(y)$ if and only if $T(\lambda x+\mu y)-T(0)=\lambda(T(x)-T(0))+\mu(T(y)-T(0))$. 
@@ -123,7 +270,7 @@ T(\lambda x+\mu y)-T(0)&=\lambda(T(x)-T(0))+\mu(T(y)-T(0))
 \item $\|L(x)\|=\|x\|$ for all $x\in\R^n$
 \item $\langle L(x),L(y)\rangle=\langle x,y\rangle$ for all $x,y\in\R^n$
 \item $A$ is an orthogonal matrix. 
-\end{itemize}\tcbline
+\end{itemize}
 \begin{proof} Let $L:\R^n\to\R^k$ be linear. 
 \begin{itemize}
 \item $(1)\implies(2)$: This is trivial since isometries are distance preserving
@@ -151,7 +298,7 @@ Thus $d(L(x),L(y))=\|L(x)-L(y)\|=\|L(x-y)\|=\|x-y\|=d(x,y)$.
 \end{proof}
 \end{prp}
 
-\begin{prp}{}{} Let $n\in\N\setminus\{0\}$. Let $T:\R^n\to\R^n$ be a function. Then $T$ is an isometry if and only if $T$ is affine and given by $T(x)=Ax+b$, where $A$ is orthogonal. \tcbline
+\begin{prp}{}{} Let $n\in\N\setminus\{0\}$. Let $T:\R^n\to\R^n$ be a function. Then $T$ is an isometry if and only if $T$ is affine and given by $T(x)=Ax+b$, where $A$ is orthogonal. 
 \begin{proof} We have shown that Euclidean Isometries are line preserving, thus by $1.3.2$ they are affine and in the form $T(x)=Ax+b$. We now check that $G(x)=Ax=T(x)-b$ is an isometry. $G$ is distance preserving since
 \begin{align*}
 d(G(x),G(y))&=\|G(x)-G(y)\|\\
@@ -176,7 +323,7 @@ I_k &&&&\\
 &&&&B_l
 \end{pmatrix}$$ where $$B_i=\begin{pmatrix}\cos(\theta_i) & -\sin(\theta_i) \\
 \sin(\theta_i) & \cos(\theta_i)
-\end{pmatrix}$$\tcbline
+\end{pmatrix}$$
 \begin{proof}
 Let $L:\R^n\to\R^n$ be an isometry. We prove the result by induction on $n$. Extend the domain of $L$ such that it becomes a map from $\C^n\to\C^n$. By the fundamental theorem of algebra, $c_A(L)$ has at least one root, $\lambda$. We know that $\abs{\lambda}=1$. There are two cases. 
 \begin{itemize}
@@ -199,16 +346,18 @@ By the above, in both cases, $L|_{W^\perp}$ is an isometry of $W^\perp$, so we c
 I would say that the main part of this theorem is that you essentially decompose $\R^n$ into $W_1\oplus\dots\oplus W_n$, where they are mutually orthogonal. It might be the case that an isometry in $\R^2$ or $\R^3$ allows some orthogonal to rotate or reflect, leaving the rest invariant. Thus performing each rotation or reflection in $\R^3$ is only transforming one of $W_1,\dots,W_n$. 
 
 \subsection{Isometry Decomposition}
-\begin{defn}{Hyperplane}{} Let $V\subseteq\R^n$ be a vector subspace of $\R^{n-1}$. Let $b\in\R^n$. Let $v_n\in\R$ such that $v_n\perp V$. A hyperplane of $\R^n$ is an affine subspace of dimension $n-1$, which has the form $$\Pi=V+b=\{b+v|v\in V\}=\{v\in V|\langle v,v_n\rangle=\langle v_n,b\rangle\}$$ where $V\subseteq\R^n$ and $b\in\R^n$
+\begin{defn}{Hyperplane}{}\\
+Let $n\in\N\setminus\{0\}$. A hyperplane in $\R^n$ is a set of the form $$\Pi=\{v+b\;|\;v\in V\}$$ for $V\subseteq\R^n$ a vector subspace of dimension $n-1$. 
 \end{defn}
 
-\begin{defn}{Fixed Points}{} Let $T:\R^n\to\R^n$ be an isometry. Denote the set of fixed points of $T$ to be $$\text{Fix}(T)=\{x\in\R^n|T(x)=x\}$$
+\begin{defn}{Fixed Points}{} Let $T:\R^n\to\R^n$ be an isometry. Denote the set of fixed points of $T$ to be $$\text{Fix}(T)=\{x\in\R^n\;|\;T(x)=x\}$$
 \end{defn}
 
-\begin{defn}{Reflection on Hyperplane}{} Let $\Pi$ be a hyperplane. A reflection in $\Pi$ is an Euclidean Isometry $\rho_\Pi:\R^n\to\R^n$ such that Fix$(\rho_\Pi)=\Pi$
+\begin{defn}{Reflection on Hyperplane}{}\\
+Let $\Pi\subseteq\R^n$ be a hyperplane. A reflection in $\Pi$ is an isometry $T:\R^n\to\R^n$ such that $$\text{Fix}(T)=\Pi$$
 \end{defn}
 
-\begin{prp}{}{} The reflection on hyperplane exists and is unique. \tcbline
+\begin{prp}{}{} The reflection on hyperplane exists and is unique. 
 \begin{proof} Let $\Pi=V+b$. Pick $v\in V^\perp$. Take a basis of $\R^n$ consisting of $v$ together with a basis for $V$. With respect to the basis, define a linear map $T$ with matrix $$A=\begin{pmatrix}
 -1 & 0\\
 0 & I_{n-1}
@@ -219,19 +368,19 @@ t_2+b_2\\
 \ddots\\
 t_n+b_n
 \end{pmatrix}$$
-But then $x\in\Pi$ since $x$ is of the form $b+v$ with $v\in V$. Thus $\rho_\Pi$ exists. \\~\\
+But then $x\in\Pi$ since $x$ is of the form $b+v$ with $v\in V$. Thus $\rho_\Pi$ exists. \\
 Let $\rho'$ that is not the identity mapping fixes $\Pi$. Then $R=T\circ\rho'\circ T^{-1}$ by 1.4.2 fixes $V$ and fixes $V^\perp$. Thus $R(v)=\lambda v$ for some $\lambda\in\R$. Since $R$ is an isometry, $\abs{\lambda}=1$. Since $R$ is not the identity, $\lambda=-1$ and thus $R$ has matrix $A$. Thus $\rho=\rho'$ and we have proved uniqueness. 
 \end{proof}
 \end{prp}
 
-\begin{lmm}{}{} Let $p\in\R^n$. Let $V\subseteq\R^n$ and $v\perp V$. Let $\rho_\Pi$ be the reflection on a hyperplane $\Pi=V+b$. Then $$\rho_\Pi(p)=p-2\langle p-b, v\rangle v$$\tcbline
+\begin{lmm}{}{} Let $p\in\R^n$. Let $V\subseteq\R^n$ and $v\perp V$. Let $\rho_\Pi$ be the reflection on a hyperplane $\Pi=V+b$. Then $$\rho_\Pi(p)=p-2\langle p-b, v\rangle v$$
 \begin{proof}
 Let $d$ be the shortest Euclidean distance between $P$ and the hyperplane. To obtain the reflection of $P$ along the hyperplane, we calculate the vector that starts at $P$ with magnitude $d$ and direction towards the hyperplane, and perpendicular to it, then add it to $P$ two times to obtain it. \linebreak\linebreak
 Let the point where the tail of $v$ is on $\Pi$ be $Q$. Note that $QP=P-b$. Since $\|v\|=1$, we have that the magnitude of the projection of $QP$ on to $v$ is given by $\langle P-b,v\rangle$. Thus using our method, we obtain that $\rho_\Pi(P)=P-2\langle P-b,v\rangle v$. 
 \end{proof}
 \end{lmm}
 
-\begin{lmm}{}{} Let $p,q\in\R^n$ be distinct. Then there exists a reflection $\rho$ with $\rho(p)=q$. \tcbline
+\begin{lmm}{}{} Let $p,q\in\R^n$ be distinct. Then there exists a reflection $\rho$ with $\rho(p)=q$. 
 \begin{proof}
 Let $v=\frac{p-q}{\|p-q\|}$. Let $b=\frac{p+q}{2}$. I claim that $\Pi=\R v^\perp+b$ admits a reflection such that $\rho_\Pi(p)=q$. 
 \begin{align*}
@@ -243,7 +392,7 @@ Thus we are done.
 \end{proof}
 \end{lmm}
 
-\begin{thm}{}{} Let $T\in\text{Isom}(\R^n,d)$ be an isometry of $\R^n$. Then $T$ is the composition of at most $n+1$ reflections. \tcbline
+\begin{thm}{}{} Let $T\in\text{Isom}(\R^n,d)$ be an isometry of $\R^n$. Then $T$ is the composition of at most $n+1$ reflections. 
 \begin{proof} Let $T$ be an isometry. Let $P=T(0)$ and $Q=0$. Then by the above, there exists a reflection $R$ such that $R(T(0))=0$. Thus $L=R\circ T$ is a linear isometry. Choose an orthonormal basis $v_1,\dots,v_n$ so that by the normal form theorem, the matrix $M$ has the following form $$M=\begin{pmatrix}
 I_k &&&&\\
 &-I_m&&&\\
@@ -275,6 +424,13 @@ Note that $E_i$ is a reflection in the plane orthogonal to $\sin\left(\frac{\the
 \end{proof}
 \end{thm}
 
+\begin{crl}{}{}\\
+Let $n\in\N\setminus\{0\}$. Then we have $$\text{Isom}(\R^n,d)=\langle T:\R^n\to\R^n\;|\;T\text{ is a reflection }\rangle$$
+\begin{proof}\\
+The above theorem implies that every isometry is the composition of finitely many reflections. 
+\end{proof}
+\end{crl}
+
 \pagebreak
 \section{Spherical Geometry}
 \subsection{The $n$-Sphere}
@@ -300,7 +456,7 @@ Note that $E_i$ is a reflection in the plane orthogonal to $\sin\left(\frac{\the
 \begin{defn}{Spherical Metric}{} Define the Spherical Metric by $$d_S(P,Q)=r\cos^{-1}\left(\frac{\langle P,Q\rangle}{r^2}\right)$$ where we take the domain of $\cos^{-1}$ to be $[0,\pi]$. 
 \end{defn}
 
-\begin{prp}{}{} Let $\triangle PQR$ be a spherical triangle of $S^n$. Then $\angle QOR=d(Q,R)$ and vice versa for the other angles. \tcbline
+\begin{prp}{}{} Let $\triangle PQR$ be a spherical triangle of $S^n$. Then $\angle QOR=d(Q,R)$ and vice versa for the other angles. 
 \begin{proof} By definition of a radian, the arc $QR$ is equal to the angle $\angle QOR$. 
 \end{proof}
 \end{prp}
@@ -308,25 +464,25 @@ Note that $E_i$ is a reflection in the plane orthogonal to $\sin\left(\frac{\the
 \begin{defn}{Spherical Angle}{} Suppose that two great circles on $S^n$ intersect at one of the points $P$. Define the spherical angle $P$ to be the smaller angle made on $S^n$ between the two great circles. We write it as $\angle_S$. 
 \end{defn}
 
-\begin{prp}{}{} Let $PQR$ be a spherical triangle of $S^2$. Suppose that $\alpha=\angle_SQPR$, $\beta=\angle_SPRQ$ and $\gamma=\angle_S PQR$. Let $a=\angle QOR=d_{S^2}(Q,R)$. Then $$\cos(\alpha)=\cos(\beta)\cos(\gamma)+\sin(\beta)\sin(\gamma)\cos(a)$$\tcbline
+\begin{prp}{}{} Let $PQR$ be a spherical triangle of $S^2$. Suppose that $\alpha=\angle_SQPR$, $\beta=\angle_SPRQ$ and $\gamma=\angle_S PQR$. Let $a=\angle QOR=d_{S^2}(Q,R)$. Then $$\cos(\alpha)=\cos(\beta)\cos(\gamma)+\sin(\beta)\sin(\gamma)\cos(a)$$
 \begin{proof}
 Note that isometries on $\R^3$ preserves the inner product, since spherical distance is defined by the inner product, the spherical distance is preserves. Thus we may perform an isometry such that $P=(0,0,1)$. We can then perform a  rotation such that $Q$ maps to a point on the $xz$ plane. We can then write $Q=(\sin(\beta), 0, \cos(\beta))$ and $R=(\sin(\gamma)\cos(\alpha), \sin(\gamma)\sin(\alpha), \cos(\gamma))$. Calculating this gives our required formula. 
 \end{proof}
 \end{prp}
 
-\begin{prp}{Triangle Inequality}{} Let $PQR$ be a spherical triangle of $S^n$ whose sides are shorter arcs given by $\alpha,\beta,\gamma\leq\pi$. Then $$\alpha\leq\beta+\gamma$$ with equality if and only if $PQR$ is collinear. \tcbline
+\begin{prp}{Triangle Inequality}{} Let $PQR$ be a spherical triangle of $S^n$ whose sides are shorter arcs given by $\alpha,\beta,\gamma\leq\pi$. Then $$\alpha\leq\beta+\gamma$$ with equality if and only if $PQR$ is collinear. 
 \begin{proof}
 Notice that by definition, $\alpha,\beta,\gamma\in[0,\pi]$ thus $\sin(\beta)$ and $\sin(\gamma)$ is greater than or equal to $0$. Since $\cos(a)\geq-1$, we must have from the above proposition, 
 \begin{align*}
 \cos(\alpha)&\geq\cos(\beta)\cos(\gamma)-\sin(\beta)\sin(\gamma)\\
 &=\cos(\beta+\gamma)
 \end{align*}
-We split it into two cases. If $\beta+\gamma\leq\pi$, then $\cos(x)$ being decreasing function on $[0,\pi]$ implies $\alpha\leq\beta+\gamma$ and we are done. Equality is given as long as $\cos(a)=-1$, which means that $a=\pi$, which forces $\beta+\gamma=\pi$ from the inequality. \\~\\
+We split it into two cases. If $\beta+\gamma\leq\pi$, then $\cos(x)$ being decreasing function on $[0,\pi]$ implies $\alpha\leq\beta+\gamma$ and we are done. Equality is given as long as $\cos(a)=-1$, which means that $a=\pi$, which forces $\beta+\gamma=\pi$ from the inequality. \\
 Now if $\beta+\gamma>\pi$, then the triangle inequality is trivial since $\alpha\leq\pi<\beta+\gamma$. Now equality occurs if and only if $a=\pi$. Then this is true if and only if $\cos(\alpha)=\cos(\beta+\gamma)$ which is true if and only if $\alpha+\beta+\gamma=2\pi$ and we are done. 
 \end{proof}
 \end{prp}
 
-\begin{prp}{}{} The spherical metric is indeed a metric on $S^n$. And thus $S^n$ is a metric space. \tcbline
+\begin{prp}{}{} The spherical metric is indeed a metric on $S^n$. And thus $S^n$ is a metric space. 
 \begin{proof}
 \end{proof}
 \end{prp}
@@ -383,7 +539,7 @@ Note that the Lorentz norm allows imnaginary numbers and it could also be negati
 \end{cases}$$
 \end{defn}
 
-\begin{lmm}{}{} If $v_1,\dots,v_n$ are Lorentz Orthonormal, then they form a basis of $\R^n$. \tcbline
+\begin{lmm}{}{} If $v_1,\dots,v_n$ are Lorentz Orthonormal, then they form a basis of $\R^n$. 
 \begin{proof}
 We just have to show that they are linearly independent. Suppose that $\sum_{k=1}^na_kv_k=0$ for some $a_1,\dots,a_n\in\R$. For each $i\in\{2,\dots,n\}$, we have that $$0=\left\langle\sum_{k=1}^na_kv_k,v_i\right\rangle_L=a_i$$ and for $i=1$ we have that the inner product is $-a_1$. Thus $a_1=\dots=a_n=0$ and we are done. 
 \end{proof}
@@ -424,7 +580,7 @@ $J$ will often replace the function of the identity in Hyperbolic space. From ti
 \item $T$ is a Lorentz Transformation
 \item The matrix of $T$ is Lorentz Orthogonal
 \item $\|T(x)\|_L=\|x\|_L$ for all $x\in\R^n$
-\end{itemize} \tcbline
+\end{itemize} 
 \begin{proof}~\\
 \begin{itemize}
 \item $(1)\iff(2)$: Suppose that $T$ is a Lorentz transformation. Let the matrix $A$ represent $T$ inthe standard basis so that it has columns $a_1,\dots,a_n$. This means that $T(e_k)=a_k$. Then we have 
@@ -461,9 +617,9 @@ Thus we can see that $A^TJA=J$ if and only if $T(e_1),\dots, T(e_n)$ are Lorentz
 \begin{defn}{Lorentz Transformation}{} A map $\phi:\R^n\to\R^n$ is a Lorentz transformation if it preserves the Lorentz inner product: $$\langle\phi(x),\phi(y)\rangle_L=\langle x,y\rangle_L$$ for all $x,y\in\R^n$. We say that $\phi$ is positive if both $x$ and $\phi(x)$ has their first coordinate larger than $0$. 
 \end{defn}
 
-\begin{prp}{}{} A map $T:\R^n\to\R^n$ is a Lorentz Transformation if and only if $\{T(e_1),\dots,T(e_n)\}$ is a Lorentz orthonormal basis and $T$ is linear. \tcbline
+\begin{prp}{}{} A map $T:\R^n\to\R^n$ is a Lorentz Transformation if and only if $\{T(e_1),\dots,T(e_n)\}$ is a Lorentz orthonormal basis and $T$ is linear. 
 \begin{proof}
-Suppose that $T$ is a Lorentz transformation. Then since it preserves the Lorentz inner product and $e_1,\dots,e_n$ is trivially Lorentz orthonormal, we know that $T(e_1),\dots,T(e_n)$ are Lorentz orthonormal and we are done. Now let $x=\sum_{k=1}^nx_ke_k$ and $T(x)=\sum_{k=1}^nb_kT(e_k)$. Then $$-b_1=\langle T(x),T(e_1)\rangle_L=\langle x,e_1\rangle_L=-x_1$$ and $$b_k=\langle T(x),T(e_k)\rangle_L=\langle x,e_k\rangle_L=-x_k$$ for $k\in\{2,\dots,n\}$ thus $T$ is linear. \\~\\
+Suppose that $T$ is a Lorentz transformation. Then since it preserves the Lorentz inner product and $e_1,\dots,e_n$ is trivially Lorentz orthonormal, we know that $T(e_1),\dots,T(e_n)$ are Lorentz orthonormal and we are done. Now let $x=\sum_{k=1}^nx_ke_k$ and $T(x)=\sum_{k=1}^nb_kT(e_k)$. Then $$-b_1=\langle T(x),T(e_1)\rangle_L=\langle x,e_1\rangle_L=-x_1$$ and $$b_k=\langle T(x),T(e_k)\rangle_L=\langle x,e_k\rangle_L=-x_k$$ for $k\in\{2,\dots,n\}$ thus $T$ is linear. \\
 Suppose now that $T(e_1),\dots,T(e_n)$ is Lorentz orthonormal and $T$ is linear. Then 
 \begin{align*}
 \langle T(x),T(y)\rangle_L&=T(x)^TJT(y)\\
@@ -479,7 +635,7 @@ Suppose now that $T(e_1),\dots,T(e_n)$ is Lorentz orthonormal and $T$ is linear.
 \begin{defn}{Lorentz Group}{} The Lorentz group is the group of Lorentz orthogonal $n+1,n+1$ matrices denoted $$O(1,n)=\{A\in M_{n+1\times n+1}(\R)\}|A^TJA=J\}$$
 \end{defn}
 
-\begin{prp}{}{} $O(1,n)$ is a group. \tcbline
+\begin{prp}{}{} $O(1,n)$ is a group. 
 \begin{proof}
 \end{proof}
 \end{prp}
@@ -492,9 +648,9 @@ Suppose now that $T(e_1),\dots,T(e_n)$ is Lorentz orthonormal and $T$ is linear.
 \end{itemize}
 \end{prp}
 
-\begin{crl}{}{} Every Lorentz Transformation corresponds to an element of $O(1,n)$ and every element of $O(1,n)$ gives rise to a Lorentz Transformation. \tcbline
+\begin{crl}{}{} Every Lorentz Transformation corresponds to an element of $O(1,n)$ and every element of $O(1,n)$ gives rise to a Lorentz Transformation. 
 \begin{proof}
-Let $T$ be a lorentz transformation. \\~\\
+Let $T$ be a lorentz transformation. \\
 Now let $T$ be a hyperbolic isometry. Define a Lorentz transformation $S$ by $S|_{H^n}=T$
 \end{proof}
 \end{crl}
@@ -510,7 +666,7 @@ Now let $T$ be a hyperbolic isometry. Define a Lorentz transformation $S$ by $S|
 \begin{defn}{Positive Lorentz Group}{} The positive Lorentz group is the set of all elements in $O(1,n)$ which maps positive time-like vectors bijectively to positive time-like vectors, denoted $O^+(1,n)$
 \end{defn}
 
-\begin{prp}{}{} $O^+(1,n)$ is a group. \tcbline
+\begin{prp}{}{} $O^+(1,n)$ is a group. 
 \begin{proof}
 \end{proof}
 \end{prp}
@@ -520,9 +676,9 @@ Now let $T$ be a hyperbolic isometry. Define a Lorentz transformation $S$ by $S|
 
 This is extremely powerful since it gives a fairly easy way to check whether a Lorentz orthogonal matrix is an isometry. 
 
-\begin{crl}{}{} Every Positive Lorentz Transformation corresponds to an element of $O^+(1,n)$ and every element of $O^+(1,n)$ gives rise to a Positive Lorentz Transformation. \tcbline
+\begin{crl}{}{} Every Positive Lorentz Transformation corresponds to an element of $O^+(1,n)$ and every element of $O^+(1,n)$ gives rise to a Positive Lorentz Transformation. 
 \begin{proof}
-Let $T$ be a lorentz transformation. \\~\\
+Let $T$ be a lorentz transformation. \\
 Now let $T$ be a hyperbolic isometry. Define a Lorentz transformation $S$ by $S|_{H^n}=T$
 \end{proof}
 \end{crl}
@@ -532,7 +688,7 @@ Now let $T$ be a hyperbolic isometry. Define a Lorentz transformation $S$ by $S|
 Aa&=(1,0,\dots,0)\\
 Ab&=(b_1,b_2,0,\dots,0)\text{ with }b_1>0\\\
 Ac&=(c_1,c_2,c_3,0\dots,0)\text{ with }c_1>0
-\end{align*} \tcbline
+\end{align*} 
 \begin{proof}
 Let $a,b,c,z_4,\dots,z_{n+1}$ be a basis for $H^n$. We construct a Lorentz orthonormal basis for $\R^{n+1}$. Since $a\in H^n$ implies $\|a\|=i$, we can choose $v_1=a$. We find the basis by induction, where $v_k$ is constructed by $a,b,c,z_4,\dots,z_k$. Now let $w_2=b+\langle v_1,b\rangle_L v_1$. Observe that 
 \begin{align*}
@@ -540,7 +696,7 @@ Let $a,b,c,z_4,\dots,z_{n+1}$ be a basis for $H^n$. We construct a Lorentz ortho
 &=\langle b,v_1\rangle_L-\langle v_1,b\rangle_L\tag{$\langle v_1,v_1\rangle_L=-1$}\\
 &=0
 \end{align*}
-Thus $w_2$ is Lorentz orthogonal to $v_1$. Now just choose $v_2=\frac{w_2}{\|w_2\|_L}$. Note that this is similar to the Gram-schimdt procedure in Euclidean Space. In general, suppose that $v_1,\dots,v_k$ are now made orthogonal. Define $$w_{k+1}=a-\sum_{i=1}^k\langle z_{k+1},v_i\rangle_Lv_i$$ Then $w_{k+1}$ will be orthogonal to all of $v_1,\dots,v_k$ thus we can choose $v_{k+1}=\frac{w_{k+1}}{\|w_{k+1}\|}$. Thus a Lorentz orthonormal basis $v_1,\dots,v_{n+1}$ is formed. \\~\\
+Thus $w_2$ is Lorentz orthogonal to $v_1$. Now just choose $v_2=\frac{w_2}{\|w_2\|_L}$. Note that this is similar to the Gram-schimdt procedure in Euclidean Space. In general, suppose that $v_1,\dots,v_k$ are now made orthogonal. Define $$w_{k+1}=a-\sum_{i=1}^k\langle z_{k+1},v_i\rangle_Lv_i$$ Then $w_{k+1}$ will be orthogonal to all of $v_1,\dots,v_k$ thus we can choose $v_{k+1}=\frac{w_{k+1}}{\|w_{k+1}\|}$. Thus a Lorentz orthonormal basis $v_1,\dots,v_{n+1}$ is formed. \\
 With respect to this basis, we have the desired results. 
 \end{proof}
 \end{lmm}
@@ -561,7 +717,7 @@ In order to prove that $H^n$ is a metric space, we need to first develop the not
 
 To check the type of subspace, we first find whether there is one time-like vector, we then check whether there is one light-like vector. 
 
-\begin{prp}{}{} There is a parametrization between $\R^2$ and $H^2$ given by $$f(t,\theta)=(\cosh(t),\cos(\theta)\sinh(t),\sin(\theta)\sinh(t))$$ for $t\in[0,\infty)$ and $\theta\in[0,2\pi]$ where $\R^2$ is in polar coordinates and $H^2$ in cartesian coordinates. \tcbline
+\begin{prp}{}{} There is a parametrization between $\R^2$ and $H^2$ given by $$f(t,\theta)=(\cosh(t),\cos(\theta)\sinh(t),\sin(\theta)\sinh(t))$$ for $t\in[0,\infty)$ and $\theta\in[0,2\pi]$ where $\R^2$ is in polar coordinates and $H^2$ in cartesian coordinates. 
 \begin{proof}
 
 \end{proof}
@@ -578,7 +734,7 @@ We need the following theorem to show that $d_{H^n}$ is a metric.
 \begin{lmm}{}{} For every $P\neq Q\in H^n$, there exists a unique hyperbolic line $L$ containing $P$ and $Q$. 
 \end{lmm}
 
-\begin{lmm}{}{} Every line through the origin in $\R^{n+1}$ intersects $H^n$ in at most $1$ point. \tcbline
+\begin{lmm}{}{} Every line through the origin in $\R^{n+1}$ intersects $H^n$ in at most $1$ point. 
 \begin{proof}
 Let $y=\lambda x$ for some $x,y\in H^n$. Then by definition of $H^n$, we must have $$\langle x,x\rangle_L=\langle y,y\rangle_L=-1$$ But the Lorentz inner product is linear. Thus $\langle y,y\rangle_L=\lambda^2\langle x,x\rangle_L$ and thus $\lambda=\pm1$. Since both $x_1$ and $y_1$, the first component of $x$ and $y$ must be positive, we must have $\lambda=1$ and we are done. 
 \end{proof}
@@ -592,7 +748,7 @@ Let $y=\lambda x$ for some $x,y\in H^n$. Then by definition of $H^n$, we must ha
 
 To prove the triangle inqeuality for $d_{H^n}$ we need the following theorem. 
 
-\begin{thm}{}{} Let $x,y,z\in H^n$ be distinct. Let $\alpha=d_{H^n}(z,y)$, $\beta=d_{H^n}(x,z)$, $\gamma=d_{H^n}(x,y)$ and $a$ be the hyperbolic angle of $\triangle xyz$ at $x$. Then $$\cosh(\alpha)=\cosh(\beta)\cdot\cosh(\gamma)-\sinh(\beta)\cdot\sinh(\gamma)\cdot\cos(a)$$ \tcbline
+\begin{thm}{}{} Let $x,y,z\in H^n$ be distinct. Let $\alpha=d_{H^n}(z,y)$, $\beta=d_{H^n}(x,z)$, $\gamma=d_{H^n}(x,y)$ and $a$ be the hyperbolic angle of $\triangle xyz$ at $x$. Then $$\cosh(\alpha)=\cosh(\beta)\cdot\cosh(\gamma)-\sinh(\beta)\cdot\sinh(\gamma)\cdot\cos(a)$$ 
 \begin{proof}
 WLOG we can assume $x,y,z$ takes the form $x=(1,0,\dots,0)$, $y=(\cosh(t_1),\sinh(t_1),0,\dots,0)$ and $z=(\cosh(t_2),\cos(\theta)\sinh(t_2),\sin(\theta)\sinh(t_2),0,\dots,0)$. This is because Loretnz transformation preserves the Loretnz inner product and thus the distance function remains unchanged. Since the trailing zeroes make no contributions to the calculations, we assume we are working on $H^2$. Now note that $$x\times_L\begin{pmatrix}a_1\\a_2\\a_3\end{pmatrix}=\begin{pmatrix}0\\-a_3\\a_2\end{pmatrix}$$ Thus we have 
 \begin{align*}
@@ -610,7 +766,7 @@ Combining these and using the fact that $\cos(a)=\cos(\theta)$ gives our result.
 \end{proof}
 \end{thm}
 
-\begin{thm}{}{} The hyperbolic metric is indeed a metric on $H^n$ and thus the hyperbolic space is a metric space. \tcbline
+\begin{thm}{}{} The hyperbolic metric is indeed a metric on $H^n$ and thus the hyperbolic space is a metric space. 
 \begin{proof}~\\
 \begin{itemize}
 \item We first prove that the hyperbolic metric is well defined. This means that we need to prove that $-\langle x,y\rangle_L\geq 1$. Let $x,y\in H^n$. Denote $x'=(1,x_2,\dots,x_{n+1})$ and $y'=(1,y_2,\dots,y_{n+1})$. Then we have that $$x_1^2=1+x_2^2+\dots+x_n^2=\|x'\|^2$$ and likewise for $y_1^2$. Note that the norm on the right is the usual Euclidean norm. By Cauchy Schwarz we have that $\langle x',y'\rangle^2\leq\|x'\|^2\|y'\|^2=(x_1y_1)^2$ which implies that $$\abs{1+x_2y_2+\dots+x_ny_n}\leq\abs{x_1y_1}=x_1y_1$$ Rearraging, we have that $\langle x,y\rangle_L\leq -1$ and thus $$-\langle x,y\rangle_L\geq 1$$
@@ -630,9 +786,9 @@ Combining these and using the fact that $\cos(a)=\cos(\theta)$ gives our result.
 Becareful that all isometries of $H^n$ is not the Loretnz group but only of the positive Lorentz group. 
 
 \subsection{Hyperbolic Lines}
-\begin{lmm}{}{} If $x\in\R^n$ with $\langle x,x\rangle_L<0$, and $w\in\R^n\setminus\{0\}$ with $\langle x,w\rangle_L=0$, then $\langle w,w\rangle_L>0$. In other words, any vector that is Lorentz orthogonal with a time-like vector must be a space-like vector. \tcbline
+\begin{lmm}{}{} If $x\in\R^n$ with $\langle x,x\rangle_L<0$, and $w\in\R^n\setminus\{0\}$ with $\langle x,w\rangle_L=0$, then $\langle w,w\rangle_L>0$. In other words, any vector that is Lorentz orthogonal with a time-like vector must be a space-like vector. 
 \begin{proof}
-Let $x'=x-x_1e_1$ and $w'=w-w_1e_1$. Then $\langle x',x'\rangle_L\geq 0$ and $\langle x,x\rangle_L=-x_1^2+\langle x',x'\rangle_L$. This means that $x_1\neq 0$. If $w_1=0$, then since $w\neq 0$, we must have $\langle w,w\rangle_L=\langle w',w'\rangle_L>0$ and we are done. \\~\\
+Let $x'=x-x_1e_1$ and $w'=w-w_1e_1$. Then $\langle x',x'\rangle_L\geq 0$ and $\langle x,x\rangle_L=-x_1^2+\langle x',x'\rangle_L$. This means that $x_1\neq 0$. If $w_1=0$, then since $w\neq 0$, we must have $\langle w,w\rangle_L=\langle w',w'\rangle_L>0$ and we are done. \\
 Now suppose that $w_1\neq 0$. Then $x_1w-w_1x$ has zero $e_1$ component. I claim that this vector is non-zero. Indeed if $x_1w=w_1x$, then $$0=\frac{x_1}{w_1}\langle x,w\rangle_L=\langle x,\frac{x_1}{w_1}w\rangle_L=\langle x,x\rangle_L<0$$ Now we have that 
 \begin{align*}
 0\leq\|x_1w-w_1x\|_L^2&=\langle x_1w-w_1x,x_1w-w_1x\rangle_L\\
@@ -665,27 +821,27 @@ The following theorem shows that Euclid's Postulate does not hold in hyperbolic 
 \end{prp}
 
 \subsection{Normal Form Theorem}
-Lecture did not have time to thoroughly prove things and so do I. Every Lorentz Transformation must have one of the following four forms: \\~\\
+Lecture did not have time to thoroughly prove things and so do I. Every Lorentz Transformation must have one of the following four forms: \\
 Lorentz Translation: $$\begin{pmatrix}
 \cosh(\beta) & \sinh(\beta) & 0\\
 \sinh(\beta) & \cosh(\beta) & 0\\
 0 & 0 & 1
-\end{pmatrix}$$This transformation does not have a fixed point in $H^2$. Orientation is preserved. \\~\\
+\end{pmatrix}$$This transformation does not have a fixed point in $H^2$. Orientation is preserved. \\
 Lorentz Glide: $$\begin{pmatrix}
 \cosh(\beta) & \sinh(\beta) & 0\\
 \sinh(\beta) & \cosh(\beta) & 0\\
 0 & 0 & -1
-\end{pmatrix}$$This transformation does not have a fixed point in $H^2$. Orientation is also reversed\\~\\
+\end{pmatrix}$$This transformation does not have a fixed point in $H^2$. Orientation is also reversed\\
 Rotation about the point $(1,0,0)$: $$\begin{pmatrix}
 1 & 0 & 0\\
 0 & \cosh(\beta) & \sinh(\beta)\\
 0 & \sinh(\beta) & \cosh(\beta)\\
-\end{pmatrix}$$This transformation has one fixed point, namely $(1,0,0)$ and is orientation preserving. \\~\\
+\end{pmatrix}$$This transformation has one fixed point, namely $(1,0,0)$ and is orientation preserving. \\
 Reflection along $x_2=0$: $$\begin{pmatrix}
 1 & 0 & 0\\
 0 & -1 & 0\\
 0 & 0 & 1
-\end{pmatrix}$$This transformation fixes the line $x_2=0$ and is orientation reversing. \\~\\
+\end{pmatrix}$$This transformation fixes the line $x_2=0$ and is orientation reversing. 
 
 \pagebreak
 \section{Projective Geometry}
@@ -701,10 +857,10 @@ We use $\R^{n+1}$ as our vector space since every finite dimensional vector spac
 \begin{prp}{}{} There is a bijection between $\mathbb{P}^n$ and the set of lines through the origin in $\R^{n+1}$. 
 \end{prp}
 
-\begin{prp}{}{} We have that $$\Prj^n\cong\R^n\cup\R^{n-1}\cup\dots\cup\R\cup\{\infty\}$$ \tcbline
+\begin{prp}{}{} We have that $$\Prj^n\cong\R^n\cup\R^{n-1}\cup\dots\cup\R\cup\{\infty\}$$ 
 \begin{proof}
-The proof is done by induction. We first consider $\Prj(\R)$. Recall that $x\sim y$ if and only if $y=tx$ for some $t\neq 0$. This means that $[x]$ represents the same point as long as $x\in\R\setminus\{0\}$. We also simply identify $[0]$ with $\infty$. \\~\\
-We also consider $\Prj(\R^2)$ for better illustration. All elements of $\Prj(\R^2)$ are of the form $[x_0:x_1]$. We consider the case that $x_0\neq 0$. Since $x_0\neq 0$, we can divide out $x_0$ to get the same coordinate $[1:x_1]\in\Prj(\R^2)$. For each $x_1\in\R$, $[1:x_1]$ represents different coordinates in $\Prj(\R^2)$ thus we can easily identify it with $\R$. Now if $x_0=0$, $[0:x_1]$ would represent the same coordinate for any $x_1\in\R$. This is precisely the same situation as $\Prj(\R)$. Thus we can virtually ignore the first coordinate and identify it with $\Prj(\R)$. Thus we have shown that $\Prj(\R^2)=\R^2\cup\Prj(\R)$. \\~\\
+The proof is done by induction. We first consider $\Prj(\R)$. Recall that $x\sim y$ if and only if $y=tx$ for some $t\neq 0$. This means that $[x]$ represents the same point as long as $x\in\R\setminus\{0\}$. We also simply identify $[0]$ with $\infty$. \\
+We also consider $\Prj(\R^2)$ for better illustration. All elements of $\Prj(\R^2)$ are of the form $[x_0:x_1]$. We consider the case that $x_0\neq 0$. Since $x_0\neq 0$, we can divide out $x_0$ to get the same coordinate $[1:x_1]\in\Prj(\R^2)$. For each $x_1\in\R$, $[1:x_1]$ represents different coordinates in $\Prj(\R^2)$ thus we can easily identify it with $\R$. Now if $x_0=0$, $[0:x_1]$ would represent the same coordinate for any $x_1\in\R$. This is precisely the same situation as $\Prj(\R)$. Thus we can virtually ignore the first coordinate and identify it with $\Prj(\R)$. Thus we have shown that $\Prj(\R^2)=\R^2\cup\Prj(\R)$. \\
 Now through the induction hypothesis, we just have to show that $\Prj(\R^n)=\R^n\cup\Prj(\R^{n-1})$. But this is done in a similar fashion. We can use $[1:x_1:\dots:x_n]$ for $x_1,\dots,x_n\in\R$ to identify $\R^n$ and $\Prj(\R^{n-1})$ with $[0:x_1:\dots:x_n]$. 
 \end{proof}
 \end{prp}
@@ -730,13 +886,13 @@ In particular, note that lines in $\R^{n+1}$ become points. Let $x\in\R^{n+1}$ b
 \begin{defn}{Projective Cone and Span}{} Let $V$ be a vector subspace and let $U\subset\Prj(V)$ be a subset. Define the projective cone of $U$ to be $$\tilde{U}=\bigcup_{v\in U}v$$ Define the span of $U$ to be $$\langle U\rangle=\Prj(\text{span}(\tilde{U}))$$ the smallest projective linear subspace of $\Prj(V)$ containing $U$. 
 \end{defn}
 
-\begin{thm}{Dimemsion Theorem}{} Let $E,F\subset\Prj^n$ be projective linear subspaces. Then $$\dim(E\cap F)=\dim(E)+\dim(F)-\dim\langle E,F\rangle$$ \tcbline
+\begin{thm}{Dimemsion Theorem}{} Let $E,F\subset\Prj^n$ be projective linear subspaces. Then $$\dim(E\cap F)=\dim(E)+\dim(F)-\dim\langle E,F\rangle$$ 
 \begin{proof}
 Let 
 \end{proof}
 \end{thm}
 
-\begin{thm}{}{} Any two distinct lines $L_1$ and $L_2$ in $\Prj^2$ intersect in a point. \tcbline
+\begin{thm}{}{} Any two distinct lines $L_1$ and $L_2$ in $\Prj^2$ intersect in a point. 
 \begin{proof}
 Note that $L_1$ and $L_2$ are projections of two planes $A_1,A_2$ through the origin. Since $A_1,A_2$ have dimension $2$ and are distinct. Thus their intersection must have dimension $1$ and their span has dimension $3$. But $\langle L_1,L_2\rangle=\Prj(\text{span}(A_1,A_2))=\Prj(\R^3)$ and thus $\dim(\langle L_1,L_2\rangle)=2$. By the above theorem, we must have $\dim(L_1\cap L_2)=0$ and thus it is exactly a point. 
 \end{proof}
@@ -761,7 +917,7 @@ This means that specifying any $n+2$ points in $\Prj^n$ such that they form a pr
 \begin{defn}{Perspectivities}{} Let $\Pi_1,\Pi_2$ be two hyperplanes in $\Prj^n$. A perspectivity $f:\Pi_1\to\Pi_2$ from a point $O\in\Prj^n$ but not in $\Pi_1$ or $\Pi_2$ is a map given by $$f(P)=\Pi_2\cap\langle O,P\rangle$$
 \end{defn}
 
-\begin{lmm}{}{} Perspectivities are well defined. \tcbline
+\begin{lmm}{}{} Perspectivities are well defined. 
 \begin{proof}
 We want to show that $f(P)$ is a point. We appeal to the dimension theorem. We have that $$\dim(\Pi_2\cap\langle O,P\rangle)=\dim(O)+\dim(\Pi_2)-\dim(\langle\Pi_2\langle O,P\rangle\rangle)$$ Since $O$ is necessarily not in $\Pi_1$, we have $\langle O,P\rangle$ is a projective line. Moreover, since $O$ is not in $\Pi_2$, we must have that the span of the hyperplane $\Pi_2$ and a line $\langle O,P\rangle$ must be the projective space itself. Thus we have that $$\dim(\Pi_2\cap\langle O,P\rangle)=0$$ This means that $f(P)$ must be a point in projective space. 
 \end{proof}
@@ -770,7 +926,7 @@ We want to show that $f(P)$ is a point. We appeal to the dimension theorem. We h
 \begin{defn}{Cross Ratio}{} Let $P,Q,R,S$ be distinct and ordered points on a projective line in $\Prj^n$. Define the cross ratio between the four projective points to be the ratio $$(P,Q;R,S)=\left(\frac{p-r}{p-s}\right)\left(\frac{q-s}{q-r}\right)$$ where the ratio between vectors lying on the same projective line is defined to be the $\lambda$ in $\frac{\lambda v}{v}$. 
 \end{defn}
 
-\begin{prp}{}{} Projective linear maps perserve perspectivity. \tcbline
+\begin{prp}{}{} Projective linear maps perserve perspectivity. 
 \begin{proof}
 By linearity, we must have $$\frac{T(\lambda v)}{T(v)}=\frac{\lambda v}{v}$$
 \end{proof}

@@ -15,28 +15,25 @@
 \date{\today}
 \begin{document}
 \maketitle
-\begin{abstract}
-Real analysis is all about functions from $\R$ to $\R$. It involves continuity, differentiability and integration as its central notions. However, to better characterize and prove stuff easier, we use and apply what we know about sequences and series. They are crucial not only in real analysis, but also in sequences of functions. Real analysis is often treated as the most simple case of general analysis. \\~\\
-Often when dealing with functions of multivariable, or complex functions, or even spaces with different properties, the methods and techniques are still the core of it. It is expected that when dealing with analysis on a different space, similar methods and ideas could be applied. \\~\\
-Real analysis is the best course for first year undergraduate students trying to get the hang of university mathematics. Its deployment of a wide range of ideas in proofs as well as a fair sense of abstraction invites challenging yet rewarding questions and theorems. 
-\end{abstract}
-\textbf{References}
-\begin{itemize}
-\item Principles of Mathematical Analysis Third Edition by Walter Rudin
-\item University of Warwick MA131 Analysis Lecture Notes by Keith Ball
-\item University of Warwick MA244 Analysis Lecture Notes by Jose Rodrigo
-\item Imperial College London Math40002 Lecture Notes
-\end{itemize}
+
 \pagebreak
 \tableofcontents
 \pagebreak
 \section{Properties of the Real Numbers}
-In this section, we will give the very first properties of the real numbers for readers to familiarize themselves with so that when we go on to the main discussion of sequences, we are well equipped with theorems at our disposal. 
+\subsection{The Completeness Property}
+Recall that we constructed the real numbers $\R$ as Dedekind cuts of $\Q$. The real numbers are also equipped with addition and multiplication, and is totally ordered. 
 
-\subsection{The Completeness Axiom}
-What is special about the real numbers from most of the other number systems is the existence of the completeness axiom that says a bounded subset must have a least upper bound. But before we reach our main result, we develop the notion of supremum and infinum which is especially important when considering convergences and continuity in future chapters. \\
+\begin{defn}{Intervals}{}\\ Let $I\subseteq\R$ be a subset. We say that $I$ is an interval if for all $a,b\in I$, we have $x\in I$ for all $a<x<b$. 
+\end{defn}
 
-Let us give a proper definition for bounds. 
+We use the following convention: 
+\begin{itemize}
+\item The open interval $(a,b)=\{x\in\R\;|\;a<x<b\}$
+\item The closed interval $[a,b]=\{x\in\R\;|\;a\leq x\leq b\}$
+\item $(a,b]=\{x\in\R\;|\;a<x\leq b\}$
+\item $[a,b)=\{x\in\R\;|\;a\leq x<b\}$
+\end{itemize}
+
 \begin{defn}{Upper and Lower Bounds}{}\\ Let $S$ be a non empty subset of $\R$ 
 \begin{itemize}
 \item $S$ is said to be bounded above if there exists $u\in\R$, called an upper bound of $S$ such that $x\leq u$ for all $x\in S$
@@ -45,14 +42,11 @@ Let us give a proper definition for bounds.
 \end{itemize}
 \end{defn}
 
-Here is a trivial proposition involving bounds to exercise your minds. 
-
-\begin{prp}{}{}\\ A non-empty subset $S$ of $\R$ is bounded if and only if it is bounded above and bounded below. 
+\begin{lmm}{}{}\\
+Let $S\subseteq\R$ be a subset. Then $S$ is bounded if and only if it is bounded above and bounded below. 
 \begin{proof}\\ If $S$ is bounded, then $-M\leq x\leq M$ thus it is bounded above and below. If $S$ is bounded above by $M$ and bounded below by $N$, then $\abs{x}\leq\max(\abs{M},\abs{N})$. 
 \end{proof}
-\end{prp}
-
-The notion of supremum and infinum is closely tied to that of boundedness. In particular, there is only one number in $\R$ that can be called the supremum per set, similarly for the infinum. But for boundedness, you can take any number in $\R$. As long as its absolute value is big enough to cover up for all elements in $S$, it could be a bound. So if $M>0$ is a bound for a set $S$ then naturally $M+1$, $1.1M$ and more would also be bounds for $S$. 
+\end{lmm}
 
 \begin{defn}{Supremum}{}\\ Let $S$ be a subset of $\R$. We say that $U\in\R$ is the supremum of $S$ when
 \begin{itemize}
@@ -70,16 +64,10 @@ We denote the supremum of $S$ as $\sup(S)=U$
 We denote the infinum of $S$ as $\inf(S)=L$
 \end{defn}
 
-Readers can easily check that the supremum and infinum, should it exists, is unique. One can also think about the criteria for the supremum and infinum to exists. Naturally, since the notion of supremum and infinum involves comparison, there will be no such thing in complex numbers. 
-
 \begin{prp}{}{}\\ Let $S$ be a non-empty subset of $\R$. Then $$-\sup(S)=\inf(-S)$$ where $-S=\{-x|x\in S\}$. 
 \begin{proof}\\ Since for all $x\in S$ $x\leq\sup(S)$. But this implies that $-\sup(S)\leq-x$ for all $x\in S$ thus for all $-x\in-S$. Then by definition $-\sup(S)=\inf(-S)$. 
 \end{proof}
 \end{prp}
-
-The above theorem allows us to translate properties of the supremum to properties of the infinum by simply "inverting" the set. That way to prove things about the infinum we could invert the set, use the proof by the supremum and invert it back to prove it for the infinum. In practise however, we barely use this theorem to prove anything. 
-
-The following property is an important characterization of supremums and infinums that will be used later when we need it. It is called the approximation property because it allows some sort of wiggle room between the supremum and our approximation in the sense that we can always make a better approximation for the supremum. 
 
 \begin{prp}{Approximation Property}{}\\ Let $S$ be a non-empty subset of $\R$. 
 \begin{itemize}
@@ -90,73 +78,14 @@ The following property is an important characterization of supremums and infinum
 \end{proof}
 \end{prp}
 
-We finally reach the goal of this chapter, which is the completeness axiom. 
-
 \begin{thm}{The Completeness Property of Real Numbers}{}\\ Let $S\subseteq\R$ be a subset of $\R$ that is bounded above. Then $S$ has a supremum. 
 \end{thm}
 
-\subsection{The Absolute Value}
-Recall that we have constructed the set of real numbers as Dedekind sets. Instead of focusing on the set-theoretic foundations of the real numbers. We focus on some of its properties and forego the clumsy notation of thinking about real numbers in terms of a set. \\
-
-The absolute value is an important function when it comes to defining useful concepts such as distances in the field of real. It simply measures the shortest distance between two points. 
-
-\begin{defn}{The Absolute Value}{}\\ The absolute value of a real number $x\in\R$ is defined by
-$$\abs{x}=\begin{cases}
-x & \text{if $x\geq0$} \\
--x & \text{if $x\leq0$}
-\end{cases}$$
-\end{defn}
-
-Readers should already be familiar with the absolute value in high school. In particular, one should be able to draw graphs related to the absolute function. However, there are properties of the absolute value that are yet to be seen or proved. The following properties will be a list of its useful properties. 
-
-\begin{prp}{}{}\\ Let $x,y\in\R$. Then the following are true of the absolute value. 
-\begin{itemize}
-\item $\abs{x}\geq 0$ with equality if and only if $x=0$
-\item $\abs{xy}=\abs{x}\abs{y}$
-\item $\abs{x+y}\leq\abs{x}+\abs{y}$
-\item $\abs{\abs{x}-\abs{y}}\leq\abs{x-y}$
-\end{itemize}
-\begin{proof}\\ I left out the proofs of the first and second property since they are simplay obtained via case by case analysis. 
-\begin{itemize}
-\item We start by squaring the left hand side of the inequality. 
-\begin{align*}
-\abs{x+y}^2&=(x+y)^2 \\
-&=x^2+2xy+y^2 \\
-&\leq \abs{x}^2+2\abs{x}\abs{y}+\abs{y}^2 \\
-&=(\abs{x}+\abs{y})^2
-\end{align*}
-Since the both sides of the inequality is non-negative, we can take the square root on both sides, thus obtaining $\abs{x+y}\leq\abs{x}+\abs{y}$. 
-\item Choose $x$ to be $x-y$ in (4) and we obtain $\abs{x}-\abs{y}\leq\abs{x-y}$. Similarly, choosing $y$ to be $y-x$ in (4), we find that $\abs{y}-\abs{x}\leq\abs{y-x}=\abs{x-y}$. Thus we have $\abs{\abs{x}-\abs{y}}\leq\abs{x-y}$. 
-\end{itemize}
-\end{proof}
-\end{prp}
-
-These properties will also be used extensively throguhout the entire notes. The reader should be absolutely familiar with its properties so that they can understand the definitions and the proofs more smoothly. The geometric interpretation of the absolute value will serve as an extremely important visualization on limits and convergences. 
-
-\begin{defn}{Intervals}{}\\ Let $I\subseteq\R$ be a subset. We say that $I$ is an interval if for all $a,b\in I$, we have $x\in I$ for all $a<x<b$. 
-\end{defn}
-
-We use the following convention: 
-\begin{itemize}
-\item The open interval $(a,b)=\{x\in\R\;|\;a<x<b\}$
-\item The closed interval $[a,b]=\{x\in\R\;|\;a\leq x\leq b\}$
-\item $(a,b]=\{x\in\R\;|\;a<x\leq b\}$
-\item $[a,b)=\{x\in\R\;|\;a\leq x<b\}$
-\end{itemize}
-
 \subsection{Density of the Real Numbers}
-In this chapter we will investigate another important property of the real numbers, albeit shared by the complex numbers as well. This is the density of the real numbers. We try to mathematically prove and formulate the fact that the real numbers are very rich. It is dense in the sense that for every two real numbers, you can always find another real number in between. Obviously if you simply consider the rationals or the irrationals, this is also true. But the main thing to take away here is that there would be an uncountably amount of rationals and irrationals each, between any two real numbers. This distribution can not be measured as well. The rationals and the irrationals are so interspersed and intertwined that there is no notion of "next" number in the reals. And you would not even know whether it is rational or irrational. \\~\\
-
-To start off this chapter, we need an important where it use throughout these notes will only be of this section. 
-
 \begin{thm}{Archimedean Property}{}\\ For any real numbers $a$ and $b$ with $a>0$ there exists $n\in\N$ such that $na>b$. 
 \begin{proof}\\ Suppose that $na\leq b$ for all $n$. Then the set of all $na$, denoted by $S$ has an uppper bound $b$, thus also has a least upeer bound, say $u$. We have that there exists some $na\in S$ such that $u-a<na\leq u$. But this implies that $u<(n+1)a\in S$, a contradiction. 
 \end{proof}
 \end{thm}
-
-The Archimedean property, as stated by the name, is given by Archimedes. While the theorem does look somewhat trivial, often it is the trivial theorems that are the hardest to prove, especially by new students. This is also quite a standard example for proof of contradiction. \\~\\
-
-Before we move on, we also need the floor function in our proof of density, which is formalized below. 
 
 \begin{prp}{Floor Function}{}\\ For each $x\in\R$ there exists a unique integer $\floor{x}$ such that $$\floor{x}\leq x<\floor{x}+1$$ 
 \begin{proof}\\ Let $A=\{n\in\Z:n\leq x\}$. By the archimedean property there exists $k>-x$ and thus $-k<x$ with $-k\in A$ hence $A$ is non-empty. Let $a=sup(A)$. We have some $n\in A$ such that $a-1<n\leq a\leq x$ and thus $a+1<n+1\leq a+1\leq x+1$. From this we have $n\leq x$ as well as $n+1$ not in $A$ thus $x<n+1$. \\~\\
@@ -164,14 +93,10 @@ Now suppose that $m\leq x<m+1$ and $n\leq x<n+1$. From these we derive that $m\l
 \end{proof}
 \end{prp}
 
-Now who said that the irrational numbers are not just some fantasy of a mathematician. Let us give birth to the first ever irrational mankind every thought of! Pythagoras and his disciples were quite confused by this phenomenon that they deemed their mathematics must be wrong somewhere. 
-
 \begin{lmm}{}{}\\ The positive solution to the equation $x^2-2=0 $, denoted $\sqrt{2}$ is irrational. 
 \begin{proof}\\ Suppose that $\sqrt{2}$ is rational, then it can be represented as $\frac{m}{n}$ with $hcf(m,n)=1$. Then we have $m^2=2n^2$, implying that $2|m^2$ and $2|m$. Thus we can say that $m=2k$ for some $k\in\Z$. Substituting $m=2k$, we have $2k^2=n^2$ which similarly implies that $2|n$ which is a contradiction since they have a common factor. 
 \end{proof}
 \end{lmm}
-
-Congratulations we showed that irrational numbers do exist! Finally we can move on to the core of this section, the density theorems. 
 
 \begin{thm}{Density of the Rationals}{}\\ Between any pair of distinct real numbers there is a rational number. 
 \begin{proof}\\ Suppose $a,b\in\R$ and $a<b$. By the archimedean property we have that $n(b-a)>1$ for some $n\in\N$. Let $m=\floor{na}+1$. We have $na<m\leq na+1<nb$. Thus $a<\frac{m}{n}<b$. 
@@ -183,26 +108,18 @@ Congratulations we showed that irrational numbers do exist! Finally we can move 
 \end{proof}
 \end{thm}
 
-Once we have the density in the rationals and irrationals, we now have an infinite number of rationals and irrationals betweena any two real numbers. 
-
 \begin{crl}{}{}\\ Between any pair of distinct real numbers there is an infinite number of rationals and irrationals. 
 \begin{proof}\\ Recursively apply density of rationals and density of irrationals. 
 \end{proof}
 \end{crl}
 
-Beware that there is no pattern as to how the rationals and irrationals line up in the real number line. It is unknown whether a rational or an irrational "follows" a real number. In fact, it may not be possible to define what "the next number" of a real number is. 
-
 \pagebreak
 \section{Sequences}
-Sequences have not only proven themselves to be useful in real analysis, but also in several other areas of mathematics as well including complex analysis and topology and metric spaces (they are all just analysis) and differential equations and more. They are the intermediate step for the notion of continuity and differentiability since those definitions can be reduced by an equivalence characterization via sequences. Therefore it is important to investigate properties of the sequences to better understand and prove theorems of continuity and limits. 
-
 \subsection{Sequences and Convergences}
 We begin our discussion we the definition and the first properties of sequences, as well as convergence. 
 \begin{defn}{Sequences}{}\\
-A sequence in $\R$ is a function $f:\N\to\R$ that assigns to each natural number a real number. We write often write $f(n)=a_n$ and say that it is the $n$th term of the sequence. We use $(a_n)_{n\in\N}$ to represent a sequence indexed by $n$. 
+A sequence $(a_n)_{n\in\N}$ in $\R$ is a function $f:\N\to\R$ that assigns to each natural number a real number $f(n)=a_n$. 
 \end{defn}
-
-Real analysis is all about closeness of things. The definition of convergence below will be one such. It is important here to not only understand the geometric meaning of convergence, which is closeness towards the limit, but to also be able to apply the definition to prove convergence. While we will see later that there are more ways to prove convergences, when all else fails, we must return to this definition and therefore we should be well trained with its definition. 
 
 \begin{defn}{Covergence of Sequences}{}\\
 Let $(a_n)_{n\in\N}$ be a sequence in $\R$. Let $a\in\R$. We say that the sequence converges to $a$ if for all $\varepsilon>0$, there exists $N\in\N$ such that $$n>N\implies \abs{a_n-a}<\varepsilon$$ In this case we write $(a_n)_{n\in\N}\to a$. 
@@ -227,15 +144,10 @@ Which is a contradiction.
 \end{proof}
 \end{prp}
 
-The main idea here is that since convergence means closeness, if we have two numbers to converge to then there will be two closeness. But then numbers between these two closeness will not be close to each other anymore! \\~\\
-Another important property of convergence sequecnes is that it is bounded. 
-
 \begin{prp}{}{}\\ A convergent sequence in $\R$ is bounded. 
 \begin{proof}\\ Suppose that $a_n\to a$. Fixing $\varepsilon$ to be any number larger than 0, we have that $\abs{a_n-a}<\varepsilon\implies a-\varepsilon<a_n<a+\varepsilon$ for all $n$ larger than some number $N$. At the same time, all the terms less than $N$ are bounded by $M=\max{(\abs{a_1}, \abs{a_2}, \dots,\abs{a_N})}$. Thus if we take $$C=\max{(M,\abs{a+\varepsilon},\abs{a-\varepsilon})}$$ $C$ would bound all the terms of $a_n$. 
 \end{proof}
 \end{prp}
-
-The next two theorems demonstrate inequalities between convergent sequences. 
 
 \begin{prp}{}{}\\ Let $(a_n)_{n\in\N}$ and $(b_n)_{n\in\N}$ be sequences with $a_n\to a$ and $b_n\to b$. If $\exists N\in\N$ such that $a_n\leq b_n$ for all $n>N$, then $a\leq b$. 
 \begin{proof}\\ Suppose that $b<a$. Then we have $b<\frac{a+b}{2}<a$. Choosing $\varepsilon=\frac{a-b}{2}$, then whenever $n>N_1$, we have $$b_n-b<\frac{a-b}{2}$$ Similarly, choose $\varepsilon=\frac{b-a}{2}$, then whenever $n>N_2$, we have $$a_n-a<\frac{b-a}{2}$$ Then we have $$b_n<\frac{a+b}{2}<a_n$$ which is a contradiction. 
@@ -247,10 +159,6 @@ The next two theorems demonstrate inequalities between convergent sequences.
 \end{proof}
 \end{prp}
 
-The sandwich theorem is useful in detecting the convergence to $0$ of a positive sequence. Whenever one is given a very complicated positive sequence that does not have an easily determinable limit, one can use a sequence with larger values that tends to $0$ show that that sequence converges to $0$. This however requires more care and exercise to get familiarize. \\~\\
-
-As one accummulate more examples, it can be made clear that even divergence has different kinds. This is made explicitly true when considering the sequence $a_n=\sin(n)$ and $b_n=n$. One oscillates while the other blows up. We therefore give a definition of blowing up in technicallity. 
-
 \begin{defn}{Divergence to Infinity}{}\\ A sequence $(a_n)_{n\in\N}$ in $\R$ is said to 
 \begin{itemize}
 \item diverge to $\infty$ if for every real number $C>0$ there exists a number $N\in\N$ such that $$n>N\implies a_n>C$$
@@ -258,17 +166,10 @@ As one accummulate more examples, it can be made clear that even divergence has 
 \end{itemize}
 \end{defn}
 
-This definition should be much easier to understand than that of convergence sequences. In practise it is also not hard to prove sequences that tends to infinity. Usually showing that a limit convergences requires you to find out the limit explicitly (except that if you are sandwiching) and that is often harder than simply showing that a sequence blows up. \\~\\
-But in case it is not obvious to know that it diverges to infinity, we can apply a comparison test as stated below. 
-
 \begin{prp}{}{}\\ Let $(a_n)_{n\in\N}$ and $(b_n)_{n\in\N}$ be sequences in $\R$. If $b_n\geq a_n$ for all $n$ larger than some $N\in\N$ and $a_n\to\infty$ then $b_n\to\infty$. 
 \begin{proof}\\ Suppose $a_n\to\infty$. Then we have for every $C>0$ there exists some $N\in\N$ such that $a_n>C$ whenever $n>N$. Then we have $b_n>a_n>C$ for all $n>N$ thus $b_n\to\infty$. 
 \end{proof}
 \end{prp}
-
-This proposition bears similarity to that of the convergence version. Often the hardest part of using these two comparisons is to find an appropriate sequence to demonstrate the limit of the main sequence. \\~\\
-
-The collection of all convergent sequences also works similarly to $\R$ in the sense that aside from comparison, there is also a notion of addition, scalar multplication and sequence multiplication. However the main usage of this proposition is not to construct new sequences from old, but to evaluate limits from know sequences. 
 
 \begin{prp}{Algebra of Sequences}{}\\ Let $(a_n)_{n\in\N}$ and $(b_n)_{n\in\N}$ be sequences in $\R$. Let $a_n\to a$ and $b_n\to b$. Then the following are true. 
 \begin{itemize}
@@ -307,9 +208,6 @@ Since we have $0<\abs{\frac{1}{b_n}-\frac{1}{b}}<\frac{2\abs{b_n-b}}{b^2}$ then 
 \end{proof}
 \end{prp}
 
-We will return to this property more often than you think as we will often go back to sequences when further defining new notions such as continuity and differentiability. This is why developing the notion of sequences would be useful. \\~\\
-Next up we also have the ability to invert sequences that tends to $0$ and infinity, given sufficient conditions. 
-
 \begin{prp}{}{}\\ The following two statements are true about a sequence $(a_n)_{n\in\N}$. 
 \begin{itemize}
 \item If $a_n\to\infty$ then $\frac{1}{a_n}\to 0$
@@ -322,8 +220,6 @@ Next up we also have the ability to invert sequences that tends to $0$ and infin
 \end{itemize}
 \end{proof}
 \end{prp}
-
-Finally in this exceptionally long section, we will give special names for sequences that looks more timid. Sequences that only goes up or down will have special names, and then we show an application of the completeness axiom. 
 
 \begin{defn}{Categorization of Sequences}{}\\ A sequence $(a_n)$ in $\R$ may have different properties as below. 
 \begin{itemize}
@@ -340,24 +236,14 @@ Finally in this exceptionally long section, we will give special names for seque
 \end{proof}
 \end{thm}
 
-The monotone sequence theorem is in fact equivalent to the completeness axiom. However we will not pursue this notion further as it does not deem particularly useful. 
-
 \subsection{Subsequences}
-Subsequences, as the name suggests, are new sequences extracted from old sequences. Since they came from another sequences, some properties of the old sequence should retain, as you will see. Of all the subsequences, the most important would be the limit inferior and limit superior. 
-
 \begin{defn}{Subsequences}{}\\ A subsequence of a sequence $(a_n)_{n\in\N}$ in $\R$ is a sequence $(a_{n_k})_{k\in\N}$, where $$0\leq n_1<n_2<\dots$$
 \end{defn}
-
-An immediate property of subsequences is the following. 
 
 \begin{prp}{}{}\\ Let $(a_n)_{n\in\N}$ be a sequence in $\R$ and let $a_n\to a$. Then any subsequence of $(a_{n_k})_{k\in\N}$ converges to $a$. 
 \begin{proof}\\ Given $\varepsilon>0$ there exists some $N$ such that $\abs{a_n-a}<\varepsilon$ whenever $n>N$. Since $n_k>k$, we have that $\abs{a_{n_k}-a}<\varepsilon$ for all $k>N$, thus we have $a_{n_k}\to a$
 \end{proof}
 \end{prp}
-
-There is in fact an inverse saying that if every subsequence convergesn to the same number, then the sequence also converges to that number. However it is impractical since I doubt there are any methods that can find out what all the subsequences converge to, all without knowing the limit of the original sequence. \\~\\
-
-Next we have a very important theorem that constructs very useful subsequences. 
 
 \begin{thm}{Bolzano-Weierstrass Theorem}{}\\ Every bounded sequence in $\R$ has a convergent subsequence. 
 \begin{proof}\\ Let $(a_n)_{n\in\N}$ be a bounded sequence, say $c_0\leq a_n\leq d_0$ for all $n$. Bisect the interval $I_0=[c_0,d_0]$. Observe that if the union of two sets contains infinitely many terms, than at least one of the sets must contain infinitely many terms of the sequence. \\~\\
@@ -366,22 +252,14 @@ Observe that $(c_k)$ and $(d_k)$ are monotonic and bounded, thus converges to $c
 \end{proof}
 \end{thm}
 
-As you see, the monotone convergence theorem is applied thus the completeness axiom actually implies the Bolzano-Weierstrass theorem. Once again, the converse is also true but is too much of a nuisance to prove, given that there is virtually no good application. However, the Bolzano-Weierstrass theorem will prove itself extremely useful in future proofs. It is one of the rare theorems, that returns you a sequence will useful properties. \\~\\
-
-Finally, we have the two important subsequences. 
-
 \begin{defn}{Limit Superior and Limit Inferior}{}\\ Let $(a_n)_{n\in\N}$ be a sequence. Define the limit superior of the sequence to be the the limit of $$s_n=\sup_{m\geq n}a_m$$ if it exists. \\~\\ Define the limit inferior of the sequence to be the limit of $$t_n=\inf_{m\geq n}a_m$$ if it exists. 
 \end{defn}
-
-They will not serve much of a purpose except to prove a test that involves series later. However, I will collect a few of its properties here. There are much nicer properties involving inequalities but is rarely useful unless you are taking an exam. 
 
 \begin{prp}{}{}\\ Let $(a_n)_{n\in\N}$ be a bounded sequence. Then $s_n$ and $t_n$ converges. 
 \begin{proof}\\
 Trivially we must have $s_n$ a decreasing sequence and $t_n$ an increasing sequence since $\{a_m|m\geq n_2\}\subset\{a_m|m\geq n_1\}$ as long as $n_1<n_2$. Since $(a_n)_{n\in\N}$ is bounded, so is the subsequences $s_n$ and $t_n$. Thus $s_n$ and $t_n$ is convergent by the monotone convergent theorem. 
 \end{proof}
 \end{prp}
-
-Finally the below proposition is a characterization of limit superior and limit inferior. This would be quite useful if combined with the monotone convergence theorem. 
 
 \begin{prp}{}{}\\ Let $(a_n)_{n\in\N}$ be a sequence. Then $a_n\to a$ if and only if $$\lim_{n\to\infty}\sup_{m\geq n}a_m=\lim_{n\to\infty}\inf_{m\geq n}a_m=a$$ 
 \begin{proof}\\
@@ -426,7 +304,8 @@ Thus we have the desired result.
 \end{proof}
 \end{prp}
 
-\begin{thm}{Geometric Sequences}{}\\ $$x^n\to\begin{cases}
+\begin{eg}{Geometric Sequences}{}\\
+Let $x\in\R$ be a real number. Then the following is true. $$(x^n)_{n\in\N}\to\begin{cases}
 \infty & \text{if $x>1$} \\
 1 & \text{if $x=1$} \\
 0 & \text{if $-1<x<1$} \\
@@ -440,12 +319,12 @@ Thus we have the desired result.
 \item It is easy to show that it neither goes to $\pm\infty$ nor converges. 
 \end{itemize}
 \end{proof}
-\end{thm}
+\end{eg}
 
 \begin{defn}{Strictly Contracting}{}\\ A sequence $(a_n)_{n\in\N}$ is strictly contracting if $\abs{a_{n+2}-a_{n+1}}\leq l\abs{a_{n+1}-a_n}$ for all $n\in\N$ where $l\in(0,1)$
 \end{defn}
 
-\begin{thm}{}{}\\ Every strictly contracting sequence is Cauchy. 
+\begin{prp}{}{}\\ Every strictly contracting sequence is Cauchy. 
 \begin{proof}\\ Suppose that $(a_n)_{n\in\N}$ is a strictly contracting sequence. Without loss of generality suppose $n>m$. 
 \begin{align*}
 \abs{a_n-a_m}&\leq\abs{a_n-a_{n-1}}+\abs{a_{n_1}-a_{n-2}}+\dots+\abs{a_{m+2}-a_{m+1}}+\abs{a_{m+1}-a_m} \\
@@ -457,7 +336,7 @@ Thus we have the desired result.
 \end{align*}
 As $m\to\infty$ we have $\left(\frac{l^m}{1-l}\right)\to0$ by the geometric sequence. Then for every $\frac{\varepsilon}{\abs{a_2-a_1}}$, there exists $N$ such that $\abs{\frac{l^m}{1-l}}<\frac{\varepsilon}{\abs{a_2-a_1}}$ whenever $n>N$. Using this, we have that $\abs{a_n-a_m}\leq\frac{\varepsilon}{\abs{a_2-a_1}}<\varepsilon$. Thus we have the desired result. 
 \end{proof}
-\end{thm}
+\end{prp}
 
 \subsection{Standard Limits}
 \begin{thm}{$n$th root}{}\\ For every $x\in\R$ and $n\in\N$ there exists a unique $n$th root denoted by $x^\frac{1}{n}$. 
@@ -478,12 +357,14 @@ But $c^{n-1}+bc^{n-2}+\dots+b^{n-2}c+b^{n-1}>nb^{n-1}$. Thus we can only have $b
 \end{proof}
 \end{thm}
 
-\begin{thm}{}{}\\ For all $x>0$, $$x^{\frac{1}{n}}\to 1$$ 
+\begin{eg}{}{}\\
+Let $x>0$ be a real number. Then we have $$\left(x^{\frac{1}{n}}\right)_{n\in\N}\to 1$$ 
 \begin{proof}\\ Consider the case with $x\geq1$. We have $x^\frac{1}{n}\geq1$. From the Bernoulli's Inequality, we have $\left(1+x^\frac{1}{n}-1\right)\geq1+n\left(x^\frac{1}{n}-1\right)\implies x\geq1+n\left(x^\frac{1}{n}-1\right)$.  Thus we have $0<x^\frac{1}{n}-1\leq\frac{x-1}{n}$. Since $\left(\frac{x-1}{n}\right)\to0$, we have that $\left(x^\frac{1}{n}-1\right)\to0$ from the sandwich theorem and thus $\left(x^\frac{1}{n}\right)\to1$. For the case $0<x<1$, note that $\left(\frac{1}{x^\frac{1}{n}}\right)\to1$ since $\frac{1}{x}>1$. Using the algebra for sequences, we have $\left(\frac{1}{\frac{1}{x}^{\frac{1}{n}}}\right)=\left(x^\frac{1}{n}\right)\to1$. 
 \end{proof}
-\end{thm}
+\end{eg}
 
-\begin{thm}{}{}\\ The sequence $n^{\frac{1}{n}}$ converges to $1$. 
+\begin{eg}{}{}\\
+The sequence $n^{\frac{1}{n}}$ converges to $1$. 
 \begin{proof}\\ Note that $n\geq1$ and $n^\frac{1}{2n}>0$, we have 
 \begin{align*}
 \sqrt{n}&=(1+(n^\frac{1}{2n}-1))^n \\
@@ -492,7 +373,7 @@ But $c^{n-1}+bc^{n-2}+\dots+b^{n-2}c+b^{n-1}>nb^{n-1}$. Thus we can only have $b
 \end{align*}
 from Bernoulli's Inquality. Thus we have that $1\leq n^\frac{1}{2n}<\frac{1}{\sqrt{n}}+1$. So by the sand wich theorem we have $(n^\frac{1}{2n})\to1$ and $(n^\frac{1}{n})=(n^\frac{1}{2n})^2\to1$ by the arithmetic of sequences. 
 \end{proof}
-\end{thm}
+\end{eg}
 
 \begin{thm}{Ratio Lemma}{}\\ Suppose $0\leq l<1$. Let $(a_n)_{n\in\N}$ be a sequence. 
 \begin{itemize}
@@ -507,8 +388,9 @@ from Bernoulli's Inquality. Thus we have that $1\leq n^\frac{1}{2n}<\frac{1}{\sq
 \end{proof}
 \end{thm}
 
-\begin{thm}{}{}\\ Suppose $k\in\N$. Then
-$$\frac{x^n}{n^k}\to\begin{cases}
+\begin{eg}{}{}\\
+Let $x\in\R$ be a real number. Let $k\in\N$ be fixed. Then we have 
+$$\left(\frac{x^n}{n^k}\right)_{n\in\N}\to\begin{cases}
 \infty & \text{if $x>1$} \\
 0 & \text{if $0<x\leq1$} 
 \end{cases}$$
@@ -519,54 +401,38 @@ $$\frac{x^n}{n^k}\to\begin{cases}
 \end{align*}
 We have that $\left(1-\frac{1}{n+1}^k\right)\to 0$ so by the ratio lemma, it converges to $0$ whenever $0<x\leq1$. Then suppose that $b_n=\frac{1}{a_n}$. Then $\frac{b_{n+1}}{b_n}=\frac{1}{\left(1-\frac{1}{n+1}\right)^k}\frac{1}{x}$ thus $b_n$ tends to $0$ whenever $x>1$. Then by taking the reciprocal we have $a_n\to\infty$ when $x>1$. 
 \end{proof}
-\end{thm}
+\end{eg}
 
-\subsection{Further Developing the Real Numbers}
-\begin{defn}{Decimal Representation}{}\\ For every $x\in\R$, $$x=\sum_{k=0}^{\infty}\frac{d_k}{10^k}$$ where $d_n\in{0,1,\dots9}$ for all $n\in\N$ and $d_0$ an integer. We write $x=d_0.d_1d_2\dots$
+\subsection{Decimal Representations of Real Numbers}
+\begin{defn}{Decimal Representation}{}\\
+Let $x\in\R$ be a real number. A decimal representation of $x$ is a sequence $(d_n)_{n\in\N}$ such that $$\left(\sum_{k=0}^n\frac{d_k}{10^k}\right)_{n\in\N}\to x$$ where $d_0\in\Z$ and $d_n\in\{0,\dots,9\}$ for all $n\geq 1$. We write $x=d_0,d_1d_2\dots$ to represent $x$ in this decimal representation. 
 \end{defn}
 
-\begin{defn}{Categorization of Decimals}{}\\ An infinte decimal $\pm d_0.d_1d_2\dots$ is
+\begin{lmm}{}{}\\
+Let $x\in\R$ be a real number. Then a decimal representation of $x$ exists. 
+\begin{proof}\\
+Let $d_0=\floor{x}$. For each $n\in\N\setminus\{0\}$, define $d_n\in\N$ to be the largest number in $\{0,\dots,9\}$ such that $\sum_{k=0}^n\frac{d_k}{10^k}\leq x$. Since $d_0\leq\floor{x}$, this is always possible. Define $S_n=\sum_{k=0}^n\frac{d_k}{10^k}$. By construction, $(S_n)_{n\in\N}$ is an increasing sequence and bounded above by $x$. \\
+
+Let $M<x$. Suppose for a contradiction that $S_n<M$ for all $n\in\N$. 
+\end{proof}
+\end{lmm}
+
+\begin{defn}{Categorization of Decimals}{}\\
+Let $x\in\R$ be a real number. Let $x=d_0.d_1d_2\dots$ be a decimal representation of $x$. We say that the decimal is 
 \begin{itemize}
-\item terminating if there exists a natural number $N$ such that $d_n=0$ for every $n>N$
-\item recurring if there exists natural numbers $N$ and $r$ such that $d_n=d_{n+r}$ for every $n>N$
-\item non-recurring if it is neither terminating nor recurring
+\item Terminating if there exists $N\in\N$ such that $d_n=0$ for all $n>N$. 
+\item Recurring if there exists $N,r\in\N$ such that $d_n=d_{n+r}$ for all $n>N$. 
+\item Non-recurring if it is neither terminating nor recurring. 
 \end{itemize}
 \end{defn}
 
-\begin{thm}{}{}\\ Every infinte decimal $\pm d_0.d_1d_2\dots$ represents a real number. 
-\begin{proof}\\ Suppose we have an infinite decimal $\pm d_0.d_1d_2\dots$. Define a sequence $$s_n=\sum_{k=0}^{n}\frac{d_k}{10^k}$$ Then we have that $(s_n)$ is increasing and is bounded by by the infinite decimal. Thus by the completeness axiom $(d_n)$ converges and it converges to its supremum which is a real number. Thus the real number it represents is its supremum. 
+\begin{thm}{}{}\\
+Let $x\in\R$. Then $x$ is irrational if and only if $x$ is non-recurring. 
+\begin{proof}\\
+Suppose that $x=\frac{p}{q}$ with $p,q\in\N$. To represent a negative real number simply append the minus operation in front of $\frac{p}{q}$. Now, remove the integer part of $x$ so that the new number, $y$, is between $0$ and $1$. Then $y$ is also a rational number since alegra under rationals are closed. Let $y=\frac{m}{n}$. Let $m=d_0n+r_1$. Then let $10r_1=d_1n+r_2$. Recursively define $10r_{k-1}=d_{k-1}n+r_k$. Observe that $r_k\in\{o,\dots,n-1\}$. Thus the operation eventually repeats, and we obtain a recurring decimal. If the recurring block of the decimal is only $0$, then it is in fact a terminating decimal, a subset of recurring decimals. Note that the proof here required knowledge on basic number theory. \\~\\
+Now suppose that we have a recursive decimal $x$ with $0<x<1$, a non-recurring block of length $p$ and recurring block of length $q$. Then we have $(10^{p+q}-1)x=n\in\N$. Then we have $x=\frac{n}{10^{p+q}-1}$. Append any integer to the front of the decimal then any recurring decimal can be represented by a rational number. 
 \end{proof}
 \end{thm}
-
-\begin{thm}{}{}\\ Every real number can be represented by an infinte decimal. 
-\begin{proof}\\ Define a sequence $$s_n=\sum_{k=0}^{n}\frac{d_k}{10^k}$$ with $d_k$ selected such that $d_k$ is the largest in ${0,\dots 9}$ and $s_n$ is less than $x\in\R$. Then we have that $(s_n)$ is increasing and is bounded by $x$. Thus by the completeness axiom $(s_n)$ converges and it converges to its supremum. Note that for however small $\varepsilon$ there exists an $n\in\N$ such that $10^n\varepsilon>1$, and thus $\varepsilon>\frac{1}{10^n}$. Then for every $\varepsilon>0$ there exists some $N$ such that $$\abs{x-\sum_{k=0}^{n}\frac{d_k}{10^k}}<\frac{1}{10^n}<\varepsilon$$ whenever $n>N$. Thus the condition for convergence is satisfied and $(s_n)\to x$. Thus the there exists an infinite decimal such that it converges to the selected real number. 
-\end{proof}
-\end{thm}
-
-\begin{lmm}{}{}\\ For every real number $x$ there is a sequence of rationals that converges to $x$. 
-\begin{proof}\\ By the construction of the last theorem the sequence used is a sequence of rationals that converges to $x$. 
-\end{proof}
-\end{lmm} 
-
-\begin{thm}{}{}\\ Every real number $x$ is rational if and only if it can be written as a terminating or recurring decimal. This implies that $x$ is irrational if and only if it is non-recurring. 
-\begin{proof}\\ We first prove the forward implication. Suppose that $x=\frac{p}{q}$ with $p,q\in\N$. To represent a negative real number simply append the minus operation in front of $\frac{p}{q}$. Now, remove the integer part of $x$ so that the new number, $y$, is between $0$ and $1$. Then $y$ is also a rational number since alegra under rationals are closed. Let $y=\frac{m}{n}$. Let $m=d_0n+r_1$. Then let $10r_1=d_1n+r_2$. Recursively define $10r_{k-1}=d_{k-1}n+r_k$. Observe that $r_k\in\{o,\dots,n-1\}$. Thus the operation eventually repeats, and we obtain a recurring decimal. If the recurring block of the decimal is only $0$, then it is in fact a terminating decimal, a subset of recurring decimals. Note that the proof here required knowledge on basic number theory. \\~\\
-We now prove the backward implication. Suppose that we have a recursive decimal $x$ with $0<x<1$, a non-recurring block of length $p$ and recurring block of length $q$. Then we have $(10^{p+q}-1)x=n\in\N$. Then we have $x=\frac{n}{10^{p+q}-1}$. Append any integer to the front of the decimal then any recurring decimal can be represented by a rational number. 
-\end{proof}
-\end{thm}
-
-\begin{crl}{}{}\\ The series $$a_n=\left(1+\frac{1}{n}\right)^n$$ converges. 
-\begin{proof}\\ Consider $\frac{a_{n+1}}{a_n}$. We have that $\frac{a_{n+1}}{a_n}=\left(1+\frac{1}{n+1}\right)\left(1-\frac{1}{(n+1)^2}\right)^n$. Note that since $\frac{-1}{(n+1)^2}>-1$, we can apply the Bernoulli's Inequality can be applied. Then $$\left(1+\frac{1}{n+1}\right)\left(1-\frac{1}{(n+1)^2}\right)^n\geq\left(1+\frac{1}{n+1}\left(1-\frac{n}{(n+1)^2}\right)\right)=1+\frac{1}{(n+1)^3}\geq 1$$ Thus $a_n$ is an increasing sequence. 
-\\~\\ Now note that $\left(1+\frac{1}{2n}\right)^n=\frac{1}{\left(1+\frac{1}{2n+1}\right)^n}$. Since $\frac{-1}{2n+1}>-1$. Thus we can apply Bernoulli's Inequality to have 
-\begin{align*}
-\left(1-\frac{1}{2n+1}\right)^n&\geq1-\frac{n}{2n+1} \\
-\left(1-\frac{1}{2n+1}\right)^n&\geq\frac{n+1}{2n+1} \\
-\frac{2n+1}{n+1}&\geq\frac{1}{\left(1-\frac{1}{2n+1}\right)^n} \\
-2-\frac{1}{n+1}&\geq\left(1+\frac{1}{2n}\right)^n \\
-2&\geq\left(1+\frac{1}{2n}\right)^n \\
-\end{align*}
-Then we have $0\leq a_{2n}\leq 4$, which is bounded. By the completeness axiom, this sequence converges. 
-\end{proof}
-\end{crl}
 
 \pagebreak
 \section{Series}
@@ -577,52 +443,34 @@ Then we have $0\leq a_{2n}\leq 4$, which is bounded. By the completeness axiom, 
 \begin{defn}{Convergence of Series}{}\\ The series is said to converge if the sequence of partial sums converge. The series diverges if the sequence of partial sums diverge. 
 \end{defn}
 
-\begin{thm}{Algebra of Series}{}\\ Let $(a_n)_{n\in\N}$ and $(b_n)_{n\in\N}$ be sequecnces in $\R$ and let $s,t\in\R$. If $\sum_{k=1}^\infty a_k$ and $\sum_{k=1}^\infty b_k$ converges, then $$\sum_{k=1}^\infty(sa_k+tb_k)$$ converges. 
+\begin{prp}{Algebra of Series}{}\\ Let $(a_n)_{n\in\N}$ and $(b_n)_{n\in\N}$ be sequecnces in $\R$ and let $s,t\in\R$. If $\sum_{k=1}^\infty a_k$ and $\sum_{k=1}^\infty b_k$ converges, then $$\sum_{k=1}^\infty(sa_k+tb_k)$$ converges. 
 \begin{proof}\\ Since series are also sequences, we can simply apply the arithmetic of sequences to obtain the results. 
 \end{proof}
-\end{thm}
+\end{prp}
 
-\begin{thm}{Geometric Series}{}\\ The geometric series $$\sum_{k=0}^{\infty}ar^k$$ where $a,r\in\R$ and $a\neq0$, converges if and only if $\abs{r}<1$. In this case $$\sum_{k=0}^{\infty}ar^k=\frac{a}{1-r}$$ 
+\begin{eg}{Geometric Series}{}\\ The geometric series $$\sum_{k=0}^{\infty}ar^k$$ where $a,r\in\R$ and $a\neq0$, converges if and only if $\abs{r}<1$. In this case $$\sum_{k=0}^{\infty}ar^k=\frac{a}{1-r}$$ 
 \begin{proof}\\ Consider the partial sum $s_n=a+ar+\dots+ar^{n}$. We have $s_n=\frac{1-r^{n+1}}{1-r}$. If $\abs{r}<1$, then $(r^{n+1})$ converges to $0$. Then for every $(1-r)\varepsilon>0$ there exists some $N$ such that $n\geq N$ implies $\abs{r^{n+1}}<(1-r)\varepsilon$. Then
 \begin{align*}
 \abs{\frac{1-r^{n+1}}{1-r}-\frac{1}{1-r}}&=\abs{\frac{r^{n+1}}{1-r}}\\
 &<\varepsilon
 \end{align*} Thus the geometric series converges if and only if $\abs{r}<1$. 
 \end{proof}
-\end{thm}
+\end{eg}
 
-\begin{crl}{}{}\\ The infinite sum $$\sum_{k=0}^{\infty}\frac{1}{k!}$$ converges. 
-\begin{proof}\\  For all $n>0$, we have that $n!\geq2^{n-1}$, we have that $\frac{1}{n!}\leq\frac{1}{2^{n-1}}$. Thus we have that $$\sum_{k=0}^{n}\frac{1}{k!}\leq\sum_{k=0}^{n}\frac{1}{2^{k}}$$ $\sum_{k=0}^{n}\frac{1}{2^{k}}$ is a geometric series so it converges then it has an upper bound. By the completeness axiom, we have that the sum converges. 
-\end{proof}
-\end{crl}
-
-\begin{defn}{Euler's Number}{}\\ Define Euler's number to be $$e=\sum_{k=0}^{\infty}\frac{1}{k!}$$
-\end{defn}
-
-\begin{prp}{}{}\\ $$e=\lim_{n\to\infty}\left(1+\frac{1}{n}\right)^n=\sum_{k=0}^{\infty}\frac{1}{k!}$$ 
-\begin{proof}\\ We start by considering the $n$th term of both sequences. From the binomial theorem, we have that
-\begin{align*}
-\left(1+\frac{1}{n}\right)^n&=\sum_{k=0}^{n}\frac{1}{k!}\left(1-\frac{1}{n}\right)\left(1-\frac{2}{n}\right)\cdots\left(1-\frac{k-1}{n}\right)\\
-&\leq\sum_{k=0}^{n}\frac{1}{k!}
-\end{align*} Thus letting $n\to\infty$, we have $$\lim_{n\to\infty}\left(1+\frac{1}{n}\right)^n\leq\sum_{n=0}^{\infty}\frac{1}{n!}$$\\
-However, if $n>m$, $$\left(1+\frac{1}{n}\right)^n=\sum_{k=0}^{m}\frac{1}{k!}\left(1-\frac{1}{n}\right)\left(1-\frac{2}{n}\cdots\left(1-\frac{k-1}{n}\right)\right)$$ Letting $n\to\infty$, we have $e\geq s_m$. Letting $m\to\infty$, we have $e\geq s$. Thus we have $e=\lim_{n\to\infty}\left(1+\frac{1}{n}\right)^n$
-\end{proof}
-\end{prp}
-
-\begin{thm}{Null Sequence Test}{}\\ If $(a_n)_{n\in\N}$ does not tend to $0$ then $\sum_{k=0}^\infty a_k$ diverges. 
+\begin{prp}{Null Sequence Test}{}\\ If $(a_n)_{n\in\N}$ does not tend to $0$ then $\sum_{k=0}^\infty a_k$ diverges. 
 \begin{proof}\\ Suppose that $\sum_{n=0}^\infty a_n$ converges. Then we have that for all $\varepsilon>0$, there exists some $N$ such that $$\abs{\sum_{k=0}^m a_k-\sum_{k=0}^n a_k}<\varepsilon$$ whenever $n,m>N$. In particular, choosing $m=n+1$, we have
 \begin{align*}
 \abs{\sum_{k=0}^{n+1} a_k-\sum_{k=0}^n a_k}&=\abs{a_{n+1}}\\
 &<\varepsilon
 \end{align*} for all $n>N$. Thus we have that $(a_{n})\to 0$. 
 \end{proof}
-\end{thm}
+\end{prp}
 
 \subsection{Series with Non-negative Terms}
-\begin{thm}{}{}\\ If $a_n\geq 0 $ for all $n>N$ with $N\in\N$ then the series $\sum_{k=1}^\infty a_k$ converges in $\R$ if and only if its partial sums are bounded. 
+\begin{prp}{}{}\\ If $a_n\geq 0 $ for all $n>N$ with $N\in\N$ then the series $\sum_{k=1}^\infty a_k$ converges in $\R$ if and only if its partial sums are bounded. 
 \begin{proof}\\ We first prove the forward implication. Suppose that $\sum_{k=1}^\infty a_k$ converges, then by 2.1.4 it is bounded. Now suppose that $\sum_{k=1}^\infty a_k$ is bounded. Then since $a_n\geq0$ then $\sum_{k=1}^\infty a_k$ is increasing. Then $\sum_{k=1}^\infty a_k$ is convergent by monotonic increasing theorem. 
 \end{proof}
-\end{thm}
+\end{prp}
 
 \begin{thm}{Direct Comparison Test}{}\\ Suppose $0\leq a_n\leq b_n$ for all $n>N$ with $N\in\N$.
 \begin{itemize}
@@ -637,7 +485,7 @@ However, if $n>m$, $$\left(1+\frac{1}{n}\right)^n=\sum_{k=0}^{m}\frac{1}{k!}\lef
 \end{proof}
 \end{thm}
 
-\begin{lmm}{}{}\\ The harmonic series $\sum_{k=1}^\infty\frac{1}{k}$ diverges. 
+\begin{eg}{}{}\\ The harmonic series $\sum_{k=1}^\infty\frac{1}{k}$ diverges. 
 \begin{proof}\\ Let $s_n=\sum_{k=1}^{n}\frac{1}{k}$. Then
 \begin{align*}
 s_{2n}&=\frac{1}{n+1}+\frac{1}{n+2}+\dots+\frac{1}{2n-1}+\frac{1}{2n}+s_n\\
@@ -653,9 +501,9 @@ s_{2^n}&\geq s_{2^{n-1}}+\frac{1}{2}\\
 \end{align*}
 By the direct comparison test, we now have $s_n$ diverge since $1+\frac{n}{2}$ diverges. 
 \end{proof}
-\end{lmm}
+\end{eg}
 
-\begin{lmm}{}{}\\ $\sum_{k=1}^\infty\frac{1}{k^2}$ converges. 
+\begin{eg}{}{}\\ $\sum_{k=1}^\infty\frac{1}{k^2}$ converges. 
 \begin{proof}\\ We first prove that $\sum_{k=2}^{\infty}\frac{1}{k^2-k}$ converges. Consider $s_n=\sum_{k=2}^{n}\frac{1}{(k)(k-1)}$. 
 \begin{align*}
 s_n&=\sum_{k=2}^{n}\left(\frac{1}{k-1}-\frac{1}{k}\right)\\
@@ -664,45 +512,21 @@ s_n&=\sum_{k=2}^{n}\left(\frac{1}{k-1}-\frac{1}{k}\right)\\
 \end{align*}
 Thus we have that $s_n\to1$. By the direct comparison test, we have that $\sum_{k=1}^\infty\frac{1}{k^2}$ converges. 
 \end{proof}
-\end{lmm}
+\end{eg}
 
-\begin{lmm}{}{}\\ The number $e$ is irrational. 
-\begin{proof}\\ Suppose that $e$ can be written in an irreducible fraction $\frac{p}{q}$. 
+\begin{thm}{$p$ series test}{}\\
+Let $p\in\R$ be a real number. Then $\sum_{k=1}^{\infty}\frac{1}{k^p}$ converges when $p>1$ and diverges when $0<p\leq 1$. 
+\begin{proof}\\
+When $0<p\leq1$, we have that $\sum_{k=1}^{\infty}\frac{1}{n^p}$ diverges by the direct comparison test with $\sum_{k=1}^\infty\frac{1}{n}$. Now suppose that $p>1$. Let $S_n=\sum_{k=1}^n\frac{1}{k^p}$. Let $m\in\N$. Since $(S_n)_{n\in\N}$ is a strictly increasing sequence, we have
 \begin{align*}
-e-\sum_{k=1}^{q+1}\frac{1}{(k-1)!}&=\frac{p}{q}-\left(\frac{1}{0!}+\frac{1}{1!}+\dots+\frac{1}{q!}\right)\\
-&=\frac{p(q-1)!-(q!+q!+\frac{q!}{2}+\dots+1)}{q!}
+S_{2m+1}&=\sum_{k=1}^{2m+1}\frac{1}{k^p}\\
+&=1+\sum_{i=1}^m\left(\frac{1}{(2i)^p}+\frac{1}{(2i+1)^p}\right)\\
+&<1+\sum_{i=1}^m\frac{2}{(2i)^p}\\
+&=1+\sum_{i=1}^m\frac{2^{1-p}}{i^p}\\
+&=1+2^{1-p}S_m\\
+&<1+2^{1-p}S_{2m+1}
 \end{align*}
-Then $k=p(q-1)!-(q!+q!+\frac{q!}{2}+\dots+1)\in\N$ and $e-\sum_{k=1}^{q+1}\frac{1}{(k-1)!}=\frac{k}{q!}$. 
-Now consider 
-\begin{align*}
-e-\sum_{k=1}^{q+1}\frac{1}{(k-1)!}&=\sum_{k=0}^{\infty}\frac{1}{k!}-\sum_{k=0}^{q}\frac{1}{k!}\\
-&=\frac{1}{(q+1)!}+\frac{1}{(q+2)!}+\dots\\
-&=\frac{1}{q!}\left(\frac{1}{q+1}+\frac{1}{(q+1)(q+2)}+\dots\right)\\
-&<\frac{1}{q!}\left(\frac{1}{2}+\frac{1}{2}\cdot\frac{1}{2}+\dots\right)\tag{since $q>1$}\\
-&=\frac{1}{q!}\left(\frac{1}{2}+\frac{1}{4}+\dots\right)\\
-&=\frac{1}{q!}\tag{by geometric series}\\
-\end{align*}
-Thus now we have that $\frac{k}{q!}<\frac{1}{q!}$ for some $k\in\N$ which is not possible for any choice of $k$. Thus we have arrived in a contradiction. 
-\end{proof}
-\end{lmm}
-
-In this section here we suppose that the techniques and origins of integration is already properly introduced, it would be weird to add the integral test to the section of integration since it is developed for testing series convergence. 
-\begin{thm}{Integral Bounds}{}\\ Let $f$ be decreasing and non-negative and integrable on the interval $[1,\infty)$. Then $$\int_{m+1}^{n+1}f(x)\,dx\leq\sum_{k=m+1}^{n+1}f(k)\leq\int_{m}^{n}f(x)\,dx$$ 
-\begin{proof}\\ The inequality is obtained through drawing the graph of a decreasing function $f$ and estimating the area of the curve with rectangles of width $1$. 
-\end{proof}
-\end{thm}
-
-\begin{thm}{Integral Test}{}\\ Let $f$ be decreasing and non-negative and integrable on the interval $[1,\infty)$. Then $s_n=\sum_{k=1}^{n}f(k)$ converges if and only if $\int_{1}^{\infty}f(x)\,dx$ converges. 
-\begin{proof}\\ From the integral bounds, we have $$\sum_{k=0}^{\infty}f(k)\leq\int_{1}^{\infty}f(x)\,dx$$ Thus when the integral is converges, the increasing sum is bounded. Thus by the monotone convergence theorem, the $\sum_{k=0}^{\infty}$ converges. When the integral diverges, then $$\int_{0}^{\infty}f(x)\,dx\leq\sum_{k=0}^{\infty}f(k)$$ also diverges by the comparison test. 
-\end{proof}
-\end{thm}
-
-\begin{thm}{$p$ series test}{}\\ $\sum_{k=1}^{\infty}\frac{1}{k^p}$ converges when $p>1$ and diverges when $0<p\leq1$. 
-\begin{proof}\\ When $0<p\leq1$, we have that $\sum_{k=1}^{\infty}\frac{1}{n^p}$ diverges by the direct comparison test with $\sum_{k=1}\frac{1}{n}$. When $p>1$, it converges by the direct comparison test with $\sum_{k=1}^{\infty}\frac{1}{n^2}$. For $p\in(1,2)$, we have that $\frac{1}{x^p}$ is decreasing. Consider 
-\begin{align*}
-\int_{1}^{\infty}\frac{1}{x^p}\,dx&=\lim_{n\to\infty}\frac{1}{(1-p)n^{(p-1)}}-\frac{1}{1-p}\\
-&=\frac{1}{p-1}
-\end{align*}Thus $\int_{1}^{\infty}\frac{1}{x^p}\,dx$ converges and by the integral test, $\sum_{k=1}^{\infty}\frac{1}{n^p}$ converges. 
+Rearranging gives $S_{2m+1}<\frac{1}{1-2^{1-p}}$. Again since the sequence is strictly increasing, we have that $S_n<\frac{1}{1-2^{1-p}}$ for all $n\in\N$. Since $(S_n)_{n\in\N}$ is increasing and bounded above, we conclude that it is convergent. 
 \end{proof}
 \end{thm}
 
@@ -731,6 +555,59 @@ Similarly for the divergence case, choose $$\varepsilon=\frac{r-1}{2}$$ Then the
 \end{proof}
 \end{thm}
 
+\subsection{Euler's Number}
+\begin{lmm}{}{}\\ The infinite sum $$\sum_{k=0}^{\infty}\frac{1}{k!}$$ converges. 
+\begin{proof}\\  For all $n>0$, we have that $n!\geq2^{n-1}$, we have that $\frac{1}{n!}\leq\frac{1}{2^{n-1}}$. Thus we have that $$\sum_{k=0}^{n}\frac{1}{k!}\leq\sum_{k=0}^{n}\frac{1}{2^{k}}$$ $\sum_{k=0}^{n}\frac{1}{2^{k}}$ is a geometric series so it converges then it has an upper bound. By the completeness axiom, we have that the sum converges. 
+\end{proof}
+\end{lmm}
+
+\begin{defn}{Euler's Number}{}\\ Define Euler's number to be $$e=\sum_{k=0}^{\infty}\frac{1}{k!}$$
+\end{defn}
+
+\begin{lmm}{}{}\\ The series $$a_n=\left(1+\frac{1}{n}\right)^n$$ converges. 
+\begin{proof}\\ Consider $\frac{a_{n+1}}{a_n}$. We have that $\frac{a_{n+1}}{a_n}=\left(1+\frac{1}{n+1}\right)\left(1-\frac{1}{(n+1)^2}\right)^n$. Note that since $\frac{-1}{(n+1)^2}>-1$, we can apply the Bernoulli's Inequality can be applied. Then $$\left(1+\frac{1}{n+1}\right)\left(1-\frac{1}{(n+1)^2}\right)^n\geq\left(1+\frac{1}{n+1}\left(1-\frac{n}{(n+1)^2}\right)\right)=1+\frac{1}{(n+1)^3}\geq 1$$ Thus $a_n$ is an increasing sequence. 
+\\~\\ Now note that $\left(1+\frac{1}{2n}\right)^n=\frac{1}{\left(1+\frac{1}{2n+1}\right)^n}$. Since $\frac{-1}{2n+1}>-1$. Thus we can apply Bernoulli's Inequality to have 
+\begin{align*}
+\left(1-\frac{1}{2n+1}\right)^n&\geq1-\frac{n}{2n+1} \\
+\left(1-\frac{1}{2n+1}\right)^n&\geq\frac{n+1}{2n+1} \\
+\frac{2n+1}{n+1}&\geq\frac{1}{\left(1-\frac{1}{2n+1}\right)^n} \\
+2-\frac{1}{n+1}&\geq\left(1+\frac{1}{2n}\right)^n \\
+2&\geq\left(1+\frac{1}{2n}\right)^n \\
+\end{align*}
+Then we have $0\leq a_{2n}\leq 4$, which is bounded. By the completeness axiom, this sequence converges. 
+\end{proof}
+\end{lmm}
+
+\begin{prp}{}{}\\ $$e=\lim_{n\to\infty}\left(1+\frac{1}{n}\right)^n=\sum_{k=0}^{\infty}\frac{1}{k!}$$ 
+\begin{proof}\\ We start by considering the $n$th term of both sequences. From the binomial theorem, we have that
+\begin{align*}
+\left(1+\frac{1}{n}\right)^n&=\sum_{k=0}^{n}\frac{1}{k!}\left(1-\frac{1}{n}\right)\left(1-\frac{2}{n}\right)\cdots\left(1-\frac{k-1}{n}\right)\\
+&\leq\sum_{k=0}^{n}\frac{1}{k!}
+\end{align*} Thus letting $n\to\infty$, we have $$\lim_{n\to\infty}\left(1+\frac{1}{n}\right)^n\leq\sum_{n=0}^{\infty}\frac{1}{n!}$$\\
+However, if $n>m$, $$\left(1+\frac{1}{n}\right)^n=\sum_{k=0}^{m}\frac{1}{k!}\left(1-\frac{1}{n}\right)\left(1-\frac{2}{n}\cdots\left(1-\frac{k-1}{n}\right)\right)$$ Letting $n\to\infty$, we have $e\geq s_m$. Letting $m\to\infty$, we have $e\geq s$. Thus we have $e=\lim_{n\to\infty}\left(1+\frac{1}{n}\right)^n$
+\end{proof}
+\end{prp}
+
+\begin{lmm}{}{}\\ The number $e$ is irrational. 
+\begin{proof}\\ Suppose that $e$ can be written in an irreducible fraction $\frac{p}{q}$. 
+\begin{align*}
+e-\sum_{k=1}^{q+1}\frac{1}{(k-1)!}&=\frac{p}{q}-\left(\frac{1}{0!}+\frac{1}{1!}+\dots+\frac{1}{q!}\right)\\
+&=\frac{p(q-1)!-(q!+q!+\frac{q!}{2}+\dots+1)}{q!}
+\end{align*}
+Then $k=p(q-1)!-(q!+q!+\frac{q!}{2}+\dots+1)\in\N$ and $e-\sum_{k=1}^{q+1}\frac{1}{(k-1)!}=\frac{k}{q!}$. 
+Now consider 
+\begin{align*}
+e-\sum_{k=1}^{q+1}\frac{1}{(k-1)!}&=\sum_{k=0}^{\infty}\frac{1}{k!}-\sum_{k=0}^{q}\frac{1}{k!}\\
+&=\frac{1}{(q+1)!}+\frac{1}{(q+2)!}+\dots\\
+&=\frac{1}{q!}\left(\frac{1}{q+1}+\frac{1}{(q+1)(q+2)}+\dots\right)\\
+&<\frac{1}{q!}\left(\frac{1}{2}+\frac{1}{2}\cdot\frac{1}{2}+\dots\right)\tag{since $q>1$}\\
+&=\frac{1}{q!}\left(\frac{1}{2}+\frac{1}{4}+\dots\right)\\
+&=\frac{1}{q!}\tag{by geometric series}\\
+\end{align*}
+Thus now we have that $\frac{k}{q!}<\frac{1}{q!}$ for some $k\in\N$ which is not possible for any choice of $k$. Thus we have arrived in a contradiction. 
+\end{proof}
+\end{lmm}
+
 \subsection{Alternating Series}
 \begin{defn}{Alternating Series}{}\\ An alternating series is one of the form $$\sum_{k=1}^{\infty}(-1)^{k+1}a_k$$ where $a_n>0$ for all $n\in\N$. 
 \end{defn}
@@ -756,16 +633,16 @@ Thus we have that $\abs{s_n-s}<\varepsilon$ whenever $n>N$ and $(s_n)$ converges
 \end{proof}
 \end{thm}
 
-\begin{lmm}{}{}\\ The alternating harmonic series $$\sum_{k=1}^{\infty}\frac{(-1)^{k+1}}{k}$$ converges. 
+\begin{eg}{}{}\\ The alternating harmonic series $$\sum_{k=1}^{\infty}\frac{(-1)^{k+1}}{k}$$ converges. 
 \begin{proof}\\ Simple application of the alternating series test. 
 \end{proof}
-\end{lmm}
+\end{eg}
 
 \subsection{Absolute Convergence}
 \begin{defn}{Absolute Convergence}{}\\ A series $\sum_{k=0}^\infty a_k$ in $\R$ is said to converge absolutely if $$\sum_{k=0}^\infty\abs{a_k}$$ converges.
 \end{defn}
 
-\begin{thm}{}{}\\ Every absolutely convergent series is convergent.
+\begin{prp}{}{}\\ Every absolutely convergent series is convergent.
 \begin{proof}\\ Consider $s_n=\sum_{k=1}^na_k$ and $t_n=\sum_{k=1}^n\abs{a_n}$. Without loss of generality suppose that $n>m$
 \begin{align*}
 \abs{s_n-s_m}&=\abs{a_n+a_{n-1}+\dots+a_{m+1}}\\
@@ -775,7 +652,7 @@ Thus we have that $\abs{s_n-s}<\varepsilon$ whenever $n>N$ and $(s_n)$ converges
 \end{align*}
 If $(t_n)$ converges then for every $\varepsilon>0$ there exists $N$ such that $\abs{t_n-t_m}<\varepsilon$ for all $n,m>N$. This implies that $\abs{s_n-s_m}<\varepsilon$ thus $s_n$ is convergent. 
 \end{proof}
-\end{thm}
+\end{prp}
 
 \begin{thm}{Ratio Test for Series}{}\\ Suppose $a_n\neq0$ for all $n$ and $\abs{\frac{a_{n+1}}{a_n}}\to l$. Then $\sum_{k=1}^{\infty}a_k$ converges absolutely if $0\leq l<1$ and diverges if $l>1$. 
 \begin{proof}\\
@@ -796,12 +673,12 @@ Now suppose that $l>1$, there exists $N$ $\abs{a_{n+1}}>\abs{a_n}$ for some $n>N
 \begin{defn}{Rearrangement}{}\\ $(b_n)_{n\in\N}$ is a rearrangement of $(a_n)_{n\in\N}$ if there is a bijection $\sigma:\N\to\N$ such that for all $n\in\N$ $b_n=a_{\sigma(n)}$
 \end{defn}
 
-\begin{thm}{}{}\\ Suppose $(b_n)_{n\in\N}$ is a rearrangement of $(a_n)_{n\in\N}$ and $a_n>0$ for all $n$ and $\sum_{k=1}^{\infty}a_k$ converges. Then $\sum_{k=1}^{\infty}b_k$ converges and $$\sum_{k=1}^{\infty}b_k=\sum_{k=1}^{\infty}a_k$$ 
+\begin{prp}{}{}\\ Suppose $(b_n)_{n\in\N}$ is a rearrangement of $(a_n)_{n\in\N}$ and $a_n>0$ for all $n$ and $\sum_{k=1}^{\infty}a_k$ converges. Then $\sum_{k=1}^{\infty}b_k$ converges and $$\sum_{k=1}^{\infty}b_k=\sum_{k=1}^{\infty}a_k$$ 
 \begin{proof}\\ Suppose that $s_n=\sum_{k=1}^{n}a_k$, $\sum_{k=1}^{\infty}a_k=s$ and $t_n=\sum_{k=1}^{n}b_k$. Suppose that $a_{\sigma(n)}=b_n$. Fix $N$ and consider $M_N=\max\{\sigma(r):r\leq N\}$. Then the first $a_{M_n}$ terms contains the first $b_n$ terms. Since $a_n,b_n>0$ for all $n$, we have $t_n<s_{M_N}<s$. Thus $t_n$ is increasing and bounded and converges by the completeness axiom to, say $t$ with $t\leq s$. Reverse the roles of $a_n$ and $b_n$ now given that $t_n$ converges, and we get $s\leq t$. Thus $s=t$. 
 \end{proof}
-\end{thm}
+\end{prp}
 
-\begin{thm}{}{}\\ Suppose $(b_n)_{n\in\N}$ is a rearrangement of $(a_n)_{n\in\N}$ and $\sum_{k=1}^{\infty}a_k$ converges absolutely. Then $\sum_{k=1}^{\infty}b_k$ converges and $\sum_{k=1}^{\infty}b_k=\sum_{k=1}^{\infty}a_k$. 
+\begin{prp}{}{}\\ Suppose $(b_n)_{n\in\N}$ is a rearrangement of $(a_n)_{n\in\N}$ and $\sum_{k=1}^{\infty}a_k$ converges absolutely. Then $\sum_{k=1}^{\infty}b_k$ converges and $\sum_{k=1}^{\infty}b_k=\sum_{k=1}^{\infty}a_k$. 
 \begin{proof}\\
 Let $\sum_{k=1}^{\infty}a_k$ converges absolutely and $\sum_{k=1}^{\infty}b_k$ a rearrangement of the series. Consider $u_n=\frac{1}{2}(\abs{a_n}+a_n)$, $v_n=\frac{1}{2}(\abs{a_n}-a_n)$, $x_n=\frac{1}{2}(\abs{b_n}+b_n)$, $y_n=\frac{1}{2}(\abs{b_n}-b_n)$. We have that $$u_n=\begin{cases}
 a_n & a_n\geq0\\
@@ -818,12 +695,12 @@ b_n & b_n\leq 0
 \end{cases}$$
 We have $\sum_{k=1}^{\infty}u_k\leq\sum_{k=1}^{\infty}\abs{a_k}$ thus $\sum_{k=1}^{\infty}u_k$ is convergent by completeness axiom and $$\sum_{k=1}^{\infty}-v_k\leq\sum_{k=1}^{\infty}\abs{a_k}$$ thus $\sum_{k=1}^{\infty}-v_k$ converges by completeness axiom and $$\sum_{k=1}^{\infty}-v_k=-\sum_{k=1}^{\infty}v_k$$ converges. We have that $\sum_{k=1}^{\infty} u_k=\sum_{k=1}^{\infty} x_k$ and $\sum_{k=1}^{\infty} v_k=\sum_{k=1}^{\infty} y_k$ by construction. Thus $$\sum_{k=1}^{\infty} a_k=\sum_{k=1}^{\infty}(u_k-v_k)=\sum_{k=1}^{\infty}(x_k-y_k)=\sum_{k=1}^{\infty} b_k$$ is convergent. 
 \end{proof}
-\end{thm}
+\end{prp}
 
 \begin{defn}{Conditionally Convergent}{}\\ A series $\sum_{k=1}^{\infty}a_k$ is said to be conditionally convergent if $\sum_{k=1}^{\infty}a_k$ is convergent but $$\sum_{k=1}^{\infty}\abs{a_k}$$ diverges. 
 \end{defn}
 
-\begin{thm}{}{}\\ Suppose $\sum_{k=1}^{\infty}a_k$ is conditionally convergent. Consider $\sum_{k=1}^{\infty}u_k$ and $\sum_{k=1}^{\infty}v_k$ where $$u_n=\begin{cases}
+\begin{prp}{}{}\\ Suppose $\sum_{k=1}^{\infty}a_k$ is conditionally convergent. Consider $\sum_{k=1}^{\infty}u_k$ and $\sum_{k=1}^{\infty}v_k$ where $$u_n=\begin{cases}
 a_n & \text{if $a_n\geq0$} \\
 0 & \text{if $a_n<0$}
 \end{cases}$$
@@ -836,9 +713,9 @@ Then $\sum_{k=1}^{\infty}u_k=+\infty$ and $\sum_{k=1}^{\infty}v_k=-\infty$.
 \begin{proof}\\
 Note that $a_n=u_n-v_n$ and $\abs{a_n}=u_n+v_n$. Suppose for contradiction that $\sum u_n$ converges. Then $\abs{a_n}=2u_n-a_n$ and thus $\sum\abs{a_n}$ converges, a contradiction. Suppose also that $\sum v_n$ converges. Then again $\abs{a_n}=2v_n+a_n$ and thus $\sum\abs{a_n}$ converges, a contradiction. Thus we have $\sum u_n$ and $\sum v_n$ diverges. Since $u_n\geq 0$ and $v_n\leq 0$ for all n, we have that $\sum u_n=\infty$ and $\sum v_n=-\infty$. 
 \end{proof}
-\end{thm}
+\end{prp}
 
-\begin{thm}{}{}\\ Suppose $\sum_{k=1}^{\infty}a_k$ is conditionally convergent. Then for every $l\in\R$ there exists a rearrangement $(b_n)$ of $(a_n)$ such that $\sum_{k=1}^{\infty}b_k=l$. 
+\begin{thm}{Riemann's Rearrangement Theorem}{}\\ Suppose $\sum_{k=1}^{\infty}a_k$ is conditionally convergent. Then for every $l\in\R$ there exists a rearrangement $(b_n)$ of $(a_n)$ such that $\sum_{k=1}^{\infty}b_k=l$. 
 \begin{proof}\\
 Let $(p_n)$ be the subsequence of all positive terms of $(a_n)$ and $(q_n)$ all its negative terms. We have that $(p_n)\to+\infty$ and $(q_n)\to-\infty$. Consider $l\geq0$. There exists $N_1$ such that $S_1=\sum_{k=1}^{N_1}a_k<l$ and $S_1+a_{N_1+1}>l$. Then since $(q_n)\to-\infty$. There exists $M_1$ such that $T_1=S_1+\sum_{k=1}^{M_1}q_k<l$ but $S_1+\sum_{k=1}^{M_1-1}q_k>l$. Repeat the process to find the rearrangement of our sequence $$p_1,\dots,p_{N_1},q_1,\dots,q_{M_1},p_{N_1+1},\dots,p_{N_2},q_{M_1+1},\dots,q_{M_2},\dots$$
 Its partial sums converges since $\abs{S_i-l}\leq p_{N_i}$ and $\abs{T_i-l}\leq -q_{M_i}$ for all $i$ and $p_{N_i}$ and $q_{M_i}$ tends to $0$ since $a_n$ is null. Swap the roles of $q_n$ and $p_n$ for the case $l<0$. 
@@ -1252,6 +1129,18 @@ Thus we have $L\leq\sup_P\{L(f,P)\}$. Similarly we have $L\geq\inf_P\{U(f,P)\}$.
 \end{proof}
 \end{thm}
 
+\begin{eg}{}{}\\ Define $$f(x)=\begin{cases}
+\frac{1}{q} & \text{if } x=\frac{p}{q} \text{ where } p,q\in\N \text{ and } \gcd(p,q)=1\\
+0 & \text{otherwise }
+\end{cases}$$ for $x\in[0,1]$. Then $f$ is integrable. This example show that non-continuous functions can be integrable. 
+\end{eg}
+
+\begin{eg}{}{}\\ Define $$f(x)=\begin{cases}
+\frac{1}{q} & \text{if } x=\frac{p}{q} \text{ where } p,q\in\N \text{ and } \gcd(p,q)=1\\
+0 & \text{otherwise }
+\end{cases}$$ for $x\in[0,1]$. Also define $g(x)=1-f(x)$.  Then $f(x)+g(x)$ is integrable and $$\inf_{P}\{U(f+g,P)\}\leq\inf_{P}\{U(f,P)\}+\inf_{P}\{U(g,P)\}$$ and $$\sup_{P}\{L(f+g,P)\}\geq\sup_{P}\{L(f,P)\}+\sup_{P}\{L(g,P)\}$$ This example shows the upper and lower riemann sums of functions are not necessarily linear. 
+\end{eg}
+
 \subsection{Properties of the Riemann Integral}
 This section gives us instant knowledge on whether a function is integrable, once we also have integrability of the basic functions. \\~\\
 We start the section with two sufficient and powerful conditions for integrability. 
@@ -1456,6 +1345,18 @@ Similarly, we have that for every $\varepsilon>0$, there exists $N$ such that $R
 \end{proof}
 \end{thm}
 
+\subsection{The Integral Test for Series}
+In this section here we suppose that the techniques and origins of integration is already properly introduced, it would be weird to add the integral test to the section of integration since it is developed for testing series convergence. 
+\begin{thm}{Integral Bounds}{}\\ Let $f$ be decreasing and non-negative and integrable on the interval $[1,\infty)$. Then $$\int_{m+1}^{n+1}f(x)\,dx\leq\sum_{k=m+1}^{n+1}f(k)\leq\int_{m}^{n}f(x)\,dx$$ 
+\begin{proof}\\ The inequality is obtained through drawing the graph of a decreasing function $f$ and estimating the area of the curve with rectangles of width $1$. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{Integral Test}{}\\ Let $f$ be decreasing and non-negative and integrable on the interval $[1,\infty)$. Then $s_n=\sum_{k=1}^{n}f(k)$ converges if and only if $\int_{1}^{\infty}f(x)\,dx$ converges. 
+\begin{proof}\\ From the integral bounds, we have $$\sum_{k=0}^{\infty}f(k)\leq\int_{1}^{\infty}f(x)\,dx$$ Thus when the integral is converges, the increasing sum is bounded. Thus by the monotone convergence theorem, the $\sum_{k=0}^{\infty}$ converges. When the integral diverges, then $$\int_{0}^{\infty}f(x)\,dx\leq\sum_{k=0}^{\infty}f(k)$$ also diverges by the comparison test. 
+\end{proof}
+\end{thm}
+
 \pagebreak
 \section{Sequences and Series of Functions}
 \subsection{Uniform Convergence}
@@ -1464,6 +1365,11 @@ Similarly, we have that for every $\varepsilon>0$, there exists $N$ such that $R
 
 \begin{defn}{Uniform Convergence}{}\\ We say that $(f_n)_{n\in\N}$ converges uniformly on $I$ to a function $f$ if for every $\varepsilon>0$ there is an integer $N$ such that $n>N$ implies $$\abs{f_n(x)-f(x)}<\varepsilon$$ for all $x\in I$. 
 \end{defn}
+\begin{eg}{}{}\\ Define $$f_n(x)=\frac{x}{n}$$ for $n\in\N$. The sequence $(f_n)_{n\in\N}$ is not uniformly convergent. 
+\end{eg}
+
+\begin{eg}{}{}\\ Define $$f_n(x)=\frac{x}{1+x^n}$$ for $n\in\N$. The sequence $(f_n)_{n\in\N}$ is not uniformly convergent. 
+\end{eg}
 
 \begin{crl}{}{}\\ Uniform convergence implies pointwise convergence. 
 \begin{proof}\\ Suppose that $(f_n)_{n\in\N}$ is uniformly convergent to $f$. Then in particular fix any $x$ in its domain, its epsilon-delta definition of convergence on $x$ is precisely the definition of pointwise convergence. 
@@ -1528,6 +1434,17 @@ which goes to $0$ as $n\to\infty$ by the uniform convergence of $f_n$ to $f$.
 \end{proof}
 \end{thm}
 
+\begin{eg}{}{}\\ Define $$f_n(x)=\begin{cases}
+n & \text{if }0\leq x\leq\frac{1}{n}\\
+0 & \text{otherwise }
+\end{cases}$$ for $n\in\N\setminus\{0\}$. The the following are true. 
+\begin{itemize}
+\item The sequence $(f_n)_{n\in\N\setminus\{0\}}$ is not uniformly convergent. 
+\item $\lim_{n\to\infty}\int_0^1f_n(x)\neq\int_0^1\lim_{n\to\infty}f_n(x)$. 
+\end{itemize}
+This example show that without uniform convergence, the limit and the integration opeartor cannot be interchanged. 
+\end{eg}
+
 \subsection{Uniform Convergence and Differentiability}
 \begin{thm}{}{}\\ Suppose $(f_n)_{n\in\N}\subset C^1([a,b])$ and it is pointwise convergent to $f$. If $(f_n')_{n\in\N}$ converges uniformly on $[a,b]$, then $f\in C^1([a,b])$ and $(f_n')_{n\in\N}$ in fact converges uniformly to $f'$. In other words, we have $$\lim_{n\to\infty}\left(\frac{d}{dx}f_n(x)\right)=\frac{d}{dx}\left(\lim_{n\to\infty}f_n(x)\right)$$ 
 \begin{proof}\\ Suppose that $f_n'$ converges uniformly to $g$. By 7.3.1, we have that $$\int_a^xg(t)\,dt=\int_a^x\lim_{n\to\infty}f_n'(t)\,dt=\lim_{n\to\infty}\int_a^xf_n'(t)\,dt$$
@@ -1537,6 +1454,24 @@ Now since $\{f_n\}$ is continuous thus $g$ is continuous. By the above, we also 
 \end{thm}
 
 An easy way to remember this is $(f_n)_{n\in\N}$ pointwise convergent, $(f_n')_{n\in\N}$ are all continuous and converges uniformly, we can exchange the order of differentiation and limit. 
+
+\begin{eg}{}{}\\ Define $$f_n(x)=\sqrt{x^2+\frac{1}{n}}$$ for $n\in\N\setminus\{0\}$. Then the following are true. 
+\begin{itemize}
+\item $f_n$ is continuously differentiable. 
+\item $(f_n)_{n\in\N\setminus\{0\}}$ converges uniformly to $\abs{x}$. 
+\item $\lim_{n\to\infty}\frac{d}{dx}f_n(x)\neq\frac{d}{dx}\lim_{n\to\infty}f_n(x)$. 
+\end{itemize}
+This example show that without uniform convergence of the derivatives of $f_n(x)$, the limit and the differentiation opeartor cannot be interchanged. 
+\end{eg}
+
+\begin{eg}{}{}\\ Define $$f_n(x)=\frac{1}{n}\sin(n^2x)$$ for $n\in\N$. Then the following are true. 
+\begin{itemize}
+\item $f_n$ is continuously differentiable. 
+\item $(f_n)_{n\in\N\setminus\{0\}}$ converges uniformly. 
+\item $\lim_{n\to\infty}\frac{d}{dx}f_n(x)\neq\frac{d}{dx}\lim_{n\to\infty}f_n(x)$. 
+\end{itemize}
+This example show that without uniform convergence of the derivatives of $f_n(x)$, the limit and the differentiation opeartor cannot be interchanged. 
+\end{eg}
 
 \subsection{Series of Functions}
 \begin{defn}{Pointwise Convergence of Series of Functions}{}\\ Let $(f_k)_{k\in\N}$ be a sequence of functions $f_k:[a,b]\to\R$. Define $$S_n(x)=\sum_{k=1}^nf_k(x)$$ Then the series converges pointwise to $S:[a,b]\to\R$ if $S_n\to S$ pointwise. 
@@ -1599,7 +1534,7 @@ We treat the case of when $c=0$ so that the power series is centered at $0$. The
 \end{proof}
 \end{thm}
 
-\begin{thm}{Continuity of Power Series}{}\\ Let $\sum_{k=0}^{\infty}a_kx^k$ with radius of convergence $R$. Then the function $f(x)=\sum_{k=0}^{\infty}a_kx^k$ is continuous on the interval $(-R,R)$. 
+\begin{prp}{Continuity of Power Series}{}\\ Let $\sum_{k=0}^{\infty}a_kx^k$ with radius of convergence $R$. Then the function $f(x)=\sum_{k=0}^{\infty}a_kx^k$ is continuous on the interval $(-R,R)$. 
 \begin{proof}\\ Suppose $\abs{x}<R$. We show that the function is continuous at $x$. Let $T$ such that $\abs{x}<T<R$. Then $\sum_{k=0}^\infty\abs{a_k}T^k$ converges, so for every $\varepsilon>0$ there is some number $N$ such that $$\sum_{k=N+1}^\infty\abs{a_k}T^k<\frac{\varepsilon}{3}$$ Let $y$ such that $\abs{y-x}<T-\abs{x}$. Then we will have $\abs{y}<T$ and $\abs{x}<T$. Hence $$\sum_{k=N+1}^\infty\abs{a_k}\abs{x}^k<\frac{\varepsilon}{3}$$ and $$\sum_{k=N+1}^\infty\abs{a_k}\abs{y}^k<\frac{\varepsilon}{3}$$ The partial sum $$\sum_{k=0}^Na_ky^k$$ is a polynomial thus is continuous. There exists some $\delta_0>0$ such that $\abs{y-x}<\delta_0$ implies $$\abs{\sum_{k=0}^Na_ky^k-\sum_{k=0}^Na_kx^k}<\frac{\varepsilon}{3}$$ Choose $\delta=\min(\delta_0,T-\abs{x})$. Then we have that $\abs{y-x}<\delta$ we get 
 \begin{align*}
 \abs{\sum_{k=0}^\infty a_ky^k-\sum_{k=0}^\infty a_kx^k}&\leq\abs{\sum_{k=N+1}^\infty a_ky^k}+\abs{\sum_{k=0}^Na_ky^k-\sum_{k=0}^Na_kx^k}+\abs{\sum_{k=N+1}^\infty a_kx^k}\\
@@ -1607,9 +1542,9 @@ We treat the case of when $c=0$ so that the power series is centered at $0$. The
 &=\varepsilon
 \end{align*}
 \end{proof}
-\end{thm}
+\end{prp}
 
-\begin{prp}{}{}\\ Let $\sum_{k=0}^\infty a_kx^k$ be a power series with radius of convergence $R$. Then $f$ is differentiable on $(-R,R)$ and $$f'(x)=\sum_{k=1}^\infty ka_kx^{k-1}$$ 
+\begin{prp}{Differentiability of Power Series}{}\\ Let $\sum_{k=0}^\infty a_kx^k$ be a power series with radius of convergence $R$. Then $f$ is differentiable on $(-R,R)$ and $$f'(x)=\sum_{k=1}^\infty ka_kx^{k-1}$$ 
 \begin{proof}\\ We first show that $\sum_{k=1}^\infty ka_kx^{k-1}$ has the same radius of convergence. We have that $\sum_{k=0}^\infty \abs{a_k}x^k$ has the same radius of convergence. Choose $x$ and $y$ such that $x<y<R$. Then $\sum_{k=0}^\infty a_kx^k$ and $\sum_{k=0}^\infty a_ky^k$ converges. 
 \begin{align*}
 \sum_{k=1}^\infty ka_kx^{k-1}&<\sum_{k=1}^\infty\abs{a_k}(y^{k-1}+y^{k-2}x+\dots+x^{k-1})\\
@@ -1684,23 +1619,123 @@ Thus we are done.
 \end{proof}
 \end{thm}
 
-\subsection{The Exponential Series}
-Now that we have explored most of the theorems in power series, we will give a through investigation on the exponential function and the logarithm function. \\~\\
-We begin by recalling the definition of the exponential function. 
-\begin{defn}{The Exponential Function}{}\\ Let $x\in\R$. The series $$e^x=\sum_{k=0}^\infty \frac{x^k}{k!}$$ is called the exponential series
+\subsection{The Trigonometric Series}
+\begin{defn}{Sine and Cosine}{}\\
+Define the sine function $\sin:\R\to\R$ to be the power series $$\sin(x)=\sum_{k=0}^\infty\frac{(-1)^kx^{2k+1}}{(2k+1)!}$$ Define the cosine function $\cos:\R\to\R$ to be the power series $$\cos(x)=\sum_{k=0}^\infty\frac{(-1)^kx^{2k}}{(2k)!}$$
 \end{defn}
 
-\begin{thm}{}{}\\ $f(x)=e^x$ is continuous for $x\in R$. 
-\begin{proof}\\ Power series are continuous. 
-\end{proof}
-\end{thm}
-
-\begin{thm}{Property of the Exponential}{}\\ Let $x,y\in\R$. Then 
+\begin{lmm}{}{}\\
+The following are true regarding sine and cosine. 
 \begin{itemize}
-\item $e^{x+y}=e^xe^y$
-\item $e^x\geq 1+x$ for all $x$
-\item $e^x\leq\frac{1}{1-x}$ for all $x<1$
-\item $e^x$ is strictly increasing
+\item The radius of convergence of $\sin$ and $\cos$ is $\infty$. 
+\item $\frac{d}{dx}\sin(x)=\cos(x)$. 
+\item $\frac{d}{dx}\cos(x)=-\sin(x)$. 
+\end{itemize}
+\end{lmm}
+
+\begin{lmm}{}{}\\
+The following are true regarding sine and cosine. 
+\begin{itemize}
+\item Pythagorean Identity: $\sin^2(x)+\cos^2(x)=1$ for all $x\in\R$. 
+\item Addition law for sine: $\sin(x+y)=\sin(x)\cos(y)+\cos(x)\sin(y)$ for all $x,y\in\R$. 
+\item Addition law for cosine: $\cos(x+y)=\cos(x)\cos(y)-\sin(x)\sin(y)$ for all $x,y\in\R$. 
+\end{itemize}
+\begin{proof}\\
+Let $f(x)=\sin^2(x)+\cos^2(x)$. Then $f'(x)=2\sin(x)\cos(x)-2\cos(x)\sin(x)=0$. Hence $f(x)=k$ for some constant $k\in\R$. Then $k=f(0)=\sin^2(0)+\cos^2(0)=1$. \\
+
+Let $y\in\R$ be fixed. Define $$g(x)=\sin(x+y)-\left(\sin(x)\cos(y)+\cos(x)\sin(y)\right)$$ and $$h(x)=\cos(x+y)-\left(\cos(x)\cos(y)-\sin(x)\sin(y)\right)$$ Then we compute that $$g'(x)=\cos(x+y)-\left(\cos(x)\cos(y)-\sin(x)\sin(y)\right)=h(x)$$ and $$h'(x)=-\sin(x+y)-\left(-\sin(x)\cos(y)-\cos(x)\sin(y)\right)=-g(x)$$ Let $S(x)=g^2(x)+h^2(x)$. Then we have 
+\begin{align*}
+S'(x)&=2g(x)g'(x)+2h(x)h'(x)\\
+&=2g(x)h(x)-2h(x)g(x)\\
+&=0
+\end{align*}
+Hence $S(x)=k$ for some constant $k\in\R$. Now since $g(0)=h(0)=0$, we have $S(0)=0$ hence $g^2(x)+h^2(x)=S(x)=0$ for all $x\in\R$. Since $g^2$ and $h^2$ are non-negative, we must have $g=0$ and $h=0$, hence the addition laws follows. 
+\end{proof}
+\end{lmm}
+
+\begin{prp}{}{}\\
+There exists $x>0$ such that $\cos(x)=0$. 
+\begin{proof}\\
+By definition of cosine, we have $\cos(1)=\sum_{k=0}^\infty\frac{(-1)^k}{(2k)!}$. I claim that $\frac{1}{2}<\cos(1)<\frac{13}{24}$. Let $S_n=\sum_{k=0}^n\frac{(-1)^k}{(2k)!}$. I prove that $S_n>1/2$ for all $n\geq1$. We proceed by induction. The base case is clear. Now suppose that $S_i>1/2$ for all $1\leq i\leq n$. If $n$ is odd, then $S_{n+1}-S_n=\frac{(-1)^{n+1}}{(2n+2)!}>0$. Hence $S_{n+1}>S_n>1/2$. If $n$ is even, then notice that $S_{n+1}=S_{n-1}+\frac{(-1)^n}{(2n)!}+\frac{(-1)^{n+1}}{(2n+2)!}$ and $\frac{(-1)^n}{(2n)!}>\frac{(-1)^{n+1}}{(2n+2)!}$ implies that $S_{n+1}>S_{n-1}>1/2$. Thus the induction is complete. Since $(S_n)_{n\in\N}\to\cos(1)$ and $S_n>1/2$ for $n\geq 1$, we must have $\cos(1)>1/2$. \\
+
+By a similar argument, we use induction to show that $S_n<S_3=\frac{13}{24}$ so that $\cos(1)<\frac{13}{24}$. \\
+
+By the addition law for cosine, we have $$\cos(2)=\cos(1+1)=\cos^2(1)-\sin^2(1)=\cos^2(1)-1+\cos^2(1)=2\cos^2(1)-1<2\cdot\frac{169}{576}-1<0$$ By the IVT, we conclude that $\cos(x)=0$ has a solution between $1$ and $2$. 
+\end{proof}
+\end{prp}
+
+\begin{defn}{The Constant $\pi$}{}\\
+Define the constant $\pi$ to be the smallest positive real number such that $\cos\left(\frac{\pi}{2}\right)=0$. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+The following are true regarding the values of sine and cosine. 
+\begin{center}
+\begin{tabular}{c|c|c|c|c|c}
+ & $x=0$ & $x=\frac{\pi}{2}$ & $x=\pi$ & $x=\frac{3\pi}{2}$ & $x=2\pi$ \\ \hline
+$\sin(x)$ & $0$ & $1$ & $0$ & $-1$ & $0$ \\
+$\cos(x)$ & $1$ & $0$ & $-1$ & $0$ & $1$
+\end{tabular}
+\end{center}
+\begin{proof}\\
+Clearly $\sin(0)=0$ and $\cos(0)=1$ by definition of sine and cosine. \\
+
+By the Pythagorean identity, we have $\sin^2(\pi/2)=1$, and so $\sin(\pi/2)=\pm1$. Now since $\pi/2$ is the smallest positive root of $\cos(x)$, we must have that $\cos(x)>0$ for $0<x<\pi/2$. Hence $\frac{d}{dx}\sin(x)>0$ for $0<x<\pi/2$. This proves that $\sin(x)$ is strictly increasing for $0<x<\pi/2$. Since $\sin(0)=0$, we must have $\sin(\pi/2)=1$. \\
+
+By the addition law for sine, we have $\sin(\pi)=\sin\left(\frac{\pi}{2}+\frac{\pi}{2}\right)=2\sin(\pi/2)\cos(\pi/2)=0$. Similarly, we have $\cos(\pi)=\cos^2(\pi/2)-\sin^2(\pi/2)=-1$. \\
+
+By the addition law for sine, we have $\sin(3\pi/2)=\sin(\pi+\pi/2)=\sin(\pi)\cos(\pi/2)+\cos(\pi)\sin(\pi/2)=-1$. Similarly, we have $\cos(3\pi/2)=\cos(\pi+\pi/2)=\cos(\pi)\cos(\pi/2)-\sin(\pi)\sin(\pi/2)=0$. \\
+
+Finally, we have $\sin(2\pi)=2\sin(\pi)\cos(\pi)=0$ and $\cos(2\pi)=\cos^2(\pi)-\sin^2(\pi)=1$. 
+\end{proof}
+\end{lmm}
+
+\begin{prp}{}{}\\
+The following are true regarding sine and cosine. 
+\begin{itemize}
+\item $\sin(x+2\pi)=\sin(x)$ for all $x\in\R$. 
+\item $\cos(x+2\pi)=\cos(x)$ for all $x\in\R$. 
+\item $\sin\left(x+\frac{\pi}{2}\right)=\cos(x)$ for all $x\in\R$. 
+\end{itemize}
+\begin{proof}\\
+By the addition law for sine, we have $\sin(x+2\pi)=\sin(x)\cos(2\pi)+\cos(x)\sin(2\pi)=\sin(x)$. Similarly, we have $\cos(x+2\pi)=\cos(x)\cos(2\pi)-\sin(x)\sin(2\pi)=\cos(x)$. \\
+
+By the addition law for sine, we have $\sin(x+\pi/2)=\sin(x)\cos(\pi/2)+\cos(x)\sin(\pi/2)=\cos(x)$. 
+\end{proof}
+\end{prp}
+
+\begin{crl}{}{}\\
+The following are true regarding sine and cosine. 
+\begin{itemize}
+\item $\sin(x)$ is strictly increasing in $[0,\pi/2)\cup[3\pi/2,2\pi)$ and strictly decreasing in $[\pi/2,3\pi/2)$. 
+\item $\cos(x)$ is strictly increasing in $[\pi,2\pi)$ and strictly decreasing in $[0,\pi)$. 
+\end{itemize}
+\begin{proof}\\
+We have seen that $\cos(x)>0$ for $x\in[0,\pi/2)$. Then $\frac{d}{dx}\sin(x)=\cos(x)$ implies that $\sin(x)$ is strictly increasing in $[0,\pi/2)$. Since $\sin(x+\pi/2)=\cos(x)$ and $\sin(x)$ is $2\pi$-periodic, we have that $\cos(x)$ is strictly increasing in $[3\pi/2,2\pi)$. Since $\sin(0)=0$, we must have $\sin(x)>0$ for $[0,\pi/2)$ so that $-\cos(x)$ is strictly increasing in that interval, and so $\cos(x)$ is strictly decreasing in that interval. Again since $\sin(x+\pi/2)=\cos(x)$, we conclude that $\sin(x)$ is strictly increasing in $[3\pi/2,2\pi)$. \\
+
+Since $\sin(x+\pi/2)=\cos(x)$ and $\cos(x)$ is strictly decreasing in $[0,\pi/2)$, we must have that $\sin(x)$ is strictly decreasing in $[\pi/2,\pi)$. Since $\sin(\pi)=0$, we must have that $\sin(x)>0$ in that interval. Therefore $-\cos(x)$ is strictly decreasing in that interval, and that $\cos(x)$ is strictly increasing in that interval. Then $\sin(x+\pi/2)=\cos(x)$ implies that $\sin(x)$ is strictly increasing in $[\pi,3\pi/2)$. Since $\sin(3\pi/2)=0$, we must have $\sin(x)<0$ in $[\pi,3\pi/2)$. Therefore $-\cos(x)$ is decreasing, and finally that $\cos(x)$ is increasing in that interval. 
+\end{proof}
+\end{crl}
+
+More work remains to prove that $\pi$ is equal to the ratio of circumference to diameter, as known classically. 
+
+\subsection{The Exponential Series}
+\begin{lmm}{}{}\\
+For all $x\in\R$, the series $\sum_{k=0}^\infty\frac{x^k}{k!}$ converges. 
+\end{lmm}
+
+\begin{defn}{The Exponential Function}{}\\
+Defining the exponential function $e^x:\R\to\R$ by $$e^x=\sum_{k=0}^\infty\frac{x^k}{k!}$$
+\end{defn}
+
+\begin{prp}{Property of the Exponential}{}\\
+The following are true regarding the exponential function. 
+\begin{itemize}
+\item $e^{x+y}=e^xe^y$ for all $x,y\in\R$. 
+\item $e^x\geq 1+x$ for all $x$. 
+\item $e^x\leq\frac{1}{1-x}$ for all $x<1$. 
+\item $e^x$ is strictly increasing. 
+\item $\frac{d}{dx}e^x=e^x$. 
 \end{itemize}
 \begin{proof}\\ Let $x,y\in\R$. 
 \begin{itemize}
@@ -1721,21 +1756,10 @@ e^y&=e^{y-x}e^x\\
 &\geq(1+y-x)e^x\\
 &>e^x
 \end{align*}
+\item Clearly differentiating $e^x$ term by term gives $e^x$. 
 \end{itemize}
 \end{proof}
-\end{thm}
-
-\begin{thm}{}{}\\ $f(x)=e^x$ is differentiable for $x\in R$ and the derivative is $$f'(x)=e^x$$ 
-\begin{proof}\\ Power series are differentiable and differentiating the power series for $e^x$ gives $e^x$. 
-\end{proof}
-\end{thm}
-
-\begin{thm}{}{}\\ The inverse of $e^x$ exists. 
-\begin{proof}\\ It suffices to show that $e^x$ is injective. Since it is strictly increasing, it must be increasing. Since the range of $e^x$ is $(0,\infty)$, the domain of the inverse is $(0,\infty)$
-\end{proof}
-\end{thm}
-
-This theorem allows us to define properly the inverse of the exponetial function, namely the logarithm. We will also show that the logarithm is also a power series. 
+\end{prp}
 
 \begin{defn}{The Logarithm}{}\\ Define the logarithm function as the inverse of $e^x$ as $\ln(x)$. 
 \end{defn}
@@ -1750,7 +1774,8 @@ This theorem allows us to define properly the inverse of the exponetial function
 
 Be cautious that the taylor series is only defined for $x\in[-1,1)$. Outside of the interval, the power series will diverge. With that in mind, we will complete the chapter by defining real exponents. This is defined through both the exponential function and the logarithm. 
 
-\begin{defn}{Real Exponents}{}\\ If $x>0$ and $p\in\R$ define $$x^p=e^{p\ln(x)}$$
+\begin{defn}{Real Exponents}{}\\
+Let $x\in\R$ and $p\in\R$. Define the $x$ to the power $p$ to be the real number $$x^p=e^{p\ln(x)}$$
 \end{defn}
 
 \begin{thm}{Law of Exponents}{}\\ Let $x>0$ and $p,q\in\R$. 
@@ -1762,40 +1787,4 @@ Be cautious that the taylor series is only defined for $x\in[-1,1)$. Outside of 
 \end{proof}
 \end{thm}
 
-\pagebreak
-\section{Examples}
-\subsection{Integrable Functions}
-\begin{eg}{}{}\\ Define $$f(x)=\begin{cases}
-\frac{1}{q} & \text{if } x=\frac{p}{q} \text{ where } p,q\in\N \text{ and } \gcd(p,q)=1\\
-0 & \text{otherwise }
-\end{cases}$$ for $x\in[0,1]$. Then $f$ is integrable. This example show that non-continuous functions can be integrable. 
-\end{eg}
-
-\begin{eg}{}{}\\ Define $$f(x)=\begin{cases}
-\frac{1}{q} & \text{if } x=\frac{p}{q} \text{ where } p,q\in\N \text{ and } \gcd(p,q)=1\\
-0 & \text{otherwise }
-\end{cases}$$ for $x\in[0,1]$. Also define $g(x)=1-f(x)$.  Then $f(x)+g(x)$ is integrable and $$\inf_{P}\{U(f+g,P)\}\leq\inf_{P}\{U(f,P)\}+\inf_{P}\{U(g,P)\}$$ and $$\sup_{P}\{L(f+g,P)\}\geq\sup_{P}\{L(f,P)\}+\sup_{P}\{L(g,P)\}$$ This example shows the upper and lower riemann integrals of functions are not necessarily linear. 
-\end{eg}
-
-\subsection{Uniform Convergence}
-\begin{eg}{}{}\\ Define $$f_n(x)=\frac{x}{n}$$ for $n\in\N$. The sequence $(f_n)_{n\in\N}$ is not uniformly convergent. 
-\end{eg}
-
-\begin{eg}{}{}\\ Define $$f_n(x)=\frac{x}{1+x^n}$$ for $n\in\N$. The sequence $(f_n)_{n\in\N}$ is not uniformly convergent. 
-\end{eg}
-
-\begin{eg}{}{}\\ Define $$f_n(x)=\begin{cases}
-n & \text{if }0\leq x\leq\frac{1}{n}\\
-0 & \text{otherwise }
-\end{cases}$$ for $n\in\N$. The sequence $(f_n)_{n\in\N}$ is not uniformly convergent. \\~\\
-This example show that without uniform convergence, the limit and the integration opeartor cannot be interchanged. 
-\end{eg}
-
-\begin{eg}{}{}\\ Define $$f_n(x)=\sqrt{x^2+\frac{1}{n}}$$ for $n\in\N$. The sequence $(f_n)_{n\in\N}$ is continuously differentiable. It also converges uniformly to $f(x)=\abs{x}$. \\~\\
-This example show that without uniform convergence of the derivatives of $f_n(x)$, the limit and the differentiation opeartor cannot be interchanged. 
-\end{eg}
-
-\begin{eg}{}{}\\ Define $$f_n(x)=\frac{1}{n}\sin(n^2x)$$ for $n\in\N$. The sequence $(f_n)_{n\in\N}$ is continuously differentiable. It also converges uniformly. \\~\\
-This example show that without uniform convergence of the derivatives of $f_n(x)$, the limit and the differentiation opeartor cannot be interchanged. 
-\end{eg}
 \end{document}

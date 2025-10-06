@@ -15,13 +15,7 @@
 \date{\today}
 \begin{document}
 \maketitle
-\begin{abstract}
-Linear algebra is at the heart of mathematics. Almost all areas of mathematics make some use of the notion of vector spaces and its properties. It began with the study of systems of linear equations. \\
 
-Nowadays as we understand vector spaces independently from systems of linear equations, we will also treat the material differently. The first three chapter begins with the basis definitions: vector spaces and the maps between them called linear maps. Eigenvalues and eigenspaces will be an important invariant for vector spaces. Together with the aid of matrices, we will have a good grasp of how to write a given vector space in a simpler form. Chapter 4 will then improve on the further simplifying a given matrix so that we can read information from each easily. \\
-
-The rest of the chapters will focus on particular properties of vector spaces and linear maps. They each correspond to an important class of matrices. For examples, quadratic form corresponds to matrices equivalent up to congruency while orthogonality of basis vectors give orthogonal matrices. 
-\end{abstract}
 \pagebreak
 \tableofcontents
 \pagebreak
@@ -795,7 +789,8 @@ Explicitly, the vector space operations are defined as follows.
 \pagebreak
 \section{Linearity in Two Variables}
 \subsection{Quadratic Forms}
-\begin{defn}{Quadratic Forms}{} A quadratic form in $n$ variables $x_1,\dots,x_n$ over a field $K$ is a polynomial $$q(x_1,\dots,x_n)=\sum_{i=1}^n\sum_{j=1}^na_{ij}x_ix_j$$
+\begin{defn}{Quadratic Forms}{}\\
+Let $\F$ be a field. Let $q:\F^n\to\F$ be a function. We say that $q$ is a quadratic form if there exists a basis $b_1,\dots,b_n$ of $\F^n$ such that $$q\left(\sum_{i=1}^nx_ib_i\right)=\sum_{i=1}^n\sum_{j=1}^na_{ij}x_ix_j$$ for some $a_{ij}\in\F$. 
 \end{defn}
 
 \begin{prp}{}{} Every quadratic form $q(x_1,\dots,x_n)=\sum_{i=1}^n\sum_{j=1}^na_{ij}x_ix_j$ can be represented by a matrix multiplication, namely $$q(x_1,\dots,x_n)=\begin{pmatrix}x_1 & \cdots & x_n\end{pmatrix}\begin{pmatrix}a_{11} & \frac{1}{2}a_{12} & \cdots & \frac{1}{2}a_{1n}\\
@@ -819,43 +814,35 @@ Multiplying out the entries of the matrix multiplication gives the original quad
 
 Using this we can establish a one-to-one correspondence $$\left\{q:\F^n\to\F\;|\;q\text{ is a quadratic form}\right\}\;\;\overset{1:1}{\longleftrightarrow}\;\;\frac{\left\{M\in M_{n\times n}(\F)\;|\;M\text{ is symmetric}\right\}}{\cong}$$ where $\cong$ denotes the congruence relation. Moreover, within each congruence class of a quadratic form $q$ contains all possible symmetric matrices that represent $q$ in all possible bases. 
 
-\begin{thm}{}{} Let $q(x_1,\dots,x_n)$ be a quadratic form in $n$ variables over a field $K$ whose characteristic is not $2$. Then there exists a basis such that $q(y_1,\dots,y_n)=c_1y_1^2+\dots+c_ny_n^2$ for some $c_1,\dots,c_n\in K$. 
-\begin{proof}
-There is a shorter proof for this theorem, but for the sake of the construction of $c_1,\dots,c_n$, we will prove the theorem constructively. Suppose that $q$ is represented by the symmetric matrix $A=(a_{ij})_{n\times n}$ with respect to the basis $b_1,\dots,b_n$. There are three steps in the construction. I use $b_1,\dots,b_n$ to indicate the old basis and $b_1',\dots,b_n'$ to indicate the basis after the step. \\
-Step 1: Arrange such that $q(b_1)\neq 0$. There are four cases here. 
-\begin{itemize}
-\item If $a_{11}\neq 0$, then we are done. 
-\item If $a_{11}=0$ but $a_{kk}\neq 0$ for some $1<k\leq n$. Then just set $b_1'=b_k$ and $b_k'=b_1$. At the same time, the matrix for the quadratic form is changed by swapping rows $r_1$ and $r_k$, and then swapping the columns $c_1$ and $c_k$
-\item If $a_{kk}=0$ for all $k\in\{1,\dots,n\}$, but there are some $i,j$ such that $a_{ij}\neq 0$, then set $b_i'=b_i+b_j$ since $q(b_i+b_j)=2a_{ij}\neq 0$ and so we reduced this case to the previous two cases.The matrix then becomes $$\begin{pmatrix}
-2a_{1k} & a_{12}+a_{k2} & \dots & a_{1k} & \cdots & a_{1n}+a_{kn} \\
- a_{12}+a_{k2} & 0 & \cdots & a_{2k} & \cdots & a_{2n} \\
-\vdots & \vdots & \ddots & \vdots & \ddots & \vdots \\
-a_{1k} & a_{k2} & \cdots & 0 & \cdots & a_{kn}\\
-\vdots & \vdots & \ddots & \vdots & \ddots & \vdots \\
-a_{1n}+a_{kn} & a_{n2} & \cdots & a_{nk} & \cdots & 0
-\end{pmatrix}$$
-\item If $a_{ij}=0$ for all $i,j\in\{1,\dots,n\}$ then it is the zero function. 
-\end{itemize}
-In this step the change of basis matrix is just the elementary matrices. \\
+\begin{thm}{}{}\\
+Let $\F$ be a field such that $\text{char}(\F)\neq 2$. Let $q:\F^n\to\F$ be a quadratic form. Then there exists a basis $b_1,\dots,b_n$ of $\F^n$ such that $$q\left(\sum_{i=1}^ny_ib_i\right)=\sum_{i=1}^nc_iy_i^2$$ for some $c_1,\dots,c_n\in\F$. 
+\end{thm}
 
-Step 2: Now we modify $b_2,\dots,b_n$ to make them orthogonal to $b_1$. Now set $b_k'=b_k-\frac{a_{1k}}{a_{11}}b_1$. This way, the matrix entry $a_{1k}$ becomes zero. Now the change of basis matrix becomes $$P=\begin{pmatrix}
+This main theorem of quadratic forms shows that every quadratic form is congruent to a diagonal matrix. It also proves that within every equivalence class of congruent matrices, there must be at least one diagonal matrix. To illustrate the process of reduction, we look an example. 
+
+\begin{defn}{The Quadratic Reduction Algorithm}{}\\
+Let $\F$ be a field such that $\text{char}(\F)\neq 2$. Let $b_1,\dots,b_n$ be a basis for $\F^n$. Let $q:\F^n\to\F$ be a quadratic form and let $Q=(a_{ij})$ be the corresponding symmetric matrix. The quadratic reduction algorithm is given by the following. \\
+
+Step 1: Find $b_1'$ such that $q(b_1')\neq 0$. There are a few cases to consider. 
+\begin{itemize}
+\item If $a_{11}\neq 0$, then take $b_i'=b_i$ for $1\leq i\leq n$ and do not change the corresponding symmetric matrix. 
+\item If $a_{11}=0$ and there is some $1\leq k\leq n$ such that $a_{kk}\neq 0$, then take $b_1'=b_k$, $b_k'=b_1$ and $b_i'=b_i$ for $i\neq 1,k$. The corresponding symmetric matrix is given by swapping rows $r_1$ and $r_k$ and then swapping the columns $c_1$ and $c_k$ of $Q$. 
+\item If $a_{kk}=0$ for $1\leq k\leq n$ but there exists some $1\leq i,j\leq n$ such that $a_{ij}\neq 0$, then take $b_i'=b_i+b_j$ and $b_k'=b_k$ for $k\neq i$. The corresponding symmetric matrix is given by swapping the row $r_i$ with $r_i+r_j$, then swapping the column $c_i$ with $c_i+c_j$. Then perform the second bullet point to get $a_{11}\neq 0$. 
+\item If $a_{ij}=0$ for all $1\leq i,j\leq n$, then the quadratic form is the zero function. 
+\end{itemize}
+Step 2: Modify $b_2,\dots,b_n$ so that they are orthogonal to $b_1$. This is done by setting $b_k'=b_k-\frac{a_{1k}}{a_{11}}b_1$ for $k\neq 1$. The change of basis matrix is given by $$P=\begin{pmatrix}
 1 & -\frac{a_{12}}{a_{11}} & \cdots & -\frac{a_{1n}}{a_{11}}\\
 0 & 1 & \cdots & 0\\
 \vdots & \vdots & \ddots & \vdots\\
 0 & 0 & \cdots & 0
-\end{pmatrix}$$
-After this step all the change of basis matrix should be compiled and calculated so that the new matrix for the quadratic form can be formed. \\
-Step 3: Since the matrix for the quadratic form is now $$\begin{pmatrix}
+\end{pmatrix}$$ and the corresponding symmetric matrix is given by $P^TQP$. 
+Step 3: The matrix for the quadratic form now has the form $$\begin{pmatrix}
 a_{11} & 0 & \cdots & 0\\
 0 & ? & \cdots & ?\\
 \vdots & \vdots & \ddots & \vdots\\
 0 & ? & \cdots & ?
-\end{pmatrix}$$
-We can induct on $n$ by repeating the process of step 1 with the entry $a_{22}$ until we reach $a_{nn}$. 
-\end{proof}
-\end{thm}
-
-This main theorem of quadratic forms shows that every quadratic form is congruent to a diagonal matrix. It also proves that within every equivalence class of congruent matrices, there must be at least one diagonal matrix. To illustrate the process of reduction, we look an example. 
+\end{pmatrix}$$ We repeat steps 1-3 on the submatrix $(a_{ij})_{2\leq i,j\leq n}$. 
+\end{defn}
 
 \begin{eg}{}{} Find a nice basis for the quadratic form $q\left(\begin{pmatrix}x\\y\\z\end{pmatrix}\right)=xy+3yz-5xz$. 
 \begin{proof}
@@ -1052,7 +1039,7 @@ In this case $V$ is called an inner product space.
 \begin{lmm}{}{} Let $\F=\R$ or $\C$. Let $(V,\langle-,-\rangle)$ be an inner product space over $\F$. Then $\langle-,-\rangle$ is non-degenerate. 
 \end{lmm}
 
-\begin{prp}{}{} Let $\F=\R$ or $\C$. Let $(V,\langle-,-\rangle)$ be an inner product space over $\F$. Then the map $\|-\|:V\to\F$ defined by $$\|v\|=\langle v,v\rangle$$ is a norm for $V$. 
+\begin{prp}{}{} Let $\F=\R$ or $\C$. Let $(V,\langle-,-\rangle)$ be an inner product space over $\F$. Then the map $\|-\|:V\to\F$ defined by $$\|v\|=\sqrt{\langle v,v\rangle}$$ is a norm for $V$. 
 \end{prp}
 
 \begin{prp}{Cauchy-Schwartz Inquality}{} Let $\F=\R$ or $\C$. Let $(V,\langle-,-\rangle)$ be an inner product space over $\F$. Let $\|-\|$ be the induced norm from the inner product. For all $x,y\in V$, we have $$\abs{\langle x,y\rangle}\leq\|x\|\cdot\|y\|$$ with equality if and only if $y=\lambda x$ for some $\lambda\in\F$. 
@@ -1073,6 +1060,7 @@ Thus we have
 Note that we have equality if and only if $\|z\|=0$, meaning $x=\frac{\abs{\langle x,y\rangle}}{\|y\|^2}y$. We are done by taking $\lambda=\frac{\|y\|^2}{\abs{\langle x,y\rangle}}$. 
 \end{proof}
 \end{prp}
+
 \subsection{The Adjoint of a Linear Map}
 \begin{defn}{The Adjoint of a Linear Map}{} Let $V$ be an inner product space. Let $T\in\text{End}(V)$ be a linear map. A map $T^\ast\in\text{End}(V)$ is said to be the adjoint of $T$ if $$\langle T(v), w\rangle=\langle v, T^\ast(w)\rangle$$ for all $v,w\in V$. 
 \end{defn}
