@@ -1,8 +1,4 @@
 ```mermaid
----
-config:
-  theme: redux
----
 flowchart BT
     A("Set Theory") --> B("Number Systems")
     B --> C("Real Analysis") & D("Groups and Rings")
