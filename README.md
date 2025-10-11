@@ -11,6 +11,7 @@ flowchart BT
     K --> M
 
      A:::None
+     B:::None
      C:::Analysis
      D:::Algebra
      E:::Analysis
@@ -31,8 +32,10 @@ flowchart BT
     classDef Analysis stroke:#FFD600, fill:#FFFFFF
     classDef Algebra stroke:#D50000, fill:#FFFFFF
     classDef None fill:#FFFFFF
-
     click A "https://github.com/Labix-Liu/Notes/blob/main/Sets%20and%20Numbers/Set%20Theory/Set%20Theory.pdf"
+    click D "Algebra/Groups and Rings/Groups and Rings.pdf"
+
+
 
 
 
