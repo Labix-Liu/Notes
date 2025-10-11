@@ -1,8 +1,4 @@
 ```mermaid
----
-config:
-  theme: redux
----
 flowchart BT
     A("Set Theory") --> B("Number Systems")
     B --> C("Real Analysis") & D("Groups and Rings")
@@ -28,9 +24,8 @@ flowchart BT
      K:::Algebra
      L:::Algebra
      M:::AlgTopGeo
-    classDef Algebra stroke:#D50000
-    classDef AlgTopGeo stroke:#AA00FF
-    classDef TopGeo stroke:#2962FF
-    classDef Analysis stroke:#FFD600
-
+    classDef AlgTopGeo stroke:#AA00FF, fill:#FFFFFF
+    classDef TopGeo stroke:#2962FF, fill:#FFFFFF
+    classDef Analysis stroke:#FFD600, fill:#FFFFFF
+    classDef Algebra stroke:#D50000, fill:#FFFFFF
 ```
