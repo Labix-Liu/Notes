@@ -1,6 +1,6 @@
 ```mermaid
 flowchart BT
-    A("<a href='[https://github.com/](https://github.com/Labix-Liu/Notes/blob/main/Sets%20and%20Numbers/Set%20Theory/Set%20Theory.pdf)'Set Theory</a>") --> B("Number Systems")
+    A("Set Theory") --> B("Number Systems")
     B --> C("Real Analysis") & D("Groups and Rings")
     C --> E("Metric Spaces")
     D --> F("Linear Algebra")
@@ -31,4 +31,9 @@ flowchart BT
     classDef Analysis stroke:#FFD600, fill:#FFFFFF
     classDef Algebra stroke:#D50000, fill:#FFFFFF
     classDef None fill:#FFFFFF
+
+    click A "https://github.com/Labix-Liu/Notes/blob/main/Sets%20and%20Numbers/Set%20Theory/Set%20Theory.pdf"
+
+
+
 ```
