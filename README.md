@@ -1,7 +1,7 @@
 ```mermaid
 ---
 config:
-  theme: neo
+  theme: redux
 ---
 flowchart BT
     A("Set Theory") --> B("Number Systems")
