@@ -1,7 +1,7 @@
 ```mermaid
 ---
 config:
-  theme: neutral
+  theme: neo
 ---
 flowchart BT
     A("Set Theory") --> B("Number Systems")
