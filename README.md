@@ -11,10 +11,10 @@ It contains my organized notes on key areas of pure mathematics — from foundat
 
 | Branch | Topics Covered |
 |---------|----------------|
-| 🧩 **Foundations** | Set Theory, Number Systems |
-| ➕ **Algebra** | Groups and Rings, Linear Algebra, Rings and Modules |
-| 📈 **Analysis** | Real Analysis, Metric Spaces, Multivariable Calculus |
-| 🔺 **Topology & Geometry** | Point Set Topology, Geometry |
+| **Foundations** | Set Theory, Number Systems |
+| **Algebra** | Groups and Rings, Linear Algebra, Rings and Modules |
+| **Analysis** | Real Analysis, Metric Spaces, Multivariable Calculus |
+| **Topology & Geometry** | Point Set Topology, Geometry |
 
 ---
 
