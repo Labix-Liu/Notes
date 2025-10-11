@@ -3,11 +3,7 @@
 A structured collection of **theorems, definitions, and proofs** that I’ve learned in pure mathematics.  
 Organized by topic, this repository serves as both a personal reference and a learning resource for others interested in rigorous mathematics.
 
----
-
-## 🧠 Overview
-
-This repository contains my organized notes on key areas of pure mathematics — from foundational set theory to abstract algebra, topology, and analysis. It is still a massive work in progress! Get in touch with me if you find corrections. 
+It contains my organized notes on key areas of pure mathematics — from foundational set theory to abstract algebra, topology, and analysis. It is still a massive work in progress! Get in touch with me if you find corrections. 
 
 ---
 
