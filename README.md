@@ -1,6 +1,6 @@
 ```mermaid
 flowchart BT
-    A("Set Theory") --> B("Number Systems")
+    A("<a href='[https://github.com/](https://github.com/Labix-Liu/Notes/blob/main/Sets%20and%20Numbers/Set%20Theory/Set%20Theory.pdf)'Set Theory</a>") --> B("Number Systems")
     B --> C("Real Analysis") & D("Groups and Rings")
     C --> E("Metric Spaces")
     D --> F("Linear Algebra")
@@ -9,6 +9,8 @@ flowchart BT
     H --> M("Algebraic Topology 1")
     I --> M
     K --> M
+
+     A:::None
      C:::Analysis
      D:::Algebra
      E:::Analysis
@@ -28,4 +30,5 @@ flowchart BT
     classDef TopGeo stroke:#2962FF, fill:#FFFFFF
     classDef Analysis stroke:#FFD600, fill:#FFFFFF
     classDef Algebra stroke:#D50000, fill:#FFFFFF
+    classDef None fill:#FFFFFF
 ```
