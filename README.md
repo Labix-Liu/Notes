@@ -1,7 +1,7 @@
 # 📚 Pure Mathematics Notes
 
 A structured collection of **theorems, definitions, and proofs** that I’ve learned in pure mathematics.  
-Organized by topic, this repository serves as both a personal reference and a learning resource for others interested in rigorous mathematics.
+Organized by topic, this repository serves as both a personal reference and a learning resource for others interested in rigorous mathematics. Note that this is an exposition - I claim no originality on any of the content. 
 
 It contains my organized notes on key areas of pure mathematics — from foundational set theory to abstract algebra, topology, and analysis. It is still a massive work in progress! Get in touch with me if you find corrections. Some of the topics I covered are included below: 
 
