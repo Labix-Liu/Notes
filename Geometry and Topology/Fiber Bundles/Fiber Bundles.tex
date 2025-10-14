@@ -15,25 +15,25 @@
 \date{\today}
 \begin{document}
 \maketitle
-\begin{abstract}
-\begin{itemize}
-\item Notes on Algebraic Topology by Oscar Randal-Williams
-\end{itemize}
-\end{abstract}
 \pagebreak
 \tableofcontents
 
 \pagebreak
 \section{Fiber Bundles with a Group Structure}
 \subsection{G-Bundles and the Structure Groups}
-We would now like to enrich the structure of a fiber bundle with a group action on the fibers. Recall that a topological group is a group with the structure of a topology such that multiplication $(g_1,g_2)\mapsto g_1g_2$ and the inverse $g\mapsto g^{-1}$ are both continuous maps. \\~\\
+We would now like to enrich the structure of a fiber bundle with a group action on the fibers. Recall that a topological group is a group with the structure of a topology such that multiplication $(g_1,g_2)\mapsto g_1g_2$ and the inverse $g\mapsto g^{-1}$ are both continuous maps. 
 
-Also, recall that a group action is faithful if for all $g\in G$, $g\cdot x\neq x$ for all $x\in X$. 
-
-\begin{defn}{G-Atlas}{} Let $(F,E,B)$ be a fiber bundle. Let $G$ be topological group with a continuous faithful action on $F$. A $G$-atlas on $(F,E,B)$ is a set of local trivalization charts $\{(U_k,\varphi_k)\;|\;k\in I\}$ such that the following are true. 
+\begin{defn}{G-Atlas}{}\\
+Let $\pi:E\to B$ be a fiber bundle with fiber $F$. Let $G$ be topological group. A $G$-atlas on the fiber bundle consisting of the following data: 
 \begin{itemize}
-\item For $(U_k,\varphi_k)$ a chart, define $\varphi_{i,x}:F\to F$ by $f\mapsto\varphi_i(x,f)$. Then the homeomorphism $$\varphi_{j,x}\circ\varphi_{i,x}^{-1}:F\to F$$ for $x\in U_i\cap U_j\neq\emptyset$ is an element of $G$. 
-\item For $i,j\in I$, the map $g_{ij}:U_i\cap U_j\to G$ defined by $$g_{ij}(x)=\varphi_{j,x}\circ\varphi_{i,x}^{-1}$$ is continuous. These $g_{ji}$ are called coordinate transformations. 
+\item A continuous and faithful action of $G$ on $F$ (so that $G$ injects into $\text{Aut}(F)$). 
+\item A set of local trivialization charts $$\{(U_k\subseteq B,\varphi_k:\pi^{-1}(U_k)\to U_k\times F)\;|\;k\in I\}$$ (where $B=\bigcup_{k\in I}U_k$ and $\varphi_k$ is a homeomorphism for all $k\in I$). 
+\item A function of sets $g_{ij}:U_i\cap U_j\to\text{Aut}(F)$ defined by $$g_{ij}(x)=\varphi_j(x)\circ\varphi_i(x)^{-1}$$
+\end{itemize}
+such that the following conditions are satisfied: 
+\begin{itemize}
+\item For $i,j\in I$, the map $g_{ij}$ lies in the injective image of $G$ in $\text{Aut}(F)$. 
+\item For $i,j\in I$, the map $g_{ij}$ is continuous. 
 \end{itemize}
 \end{defn}
 
@@ -55,7 +55,16 @@ It is clear that this is an equivalent relation. It is reflexive directly from d
 \begin{defn}{G-Bundle}{} Let $G$ be a topological group. A $G$-bundle is a fiber bundle $(F,E,B)$ together with an equivalence class of $G$-atlas. In this case, $G$ is said to be the structure group of the fiber bundle. 
 \end{defn}
 
-Similar to the case of manifolds, an maximal atlas is exactly such an equivalence class of atlases. Therefore one can also think of a $G$-bundle as a fiber bundle equipped with a maximal $G$-atlas. \\~\\
+Similar to the case of manifolds, an maximal atlas is exactly such an equivalence class of atlases. Therefore one can also think of a $G$-bundle as a fiber bundle equipped with a maximal $G$-atlas. 
+
+\begin{eg}{}{}\\
+Let $(F,E,B)$ be a vector bundle. Then $(F,E,B)$ is a $GL(F)$-bundle. 
+\end{eg}
+
+A collection of coordinate transformations satisfying the cocyle condition uniquely determines the structure of a fiber bundle. 
+
+\begin{thm}{}{} Let $X$ be a space. Let $G$ be a topological group. Then the coordinate transformations uniquely determines and is determined by a fiber bundle in the following sense: $$\left\{\substack{G\text{-bundles over }B\\\text{with fiber }F}\right\}\;\;\;\;\overset{1:1}{\longleftrightarrow}\;\;\;\;\left\{\substack{\text{An open cover }\{U_i\;|\;i\in I\}\text{ of }B\\\text{Maps }\{\phi_{i,j}:U_i\cap U_j\to G\;|\;i,j\in I\}\text{ satisfying the cocyle condition}\\\text{A space }F\text{ such that }G\text{ acts continuously on}}\right\}$$ For each $G$-bundle, the coordinate transformations satisfy the cocyle condition. For a collection of coordinate transformations $\{\phi_{i,j}:U_i\cap U_j\to G\;|\;i,j\in I\}$, consider the space $$E=\frac{\bigcup_{i\in I}U_i\times F}{\sim}$$ where $(x,k)\sim(x,k\phi_{j,i}(x))$ for $x\in U_i\cap U_j$. Then $E$ defines a fiber bundle with an appropriate ???? continuous map. 
+\end{thm}
 
 A morphism of $G$-bundles must now take into account of the group $G$. 
 
@@ -90,20 +99,6 @@ g_{jk}'(h(x))\cdot\widetilde{g_{ij}}(x)=\widetilde{g_{ik}}(x)\;\;\;\;\text{ for 
 \end{itemize}
 Then there exists a unique $G$-bundle morphism having $h$ as the map of base space and having $\{\widetilde{g_{ij}}\;|\;i,j\in I\}$ as its mapping transformations. 
 \end{thm}
-
-We end the section by noting that a collection of coordinate transformations satisfying the cocyle condition uniquely determines the structure of a fiber bundle. 
-
-\begin{thm}{}{} Let $X$ be a space. Let $G$ be a topological group. Then the coordinate transformations uniquely determines and is determined by a fiber bundle in the following sense: $$\left\{\substack{G\text{-bundles over }B\\\text{with fiber }F}\right\}\;\;\;\;\overset{1:1}{\longleftrightarrow}\;\;\;\;\left\{\substack{\text{An open cover }\{U_i\;|\;i\in I\}\text{ of }B\\\text{Maps }\{\phi_{i,j}:U_i\cap U_j\to G\;|\;i,j\in I\}\text{ satisfying the cocyle condition}\\\text{A space }F\text{ such that }G\text{ acts continuously on}}\right\}$$ For each $G$-bundle, the coordinate transformations satisfy the cocyle condition. For a collection of coordinate transformations $\{\phi_{i,j}:U_i\cap U_j\to G\;|\;i,j\in I\}$, consider the space $$E=\frac{\bigcup_{i\in I}U_i\times F}{\sim}$$ where $(x,k)\sim(x,k\phi_{j,i}(x))$ for $x\in U_i\cap U_j$. Then $E$ defines a fiber bundle with an appropriate ???? continuous map. 
-\end{thm}
-
-\subsection{Associated Bundle}
-\begin{defn}{Associated Bundles with Specified Fiber}{} Let $G$ be a topological group. Let $(F,E,B)$ be a fiber bundle with structure group $G$ and open cover $\{U_i\;|\;i\in I\}$ and coordinate transformations $\{g_{i,j}\;|\;i,j\in I\}$. If $F$ is a $G$-space, then define the associated bundle with fiber $F$ to be given by theorem 2.1.7 using the following data: 
-\begin{itemize}
-\item The open cover $\{U_i\;|\;i\in I\}$
-\item The coordinate transformations $g_{ij}:U_i\cap U_j\to G$
-\item The $G$-space $F$
-\end{itemize}
-\end{defn}
 
 \subsection{The Bundle Structure Theorem}
 \begin{thm}{The Bundle Structure Theorem}{} Let $B$ be a topological group and let $G$ be a closed subgroup of $B$. Let $H$ be a closed subgroup of $G$. Suppose that $B/G$ has a local cross section at $G\in B/G$. Then the induced map of cosets $$p:B/H\to B/G$$ give a $G/H_0$-bundle with fiber $G/H$, where $$H_0=\bigcap_{g\in G}gHg^{-1}$$

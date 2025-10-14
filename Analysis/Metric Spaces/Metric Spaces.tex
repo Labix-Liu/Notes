@@ -15,115 +15,246 @@
 \date{\today}
 \begin{document}
 \maketitle
-\begin{abstract}
-\end{abstract}
-\textbf{References}
-\begin{itemize}
-\item A course in Point Set Topology by John B. Conway
-\item Lecture Notes of MAT327 at the University of Toronto by Ivan Khatchatourian
-\end{itemize}
+
 \pagebreak
 \tableofcontents
 \pagebreak
 \section{Metric Spaces}
-\subsection{Basic Definitions}
-A lot of the times we would like to add a structure of a metric to space so that analysis such as continuity and integration can be performed on it. 
+Metric spaces lies in between analysis and topology. On one hand, they are the general setting to discuss the notion of length, and hence sequences and convergence. On the other hand, almost all of the notions of metric spaces are subsumed by topological spaces with a relative notion of closeness. Hence they form a large class of examples of topological spaces and its properties, while being easy to visualize. 
 
-\begin{defn}{Metric}{} Let $X$ be a set. Let $x,y,z\in X$. A metric is a function $d:X\times X\to\R$ satisfying the following. 
+\subsection{Basic Definitions}
+\begin{defn}{Metric}{}\\
+Let $X$ be a set. A metric on $X$ is a function $d:X\times X\to\R$ such that the following are true. 
 \begin{itemize}
-\item $d(x,y)\geq 0$ with equality if and only if $x=y$
+\item For all $x,y\in X$, we have $d(x,y)\geq 0$, and $d(x,y)=0$ if and only if $x=y$. 
 \item $d(x,y)=d(y,x)$
 \item $d(x,y)\leq d(x,z)+d(z,y)$
 \end{itemize}
 \end{defn}
 
-\begin{defn}{Metric Space}{} A metric space is an oredered pair $(X,d)$ where $X$ is a set and $d$ is a metric on $X$. 
+\begin{defn}{Metric Space}{}\\
+A metric space is an oredered pair $(X,d)$ where $X$ is a set and $d$ is a metric on $X$. 
 \end{defn}
 
-\begin{defn}{Open Balls}{} Let $X$ be a metric space. Let $a\in X$. Define the open ball of radius $r$ around $a$ to be $$B_r(a)=\{x\in X|d(x,a)<r\}$$
-\end{defn}
+\begin{eg}{The Standard Euclidean Metric on $\R$}{}\\
+The function $d:\R\times\R\to\R$ defined by $$d(x,y)=\sqrt{x^2+y^2}$$ defines a metric on $\R$, called the standard Euclidean metric. 
+\end{eg}
 
-\begin{lmm}{Metric Subspace}{} Let $(X,d)$ be a metric space. Let $A\subseteq X$, then $(A,d|_A)$ is also a metric space. 
-\begin{proof}
-$d|_A$ inherits the metric properties of $X$ while being restricted to $A$. 
+\begin{eg}{Exotic Metrics in $\R^2$}{}\\
+The following functions define metrics on $\R^2$. 
+\begin{itemize}
+\item Define the standard Euclidean metric on $\R^2$ by $$d((x_1,y_1),(x_2,y_2))=\sqrt{(x_1-x_2)^2+(y_1-y_2)^2}$$
+\item Define the taxicab metric on $\R^2$ by $$d((x_1,y_1),(x_2,y_2))=\abs{x_1-x_2}+\abs{y_1-y_2}$$
+\item Define the French railway metric on $\R^2$ by $$d((x_1,y_1),(x_2,y_2))=\begin{cases}
+\sqrt{(x_1-x_2)^2+(y_1-y_2)^2} & \text{ if } x_2y_1=y_2x_1\\
+\sqrt{x_1^2+x_2^2}+\sqrt{y_1^2+y_2^2} & \text{ otherwise }
+\end{cases}$$
+\item Define the jungle river metric on $\R^2$ by $$d((x_1,y_1),(x_2,y_2))=\begin{cases}
+\abs{y_1-y_2} & \text{ if } x_1=x_2\\
+\abs{y_1}+\abs{x_1-x_2}+\abs{y_2} & \text{ otherwise }
+\end{cases}$$
+\item Define the box metric on $\R^2$ by $$d((x_1,y_1),(x_2,y_2))=\max\{\abs{x_1-x_2},\abs{y_1,y_2}\}$$
+\end{itemize}
+\end{eg}
+
+\begin{eg}{The Discrete Metric}{}\\
+Let $X$ be a set. Define the discrete metric on $X$ to be the function $d:X\times X\to\R$ given by $$d(x,y)=\begin{cases}
+0 & \text{ if }x=y\\
+1 & \text{ otherwise }
+\end{cases}$$
+\end{eg}
+
+\subsection{New Metrics from Old}
+\begin{lmm}{Metric Subspace}{}\\
+Let $(X,d)$ be a metric space. Let $U\subseteq X$ be a subset. Then $(U,d|_{U\times U})$ is also a metric space
+\begin{proof}\\
+$d|_{U\times U}$ has the same properties as $d$. 
 \end{proof}
 \end{lmm}
 
-\subsection{Open and Closed Subsets}
-\begin{defn}{Open Sets}{} Let $M$ be a metric space. Let $U\subset M$. We say that $U$ is open if for every $a\in U$, there exists $r$ such that $$B_r(a)\subseteq U$$
-\end{defn}
-
-\begin{defn}{Closed Sets}{} Let $M$ be a metric space. Let $U\subset M$. We say that $U$ is closed if $M\setminus U$ is open. 
-\end{defn}
-
-\begin{lmm}{}{} Let $M$ be a metric space. Let $a\in M$ and $r\in\R_{\geq 0}$. Then $B_r(a)$ is an open set. 
-\begin{proof} Let $B_r(a)$ be our open ball. Let $x\in B_r(a)$. Then $$B_{(r-d(x,a))/2}(x)\subseteq B_r(a)$$ thus we are done. 
-\end{proof}
-\end{lmm}
-
-\begin{prp}{}{} Let $M$ be a metric space. Then the following are true. 
-\begin{itemize}
-\item Let $\{U_i\;|\;i\in I\}$ be a family of open subsets of $M$. Then $\bigcup_{i\in I}U_i$ is an open subset of $M$. 
-\item Let $U_1,\dots,U_n$ be open subsets of $M$. Then $\bigcap_{i=1}^nU_i$ is an open subset of $M$. 
-\end{itemize} 
-\begin{proof} Let $U_1,U_2,\dots$ be a sequence of open sets. Let $U=\bigcup_{n\in\N}U_n$. Let $x\in U$. Then there exists $k\in\N$ such that $x\in U_k$. Since $U_k$ is open, there exists $r\in\R^+$ such that $$B_r(x)\subseteq U_k\subseteq U$$ and we are done. \linebreak\linebreak
-Observe that $$X\setminus\bigcup_{n\in\N}U_n=\bigcap_{n\in\N}(X\setminus U_n)$$ By definition of closed sets, $X\setminus U$ is closed and we are done. 
-\end{proof}
-\end{prp}
-
-\begin{prp}{}{} Let $M$ be a metric space. Then the following are true. 
-\begin{itemize}
-\item Let $U_1,\dots,U_n$ be closed subsets of $M$. Then $\bigcup_{i=1}^nU_i$ is an open subset of $M$. 
-\item Let $\{U_i\;|\;i\in I\}$ be a family of closed subsets of $M$. Then $\bigcap_{i\in I}U_i$ is an open subset of $M$. 
-\end{itemize} 
-\begin{proof}
-Let $U_1,\dots,U_n$ be opens sets. Then let $x\in\bigcap_{k=1}^nU_k$. Then $x\in U_k$ for all $k\in\{1,\dots,n\}$ and there exists $r_k>0$ such that $B_{r_k}(x)\subseteq U_k$ for each $k$. Take $r=\min\{r_1,\dots,r_n\}$. Then $$B_r(x)\subseteq B_{r_k}(x)\subseteq U_k$$ for each $k$ and thus $B_r(x)\subseteq\bigcap_{k=1}^nU_k$ and we are done. \linebreak\linebreak
-Observe that $$X\setminus\bigcap_{k=1}^nU_k=\bigcup_{k=1}^n(X\setminus U_k)$$ and by definition of closed sets, $X\setminus\bigcap_{k=1}^nU_k$ is closed and we are done. 
-\end{proof}
-\end{prp}
-
-\begin{defn}{Distance Between Subsets}{} Let $(M,d)$ be a metric space. Let $U,T\subseteq M$. Let $x\in M$. Define the distance between $U$ and $T$ to be $$d(U,T)=\inf\{d(u,t)\;|\;u\in U,t\in T\}$$
-\end{defn}
-
-\begin{defn}{Diameter of a Subset}{} Let $(M,d)$ be a metric space. Let $U\subseteq M$. Define the diameter of $U$ to be $$\text{diam}(U)=\sup\{d(x,y)\;|\;x,y\in U\}$$
-\end{defn}
-
-\begin{defn}{Bounded Subsets}{}\\
-Let $X$ be a metric space. Let $U\subseteq X$ be a subset. We say that $U$ is bounded if $\text{diam}(U)<\infty$. 
-\end{defn}
-
-\subsection{Points in a Subset}
-\begin{defn}{Interior Points}{} Let $M$ be a metric space. Let $x\in U\subset M$. We say that $x$ is an interior point of $U$ if there exists $r$ such that $$B_r(x)\subset U$$ Denote the set of all interior points by $U^\circ$. 
-\end{defn}
-
-\begin{defn}{Boundary}{} Let $M$ be a metric space. Let $x\in U\subset M$. We say that $x$ is a boundary point of $U$ if for every $r$, $$B_r(x)\cap U\neq\emptyset\text{ and }B_r(x)\cap M\setminus U\neq\emptyset$$ Denote the set of all boundary points by $\partial U$. 
-\end{defn}
-
-\begin{prp}{}{} Let $M$ be a metric space. Let $U\subset M$. Then $U$ is open if and only $$U\cap\partial U=\emptyset$$ 
-\begin{proof}
-Suppose that $U$ is open. Let $x\in U\cap\partial U$. This means that $x\in\partial U$ and $B_r(x)\cap M\setminus U\neq\emptyset$ for all $r$. But this means that $B_r(x)$ cannot be a subset of $U$ is it always contains point outside $U$, thus $x\notin U$ and thus $U\cap\partial U=\emptyset$. \linebreak\linebreak
-Let $U\cap\partial U=\emptyset$. Let $x\in U$. Then $x\notin\partial U$. Thus by negation of the definition of boundary, there exists $r>0$ such that $B_r(x)\cap M\setminus U=\emptyset$. Thus $B_r(x)\subseteq U$ and we are done. 
-\end{proof}
-\end{prp}
-
-\begin{defn}{Closure}{} Let $M$ be a metric space. Let $U\subset M$. Define the closure of $U$ to be $$\overline{U}=U\cup\partial U$$
-\end{defn}
-
-\begin{prp}{}{} Let $M$ be a metric space. Let $U\subset M$. Then $U$ is closed if and only $$\overline{U}=U$$
-\end{prp}
-
-\subsection{Product Metrics}
-\begin{defn}{The p Metric}{} Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces. Let $p\in[1,\infty)$. Define the $p$ metric to be the map $d_p:(X\times Y)\times(X\times Y)\to\R$ given by $$d_p((x_1,y_1),(x_2,y_2))=\left(d_X(x_1,x_2)^p+d_Y(y_1,y_2)^p\right)^{1/p}$$
+\begin{defn}{The p Metric}{} Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces. Let $p\in[1,\infty)$. Define the $p$ metric on $X\times Y$ to be the map $d_p:(X\times Y)\times(X\times Y)\to\R$ given by $$d_p((x_1,y_1),(x_2,y_2))=\left(d_X(x_1,x_2)^p+d_Y(y_1,y_2)^p\right)^{1/p}$$
 \end{defn}
 
 \begin{prp}{}{} Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces. Let $p\in[1,\infty)$. Then $d_p$ is a metric on $X\times Y$. 
 \end{prp}
 
-\begin{prp}{}{} Let $X,Y$ be metrics spaces. Let $((x_n,y_n))_{n\in\N}$ be a sequence in $X\times Y$. Let $(x,y)\in X\times Y$. Then $((x_n,y_n))_{n\in\N}$ converges to $(x,y)$ if and only if $(x_n)_{n\in\N}$ converges to $x$ and $(y_n)_{n\in\N}$ converges to $y$. 
-\end{prp}
+\begin{eg}{}{}\\
+Let $n\in\N$. Then the function $d:\R^n\times\R^n\to\R$ defined by $$d((x_1,\dots,x_n),(y_1,\dots,y_n))=\sqrt{\sum_{i=1}^n(x_i-y_i)^2}$$ is a metric in $\R^n$, called the standard Euclidean metric of $\R^n$. 
+\end{eg}
+
+\subsection{Size and Distance of Subsets}
+\begin{defn}{Open Balls}{}\\
+Let $(X,d)$ be a metric space. Let $x\in X$. Let $r>0$. Define the open ball of radius $r$ at $x$ to be $$B_r(x)=\{y\in X\;|\;d(x,y)<r\}$$
+\end{defn}
+
+\begin{defn}{Bounded Subsets}{}\\
+Let $X$ be a metric space. Let $U\subseteq X$ be a subset. We say that $U$ is bounded if there exists $x\in X$ and $r>0$ such that $U\subseteq B_r(x)$. 
+\end{defn}
+
+\begin{defn}{Distance between two Subsets}{}\\
+Let $X$ be a metric space. Let $U,V\subseteq X$ be subsets. Define the distance between $U$ and $V$ to be $$\text{dist}(U,V)=\inf\{d(u,v)\;|\;u\in U,v\in V)\}$$
+\end{defn}
+
+\subsection{Distance Preserving Maps}
+\begin{defn}{Distance Preserving Maps}{}\\
+Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces. Let $f:X\to Y$ be a function. We say that $f$ is distance preserving if for any $p,q\in X$, we have $$d_Y(f(p),f(q))=d_X(p,q)$$
+\end{defn}
+
+\begin{defn}{Isometries}{} Let $(X,d_1)$ and $(X,d_2)$ be metric spaces. Let $f:X\to Y$ be a distance preserving map. We say that $f$ is an isometry if there exists a distance preserving map $g:Y\to X$ such that $$g\circ f=\text{id}_X\;\;\;\;\text{ and }\;\;\;\;f\circ g=\text{id}_Y$$
+\end{defn}
+
+It is also common to use the term isometry to mean a distance preserving function and refer to our version of isometry as bijective isometries. 
+
+\begin{lmm}{}{} Let $(X,d_1)$ and $(X,d_2)$ be metric spaces. Let $f:X\to Y$ be a distance preserving map. Then $f$ is an isometry if and only if $f$ is bijective. 
+\begin{proof}\\
+Clearly, if $f$ is an isometry then $f$ has an inverse function. Conversely, suppose that $f$ is bijective. Then we have $$d_X(f^{-1}(p),f^{-1}(q))=d_Y(f(f^{-1}(p)),f(f^{-1}(q)))=d_Y(p,q)$$ for any $p,q\in Y$ since $f$ is distance preserving. Hence $f^{-1}$ is distance preserving. 
+\end{proof}
+\end{lmm}
 
 \pagebreak
-\section{Limits and Continuity in Metric Spaces}
+\section{Topological Properties}
+\subsection{Open and Closed Subsets}
+\begin{defn}{Open and Closed Sets}{}\\
+Let $X$ be a metric space. Let $U\subseteq X$. 
+\begin{itemize}
+\item We say that $U$ is an open subset of $X$ if for all $x\in U$, there exists $r>0$ such that $B_r(x)\subseteq U$. 
+\item We say that $U$ is closed if $X\setminus U$ is open. 
+\end{itemize}
+\end{defn}
+
+\begin{eg}{}{}\\
+Consider the following subsets of $\R$. 
+\begin{itemize}
+\item $(0,1)$ is open in $\R$. 
+\item $[0,1]$ is closed in $\R$. 
+\item $(0,1]$ and $[0,1)$ are neither open nor closed in $\R$. 
+\end{itemize}
+\end{eg}
+
+\begin{eg}{}{}\\
+Let $[0,1)$ inherit a metric subspace structure from $\R$. 
+\begin{itemize}
+\item $[1/2,1)$ is closed in $[0,1)$. 
+\item $[0,1)$ is both open and closed in $[0,1)$. 
+\end{itemize}
+\end{eg}
+
+\begin{lmm}{}{}\\
+Let $X$ be a metric space. Let $x\in X$. Let $r>0$. Then $B_r(x)$ is an open subset of $X$. 
+\begin{proof} Let $B_r(a)$ be our open ball. Let $x\in B_r(a)$. Then $$B_{(r-d(x,a))/2}(x)\subseteq B_r(a)$$ thus we are done. 
+\end{proof}
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $X$ be a metric space. Then the following are true. 
+\begin{itemize}
+\item Let $\{U_i\;|\;i\in I\}$ be a collection of open subsets of $X$. Then $\bigcup_{i\in I}U_i$ is an open subset of $X$. 
+\item Let $U_1,\dots,U_n$ be open subsets of $X$. Then $\bigcap_{i=1}^nU_i$ is an open subset of $X$. 
+\item Let $\{U_i\;|\;i\in I\}$ be a collection of closed subsets of $X$. Then $\bigcap_{i\in I}U_i$ is a closed subset of $X$. 
+\item Let $U_1,\dots,U_n$ be closed subsets of $X$. Then $\bigcup_{i=1}^nU_i$ is a closed subset of $X$. 
+\end{itemize} 
+\begin{proof}\\
+Suppose that $\{U_i\;|\;i\in I\}$ is a collection of open subsets of $X$. Let $x\in\bigcup_{i\in I}U_i$. Then there exists $i\in I$ such that $x\in U_i$. Since $U_i$ is open, there exists $r>0$ such that $B_r(x)\subseteq U_i$. Then $B_r(x)\subseteq\bigcup_{i\in I}U_i$ and so we are done. \\
+
+Suppose that $U_1,\dots,U_n$ are open subsets of $X$. Let $x\in\bigcap_{i=1}^nU_i$. Then for $1\leq i\leq n$, there exists $r_i>0$ such that $B_{r_i}(x)\subseteq U_i$. Let $r=\min\{r_1,\dots,r_n\}$. Then for $1\leq i\leq n$, we have $B_r(x)\subseteq B_{r_i}(x)\subseteq U_i$. Hence $B_r(x)\subseteq\bigcap_{i=1}^nU_i$. Thus $\bigcap_{i=1}^nU_i$ is an open subset. \\
+ 
+Suppose that $\{U_i\;|\;i\in I\}$ is a collection of closed subsets of $X$. Then $\{X\setminus U_i\;|\;i\in I\}$ is a collection of open subsets of $X$. Hence $$\bigcup_{i\in I}(X\setminus U_i)=X\setminus\bigcap_{i\in I}U_i$$ is an open subset of $X$. Hence $\bigcap_{i\in I}U_i$ is a closed subsets of $X$. \\
+
+Suppose that $U_1,\dots,U_n$ are closed subsets of $X$. Then $X\setminus U_i$ for $1\leq i\leq n$ are open subsets. Hence $$\bigcap_{i=1}^n(X\setminus U_i)=X\setminus\bigcup_{i=1}^nU_i$$ is an open subset of $X$ by the above. Hence $\bigcup_{i=1}^nU_i$ is a closed subset of $X$. 
+\end{proof}
+\end{prp}
+
+\subsection{The Interior, Boundary and Closure Operators}
+\begin{defn}{Interior and Boundary Points}{}\\
+Let $X$ be a metric space. Let $U\subseteq X$ be a subset. Let $x\in X$. 
+\begin{itemize}
+\item We say that $x$ is an interior points of $U$ if there exists $r>0$ such that $B_r(x)\subset U$. 
+\item We say that $x$ is a boundary point of $U$ if for all $r>0$, we have $$B_r(x)\cap U\neq\emptyset\neq B_r(x)\cap(X\setminus U)$$
+\end{itemize}
+\end{defn}
+
+\begin{defn}{The Interior, Boundary and Closure Operator}{}\\
+Let $X$ be a metric space. Let $U\subseteq X$ be a subset. 
+\begin{itemize}
+\item Define the interior of $U$ to be $$U^\circ=\{x\in U\;|\;x\text{ is an interior point of }U\}$$
+\item Define the boundary of $U$ to be $$\partial U=\{x\in U\;|\;x\text{ is a boundary point of }U\}$$
+\item Define the closure of $U$ to be $$\overline{U}=U\cup\partial U$$
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $X$ be a metric space. Let $U\subseteq X$. Then the following are true. 
+\begin{itemize}
+\item $U$ is open if and only if $U=U^\circ$ if and only if $U\cap\partial U=\emptyset$. 
+\item $U$ is closed if and only if $U=\overline{U}$. 
+\end{itemize}
+\begin{proof}
+\end{proof}
+\end{prp}
+
+\subsection{Limits of Functions}
+\begin{defn}{Accumulation Points}{}\\
+Let $M$ be a metric space. Let $x\in M$. We say that $x$ is an accumulation point of $M$ if for all $r\in\R^+$, we have $$B_r(x)\setminus\{p\}\neq\emptyset$$
+\end{defn}
+
+\begin{defn}{Limits}{}\\
+Let $(X,d_X),(Y,d_Y)$ be metric spaces. Let $f:X\to Y$ be a function. Let $p\in X$ be an accumulation point. We say that $L\in Y$ is the limit of $f$ at $p$ if for all $\varepsilon>0$, there exists $\delta>0$ such that for all $x\in M$ such that $0<d_X(x,p)<\delta$, we have $$d_Y(f(x),L)<\varepsilon$$ In this case, we write $L=\lim_{x\to p}f(x)$. 
+\end{defn}
+
+\subsection{Continuous Functions}
+\begin{defn}{Continuity}{}\\
+Let $(X,d_X),(Y,d_Y)$ be metric spaces. Let $f:X\to Y$ be a function. Let $p\in X$. We say that $f$ is continuous at $p$ if for all $\varepsilon>0$, there exists $\delta>0$ such that for any $x\in X$ such that $0<d_X(x,p)<\delta$, we have $d_Y(f(x),f(p))<\varepsilon$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $X,Y$ be metric spaces. Let $f:X\to Y$ be a function. Let $p\in X$ be an accumulation point. Then the following are equivalent. 
+\begin{itemize}
+\item $f$ is continuous at $p$. 
+\item For every sequence $(x_n)_{n\in\N}\subseteq X$ such that $(x_n)_{n\in\N}\to x$, we have $(f(x_n))_{n\in\N}\to f(p)$. 
+\item $\lim_{x\to p}f(x)=f(p)$. 
+\item For every open subset $V\subseteq Y$, we have $f^{-1}(U)\subseteq X$ is open. 
+\end{itemize}
+\begin{proof}
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $X,Y$ be metric spaces. Let $f:X\to Y$ be a function. Then $f$ is continuous if and only if for every open subset $V\subseteq Y$, we have $f^{-1}(U)\subseteq X$ is open. 
+\begin{proof}\\
+Suppose that $f$ is continuous. Let $\Omega\subset V$ such that $\Omega$ is open. Then for every $p\in f^{-1}(V)$, there exists $\epsilon>0$ such that $B_{\epsilon}(f(p))\subset V$. By continuity, there exists $\delta>0$ such that $f(B_{\delta(p)})\subset B_{\epsilon}(f(p))$. This implies $B_{\delta}(p)\subset f^{-1}(B_{\epsilon}(f(p)))$. But also since $B_{\epsilon}(f(p))\subset V$, we have $$B_{\delta}(p)\subset f^{-1}(B_{\epsilon}(f(p)))\subset f^{-1}(V)$$ Since this is true for every $p$, $f^{-1}(V)$ must be open. \\
+
+Now suppose that $\Omega\subset V$ is open imply $f^{-1}(\Omega)$ is open. Let $p\in \Omega$. Then there exists $\epsilon>0$ such that $B_{\epsilon}(f(p))\subset\Omega$. By assumption, we must have $f^{-1}(B_{\epsilon}(f(p)))$ is open. The fact that this is open means there exists $\delta>0$ such that $B_{\delta}(p)\subset f^{-1}(B_{\epsilon}(f(p)))$. Then we have $$f(B_{\delta}(p))\subset B_{\epsilon}(f(p))$$ and we are done. 
+\end{proof}
+\end{prp}
+
+\begin{lmm}{}{}\\
+Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces. Let $f:X\to Y$ be a distance preserving map. Then $f$ is continuous. 
+\begin{proof}
+Let $p\in X$. Let $\varepsilon>0$. Choose $\delta=\varepsilon$, then for all $x\in X$ such that $0<d_X(x,p)<\delta$, we have $d_Y(f(x),f(p))=d_X(x,p)<\delta=\varepsilon$ so that $f$ is continuous. 
+\end{proof}
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $X,Y,Z$ be metric spaces. Let $f:X\to Y$ and $g:Y\to Z$ be functions. If $f$ and $g$ are continuous, then $g\circ f$ is continuous. 
+\end{prp}
+
+\subsection{Uniform Continuous Functions}
+\begin{defn}{Uniformly Continuous}{} A map $f:X\to Y$ is uniformaly continuous if for every $\epsilon>0$, there exists $\delta>0$ such that $$d_X(x,y)<\delta\implies d_Y(f(x),f(y))<\epsilon$$ for any $x,y\in X$. 
+\end{defn}
+
+\begin{lmm}{}{} If $f:X\to Y$ is uniformly continuous then it is continuous. 
+\end{lmm}
+
+\subsection{Lipschitz Continuous Functions}
+\begin{defn}{Lipschitz Continuous}{} Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces and suppose that $f:X\to Y$. We say that $f$ is a Lipschitz map if there is a constant $K\geq 0$ such that $$d_Y(f(x),f(y))\leq Kd(x,y)$$ for all $x,y$ in $X$. \\
+If $Y=X$ and $K\in[0,1)$ then $f$ is a contraction mapping. 
+\end{defn}
+
+\begin{lmm}{}{} If $f:X\to Y$ is Lipschitz continuous then it is continuous. 
+\end{lmm}
+
+\pagebreak
+\section{Convergence in Metric Spaces}
 \subsection{Sequences}
 \begin{defn}{Sequences}{} Let $X$ be a metric space. A sequence in $X$ is an ordered set of numbers $x_0,x_1,x_2,\dots$ such that they all are in $X$. We denote this sequence by $(x_n)_{n\in\N}$. 
 \end{defn}
@@ -140,203 +271,9 @@ Suppose that the right hand side is true. Suppose for a contradiction that $X\se
 \end{proof}
 \end{prp}
 
-\subsection{Limits}
-\begin{defn}{Accumulation Points}{}\\
-Let $M$ be a metric space. Let $x\in M$. We say that $x$ is an accumulation point of $M$ if for all $r\in\R^+$, we have $$B_r(x)\setminus\{p\}\neq\emptyset$$
-\end{defn}
-
-\begin{defn}{Limits}{}\\
-Let $(X,d_X),(Y,d_Y)$ be metric spaces. Let $f:X\to Y$ be a function. Let $p\in X$ be an accumulation point. We say that $L\in Y$ is the limit of $f$ at $p$ if for all $\varepsilon>0$, there exists $\delta>0$ such that for all $x\in M$ such that $0<d_X(x,p)<\delta$, we have $d_Y(f(x),L)<\varepsilon$. In this case, we write $$L=\lim_{x\to p}f(x)$$
-\end{defn}
-
-\subsection{Continuity}
-\begin{defn}{Continuity}{}\\
-Let $(X,d_X),(Y,d_Y)$ be metric spaces. Let $f:X\to Y$ be a function. Let $p\in X$. We say that $f$ is continuous at $p$ if for all $\varepsilon>0$, there exists $\delta>0$ such that for any $x\in X$ such that $0<d_X(x,p)<\delta$, we have $d_Y(f(x),f(p))<\varepsilon$. 
-\end{defn}
-
-\begin{prp}{}{}\\
-Let $X,Y$ be metric spaces. Let $f:X\to Y$ be a function. Let $p\in X$ be an accumulation point. Then the following are equivalent. 
-\begin{itemize}
-\item $f$ is continuous at $p$. 
-\item For every sequence $(x_n)_{n\in\N}\subseteq X$ such that $(x_n)_{n\in\N}\to x$, we have $(f(x_n))_{n\in\N}\to f(p)$. 
-\item $\lim_{x\to p}f(x)=f(p)$. 
-\end{itemize}
+\begin{prp}{}{} Let $X,Y$ be metrics spaces. Let $((x_n,y_n))_{n\in\N}$ be a sequence in $X\times Y$. Let $(x,y)\in X\times Y$. Then $((x_n,y_n))_{n\in\N}$ converges to $(x,y)$ if and only if $(x_n)_{n\in\N}$ converges to $x$ and $(y_n)_{n\in\N}$ converges to $y$. 
 \end{prp}
 
-\begin{prp}{}{} Let $U,V$ be metric spaces. Let $f:U\to V$ be a function. Then $f$ is continuous if and only if for every open subsets $\Omega\subset V$, $f^{-1}(\Omega)$ is open. 
-\begin{proof} Suppose that $f$ is continuous. Let $\Omega\subset V$ such that $\Omega$ is open. Then for every $p\in f^{-1}(V)$, there exists $\epsilon>0$ such that $B_{\epsilon}(f(p))\subset V$. By continuity, there exists $\delta>0$ such that $f(B_{\delta(p)})\subset B_{\epsilon}(f(p))$. This implies $B_{\delta}(p)\subset f^{-1}(B_{\epsilon}(f(p)))$. But also since $B_{\epsilon}(f(p))\subset V$, we have $$B_{\delta}(p)\subset f^{-1}(B_{\epsilon}(f(p)))\subset f^{-1}(V)$$ Since this is true for every $p$, $f^{-1}(V)$ must be open. \\
-Now suppose that $\Omega\subset V$ is open imply $f^{-1}(\Omega)$ is open. Let $p\in \Omega$. Then there exists $\epsilon>0$ such that $B_{\epsilon}(f(p))\subset\Omega$. By assumption, we must have $f^{-1}(B_{\epsilon}(f(p)))$ is open. The fact that this is open means there exists $\delta>0$ such that $B_{\delta}(p)\subset f^{-1}(B_{\epsilon}(f(p)))$. Then we have $$f(B_{\delta}(p))\subset B_{\epsilon}(f(p))$$
-and we are done. 
-\end{proof}
-\end{prp}
-
-\begin{prp}{}{}\\
-Let $X,Y,Z$ be metric spaces. Let $f:X\to Y$ and $g:Y\to Z$ be functions. If $f$ and $g$ are continuous, then $g\circ f$ is continuous. 
-\end{prp}
-
-\pagebreak
-\section{Connectedness}
-\subsection{Definitions and Properties}
-\begin{defn}{Connectedness}{}\\
-Let $X$ be a metric space. We say that $X$ is disconnected if there exists open subsets $\emptyset\neq U,V\subseteq X$ such that $X=U\cup V$. We say that $X$ is connected otherwise. 
-\end{defn}
-
-Notice that the definition of connectedness is implicit from the definition of disconnectedness. We give an explicit criteria to prove connectedness. 
-
-\begin{prp}{}{} Let $X$ be a metric space. Then the following are equivalent. 
-\begin{itemize}
-\item $X$ is connected
-\item If $f:X\to\{0,1\}$ is a continuous function then $f$ is constant. 
-\item The only subsets of $X$ which are both open and closed are $X$ and $\emptyset$. 
-\end{itemize} 
-\begin{proof}~\\
-\begin{itemize}
-\item $(1)\iff(2)$: We prove the contrapositive. Namely $X$ is disconnected if and only if there exists a continuous function $f;X\to\{0,1\}$ that is non-constant. Suppose that $X$ is disconnected. Then there exists $A,B\subset X$ that are open such that $A\cap B=\emptyset$ and $A\cup B=X$. Define $f$ by $$f(x)=\begin{cases}
-0 & \text{ if }x\in A\\
-1 & \text{ if }x\in B
-\end{cases}$$
-This function is continuous since every open set in $\{0,1\}$ is mapped to an open set in $X$. It clearly is non-constant thus we are done. \\
-Now suppose that $f:X\to\{0,1\}$ is non-constant continuous function. Then by defining $A=f^{-1}(0)$ and $B=f^{-1}(1)$, we are done. 
-\item $(1)\iff(3)$: Suppose that $X$ is connected but there exists non-empty $A\subset X$ such that it is both open and closed. Then $X\setminus A$ is open and is disjoint with $A$ and $A\cup X\setminus A=X$. This is a contradiction to $X$ being connected. \\
-Now suppose that the only subsets which are both open and closed are $X$ and $\emptyset$. Suppose for a contradiction that $X$ is disconnected. Then there exists open sets $A,B\subset X$ such that $A\cap B=\emptyset$ and $A\cup B=X$. Then clearly $B=X\setminus A$ is open, but $X\setminus A$ is the set difference of an open set thus it should be closed. Then $B$ is both open and closed and we have a contradiction. 
-\end{itemize}
-\end{proof}
-\end{prp}
-
-These two criteria will prove themselves to be particularly useful in proving theorems related to connectedness as well as begin able to identify concrete examples on connectedness. 
-
-\begin{prp}{}{} Let $X$ be a metric space. Let $S\subset X$ be a metric subspace. Then $S$ is connected if and only if the following is true. If $U,V$ are open subsets of $X$ and $U\cap V\cap S=\emptyset$ and $S\subseteq U\cup V$ implies $S\subseteq U$ or $S\subseteq V$. 
-\begin{proof}
-\end{proof}
-\end{prp}
-
-\begin{lmm}{}{} If $C\subset(X,d)$ is connected then so is any set $S$ satisfying $C\subset S\subset \overline{C}$. 
-\end{lmm}
-
-\begin{lmm}{}{} Let $X$ be a metric space. The countable union of connected subsets of $X$ such that they have a nonempty intersection is connected. 
-\begin{proof}
-Suppose that $\{A_i|i\in I\}$ are all connected and has a nonempty intersection $x\in X$. Suppose that $f:X\to\{0,1\}$ is a continuous function such that $f(x)=0$. For every $A_i$, $f|_{A_i}$ is a constant function since $f$ is continuous. This means that $f|_{A_i}(x)=0$ for all $x\in A_i$. Then $f$ when only restricted to the countable union of $A_i$, it will be identically zero. Thus we are done. 
-\end{proof}
-\end{lmm}
-
-\begin{prp}{}{} Continuity preserves connectedness. That is, if $f:X\to Y$ is a continuous function between metric spaces and $X$ is connected, then $f(X)$ is conneted. 
-\begin{proof}
-Suppose that $f(X)$ is disconnected. Then there exists a non-empty $A\subset f(X)$ that is both open and closed. By continuity, $f^{-1}(A)$ is also both open and closed, which is a contradiction since $X$ is connected. 
-\end{proof}
-\end{prp}
-
-\begin{prp}{}{} The product of two connected spaces is connected. 
-\end{prp}
-
-Notice that none of the above propositions involve any notion of distance. This is baecause these are topological properties rather than metric properties, which will be discussed more on a topology course. 
-
-\subsection{Path-Connectedness}
-\begin{defn}{Path-Connected Metric Space}{} Let $X$ be a metric space. Then we say that $X$ is path-connected if the following are true. For any $a,b\in X$, there exists a continuous map $\gamma:[0,1]\to X$ with $\gamma(0)=a$ and $\gamma(1)=b$. $\gamma$ is called a path. 
-\end{defn}
-
-\begin{lmm}{}{} Let $X$ be a metric space. Define a relation $\sim$ on $X$ as $a\sim b$ if and only if there exists a path $\gamma:[0,1]\to X$ with $\gamma(0)=a$ and $\gamma(1)=b$. Then $\sim$ is an equivalent relation. 
-\end{lmm}
-
-\begin{prp}{}{} Every path-connected metric space is connected. 
-\end{prp}
-
-\begin{prp}{}{} A connected open subset of a normed space is path-connected. 
-\end{prp}
-
-\subsection{Connectedness on $\R^n$}
-\begin{thm}{}{} A subset of $\R$ is connected if and only if it is an interval. 
-\end{thm}
-
-Below is a partial converse of path connectedness implying connectedness over $\R^n$. 
-
-\begin{thm}{}{} Connected open subsets of $\R^n$ are path connected. 
-\end{thm}
-
-\begin{thm}{}{} Open subsets of $\R^n$ have open connected components. 
-\end{thm}
-
-\begin{thm}{}{} A subset $U$ of $\R$ is open if and only if it is the disjoint union of countably many open intervals. 
-\end{thm}
-
-\pagebreak
-\section{Compactness}
-\subsection{Compactness and Sequential Compactness}
-\begin{defn}{Open Cover}{} An open cover of a metric space $X$ is a collection $\mathcal{U}$ of open subsets of $X$ such that E$X=\bigcup_{U\in\mathcal{U}}U$E
-\end{defn}
-
-\begin{defn}{Compact Metric Spaces}{} Let $X$ be a metric space. Let $K\subseteq X$. $K$ is said to be compact if every open cover of $K$ contains a finite subcover. 
-\end{defn}
-
-\begin{defn}{Lebesgue Number}{} Let $\mathcal{U}$ be an open cover of a metric space $X$. A number $\delta>0$ is called a Lebesgue number for $\mathcal{U}$ if for any $x\in X$ there exists $U\in\mathcal{U}$ such that $B_\delta(x)\subset U$. 
-\end{defn}
-
-\begin{lmm}{}{} Every open cover $\mathcal{U}$ of a compact metric space $X$ has a Lebesgue number. 
-\end{lmm}
-
-\begin{defn}{Sequential Compactness}{} Let $X$ be a metric space. Then $X$ is said to be sequentially compact if any sequence of elements in $X$ has a convergent subsequence. 
-\end{defn}
-
-\begin{lmm}{}{} If $X$ is sequentially compact that any open cover of $X$ has a Lebesgue number. 
-\end{lmm}
-
-\begin{prp}{}{} Let $(X,d)$ be a metric space. Then the following are equivalent. 
-\begin{itemize}
-\item $X$ is compact
-\item $X$ is sequentially compact
-\item $X$ is closed and totally bounded
-\end{itemize}
-\end{prp}
-
-\subsection{Properties of Compactness}
-\begin{prp}{}{} A compact subset of a metric space is closed. 
-\begin{proof}
-Let $K\subset X$ be compact. Let $a\in X\setminus K$. For every $x\in K$, $B_{d(a,x)/2}(a)$ and $B_{d(a,x)/2}(x)$ are disjoint open balls. Then $\{B_{d(a,x)/2}(x)|x\in K\}$ is an open cover of $K$. Since $K$ is compact, it has a finite subcover $B_{d(a,x_1)/2}(x_1),\dots,B_{d(a,x_n)/2}(x_n)$. But $$K\cap\bigcap_{k=1}^nB_{d(a,x_k)/2}(a)=\emptyset$$ since the two types of balls are disjoint. Thus $K$ is closed. 
-\end{proof}
-\end{prp}
-
-\begin{prp}{}{} A compact subset of a metric space is bounded. 
-\begin{proof}
-Let $a\in X$. Let $x\in K$. Then $x\in B_r(a)$ for all $r>d(a,x)$. Thus $K$ is covered by the collection of open balls $B_r(a)$. Thus it has a finite subcover $B_{r_1}(a),\dots,B_{r_n}(a)$. Thus $$K\subset\bigcup_{k=1}^nB_{r_k}(a)=B_{\max\{r_1,\dots,r_n\}}(a)$$ and we are done. 
-\end{proof}
-\end{prp}
-
-\begin{prp}{}{} Let $X$ be a compact metric space. Let $C\subseteq X$ be a closed subset. Then $C$ is compact. 
-\begin{proof}
-Let $U$ be a cover of $C$ by open subsets of $X$. Then $U\cup X\setminus C$ is an open cover of $X$, thus has a finite subcover. This provides an open subcover of $C$ since $X\setminus C$ is open and you can remove this element fromt the subcover. 
-\end{proof}
-\end{prp}
-
-\subsection{Compactness and Continuity}
-\begin{thm}{}{} Continuity preserves compactness. 
-\begin{proof}
-Let $f:X\to Y$ be a continuous function between metric spaces. Suppose that $X$ is compact. 
-\end{proof}
-\end{thm}
-
-\begin{lmm}{}{} Let $X,Y$ be metric spaces. A sequence $\{(x_n,y_n)\}\subset X\times Y$ converges if and only if $\{x_n\}\subset X$ converges in $X$ and $\{y_n\}\subset Y$ converges in $Y$. 
-\end{lmm}
-
-\begin{prp}{}{} The product of two compact metric spaces is compact. 
-\end{prp}
-
-\begin{thm}{Heine-Borel Theorem}{} A subset of $\R^n$ is compact if and only if it is closed and bounded. 
-\begin{proof}
-Let $K$ be a compact subset of $\R^n$. $K$ is closed by proposition 3.2.1 and $K$ is bounded by proposition 3.2.2. \\
-Let $K$ be a closed and bounded subset of $\R^n$. If $K$ is bounded then $K\subset[-r,r]^n$ for some $r>0$. I claim that $[-r,r]^n$ is compact. Once it is compact, applying 3.2.3 to the closed subset $K$ of $[-r,r]^n$, we have that $K$ is compact. \\
-Let $(x_n)_{n\in\N}$ be a sequence in $[-r,r]$ by bolzano weierstrass it has a convergent subsequence. Thus $[-r,r]$ is sequentially compact and thus compact. Using the productivity of compact metric spaces, we have that $[-r,r]^n$ is compact thus we are done. 
-\end{proof}
-\end{thm}
-
-\subsection{Uniform Continuity}
-\begin{defn}{Uniformly Continuous}{} A map $f:X\to Y$ is uniformaly continuous if for every $\epsilon>0$, there exists $\delta>0$ such that $$d_X(x,y)<\delta\implies d_Y(f(x),f(y))<\epsilon$$ for any $x,y\in X$. 
-\end{defn}
-
-\begin{thm}{}{} A continuous map from a compact metric into a metric space is uniformly continuous. 
-\end{thm}
-
-\pagebreak
-\section{Completeness}
-\subsection{Motivation and Definitions}
 \begin{defn}{Cauchy Sequence}{} We say that $\{x_n\}\subset(X,d)$ is a Cauchy sequence if for every $\epsilon>0$, there exists some $N$ such that $d(x_n,x_m)<\epsilon$ for all $n,m>\epsilon$. 
 \end{defn}
 
@@ -348,16 +285,10 @@ Let $(x_n)_{n\in\N}$ be a convergent sequence in a metric space $X$. Let $\epsil
 
 We now give the definition of a complete space in terms of Cauchy sequences. 
 
+\subsection{Complete Metric Spaces}
 \begin{defn}{Complete Spaces}{} A metric space $(X,d)$ is complete if any Cauchy sequence in $X$ converges. 
 \end{defn}
 
-\begin{prp}{}{} Every compact metric space is complete. 
-\begin{proof}
-Suppose that $(x_n)_{n\in\N}$ is a Cauchy sequence in a compact metric space $X$. Then $X$ being sequentially compact means that there exists a subsequence of $(x_n)_{n\in\N}$ such that it converges in $X$. But then clearly $$d(x_n,x)\leq d(x_n,x_{n_k})+d(x_{n_j},x)$$ implies that $x_n\to x$ since in the inequality, the first part of the sum corresponds to the sequence being Cauchy and thus tends to $0$, while the latter part correponds to the subsequence being convergent and thus tends to $0$. 
-\end{proof}
-\end{prp}
-
-\subsection{Properties of Complete Spaces}
 \begin{prp}{}{} A subspace of a metric space is complete if and only if it is closed under a complete metric space. 
 \begin{proof}
 Suppose that $X$ is a metric space and $U\subset X$ is a complete metric space. Let $(x_n)_{n\in\N}\subset U$ and that $x_n\to x\in X$. Then $(x_n)_{n\in\N}$ is Cauchy thus it convergence to some $y\in U$. We will show that in fact $x=y$. This is true from the fact that $$d|_U(x_n,y)=d(x_n,y)$$ Thus $(x_n)_{n\in\N}$ is in fact a sequence that converges in $U$. This shows that $U$ is closed. \\
@@ -380,47 +311,7 @@ The proof for $\C$ is the same in considering $\R^2$.
 \end{proof}
 \end{prp}
 
-\begin{prp}{}{} Every normed vector space is complete. 
-\end{prp}
-
-\subsection{Completion}
-The goal of this section is to attempt to complete a metric space by adding in the missing limits of a metric space. 
-
-\begin{defn}{Space of Bounded Real Functions}{} Denote $B(X)$ the space of all bounded real valued functions on a metric (topological) space $X$. This means that $$B(X)=\{f:X\to\R|\abs{f}\leq M\text{ for some }M\in\R\}$$
-\end{defn}
-
-\begin{prp}{}{} The metric space with distance induced by the supremum norm $$\|f\|_{\infty}=\sup_{x\in X}\abs{f(X)}$$ for $f\in B(X)$ is complete. 
-\begin{proof}
-Let $(f_n)_{n\in\N}$ be a Cauchy sequence in $B(X)$. Then for every $\epsilon>0$, there exists $N$ such that $$\|f_n-f_m\|_{\infty}=\sup_{x\in X}\abs{f_n(x)-f_m(x)}<\epsilon$$ for all $n,m>N$. In particular, for each $x\in X$, the property of supremum implies that $\abs{f_n(x)-f_m(x)}<\epsilon$ for $n,m>N$. Thus $(f_n(x))_{n\in\N}\subset\R$ is Cauchy for each $x$. Since $\R$ is complete, $(f_n(x))_{n\in\N}$ converges for each $x\in X$. \\
-Now define the function $f:X\to\R$ by $$f(x)=\lim_{n\to\infty}f_n(x)$$ Then fix $\epsilon>0$, we have that $$\abs{f_n(x)-f(x)}<\epsilon$$ for all $n>N$ by letting $m\to\infty$ from the fact that $\abs{f_n(x)-f_m(x)}<\epsilon$. This $N$ does not depend on $x$. Fix $\epsilon=1$, then there exists $N_1\in\N$ such that 
-\begin{align*}
-\abs{f(x)-f_n(x)}\leq\abs{f(x)-f_{N_1}(x)}\\
-\leq 1+\abs{f_{N_1}(x)}
-\end{align*} for all $x\in X$ and $n>N_1$ thus $f$ is bounded. This means that $f\in B(X)$ and that $\|f_n-f\|_\infty<\epsilon$ for all $n>N$. 
-\end{proof}
-\end{prp}
-
-\begin{prp}{}{} Any metric space $X$ can be isometrically embedded into the complete metric space $B(X)$. 
-\end{prp}
-
-\subsection{Compactness, Completeness and Totally Bounded}
-\begin{defn}{Totally Bounded}{} A metric space $X$ is totally bounded if for any $\epsilon>0$, there exists $B_\epsilon(p_k)$ for $k\in\{1,\dots,n\}$ such that $$X\subseteq\bigcup_{k=1}^nB_\epsilon(p_k)$$
-\end{defn}
-
-\begin{thm}{}{} A subspace $Y$ of a metric space $X$ that is complete is compact if and only if it is closed and totally bounded. 
-\end{thm}
-
-\begin{thm}{}{} A subspace $Y$ of a complete metric space is totally bounded if and only if its closure is compact. 
-\end{thm}
-
-\subsection{Contraction Mapping and Completion}
-\begin{defn}{Lipschitz Continuous}{} Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces and suppose that $f:X\to Y$. We say that $f$ is a Lipschitz map if there is a constant $K\geq 0$ such that $$d_Y(f(x),f(y))\leq Kd(x,y)$$ for all $x,y$ in $X$. \\
-If $Y=X$ and $K\in[0,1)$ then $f$ is a contraction mapping. 
-\end{defn}
-
-\begin{lmm}{}{} If $f:X\to Y$ is Lipschitz continuous then it is continuous. 
-\end{lmm}
-
+\subsection{The Contraction Mapping Theorem}
 \begin{thm}{Contraction Mapping Theorem}{} Let $X$ be a nonempty complete metric space and suppose that $f:X\to X$ is a contraction. Then $f$ has a unique fixed point, meaning there is a unique $x\in X$ such that $f(x)=x$. 
 \begin{proof}
 Let $x_0\in X$ and define a sequence by $x_{n+1}=f(x_n)$ for $n\in\N$. Then we have that $$d(x_{n+1},x_n)\leq Kd(x_n,x_{n-1})\leq\dots\leq K^nd(x_1,x_0)$$ Then for any $k>n$, we have that 
@@ -446,125 +337,6 @@ Another name for this theorem would be Banach's Fixed Point Theorem.
 \begin{lmm}{}{} The Cantor set is uncountable. 
 \end{lmm}
 
-\pagebreak
-\section{Complex Numbers as a Metric Space}
-\subsection{Metric Properties of $\C$}
-\begin{defn}{The Standard Norm on $\C$}{}\\
-Define the standard norm on $\C$ to be the function $\abs{\cdot}:\C\to\R$ by $$\abs{a+bi}=\sqrt{a^2+b^2}$$
-\end{defn}
-
-\begin{lmm}{}{}\\
-The standard norm on $\C$ is indeed a norm on $\C$. 
-\end{lmm}
-
-The norm thus induces a metric $d:\C\times\C\to\R$ on $\C$ given by $$d(z_1,z_2)=\abs{z_1-z_2}$$ Thus it makes sense to talk about sequences, limits and continuity of functions from $\C$ to $\C$. Since $\C$ is also a field, we would like to know how addition and multiplication interacts with sequences and limits. 
-
-\begin{prp}{}{}\\
-Let $f,g:\C\to\C$ be functions. Let $z_0\in\C$. Suppose that the limits $\lim_{z\to z_0}f(z)$ and $\lim_{z\to z_0}g(z)$ exists. Then the following are true. 
-\begin{itemize}
-\item $\lim_{z\to z_0}(f+g)(z)=\lim_{z\to z_0}f(z)+\lim_{z\to z_0}g(z)$. 
-\item $\lim_{z\to z_0}(fg)(z)=\lim_{z\to z_0}f(z)\cdot\lim_{z\to z_0}g(z)$. 
-\item If $\lim_{z\to z_0}g(z)\neq 0$, then we have $$\lim_{z\to z_0}\left(\frac{f}{g}\right)(z)=\frac{\lim_{z\to z_0}f(z)}{\lim_{z\to z_0}g(z)}$$
-\end{itemize}
-\end{prp}
-
-\begin{prp}{}{} Let $z_0=a+bi$. Let $f(x+yi)=u(x,y)+v(x,y)i$. $$\lim_{z\to z_0}f(z)=L=\alpha+\beta i$$ if and only if $u(x,y)\to\alpha$ and $v(x,y)\to\beta$ as $(x,y)\to(a,b)$
-\end{prp}
-
-\begin{prp}{}{} Let $f:\Omega\subset\C\to\C$. Then $f(x+yi)=u(x,y)+v(x,y)i$ is continuous at $z_0=x_0+y_0i$ if and only if $u,v$ are continuous at $(x_0,y_0)$
-\end{prp}
-
-\subsection{The Modulus and Argument of a Complex Number}
-\begin{defn}{Modulus}{}\\
-Let $a+bi\in\C$ be a complex number. Define the modulus of the number to be $$\abs{a+bi}=\sqrt{a^2+b^2}$$
-\end{defn}
-
-\begin{prp}{}{} Then the following are true regarding the modulus. 
-\begin{itemize}
-\item $\abs{z}^2=\abs{z}\abs{\bar{z}}$
-\item $\abs{\bar{z}}=\abs{z}$
-\item $\abs{zw}=\abs{z}\abs{w}$
-\item $z\bar{z}=\abs{z}^2$
-\item $\abs{z+w}\leq\abs{z}+\abs{w}$
-\item $\abs{z-w}=\abs*{\abs{z}-\abs{w}}$
-\end{itemize}
-\end{prp}
-
-Recall that from real analysis, we defined the power series $$\cos(x)=\sum_{k=0}^\infty\frac{(-1)^k}{(2k)!}x^{2k}\;\;\text{ and }\;\;\sin(x)=\sum_{k=0}^\infty\frac{(-1)^k}{(2k+1)!}x^{2k+1}$$
-
-\begin{defn}{Argument}{}\\
-Define the argument function $\text{arg}:\C\to\mP(\R)$ by the formula $$\text{arg}(a+bi)=\left\{\theta\in\R\;\bigg{|}\;\cos(\theta)=\frac{a}{\abs{a+bi}}\text{ and }\sin(\theta)=\frac{b}{\abs{a+bi}}\right\}$$
-\end{defn}
-
-\begin{prp}{}{} The following are true regarding the argument. 
-\begin{itemize}
-\item $\arg{(zw)}=\arg{(z)}+\arg{(w)}=\{\theta+\phi\;|\;\theta\in\arg(z), \phi\in\arg(w)\}$
-\item $\arg{(\bar{z})}=-\arg{(z)}$
-\end{itemize}
-\end{prp}
-
-\begin{lmm}{}{} Let $z\in\C$ be a complex number. Then there exists a unique real number $\theta\in\R$ such that $\theta\in\arg(z)$ and $-\pi<\theta\leq\pi$. 
-\end{lmm}
-
-\begin{defn}{Principal Argument}{} Define the principal argument function $\text{Arg}:\C\to\R$ to be the function sending $z\in\C$ to the unique real number $\text{Arg}(z)\in\R$ such that $-\pi<\text{Arg}(z)\leq\pi$ and $\text{Arg}(z)\in\arg(z)$. 
-\end{defn}
-
-\begin{lmm}{}{} Let $z\in\C$ be a complex number. Then $$\arg(z)=\{\text{Arg}(z)+2\pi k\;|\;k\in\Z\}$$
-\end{lmm}
-
-\subsection{The Complex Exponential and Logarithm}
-\begin{defn}{Exponential Function}{} The exponential function is defined to be the function $$e^z=\sum_{k=0}^\infty\frac{z^k}{k!}=\lim_{n\to\infty}\sum_{k=0}^n\frac{z^k}{k!}$$ for all $z\in\C$. 
-\end{defn}
-
-\begin{prp}{}{}\\
-For all $z\in\C$, the limit $e^z$ is convergent. 
-\end{prp}
-
-\begin{prp}{}{} Let $z,z_1,z_2\in\C$. Then
-\begin{itemize}
-\item $e^{z_1+z_2}=e^{z_1}e^{z_2}$
-\item $e^{mn}=(e^{m})^n$
-\item $\frac{d}{dz}e^z=e^z$
-\item $e^{i\theta}=\cos(\theta)+i\sin(\theta)$ for $\theta\in\R$. 
-\end{itemize}
-\end{prp}
-
-From now on we denote the logarithm for the real numbers by $\text{Log}:\R\to\R$. 
-
-\begin{defn}{Logarithm of a Complex Number}{} Define the logarithm of $z\in\C$ to be $\log(z)=\text{Log}(\abs{z})+i\arg(z)$. In terms of the $\text{Arg}(z)$ function, we have $$\log(z)=\text{Log}(\abs{z})+i\text{Arg}(z)+2i\pi k$$ for $k\in\Z$. Define the principal branch of the Logarithm to be $$\log(z)=\text{Log}(z)+i\text{Arg}(z)$$
-\end{defn}
-
-\begin{defn}{Principal Branch}{} Let $z=re^{i\theta}$. Define the principal branch of the logarithm to be $\log(z)=\log(r)+i(\theta)$ where $-\pi<\theta\leq\pi$
-\end{defn}
-
-\subsection{The Polar Form and Exponential Form of Complex Numbers}
-\begin{defn}{Polar Form}{} Let $z\in\C$ be a complex number. Define the polar form of $z$ to be the expression $$z=\abs{z}\left(\cos(\text{Arg}(z))+\sqrt{-1}\sin(\text{Arg}(z))\right)$$
-\end{defn}
-
-\begin{prp}{}{} Suppose that $z=r(\cos{(\theta)}+i\sin{(\theta)})$ and $w=s(\cos{(\phi)}+i\sin{(\phi)})$. 
-\begin{itemize}
-\item $zw=rs(\cos{(\theta+\phi)}+i\sin{(\theta+\phi)})$
-\item $\frac{1}{z}=\frac{1}{r}(\cos{(-\theta)}+i\sin{(-\theta)})$
-\item $\frac{z}{w}=\frac{r}{s}(\cos{(\theta-\phi)}+i\sin{(\theta-\phi)})$
-\item $\bar{z}=r(\cos{(-\theta)}+i\sin{(-\theta)})$
-\end{itemize}
-\end{prp}
-
-\begin{thm}{The Exponential Form of a Complex Number}{} Every $z\in\C$ can be written in the form $$z=re^{i\theta}$$ where $r=\abs{z}>0$ and $\theta\in\arg(z)$. 
-\end{thm}
-
-\begin{lmm}{}{} Suppose that $\theta$ and $\phi$ are real numbers.Then $e^{i\theta}=e^{i\phi}$ if and only if there exists some $k\in\Z$ such that $\phi=\theta+2\pi k$. 
-\end{lmm}
-
-\subsection{Roots of Complex Numbers}
-\begin{defn}{$n$th Roots}{} Let $w\neq0$ be a complex number and $n$ a positive integer. A number $z$ is called the $n$th root of $w$ if and only if $z^n=w$. 
-\end{defn}
-
-\begin{thm}{De Moivre's Theorem}{} Suppose that $r\in\mathbb{Q}$. Then $(\cos{\theta}+i\sin{\theta})^r=\cos{(r\theta)}+i\sin{(r\theta)}$
-\end{thm}
-
-\begin{thm}{Roots of Unity}{} Suppose that $z=re^{i\theta}$. Then the $n$th roots of $z$ are $$r^{\frac{1}{n}}\left[\cos{\left(\frac{(\theta+2\pi k)i}{n}\right)}+i\sin{\left(\frac{(\theta+2\pi k)i}{n}\right)}\right]$$ where $k=0,1,\dots,n-1$. 
-\end{thm}
 
 
 \end{document}

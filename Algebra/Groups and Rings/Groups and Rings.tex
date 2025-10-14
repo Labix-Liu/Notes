@@ -22,7 +22,11 @@
 \pagebreak
 
 \section{Introduction to Groups}
+Abstract algebra is the study of symmetry, and the most basic form of symmetry is refined into the definition of a group. However the notion of a group was not explicitly defined until set theory and the formalization of a group. Despite this, the concept of groups and group actions had been made use by a number of Mathematicians, such as Galois in his study of the symmetries of the roots of a polynomial. 
+
 \subsection{Basic Concepts of Groups}
+Formally, the definition of a group involves a set and an operation on the set that gives rise to symmetry. 
+
 \begin{defn}{Binary Operation}{}\\
 A binary operation $\ast$ on a set $G$ is a function $$\ast:G\times G\to G$$
 \end{defn}
@@ -99,7 +103,7 @@ Let $K=\{1,a,b,c\}$. Define a binary operation $\cdot:K\times K\to K$ by the fol
 \item $a\cdot c=c\cdot a=b$. 
 \item $b\cdot c=c\cdot b=a$. 
 \end{itemize}
-Then $(K,\cdot)$ is a group. 
+Then $(K,\cdot)$ is a group, and $\abs{a}=\abs{b}=\abs{c}=2$. 
 \end{eg}
 
 \begin{lmm}{}{}\\
@@ -771,26 +775,36 @@ Based on the number of transpositions an element can be decomposed to, we classi
 
 \pagebreak
 \section{Group Actions}
-Group actions are in a sense more fundamental then the notion of groups. One of the pioneers of group theory, Galois first used techniques in group actions to manipulate roots of a polynomial by permutations. Galois eventually gave an argument without the use of group theory or field theory why the roots of some quintic polynomials can not be expressed in radicals or the standard operations on $\R$. 
+Group actions are in a sense more fundamental then the notion of groups. One of the pioneers of group theory, Galois first used techniques in group actions to manipulate roots of a polynomial by permutations. 
 
 \subsection{Group Actions}
 Within group theory, there are also interesting applications of group actions by considering groups acting on particular sets such as the set of conjugacy classes and the set of cosets. 
 
-\begin{defn}{Groups Actions}{} Let $G$ be a group and $X$ a set. An action of $G$ on $X$ is a map $\cdot:G\times X\to X$ such that the following properties are satisfied. 
+\begin{defn}{Groups Actions}{}\\
+Let $G$ be a group. Let $X$ be a set. An action of $G$ on $X$ is a map $\cdot:G\times X\to X$ such that the following properties are satisfied. 
 \begin{itemize}
 \item Associativity: $(g_1g_2)\cdot x=g_1\cdot(g_2\cdot x)$
 \item Identity: $1\cdot x=x$
 \end{itemize}
 \end{defn}
 
+\begin{eg}{}{}\\
+Let $G$ be a group. Then $G$ acts on itself by left multiplication. 
+\end{eg}
+
+\begin{eg}{}{}\\
+Let $G$ be a group. Let $H\leq G$ be a subgroup. Then $G$ acts on the set of cosets $G/H=\{gH\;|\;g\in G\}$ by the action defined by $$g_1\cdot g_2H=g_1g_2H$$
+\end{eg}
+
 Depending on how one looks at action of the group on the set (element wise, or group wise), we obtain two viewpoints of the same idea. 
 
-\begin{prp}{}{} Let $G$ be a group acting on a set $X$. Let $\phi:G\to\text{Sym}(X)$ be defined by $\phi(g)(x)=g\cdot x$. We have that 
+\begin{prp}{}{}\\
+Let $G$ be a group. Let $X$ be a set. Suppose that $G$ acts on $X$. Let $\phi:G\to\text{Sym}(X)$ be the function defined by $\phi(g)(x)=g\cdot x$. Then the following are true. 
 \begin{itemize}
-\item For each $g\in G$, $\phi(g):X\to X$ is a permutation of $X$
+\item $\phi$ is a well defined map. 
 \item The mapping $\phi:G\to\text{Sym}(X)$ is a homomorphism
 \end{itemize}
-\begin{proof}~\\
+\begin{proof}\\
 \begin{itemize}
 \item To show that $\phi(g)$ is a permutation, we simply need to show that it is a bijection on itself. $\phi(g)$ is a bijection if and only if it has an inverse. For all $x\in X$, we have that 
 \begin{align*}
@@ -807,7 +821,8 @@ And so we conclude.
 
 In particular, the theorem also shows that $G$ is isomorphic to a subgroup of $\text{Sym}(X)$ provided that $\phi$ is injective. This is the content of Cayley's theorem. 
 
-\begin{thm}{Cayley's Theorem}{} Every group $G$ is isomorphic to a subgroup of $\text{Sym}(G)$. 
+\begin{thm}{Cayley's Theorem}{}\\
+Every group $G$ is isomorphic to a subgroup of $\text{Sym}(G)$. 
 \begin{proof}
 Consider the map $\phi_g:G\to G$ defined by $\phi_g(x)=gx$ for any $g\in G$. $\phi_{g^{-1}}$ is an inverse of $\phi_g$ and thus $\phi_g$ is bijective and thus $\phi_g\in\text{Sym}(G)$ by definition. \\
 Consider the function $T:G\to\text{Sym}(G)$ defined by $T(g)=\phi_g$. We have that 
@@ -824,12 +839,14 @@ Now we show that $T$ is injective. Suppose that $T(g)=\text{id}_G$. This means t
 
 Using the fact that $\phi$ gives a homomorphism from $G$ to the symmetric group $\text{Sym}(X)$ of the acting set $X$, we can define the kernel of a group action, which are precisely elements of $g$ that fix the set $X$. 
 
-\begin{defn}{Kernel}{} Let $G$ be a group acting on $X$. Define the kernel of the action to be the kernel of $\phi:G\to\text{Sym}(X)$, which is $$\ker(G,X,\cdot)=\{g\in G\;|\;g\cdot x=x\text{ for all }x\in X\}$$ An action is faithful if $\ker(G,X,\cdot)=\{1\}$
+\begin{defn}{Kernel}{}\\
+Let $G$ be a group. Let $X$ be a set. Suppose that $G$ acts on $X$. Define the kernel of the action to be the kernel of $\phi:G\to\text{Sym}(X)$, which is $$\ker(G,X,\cdot)=\{g\in G\;|\;g\cdot x=x\text{ for all }x\in X\}$$ We say that the group action is faithful if $\ker(G,X,\cdot)=\{1\}$. 
 \end{defn}
 
 This idea of a kernel is also employed in the proof of Cayley's theorem above. We can also improve on the result of Cayley's theorem using the kernel of an action. Moreover, notice that the kernel of a group action is a normal subgroup of $G$ just because the definition of it is just a special case of the kernel of a general group homomorphism. 
 
-\begin{prp}{}{} Let $X$ be a finite set of cardinality $n$ and let $G$ be a group acting on $X$. If $G$ acts on $X$ faithfully then $G$ is isomorphic to a subgroup of $S_n$. 
+\begin{prp}{}{}\\
+Let $G$ be a group. Let $X$ be a set of cardinality $n\in\N$. Suppose that $G$ acts on $X$. If $G$ acts on $X$ faithfully then $G$ is isomorphic to a subgroup of $S_n$. 
 \begin{proof}
 Write $\phi:G\to\text{Sym}(X)$ to be the isomorphism given in theorem 4.1.2. By the first isomorphism theorem, we have that $$G\cong\frac{G}{\ker(G,X,\cdot)}\cong\im(\phi)\leq\text{Sym}(X)$$ where the last inequality follows because $\im(\phi)$ is a permutation group on $X$. 
 \end{proof}
@@ -840,17 +857,24 @@ This is a stronger result then Cayley's theorem because for example, the group $
 \subsection{Orbits and Stabilizers}
 Orbits and stabilizers form the core of group actions. Lagrange's theorem applies to orbits and stabilizers to mimic a very similar result to Lagrange's theorem itself. Similar to how Lagrange's theorem is fundamental in group theory, the orbit-stabilizer theorem is fundamental in the theory of group actions. 
 
-\begin{defn}{Orbits}{} Let $G$ be a group acting on the nonempty set $X$. Define the orbit of $G$ containing $x$ to be the set $$\text{Orb}_G(x)=\{g\cdot x\;|\; g\in G\}$$ for any $x\in X$. 
+\begin{defn}{Orbits}{}\\
+Let $G$ be a group. Let $X$ be a set. Suppose that $G$ acts on $X$. Define the orbit of $G$ containing $x$ to be the set $$\text{Orb}_G(x)=\{g\cdot x\;|\; g\in G\}$$ for any $x\in X$. 
 \end{defn}
 
 Different $x\in X$ could give the same orbit. Indeed if $g\cdot x=y$ then $g^{-1}\cdot y=x$. In fact, this gives an equivalence relation on $X$ defining the orbits of $G$ on $X$. For $x,y\in X$, suppose that $x\sim y$ if there exists $g\in G$ such that $g\cdot x=y$. It is easy to check that $\sim$ defines an equivalence relation on $X$ and its equivalence classes are in fact the orbits. 
 
-\begin{defn}{Stabilizer}{} Let $G$ be a group that acts on $X$. Let $x\in X$. Define the stabilizer of $x$ to be $$\text{Stab}_G(x)=\{g\in G\;|\;g\cdot x=x\}$$
+\begin{defn}{Stabilizer}{}\\
+Let $G$ be a group. Let $X$ be a set. Suppose that $G$ acts on $X$. Let $x\in X$. Define the stabilizer of $x$ to be $$\text{Stab}_G(x)=\{g\in G\;|\;g\cdot x=x\}$$
 \end{defn}
+
+\begin{eg}{}{}\\
+Let $G$ be a group. Let $H\leq G$ be a subgroup. Then the stabilizer of $H$ the action of $G$ on $G/H$ is given by $$\text{Stab}_G(H)=H$$
+\end{eg}
 
 The stabilizer cam be seem as a generalization of normalizers. Indeed one can consider the group action of $G$ on the set $\{xHx^{-1}\;|\;x\in G\}$ for $H$ a subgroup of $G$. This action is given by $g\cdot xHx^{-1}=gxHx^{-1}g^{-1}$. Then notice that the set of all $g\in G$ that stabilizes $H$ is precisely $$N_G(H)=\text{Stab}_G(H)$$ We will also see important types of stabilizers when considering particular applications of group actions to some sets. 
 
-\begin{prp}{}{} Let $G$ be a group acting on $X$. Then the following are true. 
+\begin{prp}{}{}\\
+Let $G$ be a group. Let $X$ be a set. Suppose that $G$ acts on $X$. Then the following are true. 
 \begin{itemize}
 \item $\text{Stab}_G(x)\leq G$ 
 \item $\bigcap_{x\in X}\text{Stab}_G(x)=\ker(G,X,\cdot)$
@@ -870,9 +894,8 @@ This gives the desired result.
 \end{proof}
 \end{prp}
 
-Now come the major result of the theory of group actions. As mentioned before it stands in a similar stance as Lagrange's theorem in the theory of group actions. Most other major results such as the class equation and Cauchy's theorem also stems on the orbit-stabilizer theorem. 
-
-\begin{thm}{Orbit Stabilizer Theorem}{} Let $G$ be a finite group acting on $X$. If $x\in X$, then $$\abs{\text{Orb}_G(x)}=[G:\text{Stab}_G(x)]\;\;\;\;\text{ and }\;\;\;\;\abs{G}=\abs{\text{Orb}_G(x)}\abs{\text{Stab}_G(x)}$$ 
+\begin{thm}{Orbit Stabilizer Theorem}{}\\
+Let $G$ be a finite group. Let $X$ be a set. Suppose that $G$ acts on $X$. If $x\in X$, then $$\abs{\text{Orb}_G(x)}=[G:\text{Stab}_G(x)]\;\;\;\;\text{ and }\;\;\;\;\abs{G}=\abs{\text{Orb}_G(x)}\abs{\text{Stab}_G(x)}$$ 
 \begin{proof}
 The goal is to define a bijection between cosets of $\text{Stab}_G(x)$ and elements in $\text{Orb}_G(x)$. Define $f:\text{Orb}_G(x)\to G/G_x$ by $f(g)=g\text{Stab}_G(x)$. This map is clearly well defined. \\
 Injectivity: \\
@@ -885,7 +908,8 @@ Thus $\abs{\text{Orb}_G(x)}=[G:\text{Stab}_G(x)]$.
 
 The following corollary is an important consequence of the Orbit Stabilizer theorem. 
 
-\begin{crl}{}{} Let $G$ be a finite group acting on a set $X$. Then the following are true regarding the orbits of the action. 
+\begin{crl}{}{}\\
+Let $G$ be a finite group. Let $X$ be a set. Suppose that $G$ acts on $X$. Then the following are true regarding the orbits of the action. 
 \begin{itemize}
 \item Either $\text{Orb}_G(x)=\text{Orb}_G(y)$ or $\text{Orb}_G(x)\cap\text{Orb}_G(y)=\emptyset$
 \item The set of all orbits form a partition of $X$
@@ -898,7 +922,8 @@ Define a relation where for $x,y\in X$, we say that $x\sim y$ if and only if $g\
 \subsection{The Action of Conjugation}
 Conjugation marks one of the most important group actions that one should consider, with the other two being rather trivial: the action of left multiplication and the action of $G$ on the set of cosets of $H$ in $G$. In particular, Cauchy's theorem is a major application of such a group action. 
 
-\begin{defn}{Conjugation}{} Let $G$ be a group. Define conjugation to be an action of $G$ on $G$ where $\cdot:G\times G\to G$ is defined by $g\cdot x=gxg^{-1}$. Define the conjugacy classes of a group to be the orbits of conjugation: $$\text{Cl}(x)=\{gxg^{-1}\;|\;g\in G\}=\text{Orb}_G(x)$$ Two elements are said to be conjugate to each other if they lie in the same conjugacy classes. 
+\begin{defn}{Conjugation}{}\\
+Let $G$ be a group. Define conjugation to be an action of $G$ on $G$ where $\cdot:G\times G\to G$ is defined by $g\cdot x=gxg^{-1}$. Define the conjugacy classes of a group to be the orbits of conjugation: $$\text{Cl}(x)=\{gxg^{-1}\;|\;g\in G\}=\text{Orb}_G(x)$$ Two elements are said to be conjugate to each other if they lie in the same conjugacy classes. 
 \end{defn}
 
 It is easy to see that the action of conjugation is indeed a group action. Aside from the conjugacy classes of a group, we also have the notion of centralizers. 
@@ -952,7 +977,8 @@ Now suppose that $\abs{G}=p^3$. By Lagrange's theorem, $\abs{Z(G)}$ is either $p
 
 We end the section with two important consequence of the Orbit Stabilizer theorem applied to the action of conjugacy. 
 
-\begin{thm}{Cauchy's Theorem}{} Let $G$ be a finite group. Let $p$ be a prime divisor of $\abs{G}$. Then $G$ contains an element of order $p$. Moreover, the number of elements of order $p$ is congruent to $-1$ modulo $p$. 
+\begin{thm}{Cauchy's Theorem}{}\\
+Let $G$ be a finite group. Let $p$ be a prime divisor of $\abs{G}$. Then $G$ contains an element of order $p$. Moreover, the number of elements of order $p$ is congruent to $-1$ modulo $p$. 
 \begin{proof}
 Define $X=\{(x_1,\dots,x_p)|x_i\in G\text{ and }x_1\cdots x_p=1\}$. Notice that 
 \begin{align*}
@@ -983,7 +1009,8 @@ Now let $\mathcal{P}=\{x\in G|\abs{x}=p\}$. Then since the orbits partition $X$,
 
 Cauchy's theorem is a useful tool on analysing the the elements of a group. 
 
-\begin{thm}{The Class Equation}{} Let $G$ be a finite group and let $g_1,g_2,\dots,g_r$ be representatives of the distinct conjugacy classes of $G$ not contained in $Z(G)$. Then $$\abs{G}=\abs{Z(G)}+\sum_{i=1}^r[G:C_G(g_i)]=\abs{Z(G)}+\sum_{i=1}^r\abs{\text{Orb}_G(x_i)}$$ 
+\begin{thm}{The Class Equation}{}\\
+Let $G$ be a finite group and let $g_1,g_2,\dots,g_r$ be representatives of the distinct conjugacy classes of $G$ not contained in $Z(G)$. Then $$\abs{G}=\abs{Z(G)}+\sum_{i=1}^r[G:C_G(g_i)]=\abs{Z(G)}+\sum_{i=1}^r\abs{\text{Orb}_G(x_i)}$$ 
 \begin{proof}
 Suppose that $G$ acts on itself by conjugation. We know that the orbits partition the group $G$ since it is a quotient of an equivalence relation. However, for any $g\in Z(G)$, $gxg^{-1}=x$ for any $x\in X$. Thus every element in $Z(G)$ is itself an orbit. Combining these facts, we have that $$\abs{G}=\abs{Z(G)}+\sum_{i=1}^r\abs{G:C_G(g_i)}=\abs{Z(G)}+\sum_{i=1}^r\abs{\text{Cl}(g_i)}$$
 \end{proof}
@@ -1046,29 +1073,32 @@ Groups are defined as a set with additional constraints. Since sets have the Car
 \subsection{External Direct Products}
 We first have the external product. It is the most direct and natural way to construct multiplication between two groups. 
 
-\begin{defn}{External Product}{} Let $(G,\ast)$ and $(H,\circ)$ be groups. Define a group operation of $G$ and $H$ called the external (direct) product $G\times H$ with the operation $$(g_1,h_1)\times(g_2,h_2)=(g_1\ast g_2,h_1\circ h_2)$$ for $g_1,g_2\in G$ and $h_1,h_2\in H$. 
+\begin{defn}{External Product}{}\\
+Let $(G,\ast)$ and $(H,\circ)$ be groups. Define a group operation of $G$ and $H$ called the external (direct) product $G\times H$ with the operation $$(g_1,h_1)\times(g_2,h_2)=(g_1\ast g_2,h_1\circ h_2)$$ for $g_1,g_2\in G$ and $h_1,h_2\in H$. 
 \end{defn}
 
 It is easy to see that the group operation indeed defines a group structure on $G\times H$. Indeed we can check the group operations element wise. Moreover, from set theory we know that the order of $G\times H$ is equal to $\abs{G}\times\abs{H}$. There is nothing mysterious about external direct products. 
 
-\begin{thm}{}{} Let $(g,h)\in G\times H$. If $g$ and $h$ has finite order $r$ and $s$ respectivelty, then $$\abs{(g,h)}=\lcm(r,s)$$ 
+\begin{prp}{}{} Let $(g,h)\in G\times H$. If $g$ and $h$ has finite order $r$ and $s$ respectivelty, then $$\abs{(g,h)}=\lcm(r,s)$$ 
 \begin{proof}
 Trivially we have that $\abs{(g,h)}|\lcm(r,s)$. Suppose that $\abs{(g,h)}<\lcm(r,s)$. Then by definition of the lcm, either $r|\abs{(g,h)}$ or $s|\abs{(g,h)}$ but not both. But then maximally we only have one of the elements in $(g,h)$ be the identity. Thus we must have $\abs{(g,h)}=\lcm(r,s)$. 
 \end{proof}
-\end{thm}
+\end{prp}
 
-\begin{prp}{}{} Let $G_1,\dots, G_n$ be groups and $G$ their exrternal product. Then $$G/G_i\cong G_1\times\cdots \times G_{i-1}\times G_{i+1}\times\cdots\times G_n$$
+\begin{prp}{}{}\\
+Let $G_1,G_2$ be groups. Then the following are true. 
+\begin{itemize}
+\item $G_1\times\{1\}$ and $\{1\}\times G_2$ are normal subgroups of $G_1\times G_2$. 
+\item $\frac{G_1\times G_2}{G_1\times\{1\}}\cong G_2$, and $\frac{G_1\times G_2}{\{1\}\times G_2}\cong G_1$
+\end{itemize}
 \begin{proof}
-Let $g=(g_1,\dots,g_n)\in G$. Take the function $f(gG_i)=(g_1,\dots,g_{i-1},g_{i+1},\dots,g_n)$ to be the isomorphism. Indeed the function is well defined. For any $g\in G$, $gG_i$ is unique up to the $i$th element. It is a homomorphism since $f((gG_i)(hG_i))=f(ghG_i)$ is easy to check. \\
-To show injectivity, let $f(gG_i)=f(hG_i)$. Then
-\begin{align*}
-f(gG_i)&=f(hG_i)\\
-(g_1,\dots,g_{i-1},g_{i+1},\dots,g_n)&=(h_1,\dots,h_{i-1},h_{i+1},\dots,h_n)\\
-\end{align*}
-Note that the $i$th element does not matter since two $g_i\in G_i$ gives the same coset. Thus $gG_i=hG_i$ and we are done. Surjectivity is trivial since for any given $(g_1,\dots,g_{i-1},g_{i+1},\dots,g_n)$, take $g=(g_1,\dots,g_{i-1},1,g_{i+1},\dots,g_n)$ and $f(gG_i)=(g_1,\dots,g_{i-1},g_{i+1},\dots,g_n)$ and we are done. \\
-Thus the two groups are isomorphic. 
+Without loss of generality we only consider the subgroup $G_1$ in $G_1\times G_2$. Checking that $G_1\times\{1\}$ is trivial. For any $(g_1,g_2)\in G_1\times G_2$ and $(h,1)\in G_1\times\{1\}\leq G_1\times G_2$, we have $$(g_1,g_2)\cdot(h,1)\cdot(g_1^{-1},g_2^{-1})=(g_1hg_1^{-1},1)\in G_1\times\{1\}$$ Hence $G_1\times\{1\}$ is normal in $G_1\times G_2$. \\
+
+Define a function $\phi:\frac{G_1\times G_2}{G_1\times\{1\}}\to G_2$ by $$\phi((g_1,g_2)G_1\times\{1\})=g_2$$ To show that this function is well defined, we need to show that different representatives of the same element in the quotient maps to the same element. So suppose that $(g_1,g_2)G_1\times\{1\}=(h_1,h_2)G_1\times\{1\}$. Then we have that $(h_1^{-1},h_2^{-1})\cdot(g_1,g_2)\in G_1\times\{1\}$. Hence $g_2=h_2$, and so $$\phi((g_1,g_2)G_1\times\{1\})=g_2=h_2=\phi((h_1,h_2)G_1\times\{1\})$$ We now show that $\phi$ is bijective. Suppose that $\phi((g_1,g_2)G_1\times\{1\})=\phi((h_1,h_2)G_1\times\{1\})$. Then we have $g_2=h_2$. But $g_2=h_2$ implies that $(g_1,g_2)G_1\times\{1\}=(h_1,h_2)G_1\times\{1\}$. Hence $\phi$ is injective. Now suppose that $g_2\in G_2$. Then $\phi((1,g_2)G_1\times\{1\})=g_2$. Hence $\phi$ is surjective. Thus the two groups are isomorphic. 
 \end{proof}
 \end{prp}
+
+Taking $G_2=\{1\}$ the trivial group, we see that $G_1\times\{1\}$ is isomorphic to $G_1$. Hence we usually write the subgroup $G_1\times\{1\}$ in $G_1\times G_2$ simply as $G_1$. 
 
 \begin{prp}{}{} Let $m,n\in\N$. Then $$C_m\times C_n\cong C_{mn}$$ if and only if $\gcd(m,n)=1$. 
 \begin{proof}
@@ -1080,7 +1110,8 @@ Now let $\gcd(m,n)=1$. Define a function $\phi:C_m\times C_n\to C_{m\times n}$ w
 \subsection{Internal Direct Products}
 While the external product is concerned of the product between two groups, the internal direct product is interested in how two subgroups of a group could be "multiplied" to form the group itself. Essentially, we are trying to decompose a group into its internal direct product. 
 
-\begin{defn}{Internal Direct Product}{} Let $G$ be a group and $H,K\leq G$. Define $$HK=\{hk|h\in H,k\in K\}$$ If $G=HK\cong H\times K$ we say that $HK$ is the internel direct product of $G$. 
+\begin{defn}{Product of Subgroups}{}\\
+Let $G$ be a group. Let $H,K\leq G$ be subgroups. Define the product of $H$ and $K$ to be $$HK=\{hk\;|\;h\in H,k\in K\}$$
 \end{defn}
 
 Notice that the set $HK$ is not necessarily a group by its own right. Even if it is, it could happen that $HK$ is a subgroup of $G$. In particular, we have a necessary and sufficient criterion for $HK$ to be a subgroup of $G$. 
@@ -1120,29 +1151,31 @@ Notice that since the gcd is $1$, we have that $$\lcm\left([G:H],[G:K]\right)=\f
 \end{proof}
 \end{prp}
 
-The following theorem gives a sufficient criterion for $HK$ to be the internal direct product so that the external and internal direct product coincide. 
+\begin{defn}{Internal Direct Products}{}\\
+Let $G$ be a group. Let $H,K\leq G$ be subgroups. We say that $G$ is the internal direct product of $G$ if $G\cong H\times K$. 
+\end{defn}
 
-\begin{thm}{}{} Suppose that $G$ is a group with normal subgroups $H,K$ such that $H\cap K=\{1\}$ and $G=HK$, then the following are true. 
+To recognize a group as a product of subgroups, we first learn what the essence of external direct products are. Let $G_1,G_2$ be groups. Then $G_1\times G_2$ has the following important properties: 
 \begin{itemize}
-\item All $h\in H$ and all $k\in K$ commute
-\item $G\cong H\times K$
-\end{itemize} 
-\begin{proof}~\\
-\begin{itemize}
-\item Let $h\in H$ and $k\in K$. Consider the element $g=hkh^{-1}k^{-1}$. Since both $H$ and $K$ are normal, we have $hkh^{-1},k\in K$ and $khk^{-1},h\in H$ so that $g\in H\cap K=\{1\}$. Thus $hkh^{-1}k^{-1}=1$. 
-\item Define $\varphi:H\times K\to G$ by $\varphi(h,k)=hk$. Then we have 
-\begin{align*}
-\varphi((h_1,k_1)(h_2,k_2))&=\varphi(h_1h_2,k_1k_2)\\
-&=h_1h_2k_1k_2\\
-&=h_1k_1h_2k_2\\
-&=\varphi(h_1,k_1)\varphi(h_2,k_2)
-\end{align*}
-so that $\varphi$ is a homomorphism. Notice that $\varphi$ is surjective because $G=HK$. Suppose that $\varphi(h,k)=1$. Then $hk=1$ implies $h=k^{-1}\in H\cap K=\{1\}$. Thus $h=k=1$ so that $\varphi$ is an isomorphism and we conclude. 
+\item $G_1\cap G_2=\{1\}$. 
+\item Every element of $G_1\times G_2$ can be expressed uniquely as the product of an element in $G_1$ and an element in $G_2$. 
+\item $G_1,G_2$ are normal subgroups of $G_1\times G_2$ (under the assumptions of the above two, these condition is equivalent to saying elements of $G_1$ commute with elements of $G_2$). 
 \end{itemize}
-\end{proof}
-\end{thm}
 
-\subsection{Semidirect Product}
+In the start of this subsection we introduced the product of two subgroups. This is so that we may recognize condition two in the above. 
+
+\begin{prp}{}{}\\
+Let $G$ be a group. Let $H,K\leq G$ be subgroups. Then $G$ is the internal direct product of $H$ and $K$ if the following are true. 
+\begin{itemize}
+\item $H\cap K=\{1\}$. 
+\item $G=HK$. 
+\item $H,K$ are normal subgroups of $G$. 
+\end{itemize}
+\begin{proof}
+\end{proof}
+\end{prp}
+
+\subsection{Semidirect Products}
 We would like to generalize the direct product of two finite groups. 
 
 \begin{prp}{}{} Let $H,K$ be groups and let $\phi$ be a homomorphism from $K$ into $\text{Aut}(H)$. Let $G$ be the set of all ordered pairs $(h,k)$ where $h\in H$ and $k\in K$. Then the operation $$(h_1,k_1)(h_2,k_2)=\left(h_1\cdot\phi_{k_1}(h_2),k_1k_2\right)$$ allows $G$ to be a group. 
@@ -1930,6 +1963,14 @@ Since $R\leq R[x]$ by considering all the constant polynomials, the identity of 
 \end{proof}
 \end{lmm}
 
+\begin{prp}{}{} Let $R$ be a commutative ring. Let $I$ be an ideal of $R$. Then the following are true. 
+\begin{itemize}
+\item $I[x]$ is an ideal of $R$
+\item There is an isomorphism $\frac{R[x]}{I[x]}\cong\frac{R}{I}[x]$ given by the map $\left(f=\sum_{k=0}^na_kx^k+I[x]\right)\mapsto\left(\sum_{k=0}^n(a_k+I)x^k\right)$
+\item If $I$ is a prime ideal of $R$, then $I[x]$ is a prime ideal of $R[x]$. 
+\end{itemize}
+\end{prp}
+
 \begin{defn}{The Evaluation Map}{} Let $R$ be a ring and let $a$ be an element in the center $Z(R)$ of $R$. Define the evaluation map $\phi_a:R[x]\to R$ by the formula $$\phi_a\left(\sum_{k=0}^nc_kx^k\right)=\sum_{k=0}^nc_ka^k$$
 \end{defn}
 
@@ -1955,15 +1996,37 @@ Thus $\phi_a$ is a ring homomorphism. To show that $\phi_a$ is surjective, let $
 \end{proof}
 \end{prp}
 
-\begin{defn}{Degree of a Polynomial}{} Let $R$ be a commutative ring. Let $f\in R[x]$ be written as $f=\sum_{k=0}^n a_kx^k$ so that $a_n\neq 0$. Then define the degree of $f$ to be $$\deg(f)=n$$
+\begin{defn}{Leading Term and Leading Coefficient}{}\\
+Let $R$ be a ring. Let $f=\sum_{k=0}^na_kx^k\in R[x]$ be a polynomial over $R$. 
+\begin{itemize}
+\item We say that the leading term of $f$ is $a_nx^n$. 
+\item We say that the leading coefficient of $f$ is $a_n$. 
+\end{itemize}
 \end{defn}
+
+\begin{defn}{Monic Polynomials}{}\\
+Let $R$ be a commutative ring. Let $f\in R[x]$ be a polynomial. We say that $f$ is monic if the leading coefficient of $f$ is $1$. 
+\end{defn}
+
+\begin{defn}{Degree of a Polynomial}{}\\
+Let $R$ be a commutative ring. Let $f\in R[x]$ be written as $f=\sum_{k=0}^n a_kx^k$ so that $a_n\neq 0$. Then define the degree of $f$ to be $$\deg(f)=n$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $R$ be a commutative ring. Let $f,g\in R[x]$. Then the following are true. 
+\begin{itemize}
+\item $\deg(f+g)\leq\max\{\deg(f),\deg(g)\}$. 
+\item $\deg(fg)\leq\deg(f)+\deg(g)$. 
+\end{itemize}
+\begin{proof}\\
+If $f=\sum_{i=0}^na_ix^i$ and $g=\sum_{j=0}^mb_jx^j$, then $f+g=\sum_{k=0}^{\max\{n,m\}}(a_k+b_k)x^k$. Hence $\deg(f+g)\leq\deg(f)+\deg(g)$. By a similar method we can see that $\deg(fg)\leq\deg(f)+\deg(g)$. 
+\end{proof}
+\end{lmm}
 
 \subsection{The Roots of a Polynomial}
-\begin{defn}{The Roots of a Polynomial}{} Let $R$ be a commutative ring. Let $f\in R[x]$. We say that $a\in R$ is a root of $f$ if $\phi_a(f)=0$. In this case we write $f(a)=0$. 
-\end{defn}
-
-\begin{thm}{Monic Linear Division Algorithm}{} Let $R$ be a commutative ring. Let $f\in R[x]$. Let $x-a\in R[x]$ be a polynomial. Then there exists $q\in R[x]$ and $r\in R$ such that $$f(x)=(x-a)q(x)+r$$ 
-\begin{proof}
+\begin{thm}{Linear Division Algorithm}{}\\
+Let $R$ be a commutative ring. Let $f\in R[x]$. Let $x-a\in R[x]$ be a polynomial. Then there exists unique $q\in R[x]$ and unique $r\in R$ such that $$f(x)=(x-a)q(x)+r$$ 
+\begin{proof}\\
 If $f(x)=0$ then just take $q(x)=0$ and $r=0$. So assume that $f(x)\neq 0$. We induct on $\deg(f)$. If $\deg(f)=1$, then $f(x)=cx+d$ for some $c\neq 0$. Set $q(x)=c$ and $r=ca+d$. Then we have $$q(x)(x-a)+r=c(x-a)+ca+d=cx+d=f(x)$$ so we are done. Now assume that the result is true for all polynomials whose degree is less than $n$. Let $f$ be a degree $n$ polynomial, given by $f=\sum_{k=0}^na_kx^k$. Let $$g(x)=f(x)-a_nx^{n-1}(x-a)=(a_{n-1}+a_na)x^{n-1}+\sum_{k=0}^{n-2}a_kx^k$$ Notice that $\deg(g)\leq n-1$ and we can apply the inductive hypothesis to obtain $q'\in R[x]$ and $r\in R$ such that $g(x)=q'(x)(x-a)+r$. Now we have that 
 \begin{align*}
 f(x)&=g(x)+a_nx^{n-1}(x-a)\\
@@ -1974,8 +2037,17 @@ We are done as we set $q(x)=q'(x)+a_nx^{n-1}$.
 \end{proof}
 \end{thm}
 
-\begin{thm}{Factor Theorem}{} Let $R$ be a commutative ring. Let $f\in R[x]$. Then $a\in R$ is a root of $f$ if and only if $x-a$ divides $f$. 
-\begin{proof}
+\begin{thm}{The Division Algorithm}{}\\
+Let $R$ be a commutative ring. Let $f,g\in R[x]$. Suppose that $\deg(f)\geq\deg(g)$. If the leading coefficient of $g$ is a unit, then there exists unique polynomials $qr\in R[x]$ such that $$f(x)=q(x)g(x)+r(x)$$ and $\deg(r)<\deg(g)$. 
+\end{thm}
+
+\begin{defn}{The Roots of a Polynomial}{}\\
+Let $R$ be a commutative ring. Let $f\in R[x]$. We say that $a\in R$ is a root of $f$ if $\phi_a(f)=0$. In this case we write $f(a)=0$. 
+\end{defn}
+
+\begin{thm}{Factor Theorem}{}\\
+Let $R$ be a commutative ring. Let $f\in R[x]$. Then $a\in R$ is a root of $f$ if and only if $x-a$ divides $f$. 
+\begin{proof}\\
 Let $a\in R$ be a root of $f$. By the monic linear division algorithm, $f(x)=q(x)(x-a)+r$ for some $q\in R[x]$ and $r\in R$. Then $$0=\phi_a(f)=\phi_a(q(x)(x-a)+r)=\phi_a(q(x))\phi_a(x-a)+\phi_a(r)=0+r$$ since $\phi_a(x-a)=a-a=0$. Hence $r=0$ and we have $f(x)=q(x)(x-a)$. Hence $f$ is divisible by $x-a$. \\
 
 Now suppose that $x-a$ divides $f$. Then there exists $q\in R[x]$ such that $f(x)=q(x)(x-a)$. Then it is clear that $$\phi_a(f)=\phi_a(q)\phi_a(x-a)=0$$ and so we conclude. 
@@ -1983,33 +2055,34 @@ Now suppose that $x-a$ divides $f$. Then there exists $q\in R[x]$ such that $f(x
 \end{thm}
 
 \subsection{Polynomials over Integral Domains}
-\begin{prp}{}{} Let $R$ be a commutative ring. Then $R$ is an integral domain if and only if $R[x]$ is an integral domain. 
-\begin{proof}
+\begin{prp}{}{}\\
+Let $R$ be a commutative ring. Then $R$ is an integral domain if and only if $R[x]$ is an integral domain. 
+\begin{proof}\\
 Commutativity is clear since for $f,g\in R[x]$, coefficients of the product $fg$ inherits commutativity from $R$ thus $fg=gf$. Now we show that cancellation law exists in $R[X]$. Let $f,g\in R[x]$ such that $fg=0$. Suppose for a contradiction that $f\neq 0$ and $g\neq 0$. This means that $\deg(f)=n$ and $\deg(g)=m$ for some $n,m\neq 0$. Consider the coefficient of $x^{n+m}$ in $fg$, which is $a_nb_m$. Since $fg=0$, $a_nb_m=0$ and by cancellation law in $R$ either $a_n=0$ or $b_m=0$. This contradicts the fact that $\deg(f)=n$ and $\deg(g)=m$ thus we are done. \\
 
 Now suppose that $R[x]$ is an integral domain. Then $R$ is a subring of $R[x]$ so that $R$ is also an integral domain. 
 \end{proof}
 \end{prp}
 
-\begin{prp}{}{} Let $R$ be an integral domain. Let $f\in R[x]$. Then $f$ has at most $\deg(f)$ roots in $R$. 
+\begin{prp}{}{}\\
+Let $R$ be an integral domain. Then if $f\neq 0$ and $g\neq 0$ in $R[x]$, then $$\deg(fg)=\deg(f)+\deg(g)$$
+\begin{proof}\\
+Let the leading term of $f$ be $a_nx^n$ and let the leading term of $g$ be $b_mx^m$. By assumption $a_n$ and $b_m$ are non-zero. By definition of products in the polynomial ring, the coefficient of $x^k$ is $0$ for $k>n+m$. Since $R$ is an integral domain, we have that $a_n$ and $b_M$non-zero implies that $a_nb_m$ is non-zero. Hence the leading term of $fg$ is $a_nb_mx^{n+m}$. Hence $\deg(fg)=n+m=\deg(f)+\deg(g)$. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $R$ be an integral domain. Let $f\in R[x]$. Then $f$ has at most $\deg(f)$ roots in $R$. 
+\begin{proof}\\
+Suppose for a contradiction that $a_1,\dots,a_{\deg(f)+1}$ are the distinct roots of $f$. Let $g(x)=(x-a_1)\cdots(x-a_{\deg(f)+1})$. By repeated application of the factor theorem, we have that $g$ divides $f$. But this is a contradiction by 11.1.9. 
+\end{proof}
 \end{prp}
 
 \begin{prp}{}{}\\
 Let $R$ be an integral domain. Then we have $$R^\times=R[x]^\times$$
 \begin{proof}
-It is clear that $\subseteq$ is trivial. Now let $f\in R[x]$ such that $f$ is a unit. Suppose that $fg=1$ for some $g\in R[x]$. Write $f=\sum_{k=0}^na_kx^k$ and $g=\sum_{i=0}^mb_ix^i$ for $a_n\neq 0$. comparing top coefficients with $fg$ and $1$ shows that $a_nb_m=0$. Since $R$ is an integral domain, we conclude that $b_m=0$. We induct decreasin GLy on the coefficients of $g$. Suppose we showed that $b_n=\dots=b_{k+1}=0$ for some $k\geq 0$. Then the coefficient of $x^{k+n}$ in $fg$ is given by $$a_{k+n-m}b_m+\dots+a_{n-1}b_{k+1}+a_nb_k$$ Comparing coefficients with the polynomial $1$ shows that the above expression is $0$. Since $b_n=\dots=b_{k+1}=0$, we are left with $a_nb_k=0$. Since $a_n\neq 0$, we have that $b_k=0$. Thus $b_n=\dots=b_1=0$ by induction. We are left with the fact that $g$ is a constant, say $g(x)=b$. But now $a_0\cdot b=1$ implies that $b$ is a unit, hence the constant $g\in R$ is a unit. 
+It is clear that $\subseteq$ is trivial. Now let $f\in R[x]$ such that $f$ is a unit. Suppose that $fg=1$ for some $g\in R[x]$. Write $f=\sum_{k=0}^na_kx^k$ and $g=\sum_{i=0}^mb_ix^i$ for $a_n\neq 0$. comparing top coefficients with $fg$ and $1$ shows that $a_nb_m=0$. Since $R$ is an integral domain, we conclude that $b_m=0$. We induct decreasingly on the coefficients of $g$. Suppose we showed that $b_n=\dots=b_{k+1}=0$ for some $k\geq 0$. Then the coefficient of $x^{k+n}$ in $fg$ is given by $$a_{k+n-m}b_m+\dots+a_{n-1}b_{k+1}+a_nb_k$$ Comparing coefficients with the polynomial $1$ shows that the above expression is $0$. Since $b_n=\dots=b_{k+1}=0$, we are left with $a_nb_k=0$. Since $a_n\neq 0$, we have that $b_k=0$. Thus $b_n=\dots=b_1=0$ by induction. We are left with the fact that $g$ is a constant, say $g(x)=b$. But now $a_0\cdot b=1$ implies that $b$ is a unit, hence the constant $g\in R$ is a unit. 
 \end{proof}
-\end{prp}
-
-\begin{prp}{}{} Let $R$ be an integral domain. Then if $f\neq 0$ and $g\neq 0$ in $R[x]$, then $$\deg(fg)=\deg(f)+\deg(g)$$
-\end{prp}
-
-\begin{prp}{}{} Let $R$ be a commutative ring. Let $I$ be an ideal of $R$. Then the following are true. 
-\begin{itemize}
-\item $I[x]$ is an ideal of $R$
-\item There is an isomorphism $\frac{R[x]}{I[x]}\cong\frac{R}{I}[x]$ given by the map $\left(f=\sum_{k=0}^na_kx^k+I[x]\right)\mapsto\left(\sum_{k=0}^n(a_k+I)x^k\right)$
-\item If $I$ is a prime ideal of $R$, then $I[x]$ is a prime ideal of $R[x]$. 
-\end{itemize}
 \end{prp}
 
 \begin{prp}{}{} Let $R$ be a commutative ring. Then $R$ is a UFD if and only if $R[x]$ is an UFD. 
@@ -2070,6 +2143,8 @@ Finally, recall that $\F_p\cong\Z/p\Z$ is a field. We can descend the polynomial
 
 \begin{thm}{}{} Let $f(x)=\sum_{k=0}^na_kx^k\in\Z[x]$. Suppose that $p$ is a prime such that $p$ does not divide $a_n$. Write $\overline{a_k}\equiv a_k\;(\bmod\;p)$ for $0\leq k\leq n$ and $$\overline{f}=\sum_{k=0}^n\overline{a_k}x^k\in\F_p[x]$$ If $\overline{f}$ is irreducible in $\F_p[x]$ then $f$ is irreducible in $\Z[x]$. 
 \end{thm}
+
+\subsection{Multivariable Polynomials}
 
 
 \pagebreak

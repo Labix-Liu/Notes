@@ -15,11 +15,6 @@
 \date{\today}
 \begin{document}
 \maketitle
-\begin{abstract}
-The aim of these notes is to develop the notion of continuity, differentiability and some parts of integrability in $\R^n$ by attempting to generalize the same ideas in $\R$. Another major aim is to investigate non linear transformations  through the lens of linear algebra. \\
-Assumes knowledge of Linear Algebra 1, Real analysis. \\
-Note: $M_{m\times n}(\R)$ means the set of all matrices with $m$ rows and $n$ columns. 
-\end{abstract}
 \pagebreak
 \tableofcontents
 \pagebreak
@@ -74,60 +69,27 @@ Let $U\subseteq\R^n$ be a subset. Let $f:U\to\R^m$ be a function. Let $c\in U$. 
 Let $U\subseteq\R^n$ be a subset. Let $f:U\to\R^m$ be a function. Let $c\in U$. Then $f$ is continuous at $c$ if and only if $\lim_{x\to c}f(x)=f(c)$. 
 \end{lmm}
 
-\subsection{Compactness in $\R^n$}
-\begin{thm}{Heine-Borel Theorem}{}\\
-Let $K\subseteq\R^n$ be a subset. Then $K$ is compact if and only if $K$ is closed and bounded. 
-\begin{proof}
-Let $K$ be compact. Let $(x_n)_{n\in\N}\subset K$ be a convergent sequence. By sequential compactness, $(x_{n_k})_{k\in\N}$ is a subsequence that converges to $x\in K$. But $(x_n)_{n\in\N}$ has the same limit as its subsequence thus $x_n\to x$. Now suppose for a contradiction that $K$ is unbounded. Then there exists a sequence $(x_n)_{n\in\N}$ such that $\abs{x_n}\geq n$ for all $n\in\N$. By sequential compactness, there is a subsequence $(x_{n_k})_{k\in\N}$ such that its limit is $x\in K$. This means that $(x_{n_k})_{k\in\N}$ is bounded, a contradiction. \\
-Now suppose that $K$ is closed and bounded. Let $(x_n)_{n\in\N}$ be a sequence in $K$. Then $K$ being bounded means that $(x_n)_{n\in\N}$ is bounded. By the Bolzano-Weierstrass theorem, it has a convergent subsequence $(x_{n_k})_{k\in\N}$ with limit in $K$ since $K$ is closed. 
-\end{proof}
-\end{thm}
-
-\begin{thm}{Extreme Value Theorem}{} Let $f:K\subset\R^n\to\R$ be continuous and $K$ compact. Then there exists $a,b\in K$ such that $$f(a)\leq f(x)\leq f(b)$$ for all $x\in K$. 
+\begin{thm}{Extreme Value Theorem}{}\\
+Let $n,m\in\N\setminus\{0\}$. Let $K\subseteq\R^n$ be a closed and bounded subset. Let $f:K\to\R^m$ be a function. Then there exists $a,b\in K$ such that $$f(a)\leq f(x)\leq f(b)$$ for all $x\in K$. 
 \begin{proof}
 We know that $f(K)$ is closed and bounded. Thus it must have a supremum $M$ and infinum $m$ that are finite. Then we must have $(a_n)_{n\in\N}$ and $(b_n)_{n\in\N}$ such that $a_n\to m$ and $b_n\to M$ by definition of supremum and infinum. Since $f(K)$ is closed, $m,M\in f(K)$ and we are done. 
 \end{proof}
 \end{thm}
 
-\subsection{The Space of Matrices}
-\begin{defn}{Frobenius Norm}{} Let $A\in M_{k\times n}(\R)$. Define the Frobenius norm to be $$\|A\|_F=\left(\sum_{j=1}^n\sum_{i=1}^ka_{ij}^2\right)^{\frac{1}{2}}$$
+\subsection{Metric Structure on The Space of Linear Maps}
+In the discussion of derivatives of functions of the form $f:U\to\R^n\to\R^m$, we will need to understand maps of the form $U\to\Hom_\R(\R^n,\R^m)$ and $U\to M_{m\times n}(\R)$. Recall from Linear Algebra that the codomain of both types of maps are isomorphic to $\R^{n\times m}$, and through the isomorphism we may introduce the notion of metrics and hence continuity to these maps. In order to understand the metric structure more explicitly, we shall define the metric structures of each of them more explicitly, and discuss their relations. \\
+
+Recall from linear algebra that given a choice of basis $e_1,\dots,e_n$ of $\R^n$ and a choice of basis $f_1,\dots,f_m$ of $\R^m$, we can construct an explicit vector space isomorphism $$\Hom_\R(\R^n,\R^m)\cong M_{m\times n}(\R)$$ as follows. Given a linear map $T$, we may write $T(e_i)=\sum_{k=1}^ma_{ki}f_k$ for $a_{ki}\in\R$. Then the isomorphism is given by $$T\mapsto\begin{pmatrix}
+a_{11} & \cdots & a_{1n}\\
+\vdots & \ddots & \vdots\\
+a_{m1} & \cdots & a_{mn}
+\end{pmatrix}$$ We use the $\mu:\Hom_\R(\R^n,\R^m)\overset{\cong}{\longrightarrow}M_{m\times n}(\R)$ to denote the isomorphism when $e_1,\dots,e_n$ and $f_1,\dots,f_m$ are the standard basis vectors for $\R^n$ and $\R^m$ respectively. 
+
+\begin{defn}{Operator Norm}{}\\
+Define the operator norm of the vector space $\Hom_\R(\R^n,\R^m)$ to be the function $\|\cdot\|:\Hom_\R(\R^n,\R^m)\to\R$ given by $$\|T\|=\sup\{\abs{T(x)}\;|\;x\in\R^n\text{ such that }\abs{x}=1\}$$
 \end{defn}
- 
-\begin{defn}{Operator Norm}{} Let $T\in\Hom_\R(\R^n,\R^k)$ be a linear map. Define the operator norm of $T$ to be $$\|T\|=\sup\{\abs{T(x)}\;|\;x\in\R^n\text{ such that }\abs{x}=1\}$$
-\end{defn}
 
-\begin{prp}{}{}\\
-Let $T\in\Hom_\R(\R^n,\R^k)$. Let $A$ be the matrix of $T$ with respect to the standard basis. Then $\|T\|=\|A\|_F$. 
-\begin{proof}\\
-Given that the they actually act on the same vector space, we can associate every linear transformation $T$ with the matrix $A$. Now we have 
-\begin{align*}
-\|A\|_F^2&=\sum_{j=1}^n\sum_{i=1}^ka_{ij}^2\\
-&=\sum_{j=1}^n\abs{T(e_j)}^2\\
-&=\sum_{j=1}^n\abs{T(e_j)}^2\\
-&\leq\|T\|^2\sum_{j=1}^n\abs{e_j}^2\tag{$\frac{\abs{T(x)}}{\abs{x}}\leq\|T\|$}\\
-&=n\|T\|^2
-\end{align*}
-Thus we have $\|A\|_F\leq\sqrt{n}\|T\|$. \\
-Now for any $x\in\R^n$, we also have 
-\begin{align*}
-\abs{T(x)}^2&=\abs{Ax}^2\\
-&=\sum_{i=1}^k\left(\sum_{j=1}^na_{ij}x_j\right)^2\\
-&\leq\sum_{i=1}^k\left(\left(\sum_{j=1}^na_{ij}^2\right)\left(\sum_{j=1}^nx_j^2\right)\right)\tag{Cauchy-Schwarz Inequality}\\
-&=\left(\sum_{i=1}^k\sum_{j=1}^na_{ij}^2\right)\abs{x}^2\\
-&=\|A\|_F^2\abs{x}^2
-\end{align*}
-If $x\neq 0$, we can write it as 
-\begin{align*}
-\frac{\abs{T(x)}^2}{\abs{x}^2}\leq\sup_{x\in\R^n\setminus\{0\}}\frac{\abs{T(x)}^2}{\abs{x}}&\leq\|A\|_F^2\\
-\|T\|^2&\leq\|A\|_F^2
-\end{align*}
-Thus we now have $$\|T\|\leq\|A\|_F\leq\sqrt{n}\|T\|$$ and we are done. 
-\end{proof}
-\end{prp}
-
-Now we can make sense of using the operator norm for matrices, and the frobenius norm for linear maps. 
-
-\begin{prp}{}{} Let $T\in\Hom_\R(\R^n,\R^k)$ and $S\in\Hom_\R(\R^k,\R^m)$. Then $$\|S\circ T\|\leq\|S\|\|T\|$$ 
+\begin{lmm}{}{} Let $T\in\Hom_\R(\R^n,\R^k)$ and $S\in\Hom_\R(\R^k,\R^m)$. Then $$\|S\circ T\|\leq\|S\|\|T\|$$ 
 \begin{proof}
 We have that 
 \begin{align*}
@@ -136,34 +98,45 @@ We have that
 \end{align*}
 Thus we are done. 
 \end{proof}
-\end{prp}
+\end{lmm}
 
-\begin{prp}{}{} The function $\det(\cdot):\R^{n\times n}\to\R$, which is the determinant, is continuous with respect to the elements of the matrix. 
-\begin{proof}
-Note that $\R^{n\times n}\cong\R^{n^2}$ thus the determinant really is just a linear form of $\R^{n^2}$ since the determinant is defined by a polynomial. Polynomials are clearly continuous thus we are done. 
+\begin{defn}{The Operator Metric}{}\\
+Define the operator metric $d:\Hom_\R(\R^n,\R^m)\times\Hom_\R(\R^n,\R^m)\to\R$ by the formula $$d(T,S)=\|T-S\|$$
+\end{defn}
+
+This gives a metric structure on $\Hom_\R(\R^n,\R^m)$ and we can now talk about functions $f:\R^k\to\Hom_\R(\R^n,\R^m)$ which are continuous. Similarly, we would like to talk about continuous functions of the form $\R^k\to M_{m\times n}(\R)$. 
+
+\begin{defn}{The Frobenius Norm}{}\\
+Define the Frobenius norm of the vector space $M_{m\times n}(\R)$ to be the function $\|\cdot\|:M_{m\times n}(\R)\to\R$ given by $$\|A\|_F=\left(\sum_{j=1}^n\sum_{i=1}^ma_{ij}^2\right)^{\frac{1}{2}}$$
+\end{defn}
+
+\begin{defn}{The Frobenius Metric}{}\\
+Define the operator metric $d:M_{m\times n}(\R)\times M_{m\times n}(\R)\to\R$ by the formula $$d(A,B)=\|A-B\|_F$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $T\in\Hom_\R(\R^n,\R^k)$ be a linear map. Let $A$ be the matrix of $T$ with respect to the standard basis. Then we have $$\frac{1}{\sqrt{n}}\|A\|_F\leq\|T\|\leq\|A\|_F$$
+\begin{proof}\\
 \end{proof}
-\end{prp}
+\end{lmm}
 
-\begin{prp}{}{}\\
-Let $n\in\N\setminus\{0\}$. Then $GL(n,\R)$ is an open subset of $M_n(\R)$. 
-\end{prp}
-
-\begin{prp}{}{} Let $n\in\N\setminus\{0\}$. Then $$GL(n,\R)\subset L(\R^n)$$ is open. 
-\begin{proof}
-Consider the function $\det(\cdot):\R^{n\times n}\to\R$. We have that $\det(GL(n,\R))=\R\setminus\{0\}$ and image is clearly open in $\R$. Thus by continuity with open sets, $GL(n,\R)$ is open. 
+\begin{lmm}{}{}\\
+Let $U\subseteq\R^k$ be an open subset. Let $f:U\to\Hom_\R(\R^n,\R^m)$ be a function. Then $f$ is continuous if and only if $\mu\circ f:U\to M_{m\times n}(\R)$ is continuous. 
+\begin{proof}\\
 \end{proof}
-\end{prp}
+\end{lmm}
 
-\begin{prp}{}{} Let $A\in GL(n,\R)$. If $B\in M_{n\times n}(\R)$ and $\|B-A\|<\frac{1}{\|A^{-1}\|}$, then $B$ is invertible. This means that $$B_{1/\|A^{-1}\|}(A)\subset GL(n,\R)$$ is open in $M_{n\times n}(\R)$. Furthermore, we must have $$\|B^{-1}\|\leq\frac{1}{\frac{1}{\|A^{-1}\|}-\|B-A\|}$$
-\end{prp}
-
+This lemma will give us our condition for continuous derivatives in terms of the Jacobian matrix later. However, we may also interpret this lemma as follows: To check the continuity of a map of the form $U\to\Hom_\R(\R^n,\R^m)$, it suffices to check that each term in the matrix function $U\to M_{m\times n}(\R)$ is continuous. This is a practical way of checking that functions of the given type are continuous. 
+ 
 \pagebreak
 \section{Differentiation}
 \subsection{Frechet Derivative}
-\begin{defn}{Frechet Derivatives}{} Let $f:U\subseteq\R^n\to\R^m$ with $U$ open and $x\in U$. We say that $f$ is differentiable at $x\in U$ if there exists a linear map $Df\in\Hom_\R(\R^n,\R^m)$ such that $$\lim_{h\to 0}\frac{\abs{f(x +h)-f(x)-Df(h)}}{\abs{h}}=0$$ In this case, we say that the derivative of $f$ is $Df$. 
+\begin{defn}{Frechet Derivatives}{}\\
+Let $U\subseteq\R^n$ be an open subset. Let $x\in U$. Let $f:U\to\R^m$ be a function. We say that $f$ is differentiable at $x$ if there exists a linear map $Df(x)\in\Hom_\R(\R^n,\R^m)$ such that $$\lim_{h\to 0}\frac{\abs{f(x +h)-f(x)-Df(h)}}{\abs{h}}=0$$ In this case, we say that the derivative of $f$ at $x$ is $Df(x)$. 
 \end{defn}
 
-\begin{prp}{}{} The linear transformation representing the derivative is unique if it exists. 
+\begin{prp}{}{}\\
+Let $U\subseteq\R^n$ be an open subset. Let $x\in U$. Let $f:U\to\R^m$ be a function. Suppose that $f$ is differentiable at $x$ with derivatives $A$ and $B$ in $\Hom_\R(\R^n,\R^m)$. Then $A=B$. 
 \begin{proof}
 Suppose that $A,B$ both represent the derivative of $f:U\subseteq\R^n\to\R^m$. Then fix $\epsilon>0$. There exists $\delta_1,\delta_2$ such that $\abs{h}<\min\{\delta_1,\delta_2\}$ implies $$\frac{\abs{f(x+h)-f(x)-Ah}}{\abs{h}}<\epsilon$$ and $$\frac{\abs{f(x+h)-f(x)-Bh}}{\abs{h}}<\epsilon$$ Then we have 
 \begin{align*}
@@ -176,7 +149,8 @@ Thus $A=B$ by definition of limit and we are done.
 \end{proof}
 \end{prp}
 
-\begin{prp}{}{} If $f:U\subseteq\R^n\to\R^m$ is differentiable at $x\in U$, then $f$ is continuous at $x$. 
+\begin{prp}{}{}\\
+Let $U\subseteq\R^n$ be an open subset. Let $x\in U$. Let $f:U\to\R^m$ be a function. If $f$ is differentiable at $x$, then $f$ is continuous at $x$. 
 \begin{proof}
 Since $f$ is continuous at $x$, there exists $A\in\R^{m\times n}$ such that $$\lim_{h\to 0}\frac{\abs{f(x+h)-f(x)-Ah}}{\abs{h}}=0$$ Fix $\epsilon>0$, there exists $\delta_1>0$ such that $\abs{h}<\delta_1$ 
 \begin{align*}
@@ -190,31 +164,134 @@ Set $\delta_2=\min\left\{\delta_1,\frac{\epsilon}{\|A\|+\epsilon}\right\}$. Then
 
 Similar to continuity, differentiability in higher dimensions can be broken down by its individual components. This way we only need to show individual differentiability to save trouble. 
 
-\begin{prp}{Componentwise Differentiability}{} Let $f:U\subseteq\R^n\to\R^k$, where $$f(x)=\begin{pmatrix}f_1(x)\\\vdots\\f_k(x)\end{pmatrix}$$ Then $f$ is differentiable at $x\in U$ if and only if for each $i\in\{1,\dots,k\}$, $f_i:U\to\R$ is differentiable at $x$. 
+\begin{prp}{Componentwise Differentiability}{}\\
+Let $U\subseteq\R^n$ be an open subset. Let $x\in U$. Let $f:U\to\R^m$ be a function whose components are given by $f=(f_1,\dots,f_m)$. Then $f$ is differentiable at $x$ if and only if $f_i:U\to\R$ is differentiable at $x$ for $1\leq i\leq m$. 
 \end{prp}
 
-The rest of this section are also extensions of one-dimensional case. 
-
-\begin{prp}{}{} If $f:\R^n\to\R^m$ is a constant function then $Df(x)=0$. 
+\begin{prp}{}{}\\
+Let $U\subseteq\R^n$ be an open subset. Let $f:U\to\R^m$ be a constant function. Then the following are true. 
+\begin{itemize}
+\item $f$ is differentiable at $U$. 
+\item For any $x\in U$, we have $Df(x)=0$. 
+\end{itemize}
 \begin{proof}
 Suppose that $f(x)=k$ for some $k\in\R^m$. Then I claim that $Df(x)=0$. Indeed since $$\lim_{h\to 0}\frac{\abs{0+0-0h}}{\abs{h}}=0$$ thus the definition of differentiability is satisfied. 
 \end{proof}
 \end{prp}
 
-\begin{prp}{}{} If $A\in\R^{m\times n}$ and $f:U\subseteq\R^n\to\R^m$ is defined by $f(x)=Ax$, then $Df(x)=A$. 
+\begin{prp}{}{}\\
+Let $A\in\Hom_\R(\R^n,\R^m)$ be a linear map. Let $f:\R^n\to\R^m$ be the function defined by $f(x)=Ax$. Then the following are true. 
+\begin{itemize}
+\item $f$ is differentiable at $\R^n$. 
+\item For any $x\in\R^n$, we have $Df(x)=A$. 
+\end{itemize}
 \begin{proof}
 Clearly $Df(x)=A$ satisfies the definition of differentiability since $$\lim_{h\to 0}\frac{\abs{A(x+h)-Ax-Ah}}{\abs{h}}=0$$
 \end{proof}
 \end{prp}
 
-\subsection{Jacobian Matrix and Directional Derivatives}
-\begin{defn}{Directional Derivative}{} Let $v\in\R^n$. Let $f:U\subseteq\R^n\to\R^k$ be a function. Define the directional derivative along $v$ passing through $x$ to be $$\partial_vf(x)=\lim_{t\to 0}\frac{f(x+tv)-f(x)}{t}=\frac{d}{dt}f(x+tv)\bigg{|}_{t=0}$$ if the limit exists. 
+Translation: Linear maps have constant derivatives (as in the one dimensional case). 
+
+\subsection{The Jacobian Matrix Representing the Derivative}
+\begin{defn}{Partial Derivatives}{}\\
+Let $e_1,\dots,e_n$ be the standard basis for $\R^n$. Let $U\subseteq\R^n$ be an open subset. Let $p\in U$. Let $f:U\to\R^m$ be a function whose components are given by $f=(f_1,\dots,f_m)$. Define the $j$th partial derivative of the $i$th component of $f$ at $p$ to be $$\frac{\partial f_i}{\partial x_j}\bigg{|}_p=\lim_{t\to 0}\frac{f_i(p+te_j)-f_i(p)}{t}=\frac{d}{dt}f(p+te_j)\bigg{|}_{t=0}$$
 \end{defn}
 
-\begin{prp} If $f:U\subseteq\R^n\to\R^k$ has a directional derivative along $v\in\R^n$, then $f$ is linearly continuous along $v$. 
+Note that for a function $f:U\to\R^m$, the partial derivative $\frac{\partial f_i}{\partial x_j}\bigg{|}_p$ is a real number. 
+
+\begin{eg}{}{}\\
+Let $f:\R^2\to\R$ be the function defined by $$f(x,y)=\begin{cases}
+\frac{xy}{(x^2+y^2)^2} & \text{ if }(x,y)\neq(0,0)\\
+0 & \text{ if }x=y=0
+\end{cases}$$
+Then the following are true. 
+\begin{itemize}
+\item The $1$st partial derivative of $f$ at $(x,y)$ is given by $$\partial_{(1,0)}f(x,y)=\frac{y}{(x^2+y^2)}-\frac{4x^2y}{(x^2+y^2)^3}$$ for $(x,y)\in\R^2\setminus\{(0,0)\}$. 
+\item The $2$nd partial derivative of $f$ at $(x,y)$ is given by $$\text{?}$$ for $(x,y)\in\R^2\setminus\{(0,0)\}$. 
+\end{itemize}
+\end{eg}
+
+\begin{defn}{Jacobian Matrix}{}\\
+Let $U\subseteq\R^n$ be an open subset. Let $p\in U$. Let $f:U\to\R^m$ be a function. Define the Jacobian of $f$ at $p$ to be the matrix $$Jf(p)=\begin{pmatrix}
+\frac{\partial f_1}{\partial x_1}\bigg{|}_p & \cdots & \frac{\partial f_1}{\partial x_n}\bigg{|}_p\\
+\vdots & \ddots & \vdots\\
+\frac{\partial f_m}{\partial x_1}\bigg{|}_p & \cdots & \frac{\partial f_m}{\partial x_n}\bigg{|}_p
+\end{pmatrix}$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $U\subseteq\R^n$ be an open subset. Let $p\in U$. Let $f:U\to\R^m$ be a function. If $f$ is differentiable at $p$, then we have $$Df(x)v=Jf(x)v$$ for all $v\in\R^n$. 
+\begin{proof}
+Note that we have
+\begin{align*}
+Df(x)v&=Df(x)\sum_{k=1}^nv_ie_i\\
+&=\sum_{k=1}^nv_iDf(x)e_i\\
+&=\sum_{k=1}^nv_i\partial_if(x)\\
+&=\partial f(x)v
+\end{align*}
+\end{proof}
 \end{prp}
 
-\begin{prp}{}{} Let $f:U\subseteq\R^n\to\R^k$ be a function. If $Df$ exists then $\partial_vf(x)=Df(x)v$. Moreover, $\partial_vf(x)$ is linear. Meaning $$\partial_{av+bw}f(x)=a\partial_vf(x)+b\partial_wf(x)$$ for all $a,b\in\R$ and for all $v,w\in\R^n$. 
+In other words, the Jacobian matrix $Jf(x)\in M_{m\times n}(\R)$ is the representation of the linear map $Df(x)\in\Hom_\R(\R^n,\R^m)$ under the standard basis for $\R^n$ and $\R^m$. 
+
+\begin{prp}{}{}\\
+Let $U\subseteq\R^n$ be an open subset. Let $B_r(x_0)\subseteq U$ be a subset for some $r>0$ and $x_0\in U$. Let $f:U\to\R^m$ be a function. Suppose that the following are true. 
+\begin{itemize}
+\item The Jacobian $Jf(x)$ exists for all $x\in B_r(x_0)$. 
+\item $Jf:B_r(x_0)\to M_{m\times n}(\R)$ is continuous. 
+\end{itemize}
+Then $f$ is differentiable. 
+\begin{proof}
+We show this for the case that $k=1$ since $f:\R^n\to\R^k$ is differentiable if and only if each component $f_1,\dots,f_k$ is differentiable. Thus now $f:\R^n\to\R$. Suppose that $\partial f$ is continuous in $B_r(x)$ for fixed $x$. This means that $\partial_{x_j}f_i$ is continuous for any $j\in\{1,\dots,n\}$ and $i\in\{1,\dots,k\}$. Take a point $x+h\in B_r(x)$. Define $h=\begin{pmatrix}
+h_1\\ \vdots\\ h_n
+\end{pmatrix}$ and $$h_k'=\begin{pmatrix}h_1\\\vdots\\ h_k\\0\\\vdots\\0\end{pmatrix}$$ Trivially define $h_0'=0$ and $h_0=0$ for convenience. Now $f(x+h_k')-f(x+h_{k-1}')$ is just a one variable function on the $k$th slot, thus we can apply the mean value theorem in real analysis and conclude that there exists $\theta_{k}\in(0,1)$ such that $f(x+h_k')-f(x+h_{k-1}')=\partial_{x_k}f(x+h_{k-1}'+(\theta_kh_k)e_k)h_k$. \\
+Summing all these up, we have that 
+\begin{align*}
+\sum_{k=1}^nf(x+h_k')-f(x+h_{k-1}')&=\sum_{k=1}^n\partial_{x_k}f(x+h_{k-1}'+(\theta_kh_k)e_k)h_k\\
+f(x+h)-f(x)&=\sum_{k=1}^n\partial_{x_k}f(x+h_{k-1}'+(\theta_kh_k)e_k)h_k
+\end{align*}~\\
+
+We now use the continuity of the partial derivatives. Given $\epsilon>0$, there $\delta_k>0$ such that $\abs{h}<\delta_k$ implies $\abs{\partial_{x_k}f(x+h)-\partial_{x_k}f(x)}<\epsilon$. Choose $\delta=\min\{\delta_1,\dots,\delta_n\}$. Since $\theta_k\in(0,1)$ for all $k\in\{1,\dots,n\}$, we must have $\abs{h_{k-1}'+(\theta_kh_k)e_k}<\abs{h}<\delta$. Thus
+\begin{align*}
+\abs{f(x+h)-f(x)-\sum_{k=1}^n\partial_{x_k}f(x)h_k}&=\abs{\sum_{k=1}^n\partial_{x_k}f(x+h_{k-1}'+(\theta_kh_k)e_k)h_k-\sum_{k=1}^n\partial_{x_k}f(x)h_k}\\
+&<\epsilon\sum_{k=1}^n\abs{h_k}\\
+&<\epsilon\sqrt{n}\abs{h}
+\end{align*}
+if $\abs{h}<\delta$. The second inequality is due to the fact that $\sum_{k=1}^nh_k\leq\sqrt{n}\abs{h}$. \\
+
+Now define $A\in\Hom_\R(\R^n,\R)$ by $A(h)=(\partial f)h$. This makes sense in matrix multiplication since $\partial f\in M_{1\times n}(\R)$. Then $0<\abs{h}<\delta$ implies 
+\begin{align*}
+\frac{\abs{f(x+h)-f(x)-Ah}}{\abs{h}}&\leq\epsilon\sqrt{n}\frac{\abs{h}}{\abs{h}}\\
+&=\epsilon\sqrt{n}
+\end{align*} since $A(h)=\sum_{k=1}^n\partial_{x_k}f(x)h_k$. Since this is true for all $\epsilon$, the condition for differentiability is satisfied and we are done. 
+\end{proof}
+\end{prp}
+
+Notice that in the above proof, in order to show that $f$ is differentiable at $x$, we need to know the partial derivatives of its neighbours. \\
+
+The below theorem acts as a summary or recollection of the relationships between differentiability and continuous Jacobian Matrices. 
+
+\begin{crl}{}{}\\
+Let $U$ be an open subset of $\R^n$. Let $f:U\to\R^m$ be a function. Then $f$ is continuously differentiable if and only if $Jf:U\to M_{m\times n}(\R)$ is continuous. 
+\end{crl}
+
+\subsection{Directional Derivatives}
+\begin{defn}{Directional Derivative}{}\\
+Let $U\subseteq\R^n$ be an open subset. Let $p\in U$ be a point. Let $f:U\to\R^m$ be a function. Let $v\in\R^n$ be a direction. Define the directional derivative of $f$ in the direction $v$ at $p$ to be $$\partial_vf(p)=\lim_{t\to 0}\frac{f(p+tv)-f(p)}{t}=\frac{d}{dt}f(p+tv)\bigg{|}_{t=0}$$ if the limit exists. 
+\end{defn}
+
+Note that $\partial_vf(p)$ is a vector in $\R^m$. 
+
+\begin{lmm}{}{}\\
+Let $e_1,\dots,e_n$ be the standard basis for $\R^n$. Let $U\subseteq\R^n$ be an open subset. Let $p\in U$ be a point. Let $f:U\to\R^m$ be a function whose components are given by $f=(f_1,\dots,f_m)$. Then we have $$\partial_{e_j}f(p)=\left(\frac{\partial f_1}{\partial x_j}\bigg{|}_p,\dots,\frac{\partial f_m}{\partial x_j}\bigg{|}_p\right)$$ for $1\leq j\leq n$. 
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $U\subseteq\R^n$ be an open subset. Let $p\in U$. Let $f:U\to\R^m$ be a function. If $f$ is differentiable at $p$, then the following are true. 
+\begin{itemize}
+\item For any $v\in\R^n$, we have $Df(p)v=Jf(x)v=\partial_vf(x)$. 
+\item For $\lambda,\mu\in\R$ and $v,w\in\R^m$, we have $$\partial_{\lambda v+mu w}f(x)=\lambda\partial_vf(x)+\mu\partial_wf(x)$$ ($\partial_{-}f(x):\R^n\to\R^m)$ is a linear map). 
+\end{itemize}
 \begin{proof}
 Suppose that $Df$ exists. Then using the definition of differentiability, we have that 
 \begin{align*}
@@ -231,43 +308,6 @@ Linearity follows since $Df(x)$ is matrix and matrix multiplication on a vector 
 We should make absolutely clear distinction with the existence of frechet derivatives and the existence of directional derivatives. Even if the directional derivatives exists, as long as they are not linear, the matrix for the frechet derivative will not exist. In particular, it is possible to write out the Jacobian matrix as we see below, but this Jacobian matrix will not be equal to the matrix in the frechet derivative. \\
 
 The above theorem is also useful for detecting non-differentiability. By verifying the directional derivatives are non-linear, one can use the contrapositive to prove that $f$ would not be differentiable. 
-
-\begin{defn}{Partial Derivatives}{} Let $e_1,\dots,e_n$ be the standard basis for $\R^n$. Let $U\subseteq\R^n$ be a subset. Let $f:U\to\R^m$ be a function whose components are given by $f(x)=(f_1(x),\dots,f_m(x))$ for $f_1,\dots,f_m:U\to\R$. Let $p\in U$. Define the partial derivative of $f_i$ at $p$ with respect to the $j$th coordinate to be $$\frac{\partial f_i}{\partial x_j}\bigg{|}_p=\lim_{t\to 0}\frac{f_i(x+te_j)-f_i(x)}{t}$$
-\end{defn}
-
-Now we have the six notions, namely continuity, linear continuity, separate continuity, differentiable, directional derivatives and partial derivatives interconnected with each other. Namely each type of differentiability implies its own continuity. 
-
-\begin{defn}{Jacobian Matrix}{}\\
-Let $U\subseteq\R^n$ be a subset. Let $f:U\to\R^m$ be a function. Let $p\in U$. Define the Jacobian of $f$ at $p$ to be the matrix $$J_f(u)=\begin{pmatrix}
-\frac{\partial f_1}{\partial x_1}\bigg{|}_p & \cdots & \frac{\partial f_1}{\partial x_n}\bigg{|}_p\\
-\vdots & \ddots & \vdots\\
-\frac{\partial f_m}{\partial x_1}\bigg{|}_p & \cdots & \frac{\partial f_m}{\partial x_n}\bigg{|}_p
-\end{pmatrix}$$
-\end{defn}
-
-Clearly the existence of the Jacobian matrix simply relies on the existence of partial derivatives. Note that in order for $Df$ to exist, we require the directional derivatives to be linear. 
-
-\begin{thm}{}{} If $f:U\subseteq\R^n\to\R^k$ is differentiable at $x\in U$ and $v\in\R^n$, then $$Df(x)v=\partial f(x)v$$ 
-\begin{proof}
-Note that we have
-\begin{align*}
-Df(x)v&=Df(x)\sum_{k=1}^nv_ie_i\\
-&=\sum_{k=1}^nv_iDf(x)e_i\\
-&=\sum_{k=1}^nv_i\partial_if(x)\\
-&=\partial f(x)v
-\end{align*}
-\end{proof}
-\end{thm}
-
-The above theorem shows us that as long as $f$ is differentiable, the Jacobian and the matrix given in the frechet derivative will be equal and interchangable. 
-
-\begin{lmm}{}{} If $f:U\subseteq\R^n\to\R^m$ is differentiable at $x\in U$ and $v\in\R^n$, then $$Df(x)v=\partial f(x)v=\partial_vf(x)$$ 
-\begin{proof}
-This immediately follows from previous theorems. 
-\end{proof}
-\end{lmm}
-
-This theorem also shows that if $f$ is differentiable, then $f$ must have directional derivatives. 
 
 \subsection{Properties of the Derivative}
 \begin{thm}{Algebra of Differentiable functions}{} If $f,g:U\to\R^m$ are differentiable functions at $x $ and $\lambda,\mu\in\R$ are constants, then $$D(\lambda f+\mu g)(x )=\lambda Df(x )+\mu Dg(x )$$
@@ -310,7 +350,11 @@ Since $\lim_{h\to 0}\abs{\Delta_xf(h)}=0$ by construction, we are done. Now let 
 \end{proof}
 \end{prp}
 
-\subsection{Mean Value Inequality}
+\begin{crl}{}{}\\
+Let $U,V\subseteq\R^n$ be open subsets. Let $p\in U$. Let $f:U\to V$ be a bijective function. Suppose that $f$ is differentiable at $p$ and $f^{-1}$ is differentiable at $f(p)$. Then we have $$Df^{-1}(p)=(Df(p))^{-1}$$
+\end{crl}
+
+\subsection{Mean Value Theorems}
 \begin{thm}{Mean Value Theorem}{} Let $x,y\in\R^n$. Let $r:[a,b]\to\R^n$ be continuously differentiable. Let $f: C^1(r([a,b]),\R^k)$ and there exists some $M$ such that $\abs{\partial f(x)}\leq M$ for all $x\in U$. Then $$\abs{f(r(b))-f(r(a))}\leq M\int_a^b\abs{r'(t)}\,dt$$ 
 \begin{proof}
 We have that 
@@ -339,45 +383,6 @@ f(y)-f(x)&=f(r(b))-f(r(a))\\
 Thus $f(x)=f(y)$ for any $x,y\in U$. 
 \end{proof}
 \end{prp}
-
-\subsection{Conditions for Differentiability}
-\begin{thm}{}{} Let $f:U\subseteq\R^n\to\R^k$ and suppose that $B_r(x_0)\subset U$ for some $r>0$. Suppose that the Jacobian $\partial f(x)$ exists and is continuous for all $x\in B_r(x_0)$. Then $f$ is differentiable. 
-\begin{proof}
-We show this for the case that $k=1$ since $f:\R^n\to\R^k$ is differentiable if and only if each component $f_1,\dots,f_k$ is differentiable. Thus now $f:\R^n\to\R$. Suppose that $\partial f$ is continuous in $B_r(x)$ for fixed $x$. This means that $\partial_{x_j}f_i$ is continuous for any $j\in\{1,\dots,n\}$ and $i\in\{1,\dots,k\}$. Take a point $x+h\in B_r(x)$. Define $h=\begin{pmatrix}
-h_1\\ \vdots\\ h_n
-\end{pmatrix}$ and $$h_k'=\begin{pmatrix}h_1\\\vdots\\ h_k\\0\\\vdots\\0\end{pmatrix}$$ Trivially define $h_0'=0$ and $h_0=0$ for convenience. Now $f(x+h_k')-f(x+h_{k-1}')$ is just a one variable function on the $k$th slot, thus we can apply the mean value theorem in real analysis and conclude that there exists $\theta_{k}\in(0,1)$ such that $f(x+h_k')-f(x+h_{k-1}')=\partial_{x_k}f(x+h_{k-1}'+(\theta_kh_k)e_k)h_k$. \\
-Summing all these up, we have that 
-\begin{align*}
-\sum_{k=1}^nf(x+h_k')-f(x+h_{k-1}')&=\sum_{k=1}^n\partial_{x_k}f(x+h_{k-1}'+(\theta_kh_k)e_k)h_k\\
-f(x+h)-f(x)&=\sum_{k=1}^n\partial_{x_k}f(x+h_{k-1}'+(\theta_kh_k)e_k)h_k
-\end{align*}~\\
-
-We now use the continuity of the partial derivatives. Given $\epsilon>0$, there $\delta_k>0$ such that $\abs{h}<\delta_k$ implies $\abs{\partial_{x_k}f(x+h)-\partial_{x_k}f(x)}<\epsilon$. Choose $\delta=\min\{\delta_1,\dots,\delta_n\}$. Since $\theta_k\in(0,1)$ for all $k\in\{1,\dots,n\}$, we must have $\abs{h_{k-1}'+(\theta_kh_k)e_k}<\abs{h}<\delta$. Thus
-\begin{align*}
-\abs{f(x+h)-f(x)-\sum_{k=1}^n\partial_{x_k}f(x)h_k}&=\abs{\sum_{k=1}^n\partial_{x_k}f(x+h_{k-1}'+(\theta_kh_k)e_k)h_k-\sum_{k=1}^n\partial_{x_k}f(x)h_k}\\
-&<\epsilon\sum_{k=1}^n\abs{h_k}\\
-&<\epsilon\sqrt{n}\abs{h}
-\end{align*}
-if $\abs{h}<\delta$. The second inequality is due to the fact that $\sum_{k=1}^nh_k\leq\sqrt{n}\abs{h}$. \\
-
-Now define $A\in\Hom_\R(\R^n,\R)$ by $A(h)=(\partial f)h$. This makes sense in matrix multiplication since $\partial f\in M_{1\times n}(\R)$. Then $0<\abs{h}<\delta$ implies 
-\begin{align*}
-\frac{\abs{f(x+h)-f(x)-Ah}}{\abs{h}}&\leq\epsilon\sqrt{n}\frac{\abs{h}}{\abs{h}}\\
-&=\epsilon\sqrt{n}
-\end{align*} since $A(h)=\sum_{k=1}^n\partial_{x_k}f(x)h_k$. Since this is true for all $\epsilon$, the condition for differentiability is satisfied and we are done. 
-\end{proof}
-\end{thm}
-
-Notice that in the above proof, in order to show that $f$ is differentiable at $x$, we need to know the partial derivatives of its neighbours. \\
-
-The below theorem acts as a summary or recollection of the relationships between differentiability and continuous Jacobian Matrices. 
-
-\begin{thm}{}{} Let $U$ be an open subset of $\R^n$. Then $f:U\subseteq\R^n\to\R^k$ is continuously differentiable on $U$ if and only if $\partial f:U\subseteq\R^n\to\R^{k\times n}$ is continuous on $U$. 
-\begin{proof}
-Suppose that $f$ is differentiable at $x$ and its derivative $Df(x)$ is continuous. Then $Df(x)=\partial f(x)$ thus $\partial f(x)$ is also continuous. \\
-Now suppose that $\partial f(x)$ is continuous in $U$. Then by the above theorem $f$ is differentiable and thus we have $Df(x)=\partial f(x)$. Hence $Df(x)$ is also continuous. 
-\end{proof}
-\end{thm}
 
 \pagebreak
 \section{More Properties of Differentiability}

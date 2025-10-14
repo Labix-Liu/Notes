@@ -15,16 +15,7 @@
 \date{\today}
 \begin{document}
 \maketitle
-\begin{abstract}
-Topology is the most general setting ever to study any properties of a so called space as it requires only set-theoretic notation to define. This allows this definition to encapsulate a wide range of different spaces as well as allowing some very weird sets to appear as topological space. \\
-This subject in maths is the main gateway to higher level mathematics: almost every other mathematical subject requires a space to work on. Therefore it is important to layout the foundations. \\
-As expected by some readers, this subject will be definition heavy, since it involves the classfication and identification of different types of spaces. We classify it so that our theories can work on some spaces that contain more sturcture, instead of the general setting. 
-\end{abstract}
-\textbf{References}
-\begin{itemize}
-\item A course in Point Set Topology by John B. Conway
-\item Lecture Notes of MAT327 at the University of Toronto by Ivan Khatchatourian
-\end{itemize}
+
 \pagebreak
 \tableofcontents
 \pagebreak
@@ -275,101 +266,60 @@ Another way to think about this is that since I have secretly told you that taki
 \end{defn}
 
 \subsection{Continuity and Homeomorphism}
-We would like to classify different types of spaces by similar properties they hold. One way to do this is to define homeomorphisms betwene spaces. Similar to how isomorphism will preserve structure between groups, hoemoemorphism preserves strucutres called topological invariants which we will soon see what properties fall under this category. \\
-We first define the notion of continuity, slightly different from that of $\R$. 
 \begin{defn}{Continuity}{} Let $(X,\mathcal{T})$ and $(Y,\mathcal{U})$ be topological spaces. Let $f:X\to Y$ be a function. We say that $f$ is continuous if $f^{-1}(U)\in\mathcal{T}$ for every $U\in\mathcal{U}$. 
 \end{defn}
 
-\begin{prp}{}{} Let $X$ be a set and $\mathcal{T}_1,\mathcal{T}_2$ be two topologies on $X$. Then the identity function $id:X\to X$ is continuous if and only if $\mathcal{T}_1\supseteq\mathcal{T}_2$
-\end{prp}
-
-\begin{prp}{}{} Let $(X,\mathcal{T})$ and $(Y,\mathcal{U})$ be topological spaces. Let $f:X\to Y$ be a function. Let $\mathcal{B}$ be a basis of $Y$ and $\mathcal{S}$ a subbasis on $Y$ both generating $\mathcal{U}$. The following are equivalent. 
+\begin{prp}{}{}\\
+Let $X,Y$ be topological spaces. Let $f:X\to Y$ be a function. Then the following are true. 
 \begin{itemize}
-\item $f$ is continuous
-\item $f^{-1}(U)\in\mathcal{T}$ for all $U\in\mathcal{B}$
-\item $f^{-1}(U)\in\mathcal{T}$ for all $U\in\mathcal{S}$
-\item For every closed set $C\subseteq Y$, $f^{-1}(C)$ is closed in $X$. 
-\item For every $A\subseteq X$, $f(\overline{A})\subseteq\overline{f(A)}$
+\item $f$ is continuous. 
+\item For any basis $\mB$ of $Y$, we have $f^{-1}(U)$ is open for all $U\in\mB$. 
+\item For any subbasis $\mS$ of $Y$, we have $f^{-1}(U)$ is open for all $U\in\mS$. 
+\item For all closed set $C\subseteq Y$, we have $f^{-1}(C)$ is closed. 
+\item For every $A\subseteq X$, we have $f(\overline{A})\subseteq\overline{f(A)}$
 \end{itemize}
 \end{prp}
 
-\begin{prp}{}{} Let $(X,\mathcal{T}_1)$ and $(X,\mathcal{T}_2)$ be topological spaces. Then the following are equivalent. 
+\begin{prp}{}{}\\
+Let $X,Y,Z$ be topological spaces. Let $f:X\to Y$ and $g:Y\to Z$ be continuous functions. Then $g\circ f$ is continuous. 
+\end{prp}
+
+\begin{defn}{Homeomorphism}{} Let $(X,\mathcal{T})$ and $(Y,\mathcal{U})$ be topological spaces. Let $f:X\to Y$ be a function. We say that $f$ is a homeomorphism if the following are true. 
 \begin{itemize}
-\item $\mathcal{T}_2$ refines $\mathcal{T}_1$
-\item For any toplogical space $(Y,\mathcal{U})$, if $f:Y\to (X,\mathcal{T}_2)$ is continuous then $f:Y\to (X,\mathcal{T}_1)$ is also continuous
-\item For any topological space $(Y,\mathcal{U})$, if $f:(X,\mathcal{T}_1)\to Y$ is continuous then $f:(X,\mathcal{T}_2)\to Y$ is also continuous. 
+\item $f$ is bijective. 
+\item $f$ and $f^{-1}$ are continuous. 
 \end{itemize}
-\end{prp}
-
-\begin{prp}{}{} Let $(X_1,\mathcal{T}_1),(X_2,\mathcal{T}_2),(X_3,\mathcal{T}_3)$ be a topological spaces and $f:X_1\to X_2$ and $g:X_2\to X_3$ be continuous then $g\circ f$ is also continuous. 
-\end{prp}
-
-\begin{prp}{}{} Let $f,g:X\to\R$ be continuous functions from a toplogical space $X$. Then $f+g$, $fg$ are continuous. $f/g$ is also continuous on the set $\{x\in X|g(x)\neq 0\}$. 
-\end{prp}
-
-\begin{defn}{Homeomorphism}{} Let $(X,\mathcal{T})$ and $(Y,\mathcal{U})$ be topological spaces. Let $f:X\to Y$ be a bijective function. $f$ is said to be homeomorphic and write $(X,\mathcal{T})\cong(Y,\mathcal{U})$ if $f$ is continuous and $f^{-1}$ is continuous. 
 \end{defn}
-
-\begin{prp}{}{} Let $(X,\mathcal{T})$ and $(Y,\mathcal{U})$ be topological spaces. Let $f:X\to Y$ be a bijective function. The following are equivalent. 
-\begin{itemize}
-\item $f$ is a homeomorphism
-\item $U\subset X$ is open if and only if $f(U)\subset Y$ is open
-\end{itemize} 
-\begin{proof}
-Suppose that $f$ is a homeomorphism. Then $U\subset X$ being open implies $f(U)\subset Y$ being open is clear by continuity of $f^{-1}$. $f(U)\subset Y$ being open implies $U\subset X$ being open is also clear from the continuity of $f$. \\
-The only if part of the statement is also clear from the definition of continuity. 
-\end{proof}
-\end{prp}
-
-\begin{defn}{Topological Invariants}{} A property $\phi$ of topological spaces is called topological invariant if whenever $(X,\mathcal{T})$ and $(Y,\mathcal{U})$ are homeomorphic topological space, one has property $\phi$ if and only if the other has it. 
-\end{defn}
-
-The following are some properties that we will see later which are indeed topological invariants: $T_0,T_1,T_2$ spaces and compactness and connectedness. These theorem will come up in the form of: Continuity preserves $\phi$. This means that $\phi$ is a topological invariant. 
 
 \pagebreak
 \section{New Topologies from Old}
-Similar to what we did with groups and subgroups as well as products of groups, we also have similar notion where we define subspaces, product spaces, and more. Naturally they will inherit some properties of the original topological space. We give special names as we will see later for properties that can be inherited by subspaces and product spaces respectively. 
 \subsection{Subspace Topologies}
-We begin by considering subsets of a topological space. 
-\begin{defn}{Subspace Topology}{} Let $(X,\mathcal{T})$ be a topological space. Let $Y\subset X$. Define the subspace topology $\mathcal{T}_Y$ on $Y$ by $$\mathcal{T}_Y=\{U\cap Y|U\in\mathcal{T}\}$$
+\begin{defn}{Subspace Topology}{}\\
+Let $(X,\mT)$ be a topological space. Let $Y\subseteq X$ be a subset. Define the subspace topology on $Y$ to be $$\mT_Y=\{U\cap Y\;|\;U\in\mT\}$$
 \end{defn}
 
-\begin{prp}{}{} In the above definition $\mathcal{T}_Y$ is a topology on $Y$. 
-\begin{proof}
-Trivially, $\emptyset$ and $Y$ are in $\mathcal{T}_Y$. \\
-Now let $\{A_i|i\in I\}\subseteq\mathcal{T}_Y$. Then $$\bigcup_{i\in I}A_i=\bigcup_{i\in I}(U_i\cap Y)=\left(\bigcup_{i\in I}U_i\right)\cap Y$$ and since $X$ is a topological space, $V=\bigcup_{i\in I}U_i\in\mathcal{T}$ and thus $V\cap Y\in\mathcal{T}_Y$ and we have proved the second property. \\
-Let $A,B\in\mathcal{T}_Y$. Then $$A\cap B=(U_A\cap Y)\cap(U_B\cap Y)=(U_A\cap U_B)\cap Y\in\mathcal{T}_Y$$ thus we are done. 
-\end{proof}
-\end{prp}
+\begin{prp}{}{}\\
+Let $(X,\mT)$ be a topological space. Let $Y\subseteq X$ be a subset. Then the following are true regarding the subspace topology on $Y$. 
+\begin{itemize}
+\item $(Y,\mT_Y)$ is a subspace of $X$. 
+\item The collection $$\mB_Y=\{B\cap Y\;|\;B\in\mB\}$$ forms a basis of $(Y,\mT_Y)$. 
+\end{itemize}
+\begin{proof}\\
+Trivially, $\emptyset$ and $Y$ are in $\mathcal{T}_Y$. Now let $\{A_i|i\in I\}\subseteq\mathcal{T}_Y$. Then $$\bigcup_{i\in I}A_i=\bigcup_{i\in I}(U_i\cap Y)=\left(\bigcup_{i\in I}U_i\right)\cap Y$$ and since $X$ is a topological space, $V=\bigcup_{i\in I}U_i\in\mathcal{T}$ and thus $V\cap Y\in\mathcal{T}_Y$ and we have proved the second property. \\
+Let $A,B\in\mathcal{T}_Y$. Then $$A\cap B=(U_A\cap Y)\cap(U_B\cap Y)=(U_A\cap U_B)\cap Y\in\mathcal{T}_Y$$ thus we are done. \\
 
-We have seen that open sets are inherited from the original topological space. In fact, basis elements can also be inherited from the parent space. 
-
-\begin{prp}{}{} Let $(X,\mathcal{T})$ be a topological space and let $\mathcal{B}$ be a basis on $X$ that generates $\mathcal{T}$. Let $Y\subset X$. The collection $$\mathcal{B}_Y=\{B\cap Y|B\in\mathcal{B}\}$$ is a basis on $Y$ that generates the subspace topology $\mathcal{T}_Y$ on $Y$. 
-\begin{proof}
 Let $y\in Y$. Then there exists $B\in\mathcal{B}$ such that $y\in B$. Then $B\cap Y\in\mathcal{B}_Y$ and $y\in B\cap Y$ and the first property is proven. \\
 Let $B_1,B_2\in\mathcal{B}_Y$. Then there exists $A_1,A_2\in\mathcal{B}$ such that $B_1=A_1\cap Y$ and $B_2=A_2\cap Y$.  Let $y\in B_1\cap B_2=A_1\cap A_2\cap Y$. By definition of a basis there exists $A\in\mathcal{B}$ such that $y\in A\subset A_1\cap A_2$. Then $y\in A\cap Y\subset B_1\cap B_2$ and $A\cap Y\in\mathcal{B}$. Thus we are done. 
 \end{proof}
 \end{prp}
 
-\begin{prp}{}{} Let $(X,\mathcal{T})$ be a topological space and let $Y$ be a subspace of $X$. If $U$ is an open subset of $Y$ and $Y$ is an open subset of $X$, then $U$ is an open subset of $X$. 
-\end{prp}
-
-\begin{prp}{}{} Let $(X,\mathcal{T})$ be a topological space and let $Y$ be a subspace of $X$. Let $A$ be a subset of $Y$. The subspace topology inherits from $Y$ is equal to the subspace topology inherits from $X$. 
-\end{prp}
-
-\begin{prp}{}{} Let $(X,\mathcal{T})$ be a topological space and let $Y$ be a subspace of $X$. For any $Z\subset Y$, $\overline{Z}_Y=Y\cap\overline{Z}_X$, where $\overline{Z}_Y$ is the closure of $Z$ in $Y$. 
-\end{prp}
-
-\begin{prp}{}{} Let $(X,\mathcal{T})$ be a topological space and let $Y$ be a subspace of $X$. The inclusion map $i:Y\to X$ given by $i(x)=x$ is continuous. 
-\begin{proof}
-Trivial by proposition 2.1.4. 
-\end{proof}
-\end{prp}
-
-\begin{prp}{}{} Let $f:X\to Y$ be a continuous function and $A\subset X$ is a subspace. Then $f|_A:A\to Y$ is continuous. 
-\begin{proof}
-Trivial by considering $f|_A:A\to f(A)$. 
-\end{proof}
+\begin{prp}{}{}\\
+Let $X$ be a topological space. Let $Y\subseteq X$ be a subspace of $X$. Let $U\subseteq Y$ be a subset. Then the following are true.
+\begin{itemize}
+\item If $U$ is open in $Y$ and $Y$ is open in $X$, then $U$ is open in $X$. 
+\item The subspace topology of $U$ from $Y$ is the same as the subspace topology of $U$ from $X$. 
+\item $\overline{U}_Y=Y\cap\overline{U}_X$, where $\overline{Z}_Y$ is the closure of $Z$ in $Y$. 
+\end{itemize}
 \end{prp}
 
 \begin{lmm}{Pasting Lemma}{} Let $(X,\mathcal{T})$ and $(Y,\mathcal{U})$ be topological spaces. Let $A,B\subset X$, either both open or both closed, such that $X=A\cup B$ and both are subspaces of $X$. Let $f:A\to Y$ and $g:B\to Y$ be continuous functions that agree on $A\cap B$. Define $h:X\to Y$ by $$h(x)=\begin{cases}
@@ -381,36 +331,20 @@ Problem arises when an open set that is part of both $A$ and $B$ is considered. 
 \end{proof}
 \end{lmm}
 
-\begin{defn}{Hereditary Properties}{} A topological property $\phi$ is hereditary if every subspace of a topological space with $\phi$ has it. 
-\end{defn}
-
-\begin{prp}{}{} The following topological properties are hereditary. 
-\begin{itemize}
-\item $T_0, T_1, T_2$
-\item Countable
-\item First Countable
-\item Second Countable
-\end{itemize}
-\end{prp}
-
 \subsection{Product Topology}
-\begin{defn}{Product Topology}{} Let $(X,\mathcal{T})$ and $(Y,\mathcal{U})$ be topological spaces. The product topology on $X\times Y$ is the topology generated by the basis $$\mathcal{B}_{X,Y}=\{U\times V:U\in\mathcal{T},V\in\mathcal{U}\}$$
+\begin{defn}{Product Topology}{}\\
+Let $(X,\mT_X)$ and $(Y,\mT_Y)$ be topological spaces. Define the product topology on $X\times Y$ to be the topology generated by the basis $$\{U\times V\;|\;U\in\mT_X, V\in\mT_Y\}$$
 \end{defn}
 
-\begin{lmm}{}{} Let $X,Y$ be topological spaces. Then $\mathcal{B}_{X,Y}$ is indeed a topology on $X\times Y$. 
-\end{lmm}
-
-\begin{prp}{}{} Let $(X,\mathcal{T})$ and $(Y,\mathcal{U})$ be topological spaces. Let $\mathcal{B}_X$ and $\mathcal{B}_Y$ be bases on $X$ and $Y$ that generate $\mathcal{T}$ and $\mathcal{U}$, respectively. Then $$\mathcal{B}=\{U\times V|U\in\mathcal{B}_X, V\in\mathcal{B}_Y\}$$ is a basis for the product topology on $X\times Y$. 
+\begin{prp}{}{}\\
+Let $(X,\mathcal{T})$ and $(Y,\mathcal{U})$ be topological spaces. Let $\mathcal{B}_X$ and $\mathcal{B}_Y$ be bases on $X$ and $Y$ that generate $\mathcal{T}$ and $\mathcal{U}$, respectively. Then $$\mathcal{B}=\{U\times V|U\in\mathcal{B}_X, V\in\mathcal{B}_Y\}$$ is a basis for the product topology on $X\times Y$. 
 \end{prp}
 
-\begin{prp}{}{} Let $(X,\mathcal{T})$ and $(Y,\mathcal{U})$ be topological spaces. Let $x\in X$. Define a map $f:Y\to X\times Y$ by $f(y)=(x,y)$ for all $y\in Y$. Then $f$ is a homeomorphism. 
+\begin{prp}{}{} Let $(X,\mathcal{T})$ and $(Y,\mathcal{U})$ be topological spaces. Let $x\in X$. Define a map $f:Y\to X\times Y$ by $f(y)=(x,y)$ for all $y\in Y$. Then $f$ is a homeomorphism onto its image. 
 \begin{proof}
 The subspace $\{x\}\cup Y$ has open sets of the form $\emptyset\times U$ or $\{x\}\times U$ for $U\in\mathcal{U}$. Then $f$ is continuous since $f^{-1}(\{x\}\cup U)=U$ and $f^{-1}(\emptyset\cup U)=\emptyset$. $f$ is bijective since they have the same cardinality. The inverse map is also continuous since $f(U)=\{x\}\times U$ is open for open sets $U$. 
 \end{proof}
 \end{prp}
-
-\begin{defn}{Projection Maps}{} Let $(X_1,\mathcal{T}_1),\dots,(X_n,\mathcal{T}_n)$ be topological spaces. Define the projection maps $$\pi_k:\prod_{i=1}^nX_i\to X_k$$ for $k\in\{1,\dots,n\}$ by $$\pi_k(x_1,\dots,x_n)=x_k$$
-\end{defn}
 
 \begin{prp}{Universal Property of Product Spaces}{} Let $(X,\mT_X)$ and $(Y,\mT_Y)$ be topological spaces. Then the product space $X\times Y$ satisfies the following universal property. \\
 
@@ -422,23 +356,26 @@ For any topological space $(Z,\mT_Z)$ and continuous functions $f:Z\to X$ and $g
 	\arrow["{\exists!u}", dashed, from=1-1, to=2-2]
 	\arrow["f", from=1-1, to=2-3, bend left = 25]
 	\arrow["g"', from=1-1, to=3-2, bend right = 25]
-	\arrow["{\pi_1}"', from=2-2, to=2-3]
-	\arrow["{\pi_2}", from=2-2, to=3-2]
-\end{tikzcd}} \\
+	\arrow["{\text{proj}_X}"', from=2-2, to=2-3]
+	\arrow["{\text{proj}_Y}", from=2-2, to=3-2]
+\end{tikzcd}} \\~\\
+where $\text{proj}_X:X\times Y\to X$ is the function defined by $\text{proj}(x,y)=x$ and vice versa for $\text{proj}_Y$. 
 \end{prp}
 
-\begin{prp}{}{} Let $X,Y,Z$ be topological spaces. Suppose that $f:Z\to X\times Y$ is a function. Then $f$ is continuous if and only if $\pi_1\circ f:Z\to X$ and $\pi_2\circ f:Z\to Y$ are continuous. 
-\end{prp}
+\begin{crl}{}{}\\
+Let $X,Y,Z$ be topological spaces. Suppose that $f:Z\to X\times Y$ is a function. Then $f$ is continuous if and only if $\text{proj}_X\circ f:Z\to X$ and $\text{proj}_Y\circ f:Z\to Y$ are continuous. 
+\end{crl}
 
 \subsection{Quotient Topology}
-\begin{defn}{Quotient Topology}{} Let $X$ be a topological space. Let $\sim$ be an equivalence relation on $X$ and write $\pi:X\to X/\sim$ the quotient map of sets. Define a topology on $X/\sim$ as follows. We say that $U\subseteq X/\sim$ is open if and only if $\pi^{-1}(U)$ is open in $X$. 
+\begin{defn}{Quotient Topology}{}\\
+Let $X$ be a topological space. Let $\sim$ be an equivalence relation on $X$ and write $\pi:X\to X/\sim$ the quotient map of sets. Define a topology on $X/\sim$ as follows. We say that $U\subseteq X/\sim$ is open if and only if $\pi^{-1}(U)$ is open in $X$. 
 \end{defn}
 
 One can perform quotient on subspaces as follows. For $U\subseteq X$ a subset, we define an equivalence relation on $X$ by declaring that $x\sim y$ if and only if $x,y\in U$. Then we write the quotient space as $$\frac{X}{U}$$ In particular, this has the effect of considering $U$ as a single point in $X$. \\
 
 Notice that the function $\pi:X\to X/\sim$ in the definition becomes continuous by definition. 
 
-\begin{thm}{Universal Property of Quotient Spaces}{} Let $X$ be a topological space and $\sim$ an equivalence relation on $X$. Then the quotient space $X/\sim$ satisfy the following universal property. \\
+\begin{prp}{Universal Property of Quotient Spaces}{} Let $X$ be a topological space and $\sim$ an equivalence relation on $X$. Then the quotient space $X/\sim$ satisfy the following universal property. \\
 
 For any topological space $Y$ and a map $f:X\to Y$ such that $f(x)=f(y)$ for all $x\sim y$, then there exists a unique map $u:X/\sim\to Y$ such that the following diagram commutes: \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
@@ -448,9 +385,6 @@ For any topological space $Y$ and a map $f:X\to Y$ such that $f(x)=f(y)$ for all
 	\arrow["f"', from=1-1, to=2-2]
 	\arrow["{\exists!u}", dashed, from=1-2, to=2-2]
 \end{tikzcd}} \\
-\end{thm}
-
-\begin{prp}{}{} Let $X$ be a topological space and $\sim$ an equivalence relation on $X$. Let $f:X/\sim\to Y$ be a function. Then $f$ is continuous if and only if $f\circ\pi:X\to Y$ is continuous. 
 \end{prp}
 
 \pagebreak
@@ -534,16 +468,20 @@ The following is a partial converse to the unique limit point proposition that i
 \begin{prp}{}{} A topological space $(X,\mathcal{T})$ is regular if and only if for every point $x\in X$ and every open set $U$ containing $x$, there is an open set $V$ such that $x\in V\subseteq\overline{V}\subseteq U$
 \end{prp}
 
-\begin{prp}{}{} Regularity and $T_3$ are topological invariants. 
+\begin{prp}{}{}\\
+Let $X$ be a topological space. Let $Y\subseteq X$ be a subspace. Then the following are true. 
+\begin{itemize}
+\item If $X$ is regular, then $Y$ is regular. 
+\item If $X$ is $T_3$, then $Y$ is $T_3$. 
+\end{itemize}
 \end{prp}
 
-\begin{prp}{}{} Regularity and $T_3$ are hereditary. 
-\end{prp}
-
-\begin{prp}{}{} Regularity and $T_3$ are finitely productive. 
-\end{prp}
-
-\begin{prp}{}{} Let $(X,\mathcal{T})$ be a topological space that has a basis of clopen sets. Then $(X,\mathcal{T})$ is regular. 
+\begin{prp}{}{}\\
+Let $X,Y$ be topological spaces. Then the following are true. 
+\begin{itemize}
+\item If $X,Y$ are regular, then $X\times Y$ is regular. 
+\item If $X,Y$ are $T_3$, then $X\times Y$ is $T_3$. 
+\end{itemize}
 \end{prp}
 
 \subsection{$T_4$ Spaces and Normality}
@@ -556,27 +494,21 @@ The following is a partial converse to the unique limit point proposition that i
 \begin{prp}{}{}  A topological space $(X,\mathcal{T})$ is normal if and only if for every open set $U$ and every closed set $C\subset U$, there exists an open set $V$ such that $C\subseteq V\subseteq\overline{V}\subseteq U$
 \end{prp}
 
-\begin{prp}{}{} Normality and $T_4$ are topological invariants. 
+\begin{prp}{}{}\\
+Let $X$ be a topological space. If $X$ is regular and second countable, then $X$ is normal. 
 \end{prp}
-
-\begin{prp}{}{} Normality is not hereditary. 
-\end{prp}
-
-\begin{prp}{}{} Every closed subspace of a normal space is normal. 
-\end{prp}
-
-\begin{prp}{}{} Normality is not finitely productive. 
-\end{prp}
-
-\begin{thm}{}{} Every regular, second countable topological space is normal. 
-\end{thm}
 
 \pagebreak
 \section{Relation to Metric Spaces}
-Metric spaces are more closely related to analysis in both its proofs and possible question types when compared to a more set theoretic approach for topology. However topology provides a more general context than metric spaces to discuss properties such as compactness and connectedness. Therefore I have decide to include metric spaces into a set of notes for point set topology. However be aware that metric spaces require a more analytical approach. \\
-One should also be clear on what properties are unique to metric spaces. This is often reflected in the proofs. If the techniques of the proofs make use of sets rather than closeness of points for instance, then it may be a more topological property. However Hausdorff and metric spaces are also closely related which we will see below. 
+\subsection{From Norms to Metrics and From Metrics to Norms}
+\begin{defn}{The Induced Metric from Norms}{}\\
+Let $(V,\|\cdot\|)$ be a normed vector space over $\R$. Define the induced metric to be the function $d:V\times V\to\R$ given by $$d(x,y)=\|x-y\|$$
+\end{defn}
 
-\subsection{The Metric Topology}
+\begin{prp}{}{}\\
+Let $(V,\|\cdot\|)$ be a normed vector space over $\R$. Then $(V,d)$ is a complete metric space. 
+\end{prp}
+
 \begin{defn}{Metric Topology}{} Let $(X,d)$ be a metric space. The metric topology on $X$ is the topology on $X$ generated by $$\mB_d=\{B(x_0,r)\;|\;x_0\in X,r\in\R^+\}$$
 \end{defn}
 
@@ -585,22 +517,15 @@ This means that every metric space is in fact a topological space with topology 
 \begin{prp}{}{} Let $(X,d)$ be a metric space. Then $(X,\mB_d)$ is Hausdorff. 
 \end{prp}
 
-Readers should stop and start to think about the notions we previously defined on topological spaces such as open sets and interiors, and think about what they mean in this more specific context. 
-
-The following notion is unique to metric spaces which is helpful in characterizing compactness in metric spaces. 
-
-\begin{defn}{Bounded Set}{} Let $U$ be a subset of a metric spaces $(X,d)$. We say that $U$ is bounded if there exists $a\in X$ and $r>0$ such that $$U\subseteq B_r(a)$$
-\end{defn}
-
-\begin{prp}{}{} Let $f:X\to Y$ be a funciton between metric spaces. The following are equivalent. 
+\begin{prp}{}{}\\
+Let $X$ be a metric space Then the following are true. 
 \begin{itemize}
-\item $f$ is continuous at $p\in X$
-\item For every sequence $x_n$ such that $x_n\to p$, we have $f(x_n)\to f(p)$
-\item For every $\epsilon>0$, there exists $\delta>0$ such that $$x\in B_{\delta}(p)\implies f(x)\in B_{\epsilon}(f(p))$$ Or equivalently, $f(B_{\delta}(p))\subset B_{\epsilon}(f(p))$. 
+\item Let $U\subseteq X$ be a subset. Then $U$ in $X$ as a metric space if and only if $U$ is open in $X$ as a topological space. 
+\item Let $Y$ be a metric space. Let $f:X\to Y$ be a function. Then $f$ is continuous as a function between metric spaces if and only if it is continuous as a function between topological spaces. 
 \end{itemize}
 \end{prp}
 
-\subsection{Equivalent Metrics}
+\subsection{Equivalent Norms and Equivalent Metrics}
 We now investigate when will different metrics induce the same topology. The answer is reasonably straight forward considering we have the notion of homeomorphism at play. 
 
 \begin{defn}{Topologically Equivalent Metrics}{} Let $X$ be a set. Let $d_1$ and $d_2$ be metrics on $X$. We say that $d_1$ and $d_2$ are topologically equivalent if the metric topology the metric topologies coincide: $$\mB_{d_1}=\mB_{d_2}$$
@@ -614,23 +539,8 @@ We now investigate when will different metrics induce the same topology. The ans
 \end{itemize}
 \end{prp}
 
-\begin{defn}{Bilipschitz Equivalent Metrics}{} Two metrics $d_1,d_2$ on $X$ are said to be bilipschitz equivalent if there exists $0<c_1\leq c_2<\infty$ such that $$c_1d_1(x,y)\leq d_2(x,y)\leq c_2d_1(x,y)$$ for all $x,y\in X$. 
-\end{defn}
-
-\begin{lmm}{}{} Let $X$ be a set. Let $d_1$ and $d_2$ be metrics on $X$. If $d_1$ and $d_2$ are Lipshcitz equivalent then $d_1$ and $d_2$ are topologically equivalent. 
-\end{lmm}
-
-\subsection{Induced Metric from Norms}
-\begin{prp}{}{} Let $(V,\|\cdot\|)$ be a normed vector space over $\R$. Then the function $d:V\times V\to\R$ defined by $$d(x,y)=\|x-y\|$$ defines a metric on $V$. 
-\begin{proof} Can easily be seen that setting $d(x,y)=\|x-y\|$ allows the norm to become a metric. 
-\end{proof}
-\end{prp}
-
 \begin{defn}{Equivalent Norms}{} Two norms $\|\cdot\|_1$ and $\|\cdot\|_2$ for a vector space $V$ over a field $F=\R$ or $\C$ are said to be equivalent if there exists $c_1,c_2\in F$ such that for every $x\in V$, $$c_1\|x\|_1\leq\|x\|_2\leq c_2\|x\|_1$$
 \end{defn}
-
-\begin{prp}{}{} The equivalence on norms is an equivalent relation. 
-\end{prp}
 
 \begin{prp}{}{} Let $V$ be a vector space over $\R$. Let $\|\cdot\|_1$ and $\|\cdot\|_2$ be two norms on $V$. Let $d_1$ and $d_2$ be the induced metrics of the two norms respectively. Then $\|\cdot\|_1$ and $\|\cdot\|_2$ are equivalent norms if and only if $d_1$ and $d_2$ are topologically equivalent metrics. 
 \begin{proof}
@@ -638,6 +548,36 @@ Suppose that $\|\cdot\|_1$ and $\|\cdot\|_2$ are equivalent. Then define their c
 Suppose that $U\subseteq(X,d_1)$ is open. Then for every $x\in U$, there exists $r>0$ such that $B_r(x)\subset U$. From the equivalent norms, we have that there exists $c$ such that $\|x-y\|_2\leq c\|x-y\|_1$ and thus $$\left\{x\in X\bigg{|}\|x-y\|_2<\frac{r}{c}\right\}\subseteq\{x\in X|\|x-y\|_1<r\}$$ Thus $B_{\frac{r}{c}}(x)$ in the $d_2$ metric is a subset of $B_r(x)$ in the $d_1$ metric. This means that we have constructed an open ball in $(X,d_2)$ so that it is contained in $U$. Thus $U$ is also open in $(X,d_2)$. \\
 Mirror this to show that the open sets of $(X,d_2)$ must also be open sets of $(X,d_1)$ using the fact that there exists $c$ such that $\|x-y\|_1\leq c\|x-y\|_2$ and we are done. 
 \end{proof}
+\end{prp}
+
+\subsection{Completion}
+The goal of this section is to attempt to complete a metric space by adding in the missing limits of a metric space. 
+
+\begin{defn}{Space of Bounded Real Functions}{}\\
+Let $X$ be a topological space. Define the set of bounded real functions of $X$ to be $$B(X)=\{f:X\to\R\;|\;\abs{f}\leq M\text{ for some }M\in\R\}$$
+\end{defn}
+
+\begin{defn}{The Supremum Norm}{}\\
+Let $X$ be a topological space. Define the supremum norm on $B(X)$ by the formula $$\|f\|_\infty=\sup_{x\in X}\abs{f(x)}$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $X$ be a topological space. Then $(B(X),\|\cdot\|_\infty)$ is a normed vector space. 
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $X$ be a metric space. Then the metric space $B(X)$ whose metric induced by the supremum norm is complete. 
+\begin{proof}
+Let $(f_n)_{n\in\N}$ be a Cauchy sequence in $B(X)$. Then for every $\epsilon>0$, there exists $N$ such that $$\|f_n-f_m\|_{\infty}=\sup_{x\in X}\abs{f_n(x)-f_m(x)}<\epsilon$$ for all $n,m>N$. In particular, for each $x\in X$, the property of supremum implies that $\abs{f_n(x)-f_m(x)}<\epsilon$ for $n,m>N$. Thus $(f_n(x))_{n\in\N}\subset\R$ is Cauchy for each $x$. Since $\R$ is complete, $(f_n(x))_{n\in\N}$ converges for each $x\in X$. \\
+Now define the function $f:X\to\R$ by $$f(x)=\lim_{n\to\infty}f_n(x)$$ Then fix $\epsilon>0$, we have that $$\abs{f_n(x)-f(x)}<\epsilon$$ for all $n>N$ by letting $m\to\infty$ from the fact that $\abs{f_n(x)-f_m(x)}<\epsilon$. This $N$ does not depend on $x$. Fix $\epsilon=1$, then there exists $N_1\in\N$ such that 
+\begin{align*}
+\abs{f(x)-f_n(x)}\leq\abs{f(x)-f_{N_1}(x)}\\
+\leq 1+\abs{f_{N_1}(x)}
+\end{align*} for all $x\in X$ and $n>N_1$ thus $f$ is bounded. This means that $f\in B(X)$ and that $\|f_n-f\|_\infty<\epsilon$ for all $n>N$. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{} Any metric space $X$ can be isometrically embedded into the complete metric space $B(X)$. 
 \end{prp}
 
 \subsection{Metrizability}
@@ -692,19 +632,25 @@ Now suppose that every finite subcollection of $\mathcal{F}$ has a non empty int
 \end{proof}
 \end{thm}
 
-\begin{prp}{}{} Compactness is finitely productive. 
+\begin{prp}{}{}\\
+Let $X,Y$ be topological spaces. If $X,Y$ are compact, then $X\times Y$ is compact. 
 \begin{proof}
-We show that $(X,\mathcal{T})$ and $(Y,\mathcal{S})$ are compact then $X\times Y$ is compact. Consider the product topology on $X\times Y$ given by $$\mathcal{B}=\{U\times V|U\in\mathcal{T},V\in\mathcal{S}\}$$ Let $(x,y)\in W\subseteq T\times S$ be open, then by definition of a basis there exists $U\times V\in\mathcal{B}$ such that $$(x,y)\in U\times V\subset W$$ Let $\mathcal{U}$ be an open cover of $X\times Y$. \\
+Consider the product topology on $X\times Y$ given by $$\mathcal{B}=\{U\times V|U\in\mT_X,V\in\mT_Y\}$$ Let $(x,y)\in W\subseteq T\times S$ be open, then by definition of a basis there exists $U\times V\in\mathcal{B}$ such that $$(x,y)\in U\times V\subset W$$ Let $\mathcal{U}$ be an open cover of $X\times Y$. \\
 Let $x\in X$. Then we can find $W_x\in\mathcal{U}$ such that $(x,y)\in W_x$. By the above, there exists $U_x\times V_x\in\mathcal{B}$ such that $(x,y)\in U_x\times V_x\subset W_x$. The sets $U_x$ form an open cover of $X$, thus contains a finite subcover $U_{x_1},\dots,U_{x_n}$. Let $$N(y)=\bigcap_{k=1}^nV_{x_k}$$ This definition makes sense since $y\in N(y)$ is a neighbourhood of $y$ that is open. We also have $$X\times N(y)\subset\bigcup_{k=1}^n(U_{x_k}\times V_{x_k})\subset\bigcup_{k=1}^nW_{x_k}$$ And thus $X\times N(y)$ has a finite subcover. \\
 Since $\{N(y)|y\in Y\}$ forms an open cover, it has a finite subcover $N(y_1),\dots,N(y_m)$ that covers $Y$. Thus $$X\times Y=\bigcup_{k=1}^mX\times N(y_k)\subset\bigcup_{k=1}^m\bigcup_{j=1}^n(U_{x_j}\times V_{x_k})\subset\bigcup_{k=1}^m\bigcup_{j=1}^nW_{x_jk}$$ and $X\times Y$ has a finite subcover. \\
-Repeated application of the proof proves that compactness is finitely productive. 
 \end{proof}
 \end{prp}
 
 \begin{thm}{Tychonov's Theorem}{} The product of any collection of compact spaces is compact. 
 \end{thm}
 
-\subsection{Compactness, Closed Sets and Continuity}
+While products of compact spaces are compact, subspaces of compact spaces may not be compact. 
+
+\begin{eg}{}{}\\
+The subspace $[0,1]\in\R$ is compact but the subspace $(0,1)$ of $[0,1]$ is not compact. 
+\end{eg}
+
+\subsection{Properties of Compact Sets}
 \begin{prp}{}{} Let $f:X\to Y$ be continuous. If $K\subset X$ is compact, then $f(K)$ is compact.  
 \begin{proof}
 Let $K$ be compact. Let $\mathcal{U}$ be an open cover of $f(K)$. Since $f$ is continuous, for all $U\in\mathcal{U}$, $f^{-1}(U)$ are open and forms a cover of $K$. Since $K$ is compact, there exists a finite subcover of $K$, namely $f^{-1}(U_1),\dots,f^{-1}(U_n)$. \\
@@ -712,20 +658,10 @@ Let $y\in f(K)$. Then $y=f(x)$ for some $x\in K$. But $x\in f^{-1}(U_k)$ for som
 \end{proof}
 \end{prp}
 
-\begin{lmm}{}{} Compactness is a topological invariant but is not hereditary. 
-\begin{proof}
-From the above, if $X,Y$ is homeomorphic then $Y=f(X)$ and we are done. \\
-Considering $(0,1)\in\R$ as a metric subspace of $[0,1]\in\R$. 
-\end{proof}
-\end{lmm}
-
 \begin{prp}{}{} Let $(X,\mathcal{T})$ be a compact topological space. Let $C\subseteq X$ be a closed subset. Then $C$ is compact. 
 \begin{proof}
 Let $U$ be a cover of $C$ by open subsets of $X$. Then $U\cup X\setminus C$ is an open cover of $X$, thus has a finite subcover. This provides an open subcover of $C$ since $X\setminus C$ is open and you can remove this element from the subcover. 
 \end{proof}
-\end{prp}
-
-\begin{prp}{}{} Let $(X,\mathcal{T})$ be a compact Hausdorff space. Then $(X,\mathcal{T})$ is regular and normal. 
 \end{prp}
 
 \begin{prp}{}{} Let $(X,\mathcal{T})$ be a Hausdorff topological space. Let $K\subseteq X$ be compact. Then $K$ is closed. 
@@ -765,36 +701,35 @@ This section is dedicated to theorems related to compactness that is unique only
 \begin{defn}{Lebesgue Number}{} Let $\mathcal{U}$ be an open cover of a metric space $X$. A number $\delta>0$ is called a Lebesgue number for $\mathcal{U}$ if for any $x\in X$ there exists $U\in\mathcal{U}$ such that $B_\delta(x)\subset U$. 
 \end{defn}
 
-\begin{lmm}{}{} Every open cover $\mathcal{U}$ of a compact metric space $X$ has a Lebesgue number. 
+\begin{lmm}{}{}\\
+Let $X$ be a metric space. Let $\mU$ be an open cover of $X$. Then $\mU$ has a Lebesgue number. 
 \end{lmm}
 
-\begin{defn}{Sequential Compactness}{} Let $X$ be a metric space. Then $X$ is said to be sequentially compact if any sequence of elements in $X$ has a convergent subsequence. 
+\begin{defn}{Sequential Compactness}{}\\
+Let $X$ be a metric space. We say that $X$ is sequentially compact if any sequence $(x_n)_{n\in\N}$ in $X$ has a convergent subsequence. 
 \end{defn}
 
-\begin{lmm}{}{} If $X$ is sequentially compact that any open cover of $X$ has a Lebesgue number. 
-\end{lmm}
-
-\begin{prp}{}{} Let $(X,d)$ be a metric space. Then the following are equivalent. 
-\begin{itemize}
-\item $X$ is compact
-\item $X$ is sequentially compact
-\item $X$ is closed and totally bounded
-\end{itemize}
+\begin{prp}{}{}\\
+Let $X$ be a metric space. Then $X$ is compact if and only if $X$ is sequentially compact. 
 \end{prp}
 
-Since there is no notion of boundedness in a general topological space, we have the following theorem special to metric spaces. 
-
-\begin{prp}{}{} A compact subset of a metric space is bounded. 
+\begin{prp}{}{}\\
+Let $M$ be a metric space. Let $U\subseteq M$ be a subspace. If $U$ is compact, then $U$ is closed and bounded. 
 \begin{proof}
 Let $a\in X$. Let $x\in K$. Then $x\in B_r(a)$ for all $r>d(a,x)$. Thus $K$ is covered by the collection of open balls $B_r(a)$. Thus it has a finite subcover $B_{r_1}(a),\dots,B_{r_n}(a)$. Thus $$K\subset\bigcup_{k=1}^nB_{r_k}(a)=B_{\max\{r_1,\dots,r_n\}}(a)$$ and we are done. 
 \end{proof}
 \end{prp}
 
-\begin{defn}{Uniformly Continuous}{} A map $f:X\to Y$ between metric spaces is uniformaly continuous if for every $\epsilon>0$, there exists $\delta>0$ such that $$d_X(x,y)<\delta\implies d_Y(f(x),f(y))<\epsilon$$ for any $x,y\in X$. 
-\end{defn}
-
-\begin{thm}{}{} A continuous map from a compact metric into a metric space is uniformly continuous. 
-\end{thm}
+\begin{prp}{}{}\\
+Let $X$ be metric space. If $X$ is compact, then the following are true. 
+\begin{itemize}
+\item $X$ is complete. 
+\item Let $Y$ be a metric space. Let $f:X\to Y$ be a continuous function. Then $f$ is uniformly continuous. 
+\end{itemize}
+\begin{proof}\\
+Suppose that $(x_n)_{n\in\N}$ is a Cauchy sequence in a compact metric space $X$. Then $X$ being sequentially compact means that there exists a subsequence of $(x_n)_{n\in\N}$ such that it converges in $X$. But then clearly $$d(x_n,x)\leq d(x_n,x_{n_k})+d(x_{n_j},x)$$ implies that $x_n\to x$ since in the inequality, the first part of the sum corresponds to the sequence being Cauchy and thus tends to $0$, while the latter part correponds to the subsequence being convergent and thus tends to $0$. 
+\end{proof}
+\end{prp}
 
 \subsection{Compactness in $\R^n$}
 We arrive at an important characterization of compact sets in $\R^n$. 
@@ -832,39 +767,30 @@ This means that $\|x\|_2=1$ implies $\|x\|\geq c_1$. Let $y\in\R^n$ be arbitrary
 \pagebreak
 \section{Connectedness}
 \subsection{Basic Definitions}
-\begin{defn}{Connected Space}{} A topological space $(X,\mathcal{T})$ is said to be disconnected if there exists disjoint non-empty open subsets $A,B\subseteq X$ such that $X=A\cup B$, and $A\cap B=\emptyset$. If $(X,\mathcal{T})$ is not disconnected, then it is said to be connected. 
+\begin{defn}{Connected Space}{}\\
+Let $X$ be a topological space. We say that $X$ is disconnected if there exists non-empty open subsets $A,B\subseteq X$ such that the following are true. 
+\begin{itemize}
+\item $A\cap B=\emptyset$. 
+\item $A\cup B=X$. 
+\end{itemize}
+We say that $X$ is connected if $X$ is not disconnected. 
 \end{defn}
 
-\begin{prp}{}{} Let $(X,\mathcal{T})$ be a topological space. The following are equivalent. 
+\begin{prp}{}{}\\
+Let $X$ be a topological space. Then the following are equivalent. 
 \begin{itemize}
-\item $(X,\mathcal{T})$ is disconnected
-\item There exists non-empty disjoint closed sets $A,B\subseteq X$ such that $X=A\cup B$
-\item There exists a non-trivial clopen subset of $X$. 
-\end{itemize} 
-\begin{proof}~\\
-\begin{itemize}
-\item $(1)\implies(2)$: Suppose that $A,B$ are the sets satisfying the definition of a disconnceted space. Then since $A$ is open, $B=X\setminus A$ is closed thus vice versa $A$ is also closed. 
-\item $(2)\implies(3)$: Again, since $B=X\setminus A$ is open, $B$ is both open and closed. 
-\item $(3)\implies(1)$: Let $A\subset X$ be both open and closed. Then $X\setminus A$ is also open and disjoint to $A$. Thus $X$ is disconnected by $A$ and $X\setminus A$. 
+\item $X$ is connected. 
+\item There exists non-empty closed subsets $A,B\subseteq X$ such that $A\cap B=\emptyset$ and $A\cup B=X$. 
+\item If $A\subseteq X$ is a nonempty subset of $X$ that is both open and closed, then $A=X$. 
+\item If $f:X\to\{0,1\}$ is a continuous function where the codomain has the discrete topology, then $f$ is constant. 
 \end{itemize}
-\end{proof}
-\end{prp}
-
-\begin{prp}{}{} A topological space $(X,\mathcal{T})$ is disconnected if and only if there exists a continuous function $f:X\to\{0,1\}$ that is surjective. 
 \begin{proof}
-Suppose that $X$ is disconnected by $A$ and $B$. Then define $$f(x)=\begin{cases}
-0 &\text{ if }x\in A\\
-1 & \text{ if }x\in B
-\end{cases}$$
-Then $f$ is continuous since every open set in $\{0,1\}$ maps to an open set in $X$. Clearly it is also surjective. \\
-Now suppose that $f:X\to\{0,1\}$ is a surjective continuous function. Then define $A=f^{-1}(0)$ and $B=f^{-1}(1)$. $A,B$ are open by continuity. Since $f$ is surjective, we have $A\cup B=X$. Clearly they are disjoint else their common element will be mapped to both $0$ and $1$. Thus we are done. 
 \end{proof}
 \end{prp}
-
-An equivalent formulation of the above proposition is that $X$ is connected if and only if every continuous function from $X$ to $\{0,1\}$ is constant. 
 
 \subsection{Properties of Connectedness}
-\begin{prp}{}{} Let $(X,\mathcal{T})$ be connected. Let $(Y,\mathcal{U})$ be a topological space. Let $f:X\to Y$ be continuous. Then $f(X)$ is connected. 
+\begin{prp}{}{}\\
+Let $X,Y$ be topological spaces. Let $f:X\to Y$ be a continuous function. If $X$ is connected, then $f(X)$ is connected. 
 \begin{proof}
 Suppose for a contradiction that $f(X)$ is disconnected. Suppose that it is disconnected by $A,B$. Then $f^{-1}(A)$ and $f^{-1}(B)$ is clearly disjoint since $A$ and $B$ are disjoint. Since $A\cup B=f(X)$, we must also have $f^{-1}(A)\cup f^{-1}(B)=X$. By continuity, $f^{-1}(A)$ and $f^{-1}(B)$ are open. Thus $f(X)$ is disconnected, a contradiction. 
 \end{proof}
@@ -904,24 +830,21 @@ Any $K$ between $C$ and $\overline{C}$ must contain some but not all of the boun
 \end{proof}
 \end{crl}
 
-\subsection{Transferal of Connectedness}
-\begin{prp}{}{} Connectedness is not Hereditary. 
-\end{prp}
+\begin{eg}{}{}\\
+The space $\R$ is connected but the subspace $[0,1]\cup[2,3]$ is not connected. Thus connectedness is not hereditary. 
+\end{eg}
 
-\begin{prp}{}{} Connectedness is finitely productive. 
-\begin{proof}
-Let $X,Y$ be connected spaces. Let $y\in Y$. Define $C=X\times\{y\}$ and $C_t=\{t\}\times Y$. Then $C$ is homeomorphic to $T$ and $C_t$ is homeomorphic to $S$. Thus they both are connected. Clearly we also have that $C_t\cap C\neq\emptyset$ since they both contain $(x,y)$ and $$X\times Y=C\cup\bigcup_{t\in X}C_t$$ thus $X\times Y$ is connected. 
-\end{proof}
-\end{prp}
-
-\begin{prp}{}{} Connectedness is productive. 
+\begin{prp}{}{}\\
+Let $\{X_i\;|\;i\in I\}$ be a family of connected topological spaces. Then $\prod_{i\in I}X_i$ is connected. 
 \end{prp}
 
 \subsection{Path Connectedness}
-\begin{defn}{Paths}{} Let $(X,\mathcal{T})$ be a topological space. A path in $X$ is a continuous function $p:[0,1]\to X$. More specifically, given two points $a,b\in X$, a path $p$ in $X$ such that $p(0)=a$ and $p(1)=b$ is called a path from $a$ to $b$. 
+\begin{defn}{Paths in a Topological Space}{}\\
+Let $X$ be a topological space. A path in $X$ is a continuous function $\gamma:[0,1]\to X$. 
 \end{defn}
 
-\begin{defn}{Path Connectedness}{} A topological space $(X,\mathcal{T})$ is called path connected if for any distinct $a,b\in X$, there is a path from $a$ to $b$. 
+\begin{defn}{Path Connectedness}{}\\
+Let $X$ be a topological spaces. We say that $X$ is path connected if for all $x,y\in X$, there exists a path $\gamma:[0,1]\to X$ such that $\gamma(0)=x$ and $\gamma(1)=y$. 
 \end{defn}
 
 \begin{prp}{}{} Every path connected space is connected. 
@@ -931,65 +854,11 @@ Let $u\in X$. Consider any $v\in X$. Then there exists a path from $u$ to $v$. T
 \end{prp}
 
 \subsection{Connectedness on $\R^n$}
-\begin{thm}{}{} A subset of $\R$ is connected if and only if it is an interval. 
-\end{thm}
-
-Below is a partial converse of path connectedness implying connectedness over $\R^n$. 
-
-\begin{thm}{}{} Connected open subsets of $\R^n$ are path connected. 
-\end{thm}
-
-\begin{thm}{}{} Open subsets of $\R^n$ have open connected components. 
-\end{thm}
-
-\begin{thm}{}{} A subset $U$ of $\R$ is open if and only if it is the disjoint union of countably many open intervals. 
-\end{thm}
-
-\pagebreak
-\section{Notable Topologies}
-\subsection{$\R$ and $\C$ with the Standard Topology}
-$\R$ and $\C$ being metric spaces allows a natural topology to be induced from the metric. 
-\begin{defn}{Standard Topology of $\R$ and $\C$}{} The standard topology on $\R$ induced by the Euclidean metric $d(x,y)=\abs{x-y}$ consists of $B_r(a)=\{x\in\R|\abs{x-a}<r\}$ for $a\in\R$ and $r>0$ being open sets aside from $\emptyset$ and $\R$. \\
-The standard topology on $\C$ induced by the Euclidean metric $d(x,y)=\abs{x-y}$ consists of $B_r(a)=\{z\in\C|\abs{z-a}<r\}$ for $a\in\R$ and $r>0$ being open sets aside from $\emptyset$ and $\R$. 
-\end{defn}
-
-\begin{prp}{}{} The product topology of $\R^n$ and $\C^n$ is precisely $B_r(a)=\{x\in\R^n|\abs{x-a}<r\}$ and $B_r(a)=\{z\in\C|\abs{z-a}<r\}$. 
+\begin{prp}{}{}\\
+Let $U\subseteq\R$ be a subspace. Then $U$ is connected if and only if $U$ is an interval. 
 \end{prp}
 
-\begin{prp}{}{} The subspace topology of $\Z$ induced by $\R$ is precisely $\mathcal{T}_Z=\{\{x_1,\dots,x_n\}|x_k\in\Z,n\in\N\}$. 
+\begin{prp}{}{} A subset $U$ of $\R$ is open if and only if it is the disjoint union of countably many open intervals. 
 \end{prp}
-
-\begin{prp}{}{} All the above topological spaces are Hausdorff. 
-\end{prp}
-
-\subsection{Discrete and Indiscrete Topology}
-\begin{defn}{Discrete Topology}{} Let $X$ be a set. The discrete topology on $X$ is the topology where every subset of $X$ is part of the topology: $$\mathcal{T}_X=\{U|U\subseteq X\}$$
-\end{defn}
-
-\begin{prp}{}{} Under the discrete topology, every set is both open and closed. 
-\end{prp}
-
-\begin{defn}{Indiscrete Topology}{} The indiscrete topology on a set $X$ is the topology where the only open sets are $\emptyset$ and $X$. 
-\end{defn}
-
-\subsection{Cofinite Topology}
-\begin{defn}{Cofinite Topology}{} The cofinite topology on a set $X$ is a topology where every open set has its complement being finite: $$\mathcal{T}_X=\{U\subseteq X|X\setminus U\text{ is finite }\}\cup\{\emptyset\}$$
-\end{defn}
-
-\begin{prp}{}{} The cofinite topology on $\R$ is not Hausdorff. 
-\end{prp}
-
-\subsection{The Space of Bounded Functions}
-\begin{defn}{Space of Bounded Real Functions}{} Denote $B(X)$ the space of all bounded real valued functions on a topological space $X$. 
-\end{defn}
-
-\begin{prp}{}{} The metric space with distance induced by the supremum norm $$\|f\|_{\infty}=\sup_{x\in X}\abs{f(X)}$$ for $f\in B(X)$ is complete. 
-\end{prp}
-
-\begin{prp}{}{} The space of all bounded continuious functions from a topological space $T$ to $\R$, $C_B(T)$ is a closed subspace of $B(T)$ and thus is complete. 
-\end{prp}
-
-\begin{crl}{}{} Let $(X,\mathcal{T})$ be a nonempty compact topological space, then $C(T)$ is complete with maximum norm $$\|f\|_\infty=\max_{x\in T}\abs{f(x)}$$
-\end{crl}
 
 \end{document}
