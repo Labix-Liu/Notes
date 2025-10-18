@@ -133,21 +133,28 @@ This is true since Hurewicz fibrations satisfies the homotopy lifting property w
 \pagebreak
 \section{Vector Bundles}
 \subsection{Basic Definitions}
-\begin{defn}{Vector Bundles}{} Let $F$ be a field. A vector bundle $(E,B,p)$ consists of two topological spaces $E$ and $B$, a continuous surjection $p:E\to B$ such that
+\begin{defn}{Vector Bundles}{}\\
+Let $K$ be a field. Let $E,B$ be spaces with $B$ connected. Let $p:E\to B$ be a continuous map. We say that $p$ is a vector bundle of dimension $d\in\N$ over $K$ if the following are true. 
 \begin{itemize}
-\item For every $b\in B$, the fibre $E_b=p^{-1}(b)$ is an $F$-vector space of dimension $k$. 
-\item For every $b\in B$, there exists an open neighbourhood $U\subseteq B$ of $p$ and a homeomorphism $\phi:p^{-1}(U)\to U\times F^k$ such that for $\pi:U\times F^k\to U$ the projection map, the following diagram commutes \\
-\adjustbox{scale=1.1,center}{\begin{tikzcd}
-p^{-1}(U)\arrow[rr, "\phi"]\arrow[rdd, "p"'] & & U\times K^r\arrow[ldd, "\pi"]\\
-&&\\
-& U &
-\end{tikzcd}} \\
-and the map $$E_b\overset{\phi|_{E_b}}{\longrightarrow}\{b\}\times F^k\overset{\pi}{\longrightarrow}F^k$$ is a vector space isomorphism. 
+\item $p:E\to B$ is surjective. 
+\item Local Triviality: There exists a collection $$\{(U_k\subseteq B,\phi_k:p^{-1}(U_k)\to U_k\times F)\;|\;k\in I\}$$ called local trivialization charts such that the following diagram commutes: \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{p^{-1}(U_k)} && {U_k\times K^d} \\
+	& U_k
+	\arrow["{\phi_k}", from=1-1, to=1-3]
+	\arrow["p"', from=1-1, to=2-2]
+	\arrow["\pi", from=1-3, to=2-2]
+\end{tikzcd}}\\
+where $\pi$ is the projection by forgetting the second variable. 
 \end{itemize}
-$B$ is said to be the base space and $E$ the total space. Each $(U,\phi)$ is said to be a local trivialization. 
+We say that $B$ is the base space, $E$ the total space. It is denoted as $(F,E,B)$. 
 \end{defn}
 
 The local trivialization means that locally at a neighbourhood, the vector bundle looks the same the open set times $F^k$. In particular, there is also a notion of trivial bundle which means that the bundle is globally just $B\times\R^r$. 
+
+\begin{lmm}{}{}\\
+Let $K$ be a field. Let $p:E\to B$ be a vector bundle of dimension $d\in\N$ over $K$. Then the local trivialization charts induces a homeomorhpsim $$p^{-1}(b)\cong K^d$$ for all $b\in B$. 
+\end{lmm}
 
 \begin{defn}{Sections}{} A section of a vector bundle $p:E\to B$ is a map $s:B\to E$ assigning to each $b\in B$ a vector space $s(b)$ in the fiber $p^{-1}(b)$. 
 \end{defn}
@@ -204,11 +211,11 @@ Given two charts $(U_\alpha,\phi_\alpha)$ and $(U_\beta,\phi_\beta)$ of a vector
 \subsection{Fiber Bundles}
 Fiber bundles serve as somewhat of a generalization of both vector bundles and covering spaces, while being a special case of a fibration. It therefore has the properties of a fibration. 
 
-\begin{defn}{Fiber Bundles}{} Let $E,B,F$ be spaces with $B$ connected, and $p:E\to B$ a continuous map. We say that $p$ is a fiber bundle over $F$ if the following are true. 
+\begin{defn}{Fiber Bundles}{}\\
+Let $E,B,F$ be spaces with $B$ connected, and $p:E\to B$ a continuous map. We say that $p$ is a fiber bundle over $F$ if the following are true. 
 \begin{itemize}
-\item $p^{-1}(b)\cong F$ for all $b\in B$
 \item $p:E\to B$ is surjective
-\item Local Triviality: There exists a collection $$\{(U_k\subseteq B,\phi_k:p^{-1}(U_k)\to U_k\times F)\;|\;k\in I\}$$ called local trivialization charts such that the following diagram commutes: \\
+\item Local Triviality: There exists a collection $$\{(U_k\subseteq B,\phi_k:p^{-1}(U_k)\overset{\cong}{\to}U_k\times F)\;|\;k\in I\}$$ called local trivialization charts such that the following diagram commutes: \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	{p^{-1}(U_k)} && {U_k\times F} \\
 	& U_k
@@ -218,28 +225,45 @@ Fiber bundles serve as somewhat of a generalization of both vector bundles and c
 \end{tikzcd}}\\
 where $\pi$ is the projection by forgetting the second variable. 
 \end{itemize}
-We say that $B$ is the base space, $E$ the total space. It is denoted as $(F,E,B)$
+We say that $B$ is the base space, $E$ the total space. It is denoted as $(F,E,B)$ or $F\hookrightarrow E\to B$. 
 \end{defn}
 
-Intuitively, we would like a fiber bundle to locally look like the product $B\times F$. \\
+Intuitively, we would like a fiber bundle to locally look like the product $B\times F$. 
+
+\begin{lmm}{}{}\\
+Let $K$ be a field. Let $p:E\to B$ be a fiber bundle with fiber $F$. Then the local trivialization charts induces a homeomorhpsim $$p^{-1}(b)\cong F$$ for all $b\in B$. 
+\end{lmm}
 
 Fiber bundles generalizes vector bundles in the sense that the fibers are no longer vector spaces but instead arbitrary spaces. 
 
-\begin{lmm}{}{} Every vector bundle is a fiber bundle. 
+\begin{lmm}{}{}\\
+The following are true regarding fiber bundles. 
+\begin{itemize}
+\item Every vector bundle is a fiber bundle. 
+\item Every covering space is a fiber bundle. 
+\end{itemize}
 \begin{proof}
-Indeed if $p:E\to B$ is a vector bundle, then each fiber $p^{-1}(b)$ is an $n$-dimensional vector spaces over a field $F$. Moreover, by definition the local triviality condition is also satisfied. 
-\end{proof}
-\end{lmm}
-
-A lot of examples of fiber bundles therefore come from vector bundles. Another familiar collection of examples come from covering space theory. 
-
-\begin{lmm}{}{} Every covering space is a fiber bundle. 
-\begin{proof}
-If $p:\tilde{X}\to X$ is a covering space, then we have seen that $p^{-1}(x)$ remains constant as $x\in X$ varies. Moreover, $p^{-1}(x)$ has the discrete topology with countable fiber since each $p^{-1}(U)$ is a disjoint union for $U\subseteq X$ open. Thus they must all be homeomorphic. \\
+Indeed if $p:E\to B$ is a vector bundle, then each fiber $p^{-1}(b)$ is an $n$-dimensional vector spaces over a field $F$. Moreover, by definition the local triviality condition is also satisfied. \\
 
 Finally, for any $U\subseteq X$, recall that $$p^{-1}(U)=\coprod_{i\in I}V_i$$ where each $V_i\cong U$. It is clear by definition that $\abs{p^{-1}(x)}\abs{I}$ for any $x\in X$. By giving $I$ the discrete topology, we obtain a homeomorphism $p^{-1}(x)\cong I$. The homeomorphism $p^{-1}(U)=\coprod_{i\in I}V_i$ translates to $$p^{-1}(U)=\coprod_{i\in I}V_i\cong\coprod_{i\in I}U\cong U\times I$$ defined by $\tilde{x}\in V_i\mapsto(p(\tilde{x})=x,i)$. It is thus clear that the local triviality condition is satisfied. 
 \end{proof}
 \end{lmm}
+
+\begin{eg}{}{}\\
+The following maps are fiber bundles. 
+\begin{itemize}
+\item Let $f_n:S^1\to S^1$ be the map defined by $f_n(z)=z^n$. Then $f_n$ is a fiber bundle with fiber the $n$th roots of unity. 
+\item Let $f:\R\to S^1$ be the map defined by $f(t)=e^{2\pi it}$. Then $f$ is a fiber bundle with fiber $\Z$. 
+\item Let $p:S^n\to\R\Prj^n$ be the projection map. Then $p$ is a fiber bundle with fiber as a two point set with the discrete topology. 
+\end{itemize}
+\begin{proof}\\
+Indeed, all of these are covering spaces and hence fiber bundles by the above lemma. 
+\end{proof}
+\end{eg}
+
+\begin{eg}{}{}\\
+Let $M=\frac{[-1,1]\times[-1,1]}{(t,-1)\sim(1-t,1)}$ be the Mobius strip. Then the projection map $p:M\to C$ defined by $p(t,s)=s$ is a fiber bundle with fiber $[-1,1]$. 
+\end{eg}
 
 \begin{prp}{}{} Every fiber bundle is a Serre fibration. 
 \end{prp}
@@ -251,7 +275,8 @@ We can provide a partial converse for the fact that every fiber bundle is a Serr
 
 We there fore have inclusions $$\substack{\text{Fiber}\\\text{Bundles}}\subset\substack{\text{Serre}\\\text{Fibrations}}\subset\substack{\text{(Hurewicz)}\\\text{Fibrations}}$$
 
-\begin{defn}{Map of Fiber Bundles}{} Let $(F_1,E_1,B_1)$ and $(F_2,E_2,B_2)$ be fiber bundles. A map of fiber bundles is a pair of basepoint preserving continuous maps $(\tilde{f}:E_1\to E_2,f:B_1\to B_2)$ such that the following diagram commutes: \\
+\begin{defn}{Map of Fiber Bundles}{}\\
+Let $(F_1,E_1,B_1)$ and $(F_2,E_2,B_2)$ be fiber bundles. A map of fiber bundles is a pair of basepoint preserving continuous maps $(\tilde{f}:E_1\to E_2,f:B_1\to B_2)$ such that the following diagram commutes: \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	{E_1} & {E_2} \\
 	{B_1} & {B_2}
@@ -260,19 +285,19 @@ We there fore have inclusions $$\substack{\text{Fiber}\\\text{Bundles}}\subset\s
 	\arrow["{p_2}", from=1-2, to=2-2]
 	\arrow["f"', from=2-1, to=2-2]
 \end{tikzcd}}\\
-Such a map of fiber bundles determine a continuous of the fibers $F_1\cong p_1^{-1}(b_1)\to p_2^{-1}(b_2)\cong F_2$. \\
-
 A map of fiber bundles $(\tilde{f},f)$ is said to be an isomorphism if there is a map $(\tilde{g}:E_2\to E_1,g:B_2\to B_1)$ such that $\tilde{g}$ is the inverse of $\tilde{f}$ and $g$ is the inverse of $f$. 
 \end{defn}
 
-Notice that a morphism of fiber bundles preserves fibers. Indeed, If $p_1^{-1}(b)$ is a fiber of $B$, then using the commutativity of the diagram we have that $$p_2(\overline{f}(p_1^{-1}(b)))=f(p_1(p_1^{-1}(b)))=f(b)$$ which implies that $$p_2^{-1}(f(b))=\overline{f}(p^{-1}(b))$$ or in other words, the fiber at $f(b)$ is the same as the fiber at $b$ applied with $\overline{f}$. 
+Such a map of fiber bundles determine a continuous of the fibers $F_1\cong p_1^{-1}(b_1)\to p_2^{-1}(b_2)\cong F_2$. Moreover, such a morphism preserves fibers. Indeed, If $p_1^{-1}(b)$ is a fiber of $B$, then using the commutativity of the diagram we have that $$p_2(\overline{f}(p_1^{-1}(b)))=f(p_1(p_1^{-1}(b)))=f(b)$$ which implies that $$p_2^{-1}(f(b))=\overline{f}(p^{-1}(b))$$ or in other words, the fiber at $f(b)$ is the same as the fiber at $b$ applied with $\overline{f}$. 
 
-\begin{defn}{Equivalent Fiber Bundles}{} Let $p:E_1\to B_1$ and $p:E_2\to B_2$ be two fiber bundles. We say that they are equivalent if there exists an isomorphism $(\tilde{f}:E_1\to E_2,f:B_1\to B_2)$ of fiber bundles. 
+\begin{defn}{Isomorphic Fiber Bundles}{}\\
+Let $p_1:E_1\to B_1$ and $p_2:E_2\to B_2$ be two fiber bundles. Let $(\widetilde{f},f):p_1\to p_2$ be a map of fiber bundles. We say that $(\widetilde{f},f)$ is an isomorphism if there exists a map $(\widetilde{g},g):p_2\to p_1$ of fiber bundles such that $\widetilde{f}$ is the inverse of $\widetilde{g}$ and $f$ is the inverse of $g$. In this case, we say that $p_1$ and $p_2$ are isomorphic. 
 \end{defn}
 
 There are two important special cases of fiber bundles that will appear time and time again. 
 
-\begin{defn}{Trivial Bundles}{} We say that a fiber bundle $(F,E,B)$ is trivial if $(F,E,B)$ is isomorphic to the trivial fibration $B\times F\to B$. 
+\begin{defn}{Trivial Bundles}{}\\
+We say that a fiber bundle $(F,E,B)$ is trivial if $(F,E,B)$ is isomorphic to the trivial fibration $B\times F\to B$. 
 \end{defn}
 
 \begin{defn}{The Pullback Bundle}{} Let $p:E\to B$ be a fiber bundle with fiber $F$. Let $f:B'\to B$ be a continuous function. Define the pullback of $p$ by $f$ to be the space $$f^\ast(E)=\{(b',e)\in B'\times E\;|\;p(e)=f(b')\}$$
@@ -289,16 +314,36 @@ There are two important special cases of fiber bundles that will appear time and
 \end{defn}
 
 \subsection{Sphere Bundles}
-We now consider a special type of fibrations where the fibers are given by $S^1$. When we pick $n=1$ we obtain the classical object of study in algebraic topology called the Hopf fibration. 
+We now consider a special type of fibrations where the fibers are given by $S^1$. We define a class of fiber bundles of the form $S^1\to S^{2n+1}\to\C\Prj^n$. When $n=1$, this is the Hopf fibration. 
 
 \begin{defn}{Sphere Bundles}{} A sphere bundle is a fiber bundle $p:E\to B$ for which its fibers are the $n$-sphere $S^n$. 
 \end{defn}
 
-\begin{thm}{}{} Let $n\in\N$. Consider $S^{2n+1}$ lying inside $\C^{n+1}$. Then canonical map $\C^n\to\C\Prj^{n}$ given by $$(z_0,\dots,z_n)\mapsto[z_0:\cdots:z_n]$$ is a fiber bundle with fiber $S^1$. 
-\end{thm}
+\begin{eg}{}{}\\
+Let $n\in\N$. Consider $S^{2n+1}$ lying inside $\C^{n+1}$. The projection map $\C^{n+1}\setminus\{0\}\to\C\Prj^n$ induces a fiber bundle $$S^1\hookrightarrow S^{2n+1}\to\C\Prj^n$$
+\begin{proof}\\
+Clearly the projection map $p:S^{2n+1}\to\C\Prj^n$ is surjective. Consider the open cover $\{U_i\;|\;0\leq i\leq n\}$ where $U_i=\{[z_0:\cdots:z_n]\;|\;z_i\neq 0\}$. Define the local trivialization charts $\phi_i:p^{-1}(U_i)\to U_i\times S^1$ by $(z_0,\dots,z_n)\to([z_0:\cdots:z_n],z_i/\abs{z_i})$. It is continuous since it is the product of the composition map and the projection map to the sphere $S^1$. Its inverse is the continuous map $([z_0,\dots,z_n],w)=w\abs{z_i}z_i^{-1}(z_0,\dots,z_n)$ since it is induced by the universal property of quotients. It is clear that the required diagram commutes, that is $p=\text{proj}\circ\phi_i$ where $\text{proj}:U_i\times S^1\to U_i$ is the projection map to the first coordinate. 
+\end{proof}
+\end{eg}
 
-\begin{defn}{Hopf Fibration / Hopf Bundle}{} The fiber bundle $p:S^3\to S^2$ with fiber $S^1$ is called the Hopf fibration / Hopf bundle. 
-\end{defn}
+\begin{eg}{}{}\\
+For each $n\in\N$, we have a map of fiber bundles: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{S^{2n+1}} & {S^{2n+3}} \\
+	{\C\Prj^n} & {\C\Prj^{n+1}}
+	\arrow[hook, from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[hook, from=2-1, to=2-2]
+\end{tikzcd}}\\whose horizontal maps are induced by the inclusion $\C^n\hookrightarrow\C^{n+1}$ into the first $n$ coordinates. Taking colimit of the diagram, we have that $$S^1\hookrightarrow S^\infty\to\C\Prj^\infty$$ is a fiber bundle. 
+\begin{proof}\\
+Since the local triviality condition is a local condition, for each $x\in\C\Prj^\infty$, $x$ lives in $\C\Prj^n$ for some $n\in\N$ and since $S^1\hookrightarrow S^{2n+1}\to\C\Prj^n$ is a fiber bundle, there exists a chart for which the local triviality condition is satisfied. 
+\end{proof}
+\end{eg}
+
+\begin{eg}{Hopf Fibration / Hopf Bundle}{}\\
+Consider the above example with $n=1$. Restricting the total space to $S^3$, the fiber bundle $p:S^3\to S^2$ with fiber $S^1$ is called the Hopf fibration / Hopf bundle. 
+\end{eg}
 
 
 

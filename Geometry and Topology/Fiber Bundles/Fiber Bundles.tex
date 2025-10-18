@@ -28,16 +28,19 @@ Let $\pi:E\to B$ be a fiber bundle with fiber $F$. Let $G$ be topological group.
 \begin{itemize}
 \item A continuous and faithful action of $G$ on $F$ (so that $G$ injects into $\text{Aut}(F)$). 
 \item A set of local trivialization charts $$\{(U_k\subseteq B,\varphi_k:\pi^{-1}(U_k)\to U_k\times F)\;|\;k\in I\}$$ (where $B=\bigcup_{k\in I}U_k$ and $\varphi_k$ is a homeomorphism for all $k\in I$). 
-\item A function of sets $g_{ij}:U_i\cap U_j\to\text{Aut}(F)$ defined by $$g_{ij}(x)=\varphi_j(x)\circ\varphi_i(x)^{-1}$$
+\item A function of sets $g_{ij}:U_i\cap U_j\to\text{Aut}(F)$ for $i,j\in I$. 
 \end{itemize}
 such that the following conditions are satisfied: 
 \begin{itemize}
 \item For $i,j\in I$, the map $g_{ij}$ lies in the injective image of $G$ in $\text{Aut}(F)$. 
-\item For $i,j\in I$, the map $g_{ij}$ is continuous. 
+\item For $i,j\in I$, the map $g_{ij}:U_i\cap U_j\to G$ is continuous. 
+\item The transition maps $\psi_{ji}=\varphi_j\circ\varphi_i^{-1}:(U_i\cap U_j)\times F\to(U_i\cap U_j)\times F$ is given by $$\psi_{ji}(b,f)=\varphi_j\circ\varphi_i^{-1}(b,f)=(b,g_{ij}\cdot f)$$
 \end{itemize}
 \end{defn}
 
-Notice that for non empty intersections $U_i\cap U_j$ for $U_i,U_j$ open sets in $B$, there is a well defined homeomorphism $$\varphi_j\circ\varphi_i^{-1}:(U_i\cap U_j)\times F\to(U_i\cap U_j)\times F$$ This is reminiscent of properties of an atlas on $M$. 
+Notice that for non empty intersections $U_i\cap U_j$ for $U_i,U_j$ open sets in $B$, there is a well defined homeomorphism $$\varphi_j\circ\varphi_i^{-1}:(U_i\cap U_j)\times F\to(U_i\cap U_j)\times F$$ This is reminiscent of properties of an atlas on $M$. \\
+
+Comparing this to the definition of fiber bundles, the point of the $G$-atlas is that the transition between local trivializations is governed by elements of the group $G$, whereas in a general fiber bundle we make no such assumptions. 
 
 \begin{lmm}{}{} Let $(F,E,B)$ be a fiber bundle and let $G$ be a topological group. Let $\{(U_k,\varphi_k)\;|\;k\in I\}$ be a $G$-atlas on $(F,E,B)$. Then the following are true regarding the coordinate transformations $g_{ji}(x)=\varphi_{j,x}\circ\varphi_{i,x}^{-1}$
 \begin{itemize}
@@ -63,8 +66,18 @@ Let $(F,E,B)$ be a vector bundle. Then $(F,E,B)$ is a $GL(F)$-bundle.
 
 A collection of coordinate transformations satisfying the cocyle condition uniquely determines the structure of a fiber bundle. 
 
-\begin{thm}{}{} Let $X$ be a space. Let $G$ be a topological group. Then the coordinate transformations uniquely determines and is determined by a fiber bundle in the following sense: $$\left\{\substack{G\text{-bundles over }B\\\text{with fiber }F}\right\}\;\;\;\;\overset{1:1}{\longleftrightarrow}\;\;\;\;\left\{\substack{\text{An open cover }\{U_i\;|\;i\in I\}\text{ of }B\\\text{Maps }\{\phi_{i,j}:U_i\cap U_j\to G\;|\;i,j\in I\}\text{ satisfying the cocyle condition}\\\text{A space }F\text{ such that }G\text{ acts continuously on}}\right\}$$ For each $G$-bundle, the coordinate transformations satisfy the cocyle condition. For a collection of coordinate transformations $\{\phi_{i,j}:U_i\cap U_j\to G\;|\;i,j\in I\}$, consider the space $$E=\frac{\bigcup_{i\in I}U_i\times F}{\sim}$$ where $(x,k)\sim(x,k\phi_{j,i}(x))$ for $x\in U_i\cap U_j$. Then $E$ defines a fiber bundle with an appropriate ???? continuous map. 
+\begin{thm}{Fiber Bundle Construction Theorem}{}\\
+Let $X$ be a space. Let $G$ be a topological group. Then the coordinate transformations uniquely determines and is determined by a fiber bundle in the following sense: There is a one to one bijection $$\left\{\substack{G\text{-bundles over }B\\\text{with fiber }F}\right\}\;\;\;\;\overset{1:1}{\longleftrightarrow}\;\;\;\;\left\{\substack{\text{An open cover }\{U_i\;|\;i\in I\}\text{ of }B\\\text{Maps }\{g_{ij}:U_i\cap U_j\to G\;|\;i,j\in I\}\text{ satisfying the cocyle condition}\\\text{A space }F\text{ such that }G\text{ acts continuously on}}\right\}$$ given as follows. For a collection of maps $\{g_{ij}:U_i\cap U_j\to G\;|\;i,j\in I\}$, consider the space $$E=\frac{\bigcup_{i\in I}U_i\times F}{\sim}$$ where $(x,k)\sim(x,g_{ij}(x)\cdot k)$ for $x\in U_i\cap U_j$. Then $E$ defines a fiber bundle with the projection map to $B$. 
 \end{thm}
+
+\begin{defn}{Associated Fiber Bundle}{}\\
+Let $G$ be a topological group. Let $p:E\to B$ be a fiber bundle with structure group $G$. Let $F'$ be a space. Let $\{(U_i,\varphi_i)\;|\;i\in I\}$ be the local trivialization charts of $p$. Let $g_{ij}$ for $i,j\in I$ be the maps governing the transition functions of $p$. Define the associated fiber bundle of $p$ with fiber $F$ to be the fiber bundle constructed with the following data applied to the fiber bundle construction theorem. 
+\begin{itemize}
+\item Take the open cover as $\{U_i\;|\;i\in I\}$. 
+\item Take the collection of maps as $\{g_{ij}\;|\;i\in I\}$. 
+\item Take the space as $F'$. 
+\end{itemize}
+\end{defn}
 
 A morphism of $G$-bundles must now take into account of the group $G$. 
 
@@ -89,7 +102,8 @@ $g_{jk}'$ here refers to the transition charts in $(F,E_2,B_2)$. \\~\\
 
 Just as the structure groups and trivialization charts determine the isomorphism type of a fiber bundle, the $\widetilde{g_{ij}}$ and a map of base space $h:B_1\to B_2$ completes determines a morphism of $G$-bundle. 
 
-\begin{thm}{}{} Let $(F,E_1,B_1)$ and $(F,E_2,B_2)$ be two $G$-bundles for a topological group $G$ with the same fiber $F$. Suppose that we have the following. 
+\begin{thm}{}{}\\
+Let $(F,E_1,B_1)$ and $(F,E_2,B_2)$ be two $G$-bundles for a topological group $G$ with the same fiber $F$. Suppose that we have the following. 
 \begin{itemize}
 \item A map $h:B_1\to B_2$ of base space
 \item A collection $\{\widetilde{g_{ij}}:U_i\cap h^{-1}(V_j)\to G\;|\;i\in I,j\in J\}$ of continuous maps such that \begin{gather*}
@@ -181,38 +195,72 @@ Recall that homotopic maps give isomorphic fiber bundles. (???: Descends to isom
 \begin{defn}{Principal Bundle Functor}{} Let $G$ be a topological group and $X$ a space. Define a contravariant functor $\text{Prin}_G:\bold{hTop}\to\bold{Set}$ as follows. 
 \begin{itemize}
 \item For $X$ a topological space, $\text{Prin}_G(X)$ is the set of isomorphism classes of principal $G$-bundles over $X$. 
-\item If $[f:X\to Y]$ is a homotopy class of continuous maps, $$\text{Prin}_G([f]):\text{Prin}_G(Y)\to\text{Prin}_G(X)$$ is defined as follows. If $[p:E\to Y]$ is an isomorphism class of principal $G$-bundles over $Y$, then it is sent to $[f^\ast(E)]$ the isomorphism class of the pullback of $p$. 
+\item If $[f:X\to Y]$ is a homotopy class of continuous maps, $$\text{Prin}_G([f]):\text{Prin}_G(Y)\to\text{Prin}_G(X)$$ is defined as follows. If $[p:E\to Y]$ is an homotopy class of principal $G$-bundles over $Y$, then it is sent to $[f^\ast(E)]$ the homotopy class of the pullback of $p$. 
 \end{itemize}
 \end{defn}
 
-\begin{thm}{}{} Let $G$ be ta topological group. Then the principal bundle functor is representable. Explicitly, this means that there exists a principal $G$-bundle $EG\to BG$ together with a natural isomorphism $$\psi:[X,BG]\to\text{Prin}_G(X)$$ This natural isomorphism is defined by $f\mapsto[f^\ast(EG)]$. 
+\begin{thm}{}{}\\
+Let $G$ be a topological group. Then the principal bundle functor restricted to CW complexes is representable via the nerve of the category $BG$. Explicitly, this means that there exists a principal $G$-bundle $EG\to BG$ together with a natural isomorphism $$\psi:[X,BG]\to\text{Prin}_G(X)$$ This natural isomorphism is defined by $f\mapsto[f^\ast(EG)]$. (Milnor's Join Construction)
 \end{thm}
 
-\begin{defn}{Universal G-Bundles}{} Let $G$ be a topological group. A principal $G$-bundle $(F,E,B)$ is said to be universal if it represents the principal bundle functor. 
+Note that the theorem is still true when the principal bundle functor is restricted to paracompact spaces (with the same universal object). 
+
+\begin{defn}{Universal G-Bundles}{}\\
+Let $G$ be a topological group. A principal $G$-bundle $(F,E,B)$ is said to be universal if it represents the principal bundle functor. 
 \end{defn}
 
-\begin{thm}{}{} Let $(F,E,B)$ be a principal $G$-bundle. If $E$ is contractible then $(F,E,B)$ is a universal $G$-bundle. 
+\begin{thm}{}{}\\
+Let $(F,E,B)$ be a principal $G$-bundle. If $E$ is contractible then $(F,E,B)$ is a universal $G$-bundle. 
 \end{thm}
 
 A surprising thing is that $BG$ is not determined by its isomorphism type but instead by the weaker condition of its homotopy type. 
 
-\begin{thm}{}{} Let $(F,E_1,B_1)$ and $(F,E_2,B_2)$ be universal principal $G$-bundles. Then there exists a bundle map \\~\\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	{E_1} & {E_2} \\
-	{B_1} & {B_2}
-	\arrow["{\tilde{f}}", from=1-1, to=1-2]
-	\arrow["{p_1}"', from=1-1, to=2-1]
-	\arrow["{p_2}", from=1-2, to=2-2]
-	\arrow["f"', from=2-1, to=2-2]
-\end{tikzcd}}\\~\\
-such that $f$ is a homotopy equivalence. In particular, this means that any two universal principal $G$-bundles are homotopy equivalent. 
-\end{thm}
+\begin{prp}{}{}\\
+Let $G$ be a topological group. Let $p:E\to B$ be a universal $G$-bundle. Then the following are true. 
+\begin{itemize}
+\item $B$ is weakly equivalent to a CW complex (hence WLOG we may always take the base space of a universal $G$-bundle to be a CW complex). 
+\item Let $p:E\to B$ be a universal $G$-bundle such that $B$ is a CW complex. Then $B$ is unique up to canonical homotopy equivalence. 
+\item $E$ is unique up to $G$-homotopy equivalence. 
+\end{itemize}
+\end{prp}
 
-\subsection{The Classifying Space of a Group}
-\begin{defn}{Classifying Space}{} Let $G$ be a topological group. The classifying space $BG$ of $G$ is the homotopy type of the universal principal $G$-bundle. Denote the total space of $BG$ by $EG$. 
+\subsection{Milnor's Join Construction}
+\begin{defn}{The Join of two Spaces}{}\\
+Let $X,Y$ be spaces. Define the join of $X$ and $Y$ to be $$X\ast Y=\frac{X\times I\times Y}{\sim}$$ where $(x,0,y_1)\sim(x,0,y_2)$ for $x\in X$ and $y_1,y_2\in Y$ and $(x_1,1,y)\sim(x_2,1,y)$ for $x_1,x_2\in X$ and $y\in Y$. 
 \end{defn}
 
-TBA: Functoriality of $B:\bold{Grp}\to\bold{Top}$. 
+\begin{eg}{}{}\\
+Let $X$ be a space. Then the following are true. 
+\begin{itemize}
+\item $X\ast\{p\}=CX$. 
+\item $X\ast\{p_1,p_2\}=\Sigma X$. 
+\end{itemize}
+\end{eg}
+
+\begin{eg}{}{}\\
+Let $n,m\in\N$. Then we have $$S^n\ast S^m\cong S^{n+m+1}$$
+\end{eg}
+
+\begin{eg}{}{}\\
+We have $x_0\ast\cdots\ast x_n\cong\Delta^n$. 
+\end{eg}
+
+\begin{lmm}{}{}\\
+Let $X,Y$ be spaces. Then the inclusions $i_X,i_Y:X,Y\to X\ast Y$ are null homotopic. 
+\end{lmm}
+
+\begin{defn}{Milnor's Join Construction}{}\\
+Let $G$ be a topological group. Define the Milnor join construction of $G$ to be $$EG=\lim_{k\to\infty}G^{\ast(k+1)}$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $G$ be a topological group. Then the following are true. 
+\begin{itemize}
+\item $EG$ is an $G$-equivariant CW complex. 
+\item $EG$ is contractible. 
+\item The projection map $EG\to EG/G$ is a universal principle $G$-bundle. 
+\end{itemize}
+\end{lmm}
 
 \begin{prp}{}{} The following are true regarding the classifying space of the limits of the orthogonal and unitary groups. 
 \begin{itemize}
