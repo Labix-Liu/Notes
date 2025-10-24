@@ -218,9 +218,31 @@ Let $\mK$ be an abstract simplicial complex. Define the cubical embedding of $\m
 \end{defn}
 
 \pagebreak
-\section{Polytopes, Polyhedrons and Cones}
-\subsection{Basic Definitions}
+\section{Polyhedrons and Polytopes}
+\subsection{Convex Geometry}
+\begin{defn}{Convex Sets}{}\\
+Let $C\subseteq\R^n$. We say that $C$ is convex if for all $x,y\in C$ and $t\in[0,1]$, we have $(1-t)x+ty\in C$. 
+\end{defn}
+
+\begin{defn}{Convex Hull}{}\\
+Let $S\subseteq\R^n$ be a subset. Define the convex hull of $S$ to be $$\text{Conv}(S)=\left\{\sum_{k=1}^n\lambda_kx_k\;\bigg{|}\;x_k\in S\text{ and }\sum_{k=1}^n\lambda_k=1\right\}$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $S\subseteq\R^n$ be a subset. Then the following are sets are equal. 
+\begin{itemize}
+\item The convex hull $\text{Conv}(S)$. 
+\item $\bigcap_{C\subseteq\R^n\text{ is convex}}C$. 
+\item The smallest convex set containing $S$. 
+\end{itemize}
+\end{prp}
+
+\subsection{Polyhedrons and its Properties}
 Polytopes exists more generically in Euclidean space. We lose nothing discussing polytopes in $\R^n$ since Euclidean spaces maybe identified with $\R^n$ canonically. 
+
+\begin{defn}{Halfspaces}{}\\
+A halfspace of $\R^n$ is a subset of $\R^n$ of the form $$\{x\in\R^n\;|\;\langle a,x\rangle+b\geq 0\;|\;\}$$ for some $a,b\in\R^n$. 
+\end{defn}
 
 \begin{defn}{Polyhedrons}{}\\
 A polyhedron in $\R^n$ is an intersection of finitely many halfspaces. 
@@ -230,31 +252,23 @@ A polyhedron in $\R^n$ is an intersection of finitely many halfspaces.
 A polytope in $\R^n$ is a polyhedron that is bounded. 
 \end{defn}
 
+\begin{prp}{}{}\\
+Let $P\subseteq\R^n$ be a subset. Then $P$ is a polytope if and only if there exists a finite subset $S\subseteq\R^n$ such that $P=\text{Conv}(S)$. 
+\end{prp}
+
 \begin{defn}{Dimension}{}\\
 Let $P\subseteq\R^n$ be a polytope. Define the dimension of $P$ to be the dimension of the smallest affine subspace containing $P$. 
 \end{defn}
 
 \begin{defn}{Affinely Isomorphic}{}\\
-Let $P_1\subseteq\R^{n_1}$ and $P_2\subseteq\R^{n_2}$ be polytopes. We say that $P_1$ and $P_2$ are affinely isomorphic if there exists an affine transformation $f:\R^{n_1}\	to\R^{n_2}$ such that $f|_{P_1}$ is a bijection. 
+Let $P_1\subseteq\R^{n_1}$ and $P_2\subseteq\R^{n_2}$ be polytopes. We say that $P_1$ and $P_2$ are affinely isomorphic if there exists an affine transformation $f:\R^{n_1}\to\R^{n_2}$ such that $f|_{P_1}$ is a bijection. 
 \end{defn}
 
 Note that $f$ itself need not be an affine isomorphism (i.e. an isomorphism of affine spaces). 
 
-\begin{defn}{Cones}{}\\
-A cone in $\R^n$ is a subset $C\subseteq\R^n$ such that if $c_1,\dots,c_n\in C$, then $\sum_{i=1}^n\lambda_ic_i\in C$ for all $\lambda_1,\dots,\lambda_n\geq 0$. 
-\end{defn}
-
-\begin{defn}{Conical Hull}{}
-\end{defn}
-
-\subsection{The Alternate Definition and its Equivalence}
-\begin{thm}{The Main Theorem for Polytopes}{}\\
-Let $S\subseteq\R^n$ be a subset. Then $S$ is a polytope if and only if there exists a finite set of points $T$ such that the smallest convex set containing $T$ is $S$. 
-\end{thm}
-
 \subsection{Faces}
 \begin{defn}{Supporting Hyperplane}{}\\
-Let $P\subseteq\R^n$ be a polytope. Let $H\subseteq\R^n$ be a hyperplane. We say that $H$ is a supporting hyperplane for $P$ if the following are true. 
+Let $P\subseteq\R^n$ be a polyhedron. Let $H\subseteq\R^n$ be a hyperplane. We say that $H$ is a supporting hyperplane for $P$ if the following are true. 
 \begin{itemize}
 \item $P\cap H\neq\emptyset$. 
 \item $P$ lies entirely in one of the halfspaces defined by $H$. 
@@ -262,15 +276,15 @@ Let $P\subseteq\R^n$ be a polytope. Let $H\subseteq\R^n$ be a hyperplane. We say
 \end{defn}
 
 \begin{defn}{Faces}{}\\
-Let $P\subseteq\R^n$ be a polytope. A face of $P$ is a subset of $P$ defined by $$F=P\cap H$$ where $H$ is a supporting hyperplane for $P$. 
+Let $P\subseteq\R^n$ be a polyhedron. A face of $P$ is a subset of $P$ defined by $$F=P\cap H$$ where $H$ is a supporting hyperplane for $P$. 
 \end{defn}
 
 \begin{lmm}{}{}\\
-Let $P\subseteq\R^n$ be a polytope. Let $F\subseteq P$ be a face. Then $F$ is a polytope. 
+Let $P\subseteq\R^n$ be a polyhedron. Let $F\subseteq P$ be a face. Then $F$ is a polytope. 
 \end{lmm}
 
 \begin{defn}{Vertices, Edges and Facets}{}\\
-Let $P\subseteq\R^n$ be a polytope. Let $F\subseteq P$ be a face. 
+Let $P\subseteq\R^n$ be a polyhedron. Let $F\subseteq P$ be a face. 
 \begin{itemize}
 \item We say that $F$ is a vertex if $\dim(F)=0$. 
 \item We say that $F$ is an edge if $\dim(F)=1$. 
@@ -279,11 +293,103 @@ Let $P\subseteq\R^n$ be a polytope. Let $F\subseteq P$ be a face.
 \end{defn}
 
 \begin{defn}{The Face Poset}{}\\
-Let $P\subseteq\R^n$ be a polytope. Define the face poset $\mF(P)$ of $P$ to be the set of faces of $P$ together with inclusion. 
+Let $P\subseteq\R^n$ be a polyhedron. Define the face poset $\mF(P)$ of $P$ to be the set of faces of $P$ together with inclusion. 
 \end{defn}
 
 \begin{defn}{Combinatorially Equivalent}{}\\
 Let $P_1\subseteq\R^{n_1}$ and $P_2\subseteq\R^{n_2}$ be polytopes. We say that $P_1$ and $P_2$ are combinatorially equivalent if there exists a inclusion preserving bijection between $\mF(P_1)$ and $\mF(P_2)$. In this case we write $P_1\simeq P_2$. 
+\end{defn}
+
+\pagebreak
+\section{Cones and Fans}
+\subsection{Cones and its Properties}
+\begin{defn}{Cones}{}\\
+Let $C\subseteq\R^n$. We say that $C$ is a cone if $x\in C$ implies that $sx\in C$ for all $s\geq 0$. 
+\end{defn}
+
+\begin{defn}{Polyhedral Cones}{}\\
+A cone in $\R^n$ is a subset $C\subseteq\R^n$ such that if $c_1,\dots,c_n\in C$, then $\sum_{i=1}^n\lambda_ic_i\in C$ for all $\lambda_1,\dots,\lambda_n\geq 0$. 
+\end{defn}
+
+\begin{defn}{Conical Hull}{}\\
+Let $S\subseteq\R^n$ be finite. Define the conical hull of $S$ to be $$\text{Cone}(S)=\{\sum_{s\in S}\lambda_ss\;|\;\lambda_s\geq 0\}$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $C\subseteq\R^n$ be a subset. Then the following are equivalent. 
+\begin{itemize}
+\item $C$ is a polyhedral cone. 
+\item There exists a finite subset $S\subseteq\R^n$ such that $C=\text{Cone}(S)$. 
+\item $C$ is the intersection of finitely many halfspaces containing $0$ in their boundary. 
+\end{itemize}
+\end{prp}
+
+Therefore cones are also polyhedrons. 
+
+\begin{defn}{Dimension of a Cone}{}\\
+Let $C\subseteq\R^n$ be a cone. Define the dimension of $C$ to be the dimension of the smallest affine subspace containing $C$. 
+\end{defn}
+
+\begin{defn}{Rational Cones}{}\\
+Let $C\subseteq\R^n$ be a cone. We say that $C$ is rational if there exists a finite set $S\subseteq\Z^n$ such that $C=\text{Cone}(S)$. 
+\end{defn}
+
+\begin{defn}{Regular Cones}{}\\
+Let $C\subseteq\R^n$ be a cone. We say that $C$ is regular if there exists a finite set $S\subseteq\Z^n$ such that the following are true. 
+\begin{itemize}
+\item $C=\text{Cone}(S)$. 
+\item Elements of $S$ are $\Z$-linearly independent. 
+\end{itemize}
+\end{defn}
+
+\subsection{The Dual Cone}
+\begin{defn}{The Dual of a Cone}{}\\
+Let $C\in\R^n$ be a cone. Define the dual of $C$ to be $$C^\vee=\{x\in\R^n\;|\;\langle x,c\rangle\geq 0\text{ for all }c\in C\}$$
+\end{defn}
+
+\begin{defn}{Associated Hyperplane and Halfspace of a Linear Functional}{}\\
+Let $\phi\in(\R^n)^\ast$. Define the associated hyperplane of $\phi$ to be $$H_\phi=\{x\in\R^n\;|\;\phi(x)=0\}$$ Define the associated halfspace of $\phi$ to be $$H_\phi^+=\{x\in\R^n\;|\;\phi(x)\geq 0\}$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $C\in\R^n$ be a cone. Let $H$ be a hyperplane in $\R^n$. Then $H$ is a supporting hyperplane of $C$ if and only if there exists $\phi\in(\R^n)^\ast$ such that $H=H_\phi$. 
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $C\in\R^n$ be a polyhedral cone. Then the following are true. 
+\begin{itemize}
+\item $C^\vee$ is a polyhedral cone. 
+\item $(C^\vee)^vee=C$. 
+\item $C=\bigcap_{i=1}^nH_{\phi_i}$ for $\phi_i\in(\R^n)^\ast$ if and only if $C^\vee=\text{Cone}(\phi_1,\dots,\phi_n)$. 
+\end{itemize}
+\end{lmm}
+
+\begin{lmm}{Separation Lemma}{}\\
+Let $C_1,C_2\subseteq\R^n$ be cones such that $F=C_1\cap C_2$ is a face of both $C_1$ and $C_2$. Then there exists $\phi\in C_1^\vee\cap(-C_2)^\vee$ such that $$F=C_1\cap H_\phi=C_2\cap H_\phi$$
+\end{lmm}
+
+\begin{defn}{Strongly Convex Cones}{}\\
+Let $C\subseteq\R^n$ be a cone. We say that $C$ is strongly convex if $C$ does not contain a line. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $C\subseteq\R^n$ be a cone. Then the following are equivalent. 
+\begin{itemize}
+\item $C$ is strongly convex. 
+\item $\{0\}$ is a face of $C$. 
+\item $C\cap(-C)=\{0\}$. 
+\item $\dim(C^\vee)=n$. 
+\end{itemize}
+\end{lmm}
+
+\subsection{Fans and its Properties}
+\begin{defn}{Fans}{}
+\end{defn}
+
+\begin{defn}{Types of Fans}{}
+\end{defn}
+
+\begin{defn}{Complete Fans}{}
 \end{defn}
 
 \pagebreak
@@ -353,6 +459,10 @@ Let $R$ be a commutative ring. Let $n\in\N$. Let $S$ be an abstract simplicial c
 \end{prp}
 
 Maps of simplicial sets -> Maps of k-algebra. 
+
+\begin{prp}{}{}\\
+Let $R$ be a commutative ring. Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. If $\mK$ is a flag complex, then $R[\mK]$ is a Koszul algebra. 
+\end{prp}
 
 \subsection{The Hilbert Series of Stanley-Reisner Rings}
 \begin{defn}{The Face Vector}{}\\
@@ -452,6 +562,10 @@ For the moment angle complex of the $n$-gon, we note that the simplicial complex
 \end{proof}
 \end{eg}
 
+\begin{prp}{}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. If $\mK$ is a triangulation of $S^{m-1}$, then $\mZ_\mK$ is a closed topological manifold of dimension $n+m$. 
+\end{prp}
+
 \subsection{Polyhedral Products}
 \begin{defn}{Polyhedral Products}{}\\
 Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Let $(\bold{X},\bold{A})=\{(X_1,A_1),\dots,(X_n,A_n)\}$ be pairs of spaces. Define the polyhedral product of $(\bold{X},\bold{A})$ corresponding to $\mK$ to be $$(\bold{X},\bold{A})^\mK=\bigcup_{I\in\mK}\left\{(x_1,\dots,x_n)\in\prod_{i=1}^nX_i\;|\;x_i\in A_i\text{ for }i\notin I\right\}=\bigcup_{I\in\mK}\left(\prod_{i\in I}X_i\times\prod_{i\notin I}A_i\right)$$
@@ -459,19 +573,21 @@ Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Let $(\bold{X},\bold{A})=\
 
 \subsection{Algebraic Invariants of the Moment Angle Complex}
 \begin{prp}{}{}\\
-Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Then the following are true. 
+Let $R$ be a commutative ring. Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Then the following are true. 
 \begin{itemize}
-\item There is an isomorphism of rings $$H^\ast((\C\Prj^\infty,\ast)^\mK)\cong\Z[\mK]$$
-\item The inclusion $(\C\Prj^\infty,\ast)^\mK\hookrightarrow(\C\Prj^\infty,\ast)^n$ induces the quotient map $$H^\ast((\C\Prj^\infty)^m)\cong\Z[v_1,\dots,v_n]\to\Z[\mK]\cong H^\ast((\C\Prj^\infty,\ast)^\mK)$$ (where $v_1,\dots,v_n$ are degree $2$ elements). 
+\item There is an isomorphism of rings $$H^\ast((\C\Prj^\infty,\ast)^\mK;R)\cong R[\mK]$$
+\item The inclusion $(\C\Prj^\infty,\ast)^\mK\hookrightarrow(\C\Prj^\infty,\ast)^n$ induces the quotient map $$H^\ast((\C\Prj^\infty)^m;R)\cong R[v_1,\dots,v_n]\to R[\mK]\cong H^\ast((\C\Prj^\infty,\ast)^\mK;R)$$ (where $v_1,\dots,v_n$ are degree $2$ elements). 
 \item The inclusion $i:(\C\Prj^\infty,\ast)^\mK\hookrightarrow(\C\Prj^\infty,\ast)^n$ decomposes into a homotopy equivalence and fibration in the following way: \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
-	{(\C\Prj^\infty,\ast)^\mK} && {(\C\Prj^\infty,\ast)^\mK} \\
+	{(\C\Prj^\infty,\ast)^\mK} && {(\C\Prj^\infty,\ast)^n} \\
 	& {ET^m\times_{T^m}\mZ_\mK}
 	\arrow[hook, from=1-1, to=1-3]
 	\arrow["\simeq"', from=1-1, to=2-2]
 	\arrow["{\text{fib.}}"', from=2-2, to=1-3]
 \end{tikzcd}}\\
 Moreover, the fiber of the fibration is $\mZ_\mK$. 
+\item $\mZ_\mK(BS^1,\ast)=ET^m\times_{T^m}\mZ_\mK$. 
+\item $H^\ast(ET^m\times_{T^m}\mZ_\mK)=R[\mK]$. 
 \end{itemize}
 \end{prp}
 
@@ -511,7 +627,202 @@ Let $R$ be a commutative ring. Let $\mK$ be a simplicial complex on $\{1,\dots,n
 \end{prp}
 
 \begin{prp}{}{}\\
-Let $R$ be a commutative ring. Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Then there is an isomorphism of graded rings $$H^\ast(\mZ_\mK;R)\cong\text{Tor}_{R[v_1,\dots,v_m]}^\ast(R[\mK],R)$$ (natural in $\mK$)
+Let $R$ be a commutative ring. Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Then there is an isomorphism of graded algebras $$H^\ast(\mZ_\mK;R)\cong\text{Tor}_{R[v_1,\dots,v_m]}^\ast(R[\mK],R)$$ (natural in $\mK$)
 \end{prp}
+\pagebreak
+
+\section{Combinatorial Commutative Algebra}
+\subsection{}
+\begin{defn}{Monomial Notation}{}\\
+Let $R$ be a commutative ring. Let $u=(u_1,\dots,u_n)\in\N^n$. Define $$x^u=x_1^{u_1}\cdots x_n^{u_n}\in R[x_1,\dots,x_n]$$
+\end{defn}
+
+\subsection{The Semi-group Ring}
+\begin{defn}{The Semi-Group Ring}{}\\
+Let $S$ be a monoid. Let $R$ be a ring. Define the semi-group ring of $S$ over $R$ to be the left $R$-module $$R[S]=\bigoplus_{s\in S}R\cdot s$$ together with multiplication defined on basis by $t^{s_1}\cdot t^{s_2}=t^{s_1+s_2}$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $S$ be a monoid. Let $R$ be a ring. Then the following are true. 
+\begin{itemize}
+\item $R[S]$ is a ring. 
+\item If $S$ is commutative, then $R[S]$ is a commutative ring. 
+\item If $R$ and $S$ are commutative, then $R[S]$ is an $R$-algebra. 
+\end{itemize}
+\end{lmm}
+
+\subsection{Affine Semi-groups}
+\begin{defn}{Affine Semi-group}{}\\
+Let $S$ be a monoid. We say that $S$ is an affine semi-group if there exists an injective monoid homomorphism $S\to\N^d$ for some $d\in\N$. 
+\end{defn}
+
+\subsection{Lattice Ideals}
+Let $S$ be a commutative monoid. Write $G(S)$ the grothendieck completion of $S$. It is an abelian group. 
+
+\begin{defn}{Lattice Ideal}{}\\
+Let $L\subseteq\Z^n$ be a lattice. Let $R$ be a commutative ring. Define the lattice ideal of $L$ in $R[x_1,\dots,x_n]$ to be $$I_L=R\langle x^u-x^v\;|\;u,v\in\N^n\text{ and }u-v\in L\rangle$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $S$ be a finitely generated commutative monoid. Let $s_1,\dots,s_n$ be a set of generators of $S$. Let $\phi:\Z^n\to G(S)$ be the group homomorphism defined by $e_i\mapsto s_i$. Then there is a $k$-algebra isomorphism $$k[S]\cong\frac{k[x_1,\dots,x_n]}{I_{\ker(\phi)}}$$
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $S$ be a finitely generated commutative monoid. Let $s_1,\dots,s_n$ be a set of generators of $S$. Let $\phi:\Z^n\to G(S)$ be the group homomorphism defined by $e_i\mapsto s_i$. Then the following are equivalent. 
+\begin{itemize}
+\item $I_{\ker(\phi)}$ is prime. 
+\item $k[S]$ is an integral domain. 
+\item $G(S)$ is a free abelian group. 
+\item There exists an injective monoid homomorphism $S\to\N^d$ for some $d\in\N$. 
+\end{itemize}
+\end{prp}
+
+\pagebreak
+\section{Constructing Toric Varieties}
+\subsection{The Standard $n$-Torus}
+\begin{defn}{The Standard $n$-Torus}{}\\
+Let $k$ be a field. Let $n\in\N\setminus\{0\}$. Define the standard $n$-torus over $k$ to be the affine group variety $$\G_m^n=\text{Spec}(k[x,x^{-1}])^n$$
+\end{defn}
+
+\begin{defn}{Tori}{}\\
+Let $k$ be a field. Let $V$ be an affine algebraic group. We say that $V$ is a torus if there exists a field extension $K/k$ such that the algebraic group $V$ over $K$ is isomorphic to $\G_m^n=\text{Spec}(K[x,x^{-1}])^n$ for some $n\in\N\setminus\{0\}$. 
+\end{defn}
+
+\begin{defn}{Split Tori}{}\\
+Let $k$ be a field. Let $V$ be a torus over the field extension $K/k$. We say that $V$ is split if $K=k$. 
+\end{defn}
+
+If $K$ is separably closed or algebraically closed, then all tori are split. \\
+
+Recall that the functor $D:\bold{FGAb}\to\bold{Diag}$ sending a finitely generated abelian group $G$ to $D(G)=\text{Spec}(k[G])$ is an equivalence of categories. Evidently split tori corresponds to the free abelian groups of finite rank under the equivalence. \\
+
+The following are some more properties of a split torus $T$:
+\begin{itemize}
+\item $T$ is diagonalizable (in $T$ is a torus if and only if $T$ is smooth connected diagonalizable)
+\item Every representation of $G$ is diagonalizable. 
+\item If $V$ is a representation of $T$, then we can decompose $V$ into its eigenspaces: $$V=\bigoplus_{\chi\in\chi(T)}V_\chi$$
+\end{itemize}
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $T$ be split torus over $k$. Then the following are true. 
+\begin{itemize}
+\item Let $T'$ be a torus over $k$. Let $\phi:T\to T'$ be a morphism of group schemes. Then $\im(\phi)$ is a torus. 
+\item Let $H\leq T$ be a subgroup variety of $T$. If $H$ is irreducible, then $H$ is a torus. 
+\item Let $H\leq T$ be a subgroup of $T$. Then $T/H$ is a torus. 
+\end{itemize}
+\end{lmm}
+
+\begin{defn}{Character Lattices}{}\\
+Let $k$ be a field. Let $T$ be a torus over $k$. Define the character lattice of $T$ to be the group of characters $$\chi(T)=\Hom_{\bold{GrpSCh}_k}(T,\G_m)$$
+\end{defn}
+
+\begin{defn}{One-parameter Subgroups}{}\\
+Let $k$ be a field. Let $T$ be a torus over $k$. A one-parameter subgroup of $T$ is a homomorphism of group schemes $\G_m\to T$. 
+\end{defn}
+
+Since $\chi$ is the inverse to $D$, we have the following result. 
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $T$ be a split torus over $k$. Then the following are true. 
+\begin{itemize}
+\item The map $$\chi(T)\times\Hom_{\bold{GrpSch}_k}(\G_m,T)\to\Z$$ defined by $(\chi,\lambda)\to\chi\circ\lambda$ is a perfect pairing. 
+\item A choice of an isomorphism $T\cong\G_m^n$ induces a isomorphisms $\chi(T)\cong\Z^n\cong\Hom_{\bold{GrpSch}_k}(\G_m,T)$ such that the above perfect pairing is the standard Euclidean dot product. 
+\end{itemize}
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. The functor $$\chi(-_{k^\text{sep}}):\bold{Tori}_k\to\bold{FGFreeAb(with continuous action of )}\text{Gal}(k^\text{sep}/k)$$ is an equivalence of categories. 
+\end{prp}
+
+\subsection{Constructing Toric Varieties}
+\begin{defn}{Toric Varieties}{}\\
+Let $X$ be an irreducible variety over $\C$. We say that $X$ is a toric variety if the following are true. 
+\begin{itemize}
+\item $(\C^\ast)^n$ is a Zariski open subset of $X$. 
+\item The action of $(\C^\ast)^n$ on itself extends to $X$. 
+\end{itemize}
+We denote the underlying torus of $X$ by $T_X$. 
+\end{defn}
+
+\begin{defn}{Affine Toric Varieties Associated to Characters}{}\\
+Let $m\in\N^+$. Let $\mA=\{\chi_1,\dots,\chi_m\}\subset\chi(\G_m^n)$ be characters of the standard $n$-torus. Define the affine toric variety associated to $\mA$ to be $$Y_\mA=\overline{\im(\Phi_\mA)}$$ where $\Phi_\mA:\G_m^n\to\A_\C^m$ is the map defined by $\Phi_\mA(t)=(\chi_1(t),\dots,\chi_m(t))$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $m\in\N^+$. Let $\mA\subset\chi(\G_m^n)$ be a finite subset of characters of the standard $n$-torus. Then the following are true. 
+\begin{itemize}
+\item $Y_\mA$ is an affine toric variety. 
+\item The underlying torus of $Y_\mA$ has character lattice $\Z\mA$. 
+\item $\dim(Y_\mA)=\text{rank}(\Z\mA)$
+\end{itemize}
+\end{prp}
+
+\begin{defn}{Toric Ideals}{}\\
+Let $L\subseteq\Z^n$ be a lattice. Let $R$ be a commutative ring. Let $I_L\subseteq R[x_1,\dots,x_n]$ be the lattice ideal of $L$. We say that $I_L$ is a toric ideal if $I_L$ is a prime ideal. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $X$ be an irreducible affine variety over $\C$. Then the following are equivalent. 
+\begin{itemize}
+\item $X$ is a affine toric variety. 
+\item There exists a lattice $L$ and a finite subset $\mA\subseteq L$ such that $X=Y_\mA$. 
+\item There exists a toric ideal $I$ of $\C[x_1,\dots,x_n]$ such that $X=\text{Spec}\left(\frac{\C[x_1,\dots,x_n]}{I}\right)$. 
+\item There exists an affine semigroup $S$ such that $X=\text{Spec}(\C[S])$. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $k$ be an algebraically closed field. Let $S$ be an affine semi-group. Then there is a bijection $$\{p\in\text{Spec}(k[S])\;|\;p\text{ is a closed point }\}\;\;\overset{1:1}{\longleftrightarrow}\;\;\{\phi:S\to(\C,\cdot)\;|\;\phi\text{ is a monoid homomorphism }\}$$ given as follows. For each $p\in\text{Spec}(k[S])$ a closed point, $p$ corresponds to the monoid homomorphism $\gamma_p:S\to\C$ defined by $\gamma_p(m)=\chi^m(p)$
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $k$ be an algebraically closed field. Let $X=\text{Spec}(k[S])$ be an affine torus over $k$. Then the action of the torus $T_X$ on $X$ is induced by the $k$-algebra homomorphism $$k[S]\to k[\chi(T_X)]\otimes_k k[S]$$ given by $\gamma_p\mapsto\gamma_p\otimes\gamma_p$ where here we identify the closed points on $k[S]$ by the above prp. 
+\end{prp}
+
+\subsection{The Dictionary Between Combinatorics and Toric Varieties}
+\begin{defn}{The Associated Semigroup of a Cone}{}\\
+Let $C\subseteq\R^n$ be a rational cone. Define the associated semigroup of $C$ to be $$S_C=C^\vee\cap(\Z^n)^\ast\subseteq(\R^n)^\ast$$
+\end{defn}
+
+\begin{lmm}{Gordon's Lemma}{}\\
+Let $C\subseteq\R^n$ be a rational polyhedral cone. Then $S_C$ is finitely generated and hence is an affine semigroup. 
+\end{lmm}
+
+\begin{defn}{Affine Toric Variety Associated to Rational Cone}{}\\
+Let $\sigma\subseteq\R^n$ be a rational polyhedral cone. Define the affine toric variety associated to $\sigma$ to be $$V_\sigma=\text{Spec}(\C[S_\sigma])$$
+\end{defn}
+
+\begin{prp}{}{}\\
+There is a one-to-one correspondence $$\{X\text{ is an affine toric variety over }\C\}\;\;\overset{1:1}{\longleftrightarrow}\;\;\{C\text{ is a rational polyhedral cone }\}$$ given by sending a rational polyhedral cone $\sigma\subseteq\R^n$ to $\text{Spec}(\C[S_\sigma])$. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $\sigma\subseteq\R^n$ be a rational polyhedral cone. Then the following are equivalent. 
+\begin{itemize}
+\item $\text{Spec}(\C[S_\sigma])$ is normal. 
+\item $S_\sigma$ is a saturated affine semi-group. 
+\item $\sigma$ is strongly convex. 
+\item $\dim(\text{Spec}(\C[S_\sigma])=n$. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $X=\text{Spec}(\C[S])$ be an affine toric variety over $\C$ where $S$ is an affine semigroup. Then the normalization of $X$ is given by $$\tilde{X}=\text{Spec}(\C[S_{\text{Cone}(S)^\vee}])$$ together with the normalization map given by the inclusion $\C[S]\hookrightarrow\C[S_{\text{Cone}(S)^\vee}]$. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $\sigma\subseteq\R^n$ be a strongly convex rational polyhedral cone. Then $\text{Spec}(\C[S_\sigma])$ is smooth if and only if $\sigma$ is regular. 
+\end{prp}
+
+Thus we have constructed a dictionary 
+\begin{align*}
+\text{Affine Toric Varieties}\;\;&\overset{1:1}{\longleftrightarrow}\;\;\text{Rational Polyhedral Cones}\\
+\text{Affine Normal Toric Varieties}\;\;&\overset{1:1}{\longleftrightarrow}\;\;\text{Strongly Convex Rational Polyhedral Cones}\\
+\text{Affine Smooth Toric Varieties}\;\;&\overset{1:1}{\longleftrightarrow}\;\;\text{Regular Rational Polyhedral Cones}
+\end{align*}
+
+\subsection{Morphisms between Affine Toric Varieties}
+
+\subsection{Relation of Toric Varieties and Toric Topology}
 
 \end{document}

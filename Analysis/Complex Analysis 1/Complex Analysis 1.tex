@@ -22,94 +22,52 @@
 
 \pagebreak
 \section{Metric Properties of $\C$}
-\subsection{Limits and Continuity in $\C$}
-\begin{defn}{Standard Metric on $\C$}{}\\
-Define the standard metric on $\C$ to be the function $d:\C\times\C\to\R$ by the formula $$d(a+bi,c+di)=\sqrt{(a-c)^2+(b-d)^2}$$
-\end{defn}
-
-\begin{prp}{}{}\\
-Let $f,g:\C\to\C$ be functions. Let $z_0\in\C$. Suppose that the limits $\lim_{z\to z_0}f(z)$ and $\lim_{z\to z_0}g(z)$ exists. Then the following are true. 
-\begin{itemize}
-\item $\lim_{z\to z_0}(f+g)(z)=\lim_{z\to z_0}f(z)+\lim_{z\to z_0}g(z)$. 
-\item $\lim_{z\to z_0}(fg)(z)=\lim_{z\to z_0}f(z)\cdot\lim_{z\to z_0}g(z)$. 
-\item If $\lim_{z\to z_0}g(z)\neq 0$, then we have $$\lim_{z\to z_0}\left(\frac{f}{g}\right)(z)=\frac{\lim_{z\to z_0}f(z)}{\lim_{z\to z_0}g(z)}$$
-\end{itemize}
-\end{prp}
-
-\begin{prp}{}{} Let $z_0=a+bi$. Let $f(x+yi)=u(x,y)+v(x,y)i$. $$\lim_{z\to z_0}f(z)=L=\alpha+\beta i$$ if and only if $u(x,y)\to\alpha$ and $v(x,y)\to\beta$ as $(x,y)\to(a,b)$
-\end{prp}
-
-\begin{prp}{}{} Let $f:\Omega\subset\C\to\C$. Then $f(x+yi)=u(x,y)+v(x,y)i$ is continuous at $z_0=x_0+y_0i$ if and only if $u,v$ are continuous at $(x_0,y_0)$
-\end{prp}
-
-\subsection{The Modulus and Argument of a Complex Number}
-\begin{defn}{Modulus}{}\\
-Let $a+bi\in\C$ be a complex number. Define the modulus of the number to be $$\abs{a+bi}=\sqrt{a^2+b^2}$$
-\end{defn}
-
-\begin{prp}{}{} Then the following are true regarding the modulus. 
-\begin{itemize}
-\item $\abs{z}^2=\abs{z}\abs{\bar{z}}$
-\item $\abs{\bar{z}}=\abs{z}$
-\item $\abs{zw}=\abs{z}\abs{w}$
-\item $z\bar{z}=\abs{z}^2$
-\item $\abs{z+w}\leq\abs{z}+\abs{w}$
-\item $\abs{z-w}=\abs*{\abs{z}-\abs{w}}$
-\end{itemize}
-\end{prp}
-
+\subsection{The Polar Form}
 Recall that from real analysis, we defined the power series $$\cos(x)=\sum_{k=0}^\infty\frac{(-1)^k}{(2k)!}x^{2k}\;\;\text{ and }\;\;\sin(x)=\sum_{k=0}^\infty\frac{(-1)^k}{(2k+1)!}x^{2k+1}$$
 
 \begin{defn}{Argument}{}\\
 Define the argument function $\text{arg}:\C\to\mP(\R)$ by the formula $$\text{arg}(a+bi)=\left\{\theta\in\R\;\bigg{|}\;\cos(\theta)=\frac{a}{\abs{a+bi}}\text{ and }\sin(\theta)=\frac{b}{\abs{a+bi}}\right\}$$
 \end{defn}
 
-\begin{prp}{}{} The following are true regarding the argument. 
+\begin{prp}{}{}\\
+The following are true regarding the argument. 
 \begin{itemize}
 \item $\arg{(zw)}=\arg{(z)}+\arg{(w)}=\{\theta+\phi\;|\;\theta\in\arg(z), \phi\in\arg(w)\}$
 \item $\arg{(\bar{z})}=-\arg{(z)}$
 \end{itemize}
 \end{prp}
 
-\begin{lmm}{}{} Let $z\in\C$ be a complex number. Then there exists a unique real number $\theta\in\R$ such that $\theta\in\arg(z)$ and $-\pi<\theta\leq\pi$. 
+\begin{lmm}{}{}\\
+Let $z\in\C$ be a complex number. Then there exists a unique real number $\theta\in\R$ such that $\theta\in\arg(z)$ and $-\pi<\theta\leq\pi$. 
+\begin{proof}\\
+This is true since $\cos$ and $\sin$ are $2\pi$-periodic and $-1\leq\frac{a}{\abs{a+bi}},\frac{b}{\abs{a+bi}}\leq 1$. 
+\end{proof}
 \end{lmm}
 
-\begin{defn}{Principal Argument}{} Define the principal argument function $\text{Arg}:\C\to\R$ to be the function sending $z\in\C$ to the unique real number $\text{Arg}(z)\in\R$ such that $-\pi<\text{Arg}(z)\leq\pi$ and $\text{Arg}(z)\in\arg(z)$. 
+\begin{defn}{Principal Argument}{}\\
+Define the principal argument function $\text{Arg}:\C\to\R$ to be the function sending $z\in\C$ to the unique real number $\text{Arg}(z)\in\R$ such that $-\pi<\text{Arg}(z)\leq\pi$ and $\text{Arg}(z)\in\arg(z)$. 
 \end{defn}
 
-\begin{lmm}{}{} Let $z\in\C$ be a complex number. Then $$\arg(z)=\{\text{Arg}(z)+2\pi k\;|\;k\in\Z\}$$
+\begin{lmm}{}{}\\
+Let $z\in\C$ be a complex number. Then we have $$\arg(z)=\{\text{Arg}(z)+2\pi k\;|\;k\in\Z\}$$
+\begin{proof}\\
+Again this is true since $\cos$ and $\sin$ are $2\pi$-periodic. 
+\end{proof}
 \end{lmm}
 
-\subsection{The Complex Exponential and Logarithm}
-\begin{defn}{Exponential Function}{} The exponential function is defined to be the function $$e^z=\sum_{k=0}^\infty\frac{z^k}{k!}=\lim_{n\to\infty}\sum_{k=0}^n\frac{z^k}{k!}$$ for all $z\in\C$. 
+\begin{prp}{}{}\\
+Let $z\in\C$ be a complex number. Then we have $$z=\abs{z}\left(\cos(\text{Arg}(z))+i\sin(\text{Arg}(z))\right)$$
+\begin{proof}\\
+Let $z=a+bi$. Then we have $$\abs{z}\left(\cos(\text{Arg}(z))+i\sin(\text{Arg}(z))\right)=\abs{a+bi}\left(\frac{a}{\abs{a+bi}}+i\frac{b}{\abs{a+bi}}\right)=a+bi=z$$
+\end{proof}
+\end{prp}
+
+\begin{defn}{Polar Form}{}\\
+Let $z\in\C$ be a complex number. Define the polar form of $z$ to be the expression $$\abs{z}\left(\cos(\text{Arg}(z))+i\sin(\text{Arg}(z))\right)$$
 \end{defn}
 
 \begin{prp}{}{}\\
-For all $z\in\C$, the limit $e^z$ is convergent. 
-\end{prp}
-
-\begin{prp}{}{} Let $z,z_1,z_2\in\C$. Then
-\begin{itemize}
-\item $e^{z_1+z_2}=e^{z_1}e^{z_2}$
-\item $e^{mn}=(e^{m})^n$
-\item $\frac{d}{dz}e^z=e^z$
-\item $e^{i\theta}=\cos(\theta)+i\sin(\theta)$ for $\theta\in\R$. 
-\end{itemize}
-\end{prp}
-
-From now on we denote the logarithm for the real numbers by $\text{Log}:\R\to\R$. 
-
-\begin{defn}{Logarithm of a Complex Number}{} Define the logarithm of $z\in\C$ to be $\log(z)=\text{Log}(\abs{z})+i\arg(z)$. In terms of the $\text{Arg}(z)$ function, we have $$\log(z)=\text{Log}(\abs{z})+i\text{Arg}(z)+2i\pi k$$ for $k\in\Z$. Define the principal branch of the Logarithm to be $$\log(z)=\text{Log}(z)+i\text{Arg}(z)$$
-\end{defn}
-
-\begin{defn}{Principal Branch}{} Let $z=re^{i\theta}$. Define the principal branch of the logarithm to be $\log(z)=\log(r)+i(\theta)$ where $-\pi<\theta\leq\pi$
-\end{defn}
-
-\subsection{The Polar Form and Exponential Form of Complex Numbers}
-\begin{defn}{Polar Form}{} Let $z\in\C$ be a complex number. Define the polar form of $z$ to be the expression $$z=\abs{z}\left(\cos(\text{Arg}(z))+\sqrt{-1}\sin(\text{Arg}(z))\right)$$
-\end{defn}
-
-\begin{prp}{}{} Suppose that $z=r(\cos{(\theta)}+i\sin{(\theta)})$ and $w=s(\cos{(\phi)}+i\sin{(\phi)})$. 
+Suppose that $z=r(\cos{(\theta)}+i\sin{(\theta)})$ and $w=s(\cos{(\phi)}+i\sin{(\phi)})$. 
 \begin{itemize}
 \item $zw=rs(\cos{(\theta+\phi)}+i\sin{(\theta+\phi)})$
 \item $\frac{1}{z}=\frac{1}{r}(\cos{(-\theta)}+i\sin{(-\theta)})$
@@ -118,11 +76,34 @@ From now on we denote the logarithm for the real numbers by $\text{Log}:\R\to\R$
 \end{itemize}
 \end{prp}
 
-\begin{thm}{The Exponential Form of a Complex Number}{} Every $z\in\C$ can be written in the form $$z=re^{i\theta}$$ where $r=\abs{z}>0$ and $\theta\in\arg(z)$. 
-\end{thm}
+\subsection{Limits and Continuity in $\C$}
+Note that the modulus function $\abs{-}:\C\to\R$ defines a norm on $\C$. From Point Set Topology we know that such a norm induces the metric $$d_\C(z,w)=\abs{z-w}$$ and hence a topology on $\C$. The topology is defined as one would expect. For instance, the topology on $\C$ has a basis of open balls $$B_r(z)=\{x\in\C\;|\;\abs{z-x}<r\}$$ for all $r>0$ and $z\in\C$. In particular, there is a homeomorphism $\C\cong\R^2$ given by sending $a+bi$ to the pair $(a,b)$. \\
 
-\begin{lmm}{}{} Suppose that $\theta$ and $\phi$ are real numbers.Then $e^{i\theta}=e^{i\phi}$ if and only if there exists some $k\in\Z$ such that $\phi=\theta+2\pi k$. 
-\end{lmm}
+Since we have a metric / topology on $\C$, it makes sense to talk about continuous functions and limits of functions from $\C$ to $\C$. 
+
+\begin{prp}{}{}\\
+Let $U\subseteq\C$ be open. Let $f,g:U\to\C$ be functions. Let $z_0\in U$. Suppose that the limits $$\lim_{z\to z_0}f(z)\;\;\;\text{ and }\;\;\;\lim_{z\to z_0}g(z)$$ exists. Then the following are true. 
+\begin{itemize}
+\item $\lim_{z\to z_0}(f+g)(z)=\lim_{z\to z_0}f(z)+\lim_{z\to z_0}g(z)$. 
+\item $\lim_{z\to z_0}(fg)(z)=\lim_{z\to z_0}f(z)\cdot\lim_{z\to z_0}g(z)$. 
+\item If $\lim_{z\to z_0}g(z)\neq 0$, then we have $$\lim_{z\to z_0}\left(\frac{f}{g}\right)(z)=\frac{\lim_{z\to z_0}f(z)}{\lim_{z\to z_0}g(z)}$$
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $U\subseteq\C$ be open. Let $f,g:U\to\C$ be continuous functions. Let $z\in\C$. Then the following are true. 
+\begin{itemize}
+\item $f+g$ is continuous at $z$. 
+\item $fg$ is continuous at $z$. 
+\item If $g(z)\neq 0$, then $f/g$ is continuous at $z$. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{} Let $z_0=a+bi$. Let $f(x+yi)=u(x,y)+v(x,y)i$. $$\lim_{z\to z_0}f(z)=L=\alpha+\beta i$$ if and only if $u(x,y)\to\alpha$ and $v(x,y)\to\beta$ as $(x,y)\to(a,b)$
+\end{prp}
+
+\begin{prp}{}{} Let $f:\Omega\subset\C\to\C$. Then $f(x+yi)=u(x,y)+v(x,y)i$ is continuous at $z_0=x_0+y_0i$ if and only if $u,v$ are continuous at $(x_0,y_0)$
+\end{prp}
 
 \subsection{Roots of Complex Numbers}
 \begin{defn}{$n$th Roots}{} Let $w\neq0$ be a complex number and $n$ a positive integer. A number $z$ is called the $n$th root of $w$ if and only if $z^n=w$. 
@@ -135,34 +116,74 @@ From now on we denote the logarithm for the real numbers by $\text{Log}:\R\to\R$
 \end{thm}
 
 \pagebreak
-
 \section{Holomorphic Functions}
-Recall that the standard norm on $\C$ is defined by $$\abs{a+bi}=\sqrt{a^2+b^2}$$ for $a,b\in\R$. This induces a metric $d:\C\times\C\to\R$ on $\C$ defined by $$d(z_1-z_2)=\abs{z_1-z_2}$$ for $z_1,z_2\in\C$. From topology, we know that the metric then induces a topology on $\C$, making $\C$ a topological space whose basis is given by $\{B_r(z)\;|\;r\in\R^+,z\in\C\}$. 
-
 \subsection{Holomorphic Functions}
-\begin{defn}{Complex Differentiability}{} Let $U\subseteq\C$ be open. A complex function $f:U\to\C$ is complex differentiable at $z_0\in\Omega$ if $$\lim_{z\to z_0}\frac{f(z)-f(z_0)}{z-z_0}$$ exists. In this case we denote the limit as $f'(z_0)$. 
+\begin{defn}{Complex Differentiability}{}\\
+Let $U\subseteq\C$ be open. Let $f:U\to\C$ be a function. Let $z_0\in U$. We say that $f$ is complex differentiable at $z_0$ if $$\lim_{z\to z_0}\frac{f(z)-f(z_0)}{z-z_0}$$ exists. In this case we denote the limit as $f'(z_0)$. 
 \end{defn}
 
-\begin{prp}{}{} If $f$ is complex differentiable at $z_0$ then $f$ is continuous at $z_0$. 
+Equivalently, we say that $f$ is differentiable at $z_0$ if the limit $$\lim_{h\to 0}\frac{f(z_0+h)-f(z_0)}{h}$$ exists where $h\in\C$. This can be seen by a simple substitution trick of the limit similar to that of the real version. 
+
+\begin{eg}{}{}\\
+Let $n\in\N$. Let $z_0\in\C$. Then the function $f:\C\to\C$ defined by $f(z)=z_0$ is differentiable. 
+\begin{proof}\\
+We compute the limit to be $$\lim_{h\to 0}\frac{z_0-z_0}{h}=0$$ using the epsilon delta definition of limits. 
+\end{proof}
+\end{eg}
+
+\begin{eg}{}{}\\
+Let $n\in\N$. Then the function $f:\C\to\C$ defined by $f(z)=z$ is differentiable. 
+\begin{proof}\\
+We compute the limit to be $$\lim_{h\to 0}\frac{z+h-z}{h}=1$$ using the epsilon delta definition of limits. 
+\end{proof}
+\end{eg}
+
+Recall from Multivariable calculus that the limit of a real function in several variables may not exist even if the limits along the $x$ or $y$ axis exists. Because complex functions also have limits coming from different directions, we cannot check differentiability on components like we did with continuity. 
+
+\begin{eg}{}{}\\
+The function $f(z)=\overline{z}$ is not complex differentiable (but it is differentiable in the real sense). 
+\begin{proof}\\
+Notice that the limit simplifies to $$\lim_{h\to 0}\frac{\overline{z+h}-\overline{z}}{h}=\lim_{h\to 0}\frac{\overline{h}}{h}$$ If $h$ is real, then the limit is $1$. If $h$ is imaginary, then the limit is $0$. Thus the limit does not exists. 
+\end{proof}
+\end{eg}
+
+\begin{prp}{}{}\\
+Let $U\subseteq\C$ be open. Let $f:U\to\C$ be a function. Let $z\in\C$. If $f$ is differentiable at $z$, then $f$ is continuous at $z$. 
 \end{prp}
 
-\begin{prp}{}{} Let $f$ and $g$ be complex differentiable at $z_0$ then the following are complex differentiable. 
+\begin{prp}{}{}\\
+Let $U\subseteq\C$ be open. Let $f,g:U\to\C$ be functions. Let $z\in\C$. If $f$ and $g$ are differentiable at $z$, then the following are true. 
 \begin{itemize}
-\item $(f\pm g)'=f'\pm g'$
-\item $(fg)'=f'g+g'f$
-\item $\left(\frac{f}{g}\right)'=\frac{f'g-fg'}{g^2}$ provided that $g(z_0)\neq0$
+\item $f+g$ is differentiable at $z$, and $(f+g)'(z)=f'(z)+g'(z)$. 
+\item $fg$ is differentiable at $z$, and $(fg)'(z)=f'(z)g(z)+f(z)g'(z)$. 
+\item If $g'(z)\neq 0$, then $f/g$ is differentiable and $(f/g)'(z)=f'(z)/g'(z)$. 
 \end{itemize}
 \end{prp}
 
-\begin{defn}{Holomorphic Functions}{} A function $f$ is said to be holomorphic on $\Omega\subseteq\C$ if it is complex differentiable at every $z\in\Omega$. 
-\end{defn}
+\begin{prp}{}{}\\
+Let $U\subseteq\C$ be open. Let $f:U\to\C$ and $g:\im(f)\to\C$ be functions. Let $z\in\C$. If $f$ is differentiable at $z$ and $g$ is differentiable at $f(z)$, then $g\circ f$ is differentiable at $z$ and $$(g\circ f)'(z)=g'(f(z))f'(z)$$
+\end{prp}
 
-\begin{defn}{Biholomorphic Functions}{} Let $U_1,U_2\subseteq\C$ be open. A function $f:U_1\to U_2$ is said to be biholomorphic if it is a bijection such that both $f$ and $f^{-1}$ are holomorphic. 
+\begin{eg}{}{}\\
+Let $f:\C\to\C$ be a polynomial. Then $f$ is complex differentiable. 
+\begin{proof}\\
+Indeed, we have seen that the identity function and constant functions are differentiable, and polynomials are the finite sums and products of these types of functions. 
+\end{proof}
+\end{eg}
+
+\begin{defn}{Holomorphic, Biholomorphic and Meromorphic Functions}{}\\
+Let $U,V\subseteq\C$ be open. Let $f:U\to V$ be a function. 
+\begin{itemize}
+\item We say that $f$ is holomorphic if $f$ is complex differentiable at all points in $U$. 
+\item We say that $f$ is biholomorphic if $f$ is a bijection such that $f$ and $f^{-1}$ are holomorphic. 
+\item We say that $f$ is meromorphic if $f$ is complex differentiable at all $x\in U\setminus\{w\in\C\;|\;f(w)=\infty\}$ and $1/f$ is complex differentiable at all $x\in U\setminus\{w\in\C\;|\;f(w)=0\}$. 
+\end{itemize}
 \end{defn}
 
 Notice that while $f$ can be written as a function of two real variables, the notion of complex differentiable is stronger than that in multivariable calculus since we can approach the limit in complex differentiability through say $h=i\alpha$ and $\alpha\to 0$. 
 
-\begin{thm}{Cauchy Riemann Equations}{} Let $U\subseteq\C$ be open. Let $f(x+iy)=u(x,y)+iv(x,y)$ be real differentiable on $U$. Then $f$ is holomorphic on $U$ if and only if $$\frac{\partial u(x,y)}{\partial x}=\frac{\partial v(x,y)}{\partial y}$$ and $$\frac{\partial v(x,y)}{\partial x}=-\frac{\partial u(x,y)}{\partial y}$$
+\begin{thm}{Cauchy Riemann Equations}{}\\
+Let $U\subseteq\C$ be open. Let $f(x+iy)=u(x,y)+iv(x,y)$ be real differentiable on $U$. Then $f$ is holomorphic on $U$ if and only if $$\frac{\partial u(x,y)}{\partial x}=\frac{\partial v(x,y)}{\partial y}\;\;\;\text{ and }\;\;\;\frac{\partial v(x,y)}{\partial x}=-\frac{\partial u(x,y)}{\partial y}$$
 \begin{proof}
 Suppose first that $f$ is complex differentiable at $z_0$. Then in particular, the limit exists when $h$ is purely real. This means that $$\frac{\partial f}{\partial x}\bigg{|}_{z_0}=\lim_{\substack{h\to 0\\h\in\R}}\frac{f(z_0+h)-f(z_0)}{h}$$ and similarly along the imaginary axis, $$\frac{1}{i}\frac{\partial f}{\partial y}\bigg{|}_{z_0}=\lim_{\substack{ih\to 0\\h\in\R}}\frac{f(z_0+h)-f(z_0)}{h}$$ Since the two are required to be compatible, we have $$i\frac{\partial f}{\partial x}\bigg{|}_{z_0}=\frac{\partial f}{\partial y}\bigg{|}_{z_0}$$ Recall that $\frac{\partial f}{\partial x}=\frac{\partial u}{\partial x}+i\frac{\partial v}{\partial x}$ and similar for $y$, then this is precisely the Cauchy Riemann Equations. \\
 Now suppose that $f$ is real differentiable and the Cauchy Riemann equations are satisfied. 
@@ -171,28 +192,18 @@ Now suppose that $f$ is real differentiable and the Cauchy Riemann equations are
 
 The following definition is purely by convention. There is nothing analytic or related to derivatives in their definition. 
 
-\begin{defn}{Partial Derivatives in z}{} Let $f:\Omega\subseteq\C\to\C$ be complex differentiable. Define $$f_z=\frac{\partial f}{\partial z}=\frac{1}{2}\left(\frac{\partial f}{\partial x}-i\frac{\partial f}{\partial y}\right)\;\;\;\;\text{ and }\;\;\;\;f_{\overline{z}}=\frac{\partial f}{\partial \overline{z}}=\frac{1}{2}\left(\frac{\partial f}{\partial x}+i\frac{\partial f}{\partial y}\right)$$
+\begin{defn}{Partial Derivatives in z}{}\\
+Let $U\subseteq\C$ be open. Let $f:U\to\C$ be real differentiable. Define $$f_z=\frac{\partial f}{\partial z}=\frac{1}{2}\left(\frac{\partial f}{\partial x}-i\frac{\partial f}{\partial y}\right)\;\;\;\;\text{ and }\;\;\;\;f_{\overline{z}}=\frac{\partial f}{\partial \overline{z}}=\frac{1}{2}\left(\frac{\partial f}{\partial x}+i\frac{\partial f}{\partial y}\right)$$
 \end{defn}
 
 Under these definition, the Cauchy Riemann equations becomes simple. 
 
-\begin{lmm}{}{} Let $f:\Omega\subseteq\C\to\C$ be real differentiable. Then $f$ is complex differentiable if and only if the following alternate version of Cauchy Riemann Equations are satisfied: $$f_{\overline{z}}=0$$ In this case, the complex derivative at $z\in\Omega$ is precisely $$f'(z)=f_z$$ 
+\begin{lmm}{}{}\\
+Let $U\subseteq\C$ be open. Let $f:U\to\C$ be real differentiable. Then $f$ is holomorphic on $U$ if and only if the following alternate version of Cauchy Riemann Equations are satisfied: $$f_{\overline{z}}(x)=0$$ for all $x\in U$. In this case, the complex derivative at $x\in U$ is precisely $$f'(x)=f_z(x)$$ 
 \begin{proof}
 Notice that the condition that $\frac{\partial u}{\partial x}=\frac{\partial v}{\partial y}$ and $\frac{\partial u}{\partial y}=-\frac{\partial v}{\partial x}$ is equivalent to saying $\frac{\partial f}{\partial x}=-i\frac{\partial f}{\partial y}$. In this case, it is easy to see that we have $f_{\overline{z}}=0$ and $f'(x)=f_z$. 
 \end{proof}
 \end{lmm}
-
-The product rule and the chain rule also hold for partial derivatives: 
-
-\begin{lmm}{}{} Let $U,V\subseteq\C$ be open. Let $f:U\to\C$ and $g:V\to\C$ be holomorphic functions. Then the following are true. 
-\begin{itemize}
-\item Product rule: $(fg)_z=f\cdot g_z+g\cdot f_z$ on $U\cap V$
-\item Chain rule: $(f\circ g)_z(z)=f_z(g(z))g_z(z)$ if $g(V)\subseteq U$
-\end{itemize}
-\end{lmm}
-
-\begin{defn}{Meromorphic Functions}{} Suppose $\Omega\subseteq\C$ is open and connected. Let $f:\Omega\to\C_{\infty}$ that is not identically equal to $\infty$. We say that $f$ is meromorphic if $f$ is complex differentiable at every point $z_0\in\Omega$ with $f(z_0)\neq\infty$ and $\frac{1}{f}$ is complex differentiable at every point $z_0\in\Omega$ with $f(z_0)=\infty$. 
-\end{defn}
 
 \subsection{Conformal Maps}
 \begin{defn}{Conformal Maps}{} Let $U\subseteq\C$ be open. A function $f:U\to\C$ is said to be a conformal map if $f$ is holomorphic and $f'(z)\neq 0$ for all $z\in U$. 
@@ -229,28 +240,89 @@ Let $z\in U_1$ and $w=f(z)$. It is clear that $$\frac{d}{dw}\left(f(f^{-1}(w))\r
 \section{Complex Analytic Functions}
 \subsection{Power Series}
 Recall the notion of power series in real analysis. We can extend that notion into the realm of complex analysis. 
-\begin{defn}{Power Series}{} We say that a function $f:\C\to\C$ is a power series if $f$ is of the form $$f(z)=\sum_{k=0}^{\infty}a_k(z-z_0)^k$$ where $a_n\in\C$ for all $n\in\N$ and $z_0\in\C$ is a fixed complex number. 
+
+\begin{defn}{Power Series}{}\\
+A power series in $\C$ is an infinite series of the form $$\sum_{k=0}^{\infty}a_k(z-z_0)^k$$ where $a_n\in\C$ for all $n\in\N$ and $z_0\in\C$ is a fixed complex number. 
+\end{defn}
+
+Similar to the real case, we only consider power series whose center $z_0=0$ is at $0$ because the general more setting is recovered by a translation. 
+
+\begin{prp}{}{}\\
+Let $\sum_{k=0}^\infty a_kz^k$ be a power series. Let $z_0\in\C$. If $\sum_{k=0}^\infty a_kz_0^k$ is convergent, then $\sum_{k=0}^\infty a_kw^k$ is convergent for all $\abs{w}<\abs{z_0}$. 
+\end{prp}
+
+\begin{defn}{Radius of Convergence}{}\\
+Let $\sum_{k=0}^\infty a_kz^k$ be a power series Define the radius of convergence of the power series to be $$R=\sup\left\{z\in\C\;\bigg{|}\;\sum_{k=0}^\infty a_kz^k\text{ converges }\right\}$$
 \end{defn}
 
 In particular, just as there is a radius of convergence for real power series, there is an identical one with that for complex power series. 
 
-\begin{thm}{}{} Let $f:\C\to\C$ be a power series where $f(z)=\sum_{k=0}^\infty a_kz^k$, the radius of convergence is $$R=\frac{1}{\limsup_{n\to\infty}\abs{a_n}^{\frac{1}{n}}}$$ The power series converges for $\abs{x}<R$. The power series diverges for $\abs{x}>R$
-\end{thm}
+\begin{prp}{}{}\\
+Let $\sum_{k=0}^\infty a_kz^k$ be a power series. Then the radius of convergence of the power series is given by $$R=\frac{1}{\limsup_{n\to\infty}\abs{a_n}^{\frac{1}{n}}}$$
+\end{prp}
 
-\begin{thm}{}{} Let $f:\C\to\C$ be a power series with radius of convergence $R\in(0,\infty]$, then $f$ is holomorphic within the ball $B_R(0)$, the derivative is given by $$f'(z)=\sum_{k=1}^\infty ka_kz^{k-1}$$ and also has radius of convergence $R$. 
-\end{thm}
+\begin{prp}{}{}\\
+Let $\sum_{k=0}^\infty a_kz^k$ be a power series. Let $R$ be the radius of convergence. Then the following are true. 
+\begin{itemize}
+\item The function $f:B_r(0)\to\C$ given by $f(z)=\sum_{k=0}^\infty a_kz^k$ is holomorphic. 
+\item The derivative of $f$ is given by $$f'(z)=\sum_{k=1}^\infty ka_kz^{k-1}$$
+\end{itemize}
+\end{prp}
 
-Repeatedly applying the above result to the derivative gives the following corollary. 
+\subsection{The Complex Exponential and Logarithm}
+\begin{lmm}{}{}\\
+The radius of convergence of the power series $\sum_{k=0}^\infty\frac{z^k}{k!}$ is $\infty$. 
+\end{lmm}
 
-\begin{crl}{}{} Let $f:\C\to\C$ be a power series. If $f$ has radius of convergence $R\in(0,\infty]$, then $f$ is infinitely differentiable in the ball $B_R(0)$, and the $n$-th derivative of $f$ at $0\in\C$ is given by $$f^{(n)}(0)=a_nn!$$
-\end{crl}
+\begin{defn}{Exponential Function}{}\\
+Let $z\in\C$. Define the complex exponential of $z$ to be $$e^z=\sum_{k=0}^\infty\frac{z^k}{k!}=\lim_{n\to\infty}\sum_{k=0}^n\frac{z^k}{k!}$$ for all $z\in\C$. 
+\end{defn}
 
+\begin{prp}{}{}\\
+The following are true regarding the complex exponential. 
+\begin{itemize}
+\item $e^{z+w}=e^ze^w$ for all $z,w\in\C$. 
+\item $(e^z)^w=e^{zw}$ for all $z,w\in\C$. 
+\item $\frac{d}{dz}e^z=e^z$
+\item $e^{i\theta}=\cos(\theta)+i\sin(\theta)$ for $\theta\in\R$. 
+\end{itemize}
+\end{prp}
 
-\begin{thm}{}{} Let $f:\C\to\C$ be a power series of the form $$f(z)=\sum_{k=0}^\infty a_kz^k$$ Define $s_n=\sum_{k=1}^na_kz^k$ the partial sum. If $f$ has radius of convergence $R\in(0,\infty]$, then for all $r\in R$, $s_n\to f$ uniformly within the ball $B_r(0)$ as $n\to\infty$. 
-\end{thm}
+\begin{lmm}{}{} Suppose that $\theta$ and $\phi$ are real numbers.Then $e^{i\theta}=e^{i\phi}$ if and only if there exists some $k\in\Z$ such that $\phi=\theta+2\pi k$. 
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $z\in\C$. Then we have $$z=\abs{z}e^{i\text{Arg}(z)}$$
+\end{prp}
+
+From now on we denote the logarithm for the real numbers by $\text{Log}:\R\to\R$. 
+
+\begin{defn}{Logarithm of a Complex Number}{} Define the logarithm of $z\in\C$ to be $\log(z)=\text{Log}(\abs{z})+i\arg(z)$. In terms of the $\text{Arg}(z)$ function, we have $$\log(z)=\text{Log}(\abs{z})+i\text{Arg}(z)+2i\pi k$$ for $k\in\Z$. Define the principal branch of the Logarithm to be $$\log(z)=\text{Log}(z)+i\text{Arg}(z)$$
+\end{defn}
+
+\begin{defn}{Principal Branch}{} Let $z=re^{i\theta}$. Define the principal branch of the logarithm to be $\log(z)=\log(r)+i(\theta)$ where $-\pi<\theta\leq\pi$
+\end{defn}
+
+\subsection{The Complex Trigonometric Functions}
+\begin{lmm}{}{}\\
+The radius of convergence of the two power series $$\sum_{k=0}^\infty\frac{(-1)^kz^{2k+1}}{(2k+1)!}\;\;\;\text{ and }\;\;\;\sum_{k=0}^\infty\frac{(-1)^kz^{2k}}{(2k)!}$$ is $\infty$. 
+\end{lmm}
+
+\begin{defn}{The Complex Sine and Cosine}{}\\
+Define the sine function $\sin:\R\to\R$ to be the power series $$\sin(z)=\sum_{k=0}^\infty\frac{(-1)^kz^{2k+1}}{(2k+1)!}$$ Define the cosine function $\cos:\R\to\R$ to be the power series $$\cos(z)=\sum_{k=0}^\infty\frac{(-1)^kz^{2k}}{(2k)!}$$
+\end{defn}
+
+\begin{prp}{The Euler Formulas}{}\\
+The following are true. 
+\begin{itemize}
+\item $\cos(z)=(e^{iz}+e^{-iz})/2$. 
+\item $\sin(z)=(e^{iz}-e^{-iz})/(2i)$. 
+\end{itemize}
+\end{prp}
 
 \subsection{Analytic Functions}
-\begin{defn}{Analytic Functions}{} Let $U\subseteq\C$ be open. Let $f:U\to\C$ be a function. We say that $f$ is analytic if for each $w\in U$, we can write $f$ as a power series $$f(z)=\sum_{k=0}^\infty a_k(z-w)^k$$ for all $z\in B_r(w)$ for some $r>0$. 
+\begin{defn}{Analytic Functions}{}\\
+Let $U\subseteq\C$ be open. Let $f:U\to\C$ be a function. We say that $f$ is analytic if for each $w\in U$, we can write $f$ as a power series $$f(z)=\sum_{k=0}^\infty a_k(z-w)^k$$ for all $z\in B_r(w)$ for some $r>0$. 
 \end{defn}
 
 \begin{prp}{}{} Let $U,V\subseteq\C$ be open. Let $f:U\to\C$ and $g:V\to\C$ be analytic functions. Then the following are also analytic functions: 
@@ -572,7 +644,7 @@ It remains to show that $f^{-1}$ is holomorphic. Applying the chain rule, we ded
 
 Using definition 3.2.2, we may extend the definition of integrals for cycles to be formal linear combinations of the integrals: If $\gamma=a_1\gamma_1+\dots+a_n\gamma_n$ is a cycle in $U\subseteq\C$, then define $$\int_\gamma f(z)\,dz=\sum_{k=1}^na_k\int_{\gamma_k}f(z)\,dz$$ Indeed, it makes sense because $a\gamma$ for $a\in\Z$ is just a concatenation of $a$ copies of $\gamma$ so that the integral now makes sense using definition 3.2.2. Important think to note here is that formal linear combination only makes sense when each $\gamma_1,\dots,\gamma_n$ are closed loops so that they can be concatenated. For general curves as in definition 3.2.2, formal linear combination would not have made geometric sense, albeit you can still define it algebraically. 
 
-\begin{defn}{Homologous to $0$}{} Let $U\subseteq\C$ be open. We say that a cycle $\gamma$ in $U$ is homologous to $0$ if $I(\gamma,a)=0$ for all $a\in\C\setminus\{U\}$. 
+\begin{defn}{Homologous to $0$}{} Let $U\subseteq\C$ be open. We say that a cycle $\gamma$ in $U$ is homologous to $0$ if $I(\gamma,a)=0$ for all $a\in\C\setminus U$. 
 \end{defn}
 
 \begin{thm}{Cauchy's Theorem - Homology Version}{} Let $U\subseteq\C$ be open and $f:U\to\C$ holomorphic. Let $\gamma$ be a cycle that is homologous to $0$. Then we have $$\int_\gamma f(z)\,dz=0$$ 

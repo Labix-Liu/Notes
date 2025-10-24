@@ -1070,6 +1070,7 @@ Let $\mA$ be an abelian category. Then the cohomology functors $H_\bullet:\bold{
 Let $R$ be a commutative ring. Then the following are true. 
 \begin{itemize}
 \item There is a natural isomorphism $$H_n(-)\cong\Hom_{K({_R}\bold{Mod})}(c_n(R),-)$$ for all $n\in\Z$. 
+\item There is a natural isomorphism $$H^n(\Hom_\mA(-,M))\cong\Hom_{K({_R}\bold{Mod})}(-,c_n(M))$$ for any $R$-module $M$. 
 \end{itemize}
 \end{prp}
 
@@ -1134,6 +1135,14 @@ is short exact.
 
 \begin{defn}{The Cylinder of a Chain Map}{}
 \end{defn}
+
+\begin{defn}{The Cone of a Chain Complex}{}\\
+Let $\mA$ be an abelian category. Let $X\in\bold{Ch}(\mA)$ be a chain complex. Define the cone of $X$ to be $$C(X)=\text{cone}(\text{id}_X)$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $\mA$ be an abelian category. Let $X\in\bold{Ch}(\mA)$ be a chain complex. Then $\text{cone}(X)$ is contractible. 
+\end{lmm}
 
 \subsection{Complexes of Complexes}
 Let $\mA$ be an abelian category. We have seen that $\bold{Ch}(\mA)$ is also an abelian category, and so it makes sense to talk about chain complexes of chain complexes. Let $A_\bullet,B_\bullet,C_\bullet$ be chain complexes in an abelian category $\mA$. Let $i:A_\bullet\to B_\bullet$ and $j:B_\bullet\to C_\bullet$ be chain maps in $\bold{Ch}(\mA)$. A short exact sequence of chain complexes is a diagram of the form \\~\\
@@ -1466,12 +1475,49 @@ There are however equivalent definitions from the categorical point of view.
 \subsection{Resolutions of Objects}
 There are in general, four types of resolutions. Namely injective resolutions, projective resolutions, free resolutions and acyclic resolutions. We will study all four of them and their relations in this section. 
 
-\begin{defn}{Injective Resolution}{} Let $\mA$ be an abelian category. An injective resolution of an object $A\in\mA$ is an exact sequence \\~\\
+\begin{defn}{Injective Resolution}{}\\
+Let $\mA$ be an abelian category. Let $A\in\mA$. An injective resolution of $A$ is a cochain complex $I\in\bold{CCh}_{\geq 0}(\mA)$ such that the following are true. 
+\begin{itemize}
+\item $I^n$ is injective for all $n\geq 0$. 
+\item There exists a quasi-isomorphism $\iota:c_0(A)\to I$ depicted as \\~\\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
-0\arrow[r] & A\arrow[r, "\epsilon"] & I^0\arrow[r] & I^1\arrow[r] & I^2\arrow[r] & \cdots
-\end{tikzcd}}\\~\\
-where each $I^k$ is injective. 
+	\cdots & 0 & A & 0 & \cdots \\
+	\cdots & 0 & {I^0} & {I^1} & \cdots
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=1-3, to=1-4]
+	\arrow["\iota"', from=1-3, to=2-3]
+	\arrow[from=1-4, to=1-5]
+	\arrow[from=1-4, to=2-4]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-3, to=2-4]
+	\arrow[from=2-4, to=2-5]
+\end{tikzcd}}\\
+\end{itemize}
 \end{defn}
+
+\begin{eg}{}{}\\
+An injective resolution of $\Z$ in $\bold{Ab}$ is given by \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\cdots & 0 & \Z & 0 & 0 & \cdots \\
+	\cdots & 0 & \Q & {\Q/\Z} & 0 & \cdots
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=1-3, to=1-4]
+	\arrow["{\text{incl.}}"', from=1-3, to=2-3]
+	\arrow[from=1-4, to=1-5]
+	\arrow[from=1-4, to=2-4]
+	\arrow[from=1-5, to=1-6]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-3, to=2-4]
+	\arrow[from=2-4, to=2-5]
+	\arrow[from=2-5, to=2-6]
+\end{tikzcd}}\\
+\end{eg}
 
 \begin{prp}{}{} Let $\mA$ be an abelian category. Then $\mA$ has enough injectives if and only if every object of $\mA$ has an injective resolution. 
 \end{prp}
@@ -1512,12 +1558,70 @@ Moreover, any two such chain maps are homotopic.
 \begin{lmm}{}{} Let $\mA$ be an abelian category. Then any two injective resolutions of an object $A$ are homotopically equivalent. 
 \end{lmm}
 
-\begin{defn}{Projective Resolution}{} Let $\mA$ be an abelian category. An projective resolution of an object $A$ is an exact sequence \\~\\
+\begin{defn}{Projective Resolution}{}\\
+Let $\mA$ be an abelian category. Let $A\in\mA$. A projective resolution of $A$ is a chain complex $P\in\bold{Ch}_{\geq 0}(\mA)$ such that the following are true. 
+\begin{itemize}
+\item $P_n$ is injective for all $n\geq 0$. 
+\item There exists a quasi-isomorphism $\iota:P\to c_0(A)$ depicted as \\~\\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
-\cdots\arrow[r] & P_2\arrow[r] & P_1\arrow[r] & P_0\arrow[r, "d"] & A\arrow[r] & 0
-\end{tikzcd}}\\~\\
-where each $P_k$ is projective. 
+	\cdots & {P_1} & {P_0} & 0 & \cdots \\
+	\cdots & 0 & A & 0 & \cdots
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=1-3, to=1-4]
+	\arrow["\iota"', from=1-3, to=2-3]
+	\arrow[from=1-4, to=1-5]
+	\arrow[from=1-4, to=2-4]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-3, to=2-4]
+	\arrow[from=2-4, to=2-5]
+\end{tikzcd}}\\
+\end{itemize}
 \end{defn}
+
+\begin{eg}{}{}\\
+Let $R$ be a commutative ring. An projective resolution of $R$ in ${_R}\bold{Mod}$ is given by \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\cdots & 0 & {R[x]} & {R[x]} & 0 & \cdots \\
+	\cdots & 0 & 0 & R & 0 & \cdots
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-2, to=2-2]
+	\arrow["{\cdot x}", from=1-3, to=1-4]
+	\arrow[from=1-3, to=2-3]
+	\arrow[from=1-4, to=1-5]
+	\arrow["{\text{ev}_0}", from=1-4, to=2-4]
+	\arrow[from=1-5, to=1-6]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-3, to=2-4]
+	\arrow[from=2-4, to=2-5]
+	\arrow[from=2-5, to=2-6]
+\end{tikzcd}}\\
+\end{eg}
+
+\begin{eg}{}{}\\
+Let $R$ be a commutative ring. An projective resolution of $R$ in ${_R}\bold{Mod}$ is given by \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\cdots & {\frac{R[x]}{(x^2)}} & {\frac{R[x]}{(x^2)}} & {\frac{R[x]}{(x^2)}} & 0 & \cdots \\
+	\cdots & 0 & 0 & R & 0 & \cdots
+	\arrow[from=1-1, to=1-2]
+	\arrow["{\cdot x}", from=1-2, to=1-3]
+	\arrow[from=1-2, to=2-2]
+	\arrow["{\cdot x}", from=1-3, to=1-4]
+	\arrow[from=1-3, to=2-3]
+	\arrow[from=1-4, to=1-5]
+	\arrow["{\text{ev}_0}", from=1-4, to=2-4]
+	\arrow[from=1-5, to=1-6]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-3, to=2-4]
+	\arrow[from=2-4, to=2-5]
+	\arrow[from=2-5, to=2-6]
+\end{tikzcd}}\\
+\end{eg}
 
 \begin{prp}{}{} Let $\mA$ be an abelian category. Then $\mA$ has enough projectives if and only if every object of $\mA$ has a projective resolution. 
 \end{prp}
@@ -1559,23 +1663,25 @@ Moreover, any two such chain maps are homotopic.
 \end{lmm}
 
 \subsection{Derived Functors}
-\begin{defn}{Right Derived Functors}{} Let $F:\mA\to\mB$ be a left exact functor. Suppose that $\mA$ has enough injectives. Define the right derived functors $R^iF:\mA\to\mB$ for $i\geq 0$ as follows. 
+\begin{defn}{Right Derived Functors}{}\\
+Let $\mA,\mB$ be abelian categories such that $\mA$ has enough injective. Let $F:\mA\to\mB$ be a left exact functor. Define the right derived functors $$R^iF:\mA\to\mB$$ of $F$ for $i\geq 0$ as follows. 
 \begin{itemize}
 \item On objects, $R^iF(A)=H^i(F(I^\bullet))$ where $d:A\to I^\bullet$ is an injective resolution of $A$
 \item On Morphisms, $R^iF(\phi:A\to B)=H^i(F(\phi^\bullet:I^\bullet\to (I')^\bullet))$ where $\phi^\bullet:I^\bullet\to(I')^\bullet$ is an extension of $\phi$ to resolutions. 
 \end{itemize}
 \end{defn}
 
-\begin{prp}{}{} Let $F:\mA\to\mB$ be a left exact functor. The $n$th right derived functor $R^nF$ is an additive functor from $\mA$ to $\mB$. 
+\begin{prp}{}{}\\
+Let $\mA,\mB$ be abelian categories such that $\mA$ has enough injective. Let $F:\mA\to\mB$ be a left exact functor. Then the following are true. 
+\begin{itemize}
+\item $R^0F=F$. 
+\item The $n$th right derived functor $R^nF$ is an additive functor from $\mA$ to $\mB$. 
+\item If $A\in\mA$ is an injective object, then $R^nF(A)=0$ for all $n>0$. 
+\end{itemize}
 \end{prp}
 
-\begin{lmm}{}{} Let $A$ be an injective object, then $R^nF(A)=0$ for $n\neq 0$. 
-\end{lmm}
-
-\begin{crl}{}{} If $F:\mA\to\mB$ is a left exact functor, then $R^0F=F$. 
-\end{crl}
-
-\begin{thm}{}{} Let $\mA,\mB$ be abelian categories with enough injectives. Let $F:\mA\to\mB$ be a left exact functor. For any short exact sequence \\~\\
+\begin{prp}{}{}\\
+Let $\mA,\mB$ be abelian categories such that $\mA$ has enough injective. Let $F:\mA\to\mB$ be a left exact functor. For any short exact sequence \\~\\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
 0\arrow[r] & A\arrow[r] & B\arrow[r] & C\arrow[r] & 0
 \end{tikzcd}}\\~\\
@@ -1591,25 +1697,27 @@ there is a canonical long exact sequence \\~\\
 	\arrow[from=1-7, to=1-8]
 	\arrow[from=1-8, to=1-9]
 \end{tikzcd}}\\~\\
-\end{thm}
+\end{prp}
 
-\begin{defn}{Left Derived Functors}{} Let $F:\mA\to\mB$ be a right exact functor. Suppose that $\mA$ has enough projectives. Define the left derived functors $L_iF:\mA\to\mB$ for $i\geq 0$ as follows. 
+\begin{defn}{Left Derived Functors}{}\\
+Let $\mA,\mB$ be abelian categories such that $\mA$ has enough projectives. Let $F:\mA\to\mB$ be a right exact functor. Define the left derived functors $$L_iF:\mA\to\mB$$ of $F$ $i\geq 0$ as follows. 
 \begin{itemize}
 \item On objects, $L_iF(A)=H_i(F(P^\bullet))$ where $d:P_\bullet\to A$ is an projective resolution of $A$
 \item On Morphisms, $L_iF(\phi:A\to B)=L_i(F(\phi_\bullet:P_\bullet\to (P')_\bullet))$ where $\phi_\bullet:P_\bullet\to(P')_\bullet$ is an extension of $\phi$ to resolutions. 
 \end{itemize}
 \end{defn}
 
-\begin{prp}{}{} Let $F:\mA\to\mB$ be a right exact functor. The $n$th left derived functor $L_nF$ is an additive functor from $\mA$ to $\mB$. 
+\begin{prp}{}{}\\
+Let $\mA,\mB$ be abelian categories such that $\mA$ has enough projectives. Let $F:\mA\to\mB$ be a right exact functor. Then the following are true. 
+\begin{itemize}
+\item $L_0F=F$. 
+\item The $n$th left derived functor $L_nF$ is an additive functor from $\mA$ to $\mB$. 
+\item If $A\in\mA$ is a projective object, then $L_nF(A)=0$ for all $n>0$. 
+\end{itemize}
 \end{prp}
 
-\begin{lmm}{}{} Let $A$ be a projective object, then $L_nF(A)=0$ for $n\neq 0$. 
-\end{lmm}
-
-\begin{crl}{}{} If $F:\mA\to\mB$ is a right exact functor, then $L_0F=F$. 
-\end{crl}
-
-\begin{thm}{}{} Let $\mA,\mB$ be abelian categories with enough projectives. Let $F:\mA\to\mB$ be a right exact functor. For any short exact sequence \\~\\
+\begin{prp}{}{}\\
+Let $\mA,\mB$ be abelian categories such that $\mA$ has enough projectives. Let $F:\mA\to\mB$ be a right exact functor. For any short exact sequence \\~\\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
 0\arrow[r] & A\arrow[r] & B\arrow[r] & C\arrow[r] & 0
 \end{tikzcd}}\\~\\
@@ -1625,35 +1733,72 @@ there is a canonical long exact sequence \\~\\
 	\arrow[from=1-7, to=1-8]
 	\arrow[from=1-8, to=1-9]
 \end{tikzcd}}\\~\\
-\end{thm}
+\end{prp}
 
-\subsection{Derived Functors in ${_R}\bold{Mod}$}
-\begin{defn}{The Ext Functor}{} Let $R$ be a ring and let $A$ be an $R$-module. Define the right derived functor of the left exact functor $\Hom(A,-):{_R\bold{Mod}}\to\bold{Ab}$ to be $$\text{Ext}_R^i(A,-)=R^i(\Hom(A,-)):{_R\bold{Mod}}\to\bold{Ab}$$ 
-\end{defn}
-
-Explicitly, for $$0\to B\to I^0\to I^1\to\cdots$$ an injective resolution, form the cochain complex $$0\to\Hom_R(A,I^0)\to\Hom_R(A,I^1)\to\cdots$$ and define $\text{Ext}$ to be the cohomology group $$\text{Ext}_R^i(A,B)=\frac{\ker(\Hom_R(A,I^i)\to\Hom_R(A,I^{i+1}))}{\im(\Hom_R(A,I^{i-1})\to\Hom_R(A,I^i))}$$~\\
-
-Notice how although $A$ is viewed as a fixed $R$-module, it is written as if it was a variable for the functor $\text{Ext}$. Indeed, we can define the Ext functor in another manner. 
-
-\begin{thm}{}{} Let $R$ be a ring and let $A,B$ be $R$-modules. Then there is an isomorphism $$\text{Ext}_R^i(A,B)=R^i(\Hom(A,-))(B)\cong R^i(\Hom(-,B))(A)$$ that is natural in $A$ and $B$. 
-\end{thm}
-
-\begin{thm}{}{} Let $A,B$ be $R$-modules. Then the following are true regarding the Ext group. 
+\begin{defn}{The Ext Functor}{}\\
+Let $\mA$ be an abelian category. Let $A\in\mA$. 
 \begin{itemize}
-\item $\text{Ext}_R^0(A,B)\cong\Hom_R(A,B)$
-\item $\text{Ext}_R^i(A,B)=0$ for all $i>0$ if $A$ is projective or $B$ is injective
-\item $\text{Ext}_R^i(A,B)=0$ for all $i\geq 2$ if $A,B$ are $\Z$-modules. 
+\item Suppose that $\mA$ has enough injectives. Define the $n$th Ext functor of $A$ to be the right derived functor $$\text{Ext}_\mA^n(A,-)=R^n(\Hom(A,-))$$
+\item Suppose that $\mA$ has enough projectives. Define the $n$th Ext functor of $A$ to be the right derived functor $$\text{Ext}_\mA^n(-,A)=R^n(\Hom(-,A))$$
 \end{itemize}
-\end{thm}
-
-\begin{defn}{The Tor Functor}{} Let $R$ be a ring and let $B$ be an $R$-module. Define the left derived functor of the right exact functor $-\otimes_RB:{ _R\bold{Mod}}\to{_R\bold{Mod}}$ to be $$\text{Tor}_i^R(-,B)=L_i(-\otimes_RB):{_R\bold{Mod}}\to\bold{Ab}$$ 
 \end{defn}
 
-Explicitly, for $$\cdots\to P_1\to P_0\to A\to 0$$ an injective resolution, form the chain complex $$\cdots\to P_1\otimes_RB\to P_0\otimes_RB\to 0$$ and define $\text{Tor}$ to be the homology group $$\text{Tor}_i^R(A,B)=\frac{\ker(P_i\otimes_RB\to P_{i-1}\otimes_RB)}{\im(P_{i+1}\otimes_RB\to P_i\otimes_RB)}$$
+TBA: Functorial in $A$. 
 
-\begin{thm}{}{} Let $R$ be a ring and let $A,B$ be $R$-modules. Then there is an isomorphism $$\text{Tor}_i^R(A,B)=L_i(-\otimes_RB)(A)\cong L_i(A\otimes_R-)(B)$$ that is natural in $A$ and $B$. 
-\end{thm}
+\begin{prp}{}{}\\
+Let $\mA$ be an abelian category with enough injectives and projectives. Then there is an isomorphism $$R^n(\Hom(A,-))(B)\cong R^n(\Hom(-,B))(A)$$ that is natural in $A$ and $B$ for all $n\in\N$. 
+\end{prp}
 
+\subsection{$\delta$-Functors}
+\begin{defn}{$\delta$-Functors}{} Let $\mA$ and $\mB$ be abelian categories. A homological $\delta$-functor is a collection $\{T_n:\mA\to\mB\;|\;n\in\N\}$ of additive functors such that for any short exact sequence \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & A & B & C & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\~\\
+there are morphisms $\delta_n:T_n(C)\to T_n(A)$ for $n\in\N$ such that the following are true. 
+\begin{itemize}
+\item There is a long exact sequence \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\cdots & {T_{n+1}(C)} & {T_n(A)} & {T_n(B)} & {T_n(C)} & {T_{n-1}(A)} & \cdots
+	\arrow[from=1-1, to=1-2]
+	\arrow["{\delta_{n+1}}", from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+	\arrow["{\delta_n}", from=1-5, to=1-6]
+	\arrow[from=1-6, to=1-7]
+\end{tikzcd}}\\~\\
+\item If there is a morphism of short exact sequences \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & A & B & C & 0 \\
+	0 & {A'} & {B'} & {C'} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-3, to=2-3]
+	\arrow[from=1-4, to=1-5]
+	\arrow[from=1-4, to=2-4]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-3, to=2-4]
+	\arrow[from=2-4, to=2-5]
+\end{tikzcd}}\\~\\
+the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{T_n(C)} & {T_{n-1}(A)} \\
+	{T_n(C')} & {T_{n-1}(A')}
+	\arrow["{\delta_n}", from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow["{\delta_n'}", from=2-1, to=2-2]
+\end{tikzcd}}\\~\\
+\end{itemize}
+\end{defn}
+
+\subsection{The Ext Functor of ${_R}\bold{Mod}$ and Extensions}
 \begin{defn}{Extensions}{} Let $R$ be a ring. Let $M,N$ be $R$-modules. An extension of $M$ by $N$ is a short exact sequence \\~\\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
 0\arrow[r] & N\arrow[r] & E\arrow[r] & M\arrow[r] & 0
@@ -1718,57 +1863,54 @@ Then $\phi$ is an isomorphism. Moreover, equivalent extensions is an equivalence
 of $R$-modules. The above extension is called a trivial extension. 
 \end{defn}
 
-\begin{thm}{}{} Let $R$ be a ring. Let $M,N$ be $R$-modules. There is a bijection $$\frac{\{\text{Extensions of }M\text{ by }N\}}{\cong}\;\;\;\;\overset{1:1}{\longleftrightarrow}\;\;\;\;\text{Ext}_R^1(M,N)$$ where $\cong$ means equivalence of extensions. Moreover, the trivial extension corresponds to the zero element of $\text{Ext}_R^1(M,N)$. 
-\end{thm}
+\begin{prp}{}{} Let $R$ be a ring. Let $M,N$ be $R$-modules. There is a bijection $$\frac{\{\text{Extensions of }M\text{ by }N\}}{\cong}\;\;\;\;\overset{1:1}{\longleftrightarrow}\;\;\;\;\text{Ext}_R^1(M,N)$$ where $\cong$ means equivalence of extensions. Moreover, the trivial extension corresponds to the zero element of $\text{Ext}_R^1(M,N)$. 
+\end{prp}
 
-\subsection{$\delta$-Functors}
-\begin{defn}{$\delta$-Functors}{} Let $\mA$ and $\mB$ be abelian categories. A homological $\delta$-functor is a collection $\{T_n:\mA\to\mB\;|\;n\in\N\}$ of additive functors such that for any short exact sequence \\~\\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	0 & A & B & C & 0
-	\arrow[from=1-1, to=1-2]
-	\arrow[from=1-2, to=1-3]
-	\arrow[from=1-3, to=1-4]
-	\arrow[from=1-4, to=1-5]
-\end{tikzcd}}\\~\\
-there are morphisms $\delta_n:T_n(C)\to T_n(A)$ for $n\in\N$ such that the following are true. 
+\begin{prp}{}{} Let $A,B$ be $R$-modules. Then the following are true regarding the Ext group. 
 \begin{itemize}
-\item There is a long exact sequence \\~\\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	\cdots & {T_{n+1}(C)} & {T_n(A)} & {T_n(B)} & {T_n(C)} & {T_{n-1}(A)} & \cdots
-	\arrow[from=1-1, to=1-2]
-	\arrow["{\delta_{n+1}}", from=1-2, to=1-3]
-	\arrow[from=1-3, to=1-4]
-	\arrow[from=1-4, to=1-5]
-	\arrow["{\delta_n}", from=1-5, to=1-6]
-	\arrow[from=1-6, to=1-7]
-\end{tikzcd}}\\~\\
-\item If there is a morphism of short exact sequences \\~\\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	0 & A & B & C & 0 \\
-	0 & {A'} & {B'} & {C'} & 0
-	\arrow[from=1-1, to=1-2]
-	\arrow[from=1-2, to=1-3]
-	\arrow[from=1-2, to=2-2]
-	\arrow[from=1-3, to=1-4]
-	\arrow[from=1-3, to=2-3]
-	\arrow[from=1-4, to=1-5]
-	\arrow[from=1-4, to=2-4]
-	\arrow[from=2-1, to=2-2]
-	\arrow[from=2-2, to=2-3]
-	\arrow[from=2-3, to=2-4]
-	\arrow[from=2-4, to=2-5]
-\end{tikzcd}}\\~\\
-the following diagram commutes: \\~\\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	{T_n(C)} & {T_{n-1}(A)} \\
-	{T_n(C')} & {T_{n-1}(A')}
-	\arrow["{\delta_n}", from=1-1, to=1-2]
-	\arrow[from=1-1, to=2-1]
-	\arrow[from=1-2, to=2-2]
-	\arrow["{\delta_n'}", from=2-1, to=2-2]
-\end{tikzcd}}\\~\\
+\item $\text{Ext}_R^0(A,B)\cong\Hom_R(A,B)$
+\item $\text{Ext}_R^i(A,B)=0$ for all $i>0$ if $A$ is projective or $B$ is injective
+\item $\text{Ext}_R^i(A,B)=0$ for all $i\geq 2$ if $A,B$ are $\Z$-modules. 
+\end{itemize}
+\end{prp}
+
+TBA: External products
+
+\subsection{The Tor Functor of ${_R}\bold{Mod}$ and Flat Modules}
+Let $R$ be a ring. Recall that the tensor product is a bifunctor $$-\otimes_R-:{_R\bold{Mod}}\times\bold{Mod}_R\to\bold{Ab}$$
+
+\begin{defn}{The Tor Functor}{}\\
+Let $R$ be a ring. Let $n\in\N$. 
+\begin{itemize}
+\item Let $B\in\bold{Mod}_R$. Define the $n$th tor functor of $B$ to be $$\text{Tor}_R^n(-,B)=L_n(-\otimes_RB)$$
+\item Let $A\in{_R\bold{Mod}}$. Define the $n$th tor functor of $A$ to be $$\text{Tor}_R^n(A,-)=L_n(A\otimes_R-)$$
 \end{itemize}
 \end{defn}
+
+TBA: Functoriality of Tor construction. 
+
+\begin{prp}{}{}\\
+Let $R$ be a ring. Let $A\in{_R\bold{Mod}}$ and $B\in\bold{Mod}_R$. Then there is an isomorphism $$\text{Tor}_i^R(A,B)=L_i(-\otimes_RB)(A)\cong L_i(A\otimes_R-)(B)$$ that is natural in $A$ and $B$ for all $i\in\N$. 
+\end{prp}
+While projective modules allows the exactness of $\Hom(M,-)$, flat modules allows the exactness of $-\otimes_RM$. 
+
+\begin{defn}{Flat Modules}{} Let $R$ be a ring. An $R$-module $M$ is said to be flat if for every injective linear map $\phi:K\to L$ of $R$-modules, the map $$\phi\otimes\text{id}_M:K\otimes_RM\to L\otimes_RM$$ is also injective. 
+\end{defn}
+
+\begin{prp}{}{} Let $R$ be a ring and $M$ an $R$-module. Then $M$ is a flat module if and only if for every short exact sequence $0\to K\to L\to J\to 0$, the sequence $$0\to K\otimes_RM\to L\otimes_RM\to J\otimes_RM\to 0$$ is also exact. 
+\end{prp}
+
+\begin{prp}{}{} Let $R$ be a ring. Then the following are true. 
+\begin{itemize}
+\item Product: If $A$ and $B$ are flat over $R$ then $A\otimes_R B$ is flat over $R$
+\item Base Change: Let $S$ be an $R$-algebra ($R\to S$ a ring hom). Then $M\otimes_RS$ is flat over $S$ for any flat $R$-module $M$
+\item Transitivity: Let $S$ be an $R$-algebra such that $S$ is flat over $R$. If $C$ is flat over $S$ then $C$ is flat over $R$. 
+\end{itemize}
+\end{prp}
+
+We have the following inclusion of modules $$\text{Free Modules}\subset\text{Projective Modules}\subset\text{Flat Modules}\subset\text{Torsion Free Modules}$$ It is important to note that the ``duality'' between projective and injective modules is given from the bifunctor $\Hom(-,-)$ while the ``duality'' given between projective and flat modules is given by the tensor-hom adjunction. 
+
+TBA: Pairing
 
 \pagebreak
 \section{Homological Applications in Algebra}
@@ -1798,25 +1940,6 @@ the following diagram commutes: \\~\\
 
 \begin{thm}{Structure Theorem for Divisible Groups}{} Let $A$ be an abelian group. If $A$ is divisible, then there is an isomorphism $$A\cong\left(\bigoplus_{p\text{ is prime}}\frac{\Z[1/p]}{\Z}^{k_p}\right)\oplus\Q^I$$ for some choice of indexing sets $I$ and some $k_p\in\N$. 
 \end{thm}
-
-\subsection{Flat Modules}
-While projective modules allows the exactness of $\Hom(M,-)$, flat modules allows the exactness of $-\otimes_RM$. 
-
-\begin{defn}{Flat Modules}{} Let $R$ be a ring. An $R$-module $M$ is said to be flat if for every injective linear map $\phi:K\to L$ of $R$-modules, the map $$\phi\otimes\text{id}_M:K\otimes_RM\to L\otimes_RM$$ is also injective. 
-\end{defn}
-
-\begin{prp}{}{} Let $R$ be a ring and $M$ an $R$-module. Then $M$ is a flat module if and only if for every short exact sequence $0\to K\to L\to J\to 0$, the sequence $$0\to K\otimes_RM\to L\otimes_RM\to J\otimes_RM\to 0$$ is also exact. 
-\end{prp}
-
-\begin{prp}{}{} Let $R$ be a ring. Then the following are true. 
-\begin{itemize}
-\item Product: If $A$ and $B$ are flat over $R$ then $A\otimes_R B$ is flat over $R$
-\item Base Change: Let $S$ be an $R$-algebra ($R\to S$ a ring hom). Then $M\otimes_RS$ is flat over $S$ for any flat $R$-module $M$
-\item Transitivity: Let $S$ be an $R$-algebra such that $S$ is flat over $R$. If $C$ is flat over $S$ then $C$ is flat over $R$. 
-\end{itemize}
-\end{prp}
-
-We have the following inclusion of modules $$\text{Free Modules}\subset\text{Projective Modules}\subset\text{Flat Modules}\subset\text{Torsion Free Modules}$$ It is important to note that the ``duality'' between projective and injective modules is given from the bifunctor $\Hom(-,-)$ while the ``duality'' given between projective and flat modules is given by the tensor-hom adjunction. 
 
 \subsection{Koszul Complexes}
 The following definitions requires the use of central elements. Recall that when $R$ is commutative, this condition is null and so we can choose any element in $R$. 
@@ -2386,7 +2509,7 @@ is distinguished in $D(\mA)$ if it is isomorphic to a triangle of the form \\~\\
 \begin{thm}{}{} Let $\mA$ be an abelian category. Then $D(\mA)$ is a triangulated triangles with distinguished triangles given by the above definition. 
 \end{thm}
 
-\begin{defn}{Full Subcategory of Complexes}{} Let $\mA$ and $\mB$ be abelian categories such that $\mA$ is a subcategory of $\mB$. Define $$D_\mA^(\mB)$$ to be the full triangulated subcategory of complexes with cohomology in $\mA$. 
+\begin{defn}{Full Subcategory of Complexes}{} Let $\mA$ and $\mB$ be abelian categories such that $\mA$ is a subcategory of $\mB$. Define $$D_\mA(\mB)$$ to be the full triangulated subcategory of complexes with cohomology in $\mA$. 
 \end{defn}
 
 \subsection{Derived Functors of Derived Categories}
