@@ -15,10 +15,6 @@
 \date{\today}
 \begin{document}
 \maketitle
-\begin{abstract}
-
-\end{abstract}
-References: 
 
 \pagebreak
 \tableofcontents
@@ -82,7 +78,8 @@ Because of this lemma, it now makes sense to take the homology group of the norm
 
 
 \subsection{Bar Resolutions}
-\begin{defn}{Bar Construction}{} Let $A$ be an algebra over a ring $R$. Let $M$ be an $A$-algebra. Define the maps $d_i^n:M\otimes A^{\otimes n}\to M\otimes A^{\otimes n-1}$ by the following formulas: 
+\begin{defn}{Bar Construction}{}\\
+Let $R$ be a ring. Let $A$ be an algebra over $R$. Let $M$ be an $A$-algebra. Define the maps $d_i^n:M\otimes A^{\otimes n}\to M\otimes A^{\otimes n-1}$ by the following formulas: 
 \begin{itemize}
 \item If $i=0$, then $$d_i^n(m\otimes a_1\otimes\cdots\otimes a_n)=ma_1\otimes a_2\otimes\cdots\otimes a_n$$
 \item If $0<i<n$, then $$d_i^n(m\otimes a_1\otimes\cdots\otimes a_n)=m\otimes a_1\otimes\cdots a_{i-1}\otimes a_ia_{i+1}\otimes a_{i+2}\otimes\cdots\otimes a_n$$
@@ -141,7 +138,7 @@ This is the largest subgroup of $M$ for which $G$ acts trivially.
 This is the largest quotient of $M$ for which $G$ acts trivially. 
 
 \subsection{Group Cohomology and its Equivalent Forms}
-\begin{defn}{The nth Cohomology Group}{} Let $G$ be a group. Define the $n$th cohomology group of $G$ with coefficients in a $G$-module $M$ to be $$H_n(G;M)=(L_n(-)_G)(M)$$ the $n$th left derived functor of $(-)_G:{_G\bold{Mod}}\to\bold{Ab}$. 
+\begin{defn}{The nth Cohomology Group}{} Let $G$ be a group. Define the $n$th cohomology group of $G$ with coefficients in a $G$-module $M$ to be $$H^n(G;M)=(R^n(-)^G)(M)$$ the $n$th right derived functor of $(-)^G:{_G\bold{Mod}}\to\bold{Ab}$. 
 \end{defn}
 
 \begin{thm}{}{} Let $G$ be a group and let $M$ be a $G$-module. Then there is an isomorphism $$H^n(G;M)\cong\text{Ext}^n_{\Z[G]}(\Z,M)$$ that is natural in $M$. 
@@ -191,7 +188,7 @@ Thus, given a group $G$ and a $G$-module $M$, the group cohomology of $G$ with c
 \end{itemize}
 
 \subsection{Group Homology and its Equivalent Forms}
-\begin{defn}{The nth Cohomology Group}{} Let $G$ be a group. Define the $n$th cohomology group of $G$ with coefficients in a $G$-module $M$ to be $$H^n(G;M)=(R^n(-)^G)(M)$$ the $n$th right derived functor of $(-)^G:{_G\bold{Mod}}\to\bold{Ab}$. 
+\begin{defn}{The nth Homology Group}{} Let $G$ be a group. Define the $n$th homology group of $G$ with coefficients in a $G$-module $M$ to be $$H_n(G;M)=(L_n(-)_G)(M)$$ the $n$th left derived functor of $(-)_G:{_G\bold{Mod}}\to\bold{Ab}$. 
 \end{defn}
 
 \begin{thm}{}{} Let $G$ be a group and let $M$ be a $G$-module. Then there is an isomorphism $$H_n(G;M)\cong\text{Tor}_n^{\Z[G]}(\Z,M)$$ that is natural in $M$. 
@@ -214,62 +211,76 @@ Thus, given a group $G$ and a $G$-module $M$, the group cohomology of $G$ with c
 
 \pagebreak
 \section{Hochschild (Co)Homology for Rings}
-\subsection{Hochschild Homology}
-\begin{defn}{Hochschild Complex}{} Let $M$ be an $R$-module. Define the Hoschild complex to be the chain complex $C(R,M)$ given as follows. \\~\\
-\adjustbox{scale=0.95,center}{\begin{tikzcd}
-	\cdots & {M\otimes R^{\otimes n+1}} & {M\otimes R^{\otimes n}} & {M\otimes R^{\otimes n-1}} & \cdots & {M\otimes R} & M & 0
-	\arrow[from=1-1, to=1-2]
-	\arrow["d", from=1-2, to=1-3]
-	\arrow["d", from=1-3, to=1-4]
-	\arrow[from=1-4, to=1-5]
-	\arrow[from=1-5, to=1-6]
-	\arrow[from=1-6, to=1-7]
-	\arrow[from=1-7, to=1-8]
-\end{tikzcd}}\\~\\
-The map $d$ is defined by $d=\sum_{i=0}^n(-1)^id_i$ where $d_i:M\otimes R^{\otimes n}\to M\otimes R^{\otimes n-1}$ is given by the following formula. 
-\begin{itemize}
-\item If $i=0$, then $d_0(m\otimes r_1\otimes\cdots\otimes r_n)=mr_1\otimes r_2\otimes\cdots\otimes r_n$
-\item If $i=n$, then $d_n(m\otimes r_1\otimes\cdots\otimes r_n)=r_nm\otimes r_1\otimes\cdots\otimes r_{n-1}$
-\item Otherwise, then $d_i(m\otimes r_1\otimes\cdots\otimes r_n)=m\otimes r_1\otimes\cdots\otimes r_ir_{i+1}\otimes \cdots\otimes r_{n-1}$
-\end{itemize}
-\end{defn}
-
-\begin{defn}{Hochschild Homology}{} Let $M$ be an $R$-module. Define the Hochschild homology of $M$ to be the homology groups of the Hochschild complex $C(R,M)$: $$H_n(R,M)=\frac{\ker(d:M\otimes R^{\otimes n}\to M\otimes R^{\otimes n-1})}{\im(d:M\otimes R^{\otimes n+1}\to M\otimes R^{\otimes n})}=H_n(C(R,M))$$ If $M=R$ then we simply write $$HH_n(R)=H_n(R,R)=H_n(C(R,R))$$
-\end{defn}
-
-TBA: Functoriality. 
-
-\begin{prp}{}{} Let $A$ be an $R$-algebra. Then $HH_n(A)$ is a $Z(A)$-module. 
-\end{prp}
-
-\begin{prp}{}{} Let $A$ be an $R$-algebra. Then the following are true regarding the $0$th Hochschild homology. 
-\begin{itemize}
-\item Let $M$ be an $A$-module. Then $H_0(A,M)=\frac{M}{\{am-ma\;|\;a\in A, m\in M\}}$
-\item The $0$th Hochschild homology of $A$ is given by $HH_0(A)=\frac{A}{[A,A]}$
-\item If $A$ is commutative, then the $0$th Hochschild homology is given by $HH_0(A)=A$. 
-\end{itemize}
-\end{prp}
-
-\begin{thm}{}{} Let $A$ be a commutative $R$-algebra. Then there is a canonical isomorphism $$HH_1(A)\cong\Omega_{A/R}^1$$
-\end{thm}
-
-\subsection{Bar Complex}
+\subsection{The Enveloping Algebra}
 \begin{defn}{Enveloping Algebra}{} Let $A$ be an $R$-algebra. Define the enveloping algebra of $A$ to be $$A^e=A\otimes A^\text{op}$$
 \end{defn}
 
-\begin{prp}{}{} Let $A$ be an $R$-algebra. Then any $A,A$-bimodule $M$ equal to a left (right) $A^e$-module. 
+\begin{prp}{}{} Let $A$ be an $R$-algebra. Then any $(A,A)$-bimodule $M$ equal to a left (right) $A^e$-module. 
 \end{prp}
 
-\begin{defn}{Bar Complex}{}
+\subsection{The Hochschild Complex}
+\begin{defn}{The Hochschild Complex}{}\\
+Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $M$ be an $(A,A)$-bimodule. Define the Hochschild complex $$C_\ast(A,M)$$ to be the associated chain complex of the simplicial object defined as follows: For each $n\in\N$, the $n$th term is given by $$M\otimes_RA^{\otimes_R^n}$$ The face maps $d:C_n(A,M)\to C_{n-1}(A,M)$ is given by the following formula: 
+\begin{itemize}
+\item $d_0(m\otimes a_1\otimes\cdots\otimes a_n)=ma_1\otimes a_2\otimes\cdots\otimes a_n$
+\item $d_i(m\otimes a_1\otimes\cdots\otimes a_n)=m\otimes a_1\otimes\cdots\otimes a_ia_{i+1}\otimes \cdots\otimes a_{n-1}$ for $1\leq i\leq n$. 
+\item $d_n(m\otimes a_1\otimes\cdots\otimes a_n)=a_nm\otimes a_1\otimes\cdots\otimes a_{n-1}$. 
+\end{itemize}
 \end{defn}
 
-\begin{prp}{}{} Let $A$ be an $R$-algebra. The bar complex of $A$ is a resolution of the $A$ viewed as an $A^e$-module. 
+The Hochschild complex comes from the associated chain complex of the simplicial object defined as follows. 
+
+The construction of the Hochschild complex parallels that of the bar construction. Indeed, we can relate them via the following. 
+
+\begin{defn}{Hochschild Homology}{}\\
+Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $M$ be an $(A,A)$-bimodule. Define the Hochschild homology of $M$ to be $$HH_n(A;M)=H_n(C_\ast(A,M))$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $M$ be an $(A,A)$-bimodule. Then there is an isomorphism of chain complexes $$C_\ast(A,M)\cong M\otimes_{A^e} B_\ast(A,A)$$
 \end{prp}
 
-\begin{thm}{}{} Let $A$ be an $R$-algebra that is projective as an $R$-module. If $M$ is an $A$-bimodule, then there is an isomorphism $$H_n(A,M)=\text{Tor}_n^{A^e}(M,A)$$
-\end{thm}
+Motivated by the above relation with the bar complex, we define Hochschild cohomology as follows. 
 
-\subsection{Relative Hochschild Homology}
+\begin{defn}{The Hochschild Cocomplex}{}\\
+Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $M$ be an $(A,A)$-bimodule. Define the Hochschild cocomplex of $M$ to be $$C^\ast(A,M)=\Hom_R(A^{\otimes_R^n},M)$$
+\end{defn}
+
+\begin{defn}{Hochschild Cohomology}{}\\
+Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $M$ be an $(A,A)$-bimodule. Define the Hochschild cohomology of $M$ to be $$HH^n(A;M)=H^n(C^\ast(A,M))$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $M$ be an $(A,A)$-bimodule. Then there is an isomorphism of chain complexes $$C^\ast(A,M)\cong\Hom_{A^e}(B_\ast(A,A),M)$$
+\end{prp}
+
+\begin{lmm}{}{}\\
+Let $G$ be a group. Let $M$ be a right $G$-module. Then there are natural isomorphisms $$H_\ast(G;M)\cong HH_\ast(\Z[G];M)\;\;\;\text{ and }\;\;\; H^\ast(G;M)\cong HH^\ast(\Z[G];M)$$ where $M$ is considered as a $(G,G)$-bimodule with the trivial action on the left. 
+\end{lmm}
+
+\subsection{Relation to Tor and Ext}
+\begin{prp}{}{}\\
+Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $M$ be an $(A,A)$-bimodule. If $A$ is flat as an $R$-module, then there is an isomorphism $$HH_\ast(A,M)\cong\text{Tor}_\ast^{R^e}(A,M)$$
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $M$ be an $(A,A)$-bimodule. If $A$ is projective as an $R$-module, then there is an isomorphism $$HH^\ast(A,M)\cong\text{Ext}_{R^e}^\ast(A,M)$$
+\end{prp}
+
+Indeed, the tensor product is adjoint to the hom functor. The type of objects that allow for the tensor product and the hom functor to be exact would be the flat and projective objects respectively. 
+
+Crl of the above: If $R$ is a field, then explicit description via absolute tor and ext. 
+
+Explicit description via relative tor and ext
+
+\subsection{Low Degree Interpretations}
+\begin{prp}{}{}\\
+Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $M$ be an $(A,A)$-bimodule. Then we have $$HH_0(A,M)\cong\frac{M}{k\langle[A,M]\rangle}\;\;\;\text{ and }\;\;\;HH^0(A,M)\cong\{m\in M\;|\;am=ma\text{ for all }a\in A\}$$
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $M$ be an $(A,A)$-bimodule. Then we have $$HH_1(A,M)\cong\Omega_{A/R}^1\otimes_RM\;\;\;\text{ and }\;\;\;HH^1(A,M)\cong\frac{\text{Der}_R(A,M)}{\text{Inn}_R(A,M)}$$
+\end{prp}
 
 \subsection{The Trace Map}
 \begin{defn}{The Generalized Trace Map}{} Let $R$ be a ring and let $M$ be an $R$-module. Define the generalized trace map $$\text{tr}:M_r(M)\otimes M_r(A)^{\oplus n}\to M\otimes A^{\otimes n}$$ by the formula $$\text{tr}((m_{i,j})\otimes (a_{i,j})_1\otimes\cdots\otimes(a_{i,j})_n)=\sum_{0\leq i_0,\dots,i_n\leq r}m_{i_0,i_1}\otimes (a_{i_1,i_2})_1\otimes\cdots\otimes (a_{i_n,i_0})_n$$
