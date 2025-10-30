@@ -1989,7 +1989,7 @@ Let $(X,\mO_X)$ be a scheme. Define the Cartier divisor class group to be the ab
 
 \subsection{Relation to Invertible Sheaves}
 \begin{defn}{The Associated Sheaf of a Divisor}{}\\
-Let $(X,\mO_X)$ be a scheme. Let $D=\{(U_i,f_i\in K_X^\ast)\;|\;i\in I\}$ be a Cartier divisor on $X$. Define the associated sheaf $\mL(D)$ of $D$ to be the $\mO_X$-module by gluing the schemes $(U_i,\mO_X(U_i)(f_i^{-1}))$ for each $i$. 
+Let $(X,\mO_X)$ be a scheme. Let $D=\{(U_i,f_i\in K_X^\ast)\;|\;i\in I\}$ be a Cartier divisor on $X$. Define the associated sheaf $\mL(D)$ of $D$ to be the $\mO_X$-module by gluing the schemes $(U_i,\mO_X(U_i)[f_i^{-1}])$ for each $i$. 
 \end{defn}
 
 \begin{prp}{}{}\\
@@ -2011,10 +2011,10 @@ Let $X$ be a scheme. Then the map $$\text{CaCl}(X)\to\text{Pic}(X)$$ defined by 
 When $X$ is integral, Cartier divisors and the Picard group is entirely the same invariant for $X$. 
 
 \begin{prp}{}{}\\
-Let $X$ be a scheme. Then the there is an isomorphism of groups $$\text{CaCl}(X)\cong\text{Pic}(X)$$ defined by $[D]\mapsto\mL(D)$. 
+Let $X$ be an integral scheme. Then the there is an isomorphism of groups $$\text{CaCl}(X)\cong\text{Pic}(X)$$ defined by $[D]\mapsto\mL(D)$. 
 \end{prp}
 
-\begin{crl}{}{} Let $X$ be a scheme. If $X$ is Noetherian, integral, separated and that all local rings are UFDs, then the above isomorphism $$\text{Cl}(X)\cong\text{Pic}(X)$$ is natural in $X$. 
+\begin{crl}{}{} Let $X$ be a scheme. If $X$ is Noetherian, integral, separated and that all local rings are UFDs, then there are natural isomorphisms $$\text{Cl}(X)\cong\text{CaCl}(X)\cong\text{Pic}(X)$$
 \end{crl}
 
 \begin{crl}{}{} Let $X=\Prj_k^n$ be the projective space over some field $k$. Then every invertible sheaf on $X$ is isomorphic to $\mO_X(m)$ for some $m\in\Z$. 
@@ -2038,27 +2038,95 @@ Let $R$ be a commutative ring. Let $X$ be a scheme over $R$. Let $\varphi:X\to\P
 \end{prp}
 
 \subsection{Ample and Very Ample Line Bundles}
+We freely interchange between line bundles and invertible sheaves. 
+
+\begin{defn}{Very Ample Line Bundles}{}\\
+Let $R$ be a commutative ring. Let $X$ be a scheme. Let $\mL$ be a sheaf on $X$. We say that $\mL$ is very ample relative to $Y$ if there is an closed embedding $i:X\to\Prj_Y^n$ such that $\mL\cong i^\ast\mO(1)$. 
+\end{defn}
+
+If $Y=\text{Spec}(R)$ is affine, then 12.2.1 shows that $\mL$ is very ample if and only if it has global sections that generate $\mL$ such that the corresponding morphism is a closed embedding. 
+
+\begin{defn}{Ample Line Bundles}{}\\
+Let $X$ be a Noetherian scheme. Let $\mL$ be an invertible sheaf. 
+\end{defn}
 
 \pagebreak
 \section{The Study of Smoothness}
-\subsection{The Sheaf of Differential Forms}
+\subsection{The Zariski Tangent Space}
+\begin{defn}{The Zariski (Co)Tangent Space}{}\\
+Let $X$ be a scheme. Let $p\in X$. Let $m_p$ be the unique maximal ideal of $\mO_{X,p}$. 
+\begin{itemize}
+\item Define the Zariski tangent space at $p$ to be $$T_pX=\left(\frac{m_p}{m_p^2}\right)^\ast$$
+\item Define the Zariski cotangent space at $p$ to be $$T_pX^\ast=\frac{m_p}{m_p^2}$$
+\end{itemize}
+\end{defn}
+
+\begin{defn}{The Jacobian Matrix at a Point}{}\\
+Let $k$ be a field. Let $X$ be a scheme of finite type over $k$. Let $p\in X$. Let $\text{Spec}\left(\frac{k[x_1,\dots,x_n]}{(f_1,\dots,f_r)}\right)$ be an affine neighbourhood containing $p$. Define the Jacobian matrix of $X$ at $p$ to be the matrix $$J_pX=\begin{pmatrix}
+\frac{\partial f_1}{\partial x_1}\bigg{|}_p & \cdots & \frac{\partial f_1}{\partial x_n}\bigg{|}_p\\
+\vdots & \ddots & \vdots\\
+\frac{\partial f_r}{\partial x_1}\bigg{|}_p & \cdots & \frac{\partial f_r}{\partial x_n}\bigg{|}_p
+\end{pmatrix}$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $X$ be a scheme of finite type over $k$. Let $p\in X(k)$ be a $k$-valued point. Then there is an isomorphism $$T_pX\cong\text{coker}(J_pX)$$
+\end{prp}
+
+\subsection{Regularity and Smoothness}
+\begin{defn}{Regular Schemes}{}\\
+Let $X$ be a scheme. Let $p\in X$. We say that $X$ is regular at $p$ if $\mO_{X,p}$ is a regular local ring. We say that $X$ is regular if $X$ is regular at all points $p\in X$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $X$ be a scheme of finite type over $k$. Let $p\in X(k)$ be a $k$-valued point. Then the following are equivalent. 
+\begin{itemize}
+\item $p$ is a regular point of $X$. 
+\item $\dim(T_pX)=\dim(X)$. 
+\item If $\text{Spec}\left(\frac{k[x_1,\dots,x_n]}{(f_1,\dots,f_r)}\right)$ is an affine open cover containing $p$, then $\rank(J_pX)=n-\dim(X)$
+\end{itemize}
+\end{prp}
+
+The Jacobian criterion for checking regularity is only applicable for $k$-valued points. Motivated by this, we define the notion of a smooth scheme to be the schemes that satisfy the Jacobian criterion at all points. 
+
+\begin{defn}{Smooth Schemes}{}\\
+Let $k$ be a field. Let $X$ be a scheme locally of finite type over $k$. We say that $X$ is smooth if for all $p\in X$, the affine open subscheme $\text{Spec}\left(\frac{k[x_1,\dots,x_n]}{(f_1,\dots,f_r)}\right)$ containing $p$ is such that $\rank(J_pX)=n-\dim(X)$. 
+\end{defn}
+
+The main difference between smooth schemes and regular schemes is that the Jacobian rank criterion is satisfied for all (closed) points for smooth schemes, while the same criterion is only necessary on $k$-valued points for regular schemes. 
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $X$ be a scheme of finite type over $k$. Then the following are true. 
+\begin{itemize}
+\item If $X$ is smooth, then $X$ is regular. 
+\item If $k$ is algebraically closed, then $X$ is smooth if and only if $X$ is regular. 
+\end{itemize}
+\end{lmm}
+
+\subsection{The Sheaf of Relative Differentials}
 \begin{lmm}{}{}\\
 Let $X$ be a scheme over a scheme $S$. Let $\Delta:X\to X\times_SX$ be the diagonal morphism. Then there exists an open subset $\Delta(X)\subseteq U\subseteq X\times_SX$ such that $\Delta:X\to U$ is a closed immersion. 
 \end{lmm}
 
-\begin{defn}{Sheaf of Relative Differentials}{}\\
-Let $X,Y$ be schemes. Let $f:X\to Y$ be a morphism. Let $\mI$ be the ideal sheaf of $\Delta:X\to X\times_YX$. Define the sheaf of relative differential of $f$ to be $$\Omega_{X/Y}^1=\Delta^\ast(\mI/\mI^2)$$
+\begin{defn}{The Sheaf of Relative Differentials}{}\\
+Let $X,Y$ be schemes. Let $f:X\to Y$ be a morphism. Let $U\subseteq X\times_YX$ be the largest open subset such that $\Delta:X\to U$ is a closed immersion. Let $\mI$ be the ideal sheaf of $\Delta:X\to U$. Define the sheaf of relative differentials of $f$ to be $$\Omega_{X/Y}^1=\Delta^\ast(\mI/\mI^2)$$
 \end{defn}
-
-\begin{lmm}{}{}\\
-Let $X,Y$ be schemes. Let $f:X\to Y$ be a morphism. Let $V=\text{Spec}(B)$ be an open affine subset of $Y$. Let $\text{Spec}(A)=U\subseteq f^{-1}(V)$ be an open affine subset of $X$. Then there is an isomorphism $$\Omega_{V/U}^1\cong\widetilde{\Omega_{B/A}^1}$$
-\end{lmm}
 
 \begin{lmm}{}{}\\
 Let $X,Y$ be schemes. Let $f:X\to Y$ be a morphism. Then $\Omega_{X/Y}^1$ is a quasicoherent $\mO_X$-module. 
 \end{lmm}
 
-\begin{prp}{}{} Let $f:X\to Y$ and $g:Y\to Z$ be morphism of schemes. Then there is an exact sequence \\
+There is an alternative way of defining the sheaf of relative differentials. 
+
+\begin{lmm}{}{}\\
+Let $X,Y$ be schemes. Let $f:X\to Y$ be a morphism. Let $V\subseteq Y$ be an affine open subset. Let $U\subseteq f^{-1}(V)$ be an affine open subset of $X$. Then there is a an isomorphism $$\Omega_{X/Y}^1\;|\;_U\cong\widetilde{\Omega_{\Gamma(U)/\Gamma(V)}^1}$$
+\end{lmm}
+
+\begin{eg}{}{}\\
+Let $X=\A_Y^n$. Then $\Omega_{X/Y}^1$ is a free $\mO_X$-module of rank $n$. 
+\end{eg}
+
+\begin{prp}{The First Fundamental Exact Sequence}{} Let $f:X\to Y$ and $g:Y\to Z$ be morphism of schemes. Then there is an exact sequence \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	f^\ast\Omega_{Y/Z}^1 & \Omega_{X/Z}^1 & \Omega_{X/Y}^1 & 0
 	\arrow[from=1-1, to=1-2]
@@ -2067,17 +2135,63 @@ Let $X,Y$ be schemes. Let $f:X\to Y$ be a morphism. Then $\Omega_{X/Y}^1$ is a q
 \end{tikzcd}}
 \end{prp}
 
-\begin{prp}{}{} Let $f:X\to Y$ be a morphism of schemes. Let $Z$ be a closed subscheme of $X$ with ideal sheaf $\mI$. Then there is an exact sequence \\
+\begin{prp}{The Second Fundamental Exact Sequence}{}\\
+Let $X,Y,Z$ be schemes. Let $f:Y\to Z$ be a morphism. Let $i:X\to Y$ be a closed embedding with ideal sheaf $\mI$. Then there is an exact sequence of sheaves on $X$: \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
-	\mI/\mI^2 & \Omega_{X/Y}^1\otimes\mO_Z & \Omega_{Z/Y}^1 & 0
+	\mI/\mI^2 & i_\ast\Omega_{Y/Z}^1=\Omega_{Y/Z}^1\otimes_{\mO_Y}\mO_X & \Omega_{X/Z}^1 & 0
 	\arrow[from=1-1, to=1-2]
 	\arrow[from=1-2, to=1-3]
 	\arrow[from=1-3, to=1-4]
 \end{tikzcd}}
 \end{prp}
 
-\begin{lmm}{}{} Let $X=\A_Y^n$. Then $\Omega_{X/Y}^1$ is a free $\mO_X$-module of rank $n$. 
+\subsection{Smooth Morphisms}
+\begin{defn}{Smooth Morphisms}{}\\
+Let $k$ be a field. Let $X,Y$ be schemes locally of finite type over $k$. Let $f:X\to Y$ be a morphism over $k$. We say that $f$ is smooth of relative dimension $n$ if the following are true. 
+\begin{itemize}
+\item $f$ is flat. 
+\item If $X'\subseteq X$ and $Y'\subseteq Y$ are irreducible components such that $f(X')\subseteq Y'$, then $\dim(X')=\dim(Y')+n$. 
+\item For all $p\in X$, we have $$\dim_{k(p)}(\Omega_{X/Y}^1\otimes k(p))=n$$
+\end{itemize}
+\end{defn}
+
+Smooth morphisms are a direct generalization of smooth schemes. 
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $X$ be a scheme locally of finite type over $k$. Then the following are equivalent. 
+\begin{itemize}
+\item $X$ is smooth. 
+\item The canonical morphism $X\to\text{Spec}(k)$ is smooth. 
+\item $\Omega_X^1$ is locally free. 
+\end{itemize}
 \end{lmm}
+
+Notice that if $X$ is irreducible, then the third criterion is equivalent to saying that $\dim_k(\Omega_{X/Y}^1)=n$. 
+
+\begin{prp}{}{}\\
+Let $k$ be an algebraically closed field. Let $X,Y$ be schemes locally of finite type over $k$. Let $f:X\to Y$ be a morphism over $k$. Then the following are equivalent. 
+\begin{itemize}
+\item $f$ is smooth of relative dimension $\dim(X)-\dim(Y)$. 
+\item $\Omega_{X/Y}^1$ is locally free of rank $\dim(X)-\dim(Y)$. 
+\item For all closed points $p\in X$, the induced map $T_pX\to T_{f(p)}Y$ is surjective. 
+\end{itemize}
+\end{prp}
+
+\subsection{Smooth Varieties}
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $X,Y$ be smooth varieties over $k$. Let $i:X\to Y$ be a closed embedding. Let $\mI$ be the ideal sheaf of the closed embedding. Then the second fundamental exact sequence is exact on the left: \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & \mI/\mI^2 & \Omega_Y^1\otimes_{\mO_Y}\mO_X & \Omega_X^1 & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\~\\
+\end{prp}
+
+\begin{crl}{}{}\\
+Let $k$ be a field of characteristic $0$ or a finite field. Let $X$ be a smooth variety over $k$. Let $p\in X$ be a closed point. Then the second fundamental exact sequence induces an isomorphism $$\frac{m_p}{m_p^2}\cong\Omega_X^1\otimes_{\mO_X}\frac{\mO_{X,p}}{m_p}$$ where $m_p$ is the maximal ideal of $\mO_{X,p}$. 
+\end{crl}
 
 \begin{thm}{Euler Sequence}{} Let $A$ be a commutative ring. Then there is an exact sequence \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
@@ -2106,90 +2220,21 @@ Let $k$ be a field of characteristic $0$. Let $X\subseteq\Prj_k^n$ be a hypersur
 where
 \end{prp}
 
-\begin{defn}{The Canonical Sheaf}{}\\
-Let $k$ be an algebraically closed field. Let $X$ be a regular scheme over $k$. Define the canonical sheaf of $X$ to be $$\Omega_{X/k}^{\dim(X)}=\bigwedge_{i=1}^{\dim(X)}\Omega_{X/k}^1$$
+\subsection{Higher Differential Forms}
+\begin{defn}{The Differential}{}\\
+Let $X,Y$ be schemes. Let $f:X\to Y$ be a morphism. Define the differential $d:\mO_X\to\Omega_{X/Y}^1$ to be the morphism of sheaves of abelian groups given by
 \end{defn}
-
-\subsection{Regular Schemes}
-\begin{defn}{The Zariski Tangent Space}{}\\
-Let $X$ be a scheme. Let $p\in X$. Define the Zariski tangent space at $p$ to be $$T_pX=\left(\frac{m_p}{m_p^2}\right)^\ast$$ where $m_p$ is the unique maximal ideal of $\mO_{X,p}$. 
-\end{defn}
-
-\begin{defn}{The Jacobian Matrix at a Point}{}\\
-Let $k$ be a field. Let $X$ be a scheme of finite type over $k$. Let $p\in X(k)$ be a $k$-valued point. Let $\text{Spec}\left(\frac{k[x_1,\dots,x_n]}{(f_1,\dots,f_r)}\right)$ be an affine neighbourhood containing $p$. Define the Jacobian matrix of $X$ at $p$ to be the matrix $$J_pX=\begin{pmatrix}
-\frac{\partial f_1}{\partial x_1}\bigg{|}_p & \cdots & \frac{\partial f_1}{\partial x_n}\bigg{|}_p\\
-\vdots & \ddots & \vdots\\
-\frac{\partial f_r}{\partial x_1}\bigg{|}_p & \cdots & \frac{\partial f_r}{\partial x_n}\bigg{|}_p
-\end{pmatrix}$$
-\end{defn}
-
-\begin{prp}{}{}\\
-Let $k$ be a field. Let $X$ be a scheme of finite type over $k$. Let $p\in X(k)$ be a $k$-valued point. Then there is an isomorphism $$T_pX\cong\text{coker}(J_pX)$$
-\end{prp}
-
-\begin{defn}{Regular Schemes}{}\\
-Let $X$ be a scheme. Let $p\in X$. We say that $X$ is regular at $p$ if $\mO_{X,p}$ is a regular local ring. We say that $X$ is regular if $X$ is regular at all points $p\in X$. 
-\end{defn}
-
-\begin{prp}{}{} Let $X$ be an irreducible separated scheme of finite type over an algebraically closed field $k$. Then $\Omega_{X/k}^1$ is a locally free sheaf of rank $\dim(X)$ if and only if $X$ is a regular variety over $k$. 
-\end{prp}
-
-\begin{prp}{}{}\\
-Let $k$ be a field. Let $X$ be a scheme of finite type over $k$. Let $p\in X(k)$ be a $k$-valued point. Then the following are equivalent. 
-\begin{itemize}
-\item $p$ is a regular point of $X$. 
-\item $\dim(T_pX)=\dim(X)$. 
-\item If $\text{Spec}\left(\frac{k[x_1,\dots,x_n]}{(f_1,\dots,f_r)}\right)$ is an affine open cover containing $p$, then $\rank(J_pX)=n-\dim(X)$
-\end{itemize}
-\end{prp}
-
-\subsection{Flat Morphisms}
-
-\subsection{Smooth Morphisms}
-\begin{defn}{Smooth Morphisms}{}\\
-Let $k$ be a field. Let $X,Y$ be schemes of finite type over $k$. Let $f:X\to Y$ be a morphism over $k$. We say that $f$ is smooth of relative dimension $n$ if the following are true. 
-\begin{itemize}
-\item $f$ is flat. 
-\item If $X'\subseteq X$ and $Y'\subseteq Y$ are irreducible components such that $f(X')\subseteq Y'$, then $\dim(X')=\dim(Y')+n$. 
-\item For all $p\in X$, we have $$\dim_{k(p)}(\Omega_{X/Y}^1\otimes k(p))=n$$
-\end{itemize}
-\end{defn}
-
-Notice that if $X$ is irreducible, then the third criterion is equivalent to saying that $\dim_k(\Omega_{X/Y}^1)=n$. 
-
-\begin{prp}{}{}\\
-Let $k$ be an algebraically closed field. Let $X,Y$ be schemes of finite type over $k$. Let $f:X\to Y$ be a morphism over $k$. Then the following are equivalent. 
-\begin{itemize}
-\item $f$ is smooth of relative dimension $\dim(X)-\dim(Y)$. 
-\item $\Omega_{X/Y}^1$ is locally free of rank $\dim(X)-\dim(Y)$. 
-\item For all closed points $p\in X$, the induced map $T_pX\to T_{f(p)}Y$ is surjective. 
-\end{itemize}
-\end{prp}
-
-\begin{defn}{Smooth Schemes}{}\\
-Let $k$ be a field. Let $X$ be a scheme of finite type over $k$. We say that $X$ is a smooth scheme if $X$ is smooth over $k$. 
-\end{defn}
-
-\begin{prp}{}{}\\
-Let $k$ be a field. Let $X$ be a scheme of finite type over $k$. Then the following are true. Then $X$ is smooth if and only if for all closed points $p\in X$, the open affine scheme $\text{Spec}\left(\frac{k[x_1,\dots,x_n]}{(f_1,\dots,f_r)}\right)$ containing $p$ is such that $\rank(J_pX)=n-\dim(X)$. 
-\end{prp}
 
 \begin{lmm}{}{}\\
-Let $k$ be a field. Let $X$ be a scheme of finite type over $k$. If $X$ is smooth, then $X$ is regular. 
+Let $X,Y$ be schemes. Let $f:X\to Y$ be a morphism. Let $V\subseteq Y$ be an affine open subset. Let $U\subseteq f^{-1}(V)$ be an affine open subset of $X$. Then $\Gamma(d|_U):\mO_X(U)\to\Omega_{X/Y}^1(U)$ is given by the universal derivation associated to the module of Kahler differentials $\Omega_{\Gamma(U)/\Gamma(V)}^1$. 
 \end{lmm}
 
-The main difference between smooth schemes and regular schemes is that the Jacobian rank criterion is satisfied for all (closed) points for smooth schemes, while the same criterion is only necessary on $k$-valued points for regular schemes. \\
+\begin{defn}{The Canonical Sheaf}{}\\
+Let $k$ be an algebraically closed field. Let $X$ be a regular scheme over $k$. Define the canonical sheaf of $X$ to be $$\mK_X=\Omega_{X/k}^{\dim(X)}=\bigwedge_{i=1}^{\dim(X)}\Omega_{X/k}^1$$
+\end{defn}
 
-When base field is algebraically closed, $k$-valued points are the same as closed points, and so we have the following. 
-
-\begin{prp}{}{}\\
-Let $k$ be an algebraically closed field. Let $X$ be a scheme of finite type over $k$. Then the following are true. 
-\begin{itemize}
-\item $X$ is smooth if and only if $X$ is regular. 
-\item Suppose that $X$ is irreducible and separated over $k$. Then $X$ is smooth if and only if $X$ is a regular variety over $k$. 
-\end{itemize}
-\end{prp}
-
+\pagebreak
+\section{Other Topics}
 \subsection{Normal Schemes}
 \begin{defn}{Normal Schemes}{}\\
 Let $X$ be a scheme. We say that $X$ is normal if for all $p\in X$, $\mO_{X,p}$ is a normal domain. 

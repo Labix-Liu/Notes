@@ -200,6 +200,23 @@ By definition, the geometric realization $\abs{S}$ is a subcomplex of the standa
 Let $n\in\N$. Consider the set $S=\mP(\{1,\dots,n+1\})$. Then $\abs{S}$ is the standard $n$-simplex. 
 \end{eg}
 
+\subsection{The Face Vector of a Simplicial Complex}
+\begin{defn}{The Face Vector}{}\\
+Let $S$ be an abstract simplicial complex on $\{1,\dots,n\}$. Define the face vector $(f_{-1},\dots,f_n)$ of $S$ by the formula $$f_i=\text{The number of }i\text{-dimensional faces of }S$$ for $0\leq i\leq n$ and by convention, $f_{-1}=1$. 
+\end{defn}
+
+\begin{defn}{The $h$-Vector}{}\\
+Let $S$ be an abstract simplicial complex on $\{1,\dots,n\}$. Let $(f_0,\dots,f_n)$ be the face vector of $S$. Define the $h$-vector $(h_0,\dots,h_n)$ of $S$ by the formula $$h_i=\sum_{k=0}^i(-1)^{i-k}\binom{n+1-k}{i-k}f_{k-1}$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $S$ be an abstract simplicial complex on $\{1,\dots,n\}$. Let $(f_0,\dots,f_n)$ be the face vector of $S$. Let $(h_0,\dots,h_n)$ be the $h$-vector of $S$. Then the following are true. 
+\begin{itemize}
+\item We have $$\sum_{k=0}^{n+1}f_{k-1}(t-1)^{d-k}=\sum_{j=0}^{n+1}h_jt^{n+1-j}$$ for variable $t$. 
+\item For $0\leq i\leq n$, we have $$f_i=\sum_{k=0}^{i+1}\binom{n+1}{i+1-k}h_k$$
+\end{itemize}
+\end{lmm}
+
 \subsection{Cubical Embeddings of Simplicial Complexes}
 \begin{defn}{The Cubical Embedding}{}\\
 Let $n\in\N$. Define the cubical embedding $i_c:\Delta^n\to[0,1]^{n+1}$ as follows. 
@@ -295,6 +312,14 @@ Let $P\subseteq\R^n$ be a polyhedron. Let $F\subseteq P$ be a face.
 \begin{defn}{The Face Poset}{}\\
 Let $P\subseteq\R^n$ be a polyhedron. Define the face poset $\mF(P)$ of $P$ to be the set of faces of $P$ together with inclusion. 
 \end{defn}
+
+\begin{defn}{The Face Vector}{}\\
+Let $P\subseteq\R^n$ be a polytope of dimension $d$. Define the face vector $(f_0,\dots,f_{d-1})$ of $S$ by the formula $$f_i=\text{The number of }i\text{-dimensional faces of }P$$ for $0\leq i\leq d$ and by convention, $f_{-1}=f_d=1$. 
+\end{defn}
+
+\begin{lmm}{Euler's Formula}{}\\
+Let $P\subseteq\R^n$ be a polytope of dimension $d$. Then we have $$\sum_{i=0}^{d-1}(-1)^if_i=1+(-1)^d$$
+\end{lmm}
 
 \begin{defn}{Combinatorially Equivalent}{}\\
 Let $P_1\subseteq\R^{n_1}$ and $P_2\subseteq\R^{n_2}$ be polytopes. We say that $P_1$ and $P_2$ are combinatorially equivalent if there exists a inclusion preserving bijection between $\mF(P_1)$ and $\mF(P_2)$. In this case we write $P_1\simeq P_2$. 
@@ -411,13 +436,24 @@ $P=(P^\ast)^\ast$.
 
 $\mF(P)^\text{op}\cong\mF(P^\ast)$. 
 
+\subsection{Simplicial Polytopes}
+\begin{defn}{Simplicial Polytopes}{}\\
+Let $P\subseteq\R^n$ be a polytope. We say that $P$ is a simplicial polytope if all its facets are simplicies. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $P\subseteq\R^n$ be a polytope. Then $\partial P$ is a simplicial complex. 
+\end{lmm}
+
+\begin{prp}{The Dehn-Sommerville Equation}{}\\
+Let $P\subseteq\R^n$ be a simplicial polytope of dimension $d$. Then the following are true: $$\sum_{j=k}^{d-1}(-1)^j\binom{j+1}{k+1}f_j=(-1)^{d-1}f_k$$ for $-1\leq k\leq d-2$. 
+\end{prp}
+
+In particular, $\partial P$ is both a polytope and a simplicial complex. The notion of face vector coincides, and they enjoy both the Dehn-Sommerville equation and its relation with the $h$-vector. 
+
 \subsection{Simple and Simplicial Polytopes}
 \begin{defn}{Simple Polytopes}{}\\
 Let $P\subseteq\R^n$ be a polytope. We say that $P$ is a simple polytope if for all vertices $v\in P$, there exists $n$ edges $e_1,\dots,e_n\subseteq P$ such that $v\in\partial e_i$ for all $i$. 
-\end{defn}
-
-\begin{defn}{Simplicial Polytopes}{}\\
-Let $P\subseteq\R^n$ be a polytope. We say that $P$ is a simplicial polytope if all its facets are simplicies. 
 \end{defn}
 
 \begin{prp}{}{}\\
@@ -433,6 +469,31 @@ Let $P\subseteq\R^n$ be a polytope. If $P$ is both simple and simplicial, then $
 \item $P$ is a simplex. 
 \end{itemize}
 \end{prp}
+
+\pagebreak
+\section{Some Results on the Classification of Polytopes}
+Let $P$ be a simplicial polytope of dimension $4$. Since $P$ is homeomorphic to $D^4$, the following classification problems are equivalent. 
+\begin{itemize}
+\item Classification of simplicial polytopes up to uniqueness of the face vector. 
+\item Classification of triangulations of the $3$-sphere up to uniqueness of the face vector of the simplicial complex. 
+\end{itemize}
+(More subtle, this is not true for higher dimensions: see https://math.mit.edu/~rstan/pubs/pubfiles/54.pdf)
+
+
+Of course, two polytopes that are not combinatorially equivalent can still have the same face vector. Let $(f_0,f_1,f_2,f_3)$ be the face vector of $P$. A few is known in this particular case. 
+\begin{itemize}
+\item Since $P$ is simplicial, we have the bound $f_i\leq\binom{f_0}{i+1}$ from here https://en.wikipedia.org/wiki/Cyclic_polytope
+\item The Euler characteristic of the sphere tells us that $f_0-f_1+f_2-f_3=0$. 
+\item https://arxiv.org/pdf/math/0604018 shows that $f_1\geq 4f_0-10$. 
+\item The same paper tells us that $f_2=2f_1-2f_0$ and $f_3=f_1-f_0$ (also this paper: https://math.mit.edu/~rstan/pubs/pubfiles/54.pdf)
+\item For every pair of $(f_0,f_1)$ such that $f_0\geq 5$ and $\frac{f_0(f_0-1)}{2}\geq f_1\geq 4f_0-10$, there exists a triangulation of the $3$-sphere whose face vectors are $(f_0,f_1,2f_1-2f_0,f_1-f_0)$. 
+\end{itemize}
+
+Recalling that every $d$ dimensional polytope must have $d+1$ vertices,we start enumerating the possible cases with $f_0=5$. 
+
+\begin{itemize}
+\item By the above, we must have $f_1\geq 10$, and there is guaranteed to be a triangulation if $f_1\leq 10$. So $(5,10,10,5)$ is one such face vector. By the upper bound of the face vector, this is the only possible face vector. 
+\end{itemize}
 
 \pagebreak
 \section{}
@@ -465,22 +526,6 @@ Let $R$ be a commutative ring. Let $\mK$ be a simplicial complex on $\{1,\dots,n
 \end{prp}
 
 \subsection{The Hilbert Series of Stanley-Reisner Rings}
-\begin{defn}{The Face Vector}{}\\
-Let $S$ be an abstract simplicial complex on $\{1,\dots,n\}$. Define the face vector $(f_{-1},f_0,\dots,f_n)$ of $S$ by the formula $$f_i=\text{The number of }i\text{-dimensional faces of }S$$ for $0\leq i\leq n$ and by convention, $f_{-1}=1$. 
-\end{defn}
-
-\begin{defn}{The $h$-Vector}{}\\
-Let $S$ be an abstract simplicial complex on $\{1,\dots,n\}$. Let $(f_0,\dots,f_n)$ be the face vector of $S$. Define the $h$-vector $(h_0,\dots,h_n)$ of $S$ by the formula $$h_i=\sum_{k=0}^i(-1)^{i-k}\binom{n+1-k}{i-k}f_{k-1}$$
-\end{defn}
-
-\begin{lmm}{}{}\\
-Let $S$ be an abstract simplicial complex on $\{1,\dots,n\}$. Let $(f_0,\dots,f_n)$ be the face vector of $S$. Let $(h_0,\dots,h_n)$ be the $h$-vector of $S$. Then the following are true. 
-\begin{itemize}
-\item We have $$\sum_{k=0}^{n+1}f_{k-1}(t-1)^{d-k}=\sum_{j=0}^{n+1}h_jt^{n+1-j}$$ for variable $t$. 
-\item For $0\leq i\leq n$, we have $$f_i=\sum_{k=0}^{i+1}\binom{n+1}{i+1-k}h_k$$
-\end{itemize}
-\end{lmm}
-
 \begin{thm}{Stanley}{}\\
 Let $k$ be a field. Let $n\in\N$. Let $S$ be an abstract simplicial complex on $\{1,\dots,n\}$. Let $(f_0,\dots,f_n)$ be the face vector of $S$. Let $(h_0,\dots,h_n)$ be the $h$-vector of $S$. Then the Hilbert series of $k[S]$ is given by $$HS_{k[S]}(t)=\sum_{i=0}^{n+1}f_{k-1}\left(\frac{t^2}{1-t^2}\right)^k=\frac{1}{(1-t^2)^{n+1}}\sum_{i=0}^{n+1}h_it^{2i}$$
 \end{thm}
