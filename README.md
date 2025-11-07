@@ -51,10 +51,10 @@ flowchart BT
     classDef None fill:#FFFFFF
     click A "https://github.com/Labix-Liu/Notes/blob/main/Sets%20and%20Numbers/Set%20Theory/Set%20Theory.pdf"
     click D "https://github.com/Labix-Liu/Notes/blob/main/Algebra/Groups%20and%20Rings/Groups%20and%20Rings.pdf"
-    click F "https://github.com/Labix-Liu/Notes/blob/71f4c7cc4b1cd6b5f67829805c8c9747846c6a3a/Algebra/Linear%20Algebra/Linear%20Algebra.pdf"
-    click H "https://github.com/Labix-Liu/Notes/blob/ec8c07f460c233600d28a75f8ebe9c3599c68d4d/Geometry%20and%20Topology/Point%20Set%20Topology/Point%20Set%20Topology.pdf"
-    click J "https://github.com/Labix-Liu/Notes/blob/71f4c7cc4b1cd6b5f67829805c8c9747846c6a3a/Algebra/Rings%20and%20Modules/Rings%20and%20Modules.pdf"
-    click M "https://github.com/Labix-Liu/Notes/blob/71f4c7cc4b1cd6b5f67829805c8c9747846c6a3a/Geometry%20and%20Topology/Algebraic%20Topology%201/Algebraic%20Topology%201.pdf"
+    click F "https://github.com/Labix-Liu/Notes/blob/main/Algebra/Linear%20Algebra/Linear%20Algebra.pdf"
+    click H "https://github.com/Labix-Liu/Notes/blob/main/Geometry%20and%20Topology/Point%20Set%20Topology/Point%20Set%20Topology.pdf"
+    click J "https://github.com/Labix-Liu/Notes/blob/main/Algebra/Rings%20and%20Modules/Rings%20and%20Modules.pdf"
+    click M "https://github.com/Labix-Liu/Notes/blob/main/Geometry%20and%20Topology/Algebraic%20Topology%201/Algebraic%20Topology%201.pdf"
 
 
 
