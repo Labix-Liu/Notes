@@ -22,7 +22,8 @@
 \pagebreak
 \section{Basic Module Theory}
 \subsection{Introduction to Modules}
-\begin{defn}{Modules}{} Let $R$ be a ring. A left $R$-module or a left module over $R$ is an abelian group $(M,+)$ together with an action of $R$ on $M$ denoted by $\cdot:R\times M\to M$ such that 
+\begin{defn}{Modules}{}\\
+Let $R$ be a ring. A left $R$-module or a left module over $R$ is an abelian group $(M,+)$ together with an action of $R$ on $M$ denoted by $\cdot:R\times M\to M$ such that 
 \begin{itemize}
 \item $r\cdot (m+n)=r\cdot m+r\cdot n$ for all $r,s\in R$, $m\in M$
 \item $(rs)\cdot m=r\cdot (s\cdot m)$ for all $r,s\in R$, $m\in M$
@@ -34,12 +35,41 @@ A right $R$-module consists of the same axioms except that the action is on the 
 
 Notice that while most of the time we exclusively work with left $R$-modules, all results are valid also to right $R$-modules because every right $R$-module is actually a left $R^{\text{op}}$ module and vice versa. $R^{\text{op}}$ here means that the abelian group is the same: $(R^{\text{op}},+,\cdot_{R^\text{op}})$ is defined to be $(R^\text{op},+)=(R,+)$ and $$a\cdot_{R^{\text{op}}}b=b\cdot_R a$$ for all $a,b\in R$. 
 
-\begin{defn}{Submodules}{} Let $R$ be a ring and let $M$ be an $R$-module. An $R$-submodule of $M$ is an abelian subgroup $N$ of $M$ which is closed under the action of ring elements, meaning $rn\in N$ for all $r\in R$, $n\in N$. 
+\begin{eg}{}{}\\
+The following are true. 
+\begin{itemize}
+\item $\Z$-modules are the same as abelian groups. 
+\item $\Z$-submodules are the same as subgroups. 
+\item Let $\F$ be a field. Then $\F$-modules are the same as vector spaces. 
+\end{itemize}
+\end{eg}
+
+An abelian group can have different module structures. For example, the complex numbers $\C$ is both a $\C$-module and an $\R$-module. 
+
+\begin{eg}{}{}\\
+Let $\F$ be a field. Let $V$ be a vector space over $\F$. Let $T:V\to V$ be a linear map. Then $V$ can be given the structure of an $\F[x]$-module structure by $$\sum_{i=0}^na_ix^i\cdot v=\sum_{i=0}^na_iT^i(v)$$
+\end{eg}
+
+\begin{defn}{Submodules}{}\\
+Let $R$ be a ring. Let $M$ be a left $R$-module. Let $N\subseteq M$ be a subset. We say that $N$ is an $R$-submodule of $M$ if $N$ is an $R$-module. 
 \end{defn}
 
-Submodules of a ring $R$ are well known objects. They are just the ideals of $R$. 
+\begin{eg}{}{}\\
+Let $R$ be a ring. Then the following are true. 
+\begin{itemize}
+\item The left $R$-submodules are the same as left ideals of $R$. 
+\item The right $R$-submodules are the same as right ideals of $R$. 
+\end{itemize}
+\end{eg}
 
-\begin{prp}{Submodule Criterion}{} Let $R$ be a ring and let $M$ be a left $R$-module. A subset $N$ of $M$ is a left $R$-submodule of $M$ if and only if
+We have seen that left and right ideals of a ring in general do not coincide. More generally, left and right modules over a ring in general are completely different objects. 
+
+\begin{eg}{}{}\\
+Let $\F$ be a field. Let $V$ be a vector space over $\F$. Let $T:V\to V$ be a linear map. Equip $V$ with an $\F[x]$-module structure by $x\cdot v=T(v)$. Let $W\subseteq V$ be a subset. Then $W$ is a $T$-invariant subspace if and only if $W$ is an $\F[x]$-submodule of $V$. 
+\end{eg}
+
+\begin{prp}{Submodule Criterion}{}\\
+Let $R$ be a ring. Let $M$ be a left $R$-module. A subset $N$ of $M$ is a left $R$-submodule of $M$ if and only if
 \begin{itemize}
 \item $x+y\in N$ for all $x,y\in N$
 \item $r\cdot x\in N$ for all $x\in N$ and $r\in R$
@@ -49,20 +79,29 @@ Suppose that $N$ is a left $R$-submodule. Then the above two conditions are sati
 \end{proof}
 \end{prp}
 
-\begin{defn}{Sum of Submodules}{} Let $R$ be a ring. Let $M,N$ be left $R$-submodules of an $R$-module $K$. Define the sum of $M$ and $N$ to be the set $$M+N=\{m+n\;|\;m\in M,n\in N\}$$ together with a ring operation $\cdot:R\times M+N\to M+N$ defined by $$(r,m+n)=r\cdot(m+n)=r\cdot m+r\cdot n$$
-\end{defn}
-
-\begin{lmm}{}{} Let $R$ be a ring. Let $M$ and $N$ be left $R$-submodules of an $R$-module $K$. Then $M+N$ is an $R$-submodule of $K$. 
-\begin{proof}
-Notice that since the underlying group of $K$ is abelian, we have that $M+N$ is a group. Also it is clear by definition of the ring operation on $M+N$ that the operation is closed. Thus $M+N$ is an $R$-submodule of $K$. 
+\begin{lmm}{}{}\\
+Let $R$ be a ring. Let $M,N$ be left $R$-modules. Then the intersection $M\cap N$ is a left $R$-submodule of both $M$ and $N$. 
+\begin{proof}\\
+Easy check using the submodule criterion. 
 \end{proof}
 \end{lmm}
 
-\begin{lmm}{}{} Let $R$ be a ring. Let $M,N$ be left $R$-modules. Then the intersection $M\cap N$ is a left $R$-submodule of both $M$ and $N$. 
+\begin{defn}{Sum of Submodules}{}\\
+Let $R$ be a ring. Let $M$ be a left $R$-module. Let $\{N_i\;|\;i\in I\}$ be a collection of $R$-submodules. Define the sum of the submodules to be $$\sum_{i\in I}N_i=\left\{\sum_{j=1}^nn_j\;|bigg{|}\;n_j\in N_i\text{ for some }i\in I\right\}$$
+\end{defn}
+
+Notice that the elements in the sum of submodules is a finite sum. 
+
+\begin{lmm}{}{}\\
+Let $R$ be a ring. Let $M$ be a left $R$-module. Let $\{N_i\;|\;i\in I\}$ be a collection of $R$-submodules. Then $\sum_{i\in I}N_i$ is an $R$-submodule of $M$. 
+\begin{proof}\\
+Trivial. 
+\end{proof}
 \end{lmm}
 
 \subsection{Module Homomorphisms}
-\begin{defn}{$R$-Module Homomorphisms}{} Let $R$ be a ring and let $M$ and $N$ be left $R$-modules. A map $\phi:M\to N$ is an $R$-module homomorphism if 
+\begin{defn}{$R$-Module Homomorphisms}{}\\
+Let $R$ be a ring. Let $M,N$ be left $R$-modules. Let $\phi:M\to N$ be a function. We say that $\phi$ is an $R$-module homomorphism if the following are true. 
 \begin{itemize}
 \item $\phi:M\to N$ is a homorphism of the underlying abelian group
 \item $\phi(am)=a\phi(m)$ for $a\in R$ and $m\in M$
@@ -70,24 +109,53 @@ Notice that since the underlying group of $K$ is abelian, we have that $M+N$ is 
 We say that $\phi$ is a $R$-module isomorphism if it is bijective. 
 \end{defn}
 
+\begin{defn}{$R$-Module Isomorphisms}{}\\
+Let $R$ be a ring. Let $M,N$ be left $R$-modules. Let $\phi:M\to N$ be an $R$-module homomorphism. We say that $\phi$ is an isomorphism if there exists an $R$-module homomorphism $\psi:N\to M$ such that $$\psi\circ\phi=\text{id}_M\;\;\;\text{ and }\;\;\;\phi\circ\psi=\text{id}_N$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $R$ be a ring. Let $M,N$ be left $R$-modules. Let $\phi:M\to N$ be an $R$-module homomorphism. Then $\phi$ is an isomorphism if and only if $\phi$ is bijective. 
+\begin{proof}\\
+If $\phi$ is an isomorphism then clearly $\phi$ is bijective. Conversely, suppose that $\phi$ is bijective. We check that $\phi^{-1}$ is an $R$-module homomorphism. Let $n_1,n_2\in M$ and $r_1,r_2\in R$. Then there exists $m_1,m_2\in M$ such that $\phi(m_1)=n_1$ and $\phi(m_2)=n_2$ respectively. Then we have 
+\begin{align*}
+\phi^{-1}(r_1n_1+r_2n_2)&=\phi^{-1}(r_1\phi(m_1)+r_2\phi(m_2))\\
+&=\phi^{-1}(\phi(r_1m_1+r_2m_2))\\
+&=r_1m_1+r_2m_2\\
+&=r_1\phi^{-1}(n_1)+r_2\phi^{-1}(n_2)
+\end{align*}
+Hence $\phi$ is an $R$-module homomorphism. 
+\end{proof}
+\end{lmm}
+
 \begin{defn}{The Kernel of a Homomorphism}{}\\
 Let $R$ be a ring. Let $M,N$ be left $R$-modules. Let $\phi:M\to N$ be an $R$-module homomorphism. Define the kernel of $\phi$ to be $$\ker(\phi)=\{x\in M\;|\;\phi(x)=0\}$$
 \end{defn}
 
-\begin{defn}{Quotient Module}{} Let $M$ be an $R$-module and $N$ a submodule of $M$. Define the quotient module of $M$ and $N$ to be the abelian quotient group $$\frac{M}{N}=\{m+N\;|\;m\in M\}$$ together with the left ring operation $\cdot:R\times\frac{M}{N}\to\frac{M}{N}$ defined by $$(r,m+N)=r\cdot(m+N)=rm+N$$
+\begin{defn}{Quotient Module}{}\\
+Let $R$ be a ring. Let $M$ be a left $R$-module. Let $N\leq M$ be an $R$-submodule of $M$. Define the quotient module of $M$ and $N$ to be the abelian quotient group $$\frac{M}{N}=\{m+N\;|\;m\in M\}$$ together with the left ring operation $\cdot:R\times\frac{M}{N}\to\frac{M}{N}$ defined by $$(r,m+N)=r\cdot(m+N)=rm+N$$
 \end{defn}
+
+\begin{eg}{}{}\\
+Let $k$ be a field. Then $\frac{k[x,y]}{(x^2-y)}$ is both a $k[x,y]$-module and a $\frac{k[x,y]}{(x^2-y)}$-module. 
+\end{eg}
+
+\begin{lmm}{}{} Let $R$ be a ring. Let $I,J$ be left ideals of $R$. Then $\frac{R}{I}\cong\frac{R}{J}$ as $R$-modules if and only if $I=J$. 
+\begin{proof}
+When $I=J$ it is clear that $R/I\cong R/J$. Conversely, suppose that $\phi:R/I\to R/J$ is an $R$-module isomorphism. For any $r\in J$, we have $$\phi(r+I)=(r+J)\phi(1+I)=(r+J)(1+J)=(r+J)=0$$ Since $\phi$ is an isomorphism, we conclude that $r+I=I$, so that $r\in I$. This shows that $J\subseteq I$. Similarly one can show that $I\subseteq J$. 
+\end{proof}
+\end{lmm}
 
 \subsection{Isomorphism Theorem for Modules}
 Similar to the isomorphism theorem for rings, the isomorphism theorem for modules extends the definition of the original isomorphism for groups. Therefore most of the time we just have to check the compatibility of the isomorphism theorems with the ring action on the abelian group. 
 
-\begin{thm}{First isomorphism Theorem for Modules}{} Let $M,N$ be left $R$-modules and let $\psi:M\to N$ be an $R$-mdoule homomorphism. Then the following are true. 
+\begin{thm}{First isomorphism Theorem for Modules}{}\\
+Let $R$ be a ring. Let $M,N$ be left $R$-modules. Let $\phi:M\to N$ be an $R$-module homomorphism. Then the following are true. 
 \begin{itemize}
-\item $\ker(\phi)$ is a submodule of $M$
-\item $\im(\phi)$ is a submodule of $N$
+\item $\ker(\phi)$ is an $R$-submodule of $M$. 
+\item $\im(\phi)$ is an $R$-submodule of $N$. 
+\item There is an isomorphism $$M/\ker(\phi)\cong\im(\phi)$$ given by the function $m+\ker(\phi)\mapsto\phi(m)$. 
 \end{itemize}
-Moreover, we have an isomorphism $$\frac{M}{\ker(\phi)}\cong\phi(M)$$ of modules. 
- 
-\begin{proof}
+\begin{proof}\\
 We have seen all these statements for groups. We just have to show that the statements are compatible with the left action of the left $R$-module structure. 
 \begin{itemize}
 \item Let $r\in R$ and $m\in\ker(\phi)$. Then $\phi(r\cdot m)=r\cdot\phi(m)=0$ and thus $r\cdot m\in\ker(\phi)$
@@ -103,13 +171,14 @@ Thus they all are compatible with left multiplication.
 \end{proof}
 \end{thm}
 
-\begin{thm}{Second isomorphism Theorem for Modules}{} Let $A,B$ be left $R$-submodules of an $R$-module $M$. Then the following are true. 
+\begin{thm}{Second isomorphism Theorem for Modules}{}\\
+Let $R$ be a ring. Let $M$ be a left $R$-module. Let $A,B\leq M$ be $R$-submodules of $M$. Then the following are true. 
 \begin{itemize}
-\item $A$ and $B$ are submodules of $A+B$
-\item $A\cap B$ is a submodule of $A$ and $B$
+\item $A$ and $B$ are $R$-submodules of $A+B$. 
+\item $A\cap B$ are $R$-submodule of $A$ and $B$. 
+\item There is an isomorphism $$\frac{A+B}{B}\cong\frac{A}{A\cap B}$$ given by the function $a+b+B\mapsto a+A\cap B$. 
 \end{itemize}
-Moreover, we have the following isomorphism $$\frac{A+B}{B}\cong\frac{A}{A\cap B}$$ of quotient $R$-modules. 
-\begin{proof}
+\begin{proof}\\
 It is clear that $A$ and $B$ are subgroups of $A+B$. Moreover, the left $R$-action on $A$ and $B$ is closed since they are left $R$-submodules. Thus $A$ and $B$ are submodules of $A+B$. The proof for $A\cap B$ is similar. \\~\\
 
 Consider the composition of $R$-module homomorphisms $\phi:A\to A+B\to\frac{A+B}{B}$ defined by $a\mapsto a+B$. It is a homomorphism since it is the composition of the inclusion and the quotient map. This maps is surjective since for any $(a+b)+B$, we have that $(a+b)+B=a+B$ and thus $a\in A$ maps to this element. \\~\\
@@ -117,75 +186,73 @@ I claim that $\ker(\phi)=A\cap B$. If $a\in\ker(\phi)$ then $a+B=B$ implies that
 \end{proof}
 \end{thm}
 
-\begin{thm}{Third isomorphism Theorem for Modules}{} Let $M$ be a left $R$-module. Let $A$ be an $R$-submodule of $M$ and $B$ an $R$-submodule of $A$. Then we have the following isomorphism of quotient $R$-modules: $$\frac{M/B}{A/B}\cong\frac{M}{A}$$
+\begin{thm}{Third isomorphism Theorem for Modules}{}\\
+Let $R$ be a ring. Let $M$ be a left $R$-module. Let $A,B\leq M$ be $R$-submodules of $M$ such that $B\leq A$. Then the following are true. 
+\begin{itemize}
+\item $A/B$ is an $R$-submodule of $M/B$. 
+\item There is an isomorphism $$\frac{M/B}{A/B}\cong\frac{M}{A}$$ given by the function $(m+B)+A/B\mapsto m+A$. 
+\end{itemize}
 \end{thm}
 
-\begin{thm}{Correspondence Theorem for Modules}{} Let $N$ be a submodule of the $R$-module $M$. There is a bijection between the submodules of $M$ which contain $N$ and the submodules of $M/N$. $$\left\{\substack{\text{Submodules of }M\\\text{containing }N}\right\}\;\;\overset{\text{1:1}}{\longleftrightarrow}\;\;\left\{\substack{\text{Submodules }\\\text{of }M/N}\right\}$$ The correspondence is given by sending $A$ to $A/N$ for all $A\supseteq N$. 
+\begin{thm}{Correspondence Theorem for Modules}{}\\
+Let $R$ be a ring. Let $M$ be a left $R$-module. Let $N\leq M$ be an $R$-submodule of $M$. There is an inclusion preserving bijection $$\left\{K\subseteq M\;\bigg{|}\;\substack{K\text{ is an }R\text{-submodule of }M\\\text{ containing }N}\right\}\;\;\overset{1:1}{\longleftrightarrow}\left\{K\subseteq M/N\;\bigg{|}\;\substack{K\text{ is an}\\R\text{-submodule of }M/N}\right\}$$ given by $K\mapsto K/N$. 
 \end{thm}
 
 \subsection{Bimodules}
-\begin{defn}{Bimodules}{} Let $R,S$ be rings. Let $M$ be an abelian group. We say that $M$ is an $(R,S)$-bimodule if the following are true. 
+\begin{defn}{Bimodules}{}\\
+Let $R,S$ be rings. An $(R,S)$-bimodule is an abelian group $M$ together with the following data. 
 \begin{itemize}
 \item $M$ is a left $R$-module. 
 \item $M$ is a right $S$-module. 
-\item For all $r\in R$, $s\in S$ and $m\in M$, we have $$(rm)s=r(ms)$$
+\item For all $r\in R$, $s\in S$ and $m\in M$, we have $$(r\cdot m)\cdot s=r\cdot(m\cdot s)$$
 \end{itemize}
 \end{defn}
 
-\subsection{Rings as a Module}
-Let $R$ be a ring. Then left multiplication on $R$ defines a module structure $\cdot:R\times R\to R$ on the ring $R$ itself. 
+\begin{eg}{}{}\\
+Let $R$ be a commutative ring. Let $M$ be a left (right) $R$-module. Then $M$ is an $(R,R)$-bimodule where the right (left) action of $R$ is given by $m\cdot r=r\cdot m$. 
+\end{eg}
 
-\begin{prp}{}{} Let $R$ be a ring. Let $I$ be a subset of $R$. Then $I$ is a left ideal of $R$ if and only if $I$ is an $R$-submodule of $R$. 
-\end{prp}
-
-\begin{prp}{}{} Let $R$ be a ring. Let $I,J$ be left ideals of $R$. Then $\frac{R}{I}\cong\frac{R}{J}$ as $R$-modules if and only if $I=J$. 
-\begin{proof}
-When $I=J$ it is clear that $R/I\cong R/J$. Conversely, suppose that $\phi:R/I\to R/J$ is an $R$-module isomorphism. For any $r\in J$, we have $$\phi(r+I)=(r+J)\phi(1+I)=(r+J)(1+J)=(r+J)=0$$ Since $\phi$ is an isomorphism, we conclude that $r+I=I$, so that $r\in I$. This shows that $J\subseteq I$. Similarly one can show that $I\subseteq J$. 
-\end{proof}
-\end{prp}
+\begin{eg}{}{}\\
+Let $R$ be a ring. Let $n,m\in\N^+$. Then $M_{n\times m}(R)$ is an $(M_n(R),M_m(R))$-bimodule. 
+\end{eg}
 
 \pagebreak
 \section{Constructing New Modules}
 \subsection{Direct Sum and Products of Modules}
-\begin{defn}{Direct Product of Modules}{} Let $I$ be an indexing set and $\{M_i\;|\;i\in I\}$ a family of $R$-modules. Define the direct product to be the set $$\prod_{i\in I}M_i=\left\{(m_i)_{i\in I}\;\bigg{|}m_i\in M_i\;\right\}$$ together with the left $R$-module structure inherited component wise. 
+\begin{defn}{Direct Product of Modules}{}\\
+Let $R$ be a ring. Let $\{M_i\;|\;i\in I\}$ be a collection of left $R$-modules. Define the direct product of the collection to be the set $$\prod_{i\in I}M_i=\left\{(m_i)_{i\in I}\;\bigg{|}m_i\in M_i\;\right\}$$ together with the left $R$-module structure inherited component wise. 
 \end{defn}
 
-\begin{defn}{External Direct Sum of Modules}{} Let $I$ be an indexing set and $\{M_i\;|\;i\in I\}$ be a family of $R$-modules. Define the direct sum of the family of modules to be $$\bigoplus_{i\in I}M_i=\left\{(m_i)_{i\in I}\in\prod_{i\in I}M_i\;\bigg{|}\;m_i\neq 0\text{ for finitely many }i\right\}$$
+\begin{defn}{External Direct Sum of Modules}{}\\
+Let $R$ be a ring. Let $\{M_i\;|\;i\in I\}$ be a collection of left $R$-modules. Define the direct sum of the collection to be the set $$\bigoplus_{i\in I}M_i=\left\{(m_i)_{i\in I}\in\prod_{i\in I}M_i\;\bigg{|}\;m_i\neq 0\text{ for finitely many }i\right\}$$ together with the left $R$-module structure inherited component wise. 
 \end{defn}
 
 There is no different between finite direct sum and finite direct products. However when $I$ is an infinite indexing set, there is a big difference. For instance, a direct product of rings is still a ring but infinite direct product of rings is not a ring. 
 
-\begin{prp}{}{} Let $R$ be a ring. Let $I$ be an indexing set. Let $M_i$ be an $R$-module for each $i\in I$. Then there is an isomorphism $$\bigoplus_{i\in I}M_i\cong\prod_{i\in I}M_i$$ given component-wise if and only if $\abs{I}\in\N$. 
+\begin{prp}{}{}\\
+Let $R$ be a ring. Let $\{M_i\;|\;i\in I\}$ be a collection of left $R$-modules. Then the inclusion homomorphism $i:\bigoplus_{i\in I}M_i\to\prod_{i\in I}M_i$ is an isomorphism $$\bigoplus_{i\in I}M_i\cong\prod_{i\in I}M_i$$ if and only if $\abs{I}\in\N$. 
+\begin{proof}\\
+Clearly if $\abs{I}$ is finite then they are isomorphic. If the inclusion homomorphism is an isomorphism, then for any $(m_i)_{i\in I}\in\prod_{i\in I}M_i$ we have $(m_i)_{i\in I}\in\bigoplus_{i\in I}M_i$. If all of $m_i$ are non-zero, then $m_i\neq 0$ for finitely many $i$ implies that $\abs{I}$ is finite. 
+\end{proof}
 \end{prp}
 
 Let $R$ be a ring. Given a left $R$-module $M$, how can we recognize that $M$ is isomorphic to a direct sum? We introduce the notion of internal direct sums to identify direct sums. 
 
-\begin{defn}{Internal Direct Sum of Modules}{} Let $I$ be an indexing set and $\{N_i\;|\;i\in I\}$ be a family of submodules of a left $R$-module $M$. Define $$\sum_{i\in I}N_i=\{a_1+\dots+a_n\;|\;a_i\in N_i\}$$ If the external direct product is isomorphic to $$\bigoplus_{i\in I}N_i\cong\sum_{i\in I}N_i$$ then we call $\sum_{i\in I}N_i$ the internal direct sum and denote it with $\bigoplus_{i\in I}N_i$ instead. If $M\cong\bigoplus_{i\in I}N_i$ then we say that $M$ is the internal direct sum. 
+\begin{defn}{Internal Direct Sum of Modules}{}\\
+Let $R$ be a ring. Let $M$ be a left $R$-module. Let $\{N_i\;|\;i\in I\}$ be a collection of $R$-submodules of $M$. We say that $\sum_{i\in I}N_i$ is the internal direct sum of the collection if there is an isomorphism $$\bigoplus_{i\in I}N_i\cong\sum_{i\in I}N_i$$ given by $(n_i)_{i\in I}\mapsto\sum_{i\in I}n_i$. 
 \end{defn}
-
-Thus there is no distinction in external and internal direct sum of modules, just that whether our view point starts with the larger module $M$ or with the collection $\{M_i\;|\;i\in I\}$. 
-
-\begin{lmm}{}{} Let $I$ be an indexing set and $\{N_i\;|\;i\in I\}$ be a family of submodules of a left $R$-module $M$. Define $\phi:\bigoplus_{i\in I}N_i\to M$ by $$\phi\left((m_i)_{i\in I}\right)=\sum_{i\in I}m_i$$ Then the following are true. 
-\begin{itemize}
-\item $\im(\phi)=\sum_{i\in I}N_i$
-\item If $\phi$ is injective then $\sum_{i\in I}N_i$ is the internal direct sum
-\item $\phi$ is bijective then $M$ is the internal direct sum of $\{N_i\;|\;i\in I\}$
-\end{itemize} 
-\begin{proof}
-Firstly, it is clear that $\im(\phi)=\sum_{i\in I}N_i$ by definition of $\phi$. If $\phi$ is injective then we obtain an isomorphism $\bigoplus_{i\in I}N_i\cong\sum_{i\in I}N_i$ by the first isomorphism theorem of modules. Finally if $\phi$ is also surjective then we have $M=\sum_{i\in I}N_i\cong\bigoplus_{i\in I}N_i$ and so we are done. 
-\end{proof}
-\end{lmm}
 
 \subsection{The Module of Homomorphisms}
-\begin{defn}{The Set of Homomorphisms}{} Let $R$ be a ring. Let $M,N$ be $R$-modules. Define the homomorphism ring of $R$ to be the set $$\Hom_R(M,N)=\{\phi:M\to N\;|\;\phi\text{ is an }R\text{-module homomorphism}\}$$ of all $R$-module homomorphisms from $M$ to $N$.
+\begin{defn}{The Set of Homomorphisms}{}\\
+Let $R$ be a ring. Let $M,N$ be left $R$-modules. Define the homomorphism ring of $R$ to be the set $$\Hom_R(M,N)=\{\phi:M\to N\;|\;\phi\text{ is an }R\text{-module homomorphism}\}$$ together with the following two binary operations: 
+\begin{itemize}
+\item Let $\phi,\psi\in\Hom_R(M,N)$. Define $\phi+\varphi:M\to N$ by $(\phi+\varphi)(m)=\phi(m)+\varphi(m)$ for all $m\in M$
+\item Let $\phi\in\Hom_R(M,N)$. Let $r\in Z(R)$. Define $r\phi:M\to N$ by $(r\phi)(m)=r\cdot\phi(m)$ for all $m\in M$. 
+\end{itemize} 
 \end{defn}
 
-\begin{prp}{}{} Let $R$ be a ring. Let $M,N$ be $R$-modules. Then $\Hom_R(M,N)$ is a $Z(R)$-module with the following binary operations. 
-\begin{itemize}
-\item For $\phi,\varphi:M\to N$ two $R$-module homomorphisms, define $\phi+\varphi:M\to N$ by $(\phi+\varphi)(m)=\phi(m)+\varphi(m)$ for all $m\in M$
-\item For $\phi:M\to N$ an $R$-module homomorphism and $r\in Z(R)$, define $r\phi:M\to N$ by $(r\phi)(m)=r\cdot\phi(m)$ for all $m\in M$. 
-\end{itemize} 
-In particular, it is an abelian group. 
+\begin{prp}{}{}\\
+Let $R$ be a ring. Let $M,N$ be left $R$-modules. Then $\Hom_R(M,N)$ is a $Z(R)$-module. 
 \begin{proof}
 We first show that the addition operation gives the structure of a group. 
 \begin{itemize}
@@ -202,23 +269,24 @@ Thus we are done.
 \end{proof}
 \end{prp}
 
-\begin{eg}{}{} Let $n,m\geq 1$. Then we have $$\Hom_\Z\left(\frac{\Z}{n\Z},\frac{\Z}{m\Z}\right)\cong\frac{\Z}{\gcd(m,n)\Z}$$ 
+\begin{eg}{}{}\\
+Let $n,m\in\N^+$. Then we have $$\Hom_\Z\left(\frac{\Z}{n\Z},\frac{\Z}{m\Z}\right)\cong\frac{\Z}{\gcd(m,n)\Z}$$ 
 \begin{proof}
 Any $\Z$-module homomorphism is determined by where $1$ is mapped to. Let $\varphi_a:\Z/n\Z\to\Z/m\Z$ be the $\Z$-module homomorphism given by $[1]\mapsto[a]$. Then $$[0]=[n]=n\cdot[1]\mapsto n\cdot[a]$$ implies that $[na]=[0]$. Hence $m$ divides $na$. Let $km=na$ for some $k\in\N$. Then $a=\frac{km}{n}$. Now we know that $m/\gcd(m,n)$ and $n/\gcd(m,n)$ are coprime. For $a$ to be an integer, $k$ must lie in the set $$\left\{\frac{n}{\gcd(m,n)},2\frac{n}{\gcd(m,n)},\dots,\gcd(m,n)\frac{n}{\gcd(m,n)}\right\}$$ and so the only possible choices for $a$ are $$\left\{\frac{m}{\gcd(m,n)},2\frac{m}{\gcd(m,n)},\dots,\gcd(m,n)\frac{m}{\gcd(m,n)}\right\}$$ and so $\Hom_\Z\left(\frac{\Z}{n\Z},\frac{\Z}{m\Z}\right)\cong\frac{\Z}{\gcd(m,n)\Z}$. 
 \end{proof}
 \end{eg}
 
-\subsection{The Endomorphism Ring}
-\begin{defn}{Endomorphisms of a Module}{} Let $R$ be a ring and $M$ a left $R$-module. An endomorphism of $M$ is a homomorphism $\phi:M\to M$. Denote the set of all $R$-endomorphisms by $$\text{End}_R(M)=\{\phi:M\to M\;|\;\phi\text{ is an isomorphism of }M\}$$
-\end{defn}
-
-\begin{prp}{}{} Let $R$ be a ring and $M$ a left $R$-module. Define two binary operations on $\text{End}_R(M)$ as follows. 
+\begin{defn}{Endomorphisms of a Module}{}\\
+Let $R$ be a ring. Let $M$ be a left $R$-module. An endomorphism of $M$ is a homomorphism $\phi:M\to M$. Denote the set of all $R$-endomorphisms by $$\text{End}_R(M)=\{\phi:M\to M\;|\;\phi\text{ is a homomorphism of }M\}$$ together with two binary operations defined as follows: 
 \begin{itemize}
 \item Let $\phi,\psi\in\text{End}_R(M)$. Define $\phi+\psi:M\to M$ by $m\mapsto\phi(m)+\psi(m)$. 
 \item Let $\phi,\psi\in\text{End}_R(M)$. Define $\phi\cdot\psi\in\text{End}_R(M)$ by $m\mapsto\phi(\psi(m))$. 
 \end{itemize}
-Then $\text{End}_R(M)$ is a ring with the above operations. 
-\begin{proof}
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $R$ be a ring. Let $M$ be a left $R$-module. Then $\text{End}_R(M)$ is a ring. 
+\begin{proof}\\
 We first show that $\text{End}_R(M)$ is a group. 
 \begin{itemize}
 \item Since $M$ is associative as an additive group, associativity follows
@@ -237,134 +305,196 @@ Thus we are done.
 
 The following lemma shows that endomorphisms of $R$ as an $R$-module consists of precisely the left multiplications of $R$ by each element in $R$ (Thus also having an isomorphism on right multiplication). Moreover, the ring structures are compatible so that it is not just a bijection. 
 
-\begin{prp}{}{} Let $R$ be a ring. Then we have an isomorphism $$\text{End}_R(R)\cong R$$ 
-\begin{proof}~\\
-Define a map $\phi:R\to\text{End}_R(R)$ by $$r\mapsto\begin{pmatrix}
-\phi(r):R\to R\\x\mapsto x\cdot r
-\end{pmatrix}$$ We check that $\phi$ is a ring homomorphism. 
-\begin{itemize}
-\item $\phi$ preserves addition since 
-\begin{align*}
-\phi(r+s)(x)&=x\cdot (r+s)\\
-&=x\cdot r+x\cdot s\\
-&=\phi(r)(x)+\phi(s)(x)
-\end{align*}
-\item $\phi$ preserves identity since $\phi(1)(x)=x\cdot 1=x$ is just the identity map
-\item $\phi$ preserves multiplication since 
-\begin{align*}
-\phi(rs)&=x\cdot (rs)\\
-&=(x\cdot r)\cdot s\\
-&=\phi(s)(x\cdot r)\\
-&=\phi(s)(\phi(r)(x))
-\end{align*}
-\end{itemize}
-We also show that $\phi$ is bijective. 
-\begin{itemize}
-\item The kernel $\phi$ is $0$ because letting $r\in\ker(\phi)$, we have $\phi(r)=0$. But we also know that $\phi(r)(1_R)=1_R\cdot r$. Equating gives $r=0$. 
-\item Let $\eta\in\text{End}_R(R)$. Let $x\in R$. Then we have 
-\begin{align*}
-\eta(x)&=\eta(x\cdot 1_R)\\
-&=x\cdot\eta(1_R)\tag{$\eta$ is a module homomorphism}\\
-&=\phi(\eta(1_R))(x)
-\end{align*}
-\end{itemize}
-Thus $\phi$ is a ring isomorphism. 
+\begin{prp}{}{}\\
+Let $R$ be a ring. Then there is an $R$-module isomorphism $$R\cong\text{End}_R(R)$$ given by $r\mapsto(x\mapsto r\cdot x)$. 
+\begin{proof}\\
+We first check that the map $\phi:R\to\text{End}_R(R)$ is a ring homomorphism. For any $r,s\in R$ and $x\in M$, we have $$\phi(r+s)(x)=x\cdot (r+s)=x\cdot r+x\cdot s=\phi(r)(x)+\phi(s)(x)$$ We also have $\phi(1)(x)=x=\text{id}_R(x)$. Finally, we have $$\phi(rs)=x\cdot (rs)=(x\cdot r)\cdot s=\phi(s)(x\cdot r)=\phi(s)(\phi(r)(x))$$ It remains to show that $\phi$ is bijective. For injectivity: The kernel $\phi$ is $0$ because letting $r\in\ker(\phi)$, we have $\phi(r)=0$. But we also know that $\phi(r)(1_R)=1_R\cdot r$. Equating gives $r=0$. For surjectivity: Let $\eta\in\text{End}_R(R)$. Let $x\in R$. Then we have $$
+\eta(x)=\eta(x\cdot 1_R)=x\cdot\eta(1_R)=\phi(\eta(1_R))(x)$$ Thus $\phi$ is a ring isomorphism. 
 \end{proof}
 \end{prp}
 
 Notice that in the proof it might be more natural to show first that $R^\text{op}\cong\text{End}_R(R)$ and then to show that $R^\text{op}\cong R$. The first isomorphism is naturally isomorphic but the second one is not. Naturality refers to category theory. 
 
-\subsection{Tensor Products of Modules}
-\begin{defn}{Bilinear Maps}{} Let $R$ be a ring. Let $A,B,C$ be $R$-modules. We say that an $R$-module homomorphism $$\varphi:A\times B\to C$$ is bilinear if the following are true. 
+\subsection{Tensor Products of Modules over General Rings}
+\begin{defn}{Tensor Product of Modules}{}\\
+Let $R$ be a ring. Let $M$ be a right $R$-module. Let $N$ be a left $R$-module. Define the tensor product of $M$ and $N$ to be the quotient abelian group $$M\otimes_RN=\frac{M\times N}{\left\langle\substack{(m_1,n)+(m_2,n)-(m_1+m_2,n)\\(m,n_1)+(m,n_2)-(m,n_1+n_2)\\(mr,n)-(m,rn)}\;\bigg{|}\;m,m_1,m_2\in M,n,n_1,n_2\in N,r\in R\right\rangle}$$
+\end{defn}
+
+We write elements of the abelian group as $m\otimes n$ for $m\in M$ and $n\in N$. \\
+
+The tensor product satisfies a particular universal property. For that we need to define the notion of $R$-balanced maps. 
+
+\begin{defn}{$R$-Balanced Maps}{}\\
+Let $R$ be a ring. Let $M$ be a right $R$-module. Let $N$ be a left $R$-module. Let $A$ be an abelian group. Let $\varphi:M\times N\to A$ be a function. We say that $\varphi$ is an $R$-balanced map if the following are true. 
 \begin{itemize}
-\item Linearity in the first variable: $$\varphi(sa_1+ta_2,b)=s\varphi(a_1,b)+t\varphi(a_2,b)$$ for all $a_1,a_2\in A$, $b\in B$ and $s,t\in R$. 
-\item Linearity in the second variable: $$\varphi(a,sb_1+tb_2)=s\varphi(a,b_1)+t\varphi(a,b_2)$$ for all $a\in A$, $b_1,b_2\in B$ and $s,t\in R$. 
+\item $\varphi(m_1+m_2,n)=\varphi(m_1,n)+\varphi(m_2,n)$ for all $m_1,m_2\in M$ and $n\in N$ and $r\in R$. 
+\item $\varphi(m,n_1+n_2)=\varphi(m,n_1)+\varphi(m,n_2)$ for all $m\in M$ and $n_1,n_2\in N$ and $r\in R$. 
+\item $\varphi(m\cdot r,n)=\varphi(m,r\cdot n)$ for all $m\in M$ and $n\in N$ and $r\in R$. 
 \end{itemize}
 \end{defn}
 
-\begin{defn}{Tensor Product of Modules}{} Let $R$ be a ring. Let $A,B$ be $R$-modules. The tensor product of $A$ and $B$ over $R$ is an $R$-module $$A\otimes_R B$$ together with an $R$-bilinear map $\phi:A\times B\to A\otimes_RB$ such that the following universal property as satisfied. For any other $R$-bilinear map $\psi:A\times B\to C$, there is a unique $R$-linear map $\theta:A\otimes_RB\to C$ such that the following diagram commutes: \\~\\
+\begin{prp}{Universal Property of Tensor Products}{}\\
+Let $R$ be a ring. Let $M$ be a right $R$-module. Let $N$ be a left $R$-module. Then the tensor product $M\otimes_RN$ together with the quotient map $i:M\times N\to M\otimes_RN$ satisfies the following universal property: For any abelian group $A$ and $R$-balanced map $\phi:M\times N\to A$, there exists a unique group homomorphism $\psi:M\otimes_RN\to A$ such that the following diagram commutes: \\~\\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
-A\times B\arrow[r, "\phi"]\arrow[rd, "\psi"'] & A\otimes_RB\arrow[d, "\exists !\theta", dashed]\\
-&C
-\end{tikzcd}}
-\end{defn}
-
-The universal property makes it very abstract and hard to visualize the tensor product. There are a number of explicit ways to think about the tensor product. 
-
-\begin{lmm}{}{} Let $R$ be a ring. Let $A,B$ be $R$-modules. Let $F$ be the module over $R$ with basis $(a,b)\in A\times B$. Also let $L$ be the ideal of $F$ generated by the elements of $F$ of the form 
-\begin{itemize}
-\item $(a_1+a_2,b)-(a_1,b)-(a_2,b)$
-\item $(a,b_1+b_2)-(a,b_1)-(a,b_2)$
-\item $(sa,b)-s(a,b)$
-\item $(a,sb)-s(a,b)$
-\end{itemize}
-for $a,a_1,a_2\in A$, $b,b_1,b_2\in B$ and $s\in R$. Then the tensor product of $A$ and $B$ is given by $$A\otimes_RB=\frac{F}{L}$$
-\end{lmm}
-
-Let $R$ be a ring. Let $A,B$ be $R$-modules. Elements of the tensor product are denoted by $a\otimes_R b$ for $a\in A$ and $b\in B$. 
-
-\begin{prp}{}{} Let $R$ be a ring and $A,B,C$ be $R$-modules. Then the following properties hold for the tensor product. 
-\begin{itemize}
-\item Associativity: $(A\otimes_RB)\otimes_RC\cong A\otimes_R(B\otimes_RC)$
-\item Commutativity: $A\otimes_R B\cong B\otimes_RA$
-\item Identity: $A\otimes_RR\cong A$
-\item Distributivity: $(A\oplus B)\otimes_R C\cong(A\otimes_RC)\oplus(B\otimes_RC)$
-\end{itemize}
+	{M\times N} & {M\otimes_RN} \\
+	& A
+	\arrow["i", from=1-1, to=1-2]
+	\arrow["\phi"', from=1-1, to=2-2]
+	\arrow["{\exists!\psi}", dashed, from=1-2, to=2-2]
+\end{tikzcd}}\\
+Moreover, $M\otimes_RN$ is the unique (up to unique isomorphism) abelian group with this property. 
 \end{prp}
-
-\begin{prp}{}{} Let $R$ be a ring and $I,J$ be ideals of $R$. Then $$\frac{R}{I}\otimes_R\frac{R}{J}\cong\frac{R}{I+J}$$
-\end{prp}
-
-\begin{prp}{}{} Let $M$ be an $R$-module and $I$ an ideal of $R$. Then $$M\otimes\frac{R}{I}\cong\frac{M}{IM}$$
-\end{prp}
-
-Recall that any abelian group $A$ can also be thought of as a $\Z$-module. The tensor product over $\Z$ or any of its quotient modules are significantly easier to compute. 
 
 \begin{prp}{}{}\\
-Let $A$ be an abelian group. Then the following are true. 
-\begin{itemize}
-\item $\Z\otimes_\Z A\cong A$
-\item $\Z/p\Z\otimes_\Z A\cong A/pA$
-\item $\Z/m\Z\otimes\Z/n\Z\cong\Z/\gcd(m,n)\Z$
-\end{itemize}
-\begin{proof}\\
-Define $\Z$-module homomorphism $f:\Z/m\Z\otimes\Z/n\Z\to\Z/\gcd(m,n)\Z$ by $a\otimes_\Z b\mapsto ab\;(\bmod\;\gcd(m,n))$. Clearly $f$ is surjective since $1\otimes 1\mapsto 1$. We also show that $f$ is injective. Suppose that $ab$ is divisible by $\gcd(m,n)$. Then there exists $k\in\N$ such that $ab=\gcd(m,n)k$. Then $a\otimes_\Z b=ab(1\otimes_\Z1)=\gcd(m,n)k(1\otimes_\Z1)$. By Bezout's lemma, there exists $x,y\in\Z$ such that $$a\otimes_\Z b=\gcd(m,n)k(1\otimes_\Z1)=(mx+ny)k(1\otimes_\Z1)=xk(m\otimes_\Z 1)+yk(1\otimes_\Z n)=0+0=0$$ Hence $f$ is injective. 
-\end{proof}
+Let $R$ be a ring. Let $M_1,M_2$ be right $R$-modules. Let $N_1,N_2$ be left $R$-modules. Let $\varphi:M_1\to M_2$ and $\psi:N_1\to N_2$ be $R$-modules homomorphisms. Then there is a unique group homomorphism $\varphi\otimes\psi:M_1\otimes_RN_1\to M_2\otimes_RN_2$ such that $$(\varphi\otimes\psi)(m\otimes n)=\varphi(m)\otimes\psi(n)$$
 \end{prp}
 
-\subsection{Tensor Products of Vector Spaces}
-Let $V$ be a vector space over a field $k$. In particular this means that $V$ is a module over $k$ and all the theory on tensor products apply to $V$. Because of the importance of the dual space there is more general notion of tensors for vector spaces. 
+\begin{prp}{}{}\\
+Let $R,S$ be rings. Let $M$ be a right $R$-module. Let $N$ be an $(R,S)$-bimodule. Let $L$ be a left $S$-module. Then the following are true. 
+\begin{itemize}
+\item There is a group isomorphism $$(M\otimes_RN)\otimes_SL\cong M\otimes_R(N\otimes_SL)$$ given by $(m\otimes n)\otimes l\mapsto m\otimes(n\otimes l)$. 
+\item Let $T$ be a ring. If $M$ is an $(T,R)$-bimodule or $N$ is an $(R,T)$-bimodule, then the above isomorphism is a $T$-module isomorphism. 
+\end{itemize}
+\end{prp}
 
-\begin{defn}{The Space of Tensors}{} Let $V$ be a vector space over a field. Let $m,n\in\N$. A type $(m,n)$ tensor of $V$ is an element of the tensor product $$T_n^m(V)=V^{\otimes m}\otimes(V^\ast)^{\otimes n}$$ We call $T_n^m(V)$ the space of tensors of $V$. 
+\begin{prp}{}{}\\
+Let $R$ be a ring. Let $\{M_i\;|\;i\in I\}$ be a collection of right $R$-modules. Let $\{N_i\;|\;i\in I\}$ be a collection of left $R$-modules. Then the following are true. 
+\begin{itemize}
+\item Let $M$ be a right $R$-module. There is a group isomorphism $$M\otimes_R\left(\bigoplus_{i\in I}N_i\right)\cong\bigoplus_{i\in I}(M\otimes_R N_i)$$ given by $m\otimes(n_i)_{i\in I}\mapsto(m\otimes n_i)_{i\in I}$. 
+\item Let $S$ be a ring. If $M$ is an $(S,R)$-bimodule or all of $N_i$ are $(R,S)$-bimodules, then the above isomorphism is an $S$-module isomorphism. 
+\item Let $N$ be a left $R$-module. There is a group isomorphism $$
+\left(\bigoplus_{i\in I}M_i\right)\otimes_R N\cong\bigoplus_{i\in I}(M_i\otimes_RN)$$ given by $(m_i)_{i\in I}\otimes n\mapsto(m_i\otimes n)_{i\in I}$
+\item Let $S$ be a ring. If $N$ is an $(R,S)$-bimodule or all of $M_i$ are $(S,R)$-bimodules, then the above isomorphism is an $S$-module isomorphism. 
+\end{itemize}
+\end{prp}
+
+\subsection{Tensor Product over Commutative Rings}
+The tensor product is in general an abelian group. It does not have a well defined $R$-module structure. However if the modules $M$ and $N$ have additional module structure, then we may equip the tensor product with module structures as well. 
+
+\begin{prp}{}{}\\
+Let $R,S$ be rings. Let $M$ be a right $R$-module. Let $N$ be a left $R$-module. Then the following are true. 
+\begin{itemize}
+\item If $M$ is an $(S,R)$-bimodule, then $M\otimes_RN$ is a left $S$-module given by the left $S$-module structure of $M$. 
+\item If $N$ is an $(R,S)$-bimodule, then $M\otimes_RN$ is a right $S$-module given by the right $S$-module structure of $N$. 
+\end{itemize}
+\end{prp}
+
+When we also consider the tensor product over a commutative ring with its module structure, one can also obtain a universal property for the tensor product (together with the module structure). For that we need to define bilinear maps, and the definition parallels that in Linear Algebra. 
+
+\begin{defn}{Bilinear Maps}{}\\
+Let $R$ be a commutative ring. Let $M,N,L$ be $R$-modules. Let $\varphi:M\times N\to L$ be a function. We say that $\varphi$ is $R$-bilinear if the following are true. 
+\begin{itemize}
+\item $\varphi(r_1m_1+r_2m_2,n)=r_1\varphi(m_1,n)+r_2\varphi(m_2,n)$ for all $m_1,m_2\in M$ and $n\in N$ and $r\in R$. 
+\item $\varphi(m,r_1n_1+r_2n_2)=r_1\varphi(m,n_1)+r_2\varphi(m,n_2)$ for all $m\in M$ and $n_1,n_2\in N$ and $r\in R$. 
+\end{itemize}
 \end{defn}
+
+\begin{prp}{Universal Property of Tensor Products over Commutative Rings}{}\\
+Let $R$ be a commutative ring. Let $M,N$ be a $R$-modules. Then the tensor product $M\otimes_RN$ together with the quotient map $i:M\times N\to M\otimes_RN$ satisfies the following universal property: For any $R$-module $L$ and $R$-bilinear map $\phi:M\times N\to L$, there exists a unique $R$-module homomorphism $\psi:M\otimes_RN\to L$ such that the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{M\times N} & {M\otimes_RN} \\
+	& L
+	\arrow["i", from=1-1, to=1-2]
+	\arrow["\phi"', from=1-1, to=2-2]
+	\arrow["{\exists!\psi}", dashed, from=1-2, to=2-2]
+\end{tikzcd}}\\
+Moreover, $M\otimes_RN$ is the unique (up to unique isomorphism) $R$-module with this property. 
+\end{prp}
+
+\begin{eg}{}{}\\
+Let $R$ be a commutative ring. Let $M,N$ be $R$-modules. Then $m\otimes 0=0\otimes n=0$ for all $m\in M$ and $n\in N$. 
+\end{eg}
+
+\begin{eg}{}{}\\
+Let $n,m\in\N^+$. Then we have $$\Z/n\Z\otimes_\Z\Z/n\Z=\Z/\gcd(n,m)\Z$$
+\begin{proof}\\
+Define $\Z$-module homomorphism $f:\Z/m\Z\otimes\Z/n\Z\to\Z/\gcd(m,n)\Z$ by $a\otimes_\Z b\mapsto ab\;(\bmod\;\gcd(m,n))$. Clearly $f$ is surjective since $1\otimes 1\mapsto 1$. We also show that $f$ is injective. Suppose that $ab$ is divisible by $\gcd(m,n)$. Then there exists $k\in\N$ such that $ab=\gcd(m,n)k$. Then $a\otimes b=ab(1\otimes 1)=\gcd(m,n)k(1\otimes 1)$. By Bezout's lemma, there exists $x,y\in\Z$ such that $$a\otimes_\Z b=\gcd(m,n)k(1\otimes 1)=(mx+ny)k(1\otimes_\Z1)=xk(m\otimes 1)+yk(1\otimes n)=0+0=0$$ Hence $f$ is injective. 
+\end{proof}
+\end{eg}
+
+Tensoring over different base rings can have unexpected consequences. 
+
+\begin{eg}{}{}\\
+We have $\Q/\Z\otimes_\Z\Q/\Z=0$. 
+\end{eg}
+
+\begin{eg}{}{}\\
+The following are true. 
+\begin{itemize}
+\item $\Q\otimes_Z\Q$ and $\Q\otimes_\Q\Q$ are isomorphic as $\Q$-modules. 
+\item $\C\otimes_R\C$ and $\C\otimes_\R\C$ are not isomorphic $\C$-modules. 
+\end{itemize}
+\end{eg}
+
+\begin{prp}{}{}\\
+Let $R$ be a commutaive ring. Let $M_1,M_2,N_1,N_2$ be $R$-modules. Let $\varphi:M_1\to M_2$ and $\psi:N_1\to N_2$ be $R$-modules homomorphisms. Then there is a unique $R$-module homomorphism $\varphi\otimes\psi:M_1\otimes_RN_1\to M_2\otimes_RN_2$ such that $$(\varphi\otimes\psi)(m\otimes n)=\varphi(m)\otimes\psi(n)$$
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $R$ be a commutative ring. Let $M,N,L$ be $R$-modules. Then the following are true. 
+\begin{itemize}
+\item Associativity: There is an $R$-module isomorphism $$(M\otimes_RN)\otimes_RL\cong M\otimes_R(N\otimes_RL)$$ given by $(m\otimes n)\otimes l\mapsto m\otimes(n\otimes l)$. 
+\item Commutativity: There is an $R$-module isomorphism $$M\otimes_RN\to N\otimes_RM$$ given by $m\otimes n\mapsto n\otimes m$. 
+\item Identity: There is an $R$-module isomorphism $$M\otimes_RR\cong M$$ given by $(m,r)\mapsto rm$. 
+\end{itemize}
+\end{prp}
+
+By commutativity of tensor product over commutative rings, we also have distributivity on the right. That is, there is an $R$-module isomorphism $$M\otimes_R\left(\bigoplus_{i\in I}N_i\right)\cong\bigoplus_{i\in I}(M\otimes_RN_i)$$ for $M$ and $\{N_i\;|\;i\in I\}$ $R$-modules. 
+
+\begin{prp}{}{}\\
+Let $R$ be a commutative ring. Let $\{M_i\;|\;i\in I\}$ be a collection of $R$-modules. Let $N$ be an $R$-module. Then there is an $R$-module isomorphism $$\left(\bigoplus_{i\in I}M_i\right)\otimes_RN\cong\bigoplus_{i\in I}(M_i\otimes_RN)$$ given by $(m_i)_{i\in I}\otimes n\mapsto(m_i\otimes n)_{i\in I}$. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $R$ be a ring. Let $I$ be an ideal of $R$. Then the following are true. 
+\begin{itemize}
+\item Let $M$ be an $R$-module. There is an $R$-module isomorphism $$M\otimes_R\frac{R}{I}\cong\frac{M}{IM}$$ given by $m\otimes r+I\mapsto rm+IM$. 
+\item Let $J$ be an ideal of $R$. There is an $R$-module isomorphism $$\frac{R}{I}\otimes_R\frac{R}{J}\cong\frac{R}{I+J}$$ given by $r_1+I\otimes r_2+J\mapsto r_1r_2+I+J$. 
+\end{itemize}
+\end{prp}
+
+\begin{eg}{}{}\\
+Let $n\in\N^+$. Let $A$ be an abelian group. Then we have $$\Z/n\Z\otimes_\Z A\cong A/nA$$
+\end{eg}
 
 \pagebreak
 \section{Some Properties of Modules}
-\subsection{Invariant Basis Number Property}
-It is not a coincidence that we require $R$ to be a division ring. Every division ring is an invariant basis number (IBN) ring. 
-
-\begin{defn}{Invariant Basis Number Property}{} Let $R$ be a ring. We say that $R$ has the invariant basis number (IBN) property if every free $R$-module has equal cardinality for basis. 
-\end{defn}
-
-\begin{prp}{}{} Let $R$ be a ring. Then $R$ is an IBN-ring if and only if $R^m\cong R^n$ implies that $m=n$. 
-\end{prp}
-
-\begin{prp}{}{} Every division ring is an IBN-ring. 
-\end{prp}
-
-\begin{prp}{}{} Every commutative ring is an IBN-ring. 
-\begin{proof}
-Let $R$ be a commutative ring. Let $m$ be a maximal ideal of $R$. Suppose that $R^k\cong R^n$. Then $(R/m)^k\cong(R/m)^n$ as vector spaces over $R/m$. Hence $k=n$. Thus $R$ is an IBN-ring. 
-\end{proof}
-\end{prp}
-
-\begin{prp}{}{} Let $f:R\to S$ be a surjective non zero ring homomorphism. Let $S$ be an IBN-ring. Then $R$ is also an IBN-ring. 
-\end{prp}
-
 \subsection{Free Modules}
 Free modules is the module analogue of vector spaces. There is an intrinsic and extrinsic way to defined free modules, but they both mean the same thing. The intrinsic definition is used to identify certain modules to be free. 
 
-\begin{defn}{Basis of a Module}{} Let $R$ be a ring and $M$ a left $R$-module. Let $B\subseteq M$. 
+\begin{defn}{Free Module over a Basis}{}\\
+Let $R$ be a ring. Let $B$ be a set. Let $M$ be a left $R$-module. Let $i:B\to M$ be an injective function. We say that $M$ is a free $R$-module over $B$ if the following universal property is satisfied: For any $R$-module $N$ and any function $f:B\to N$, there exists a unique $R$-module homomorphism $g:M\to N$ such that the following diagram is commutative: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	B & M \\
+	& N
+	\arrow["i", from=1-1, to=1-2]
+	\arrow["f"', from=1-1, to=2-2]
+	\arrow["{\exists!g}", from=1-2, to=2-2]
+\end{tikzcd}}\\
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $R$ be a ring. Let $B$ be a set. Then the following are true. 
+\begin{itemize}
+\item The free $R$-module over $B$ is unique (up to unique isomorphism). 
+\item $\bigoplus_{b\in B}R$ is a free $R$-module over $B$. 
+\end{itemize}
+\end{lmm}
+
+Notice that $\prod_{i\in I}R$ is not a free module with $I$ is not finite. Indeed, if the indexing set is not finite, the cartesian product is in general not isomorphic to the direct sum. 
+
+\begin{eg}{}{}\\
+Let $R$ be a commutative ring. Then the following are true. 
+\begin{itemize}
+\item $R[x]$ is a free $R$-module isomorphic to $\bigoplus_{n\in\N}R\cdot x^n$. 
+\item $R[[x]]$ is not a free $R$-module but is isomorphic to $\prod_{n\in\N}Rx^n$. 
+\end{itemize}
+\end{eg}
+
+Given an $R$-module $M$, how can we identify whether $M$ is a free? We answer the question using the concept of a basis, similar to that in Linear Algebra. 
+
+\begin{defn}{Basis of a Module}{}\\
+Let $R$ be a ring. Let $M$ be a left $R$-module. Let $B\subseteq M$. 
 \begin{itemize}
 \item We say that $B$ is linearly independent if for every $\{b_1,\dots,b_n\}\subseteq B$ such that $$\sum_{i=1}^nr_ib_i=0_M$$ we have that $r_1=\dots=r_n=0_R$
 \item We say that $B$ is a generating set of $M$ if for all $m\in M$, $$m=\sum_{b\in B}r_b\cdot b$$ for finitely many non zero $r_b$
@@ -374,12 +504,15 @@ Free modules is the module analogue of vector spaces. There is an intrinsic and 
 
 By considering $r_b$ being dependent on $b\in B$, we can define $$\text{Fun}_f(B,R)=\{f:B\to R\;|\;f(b)=0_R\text{ for all but finitely many }b\in B\}$$ then we can rewrite the definition of generating sets to be if for every $m\in M$, there exists $f\in\text{Fun}_f(B,R)$ such that $m=\sum_{b\in B}f(b)\cdot b$. We can also define linear independence in a similar fashion. \\
 
-Basis for a module is similar to a basis for vector spaces. Indeed every field is a ring so one can think of modules as a generalization for vector spaces. However, not every module admits a basis just like the theory in vector spaces. When they do admit a basis, we call the module a free module. 
+Basis for a module is similar to a basis for vector spaces. Indeed every field is a ring so one can think of modules as a generalization for vector spaces. However, not every module admits a basis like the theory of vector spaces. \\
 
-\begin{defn}{Free R-Module}{} Let $R$ be a ring and $M$ a left $R$-module. We say that $M$ is a free $R$-module if $M$ admits a basis. 
-\end{defn}
+Bases are closely related to freeness in the following way. 
 
-Notice that while the countable Cartesian product $\prod_{i\in I}R$ is indeed a left $R$-module, it is not a free module. Because in the definition of a generating set elements of the direct sum is a finite sum of elements. But elements in $\prod_{i\in I}R$ can have countably many long components. 
+\begin{prp}{}{}\\
+Let $R$ be a ring. Let $M$ be a left $R$-module. Then $M$ is free if and only if $M$ admits a basis. In this case, $M$ is the free $R$-module over the basis. 
+\end{prp}
+
+Another explanation for why $\prod_{i\in I}R$ is not free if $I$ is not finite: Because in the definition of a generating set elements of the direct sum is a finite sum of elements. But elements in $\prod_{i\in I}R$ can have countably many long components. 
 
 \begin{eg}{}{} Consider the following abelian groups as $\Z$-modules. 
 \begin{itemize}
@@ -389,33 +522,39 @@ Notice that while the countable Cartesian product $\prod_{i\in I}R$ is indeed a 
 \end{itemize}
 \end{eg}
 
-\begin{prp}{}{} Let $R$ be a ring. Let $M$ be a free $R$-module. Then there is an isomorphism $$M\cong\bigoplus_{i\in I}R$$ for some indexing set $I$. 
-\end{prp}
+The cardinality of two bases of a free $R$-module need not be equal. 
 
-Thus free modules are precisely direct sums of copies of the base ring $R$. 
-
-\begin{prp}{Universal Property of Free Modules}{}\\
-Let $R$ be a ring. Let $B$ be a set. Then the free $R$-module $\bigoplus_{b\in B}Rb$ satisfies the following universal property. For every $R$-module $N$ and every map of sets $g:B\to N$, there exists a unique $R$-module homomorphism $h:\bigoplus_{b\in B}Rb\to N$ such that the following diagram commutes: \\~\\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	B & \bigoplus_{b\in B}Rb \\
-	& N
-	\arrow["f", from=1-1, to=1-2]
-	\arrow["g"', from=1-1, to=2-2]
-	\arrow["{\exists!}", dashed, from=1-2, to=2-2]
-\end{tikzcd}}\\~\\
-Moreover, $\bigoplus_{b\in B}Rb$ is the unique (up to unique isomorphism) $R$-module satisfying the above. 
-\end{prp}
-
-Thus to test whether a given $R$-module is free, it suffices to find a basis for the module in which the above universal property holds. 
-
-\begin{eg}{}{} Let $R$ be a commutative ring. Then the following are true. 
+\begin{eg}{}{}\\
+The following are true regarding the ring $$R=\text{End}_\Z\left(\prod_{n\in\N^+}\Z\right)$$
 \begin{itemize}
-\item $R[x]$ is a free $R$-module isomorphic to $\bigoplus_{n\in\N}R\cdot x^n$. 
-\item $R[[x]]$ is not a free $R$-module but is isomorphic to $\prod_{n\in\N}Rx^n$. 
+\item Let $\varphi_1\in R$ be defined by $\varphi_1((a_n)_{n\in\N^+})=(a_{2n-1})_{n\in\N^+}$. Let $\varphi_2\in R$ be defined by $\varphi_2((a_n)_{n\in\N^+})=(a_{2n})_{n\in\N^+}$. Then $\{\varphi_1,\varphi_2\}$ is a basis for $R$. 
+\item $R\cong R^n$ for any $n\in\N^+$. 
 \end{itemize}
+\begin{proof}\\
+Define $\psi_1,\psi_2\in R$ by $$\psi_1((a_n)_{n\in\N^+})=(a_1,0,a_2,0,\dots)\;\;\;\text{ and }\;\;\;\psi_2((a_n)_{n\in\N^+})=(0,a_1,0,a_2,\dots)$$ Then clearly we have $$\varphi_1\circ\psi_1=\text{id}=\varphi_2\circ\psi_2\;\;\;\text{ and }\;\;\;\varphi_1\circ\psi_2=0=\varphi_2\circ\psi_1\;\;\;\text{ and }\;\;\;\psi_1\circ\varphi_1+\psi_2\circ\varphi_2=\text{id}$$ Notice that for any $f\in R$, we have $$f=f\circ\text{id}=f\circ(\psi_1\circ\varphi_1+\psi_2\circ\varphi_2)=f\circ\psi_1\circ\varphi_1+f\circ\psi_2\circ\varphi_2$$ Thus $f$ is an $R$-linear combination of $\varphi_1,\varphi_2$. Hence $\varphi_1,\varphi_2$ generate $R$. Now suppose that for some $f,g\in R$, we have $f\circ\varphi_1+g\circ\varphi_2=0$. Precomposing with $\psi_1$ gives $f\circ\text{id}+0=0$ Hence $f=0$. Similarly precomposing with $\psi_2$ gives $g=0$. Hence $\varphi_1$ and $\varphi_2$ are linearly independent. Hence $\{\varphi_1,\varphi_2\}$ forms a basis for $R$. \\
+
+Define a function $h:R\to R^2$ by $h(f_1\circ\varphi_1+f_2\circ\varphi_2)=(f_1,f_2)$. We first show that this is an $R$-module homomorphism. We have 
+\begin{align*}
+h((f_1\circ\varphi_1+f_2\circ\varphi_2)+(g_1\circ\varphi_1+g_2\circ\varphi_2))&=h((f_1+g_1)\circ\varphi_1+(f_2+g_2)\circ\varphi_2)\\
+&=(f_1+g_1,f_2+g_2)\\
+&=(f_1,f_2)+(g_1,g_2)\\
+&=h(f_1\circ\varphi_1+g_1\circ\varphi_1)+h(f_2\circ\varphi_2+g_2\circ\varphi_2)
+\end{align*}
+for any $f,g,r\in R$. Also we have 
+\begin{align*}
+h(r\cdot(f\circ\varphi_1+g\circ\varphi_2))&=h(r\circ f\circ\varphi_1+r\circ g\circ\varphi_2)\\
+&=(r\circ f,r\circ g)\\
+&=r\cdot(f,g)\\
+&=r\cdot h(f\circ\varphi_1+g\circ\varphi_2)
+\end{align*}
+Hence $h$ is an $R$-module homomorphism. It remains to show that $h$ is bijective. Suppose that $f\circ\varphi_1+g\circ\varphi_2\in\ker(h)$. Then $(f,g)=0$ means that $f=0$ and $g=0$. Hence $f\circ\varphi_1+g\circ\varphi_2=0\cdot\varphi_1+0\cdot\varphi_2=0$. Thus $h$ is injective. Surjectivity is also clear by construction. Thus $R\cong R^2$. By induction, we conclude that $R\cong R^n$. 
+\end{proof}
 \end{eg}
 
-\begin{lmm}{}{} Let $R$ be a ring. Let $M$ be a left $R$-module. Then $M$ is isomorphic $$M\cong\frac{\bigoplus_{i\in I}R}{J}$$ to a quotient of a free module for some left $R$-submodule $J$. 
+Because every ring $R$ is a free $R$-module generated by the identity element, we see that two different bases of the above ring has different cardinality. 
+
+\begin{lmm}{}{}\\
+Let $R$ be a ring. Let $M$ be a left $R$-module. Then $M$ is isomorphic $$M\cong\frac{\bigoplus_{i\in I}R}{J}$$ to a quotient of a free module for some left $R$-submodule $J$. 
 \begin{proof}
 Let $M$ be an $R$-module. Choose a generating set $B\subseteq M$. This is always possible because trivially we can choose $B=M$. Define a map $\pi_B:\bigoplus_{b\in B}R\to M$ by $$\pi_B(r_1,r_2,\dots)=\sum_{b\in B}r_b\cdot b$$ Note that the sum is finite since elements of $\bigoplus_{b\in B}R$ has finitely many non-zero components. It is clear that it is an $R$-module homomorphism. It is also surjective by definition of a generating set. By the first isomorphism theorem for module, we have that $$\frac{\bigoplus_{b\in B}R}{\ker(\pi_B)}\cong M$$ and so we conclude. 
 \end{proof}
@@ -423,7 +562,8 @@ Let $M$ be an $R$-module. Choose a generating set $B\subseteq M$. This is always
 
 The following is reminiscent of a theorem in linear algebra. However note that we require that $R$ to be a division ring. Because we only dealt with finite dimensional vector spaces in Linear Algebra, we will need Zorn's lemma to deal with the case that the basis set has countable cardinality. Recall Zorn's lemma: If $(\mP,\preceq)$ is a non empty poset such that every chain $P_1\preceq P_2\preceq\cdots$ has an upper bound, then $(\mP,\preceq)$ contains a maximal element. 
 
-\begin{prp}{}{} Let $R$ be a division ring. Let $M$ be a left $R$-module. Then the following are true. 
+\begin{prp}{}{}\\
+Let $R$ be a division ring. Let $M$ be a left $R$-module. Then the following are true. 
 \begin{itemize}
 \item Every linearly independent subset $S\subseteq M$ can be extended to a basis
 \item Every generating set $Q\subseteq M$ contains a basis
@@ -448,14 +588,16 @@ This concludes the proof.
 \end{prp}
 
 \subsection{Finitely Generated Modules}
-\begin{defn}{Finitely Generated Modules}{} Let $R$ be a ring. Let $M$ be a left $R$-module. We say that $M$ is finitely generated if $M$ has a finite generating set. 
+\begin{defn}{Finitely Generated Modules}{}\\
+Let $R$ be a ring. Let $M$ be a left $R$-module. We say that $M$ is finitely generated if $M$ has a finite generating set. 
 \end{defn}
 
 This notion should be somewhat familiar to us. A finitely generated $\Z$-module is just a finitely generated abelian group. We have already classified all finitely generated $\Z$-modules by the fundamental theorem of finitely generated abelian groups. \\
 
 On the other hand, a finitely generated $k$-module for a field $k$ is exactly a finite dimensional vector space over $k$. We have already classified all finitely generated $k$-modules as they are isomorphic to $k^n$ for some $n\in\N$. 
 
-\begin{prp}{}{} Let $R$ be a ring. Let $M$ be a left $R$-module. Let $N\leq M$ be an $R$-submodule of $M$. If $M$ is finitely generated, then $M/N$ is finitely generated. 
+\begin{prp}{}{}\\
+Let $R$ be a ring. Let $M$ be a left $R$-module. Let $N\leq M$ be an $R$-submodule of $M$. If $M$ is finitely generated, then $M/N$ is finitely generated. 
 \begin{proof}
 Suppose that $M$ is generated by the elements $m_1,\dots,m_k$. Let $p:M\to M/N$ be the projection map. It is in particular surjective. I claim that $m_1+N,\dots,m_k+N$ generate $M/N$. Let $t+N\in M/N$. Since $p$ is surjective, there exists $u\in M$ such that $p(u)=t+N$. Since $M$ is finitely generated by $m_1,\dots,m_k$, we can write $u=r_1m_1+\dots+r_km_k$. Then $$t+N=p(u)=p(r_1m_1+\dots+r_km_k)=r_1p(m_1)+\dots+r_kp(m_k)=r_1m_1+N+\dots+r_km_k+N$$ Hence every element of $M/N$ can be written as an $R$-linear combination of $m_1+N,\dots,m_k+N$. Hence $M/N$ is finitely generated by $m_1+N,\dots,m_k+N$. 
 \end{proof}
@@ -492,6 +634,29 @@ When $R=0$ then it is trivial. Suppose that $R\neq 0$. Let $m$ be a maximal idea
 Clearly $R/I$ is generated by the element $1+I$. Hence $M\cong R/I$ is cyclic. Conversely, suppose that $M$ is cyclic. Consider the $R$-module homomorphism $R\to M$ defined by $r\mapsto rx$. It is surjective since $M=R\cdot x$. Moreover, its kernel is an ideal. Hence $M\cong R/I$. 
 \end{proof}
 \end{lmm}
+
+\subsection{Invariant Basis Number Property}
+\begin{defn}{Invariant Basis Number Property}{}\\
+Let $R$ be a ring. We say that $R$ has the invariant basis number (IBN) property if $R^m\cong R^n$ implies $m=n$. 
+\end{defn}
+
+\begin{defn}{Rank of a Free Module}{}\\
+Let $R$ be a ring. Let $n\in\N^+$. Define the rank of $R^n$ to be $n$. 
+\end{defn}
+
+The notion of rank is not well defined if the ring is not IBN. 
+
+\begin{prp}{}{} Every division ring is an IBN-ring. 
+\end{prp}
+
+\begin{prp}{}{} Every commutative ring is an IBN-ring. 
+\begin{proof}
+Let $R$ be a commutative ring. Let $m$ be a maximal ideal of $R$. Suppose that $R^k\cong R^n$. Then $(R/m)^k\cong(R/m)^n$ as vector spaces over $R/m$. Hence $k=n$. Thus $R$ is an IBN-ring. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{} Let $f:R\to S$ be a surjective non zero ring homomorphism. Let $S$ be an IBN-ring. Then $R$ is also an IBN-ring. 
+\end{prp}
 
 \subsection{Simple Modules}
 The first structural result on Modules is the baby Artin-Wedderburn theorem. It relies on another powerful lemma called Schur's lemma, which has a fundamental application in Representation theory. We begin with the notion of simple modules. 
@@ -957,6 +1122,19 @@ Notice that when $R$ is a field, the algebra $A$ becomes a vector space over $R$
 \item $f$ is a ring homomorphism: $f(xy)=f(x)f(y)$ for $x,y\in A$
 \end{itemize}
 \end{defn}
+
+\subsection{New Algebras from Old}
+\begin{prp}{}{}\\
+Let $R$ be a commutative ring. Let $\{A_i\;|\;i\in I\}$ be a collection of $R$-algebras. Then the following are true. 
+\begin{itemize}
+\item $\prod_{i\in I}A_i$ is an $R$-algebra. 
+\item $\bigoplus_{i\in I}A_i$ is an $R$-algebra. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $R$ be a commutative ring. Let $A_1,A_2$ be $R$-algebras. Then $A_1\otimes_RA_2$ is an $R$-algebra. 
+\end{prp}
 
 \subsection{Free Algebras}
 \begin{defn}{Free Algebra}{} Let $R$ be a commutative ring. Let $X$ be a set. Let $W=\{x_1\cdots x_n\;|\;x_1,\dots,x_n\in X\}$ be the set of words of $X$. Define the free $R$-algebra over $X$ to be the free $R$-module $$R\langle X\rangle=\bigoplus_{w\in W}R\cdot w$$ together with multiplication defined by $(x_1\cdots x_n)\cdot(y_1\cdots y_m)=x_1\cdots x_n\cdot y_1\cdots y_m$. 
@@ -1454,7 +1632,12 @@ Let $R$ be a ring. Let $I$ be a left ideal of $R$. Define the graded ring associ
 \begin{defn}{Graded Commutative Rings}{} Let $R=\bigoplus_{k=0}^\infty R_k$ be a graded ring. We say that $R$ is graded commutative if for all $r\in R_i$ and $r\in R_j$, $$r\cdot s=(-1)^{ij}s\cdot r$$
 \end{defn}
 
-\begin{defn}{Homomorphism of Graded Rings}{} Let $R,S$ be graded rings. Let $\varphi:R\to S$ be a ring homomorphism. We say that $\phi$ is a graded ring homomorphism if $$\phi(R_i)\subseteq S_i$$ for each $i\in\N$. 
+\begin{defn}{Homomorphism of Graded Rings}{}\\
+Let $R,S$ be graded rings. Let $\varphi:R\to S$ be a ring homomorphism. 
+\begin{itemize}
+\item We say that $\varphi$ has degree $n\in\Z$ if $\varphi(R_i)\subseteq S_{i+n}$ for all $i\in\Z$. 
+\item We say that $\varphi$ is a graded homomorphism if $\deg(\varphi)=0$. 
+\end{itemize}
 \end{defn}
 
 \begin{defn}{Isomorphism of Graded Rings}{} Let $R,S$ be graded rings. Let $\varphi:R\to S$ be a ring homomorphism. We say that $\phi$ is a graded ring isomorphism if it is a graded ring homomorphism and an isomorphism of rings. 
@@ -1633,20 +1816,14 @@ Let $R$ be a commutative ring. Let $M$ be a free $R$-module with basis $m_1,\dot
 \begin{itemize}
 \item $\Lambda^n(M)\cong R$. 
 \item $\Lambda^k(M)=0$ for $k>n$. 
+\item Suppose that $M$ has $R$-basis $\{m_1,\dots,m_n\}$. Then an $R$-basis of $\Lambda^k(M)$ is given by $$\{m_{i_1}\wedge\cdots\wedge m_{i_k}\;|\;1\leq i_1<\cdots<i_k\leq n\}$$
+\item $\dim(\Lambda^k(M))=\binom{n}{k}$. 
 \end{itemize}
 \end{lmm}
 
 \begin{eg}{}{}\\
-Let $R$ be a commutative ring. Then there is an isomorphism of $R$-algebras $$\Lambda\left(\bigoplus_{i=1}^nRx_i\right)\cong\frac{R[x_1,\dots,x_n]}{(x_ix_j+x_jx_i,x_i^2\;|\;1\leq i\neq j\leq n)}$$ It is common to denote this $R$-algebra by $\Lambda_R[x_1,\dots,x_n]$. 
+Let $R$ be a commutative ring. Then there is an isomorphism of $R$-algebras $$\Lambda\left(\bigoplus_{i=1}^nRx_i\right)\cong\frac{R\langle x_1,\dots,x_n\rangle}{(x_ix_j+x_jx_i,x_i^2\;|\;1\leq i\neq j\leq n)}$$ It is common to denote this $R$-algebra by $\Lambda_R[x_1,\dots,x_n]$. 
 \end{eg}
-
-\begin{lmm}{}{}\\
-Let $k$ be a field. Let $V$ be a vector space over $k$ of dimension $n$. Then the following are true. 
-\begin{itemize}
-\item Let $B$ be a basis of $V$. Then $$\{v_{i_1}\wedge\cdots\wedge v_{i_r}\;|\;v_{i_k}\in B\text{ and }1\leq i<\cdots<i_r\leq n\}$$ forms a basis for $\Lambda^r(V)$. 
-\item The dimension of the exterior power is given by $$\dim(\Lambda^r(V))=\binom{n}{r}$$
-\end{itemize}
-\end{lmm}
 
 \subsection{Symmetric Algebra}
 \begin{defn}{Symmetric Quotient}{} Let $M$ be an $R$-module. The symmetric quotient is the ideal $$C(M)=\langle m_1\otimes m_2-m_2\otimes m_1|m_1,m_2\in M\rangle$$ of $T(M)$ generated by commutativity. 

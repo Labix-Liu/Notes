@@ -650,31 +650,33 @@ Step 1: Take $v\neq 0$ an eigenvector and set $W=\text{span}\{v,T(v),T^2(v),\dot
 Step 2: Consider the polynomial $$x^d+c_{d-1}x^{d-1}+\dots+c_1x+c_0$$ Then this is precisely the minimal polynomial. 
 
 \subsection{Generalized Eigenspace}
-\begin{defn}{Generalized Eigenvectors}{} Let $V$ be a vector space over a field $\F$. Let $T\in\text{End}_k(V)$. Let $\lambda$ be an eigenvalue of $T$. We say that $v\in V$ is a generalized eigenvector of $T$ if $$(T-\lambda\text{id}_V)^kv=0$$ for some $k\in\N\setminus\{0\}$. 
+\begin{defn}{Generalized Eigenspaces}{}\\
+Let $\F$ be a field. Let $V$ be a vector space over $\F$. Let $T:V\to V$ be a linear map. Let $\lambda\in\F$ be an eigenvalue of $T$. Let $k\in\N^+$. Define the generalized eigenspace of index $k$ of $T$ with respect to $\lambda$ to be $$N_k(T,\lambda)=\ker((T-\lambda I)^k)$$ Elements of the subspace are called generalized eigenvectors. 
 \end{defn}
 
-\begin{defn}{Generalized Eigenspaces}{} Let $V$ be a vector space over a field $\F$. Let $T\in\text{End}_k(V)$. Let $\lambda$ be an eigenvalue of $T$. Define the generalized eigenspace of index $k\in\N\setminus\{0\}$ of $T$ with respect to $\lambda$ to be $$N_k(T,\lambda)=\{v\in V|(T-\lambda I)^kv=0\}=\ker((T-\lambda I)^k)$$
-\end{defn}
+Clearly we have an ascending chain of vector subspaces $$N_1(T,\lambda)\subseteq N_2(T,\lambda)\subseteq\cdots$$
 
-\begin{prp}{}{} Let $V$ be a vector space over a field $\F$. Let $T\in\text{End}_k(V)$. Let $\lambda$ be an eigenvalue of $T$. Then the following are true. 
-\begin{itemize}
-\item $N_1(T,\lambda)\subseteq N_2(T,\lambda)\subseteq N_3(T,\lambda)\subseteq\dots$
-\item There exists some $k\in\N\setminus\{0\}$ such that $N_k(T,\lambda)=N_{k+1}(T,\lambda)=\cdots$
-\end{itemize} 
-\begin{proof}
+\begin{prp}{}{}\\
+Let $\F$ be a field. Let $V$ be a finite dimensional vector space over $\F$. Let $T:V\to V$ be a linear map. Let $\lambda\in\F$ be an eigenvalue of $T$. Then there exists $k\in\N^+$ such that $$N_k(T,\lambda)=N_{k+n}(T,\lambda)$$ for all $n\in\N$. 
+\begin{proof}\\
 Let $v\in N_i(T,\lambda)$. This means that $(T-\lambda\text{id}_V)^iv=0$. Applying the linear map $T-\lambda\text{id}_V$ on both sides show that $v\in N_{i+1}(T,\lambda)$. 
 \end{proof}
 \end{prp}
 
-\begin{defn}{Degree of Eigenvectors}{} Let $V$ be a vector space over a field $\F$. Let $T\in\text{End}_k(V)$. Let $\lambda$ be an eigenvalue of $T$. Define the degree of $\lambda$ to be $$d(\lambda)=\min\{k\;|\;N_k(T,\lambda)=N_{k+1}(T,\lambda)=\cdots\}$$
+\begin{defn}{Degree of Eigenvalues}{}\\
+Let $\F$ be a field. Let $V$ be a finite dimensional vector space over $\F$. Let $T:V\to V$ be a linear map. Let $\lambda\in\F$ be an eigenvalue of $T$. Define the degree of $\lambda$ to be $$d(\lambda)=\min\{k\;|\;N_k(T,\lambda)=N_{k+1}(T,\lambda)=\cdots\}$$
 \end{defn}
 
-\begin{prp}{}{} Let $V$ be a vector space over a field $\F$. Let $T\in\text{End}_k(V)$. Let $\lambda_1,\dots,\lambda_m$ be eigenvalues of $T$. Let $v_i\in N_{d(\lambda_i)}(T,\lambda_i)$ for $1\leq i\leq m$. Then $v_1,\dots,v_m$ are linearly independent. 
+Recall that eigenvectors corresponding to different eigenvalues are linearly independent. The following is the corresponding generalization. 
+
+\begin{prp}{}{}\\
+Let $\F$ be a field. Let $V$ be a vector space over $\F$. Let $T:V\to V$ be a linear map. Let $\lambda_1,\dots,\lambda_r\in\F$ be eigenvalues of $T$. Let $v_i\in N_{d(\lambda_i)}(T,\lambda_i)$ for $1\leq i\leq r$. Then $v_1,\dots,v_r$ are linearly independent. 
 \end{prp}
 
 Using generalized eigenspaces, we obtain an improvement of thm3.2.5. 
 
-\begin{thm}{Primary Decomposition Theorem}{} Let $V$ be a vector space of an algebraically closed field $F$. Let $T:V\to V$. Let $\lambda_1,\dots,\lambda_m$ be the full list of distinct eigenvalues of $T$. Then the following are true. 
+\begin{thm}{Primary Decomposition Theorem}{}\\
+Let $\F$ be an algebraically closed field. Let $V$ be a vector space over $\F$. Let $T:V\to V$. Let $\lambda_1,\dots,\lambda_m$ be the full list of distinct eigenvalues of $T$. Then the following are true. 
 \begin{itemize}
 \item $V$ admits a decomposition into generalized eigenspaces $$V=\bigoplus_{i=1}^mN_{d(\lambda_i)}(T,\lambda_i)$$
 \item The generalized eigenspace $N_{d(\lambda_i)}(T,\lambda_i)$ is an invariant subspace of $T$. 
@@ -684,14 +686,16 @@ Using generalized eigenspaces, we obtain an improvement of thm3.2.5.
 This version of the decomposition is applicable to any in vector space and linear map. In particular, if $d(\lambda_i)=1$ for all $i$, notice that generalized eigenspaces are simply eigenspaces so that the two decompositions coincide. 
 
 \subsection{Jordan Canonical Form}
-\begin{defn}{Jordan Chain}{} Let $V$ be a vector space over a field $\F$. Let $T\in\text{End}_k(V)$. Let $\lambda$ be an eigenvalue of $T$. A Jordan Chain of length $k\in\N\setminus\{0\}$ is a sequence of nonzero vectors $v_1,\dots,v_k\in V$ such that the following are true. 
+\begin{defn}{Jordan Chain}{}\\
+Let $\F$ be a field. Let $V$ be a vector space over $\F$. Let $T:V\to V$ be a linear map. Let $\lambda\in\F$ be an eigenvalue of $T$. A Jordan Chain of length $k\in\N^+$ with respect to $T$ and $\lambda$ is a sequence of nonzero vectors $v_1,\dots,v_k\in V$ such that the following are true. 
 \begin{itemize}
 \item $T(v_1)=\lambda v_1$
 \item For $2\leq i\leq k$, we have $T(v_i)=\lambda v_i+v_{i-1}$
 \end{itemize}
 \end{defn}
 
-\begin{lmm}{}{} Let $V$ be a vector space over a field $\F$. Let $T\in\text{End}_k(V)$. Let $\lambda$ be an eigenvalue of $T$. Let $v_1,\dots,v_k\in V$ be a Jordan chain of length $k$ with respect to $T$ and $\lambda$. Then the following are true. 
+\begin{lmm}{}{}\\
+Let $\F$ be a field. Let $V$ be a vector space over $\F$. Let $T:V\to V$ be a linear map. Let $\lambda\in\F$ be an eigenvalue of $T$. Let $v_1,\dots,v_k\in V$ be a Jordan chain of length $k$ with respect to $T$ and $\lambda$. Then the following are true. 
 \begin{itemize}
 \item For $1\leq i\leq k$, we have $v_i\in N_i(A,\lambda)$
 \item For $2\leq i\leq k$, $(T-\lambda\text{id}_V)(v_i)=v_{i-1}$
@@ -700,12 +704,6 @@ This version of the decomposition is applicable to any in vector space and linea
 \begin{proof}
 \end{proof}
 \end{lmm}
-
-\begin{prp}{}{} Let $V$ be a vector space over a field $\F$. Let $T\in\text{End}_k(V)$. Let $\lambda$ be an eigenvalue of $T$. Let $v_1,\dots,v_k\in V$ be a Jordan chain of length $k$ with respect to $T$ and $\lambda$. Then the subspace $\F\langle v_1,\dots,v_k\rangle$ is invariant under $T$. 
-\begin{proof}
-Note that we just have to find out where $v_1,\dots,v_k$ are mapped to since they are a basis of our subspace. But $T(v_i)=\lambda v_i+v_{i-1}$ for $i\in\{2,\dots,k\}$ which is a linear combination of our basis, we must have that the subspace is invariant. 
-\end{proof}
-\end{prp}
 
 \begin{defn}{Jordan Block of Degree $k$}{} Let $\F$ be a field. Let $\lambda\in\F$. Define the Jordan block of degree $k$ of $\lambda$ to be the $k\times k$ matrix $$
 \gamma_{ij}=\begin{cases}
