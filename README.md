@@ -21,11 +21,16 @@ flowchart BT
     B --> C("Real Analysis") & D("Groups and Rings")
     C --> E("Metric Spaces")
     D --> F("Linear Algebra")
-    E --> G("Multivariable Calculus") & H("Point Set Topology") & I("Geometry")
+    E --> G("Multivariable Calculus") & H("Point Set Topology") & I("Geometry") & S("Algebraic Geometry 1")
     F --> G & I & J("Rings and Modules") & K("Advanced Group Theory") & L("Field and Galois Theory")
-    H --> M("Algebraic Topology 1")
+    G --> N("Complex Analysis 1")
+    H --> M("Algebraic Topology 1") & N & R("Bundle Structures in Topology")
     I --> M
+    J --> O("Category Theory") & P("Commutative Algebra 1")
     K --> M
+    M --> Q("Algebraic Topology 2")
+    O --> T("Homological Algebra")
+    P --> T
 
      A:::None
      B:::None
@@ -34,16 +39,19 @@ flowchart BT
      E:::Analysis
      F:::Algebra
      G:::Analysis
-     H:::Class_01
-     H:::TopologyGeometry
      H:::TopGeo
-     I:::Class_01
-     I:::TopologyGeometry
      I:::TopGeo
      J:::Algebra
      K:::Algebra
      L:::Algebra
      M:::AlgTopGeo
+     N:::Analysis
+     O:::Algebra
+     P:::Algebra
+     Q:::AlgTopGeo
+     R:::TopGeo
+     S:::AlgTopGeo
+     T:::Algebra
     classDef AlgTopGeo stroke:#AA00FF, fill:#FFFFFF
     classDef TopGeo stroke:#2962FF, fill:#FFFFFF
     classDef Analysis stroke:#FFD600, fill:#FFFFFF
