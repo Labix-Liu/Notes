@@ -16,6 +16,10 @@ It contains my organized notes on key areas of pure mathematics — from foundat
 
 ## 🏗️ Notes Structure
 ```mermaid
+---
+config:
+  layout: dagre
+---
 flowchart BT
     A("Set Theory") --> B("Number Systems")
     B --> C("Real Analysis") & D("Groups and Rings")
