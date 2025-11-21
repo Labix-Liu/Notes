@@ -1,6 +1,6 @@
 \documentclass[a4paper]{article}
 
-\input{C:/Users/liula/Desktop/Latex/Headers V1.2.tex}
+\input{C:/Users/liula/Desktop/Latex/Headers/Headers.tex}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -22,212 +22,218 @@
 \pagebreak
 
 \pagebreak
-\section{Group Representations}
-\subsection{Matrix and Linear Representations}
-Recall the result stating that for $G=\langle S|R\rangle$ where $S$ is finite, if $H$ is a group with elements $h_1,\dots,h_n\in H$. Then there exists a homomorphism $\phi:G\to H$ satisfying $\phi(s_i)=h_i$ if and only if every relation $r\in R$ is also satisfied by the $h_i$. In this case $\phi$ is unique. 
-
-\begin{defn}{Matrix Representations}{} Let $G$ be a group and $F$ a field. A matrix representation is a homomorphism $$\rho:G\to\GL(n,F)$$ for some $n$. The degree of $\rho$ is the integer $n$. 
+\section{Basic Definitions of Representations}
+\subsection{Representation of an Algebra}
+\begin{defn}{Representation of an Algebra}{}\\
+Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. A representation of $A$ is a left $R$-module $M$ and a homomorphism of $R$-algebras $$\rho:A\to\text{End}_R(M)$$
 \end{defn}
 
-In some sense we are enabling a geometric picture of a group by visualizing them through a subgroups consisting of matrices. And since matrices act on the plane $\R^n$, we can visualize what the group is doing through this. 
+Let $A,M$ be sets. Recall that there is a natural bijection $$\Hom_{\bold{Sets}}(A\times M,M)\cong\Hom_{\bold{Sets}}(A,\Hom_{\bold{Sets}}(M,M))$$ given by curling. A representation of an $R$-algebra $A$ is an element in $$\Hom_{\bold{Alg}_R}(A,\text{End}_R(M))\subseteq\Hom_{\bold{Sets}}(A,\Hom_{\bold{Sets}}(M,M))$$ Therefore we may ask what kinds of maps of the form $A\times M\to M$ give a representation of $A$. 
 
-\begin{lmm}{}{} Let $\rho:G\to GL(n,F)$ be a matrix representation. Let $A\in\GL(n,F)$. Then the homomorphism $\rho':G\to\GL(n,F)$ defined by $$\rho'(g)=A\rho(g)A^{-1}$$ is a matrix representation. \tcbline
-\begin{proof}
-We just have to show that $\rho'$ is a group homomorphism. We have that 
-\begin{align*}
-\rho'(gh)&=A\rho(gh)A^{-1}\\
-&=A\rho(g)\rho(h)A^{-1}\\
-&=A\rho(g)A^{-1}A\rho(h)A^{-1}\\
-&=\rho'(g)\rho'(h)
-\end{align*}
-Thus we are done. 
-\end{proof}
-\end{lmm}
-
-\begin{defn}{Equivalent Representations}{} Let $\rho_1:G\to\GL(n,F)$ and $\rho_2:G\to\GL(n,F)$ be two representations. We say that $\rho_1$ and $\rho_2$ are equivalent if $n=m$ and there exists a matrix $P\in\GL(n,F)$ such that $\rho_2(g)=P\rho_1(g)P^{-1}$ for all $g\in G$. 
-\end{defn}
-
-\begin{lmm}{}{} The equivalence of representations is an equivalence relation. 
-\end{lmm}
-
-\begin{lmm}{}{} Degree $1$ representations $\rho_1,\rho_2:G\to\GL(1,F)=F^\ast$ are equivalent if and only if they are equal. \tcbline
-\begin{proof}
-Suppose that $\rho_1,\rho_2$ are equivalent. Then we have that $\rho_1(g)=u\rho_2(g)u^{-1}$ for some $u\in F^\ast$. But $F$ is commutative so $\rho_1(g)=\rho_2(g)$. \\~\\
-If $\rho_1$ and $\rho_2$ are equal then they are clearly equivalent, 
-\end{proof}
-\end{lmm}
-
-\begin{defn}{Faithful Representations}{} A representation $\rho:G\to\GL(n,F)$ is said to be faithful if it is injective. 
-\end{defn}
-
-\begin{defn}{Linear Representations}{} Let $G$ be a group. A linear representation of $G$ is a pair $(V,\rho)$ where $V$ is a vector space and $\rho$ is a homomorphism $\rho:G\to\GL(V)$. The dimension of $V$ is called the degree of the representation. 
-\end{defn}
-
-Recalling that by choosing a basis, we can show that $\GL(V)\cong\GL(n,\C)$ if $\dim(V)=n$. Linear representations are often used for when we do not want to choose a basis and leave it arbitrary. In practical calculations matrix representations may be useful but in the abstract theory itself, using an arbitrary vector space is more useful. 
-
-\subsection{KG-Modules}
-\begin{defn}{Group Ring}{} Let $G$ be a group and $R$ a ring. The group ring $RG$ is the ring whose elements are the $R$-linear combinations $\sum_{g\in G}\lambda_gg$ for finitely many non-zero $\lambda_g\in R$, where operations are defined as follows: 
+\begin{prp}{}{}\\
+Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $M$ be an $R$-module. Let $f:A\times M\to M$ be a function. Then the map $a\mapsto f(a,-)$ defines a representation of $A$ if and only if the following are true. 
 \begin{itemize}
-\item Addition: $\left(\sum_{g\in G}\lambda_g\cdot g\right)+\left(\sum_{g\in G}\mu_g\cdot g\right)=\sum_{g\in G}(\lambda_g+\mu_g)\cdot g$
-\item Multiplication: $\left(\sum_{g\in G}\lambda_gg\right)\cdot\left(\sum_{h\in G}\mu_h h\right)=\sum_{g,h\in G}(\lambda_g\mu_h)h$
+\item $f$ is an $R$-module homomorphism. 
+\item $f$ defines an $A$-module structure on $M$. 
 \end{itemize}
-\end{defn}
-
-\begin{lmm}{}{} Let $G$ be a group and $K$ a field. Then the group ring $KG$ is a $K$-vector space with basis $G$. Moreover, $KG$ is a $K$-algebra. 
-\end{lmm}
-
-There is a very rich structure in $KG$-modules. In ring and modules we know that algebras over a field can be seen as a vector space. Vector spaces can also be seen as a module over a field. 
-\begin{defn}{KG-Submodule}{} Let $G$ be a group, $K$ a field and $V$ a $KG$-module. We say that $W$ is a $KG$-submodule if the following are true. 
-\begin{itemize}
-\item $W$ is a $K$-subspace of $V$
-\item $g\cdot w\in W$ for all $w\in W$ and $g\in G$
-\end{itemize}
-\end{defn}
-
-We know that any $R$-submodule $N$ of $M$ is also an $R$-module. This property is inherited and thus $KG$-submodules are also $KG$-modules in its own right. 
-
-\begin{defn}{G-Linear Map}{} Let $V,W$ be $KG$-modules. We say that a linear transformation $\phi:V\to W$ is $G$-linear if $$\phi(g\cdot v)=g\cdot\phi(v)$$ for all $g\in G$ and $v\in V$. In other words, $\phi$ is $G$-equivariant. Denote the set of all $G$-morphisms by $$\Hom_G(V,W)$$
-\end{defn}
-
-\begin{lmm}{}{} Let $\pi:V\to W$ be a morphism of $KG$-modules. Then $\ker(\pi)$ and $\im(\pi)$ are $KG$-submodules of $V$ and $W$ respectively. 
-\end{lmm}
-
-\subsection{Equivalence Between KG-Modules and Representations}
-\begin{defn}{Linear Action}{} Let $G$ be a group and $V$ a vector space. A linear action of $G$ on $V$ is a map $\gamma:G\times V\to V$ such that the following holds: 
-\begin{itemize}
-\item Identity: $\gamma(1_G,v)=v$ for all $v\in V$
-\item Associativity: $\gamma(hg,v)=\gamma(h,\gamma(g,v))$ for all $g,h\in G$, $v\in V$
-\item Linearity on $V$: $\gamma(g,u+v)=\gamma(g,u)+\gamma(g,v)$ for all $g\in G$, $u,v\in V$
-\item Linearity on $V$: $\gamma(g,av)=a\gamma(g,v)$ for all $g\in G$ and $v\in V$ and $a\in K$
-\end{itemize}
-This means that $G$ acts on $V$ and that $\rho(g):V\to V$ defined by $v\mapsto\gamma(g,v)$ is a linear map. 
-\end{defn}
-
-\begin{prp}{}{} Let $G$ be a group. If $V$ is a $KG$-module then the action of $G$ on $V$ is a linear action. Conversely, if $V$ is a $K$-vector space with a linear action $G$ then $V$ is a $KG$-module. 
 \end{prp}
 
-There is also a 1-1 correspondence between linear representations and $KG$-modules. 
+The $A$-module structure can also be seen in the representation $\rho:A\to\text{End}_R(M)$. It is given by $a\cdot m=\rho(a)(m)$. 
 
-\begin{thm}{}{} Let $G$ be a group. Then linear representations of $G$ and $KG$-modules are the same in the following sense. 
+\begin{defn}{Subrepresentation}{}\\
+Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $M$ be an $R$-module. Let $\rho:A\to\text{End}_R(M)$ be a representation of $A$. A subrepresentation of $\rho$ is an $R$-submodule $N\leq M$ such that the map $\rho|_N:A\to\text{End}_R(N)$ defined by $\rho|_N=\rho(a)|_N$ is a representation of $A$. 
+\end{defn}
+
+\begin{defn}{Quotient Representations}{}\\
+Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $M$ be an $R$-module. Let $\rho:A\to\text{End}_R(M)$ be a representation of $A$. Let $N\leq M$ be a subrepresentation of $M$. Define the quotient representation of $M$ by $N$ to be the representation $A\to\text{End}_R(M/N)$ given by $$a\mapsto(m+N\mapsto\rho(a)(m)+N)$$
+\end{defn}
+
+We need to check that the quotient is indeed a representation. Firstly, the map is well defined since $N$ is a subrepresentation, so that for $m\in N$ we know that $\rho(a)(m)\in N$. 
+
+\begin{defn}{Sum of Representations}{}\\
+Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $M,N$ be $R$-modules. Let $\rho:A\to\text{End}_R(M)$ and $\tau:A\to\text{End}_R(N)$ be representations of $A$. Define the sum of $\rho$ and $\tau$ to be the representation $\rho\oplus\tau:A\to\text{End}_R(M\oplus N)$ given by $$(\rho\oplus\tau)(a)(m,n)=(\rho(a)(m),\tau(a)(n))$$
+\end{defn}
+
+Since representations of an algebra $A$ are $A$-modules, it follows that the following notions in Rings and Modules apply to representations. 
 \begin{itemize}
-\item If $\rho:G\to\GL(V)$ is a linear representation, $\rho$ gives rise to a $KG$-module structure on $V$, where the composition law $KG\times V\to V$ is defined by $$\left(\sum_{g\in G}\lambda_gg,v\right)\mapsto\left(\sum_{g\in G}\lambda_gg\right)\cdot v=\sum_{g\in G}\lambda_g\rho(g)(v)$$
-\item Conversely, given a $KG$-module $V$, the map $\rho_V:G\to\GL(V)$ defined by $$g\mapsto\rho_V(g):V\to V$$ where $\rho_V(g)$ is defined by $\rho_V(g)(v)=g\cdot v$ is in fact a linear representation. 
+\item A representation is simple (irreducible) if it is a simple $A$-module (equivalently, it has no non-trivial subrepresentations). 
+\item A representation is semisimple if it is a direct sum of simple representations. 
+\end{itemize}
+
+\begin{defn}{Indecomposable Representations}{}\\
+Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $M$ be an $R$-module. Let $\rho:A\to\text{End}_R(M)$ be a representation of $A$. We say that $M$ is indecomposable if $M$ is not the direct sum of representations. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $M$ be an $R$-module. Let $\rho:A\to\text{End}_R(M)$ be a representation of $A$. If $\rho$ is irreducible, then $\rho$ is indecomposable. 
+\end{lmm}
+
+The converse need not be true in general. 
+
+\begin{eg}{}{}\\
+Let $k$ be a field. Define a representation $\rho:k[x]\to\text{End}_k(k^2)\cong M_2(k)$ by $x\mapsto\begin{pmatrix}
+1 & 1\\
+0 & 1
+\end{pmatrix}$ then extended it $R$-linearly and respecting products of $x$. Then $\rho$ is indecomposable but reducible. 
+\begin{proof}\\
+Suppose for a contradiction that $\rho$ is decomposable. Then there exists $1$-dimensional linear subspaces $L_1,L_2$ of $k^2$ such that $\rho_{L_1}$ and $\rho_{L_2}$ are representations. Suppose that $L_1=k\langle v_1\rangle$ and $L_2=k\langle v_2\rangle$. Then $x\cdot v_1\in L_1$ and $x\cdot v_2\in L_2$ implies that $v_1$ and $v_2$ are linearly independent eigenvectors of $\rho(x)$. But by an easy computation, we see that the only eigenvalue of $\rho(x)$ is $1$ and its eigenspace has dimension $1$. Hence this is a contradiction. \\
+
+From the above, we see that the eigenspace of $\rho(x)$ is a subrepresentation of $\rho$. Hence $\rho$ is reducible. 
+\end{proof}
+\end{eg}
+
+\subsection{Maps between Representations}
+\begin{defn}{Homomorphisms of Representations}{}\\
+Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $M,N$ be $R$-modules. Let $\rho:A\to\text{End}_R(M)$ and $\tau:A\to\text{End}_R(N)$ be representations of $A$. A homomorphism from $\rho$ to $\tau$ is a function $\phi:M\to N$ such that the following are true. 
+\begin{itemize}
+\item $\phi$ is an $R$-module homomorphism. 
+\item The following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{A\times M} & M \\
+	{A\times N} & N
+	\arrow["\rho", from=1-1, to=1-2]
+	\arrow["{\text{id}_A\times\phi}"', from=1-1, to=2-1]
+	\arrow["\phi", from=1-2, to=2-2]
+	\arrow["\tau"', from=2-1, to=2-2]
+\end{tikzcd}}\\
+\end{itemize}
+\end{defn}
+
+Since $M$ and $N$ are $A$-modules, the definition of homomorphism implies that such a morphism must be an $A$-module homomorphism. 
+
+\begin{defn}{Isomorphisms of Representations}{}
+Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $M,N$ be $R$-modules. Let $\rho:A\to\text{End}_R(M)$ and $\tau:A\to\text{End}_R(N)$ be representations of $A$. Let $\phi:M\to N$ be a homomorphism of representations. We say that $\phi$ is an isomorphism if there exists a homomorphism of representations $\psi:N\to M$ such that $$\psi\circ\phi=\text{id}_M\;\;\;\text{ and }\;\;\;\phi\circ\psi=\text{id}_N$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $M,N$ be $R$-modules. Let $\rho:A\to\text{End}_R(M)$ and $\tau:A\to\text{End}_R(N)$ be representations of $A$. Let $\phi:M\to N$ be a homomorphism of representations. Then $\phi$ is an isomorphism if and only if $\phi$ is an isomorphism of $R$-modules. 
+\end{lmm}
+
+\begin{thm}{First Isomorphism Theorem for Representations}{}\\
+Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $M,N$ be $R$-modules. Let $\rho:A\to\text{End}_R(M)$ and $\tau:A\to\text{End}_R(N)$ be representations of $A$. Let $\phi:M\to N$ be a homomorphism of representations. Then the following are true. 
+\begin{itemize}
+\item $\ker(\phi)$ is a subrepresentation of $M$. 
+\item $\im(\phi)$ is a subrepresentation of $N$. 
+\item There is an isomorphism of representations $$M/\ker(\phi)\cong\im(\phi)$$ given by $\phi$. 
 \end{itemize}
 \end{thm}
 
-One can think of the $KG$-module action on $V$ as an extension of the $K$-action on $V$. 
+Recall from Rings and Modules that we have Schur's lemma: A homomorphism $M\to N$ of simple $R$-modules is either the $0$ map or an isomorphism. 
 
-\begin{lmm}{}{} Two representations $\rho_1:G\to\GL(V_2)$ and $\rho_2:G\to\GL(V_2)$ are equivalent if and only if $V_1\cong V_2$ as $KG$-modules. 
+\begin{lmm}{Schur's Lemma III}{}\\
+Let $k$ be an algebraically closed field. Let $A$ be a $k$-algebra. Let $V$ be a finite dimensional $k$-vector space. Let $\rho:A\to\text{End}_k(V)$ be an irreducible representations of $A$. Let $\phi:V\to V$ be a homomorphism of representations. Then $\phi=\lambda\text{id}_V$ for some $\lambda\in k$. 
+\begin{proof}\\
+Since $\phi$ is a homomorphism of simple $A$-modules, by Schur's lemma we know that $\phi=0$ or $\phi$ is an isomorphism. If $\phi=0$ then we are done. Otherwise, since $k$ is algebraically closed, the endomorphism $\phi$ admits an eigenvalue $\lambda\in k$ and eigenvector $v\in V$. Consider the homomorphism of representations $\phi-\lambda\text{id}_V$. By Schur's lemma, this map is either $0$ or an isomorphism. But it is not an isomorphism since $\phi(v)-\lambda v=0$. Hence $\phi-\lambda\text{id}_V=0$. So we are done. 
+\end{proof}
 \end{lmm}
 
-Essentially, one can think of $KG$-modules being a vector space (module) over $K$ together with a group action. Thus later when we encounter $KG$-submodules and morphisms we can simply regard them as vector subspaces (submodules) and linear transformations that respect the group action. 
+\begin{crl}{}{}\\
+Let $k$ be an algebraically closed field. Let $A$ be a commutative $k$-algebra. Let $V$ be a finite dimensional $k$-vector space. Let $\rho:A\to\text{End}_k(V)$ be an irreducible representations of $A$. Then $\dim(V)=1$. 
+\begin{proof}\\
+By Schur's lemma III, we know that $\rho(a):V\to V$ is a scalar operator for all $a\in A$. This means that $\rho(a)(v)=\lambda_av$ for some $\lambda_a\in k$ and all $v\in V$. For any fixed $v_0\in V$, this implies that $k\langle v_0\rangle$ is a subrepresentation of $\rho$. If $\dim(V)\geq 2$, then $k\langle v_0\rangle$ is a non-trivial subrepresentation, contradicting the irreducible assumption. Hence $\dim(V)=1$. 
+\end{proof}	
+\end{crl}
 
-\begin{prp}{}{} Let $G$ be a group and let $\rho:G\to\text{GL}(V)$ be a representation. Suppose that $U\subseteq V$ is a subrepresentation of $\rho$. Then $$\overline{\rho}:G\to\text{GL}(V/U)$$ defined by $\rho(g)(v+U)=gv+U$ is also a representation of $G$. \tcbline
-\begin{proof}
-By the corresponding between $KG$-modules and representations of $G$, $V$ and $U$ are both $KG$-module and in particular, $U$ is a $KG$-submodule of $V$. We have seen from Rings and Modules that $V/U$ is also a $KG$-module. Thus $V/U$ together $\overline{\rho}$ is a representation of $G$. 
+In other words, every finite dimensional representation of a commutative algebra over an algebraically closed field must be of dimension $1$. And these are easy to classify. 
+
+\subsection{Representations of Finite Algebra}
+\begin{prp}{}{}\\
+Let $R$ be a commutative ring. Let $A$ be a finite $R$-algebra. Let $\rho:A\to\text{End}_R(M)$ be an irreducible representation of $A$. Then $M$ is finitely generated. 
+\begin{proof}\\
+Let $0\neq m\in M$. Then $\rho(A)(m)$ is a submodule of $M$. Since $M$ is irreducible, we must have $\rho(A)(m)=M$. Since $A$ is finite over $R$, we must have $\rho(A)(m)$ is finitely generated over $R$. Hence $M$ is finitely generated over $R$. 
 \end{proof}
 \end{prp}
 
-\subsection{Irreducible Representations}
-Recall the notion of an irreducible module. 
-
-\begin{defn}{Irreducible Representations}{} Let $V$ be a $KG$-module. We say that $V$ is irreducible if $V$ is a simple $KG$-module. 
+\pagebreak
+\section{Representation Theory of Groups}
+\subsection{Representations of a Group}
+\begin{defn}{Representations of a Group}{}\\
+Let $G$ be a group. Let $k$ be a field. A representation of $G$ is a $k$-vector space $V$ together with a group homomorphism $\rho:G\to\text{End}_k(V)$. 
 \end{defn}
 
-Equivalently, a representation $\rho:G\to GL(V)$ is irreducible if there are no proper, non-trivial subspace of $V$ that is invariant under the action of $G$. 
+By the natural isomorphism $$\Hom_{\bold{Alg}_k}(k[G],\text{End}_k(V))\cong\Hom_{\bold{Grp}}(G,\text{End}_k(V))$$ we see that representations of a group is the same as representation of the group ring. 
 
-\begin{thm}{Schur's Lemma III}{} Let $G$ be a group. Let $V$ be an irreducible $\C G$-module of finite degree. Let $\pi:V\to V$ be a $G$-linear map. Then $\pi=\lambda I_V$ for some $\lambda\in\C$. \tcbline
-\begin{proof}
-Since $\pi$ is a $\C$-linear map from an irreducible module, by Schur's lemma in Rings and Modules, either $\pi=0$ or $\pi$ is an isomorphism. Since $V$ is finite dimensional, $\pi$ has an eigenvalue $\lambda\in\C$. Let $u\in V$ be the corresponding eigenvector. Define $\pi':V\to V$ by $\pi'(v)=\pi(v)-\lambda v$. It is clear that $\pi'$ is a linear transformation. Moreover, for $g\in G$, we have that 
-\begin{align*}
-\pi'(g\cdot v)&=\pi(g\cdot v)-\lambda(g\cdot v)\\
-&=g\cdot\pi(v)-g\cdot(\lambda v)\\
-&=g\cdot(\pi(v)-\lambda v)\\
-&=g\cdot\pi'(v)
-\end{align*}
-Thus $\pi'$ is a $G$-linear map. By Schur's lemma again, we must have that $\pi'$ is $0$ or an isomorphism. But $\pi'(u)=0$ hence $\pi'$ is the $0$ map. Thus $\pi(v)=\lambda v$ for all $v\in V$. 
-\end{proof}
-\end{thm}
+\begin{eg}{}{}\\
+The following are representations of $D_8=\langle r,s\;|\;r^4,s^2,rsrs\rangle$. 
+\begin{itemize}
+\item $\rho:D_8\to GL_2(\C)$ defined by $\rho(r)=\begin{pmatrix}
+0 & -1\\
+1 & 0
+\end{pmatrix}$ and $\rho(s)=\begin{pmatrix}
+-1 & 0\\
+0 & 1
+\end{pmatrix}$. 
+\item $\rho:D_8\to GL_n(\C)$ defined by $\rho(r)=\rho(s)=I_n$. 
+\item $\rho:D_8\to\C^\times$ defined by $\rho(r)=\pm1$ and $\rho(s)=\pm1$. 
+\item $\rho:D_8\to GL_4(\C)$ defined by $\rho(r)=\begin{pmatrix}
+0 & 0 & 0 & 1\\
+1 & 0 & 0 & 0\\
+0 & 1 & 0 & 0\\
+0 & 0 & 1 & 0
+\end{pmatrix}$ and $\rho(s)=\begin{pmatrix}
+0 & 1 & 0 & 0\\
+1 & 0 & 0 & 0\\
+0 & 0 & 0 & 1\\
+0 & 0 & 1 & 0
+\end{pmatrix}$. 
+\end{itemize}
+\end{eg}
 
-\begin{lmm}{The Averaging Trick}{} Let $G$ be a finite group and $K$ a field. Suppose that $\abs{G}\cdot 1_K\neq 0$. Let $V,U$ be $KG$-modules and let $\pi:V\to U$ be a linear transformation. Define $\pi':V\to U$ by $$\pi'(v)=\frac{1}{\abs{G}}\sum_{g\in G}g\cdot\pi(g^{-1}\cdot v)$$ Then $\pi'$ is a morphism of $KG$-modules. \tcbline
-\begin{proof}
-Firstly, since each $g\in G$ acts on $V$ as a linear transformation, $g\pi g^{-1}$ is also a linear transformation. Now we want to show that $\pi'$ preserves the action. Now note that the action of $g$ on $G$ is transitive. This means that $G=\{hg\in G\;|\;g\in G\}$ for any fixed $h\in G$. We have that 
-\begin{align*}
-\pi'(h\cdot v)&=\frac{1}{\abs{G}}\sum_{g\in G}g\cdot\pi'(g^{-1}h\cdot v)\\
-&=\frac{1}{\abs{G}}\sum_{k\in G}hk^{-1}\cdot\pi'(k\cdot v)\tag{$k=g^{-1}h$}\\
-&=h\left(\frac{1}{\abs{G}}\sum_{u\in G}u\cdot\pi'(u^{-1}\cdot v)\right)\tag{$k^{-1}=u$}\\
-&=h\pi(v)\tag{$k^{-1}=u$}
-\end{align*}
-Hence we conclude. 
-\end{proof}
-\end{lmm}
+\begin{defn}{The Regular Representation of a Group}{}\\
+Let $G$ be a group. Let $k$ be a field. Define the regular representation $\text{reg}:G\to\text{End}_k(k[G])$ of $G$ on $k$ by the formula $$\text{reg}(g)\left(\sum_{h\in G}\lambda_hh\right)=\sum_{h\in G}\lambda_hgh$$
+\end{defn}
 
-Recall the notion of semisimple modules: An $R$-module is semisimple if it is the direct sum of simple submodules. The following is a version of the Maschke's theorem proved in Rings and Modules. (Edit: Rings and Modules Maschke's theorem is not the most general version)
+\begin{defn}{Permutation Representations}{}\\
+Let $X$ be a set. Let $G$ be a group acting on $X$. Let $k$ be a field. Define the permutation representation $\rho:G\to\text{GL}(k\langle X\rangle)$ of $G$ on $X$ over $k$ by the formula $$\rho(g)(x)=g\cdot x$$ and then extending it $k$-linearly. 
+\end{defn}
 
-\begin{thm}{Maschke's Theorem}{} Let $G$ be a finite group. Let $K$ be a field such that $\abs{G}\cdot 1_K\neq 0_K$. Then the group algebra $KG$ is semisimple. \tcbline
-\begin{proof}
-Suppose that $KG$ is semisimple. Consider $K$ as the trivial $KG$-module defined by $g\cdot x=x$ for all $x\in K$ and $g\in G$ and extend it by linearity. Then there is a homomorphism of $KG$-modules $\psi:KG\to\F$ defined by $$\psi\left(\sum_{g\in G}\lambda_gg\right)=\sum_{g\in G}\lambda_g$$ Since $KG$ is semisimple, $\ker(\psi)$ has a direct complement $L$. By proposition 2.2.2, and the first isomorphism theorem for modules, we have that $L\cong K$. Since $L\cong K$, $hx=x$ for all $h\in G$. Thus $$\sum_{g\in G}\lambda_g(hg)=\sum_{g\in G}\lambda_gg$$ for all $h\in G$. Thus all $\lambda_g$ are equal. Hence $L=\cong Kz$ where $z=\sum_{g\in G}g$. If $n=\abs{G}$ is finite and $p\;|\;n$, then $\psi(z)=n=0_K$ and $\psi:L\to K$ is not surjective, contradicting proposition 2.2.2. Thus $p$ does not divide $n$. \\~\\
+Every group $G$ has an action on itself by left multiplication. In this case the permutation representation is just the regular representation. 
 
-By Artin-Wedderburn theorem, it suffices to show that if $V$ is a $KG$-module, then $V$ is semisimple. So suppose that $V$ is an $KG$-module. Let $U$ be a $KG$-submodule of $V$. Then $U$ is a $K$-vector subspace of $V$ hence there exists a projection map $\pi:V\to U$. Consider the map $\varphi:V\to U$ defined by $$\varphi(x)=\frac{1}{\abs{G}}\sum_{g\in G}g\cdot\pi(g^{-1}\cdot x)$$ By the averaging trick, $\varphi$ is a morphism of $KG$-modules. \\~\\
+\subsection{Structural Results of Representations of Finite Groups}
+From section 1 and from Rings and Modules, we know a few facts about representations of a finite group $G$ over $k$. 
 
-We claim that $\varphi:V\to U$ is a projection. It is clear that $\varphi$ is a linear transformation. Let $u\in U$. We have that 
-\begin{align*}
-\varphi(u)&=\frac{1}{\abs{G}}\sum_{g\in G}g\cdot\pi(g^{-1}\cdot u)\\
-&=\frac{1}{\abs{G}}\sum_{g\in G}g\cdot(g^{-1}\cdot u)\tag{$\pi$ is a projection}\\
-&=\frac{1}{\abs{G}}\sum_{g\in G}u\tag{$\pi$ is a projection}\\
-&=u
-\end{align*}
-Now it is clear that $V=U\oplus\ker(\varphi)$ as $K$-vector spaces. We want to show that this decomposition extends to a decomposition of $KG$-submodules. But 1.2.5 proves that $\ker(\varphi)$ is a $KG$-submodule of $V$. Hence $V$ is completely reducible and so that $V$ is semisimple. 
-\end{proof}
-\end{thm}
+\begin{itemize}
+\item Every representation of $G$ is finite dimensional over $k$. 
+\item Morphisms between irreducible representations of $G$ are scalar operators. 
+\item If $G$ is abelian, then every irreducible representation of $G$ has dimension $1$. 
+\item Maschke's theorem says that if $\text{char}(k)$ does not divide $\abs{G}$, then every representation of $G$ is a direct sum of irreducible representations of $G$. 
+\end{itemize}
 
-This is great. Maschke's theorem says that every $\C G$-module is irreducible. 
+\begin{eg}{}{}\\
+The representation of $C_3=\langle x\;|\;x^3\rangle$ on $\F_3^2$ given by $$\rho(x)=\begin{pmatrix}
+1 & 1\\
+0 & 1
+\end{pmatrix}$$ is not semisimple.
+\end{eg}
 
-\begin{crl}{}{} Let $V\neq 0$ be a $KG$-module of finite degree, where $G$ is a finite group and $\abs{G}\cdot 1_K\neq 0$. Then there exists irreducible submodules $U_1,\dots U_k$ such that $$V=U_1\oplus\dots\oplus U_k$$ \tcbline
-\begin{proof}
-This is true since $V$ is a non-trivial $KG$-module and $KG$-modules are semisimple. 
+\begin{crl}{}{}\\
+Let $G$ be a finite group. Let $k$ be a field such that $\text{char}(k)$ does not divide $\abs{G}$. Let $\rho:G\to GL_k(V)$ be an irreducible representation of $G$. Then $V$ is a subrepresentation of $k[G]$. 
+\begin{proof}\\
+Let $0\neq v\in V$. Define a function $T:k[G]\to V$ by $$T\left(\sum_{g\in G}\lambda_gg\right)=\sum_{g\in G}\lambda_ggu$$ where $k[G]$ is the regular representation. Clearly it is a homomorphism of representations. Since $v\neq 0$ and $V$ is irreducible, we must have $\im(T)=V$. By Maschke's theorem, we have $k[G]=\ker(T)\oplus W$ for some subrepresentation $W$ of $k[G]$. By the first isomorphism theorem, we have $W\cong\im(T)=V$ so that $V$ is a subrepresentation of $k[G]$. 
 \end{proof}
 \end{crl}
 
-Character theory will then be to show that this decomposition of $KG$-submodules is essentially unique assuming that $K=\C$. 
+\begin{crl}{}{}\\
+Let $G$ be a finite group. Let $k$ be a field such that $\text{char}(k)$ does not divide $\abs{G}$. Then there are only finitely many non-isomorphic irreducible $k[G]$-modules. 
+\end{crl}
 
-\subsection{Regular and Permutation Representations}
-Given a group $G$, Cayley's theorem tells us that $G$ is isomorphic to a permutation group and hence we can think of every group $G$ as a permutation group on any set $X$ with $\abs{G}$ number of elements. In particular, for any group $G$ there will always be a representation where the vector space has dimension $\abs{G}$. 
-
-\begin{defn}{Regular Representations}{} Let $G$ be a group. Let $V$ be a vector space of dimension $\abs{G}$ with basis $E=\{e_1,\dots,e_n\}$ and that $G$ acts on the basis by $\cdot:G\times E\to E$. Define the regular representation of $G$ to be the group homomorphism $\text{reg}:G\to GL(V)$ defined as $$\text{reg}(g)\left(\sum_{i=1}^na_ie_i\right)=\sum_{i=1}^na_i(g\cdot e_i)$$
-\end{defn}
-
-We can generalize regular representations in the form of group actions. 
-
-\begin{defn}{Permutation Representation}{} Let $G$ be a finite group acting on a finite set $X$. Let $\C X$ be the $\C$-vector space with basis $X$. Define the permutation representation of $G$ to be $$\rho:G\to\text{GL}(\C X)$$ where for $g\in G$, $\rho(g):\C X\to\C X$ is the map defined on the basis elements $x\in X$ by $\rho(g)(x)=g\cdot x$ and then extending it $\C$-linearly. 
-\end{defn}
-
-If $X=G$ and $G$ acts on $X=G$ by left multiplication, then one can easily see that we recover the notion of a regular representation from permutation representations. 
+\begin{prp}{}{}\\
+Let $G$ be a finite group. Let $k$ be an algebraically closed field such that $\text{char}(k)$ does not divide $\abs{G}$. Let $V,W$ be irreducible $k[G]$-modules. Then we have $$\dim_k(\Hom_{k[G]}(V,W))=\begin{cases}
+1 & \text{ if }V\cong W\\
+0 & \text{ otherwise }
+\end{cases}$$
+\begin{proof}\\
+If $V$ is not isomorphic to $W$, then by Schur's lemma we must have $\Hom_{k[G]}(V,W)=\{0\}$. Suppose that $V\cong W$. Let $\varphi:V\to W$ be a $k[G]$-module isomorphism. Let $\psi\in\Hom_{k[G]}(V,W)$. Then we have $\varphi^{-1}\circ\psi:V\to V$ is a $k[G]$-module homomorphism. Then $\varphi^{-1}\circ\psi=\lambda\text{id}_V$ by a corollary of Schur's lemma. Hence $\psi=\lambda\varphi$ so that $k\langle\varphi\rangle=\Hom_{k[G]}(V,W)$. 
+\end{proof}
+\end{prp}
 
 \pagebreak
 \section{Character Theory}
 Recall that given a representation, there exists irreducible subrepresentations that break down the given representation. Our goal is now to find all describe all irreducible representations and to find the multiplicity of each irreducible subrepresentation lying in a given representation. 
 
 \subsection{Trace of a Matrix}
-\begin{defn}{Trace of a Matrix}{} Let $A\in M_{n\times n}(K)$ for $K=\R$ or $\C$ where we write $$A=\begin{pmatrix}
-a_{11} & \cdots & a_{1n}\\
-\vdots & \ddots & \vdots\\
-a_{n1} & \cdots & a_{nn}
-\end{pmatrix}$$ Define the trace of $A$ to be $$\text{tr}(A)=\sum_{i=1}^na_{ii}$$ which is the sum of the diagonal entries of $A$. 
-\end{defn}
 
-\begin{prp}{}{} Let $A\in M_{n\times n}(K)$ for $K=\R$ or $\C$. Then the trace of $A$ is the coefficient of $x^{n-1}$ in the characteristic polynomial $c_A(x)$ and the determinant is the constant term. 
-\end{prp}
-
-Recall that two matrices $A$ and $B$ are said to be similar if there exists some invertible matrix $P$ such that $A=P^{-1}BP$. In particular this means that $A$ and $B$ must be square matrices of the same dimensions. 
-
-\begin{lmm}{}{} Let $A,B$ be similar $d\times d$ matrices. Then $A$ and $B$ have the same trace. \tcbline
-\begin{proof}
-Since similar matrices have the same characteristic polynomial and that the trace of a matrix is the coefficient of the characteristic polynomial at the $x^{d-1}$ term, we have that $A$ and $B$ have the same trace. 
-\end{proof}
-\end{lmm}
-
-\begin{lmm}{}{} Let $A\in\GL(d,\C)$ such that $A^n=I$ for some $n\in\N\setminus\{0\}$. Then the following are true regarding the trace of $A$. 
+\begin{lmm}{}{} Let $A\in\text{GL}(d,\C)$ such that $A^n=I$ for some $n\in\N\setminus\{0\}$. Then the following are true regarding the trace of $A$. 
 \begin{itemize}
 \item $\abs{\text{tr}(A)}\leq d$
 \item $\abs{\text{tr}(A)}=d$ if and only if $A=\theta I_d$ where $\theta$ is some $n$th root of unity. 
@@ -246,18 +252,18 @@ Conversely, If $A=\theta I_d$ then $\text{tr}(A)=d\cdot\theta$ and thus we are d
 \end{lmm}
 
 \subsection{Characters of a Representation}
-\begin{defn}{Character of a Representation}{} Let $\rho:G\to\GL(d,\C)$ be a degree $d$ complex matrix representation. Define the character of $\rho$ as the function $\chi_\rho:G\to\C$ defined by $$\chi_\rho(g)=\text{tr}(\rho(g))$$
+\begin{defn}{Character of a Representation}{} Let $\rho:G\to\text{GL}(d,\C)$ be a degree $d$ complex matrix representation. Define the character of $\rho$ as the function $\chi_\rho:G\to\C$ defined by $$\chi_\rho(g)=\text{tr}(\rho(g))$$
 \end{defn}
 
 \begin{lmm}{}{} Equivalent matrix representations have the same character. \tcbline
 \begin{proof}
-Suppose $\rho_1,\rho_2:G\to\GL(d,\C)$ are equivalent matrix representations. Then $\rho_1,\rho_2$ are similar for each $g$ and so they have the same trace. Thus they have the same characteristic. 
+Suppose $\rho_1,\rho_2:G\to\text{GL}(d,\C)$ are equivalent matrix representations. Then $\rho_1,\rho_2$ are similar for each $g$ and so they have the same trace. Thus they have the same characteristic. 
 \end{proof}
 \end{lmm}
 
 In fact the inverse of this lemma is also true, which we will see later in the notes. This makes characteristics a powerful invariant for representations. 
 
-\begin{prp}{}{} Let $G$ be a finite group. Let $\rho:G\to\GL(d,\C)$ be a complex matrix representation. Then the following are true regarding the character $\chi$ of the representation. 
+\begin{prp}{}{} Let $G$ be a finite group. Let $\rho:G\to\text{GL}(d,\C)$ be a complex matrix representation. Then the following are true regarding the character $\chi$ of the representation. 
 \begin{itemize}
 \item $\abs{\chi(g)}\leq d$ for all $g$
 \item $\chi(g)=d$ if and only if $\rho(g)=I_d$

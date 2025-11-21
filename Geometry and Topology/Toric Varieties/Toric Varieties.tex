@@ -21,15 +21,73 @@
 \tableofcontents
 \pagebreak
 
-\section{Combinatorial Commutative Algebra}
-\subsection{}
-\begin{defn}{Monomial Notation}{}\\
-Let $R$ be a commutative ring. Let $u=(u_1,\dots,u_n)\in\N^n$. Define $$x^u=x_1^{u_1}\cdots x_n^{u_n}\in R[x_1,\dots,x_n]$$
+\pagebreak
+\section{Monoids}
+\subsection{Basic Properties of Monoids}
+\begin{defn}{Monoids}{}\\
+A monoid is a pair $(M,\ast)$ where $M$ is a set and $\ast:M\times M\to M$ is a binary operation on $M$ satisfying the following axioms: 
+\begin{itemize}
+\item Associativity: $(a\ast b)\ast c=a\ast(b\ast c)$ for all $a,b,c\in M$. 
+\item Identity: There exists $1_M\in M$ such that $1_M\ast a=a=a\ast 1_M$ for all $a\in M$. 
+\end{itemize}
 \end{defn}
 
-\subsection{The Semi-group Ring}
-\begin{defn}{The Semi-Group Ring}{}\\
-Let $S$ be a monoid. Let $R$ be a ring. Define the semi-group ring of $S$ over $R$ to be the left $R$-module $$R[S]=\bigoplus_{s\in S}R\cdot s$$ together with multiplication defined on basis by $t^{s_1}\cdot t^{s_2}=t^{s_1+s_2}$
+\begin{defn}{Monoid Homomorphisms}{}\\
+Let $M,N$ be monoids. Let $\phi:M\to N$ be a function. We say that $\phi$ is a monoid homomorphism if the following are true. 
+\begin{itemize}
+\item $\phi(m_1m_2)=\phi(m_1)\phi(m_2)$ for all $m_1,m_2\in M$. 
+\item $\phi(1_M)=1_N$. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Commutative Monoids}{}\\
+Let $M$ be a monoid. We say that $M$ is commutative if $$a\ast b=b\ast a$$ for all $a,b\in M$. 
+\end{defn}
+
+\begin{defn}{Cancellative Monoids}{}\\
+Let $M$ be a monoid. We say that $M$ is cancellative if the following are true. 
+\begin{itemize}
+\item $ab=ac$ implies $b=c$ for all $a,b,c\in M$. 
+\item $ba=ca$ implies $b=c$ for all $a,b,c\in M$. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Finitely Generated Monoids}{}\\
+Let $M$ be a monoid. We say that $M$ is finitely generated if there exists $m_1,\dots,m_n\in M$ such that $$m=m_1^{a_1}\cdots m_n^{a_n}$$ for all $m\in M$ and some $a_1,\dots,a_n\in\N$. 
+\end{defn}
+
+\subsection{The Grothendieck Completion of a Group}
+\begin{defn}{Grothendieck Completion}{}\\
+Let $M$ be a commutative monoid. Define the Grothendieck completion of $M$ to be the set $$G(M)=\frac{M\times M}{\sim}$$ where $(m_1,m_2)\sim(n_1,n_2)$ if $m_1+n_2+k=m_2+n_1+k$ together with the binary operation $\ast:G(M)\times G(M)\to G(M)$ defined by $$(m_1,m_2)\ast(n_1,n_2)=(m_1+n_1,m_2+n_2)$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $M$ be a commutative monoid. Then $G(M)$ is an abelian group. 
+\end{lmm}
+
+\begin{defn}{The Canonical Homomorphism}{}\\
+Let $M$ be a commutative monoid. Define the canonical homomorphism to the Grothendieck completion to be the function $i:M\to G(M)$ given by $i(m)=(m,0)$. 
+\end{defn}
+
+\begin{prp}{Universal Property of the Grothendieck Completion}{}\\
+Let $M$ be a commutative monoid. Then $G(M)$ and the canonical map $i:M\to G(M)$ satisfies the following universal property: For any abelian group $G$ and any monoid homomorphism $\phi:M\to G$, there exists a unique group homomorphism $\psi:G(M)\to G$ such that the following diagram commutes: \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	M & {G(M)} \\
+	& G
+	\arrow["i", from=1-1, to=1-2]
+	\arrow["\phi"', from=1-1, to=2-2]
+	\arrow["{\exists!\psi}", dashed, from=1-2, to=2-2]
+\end{tikzcd}} \\
+Moreover, $G(M)$ is the unique (up to unique isomorphism) abelian group satisfying this property. 
+\end{prp}
+
+\begin{lmm}{}{}\\
+Let $M$ be a cancellative commutative monoid. Then the canonical morphism $i:M\to G(M)$ is injective. 
+\end{lmm}
+
+\subsection{The Monoid Ring}
+\begin{defn}{The Monoid Ring}{}\\
+Let $S$ be a monoid. Let $R$ be a ring. Define the semi-group ring of $S$ over $R$ to be the left $R$-module $$R[S]=\bigoplus_{s\in S}R\cdot t^s$$ together with multiplication defined on basis by $t^{s_1}\cdot t^{s_2}=t^{s_1+s_2}$
 \end{defn}
 
 \begin{lmm}{}{}\\
@@ -41,38 +99,12 @@ Let $S$ be a monoid. Let $R$ be a ring. Then the following are true.
 \end{itemize}
 \end{lmm}
 
-\subsection{Polyhedral Cones}
-\begin{defn}{The Cone of a Set of Vectors}{}\\
-Let $k$ be a field. Let $V$ be a finite dimensional vector space over $k$. Let $S=\{v_1,\dots,v_s\}\subseteq V$ be finite set of vectors. Define the cone spanned by $S$ to be $$\text{Cone}(S)=\left\{\sum_{k=1}^s\lambda_kv_k\;\bigg{|}\;\lambda_k\geq 0\right\}$$
+\begin{defn}{Monomial Notation}{}\\
+Let $R$ be a commutative ring. Let $u=(u_1,\dots,u_n)\in\N^n$. Define $$x^u=x_1^{u_1}\cdots x_n^{u_n}\in R[x_1,\dots,x_n]$$
 \end{defn}
-
-\begin{defn}{Cones in a Vector Space}{}\\
-Let $k$ be a field. Let $V$ be a finite dimensional vector space over $k$. Let $C\subseteq V$ be a subset of $V$. We say that $C$ is a cone of $V$ if there exists a finite subset $S\subseteq V$ of vectors such that $$C=\text{Cone}(S)$$
-\end{defn}
-
-\begin{lmm}{}{}\\
-Let $k$ be a field. Let $C\subseteq k^n$ be a subset of $V$. Then $C$ is a cone if and only if there exists half planes $H_1,\dots,H_d\subseteq k^n$ such that $$C=H_1\cap\cdots\cap H_d$$
-\end{lmm}
-
-\begin{defn}{Dual Cone}{}\\
-Let $k$ be a field. Let $V$ be a finite dimensional vector space over $k$. Let $C\subseteq V$ be a subset of $V$. Then define the dual cone of $C$ to be $$C^\vee=\{f\in V^\ast\;|\;\langle f,v\rangle\geq 0\text{ for all }v\in C\}$$
-\end{defn}
-
-\begin{lmm}{}{}\\
-Let
-\end{lmm}
-
-
-\subsection{Affine Semi-groups}
-\begin{defn}{Affine Semi-group}{}\\
-Let $S$ be a monoid. We say that $S$ is an affine semi-group if there exists an injective monoid homomorphism $S\to\N^d$ for some $d\in\N$. 
-\end{defn}
-
-\subsection{Lattice Ideals}
-Let $S$ be a commutative monoid. Write $G(S)$ the grothendieck completion of $S$. It is an abelian group. 
 
 \begin{defn}{Lattice Ideal}{}\\
-Let $L\subseteq\Z^n$ be a lattice. Let $R$ be a commutative ring. Define the lattice ideal of $L$ in $R[x_1,\dots,x_n]$ to be $$I_L=R\langle x^u-x^v\;|\;u,v\in\N^n\text{ and }u-v\in L\rangle$$
+Let $L\subseteq\Z^n$ be a lattice. Let $R$ be a commutative ring. Define the lattice ideal of $L$ in $R[x_1,\dots,x_n]$ to be $$I_L=\langle x^u-x^v\;|\;u,v\in\N^n\text{ and }u-v\in L\rangle$$
 \end{defn}
 
 \begin{prp}{}{}\\
@@ -80,53 +112,92 @@ Let $k$ be a field. Let $S$ be a finitely generated commutative monoid. Let $s_1
 \end{prp}
 
 \begin{prp}{}{}\\
+Let $k$ be a field. Let $S$ be a finitely generated commutative monoid. Let $s_1,\dots,s_n$ be a set of generators of $S$. Then we have $$\dim(k[S])=n-\rank(\ker(\phi))$$
+\end{prp}
+
+\begin{defn}{Affine Semi-group}{}\\
+Let $S$ be a monoid. We say that $S$ is an affine semi-group if there exists an injective monoid homomorphism $S\to\N^d$ for some $d\in\N$. 
+\end{defn}
+
+\begin{prp}{}{}\\
 Let $k$ be a field. Let $S$ be a finitely generated commutative monoid. Let $s_1,\dots,s_n$ be a set of generators of $S$. Let $\phi:\Z^n\to G(S)$ be the group homomorphism defined by $e_i\mapsto s_i$. Then the following are equivalent. 
 \begin{itemize}
 \item $I_{\ker(\phi)}$ is prime. 
 \item $k[S]$ is an integral domain. 
 \item $G(S)$ is a free abelian group. 
-\item There exists an injective monoid homomorphism $S\to\N^d$ for some $d\in\N$. 
+\item $S$ is an affine semi-group. 
 \end{itemize}
 \end{prp}
 
+\subsection{Affine Semigroup Associated to a Rational Polyhedral Cone}
+\begin{lmm}{Gordon's Lemma}{}\\
+Let $\sigma\subseteq\R^n$ be a rational polyhedral cone. Let $A\subseteq\Z^n$ be a subgroup. Then $\sigma\cap A$ is an affine semi-group. 
+\end{lmm}
+
+Conversely, given an affine semigroup $S\subseteq\N^n$, we may associate to it a cone $$\R_{\geq 0}S=\{rs\;|\;r\in\R_{\geq 0}\text{ and }s\in S\}$$ So given an affine semigroup, we may obtain a new affine semigroup by passing to cones then passing back. This is called the saturation of the affine semigroup. 
+
+\begin{defn}{Saturation of an Affine Semigroup}{}\\
+Let $S$ be an affine semigroup. Define the saturation of $S$ to be $$S_\text{sat}=(\R_{\geq 0}S)\cap G(S)$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $S$ be an affine semigroup. Then we have $$\overline{k[S]}=k[S_\text{sat}]$$
+\end{prp}
+
+\begin{defn}{Saturated Affine Semigroup}{}\\
+Let $S$ be an affine semigroup. We say that $S$ is saturated if $S=S_\text{sat}$. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $\sigma\subseteq\R^n$ be a strongly convex rational polyhedral cone. Then $\sigma\cap S$ is saturated. 
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $\sigma_1,\sigma_2\subseteq\R^n$ be cones such that $\sigma_1\cap\sigma_2$ is a face of both cones. Let $A\subseteq\Z^n$ be a subgroup. Then we have $$(\sigma_1\cap\sigma_2)\cap A=(\sigma_1\cap A)+(\sigma_2\cap A)$$
+\end{lmm}
+
 \pagebreak
-\section{Constructing Toric Varieties}
+\section{Introduction to Toric Varieties}
 \subsection{The Standard $n$-Torus}
 \begin{defn}{The Standard $n$-Torus}{}\\
-Let $k$ be a field. Let $n\in\N\setminus\{0\}$. Define the standard $n$-torus over $k$ to be the affine group variety $$\G_m^n=\text{Spec}(k[x,x^{-1}])^n$$
+Let $k$ be a field. Let $n\in\N^+$. Define the standard $n$-torus over $k$ to be the affine group variety $$\G_m^n(k)=\text{Spec}(k[x,x^{-1}])^n$$
 \end{defn}
 
 \begin{defn}{Tori}{}\\
-Let $k$ be a field. Let $V$ be an affine algebraic group. We say that $V$ is a torus if there exists a field extension $K/k$ such that the algebraic group $V$ over $K$ is isomorphic to $\G_m^n=\text{Spec}(K[x,x^{-1}])^n$ for some $n\in\N\setminus\{0\}$. 
+Let $k$ be a field. Let $T$ be an affine variety over $k$. We say that $T$ is a torus if there exists a field extension $K/k$ such that $T\cong\G_m^n(K)$. 
 \end{defn}
 
 \begin{defn}{Split Tori}{}\\
-Let $k$ be a field. Let $V$ be a torus over the field extension $K/k$. We say that $V$ is split if $K=k$. 
+Let $k$ be a field. Let $T$ be a torus over the field extension $K/k$. We say that $T$ is split if $K=k$. 
 \end{defn}
 
-If $K$ is separably closed or algebraically closed, then all tori are split. \\
-
-Recall that the functor $D:\bold{FGAb}\to\bold{Diag}$ sending a finitely generated abelian group $G$ to $D(G)=\text{Spec}(k[G])$ is an equivalence of categories. Evidently split tori corresponds to the free abelian groups of finite rank under the equivalence. \\
-
-The following are some more properties of a split torus $T$:
-\begin{itemize}
-\item $T$ is diagonalizable (in $T$ is a torus if and only if $T$ is smooth connected diagonalizable)
-\item Every representation of $G$ is diagonalizable. 
-\item If $V$ is a representation of $T$, then we can decompose $V$ into its eigenspaces: $$V=\bigoplus_{\chi\in\chi(T)}V_\chi$$
-\end{itemize}
+If $K$ is separably closed or algebraically closed, then all tori are split. 
 
 \begin{lmm}{}{}\\
-Let $k$ be a field. Let $T$ be split torus over $k$. Then the following are true. 
+Let $k$ be a field. Let $T$ be a torus over $k$. Then the following are true. 
 \begin{itemize}
-\item Let $T'$ be a torus over $k$. Let $\phi:T\to T'$ be a morphism of group schemes. Then $\im(\phi)$ is a torus. 
+\item Let $T'$ be a torus over $k$. Let $\phi:T\to T'$ be a morphism of group schemes. Then $\im(\phi)$ is closed torus in $T'$. 
 \item Let $H\leq T$ be a subgroup variety of $T$. If $H$ is irreducible, then $H$ is a torus. 
 \item Let $H\leq T$ be a subgroup of $T$. Then $T/H$ is a torus. 
 \end{itemize}
 \end{lmm}
 
+Recall that the functor $D:\bold{FGAb}\to\bold{Diag}$ sending a finitely generated abelian group $G$ to $D(G)=\text{Spec}(k[G])$ is an equivalence of categories. Evidently split tori corresponds to the free abelian groups of finite rank under the equivalence. \\
+
+The following are some more properties of a split torus $T$:
+\begin{itemize}
+\item $T$ is diagonalizable ($T$ is a torus if and only if $T$ is smooth connected diagonalizable)
+\item Every representation of $G$ is diagonalizable. 
+\item If $V$ is a representation of $T$, then we can decompose $V$ into its eigenspaces: $$V=\bigoplus_{\chi\in\chi(T)}V_\chi$$
+\end{itemize}
+
+Recall that the character of a torus $T$ is a group homomorphism $T\to\C^\times$. 
+
 \begin{defn}{Character Lattices}{}\\
-Let $k$ be a field. Let $T$ be a torus over $k$. Define the character lattice of $T$ to be the group of characters $$\chi(T)=\Hom_{\bold{GrpSCh}_k}(T,\G_m)$$
+Let $k$ be a field. Let $T$ be a torus over $k$. Define the character lattice of $T$ to be the group of characters $$\chi(T)=\Hom_{\bold{GrpSch}_k}(T,\G_m)$$
 \end{defn}
+
+Let $(m_1,\dots,m_n)\in\Z^n$, we have a character $\chi:T\to\C^\times$ defined by $(t_1,\dots,t_n)\mapsto t_1{m_1}\cdots t_n^{m_n}$. All characters of $T$ are of this form. In other words, we have $M=\Hom(T,\C^\times)\cong\Z^n$. 
 
 \begin{defn}{One-parameter Subgroups}{}\\
 Let $k$ be a field. Let $T$ be a torus over $k$. A one-parameter subgroup of $T$ is a homomorphism of group schemes $\G_m\to T$. 
@@ -142,83 +213,319 @@ Let $k$ be a field. Let $T$ be a split torus over $k$. Then the following are tr
 \end{itemize}
 \end{lmm}
 
-\begin{prp}{}{}\\
-Let $k$ be a field. The functor $$\chi(-_{k^\text{sep}}):\bold{Tori}_k\to\bold{FGFreeAb(with continuous action of )}\text{Gal}(k^\text{sep}/k)$$ is an equivalence of categories. 
-\end{prp}
+\subsection{General Toric Varieties}
+Recall that the $t$ functor $t:\bold{Var}_k\to\bold{Sch}_k$ is the fully faithful functor whose inverse restricted to the essential image sends a scheme $X$ to its underlying $k$-points $X(k)$. When $X=\text{Spec}(\C[x_1,\dots,x_n]/I)$ is affine over $\C$ then the $\C$-points are precisely $\V(I)$. When $X$ is projective over $\C$ then its $\C$-points are described locally as the $\C$-points on the affine varieties in each standard affine cover. Thus we freely interchange notations between scheme theory and classical algebraic geometry. 
 
-\subsection{Constructing Toric Varieties}
 \begin{defn}{Toric Varieties}{}\\
-Let $k$ be a field. Let $X$ be an irreducible variety. We say that $X$ is a toric variety if the following are true. 
+Let $X$ be an irreducible variety over $\C$. We say that $X$ is a toric variety if the following are true. 
 \begin{itemize}
-\item $(\C^\ast)^n$ is a Zariski open subset of $X$. 
-\item The action of $(\C^\ast)^n$ on itself extends to $X$. 
+\item $X$ contains a torus $T_X$ as a Zariski open subset. 
+\item The action of $T_X$ on itself extends to $X$. 
 \end{itemize}
-We denote the underlying torus of $X$ by $T_X$. 
 \end{defn}
 
+\begin{eg}{}{}\\
+The following are true. 
+\begin{itemize}
+\item $\C^\times$ is a toric variety. 
+\item $\C^n$ is a toric variety. 
+\item $\Prj^n$ is a toric variety. 
+\item If $X,Y$ are toric varieties, then $X\times Y$ is a toric variety. 
+\item The total space of the line bundle over $\Prj^n$ is a toric variety. 
+\end{itemize}
+\end{eg}
+
+The equivariant structure of the torus encodes a lot of the algebraic geometry into combinatorial data or more managable structure. A lot of common varieties are toric, or are subvarieties of complete intersections of toric varieties. \\
+
+There are two ways to construct normal toric varieties: \\
+
+(1): Make an open cover of it via affine schemes that each corresponds to some polyhedral cone, then glue the open cover from combinatorial data. \\
+
+(2): Encode a projective variety as the proj construction given by a polytope. 
+
+\pagebreak
+\section{Constructing Affine Toric Varieties}
+\subsection{Equivalent Constructions of Affine Toric Varieties}
 \begin{defn}{Affine Toric Varieties Associated to Characters}{}\\
-Let $k$ be a field. Let $n\in\N\setminus\{0\}$. Let $\mA=\{\chi_1,\dots,\chi_m\}\subset\chi(\G_m^n)$ be characters of the standard $n$-torus. Define the affine toric varieties associated to $\mA$ to be $$Y_\mA=\overline{\im(\Phi_\mA)}$$ where $\Phi_\mA:\G_m^n\to\A_\C^m$ is the map defined by $\Phi_\mA(t)=(\chi_1(t),\dots,\chi_m(t))$
+Let $T$ be a torus over $\C$. Let $\mA=\{\chi_1,\dots,\chi_s\}\subseteq\chi(T)$ be characters of $T$. Define the affine toric variety associated to $\mA$ to be $$Y_\mA=\overline{\im(\Phi_\mA)}$$ where $\Phi_\mA:T\to\A_\C^s$ is the map defined by $\Phi_\mA(t)=(\chi_1(t),\dots,\chi_s(t))$
 \end{defn}
 
 \begin{prp}{}{}\\
-Let $k$ be a field. Let $n\in\N\setminus\{0\}$. Let $\mA\subset\chi(\G_m^n)$ be a finite subseet of characters of the standard $n$-torus. Then the following are true. 
+Let $T$ be a torus over $\C$. Let $\mA=\{\chi_1,\dots,\chi_s\}\subseteq\chi(T)$ be characters of $T$. Then the following are true. 
 \begin{itemize}
 \item $Y_\mA$ is an affine toric variety. 
 \item The underlying torus of $Y_\mA$ has character lattice $\Z\mA$. 
-\item $\dim(Y_\mA)=\text{rank}(\Z\mA)$
+\item $\dim(Y_\mA)=\text{rank}(\Z\mA)$. 
+\item The ideal of $Y_\mA$ is given by $$\I(Y_\mA)=I_{\ker(\phi)}=\langle x^\alpha-x^\beta\;|\;\alpha,\beta\in\N^s, \alpha-\beta\in\ker(\phi)\rangle$$ where $\phi:\Z^s\to\chi(T)$ is the group homomorphism defined by $e_i\mapsto\chi_i$. 
 \end{itemize}
+\begin{proof}\\
+Notice that the image of $\Phi_\mA$ lands in $\G_m^s$. Hence $\Phi_\mA$ is a map of torii. By lmm we know that $\im(\Phi_\mA)$ is a closed torus in $\G_m^s$. By the relative closure formula, we have that $$Y_\mA\cap\G_m^s=\im(\Phi_\mA)$$ Then by definition of subspace topology on $Y_\mA$, we conclude that $\im(\Phi_\mA)$ is an open subset of $Y_\mA$. This shows that $Y_\mA$ contains a torus as an open subset. Also, since $\im(\Phi_\mA)$ is irreducible and is an open subset of $Y_\mA$, we conclude that $Y_\mA$ is irreducible. \\
+
+Since $T$ acts on itself for being a torus, the map $\Phi_\mA$ gives the action of $\im(\Phi_\mA)$ on $\G_m^s$ that sends varieties to varieties. Let $t\in\im(\Phi_\mA)$. Since $\im(\Phi_\mA)$ is a torus, we have that $$\im(\Phi_\mA)=t\cdot\im(\Phi_\mA)\subseteq t\cdot Y_\mA$$ By definition of closure, we must have $Y_\mA\subseteq t\cdot Y_\mA$. Replacing $t$ with $t^{-1}$ show that $t\cdot Y_\mA\subseteq Y_\mA$. Hence the action of $\im(\Phi_\mA)$ gives an action on $Y_\mA$. Thus $Y_\mA$ is an affine toric variety. 
+\end{proof}
 \end{prp}
+
+\begin{eg}{The Rational Normal Cone}{}\\
+Let $d\in\N^+$. Let $\phi:\C^2\to\C^{d+1}$ be the morphism defined by $$\phi(s,t)=(s^d,s^{d-1}t,\dots,st^{d-1},t^d)$$ Then the following are true. 
+\begin{itemize}
+\item $\im(\phi)$ is an affine toric variety. 
+\item $\I(\im(\phi))=(x_ix_{j+1}-x_{i+1}x_j\;|\;1\leq i<j\leq d)$. 
+\end{itemize}
+\begin{proof}\\
+Let $I=(x_ix_{j+1}-x_{i+1}x_j\;|\;1\leq i<j\leq d)\subseteq\C[x_1,\dots,x_{d+1}]$. Notice that by projecting to projective space, we have that $\phi$ is the veronese map. It follows from the same technique that $\im(\phi)=\V(I)$. By the above, we know that $\im(\phi)$ is an affine toric variety. \\
+
+Now we have $\I(\im(\phi))=\I(\V(I))=I$ because toric varieties are irreducible. 
+\end{proof}
+\end{eg}
 
 \begin{defn}{Toric Ideals}{}\\
 Let $L\subseteq\Z^n$ be a lattice. Let $R$ be a commutative ring. Let $I_L\subseteq R[x_1,\dots,x_n]$ be the lattice ideal of $L$. We say that $I_L$ is a toric ideal if $I_L$ is a prime ideal. 
 \end{defn}
 
+\begin{lmm}{}{}\\
+Let $I\subseteq\C[x_1,\dots,x_n]$ be an ideal. Then $I$ is toric if and only if it is prime and is generated by binomials of the form $x_{i_1}^{\alpha_1}\cdots x_{i_n}^{\alpha_n}-x_{j_1}^{\beta_1}\cdots x_{j_m}^{\beta_m}$. 
+\begin{proof}\\
+If $I$ is a toric ideal then it is clearly prime and generated by binomials. So suppose that $I$ is prime and is generated by binomials of the above form. Notice that $\V(I)\cap(\C^\times)^n$ is non-empty since it contains $(1,\dots,1)$. We check that it is a subgroup of $(\C^\times)^n$. Let $u,v\in\V(I)\cap(\C^\times)^n$. Then we know that $u^\alpha-u^\beta=0=v^\alpha-v^\beta$. Then we have $$(uv)^\alpha-(uv)^\beta=u^\alpha v^\alpha-u^\beta v^\alpha+u^\beta v^\alpha-u^\beta v^\beta=(u^\alpha-u^\beta)v^\alpha+u^\beta(v^\alpha-v^\beta)=0$$ Hence products are closed. Also, we have  Hence inverses are closed. Thus $\V(I)\cap(\C^\times)^n$ is a subgroup of $(\C^\times)^n$. By lmm, we conclude that $\V(I)\cap(\C^\times)^n$ is a torus. For each $1\leq i\leq n$, projecting to the $i$th coordinate gives a character $\V(I)\cap(\C^\times)^n\to(\C^\times)^n\to\C^\times$. Let $\mA$ be the set of these characers. Then by construction we have $\V(I)=Y_\mA$. By the Nullstellensatz, we have $I=\I(\V(I))=\I(Y_\mA)$. Hence by the above we conclude that $I$ is toric. 
+\end{proof}
+\end{lmm}
+
 \begin{prp}{}{}\\
-Let $k$ be a field. Let $X$ be an irreducible affine variety over $k$. Then the following are equivalent. 
+Let $X$ be an irreducible affine variety over $\C$. Then the following are equivalent. 
 \begin{itemize}
 \item $X$ is a affine toric variety. 
-\item There exists a lattice $L$ and a finite subset $\mA\subseteq L$ such that $X=Y_\mA$. 
-\item There exists a toric ideal $I$ of $k[x_1,\dots,x_n]$ such that $X=\text{Spec}\left(\frac{k[x_1,\dots,x_n]}{I}\right)$. 
-\item There exists an affine semigroup $S$ such that $X=\text{Spec}(k[S])$. 
+\item There exists a torus $T$ and a finite subset $\mA\subseteq\chi(T)$ such that $X=Y_{\mA}$. 
+\item There exists a toric ideal $I$ of $\C[x_1,\dots,x_n]$ such that $X=\text{Spec}\left(\frac{\C[x_1,\dots,x_n]}{I}\right)$. 
+\item There exists an affine semigroup $S$ such that $X=\text{Spec}(\C[S])$ and $\chi(T_X)=\Z S$. 
 \end{itemize}
 \end{prp}
 
+\subsection{Cones and Affine Toric Varieties}
+By the main result in the last section, there is a close connection between affine toric varieties and affine semigroups. In combinatorial commutative algebra we have seen how to construct an affine semigroup from cones and vice versa. We will investigate the connection between cones and affine toric varieties here. 
+
+\begin{defn}{Affine Semigroup Associated to a Cone}{}\\
+Let $\sigma\subseteq\R^n$ be a rational polyhedral cone. Define the associated affine semigroup to be $$S_\sigma=\sigma^\vee\cap(\R^n)^\ast$$
+\end{defn}
+
+\begin{eg}{}{}\\
+There is an isomorphism $$\text{Spec}(\C[\{0\}^\vee\cap\Z^n])\cong\text{Spec}(\G_m^n)$$
+\begin{proof}\\
+The dual cone of $\{0\}$ is $\R^n$ and intersecting with $\Z^n$ just gives itself. So $\C[\Z^n]=\C[x_1,\dots,x_n,x_1^{-1},\dots,x_n^{-1}]$ is just the coordinate ring of the standard $n$-torus. 
+\end{proof}
+\end{eg}
+
+\begin{eg}{}{}\\
+Let $e_1,e_2,e_3\in\R^3$ be the standard basis vectors. Let $\sigma=\text{Cone}(e_1,e_2,e_1+e_3,e_2+e_3)\subseteq\R^3$. Then we have $$\C[S_\sigma]=\frac{\C[x,y,z,w]}{(xy-zw)}$$
+\begin{proof}\\
+We compute the dual cone to be $$\sigma^\vee=H_{(1,0,0)}^+\cap H_{(0,1,0)}^+\cap H_{(1,0,1)}^+\cap H_{(0,1,1)}^+$$ A generating set of $S_\sigma$ as a monoid is given by $\{e_1,e_2,e_3,e_1+e_2-e_3\}$. The kernel of the map $\Z^4\to\Z^3$ defined by $e_i\mapsto e_i$ for $1\leq i\leq 3$ and $e_4\mapsto(1,1,-1)$ is given by $\Z\langle e_1+e_2-e_3-e_4\rangle$. Thus we are done. 
+\end{proof}
+\end{eg}
+
+\begin{eg}{}{}\\
+Let $e_1,e_2,e_3\in\R^3$ be the standard basis vectors. Let $\sigma=\text{Cone}(e_2,e_3,2e_1+e_2+e_3)\subseteq\R^3$. Then we have $$\C[S_\sigma]\cong\frac{\C[x_1,\dots,x_6]}{(x_1x_4-x_2x_3,x_1x_5-x_2^2,x_1x_6-x_3^2)}$$
+\begin{proof}\\
+We compute the dual cone to be $$\sigma^\vee=H_{(2,1,1)}^+\cap H_{(0,1,0)}^+\cap H_{(0,0,1)}^+$$ A generating set of $S_\sigma$ as a monoid is then given by $\{(1,0,0),(0,1,0),(0,0,1),(-1,1,1),(-1,2,0),(-1,0,2)\}$. The kernel of the map $\Z^6\to\Z^3$ defined by $e_i\mapsto e_i$ for $1\leq i\leq 3$ and $e_4\mapsto(-1,1,1),e_5\mapsto(-1,2,0),e_6\mapsto(-1,0,2)$ is given by $\Z\langle e_1-e_2-e_3+e_4,e_1-2e_2+e_5,e_1-2e_3+e_6\rangle$. The ideal associated to this lattice is given by $(x_1x_4-x_2x_3,x_1x_5-x_2^2,x_1x_6-x_3^2)$. Thus we are done. 
+\end{proof}
+\end{eg}
+
+\begin{eg}{}{}\\
+Let $e_1,e_2\in\R^2$ be the standard basis vectors. Let $\sigma=\text{Cone}(de_1-e_2,e_2)$. Then we have $$\C[S_\sigma]\cong\frac{\C[x_0,\dots,x_d]}{(x_ix_{j+1}-x_jx_{i+1}\;|\;0\leq i<j\leq d-1)}$$
+\begin{proof}\\
+The dual cone is given by $$\sigma^\vee=H_{(d,-1)}^+\cap H_{(0,1)}^+$$ A generating set for the monoid $S_\sigma$ is given by $\{e_1+ie_2\;|\;0\leq i\leq d\}$. The kernel of the map $\Z^{d+1}\to\Z^2$ defined by $e_i\mapsto e_1+ie_2$ is given by $\Z\langle e_i+e_{j+1}-e_{i+1}e_j\;|\;0\leq i<j\leq d-1\rangle$. Notice that the lattice ideal of the kernel is precisely the ideal defining the rational normal cone. Hence we are done. 
+\end{proof}
+\end{eg}
+
+Not all affine toric varieties comes from cones. But all affine normal toric varieties come from strongly convex rational polyhedral cones. 
+
 \begin{prp}{}{}\\
-Let $k$ be an algebraically closed field. Let $S$ be an affine semi-group. Then there is a bijection $$\{p\in\text{Spec}(k[S])\;|\;p\text{ is a closed point }\}\;\;\overset{1:1}{\longleftrightarrow}\;\;\{\phi:S\to(\C,\cdot)\;|\;\phi\text{ is a monoid homomorphism }\}$$ given as follows. For each $p\in\text{Spec}(k[S])$ a closed point, $p$ corresponds to the monoid homomorphism $\gamma_p:S\to\C$ defined by $\gamma_p(m)=\chi^m(p)$
+Let $V$ be an affine toric variety. Then the following are equivalent. 
+\begin{itemize}
+\item $V$ is normal. 
+\item $V=\text{Spec}(\C[S])$ where $S$ is a saturated affine semigroup. 
+\item $V=\text{Spec}(\C[S_\sigma])$ where $\sigma $ is a strongly convex rational polyhedral cone. 
+\end{itemize}
+\end{prp}
+
+Let $S$ be an affine semigroup. Recall that the saturation of $S$ is the affine semigroup $$S_\text{sat}=\R_{\geq 0}S\cap G(S)$$ where $G(S)$ is the Grothendieck completion of $S$. 
+
+\begin{lmm}{}{}\\
+Let $X=\text{Spec}(\C[S])$ be an affine toric variety over $\C$ where $S$ is an affine semigroup. Then the normalization of $X$ is given by $$\widetilde{X}=\text{Spec}(\C[S_{\text{sat}}])$$ together with the normalization map given by the inclusion $\C[S]\hookrightarrow\C[S_{\text{sat}}]$. 
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $V$ be an affine toric variety. Then $V$ is smooth if and only if $V=\text{Spec}(\C[S_\sigma])$ where $\sigma$ is a strongly convex regular rational polyhedral cone. 
+\end{prp}
+
+Thus we have constructed a dictionary 
+\begin{align*}
+\text{Affine Toric Varieties}\;\;&\overset{1:1}{\longleftrightarrow}\;\;\text{Rational Polyhedral Cones}\\
+\text{Affine Normal Toric Varieties}\;\;&\overset{1:1}{\longleftrightarrow}\;\;\text{Strongly Convex Rational Polyhedral Cones}\\
+\text{Affine Smooth Toric Varieties}\;\;&\overset{1:1}{\longleftrightarrow}\;\;\text{Regular Rational Polyhedral Cones}\\
+\text{Affine Toric Orbifolds}\;\;&\overset{1:1}{\longleftrightarrow}\;\;\text{Simplicial Rational Polyhedral Cones}
+\end{align*}
+
+\subsection{Properties of Affine Toric Varieties}
+\begin{prp}{}{}\\
+Let $k$ be an algebraically closed field. Let $S$ be an affine semi-group with generators given by $m_1,\dots,m_s$. Then there is a bijection $$\{p\in\text{Spec}(k[S])\;|\;p\text{ is a closed point }\}\;\;\overset{1:1}{\longleftrightarrow}\;\;\{\phi:S\to(\C,\cdot)\;|\;\phi\text{ is a monoid homomorphism }\}$$ given as follows. 
+\begin{itemize}
+\item Each closed point $p\in\text{Spec}(k[S])$ corresponds to the monoid homomorphism $\gamma_p:S\to\C$ defined by $$\gamma_p\left(\sum_{i=1}^s\lambda_im_i\right)=\sum_{i=1}^s\lambda_ix_i(p)$$ where $x_i\in\C[S]$ is the $i$th coordinate function. 
+\item Each monoid homomorphism $\gamma:S\to(\C,\cdot)$ corresponds to the point $(\gamma(m_1),\dots,\gamma(m_s))$. 
+\end{itemize}
 \end{prp}
 
 \begin{prp}{}{}\\
 Let $k$ be an algebraically closed field. Let $X=\text{Spec}(k[S])$ be an affine torus over $k$. Then the action of the torus $T_X$ on $X$ is induced by the $k$-algebra homomorphism $$k[S]\to k[\chi(T_X)]\otimes_k k[S]$$ given by $\gamma_p\mapsto\gamma_p\otimes\gamma_p$ where here we identify the closed points on $k[S]$ by the above prp. 
 \end{prp}
 
-\subsection{Normality Condition and Polyhedral Cones}\begin{defn}{}{}\\
-Let $\sigma\subseteq\R^n$ be a strongly convex rational polyhedral cone. Define the affine toric variety associated to $\sigma$ to be $$V_\sigma=\text{Spec}(\C[S_\sigma])$$
+\begin{prp}{}{}\\
+Let $n\in\N^+$. Let $\sigma\subseteq\R^n$ be a cone. Let $\tau\subseteq\sigma$ be a face of the cone. Let $H_\phi$ be the supporting hyperplane for $\tau$ where $\phi\in\sigma^\vee\cap\Z^n$. Then we have $$\C[S_\tau]=\C[S_\sigma]_\phi$$
+\end{prp}
+
+\begin{eg}{}{}\\
+Let $e_1,e_2,e_3\subseteq\R^3$ be the standard basis vectors. Let $\sigma=\text{Cone}(e_1,e_2,e_1+e_3,e_2+e_3)\subseteq\R^3$. Let $\tau=\text{Cone}(e_1,e_1+e_3)$. Then we have $$\C[S_\tau]\cong\frac{\C[x,y,z,w]}{(xy-1)}$$
+\begin{proof}\\
+We already computed that $\C[S_\sigma]=\frac{\C[x,y,z,w]}{(xy-zw)}$. Notice that the supporting hyperplane for $\tau$ is given by $H_{(0,1,0)}^+$ (cross product of $e_1$ and $e_1+e_3$ gives the normal to the plane $\R\langle e_1,e_1+e_3\rangle$). Under the isomorphism $\C[S_\sigma]\cong\frac{\C[x,y,z,w]}{(xy-zw)}$, the element $(0,1,0)\in S_\sigma$ corresponds to $y$. Hence $$\C[S_\tau]=\left(\frac{\C[x,y,z,w]}{(xy-zw)}\right)_y\cong\C[y,z,w,y^{-1}]\cong\frac{\C[x,y,z,w]}{(xy-1)}$$ On the other hand, we may compute the coordinate ring $\C[S_\tau]$ using the lattice ideal. Notice that the dual of $\tau$ is given by $$\tau^\vee= H_{(1,0,0)}^+\cap H_{(1,0,1)}^+$$ A generating set for the monoid $S_\tau$ is given by $\{e_2,-e_2,e_3,e_1-e_3\}$. Then the kernel of the map $\Z^4\to\Z^3$ defined by $e_i\mapsto e_i$ for $2\leq i\leq 3$ and $e_4\mapsto-e_2,e_1\mapsto e_1-e_3$ is given by $\Z\langle e_2+e_4\rangle$ and so the coordinate ring is given by $$\C[S_\tau]=\frac{\C[x,y,z,w]}{(yw-1)}$$ and the two computations give isomorphic $\C$-algebras. 
+\end{proof}
+\end{eg}
+
+\subsection{Morphisms between Affine Toric Varieties}
+
+\pagebreak
+\section{Constructing Generic Toric Varieties}
+\subsection{Fans and Toric Varieties}
+\begin{defn}{Scheme Associated to a Fan}{}\\
+Let $n\in\N^+$. Let $\Sigma$ be a fan in $\R^n$. Define the scheme $X_\Sigma$ associated to $\Sigma$ by the following gluing data. 
+\begin{itemize}
+\item The schemes $\text{Spec}(\C[S_\sigma])$ for each $\sigma\in\Sigma$. 
+\item For each $\sigma_1,\sigma_2\in\Sigma$, an open subscheme $$\text{Spec}(\C[S_{\sigma_1\cap\sigma_2}])$$ of $\text{Spec}(\C[S_{\sigma_1}])$ and $\text{Spec}(\C[S_{\sigma_2}])$. 
+\item The gluing maps are the identity maps. 
+\end{itemize}
 \end{defn}
 
+We need to check that the above data is sufficient to define a scheme for gluing. 
+
 \begin{prp}{}{}\\
-Let $k$ be a field. Let $T$ be an affine torus variety over $k$. Then the following are equivalent. 
+Let $n\in\N^+$. Let $\Sigma$ be a fan in $\R^n$. Then $X_\Sigma$ is a normal, separated toric variety. 
+\begin{proof}\\
+Sketch proof: \\
+
+Since each cone in $\Sigma$ is strongly convex, we know that $\{0\}\in\Sigma$ and it is the face of every cone. Hence we have inclusions $\text{Spec}(\C[S_{\{0\}}])\hookrightarrow\text{Spec}(\C[S_\sigma])$ for every $\sigma\in\Sigma$. Hence each of the torii is glued by the identity. Thus $\text{Spec}(\C[S_{\{0\}}])$ is a torus contained in $X_\Sigma$. For each $\sigma\in\Sigma$, we know that $\text{Spec}(\C[S_{\{0\}}])$ acts on $\text{Spec}(\C[S_\sigma])$ for each $\sigma\in\Sigma$. Hence they glue to an action on $X_\Sigma$. (Check: the action is compatible with intersections and patches). \\
+
+Since each $\text{Spec}(\C[S_\sigma])$ is irreducible, we must have $X_\Sigma$ is irreducible. Hence $X_\Sigma$ is a toric variety. \\
+
+Since normality is a local condition, we conclude that $X_\Sigma$ is normal. \\
+
+Now notice that $X_\Sigma$ is separated if and only if for any cones $\sigma_1,\sigma_2\in\Sigma$, the product map $\Delta:\text{Spec}(\C[S_{\sigma_1\cap\sigma_2}])\to\text{Spec}(\C[S_{\sigma_1}])\times\text{Spec}(\C[S_{\sigma_2}])$ is Zariski closed. Now the map $\Delta$ is induced by the $\C$-algebra homomorphism $\Delta^\ast:\C[S_{\sigma_1}]\otimes_\C\C[S_{\sigma_2}]\to\C[S_{\sigma_1\cap\sigma_2}]$ by $\chi^{m_1}\otimes\chi^{m_2}\mapsto\chi^{m_1+m_2}$. By the separation lemma, we know that $S_{\sigma_1}+S_{\sigma_2}=S_{\sigma_1\cap\sigma_2}$. Thus $\Delta^\ast$ is surjective. Then we have $$\C[\im(\Delta)]=\C[S_{\sigma_1}]\otimes_\C\C[S_{\sigma_2}]/\ker(\Delta^\ast)$$ so that $\im(\Delta)$ is Zariski closed. 
+\end{proof}
+\end{prp}
+
+\begin{thm}{(Sumihiro)}{}\\
+Let $X$ be a normal separated variety equipped with the action of a torus $T$. Let $p\in X$. Then there exists an affine open neighbourhood $U$ of $p$ such that $U$ is $T$-invariant. 
+\end{thm}
+
+\begin{crl}{}{}\\
+Let $X$ be a normal separated toric variety. Then there exists a fan $\Sigma$ in $\R^n$ for some $n\in\N^+$ such that $X=X_\Sigma$. 
+\end{crl}
+
+Intuition: Adding a new cone to a fan partially compactifies. 
+
+\begin{prp}{}{}\\
+Let $n\in\N^+$. Let $\Sigma$ be a fan in $\R^n$. Then the following are true. 
 \begin{itemize}
-\item $X$ is normal. 
-\item There exists a saturated affine semigroup $S$ such that $X=\text{Spec}(\C[S])$. 
-\item There exists a strongly convex rational polyhedral cone $\sigma$ such that $X=\text{Spec}(\C[S_\sigma])$. 
+\item $X_\Sigma$ is smooth if and only if $\sigma$ is smooth for all $\sigma\in\Sigma$. 
+\item $X_\Sigma$ is an orbifold if and only if $\sigma$ is simplicial for all $\sigma\in\Sigma$. 
+\item $\Sigma$ is complete if and only if $X_\Sigma$. 
 \end{itemize}
 \end{prp}
 
-\subsection{Criteria for Smoothness}
+\begin{eg}{}{}\\
+Let $e_1,e_2\subseteq\R^2$ be the standard basis vectors. Let $\Sigma$ be the fan whose maximal cones are given by $\text{Cone}(e_1,e_2),\text{Cone}(e_1,-e_1-e_2),\text{Cone}(e_2,-e_1-e_2)$. Then $X_\Sigma=\Prj^2$. 
+\end{eg}
 
+\begin{prp}{}{}\\
+Let $n_1,n_2\in\N^+$. Let $\Sigma_1,\Sigma_2$ be fans in $\R^{n_1}$ and $\R^{n_2}$ respectively. Then we have $$X_{\Sigma_1\times\Sigma_2}\cong X_{\Sigma_1}\times X_{\Sigma_2}$$
+\end{prp}
 
+\subsection{Orbit Cone Correspondence}
+\begin{defn}{Distinguished Point of a Cone}{}\\
+Let $\sigma\subseteq\R^n$ be a cone. Let $\gamma:S_\sigma\to\C$ be the monoid homomorphism defined by $$\gamma(m)=\begin{cases}
+1 & \text{ if } m\in S_\sigma\cap\sigma^\perp=\sigma^\perp\cap(\R^n)^\ast\\
+0 & \text{ otherwise }
+\end{cases}$$
+Define the distinguished point of $\sigma$ to be the closed point in $\text{Spec}(\C[S_\sigma])$ associated to $\gamma$. We denote it by $p_\sigma$. 
+\end{defn}
 
+\begin{defn}{Torus Orbits}{}\\
+Let $\Sigma$ be a fan in $\R^n$. Let $\sigma\in\Sigma$ be a cone. Define the orbit of $\sigma$ to be $$O(\sigma)=p_\sigma\cdot T_{X_\Sigma}$$
+\end{defn}
 
+\begin{lmm}{}{}\\
+Let $\Sigma$ be a fan in $\R^n$. Let $\sigma\in\Sigma$ be a cone. Then we have $$\dim(O(\sigma))=n-\dim(\sigma)$$
+\end{lmm}
 
+\begin{thm}{The Orbit-Cone Correspondence}{}\\
+Let $\Sigma$ be a fan in $\R^n$. Then there is a one to one correspondence $$\Sigma\;\;\overset{1:1}{\longleftrightarrow}T_{X_{\Sigma}}\text{ orbits in }X_\Sigma$$ given by $\sigma\mapsto O(\sigma)$. 
+\end{thm}
 
+\begin{prp}{}{}\\
+Let $\Sigma$ be a fan in $\R^n$. Let $\sigma\in\Sigma$ be a cone. Then we have $$\text{Spec}(\C[S_\sigma])=\bigcup_{\tau\text{ is a face of }\sigma}O(\tau)$$
+\end{prp}
 
+\subsection{Divisors on Toric Varieties}
+\begin{prp}{}{}\\
+Let $\Sigma$ be a fan in $\R^n$. Let $\chi\in\chi(T)$ be a character of $T_{X_\Sigma}$. Then the following are true. 
+\begin{itemize}
+\item $\chi$ is a rational function on $X_\Sigma$. 
+\item The divisor of $\chi$ is given by $$\text{div}(\chi)=\sum_{\rho\in\Sigma(1)}\langle\chi,u_\rho\rangle\overline{O(\rho)}$$ where $u_\rho$ is a generator for $\rho\cap\Z^n$. 
+\end{itemize}
+\end{prp}
 
+\begin{defn}{$T$-Invariant Divisor Group}{}\\
+Let $\Sigma$ be a fan in $\R^n$. Define the $T_{X_\Sigma}$-invariant divisor group of $X_\Sigma$ to be the subgroup $$\text{Div}_{T_{X_\Sigma}}(X_\Sigma)=\bigoplus_{\rho\in\Sigma(1)}\Z\overline{O(\rho)}\leq\text{Div}(X_\Sigma)$$
+\end{defn}
 
+\begin{prp}{}{}\\
+Let $\Sigma$ be a fan in $\R^n$. Then the following are true. 
+\begin{itemize}
+\item There is an exact sequence of the form \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\chi(T)} & {\text{Div}_{T_{X_\Sigma}}(X_\Sigma)} & {\text{Cl}(X_\Sigma)} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+\end{tikzcd}}\\
+where the first map is given by $\chi\mapsto\text{div}(\chi)$ and the second map is the restriction of the quotient map from the group of divisors to the class group. 
+\item Let $u_\rho$ be a generator for $\rho\cap\Z^n$. If $\{u_\rho\;|\;\rho\in\Sigma(1)\}$ spans $\Z^n$ (i.e. $X_\Sigma$ has no torus factors), then there the above sequence is exact on the left: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {\chi(T)} & {\text{Div}_{T_{X_\Sigma}}(X_\Sigma)} & {\text{Cl}(X_\Sigma)} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\
+\end{itemize}
+\end{prp}
 
+\begin{eg}{}{}\\
+We have $$\text{Cl}\left(\text{Spec}\left(\frac{\C[x,y,z,w]}{(xy-zw)}\right)\right)=\Z$$
+\begin{proof}\\
+Recall that the affine toric variety is the toric variety associated to the cone $\text{Cone}(e_1,e_2,e_1+e_3,e_2+e_3)$. It has four $1$-dimensional faces given by $e_1,e_2,e_1+e_3,e_2+e_3$. Now the character lattice for the torus is $\Z^3$ with generators $e_1,e_2,e_3$. Then we compute that $\text{div}(e_1)=\overline{O(e_1)}+\overline{O(e_1+e_3)}$ and etc. By the above proposition, it suffices to compute the cokernel of the matrix $\begin{pmatrix}
+1 & 0 & 0\\
+0 & 1 & 0\\
+1 & 0 & 1\\
+0 & 1 & 1
+\end{pmatrix}$. So we are done. 
+\end{proof}
+\end{eg}
 
-
-
-
+\begin{eg}{}{}\\
+We have $$\text{Cl}\left(\text{Spec}\left(\frac{\C[x_0,\dots,x_d]}{(x_ix_{j+1}-x_jx_{i+1}\;|\;0\leq i<j\leq d-1)}\right)\right)=\Z/d\Z$$
+\begin{proof}\\
+Recall that the rational normal cone is given by the cone $\sigma=\text{Cone}(e_2,de_1-e_2)$. It has two $1$-dimensional faces whose generators are given by $e_2$ and $de_1-e_2$. Now the character lattice of $S_\sigma$ is $\Z^2$ with generators $e_1$ and $e_2$. Then we compute that $$\text{div}(e_1)=\langle e_1,e_2\rangle\overline{O(e_2)}+\langle e_1,de_1-e_2\rangle\overline{O(de_1-e_2)}=d\overline{O(de_1-e_2)}$$ and similarly that $\text{div}(e_2)=\overline{O(e_2)}-\overline{O(de_1-e_2)}$. By the above proposition, it suffices to compute the cokernel of $\begin{pmatrix}
+0 & 1\\
+d & -1
+\end{pmatrix}$. Hence we are done. 
+\end{proof}
+\end{eg}
 
 
 \end{document}

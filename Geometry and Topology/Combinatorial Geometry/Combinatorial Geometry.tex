@@ -145,14 +145,29 @@ and so we conclude.
 \end{defn}
 
 \begin{defn}{Abstract Simplicial Complex}{}\\
-Let $T$ be a set. Let $S\subseteq\mP(T)$. We say that $S$ is an abstract simplicial complex if for all $U\in S$ and $V\subseteq U$, we have $V\in S$. 
+Let $S$ be a set. We say that $S$ is a simplicial complex if for all $\sigma\in S$ and $\tau\subseteq\sigma$, we have $\tau\in S$. Elements of $S$ are called faces. 
 \end{defn}
-
-We mostly consider the case where $T$ is finite. In this case, we may replace the underlying set $T$ by $\{1,\dots,n\}$ by a suitable $n\in\N$. We think of the set $T$ is the set of vertices, and each subset of $T$ determines a face of the complex. 
 
 \begin{eg}{}{}\\
 The set $S=\mP(\{1,2,3\})\cup\mP(\{1,3,4\})\cup\mP(\{2,4\})$ is an abstract simplicial complex. 
 \end{eg}
+
+\begin{defn}{Dimension}{}\\
+Let $S$ be a simplicial complex. 
+\begin{itemize}
+\item Let $\sigma\in S$. Define the dimension of $\sigma$ to be $$\dim(\sigma)=\abs{\sigma}-1$$
+\item Define the dimension of $S$ to be $$\dim(S)=\max\{\dim(\sigma)\;|\;\sigma\in S\}$$
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Vertex Set}{}\\
+Let $S$ be a simplicial complex. Define the vertex set of $S$ to be $$V(S)=\bigcup_{\sigma\in S}\sigma$$
+\end{defn}
+
+Thus it is clear that $S\subseteq\mP(V(S))$. \\
+
+We mostly consider the case where $V(S)$ is finite. In this case, we may replace the underlying set by $\{1,\dots,n\}$ by a suitable $n\in\N$. 
+
 
 \begin{defn}{Associated Abstract Simplicial Complex}{}\\
 Let $\mK$ be a simplicial complex. Define the associated abstract simplicial complex $A(\mK)\subseteq\mP(V(\mK))$ as follows: For each simplex $\Delta\in\mK$, we have $V(\Delta)\subseteq A(\mK)$. 
@@ -164,25 +179,38 @@ Let $\mK$ be a simplicial complex. Then $A(\mK)$ is an abstract simplicial compl
 
 \subsection{Maps between Simplicial Complexes}
 \begin{defn}{Simplicial Maps}{}\\
-Let $T_1,T_2$ be sets. Let $S_1,S_2$ be simplicial complexes on $T_1$ and $T_2$ respectively. Let $f:T_1\to T_2$ be a function. We say that $f$ is a simplicial map if for each $\sigma\in S_1$, we have $f(\sigma)\in S_2$. 
+Let $S,T$ be simplicial complexes. Let $f:V(S)\to V(T)$ be a function. We say that $f$ is a simplicial map if for each $\sigma\in S$, we have $f(\sigma)\in T$. 
 \end{defn}
 
 \begin{lmm}{}{}\\
-Let $T_1,T_2,T_3$ be sets. Let $S_1,S_2,S_3$ be simplicial complexes on $T_1,T_2,T_3$ respectively. Let $f:T_1\to T_2$ and $g:T_2\to T_3$ be simplicial maps. Then $g\circ f$ is a simplicial map. 
+Let $S,T,U$ be simplicial complexes. Let $f:V(S)\to V(T)$ and $g:V(T)\to V(U)$ be simplicial maps. Then $g\circ f$ is a simplicial map. 
 \end{lmm}
 
 \begin{defn}{Isomorphism of Simplicial Complexes}{}\\
-Let $T_1,T_2$ be sets. Let $S_1,S_2$ be simplicial complexes on $T_1$ and $T_2$ respectively. Let $f:T_1\to T_2$ be a function. We say that $f$ is an isomorphism if there exists a simplicial map $g:T_2\to T_2$ such that $$g\circ f=\text{id}_{T_1}\;\;\;\text{ and }\;\;\;f\circ g=\text{id}_{T_2}$$
+Let $S,T$ be simplicial complexes. Let $f:V(S)\to V(T)$ be a function. We say that $f$ is an isomorphism if there exists a simplicial map $g:V(T)\to V(S)$ such that $$g\circ f=\text{id}_{V(S)}\;\;\;\text{ and }\;\;\;f\circ g=\text{id}_{V(T)}$$
 \end{defn}
 
 \subsection{Barycentric Subdivision}
 Recall that there is a notion of barycentric subdivision for simplicies. The definition easily extends to simplcial complexes, but not obvious for abstract simplicial complexes. 
 
 \begin{defn}{Barycentric Subdivision}{}\\
-Let $T$ be a set. Let $S$ be an abstract simplicial complex on $T$. Define the barycentric subdivision of $S$ to be the abstract simplicial complex $$\text{Bd}(S)=\bigcup_{i=0}^\infty\{\{v_0,\dots,v_k\}\subseteq\mP(S)\;|\;v_i\subset v_{i+1}\}$$ on $S$. 
+Let $S$ be an abstract simplicial complex. Define the barycentric subdivision of $S$ to be the abstract simplicial complex $$\text{Bd}(S)=\bigcup_{i=0}^\infty\{\{v_0,\dots,v_k\}\subseteq\mP(S)\;|\;v_i\subset v_{i+1}\}$$ on $S$. 
 \end{defn}
 
 The idea is to add vertex for each simplex in the simplicial complex so that the underlying set of the barycentric subdivision is $S$. Since $S$ is a subset of $\mP(T)$, elements of $S$ are partially ordered by inclusion, each inclusion with the geometric meaning of faces of the simplex.
+
+\subsection{Links and Stars}
+\begin{defn}{The Link of a Face}{}\\
+Let $S$ be a simplicial complex. Let $\sigma\in S$. Define the link of $\sigma$ to be $$\text{lk}(\sigma)=\{\tau\in S\;|\;\sigma\cup\tau\in S\text{ and }\sigma\cap\tau=\emptyset\}$$
+\end{defn}
+
+\begin{defn}{The Star of a Face}{}\\
+Let $S$ be a simplicial complex. Let $\sigma\in S$. Define the star of $\sigma$ to be $$\text{st}(\sigma)=\{\tau\in S\;|\;\sigma\cup\tau\in S\}$$ Define the boundary of the star of $\sigma$ to be $$\partial\text{st}(\sigma)=\{\tau\in S\;|\;\sigma\cup\tau\in S\text{ and }\sigma\not\subseteq\tau\}$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $S$ be a simplicial complex. Let $p\in V(S)$. Then we have $$\text{lk}(p)=\partial\text{st}(p)$$
+\end{lmm}
 
 \subsection{The Face Vector of a Simplicial Complex}
 \begin{defn}{The Face Vector}{}\\
@@ -219,40 +247,36 @@ Let $\mK$ be an abstract simplicial complex. Define the cubical embedding of $\m
 \end{defn}
 
 \pagebreak
-\section{Piecewise Linear Geometry}
+\section{Realizing Simplicial Complexes in Euclidean Space}
 \subsection{Geometric Realization}
 \begin{defn}{Geometric Realization with Respect to Function}{}\\
-Let $T$ be a set. Let $S$ be an abstract simplicial complex on $T$. Let $n\in\N$. Let $\phi:T\to\R^n$ be a function. Define the geometric realization of $T$ with respect to $\phi$ to be the space $$\abs{S}_\phi=\bigcup_{\sigma\in S}[\phi(s)\;|\;s\in\sigma]$$
+Let $S$ be an abstract simplicial complex. Let $n\in\N$. Let $\phi:V(S)\to\R^n$ be a function. Define the geometric realization of $S$ with respect to $\phi$ to be the space $$\abs{S}_\phi=\bigcup_{\sigma\in S}[\phi(s)\;|\;s\in\sigma]$$
 \end{defn}
 
-\begin{lmm}{}{}\\
-Let $T$ be a set. Let $S$ be a simplicial complex on $T$. Then $\abs{S}$ and $\abs{\text{Bd}(S)}$ are homeomrophic. 
-\end{lmm}
-
 \begin{defn}{Affine Embedding}{}\\
-Let $T$ be a set. Let $S$ be an abstract simplicial complex on $T$. Let $\phi:T\to\R^n$ be a function. We say that $\abs{S}_\phi$ is an affine embedding if $\phi$ is injective. 
+Let $S$ be an abstract simplicial complex. Let $\phi:V(S)\to\R^n$ be a function. We say that $\abs{S}_\phi$ is an affine embedding if $\phi$ is injective. 
 \end{defn}
 
 \begin{prp}{}{}\\
-Let $T$ be a set. Let $S$ be an abstract simplicial complex on $T$. Let $\phi:T\to\R^n$ and $\psi:T\to\R^m$ be affine embeddings. Then $\abs{S}_\phi$ and $\abs{S}_\psi$ are homeomorphic. 
+Let $S$ be an abstract simplicial complex. Let $\phi:V(S)\to\R^n$ and $\psi:V(S)\to\R^m$ be affine embeddings. Then $\abs{S}_\phi$ and $\abs{S}_\psi$ are homeomorphic. 
 \end{prp}
 
 Since any two affine embeddings give homeomorphic geometric realizations, we often drop the underling injective function and assume that a choice has been chosen. 
 
 \begin{defn}{Geometric Realization of a Simplicial Map}{}\\
-Let $T_1,T_2$ be sets. Let $S_1,S_2$ be simplicial complexes on $T_1$ and $T_2$ respectively. Let $\phi_1:T_1\to\R^n$ and $\phi_2:T_2\to\R^m$ be affine embeddings. Let $f:T_1\to T_2$ be a simplicial map. Define the geometric realization of $f$ to be the function $$\abs{f}:\abs{S_1}_{\phi_1}\to\abs{S_2}_{\phi_2}$$ given as follow. For each $x\in\abs{S_1}$, there exists $\lambda_v\in\R$ such that $x=\sum_{v\in T_1}\lambda_v\phi_1(v)$ and $\sum_{v\in T_1}\lambda_v=1$. Then define $$\abs{f}(x)=\sum_{v\in T_1}\lambda_v\psi(f(v))$$
+Let $S,T$ be simplicial complexes. Let $\phi_1:V(S)\to\R^n$ and $\phi_2:V(T)\to\R^m$ be affine embeddings. Let $f:S\to T$ be a simplicial map. Define the geometric realization of $f$ to be the function $$\abs{f}:\abs{S}_{\phi_1}\to\abs{T}_{\phi_2}$$ given as follow. For each $x\in\abs{S}$, there exists $\lambda_v\in\R$ such that $x=\sum_{v\in T_1}\lambda_v\phi_1(v)$ and $\sum_{v\in V(S)}\lambda_v=1$. Then define $$\abs{f}(x)=\sum_{v\in V(S)}\lambda_v\psi(f(v))$$
 \end{defn}
 
 \begin{prp}{}{}\\
-Let $T_1,T_2$ be sets. Let $S_1,S_2$ be simplicial complexes on $T_1$ and $T_2$ respectively. Let $f:T_1\to T_2$ be a simplicial map. Then the following are true. 
+Let $S_1,S_2$ be simplicial complexes. Let $f:S\to T$ be a simplicial map. Then the following are true. 
 \begin{itemize}
-\item Let $\sigma\in S_1$. Then we have $$\abs{f}(\abs{\sigma})=\abs{f(\sigma)}$$
-\item Let $\sigma\in S_1$. Then $\abs{f}|_{\abs{\sigma}}$ is affine linear. 
+\item Let $\sigma\in S$. Then we have $$\abs{f}(\abs{\sigma})=\abs{f(\sigma)}$$
+\item Let $\sigma\in S$. Then $\abs{f}|_{\abs{\sigma}}$ is affine linear. 
 \end{itemize}
 \end{prp}
 
 \begin{lmm}{}{}\\
-Let $T_1,T_2,T_3$ be sets. Let $S_1,S_2,S_3$ be simplicial complexes on $T_1,T_2,T_3$ respectively. Let $f:T_1\to T_2,g:T_2\to T_3$ be a simplicial map. Then we have $$\abs{g\circ f}=\abs{g}\circ\abs{f}$$
+Let $S,T,U$ be simplicial complexes. Let $f:S\to T,g:T\to U$ be simplicial maps. Then we have $$\abs{g\circ f}=\abs{g}\circ\abs{f}$$
 \end{lmm}
 
 Thus geometric realization is a functor from a pair $(S,\phi)$ where $S$ is a simplicial complex on some set $T$ and $\phi$ is an affine embedding, to its geometric realization with respect to the embedding. 
@@ -267,28 +291,37 @@ By definition, the geometric realization $\abs{S}$ is a subcomplex of the standa
 Let $n\in\N$. Consider the set $S=\mP(\{1,\dots,n+1\})$. Then $\abs{S}$ is the standard $n$-simplex. 
 \end{eg}
 
+\subsection{Properties of Geometric Realization}
+\begin{lmm}{}{}\\
+Let $S$ be a simplicial complex. Then $\abs{S}$ and $\abs{\text{Bd}(S)}$ are homeomrophic. 
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $S$ be a simplicial complex. Let $p\in V(S)$. Then we have $$\abs{\text{st}(p)}=\bigcup_{F\in S, p\in F}\abs{F}$$
+\end{lmm}
+
+To be removed: 
+\begin{prp}{}{}\\
+Let $S$ be a simplicial complex. Let $\sigma\in S$. Let $p\in\abs{\sigma}^\circ$. Then we have $$H_\text{sing}^k(\abs{S},\abs{S}\setminus p)\cong\widetilde{H}_\Delta^{k-\abs{\sigma}}(\text{lk}(\sigma))$$
+\end{prp}
+
 \subsection{Simplicial Approximation}
 \begin{defn}{Simplicial Approximations}{}\\
-Let $T_1,T_2$ be sets. Let $S_1,S_2$ be simplicial complexes on $T_1$ and $T_2$ respectively. Let $f:\abs{S_1}_{\phi_1}\to\abs{S_2}_{\phi_2}$ be a continuous map. A simplicial approximation of $f$ is a simplicial map $F:T_1\to T_2$ such that $\abs{F}$ is homotopic to $f$. 
+Let $S,T$ be simplicial complexes. Let $f:\abs{S}\to\abs{T}$ be a continuous map. A simplicial approximation of $f$ is a simplicial map $F:V(S)\to V(T)$ such that $\abs{F}$ is homotopic to $f$. 
 \end{defn}
 
 \begin{thm}{The Simplicial Approximation Theorem}{}\\
-Let $T_1,T_2$ be sets. Let $S_1,S_2$ be simplicial complexes on $T_1$ and $T_2$ respectively. Let $f:\abs{S_1}\to\abs{S_2}$ be a continuous map. Then there exists $n\in\N^+$ and a simplicial approximation $F:\text{Bd}^n(S_1)\to S_2$ of $f$. 
+Let $S,T$ be simplicial complexes. Let $f:\abs{S}\to\abs{T}$ be a continuous map. Then there exists $n\in\N^+$ and a simplicial approximation $F:\text{Bd}^n(S)\to T$ of $f$. 
 \end{thm}
+
+\begin{prp}{}{}\\
+Let $X$ be a CW complex. Then there exists a simplicial complex $S$ such that $\abs{S}$ is homotopic to $X$. 
+\end{prp}
 
 \subsection{Triangulated Spaces}
 \begin{defn}{Triangulated Spaces}{}\\
 Let $X$ be a space. We say that $X$ is triangulated if there is a simplicial complex $K$ such that $\abs{K}\cong X$. 
 \end{defn}
-
-Triangulations may not exists in general, and they may not be unique. 
-
-\subsection{Piecewise Linear Maps}
-\begin{defn}{Piecewise Linear Maps}{}\\
-Let $T_1,T_2$ be sets. Let $S_1,S_2$ be simplicial complexes on $T_1$ and $T_2$ respectively. Let $f:S_1\to S_2$ be a function. We say that $f$ is piecewise linear if there exists a subcomplex $S_1'\subseteq S_1$ such that $f|_{S_1'}$ is simplicial. 
-\end{defn}
-
-Clearly every simplicial map is piecewise linear. 
 
 \pagebreak
 \section{Delta Complexes and Simplicial Homology}

@@ -1340,43 +1340,30 @@ We picture a double complex as follows: \\~\\
 	\arrow[from=4-4, to=5-4]
 	\arrow[from=4-5, to=4-4]
 \end{tikzcd}}\\~\\
-where each square is commutative. 
+where each square is commutative. Double complexes are also graded objects of an abelian category equipeed with differentials that decrease the first and second degrees respectively. 
 
-\begin{defn}{The Total Complex of a Double Complex}{} Let $\mA$ be an abelian category where $\oplus$ denotes finite product. Let $(C_{\bullet,\bullet},d^h,d^v)$ be a double complex. Define the total complex $\text{Tot}^\oplus(C)_\bullet$ to be the chain complex in $\mA$ constructed as follows. 
+\begin{defn}{The Total Complex of a Double Complex}{}\\
+Let $\mA$ be an abelian category. Suppose that $\mA$ admits all relevant direct sums. Let $(C_{\bullet,\bullet},d^h,d^v)$ be a double complex. Define the total complex $\text{Tot}^\oplus(C)_\bullet$ to be the chain complex in $\mA$ constructed as follows. 
 \begin{itemize}
 \item For each $n\in\Z$, define $$\text{Tot}^\oplus(C)_n=\bigoplus_{p+q=n}C_{p,q}$$
-\item For each $n\in\Z$, define $d_n:\text{Tot}^\oplus(C)_n\to\text{Tot}^\oplus(C)_{n-1}$ by $$d_n=d_n^v+(-1)^nd_n^h$$
+\item For each $n\in\Z$, define $d:\text{Tot}^\oplus(C)_n\to\text{Tot}^\oplus(C)_{n-1}$ by $$d=d^v+(-1)^nd^h$$
 \end{itemize}
-In other words, the chain complex is of the form: \\~\\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	\cdots & {\bigoplus_{p+q=n+1}C_{p,q}} && {\bigoplus_{p+q=n}C_{p,q}} && {\bigoplus_{p+q=n-1}C_{p,q}} & \cdots
-	\arrow[from=1-1, to=1-2]
-	\arrow["{d_{n+1}^v+(-1)^{n+1}d_{n+1}^h}", from=1-2, to=1-4]
-	\arrow["{d_n^v+(-1)^nd_n^h}", from=1-4, to=1-6]
-	\arrow[from=1-6, to=1-7]
-\end{tikzcd}}\\~\\
 \end{defn}
 
-\begin{defn}{Total Homology of a Double Chain Complex}{} Let $\mA$ be an abelian category. Let $(C_{\bullet,\bullet},d^h,d^v)$ be a double complex in $\mA$. Define the total homology of $C$ to be the homology $$H_\bullet^\text{Tot}(C_{\bullet,\bullet},d^h,d^v)=H_\bullet(\text{Tot}^\oplus(C)_\bullet,d)$$ of the total complex $(\text{Tot}^\oplus(C)_\bullet,d)$
+\begin{defn}{Total Homology of a Double Chain Complex}{}\\
+Let $\mA$ be an abelian category. Suppose that $\mA$ admits all relevant products. Let $(C_{\bullet,\bullet},d^h,d^v)$ be a double complex in $\mA$. Define the total homology of $C$ to be the homology $$H_\bullet^\text{Tot}(C_{\bullet,\bullet},d^h,d^v)=H_\bullet(\text{Tot}^\oplus(C)_\bullet,d)$$ of the total complex $(\text{Tot}^\oplus(C)_\bullet,d)$
 \end{defn}
 
 \begin{defn}{The Product Total Complex of a Double Complex}{}\\
 Let $\mA$ be an abelian category. Let $(C_{\bullet,\bullet},d^h,d^v)$ be a double complex. Define the product total complex $\text{Tot}^{\prod}(C)_\bullet$ to be the chain complex in $\mA$ constructed as follows. 
 \begin{itemize}
 \item For each $n\in\Z$, define $$\text{Tot}^{\prod}(C)_n=\prod_{p+q=n}C_{p,q}$$
-\item For each $n\in\Z$, define $d_n:\text{Tot}^{\prod}(C)_n\to\text{Tot}^{\prod}(C)_{n-1}$ by $$d_n=d_n^v+(-1)^nd_n^h$$
+\item For each $n\in\Z$, define $d:\text{Tot}^{\prod}(C)_n\to\text{Tot}^{\prod}(C)_{n-1}$ by $$d=d^v+(-1)^nd^h$$
 \end{itemize}
-In other words, the chain complex is of the form: \\~\\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	\cdots & {\prod_{p+q=n+1}C_{p,q}} && {\prod_{p+q=n}C_{p,q}} && {\prod_{p+q=n-1}C_{p,q}} & \cdots
-	\arrow[from=1-1, to=1-2]
-	\arrow["{d_{n+1}^v+(-1)^{n+1}d_{n+1}^h}", from=1-2, to=1-4]
-	\arrow["{d_n^v+(-1)^nd_n^h}", from=1-4, to=1-6]
-	\arrow[from=1-6, to=1-7]
-\end{tikzcd}}\\~\\
 \end{defn}
 
-\begin{defn}{Tensor Product Double Complex}{} Let $\mA$ be an abelian category. Let $(C_\bullet,d^C)$ and $(D_\bullet,d^D)$ be two chain complexes. Define the tensor product of $C_\bullet$ and $D_\bullet$ to be the double complex $C_\bullet\otimes D_\bullet$ with the horizontal differential and vertical differential is defined by $$d^h=d^{C_p}\otimes\text{id}_{D_q}\;\;\;\;\text{ and }\;\;\;\;d^v=(-1)^p\text{id}_{C_p}\otimes d^{D_q}$$ respectively. 
+\begin{defn}{Tensor Product Double Complex}{}\\
+Let $(\mA,\otimes_\mA)$ be a monoidal abelian category. Let $(C_\bullet,d^C)$ and $(D_\bullet,d^D)$ be two chain complexes. Define the tensor product of $C_\bullet$ and $D_\bullet$ to be the double complex $C_\bullet\otimes D_\bullet$ with the horizontal differential $d^h:C_p\otimes_\mA D_q\to C_{p-1}\otimes_\mA D_q$ and vertical differential $d^v:C_p\otimes_\mA D_q\to C_p\otimes_\mA D_{q-1}$ is defined by $$d^h=d^C\otimes\text{id}_D\;\;\;\;\text{ and }\;\;\;\;d^v=(-1)^p\text{id}_C\otimes d^D$$ respectively. 
 \end{defn}
 
 \begin{defn}{Tensor Product Chain Complex}{} Let $\mA$ be an abelian category. Let $(C_\bullet,d^C)$ and $(D_\bullet,d^D)$ be two chain complexes. Define the tensor product chain complex of $C_\bullet$ and $D_\bullet$ to be the chain complex $$(C\otimes D)_\bullet=\text{Tot}^\oplus(C_\bullet\otimes D_\bullet)$$
