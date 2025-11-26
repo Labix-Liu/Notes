@@ -38,7 +38,7 @@ Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $M$ be an $R$-modu
 \end{itemize}
 \end{prp}
 
-The $A$-module structure can also be seen in the representation $\rho:A\to\text{End}_R(M)$. It is given by $a\cdot m=\rho(a)(m)$. 
+The $A$-module structure can also be seen in the representation $\rho:A\to\text{End}_R(M)$. It is given by $a\cdot m=\rho(a)(m)$. In particular, not every $A$-module $M$ gives a representation; the action of $A$ on $M$ must be bilinear in the scalars $R$. 
 
 \begin{defn}{Subrepresentation}{}\\
 Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $M$ be an $R$-module. Let $\rho:A\to\text{End}_R(M)$ be a representation of $A$. A subrepresentation of $\rho$ is an $R$-submodule $N\leq M$ such that the map $\rho|_N:A\to\text{End}_R(N)$ defined by $\rho|_N=\rho(a)|_N$ is a representation of $A$. 
@@ -118,6 +118,14 @@ Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $M,N$ be $R$-modul
 \end{itemize}
 \end{thm}
 
+\begin{prp}{}{}\\
+Let $R$ be a commutative ring. Let $A$ be a finite $R$-algebra. Let $\rho:A\to\text{End}_R(M)$ be an irreducible representation of $A$. Then $M$ is finitely generated. 
+\begin{proof}\\
+Let $0\neq m\in M$. Then $\rho(A)(m)$ is a submodule of $M$. Since $M$ is irreducible, we must have $\rho(A)(m)=M$. Since $A$ is finite over $R$, we must have $\rho(A)(m)$ is finitely generated over $R$. Hence $M$ is finitely generated over $R$. 
+\end{proof}
+\end{prp}
+
+\subsection{Schur's Lemma}
 Recall from Rings and Modules that we have Schur's lemma: A homomorphism $M\to N$ of simple $R$-modules is either the $0$ map or an isomorphism. 
 
 \begin{lmm}{Schur's Lemma III}{}\\
@@ -136,12 +144,46 @@ By Schur's lemma III, we know that $\rho(a):V\to V$ is a scalar operator for all
 
 In other words, every finite dimensional representation of a commutative algebra over an algebraically closed field must be of dimension $1$. And these are easy to classify. 
 
-\subsection{Representations of Finite Algebra}
+\subsection{Representations of Finite Algebras over an Algebraically Closed Field}
 \begin{prp}{}{}\\
-Let $R$ be a commutative ring. Let $A$ be a finite $R$-algebra. Let $\rho:A\to\text{End}_R(M)$ be an irreducible representation of $A$. Then $M$ is finitely generated. 
-\begin{proof}\\
-Let $0\neq m\in M$. Then $\rho(A)(m)$ is a submodule of $M$. Since $M$ is irreducible, we must have $\rho(A)(m)=M$. Since $A$ is finite over $R$, we must have $\rho(A)(m)$ is finitely generated over $R$. Hence $M$ is finitely generated over $R$. 
-\end{proof}
+Let $k$ be an algebraically closed field. Let $A$ be a finite $k$-algebra. Then there are only finitely many irreducible representations of $A$ up to isomorphism. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $k$ be an algebraically closed field. Let $A$ be a finite $k$-algebra. Then the following are equivalent. 
+\begin{itemize}
+\item $A$ is semisimple. 
+\item Every representation of $A$ is semisimple. 
+\item $\dim(A)=\sum_{i=1}^n\dim(V_i)^2$ where $V_1,\dots,V_n$ is the complete list of non-isomorphic irreducible representations of $A$. 
+\end{itemize}
+\end{prp}
+
+
+\subsection{Character Theory}
+Let $k$ be an algebraically closed field. Recall that the trace of a $k$-linear map between finite dimensional vector spaces have a basis independent description. 
+
+\begin{defn}{Characters of a Representation}{}\\
+Let $k$ be an algebraically closed field. Let $A$ be a $k$-algebra. Let $\rho:A\to\text{End}_k(V)$ be a finite dimensional representation of $A$. Define the character of $\rho$ to be function $\chi_V:A\to k$ given by $$\chi_V(a)=\text{tr}(\rho(a))$$
+\end{defn}
+
+\begin{defn}{Characters of an Algebra}{}\\
+Let $k$ be an algebraically closed field. Let $A$ be a $k$-algebra. Let $\phi:A\to k$ be a function. We say that $\phi$ is a character of $A$ if there exists a finite dimensional representation $V$ of $A$ such that $\phi=\chi_V$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $k$ be an algebraically closed field. Let $A$ be a $k$-algebra. Let $V,W$ be isomorphic finite dimensional representations of $A$. Then $\chi_V=\chi_W$. 
+\end{prp}
+
+\begin{lmm}{}{}\\
+Let $k$ be an algebraically closed field. Let $A$ be a $k$-algebra. Let $V$ be a finite dimensional representation of $A$. Let $W\leq V$ be a subrepresentation. Then we have $$\chi_V=\chi_W+\chi_{V/W}$$
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $k$ be an an algebraically closed field. Let $k$ be an algebraically closed field. Let $A$ be a $k$-algebra. Let $\rho:A\to\text{End}_k(V)$ be a finite dimensional representation of $A$. Then $\rho$ descends to a well defined function $\rho:\frac{A}{[A,A]}\to k$. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $k$ be an algebraically closed field. Let $A$ be a $k$-algebra. If $A$ is semisimple, then the set $$\{\chi_{[V]}\;|\;V\text{ is a finite dimensional representation of }A\}$$ is a basis for $\Hom_k\left(\frac{A}{[A,A]},k\right)$. 
 \end{prp}
 
 \pagebreak
@@ -189,34 +231,7 @@ Let $X$ be a set. Let $G$ be a group acting on $X$. Let $k$ be a field. Define t
 
 Every group $G$ has an action on itself by left multiplication. In this case the permutation representation is just the regular representation. 
 
-\subsection{Structural Results of Representations of Finite Groups}
-From section 1 and from Rings and Modules, we know a few facts about representations of a finite group $G$ over $k$. 
-
-\begin{itemize}
-\item Every representation of $G$ is finite dimensional over $k$. 
-\item Morphisms between irreducible representations of $G$ are scalar operators. 
-\item If $G$ is abelian, then every irreducible representation of $G$ has dimension $1$. 
-\item Maschke's theorem says that if $\text{char}(k)$ does not divide $\abs{G}$, then every representation of $G$ is a direct sum of irreducible representations of $G$. 
-\end{itemize}
-
-\begin{eg}{}{}\\
-The representation of $C_3=\langle x\;|\;x^3\rangle$ on $\F_3^2$ given by $$\rho(x)=\begin{pmatrix}
-1 & 1\\
-0 & 1
-\end{pmatrix}$$ is not semisimple.
-\end{eg}
-
-\begin{crl}{}{}\\
-Let $G$ be a finite group. Let $k$ be a field such that $\text{char}(k)$ does not divide $\abs{G}$. Let $\rho:G\to GL_k(V)$ be an irreducible representation of $G$. Then $V$ is a subrepresentation of $k[G]$. 
-\begin{proof}\\
-Let $0\neq v\in V$. Define a function $T:k[G]\to V$ by $$T\left(\sum_{g\in G}\lambda_gg\right)=\sum_{g\in G}\lambda_ggu$$ where $k[G]$ is the regular representation. Clearly it is a homomorphism of representations. Since $v\neq 0$ and $V$ is irreducible, we must have $\im(T)=V$. By Maschke's theorem, we have $k[G]=\ker(T)\oplus W$ for some subrepresentation $W$ of $k[G]$. By the first isomorphism theorem, we have $W\cong\im(T)=V$ so that $V$ is a subrepresentation of $k[G]$. 
-\end{proof}
-\end{crl}
-
-\begin{crl}{}{}\\
-Let $G$ be a finite group. Let $k$ be a field such that $\text{char}(k)$ does not divide $\abs{G}$. Then there are only finitely many non-isomorphic irreducible $k[G]$-modules. 
-\end{crl}
-
+\subsection{The Space of Homomorphisms between Representations}
 \begin{prp}{}{}\\
 Let $G$ be a finite group. Let $k$ be an algebraically closed field such that $\text{char}(k)$ does not divide $\abs{G}$. Let $V,W$ be irreducible $k[G]$-modules. Then we have $$\dim_k(\Hom_{k[G]}(V,W))=\begin{cases}
 1 & \text{ if }V\cong W\\
@@ -227,66 +242,131 @@ If $V$ is not isomorphic to $W$, then by Schur's lemma we must have $\Hom_{k[G]}
 \end{proof}
 \end{prp}
 
-\pagebreak
-\section{Character Theory}
-Recall that given a representation, there exists irreducible subrepresentations that break down the given representation. Our goal is now to find all describe all irreducible representations and to find the multiplicity of each irreducible subrepresentation lying in a given representation. 
+\begin{prp}{}{}\\
+Let $G$ be a finite group. Let $k$ be an algebraically closed field such that $\text{char}(k)$ does not divide $\abs{G}$. Let $V,W$ be $k[G]$-modules. If $\Hom_{k[G]}(V,W)\neq\{0\}$, then there exists $k[G]$-submodules $V'\leq V$ and $W'\leq W$ such that $V'\cong W'$. 
+\end{prp}
 
-\subsection{Trace of a Matrix}
+\begin{prp}{}{}\\
+Let $G$ be a finite group. Let $k$ be an algebraically closed field such that $\text{char}(k)$ does not divide $\abs{G}$. Let $V_i,W_j$ be irreducible $k[G]$-modules for $1\leq i\leq n$ and $1\leq j\leq m$. Then we have $$\dim_k\left(\Hom_{k[G]}\left(\bigoplus_{i=1}^nV_i,\bigoplus_{j=1}^mW_j\right)\right)=\sum_{i=1}^n\sum_{j=1}^m\dim_k(\Hom_{k[G]}(V_i,W_j))$$
+\end{prp}
 
-\begin{lmm}{}{} Let $A\in\text{GL}(d,\C)$ such that $A^n=I$ for some $n\in\N\setminus\{0\}$. Then the following are true regarding the trace of $A$. 
-\begin{itemize}
-\item $\abs{\text{tr}(A)}\leq d$
-\item $\abs{\text{tr}(A)}=d$ if and only if $A=\theta I_d$ where $\theta$ is some $n$th root of unity. 
-\item $\text{tr}(A)=d$ if and only if $A=I$
-\item $\text{tr}(A^{-1})=\overline{\text{tr}(A)}$
-\end{itemize} \tcbline
-\begin{proof}~\\
-\begin{itemize}
-\item By lemma $1.2.2$, there is some matrix $Q$ and $n$th roots of unity $\theta_1,\dots,\theta_d$ such that $Q^{-1}AQ=\text{diag}(\theta_1,\dots,\theta_d)$. It follows that $\text{tr}(A)=\text{tr}(Q^{-1}AQ)=\sum_{i=1}^d\theta_i$ and that $$\abs{\text{tr}(A)}\leq\sum_{i=1}^d\abs{\theta_i}$$
-\item Suppose that $\abs{\text{tr}(A)}=d$ Then this means that $\abs{\text{tr}(A)}=\sum_{i=1}^d\abs{\theta_i}$. This happens precisely when each $\theta_i$ have the same angle, which means they are positive multiples of each other. Since $\abs{\theta_1}=1$, we have $\theta_1=\dots=\theta_d$. Thus $A=\theta I_d$ for some $\theta$ an $n$th root of $1$. \\~\\
-Conversely, If $A=\theta I_d$ then $\text{tr}(A)=d\cdot\theta$ and thus we are done. 
-\item It follows immediately from the second item
-\item We have that $$Q^{-1}A^{-1}Q=(Q^{-1}AQ)^{-1}=\text{diag}(\theta_1^{-1},\dots,\theta_d^{-1})$$ This means that $\text{tr}(A^{-1})=\sum_{i=1}^d\theta_i^{-1}$. But since $\theta_i$ is a root of unity, we have that $\overline{\theta_i}=\theta_i^{-1}$. Thus we are done. 
-\end{itemize}
+\begin{prp}{}{}\\
+Let $G$ be a finite group. Let $k$ be an algebraically closed field such that $\text{char}(k)$ does not divide $\abs{G}$. Let $V$ be a $k[G]$-module. The we have $$\dim_k(\Hom_{k[G]}(k[G],V)=\dim(V)$$
+\begin{proof}\\
+Let $v_1,\dots,v_{\dim(V)}\in V$ be a basis for $V$. Define $\varphi_i:k[G]\to V$ by $\varphi_i(g)=g\cdot v_i$ for $g\in G$ and extend it $k$-linearly. It is clearly a $k[G]$-module homomorphism. Hence $\varphi_i\in\Hom_{k[G]}(k[G],V)$. I claim that $\varphi_1,\dots,\varphi_{\dim(V)}$ is a basis for $\Hom_{k[G]}(k[G],V)$. Let $\psi\in\Hom_{k[G]}(k[G],V)$. Then $$\psi(1)=\sum_{i=1}^{\dim(V)}\lambda_iv_i=\sum_{i=1}^{\dim(V)}\lambda_i\varphi_i(1)$$ for some $\lambda_i\in k$. Now since $\psi$ is a $k[G]$-module homomorphism, we have $$\psi(a)=a\psi(1)=a\sum_{i=1}^{\dim(V)}\lambda_ia\varphi_i(1)=\sum_{i=1}^{\dim(V)}\lambda_i\varphi_i(a)$$ for any $a\in k[G]$. Hence $\varphi_1,\dots,\varphi_{\dim(V)}$ spans $\Hom_{k[G]}(k[G],V)$. Now suppose that $\sum_{i=1}^{\dim(V)}\lambda_i\varphi_i=0$ for some $\lambda_i\in k$. Evaluating both sides at $1\in k[G]$ gives $\sum_{i=1}^{\dim(V)}\lambda_iv_i=0$. But since $v_1,\dots,v_{\dim(V)}$ is a basis for $V$, we conclude that $\lambda_1=\dots=\lambda_{\dim(V)}=0$. Hence $v_1,\dots,v_{\dim(V)}$ are linearly independent. 
 \end{proof}
-\end{lmm}
+\end{prp}
 
-\subsection{Characters of a Representation}
-\begin{defn}{Character of a Representation}{} Let $\rho:G\to\text{GL}(d,\C)$ be a degree $d$ complex matrix representation. Define the character of $\rho$ as the function $\chi_\rho:G\to\C$ defined by $$\chi_\rho(g)=\text{tr}(\rho(g))$$
+\subsection{Structural Results of Representations of Finite Groups}
+From section 1 and from Rings and Modules, we know a few facts about representations of a finite group $G$ over $k$. 
+
+\begin{itemize}
+\item Every representation of $G$ is finite dimensional over $k$. 
+\item Morphisms between irreducible representations of $G$ are scalar operators. 
+\item If $G$ is abelian, then every irreducible representation of $G$ has dimension $1$. 
+\item Maschke's theorem says that if $\text{char}(k)$ does not divide $\abs{G}$, then every representation of $G$ is a direct sum of irreducible representations of $G$. 
+\end{itemize}
+
+\begin{defn}{Composition Factors}{}\\
+Let $G$ be a finite group. Let $k$ be an algebraically closed field such that $\text{char}(k)$ does not divide $\abs{G}$. Let $V$ be $k[G]$-a module. Define the composition factors of $V$ to be irreducible $k[G]$-modules $V_1,\dots,V_n$ such that $$V\cong\bigoplus_{i=1}^nV_i$$
+Denote the set of isomorphism classes of composition factors of $V$ to be $$\text{Comp}(V)=\{[V_1],\dots,[V_n]\}$$
 \end{defn}
 
-\begin{lmm}{}{} Equivalent matrix representations have the same character. \tcbline
-\begin{proof}
-Suppose $\rho_1,\rho_2:G\to\text{GL}(d,\C)$ are equivalent matrix representations. Then $\rho_1,\rho_2$ are similar for each $g$ and so they have the same trace. Thus they have the same characteristic. 
+\begin{defn}{Multiplicity of an Irreducible Submodule}{}\\
+Let $G$ be a finite group. Let $k$ be an algebraically closed field such that $\text{char}(k)$ does not divide $\abs{G}$. Let $V,W$ be $k[G]$-modules such that $W$ is irreducible. Define the multiplicity of $W$ in $V$ to be $$\text{mult}_V(W)=\{[V_i]\in\text{Comp}(V)\;|\;W\in[V_i]\}$$
+\end{defn}
+
+\begin{eg}{}{}\\
+The representation of $C_3=\langle x\;|\;x^3\rangle$ on $\F_3^2$ given by $$\rho(x)=\begin{pmatrix}
+1 & 1\\
+0 & 1
+\end{pmatrix}$$ is not semisimple.
+\end{eg}
+
+\begin{crl}{}{}\\
+Let $G$ be a finite group. Let $k$ be a field such that $\text{char}(k)$ does not divide $\abs{G}$. Let $V$ be an irreducible $k[G]$-module. Then $V$ is a composition factor of $k[G]$. 
+\begin{proof}\\
+Let $0\neq v\in V$. Define a function $T:k[G]\to V$ by $$T\left(\sum_{g\in G}\lambda_gg\right)=\sum_{g\in G}\lambda_ggu$$ where $k[G]$ is the regular representation. Clearly it is a homomorphism of representations. Since $v\neq 0$ and $V$ is irreducible, we must have $\im(T)=V$. By Maschke's theorem, we have $k[G]=\ker(T)\oplus W$ for some subrepresentation $W$ of $k[G]$. By the first isomorphism theorem, we have $W\cong\im(T)=V$ so that $V$ is a subrepresentation of $k[G]$. 
 \end{proof}
-\end{lmm}
+\end{crl}
 
-In fact the inverse of this lemma is also true, which we will see later in the notes. This makes characteristics a powerful invariant for representations. 
+\begin{crl}{}{}\\
+Let $G$ be a finite group. Let $k$ be a field such that $\text{char}(k)$ does not divide $\abs{G}$. Then there are only finitely many non-isomorphic irreducible $k[G]$-modules. 
+\end{crl}
 
-\begin{prp}{}{} Let $G$ be a finite group. Let $\rho:G\to\text{GL}(d,\C)$ be a complex matrix representation. Then the following are true regarding the character $\chi$ of the representation. 
+\begin{crl}{}{}\\
+Let $G$ be a finite group. Let $k$ be an algebraically closed field such that $\text{char}(k)$ does not divide $\abs{G}$. Let $V,W$ be $k[G]$-modules such that $W$ is irreducible. Then we have $$\dim_k(\Hom_{k[G]}(V,W))=\text{mult}_V(W)$$
+\end{crl}
+
+Let $V$ be an irreducible $k[G]$-module. Combining the above proposition and corollary, we deduce that $$\text{mult}_{k[G]}(V)=\dim(V)$$
+
+\begin{thm}{}{}\\
+Let $G$ be a finite group. Let $k$ be an algebraically closed field such that $\text{char}(k)$ does not divide $\abs{G}$. Let $V_1,\dots,V_n$ be the complete list of non-isomorphic irreducible $k[G]$-modules. Then we have $$\abs{G}=\sum_{i=1}^n\dim(V_i)^2$$
+\end{thm}
+
+\begin{eg}{}{}\\
+Let $G$ be a group of order $8$. Let $k$ be an algebraically closed field such that $\text{char}(k)\neq 2$. Let $V_1,\dots,V_n$ be the complete list of non-isomorphic irreducible $k[G]$-modules. Then exactly one of the following is true (up to reordering of the modules). 
 \begin{itemize}
-\item $\abs{\chi(g)}\leq d$ for all $g$
-\item $\chi(g)=d$ if and only if $\rho(g)=I_d$
-\item $\chi(g^{-1})=\overline{\chi(g)}$ for all $g\in G$. 
-\item $\chi(hgh^{-1})=\chi(g)$ for all $g,h\in G$
+\item $n=8$ and $\dim(V_i)=1$. 
+\item $n=5$ and $\dim(V_1)=\dots=\dim(V_4)=1$ and $\dim(V_5)=2$. 
+\end{itemize}
+\end{eg}
+
+\subsection{Characters of Finite Groups}
+Similar to the case of representations, the character of a representation of a finite group $\chi:k[G]\to k$ is the same information as a function $\chi:G\to k$ simply be restriction and extension via scalars. 
+
+\begin{prp}{}{}\\
+Let $G$ be a finite group. Let $k$ be an algebraically closed field such that $\text{char}(k)$ does not divide $\abs{G}$. Let $\rho:G\to\text{End}_k(V)$ be a representation of $G$. Then the following are true. 
+\begin{itemize}
+\item $\chi_V(1_G)=\dim(V)$. 
+\item $\chi_V(hgh^{-1})=\chi(g)$ for all $g,h\in G$. 
 \end{itemize}
 \end{prp}
 
-In particular, $\chi$ is invariant under conjugacy classes. This means that we can think of $\chi$ as class functions instead. Class functions are functions that are constant on conjugacy classes so that we can think of their input are conjugacy classes. 
+The second item implies that $\chi$ descends to a function on conjugation classes $\chi:\text{Cl}(G)\to k$. 
 
-\begin{lmm}{}{} Let $V$ be a $\C G$-module of finite degree. Suppose $V=U\oplus W$ where $U$ and $W$ are submodules. Then $$\chi_V=\chi_U+\chi_W$$
-\end{lmm}
+\begin{prp}{}{}\\
+Let $G$ be a finite group. Let $\rho:G\to\text{End}_\C(V)$ be a complex representation of $G$. Then the following are true. 
+\begin{itemize}
+\item Let $g\in G$ be an element of order $n$. Then we have $$\chi_V(g)=\sum_{i=0}^{n-1}e^{2\pi i/n}$$
+\item Let $g\in G$. Then we have $\chi_V(g^{-1})=\overline{\chi_V(g)}$. 
+\end{itemize}
+\begin{proof}\\
+Let $H=\langle g\rangle$. Then $V$ is also a $\C[H]$-module. Let $V=\bigoplus_{i=1}^mV_i$ be the decomposition of $V$ into irreducible $\C[H]$-submodules. Since $H$ is cyclic, we must have $\dim(V_i)=1$. 
+\end{proof}
+\end{prp}
 
-\begin{defn}{Irreducible Character}{} Let $G$ be a finite group. A character is said to be irreducible if it is the character of an irreducible $\C G$-module. 
+Let $G$ be a finite group. Since $\C[G]$ is a semisimple $\C$-algebra, we know that the $\C$-vector space $$\Hom_\C\left(\frac{G}{[G,G]},\C\right)=\Hom_{\bold{Set}}(\text{Cl}(G),\C)$$ has a basis given by the character of $G$. We now define an inner product of the $\C$-space and show that the characters form an orthogonal basis. 
+
+\begin{defn}{The Inner Product Space of Class Functions}{}\\
+Let $G$ be a finite group. Define the inner product space of class functions of $G$ to be the $\C$-vector space $$\Hom_k\left(\frac{G}{[G,G]},k\right)=\Hom_{\bold{Set}}(\text{Cl}(G),\C)$$ together with the inner product given by $$\langle f_1,f_2\rangle=\frac{1}{\abs{G}}\sum_{g\in G}f_1(g)\overline{f_2(g)}$$
 \end{defn}
 
-\begin{lmm}{}{} Let $V=U_1\oplus\dots\oplus U_k$ be a decomposition of a $\C G$-module into irreducible $\C G$-submodules. Then $$\chi_V=\sum_{i=1}^k\chi_{U_i}$$
-\end{lmm}
+\begin{prp}{}{}\\
+Let $G$ be a finite group. Let $\phi,\psi$ be characters of $G$. Then we have $\langle\phi,\psi\rangle\in\R$. 
+\begin{proof}\\
+Let $\phi,\psi$ be characters. Then we have
+\begin{align*}
+\overline{\phi,\psi}&=\overline{\frac{1}{\abs{G}}\sum_{g\in G}\phi(g)\overline{\psi(g)}}\\
+&=\frac{1}{\abs{G}}\sum_{g\in G}\overline{\phi(g)}\psi(g)\\
+&=\frac{1}{\abs{G}}\sum_{g\in G}\phi(g^{-1})\psi(g)\\
+&=\frac{1}{\abs{G}}\sum_{h\in G}\phi(h)\psi(h^{-1})\tag{Let $h=g^{-1}$}\\
+&=\langle\phi,\psi\rangle
+\end{align*}
+so we are done. 
+\end{proof}
+\end{prp}
 
-Thus to compute the character of a $\C G$-module, one only has to compute the character of the submodules. 
+\begin{prp}{}{}\\
+Let $G$ be a finite group. Let $V,W$ be irreducible $\C[G]$-modules. Then we have $$
+\langle\chi_V,\chi_W\rangle=\begin{cases}
+1 & \text{ if }V\cong W\\
+0 & \text{ otherwise }
+\end{cases}$$
+\end{prp}
 
-\begin{defn}{Set of all Irreducible Characters of a Group}{} Let $G$ be a finite group. Denote the set of all complex irreducible representations of $G$ by $\hat{G}$. 
-\end{defn}
+\begin{thm}{}{}\\
+\end{thm}
 
 \subsection{Orthogonality Relations of Characters}
 \begin{defn}{Set of Functions from Group to $\C$}{} Let $G$ be a finite group. Denote $$\C[G]=\{\phi:G\to\C\;|\;\phi\text{ is a map of sets }\}$$ the set of all functions from $G$ to $\C$. 

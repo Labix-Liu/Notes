@@ -190,28 +190,6 @@ Let $S,T,U$ be simplicial complexes. Let $f:V(S)\to V(T)$ and $g:V(T)\to V(U)$ b
 Let $S,T$ be simplicial complexes. Let $f:V(S)\to V(T)$ be a function. We say that $f$ is an isomorphism if there exists a simplicial map $g:V(T)\to V(S)$ such that $$g\circ f=\text{id}_{V(S)}\;\;\;\text{ and }\;\;\;f\circ g=\text{id}_{V(T)}$$
 \end{defn}
 
-\subsection{Barycentric Subdivision}
-Recall that there is a notion of barycentric subdivision for simplicies. The definition easily extends to simplcial complexes, but not obvious for abstract simplicial complexes. 
-
-\begin{defn}{Barycentric Subdivision}{}\\
-Let $S$ be an abstract simplicial complex. Define the barycentric subdivision of $S$ to be the abstract simplicial complex $$\text{Bd}(S)=\bigcup_{i=0}^\infty\{\{v_0,\dots,v_k\}\subseteq\mP(S)\;|\;v_i\subset v_{i+1}\}$$ on $S$. 
-\end{defn}
-
-The idea is to add vertex for each simplex in the simplicial complex so that the underlying set of the barycentric subdivision is $S$. Since $S$ is a subset of $\mP(T)$, elements of $S$ are partially ordered by inclusion, each inclusion with the geometric meaning of faces of the simplex.
-
-\subsection{Links and Stars}
-\begin{defn}{The Link of a Face}{}\\
-Let $S$ be a simplicial complex. Let $\sigma\in S$. Define the link of $\sigma$ to be $$\text{lk}(\sigma)=\{\tau\in S\;|\;\sigma\cup\tau\in S\text{ and }\sigma\cap\tau=\emptyset\}$$
-\end{defn}
-
-\begin{defn}{The Star of a Face}{}\\
-Let $S$ be a simplicial complex. Let $\sigma\in S$. Define the star of $\sigma$ to be $$\text{st}(\sigma)=\{\tau\in S\;|\;\sigma\cup\tau\in S\}$$ Define the boundary of the star of $\sigma$ to be $$\partial\text{st}(\sigma)=\{\tau\in S\;|\;\sigma\cup\tau\in S\text{ and }\sigma\not\subseteq\tau\}$$
-\end{defn}
-
-\begin{lmm}{}{}\\
-Let $S$ be a simplicial complex. Let $p\in V(S)$. Then we have $$\text{lk}(p)=\partial\text{st}(p)$$
-\end{lmm}
-
 \subsection{The Face Vector of a Simplicial Complex}
 \begin{defn}{The Face Vector}{}\\
 Let $S$ be an abstract simplicial complex on $\{1,\dots,n\}$. Define the face vector $(f_{-1},\dots,f_n)$ of $S$ by the formula $$f_i=\text{The number of }i\text{-dimensional faces of }S$$ for $0\leq i\leq n$ and by convention, $f_{-1}=1$. 
@@ -245,6 +223,42 @@ Let $n\in\N$. Then $\partial[0,1]^n$ is a simplicial complex.
 \begin{defn}{Cubical Embeddings of Abstract Simplicial Complexes}{}\\
 Let $\mK$ be an abstract simplicial complex. Define the cubical embedding of $\mK$ to be the subspace $$\text{cc}(\mK)=i_c(\abs{\mK})$$
 \end{defn}
+
+\pagebreak
+\section{Operations on Simplicial Complexes}
+\subsection{Barycentric Subdivision}
+Recall that there is a notion of barycentric subdivision for simplicies. The definition easily extends to simplcial complexes, but not obvious for abstract simplicial complexes. 
+
+\begin{defn}{Barycentric Subdivision}{}\\
+Let $S$ be an abstract simplicial complex. Define the barycentric subdivision of $S$ to be the abstract simplicial complex $$\text{Bd}(S)=\bigcup_{i=0}^\infty\{\{v_0,\dots,v_k\}\subseteq\mP(S)\;|\;v_i\subset v_{i+1}\}$$ on $S$. 
+\end{defn}
+
+The idea is to add vertex for each simplex in the simplicial complex so that the underlying set of the barycentric subdivision is $S$. Since $S$ is a subset of $\mP(T)$, elements of $S$ are partially ordered by inclusion, each inclusion with the geometric meaning of faces of the simplex.
+
+\subsection{Links and Stars}
+\begin{defn}{The Link of a Face}{}\\
+Let $S$ be a simplicial complex. Let $\sigma\in S$. Define the link of $\sigma$ to be $$\text{lk}(\sigma)=\{\tau\in S\;|\;\sigma\cup\tau\in S\text{ and }\sigma\cap\tau=\emptyset\}$$
+\end{defn}
+
+\begin{defn}{The Star of a Face}{}\\
+Let $S$ be a simplicial complex. Let $\sigma\in S$. Define the star of $\sigma$ to be $$\text{st}(\sigma)=\{\tau\in S\;|\;\sigma\cup\tau\in S\}$$ Define the boundary of the star of $\sigma$ to be $$\partial\text{st}(\sigma)=\{\tau\in S\;|\;\sigma\cup\tau\in S\text{ and }\sigma\not\subseteq\tau\}$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $S$ be a simplicial complex. Let $p\in V(S)$. Then we have $$\text{lk}(p)=\partial\text{st}(p)$$
+\end{lmm}
+
+\subsection{The Join of Simplicial Complexes}
+\begin{defn}{The Join of Two Simplicial Complexes}{}\\
+Let $\mK_1,\mK_2$ be simplicial complexes. Define the join of $\mK_1$ and $\mK_2$ to be $$\mK_1\ast\mK_2=\{I_1\amalg I_2\;|\;I_1\in\mK_1,I_2\in\mK_2\}$$
+\end{defn}
+
+\begin{eg}{}{}\\
+We have $\Delta^n\ast\Delta^m=\Delta^{n+m-1}$. 
+\end{eg}
+
+\subsection{The Connected Sum of Simplicial Complexes}
+
 
 \pagebreak
 \section{Realizing Simplicial Complexes in Euclidean Space}
@@ -300,10 +314,18 @@ Let $S$ be a simplicial complex. Then $\abs{S}$ and $\abs{\text{Bd}(S)}$ are hom
 Let $S$ be a simplicial complex. Let $p\in V(S)$. Then we have $$\abs{\text{st}(p)}=\bigcup_{F\in S, p\in F}\abs{F}$$
 \end{lmm}
 
-To be removed: 
-\begin{prp}{}{}\\
-Let $S$ be a simplicial complex. Let $\sigma\in S$. Let $p\in\abs{\sigma}^\circ$. Then we have $$H_\text{sing}^k(\abs{S},\abs{S}\setminus p)\cong\widetilde{H}_\Delta^{k-\abs{\sigma}}(\text{lk}(\sigma))$$
-\end{prp}
+\begin{lmm}{}{}\\
+Let $\mK_1,\mK_2$ be simplicial complexes. Then we have $$\abs{\mK_1\ast\mK_2}=\abs{\mK_1}\ast\abs{\mK_2}$$
+\end{lmm}
+
+TBR (cones and suspensions are not yet introduced). 
+\begin{crl}{}{}\\
+Let $\mK$ be a simplicial complex. Then the following are true. 
+\begin{itemize}
+\item $\abs{\Delta^0\ast\mK}=C\abs{\mK}$ (the cone of the space). 
+\item $\abs{\partial\Delta^1\ast\mK}=\Sigma\abs{\mK}$. 
+\end{itemize}
+\end{crl}
 
 \subsection{Simplicial Approximation}
 \begin{defn}{Simplicial Approximations}{}\\
@@ -426,5 +448,6 @@ and so we conclude.
 \end{lmm}
 
 Combining with the induced map in homology, we thus have that given a map of $\Delta$-sets, it induces a map in homology. 
+
 
 \end{document}
