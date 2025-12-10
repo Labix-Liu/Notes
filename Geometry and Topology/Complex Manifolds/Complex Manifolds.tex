@@ -23,23 +23,12 @@
 \pagebreak
 \section{Complex Manifolds}
 \subsection{Basic Definitions}
-\begin{defn}{Atlas (Complex Structure)}{} Let $M$ be a topological space. An atlas of $M$ is a family of pairs $\{(U_i,\phi_i)|i\in I\}$, called charts, such that 
-\begin{itemize}
-\item Each $U_i$ is an open subset of $M$ and $M=\bigcup_{i\in I}U_i$
-\item Each $\phi_i$ is a homeomorphism of $U_i$ onto an open set $V\subseteq\C^n$
-\item Compatibility: Whenever $U_i\cap U_j$ is nonempty, the mapping $\phi_j\circ\phi_i^{-1}$ of $\phi_i(U_i\cap U_j)$ onto $\phi_j(U_i\cap U_j)$ is holomorphic
-\end{itemize}
+\begin{defn}{The Holomorphic Pseudogroup of Transformations}{}\\
+Define the holomorphic Pseudogroup of transformations to be $$\Gamma_\text{Holo}=\{f:U\to V\;|\;f\text{ is biholomorphic and }U,V\subseteq\C^n\text{ are open }\}$$
 \end{defn}
 
-\begin{defn}{Complete Atlas}{} A complete atlas on a topological space $M$ is an atlas of $M$ which is not contained in any other atlas of $M$. 
-\end{defn}
-
-\begin{lmm}{}{} Every atlas of $M$ is contained in a unique complete atlas. 
-\end{lmm}
-
-By collecting atlas and using the complete atlas of a topological space, we can talk about all possible transitions between the open covers. 
-
-\begin{defn}{Complex Manifolds}{} A complex manifold is a Hausdorff topological space $M$ that is second countable, together with a fixed complete atlas. 
+\begin{defn}{Complex Manifolds}{}\\
+A complex manifold $M$ is a manifold whose atlas is given by $\Gamma_\text{Holo}$. 
 \end{defn}
 
 \begin{prp}{}{} Every complex manifold is a smooth real manifold. 
@@ -48,19 +37,224 @@ Let $(U,\phi=z_1,\dots,z_n))$ be a chart of a complex manifold $M$. Write $z_k=x
 \end{proof}
 \end{prp}
 
-\subsection{Holomorphic Maps between Manifolds}
-\begin{defn}{Holomorphic Maps to $\C^k$}{} A continuous function $f:X\to\C^k$ is called holomorphic if for every chart $(U,\phi)$, we have that $f\circ\phi^{-1}:\C^n\to\C^k$ is holomorphic. 
-\end{defn}
-
-\begin{defn}{Holomorphic Maps between Manifolds}{} A continuous map $f:M\to N$ between two complex manifolds is called holomorphic if $\psi\circ f\circ\phi^{-1}$ is holomorphic for every pair of charts $(U,\phi)$ of $M$ and $(V,\psi)$ of $N$ such that $f(U)\subset V$. 
-\end{defn}
+\begin{lmm}{}{}\\
+Let $M$ be a complex manifold. Let $U\subseteq M$ be an open subset. Then $U$ is a complex manifold. 
+\end{lmm}
 
 \subsection{Complex Submanifolds}
 \begin{defn}{Complex Submanifolds}{} Let $M$ be an $n$ dimensional manifold. An $m$ dimensional submanifold is a subset $Y$ of $M$ such that for every $y\in Y$, there exists a chart $(U,\phi)$ of $M$ such that $$\phi(Y\cap U)=\phi(U)\cap\{0\}^{n-m}\times\C^m=\{(z_1,\dots,z_n)\in\phi(U)|z_{n-m+1}=\dots=z_n=0\}$$
 \end{defn}
 
 \pagebreak
+\section{Almost Complex Manifolds}
+\subsection{Linear Complex Structures}
+\begin{defn}{Linear Complex Structure}{}\\
+Let $V$ be a vector space over $\R$. A linear complex structure on $V$ is a linear map $J:V\to V$ such that $J^2=-\text{id}_V$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $V$ be a vector space over $\R$. Let $J$ be a linear complex structure on $V$. Then $V$ is a $\C$-vector space whose action is given by $$(x+iy)\cdot v=xv+yJ(v)$$ for $v\in V$ and $x+iy\in\C$. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $V$ be a finite dimensional vector space over $\R$. Then the following are true. 
+\begin{itemize}
+\item $V$ admits a linear complex structure if and only if $\dim_\R(V)$ is even. 
+\item In this case, we have $\dim_\C(V)=2\dim_\R(V)$. 
+\end{itemize}
+\end{prp}
+
+\begin{eg}{}{}\\
+Let $J:\R^{2n}\to\R^{2n}$ be the map defined in block matrix form $$J=\begin{pmatrix}
+0 & -I_n\\
+I_n & 0
+\end{pmatrix}$$
+Then $J$ defines a linear complex structure on $\R^{2n}$. In particular, if $e_1,\dots,e_{2n}$ are the standard basis vectors for $\R^{2n}$, then $\frac{1}{2}(e_1-ie_{2n+1}),\dots,\frac{1}{2}(e_n-ie_{2n})$ is a basis for $V$ as a $\C$-vector space. 
+\end{eg}
+
+\begin{prp}{}{}\\
+Let $V$ be a vector space over $\R$. Let $J$ be a linear complex structure on $V$. Let $T:V\to V$ be an $\R$-linear transformation. Then $T$ is a $\C$-linear transformation if and only if $J\circ T=T\circ J$. 
+\end{prp}
+
+The linear complex structure on an $\R$-vector space gives an intrinsic way of giving the $\R$-vector space the structure of a $\C$-vector space. However, we already know an external way of giving $\R$-vector spaces $\C$-multiplication: namely by extension of scalars. 
+
+\begin{prp}{}{}\\
+Let $V$ be a vector space over $\R$. Let $J$ be a linear complex structure on $V$. Then the following are true. 
+\begin{itemize}
+\item $J$ extends to a linear complex structure on $V\otimes_\R\C$ by $J(v\otimes z)=J(v)\otimes z$. 
+\item The eigenvalues of $J:V\otimes_\R\C\to V\otimes_\R\C$ is given by $\pm i$ and the eigenspaces of $J$ are given by $$E_i=\{v\otimes 1-J(v)\otimes i\;|\;v\in V\}\;\;\;\text{ and }\;\;\;E_{-i}=\{v\otimes 1+J(v)\otimes i\;|\;v\in V\}$$
+\item There is a natural isomorphism of $\C$-vector space $V\cong E_i$ given by $v\mapsto v\otimes 1-J(v)\otimes i$. 
+\item The conjugation map $\overline{(-)}:V\otimes_R\C\to V\otimes_\R\C$ given by $\overline{v\otimes z}=v\otimes\overline{z}$ restricts to an isomorphism $$\overline{(-)}|_{E_i}:E_i\overset{\cong}{\to}E_{-i}$$ whose inverse is given by $\overline{(-)}|_{E_{-i}}$. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $V$ be a vector space over $\R$. Let $J$ be a linear complex structure on $V$. Then $J^T$ defines a linear complex structure on $V^\ast$. 
+\end{prp}
+
+\subsection{Almost Complex Structures on Vector Bundles}
+\begin{defn}{Almost Complex Structure}{}\\
+Let $p:E\to B$ be a vector bundle. An almost complex structure on $p$ is a section $J:B\to\Hom(E,E)$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $p:E\to B$ be a vector bundle. Let $J$ be an almost complex structure on $p$. Then $p$ is a complex vector bundle whose action is given by $$(x+iy)\cdot v=xv+yJ_b(v)$$ for $v\in E_b$ and $x+iy\in\C$ for each $b\in B$. 
+\end{prp}
+
+\subsection{Almost Complex Manifolds}
+\begin{defn}{Almost Complex Manifolds}{}\\
+An almost complex manifold is a smooth manifold $M$ together with an almost complex structure $J:M\to\Hom(TM,TM)$ that is smooth. 
+\end{defn}
+
+Even though every even dimensional vector space has a linear complex structure, they may not glue smoothly into an almost complex structure for a smooth manifold. This is a question of the reduction of the structure group from $GL_{2n}(\R)$ to the subgroup $GL_n(\C)$. 
+
+\pagebreak
+\section{Complex Vector Bundles}
+\subsection{Hermitian and Holomorphic Vector Bundles}
+\begin{defn}{Hermitian Structure}{} Let $p:E\to B$ be a vector bundle. A Hermitian structure $H$ on $E$ is a Hermitian product on each fibre varying smoothly on $E$. This means that for $x\in M$, $H:E_x\times E_x\to\C$ satisfies the following.
+\begin{itemize}
+\item $H(u,v)$ is $\C$-linear for every $v\in E_x$
+\item $H(u,v)=\overline{H(v,u)}$
+\item $H(u,u)>0$ for all $u\neq 0$
+\item $H(u,v)$ is a smooth function on $M$ for every smooth sections $u,v$ of $E$
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Holomorphic Vector Bundle}{} Let $p:E\to M$ be a vector bundle over a complex manifold $M$. We say the vector bundle is holomorphic (equipped with a holomorphic structure) if the trivializations $$\tau_i:p^{-1}(U_i)\overset{\cong}{\to}U_i\times\C^n$$ has transition matrices $\tau_{ij}=\tau_j\circ\tau_i$ that have holomorphic coefficients. 
+\end{defn}
+
+
+\pagebreak
+\section{Tangent Spaces}
+\subsection{The Complex Structure of Tangent Spaces on Almost Complex Manifolds}
+\begin{defn}{Holomorphic and Antiholomorphic Tangent Space}{}\\
+Let $(M,J)$ be an almost complex manifold. 
+\begin{itemize}
+\item Define $T_p^{1,0}(M)$ to be the eigenspace of $i$ of the linear complex structure $J_p$ on $T_{\C,p}(M)$. 
+\item Define $T_p^{0,1}(M)$ to be the eigenspace of $-i$ of the linear complex structure $J_p$ on $T_{\C,p}(M)$. 
+\end{itemize}
+\end{defn}
+
+We have seen above that $$T_pM\otimes_R\C\cong T_p^{(1,0)}(M)\oplus T_p^{(0,1)}(M)$$ as complex vector spaces. 
+
+\begin{lmm}{}{}\\
+Let $(M,J)$ be an almost complex manifold. Let $p\in M$. Let $(U,x^1,\dots,x^n,y^1,\dots,y^n)$ be a smooth chart at $p$. Suppose that $J_p\left(\frac{\partial}{\partial x^i}\bigg{|}_p\right)=\frac{\partial}{\partial y^i}\bigg{|}_p$ for $1\leq i\leq n$. Then the following are true. 
+\begin{itemize}
+\item A $\C$-basis for $T_p^{1,0}(M)$ is given by $$\left\{\frac{1}{2}\left(\frac{\partial}{\partial x^1}-i\frac{\partial}{\partial y^1}\right)\bigg{|}_p,\dots,\frac{1}{2}\left(\frac{\partial}{\partial x^n}-i\frac{\partial}{\partial y^n}\right)\bigg{|}_p\right\}$$
+\item A $\C$-basis for $T_p^{0,1}(M)$ is given by $$\left\{\frac{1}{2}\left(\frac{\partial}{\partial x^1}+i\frac{\partial}{\partial y^1}\right)\bigg{|}_p,\dots,\frac{1}{2}\left(\frac{\partial}{\partial x^n}+i\frac{\partial}{\partial y^n}\right)\bigg{|}_p\right\}$$
+\end{itemize}
+\end{lmm}
+
+Assuming that $J_p$ sends the basis vector $\frac{\partial}{\partial x^i}\bigg{|}_p$ to $\frac{\partial}{\partial y^i}\bigg{|}_p$ loses no generality since we can always choose appropriate coordinate functions so that the almost complex structure locally at $U$ looks like ours one. \\
+
+Recall from complex analysis that we defined partial complex derivatives by $$\frac{\partial}{\partial z_k}=\frac{1}{2}\left(\frac{\partial}{\partial x_k}-i\frac{\partial}{\partial y_k}\right)\;\;\;\text{ and }\;\;\;\frac{\partial}{\partial\overline{z_k}}=\frac{1}{2}\left(\frac{\partial}{\partial x_k}+i\frac{\partial}{\partial y_k}\right)$$
+
+\begin{defn}{The Basis for Tangent Space given by the Almost Complex Structure}{}\\
+Let $(M,J)$ be an almost complex manifold. Let $p\in M$. Let $(U,x^1,\dots,x^n,y^1,\dots,y^n)$ be a smooth chart at $p$. Define the tangent vector $$\frac{\partial}{\partial z^k}\bigg{|}_p:\mC_{M,p}^\infty\to\R$$ by $$\frac{\partial}{\partial z^k}\bigg{|}_p=\left(\frac{\partial}{\partial x^k}-i\frac{\partial}{\partial y^k}\right)\bigg{|}_p$$ Define the tangent vector $$\frac{\partial}{\partial\overline{z^k}}\bigg{|}_p:\mC_{M,p}^\infty\to\R$$ by $$\frac{\partial}{\partial\overline{z^k}}\bigg{|}_p=\left(\frac{\partial}{\partial x^k}+i\frac{\partial}{\partial y^k}\right)\bigg{|}_p$$
+\end{defn}
+
+\subsection{Decomposing the Tangent Space of Complex Manifolds}
+Let $M$ be a complex manifold. Let $p\in M$. Regarded as a smooth manifold, we have the notion of tangent space $T_pM=\text{Der}(C_{M,p}^\infty(M,\R),\R)$. Since we are on a complex manifold, we ought to consider smooth functions with values in $\C$ instead. 
+
+\begin{lmm}{}{}\\
+Let $M$ be a complex manifold. Let $p\in M$. Let $(U,x^1,\dots,x^n,y^1,\dots,y^n)$ be a smooth chart at $p$. Then an $\R$-basis for $T_pM$ is given by $$\left\{\frac{\partial}{\partial x^1}\bigg{|}_p,\dots,\frac{\partial}{\partial x^n}\bigg{|}_p,\frac{\partial}{\partial y^1}\bigg{|}_p,\dots,\frac{\partial}{\partial y^n}\bigg{|}_p\right\}$$
+\end{lmm}
+
+\begin{defn}{The Complex Tangent Space}{}\\
+Let $M$ be a complex manifold. Let $p\in M$. Define the complex tangent space of $M$ at $p$ to be $$T_{\C,p}(M)=\text{Der}_\C(C_{M,p,\C}^\infty,\C)$$
+\end{defn}
+
+Let $u:\C\to\C$ be a function. Identifying $\C$ with $\R^2$, we obtain the notion of smooth functions. And smoothness of $u$ can be checked on the components of $u$. This gives a decomposition of tangent spaces. 
+
+\begin{lmm}{}{}\\
+Let $M$ be a complex manifold. Let $p\in M$. Then we have a natural $\C$-vector space isomorphism $$T_{\C,p}(M)\cong T_p(M)\otimes_\R\C$$
+\end{lmm}
+
+In particular, the real dimension of $T_{\C,p}(M)$ is $4\dim_\C(M)$, and a $\C$-basis for $T_{\C,p}(M)$ is given by lemma 3.5.1. This is the effect of considering $T_{\C,p}(M)$ as an extension of scalars from $T_p(M)$. 
+
+\begin{prp}{}{}\\
+Let $M$ be a complex manifold. Then $M$ is an almost complex manifold. 
+\end{prp}
+
+We know from Complex Analysis that not every smooth function is holomorphic. A smooth function must satisfy the Cauchy-Riemann equations in order to be holomorphic. We will see in a moment that the complex tangent space contains the holomorphic tangent space defined earlier. 
+
+\subsection{The Holomorphic Tangent Space}
+Let $M$ be a smooth manifold. Recall that the tangent space of $M$ is defined to be $$\text{Der}_\R(C_{M,p}^\infty,C_{M,p}^\infty/m_p)$$ where $C_{M,p}^\infty$ is the stalk of the sheaf $C_M^\infty(-)$ of smooth functions on $M$ at $p$. Now if $M$ is a complex manifold, the canonical maps we care about are holomorphic maps and the sheaf of holomorphic functions $\mO_M(-)$. Therefore we define the holomorphic tangent space in a similar way. 
+
+\begin{defn}{The Holomorphic Tangent Space}{}\\
+Let $M$ be a complex manifold. Let $p\in M$. Define the Holomorphic Tangent space of $M$ at $p$ to be $$T_p^{\text{Holo}}(M)=\text{Der}_\C\left(\mO_{M,p},\C\right)$$ where $\C$ is a $\mO_{M,p}$-module via the isomorphism $\C\cong\frac{\mO_{M,p}}{m_p}$. 
+\end{defn}
+
+Immediately one is curious of the relation between $T_p^\text{Holo}(M)$ and $T_p(M)$ since every complex manifold is a smooth manifold of double the dimension. 
+
+\begin{prp}{}{}\\
+Let $M$ be a complex manifold. Let $p\in M$. Then we have $T_p^{1,0}(M)=T_p^\text{Holo}(M)$. 
+\end{prp}
+
+%https://math.stackexchange.com/questions/577501/complexified-tangent-space
+
+The way in which we may decompose the complexified tangent space into its holomorphic and antiholomorphic part works also for almost complex manifolds. In fact this motivates the theory for almost complex manifolds in the first place. 
+
+\subsection{The Induced Map and the Jacobians}
+Let $M,N$ be complex manifolds. Let $f:M\to N$ be a smooth map. Let $p\in M$. Let $(U,x^1,\dots,x^n,y^1,\dots,y^n)$ be a smooth chart at $p$. Let $(V,u^1,\dots,u^m,v^1,\dots,v^m)$ be a smooth chart at $f(p)$. Recall that the $\R$-linear map $(f_\ast)_p:T_p(M)\to T_p(N)$ is given by the Jacobian which can be compactly written into block matrix form $$(f_\ast)_p=\begin{pmatrix}
+\frac{\partial u^i\circ f}{\partial x^j}\bigg{|}_p & \frac{\partial u^i\circ f}{\partial y^j}\bigg{|}_p\\
+\frac{\partial v^i\circ f}{\partial x^j}\bigg{|}_p & \frac{\partial v^i\circ f}{\partial y^j}\bigg{|}_p
+\end{pmatrix}$$
+
+We may ask what the Jacobian looks like under our newly acquired basis from the almost complex structure. 
+
+\begin{defn}{The Holomorphic Jacobian}{}\\
+Let $M,N$ be complex manifolds. Let $f:M\to N$ be a smooth map. Let $p\in M$. Let $(U,x^1,\dots,x^n,y^1,\dots,y^n)$ be a smooth chart at $p$. Let $(V,u^1,\dots,u^m,v^1,\dots,v^m)$ be a smooth chart at $f(p)$. Define the holomorphic Jacobian of $f$ with respect to the charts to be $$J(f)=\begin{pmatrix}
+\frac{\partial(u^1+iv^1)\circ f}{\partial z^1}\bigg{|}_p & \cdots & \frac{\partial(u^1+iv^1)\circ f}{\partial z^n}\bigg{|}_p\\
+\vdots & \ddots & \vdots\\
+\frac{\partial(u^m+iv^m)\circ f}{\partial z^1}\bigg{|}_p & \cdots & \frac{\partial(u^m+iv^m)\circ f}{\partial z^n}\bigg{|}_p
+\end{pmatrix}$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $M,N$ be complex manifolds. Let $f:M\to N$ be a smooth map. Let $p\in M$. Let $(U,x^1,\dots,x^n,y^1,\dots,y^n)$ be a smooth chart at $p$. Let $(V,u^1,\dots,u^m,v^1,\dots,v^m)$ be a smooth chart at $f(p)$. Then the differential $(f_\ast)_p$ under the basis induced from the almost complex structure is given in block matrix form by $$(f_\ast)_p=\begin{pmatrix}
+J(f) & 0\\
+0 & \overline{J(f)}
+\end{pmatrix}$$
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $M,N$ be complex manifolds. Let $f:M\to N$ be a holomorphic map. Let $p\in M$. Let $(U,x^1,\dots,x^n,y^1,\dots,y^n)$ be a smooth chart at $p$. Let $(V,u^1,\dots,u^m,v^1,\dots,v^m)$ be a smooth chart at $f(p)$. Then $(f_\ast)_p:T_p(M)\to T_p(N)$ restricts to an $\C$-linear map $T_p^{1,0}(M)\to T_{f(p)}^{1,0}(N)$. 
+\end{prp}
+
+\subsection{The Complex Tangent Bundle}
+\begin{defn}{The Complex Tangent Bundle}{}\\
+Let $M$ be a complex manifold. Define the complex tangent bundle of $M$ to be $$T_\C M=TM\otimes_\R\C$$
+\end{defn}
+
+\subsection{Integrable Complex Structures}
+\begin{defn}{Integrable Complex Structure}{}\\
+Let $(M,J)$ be an almost complex manifold. We say that $M$ is integrable if there exist a complex structure on $M$ that induces $J$. 
+\end{defn}
+
+\begin{thm}{The Newlander–Nirenberg theorem}{}\\
+Let $(M,J)$ be an almost complex manifold. Then $J$ is integrable if and only if $[TM^-,TM^-]\subseteq TM^-$
+\end{thm}
+
+\pagebreak
 \section{Sheaves on Manifolds}
+\subsection{}
+\begin{defn}{Sheaf of Smooth Complex Functionss}{}\\
+Let $M$ be a complex manifold. Define the sheaf of smooth complex functions $$\mC_{M,\C}^\infty$$ on $M$ to be the sheaf given as follows. 
+\begin{itemize}
+\item For each open subset $U\subseteq M$, we have $\mC_{M,\C}^\infty(U)=\mC^\infty(U;\C)$ is the smooth functions from $U$ to $\C$. 
+\item For each inclusion $V\subseteq U$ of open sets, then induced map is the restriction map. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Sheaf of Holomorphic Functions}{}\\
+Let $M$ be a complex manifold. Define the sheaf of holomorphic functions $$\mO_M$$ on $M$ to be the sheaf given as follows. 
+\begin{itemize}
+\item For each open subset $U\subseteq M$, we have $\mO_M(U)=\{f:U\to\C\;|\;f\text{ is holomorphic }\}$ is the smooth functions from $U$ to $\C$. 
+\item For each inclusion $V\subseteq U$ of open sets, then induced map is the restriction map. 
+\end{itemize}
+\end{defn}
+
 \subsection{The Orientation Sheaf}
 We can organize all the local and global orientation information into a sheaf. 
 
@@ -99,184 +293,71 @@ TBA: Topology on $\mC^0(U)$
 \end{defn}
 
 \pagebreak
-\section{More on Vector Bundles}
-\subsection{Structure on Vector Spaces}
-\begin{defn}{Linear Complex Structure}{} Let $V$ be a real vector space. A linear complex structure on $V$ is a map $T:V\to V$ such that $T^2=-\text{id}$. 
-\end{defn}
-
-\begin{prp}{}{} Let $V$ be a real vector space admitting a linear complex structure $T$. Then $V$ can be seen as a complex vector space. 
-\end{prp}
-
-\begin{prp}{}{} Let $V$ be a real vector space admitting a linear complex structure $T$. Then $W_\C=\Hom_\R(V,\C)$ admits the decomposition $$W_\C=W^{1,0}\oplus W^{0,1}$$ where $W^{1,0}$ is the $\C$-linear forms and $W^{0,1}$ the $\C$-antilinear forms. 
-\end{prp}
-
-\subsection{Structure on Vector Bundles}
-\begin{defn}{Almost Complex Structure}{} Let $p:E\to B$ be a vector bundle. An almost complex structure $J$ on $E$ is a linear complex structure on each fibre varying smoothly on $E$. In other words, each $J_x$ for $x\in E$ is a linear complex structure. 
-\end{defn}
-
-\begin{defn}{Almost Complex Manifolds}{} An almost complex manifold is a complex manifold $M$ such that its tangent space $TM$ has an almost complex structure. 
-\end{defn}
-
-\begin{prp}{}{} Every complex manifold is an almost complex manifold. 
-\end{prp}
-
-\begin{defn}{Integrable Complex Structure}{} An almost complex structure on a manifold $M$ is said to be integrable if there exists a complex structure on $M$ which induces $I$. 
-\end{defn}
-
-\begin{defn}{Hermitian Structure}{} Let $p:E\to B$ be a vector bundle. A Hermitian structure $H$ on $E$ is a Hermitian product on each fibre varying smoothly on $E$. This means that for $x\in M$, $H:E_x\times E_x\to\C$ satisfies the following.
-\begin{itemize}
-\item $H(u,v)$ is $\C$-linear for every $v\in E_x$
-\item $H(u,v)=\overline{H(v,u)}$
-\item $H(u,u)>0$ for all $u\neq 0$
-\item $H(u,v)$ is a smooth function on $M$ for every smooth sections $u,v$ of $E$
-\end{itemize}
-\end{defn}
-
-\begin{defn}{Holomorphic Vector Bundle}{} Let $p:E\to M$ be a vector bundle over a complex manifold $M$. We say the vector bundle is holomorphic (equipped with a holomorphic structure) if the trivializations $$\tau_i:p^{-1}(U_i)\overset{\cong}{\to}U_i\times\C^n$$ has transition matrices $\tau_{ij}=\tau_j\circ\tau_i$ that have holomorphic coefficients. 
-\end{defn}
-
-\pagebreak
-\section{Tangent Spaces of Complex Manifolds}
-\subsection{Holomorphic Tangent Bundles}
-Since every complex manifold is a smooth real manifold, there is no need to redefine everything. We begin this section with a note that for a complex manifold $M$ of dimension $n$, $M$ has the real tangent space structure on $p\in M$ with basis $$\left\{\frac{\partial}{\partial x_1},\dots,\frac{\partial}{\partial x_n},\frac{\partial}{\partial y_1},\dots,\frac{\partial}{\partial y_n}\right\}$$ This is now denoted $T_{\R}M$. \\
-
-The following is an analogue to the tangent bundle of a smooth manifold. We shall see later that by identifying a complex manifold as also a smooth manifold of double the dimension, we can decompose this tangent bundle. 
-
-\begin{defn}{Holomorphic Tangent Bundles}{} Let $M$ be a complex manifold. Let $\{(U_i,\phi_i=(z_1,\dots,z_n))|i\in I\}$ be an atlas. Denote $\phi_{ij}=\phi_j\circ\phi_i^{-1}$ and the $$\phi_{ij\ast}=\begin{pmatrix}
-\frac{\partial (\phi_{ij})_1}{\partial z_1} & \cdots & \frac{\partial (\phi_{ij})_1}{\partial z_n}\\
-\vdots & \ddots & \vdots\\
-\frac{\partial (\phi_{ij})_n}{\partial z_1} & \cdots & \frac{\partial (\phi_{ij})_n}{\partial z_n}
-\end{pmatrix}$$ Define the tangent bundle as the union of $U_i\times\C^n$, glued by identifying $U_i\cap U_j\times\C^n\subset U_i\times\C^n$ and $U_i\cap U_j\times\C^n$ by the map $(u,v)\mapsto(u,\phi_{ij\ast}(v))$. Denote the holormorphic tangent bundle as $TM$. Each fibre of $TM$ is denoted $T_pM$. 
-\end{defn}
-
-\subsection{Complex Tangent Spaces}
-We mimic the definition of tangent spaces in the smooth case. 
-
-\begin{defn}{$\C$-Algebra of Germs of Holomorphic Functions}{} Let $M$ be a complex manifold. Let $p\in M$. Define the $\C$-Algebra of Germs of Functions $$\mO_{M,p}^\infty=\{(f:U\to\C, U)\;|\;p\in U, U\text{ is open}, f\text{ is holomorphic }\}/\sim=\lim_{U\subseteq M}\mO_M(U)$$ to be the stalk of the sheaf of $\C$-algebras of holomorphic functions at $p$. 
-\end{defn}
-
-Let $A$ be a ring. Let $B$ be an $A$-algebra. Let $M$ be a $B$-module. Recall that a derivation of $A$ is a $B$-module homomorphism $d:B\to M$ such that the Leibniz rule $$d(b_1b_2)=d(b_1)b_2+b_1d(b_2)$$ is satisfied for all $b_1,b_2\in B$. 
-
-\begin{defn}{The Complex Tangent Space}{} Let $M$ be a complex manifold. Let $p\in M$. Define the tangent space of $M$ at $p$ to be the $\C$-vector space of derivations $$T_{\C,p}M=\text{Der}_\C(\mO_{M,p},\C)=\{d:\mO_{M,p}\to\C\;|\;d\text{ is a derivation over }\C\}$$
-\end{defn}
-
-This is the most natural way that one defines tangents on a complex manifold, just as how we did for smooth manifolds. In particular, one can write down two canonical basis for the tangent space. 
-
-\begin{prp}{}{} Let $M$ be a complex manifold of dimension $n$. Then $T_{\C}M$ has basis $$\left\{\frac{\partial}{\partial x_1}\bigg\vert_p,\dots,\frac{\partial}{\partial x_n}\bigg\vert_p,\frac{\partial}{\partial y_1}\bigg\vert_p,\dots,\frac{\partial}{\partial y_n}\bigg\vert_p\right\}$$ or equivalently, with basis $$\left\{\frac{\partial}{\partial z_1}\bigg\vert_p,\dots,\frac{\partial}{\partial z_n}\bigg\vert_p,\frac{\partial}{\partial \bar{z}_1}\bigg\vert_p,\dots,\frac{\partial}{\partial \bar{z}_n}\bigg\vert_p\right\}$$
-\end{prp}
-
-However, because complex manifolds are also smooth manifolds, we obtain another notion of tangent spaces. Namely, this tangent space consists of derivations over $\R$. 
-
-\begin{defn}{The Real Tangent Space}{} Let $M$ be a complex manifold. Let $p\in M$. Consider $M$ as a smooth manifold. Then define the real tangent space $$T_{\R,p}M=\text{Der}_\R(\mC_{M,p}^\infty,\R)$$ to be the usual notion of tangent spaces in the smooth case. 
-\end{defn}
-
-\begin{prp}{}{} Let $M$ be a complex manifold. Let $p\in M$. Then there is a $\C$-vector space isomorphism $$T_{\C,p}M\cong T_{\R,p}M\otimes_R\C$$ given by the map sending $v\otimes z\in T_{\R,p}M\otimes_R\C$ to the derivation $v\otimes z$ defined by $(v\otimes z)(f+ig)=z\cdot(v(f)+iv(g))$. 
-\end{prp}
-
-\subsection{A Decomposition of the Complex Tangent Space}
-
-\begin{prp}{}{} Let $M$ be a complex manifold. Then $M$ admits an almost complex structure, and the we have an isomorphism $T^{1,0}M\cong TM$
-\end{prp}
-
-\begin{prp}{}{} Let $M$ be a complex manifold. Then $T^{0,1}M=\overline{T^{1,0}M}$
-\end{prp}
-
-\begin{lmm}{}{} Let $M$ be a complex manifold. Then the map \\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-TM\arrow[r, hookrightarrow] & T_{\C}M\arrow[r, twoheadrightarrow] & T^{1,0}M
-\end{tikzcd}} \\
-is an isomorphism. 
-\end{lmm}
-
-\subsection{The Dual of the Complex Tangent Space}
-\begin{defn}{}{} Let $M$ be a complex manifold. Let $p\in M$. Define the dual of the tangent space at $p$ to be the $\C$-vector space $$T_{\C,p}^\ast(M)=\Hom_\C(T_{\C,p}(M),\C)$$ dual of the complex tangent space. 
-\end{defn}
-
-\subsection{The Complex Tangent Bundle}
-
-\pagebreak
 \section{Complex Differential Forms}
-
-\subsection{Complex Differential Forms}
-\begin{defn}{Complex Differential 1-Forms}{} Let $M$ be a complex manifold. A complex differential $1$-form on $M$ is a smooth section $$s:M\to T^\ast(M)$$ of the holomorphic cotangent bundle $T^\ast(M)\to M$. 
+\subsection{Complexified Differential Forms}
+\begin{defn}{}{}\\
+Let $M$ be a complex manifold. Define ??? to be $$\Omega_{M,\C}^k$$ to be the sheaf of smooth sections of $\Lambda^k(T_\C M)$. 
 \end{defn}
 
-\begin{defn}{The Space of Complex Differential 1-Forms}{} Let $M$ be a complex manifold. Define the $\C$-vector space of all complex differential 1-forms to be $$\Omega_\C^1(M)=\{s:M\to T^\ast M\;|\;s\text{ is a complex differential }1\text{-form }\}$$
+Let $M$ be a complex manifold. The $\C$-vector space $\Omega_\C^1(M)$ consists of smooth maps from $M$ to $T_\C^\ast M$. The splitting $T_\C^\ast M=TM^+\oplus TM^-$ together with sections on operations of vector bundles means that giving a section of $T_\C^\ast M$ is the same as giving a section of $TM^+$ and $TM^-$. Thus we acquire a splitting $\Omega_\C^1(M)=\Omega^{1,0}(M)\oplus\Omega^{0,1}(M)$. 
+
+Let $M$ be a complex manifold. The splitting $T_\C^\ast M=TM^+\oplus TM^-$. Properties of the exterior product that translates to vector bundles as $$\Lambda^n(T_\C^\ast M)=\bigoplus_{p+q=n}\Lambda^p(TM^+)\otimes\Lambda^q(TM^-)$$
+
+\begin{defn}{}{}\\
+Let $M$ be a complex manifold. Define ??? to be $$\Omega_M^{p,q}$$ to be the sheaf of smooth sections of $\Lambda^p(TM^+)\otimes\Lambda^q(TM^-)$. 
 \end{defn}
 
-\begin{defn}{Differential of a Holomorphic Function}{} Let $M$ be a complex manifold. Define the complex differential of $f\in\mO_M(M)$ to be the $1$-form $d_\C f:M\to T^\ast M$ given as follows. For each $p\in M$, $(d_\C f)_p$ is a map from $T_{\C,p}(M)$ to $\C$ where $$(d_\C f)_p(X)=X(f)$$
-\end{defn}
+It follows that $\Omega_\C^n(M)=\bigoplus_{p+q=n}\Omega^{p,q}(M)$. 
 
-Let $M$ be a complex manifold. Let $p\in M$. Inside the $\C$-algebra $\mO_{M,p}$ lives the holomorphic functions $$z^k:U\to\C$$ defined on some open set in $M$ as follows. Choose a chart $(U,\varphi=(z^1,\dots,z^n))$ around $p$. Then $z^k(x)$ is the $k$th complex coordinate of $x$ int he chart. Similarly, the holomorphic functions $\bar{z}^k:U\to\C$ can be expressed in a similar manner. 
-
-\begin{prp}{}{} Let $M$ be a complex manifold. Let $p\in M$. Write $(dz^k)_p$ and $(d\bar{z}^k)_p$ the differential of the holomorphic functions $z^k$ and $\bar{z}^k$ respectively. Then $$\left\{(dz^1)_p,\dots,(dz^n)_p,(d\bar{z}^1)_p,\dots,(d\bar{z}^n)_p\right\}$$ is the dual basis in $T_{\C,p}^\ast(M)$ of $\left\{\frac{\partial}{\partial z^1}\bigg\vert_p,\dots,\frac{\partial}{\partial z^n}\bigg{|}_p,\frac{\partial}{\partial\bar{z}^1}\bigg\vert_p,\dots,\frac{\partial}{\partial\bar{z}^n}\bigg{|}_p\right\}$.
-\end{prp}
-
-Locally, we can express smooth sections in terms of local coordinates. 
-
-\begin{prp}{}{} Let $M$ be a complex manifold. Let $\omega:M\to T^\ast M$ be a complex differential $1$-form. Let $(U,\varphi=(z^1,\dots,z^n))$ be a local chart of $M$. Then in the chart, $\omega$ can be expressed as $$\omega=\sum_{k=1}^n(a_kdz^k+b_kd\bar{z}^k)$$ where $a_k,b_k\in\mO_M(M)$ are smooth functions for each $k$. Moreover, for each $p\in U$, $$\omega_p=\sum_{k=1}^n\left(a_k(p)(dz^k)|_p+b_k(p)(d\bar{z}^k)|_p\right)$$ 
-\end{prp}
-
-Once again, we already have the notion of differential forms for a complex manifold since we already have it for smooth real manifolds. However, we can once again use the decomposition $dz=dx+idy$ and $d\bar{z}=dx-idy$. This is why we can write any $k$-form on a complex manifold as $$\omega=\sum_{\abs{I}+\abs{J}=k}\phi_{I,J}dz_I\wedge d\bar{z}_J$$
-
-\begin{defn}{Complex Differential k-Forms}{} Let $M$ be a complex manifold. A complex differential $k$-form on $M$ is a smooth section $s:M\to\Lambda^k(T^\ast(M))$ of exterior product of the cotangent bundle $p:T^\ast(M)\to M$. 
-\end{defn}
-
-\begin{defn}{The Space of Complex Differential k-Forms}{} Let $M$ be a complex manifold. Define the $\C$-vector space of all complex differential k-forms to be $$\Omega_\C^k(M)=\{s:M\to\Lambda^kT^\ast M\;|\;s\text{ is a complex differential }k\text{-form }\}$$
-\end{defn}
-
-\begin{prp}{}{} Let $M$ be a complex manifold. Let $(U,\phi=(x^1,\dots,x^n))$ be a chart on $M$. Let $\omega$ be a complex differential $k$-form on $M$. Then we can write $\omega$ in terms of the chart as $$\omega=\sum_{\abs{I}+\abs{J}=k}\phi_{I,J}dz_I\wedge d\bar{z}_J$$ where each $\phi_{I,J}:U\to\C$ are holomorphic functions in $\mO_M(U)$. 
-\end{prp}
-
-\subsection{Holomorphic de Rham Cohomology}
-\begin{defn}{Complex Differentials}{} Let $M$ be a complex manifold. A complex derivative on $M$ is a map $d_\C:\Omega^\bullet(M)\to\Omega^\bullet(M)$ such that the following are true. 
+\begin{prp}{}{}\\
+Let $M$ be a complex manifold. Then the following are true. 
 \begin{itemize}
-\item $d(\Omega_\C^k(M))\subseteq\Omega_\C^{k+1}(M)$ is a $\C$-linear map
-\item $d\circ d=0$
-\item If $\omega\in\Omega_\C^r(M)$ and $\tau\in\Omega_\C^s(M)$ then $d_\C(\omega\wedge\tau)=d_\C\omega\wedge\tau+(-1)^r\omega\wedge d\tau$
-\item For any $f\in C^\infty(M)$, $d_\C f$ is the differential of $f$ as defined above. 
+\item There is a $\mC_M^\infty$-module isomorphism $$\Omega_{M,\C}^n\cong\bigoplus_{p+q=n}\Omega_M^{p,q}$$
+\item There is a $\mC_M^\infty$-module isomorphism $$\Omega_M^{p,q}\cong\Lambda^p\Omega_M^{1,0}\otimes_\C\Lambda^q\Omega_M^{0,1}$$
+\end{itemize}
+\end{prp}
+
+\begin{defn}{The Complexified Differential}{}\\
+Let $M$ be a complex manifold. 
+\begin{itemize}
+\item Define the differential $d_\C:\Omega_{M,\C}^\bullet(M)\to\Omega_{M,\C}^{\bullet}(M)$ of $M$ to be the $\mC_{M,\C}^\infty(M)$-module homomorphism $$d_\C=d\otimes\text{id}_\C$$ where $d:\Omega^{\bullet}(M)\to\Omega^{\bullet}(M)$ is the differential of $M$ considered as a smooth manifold. 
+\item Define the $\mC_{M,\C}^\infty$-module homomorphism $d_\C:\Omega_{M,\C}^\bullet\to\Omega_{M,\C}^\bullet$ as follows. For each open set $U$, the $\mC_{M,\C}^\infty(U)$-module homomorphism $d_\C(U)$ is the differential of $U$ considered as a complex manifold. 
 \end{itemize}
 \end{defn}
 
-\begin{prp}{}{} Let $M$ be a complex manifold. Then the complex differential exists and is unique. Moreover, if $(U,\phi)$ is a local chart on $M$ and $\omega=\sum_{\abs{I}+\abs{J}=k}\phi_{I,J}dz_I\wedge d\bar{z}_J$ is a differential $k$-form, then locally on the chart $$d\omega=\sum_{\abs{I}+\abs{J}=k}d(\phi_{I,J})\wedge dz_I\wedge d\bar{z}_J=\sum_{\abs{I}+\abs{J}=k}\sum_{j=1}^n\left(\frac{\partial\phi_{I,J}}{\partial z^j}dz^j+\frac{\partial\phi_{I,J}}{\partial\bar{z}^j}d\bar{z}^j\right)\wedge dz_I\wedge d\bar{z}_J$$
-\end{prp}
-
-\begin{defn}{The Holomorphic de Rham Chain Complex}{} Let $M$ be a complex manifold. Define the holomorphic de Rham chain complex to be $(\Omega_\C^\bullet(M),d_\C)$. Explicitly, it is the following chain complex: \\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	{\mO_M(M)} & {\Omega^1(M)} & {\Omega^2(M)} & \cdots
-	\arrow["{d_\C}", from=1-1, to=1-2]
-	\arrow["{d_\C}", from=1-2, to=1-3]
-	\arrow[from=1-3, to=1-4]
-\end{tikzcd}}\\
+\begin{defn}{The Complex de Rham Chain Complex}{}\\
+Let $M$ be a complex manifold. Define the de Rham chain complex of $M$ to be $(\Omega_{M,\C}^\bullet(M),d_\C)$. 
 \end{defn}
 
-\begin{defn}{The Holomorphic de Rham Cohomology}{} Let $M$ be a complex manifold. Define the complex de Rham cohomology groups to be $$H_{\text{dR}}^k(M;\C)=\frac{\ker(d:\Omega_{\C}^k(M)\to\Omega_{\C}^{k+1}(M))}{\im(d:\Omega_{\C}^{k-1}(M)\to\Omega_{\C}^k(M))}=H_{dR}^k(\Omega_{\C}^\bullet(M))$$
+\begin{defn}{The Complex de Rham Cohomology Groups}{}\\
+Let $M$ be a complex manifold. Define the $n$th holomorphic de Rham cohomology groups of $M$ to be $$H_\text{dR}^n(M;\C)=H^n(\Omega_{M,\C}^\bullet(M),d_\C)$$
 \end{defn}
 
-Relation between $H_\text{dR}^k(M;\C)$ and $H_\text{dR}^k(M;\R)$
-
-\begin{prp}{}{} Let $M$ be a complex manifold. Then there is an isomorphism $$H_{\text{dR}}^k(M;\C)\cong H_{\text{dR}}^k(M;\R)\otimes_\R\C$$ for all $n\in\N$. 
+\begin{prp}{}{}\\
+Let $M$ be a complex manifold. Then there is a natural isomorphism $$H_\text{dR}^n(M;\C)\cong H_\text{dR}^n(M;\R)\otimes_\R\C$$ for all $n\in\N$. 
 \end{prp}
-
-\subsection{A Decomposition of the Space of k-Forms}
-In previous sections we decomposed the complex tangent space into $$T_{\C,p}M\cong T_p^{1,0}(M)\oplus T_p^{0,1}(M)$$ for each point $p$ in the complex manifold $M$. We can also do this for the dual of the tangent pace, and hence the exterior product bundle. 
-
-\begin{prp}{}{} The spaces $\Omega^{1,0}(M)$ and $\Omega^{0,1}(M)$ for a complex manifold $M$ defines a vector bundle over $M$. Moreover, the complexification $T_{\C}M$ induces a dual decomposition $$\Omega_{\C}^1(M)=\Omega^{1,0}(M)\oplus\Omega^{0,1}(M)$$
-\end{prp}
-
-\begin{prp}{}{} Let $M$ be a complex manifold. Then $$\Omega^{p,q}(M)=\bigwedge_{i=1}^p\Omega^{1,0}(M)\otimes\bigwedge_{j=1}^q\Omega^{0,1}(M)$$
-\end{prp}
-
-\begin{lmm}{}{} Let $M$ be a complex manifold. We have the decomposition $$\Omega_{\C}^k(M)=\bigwedge_{i=1}^k\Omega_{\C}^1(M)=\bigoplus_{p+q=k}\Omega^{p,q}(M)$$
-\end{lmm}
-
-We can also decompose the exterior derivative into its holomorphic and antiholomorphic part. 
-
-\begin{lmm}{}{} Let $M$ be a complex manifold. Consider the complex differential $d_\C:\Omega^k(M)\to\Omega^{k+1}(M)$. Then we can decompose $$d_{\C}=\partial+\bar{\partial}$$ where $\partial:\Omega^{p,q}(M)\to\Omega^{p+1,q}(M)$ and $\bar{\partial}:\Omega^{p,q}(M)\to\Omega^{p,q+1}(M)$. In local coordinates, $$\bar{\partial}\left(\sum\phi_{I,J}dz_I\wedge dz_J\right)=\sum\frac{\partial \phi_{I,J}}{\partial \bar{z}_k}d\bar{z}_k\wedge dz_I\wedge d\bar{z}_J$$
-\end{lmm}
 
 \subsection{Dolbeault Cohomology}
-\begin{prp}{}{} Let $M$ be a complex manifold. Then $(\Omega^{\bullet,\bullet},\partial,\overline{\partial})$ is a double chain complex. 
+\begin{defn}{Dolbeault Operators}{}\\
+Let $M$ be a complex manifold. Define the Dolbeault operators on $M$ by $$\partial=\text{proj}_{p+1,q}\circ d:\Omega^{p,q}\to\Omega^{p+1,q}\;\;\;\text{ and }\;\;\;\overline{\partial}=\text{proj}_{p,q+1}\circ d:\Omega^{p,q}\to\Omega^{p,q+1}$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $M$ be a complex manifold. Let $p\in M$. Let $(U,z^1,\dots,z^n)$ be a local chart at $p$. Suppose that $\omega\in\Omega_M^{p,q}$ is given locally by $$\omega=\sum_{\abs{I}=p,\abs{J}=q}f_{I,J}dz^I\wedge d\overline{z^J}$$ where $f_{I,J}:U\to\C$ are smooth functions. Then the following are true. 
+\begin{itemize}
+\item $\partial\omega$ is given locally on the same chart by $$\partial\omega=\sum_{\abs{I}=p,\abs{J}=q}\sum_k\frac{\partial f_{I,J}}{\partial z^l}dz^l\wedge dz^I\wedge\overline{z^J}$$
+\item $\overline{\partial}\omega$ is given locally on the same chart by $$\overline{\partial}\omega=\sum_{\abs{I}=p,\abs{J}=q}\sum_k\frac{\partial f_{I,J}}{\partial\overline{z^l}}d\overline{z^l}\wedge dz^I\wedge\overline{z^J}$$
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $M$ be a complex manifold. Then the following are true. 
+\begin{itemize}
+\item $d=\partial+\overline{\partial}$. 
+\item $\partial\circ\partial=\overline{\partial}\circ\overline{\partial}=0$. 
+\item $\partial\circ\overline{\partial}=-\overline{\partial}\circ\partial$. 
+\item Let $\omega\in\Omega_{M,\C}^k(M)$ and $\eta\in\Omega_{M,\C}^l(M)$. Then we have $$\partial(\omega\wedge\eta)=\partial(\omega)\wedge\eta+(-1)^k\omega\wedge\partial(\eta)\;\;\;\text{ and }\;\;\;\overline{\partial}(\omega\wedge\eta)=\overline{\partial}(\omega)\wedge\eta+(-1)^k\omega\wedge\overline{\partial}(\eta)$$
+\end{itemize}
 \end{prp}
 
 We can now write the bicomplex in a grid: \\
@@ -304,81 +385,267 @@ We can now write the bicomplex in a grid: \\
 	\arrow["{\overline{\partial}}"', from=4-3, to=3-3]
 	\arrow[from=4-3, to=4-4]
 \end{tikzcd}}\\
+Note that the squares here are not commutative, and this is not the notation we have defined for bicomplexes. If we augment the differential in the total complex by accounting the anti-commutativity of the squares, we would obtain isomorphisms $$H_\text{dR}^k(M;\C)=H^k(\text{Tot}(\Omega^{\bullet,\bullet}(M),\partial,\overline{\partial}))$$
 
-Evidently, we can recover the complex de Rham cohomology from the bicomplex with $$H_\text{dR}^k(M;\C)=H^k(\text{Tot}(\Omega_\C^{\bullet,\bullet}(M),\partial,\overline{\partial}))$$
+\begin{defn}{Holomorphic de Rham Cohomology}{}\\
+Let $M$ be a complex manifold. Define the $n$th holomorphic de Rham cohomology group of $M$ to be $$H_\text{Holo}^n(M)=H^n(\Omega_M^{\bullet,0}(M),\partial)$$
+\end{defn}
 
-\begin{defn}{Dolbeault Complex}{} Let $M$ be a complex manifold. Let $p\in\N$. Define the Dolbeault complex of $M$ to be the cochain complex \\
+\begin{defn}{Dolbeault Complex}{} Let $M$ be a complex manifold. Let $p\in\N$. Define the $p$th Dolbeault complex of $M$ to be the cochain complex \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
 \cdots\arrow[r] & \Omega^{p,q-1}(M)\arrow[r, "\overline{\partial}"] & \Omega^{p,q}(M)\arrow[r, "\overline{\partial}"] & \Omega^{p,q+1}(M)\arrow[r, "\overline{\partial}"] & \cdots
 \end{tikzcd}}~\\
 denoted $\Omega^{p,\bullet}(M)$. 
 \end{defn}
 
-\begin{defn}{Dolbeault Cohomology}{} Define the dobeault cohomology of a complex manifold $m$ to be $$H^{p,q}(M)=\frac{\ker(\bar{\partial}:\Omega^{p,q}(M)\to\Omega^{p,q+1}(M)}{\im(\bar{\partial}:\Omega^{p,q-1}(M)\to\Omega^{p,q}(M))}=H^q(\Omega^{p,\bullet})$$
+\begin{defn}{Dolbeault Cohomology}{} Define the dobeault cohomology of a complex manifold $M$ to be $$H^{p,q}(M)=\frac{\ker(\bar{\partial}:\Omega^{p,q}(M)\to\Omega^{p,q+1}(M)}{\im(\bar{\partial}:\Omega^{p,q-1}(M)\to\Omega^{p,q}(M))}=H^q(\Omega^{p,\bullet}(M),\overline{\partial})$$
 \end{defn}
+
+We may relate Dolbeault cohomology with sheaf cohomology. 
+
+\begin{thm}{}{}\\
+Let $M$ be a complex manifold. Then we have an isomorphism $$H^{p,q}(M)\cong H^q(M,\Omega_M^p)$$
+\end{thm}
+
+\begin{crl}{}{}\\
+Let $M$ be a compact complex manifold. Then $H^{0,0}(M)=\C$. 
+\end{crl}
+
+\begin{lmm}{}{}\\
+Let $M$ be a complex manifold. Then $H^{0,q}(M)=0$ for all $q>\dim(M)$. 
+\end{lmm}
+
+\begin{thm}{Serre Duality}{}\\
+Let $M$ be a compact complex manifold. Then we have $$H^{p,q}(M)\cong H^{\dim(X)-p,\dim(X)-q}(M)$$
+\end{thm}
+
+\subsection{Hodge's Theorem}
+
+\begin{crl}{}{}\\
+Let $M$ be a compact connected complex manifold. Then the following are true. 
+\begin{itemize}
+\item $H^{p,q}(M)$ is finite dimensional over $\C$. 
+\item $H^{\dim(M),\dim(M)}=1$. 
+\end{itemize}
+\end{crl}
+
+\subsection{Orientability}
+\begin{prp}{}{}\\
+Let $M$ be a complex manifold. Then $M$ is orientable. 
+\end{prp}
+
+\begin{crl}{}{}\\
+Let $M,N$ be complex manifolds. Let $f:M\to N$ be a holomorphic map. Then $f$ preserves orientation. 
+\end{crl}
+
 
 \pagebreak
 \section{Hermitian Manifolds}
-\subsection{Hermitian Manifold and its Metric}
-\begin{defn}{Hermitian Manifold}{} A complex manifold $M$ is said to be Hermitian if the holomorphic tangent bundle has a Hermitian structure. 
+\subsection{Hermitian Metric}
+\begin{defn}{Hermitian Metric on a Vector Bundle}{}\\
+Let $M$ be a smooth manifold. Let $p:E\to M$ be a complex vector bundle. A Hermitian metric on $M$ is a smooth section $g\in\Gamma(M,(E\otimes\overline{E})^\ast)$ such that $g_p:E_p\times E_p\to\R$ is a Hermitian inner product for all $p\in M$. 
 \end{defn}
 
-\begin{defn}{Hermitian Metric}{} A Hermitian metric on a complex vector space $V$ is a map $h:V\times V\to\C$ such that 
-\begin{itemize}
-\item $h(v,w)=\overline{h(w,v)}$ for all $v,w\in V$
-\item $h(v,v)>0$ for all $v\in V$
-\end{itemize}
-A Hermitian metric on a vector bundle $p:E\to B$ is a smoothly varying Hermitian metric on each fibre $E_x$ of $E$ for $x\in E$. 
+Equivalently, a Hermitian metric is an assignment $p\mapsto\langle-,-\rangle_p$ such that for any smooth sections $s,t\in\Gamma(M,E)$, the map $p\mapsto\langle s(p),t(p)\rangle_p$ is smooth. 
+
+\begin{defn}{Hermitian Manifolds}{}\\
+Let $M$ be a complex manifold. We say that $M$ is Hermitian if $T^{1,0}(M)$ admits a Hermitian metric. 
 \end{defn}
 
-\begin{prp}{}{} Let $M$ be an almost complex manifold. Every Hermitian metric on $M$ induces a Hermitian structure on $M$. Every Hermitian structure on $M$ induces a Hermitian metric on $M$. 
-\begin{proof}
-Let $h$ be a Hermitian metric on $M$. Then $H(X,Y)=h(X,Y)-ih(JX,Y)$ defines a Hermitian structure on $M$. Conversely, let $H$ be a Hermitian structure on the tangent space $T_\C M$ defines a Hermitian metric by $h(X,Y)=\text{Re}(X,Y)$. 
-\end{proof}
+\begin{prp}{}{}\\
+Let $(M,h)$ be a Hermitian manifold. Let $p\in M$. Let $(U,z^1,\dots,z^n)$ be a complex chart at $p$. Then $h_p$ is given locally on the chart by $$h_p=\sum_{i,j=1}^nh_{i,j}|_p\;(dz^i)_p\otimes(d\overline{z^j})_p$$ where $h_{i,j}|_p=h_p\left(\frac{\partial}{\partial z^i}\bigg{|}_p,\frac{\partial}{\partial z^j}\bigg{|}_p\right)$. 
 \end{prp}
 
-This shows that Hermitian metrics and Hermitian structure essentially mean the same thing, just in different presentations. 
-
-\begin{prp}{}{} Every almost complex manifold admits a Hermitian metric. 
-\begin{proof}
-Choose any arbitrary Riemannian metric $g$. Then define $h(X,Y)=g(X,Y)+g(JX,JY)$. This is a Hermitian metric. 
-\end{proof}
+\begin{prp}{}{}\\
+Let $M$ be a smooth manifold. Let $p:E\to M$ be a complex vector bundle. Then $E$ admits a Hermitian metric. 
 \end{prp}
 
-\subsection{The Riemannian Metric, The Hermitian Metric and the Associated Form}
-\begin{prp}{}{} Every hermitian metric $h$ on a complex manifold $M$ defines a Riemannian metric $$g(u,v)=\frac{1}{2}(h+\overline{h})$$
-\end{prp}
+\begin{crl}{}{}\\
+Let $M$ be a complex manifold. Then $M$ is a Hermitian manifold. 
+\end{crl}
 
-In local coordinates, $g$ is expressed as $$g(u,v)=\frac{1}{2}\sum h_{\alpha\overline{\beta}}(dz_\alpha\otimes d\overline{z}_\beta+d\overline{z}_\beta\otimes dz_\alpha)$$
-
-\begin{lmm}{}{} Let $M$ be a Hermitian manifold. Denote $h$ the Hermitian metric of $M$. Then $$\omega(x,y)=\frac{i}{2}(h-\overline{h})$$ is a $(1,1)$ form 
-\end{lmm}
+\subsection{The Associated Form}
+\begin{defn}{The Associated Form}{}\\
+Let $(M,h)$ be a Hermitian manifold. Define the associated form of $h$ to be $$\omega=\frac{i}{2}(h-\overline{h})$$
+\end{defn}
 
 In local coordinates, $\omega$ is expressed as $$\omega=\frac{i}{2}\sum_{\alpha,\beta=1}^n h_{\alpha\overline{\beta}}dz_{\alpha}\wedge d\overline{z}_\beta$$ if $M$ is a complex manifold of complex dimension $n$. 
 
-\begin{defn}{Associated Form of a Hermitian Metric}{} Let $M$ be a Hermitian manifold. Let $h$ be the Hermitian metric. Define the associated form of $h$ to be the $(1,1)$-form $$\omega(u,v)=\frac{i}{2}(h-\overline{h})$$
+\begin{defn}{The Associated Riemannian Metric}{}\\
+Let $(M,h)$ be a Hermitian manifold. Define the associated Riemannian metric of $h$ to be $$g=\frac{1}{2}(h+\overline{h})=$$
 \end{defn}
 
-\begin{prp}{}{} Let $M$ be a Hermitian manifold. Then the following are true in terms of the metrics. 
-\begin{itemize}
-\item $\omega(u,v)=g(Ju,v)$
-\item $g(u,v)=\omega(u,Jv)$
-\item $h=g-i\omega$
-\end{itemize}
-\end{prp}
+In local coordinates, $g$ is expressed as $$g(u,v)=\frac{1}{2}\sum h_{\alpha\overline{\beta}}(dz_\alpha\otimes d\overline{z}_\beta+d\overline{z}_\beta\otimes dz_\alpha)$$
 
-\begin{thm}{}{} Let $M$ be a Hermitian manifold. Denote $h$ the Hermitian metric. Then $h,g,\omega$ preserve the almost complex structure $J$ of $M$. This means that the following are true. 
+\begin{lmm}{}{}\\
+Let $(M,h)$ be a Hermitian manifold. Then we have $\omega$ is a $(1,1)$-form. 
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $(M,h)$ be a Hermitian manifold. Then we have $$h=g-i\omega$$
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $(M,h)$ be a Hermitian manifold whose associated almost complex structure is given by $J$. Then the following are true. 
 \begin{itemize}
 \item $h(Ju,Jv)=h(u,v)$
 \item $g(Ju,Jv)=g(u,v)$
 \item $\omega(Ju,Jv)=\omega(u,v)$
 \end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $(M,h)$ be a Hermitian manifold whose associated almost complex structure is given by $J$. Then the following are true. 
+\begin{itemize}
+\item $\omega(u,v)=g(Ju,v)$. 
+\item $g(u,v)=\omega(u,Jv)$. 
+\end{itemize}
+\end{prp}
+
+Notice that the three equations $$h=g-i\omega\;\;\;\text{ and }\;\;\;\omega(u,v)=g(Ju,v)\;\;\;\text{ and }\;\;\;g(u,v)=\omega(u,Jv)$$ completely determines the triple $(g,h,\omega)$. 
+
+\begin{prp}{}{}\\
+Let $M$ be a complex manifold whose associated almost complex structure is given by $J$. Let $g$ be a Riemannian metric on $M$. Then the following are true. 
+\begin{itemize}
+\item $h=g-i\omega$ is a Hermitian form on $M$ where $\omega(u,v)=g(Ju,v)$. 
+\item $\omega$ is the associated form of $h$. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $M$ be a complex manifold whose associated almost complex structure is given by $J$. Let $\omega$ be a $(1,1)$-form on $M$ that is non-degenerate, and preserves $J$ and is positive definite in the sense that $\omega(u,Jv)>0$ for all non-zero $u,v$. Then the following are true. 
+\begin{itemize}
+\item $g(u,v)=\omega(u,Jv)$ is a Riemannian metric on $M$. 
+\item $h=g-i\omega$ is a Hermitian metric on $M$. 
+\end{itemize}
+\end{prp}
+
+\pagebreak
+\section{Hodge Theory}
+\subsection{Hodge Theory for Smooth Manifolds}
+Let $V$ be a finite dimensional inner product over $\R$. The inner product induces an inner product on $\Lambda^k(V)$ given by $$\langle\alpha_{i_1}\wedge\cdots\wedge\alpha_{i_k},\beta_{j_1}\wedge\cdots\wedge\beta_{j_k}\rangle=\det\begin{pmatrix}
+\langle\alpha_{i_1},\beta_{j_1}\rangle & \cdots & \langle\alpha_{i_1}\wedge\beta_{j_k}\rangle\\
+\vdots & \ddots & \vdots\\
+\langle\alpha_{i_k},\beta_{j_1}\rangle & \cdots & \langle\alpha_{i_k}\wedge\beta_{j_k}\rangle
+\end{pmatrix}$$
+
+\begin{defn}{The $L^2$-Norm}{}\\
+Let $(M,g)$ be an orientable Riemmanian manifold. Let $\alpha,\beta\in\Omega^k(M)$ be differential forms of compact support. Define the $L^2$ norm on $M$ to be $$\langle\alpha,\beta\rangle_{L^2}=\int_M\langle\alpha,\beta\rangle\text{Vol}$$ where $\langle-,-\rangle$ is the induced metric on $\Omega^k(M)$ by $g$. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $(M,g)$ be an orientable Riemmanian manifold. Then $\langle-,-\rangle_{L^2}$ defines a norm on the vector space of compactly supported differential forms on $M$. 
+\end{lmm}
+
+\begin{defn}{The Hodge Star Operator}{}\\
+Let $(M,g)$ be an orientable Riemannian manifold. Let $n=\dim(M)$. 
+\begin{itemize}
+\item Let $p\in M$. Define $\ast_p:\Lambda^kT_p^\ast(M)\to\Lambda^{n-k}T_p^\ast(M)$ to be the unique $\C$-linear isomorphism such that $$\alpha\wedge(\ast_p\beta)=\langle\alpha,\beta\rangle_p\text{Vol}_p$$ where $\alpha,\beta\in\Lambda^kT_p^\ast(M)$ and $\text{Vol}$ is the volume form of $M$ associated to $g$, and $\langle-,-\rangle_p$ is the induced metric on $\Lambda^k(T_p^\ast(M))$. 
+\item Define the Hodge star operator of $M$ to be the map $$\ast\in\Gamma(M,\Hom(\Omega^k(M),\Omega^{n-k}(M)))$$ given by $p\mapsto\ast_p$. 
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $(M,g)$ be an orientable Riemannian manifold. Then we have $$\ast^2=(-1)^{k(n-k)}$$ on $\Omega^k(M)$. 
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $(M,g)$ be an orientable Riemmanian manifold. Let $\alpha,\beta\in\Omega^k(M)$ be differential forms. Then we have $$\langle\alpha,\beta\rangle_{L^2}=\int_M\alpha\wedge\ast\beta$$
+\end{lmm}
+
+\begin{defn}{Adjoint Differential Operator}{}\\
+Let $(M,g)$ be an orientable Riemannian manifold. Define the operator $d^\ast:\Omega^{k+1}(M)\to\Omega^k(M)$ by $$d^\ast=(-1)^k(\ast^{-1}\circ d\circ\ast)$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $(M,g)$ be an orientable Riemannian manifold. Then we have $$d^\ast=(-1)^{n(k+1)+1}(\ast\circ d\circ\ast)$$
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $(M,g)$ be an orientable Riemannian manifold. Let $\alpha\in\Omega^k(M)$ and $\beta\in\Omega^{k+1}(M)$ be differential forms with compact support. Then we have $$\langle\alpha,d^\ast\beta\rangle_{L^2}=\langle d\alpha,\beta\rangle_{L^2}$$
+\end{prp}
+
+\begin{defn}{The Laplace-Beltrami Operator}{}\\
+Let $M$ be an orientable Riemannian manifold. Define the Laplace-Beltrami operator on $M$ to be the map $\Delta:\Omega^k(M)\to\Omega^k(M)$ given by $$\Delta=d^\ast\circ d+d\circ d^\ast$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $M$ be an orientable Riemannian manifold. Then the following are true regarding the Laplace-Beltrami operator. 
+\begin{itemize}
+\item $\ast\circ\Delta=\Delta\circ\ast$. 
+\item $\langle\Delta\alpha,\beta\rangle_{L^2}=\langle\alpha,\Delta\beta\rangle_{L^2}$ for any compactly supported differential forms $\alpha,\beta\in\Omega^k(M)$. 
+\end{itemize}
+\end{lmm}
+
+\begin{defn}{Harmonic Forms}{}\\
+Let $M$ be an orientable Riemannian manifold. Let $\alpha\in\Omega^k(M)$. We say that $\alpha$ is harmonic if $\alpha\in\ker(\Delta)$. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $M$ be an orientable Riemannian manifold. Let $\alpha\in\Omega^k(M)$. Then $\alpha$ is harmonic if and only if $d(\alpha)=0$ and $d^\ast(\alpha)=0$. 
+\end{lmm}
+
+\begin{defn}{The Space of Harmonic Forms}{}\\
+Let $M$ be an orientable Riemannian manifold. Define the space of harmonic $k$-forms to be $$\mH^k(M)=\ker(\Delta)$$
+\end{defn}
+
+\begin{thm}{Hodge Theorem}{}\\
+Let $M$ be an compact orientable Riemannian manifold. Then the following are true. 
+\begin{itemize}
+\item $\mH^k$ is finite dimensional for all $k\in\N$. 
+\item There is a decomposition $$\Omega^k(M)\cong\mH^k(M)\oplus\im(\Delta)$$
+\end{itemize}
 \end{thm}
 
-\begin{lmm}{}{} Let $M$ be an almost complex manifold. Let $g$ be a Riemannian metric on $M$ such that $g(Ju,Jv)=g(u,v)$. Then $g$ induces a Hermitian metric. 
+\begin{crl}{}{}\\
+Let $M$ be an orientable Riemannian manifold. Then the quotient map induces an isomorphism $$\mH^k(M)\cong H_\text{dR}^k(M)$$ for all $k\in\N$. 
+\end{crl}
+
+\subsection{Hodge Star Operator for Complex Manifolds}
+\begin{defn}{The Hodge Star Operator}{}\\
+Let $(M,h)$ be a complex Hermitian manifold. Let $n=\dim(M)$. 
+\begin{itemize}
+\item Let $p\in M$. Define $\ast_p:\Lambda^kT_p^\ast(M)\to\Lambda^{n-k}T_p^\ast(M)$ to be the unique $\C$-linear isomorphism such that $$\alpha\wedge\overline{\ast_p\beta}=\langle\alpha,\beta\rangle_p\text{Vol}_p=\det\begin{pmatrix}
+h_p(\alpha_{i_1},\beta_{j_1}) & \cdots & h_p(\alpha_{i_1}\wedge\beta_{j_k})\\
+\vdots & \ddots & \vdots\\
+h_p(\alpha_{i_k},\beta_{j_1}) & \cdots & h_p(\alpha_{i_k}\wedge\beta_{j_k})
+\end{pmatrix}\text{Vol}_p$$ where $\alpha,\beta\in\Lambda^kT_p^\ast(M)$ and $\text{Vol}$ is the volume form of $M$, and $\langle-,-\rangle_p$ is the induced metric on $\Lambda^k(T_p^\ast(M))$. 
+\item Define the Hodge star operator of $M$ to be the map $$\ast\in\Gamma(M,\Hom(\Omega^k(M),\Omega^{n-k}(M)))$$ given by $p\mapsto\ast_p$. 
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $M$ be a complex manifold. Then we have $$\ast^2=(-1)^{k(n-k)}$$ on $\Omega^k(M)$. 
 \end{lmm}
 
-\begin{lmm}{}{} Let $M$ be an almost complex manifold. Let $\omega$ be a non-degenerate $(1,1)$-form such that $\omega(Ju,Jv)=\omega(u,v)$ and that $\omega(u,Ju)>0$ for all tangent vectors $u$. Then $\omega$ induces a Hermitian metric. 
+\begin{defn}{Adjoint Dolbeault Operators}{}\\
+Let $M$ be a complex manifold. 
+\begin{itemize}
+\item Define the operator $d^\ast:\Omega^{k+1}(M)\to\Omega^k(M)$ by $$d^\ast=(-1)^k(\ast^{-1}\circ d\circ\ast)$$
+\item Define the operators $\partial^\ast:\Omega^{k+1}(M)\to\Omega^k(M)$ by $\partial^\ast=-(\ast\circ\overline{\partial}\circ\ast)$. 
+\item Define the operators $\overline{\partial}^\ast:\Omega^{k+1}(M)\to\Omega^k(M)$ by $\overline{\partial}^\ast=-(\ast\circ\partial\circ\ast)$. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{The $L^2$-Norm}{}\\
+Let $(M,h)$ be a complex Hermitian manifold. Let $\alpha,\beta\in\Omega^k(M)$ be differential forms of compact support. Define the $L^2$ norm on $M$ to be $$\langle\alpha,\beta\rangle_{L^2}=\int_M\langle\alpha,\beta\rangle\text{Vol}$$ where $\langle-,-\rangle$ is the induced metric on $\Omega^k(M)$ from $h$. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $M$ be a complex manifold. If $M$ is compact, then $\langle-,-\rangle_{L^2}$ defines a norm on $\Omega^k(M)$. 
 \end{lmm}
+
+\begin{lmm}{}{}\\
+Let $M$ be a complex manifold. Let $\alpha,\beta\in\Omega^k(M)$ be differential forms of compact support. Then we have $$\langle\alpha,\beta\rangle_{L^2}=\int_M\alpha\wedge\overline{\ast\beta}$$
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $M$ be a complex manifold. Let $\alpha\in\Omega^k(M)$ and $\beta\in\Omega^{k+1}(M)$ be differential forms of compact support. Then the following are true. 
+\begin{itemize}
+\item $d$ and $d^\ast$ are formal adjoints as linear operators over the $L^2$ norm. This means that $$\langle\alpha,d^\ast\beta\rangle_{L^2}=\langle d\alpha,\beta\rangle_{L^2}$$
+\item $\partial$ and $\partial^\ast$ are formal adjoints as linear operators over the $L^2$ norm. This means that $$\langle\alpha,\partial^\ast\beta\rangle_{L^2}=\langle\partial\alpha,\beta\rangle_{L^2}$$
+\item $\overline{\partial}$ and $\overline{\partial}^\ast$ are formal adjoints as linear operators over the $L^2$ norm. This means that $$\langle\alpha,\overline{\partial}^\ast\beta\rangle_{L^2}=\langle\overline{\partial}\alpha,\beta\rangle_{L^2}$$
+\end{itemize}
+\end{prp}
 
 \end{document}

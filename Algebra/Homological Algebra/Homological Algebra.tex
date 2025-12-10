@@ -212,6 +212,87 @@ Similarly, by the above lemma we know that $\im(f)\to B$ is injective. Since $f=
 \end{proof}
 \end{lmm}
 
+\subsection{Adjunctions in the Category of Modules}
+\begin{thm}{Tensor-Hom Adjunction}{} Let $R$ be a ring and let $M$ be an $R$-module. Then there is an adjunction $$-\otimes_RM:{_R\bold{Mod}}\rightleftarrows{_R\bold{Mod}}:\Hom(M,-)$$ Explicitly, there is a natural isomorphism $$\Hom_{_R\bold{Mod}}(-\otimes_RM,-)\cong\Hom_{_R\bold{Mod}}(-,\Hom_{_R\bold{Mod}}(M,-))$$ 
+\end{thm}
+
+More generally, the tensor-hom adjunction is a phenomena that exhibits ${_R}\bold{Mod}$  as a closed monoidal category. 
+
+\begin{prp}{}{} Let $R$ be a ring. Then $({_R}\bold{Mod},\otimes_R,R)$ is a symmetric monoidal category. Moreover, it is a closed monoidal category with internal hom given by the usual hom functor $\text{HOM}_{{_R}\bold{Mod}}(-,-)=\Hom_R(-,-)$. 
+\end{prp}
+
+We have seen that the left and right Hom functors $$\Hom(M,-):{_R\bold{Mod}}\to{_R\bold{Mod}}\;\;\;\;\text{ and }\;\;\;\;\Hom(-,M):{_R\bold{Mod}}\to{_R\bold{Mod}}$$ are left exact functors. Using the tensor-hom adjunction, we can deduce the following. 
+
+\begin{prp}{}{} Let $R$ be a ring and let $M$ be an $R$-module. Then both $$-\otimes_R M:{_R\bold{Mod}}\to{_R\bold{Mod}}\;\;\;\;\text{ and }\;\;\;\;M\otimes_R-:{_R\bold{Mod}}\to{_R\bold{Mod}}$$ are right exact functors. 
+\end{prp}
+
+We find it important to notice the relation between all four functor here. Notice that because there is a canonical isomorphism $M\otimes_RN\cong N\otimes_RM$, we can replace $-\otimes_RM$ in the natural isomorphism $$\Hom_{_R\bold{Mod}}(-\otimes_RM,-)\cong\Hom_{_R\bold{Mod}}(-,\Hom_{_R\bold{Mod}}(M,-))$$ with $M\otimes_R-$. This leaves us with the question: What is the functor $\Hom(-,M)$ adjoint to? The answer is itself! $$\Hom_R(A,\Hom_R(B,C))\cong\Hom(B,\Hom(A,C))$$ Therefore it is more often to discuss $\Hom(M,-)$ in conjunction with $-\otimes_RM$, while $\Hom(-,M)$ is often left behind. \\~\\
+
+\begin{thm}{Change of Base Ring I}{}\\
+Let $R,S$ be commutative rings. Let $\varphi:R\to S$ be a ring homomorphism. Then there is an adjunction $$-\otimes_RS:\bold{Mod}_R\overset{\dashv}{\rightleftarrows}\bold{Mod}_S:-|_R$$
+\end{thm}
+
+\begin{thm}{Change of Base Ring II}{}\\
+Let $R,S$ be commutative rings. Let $\varphi:R\to S$ be a ring homomorphism. Then there is an adjunction $$-|_R:\bold{Mod}_S\overset{\dashv}{\rightleftarrows}\bold{Mod}_R:\Hom_R(S,-)$$
+\end{thm}
+
+\subsection{Graded Objects and Filtrations}
+\begin{defn}{Graded Objects}{}\\
+Let $G$ be an abelian group. Let $\mA$ be an abelian category. A $G$-graded object in $\mA$ is a collection $$C_\bullet=(C_g)_{g\in G}$$ for $C_g\in\mA$. 
+\end{defn}
+
+\begin{defn}{Morphisms of Graded Objects}{}\\
+Let $G$ be an abelian group. Let $\mA$ be an abelian category. Let $C_\bullet,D_\bullet$ be $G$-graded objects. A morphism from $C_\bullet$ to $D_\bullet$ is a collection $$f_\bullet=(f_g)_{g\in G}$$ for $f_g:C_g\to D_g\in\mA$. 
+\end{defn}
+
+\begin{defn}{The Category of Graded Objects}{}\\
+Let $G$ be an abelian group. Let $\mA$ be an abelian category. Define the category $$\bold{Gr}_G(\mA)$$ of $G$-graded objects as follows. 
+\begin{itemize}
+\item Objects of $\bold{Gr}_G(\mA)$ are graded objects of $\mA$. 
+\item Morphisms of $\bold{Gr}_G(\mA)$ are the morphisms of graded objects. 
+\item Composition is given by index-wise composition. 
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $G$ be an abelian group. Let $\mA$ be an abelian category. Then $\bold{Gr}_G(\mA)$ is an abelian category. 
+\end{lmm}
+
+\begin{defn}{The Shifting Functor}{}\\
+Let $G$ be an abelian group. Let $\mA$ be an abelian category. Let $g_0\in G$. Define the $g$th shifting functor $$-[g_0]:\bold{Gr}_G(\mA)\to\bold{Gr}_G(\mA)$$ as follows. 
+\begin{itemize}
+\item For each object $C_\bullet$, define $C_\bullet[g_0]=(C_{g+g_0})_{g\in G}$. 
+\item For each morphisms $f_\bullet:C_\bullet\to D_\bullet$, define $f_\bullet[g]=(f_{g+g_0})_{g\in G}$. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Morphisms of Given Degree}{}\\
+Let $G$ be an abelian group. Let $\mA$ be an abelian category. Let $g_0\in G$. Let $C_\bullet,D_\bullet\in\bold{Gr}_G(\mA)$. A morphism from $C_\bullet$ to $D_\bullet$ of degree $g_0$ is a morphism $C_\bullet\to D_\bullet[g_0]$. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $G$ be an abelian group. Let $\mA$ be an abelian category. Let $g_0\in G$. Then there is a natural isomorphism $$\Hom_{\bold{Gr}_G(\mA)}(C_\bullet,D_\bullet[g_0])\cong\Hom_{\bold{Gr}_G(\mA)}(C_\bullet[-g_0],D_\bullet)$$ given by $f\mapsto f[-g_0]$. 
+\end{lmm}
+
+\begin{defn}{Filtration of an Object}{}\\
+Let $\mA$ be an abelian category. Let $A\in\mA$. 
+\begin{itemize}
+\item A descending filtration of $A$ is a collection $\mF=(F_nA)_{n\geq n_0}$ such that there are monomorphisms $F_{n+1}A\to F_nA$. We denote the filtration by $$0\subseteq\cdots\subseteq F_{n+1}A\subseteq F_nA\subseteq\cdots\subseteq A$$
+\item An ascending filtration of $A$ is a collection $\mF=(F_nA)_{n\geq n_0}$ such that there are monomorphisms $F_nA\to F_{n+1}A$. We denote the filtration by $$0\subseteq\cdots\subseteq F_nA\subseteq F_{n+1}A\subseteq\cdots\subseteq A$$
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Types of Filtrations}{}\\
+Let $\mA$ be an abelian category. Let $A\in\mA$. Let $(F_nA)_{n\in\N^+}$ be a filtration of $A$. 
+\begin{itemize}
+\item We say that the filtration is finite if there exists $s\in\N^+$ such that $F_sA=0$. 
+\item We say that the filtration is exhaustive if $\text{colim}_{n\to\infty}F_nA\cong A$. 
+\item We say that the filtration if Hausdorff if $\text{lim}_{n\to\infty}F_nA\cong 0$. 
+\end{itemize}
+\end{defn}
+
+\pagebreak
+\section{Exact Functors and Exact Sequences}
 \subsection{Additive Functors}
 \begin{defn}{Additive Functors}{} Let $\mA,\mB$ be abelian categories. We say that a functor $F:\mA\to\mB$ is additive if for every $X,Y\in\mA$, the map $$\Hom_\mA(X,Y)\to\Hom_\mB(F(X),F(Y))$$ is a homomorphism of abelian groups. 
 \end{defn}
@@ -658,86 +739,128 @@ The notion of abelian subcategories is rather subtle: since exact sequences in $
 Let $\mA$ be a small abelian category. Then there exists a ring $R$ and an exact, fully faithful embedding $F:\mA\to{_R\bold{Mod}}$. 
 \end{thm}
 
-Such a functor allows us think about diagrams in $\mA$ as if they were diagrams in ${_R\bold{Mod}}$
+Such a functor allows us think about diagrams in $\mA$ as if they were diagrams in ${_R\bold{Mod}}$. 
 
-\subsection{Adjunctions in the Category of Modules}
-\begin{thm}{Tensor-Hom Adjunction}{} Let $R$ be a ring and let $M$ be an $R$-module. Then there is an adjunction $$-\otimes_RM:{_R\bold{Mod}}\rightleftarrows{_R\bold{Mod}}:\Hom(M,-)$$ Explicitly, there is a natural isomorphism $$\Hom_{_R\bold{Mod}}(-\otimes_RM,-)\cong\Hom_{_R\bold{Mod}}(-,\Hom_{_R\bold{Mod}}(M,-))$$ 
-\end{thm}
-
-More generally, the tensor-hom adjunction is a phenomena that exhibits ${_R}\bold{Mod}$  as a closed monoidal category. 
-
-\begin{prp}{}{} Let $R$ be a ring. Then $({_R}\bold{Mod},\otimes_R,R)$ is a symmetric monoidal category. Moreover, it is a closed monoidal category with internal hom given by the usual hom functor $\text{HOM}_{{_R}\bold{Mod}}(-,-)=\Hom_R(-,-)$. 
-\end{prp}
-
-We have seen that the left and right Hom functors $$\Hom(M,-):{_R\bold{Mod}}\to{_R\bold{Mod}}\;\;\;\;\text{ and }\;\;\;\;\Hom(-,M):{_R\bold{Mod}}\to{_R\bold{Mod}}$$ are left exact functors. Using the tensor-hom adjunction, we can deduce the following. 
-
-\begin{prp}{}{} Let $R$ be a ring and let $M$ be an $R$-module. Then both $$-\otimes_R M:{_R\bold{Mod}}\to{_R\bold{Mod}}\;\;\;\;\text{ and }\;\;\;\;M\otimes_R-:{_R\bold{Mod}}\to{_R\bold{Mod}}$$ are right exact functors. 
-\end{prp}
-
-We find it important to notice the relation between all four functor here. Notice that because there is a canonical isomorphism $M\otimes_RN\cong N\otimes_RM$, we can replace $-\otimes_RM$ in the natural isomorphism $$\Hom_{_R\bold{Mod}}(-\otimes_RM,-)\cong\Hom_{_R\bold{Mod}}(-,\Hom_{_R\bold{Mod}}(M,-))$$ with $M\otimes_R-$. This leaves us with the question: What is the functor $\Hom(-,M)$ adjoint to? The answer is itself! $$\Hom_R(A,\Hom_R(B,C))\cong\Hom(B,\Hom(A,C))$$ Therefore it is more often to discuss $\Hom(M,-)$ in conjunction with $-\otimes_RM$, while $\Hom(-,M)$ is often left behind. \\~\\
-
-\begin{thm}{Change of Base Ring I}{}\\
-Let $R,S$ be commutative rings. Let $\varphi:R\to S$ be a ring homomorphism. Then there is an adjunction $$-\otimes_RS:\bold{Mod}_R\overset{\dashv}{\rightleftarrows}\bold{Mod}_S:-|_R$$
-\end{thm}
-
-\begin{thm}{Change of Base Ring II}{}\\
-Let $R,S$ be commutative rings. Let $\varphi:R\to S$ be a ring homomorphism. Then there is an adjunction $$-|_R:\bold{Mod}_S\overset{\dashv}{\rightleftarrows}\bold{Mod}_R:\Hom_R(S,-)$$
-\end{thm}
-
-\subsection{Graded Objects and Filtrations}
-\begin{defn}{Graded Objects}{}\\
-Let $G$ be an abelian group. Let $\mA$ be an abelian category. A $G$-graded object in $\mA$ is a collection $$C_\bullet=(C_g)_{g\in G}$$ for $C_g\in\mA$. 
-\end{defn}
-
-\begin{defn}{Morphisms of Graded Objects}{}\\
-Let $G$ be an abelian group. Let $\mA$ be an abelian category. Let $C_\bullet,D_\bullet$ be $G$-graded objects. A morphism from $C_\bullet$ to $D_\bullet$ is a collection $$f_\bullet=(f_g)_{g\in G}$$ for $f_g:C_g\to D_g\in\mA$. 
-\end{defn}
-
-\begin{defn}{The Category of Graded Objects}{}\\
-Let $G$ be an abelian group. Let $\mA$ be an abelian category. Define the category $$\bold{Gr}_G(\mA)$$ of $G$-graded objects as follows. 
+\subsection{Left and Right Exact Functors}
+\begin{defn}{Left and Right Exact Functors}{} Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be an additive functor. Let $0\to A\to B\to C\to 0$ be an exact sequence in $\mA$. 
 \begin{itemize}
-\item Objects of $\bold{Gr}_G(\mA)$ are graded objects of $\mA$. 
-\item Morphisms of $\bold{Gr}_G(\mA)$ are the morphisms of graded objects. 
-\item Composition is given by index-wise composition. 
+\item We say that $F$ is right exact if the sequence $$F(A)\to F(B)\to F(C)\to 0$$ is exact. 
+\item We say that $F$ is left exact if the sequence $$0\to F(A)\to F(B)\to F(C)$$ is exact. 
 \end{itemize}
 \end{defn}
 
-\begin{lmm}{}{}\\
-Let $G$ be an abelian group. Let $\mA$ be an abelian category. Then $\bold{Gr}_G(\mA)$ is an abelian category. 
+\begin{lmm}{}{} Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be an additive functor. Then $F$ is exact if and only if $F$ is left exact and right exact. 
 \end{lmm}
 
-\begin{defn}{The Shifting Functor}{}\\
-Let $G$ be an abelian group. Let $\mA$ be an abelian category. Let $g_0\in G$. Define the $g$th shifting functor $$-[g_0]:\bold{Gr}_G(\mA)\to\bold{Gr}_G(\mA)$$ as follows. 
+\begin{prp}{}{} Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a functor. Then the following are true. 
 \begin{itemize}
-\item For each object $C_\bullet$, define $C_\bullet[g_0]=(C_{g+g_0})_{g\in G}$. 
-\item For each morphisms $f_\bullet:C_\bullet\to D_\bullet$, define $f_\bullet[g]=(f_{g+g_0})_{g\in G}$. 
+\item $F$ is additive and left exact if and only if $F$ preserves all finite limits. 
+\item $F$ is additive and right exact if and only if $F$ preserves all finite colimits. 
 \end{itemize}
-\end{defn}
+\end{prp}
 
-\begin{defn}{Morphisms of Given Degree}{}\\
-Let $G$ be an abelian group. Let $\mA$ be an abelian category. Let $g_0\in G$. Let $C_\bullet,D_\bullet\in\bold{Gr}_G(\mA)$. A morphism from $C_\bullet$ to $D_\bullet$ of degree $g_0$ is a morphism $C_\bullet\to D_\bullet[g_0]$. 
-\end{defn}
+Since right adjoints preserves limits, any right adjoint functor between abelian categories must be left exact. Moreover, since limits commutes with limits, the limit functor $\lim_\mJ(-):\mC^\mJ\to\mC$ is also left exact. Dually, left adjoints and the colimit functor must also be right exact. 
+
+\begin{prp}{}{} Let $\mA$ be an abelian category. Let $M\in\mA$. Then the following are true. 
+\begin{itemize}
+\item The covariant functor $\Hom(M,-):\mA\to\bold{Ab}$ is left exact. 
+\item The contravariant functor $\Hom(-,M):\mA\to\bold{Ab}$ is right exact. 
+\end{itemize}
+\end{prp}
+
+Let $\mC$ be a category and let $\mJ$ be a diagram. Recall that if $\mC$ is complete, then the limit can be thought of as a functor $\lim_\mJ:\mC^\mJ\to\mC$. Dually, if $\mC$ is cocomplete, the colimit can be thought of as a functor $\text{colim}_\mJ:\mC^\mJ\to\mC$. If $\mC$ is an abelian category, it makes sense to ask whether these two functors preserve exact sequences. 
+
+\begin{prp}{}{} Let $\mA$ be an abelian category. Let $\mJ$ be a small category. Then the following are true. 
+\begin{itemize}
+\item If $\mA$ is complete, then the functor $\lim_\mJ:\mC^\mJ\to\mC$ is left exact
+\item If $\mA$ is cocomplete, then the functor $\text{colim}_\mJ:\mC^\mJ\to\mC$ is right exact
+\end{itemize}
+\end{prp}
+
+\subsection{Grothendieck Abelian Categories}
+We summarize the axioms of an abelian category as follows: A category $\mA$ is abelian if the following are true. 
+\begin{itemize}
+\item The Hom sets of $\mA$ are abelian groups that are compatible with composition. 
+\item $\mA$ has a $0$ object. 
+\item $\mA$ has finite products. 
+\item (AB1): Every morphism of $\mA$ has a kernel and cokernel. 
+\item (AB2): Every monomorphism is the kernel of its cokernel. 
+\item Every epimorphism is the cokernel of its kernel. 
+\end{itemize}
+These axioms are sufficient to prove the existence of finite coproducts and them coinciding with finite products. However we would often prefer an abelian category that admits all products and coproducts. 
 
 \begin{lmm}{}{}\\
-Let $G$ be an abelian group. Let $\mA$ be an abelian category. Let $g_0\in G$. Then there is a natural isomorphism $$\Hom_{\bold{Gr}_G(\mA)}(C_\bullet,D_\bullet[g_0])\cong\Hom_{\bold{Gr}_G(\mA)}(C_\bullet[-g_0],D_\bullet)$$ given by $f\mapsto f[-g_0]$. 
+Let $\mA$ be an abelian category. Then the following are true. 
+\begin{itemize}
+\item If $0\to A_i\to B_i\to C_i\to 0$ is an exact sequence for $1\leq i\leq n$, then the following is an exact sequence: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\bigoplus_{i=1}^nA_i} & {\bigoplus_{i=1}^nB_i} & {\bigoplus_{i=1}^nC_i} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+\end{tikzcd}}\\
+\item If $0\to A_i\to B_i\to C_i\to 0$ is an exact sequence for $1\leq i\leq n$, then the following is an exact sequence: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {\prod_{i=1}^nA_i} & {\prod_{i=1}^nB_i} & {\prod_{i=1}^nC_i}
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+\end{tikzcd}}\\
+if the colimits exists. 
+\item If $0\to A_i\to B_i\to C_i\to 0$ is an exact sequence for $i\in I$ where $i\mapsto A_i$, $i\mapsto B_i$ and $i\mapsto C_i$ are filtered diagrams, then the following is an exact sequence: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {\text{lim}_{i\in I}A_i} & {\text{lim}_{i\in I}B_i} & {\text{lim}_{i\in I}C_i}
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+\end{tikzcd}}\\
+if the limits exists. 
+\end{itemize}
 \end{lmm}
 
-\begin{defn}{Filtration of an Object}{}\\
-Let $\mA$ be an abelian category. Let $A\in\mA$. 
+\begin{defn}{The Grothendieck Abelian Categories Conditions}{}\\
+Let $\mA$ be an abelian category. 
 \begin{itemize}
-\item A descending filtration of $A$ is a collection $\mF=(F_nA)_{n\geq n_0}$ such that there are monomorphisms $F_{n+1}A\to F_nA$. We denote the filtration by $$0\subseteq\cdots\subseteq F_{n+1}A\subseteq F_nA\subseteq\cdots\subseteq A$$
-\item An ascending filtration of $A$ is a collection $\mF=(F_nA)_{n\geq n_0}$ such that there are monomorphisms $F_nA\to F_{n+1}A$. We denote the filtration by $$0\subseteq\cdots\subseteq F_nA\subseteq F_{n+1}A\subseteq\cdots\subseteq A$$
+\item We say that $\mA$ satisfies $(AB3)$ if all coproducts exists. 
+\item We say that $\mA$ satisfies $(AB3^\ast)$ if all products exists. 
+\item We say that $\mA$ satisfies $(AB4)$ if $\mA$ satisfies $(AB3)$ and the following is true: If $0\to A_i\to B_i\to C_i\to 0$ is an exact sequence for $i\in I$, then the following is an exact sequence: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {\bigoplus_{i\in I}A_i} & {\bigoplus_{i\in I}B_i} & {\bigoplus_{i\in I}C_i} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\
+\item We say that $\mA$ satisfies $(AB4^\ast)$ if $\mA$ satisfies $(AB3^\ast)$ and the following is true: If $0\to A_i\to B_i\to C_i\to 0$ is an exact sequence for $i\in I$, then the following is an exact sequence: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {\prod_{i\in I}A_i} & {\prod_{i\in I}B_i} & {\prod_{i\in I}C_i} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\
+if the colimits exists. 
+\item We say that $\mA$ satisfies $(AB5)$ if $\mA$ satisfies $(AB3)$ and the following is true: If $0\to A_i\to B_i\to C_i\to 0$ is an exact sequence for $i\in I$ where $i\mapsto A_i$, $i\mapsto B_i$ and $i\mapsto C_i$ are filtered diagrams, then the following is an exact sequence: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {\text{lim}_{i\in I}A_i} & {\text{lim}_{i\in I}B_i} & {\text{lim}_{i\in I}C_i} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\
+if the limits exists. 
 \end{itemize}
 \end{defn}
 
-\begin{defn}{Types of Filtrations}{}\\
-Let $\mA$ be an abelian category. Let $A\in\mA$. Let $(F_nA)_{n\in\N^+}$ be a filtration of $A$. 
+\begin{prp}{}{}\\
+Let $\mA$ be an abelian category. Then the following are true. 
 \begin{itemize}
-\item We say that the filtration is finite if there exists $s\in\N^+$ such that $F_sA=0$. 
-\item We say that the filtration is exhaustive if $\text{colim}_{n\to\infty}F_nA\cong A$. 
-\item We say that the filtration if Hausdorff if $\text{lim}_{n\to\infty}F_nA\cong 0$. 
+\item $\mA$ is cocomplete if and only if $\mA$ satisfies $(AB3)$. 
+\item $\mA$ is complete if and only if $\mA$ satisfies $(AB3^\ast)$. 
+\item If $\mA$ satisfies $(AB3)$, then $\mA$ satisfies $(AB3^\ast)$. 
+\item If $\mA$ satisfies $(AB5)$ and $(AB5^\ast)$, then $\mA=0$. 
 \end{itemize}
-\end{defn}
+\end{prp}
 
 \pagebreak
 \section{Chain Complexes}
@@ -983,6 +1106,27 @@ The construction of cohomology groups are functorial because the homology groups
 \end{itemize}
 \end{defn}
 
+\subsection{(Co)Homology and (Co)Limits}
+\begin{thm}{The FHHF Theorem}{}\\
+Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a covariant functor. Then the following are true. 
+\begin{itemize}
+\item If $F$ is right exact, then there is a natural transformation $F\circ H_n\Rightarrow H_n\circ F$ for all $n\in\N$. 
+\item If $F$ is left exact, then there is a natural transformation $H_n\circ F\Rightarrow F\circ H_n$ for all $n\in\N$. 
+\item If $F$ is exact, then the above natural transformations isomorphisms and are inverses of each other. 
+\end{itemize}
+\end{thm}
+
+\begin{prp}{}{}\\
+Let $\mA$ be an abelian category. Let $\mJ$ be a filtered category. Let $F:\mJ\to\bold{Ch}(\mA)$ be a functor. Then there is a natural isomorphism $$\colim_\mJ H_n\circ F\cong H_n\left(\colim_\mJ F\right)$$ for all $n\in\N$. 
+\begin{proof}\\
+Since filtered colimits commute with finite limits, we know that the filtered colimit functor is left exact. Hence it is an exact functor. By the FHHF theorem, filtered colimits commute with homology. 
+\end{proof}
+\end{prp}
+
+\begin{eg}{}{}\\
+Since products are coproducts and coproducts are filtered colimits, the above prp shows that homology commutes with products. 
+\end{eg}
+
 \subsection{Chain Homotopies}
 \begin{defn}{Chain Homotopy}{}\\
 Let $\mA$ be an abelian category. Let $f_\bullet,g_\bullet:C_\bullet\to C_\bullet'$ be two chain maps in $\bold{Ch}(\mA)$. Then a chain homotopy from $f$ to $g$ is a collection of morphisms $$\eta_n:C_n\to C_{n+1}'$$ in $\mA$ such that $$g_n-f_n=\partial_{n+1}'\eta_n+\eta_{n-1}\partial_n$$ for all $n\in\Z$. In this case, $f$ and $g$ are said to be chain homotopic and we write $f\simeq g$. 
@@ -1203,7 +1347,97 @@ Let $\mA$ be an abelian category. Let $X\in\bold{Ch}(\mA)$ be a chain complex. D
 Let $\mA$ be an abelian category. Let $X\in\bold{Ch}(\mA)$ be a chain complex. Then $\text{cone}(X)$ is contractible. 
 \end{lmm}
 
-\subsection{Complexes of Complexes}
+\subsection{Double Complexes}
+\begin{defn}{Double Complexes}{}\\
+Let $\mA$ be an abelian category. A double complex in $\mA$ consists of the following data: 
+\begin{itemize}
+\item A family of objects $C_{p,q}\in\mA$ for $p,q\in\Z$. 
+\item Horizontal differentials $d^h:C_{p,q}\to C_{p-1,q}$ in $\mA$ for $p,q\in\Z$. 
+\item Vertical differentials $d^v:C_{p,q}\to C_{p,q-1}$ in $\mA$ for $p,q\in\Z$. 
+\end{itemize}
+such that the following are true. 
+\begin{itemize}
+\item $d^h\circ d^h=0$. 
+\item $d^v\circ d^v=0$. 
+\item $d^v\circ d^h=d^h\circ d^v$. 
+\end{itemize}
+\end{defn}
+
+We picture a double complex as follows: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	& \vdots & \vdots & \vdots \\
+	\cdots & {C_{p-1,q+1}} & {C_{p,q+1}} & {C_{p+1,q+1}} & \cdots \\
+	\cdots & {C_{p-1,q}} & {C_{p,q}} & {C_{p+1,q}} & \cdots \\
+	\cdots & {C_{p-1,q-1}} & {C_{p,q-1}} & {C_{p+1,q-1}} & \cdots \\
+	& \vdots & \vdots & \vdots
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=1-3, to=2-3]
+	\arrow[from=1-4, to=2-4]
+	\arrow[from=2-2, to=2-1]
+	\arrow["{d^v}"', from=2-2, to=3-2]
+	\arrow["{d^h}"', from=2-3, to=2-2]
+	\arrow["{d^v}"', from=2-3, to=3-3]
+	\arrow["{d^h}"', from=2-4, to=2-3]
+	\arrow["{d^v}", from=2-4, to=3-4]
+	\arrow[from=2-5, to=2-4]
+	\arrow[from=3-2, to=3-1]
+	\arrow["{d^v}"', from=3-2, to=4-2]
+	\arrow["{d^h}"', from=3-3, to=3-2]
+	\arrow["{d^v}"', from=3-3, to=4-3]
+	\arrow["{d^h}"', from=3-4, to=3-3]
+	\arrow["{d^v}", from=3-4, to=4-4]
+	\arrow[from=3-5, to=3-4]
+	\arrow[from=4-2, to=4-1]
+	\arrow[from=4-2, to=5-2]
+	\arrow["{d^h}", from=4-3, to=4-2]
+	\arrow[from=4-3, to=5-3]
+	\arrow["{d^h}", from=4-4, to=4-3]
+	\arrow[from=4-4, to=5-4]
+	\arrow[from=4-5, to=4-4]
+\end{tikzcd}}\\~\\
+where each square is commutative. Double complexes are also graded objects of an abelian category equipeed with differentials that decrease the first and second degrees respectively. 
+
+\begin{defn}{Map of Double Complexes}{}\\
+Let $\mA$ be an abelian category. Let $C_{\bullet,\bullet},D_{\bullet,\bullet}$ be double complexes on $\mA$. A map $f:C_{\bullet,\bullet}\to D_{\bullet,\bullet}$ between the two double complexes consists of a collection of morphims $f_{p,q}:C_{p,q}\to D_{p,q}$ such that the following are true. 
+\begin{itemize}
+\item $d^h\circ f=f\circ d^h$. 
+\item $d^v\circ f=f\circ d^v$. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Homotopy between Maps of Double Complexes}{}
+\end{defn}
+
+\begin{defn}{The Total Complex of a Double Complex}{}\\
+Let $\mA$ be an abelian category. Suppose that $\mA$ admits all relevant direct sums. Let $(C_{\bullet,\bullet},d^h,d^v)$ be a double complex. Define the total complex $\text{Tot}^\oplus(C)_\bullet$ to be the chain complex in $\mA$ constructed as follows. 
+\begin{itemize}
+\item For each $n\in\Z$, define $$\text{Tot}^\oplus(C)_n=\bigoplus_{p+q=n}C_{p,q}$$
+\item For each $n\in\Z$, define $d:\text{Tot}^\oplus(C)_n\to\text{Tot}^\oplus(C)_{n-1}$ by $$d=d^v+(-1)^nd^h$$
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Total Homology of a Double Chain Complex}{}\\
+Let $\mA$ be an abelian category. Suppose that $\mA$ admits all relevant products. Let $(C_{\bullet,\bullet},d^h,d^v)$ be a double complex in $\mA$. Define the total homology of $C$ to be the homology $$H_\bullet^\text{Tot}(C_{\bullet,\bullet},d^h,d^v)=H_\bullet(\text{Tot}^\oplus(C)_\bullet,d)$$ of the total complex $(\text{Tot}^\oplus(C)_\bullet,d)$
+\end{defn}
+
+\begin{defn}{The Product Total Complex of a Double Complex}{}\\
+Let $\mA$ be an abelian category. Let $(C_{\bullet,\bullet},d^h,d^v)$ be a double complex. Define the product total complex $\text{Tot}^{\prod}(C)_\bullet$ to be the chain complex in $\mA$ constructed as follows. 
+\begin{itemize}
+\item For each $n\in\Z$, define $$\text{Tot}^{\prod}(C)_n=\prod_{p+q=n}C_{p,q}$$
+\item For each $n\in\Z$, define $d:\text{Tot}^{\prod}(C)_n\to\text{Tot}^{\prod}(C)_{n-1}$ by $$d=d^v+(-1)^nd^h$$
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Tensor Product Double Complex}{}\\
+Let $(\mA,\otimes_\mA)$ be a monoidal abelian category. Let $(C_\bullet,d^C)$ and $(D_\bullet,d^D)$ be two chain complexes. Define the tensor product of $C_\bullet$ and $D_\bullet$ to be the double complex $C_\bullet\otimes D_\bullet$ with the horizontal differential $d^h:C_p\otimes_\mA D_q\to C_{p-1}\otimes_\mA D_q$ and vertical differential $d^v:C_p\otimes_\mA D_q\to C_p\otimes_\mA D_{q-1}$ is defined by $$d^h=d^C\otimes\text{id}_D\;\;\;\;\text{ and }\;\;\;\;d^v=(-1)^p\text{id}_C\otimes d^D$$ respectively. 
+\end{defn}
+
+\begin{defn}{Tensor Product Chain Complex}{} Let $\mA$ be an abelian category. Let $(C_\bullet,d^C)$ and $(D_\bullet,d^D)$ be two chain complexes. Define the tensor product chain complex of $C_\bullet$ and $D_\bullet$ to be the chain complex $$(C\otimes D)_\bullet=\text{Tot}^\oplus(C_\bullet\otimes D_\bullet)$$
+\end{defn}
+
+Note that this is different from the tensor product double complex of two chain complexes, although they are closely related. Although the tensor product double complex makes more intuitive sense, the canonical product for $\bold{Ch}(\mA)$ is in fact the tensor product chain complex. Moreover, this product is the symmetric monoidal product of $\bold{Ch}(\mA)$. 
+
+\subsection{Long Exact Sequence of Homology from Short Exact Sequences}
 Let $\mA$ be an abelian category. We have seen that $\bold{Ch}(\mA)$ is also an abelian category, and so it makes sense to talk about chain complexes of chain complexes. Let $A_\bullet,B_\bullet,C_\bullet$ be chain complexes in an abelian category $\mA$. Let $i:A_\bullet\to B_\bullet$ and $j:B_\bullet\to C_\bullet$ be chain maps in $\bold{Ch}(\mA)$. A short exact sequence of chain complexes is a diagram of the form \\~\\
 \adjustbox{scale=1.1,center}{\begin{tikzcd}
 & 0\arrow[d] & 0\arrow[d] & 0\arrow[d] &\\
@@ -1293,142 +1527,8 @@ If any two out of $f,g,h$ are quasi-isomorphisms, then the five lemma implies th
 \end{proof}
 \end{crl}
 
-\begin{defn}{Double Complexes}{}\\
-Let $\mA$ be an abelian category. A double complex in $\mA$ consists of the following data: 
-\begin{itemize}
-\item A family of objects $C_{p,q}\in\mA$ for $p,q\in\Z$. 
-\item Horizontal differentials $d^h:C_{p,q}\to C_{p-1,q}$ in $\mA$ for $p,q\in\Z$. 
-\item Vertical differentials $d^v:C_{p,q}\to C_{p,q-1}$ in $\mA$ for $p,q\in\Z$. 
-\end{itemize}
-such that the following are true. 
-\begin{itemize}
-\item $d^h\circ d^h=0$. 
-\item $d^v\circ d^v=0$. 
-\item $d^v\circ d^h=d^h\circ d^v$. 
-\end{itemize}
-\end{defn}
-
-We picture a double complex as follows: \\~\\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	& \vdots & \vdots & \vdots \\
-	\cdots & {C_{p-1,q+1}} & {C_{p,q+1}} & {C_{p+1,q+1}} & \cdots \\
-	\cdots & {C_{p-1,q}} & {C_{p,q}} & {C_{p+1,q}} & \cdots \\
-	\cdots & {C_{p-1,q-1}} & {C_{p,q-1}} & {C_{p+1,q-1}} & \cdots \\
-	& \vdots & \vdots & \vdots
-	\arrow[from=1-2, to=2-2]
-	\arrow[from=1-3, to=2-3]
-	\arrow[from=1-4, to=2-4]
-	\arrow[from=2-2, to=2-1]
-	\arrow["{d^v}"', from=2-2, to=3-2]
-	\arrow["{d^h}"', from=2-3, to=2-2]
-	\arrow["{d^v}"', from=2-3, to=3-3]
-	\arrow["{d^h}"', from=2-4, to=2-3]
-	\arrow["{d^v}", from=2-4, to=3-4]
-	\arrow[from=2-5, to=2-4]
-	\arrow[from=3-2, to=3-1]
-	\arrow["{d^v}"', from=3-2, to=4-2]
-	\arrow["{d^h}"', from=3-3, to=3-2]
-	\arrow["{d^v}"', from=3-3, to=4-3]
-	\arrow["{d^h}"', from=3-4, to=3-3]
-	\arrow["{d^v}", from=3-4, to=4-4]
-	\arrow[from=3-5, to=3-4]
-	\arrow[from=4-2, to=4-1]
-	\arrow[from=4-2, to=5-2]
-	\arrow["{d^h}", from=4-3, to=4-2]
-	\arrow[from=4-3, to=5-3]
-	\arrow["{d^h}", from=4-4, to=4-3]
-	\arrow[from=4-4, to=5-4]
-	\arrow[from=4-5, to=4-4]
-\end{tikzcd}}\\~\\
-where each square is commutative. Double complexes are also graded objects of an abelian category equipeed with differentials that decrease the first and second degrees respectively. 
-
-\begin{defn}{The Total Complex of a Double Complex}{}\\
-Let $\mA$ be an abelian category. Suppose that $\mA$ admits all relevant direct sums. Let $(C_{\bullet,\bullet},d^h,d^v)$ be a double complex. Define the total complex $\text{Tot}^\oplus(C)_\bullet$ to be the chain complex in $\mA$ constructed as follows. 
-\begin{itemize}
-\item For each $n\in\Z$, define $$\text{Tot}^\oplus(C)_n=\bigoplus_{p+q=n}C_{p,q}$$
-\item For each $n\in\Z$, define $d:\text{Tot}^\oplus(C)_n\to\text{Tot}^\oplus(C)_{n-1}$ by $$d=d^v+(-1)^nd^h$$
-\end{itemize}
-\end{defn}
-
-\begin{defn}{Total Homology of a Double Chain Complex}{}\\
-Let $\mA$ be an abelian category. Suppose that $\mA$ admits all relevant products. Let $(C_{\bullet,\bullet},d^h,d^v)$ be a double complex in $\mA$. Define the total homology of $C$ to be the homology $$H_\bullet^\text{Tot}(C_{\bullet,\bullet},d^h,d^v)=H_\bullet(\text{Tot}^\oplus(C)_\bullet,d)$$ of the total complex $(\text{Tot}^\oplus(C)_\bullet,d)$
-\end{defn}
-
-\begin{defn}{The Product Total Complex of a Double Complex}{}\\
-Let $\mA$ be an abelian category. Let $(C_{\bullet,\bullet},d^h,d^v)$ be a double complex. Define the product total complex $\text{Tot}^{\prod}(C)_\bullet$ to be the chain complex in $\mA$ constructed as follows. 
-\begin{itemize}
-\item For each $n\in\Z$, define $$\text{Tot}^{\prod}(C)_n=\prod_{p+q=n}C_{p,q}$$
-\item For each $n\in\Z$, define $d:\text{Tot}^{\prod}(C)_n\to\text{Tot}^{\prod}(C)_{n-1}$ by $$d=d^v+(-1)^nd^h$$
-\end{itemize}
-\end{defn}
-
-\begin{defn}{Tensor Product Double Complex}{}\\
-Let $(\mA,\otimes_\mA)$ be a monoidal abelian category. Let $(C_\bullet,d^C)$ and $(D_\bullet,d^D)$ be two chain complexes. Define the tensor product of $C_\bullet$ and $D_\bullet$ to be the double complex $C_\bullet\otimes D_\bullet$ with the horizontal differential $d^h:C_p\otimes_\mA D_q\to C_{p-1}\otimes_\mA D_q$ and vertical differential $d^v:C_p\otimes_\mA D_q\to C_p\otimes_\mA D_{q-1}$ is defined by $$d^h=d^C\otimes\text{id}_D\;\;\;\;\text{ and }\;\;\;\;d^v=(-1)^p\text{id}_C\otimes d^D$$ respectively. 
-\end{defn}
-
-\begin{defn}{Tensor Product Chain Complex}{} Let $\mA$ be an abelian category. Let $(C_\bullet,d^C)$ and $(D_\bullet,d^D)$ be two chain complexes. Define the tensor product chain complex of $C_\bullet$ and $D_\bullet$ to be the chain complex $$(C\otimes D)_\bullet=\text{Tot}^\oplus(C_\bullet\otimes D_\bullet)$$
-\end{defn}
-
-Note that this is different from the tensor product double complex of two chain complexes, although they are closely related. Although the tensor product double complex makes more intuitive sense, the canonical product for $\bold{Ch}(\mA)$ is in fact the tensor product chain complex. Moreover, this product is the symmetric monoidal product of $\bold{Ch}(\mA)$. 
-
 \pagebreak
 \section{Derived Functors}
-\subsection{Left and Right Exact Functors}
-\begin{defn}{Left and Right Exact Functors}{} Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be an additive functor. Let $0\to A\to B\to C\to 0$ be an exact sequence in $\mA$. 
-\begin{itemize}
-\item We say that $F$ is right exact if the sequence $$F(A)\to F(B)\to F(C)\to 0$$ is exact. 
-\item We say that $F$ is left exact if the sequence $$0\to F(A)\to F(B)\to F(C)$$ is exact. 
-\end{itemize}
-\end{defn}
-
-\begin{lmm}{}{} Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be an additive functor. Then $F$ is exact if and only if $F$ is left exact and right exact. 
-\end{lmm}
-
-\begin{prp}{}{} Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a functor. Then the following are true. 
-\begin{itemize}
-\item $F$ is additive and left exact if and only if $F$ preserves all finite limits. 
-\item $F$ is additive and right exact if and only if $F$ preserves all finite colimits. 
-\end{itemize}
-\end{prp}
-
-Since right adjoints preserves limits, any right adjoint functor between abelian categories must be left exact. Moreover, since limits commutes with limits, the limit functor $\lim_\mJ(-):\mC^\mJ\to\mC$ is also left exact. Dually, left adjoints and the colimit functor must also be right exact. 
-
-\begin{prp}{}{} Let $\mA$ be an abelian category. Let $M\in\mA$. Then the following are true. 
-\begin{itemize}
-\item The covariant functor $\Hom(M,-):\mA\to\bold{Ab}$ is left exact. 
-\item The contravariant functor $\Hom(-,M):\mA\to\bold{Ab}$ is right exact. 
-\end{itemize}
-\end{prp}
-
-Let $\mC$ be a category and let $\mJ$ be a diagram. Recall that if $\mC$ is complete, then the limit can be thought of as a functor $\lim_\mJ:\mC^\mJ\to\mC$. Dually, if $\mC$ is cocomplete, the colimit can be thought of as a functor $\text{colim}_\mJ:\mC^\mJ\to\mC$. If $\mC$ is an abelian category, it makes sense to ask whether these two functors preserve exact sequences. 
-
-\begin{prp}{}{} Let $\mA$ be an abelian category. Let $\mJ$ be a small category. Then the following are true. 
-\begin{itemize}
-\item If $\mA$ is complete, then the functor $\lim_\mJ:\mC^\mJ\to\mC$ is left exact
-\item If $\mA$ is cocomplete, then the functor $\text{colim}_\mJ:\mC^\mJ\to\mC$ is right exact
-\end{itemize}
-\end{prp}
-
-\begin{thm}{The FHHF Theorem}{}\\
-Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a covariant functor. Then the following are true. 
-\begin{itemize}
-\item If $F$ is right exact, then there is a natural transformation $F\circ H_n\Rightarrow H_n\circ F$ for all $n\in\N$. 
-\item If $F$ is left exact, then there is a natural transformation $H_n\circ F\Rightarrow F\circ H_n$ for all $n\in\N$. 
-\item If $F$ is exact, then the above natural transformations isomorphisms and are inverses of each other. 
-\end{itemize}
-\end{thm}
-
-\begin{prp}{}{}\\
-Let $\mA$ be an abelian category. Let $\mJ$ be a filtered category. Let $F:\mJ\to\bold{Ch}(\mA)$ be a functor. Then there is a natural isomorphism $$\colim_\mJ H_n\circ F\cong H_n\left(\colim_\mJ F\right)$$ for all $n\in\N$. 
-\begin{proof}\\
-Since filtered colimits commute with finite limits, we know that the filtered colimit functor is left exact. Hence it is an exact functor. By the FHHF theorem, filtered colimits commute with homology. 
-\end{proof}
-\end{prp}
-
-\begin{eg}{}{}\\
-Since products are coproducts and coproducts are filtered colimits, the above prp shows that homology commutes with products. 
-\end{eg}
-
 \subsection{Injective and Projective Objects}
 Injectivity and Projectivity objects are created just for the sake of allowing the $\Hom$ functor to be exact. Therefore its definition is also direct. 
 
@@ -1519,16 +1619,13 @@ Let $R$ be a ring. Let $M$ be a left $R$-module. Then $M$ is injective if and on
 There are however equivalent definitions from the categorical point of view. 
 
 \subsection{Resolutions of Objects}
-There are in general, four types of resolutions. Namely injective resolutions, projective resolutions, free resolutions and acyclic resolutions. We will study all four of them and their relations in this section. 
-
-\begin{defn}{Injective Resolution}{}\\
-Let $\mA$ be an abelian category. Let $A\in\mA$. An injective resolution of $A$ is a cochain complex $I\in\bold{CCh}_{\geq 0}(\mA)$ such that the following are true. 
+\begin{defn}{Resolution of Objects}{}\\
+Let $\mA$ be an abelian category. Let $A\in\mA$. 
 \begin{itemize}
-\item $I^n$ is injective for all $n\geq 0$. 
-\item There exists a quasi-isomorphism $\iota:c_0(A)\to I$ depicted as \\~\\
+\item A left resolution of $A$ is a chain complex $F_\bullet\in\bold{Ch}_{\geq 0}(\mA)$ together with a quasi-isomorphism $\iota:F_\bullet\to A$ depicted as \\~\\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
-	\cdots & 0 & A & 0 & \cdots \\
-	\cdots & 0 & {I^0} & {I^1} & \cdots
+	\cdots & {F_1} & {F_0} & 0 & \cdots \\
+	\cdots & 0 & A & 0 & \cdots
 	\arrow[from=1-1, to=1-2]
 	\arrow[from=1-2, to=1-3]
 	\arrow[from=1-2, to=2-2]
@@ -1541,6 +1638,32 @@ Let $\mA$ be an abelian category. Let $A\in\mA$. An injective resolution of $A$ 
 	\arrow[from=2-3, to=2-4]
 	\arrow[from=2-4, to=2-5]
 \end{tikzcd}}\\
+\item A right resolution of $A$ is a cochain complex $F^\bullet\in\bold{CCh}_{\geq 0}(\mA)$ together with a quasi-isomorphism depicted as \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\cdots & 0 & A & 0 & \cdots \\
+	\cdots & 0 & {F^0} & {F^1} & \cdots
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=1-3, to=1-4]
+	\arrow["\iota"', from=1-3, to=2-3]
+	\arrow[from=1-4, to=1-5]
+	\arrow[from=1-4, to=2-4]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-3, to=2-4]
+	\arrow[from=2-4, to=2-5]
+\end{tikzcd}}\\
+\end{itemize}
+\end{defn}
+
+The quasi-isomorphism condition is the same as saying that the chain complex is exact. 
+
+\begin{defn}{Injective Resolution}{}\\
+Let $\mA$ be an abelian category. Let $A\in\mA$. An injective resolution of $A$ is a cochain complex $I\in\bold{CCh}_{\geq 0}(\mA)$ such that the following are true. 
+\begin{itemize}
+\item $I^n$ is injective for all $n\geq 0$. 
+\item $I^\bullet$ is a right resolution of $A$. 
 \end{itemize}
 \end{defn}
 
@@ -1608,22 +1731,7 @@ Moreover, any two such chain maps are homotopic.
 Let $\mA$ be an abelian category. Let $A\in\mA$. A projective resolution of $A$ is a chain complex $P\in\bold{Ch}_{\geq 0}(\mA)$ such that the following are true. 
 \begin{itemize}
 \item $P_n$ is injective for all $n\geq 0$. 
-\item There exists a quasi-isomorphism $\iota:P\to c_0(A)$ depicted as \\~\\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	\cdots & {P_1} & {P_0} & 0 & \cdots \\
-	\cdots & 0 & A & 0 & \cdots
-	\arrow[from=1-1, to=1-2]
-	\arrow[from=1-2, to=1-3]
-	\arrow[from=1-2, to=2-2]
-	\arrow[from=1-3, to=1-4]
-	\arrow["\iota"', from=1-3, to=2-3]
-	\arrow[from=1-4, to=1-5]
-	\arrow[from=1-4, to=2-4]
-	\arrow[from=2-1, to=2-2]
-	\arrow[from=2-2, to=2-3]
-	\arrow[from=2-3, to=2-4]
-	\arrow[from=2-4, to=2-5]
-\end{tikzcd}}\\
+\item $P_\bullet$ is a left resolution of $A$. 
 \end{itemize}
 \end{defn}
 
@@ -1793,6 +1901,31 @@ TBA: Functorial in $A$.
 
 \begin{prp}{}{}\\
 Let $\mA$ be an abelian category with enough injectives and projectives. Then there is an isomorphism $$R^n(\Hom(A,-))(B)\cong R^n(\Hom(-,B))(A)$$ that is natural in $A$ and $B$ for all $n\in\N$. 
+\end{prp}
+
+\subsection{Acyclic Resolutions}
+\begin{defn}{Acyclic Objects}{}\\
+Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a functor. Let $A\in\mA$. 
+\begin{itemize}
+\item Suppose that $F$ is right exact. We say that $A$ is an $F$-acyclic object if $L_iF(A)=0$ for all $i\geq 1$. 
+\item Suppose that $F$ is left exact. We say that $A$ is an $F$-acyclic object if $R^iF(A)=0$ for all $i\geq 1$. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Acyclic Resolutions}{}\\
+Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a functor. Let $A\in\mA$. 
+\begin{itemize}
+\item Suppose that $F$ is right exact. Let $Q_\bullet\to A$ be a left resolution of $A$. We say that $Q_\bullet$ is $F$-acyclic if each $Q_n$ is $F$-acyclic. 
+\item Suppose that $F$ is left exact. Let $A\to Q^\bullet$ be a right resolution of $A$. We say that $Q^\bullet$ is $F$-acyclic if each $Q^n$ is $F$-acyclic. 
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a right exact functor. Let $A\in\mA$ be an object. Let $Q_\bullet$ be an $F$-acyclic resolution of $A$. Then we have $$L_nF(A)=H_nF(Q_\bullet)$$
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a left exact functor. Let $A\in\mA$ be an object. Let $Q^\bullet$ be an $F$-acyclic resolution of $A$. Then we have $$R^nF(A)=H^nF(Q^\bullet)$$
 \end{prp}
 
 \subsection{$\delta$-Functors}
@@ -2727,6 +2860,155 @@ from the lower-left path to the top-right path which is universal in the followi
 \end{thm}
 
 Notice that in particular, if $X\in\mA$ is an object considered as a chain complex in degree $0$, we have seen that $\L_iF=L_iF:\bold{\mA}\to\bold{\mB}$ hence $L_iF=H_i(LF):\bold{\mA}\to\bold{\mB}$. This is similar for the dual version. 
+
+\pagebreak
+\section{Hyper-Derived Functors}
+\subsection{Cartan-Eilenberg Resolutions}
+\begin{defn}{Left Cartan-Eilenberg Resolutions}{}\\
+Let $\mA$ be an abelian category. Let $C_\bullet\in\bold{Ch}(\mA)$ be a chain complex in $\mA$. A left Cartan-Eilenberg resolution of $C_\bullet$ is a double complex $P_{\bullet,\bullet}$ together with a chain map $P_{\bullet,0}\to C_\bullet$ such that the following are true. 
+\begin{itemize}
+\item $P_{i,j}=0$ if $j<0$. 
+\item If $C_i=0$, then $P_{i,\bullet}=0$. 
+\item For each $i\in\Z$, the chain complex $B_i(P_{\bullet,i},d^h)$ in $i$ is a projective resolution for $B_i(C_\bullet)$. 
+\item For each $i\in\Z$, the chain complex $H_i(P_{\bullet,i},d^h)$ in $i$ is a projective resolution for $H_i(C_\bullet)$. 
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $\mA$ be an abelian category. Let $C_\bullet\in\bold{Ch}(\mA)$ be a chain complex in $\mA$. Let $P_{\bullet,\bullet}$ be a left Cartan-Eilenberg resolution of $C_\bullet$. Then the following are true. 
+\begin{itemize}
+\item For each $i\in\Z$, the chain complex $P_{i,\bullet}$ is a projective resolution of $C_i$. 
+\item For each $i\in\Z$, the chain complex $Z_i(P_{\bullet,i},d^h)$ in $i$ is a projective resolution for $Z_i(C_\bullet)$. 
+\item Suppose that $(AB4)$ holds for $\mA$. The induced morphism $\text{Tot}^\oplus(P_{\bullet,\bullet})\to C_\bullet$ is a quasi-isomorphism. 
+\end{itemize}
+\end{prp}
+
+\begin{lmm}{}{}\\
+Let $\mA$ be an abelian category. If $\mA$ has enough projectives, then every chain complex in $\mA$ has a left Cartan-Eilenberg resolution. 
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $\mA$ be an abelian category. Let $C_\bullet\in\bold{Ch}(\mA)$ be a chain complex in $\mA$. Let $P_{\bullet,\bullet},Q_{\bullet,\bullet}$ be left Cartan-Eilenberg resolutions of $C_\bullet$. Then $P_{\bullet,\bullet},Q_{\bullet,\bullet}$ are homotopy equivalent. 
+\end{lmm}
+
+\begin{defn}{Right Cartan-Eilenberg Resolutions}{}\\
+Let $\mA$ be an abelian category. Let $C^\bullet\in\bold{CCh}(\mA)$ be a cochain complex in $\mA$. A right Cartan-Eilenberg resolution of $C^\bullet$ is a double cochain complex $I^{\bullet,\bullet}$ together with a chain map $C^\bullet\to I^{\bullet,0}$ such that the following are true. 
+\begin{itemize}
+\item $I^{i,j}=0$ if $j<0$. 
+\item If $C^i=0$, then $I^{i,\bullet}=0$. 
+\item For each $i\in\Z$, the chain complex $B^i(I^{\bullet,i},d^h)$ in $i$ is an injective resolution for $B^i(C^\bullet)$. 
+\item For each $i\in\Z$, the chain complex $H^i(I^{\bullet,i},d^h)$ in $i$ is an injective resolution for $H^i(C^\bullet)$. 
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $\mA$ be an abelian category. Let $C^\bullet\in\bold{Ch}(\mA)$ be a cochain complex in $\mA$. Let $I^{\bullet,\bullet}$ be a right Cartan-Eilenberg resolution of $C^\bullet$. Then the following are true. 
+\begin{itemize}
+\item For each $i\in\Z$, the chain complex $I^{i,\bullet}$ is an injective resolution for $C^i$. 
+\item For each $i\in\Z$, the chain complex $Z^i(I^{\bullet,i})$ in $i$ is an injective resolution for $Z^i(C^\bullet)$. 
+\item Suppose that $(AB4^\ast)$ holds for $\mA$. Then the induced morphism $C^\bullet\to\text{Tot}^{\prod}(I^{\bullet,\bullet})$ is a quasi-isomorphism. 
+\end{itemize}
+\end{prp}
+
+\begin{lmm}{}{}\\
+Let $\mA$ be an abelian category. If $\mA$ has enough injectives, then every cochain complex in $\mA$ has a right Cartan-Eilenberg resolution. 
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $\mA$ be an abelian category. Let $C^\bullet\in\bold{CCh}(\mA)$ be a cochain complex in $\mA$. Let $I^{\bullet,\bullet},J^{\bullet,\bullet}$ be right Cartan-Eilenberg resolutions of $C^\bullet$. Then $I^{\bullet,\bullet},J^{\bullet,\bullet}$ are homotopy equivalent. 
+\end{lmm}
+
+\subsection{Hyper-Derived Functors}
+\begin{defn}{Left Hyper-Derived Functors}{}\\
+Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a right exact functor. Suppose that $\mA$ has enough projectives. Define the $i$th left hyper-derived functor $\L_iF:\bold{Ch}(\mA)\to\mB$ of $F$ by $$\L_iF(C_\bullet)=H_i(\text{Tot}^\oplus(F(P_{\bullet,\bullet})))$$ where $P_{\bullet,\bullet}$ is a left Cartan-Eilenberg resolution of $C_\bullet$. 
+\end{defn}
+
+Functoriality: 
+
+Note: we need to restrict to either $\bold{Ch}_+(\mA)$ or that $\mB$ is cocomplete. 
+
+\begin{prp}{}{}\\
+Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a right exact functor. Suppose that $\mA$ has enough projectives. Then the following are true. 
+\begin{itemize}
+\item Let $A\in\mA$ be an object. Then we have $$\L_iF(c_0(A))=L_iF(A)$$
+\item Let $C_\bullet\in\bold{Ch}_{\geq0}(\mA)$ be a chain complex. Then we have $$\L_iF(C_\bullet)=L_i(H_0F(C_\bullet))$$
+\end{itemize}
+\end{prp}
+
+\begin{lmm}{}{}\\
+Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a right exact functor. Suppose that $\mA$ has enough projectives. Suppose that the following is a short exact sequence of chain complexes in $\bold{Ch}_+(\mA)$: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {A_\bullet} & {B_\bullet} & {C_\bullet} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\
+Then there is a long exact sequence \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\cdots & {\L_{i+1}F(C_\bullet)} & {\L_iF(A_\bullet)} & {\L_iF(B_\bullet)} & {\L_iF(C_\bullet)} & {\L_{i-1}F(A_\bullet)} & \cdots
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+	\arrow[from=1-5, to=1-6]
+	\arrow[from=1-6, to=1-7]
+\end{tikzcd}}\\
+induced by the snake lemma. 
+\end{lmm}
+
+\begin{crl}{}{}\\
+Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a right exact functor. Suppose that $\mA$ has enough projectives. Then the following are true. 
+\begin{itemize}
+\item Let $C_\bullet\in\bold{Ch}(\mA)$ be a chain complex. If $C_\bullet$ is exact, then we have $$\L_iF(C_\bullet)=0$$ for all $i$. 
+\item Let $C_\bullet,D_\bullet\in\bold{Ch}(\mA)$ be chain complexes. Let $f:C_\bullet\to D_\bullet$ be a quasi-isomorphism. Then $f$ induces an isomorphism $$\L_iF(C_\bullet)\cong\L_iF(D_\bullet)$$ for all $i$. 
+\item Let $C_\bullet\in\bold{Ch}(\mA)$ be a chain complex. If $L_iF(C_p)=0$ for all $p\in\Z$ and all $i\geq 1$, then we have $$\L_iF(C_\bullet)=H_iF(C_\bullet)$$
+\end{itemize}
+\end{crl}
+
+\begin{defn}{Right Hyper-Derived Functors}{}\\
+Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a left exact functor. Suppose that $\mA$ has enough injectives. Define the $i$th right hyper-derived functor $\R^iF:\bold{CCh}(\mA)\to\mB$ by $$\R^iF(C^\bullet)=H^i(\text{Tot}^{\prod}(F(I^{\bullet,\bullet})))$$ where $I^{\bullet,\bullet}$ is a right Cartan-Eilenberg resolution of $C^\bullet$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a left exact functor. Suppose that $\mA$ has enough injectives. Then the following are true. 
+\begin{itemize}
+\item Let $A\in\mA$ be an object. Then we have $$\R^iF(c^0(A))=R^iF(A)$$
+\item Let $C^\bullet\in\bold{CCh}^{\geq 0}(\mA)$. Then we have $$\R^iF(C^\bullet)=R^iH^0F(C^\bullet)$$
+\end{itemize}
+\end{prp}
+
+\begin{lmm}{}{}\\
+Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a right exact functor. Suppose that $\mA$ has enough injectives. Suppose that the following is a short exact sequence of chain complexes in $\bold{CCh}^+(\mA)$: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {A_\bullet} & {B_\bullet} & {C_\bullet} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\
+Then there is a long exact sequence \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\cdots & {\R^{i-1}F(C_\bullet)} & {\R^iF(A_\bullet)} & {\R^iF(B_\bullet)} & {\R^iF(C_\bullet)} & {\R^{i+1}F(A_\bullet)} & \cdots
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+	\arrow[from=1-5, to=1-6]
+	\arrow[from=1-6, to=1-7]
+\end{tikzcd}}\\
+induced by the snake lemma. 
+\end{lmm}
+
+\begin{crl}{}{}\\
+Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a left exact functor. Suppose that $\mA$ has enough injectives. Then the following are true. 
+\begin{itemize}
+\item Let $C^\bullet\in\bold{CCh}(\mA)$ be a cochain complex. If $C^\bullet$ is exact, then we have $$\R^iF(C^\bullet)=0$$
+\item Let $C^\bullet,D^\bullet\in\bold{CCh}(\mA)$ be cochain complexes. Let $f:C^\bullet\to D^\bullet$ be a quasi-isomorphism. Then $f$ induces an isomrophism $$\R^iF(C^\bullet)\cong\R^iF(D^\bullet)$$
+\item Let $C^\bullet\in\bold{CCh}(\mA)$ be a cochain complex. If $R^iF(C^p)=0$ for all $p\in\Z$ and all $i\geq 1$, then we have $$\R^iF(C^\bullet)=H^iF(C^\bullet)$$
+\end{itemize}
+\end{crl}
+
 
 
 

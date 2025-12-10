@@ -23,17 +23,33 @@
 
 \section{Riemannian Metrics}
 \subsection{The Riemannian Metric}
-\begin{defn}{Riemannian Metric}{} Let $M$ be a smooth manifold. A Riemannian metric on $M$ is a function $g: TM\times TM\to\R$ such that for each $p\in M$, the restriction of $g$ to $$g_p:T_pM\times T_pM\to\R$$ is an inner product. 
+\begin{defn}{Riemannian Metric}{}\\
+Let $M$ be a smooth manifold. A Riemannian metric on $M$ is a smooth section $g\in\Gamma(M,(TM\otimes TM)^\ast)$ such that $g_p:T_p(M)\times T_p(M)\to\R$ is an inner product for all $p\in M$. 
 \end{defn}
+
+Equivalently, a Riemannian metric is an assignment $p\mapsto g_p$ such that for any smooth sections $s,t\in\Gamma(M,TM)$, the map $p\mapsto g_p(s(p),t(p))$ is smooth. 
 
 \begin{defn}{Riemannian Manifold}{} A Riemannian manifold $(M,g)$ is a manifold $M$ together with a Riemannian metric $g$ on $M$. 
 \end{defn}
 
-\begin{thm}{}{} Every smooth manifold admits a Riemannian metric and hence is a Riemannian manifold. 
+To describe the Riemannian metric in local coordinates, we need some simple algebra. Let $V$ be a finite dimensional vector space over a field $k$. Let $\{e_1,\dots,e_n\}$ be a basis for $V$. Let $\{e^1,\dots,e^n\}$ be the dual basis for $V^\ast$. Then we may establish a canonical isomorphism $$(V\otimes_kV)^\ast\cong V^\ast\otimes_kV^\ast$$ given by $f(-,-)\mapsto\sum_{i,j=1}^nf(e_i\otimes e_j)e^i\otimes e^j$. Its converse is given by $\varphi\otimes\psi\mapsto((v\otimes w)\mapsto\varphi(v)\psi(w))$. 
+
+Then isomorphism carries over to vector bundles, and so we have an isomorphism $(TM\otimes TM)^\ast\cong TM^\ast\otimes TM^\ast$. This is how the Riemannian metric is a $(0,2)$-tensor field. 
+
+\begin{prp}{}{}\\
+Let $(M,g)$ be a Riemannian manifold. Let $p\in M$. Let $(U,x^1,\dots,x^n)$ be a chart at $p$. Then $g_p$ as an element of $T_p(M)^\ast\otimes T_p(M)^\ast$ is given locally on the chart by $$g_p=\sum_{i,j=1}^ng_{i,j}|_p\;(dx^i)|_p\otimes(dx^j)_p$$ where $g_{i,j}|_p=g_p\left(\frac{\partial}{\partial x^i}\bigg{|}_p,\frac{\partial}{\partial x^j}\bigg{|}_p\right)$ where the latter $g_p$ is thought of as an element of $(T_p(M)\otimes T_p(M))^\ast$. 
+\end{prp}
+
+\begin{thm}{}{}\\
+Every smooth manifold admits a Riemannian metric and hence is a Riemannian manifold. 
 \end{thm}
 
 \begin{defn}{Isometries}{} Let $(M,g)$ and $(N,h)$ be two Riemannian manifolds. We say that $(M,g)$ and $(N,h)$ are isometric if there exists a diffeomorphisms $f:M\to N$ such that $$h\circ f=g$$ In this case $f$ is said to be an isometry. 
 \end{defn}
+
+\begin{thm}{(Nash)}{}\\
+Let $(M,g)$ be a Riemannian manifold of dimension $n$. Then there exists an isometric embedding $f:M\to\R^{(n+2)(n+3)/2}$ with the standard Euclidean metric. 
+\end{thm}
 
 \begin{defn}{Local Isometries}{} Let $(M,g)$ and $(N,h)$ be two Riemannian manifolds. We say that they are locally isometric if for all $p\in M$, there exists an open neighbourhood $U\subseteq M$ of $p$ and $V\subseteq N$ open and an isometry $f:U\to V$. 
 \end{defn}
@@ -46,7 +62,7 @@ In general, not every Riemannian manifold is flat. This can be shown once we dis
 \begin{lmm}{}{} Every 1 dimensional Riemannian manifold is flat. 
 \end{lmm}
 
-\subsection{Lengths and Angles}
+\subsection{Lengths, Angles and Volumes}
 \begin{defn}{Length of a Tangent Vector}{} Let $(M,g)$ be a Riemannian manifold. Let $v\in T_p(M)$ be a tangent vector for $p\in M$. Define the length of $v$ to be $$\abs{v}_g=\sqrt{g_p(v,v)}$$
 \end{defn}
 
@@ -60,6 +76,10 @@ In general, not every Riemannian manifold is flat. This can be shown once we dis
 \end{defn}
 
 \begin{defn}{Angle between two Curves}{} Let $(M,g)$ be a Riemannian manifold. Let $\gamma_1:(a,b)\to M$ and $\gamma_2:(c,d)\to M$ be two curves that intersecting at $p=\gamma_1(t_1)=\gamma_2(t_2)\in M$ and that $\gamma_1'(t_1)\neq 0$ and $\gamma_2'(t)\neq 0$. Define the angle between $\gamma_1$ and $\gamma_2$ at $p$ to be the unique $\theta\in[0,\pi]$ such that $$\cos(\theta)=\frac{g_p(X_{\gamma_1,p},X_{\gamma_2,p})}{\abs{X_{\gamma_1,p}}_g\abs{X_{\gamma_2,p}}_g}$$
+\end{defn}
+
+\begin{defn}{}{}\\
+Let $(M,g)$ be an orientable Riemannian manifold. Let $p\in M$. Let $(U,x^1,\dots,x^n)$ be a chart around $p$. Define the volume form $\text{Vol}(M)$ of $M$ to be given locally on the chart by $$\text{Vol}_p=\sqrt{\abs{g_p}}dx^1|_p\wedge\cdots\wedge dx^n|_p$$
 \end{defn}
 
 \subsection{Musical Isomorphism}

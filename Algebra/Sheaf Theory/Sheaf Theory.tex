@@ -1043,6 +1043,11 @@ The global section functor is a special case of the above proposition.
 \begin{defn}{Cohomology Functors}{} Let $X$ be a space. Define the cohomology functors $$H^i(X,-)=R^i\Gamma(X,-):\bold{Ab}(X)\to\bold{Ab}$$ of $X$ to be the right derived functors of $\Gamma(X,-):\bold{Ab}(X)\to\bold{Ab}$. For any sheaf $\mF$ of abelian groups on $X$, the groups $H^i(X,\mF)$ are called the cohomology groups of $\mF$. 
 \end{defn}
 
+\begin{prp}{}{} Let $(X,\mO_X)$ be a ringed space. Then the derived functors of $$\Gamma(X,-):{_{\mO_X}\bold{Mod}}(X)\to\bold{Ab}$$ coincide with the derived functors of $\Gamma(X,-):\bold{Ab}(X)\to\bold{Ab}$. 
+\end{prp}
+
+Thus there is no distinction in considering the cohomology groups of sheaf of $\mO_X$-modules and when considering them as simply a sheaf of abelian groups. 
+
 \subsection{Flasque Sheaves}
 \begin{defn}{Flasque Sheaves}{} A sheaf $\mF$ on a space $X$ is said to be flasque if for every pair of open sets $V\subset U$, the restriction map $\mF(U)\to\mF(V)$ is surjective. 
 \end{defn}
@@ -1115,10 +1120,50 @@ Since $\mI$ is injective, we have that $H^i(X,\mI)=0$ for all $i>0$. By passing 
 \end{proof}
 \end{prp}
 
-\begin{prp}{}{} Let $(X,\mO_X)$ be a ringed space. Then the derived functors of $$\Gamma(X,-):{_{\mO_X}\bold{Mod}}(X)\to\bold{Ab}$$ coincide with the derived functors of $\Gamma(X,-):\bold{Ab}(X)\to\bold{Ab}$. 
+Acyclic sheaves are useful because they help compute sheaf cohomology. Recall from Homological Algebra that $$H^i(X;\mF)=H^i(\Gamma(X,\mI^\bullet))$$ if $\mI^\bullet$ is an acyclic resolution of $\mF$. 
+
+\subsection{Godement Resolution}
+\begin{defn}{The Godement Sheaf}{}\\
+Let $X$ be a space. Let $\mF\in\bold{Ab}(X)$ be a sheaf on $X$. Define the Godement sheaf $\text{Gd}(F):\bold{Open}(X)\to\bold{Ab}$ as follows. 
+\begin{itemize}
+\item For each open set $U\subseteq X$, define $$\text{Gd}(F)(U)=\prod_{x\in U}\mF_x$$
+\item For each inclusion $V\subseteq U$, define the induced map $\text{Gd}(F)(U)\to\text{Gd}(F)(V)$ to be the restriction map. 
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $X$ be a space. Let $\mF\in\bold{Ab}(X)$ be a sheaf on $X$. Then $\text{Gd}(F)$ is a flasque sheaf. 
+\end{lmm}
+
+\begin{defn}{Canonical Morphism}{}\\
+Let $X$ be a space. Let $\mF\in\bold{Ab}(X)$ be a sheaf on $X$. Define the canonical morphism $\alpha_F:F\to\text{Gd}(\mF)$ by $\alpha_F:F(U)\to\text{Gd}(\mF)$ the formula $$s\mapsto(s_x)_{x\in U}$$
+\end{defn}
+
+\begin{defn}{The Godement Functor}{}\\
+Let $X$ be a space. Define the Godement functor $\text{Gd}:\bold{Ab}(X)\to\bold{Ab}(X)$ as follows. 
+\begin{itemize}
+\item Each sheaf $\mF\in\bold{Ab}(X)$ is sent to the godement sheaf $\text{Gd}(\mF)$. 
+\item Each morphism $\mF\to\mG$ is sent to the morphism of sheaves defined by the product of the induced map on stalks. 
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $X$ be a space. Let $\mF\in\bold{Ab}(X)$ be a sheaf. Then $\text{Gd}(\mF)$ is flasque. 
 \end{prp}
 
-Thus there is no distinction in considering the cohomology groups of sheaf of $\mO_X$-modules and when considering them as simply a sheaf of abelian groups. 
+\begin{defn}{Godement Resolution}{}\\
+Let $X$ be a space. Let $\mF\in\bold{Ab}(X)$ be a sheaf. Define the Godement resolution $\text{Gd}(\mF)^\bullet$ of $\mF$ as follows. 
+\begin{itemize}
+\item Define $\text{Gd}(\mF)^0=\mF$. 
+\item For each $n\in\N^+$, define $\text{Gd}(\mF)^n=\text{Gd}(\text{coker}(\alpha_{\text{Gd}(\mF)^{n-1}}))$. 
+\item Define the morphisms $\text{Gd}(\mF)^n\to\text{Gd}(\mF)^{n+1}$ to be $\alpha_{\text{Gd}(\mF)^n}$. \end{itemize}
+\end{defn}
+
+\begin{crl}{}{}\\
+Let $X$ be a space. Let $\mF\in\bold{Ab}(X)$ be a sheaf. Then $\text{Gd}(\mF)^\bullet$ is an acyclic resolution for $\Gamma(X,-)$. 
+\end{crl}
+
+Consequently, the sheaf cohomology of $\mF$ acquires the formula $$H^i(X;\mF)=H^i(\Gamma(X,\text{Gd}(\mF)^\bullet)$$
 
 \subsection{\v{C}ech Cohomology}
 \begin{defn}{\v{C}ech Complex}{} Let $X$ be a topological space and $\mU=\{U_i|i\in I\}$ an open cover of $X$ where $I$ is an indexing set. For any $(i_0,\dots,i_k)\in I^{k+1}$, denote $$U_{i_0,\dots,i_k}=U_{i_0}\cap U_{i_1}\cap\dots\cap U_{i_k}$$ Define for each $k$, $$C^k(X,\mU,\mF)=\bigcap_{(i_0,\dots,i_k)\in I^{k+1}}\mF(U_{i_0,\dots,i_k})$$ Furthermore, define a boundary map $d:C^k(X,\mU,\mF)\to C^{k+1}(X,\mU,\mF)$ by $$c_{i_0\dots,i_k}\overset{d}{\mapsto}\sum_{s=0}^{k+1}(-1)^s\text{res}(c_{i_0,\dots,\hat{i}_s,\dots,i_{k+1}})$$ Define the \v{C}ech complex to be $(C^\bullet(X,\mU,\mF),d)$. 
@@ -1136,8 +1181,28 @@ Thus there is no distinction in considering the cohomology groups of sheaf of $\
 \begin{prp}{}{} Let $X$ be a topological space and $\mU$ an open cover of $X$. If the open sets $U_{i_0,\dots,i_k}$ satisfy that $H^k(U_{i_0,\dots,i_k},\mF)=0$ for all $k>0$, then $$H^k(X,\mF)=\text{\v{H}}^k(X,\mU,\mF)$$
 \end{prp}
 
-\pagebreak
-\section{Hypercohomology}
+\subsection{Hypercohomology}
+\begin{defn}{Hypercohomology of a Space}{}\\
+Let $X$ be a space. Let $\mF^\bullet$ be a cochain complex of sheaves on $X$. Define the hyper cohomology of $X$ to be the right hyper-derived functor of the global section functor: $$\H^n(X;\mF^\bullet)=\R^n\Gamma(\mF^\bullet)$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $X$ be a space. Let $\mF^\bullet\in\bold{CCh}^+(\bold{Ab}(X))$ be a bounded below cochain complex. Let $\mI^\bullet\in\bold{CCh}^+(\bold{Ab}(X))$ be a bounded below cochain complex such that the following are true. 
+\begin{itemize}
+\item $I^n$ is injective for all $n$. 
+\item There is a quasi-isomorphism $F^\bullet\to\mI^\bullet$. 
+\end{itemize}
+Then we have $$\H^n(X;\mF^\bullet)=H^i(\Gamma(X,\mI^\bullet))$$
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $X$ be a space. Let $\mF^\bullet\in\bold{CCh}^+(\bold{Ab}(X))$ be a cochain complex of sheaves on $X$. Then there is a natural isomorphism $$\H^n(X;\mF^\bullet)\cong H^n(\Gamma(X,\text{Tot}^{\prod}(\text{Gd}^\bullet,\mF^\bullet)))$$
+\end{prp}
+
+\subsection{Relation to Singular Cohomology}
+\begin{thm}{(Y. Sella 2016)}{}\\
+Let $X$ be a locally contractible space. Then there is an isomorphism $$H_\text{sing}^n(X;\Z)\cong H_\text{sheaf}^n(X;\underline{\Z})$$
+\end{thm}
 
 \pagebreak
 \section{Sites, Sieves and Grothendieck Topologies}

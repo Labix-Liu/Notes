@@ -386,7 +386,12 @@ What follows is that we will show that these are essentially the same constructi
 \begin{defn}{Tangent Space}{} Let $M$ be a manifold. Define the tangent space to $M$ at $p$ to be the set of all tangent vectors of $M$ at $p$, denoted $T_p(M)$. 
 \end{defn}
 
-\begin{prp}{Standard Basis}{} Let $(U,\phi=(x^1,\dots,x^n))$ be a chart containing $p$ in a smooth manifold $M$. Then $T_p(M)$ has basis $$\left\{\frac{\partial}{\partial x^1}\bigg\vert_p,\dots,\frac{\partial}{\partial x^n}\bigg{|}_p\right\}$$ This means that a tangent vector of $M$ has the form $$X_{\gamma,p}=\sum_{k=1}^na_k(p)\frac{\partial}{\partial x^k}\bigg{|}_p\;\;\;\;\text{and}\;\;\;\;X_{\gamma,p}(f)=\sum_{k=1}^na_k(p)\frac{\partial (f\circ\phi^{-1})}{\partial x_k}\bigg{|}_{\phi(p)}$$ where $a_k(p)\in\R$ depends on $[\gamma]$ for each $k$. 
+\begin{defn}{Standard Basis Vectors of the Tangent Space With Respect to a Chart}{}\\
+Let $M$ be a smooth manifold. Let $p\in M$. Let $(U,\phi=(x^1,\dots,x^n))$ be a chart containing $p$. Define the tangent vector $\frac{\partial}{\partial x^k}\bigg{|}_p:\mC_{M,p}^\infty\to\R$ by $$\frac{\partial}{\partial x^k}\bigg{|}_p(f)=\frac{\partial f\circ\phi^{-1}}{\partial x_k}\bigg{|}_{\phi(p)}$$
+\end{defn}
+
+\begin{prp}{Standard Basis}{}\\
+Let $M$ be a smooth manifold. Let $p\in M$. Let $(U,\phi=(x^1,\dots,x^n))$ be a chart containing $p$. Then an $\R$-basis for $T_p(M)$ is given by $$\left\{\frac{\partial}{\partial x^1}\bigg\vert_p,\dots,\frac{\partial}{\partial x^n}\bigg{|}_p\right\}$$
 \begin{proof}
 By chain rule applied to the map $(f\circ\phi^{-1})\circ(\phi\circ\gamma):\R\to\R^n$, for any $\gamma:(-1,1)\to M$ and $f\in\mC_{M,p}^\infty$, we have $$X_{\gamma,p}(f)=\sum_{k=1}^n\frac{\partial (f\circ\phi^{-1})}{\partial x_k}\bigg{|}_{\phi(p)}\cdot\frac{d\gamma_k(t)}{dt}\bigg{|}_{t=0}$$ where $\gamma_k(t)=x^k$. Rewriting $a_k(p)=\frac{d\gamma_k(t)}{dt}\bigg{|}_{t=0}$, we have that $$X_{\gamma,p}(f)=\sum_{k=1}^na_k\frac{\partial (f\circ\phi^{-1})}{\partial x_k}\bigg{|}_{\phi(p)}$$ By allowing $f$ to vary, we obtain $X_{\gamma,p}=\sum_{k=1}^na_k\frac{\partial}{\partial x^k}\bigg{|}_p$. It remains to show that they span the vector space and that they are linearly independent. \\
 
@@ -405,41 +410,49 @@ X_{\gamma,p}(f)&=\frac{d(f\circ\gamma)(t)}{dt}\bigg{|}_{t=0}\\
 \end{proof}
 \end{prp}
 
+This means that a tangent vector of $M$ has the form $$X_{\gamma,p}=\sum_{k=1}^na_k(p)\frac{\partial}{\partial x^k}\bigg{|}_p\;\;\;\;\text{and}\;\;\;\;X_{\gamma,p}(f)=\sum_{k=1}^na_k(p)\frac{\partial (f\circ\phi^{-1})}{\partial x_k}\bigg{|}_{\phi(p)}$$ where $a_k(p)\in\R$ depends on $[\gamma]$ for each $k$. \\
+
 This proposition also shows that the choice of $\gamma$ becomes encoded in the coefficients of the basis elements $a_1(p),\dots,a_n(p)\in\R$. Thus from now on we omit $\gamma$ in $X_{\gamma,p}$ and simply write $X_p$. Later we will see that as we smoothly vary the point $p$, if each $a_1,\dots,a_n$ varies smoothly with points on $M$ so that $a_1,\dots,a_n\in C_{M,p}^\infty$, then $X$ becomes a vector field. \\
 
-When we do not want to emphasize on the choice of charts of $X_p$, we use $\frac{\partial}{\partial x^k}$ to indicate the partial derivative on the $k$th coordinate. Once a choice of chart $(U,\phi)$ has been chosen, we can then pre-compose $f\in C_{M,p}^\infty$ with $\phi^{-1}$ so that $f\circ\phi^{-1}$ is a real function from $\R^n$. Then it makes sense to write the partial derivative at the $k$th coordinate direction as $\frac{\partial(f\circ\phi^{-1})}{\partial x_k}$ because now the partial derivative is the usual one in multivariable calculus. 
-
-\begin{crl}{}{} Let $M$ be a smooth manifold of dimension $n$. Let $p\in M$. Then $T_p(M)\cong\R^n$ as a vector space. 
-\begin{proof}
-By the above proposition, $T_p(M)$ is a vector space over $\R$ with $n$ basis elements. Thus $T_p(M)\cong\R^n$ as vector spaces. 
-\end{proof}
+\begin{crl}{}{}\\
+Let $M$ be a smooth manifold. Then we have $\dim_\R(T_p(M))=\dim(M)$. 
 \end{crl}
 
 Given two charts overlapping on a point $p\in M$, how does the derivative of the functions change with respect to changing their coordinate charts? The following proposition shows that once again, the question can be reduced to a problem on multivariable calculus. 
 
-\begin{prp}{}{} Suppose $(U,\phi=(x^1,\dots,x^n))$ and $(V,y^1,\dots,y^n)$ are two coordinate charts on a manifold $M$. Then $$\frac{\partial}{\partial x^k}=\sum_{i=1}^n\frac{\partial(y^i\circ\phi^{-1})}{\partial x_k}\frac{\partial}{\partial y^k}$$ on $U\cap V$. 
+\begin{prp}{}{}\\
+Let $M$ be a smooth manifold. Let $p\in M$. Let $(U,\phi=(x^1,\dots,x^n))$ and $(V,y^1,\dots,y^n)$ be two chart containing $p$. Then $$\frac{\partial}{\partial x^k}\bigg{|}_p=\sum_{i=1}^n\frac{\partial(y^i\circ\phi^{-1})}{\partial x_k}\bigg{|}_p\frac{\partial}{\partial y^k}\bigg{|}_p$$ on $U\cap V$. 
+\end{prp}
+
+\subsection{Equivalent Characterizations of the Tangent Space}
+\begin{lmm}{}{}\\
+Let $M$ be a smooth manifold. Then $$m_p=\{f\in\mC_{M,p}^\infty\;|\;f(p)=0\}$$ is a maximal ideal of $\mC_{M,p}^\infty$. 
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $M$ be a smooth manifold. Then the following are true. 
+\begin{itemize}
+\item There is a natural $\R$-linear isomorphism $$T_p(M)\cong\text{Der}_\R(\mC_{M,p}^\infty,\R)$$ given by $[\gamma]\mapsto X_{\gamma,p}$ where $\R$ is a $\mC_{M,p}^\infty$-module via the isomorphism $\R\cong\frac{\mC_{M,p}^\infty}{m_p}$. 
+\item There is a natural $\R$-linear isomorphism $$\text{Der}_\R(\mC_{M,p}^\infty,\R)\cong\left(\frac{m_p}{m_p^2}\right)^\ast$$ given by restriction of a derivation $d$ to the ideal $m_p$ and then taking quotient. 
+\end{itemize}
 \end{prp}
 
 \subsection{Differential of Smooth Maps}
-\begin{defn}{Differential of a Map}{} Let $f:M\to N$ be a smooth map of manifolds. For each $p\in M$, define the differential of $f$ to be $$(f_\ast)_p:T_p(M)\to T_{f(p)}(N)$$ where for $X_{\gamma,p}\in T_p(M)$, $(f_\ast)_p$ sends the tangent vector to $$(f_\ast)_p(X_{\gamma,p})(g)=X_{f\circ\gamma,f(p)}(g)=\frac{d(g\circ f\circ\gamma)(t)}{dt}\bigg{|}_{t=0}$$ for any choice $g\in C_{N,f(p)}^\infty$. 
+\begin{defn}{Differential of a Map}{}\\
+Let $M,N$ be smooth manifolds. Let $f:M\to N$ be a smooth map. Let $p\in M$. Define the differential of $f$ at $p$ to be the map $(f_\ast)_p:T_p(M)\to T_p(N)$ given by $$(f_\ast)_p(X_p)=X_p(-\circ f)$$
 \end{defn}
 
-It is indeed a bit of a messy function. But one can think of it as follows. $(f_\ast)_p$ is a map between maps on $M$ and maps on $N$. So in order to define what $(f_\ast)_p$ does, we need to specify for each function $X_p$ on $M$, what does $(f_\ast)_p(X_p)$ do. \\
-
-Alternative notations seen in common literature include $f_\ast$ to make less emphasize on the choice of a particular point, or $df_p$ as $df$ means the total derivative in multivariable calculus, and indeed it our case the differential is actually just the Jacobian, meaning that the two notions coincide. This can be seen in the following proposition. \\
-
-One easy way to think of $(f_\ast)_p$ is to notice that $(f_\ast)_p(X_p)(g)$ is actually the same as $X_p(g\circ f)$. Computationally, they give the same result although conceptually, $X_p(g\circ f)$ does not look remotely like an element in $T_{f(p)}(N)$. But this is because $g$ is a variable here. Indeed, by allowing $g$ to vary, we obtain a map $X_p(-\circ f):C_{N,T(p)}^\infty\to\R$ defined by $g\mapsto X_p(g\circ f)$. In particular, this means that $(f_\ast)_p$ is a map such that $$X_p(-)\mapsto X_p(-\circ f)$$
-
-\begin{thm}{}{} Let $f:M\to N$ be a smooth map of smooth manifolds where $\dim(M)=m$ and $\dim(N)=n$. Let $p\in U$ and $(U,\phi)$ be a chart on $M$ and $(V,\psi=(y_1,\dots,y_m))$ be a chart on $N$ such that $f(U)\subseteq V$. Then the differential of $f$ at $p$ is given by the Jacobian of $\psi\circ f\circ\phi^{-1}$ evaluated at $p\in M$. This means that $$(f_\ast)_p=\begin{pmatrix}
-\frac{\partial(y_1\circ f\circ\phi^{-1})}{\partial x_1}|_{\phi(p)} & \cdots & \frac{\partial (y_1\circ f\circ\phi^{-1})}{\partial x_n}|_{\phi(p)}\\
+\begin{thm}{}{}\\
+Let $M,N$ be smooth manifolds. Let $f:M\to N$ be a smooth map. Let $p\in M$. Let $(U,x^1,\dots,x^n)$ be a chart of $M$ containing $p$. Let $(V,y^1,\dots,y^m)$ be a chart of $N$ containing $f(p)$. Then $(f_\ast)_p$ is given by the matrix that is the Jacobian: $$(f_\ast)_p=\begin{pmatrix}
+\frac{\partial }{\partial x^1}\bigg{|}_p(y^1\circ f) & \cdots & \frac{\partial }{\partial x^n}\bigg{|}_p(y^1\circ f)\\
 \vdots & \ddots & \vdots\\
-\frac{\partial(y_m\circ f\circ\phi^{-1})}{\partial x_1}|_{\phi(p)} & \cdots & \frac{\partial (y_m\circ f\circ\phi^{-1})}{\partial x_n}|_{\phi(p)}
+\frac{\partial }{\partial x^1}\bigg{|}_p(y^m\circ f) & \cdots & \frac{\partial }{\partial x^n}\bigg{|}_p(y^m\circ f)
 \end{pmatrix}$$
 \end{thm}
 
-To  compute the differential of a map applied to a tangent vector, write $X_{\gamma,p}$ in terms of the basis at $(U,\phi)$. For example, $X_{\gamma,p}$ can be given by $\begin{pmatrix}
+To compute the differential of a map applied to a tangent vector, write $X_{\gamma,p}$ in terms of the basis at $(U,\phi)$. For example, $X_{\gamma,p}$ can be given by $\begin{pmatrix}
 a_1(p) & \cdots & a_n(p)
-\end{pmatrix}^T$. Then apply the linear transformation $(f_\ast)_p$ to receive an $n\times 1$ vector: $$(f_\ast)_p(X_{\gamma,p})=\begin{pmatrix}
+\end{pmatrix}^T$. Then apply the linear transformation $(f_\ast)_p$ to receive an $m\times 1$ vector: $$(f_\ast)_p(X_{\gamma,p})=\begin{pmatrix}
 \frac{\partial(y_1\circ f\circ\phi^{-1})}{\partial x_1}|_{\phi(p)} & \cdots & \frac{\partial (y_1\circ f\circ\phi^{-1})}{\partial x_n}|_{\phi(p)}\\
 \vdots & \ddots & \vdots\\
 \frac{\partial(y_m\circ f\circ\phi^{-1})}{\partial x_1}|_{\phi(p)} & \cdots & \frac{\partial (y_m\circ f\circ\phi^{-1})}{\partial x_n}|_{\phi(p)}
@@ -731,9 +744,9 @@ Note that the above definition makes sense. Firstly, $df$ is a map from $M$ so t
 
 Recall from linear algebra that $V$ and its dual space $V^\ast$ has the same dimension if $V$ is finite dimensional. This applies also to the case $T_p^\ast(M)$. Moreover, we can compute a basis for $T_p^\ast(M)$ in terms of differential of some particular functions in $C^\infty(M)$, at least locally. 
 
-\begin{prp}{}{} Let $M$ be a smooth manifold. Let $(U,\phi=(x^1,\dots,x^n))$ be a chart at $p\in M$. Write $dx^k$ the differential of the smooth function $x^k:U\to\R$ (so that it is a $1$-form). Then $$\left\{(dx^1)|_p,\dots,(dx^n)|_p\right\}$$ is the dual basis in $T_p^\ast(M)$ of $\left\{\frac{\partial}{\partial x^1}\bigg\vert_p,\dots,\frac{\partial}{\partial x^n}\bigg{|}_p\right\}$. 
+\begin{prp}{}{} Let $M$ be a smooth manifold. Let $(U,\phi=(x^1,\dots,x^n))$ be a chart at $p\in M$. Write $dx^k$ the differential of the smooth function $x^k:U\to\R$ (so that it is a $1$-form). Then $$\left\{(dx^1)_p,\dots,(dx^n)_p\right\}$$ is the dual basis in $T_p^\ast(M)$ of $\left\{\frac{\partial}{\partial x^1}\bigg\vert_p,\dots,\frac{\partial}{\partial x^n}\bigg{|}_p\right\}$. 
 \begin{proof}
-By definition, we have that $$(dx^j)|_p\left(\frac{\partial}{\partial x^i}\bigg{|}_p\right)=\frac{\partial x^j}{\partial x^i}\bigg{|}_p=\begin{cases}
+By definition, we have that $$(dx^j)_p\left(\frac{\partial}{\partial x^i}\bigg{|}_p\right)=\frac{\partial x^j}{\partial x^i}\bigg{|}_p=\begin{cases}
 1 & \text{ if } i=j\\
 0 & \text{ if } i\neq j
 \end{cases}$$
@@ -743,13 +756,13 @@ and so we conclude.
 
 Using the local basis of the cotangent space, we can also express the differential of a function and smooth $1$-forms locally. 
 
-\begin{lmm}{}{} Let $M$ be a smooth manifold and let $\omega$ be a smooth differential $1$-form on $M$. Let $(U,\phi=(x^1,\dots,x^n))$ be a local chart on $M$. Then on the local chart, $$\omega=\sum_{k=1}^na_kdx^k$$ where $a_k\in C^\infty(M)$ are smooth functions for each $k$. Moreover, for each $p\in U$, $$\omega_p=\sum_{k=1}^na_k(p)(dx^k)|_p$$ 
+\begin{lmm}{}{} Let $M$ be a smooth manifold and let $\omega$ be a smooth differential $1$-form on $M$. Let $(U,\phi=(x^1,\dots,x^n))$ be a local chart on $M$. Then on the local chart, $$\omega=\sum_{k=1}^na_kdx^k$$ where $a_k\in C^\infty(M)$ are smooth functions for each $k$. Moreover, for each $p\in U$, $$\omega_p=\sum_{k=1}^na_k(p)(dx^k)_p$$ 
 \begin{proof}
 For each point $p\in U$, the above proposition implies that $$\omega_p=\sum_{k=1}^na_k(p)(dx^k)|_p$$ By proposition 5.1.4, $a_k:U\to\R$ are smooth functions for each $k$. 
 \end{proof}
 \end{lmm}
 
-\begin{prp}{}{} Let $M$ be a smooth manifold. Let $f\in C^\infty(M)$ be a smooth function. Let $(U,\phi=(x^1,\dots,x^n))$ be a chart on $M$. Then locally on the chart, $$df=\sum_{k=1}^n\frac{\partial(f\circ\phi^{-1})}{\partial x_k}dx^k$$ 
+\begin{prp}{}{} Let $M$ be a smooth manifold. Let $f\in C^\infty(M)$ be a smooth function. Let $(U,\phi=(x^1,\dots,x^n))$ be a chart on $M$. Then locally on the chart, $$(df)_p=\sum_{k=1}^n\frac{\partial(f\circ\phi^{-1})}{\partial x_k}\bigg{|}_p(dx^k)_p$$ for $p\in U$. 
 \begin{proof}
 By the above lemma, we have $$df=\sum_{k=1}^na_kdx^k$$ for some smooth functions $a_k:U\to\R$. To compute $a_k$, we evaluate $\frac{\partial}{\partial x^j}$ on both sides to get $\frac{\partial f}{\partial x^j}=a_j$ and so we are done. 
 \end{proof}
@@ -779,6 +792,19 @@ We know that $\omega\wedge\tau\in\Lambda^{k+l}(T(M))$ by construction of the ext
 \end{proof}
 \end{prp}
 
+\subsection{Equivalent Definitions of the Tangent Space}
+\begin{prp}{}{}\\
+Let $M$ be a smooth manifold. Then $$m_p=\{f\in C_{M,p}^\infty\;|\;\}$$ is a maximal ideal of $C_{M,p}^\infty$. 
+\end{prp}
+
+\begin{thm}{Equivalent Definitions of the Tangent Space}{}\\
+Let $M$ be a smooth manifold. Then the following are true. 
+\begin{itemize}
+\item There is a vector space isomorphism $$T_p(M)\cong\text{Der}_\R\left(C_{M,p}^\infty,\R\right)$$ given by inclusion, where $\R$ is a $C_{M,p}^\infty$-module via the identification $\R\cong\frac{C_{M,p}^\infty}{m_p}$. 
+\item There is a vector space isomorphism $$\text{Der}_\R\left(C_{M,p}^\infty,\R\right)\cong\left(\frac{m_p}{m_p^2}\right)^\ast$$ given by the restriction of a derivation $d:C_{M,p}^\infty\to\R$ to $m_p$ and then quotient by $m_p^2$. 
+\end{itemize}
+\end{thm}
+
 \subsection{The Induced Pullback Map}
 Now let $f:M\to N$ be a smooth map of manifolds. Recall that for each $p\in M$, there is a pushforward map of tangent spaces: $(f_\ast)_p:T_pM\to T_{f(p)}N$. Taking dual of the tangent spaces, we obtain the dual map $(f_\ast)_p^\ast:T_{f(p)}^\ast N\to T_p^\ast M$. We can then take the exterior power of the map to obtain $$\Lambda^k((f_\ast)_p^\ast):\Lambda^k(T_{f(p)}^\ast N)\to\Lambda^k(T_p^\ast M)$$ which is the main object of the next definition. Denote this map by $f^\ast$. 
 
@@ -805,8 +831,6 @@ A local expression would be better than the above abomination of a formula in th
 \end{prp}
 
 \subsection{Exterior Derivatives}
-We will define exterior derivatives which generalizes total differentials by defining them within the exterior derivatives. 
-
 \begin{defn}{Exterior Derivative}{} Let $M$ be a smooth manifold. An exterior derivative on $M$ is a map $d:\Omega^\bullet(M)\to\Omega^\bullet(M)$ such that the following are true. 
 \begin{itemize}
 \item $d(\Omega^k(M))\subseteq\Omega^{k+1}(M)$ is an $\R$-linear map
@@ -886,7 +910,7 @@ One property of partition of unity is that only finitely many $\theta_\alpha$ ar
 \begin{prp}{}{} Let $M$ be an orientable manifold of dimension $n$. Let $\omega\in\Omega^n(M)$ be a top form of compact support. Then $\int_M\omega$ is independent of the choice of the open cover and partition of unity. 
 \end{prp}
 
-\begin{prp}{}{} Let $M$ be an oriented manifold of dimension $n$. Let $\omega\in\Omega^n(M)$ be a top form of $M$ with compact support. If $-M$ denotes the opposite choice of orientation of $M$, then $$\int_{-M}\omega=-\int_M\omega$$
+\begin{prp}{}{} Let $M$ be an oriented manifold of dimension $n$ without boundary. Let $\omega\in\Omega^n(M)$ be a top form of $M$ with compact support. If $-M$ denotes the opposite choice of orientation of $M$, then $$\int_{-M}\omega=-\int_M\omega$$
 \end{prp}
 
 We have actually seen examples of integration on manifolds before. Write $\omega=f_1\;dx_1+f_2\;dx_2+f_3\;dx_3$ be a smooth top form in $\R^3$ that is compactly supported. Let $\gamma:I\to\R^3$ be a diffeomorphism. Then $C=\gamma(I)$ is a $1$-dimensional manifold, and $$\int_C\omega=\sum_{i=1}^3\int_If_i(\gamma(t))\frac{d\gamma_i}{dt}\,dt$$ This is in fact the line integral of the vector field $f=(f_1,f_2,f_3)$ over $C$. 
@@ -899,7 +923,8 @@ Choose a covering of $M$ and a partition of unity $\{\theta_i\;|\;i\in I\}$ subo
 
 This theorem in context says that integration on the manifold that does not touch the boundary contributes to the overall integration a sum of $0$. Indeed we are assuming $M$ to be an ordinary manifold without boundary in the above theorem. 
 
-\begin{thm}{Stokes' Theorem}{} Let $M$ be an $n$-dimensional oriented manifold with boundary $\partial M$ carrying the induced orientation. Let $\omega$ be an $n-1$ form with compact support. Then $$\int_{\partial M}\omega=\int_Md\omega$$ 
+\begin{thm}{Stokes' Theorem}{}\\
+Let $M$ be an $n$-dimensional oriented manifold with boundary $\partial M$ carrying the induced orientation. Let $\omega$ be an $n-1$ form with compact support. Then $$\int_{\partial M}\omega|_{\partial M}=\int_Md\omega$$ 
 \begin{proof}
 Notice that when $n=1$, it is entirely the same as the fundamental theorem of calculus so that we only treat the case for when $n\geq 2$. Write $\omega=\sum_{i\in I}\theta_i\omega$ where $\{\theta_i\;|\;i\in I\}$ is a partition of unity subordinate to a choice of open cover on $M$. Now we have that $$\int_Md\omega=\sum_{i\in I}\int_Md(\theta_i\omega)$$ and we can write $$\theta_i\omega=f_1\;dx^2\wedge\cdots\wedge dx^n-f_2\;dx^1\wedge dx^3\wedge\cdots\wedge dx^n+\cdots+(-1)^{n+1}f_n\;dx^1\wedge\cdots\wedge dx^{n-1}$$ similar to the above proof. There are two types of chart in the choice of open cover. If $U_\alpha$ does not intersect with the boundary, the above theorem implies that the contribution to the integral is $0$. For those that do intersect, we have that 
 \begin{align*}
