@@ -55,14 +55,7 @@ We begin not with the definition of the homotopy groups, but rather a slight gen
 \begin{defn}{The nth Homotopy Groups}{} Let $(X,x_0)$ be a pointed space. Define the $n$th homotopy group $\pi_n(X,x_0)$ to be $$\pi_n(X,x_0)=\frac{\left\{\gamma:\left(I^n,\partial I^n\right)\to\left(X,\{x_0\}\right)\;\bigg{|}\;\gamma\text{ is continuous }\right\}}{\simeq}$$ where we say that $f\simeq g$ if there exists a homotopy between $f$ and $g$. 
 \end{defn}
 
-Notice that the definition coincides with that of the fundamental group when $n=1$, and hence $\pi_n$ is indeed a generalization. 
-
-\begin{lmm}{}{} For any $n\in\N$, the two spaces $(I^n,\partial I^n)$ and $(S^n,s_0)$ are homotopy equivalent. 
-\end{lmm}
-
-Therefore an alternate viewpoint of the homotopy groups is instead the collection of maps from the pointed $n$-sphere to the space $X$ quotient homotopy. Indeed an $n$-dimensional sphere has an $n$-dimensional hole enclosed by the sphere itself. Therefore in order to detect $n$-dimensional holes in a space, we are permitted to try and fit $n$-spheres into the space. \\
-
-Spheres are also advantageous for the definition of $\pi_n$ because spheres only has an $n$-dimensional hole and no other holes in any dimension. Therefore we are capturing the minimal amount of information on $n$-dimensional holes without producing excess data. \\
+Notice that the definition coincides with that of the fundamental group when $n=1$, and hence $\pi_n$ is indeed a generalization. \\
 
 Now we have defined the set $\pi_n(X,x_0)$ for a pointed space to have the word group in its name. We will also need to procure a canonical group structure on the set $\pi_n(X,x_0)$. This will be similar with that of the fundamental group. 
 
@@ -128,7 +121,25 @@ When $n\geq 2$, suppose that $[f]\in\pi_n(S^1)$. Then we have a map $f:S^k\to S^
 \end{proof}
 \end{eg}
 
-\subsection{Properties of Homotopy}
+\begin{lmm}{}{}\\
+For any $n\in\N^+$, the two spaces $(I^n,\partial I^n)$ and $(S^n,s_0)$ are homotopy equivalent. 
+\end{lmm}
+
+\begin{crl}{}{}\\
+Let $(X,x_0)$ be a pointed space. Then we have $$\pi_n(X,x_0)=[(S^n,1),(X,x_0)]_\ast$$
+\end{crl}
+
+Therefore an alternate viewpoint of the homotopy groups is instead the collection of maps from the pointed $n$-sphere to the space $X$ quotient homotopy. Indeed an $n$-dimensional sphere has an $n$-dimensional hole enclosed by the sphere itself. Therefore in order to detect $n$-dimensional holes in a space, we are permitted to try and fit $n$-spheres into the space. \\
+
+Spheres are also advantageous for the definition of $\pi_n$ because spheres only has an $n$-dimensional hole and no other holes in any dimension. Therefore we are capturing the minimal amount of information on $n$-dimensional holes without producing excess data. \\
+
+The group structure of $\pi_n$ is also easy to understand in terms of spheres. 
+
+\begin{lmm}{}{}\\
+Let $(X,x_0)$ be a pointed space. Let $f,g:S^n\to X$ be pointed maps. Then $[f]\cdot[g]\in\pi_n(X,x_0)$ is represented by the map $$S^n\overset{\text{proj.}}{\to} S^n\wedge S^n\overset{f\wedge g}{\to}X$$ where the projection map is given by $S^n\wedge S^n\cong\frac{S^n}{S^{n-1}}$ where $S^{n-1}\hookrightarrow S^n$ is the inclusion along the equator. 
+\end{lmm}
+
+\subsection{Functorial Properties of Homotopy}
 The homotopy groups also satisfy functorial properties similar to the fundamental group and the (co)homology groups. 
 
 \begin{thm}{Functoriality}{} Let $(X,x_0)$ and $(Y,y_0)$ be pointed spaces and let $f:(X,x_0)\to(Y,y_0)$ be a pointed map. Then the induced map $$\pi_n(f):\pi_n(X,x_0)\to\pi_n(Y,y_0)$$ defined by $[\gamma]\mapsto[f\circ\gamma]$ is a group homomorphism. Moreover, it satisfies the following functorial properties. 
@@ -168,16 +179,21 @@ The construction of $u_\#$ is a group isomorphism. Moreover, it satisfies the fo
 \end{itemize}
 \end{thm}
 
+\begin{prp}{}{} Let $X_i$ for $i\in I$ be a family of path connected spaces. Then there are isomorphisms $$\pi_n\left(\prod_{i\in I}X_i\right)\cong\prod_{i\in I}\pi_n(X_i)$$
+\end{prp}
+
 \begin{prp}{}{} Let $(X,x_0)$ and $(X,x_1)$ be pointed spaces with the same base space. Let $u,v:I\to X$ be paths from $x_0$ to $x_1$. If $u$ and $v$ are homotopic relative to end points then the induced maps $$u_\#=v_\#:\pi_n(X,x_0)\to\pi_n(X,x_1)$$ are equal. 
 \end{prp}
 
 This shows that if $X$ is path connected, then $\pi_n(X,x_0)$ no longer depends on the choice of base point. Although there are no canonical isomorphisms between $\pi_n(X,x_0)$ and $\pi_n(X,x_1)$, we still forget about the base point in this case and write the homotopy groups as $\pi_n(X)$. 
 
-\begin{prp}{}{} Let $(X,x_0)$ be a pointed space and $f\in\pi_n(X,x_0)$. Let $u:I\to X$ be a loop on $x_0$. Then $u$ induces a left action of $\pi_1(X,x_0)$ on $\pi_n(X,x_0)$ by the map $$(u,\gamma)\mapsto u_\#(\gamma)$$ In particular, for $n\geq 2$, $\pi_n(X,x_0)$ is a $\Z\pi_1(X,x_0)$-module. 
+\subsection{The Action of the Fundamental Group}
+\begin{prp}{}{}\\
+Let $(X,x_0)$ be a pointed space. Let $n\geq 1$. Then the map $\pi_1(X,x_0)\times\pi_n(X,x_0)\to\pi_n(X,x_0)$ defined by $$([u],[f])\mapsto u_\#(f)$$ is a group action on $\pi_n(X,x_0)$. 
 \end{prp}
 
-\begin{prp}{}{} Let $X_i$ for $i\in I$ be a family of path connected spaces. Then there are isomorphisms $$\pi_n\left(\prod_{i\in I}X_i\right)\cong\prod_{i\in I}\pi_n(X_i)$$
-\end{prp}
+When $n=1$, the above group action is just left multiplication in $\pi_1(X,x_0)$. 
+
 
 \subsection{Relative Homotopy Groups}
 \begin{defn}{Triplets of Spaces}{} Let $X$ be a topological space. A pointed pair of space is a triple $(X,A_1,A_2)$ where $A_2\subseteq A_1\subseteq X$ are subspaces of $X$. A map between triplets of spaces $f:(X,A_1,A_2)\to(Y,B_1,B_2)$ is a map $f:X\to Y$ such that $f(A_1)\subseteq B_1$ and $f(A_2)\subseteq B_2$. \\
@@ -436,30 +452,53 @@ We often denote this space $X$ directly by $X=K(G,n)$.
 \begin{thm}{}{} Let $G$ be an abelian group and $n\geq 2$. Then there exists a $K(G,n)$-CW complex. Moreover, it is uniquely determined by $G$ and $n$. 
 \end{thm}
 
-The Eilenberg-Maclane spaces are a fundamental object of study in algebraic topology because it is a universal object. This is again part of Stable Homotopy Theory and is the same theorem that gives the connection between homotopy groups and cohomology groups. \\
+The Eilenberg-Maclane spaces are a fundamental object of study in algebraic topology because it is a universal object. This is again part of Stable Homotopy Theory and is the same theorem that gives the connection between homotopy groups and cohomology groups. 
 
-We will not prove this here, but we will give the theorem: If $G$ is an abelian group, then there are natural isomorphisms $$H^n(X;G)\cong[X,K(G,n)]_\ast$$ that is natural in the following sense. If $f:X\to Y$ is a map, then there is a commutative diagram: \\
-\adjustbox{scale=1,center}{\begin{tikzcd}
-	{H^n(Y;G)} & {H^n(X;G)} \\
-	{[Y,K(G,n)]_\ast} & {[X,K(G,n)]_\ast}
-	\arrow["{f^\ast}", from=1-1, to=1-2]
-	\arrow["\cong"', from=1-1, to=2-1]
-	\arrow["\cong", from=1-2, to=2-2]
-	\arrow["{f^\ast}"', from=2-1, to=2-2]
-\end{tikzcd}}\\
+\begin{thm}{Brown's Representability Theorem for Singular Cohomology}{}\\
+Let $G$ be an abelian group. Then there is a natural isomorphism $$H^n(-;G)\cong[-,K(G,n)]$$ for each $n\in\N$. 
+\end{thm}
 
 \pagebreak
-\section{Relation Between Homotopy Groups and (Co)Homology Groups}
+\section{Generalized (Co)Homology Theories}
 \subsection{Weak Equivalences and (Co)Homological Isomorphisms}
 \begin{prp}{}{} Let $X,Y$ be spaces. Let $A$ be an abelian group. Let $f:X\to Y$ be a weak equivalence. Then $$f_\ast:H_n(X;A)\to H_n(Y;A)\;\;\;\;\text{ and }\;\;\;\;f^\ast:H^n(Y;A)\to H^n(X;A)$$ are isomorphisms for all $n$. 
 \end{prp}
 
-\subsection{Cohomology Theory with Weak Equivalences}
+\subsection{Generalized Homology Theories}
+\begin{defn}{Generalized Homology Theory for Spaces}{} A Generalized Homology Theory is a collection of functors $$h_n:\bold{Top}^2\to\bold{Ab}\;\;\;\;\;\;\;\text{ and }\;\;\;\;\;\;\;\delta_n:h_n\circ F\Rightarrow h_{n-1}$$ where $F(X,Y)=(Y,\emptyset)$, for each $n\in\N$, satisfying the first four axioms together with the following. 
+\begin{itemize}
+\item Weak Equivalence: If $f:(X,A)\to(Y,B)$ is a weak equivalence, then $$f_\ast:h_n(X,A)\to h_n(Y,B)$$ is an isomorphism. 
+\end{itemize}
+\end{defn}
+
+By adding on the axiom of weak equivalence and the fact that every space admits a weak equivalence to a CW complex, we can see that the two theories are the same. 
+
+\begin{thm}{}{} Any generalized homology theory on $\bold{Top}^2$ determines and is determined by a generalized homology theory on $\bold{CW}^2$.
+\end{thm}
+
+\begin{defn}{Ordinary Homology Theory}{} Let $G$ be an abelian group. If a generalized homology theory $(h_n,\delta_n)$ in addition satisfies 
+\begin{itemize}
+\item Dimension: $$h_n(\ast)=\begin{cases}
+G & \text{ if } n=0\\
+0 & \text{ otherwise }
+\end{cases}$$
+\end{itemize}
+Then $h_n$ is called an ordinary homology theory. 
+\end{defn}
+
+\begin{thm}{Eilenberg-Steenrod Uniqueness Theorem}{} Let $T:(h_n,\delta_n)\to(h_n',\delta_n')$ be a natural transformation of generalized homology theories defined on $\bold{CW}^2$ such that $h_n(\ast)\cong h_n'(\ast)$, then $T$ is a natural isomorphism $$(h_n,\delta_n)\cong(h_n',\delta_n')$$
+\end{thm}
+
+\subsection{Generalized Cohomology Theories}
 \begin{defn}{Generalized Cohomology Theory for Spaces}{} A Generalized cohomology theory is a collection of contravariant functors and natural transformations $$h^n:\bold{Top}^2\to\bold{Ab}\;\;\;\;\;\;\;\text{ and }\;\;\;\;\;\;\;\delta^n:h^n\circ F\Rightarrow h^{n+1}(X,A)$$ where $F(X,A)=(A,\emptyset)$, for each $n\in\N$, satisfying the above first four axioms and the following. 
 \begin{itemize}
 \item Weak Equivalence: If $f:(X,A)\to(Y,B)$ is a weak equivalence, then $$f_\ast:h^n(Y,B)\to h^n(X,A)$$ is an isomorphism. 
 \end{itemize}
 \end{defn}
+
+\begin{prp}{}{} Let $F$ and $G$ be two generalized cohomology theories for CW pairs. Let $\lambda:F\Rightarrow G$ be a natural transformation such that $$\lambda:F(\ast,\emptyset)\overset{\cong}{\longrightarrow}G(\ast,\emptyset)$$ is an isomorphism for $\ast$ the one-point space. Then $\lambda$ is a natural isomorphism. 
+\end{prp}
+
 
 
 \pagebreak
@@ -602,6 +641,282 @@ The functor $\pi_i$ for $i\in\N$ induces a cone in $\bold{Grp}$. By definition o
 
 \begin{prp}{}{} Let $X$ be a connected CW complex. Choose a Postnikov tower of $X$. Then there is a weak homotopy equivalence $$X\simeq\lim_{\leftarrow}X_n$$ so that $X$ is a CW approximation of $\lim_{\leftarrow}X_n$. 
 \end{prp}
+
+\pagebreak
+\section{Kunneth Theorem for Homology}
+\subsection{The Universal Coefficient Theorem for Homology}
+\begin{prp}{}{} Let $(X,A)$ be a pair of space. Let $T$ be an abelian group. Then there exists a natural map $h:H_n(X,A)\otimes T\to H_n(X,A;T)$ such that $\text{coker}(h)\cong\text{Tor}_1^\Z(H_{n-1}(X,A),T)$ and a split exact sequence (that is not natural) of the form \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {H_n(X,A)\otimes T} & {H_n(X,A;T)} & {\text{Tor}_1^\Z(H_{n-1}(X,A),T)} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["h", from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\
+for any $n\in\N$. In particular, split exactness implies that there is an isomorphism $$H_n(X,A;T)\cong H_n(X,A)\otimes T\oplus\text{Tor}_1^\Z(H_{n-1}(X,A),T)$$ for any $n\in\N$. 
+\end{prp}
+
+\subsection{Kunneth Theorem for Homology}
+\begin{thm}{The Eilenberg-Zilbur Theorem}{}\\
+Let $X,Y$ be spaces. Then $C_\bullet(X)\otimes_\Z C_\bullet(Y)$ and $C_\bullet(X\times Y)$ are chain homotopy equivalent, that is natural in $X$ and $Y$. 
+\end{thm}
+
+\begin{prp}{}{} Let $X$ and $Y$ be CW-complexes. Let $R$ be a principal ideal domain. Then there is a short exact sequence \\~\\
+\adjustbox{scale=0.85,center}{\begin{tikzcd}
+	0 & {\bigoplus_{i+j=n}H_i(X;R)\otimes_R H_j(Y;R)} & {H_n(X\times Y;R)} & {\bigoplus_{i+j=n}\text{Tor}_1^R(H_i(X;R),H_{j-1}(Y;R))} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["\times", from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\
+induced by the cross product, that is natural in maps $f:X\to A$ and $g:Y\to B$. Moreover, this sequence splits. 
+\end{prp}
+
+\pagebreak
+\section{Spectral Sequences in Algebraic Topology}
+\subsection{Spectral Sequences in Topology}
+\begin{thm}{}{} Let $X$ be a space. Let the following be a sequence $$\emptyset\subset X_0\subset X_1\subset\cdots\subset X$$ of subspaces. Let $G$ be an abelian group. Then the following data
+\begin{itemize}
+\item $A_{p,q}=H_{p+q}(X_p;G)$
+\item $E_{p,q}=H_{p+q}(X_p,X_{p-1};G)$
+\item $i:H_{p+q}(X_p;G)=A_{p,q}\to H_{p+q}(X_{p+1};G)=A_{p+1,q-1}$ (degree $(1,-1)$)
+\item $j:H_{p+q}(X_p;G)=A_{p,q}\to H_{p+q}(X_p,X_{p-1};G)=E_{p,q}$ (degree $(0,0)$)
+\item $k:H_{p+q}(X_p,X_{p-1};G)=A_{p,q}\to H_{p+q-1}(X_{p-1};G)=A_{p-1,q}$ (degree $(-1,0)$)
+\end{itemize}
+defines an exact couple and hence a spectral sequence with $E^1$ page given by $$E_{p,q}^1=H_{p+q}(X_p,X_{p-1};G)$$ where the differential $d:E_{p,q}^1\to E_{p-1,q}^1$ is given by the composition $$H_{p+q}(X_p,X_{p-1};G)\overset{k}{\longrightarrow}H_{p+q-1}(X_{p-1};G)\overset{j}{\longrightarrow} H_{p+q-1}(X_{p-1},X_{p-2};G)$$
+\end{thm}
+
+The $E_1$ page of such a spectral sequence is given by \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\cdots & \cdots & \cdots & \cdots \\
+	{H_3(X_1,X_0;G)} & {H_4(X_2,X_1;G)} & {H_4(X_3,X_2;G)} & \cdots \\
+	{H_2(X_1,X_0;G)} & {H_3(X_2,X_1;G)} & {H_4(X_3,X_2;G)} & \cdots \\
+	{H_1(X_1,X_0;G)} & {H_2(X_2,X_1;G)} & {H_3(X_3,X_2;G)} & \cdots
+	\arrow[from=1-2, to=1-1]
+	\arrow[from=1-3, to=1-2]
+	\arrow[from=1-4, to=1-3]
+	\arrow[from=2-2, to=2-1]
+	\arrow[from=2-3, to=2-2]
+	\arrow[from=2-4, to=2-3]
+	\arrow[from=3-2, to=3-1]
+	\arrow[from=3-3, to=3-2]
+	\arrow[from=3-4, to=3-3]
+	\arrow[from=4-2, to=4-1]
+	\arrow[from=4-3, to=4-2]
+	\arrow[from=4-4, to=4-3]
+\end{tikzcd}}\\
+
+Things get interesting when we choose $X$ to be a CW complex and we choose the filtration of $X$ by the skeleton of $X$. Recall that we have the formula $$H_{p+q}(X_p,X_{p-1};G)\cong\begin{cases}
+C_p^\text{CW}(X;G) & \text{ if } q=0\\
+0 & \text{otherwise}
+\end{cases}$$ Thus the $E^1$ page is only left with a chain complex at $q=0$. 
+
+Let us also compute the derived couple of this exact couple or in other words, the $E^2$ page of the spectral sequence. This is more intuitive then the one thinks about on the definition of the derived couple. The $E_{p,q}^2$ slot is simply the homology of the chain complex at the $(p,q)$th slot. The direction of the maps of the $E^2$ page depends not on the choice of spectral sequence at all (In fact, the direction only depends on the page). Now in our case, the homology can be given by a known construct: $$E_{p,q}^2=\frac{\ker(d:H_{p+q}(X_p,X_{p-1};G)\to H_{p+q-1}(X_{p-1},X_{p-2};G))}{\im(d:H_{p+q+1}(X_{p+1},X_p;G)\to H_{p+q}(X_p,X_{p-1};G))}=H_{p+q}^\text{CW}(X;G)$$ Since the direction of the maps are now diagonal and when $q\neq 0$ we have $E_{p,q}^2=0$, all maps in $E^2$ are $0$ and we are left with \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{H_0^\text{CW}(X;G)} & {H_1^\text{CW}(X;G)} & {H_2^\text{CW}(X;G)} & {H_3^\text{CW}(X;G)} & \cdots
+\end{tikzcd}}\\
+
+\begin{thm}{Leray-Serre Spectral Sequence}{} Let $p:E\to B$ be a Serre fibration with fibre $F$ and path connected $B$. Suppose that the action of $\pi_1(B)$ on $H_\ast(F;G)$ is trivial. Then there is a first quadrant homological spectral sequence starting with $E^2$ and weakly converging to $H_\bullet(E;\Z)$. Explicitly, there is a convergence $$E_{p,q}^2=H_p(B,H_1(F))\Rightarrow H_{p+q}(E;\Z)$$
+\end{thm}
+
+\pagebreak
+\section{H-Spaces}
+\subsection{H-Spaces and the Hopf Algebra Structure on Cohomology}
+\begin{defn}{H-Spaces}{}\\
+Let $X$ be a space. We say that $X$ is a H-space if there exists a map $\mu:X\times X\to X$ and a point $e\in X$ such that the maps $x\mapsto\mu(x,e)$ and $x\mapsto\mu(e,x)$ are homotopic to the identity map. 
+\end{defn}
+
+\begin{eg}{}{}\\
+Let $G$ be a topological group. Then $G$ is a H-space. 
+\end{eg}
+
+\begin{eg}{}{}\\
+Let $(X,x_0)$ be a pointed space. Then $\Omega(X,x_0)$ is a H-space. 
+\end{eg}
+
+\begin{lmm}{}{}\\
+Let $X$ be a H-space. Let $Y$ be a space. Then $[Y,X]$ has multiplication and identity. 
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $X$ be a H-space with multiplication given by $\mu$. Let $R$ be a commutative ring. Suppose that the following are true. 
+\begin{itemize}
+\item $H^0(X;R)\cong R$. 
+\item $H^n(X;R)$ is a finitely generated free $R$-module for each $n\in\N$. 
+\end{itemize}
+Then $H^\ast(X;R)$ is a Hopf algebra whose comultiplication is induced by $\mu^\ast$. 
+\end{prp}
+
+\subsection{Homotopy Associative H-Space and the Pontryagin Product}
+\begin{defn}{Homotopy Associative H-Space}{}\\
+Let $X$ be a H-space. We say that $X$ is homotopy associative if the two maps $$(x,y,z)\mapsto\mu(x,\mu(y,z))\;\;\;\text{ and }\;\;\;(x,y,z)\mapsto\mu(\mu(x,y),z)$$ are homotopic. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $X$ be a space. Then $X$ is a group like H-space if and only if $X$ is a monoid object in $\bold{hTop}$. 
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $X$ be a homotopy associative H-space. Let $Y$ be a space. Then $[Y,X]$ is a monoid. 
+\end{lmm}
+
+\begin{defn}{Pontryagin Product}{}\\
+Let $X$ be a homotopy associative H-space. Let $R$ be a commutative ring. Define the Pontryagin product of $X$ to be the composite $$H_\ast(X;R)\otimes_RH_\ast(X;R)\overset{\times}{\to}H_\ast(X\times X;R)\overset{\mu_\ast}{\to}H_\ast(X;R)$$ where the first map is the cross product given by the Kunneth theorem. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $X$ be a homotopy associative H-space. Then the Pontryagin product gives a ring structure to the direct sum $$H_\ast(X;R)=\bigoplus_{n=0}^\infty H_n(X;R)$$
+\end{prp}
+
+\subsection{Group Like H-Spaces}
+\begin{defn}{Group Like H-Spaces}{}\\
+Let $X$ be a H-space. We say that $X$ is group like if the following are true. 
+\begin{itemize}
+\item $X$ is homotopy associative. 
+\item There exists a map $j:X\to X$ such that $\mu\circ(\text{id},j)$ and $\mu\circ(j,\text{id})$ are homotopic to the identity map. 
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $X$ be a space. Then $X$ is a group like H-space if and only if $X$ is a group object in $\bold{hTop}$. 
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $X$ be a group like H-space. Let $Y$ be a space. Then $[Y,X]$ is a group. 
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $X$ be homotopy associative H-space. Then $X$ is group like if and only if the map $(x,y)\mapsto(x,xy)$ is a homotopy equivalence. 
+\end{prp}
+
+\begin{defn}{Homotopy Commutative H-Space}{}\\
+Let $X$ be a H-space. We say that $X$ is homotopy commutative if the two maps $$(x,y)\mapsto\mu(x,y)\;\;\;\text{ and }\;\;\;(x,y)\mapsto\mu(y,x)$$ are homotopic. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $X$ be a space. Then $X$ is a group like H-space if and only if $X$ is an abelian group object in $\bold{hTop}$. 
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $X$ be a pointed space. Then the following are true. 
+\begin{itemize}
+\item $\Omega X$ is a group like H-space. 
+\item $\Omega^2X$ is group like homotopy commutative H-space. 
+\end{itemize}
+\end{prp}
+
+\pagebreak
+\section{The Free Monoid of a Space}
+\subsection{The James Construction}
+\begin{defn}{James Reduced Product}{}\\
+Let $(X,e)$ be a pointed space. 
+\begin{itemize}
+\item Define $J_n(X)=\frac{X^n}{\sim}$ where $(x_1,\dots,x_{i-1},e,x_{i+1},\dots,x_n)\sim(x_1,\dots,x_i,e,x_{i+2},\dots,x_n)$. 
+\item Define the James reduced product of $(X,e)$ to be $$J(X)=\text{colim}_{n\in\N}J_n(X)$$
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $(X,e)$ be a CW complex where $e$ is a $0$-cell. Then $J(X)$ is a CW complex. 
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $X$ be a connected CW complex. Let $R$ be a ring. Suppose that $H_\ast(X;R)$ is a free $R$-module. Then there is an isomorphism $$H_\ast(J(X);R)\cong T(\widetilde{H}_\ast(X;R))$$
+\end{prp}
+
+Let $(X,x_0)$ be a pointed space. Recall that the suspension of $X$ is defined to be $$\Sigma X=\frac{X\times I}{X\times\partial I\cup\{x_0\}\times I}$$ Elements of $\Sigma X$ look like $(x,t)$ where $x\in X$ and $t\in I$. Since $(x,0)\sim(x,1)$ in the quotient, the map $t\mapsto(x,t)$ is a well defined loop in $\Sigma X$, hence an element of $\Omega\Sigma X$. 
+
+\begin{prp}{}{}\\
+Let $(X,e)$ be a pointed connected CW complex where $e$ is a $0$-cell. Let $\lambda:J(X)\to\Omega\Sigma X$ be the map defined by $\lambda(x)=(t\mapsto(x,t))$. Then $\lambda$ is a homotopy equivalence. 
+\end{prp}
+
+\subsection{The Infinite Symmetric Product}
+\begin{defn}{Infinite Symmetric Product}{}\\
+Let $(X,e)$ be a pointed space. 
+\begin{itemize}
+\item Define $SP_n(X)=\frac{X^n}{S^n}$ the orbit space, where $S^n$ acts on $X^n$ by $\sigma\cdot(x_1,\dots,x_n)=(x_{\sigma(1)},\dots,x_{\sigma(n)})$. 
+\item Define the infinite symmetric product of $X$ to be $$SP(X)=\text{colim}_{n\in\N}SP_n(X)$$ where the maps $SP_n(X)\hookrightarrow SP_{n+1}(X)$ is given by inclusion: $(x_1,\dots,x_n)\mapsto(x_1,\dots,x_n,e)$. 
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $(X,e)$ be a pointed space. Then there is a homeomorphism $$SP(X)\cong\text{colim}_{n\in\N}\frac{J_n(X)}{S_n}$$ where $S_n$ acts on $J_n(X)$ by $\sigma\cdot(x_1,\dots,x_n)=(x_{\sigma(1)},\dots,x_{\sigma(n)})$. 
+\end{lmm}
+
+\begin{thm}{Dold-Thom Theorem}{}\\
+Let $(X,e)$ be a pointed space. Then there are isomorphisms $$\widetilde{H}_n(X)\cong\pi_n(SP(X),e)$$ for each $n\in\N$. 
+\end{thm}
+
+\begin{prp}{}{}\\
+Let $(X,e)$ be a pointed space. Then we have a factorization \\~\\
+\adjustbox{scale=1,center}{\begin{tikzcd}
+	{\pi_n(X,e)} && {\pi_n(\text{SP}(X),e)} \\
+	& {\widetilde{H}_n(X)}
+	\arrow["{\text{incl}_\ast}", from=1-1, to=1-3]
+	\arrow["{h_n}"', from=1-1, to=2-2]
+	\arrow["\cong"', from=2-2, to=1-3]
+\end{tikzcd}}\\~\\
+where $h$ is the Hurewicz homomorphism. 
+\end{prp}
+
+\pagebreak
+\section{The Super Lie Algebra Structure in Homotopy Groups}
+\subsection{The Samelson Product}
+\begin{defn}{Samelson Product}{}\\
+Let $X,Y$ be spaces. Let $G$ be a group like $H$-space. Let $f:X\to G$ and $g:Y\to G$ be maps. Define the Samelson product $[f,g]:X\wedge Y\to G$ by $$[f,g]=[-,-]\circ(f\wedge g)$$ where $[-,-]$ is the commutator map on $G$. 
+\end{defn}
+
+Note that the Samelson product is well defined because the commutator map $[-,-]:G\times G\to G$ is trivial on $G\wedge G$ and so it descends to a map $G\wedge G\to G$.
+
+\begin{prp}{}{}\\
+Let $G$ be a group like H-space that is $0$-connected. Then the following are true. 
+\begin{itemize}
+\item The map $\pi_n(G)\times\pi_m(G)\to\pi_{n+m}(G)$ given by $([f],[g])\mapsto[f,g]$ is a $\Z$-bilinear map. 
+\item Let $[f]\in\pi_n(G)$ and $[g]\in\pi_m(G)$. Then we have $$[f,g]=(-1)^{nm+1}[g,f]$$
+\end{itemize}
+\end{prp}
+
+\begin{prp}{The Super Jacobi Identity}{}\\
+Let $G$ be a group like H-space that is $0$-connected. Let $[f]\in\pi_n(G)$, $[g]\in\pi_m(G)$ and $[h]\in\pi_k(G)$. Then we have $$(-1)^{nk}[f,[g,h]]+(-1)^{nm}[g,[h,f]]+(-1)^{mk}[h,[f,g]]=0$$
+\end{prp}
+
+\begin{crl}{}{}\\
+Let $G$ be a group like H-space that is $0$-connected. Then $\pi_\ast(G)$ is a super Lie algebra. 
+\end{crl}
+
+\subsection{The Whitehead Product}
+\begin{defn}{The Whitehead Product}{}\\
+Let $X$ be a pointed space. Define the Whitehead product on $X$ to be the map $[-,-]_\text{Wh}:\pi_n(X)\times\pi_m(X)\to\pi_{n+m-1}(X)$ as follows. For $[f]\in\pi_n(X)$ and $[g]\in\pi_m(X)$, the Whitehead product is given by $$[f,g]_\text{Wh}=(f\wedge g)\circ\phi$$ where $\phi:S^{n+m-1}\to S^n\wedge S^m$ is the attaching map of the $(n+m)$-cell in the CW complex structure of $S^n\times S^m$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $X$ be a pointed space. Let $\tau$ be the isomorphism $\pi_{n+1}(X)\cong\pi_n(\Omega X)$. Let $[f]\in\pi_{n+1}(X)$ and $[g]\in\pi_{m+1}(X)$. Then we have $$\tau([f,g]_\text{Wh})=(-1)^{n-1}[\tau([f]),\tau([g])]$$
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $X$ be a pointed space. 
+\begin{itemize}
+\item The Whitehead product $[-,-]_\text{Wh}$ is a $\Z$-bilinear map. 
+\item Let $[f]\in\pi_n(X)$ and $[g]\in\pi_m(X)$. Then we have $$[f,g]=(-1)^{nm}[g,f]$$
+\end{itemize}
+\end{prp}
+
+\begin{prp}{The Super Jacobi Identity}{}\\
+Let $X$ be a pointed space. Let $[f]\in\pi_n(G)$, $[g]\in\pi_m(G)$ and $[h]\in\pi_k(G)$. Then we have $$(-1)^{(n-1)(k-1)}[f,[g,h]]+(-1)^{(n-1)(m-1)}[g,[h,f]]+(-1)^{(m-1)(k-1)}[h,[f,g]]=0$$
+\end{prp}
+
+\begin{crl}{}{}\\
+Let $X$ be a pointed space. Then $\pi_{\ast-1}(X)$ is a super Lie algebra. 
+\end{crl}
+
+\subsection{The Hilton Milnor Theorem}
+\begin{thm}{Hilton-Milnor Theorem}{}\\
+Let $X,Y$ be connected spaces. Then there is a weak equivalence $$\Omega\Sigma X\times\Omega\Sigma\left(\bigvee_{i=0}^\infty(Y\wedge X^{\wedge i})\right)\to\Omega\Sigma(X\vee Y)$$
+\end{thm}
+
+\begin{crl}{}{}\\
+Let $X,Y$ be connected spaces. Then there is a zigzag of weak equivalence $$\Omega\Sigma(X\wedge Y)\simeq\Omega\Sigma X\times\Omega\Sigma Y\times\Omega\Sigma\left(\bigvee_{i,j=1}^\infty(X^{\wedge i}\wedge Y^{\wedge j})\right)$$ given by twice applying the Hilton-Milnor theorem. 
+\end{crl}
 
 
 

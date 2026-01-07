@@ -149,6 +149,15 @@ Let $S$ be a set. We say that $S$ is a simplicial complex if for all $\sigma\in 
 \end{defn}
 
 \begin{eg}{}{}\\
+The following are simplicial complexes. 
+\begin{itemize}
+\item The $n$-polygon $\{\{i,i+1\}\;|\;1\leq i\leq n-1\}\cup\{\{1,n\}\}$. 
+\item The $n$-simplex $\mP(\{1,\dots,n+1\})$. 
+\item The boundary of the $n$-simplex $\mP(\{1,\dots,n+1\})\setminus\{1,\dots,n+1\}$. 
+\end{itemize}
+\end{eg}
+
+\begin{eg}{}{}\\
 The set $S=\mP(\{1,2,3\})\cup\mP(\{1,3,4\})\cup\mP(\{2,4\})$ is an abstract simplicial complex. 
 \end{eg}
 
@@ -161,7 +170,7 @@ Let $S$ be a simplicial complex.
 \end{defn}
 
 \begin{defn}{Vertex Set}{}\\
-Let $S$ be a simplicial complex. Define the vertex set of $S$ to be $$V(S)=\bigcup_{\sigma\in S}\sigma$$
+Let $S$ be a simplicial complex. Define the vertex set of $S$ to be $$V(S)=\bigcup_{\sigma\in S}V(\sigma)$$
 \end{defn}
 
 Thus it is clear that $S\subseteq\mP(V(S))$. \\
@@ -192,12 +201,29 @@ Let $S,T$ be simplicial complexes. Let $f:V(S)\to V(T)$ be a function. We say th
 
 \subsection{The Face Vector of a Simplicial Complex}
 \begin{defn}{The Face Vector}{}\\
-Let $S$ be an abstract simplicial complex on $\{1,\dots,n\}$. Define the face vector $(f_{-1},\dots,f_n)$ of $S$ by the formula $$f_i=\text{The number of }i\text{-dimensional faces of }S$$ for $0\leq i\leq n$ and by convention, $f_{-1}=1$. 
+Let $\mK$ be an abstract simplicial complex. Define the face vector $(f_0,\dots,f_{\dim(\mK)})$ of $S$ by the formula $$f_i=\text{The number of }i\text{-dimensional faces of }\mK$$ for $0\leq i\leq\dim(\mK)$. By convention, we set $f_{-1}=1$. 
 \end{defn}
 
+\begin{eg}{}{}\\
+The following are true. 
+\begin{itemize}
+\item The face vector of the $n$-polygon is given by $(n,n)$. 
+\item The face vector of the $n$-simplex is given by $f_i=\binom{n+1}{i+1}$ for $0\leq i\leq n$. 
+\item The face vector of the boundary of the $n$-simplex is given by $f_i=\binom{n+1}{i+1}$ for $0\leq i\leq n-1$. 
+\end{itemize}
+\end{eg}
+
 \begin{defn}{The $h$-Vector}{}\\
-Let $S$ be an abstract simplicial complex on $\{1,\dots,n\}$. Let $(f_0,\dots,f_n)$ be the face vector of $S$. Define the $h$-vector $(h_0,\dots,h_n)$ of $S$ by the formula $$h_i=\sum_{k=0}^i(-1)^{i-k}\binom{n+1-k}{i-k}f_{k-1}$$
+Let $\mK$ be an abstract simplicial complex. Let $(f_0,\dots,f_{\dim(\mK)})$ be the face vector of $S$. Define the $h$-vector $(h_0,\dots,h_{\dim(\mK)})$ of $S$ by the formula $$h_i=\sum_{k=0}^i(-1)^{i-k}\binom{n+1-k}{i-k}f_{k-1}$$ for $0\leq i\leq\dim(\mK)+1$. 
 \end{defn}
+
+\begin{eg}{}{}\\
+The following are true. 
+\begin{itemize}
+\item The $h$-vector of the $n$-polygon is given by $(1,-n^2,n(3-n)/2)$. 
+\item The $h$-vector of the $n$-simplex is given by $$h_i=\sum_{k=0}^i(-1)^{i-k}\binom{n+1}{i}\cdot(i-1)\cdots(i-k+1)$$
+\end{itemize}
+\end{eg}
 
 \begin{lmm}{}{}\\
 Let $S$ be an abstract simplicial complex on $\{1,\dots,n\}$. Let $(f_0,\dots,f_n)$ be the face vector of $S$. Let $(h_0,\dots,h_n)$ be the $h$-vector of $S$. Then the following are true. 
@@ -230,10 +256,32 @@ Let $\mK$ be an abstract simplicial complex. Define the cubical embedding of $\m
 Recall that there is a notion of barycentric subdivision for simplicies. The definition easily extends to simplcial complexes, but not obvious for abstract simplicial complexes. 
 
 \begin{defn}{Barycentric Subdivision}{}\\
-Let $S$ be an abstract simplicial complex. Define the barycentric subdivision of $S$ to be the abstract simplicial complex $$\text{Bd}(S)=\bigcup_{i=0}^\infty\{\{v_0,\dots,v_k\}\subseteq\mP(S)\;|\;v_i\subset v_{i+1}\}$$ on $S$. 
+Let $\mK$ be a simplicial complex. Define the barycentric subdivision of $\mK$ to be the abstract simplicial complex $$\text{Bd}(\mK)=\bigcup_{k=0}^\infty\{\{v_0,\dots,v_k\}\subseteq\mP(\mK)\setminus\{\emptyset\}\;|\;v_0\subset\cdots\subset v_k\}$$ The vertex set of $\text{Bd}(\mK)$ is $\mK$. 
 \end{defn}
 
-The idea is to add vertex for each simplex in the simplicial complex so that the underlying set of the barycentric subdivision is $S$. Since $S$ is a subset of $\mP(T)$, elements of $S$ are partially ordered by inclusion, each inclusion with the geometric meaning of faces of the simplex.
+The idea is to add vertex for each simplex in the simplicial complex so that the underlying set of the barycentric subdivision is $\mK$. Since $\mK$ is a subset of $\mP(\mK)$, elements of $\mK$ are partially ordered by inclusion, each inclusion with the geometric meaning of faces of the simplex. 
+
+\begin{lmm}{}{}\\
+Let $\mK$ be a simplicial complex. Then we have $$\dim(\text{Bd}(\mK))=\dim(\mK)$$
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $\mK$ be a simplicial complex. Then the following are true. 
+\begin{itemize}
+\item For $0\leq i\leq\dim(\text{Bd}(\mK))$, the face vector for $\text{Bd}(\mK)$ is given by $$f_i(\text{Bd}(\mK))=\sum_{j=i}^{\dim(\mK)}b_{ij}f_j(\mK)$$ where $$b_{ij}=\sum_{k=0}^i(-1)^k\binom{i+1}{k}(i-k+1)^{j+1}$$
+\item The matrix $(b_{ij})\in M_{\dim(\mK)+1}(\Z)$ is upper triangular and invertible. 
+\item The face vector for $\text{Bd}(\mK)$ is given by matrix multiplication: $$f(\text{Bd}(\mK))=(b_{ij})f(\mK)$$
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $\mK$ be a simplicial complex. Then the following are true. 
+\begin{itemize}
+\item For $0\leq i\leq\dim(\text{Bd}(\mK))$, the face vector for $\text{Bd}(\mK)$ is given by $$h_i(\text{Bd}(\mK))=\sum_{j=0}^{\dim(\mK)+1}d_{ij}h_j(\mK)$$ where $$d_{ij}=\sum_{k=0}^i(-1)^k\binom{\dim(\mK)+2}{k}(i-k)^j(i-k+1)^{\dim(\mK)+1-j}$$
+\item The matrix $(d_{ij})\in M_{\dim(\mK)+2}(\Z)$ is invertible. 
+\item The $h$-vector for $\text{Bd}(\mK)$ is given by matrix multiplication: $$h(\text{Bd}(\mK))=(d_{ij})h(\mK)$$
+\end{itemize}
+\end{prp}
 
 \subsection{Links and Stars}
 \begin{defn}{The Link of a Face}{}\\

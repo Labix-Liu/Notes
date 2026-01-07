@@ -132,8 +132,14 @@ This lemma will give us our condition for continuous derivatives in terms of the
 \section{Differentiation}
 \subsection{Frechet Derivative}
 \begin{defn}{Frechet Derivatives}{}\\
-Let $U\subseteq\R^n$ be an open subset. Let $x\in U$. Let $f:U\to\R^m$ be a function. We say that $f$ is differentiable at $x$ if there exists a linear map $Df(x)\in\Hom_\R(\R^n,\R^m)$ such that $$\lim_{h\to 0}\frac{\abs{f(x +h)-f(x)-Df(h)}}{\abs{h}}=0$$ In this case, we say that the derivative of $f$ at $x$ is $Df(x)$. 
+Let $U\subseteq\R^n$ be an open subset. Let $x\in U$. Let $f:U\to\R^m$ be a function. We say that $f$ is differentiable at $x$ if there exists a linear map $Df(x)\in\Hom_\R(\R^n,\R^m)$ such that $$\lim_{h\to 0}\frac{\abs{f(x +h)-f(x)-Df(x)h}}{\abs{h}}=0$$ In this case, we say that the derivative of $f$ at $x$ is $Df(x)$. 
 \end{defn}
+
+For each function $f$, $Df$ is a map from $U$ to $\Hom_\R(\R^n,\R^m)$, and $D$ is a map that sends differentiable functions $f:U\to\R^m$ to $Df:U\to\Hom_\R(\R^n,\R^m)$. 
+
+\begin{eg}{}{}\\
+Let $f:\R\to\R$ be the map given by $f(x)=x^2+5x$. Let $p\in\R$. Then $Df(p)=2p+5$. 
+\end{eg}
 
 \begin{prp}{}{}\\
 Let $U\subseteq\R^n$ be an open subset. Let $x\in U$. Let $f:U\to\R^m$ be a function. Suppose that $f$ is differentiable at $x$ with derivatives $A$ and $B$ in $\Hom_\R(\R^n,\R^m)$. Then $A=B$. 
@@ -168,31 +174,27 @@ Similar to continuity, differentiability in higher dimensions can be broken down
 Let $U\subseteq\R^n$ be an open subset. Let $x\in U$. Let $f:U\to\R^m$ be a function whose components are given by $f=(f_1,\dots,f_m)$. Then $f$ is differentiable at $x$ if and only if $f_i:U\to\R$ is differentiable at $x$ for $1\leq i\leq m$. 
 \end{prp}
 
+\begin{eg}{}{}\\
+Let $U\subseteq\R^n$ be an open subset. Let $f:U\to\R^m$ be the function given by $f(x)=c$ for some $c\in\R^m$. Then $f$ is differentiable at $U$ and $Df(x)=0$ for all $x\in U$. 
+\end{eg}
+
+\begin{eg}{}{}\\
+Let $f:\R^n\to\R^m$ be the linear map given by $f(x)=Ax$ for some $A\in M_{n\times m}(\R)$. Then $f$ is differentiable and $Df(x)=A$. 
+\end{eg}
+
 \begin{prp}{}{}\\
-Let $U\subseteq\R^n$ be an open subset. Let $f:U\to\R^m$ be a constant function. Then the following are true. 
-\begin{itemize}
-\item $f$ is differentiable at $U$. 
-\item For any $x\in U$, we have $Df(x)=0$. 
-\end{itemize}
-\begin{proof}
-Suppose that $f(x)=k$ for some $k\in\R^m$. Then I claim that $Df(x)=0$. Indeed since $$\lim_{h\to 0}\frac{\abs{0+0-0h}}{\abs{h}}=0$$ thus the definition of differentiability is satisfied. 
-\end{proof}
+Let $U\subseteq\R^n$ be an open subset. Let $x\in U$. Let $f,g:U\to\R^m$ be differentiable at $x$. Let $\lambda,\mu\in\R$. Then we have $$D(\lambda f+\mu g)(x)=\lambda Df(x)+\mu Dg(x)$$
 \end{prp}
 
 \begin{prp}{}{}\\
-Let $A\in\Hom_\R(\R^n,\R^m)$ be a linear map. Let $f:\R^n\to\R^m$ be the function defined by $f(x)=Ax$. Then the following are true. 
-\begin{itemize}
-\item $f$ is differentiable at $\R^n$. 
-\item For any $x\in\R^n$, we have $Df(x)=A$. 
-\end{itemize}
-\begin{proof}
-Clearly $Df(x)=A$ satisfies the definition of differentiability since $$\lim_{h\to 0}\frac{\abs{A(x+h)-Ax-Ah}}{\abs{h}}=0$$
-\end{proof}
+Let $U\subseteq\R^n$ be an open subset. Let $x\in U$. Let $f:U\to\R^m$ be differentiable at $x$. Let $g:V\subseteq f(U)\to\R^k$ be differentiable at $f(x)$. Then we have $$D(g\circ f)(x)=Dg(f(x))\cdot Df(x)$$
 \end{prp}
 
-Translation: Linear maps have constant derivatives (as in the one dimensional case). 
+\begin{prp}{}{}\\
+Let $U,V\subseteq\R^n$ be open subsets. Let $f:U\to V$ be a bijective function. Suppose that $f$ is differentiable at $p\in U$ and $f^{-1}$ is differentiable at $f(p)$. Then $Df(p)$ is invertible and we have $$Df^{-1}(p)=(Df(p))^{-1}$$
+\end{prp}
 
-\subsection{The Jacobian Matrix Representing the Derivative}
+\subsection{Partial Derivatives and Directional Derivatives}
 \begin{defn}{Partial Derivatives}{}\\
 Let $e_1,\dots,e_n$ be the standard basis for $\R^n$. Let $U\subseteq\R^n$ be an open subset. Let $p\in U$. Let $f:U\to\R^m$ be a function whose components are given by $f=(f_1,\dots,f_m)$. Define the $j$th partial derivative of the $i$th component of $f$ at $p$ to be $$\frac{\partial f_i}{\partial x_j}\bigg{|}_p=\lim_{t\to 0}\frac{f_i(p+te_j)-f_i(p)}{t}=\frac{d}{dt}f(p+te_j)\bigg{|}_{t=0}$$
 \end{defn}
@@ -219,20 +221,38 @@ Let $U\subseteq\R^n$ be an open subset. Let $p\in U$. Let $f:U\to\R^m$ be a func
 \end{pmatrix}$$
 \end{defn}
 
+\begin{defn}{Directional Derivative}{}\\
+Let $U\subseteq\R^n$ be an open subset. Let $p\in U$ be a point. Let $f:U\to\R^m$ be a function. Let $v\in\R^n$ be a direction. Define the directional derivative of $f$ in the direction $v$ at $p$ to be $$\partial_vf(p)=\lim_{t\to 0}\frac{f(p+tv)-f(p)}{t}=\frac{d}{dt}f(p+tv)\bigg{|}_{t=0}$$ if the limit exists. 
+\end{defn}
+
+Note that $\partial_vf(p)$ is a vector in $\R^m$. 
+
+\begin{lmm}{}{}\\
+Let $e_1,\dots,e_n$ be the standard basis for $\R^n$. Let $U\subseteq\R^n$ be an open subset. Let $p\in U$ be a point. Let $f:U\to\R^m$ be a function whose components are given by $f=(f_1,\dots,f_m)$. Then we have $$\partial_{e_j}f(p)=\left(\frac{\partial f_1}{\partial x_j}\bigg{|}_p,\dots,\frac{\partial f_m}{\partial x_j}\bigg{|}_p\right)$$ for $1\leq j\leq n$. 
+\end{lmm}
+
 \begin{prp}{}{}\\
-Let $U\subseteq\R^n$ be an open subset. Let $p\in U$. Let $f:U\to\R^m$ be a function. If $f$ is differentiable at $p$, then we have $$Df(x)v=Jf(x)v$$ for all $v\in\R^n$. 
+Let $U\subseteq\R^n$ be an open subset. Let $p\in U$. Let $f:U\to\R^m$ be a function. If $f$ is differentiable at $p$, then the following are true. 
+\begin{itemize}
+\item For any $v\in\R^n$, we have $Df(p)v=Jf(x)v=\partial_vf(x)$. 
+\item For $\lambda,\mu\in\R$ and $v,w\in\R^m$, we have $$\partial_{\lambda v+\mu w}f(x)=\lambda\partial_vf(x)+\mu\partial_wf(x)$$
+\end{itemize}
 \begin{proof}
-Note that we have
+Suppose that $Df$ exists. Then using the definition of differentiability, we have that 
 \begin{align*}
-Df(x)v&=Df(x)\sum_{k=1}^nv_ie_i\\
-&=\sum_{k=1}^nv_iDf(x)e_i\\
-&=\sum_{k=1}^nv_i\partial_if(x)\\
-&=\partial f(x)v
+\lim_{t\to 0}\frac{f(x+tv)-f(x)-Df(x)(tv)}{t\abs{v}}&=0\\
+\lim_{t\to 0}\frac{f(x+tv)-f(x)-tDf(x)v}{t}&=0\\
+\lim_{t\to 0}\frac{f(x+tv)-f(x)}{t}&=\lim_{t\to 0}\frac{tDf(x)v}{t}\\
+\lim_{t\to 0}\frac{f(x+tv)-f(x)}{t}&=Df(x)v\\
+\partial_vf(x)&=Df(x)v
 \end{align*}
+Linearity follows since $Df(x)$ is matrix and matrix multiplication on a vector is linear. 
 \end{proof}
 \end{prp}
 
-In other words, the Jacobian matrix $Jf(x)\in M_{m\times n}(\R)$ is the representation of the linear map $Df(x)\in\Hom_\R(\R^n,\R^m)$ under the standard basis for $\R^n$ and $\R^m$. 
+We should make absolutely clear distinction with the existence of frechet derivatives and the existence of directional derivatives. Even if the directional derivatives exists, as long as they are not linear, the matrix for the frechet derivative will not exist. In particular, it is possible to write out the Jacobian matrix as we see below, but this Jacobian matrix will not be equal to the matrix in the frechet derivative. \\
+
+The above theorem is also useful for detecting non-differentiability. By verifying the directional derivatives are non-linear, one can use the contrapositive to prove that $f$ would not be differentiable. 
 
 \begin{prp}{}{}\\
 Let $U\subseteq\R^n$ be an open subset. Let $B_r(x_0)\subseteq U$ be a subset for some $r>0$ and $x_0\in U$. Let $f:U\to\R^m$ be a function. Suppose that the following are true. 
@@ -275,117 +295,6 @@ The below theorem acts as a summary or recollection of the relationships between
 Let $U$ be an open subset of $\R^n$. Let $f:U\to\R^m$ be a function. Then $f$ is continuously differentiable if and only if $Jf:U\to M_{m\times n}(\R)$ is continuous. 
 \end{crl}
 
-\subsection{Directional Derivatives}
-\begin{defn}{Directional Derivative}{}\\
-Let $U\subseteq\R^n$ be an open subset. Let $p\in U$ be a point. Let $f:U\to\R^m$ be a function. Let $v\in\R^n$ be a direction. Define the directional derivative of $f$ in the direction $v$ at $p$ to be $$\partial_vf(p)=\lim_{t\to 0}\frac{f(p+tv)-f(p)}{t}=\frac{d}{dt}f(p+tv)\bigg{|}_{t=0}$$ if the limit exists. 
-\end{defn}
-
-Note that $\partial_vf(p)$ is a vector in $\R^m$. 
-
-\begin{lmm}{}{}\\
-Let $e_1,\dots,e_n$ be the standard basis for $\R^n$. Let $U\subseteq\R^n$ be an open subset. Let $p\in U$ be a point. Let $f:U\to\R^m$ be a function whose components are given by $f=(f_1,\dots,f_m)$. Then we have $$\partial_{e_j}f(p)=\left(\frac{\partial f_1}{\partial x_j}\bigg{|}_p,\dots,\frac{\partial f_m}{\partial x_j}\bigg{|}_p\right)$$ for $1\leq j\leq n$. 
-\end{lmm}
-
-\begin{prp}{}{}\\
-Let $U\subseteq\R^n$ be an open subset. Let $p\in U$. Let $f:U\to\R^m$ be a function. If $f$ is differentiable at $p$, then the following are true. 
-\begin{itemize}
-\item For any $v\in\R^n$, we have $Df(p)v=Jf(x)v=\partial_vf(x)$. 
-\item For $\lambda,\mu\in\R$ and $v,w\in\R^m$, we have $$\partial_{\lambda v+mu w}f(x)=\lambda\partial_vf(x)+\mu\partial_wf(x)$$ ($\partial_{-}f(x):\R^n\to\R^m)$ is a linear map). 
-\end{itemize}
-\begin{proof}
-Suppose that $Df$ exists. Then using the definition of differentiability, we have that 
-\begin{align*}
-\lim_{t\to 0}\frac{f(x+tv)-f(x)-Df(x)(tv)}{t\abs{v}}&=0\\
-\lim_{t\to 0}\frac{f(x+tv)-f(x)-tDf(x)v}{t}&=0\\
-\lim_{t\to 0}\frac{f(x+tv)-f(x)}{t}&=\lim_{t\to 0}\frac{tDf(x)v}{t}\\
-\lim_{t\to 0}\frac{f(x+tv)-f(x)}{t}&=Df(x)v\\
-\partial_vf(x)&=Df(x)v
-\end{align*}
-Linearity follows since $Df(x)$ is matrix and matrix multiplication on a vector is linear. 
-\end{proof}
-\end{prp}
-
-We should make absolutely clear distinction with the existence of frechet derivatives and the existence of directional derivatives. Even if the directional derivatives exists, as long as they are not linear, the matrix for the frechet derivative will not exist. In particular, it is possible to write out the Jacobian matrix as we see below, but this Jacobian matrix will not be equal to the matrix in the frechet derivative. \\
-
-The above theorem is also useful for detecting non-differentiability. By verifying the directional derivatives are non-linear, one can use the contrapositive to prove that $f$ would not be differentiable. 
-
-\subsection{Properties of the Derivative}
-\begin{thm}{Algebra of Differentiable functions}{} If $f,g:U\to\R^m$ are differentiable functions at $x $ and $\lambda,\mu\in\R$ are constants, then $$D(\lambda f+\mu g)(x )=\lambda Df(x )+\mu Dg(x )$$
-\end{thm}
-
-\begin{lmm}{}{} Let $f:U\subset\R^n\to\R^k$, $x\in U$ and $r>0$ such that $B_r(x)\subset U$ and $A\in L(\R^n,\R^k)$. Define $\Delta_{x,A}f:B_r(0)\to\R^k$ by $$\Delta_{x,A}f(h)=\begin{cases}
-\frac{f(x+h)-f(x)-Ah}{\abs{h}} & \text{if $h\neq0$}\\
-0 & \text{if $h=0$}
-\end{cases}$$
-Then $f$ is differentiable at $x$ with $Df(x)=A$ if and only if $\Delta_{x,A}$ is continuous at $0$. 
-\begin{proof}
-Let $\Delta_{x,A}$ be continuous at $0$. Then $$\lim_{h\to 0}\abs{\Delta_{x,A}f(h)}=\abs{\Delta_{x,A}f(0)}=0$$ Thus by definition of differentiability $f$ is differentiable at $x$ with $Df(x)=A$. \\
-Now let $f$ be differentiable at $x$ and set $A=Df(x)$. Then by definition of differentiability we have that $$\lim_{h\to 0}\abs{\frac{f(x+h)-f(x)-Ah}{\abs{h}}}=\lim_{h\to 0}\abs{\Delta_{x,A}f(h)}=0=\Delta_{x,A}f(0)$$ Thus $\Delta_{x,A}f(x)$ is continuous at $0$. 
-\end{proof}
-\end{lmm}
-
-\begin{lmm}{}{} Let $\tau>0$. Let $\xi:B_r(0)\to\R$ be bounded and $\nu:B_r(0)\to\R^k$ be continuous at $0\in B_r(0)$ and $\nu(0)=0$. Then $$\delta(h)=\xi(h)\nu(h)$$ where $0<\abs{h}<\tau$ and $\delta(0)=0$ is continuous at $0\in B_r(0)$. 
-\begin{proof}
-By continuity of $\nu$ at $0$, let $\epsilon>0$. Then there exists $\delta\in(0,\tau)$ such that $\abs{h}<\tau$ implies $\abs{\nu(h)}<\epsilon$. By boundedness of $\xi$, there exists $M>0$ such that $\abs{\xi}<M$ for all $h\in B_r(0)\setminus\{0\}$. Thus $0<\abs{h}<\delta$ implies $\abs{\delta(h)}<M\epsilon$, meaning $\lim_{h\to 0}\delta(h)=0=\delta(0)$ thus we are done. 
-\end{proof}
-\end{lmm}
-
-\begin{prp}{Chain Rule}{} Let $f:U\subset\R^n\to\R^m$ and $g:V\subset\R^m\to\R^k$ be two differentiable functions. Let $x \in U$. Then $g\circ f$ is differentiable and $$D(g\circ f)(x)=(Dg)(f(x))\cdot Df(x)$$ 
-\begin{proof}
-Let $$\Delta_xf(h)=\begin{cases}
-\frac{f(x+h)-f(x)-Df(x)h}{\abs{h}} & \text{if } h\neq 0\\
-0 & \text{if } h=0
-\end{cases}$$ and $$\Delta_{f(x)}g(k)\begin{cases}
-\frac{g(f(x)+k)-g(f(x))-D_g(f(x))k}{\abs{k}} & \text{if } k\neq 0\\
-0 & \text{if } k=0
-\end{cases}$$ where both functions are continuous by lemma 2.3.2. Then we have that $$f(x+h)=f(x)+Df(x)h+\Delta_xf(h)\abs{h}$$ and $$g(f(x)+k)=g(f(x))+D_g(f(x))k+\Delta_{f(x)}g(k)\abs{k}$$ Let $k(h)=Df(x)h+\Delta_xf(h)\abs{h}$. Then by linearity of $D_g(f(x))$, $$g(f(x+h))=g(f(x))+D_g(f(x))Df(x)h+D_g(f(x))\Delta_xf(h)\abs{h}+\Delta_{f(x)}g(k(h))\abs{k(h)}$$\
-Let $$\delta_1(h)=D_g(f(x))(\Delta_xf(h))$$ and $$\delta_2(h)=\begin{cases}
-\frac{\abs{k(h)}}{\abs{h}}\Delta_{f(x)}g(k(h)) & \text{if }h\neq 0\\
-0 & \text{if }h=0
-\end{cases}$$
-Then we have $$g(f(x+h))-g(f(x))-D_g(f(x))\circ Df(x)h=\abs{h}(\delta_1(h)+\delta_2(h))$$
-\linebreak
-We now show that $\lim_{h\to 0}\abs{\delta_1(h)}=0$ and $\lim_{h\to 0}\abs{\delta_2(h)}=0$. Note that $$\abs{\delta_1(h)}\leq\|D_g(f(x))\|\abs{\Delta_xf(h)}$$
-Since $\lim_{h\to 0}\abs{\Delta_xf(h)}=0$ by construction, we are done. Now let $$\xi(h)=\frac{\abs{k(h)}}{\abs{h}}\leq\frac{\abs{Df(x)h}}{\abs{h}}+\abs{\Delta_xf(h)}\leq\|Df(x)\|+\abs{\Delta_xf(h)}$$ Since $\Delta_xf$ is continuous, $\xi$ is bounded on $B_r(0)\setminus\{0\}$ for some $\tau>0$. Now set $\nu(h)=\Delta_{f(x)}g(k(h))$. Since $k$ is contuinuous at $k(0)=0$ and $g$ is differentiable at $f(x)$, we have that $\nu(h)$ is continuous and $\nu(0)=0$, Thus we can apply lemma 2.3.3 and $$\lim_{h\to 0}\abs{\delta_2(h)}=0$$ Thus we must have $$g(f(x+h))-g(f(x))-D_gf(x)\circ Df(x)h=\abs{h}(\delta_1(h)+\delta_2(h))\to 0$$ and we are done. 
-\end{proof}
-\end{prp}
-
-\begin{crl}{}{}\\
-Let $U,V\subseteq\R^n$ be open subsets. Let $p\in U$. Let $f:U\to V$ be a bijective function. Suppose that $f$ is differentiable at $p$ and $f^{-1}$ is differentiable at $f(p)$. Then we have $$Df^{-1}(p)=(Df(p))^{-1}$$
-\end{crl}
-
-\subsection{Mean Value Theorems}
-\begin{thm}{Mean Value Theorem}{} Let $x,y\in\R^n$. Let $r:[a,b]\to\R^n$ be continuously differentiable. Let $f: C^1(r([a,b]),\R^k)$ and there exists some $M$ such that $\abs{\partial f(x)}\leq M$ for all $x\in U$. Then $$\abs{f(r(b))-f(r(a))}\leq M\int_a^b\abs{r'(t)}\,dt$$ 
-\begin{proof}
-We have that 
-\begin{align*}
-\abs{f(r(b))-f(r(a))}&=\abs{\int_a^b\frac{d}{dt}f(r(t))\,dt}\tag{By the FTC}\\
-&=\abs{\int_a^b\partial f(r(t))r'(t)\,dt}\\
-&\leq\int_a^b\abs{\partial f(r(t))r'(t)}\,dt\\
-&\leq\int_a^b\abs{\partial f(r(t))}\abs{r'(t)}\,dt\\
-&\leq\int_a^bM\abs{r'(t)}\,dt
-\end{align*}
-Thus we are done. 
-\end{proof}
-\end{thm}
-
-Notive that $\int_a^b\abs{r'(t)}\,dt$ is exactly the length of the path $r$ from $a$ to $b$. 
-
-\begin{prp}{}{} Suppose that $U\subseteq\R^n$ is path-connected and every path is differentiable. Let $f:U\subseteq\R^n\to\R^m$ be differentiable and that $\partial f(x)=0$ for all $x\in U$. Then $f$ is constant on $U$. 
-\begin{proof}
-Let $x,y\in U$, then any path $r:[a,b]\to U$ with $r(a)=x$ and $r(b)=y$ is differentiable. Then 
-\begin{align*}
-f(y)-f(x)&=f(r(b))-f(r(a))\\
-&=\int_a^b\frac{d}{dt}f(r(t))\,dt\tag{By the FTC}\\
-&=\int_a^b\partial f(r(t))r'(t)\,dt\\
-&=0
-\end{align*}
-Thus $f(x)=f(y)$ for any $x,y\in U$. 
-\end{proof}
-\end{prp}
-
-\pagebreak
-\section{More Properties of Differentiability}
 \subsection{Inverse Function Theorem}
 The inverse function theorem is a powerful multidimensional analog of finding the derivative of an inverse function. The function has a few conditions to satisfy in order for it to be applied. Since the proof is exceptionally long, I will split it to a number of theorems and prepositions. 
 \begin{prp}{}{} Suppose that $\Psi:U\to V$ is a bijection which is differentiable at $x\in U$. Suppose that $\Psi^{-1}$ is differentiable at $y=\Psi(x)\in V$. Then $D\Psi(x)$ and $D\Psi^{-1}(y)$ are both invertible and $$(D\Psi^{-1})(y)=(D\Psi(\Psi^{-1}(y)))^{-1}$$ 
@@ -476,15 +385,16 @@ Furthermore, even if there are multiple $p$ mapping to $q$, not every $p$ could 
 
 \subsection{Implicit Function Theorem}
 \begin{thm}{Implicit Function Theorem}{}\\
-Let $U$ be an open subset of $\R^{n+l}$. Let $F\in\mC^1(U,\R^l)$. Let $c\in\R^l$. Suppose that there exists $a=(a_1,\dots,a_{n+l})\in\R^{n+l}$ is such that $F(a)=c$ and $$\begin{vmatrix}
-\frac{\partial F_1}{\partial x_{n+1}}\bigg{|}_a & \cdots & \frac{\partial F_1}{\partial x_{n+l}}\bigg{|}_a\\
+Let $U\subseteq\R^{n+l}$ be an open subset. Let $F:U\to\R^l$ be a function of class $\mC^1$. Let $p=(p_1,\dots,p_{n+l})\in U$ be a point. Let $c=F(p)$. Suppose that $$\begin{vmatrix}
+\frac{\partial F_1}{\partial x_{n+1}}\bigg{|}_p & \cdots & \frac{\partial F_1}{\partial x_{n+l}}\bigg{|}_p\\
 \vdots & \ddots & \vdots\\
-\frac{\partial F_m}{\partial x_{n+1}}\bigg{|}_a & \cdots & \frac{\partial F_m}{\partial x_{n+l}}\bigg{|}_a
-\end{vmatrix}\neq 0$$ Then there exists a neighborhood $N\subseteq\R^n$ of $(a_1,\dots,a_n)$ and $g\in\mC^1(N,\R^l)$ such that the following are true. 
+\frac{\partial F_m}{\partial x_{n+1}}\bigg{|}_p & \cdots & \frac{\partial F_m}{\partial x_{n+l}}\bigg{|}_p
+\end{vmatrix}\neq 0$$
+Then there exists an open neighborhood $(p_1,\dots,p_n)\in U_p\subseteq\R^n$ and $g:U_p\to\R^l$ of class $\mC^1$ such that the following are true. 
 \begin{itemize}
-\item $g(a_1,\dots,a_n)=(a_{n+1},\dots,a_{n+l})$
-\item $\{(x,g(x))\;|\;x\in N\}\subset U$
-\item $F(x,g(x))=c$ for all $x\in N$. 
+\item $g(p_1,\dots,p_n)=(p_{n+1},\dots,p_{n+l})$. 
+\item $\{(x,g(x))\in\R^{n+l}\;|\;x\in N\}\subseteq U$. 
+\item $f(x,g(x))=0$ for all $x\in U_p$. 
 \item The Jacobian of $g$ is given by $$J_g(x)=-\begin{pmatrix}
 \frac{\partial F_1}{\partial x_{n+1}}\bigg{|}_x & \cdots & \frac{\partial F_1}{\partial x_{n+l}}\bigg{|}_x\\
 \vdots & \ddots & \vdots\\
@@ -500,274 +410,464 @@ Let $U$ be an open subset of $\R^{n+l}$. Let $F\in\mC^1(U,\R^l)$. Let $c\in\R^l$
 Beware that more often we seen that the invertible matrix is not necessarily on the right hand side of $\partial F$. It could consist of multiple columns of $\partial F$ simply because of the ordering of the variables which is completely by the writer's choice. Moreover, there may be more than one $g$ to convert the implicit function into an explicit one if you consider different variables for the domain and the codomain. 
 
 \subsection{Higher Order Derivatives}
-From here onwards, our function $f:\R^n\to\R$ will be a scalar function else the Hessian Matrix cannot be defined. Do note that general second order differential operators for $f:\R^n\to\R^m$ do exists. It is just that we will not discuss it here. 
-
-\begin{defn}{Second Order Partial Derivatives}{} Suppose that $f:U\subseteq\R^n\to\R$ is differentiable with partial derivative operator $\partial_jf:U\subseteq\R^n\to\R$ for $1\leq j\leq n$. Define the second order partial derivative at $x_0\in U$ to be $$\partial_{ij}f(x_0)=\frac{\partial}{\partial x_i}\partial_jf(x)\bigg{|}_{x=x_0}=\frac{\partial^2}{\partial x_i\partial x_j}f(x)\bigg{|}_{x=x_0}$$
-for $1\leq i\leq n$ if it exists. This is done by treating $\partial_jf$ as a function from $\R^n$ to $\R$ and taking the partial derivative of it. 
+\begin{defn}{$k$-times Continuously Differentiable Functions}{}\\
+Let $U\subseteq\R^n$ and $V\subseteq\R^m$ be open subsets. Let $f:U\to V$ be a function. We say that $f$ is of class $\mC^k$ if for $1\leq i\leq k-1$, the map $D^if:U\to\R^{mn^i}$ is differentiable and $D^kf:U\to\R^{mn^k}$ is continuous. 
 \end{defn}
 
-\begin{defn}{Hessian Matrix}{} Suppose that all second order partial derivatives of $f:U\subseteq\R^n\to\R$ exists. Define the Hessian Matrix $f$ to be $$H_f(x)=\partial^2 f(x)=\begin{pmatrix}
+\begin{defn}{The Set of $k$-times Continuously Differentiable Functions}{}\\
+Let $U\subseteq\R^n$ and $V\subseteq\R^m$ be open subsets. Define $$\mC^k(U,V)=\{f:U\to V\;|\;f\text{ is of class }\mC^k\}$$
+\end{defn}
+
+From here onwards, our function $f:\R^n\to\R$ will be a scalar function else the Hessian Matrix cannot be defined. Do note that general second order differential operators for $f:\R^n\to\R^m$ do exists. 
+
+Let $f:U\subseteq\R^n\to\R^m$ be a function. If it is differentiable, then the partial derivatives are functions $\partial_if:U\to\R^m$ given by $$\partial_if(x)=\begin{pmatrix}
+\partial_if_1(x)\\\vdots\\\partial f_m(x)
+\end{pmatrix}$$
+
+\begin{defn}{Higher Order Partial Derivatives}{}\\
+Let $U\subseteq\R^n$ be an open subset. Let $f:U\to\R^m$ be a function. Define the partial derivatives of order $k$ inductively by $$\partial_{j_k\cdots j_1}f(x)=\partial_{j_k}(\partial_{j_{k-1}}\cdots\partial_{j_1})f(x)$$
+\end{defn}
+
+\begin{defn}{Hessian Matrix}{}\\
+Let $U\subseteq\R^n$ be an open subset. Let $f:U\to\R$ be a function. Suppose that all second order partial derivatives of $f$ exists. Define the Hessian matrix of $f$ to be $$Hf(x)=\begin{pmatrix}
 \partial_{11}f(x) & \cdots & \partial_{1n}f(x)\\
 \vdots & \ddots & \vdots\\
 \partial_{n1}f(x) & \cdots & \partial_{nn}f(x)
 \end{pmatrix}$$
 \end{defn}
 
-With $f:\R^n\to\R$, to say that $Df$ is differentiable means that there exists a linear operator $T$ such that $$\lim_{h\to 0}\frac{\abs{Df(x+h)-Df(x)-T(h)}}{\abs{h}}=0$$ as defined by the definition of differentiability. Notice that $Df(x)\in\Hom_\R(\R^n,\R)$. This means that $T$ must take the form $T:\R^n\to\Hom_\R(\R^n,\R)$ so that $T(h)\in\Hom_\R(\R^n,\R)$ makes sense. Thus $T\in\Hom_\R(\R^n,\Hom_\R(\R^n,\R))$. This leads to the following identification: 
-
-\begin{prp}{}{} Let $n\in\N\setminus\{0\}$. Then $$\Hom_\R(\R^n,\Hom_\R(\R^n,\R))\cong\Hom_\R^2(\R^n,\R)$$ where $\Hom_\R^2(\R^n,\R)$ is the space of all bilinear forms $\R^n\times\R^n\to\R$. 
-\begin{proof}
-Let $T\in\Hom_\R(\R^n,\Hom_\R(\R^n,\R))$. Then for every $x\in\R^n$, $T(x):\R^n\to\R$. Thus $T(x)(y)\in\R$ with $x,y\in\R^n$. Obviously we can write it into $T(x)(y)=B(x,y)$. Conversely any bilinear form can be written into the above form. In particular they both are vector spaces of dimension $n^2$. \\
-From linear algebra we know that $B(x,y)=x^TAy$ for some matrix $A$. If $T(x)=Cx$ with $C$ representing $T$, then $$B(x,y)=(T(x))\cdot y=(Cx)^Ty=x^TC^Ty$$
-\end{proof}
+\begin{prp}{}{}\\
+Let $U\subseteq\R^n$ be an open subset. Let $f:U\to\R$ be a function of class $\mC^2$. Then the following are true. 
+\begin{itemize}
+\item $D(Df)(x)=Hf(x)$ for all $x\in U$. 
+\item $Hf(x)$ is a symmetric matrix for all $x\in U$. 
+\item $\partial_{ij}f(x)=\partial_{ji}f(x)$ for all $x\in U$. 
+\end{itemize}
 \end{prp}
 
-\begin{prp}{}{} Let $f:U\subseteq\R^n\to\R$ be differentiable for all $x\in U$ and $Df:U\subseteq\R^n\to\Hom_\R(\R^n,\R)$ be differentiable. Then $D(Df)(x)=H_f(x)$. Moreover, $H_f(x)$ is symmetric and all second order partial derivatives commute. 
+\begin{prp}{}{}\\
+Let $U\subseteq\R^n$ be an open subset. Let $f:U\to\R^m$ be a function of class $\mC^k$. Then the following are true. Let $1\leq j_1,\dots,j_m\leq n$ be integers. Let $\sigma\in\text{Sym}(\{j_1,\dots,j_m\})$ be a permutation. Then we have $$\partial_{j_k\cdots j_1}f(x)=\partial_{\sigma(j_k)\cdots\sigma(j_1)}f(x)$$
 \end{prp}
 
-\begin{lmm}{}{} If all second order partial derivatives of $f:U\subseteq\R^n\to\R$ at $x$ is continuous for $x\in U$, then $$\frac{\partial^2}{\partial x_i\partial x_j}f(x)=\frac{\partial^2}{\partial x_j\partial x_i}f(x)$$
+\pagebreak
+\section{Riemann Integrals}
+\subsection{Jordan Measure}
+\begin{defn}{Rectangles}{}\\
+A rectangle in $\R^n$ is a set $R\subseteq\R^n$ of the form $$R=\prod_{j=1}^nI_j$$ where each $I_j\subseteq\R$ is an interval. 
+\end{defn}
+
+\begin{defn}{Volume of a Rectangle}{}\\
+Let $R=I_1\times\cdots\times I_n\subseteq\R^n$ be a rectangle. Suppose that the endpoints of $I_j$ is given by $a_j,b_j\in\R$ for $a_j\leq b_j$. Define the volume of $R$ to be $$\text{Vol}(R)=\prod_{i=1}^n(b_i-a_i)$$
+\end{defn}
+
+\begin{defn}{Elementary Sets}{}\\
+Let $S\subseteq\R^n$ be a subset. We say that $S$ is elementary if there exists rectangles $R_1,\dots,R_k\subseteq\R^n$ such that $$S=\bigcup_{i=1}^kR_i$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $S,T\subseteq\R^n$ be elementary set. Then the following are true. 
+\begin{itemize}
+\item $S\cup T$ is an elementary set. 
+\item $S\cap T$ is an elementary set. 
+\item $S\setminus T$ is an elementary set. 
+\end{itemize}
 \end{lmm}
 
-\begin{defn}{Twice differentiable and Continuous derivatives}{} Let $f:U\subseteq\R^n\to\R^m$ where $f(x)=\begin{pmatrix}f_1(x)\\\vdots\\f_m(x)\end{pmatrix}$ with $f_k(x):\R^n\to\R$ for $k\in\{1,\dots,m\}$. Define $$\mathcal{C}^2(U,\R^m)=\{f:U\to\R^m|\partial^2f_k(x):U\subseteq\R^n\to\R^n\text{ is continuous for }k\in\{1,\dots,m\}\}$$
-\end{defn}
-
-\begin{thm}{}{}[Second Order Taylor Expansion] Let $U\subset\R^n$ be convex and $x,x+h\in U$. If $f\in\mathcal{C}^2(U)$ then $$f(x+h)=f(x)+\sum_{k=1}^nh_i\frac{\partial f(x)}{\partial x_i}+\frac{1}{2}\sum_{i,j=1}^nh_ih_j\frac{\partial^2f(x)}{\partial x_i\partial x_j}+R(h)$$ where $$\lim_{h\to 0}\frac{\abs{R(h)}}{\abs{h}^2}=0$$
-\end{thm}
-
-\subsection{Second Order Derivative Test}
-\begin{defn}{Critical Point}{} We say that $p\in U$ is a critical point of $f\in\mathcal{C}^1(U)$ if $\nabla f(p)=0$. 
-\end{defn}
-
-\begin{prp}{}{} If $f$ has a local minimum ot maximum at $p$ then $\nabla f(p)=0$. 
+\begin{prp}{}{}\\
+Let $S\subseteq\R^n$ be an elementary subset. Then the following are true. 
+\begin{itemize}
+\item There exists rectangles $R_1,\dots,R_k\subseteq\R^n$ such that $S=\bigcup_{i=1}^kR_i$ and $R_i\cap R_j=\emptyset$ for $1\leq i\neq j\leq k$. 
+\item Suppose that $R_1,\dots,R_k\subseteq\R^n$ and $Q_1,\dots,Q_l\subseteq\R^n$ are rectangles such that $$S=\bigcup_{i=1}^kR_i=\bigcup_{i=1}^lQ_i$$ Then we have $$\sum_{i=1}^k\text{Vol}(R_i)=\sum_{i=1}^l\text{Vol}(Q_i)$$
+\end{itemize}
 \end{prp}
 
-\begin{thm}{Second Order Derivative Test}{} Suppose that $f:U\subseteq\R^n\to\R$ such that $H_f(x)$ exists and is continuous ($f\in\mathcal{C}^2(U)$). Suppose that $\nabla f(p)=0$ for some $p\in U$ (All first order derivatives are $0$ at $p$ or $p$ is a critical point). 
+\begin{defn}{Volume of an Elementary Set}{}\\
+Let $S\subseteq\R^n$ be an elementary subset. Let $R_1,\dots,R_k\subseteq\R^n$ be rectangles such that $S=\bigcup_{i=1}^kR_i$ and $R_i\cap R_j=\emptyset$ for $1\leq i\neq j\leq k$. Define the volume of $S$ to be $$\text{Vol}(S)=\sum_{i=1}^k\text{Vol}(R_i)$$
+\end{defn}
+
+\begin{defn}{Jordan Inner and Outer Measure}{}\\
+Let $S\subseteq\R^n$ be a bounded subset. 
 \begin{itemize}
-\item If $x^TH_f(p)x>0$ for all $x\in\R^n\setminus\{0\}$ then $f$ has a strict local minimum at $p$
-\item If $x^TH_f(p)x<0$ for all $x\in\R^n\setminus\{0\}$ then $f$ has a strict local maximum at $p$
-\item If there exists $x,y\in\R^n\setminus\{0\}$ such that $x^TH_f(p)x>0$ and $y^TH_f(p)y<0$ then $p$ is a saddle point
-\item The test is inconclusive otherwise. 
+\item Define the Jordan inner measure of $S$ to be $$\mu_\ast(S)=\sup\{\text{Vol}(E)\;|\;E\subseteq S\text{ and }E\text{ is an elementary set }\}$$
+\item Define the Jordan outer measure of $S$ to be $$\mu^\ast(S)=\inf\{\text{Vol}(E)\;|\;S\subseteq E\text{ and }E\text{ is an elementary set }\}$$
 \end{itemize}
+\end{defn}
+
+\begin{defn}{Jordan Measure}{}\\
+Let $S\subseteq\R^n$ be a bounded subset. We say that $S$ is Jordan measurable if $\mu_\ast(S)=\mu^\ast(S)$. In this case, we say that the Jordan measure of $S$ is $$\mu(S)=\mu_\ast(S)=\mu^\ast(S)$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $S\subseteq\R^n$ be a bounded subset. Then $S$ is Jordan measurable if and only if for all $\varepsilon>0$, there exists elementary sets $A,B$ such that $A\subseteq S\subseteq B$ and $\text{Vol}(B\setminus A)<\varepsilon$. 
+\end{prp}
+
+\begin{defn}{Set of Jordan Measurable Sets}{}\\
+Define the set of Jordan measurable sets in $\R^n$ to be $$\mJ(\R^n)=\{S\subseteq\R^n\;|\;S\text{ is Jordan measurable }\}$$
+\end{defn}
+
+\begin{prp}{}{}\\
+The following are true regarding the Jordan measure $\mu:\mJ(\R^n)\to[0,\infty)$. 
+\begin{itemize}
+\item $\mu(\emptyset)=0$. 
+\item If $S,T\in\mJ(\R^n)$, then $S\cup T,S\cap T\in\mJ(\R^n)$ and $$\mu(S\cup T)=\mu(S)+\mu(T)-\mu(S\cap T)$$
+\item If $S,T\in\mJ(\R^n)$ and $S\subseteq T$, then $$\mu(S)\leq\mu(T)$$
+\item If $S\in\mJ(\R^n)$ and $T\in\mJ(\R^m)$, then $S\times T\in\mJ(\R^{n+m})$ and $$\mu(S\times T)=\mu(S)\cdot\mu(T)$$
+\end{itemize}
+\end{prp}
+
+\begin{defn}{The $k$th Inner and Outer Volumes of a Subset}{}\\
+Let $S\subseteq\R^n$ be a bounded subset. 
+\begin{itemize}
+\item Define the $k$th inner volume of $S$ to be $$V_k^-(S)=\frac{1}{2^{nk}}\abs{\left\{(t_1,\dots,t_n)\in\Z^n\;\bigg{|}\;\left[\frac{t_1}{2^k},\frac{t_1+1}{2^k}\right)\times\cdots\times\left[\frac{t_n}{2^k},\frac{t_n+1}{2^k}\right)\subseteq S\right\}}$$
+\item Define the $k$th outer volume of $S$ to be $$V_k^+(S)=\frac{1}{2^{nk}}\abs{\left\{(t_1,\dots,t_n)\in\Z^n\;\bigg{|}\;\left[\frac{t_1}{2^k},\frac{t_1+1}{2^k}\right)\times\cdots\times\left[\frac{t_n}{2^k},\frac{t_n+1}{2^k}\right)\cap S\neq\emptyset\right\}}$$
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $S\subseteq\R^n$ be a bounded subset. Then $S$ is Jordan measurable if and only if $(V_k^+(S)-V_k^-(S))_{k\in\N^+}$ tends to $0$. In this case, we have $$\text{Vol}(S)=\lim_{k\to\infty}V_k^-(S)=\lim_{k\to\infty}V_k^+(S)$$
+\end{prp}
+
+\subsection{Riemann Integral}
+\begin{defn}{Subdivision}{}\\
+Let $S\subseteq\R^n$ be a Jordan measurable set. A subdivision of $S$ consists of finitely many Jordan measurable sets $P=\{F_1,\dots,F_k\subseteq\R^n\}$ such that the following are true. 
+\begin{itemize}
+\item $S=\bigcup_{i=1}^kF_i$. 
+\item $F_i^\circ\cap F_j^\circ=\emptyset$ for any $i\neq j$. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Refinements}{}\\
+Let $S\subseteq\R^n$ be a Jordan measurable set. Let $P,Q$ be subdivisions of $S$. We say that $Q$ is a refinement of $P$ if $P\subseteq Q$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $S\subseteq\R^n$ be a Jordan measurable set. Let $P,Q$ be subdivisions of $S$. Then there exists a subdivision $R$ of $S$ such that $R$ is a refinement of both $P$ and $Q$. 
+\end{prp}
+
+\begin{defn}{Lower and Upper Sums}{}\\
+Let $S\subseteq\R^n$ be a Jordan measurable set. Let $f:S\to\R$ be a bounded function. Let $P$ be a subdivision of $S$. 
+\begin{itemize}
+\item Define the lower sum of $f$ with respect to $P$ to be $$L(f,P)=\sum_{F\in P}\inf_F(f)\cdot \mu(F)$$
+\item Define the upper sum of $f$ with respect to $P$ to be $$U(f,P)=\sum_{F\in P}\sup_F(f)\cdot \mu(F)$$
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $S\subseteq\R^n$ be a Jordan measurable set. Let $f:S\to\R$ be a bounded function. Then the following are true. 
+\begin{itemize}
+\item If $m\leq f(x)\leq M$ for all $x\in S$, then we have $$m\cdot\mu(S)\leq L(f,P)\leq U(f,P)\leq M\cdot\mu(S)$$
+\item If $P,Q$ are subdivisions of $S$, then we have $$L(f,P)\leq U(f,Q)$$
+\end{itemize}
+\end{prp}
+
+\begin{defn}{Lower and Upper Integrals}{}\\
+Let $S\subseteq\R^n$ be a Jordan measurable set. Let $f:S\to\R$ be a bounded function. 
+\begin{itemize}
+\item Define the lower integral of $f$ at $S$ to be $$\underline{\int}_Sf=\sup\{L(f,P)\;|\;P\text{ is a subdivision of }S\}$$
+\item Define the upper integral of $f$ at $S$ to be $$\overline{\int}_Sf=\inf\{U(f,P)\;|\;P\text{ is a subdivision of }S\}$$
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Integrable Functions}{}\\
+Let $S\subseteq\R^n$ be a Jordan measurable set. Let $f:S\to\R$ be a bounded function. We say that $f$ is integrable at $S$ if $$\underline{\int}_Sf=\overline{\int}_Sf$$ In this case, we say that the integral of $f$ at $S$ is the value $$\int_Sf=\underline{\int}_Sf=\overline{\int}_Sf$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $S\subseteq\R^n$ be a Jordan measurable set. Let $f:S\to\R$ be a bounded function. Then $f$ is integrable if and only if for all $\varepsilon>0$, there exists a subdivision $P$ of $S$ such that $$U(f,P)-L(f,P)<\varepsilon$$
+\end{prp}
+
+\begin{lmm}{}{}\\
+Let $S\subseteq\R^n$ be a Jordan measurable set. Let $f:S\to\R$ be an integrable function. If $m\leq f(x)\leq M$ for all $x\in S$, then we have $$m\cdot\mu(S)\leq\int_f\leq M\cdot\mu(S)$$
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $S\subseteq\R^n$ be a Jordan measurable set. Let $f,g:S\to\R$ be integrable functions. Then the following are true. 
+\begin{itemize}
+\item For any $\lambda,\mu\in\R$, then $\lambda f+\mu g$ is integrable and $$\int_S\lambda f+\mu g=\lambda\int_Sf+\mu\int_Sg$$
+\item If $f\leq g$, then we have $$\int_Sf\leq\int_Sg$$
+\end{itemize}
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $S,T\subseteq\R^n$ be Jordan measurable sets. Let $f:S\cup T\to\R$ be an integrable function. Then we have $$\int_{S\cup T}f=\int_Sf+\int_Tf-\int_{S\cap T}f$$
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $S\subseteq\R^n$ be a Jordan measurable set. Let $f:S\to\R$ be a bounded function. Then the following are true. 
+\begin{itemize}
+\item If $f$ is uniformly continuous, then $f$ is integrable. 
+\item If $f$ is integrable, then $\abs{f}$ is integrable and we have $$\abs{\int_Sf}\leq\int_S\abs{f}$$
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $S\subseteq\R^n$ be a bounded subset. Then $S$ is Jordan measurable if and only if the indicator function $1_S:S\to\{0,1\}$ is integrable. In this case, we have $$\int_S1_S=\mu(S)$$
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $S\subseteq\R^n$ be a Jordan measurable set. Let $R\subseteq\R^n$ be a rectangle such that $S\subseteq R$. Let $f|^R:R\to\R$ be the function defined by $$f|^R(x)=\begin{cases}
+f(x) & \text{ if }x\in S\\
+0 & \text{ otherwise }
+\end{cases}$$ Then we have $$\int_Sf=\int_Rf|^R$$
+\end{prp}
+
+\begin{thm}{Fubini's Theorem}{}\\
+Let $S\subseteq\R^n$ and $T\subseteq\R^m$ be Jordan measurable sets. Let $f:S\times T\to\R$ be a bounded function. Suppose that $f(x,-):T\to\R$ is integrable for all $x\in S$. Then the function $x\mapsto\int_T f(x,-)$ is integrable, and we have $$\int_{S\times T}f=\int_S\int_Tf$$
+\end{thm}
+
+\begin{thm}{Change of Variables}{}\\
+Let $S,T\subseteq\R^n$ be Jordan measurable sets. Let $f:S\to\R$ be a function. Let $g:T\to S$ be a bijective function of class $\mC^1$. Then $f$ is integrable if and only if $f\circ g$ is integrable. In this case, we have $$\int_Sf=\int_Tf\circ g\;\abs{Jg}$$
 \end{thm}
 
 \pagebreak
-\section{Vector Calculus}
-\subsection{Regions in Euclidean Space}
-Before we define integration of functions, we need to make sense of the domain of our integral. 
-
-\begin{defn}{Regions}{} A region in $\R^n$ is a bounded open subset $\Omega$ of $\R^n$ such that there exists a function $f:\R^n\to\R$ with the property that 
-\begin{itemize}
-\item all partial derivatives of $f$ are continuous
-\item $\Omega=\{x\in\R^n\;|\;f(x)\leq 0\}$
-\item If $p\in\R^n$ is such that $f(p)=0$, then the partial derivatives of $f$ do not simultaneously vanish. 
-\end{itemize}
-Also define the boundary of a region, $\partial\Omega$ to be $\{x\in\R^n|f(x)=0\}$. 
+\section{Differential Operators}
+\subsection{Gradient}
+\begin{defn}{Gradient}{}\\
+Let $U\subseteq\R^n$ be an open subset. Let $f:U\to\R$ be a function of class $\mC^1$. Define the gradient of $f$ to be the function $\text{grad}(f):U\to\R^n$ given by $$\text{grad}(f)(p)=\begin{pmatrix}
+\frac{\partial f}{\partial x_1}\bigg{|}_p\\\vdots\\\frac{\partial f}{\partial x_n}\bigg{|}_p
+\end{pmatrix}=\begin{pmatrix}
+\partial_{e_1}f(p)\\\vdots\\\partial_{e_n}f(p)
+\end{pmatrix}$$ where $e_1,\dots,e_n\in\R^n$ is the standard basis vectors of $\R^n$. 
 \end{defn}
 
-\begin{eg}{}{}\\
-Let $R>0$. Consider the function $f:\R^3\to\R$ defined by $f(x,y,z)=x^2+y^2+z^2-R^2$. Then $\{x\in\R^n\;|\;f(x)<0\}$ is a region in $\R^3$. 
-\end{eg}
+Note: Implicit in our formula for $\text{grad}(f)$ is the choice of standard basis for $\R^n$. As we all things in linear algebra, the representation of a vector depends on the chosen basis. 
 
-\begin{prp}{}{} Let $\Omega\subset\R^n$ be a region with boundary $f(x)=0$. Then there exists $0<l<n$ and $r:\R^l\to\R^n$ such that $f(r(x))=0$. 
-\begin{proof}
-Since $\nabla f(p)\neq 0$ for all $p\in\R^n$, we can apply the implicit function theorem to find function $g:\R^l\to\R^{n-l}$ such that $f(x,g(x))=0$ for any $p\in f^{-1}(0)$. Now define $r:\R^l\to\R^n$ by $r(x)=(x,g(x))$. Then clearly $f(r(x))=0$. 
-\end{proof}
+\begin{crl}{}{}\\
+Let $U\subseteq\R^n$ be an open subset. Let $f:U\to\R$ be a function of class $\mC^1$. Then $\text{grad}(f):U\to\R^n$ is continuous. 
+\end{crl}
+
+Note: For a $\mC^1$-function $f:\R^n\to\R$, we have that $\text{grad}(f)(q)$ is orthogonal to $H=\{p\in\R^n\;|\;f(p)=0\}$ at the point $q\in H$. 
+
+\begin{prp}{}{}\\
+Let $U\subseteq\R^n$ be an open subset. Let $f,g:U\to\R$ be functions of class $\mC^1$. Then the following are true. 
+\begin{itemize}
+\item $\text{grad}(\lambda f+\mu g)=\lambda\text{grad}(f)+\mu\text{grad}(g)$ for any $\lambda,\mu\in\R$. 
+\item $\text{grad}(fg)=f\text{grad}(g)+\text{grad}(f)g$. 
+\item If $g\neq 0$, then we have $\text{grad}(f/g)=\frac{\text{grad}(f)g-f\text{grad}(g)}{g^2}$
+\end{itemize}
 \end{prp}
 
-\begin{eg}{}{}\\
-Let $R>0$. Let $f:\R^3\to\R$ be the function defined by $f(x,y,z)=x^2+y^2+z^2-R^2$. Consider the region $\{x\in\R^n\;|\;f(x)<0\}$. 
-\end{eg}
-
-In particular, if $l=1$, then we call $r$ a curve. If $l=2$, then $r$ would be a surface. This is precisely the parametrization of a boundary, be it a curve or a surface. 
-
-\subsection{Differentiation and Integration of Curves}
-This section is dedicated to vector functions, which are functions with domain $\R$ and codomain $\R^n$. 
-
-\begin{defn}{Curves in Euclidean Space}{} Let $C\subseteq\R^n$ be a subset. We say that $C$ is a curve if there exists a function continuous function $r:I\to\R^n$ such that $$C=\im(r)$$ In this case we call $r$ a parametrization of $C$. 
+\subsection{Divergence}
+\begin{defn}{Divergence}{}\\
+Let $U\subseteq\R^n$ be an open subset. Let $F=(F_1,\dots,F_n):U\to\R^n$ be a function of class $\mC^1$. Define the divergence of $F$ to be the function $\text{div}(F):U\to\R$ given by $$\text{div}(F)(p)=\sum_{i=1}^n\frac{\partial f_i}{\partial x_i}\bigg{|}_p$$
 \end{defn}
 
-\begin{defn}{Simple and Closed Curves}{} Let $C\subseteq\R^n$ be a curve. 
+\begin{prp}{}{}\\
+Let $U\subseteq\R^n$ be an open subset. Then the following are true regarding the divergence operator. 
 \begin{itemize}
-\item $C$ is if simple if there exists a parametrization $r:I\to\R^n$ of $C$ such that $r$ is injective. 
-\item $C$ is closed if there exists a region $\Omega\subseteq\R^n$ such that $C=\partial\Omega$. 
+\item $\text{div}(\lambda F+\mu G)=\lambda\text{div}(F)+\mu\text{div}(G)$ for all $\mC^1$-functions $F,G:U\to\R^n$ and all $\lambda,\mu\in\R$. 
+\item $\text{div}(hF)=h\text{div}(F)+\text{grad}(f)\cdot F$ for all $\mC^1$-functions $F:U\to\R^n$ and $h:U\to\R$. 
 \end{itemize}
-\end{defn}
-
-\begin{defn}{Differentiable and Regular Parameterizations}{} Let $C\subseteq\R^n$ be a curve. Let $r:I\to\R^n$ be a parametrization of $C$. 
-\begin{itemize}
-\item We say that $r\in\mC^n$ if $r^{(k)}$ is differentiable for all $0\leq k\leq n-1$, and $r^{(n)}$ is continuous. 
-\item We say that $r$ is regular if $\abs{r'(t)}\neq 0$ for all $t\in I$. 
-\end{itemize}
-\end{defn}
-
-\begin{prp}{}{} Let $r:I\to\R^n$ be a function. If $\im(r)$ is simple, closed and $r$ is regular, then there exists a region $\Omega\subseteq\R^n$ such that $$\partial\Omega=\im(r)$$
 \end{prp}
 
-\begin{defn}{Arc Length Function and Parametrization}{} Let $r:I\to\R^n$ be a function. Define the Arc Length Function by $$s(t)=\int_{t_0}^{t}\abs{\vb{r}'(u)}du$$ Define the Arc Length Parametrization by $\vb{r}(s)$. 
+Denote the set of all vector fields by $$\mathfrak{X}^k(U)=\{F:U\to\R^n\;|\;F\text{ is of class }\mC^k\}$$ We have defined operators $\text{grad}:\mC^1(U)\to\mathfrak{X}^0(U)$ and $\text{div}:\mathfrak{X}^1(U)\to\mC^0$. We provide a link between grad and div by establishing an operator $\mathfrak{X}^1(U)\to\mathfrak{X}^0(U)$. 
+
+\subsection{Laplacian}
+\begin{defn}{Laplacian}{}\\
+Let $U\subseteq\R^n$ be an open subset. Let $f:U\to\R$ be a function of class $\mC^2$. Define the Laplacian of $f$ to be the function $\Delta:U\to\R$ given by $$\Delta(f)(p)=\text{div}(\text{grad}(f))(p)$$
 \end{defn}
 
-\begin{lmm}{}{} Let $r:I\to\R^n$ be a function. Denote the arc length function by $s(t)$. Then we have $$\abs{r'(s(t))}=1$$ 
-\begin{proof} We show that $\abs{\vb{r}'(s)}=1$. By the chain rule, 
-\begin{align*}
-\abs{\frac{d}{ds}\vb{r}(s(t))}&=\abs{\frac{d\vb{r}}{dt}\cdot\frac{dt}{ds}}\\
-&=\frac{\abs{\vb{r}'(t)}}{\abs{\vb{r}'(t)}}\tag{By the FTC}\\
-&=1
-\end{align*}
-\end{proof}
-\end{lmm}
-
-\begin{defn}{Line Integrals on Scalar Functions}{} Let $f:\R^n\to\R$. Let $r:[a,b]\to\R^n$ a smooth curve with image $C$. Define the line integral along a function $f:\R^n\to\R$ to be $$\int_Cf\,dr=\int_a^bf(r(t))\abs{r'(t)}\,dt$$ If $r$ is a closed curve then we write the integral as $\oint_Cf$. 
-\end{defn}
-
-$dr$ in the integral is justified by noting that if $r$ is a function of $t$, then $dr=r'(t)dt$. But since $dr$ is a positive line segment, we take the absolute value, giving us $$dr=\abs{dr}=\abs{r'(t)}\abs{dt}=dt$$
-
-There is no proper infinite sum that we can justify for $\int_Cf$ because it is simply a notation short hand for the integral on the right hand side. Notice that the parameterization $r$ does not appear on this notation because there can be mutiple parametrizations with the same image. 
-
-\subsection{Vector Fields}
-\begin{defn}{Vector Fields}{} Let $U\subseteq\R^n$ be a subset. A vector field on $U$ is a function $v:U\to\R^n$. 
-\end{defn}
-
-\begin{defn}{Conservative Vector Fields}{} We say that a vector field $v:U\subset\R^n\to\R^n$ is conservative if there exsits some scalar function $\phi:\R^n\to\R$ such that $$v=\nabla\phi$$
-\end{defn}
-
-\begin{defn}{Divergence}{} Let $f:U\subset\R^n\to\R^n$ be a vector field. Define the divergence of $f$ to be $$\nabla\cdot f=\begin{pmatrix}\frac{\partial}{\partial x_1} & \cdots & \frac{\partial}{\partial x_n}\end{pmatrix}\begin{pmatrix}f_1\\\vdots\\f_n\end{pmatrix}=\sum_{k=1}^n\frac{\partial f_k}{\partial x_k}$$
-\end{defn}
-
-\begin{defn}{Line Integrals on Vector Fields}{} Let $v:U\subset\R^n\to\R^n$ be a vector field. Let $r:[a,b]\to\R^n$ be a curve with image $C\in U$. Define the integral of $v$ along the curve $C$ to be $$\int_Cv\cdot\,dr=\int_a^bv(r(t))\cdot r'(t)\,dt$$ If $r$ is a closed curve then we write the integral as $\oint_Cv\cdot\,dr$. 
-\end{defn}
-
-\begin{prp}{}{} Let $v:U\subset\R^n\to\R^n$ be a vector field. Let $r:[a,b]\to\R^n$ be a curve with image $C\in U$. Then $$\int_Cv\cdot\,dr=\sum_{k=1}^n\int_Cv_k\,dx_k$$
+\begin{prp}{}{}\\
+Let $U\subseteq\R^n$ be an open subset. Let $f,g:U\to\R$ be functions of class $\mC^2$. Then we have $$\Delta(\lambda f+\mu g)=\lambda\Delta(f)+\mu\Delta(g)$$ for all $\lambda,\mu\in\R$. 
 \end{prp}
 
-\begin{prp}{}{} If $v:U\subset\R^n\to\R^n$ is conservative with $v=\nabla f$ and $r:[a,b]\to\R^n$ is a curve with image $C$ then $$\int_Cv\cdot dr=f(r(b))-f(r(a))$$
+\begin{defn}{Harmonic Functions}{}\\
+Let $U\subseteq\R^n$ be an open subset. Let $f:U\to\R$ be a function of class $\mC^2$. We say that $f$ is harmonic if $\Delta(f)=0$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $U\subseteq\R^n$ be an open subset. Let $f:U\to\R$ be a harmonic function. Then $f$ is analytic. 
 \end{prp}
 
-\begin{thm}{Equivalent Characterization of Conservative Vector Fields}{} Let $\gamma:[a,b]\to\R^n$ be a path. Let $F:\R^n\to\R^n$ be a vector field. Then the following are equivalent. 
-\begin{itemize}
-\item $F$ is conservative
-\item $\int_\gamma F(r)\cdot \,dr$ is independent of the choice of $\gamma$
-\item $\int_\gamma F(r)\cdot \,dr=0$ if $\gamma$ is closed
-\end{itemize}
+\begin{thm}{Mean Value Theorem}{}
 \end{thm}
+
+\begin{thm}{Liouville's Theorem}{}\\
+Let $f:\R^n\to\R$ be a bounded harmonic function. Then $f$ is constant. 
+\end{thm}
+
+\subsection{Curl}
+\begin{defn}{Curl}{}\\
+Let $U\subseteq\R^3$ be an open subset. Let $F=(F_1,F_2,F_3):U\to\R^3$ be a $\mC^1$-function. Define the curl of $F$ to be the function $\text{curl}(F):U\to\R^3$ given by $$\text{curl}(F)(p)=\begin{pmatrix}
+\frac{\partial F_3}{\partial x_2}\bigg{|}_p-\frac{\partial F_2}{\partial x_3}\bigg{|}_p\\
+\frac{\partial F_1}{\partial x_3}\bigg{|}_p-\frac{\partial F_3}{\partial x_1}\bigg{|}_p\\
+\frac{\partial F_2}{\partial x_1}\bigg{|}_p-\frac{\partial F_1}{\partial x_2}\bigg{|}_p
+\end{pmatrix}$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $U\subseteq\R^n$ be an open subset. Then the following are true regarding the curl operator. 
+\begin{itemize}
+\item $\text{curl}(\lambda F+\mu G)=\lambda\text{curl}(F)+\mu\text{curl}(G)$ for all $\mC^1$-functions $F,G:U\to\R^n$ and all $\lambda,\mu\in\R$. 
+\item $\text{curl}(hF)=h\text{curl}(F)+\text{grad}(f)\times F$ for all $\mC^1$-functions $F:U\to\R^n$ and $h:U\to\R$. 
+\end{itemize}
+\end{prp}
+
+We relate the three operators by the following proposition. 
+
+\begin{prp}{}{}\\
+Let $U\subseteq\R^3$ be an open subset. Then the following are true regarding the three differential operators. 
+\begin{itemize}
+\item $\text{div}(F\times G)=\text{curl}(F)\cdot G-F\cdot\text{curl}(G)$ for all $\mC^1$-functions $F,G:U\to\R^3$. 
+\item $\text{curl}(\text{grad}(f))=0$ for all $\mC^2$-functions $f:U\to\R$. 
+\item $\text{div}(\text{curl}(F))=0$ for all $\mC^2$-functions $f:U\to\R^3$. 
+\end{itemize}
+\end{prp}
+
+Thus when our functions are sufficiently continuously differentiable, we obtain a diagram\\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\mC^\infty(U)} & {\mathfrak{X}^\infty(U)} & {\mathfrak{X}^\infty(U)} & {\mC^\infty(U)}
+	\arrow["{\text{grad}}", from=1-1, to=1-2]
+	\arrow["{\text{curl}}", from=1-2, to=1-3]
+	\arrow["{\text{div}}", from=1-3, to=1-4]
+\end{tikzcd}}\\
+in which any two consecutive operators is $0$. 
+
+\begin{defn}{The Curl in $\R^2$}{}\\
+Let $U\subseteq\R^2$ be an open subset. Let $F:U\to\R^2$ be a function of class $\mC^1$. Define the curl of $F$ to be $$\text{curl}(F)(p)=\frac{\partial F_2}{\partial x_1}\bigg{|}_p-\frac{\partial F_1}{\partial x_2}\bigg{|}_p$$
+\end{defn}
 
 \pagebreak
-
-\section{2 Dimensional Calculus}
-\subsection{Double Integrals}
-\begin{defn}{Positively Oriented Tangents and Outward Normals}{} Let $\Omega$ be a region in $\R^2$ with boundary $f(x)=0$ and parametrization $r:\R\to\R^2$. We say that $r$ is positively oriented if as the domain of $r$ increases, the tangent vector $r'(t)$ moves anticlockwise. In this case, we say that $\begin{pmatrix}-r_2(p)\\r_1(p)\end{pmatrix}$ for $p\in\partial\Omega$ is the outward normal vector which is perpendicular to the tangent space $T_p(\partial\Omega)$. 
+\section{Line Integrals}
+\subsection{Regular Paths and the Arc Length Parametrization}
+\begin{defn}{Regular Paths}{}\\
+Let $r:[a,b]\to\R^n$ be a path. We say that $r$ is regular if $r'(t)\neq 0$ for all $t\in(a,b)$. 
 \end{defn}
 
-\begin{defn}{Double Integrals}{} Let $f:\R^2\to\R$. Define the double integral over $f$ on a region $\Omega$ to be $$\iint_\Omega f(x,y)\,dx\,dy$$
+\begin{defn}{The Arc Length Function}{}\\
+Let $r:[a,b]\to\R^n$ be a path. Define the arc length function of $r$ to be the function $s:[a,b]\to\R$ given by $$s(t)=\int_a^t\abs{r'(u)}\;du$$
 \end{defn}
 
-\begin{prp}{}{} Let $f,g:\R^2\to\R$ be integrable on a region $\Omega$ and $a,b\in\R$. Then the following are true for double integrals. 
+\begin{thm}{The Reparametrization Theorem}{}\\
+Let $r:[a,b]\to\R^n$ be a regular path. Then there exists a reparametrization $s:[c,d]\to\R^n$ of $r$ such that $\abs{s'(t)}=1$ for all $t\in[c,d]$. 
+\end{thm}
+
+\begin{defn}{Tangent and Normal of a Regular Path}{}\\
+Let $r:[a,b]\to\R^n$ be a regular path of class $\mC^2$. 
 \begin{itemize}
-\item $\iint_\Omega(af(x,y)+bg(x,y))\,dA=a\iint_\Omega f(x,y)\,dA+b\iint_\Omega g(x,y)\,dA$
-\item If $f(x,y)\geq g(x,y)$ for all $x,y\in\Omega$, then $\iint_\Omega f(x,y)\,dA\geq\iint_\Omega g(x,y)\,dA$
-\item If $\Omega=D_1\cup D_2$ and $D_1\cap D_2=\emptyset$, then $\iint_\Omega f(x,y)\,dA=\iint_{D_1}f(x,y)\,dA+\iint_{D_2}f(x,y)\,dA$
+\item Define the unit tangent vector of $r$ at $t\in(a,b)$ to be $$T_r(t)=\frac{r'(t)}{\abs{r'(t)}}$$
+\item Define the unit normal vector of $r$ at $t\in(a,b)$ to be $$n_r(t)=\frac{T_r'(t)}{\abs{T_r'(t)}}$$
+\end{itemize}
+\end{defn}
+
+Note: The normal always points towards the curve (it does not always point outwards). 
+
+\begin{prp}{}{}\\
+Let $r:[a,b]\to\R^n$ be a regular path of class $\mC^2$. Let $s:[a,b]\to\R^n$ be a orientation preserving regular reparametrization of $r$. Then the following are true. 
+\begin{itemize}
+\item $T_r(t)=T_s(t)$. 
+\item $n_r(t)=n_s(t)$. 
 \end{itemize}
 \end{prp}
 
-\begin{prp}{Fubini's Theorem}{} If $f:\R^2\to\R$ is continuous and bounded on the rectangle $R=\{(x,y)\in\R^2|a\leq x\leq b, c\leq y\leq d\}$. Then $$\int_a^b\int_c^df(x,y)\,dy\,dx=\int_c^d\int_a^bf(x,y)\,dx\,dy$$
-\end{prp}
-
-\begin{prp}{}{} If $f:\R^2\to\R$ is a function such that $f(x,y)=g(x)h(y)$ where $g,h:\R\to\R$ and $R=\{(x,y)\in\R^2|a\leq x\leq b, c\leq y\leq d\}$, then $$\iint_Rf(x,y)\,dA=\int_a^bg(x)\,dx\int_c^df(y)\,dy$$
-\end{prp}
-
-\begin{thm}{}{} Let $R$ be a region. Let $f:\R^2\to\R^2$ defined by $f(x,y)=\begin{pmatrix}u(x,y)\\v(x,y)\end{pmatrix}$ such that $f|_R$ is a bijection and $\partial f\in\mathcal{C}^1(R)$. Let $g:\R^2\to\R$. Then $$\iint_Sg(u,v)\,du\,dv=\iint_Rg(x,y)\abs{\partial f}\,dx\,dy$$
-\end{thm}
-
-The conditions for $f$ being a local bijection is given by the inverse function theorem. 
-
-\begin{thm}{Moments}{} Let $f:\R^2\to\R$. Let $\rho(x,y)$ give the moment at $(x,y)$. The moment about the $x$-axis on a region $D\subset\R^2$ is given by $$M_x=\iint_Dy\rho(x,y)\,dA$$ and the moment about the $y$-axis is given by $$M_y=\iint_Dx\rho(x,y)\,dA$$
-\end{thm}
-
-\begin{thm}{Mass}{} Let $f:\R^2\to\R$. Let $\rho(x,y)$ give the moment at $(x,y)$. Let $D\subset\R^2$ be a region. Then the mass is given by $$m=\iint_D\rho(x,y)\,dA$$
-\end{thm}
-
-\begin{thm}{Center of Mass}{} Let $f:\R^2\to\R$. Let $\rho(x,y)$ give the moment at $(x,y)$. Let $D\subset\R^2$ be a region. The center of mass is given by $$(\overline{x},\overline{y})=\left(\frac{M_y}{m},\frac{M_x}{m}\right)$$
-\end{thm}
-
-\subsection{Green's Theorem for a Planar Region}
-\begin{defn}{Curl}{} Let $v:U\subseteq\R^2\to\R^2$ be a continuously differentiable planar vector field given by $v(x,y)=\left(a(x,y),b(x,y)\right)$. Define the curl of $v$ to be $$\text{curl}(v)=\frac{\partial b}{\partial x}-\frac{\partial a}{\partial y}$$
+\subsection{Line Integrals}
+\begin{defn}{Line Integrals over a $\mC^1$ Path}{}\\
+Let $U\subseteq\R^n$ be an open subset. Let $F:U\to\R^n$ be a function. Let $r:[a,b]\to U$ be a $\mC^1$ path. Let $C=\im(r)$. Define the integral of $F$ along $r$ to be $$\int_CF\cdot dr=\int_{[a,b]}(F\circ r)\cdot Jr$$ if the integral exists. 
 \end{defn}
 
-\begin{thm}{Green's Theorem for a Rectangular Region}{} Let $v:U\subseteq\R^2\to\R^2$ be a continuously differentiable planar vector field where $v(x,y)=\begin{pmatrix}v_1(x,y)\\v_2(x,y)\end{pmatrix}$. Let $\Omega=\{(x,y)\in\R^2|a\leq x\leq b,c\leq y\leq d\}$ such that $\partial\Omega\subset U$. Then $$\iint_\Omega\text{curl}(v)\,dA=\int_{\partial\Omega}v\cdot\,dr$$ where $r$ is positively oriented. 
-\begin{proof}
-Clearly, we have $$\iint_\Omega\text{curl}(v)\,dA=\int_a^bv_1(x,c)\,dx+\int_b^cv_2(d,y)\,dy+\int_c^av_1(x,d)\,dx+\int_d^bv_2(a,y)\,dy$$
-\end{proof}
-\end{thm}
-
-\begin{thm}{Green's Theorem for a Planar Region}{} Let $v:U\subseteq\R^2\to\R^2$ be a continuously differentiable planar vector field. Let $\Omega$ be a region such that $\Omega\cup\partial\Omega\subset U$ and $r$ a parametrization of $\partial\Omega$. Then $$\iint_\Omega\text{curl}(v)\,dA=\oint_{\partial\Omega}v\cdot\,dr$$ where $r$ is positively oriented. 
-\end{thm}
-
-\begin{thm}{Conservative Implies Zero Curl}{} If $v:U\subseteq\R^2\to\R^2$ is a conservative vector field with continuous partial derivatives on $U$, then $$\text{curl}(v)=0$$
-\end{thm}
-
-\subsection{Divergence Theorem for a Planar Region}
-\begin{defn}{Flux across a Curve}{} Let $v:\R^2\to\R^2$ be a planar vector field. Let $\Omega\subset\R^2$ be a region with $\partial\Omega$ parametrized by $r$. Define the flux of $v$ across $\Omega$ to be $$\text{flux of }v=\int_{\partial\Omega}v\cdot n\,dr$$ wwhere $r$ is positively oriented such that $n$ is the ouwards unit normal. 
+\begin{defn}{Line Integrals over a Piecewise $\mC^1$ Path}{}\\
+Let $U\subseteq\R^n$ be an open subset. Let $F:U\to\R^n$ be a function. Let $r:[a,b]\to U$ be a piecewise $\mC^1$ path whose pieces are given by $r_i:[a_i,a_{i+1}]$ for $1\leq i\leq n$. Let $C_i=\im(r_i)$. Define the line integral of $F$ along $r$ to be $$\int_CF\cdot dr=\sum_{i=1}^n\int_{C_i}F\cdot dr_i$$
 \end{defn}
 
-\begin{thm}{Divergence Theorem for a Planar Region}{} Let $v:\R^2\to\R^2$ be a continuously differentiable planar vector field. Let $\Omega$ be a region such that $\Omega\cup\partial\Omega\subset U$ and $r$ a parametrization of $\partial\Omega$. Then $$\iint_{\Omega}\nabla\cdot v\,dA=\int_{\partial\Omega}v\cdot n\,dr$$ where $r$ is positively oriented such that $n$ is the ouwards unit normal. 
+\subsection{The Fundamental Theorem of Line Integrals}
+\begin{thm}{The Fundamental Theorem of Line Integrals}{}
+Let $U\subseteq\R^n$ be an open subset. Let $f:U\to\R$ be a differentiable function. Let $r:[a,b]\to U$ be a differentiable function in $U$. Then we have $$\int_C\text{grad}(f)\cdot dr=f(r(b))-f(r(a))$$
 \end{thm}
+
+\begin{defn}{Conservative Vector Fields}{}\\
+Let $U\subseteq\R^n$ be an open subset. Let $F:U\to\R^n$ be a function. We say that $F$ is conservative if there exists a differentiable function $f:U\to\R$ such that $F=\text{grad}(f)$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $U\subseteq\R^n$ be an open subset. Let $F:U\to\R^n$ be a vector field. Then the following are equivalent. 
+\begin{itemize}
+\item $F$ is conservative. 
+\item If $r,s:[a,b]\to U$ are differentiable paths in $U$ such that $r(a)=s(a)$ and $r(b)=s(b)$, then we have $$\int_{r([a,b])}F\cdot dr=\int_{s([a,b])}F\cdot ds$$
+\item If $r:[a,b]\to U$ is a differentiable path in $U$ such that $r(a)=r(b)$, then we have $$\int_{r([a,b])}F\cdot dr=0$$
+\end{itemize}
+\end{prp}
+
+\subsection{Green's Theorem}
+\begin{defn}{Positively Oriented Regular Curves}{}\\
+Let $r:[a,b]\to\R^2$ be a simple closed regular smooth curve. Let $D\subseteq\R^2$ be a bounded subset such that $\partial D=\im(r)$. We say that $r$ is positively oriented with respect to $D$ if the following are true. For all $t\in(a,b)$, there exists $M>0$ such that $$s\begin{pmatrix}
+0 & -1\\
+1 & 0
+\end{pmatrix}r'(t)+r(t)\in D$$ for all $0\leq s<M$. 
+\end{defn}
+
+\begin{defn}{Positively Oriented Curves}{}\\
+Let $r:[a,b]\to\R^2$ be a simple closed regular smooth curve. Let $D\subseteq\R^2$ be a bounded subset such that $\partial D=\im(r)$. We say that $r$ is positively oriented with respect to $D$ if there exists an orientation preserving reparametrization $s$ of $r$ such that $s$ is regular and $s$ is regular and positively oriented with respect to $D$. 
+\end{defn}
+
+\begin{thm}{Green's Theorem on the Plane}{}\\
+Let $r:[a,b]\to\R^2$ be a piecewise-smooth simple closed curve whoses pieces are given by $r_1,\dots,r_k$. Let $D\subseteq\R^2$ be a bounded subset such that $\partial D=\im(r)$. Suppose that $r$ is positively oriented with respect to $D$. Let $U\subseteq\R^2$ be an open subset such that $D\subseteq U$. Let $F:U\to\R^2$ be a $\mC^1$-function. Then we have $$\iint_D\text{curl}(F)=\sum_{i=1}^k\int_{\im(r_i)}F\cdot dr_i$$
+\end{thm}
+
+By the Jordan Curve Theorem (proved in Algebraic Topology 2), every simple closed curve in $\R^2$ can be oriented in such a way. 
 
 \pagebreak
-
-\section{3 Dimensional Calculus}
-\subsection{Triple Integrals}
-\begin{defn}{Triple Integral}{} Let $f:\R^3\to\R$ be a function. Define the triple integral of $f$ in a region $\Omega$ to be $$\iiint_\Omega f(x,y,z)\,dx\,dy\,dz$$
+\section{Surface Integrals}
+\subsection{Parametric Surfaces}
+\begin{defn}{Parametric Surface}{}\\
+Let $S\subseteq\R^n$ be a subset. Let $r:D\to S$ be a surjective function of class $\mC^1$. We say that $S$ is a parametric surface parametrized by $r$ if the following are true. 
+\begin{itemize}
+\item There exists an open subset $D\subseteq U\subseteq\R^2$ and a function $f:U\to\R^n$ of class $\mC^1$ such that $f|_D=r$. 
+\item $\partial_{e_1}r(p)$ and $\partial_{e_2}r(p)$ are linearly independent for all $p\in D^\circ$. 
+\item $r|_{D^\circ}$ is injective. 
+\end{itemize}
+In this case we call $S$ a parametric surface. 
 \end{defn}
 
-\begin{thm}{}{}Let $R\subset\R^3$ be a region. Let $f:\R^3\to\R^3$ defined by $f(x,y,z)=\begin{pmatrix}u(x,y,z)\\v(x,y,z)\\w(x,y,z)\end{pmatrix}$ such that $f|_R$ is a bijection and $\partial f\in\mathcal{C}^1(R)$. Let $g:\R^3\to\R$. Then $$\iiint_Sg(u,v,w)\,du\,dv\,dw=\iiint_Rg(x,y,z)\abs{\partial f}\,dx\,dy\,dz$$
-\end{thm}
+Note: The general definition of a surface is that locally $S\subseteq\R^n$ looks like $\R^2$ (this appears in Introduction to Manifolds). In particular, there need not be a global parametrization of the surface. Therefore we are only considering a special kind of surfaces, although it can easily be generalized to any type of compact manifold. 
 
-\begin{thm}{Cylindrical Coordinates}{} Let $f:\R^3\to\R$. Let $E\subset\R^3$ be a region. Then $$\iiint_R f(x,y,z)\,dV=\iiint_R f(r\cos\theta,r\sin\theta,z)r\,drd\theta dz$$ with $x=r\cos(\theta)$ and $y=r\sin(\theta)$ and $z=z$
-\end{thm}
+\begin{defn}{The Boundary of a Parametric Surface}{}\\
+Let $S\subseteq\R^n$ be a parametric surface parametrized by $r:D\to S$. Define the boundary of $S$ to be $$\partial S=\left\{p\in S\;\bigg{|}\;\substack{\text{ there exists }f:U\cap S\to V\subseteq\R^2\text{ such that }p\in U\subseteq\R^n\text{ is open }\\f,f^{-1}\text{ are of class }\mC^1,f(p)=(0,0), f(U\cap S)\subseteq H^2}\right\}$$
+\end{defn}
 
-\begin{thm}{Spherical Coordinates}{} Let $f:\R^3\to\R$. Let $E\subset\R^3$ be a region. Then $$\iiint_R f(x,y,z)\,dV=\iiint_R f(r\cos\theta\sin\phi,r\sin\theta\sin\phi,r\cos\phi)r^2\sin(\phi)\,drd\theta d\phi$$ with $x=r\sin(\phi)\cos(\theta)$ and $y=r\sin(\phi)\sin(\theta)$ and $z=r\cos(\phi)$
-\end{thm}
-
-\begin{thm}{Mass}{} Consider a solid occupying a region $\Omega\subset\R^3$ with density function $\rho(x,y,z)$ Then its total mass is $$M=\iiint_\Omega\rho(x,y,z)\,dV$$
-\end{thm}
-
-\begin{thm}{Center of Mass}{} Consider a solid occupying a region $\Omega\subset\R^3$ with density function $\rho(x,y,z)$ and total mass $M$. Then $$(\bar{x},\bar{y},\bar{z})=\left(\frac{1}{M}\iiint_\Omega\rho x\,dV, \frac{1}{M}\iiint_\Omega\rho y\,dV, \frac{1}{M}\iiint_\Omega\rho z\,dV\right)$$
-\end{thm}
-
-\subsection{Surface Integrals}
-\begin{thm}{}{} Let $S$ be a surface parametrized by $\vb{r}(u,v)$. The surface area is given by $$A=\iint_{\Omega}\abs{\vb{r}_u\times\vb{r}_v}\,dudv$$ where $\Omega$ is the parameter domain. 
-\end{thm}
-
-\begin{lmm}{}{} The formula of the area of a surface given by $z=f(x,y)$ where $(x,y)\in R\subset\R^2$ is given by $$A=\iint_{R}\sqrt{1+\left(\frac{\partial f}{\partial x}\right)^2+\left(\frac{\partial f}{\partial y}\right)^2}\,dxdy$$
+\begin{lmm}{}{}\\
+Boundary of parametric surface is a curve
 \end{lmm}
+
+\begin{defn}{The Outward Pointing Unit Normal Vector}{}\\
+Let $S\subseteq\R^3$ be a parametric surface parametrized by $r=(r_1,r_2,r_3):D\to S$. Let $p\in S$ be given by $p=r(u,v)$ for some $(u,v)\in D$. Define the outward pointing unit normal vector of $S$ at $p$ to be the unique vector $n_+(p)\in\R^3$ such that the following are true. 
+\begin{itemize}
+\item $\begin{pmatrix}\det(J(r_2,r_3))\\\det(J(r_3,r_1))\\\det(J(r_1,r_2))\end{pmatrix}\cdot n_+(p)=0$. 
+\item There exists $M>0$ such that $p-\lambda n_+(p)\in S$ for all $0<\lambda<M$. 
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $S\subseteq\R^3$ be a parametric surface parametrized by $r:D\to S$. Let $(u,v)\in D$. Then we have $$n_+(r(u,v))=\pm\frac{\partial_{e_1}r(u,v)\times\partial_{e_2}r(u,v)}{\abs{\partial_{e_1}r(u,v)\times\partial_{e_2}r(u,v)}}$$
+\end{lmm}
+
+\begin{defn}{Orientation}{}\\
+Let $S\subseteq\R^3$ be a parametric surface parametrized by $r:D\to S$. We say that $S$ is orientable if the function $n_+:S\to\R^3$ is continuous. 
+\end{defn}
+
+Let $S\subseteq\R^3$ be a parametric surface parametrized by $r:D\to S$. Our definition of parametric surfaces imply that the map $$(s,t)\mapsto\frac{\partial_{e_1}r(u,v)\times\partial_{e_2}r(u,v)}{\abs{\partial_{e_1}r(u,v)\times\partial_{e_2}r(u,v)}}$$ This does not mean that every parametric surface is orientable because the definition requires that the domain of the outward normal function is $S$, not $D$. 
+
+\begin{defn}{Surface Integrals}{}\\
+Let $S\subseteq\R^3$ be a parametric surface parametrized by $r:D\to S$. Let $U\subseteq\R^3$ be an open subset such that $S\subseteq U$. Let $F:U\to\R^3$ be a function of class $\mC^1$. Define the surface integral of $F$ along $S$ to be $$\iint_S F\cdot dS=\iint_D(F\circ r)\cdot n_+$$
+\end{defn}
+
+Note the similarity with the line integral. The difference being that the tangent line $r'(t)$ in the line integral plays the role of $n_+$ in the surface integral. 
+
+\begin{defn}{}{}\\
+Piecewise smooth parametric surfaces
+\end{defn}
+
+\begin{defn}{}{}\\
+Piecewise surface integral
+\end{defn}
+
+\subsection{Stokes Theorem}
+\begin{thm}{Stokes Theorem}{}\\
+Let $S\subseteq\R^3$ be a parametric surface parametrized by $r:D\to S$. Let $U\subseteq\R^3$ be an open subset such that $S\subseteq U$. Let $F:U\to\R^3$ be a function of class $\mC^1$.Then we have $$\iint_S\text{curl}(F)\cdot dS=\int_{\partial S}F\cdot dr$$
+\end{thm}
 
 \subsection{Divergence Theorem}
-\begin{defn}{Curl}{} Let $f:U\subset\R^3\to\R^3$ be a vector field. Then the curl of $f$ is defined as $$\nabla\times f=\begin{vmatrix}
-i&j&k\\
-\frac{\partial}{\partial x}&\frac{\partial}{\partial y}&\frac{\partial}{\partial z}\\
-f_1&f_2&f_3
-\end{vmatrix}$$
-\end{defn}
-
-\begin{prp}{}{} If $v:U\subseteq\R^3\to\R^3$ is a conservative vector field with continuous partial derivatives on $U$, then $$\text{curl}(v)=0$$
-\end{prp}
-
-\begin{defn}{Flux of a Surface}{} Let $v:\R^3\to\R^3$ be a vector field. Let $\Omega\subset\R^3$ be a volume. Define the flux of $v$ across $\Omega$ to be $$\text{flux of }v=\iint_{\partial\Omega}v\cdot n\,dA$$ where $n$ is the outward pointing normal. 
-\end{defn}
-
-\begin{lmm}{Practical Definition of Flux}{} Let $\vb{v}:\R^3\to\R^3$. Let $\Omega\subset\R^3$. Let $r:\R^2\to\R^3$ parameterize the surface $\partial\Omega$. Then $$\iint_{\partial\Omega}v\cdot n\,dA=\iint_{\partial\Omega}\vb{v}(r(u,v))\cdot\left(\frac{\partial r}{\partial u}\times\frac{\partial r}{\partial v}\right)\,dudv$$
-\end{lmm}
-
-\begin{thm}{The Divergence Theorem}{} Let $v:U\subset\R^3\to\R^3$ be a $\mathcal{C}^1$ vector field. Let $\Omega$ be a region in $\R^3$ with $\partial\Omega$ parametrized by $r$ such that $\Omega\cup\partial\Omega\subset U$. Then $$\iiint_\Omega\nabla\cdot v\,dV=\iint_{\partial\Omega} v\cdot n\,dA$$ where $r$ is positively oriented such that $n$ is the ouwards unit normal. 
-\end{thm}
-
-\subsection{Stoke's Theorem}
-\begin{defn}{Pointwise Circulation}{} Let $\vb{F}(x,y,z)$ give the velocity of a fluid. The pointwise circulation of $\vb{F}$ is given by $$\nabla\times\vb{F}\cdot\hat{n}$$
-\end{defn}
-
-\begin{thm}{Net Circulation}{} The net circulation over a surface $S$ is given by $$\iint_S\nabla\times\vb{F}\cdot\hat{n}\,dS$$
-\end{thm}
-
-\begin{thm}{Stoke's Theorem}{} Let $\vb{F}(x,y,z)$ be a vector field. Let $S$ be a surface with unit normal $\hat{n}$ and boundary curve $C$, oriented according to the right hand rule. Then $$\iint_S\nabla\times\vb{F}\cdot\hat{n}\,dS=\int_C\vb{F}\cdot\,d\vb{r}$$
+\begin{thm}{Divergence Theorem}{}\\
+Let $\Omega\subseteq\R^3$ be a closed subset such that $\partial\Omega$ is a piecewise smooth parametric surface. Let $U\subseteq\R^3$ be an open subset such that $V\subseteq U$. Let $F:U\to\R^3$ be a function of class $\mC^1$. Then we have $$\iiint_\Omega\text{div}(F)=	\iint_{\partial\Omega}F\cdot d(\partial\Omega)$$
 \end{thm}
 
 \end{document}

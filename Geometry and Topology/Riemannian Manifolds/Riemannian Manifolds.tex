@@ -62,7 +62,7 @@ In general, not every Riemannian manifold is flat. This can be shown once we dis
 \begin{lmm}{}{} Every 1 dimensional Riemannian manifold is flat. 
 \end{lmm}
 
-\subsection{Lengths, Angles and Volumes}
+\subsection{Lengths and Angles}
 \begin{defn}{Length of a Tangent Vector}{} Let $(M,g)$ be a Riemannian manifold. Let $v\in T_p(M)$ be a tangent vector for $p\in M$. Define the length of $v$ to be $$\abs{v}_g=\sqrt{g_p(v,v)}$$
 \end{defn}
 
@@ -76,10 +76,6 @@ In general, not every Riemannian manifold is flat. This can be shown once we dis
 \end{defn}
 
 \begin{defn}{Angle between two Curves}{} Let $(M,g)$ be a Riemannian manifold. Let $\gamma_1:(a,b)\to M$ and $\gamma_2:(c,d)\to M$ be two curves that intersecting at $p=\gamma_1(t_1)=\gamma_2(t_2)\in M$ and that $\gamma_1'(t_1)\neq 0$ and $\gamma_2'(t)\neq 0$. Define the angle between $\gamma_1$ and $\gamma_2$ at $p$ to be the unique $\theta\in[0,\pi]$ such that $$\cos(\theta)=\frac{g_p(X_{\gamma_1,p},X_{\gamma_2,p})}{\abs{X_{\gamma_1,p}}_g\abs{X_{\gamma_2,p}}_g}$$
-\end{defn}
-
-\begin{defn}{}{}\\
-Let $(M,g)$ be an orientable Riemannian manifold. Let $p\in M$. Let $(U,x^1,\dots,x^n)$ be a chart around $p$. Define the volume form $\text{Vol}(M)$ of $M$ to be given locally on the chart by $$\text{Vol}_p=\sqrt{\abs{g_p}}dx^1|_p\wedge\cdots\wedge dx^n|_p$$
 \end{defn}
 
 \subsection{Musical Isomorphism}
@@ -100,6 +96,82 @@ In other words, a bundle metric is an assignment to each fibre, an inner product
 
 \begin{prp}{}{} Let $M$ be a smooth manifold. Then a Riemannian metric give rise to a bundle metric on $TM$. A bundle metric on $TM$ gives rise to a Riemannian metric. 
 \end{prp}
+
+\pagebreak
+\section{Calculus on Manifolds}
+\subsection{Integration of Functions on Riemannian Manifolds}
+\begin{defn}{The Riemannian Volume Form}{}\\
+Let $(M,g)$ be an orientable Riemannian manifold. Define the volume form $dV$ of $M$ to be given locally at $p\in M$ on the chart $(U,x^1,\dots,x^n)$ by $$dV_p=\sqrt{\abs{g_p}}dx^1|_p\wedge\cdots\wedge dx^n|_p$$
+\end{defn}
+
+\subsection{Differential Operators}
+\begin{defn}{The Gradient of a Function}{}
+\end{defn}
+
+\begin{defn}{The Divergence of a Vector Field}{}
+\end{defn}
+
+\begin{defn}{The $\beta$-Operator}{}
+\end{defn}
+
+\begin{defn}{The Curl of a Vector Field}{}
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $(M,g)$ be an oriented smooth manifold of dimension $3$. Then the following diagram is commutative: \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\mC^\infty(M)} & {\mathfrak{X}(M)} & {\mathfrak{X}(M)} & {\mC^\infty(M)} \\
+	{\Omega^0(M)} & {\Omega^1(M)} & {\Omega^2(M)} & {\Omega^3(M)}
+	\arrow["{\text{grad}}", from=1-1, to=1-2]
+	\arrow["{\text{id}}"', from=1-1, to=2-1]
+	\arrow["{\text{curl}}", from=1-2, to=1-3]
+	\arrow["\flat"', from=1-2, to=2-2]
+	\arrow["{\text{div}}", from=1-3, to=1-4]
+	\arrow["\beta", from=1-3, to=2-3]
+	\arrow["\flat", from=1-4, to=2-4]
+	\arrow["d"', from=2-1, to=2-2]
+	\arrow["d"', from=2-2, to=2-3]
+	\arrow["d"', from=2-3, to=2-4]
+\end{tikzcd}}\\
+\end{prp}
+
+\begin{defn}{The Laplacian of a Function}{}
+\end{defn}
+
+\subsection{Calculus on Manifolds}
+Let $M$ be an oriented smooth manifold of dimension $n$. let $p\in\partial M$. Then $T_p(\partial M)$ is an $(n-1)$-dimensional vector subspace of $T_p(M)$. Recall that a boundary chart of $M$ at $p\in M$ is a chart $(U,\phi)$ such that the following are true. 
+\begin{itemize}
+\item $\phi(U)\subseteq\{(x_1,\dots,x_n)\in\R^n\;|\;x_n\geq 0\}$. 
+\item $\phi^{-1}(\{(x_1,\dots,x_n)\in\R^n\;|\;x_n=0\})\subseteq\partial M$. 
+\item $\phi(p)=0$. 
+\end{itemize}
+
+\begin{defn}{Unit Normal Vectors}{}\\
+Let $(M,g)$ be a Riemannian manifold of dimension $n$ with boundary. Let $p\in\partial M$. Define the normal vector $n(p)$ of $p$ to be the unique vector in $T_p(M)$ such that the following are true. 
+\begin{itemize}
+\item $n(p)$ is normal to the hyperplane $T_p(\partial M)$ in $T_p(M)$ with respect to the inner product $g_p$. 
+\item $n(p)$ is a unit vector. 
+\item Choose a boundary chart $(U,\phi)$ at $p$. Denote $(\phi_\ast)_p:T_p(M)\to T_{\phi(p)}(\R^n)$ the differential of $\phi$. Then $n$th coordinate of $(\phi_\ast)_p(n_p)$ is less than $0$ under the standard basis of $T_{\phi(p)}(\R^n)$. 
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $(M,g)$ be a Riemannian manifold of dimension $n$ with boundary. If $M$ is orientable, then the assignment $p\mapsto n(p)$ is a smooth map from $\partial M$ to $TM$. 
+\end{lmm}
+
+\begin{thm}{The Gradient Theorem}{}\\
+Let $M\subseteq\R^n$ be a smooth compact connected $1$-dimensional manifold. Let $r:[a,b]\to M$ be a smooth curve such that $\im(r)=M$. Let $f\in\mC^\infty(M)$ be a smooth function. Then we have $$\int_M\nabla f=f(r(b))-f(r(a))$$
+\end{thm}
+
+\begin{thm}{The Divergence Theorem}{}\\
+Let $M\subseteq\R^n$ be a smooth compact manifold of dimension $n$ with boundary. Let $F:M\to\R^n$ be a smooth function. Then we have $$\int_M\text{div}(F)=\int_{\partial M}F\cdot n(x)$$ where both integrals are Riemann integrals. 
+\end{thm}
+
+\begin{thm}{}{}
+\end{thm}
+
+\pagebreak
+\section{The Hodge Star Operator}
 
 \pagebreak
 \section{Connections and Parallel Transports}

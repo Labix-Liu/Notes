@@ -894,7 +894,7 @@ Explicitly, the vector space operations are defined as follows.
 \begin{defn}{The Double Dual}{} Let $V$ be a vector space over a field $\F$. Define the double dual of $V$ to be the vector space $$V^{\ast\ast}=\Hom(\Hom(V,\F),\F)$$
 \end{defn}
 
-\begin{thm}{}{} Let $V$ be a vector space over a field $k$. Define the function $\text{ev}_V:V\to V^{\ast\ast}$ by $$\text{ev}(v)=\left(\substack{E_v:V^\ast\to\R\\f\mapsto f(v)}\right)$$ Then $\text{ev}$ is an injective linear transformation. Moreover $\text{ev}_V$ is natural in the following sense. If $W$ is another vector space over $k$ and $\phi:V\to W$ is a linear map, then the following diagram commutes: \\
+\begin{prp}{}{} Let $V$ be a vector space over a field $k$. Define the function $\text{ev}_V:V\to V^{\ast\ast}$ by $$\text{ev}(v)=\left(\substack{E_v:V^\ast\to\R\\f\mapsto f(v)}\right)$$ Then $\text{ev}$ is an injective linear transformation. Moreover $\text{ev}_V$ is natural in the following sense. If $W$ is another vector space over $k$ and $\phi:V\to W$ is a linear map, then the following diagram commutes: \\
 \adjustbox{scale=1,center}{\begin{tikzcd}
 	V & W \\
 	{V^{\ast\ast}} & {W^{\ast\ast}}
@@ -903,12 +903,14 @@ Explicitly, the vector space operations are defined as follows.
 	\arrow["{\text{ev}_W}", from=1-2, to=2-2]
 	\arrow["{\phi^{\ast\ast}}"', from=2-1, to=2-2]
 \end{tikzcd}}\\
-\end{thm}
+\end{prp}
 
-\begin{lmm}{}{} Let $V$ be a vector space over a field. Then the map $$\text{ev}:V\to V^{\ast\ast}$$ is an isomorphism. 
-\end{lmm}
-
-\subsection{Perfect Pairings}
+\begin{crl}{}{}
+Let $V$ be a vector space over a field. If $V$ is finite dimensional , then the map $$\text{ev}:V\to V^{\ast\ast}$$ is an isomorphism. 
+\begin{proof}\\
+Follows from the above since $\text{ev}$ is injective. 
+\end{proof}
+\end{crl}
 
 \pagebreak
 \section{Linearity in Two Variables}
@@ -1019,27 +1021,23 @@ In general, this result of diagonalization is different from that of similar mat
 \end{itemize}
 \end{defn}
 
-\begin{defn}{Matrix Representing Bilinear Forms}{} Let $\F$ be a field. Let $V,W$ be finite dimensional vector spaces over $\F$. Let $E$ be a basis of $V$ and let $F$ be a basis of $W$. Let $\tau:V\times W\to\F$ be a bilinear map. Define the matrix representing $\tau$ under the basis $E$ and $F$ to be $$A=\begin{pmatrix}
+\begin{defn}{Matrix Representing Bilinear Forms}{}\\
+Let $\F$ be a field. Let $V,W$ be finite dimensional vector spaces over $\F$. Let $E$ be a basis of $V$ and let $F$ be a basis of $W$. Let $\tau:V\times W\to\F$ be a bilinear map. Define the matrix representing $\tau$ under the basis $E$ and $F$ to be $$[\tau]_{E,F}=\begin{pmatrix}
 \tau(e_1,f_1) & \cdots & \tau(e_1,f_m)\\
 \vdots & \ddots & \vdots\\
 \tau(e_n,f_1) & \cdots & \tau(e_n,f_m)
 \end{pmatrix}$$
 \end{defn}
 
-\begin{prp}{}{} Let $\F$ be a field. Let $V,W$ be finite dimensional vector spaces over $\F$. Let $E$ be a basis of $V$ and let $F$ be a basis of $W$. Let $\tau:V\times W\to\F$ be a bilinear map. Let $A$ be the matrix representing $\tau$ under the given bases. Then for any $v\in V$ and $w\in W$, we have $$\tau(v,w)=v^TAw$$ 
+\begin{prp}{}{}\\
+Let $\F$ be a field. Let $V,W$ be finite dimensional vector spaces over $\F$. Let $E$ be a basis of $V$ and let $F$ be a basis of $W$. Let $\tau:V\times W\to\F$ be a bilinear map. Then for any $v\in V$ and $w\in W$, we have $$\tau(v,w)=v^T[\tau]_{E,F}w$$ 
 \begin{proof}
 Simple to see by expanding the matrix multiplication. 
 \end{proof}
 \end{prp}
 
-\begin{prp}{}{} Let $V,W$ be vector spaces over $\F$. Let $\tau:V\times W\to\F$ be a bilinear map. Consider the following data. 
-\begin{itemize}
-\item Let $A\in M_{n\times m}(\F)$ represent $\tau$ with the bases $E$ of $V$ and $F$ of $W$ respectively. 
-\item Let $B\in M_{n\times m}(\F)$ represent $\tau$ with the bases $E'$ of $W$ and $F'$ of $W$ respectively
-\item Let $P\in GL(n,\F)$ be the change of basis matrix from $E$ to $E'$
-\item Let $Q\in GL(m,\F)$ be the change of basis matrix from $F$ to $F'$
-\end{itemize}
-Then we have that $$B=P^TAQ$$
+\begin{prp}{}{}\\
+Let $\F$ be a field. Let $V,W$ be finite dimensional vector spaces over $\F$. Let $E,E'$ be bases of $V$ and let $F,F'$ be bases of $W$. Then we have $$[\tau]_{E',F'}=(C_E^{E'})^T[\tau]_{E,F}C_F^{F'}$$
 \end{prp}
 
 \begin{defn}{Bilinear Forms}{} Let $V$ be a vector space over a field $\F$. A bilinear form on $V$ is a bilinear map $$\tau:V\times V\to\F$$
@@ -1093,6 +1091,24 @@ Let $q:V\to K$ be a function.
 \item $(3)\implies (1)$: If $\tau(v,v)$ is a symmetric bilinear form then the matrix of $\tau$ is symmetric since $a_{ij}=\tau(e_i,f_j)=\tau(f_j,e_i)=a_{ji}$. Thus $q(v)=\tau(v,v)$ defines a quadratic form. 
 \end{itemize}
 \end{proof}
+\end{prp}
+
+\subsection{Perfect Pairings}
+\begin{defn}{Perfect Pairings}{}\\
+Let $k$ be a field. Let $V,W$ be vector spaces over $k$. Let $\tau:V\times W\to k$ be a bilinear map. We say that $\tau$ is a perfect pairing if the following are true. 
+\begin{itemize}
+\item The map $V\to W^\ast$ given by $v\mapsto\tau(v,-)$ is an isomorphism. 
+\item The map $W\to V^\ast$ given by $w\mapsto\tau(-,w)$ is an isomorphism. 
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $V,W$ be finite dimensional vector spaces over $k$. Let $\tau:V\times W\to k$ be a bilinear map. Then the following are equivalent. 
+\begin{itemize}
+\item $\tau$ is a perfect pairing. 
+\item The map $V\to W^\ast$ given by $v\mapsto\tau(v,-)$ is an isomorphism. 
+\item The map $W\to V^\ast$ given by $w\mapsto\tau(-,w)$ is an isomorphism. 
+\end{itemize}
 \end{prp}
 
 \subsection{Sesquilinear Forms}

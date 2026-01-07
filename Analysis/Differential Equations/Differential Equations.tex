@@ -1,6 +1,6 @@
 \documentclass[a4paper]{article}
 
-\input{C:/Users/liula/Desktop/Latex/Headers.tex}
+\input{C:/Users/liula/Desktop/Latex/Headers/Headers.tex}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -20,6 +20,49 @@ These notes will act as a an introductory text with a collection of theorems and
 \end{abstract}
 \tableofcontents
 \pagebreak
+
+\pagebreak
+\section{}
+\subsection{}
+\begin{defn}{Partial Differential Equations}{}\\
+Let $U\subseteq\R^n$ be an open subset. A partial differential equation on $U$ is an equation of the form $$F(x,u(x),Du(x),\dots,D^ku(x))=0$$ where $u:U\to\R$ is a $\mC^k$-function and $F:U\times\R\times\R^n\times\cdots\times\R^{n^k}$ is a function. 
+\end{defn}
+
+\begin{defn}{Linear Types of Partial Differential Equations}{}\\
+Let $U\subseteq\R^n$ be an open subset. Let $u:U\to\R$ be a $\mC^k$-function. Let $F:U\times\R\times\R^n\times\cdots\times\R^{n^k}$ be a partial differential equation on $u$. 
+\begin{itemize}
+\item We say that $F$ is linear if $F$ is of the form $$F=\sum_{i=0}^kp_iD^iu-f$$ where $p_i:U\to\R$ for $0\leq i\leq k$ and $f$ are functions. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Homogeneous Partial Differential Equations}{}\\
+Let $U\subseteq\R^n$ be an open subset. Let $u:U\to\R$ be a $\mC^k$-function. Let $F:U\times\R\times\R^n\times\cdots\times\R^{n^k}$ be a partial differential equation on $u$. We say that $F$ is homogeneous if 
+\end{defn}
+
+\pagebreak
+\section{Four Important Linear Partial Differential Equations}
+\subsection{Transport Equation}
+\begin{defn}{Linear Transport Equation}{}\\
+Define the transport equation to be the partial differential equation $$\frac{\partial u}{\partial t}+b\cdot\left(\frac{\partial u}{\partial x_1},\dots,\frac{\partial u}{\partial x_n}\right)=f$$ for some $b\in\R^n$ and some function $f:\R^n\times(0,\infty)\to\R$, and $u:\R^n\times(0,\infty)\to\R$ is the solution where we use the convention $u=u(x_1,\dots,x_n,t)$. 
+\end{defn}
+
+\begin{defn}{The Initial Value Problem for Linear Transport Equations}{}\\
+The initial value problem for the linear transport equation consists of finding a function $u:\R^n\times(0,\infty)\to\R$ such that the following are true. 
+\begin{itemize}
+\item $u$ is the solution to the transport equation: $$\frac{\partial u(x,t)}{\partial t}+b\cdot\left(\frac{\partial u(x,t)}{\partial x_1},\dots,\frac{\partial u(x,t)}{\partial x_n}\right)=f(x,t)$$ for some $b\in\R^n$ and some function $f:\R^n\times(0,\infty)\to\R$. 
+\item $u(-,0)=g$. 
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $b\in\R^n$. Let $f:\R^n\times(0,\infty)\to\R$ be an integrable function. Let $g:\R^n\to\R$ be a function. Then the function $u:\R^n\times(0,\infty)\to\R$ defined by $$u(x,t)=g(x-tb)+\int_0^tf(x+(s-t)b,s)\;ds$$ is a solution to the initial value problem for linear transport equations. 
+\end{prp}
+
+\subsection{Wave Equation}
+
+\subsection{Heat Equation}
+
+\subsection{Laplace's Equation}
 
 \section{Introduction to Differential Equations}
 \subsection{Classification}
@@ -243,45 +286,6 @@ a_{n1} & \cdots & a_{nn}
 \item $A$ is hyperbolic for $x\in U$ if $A$ has $d-1$ eigenvalues of the same sign and one eigenvalue of the opposite sign
 \item $A$ is parabolic for $x\in U$ if one eigenvalue is $0$ and the other $d-1$ have the same sign
 \end{itemize}
-\end{defn}
-
-\pagebreak
-\section{Partial Differential Equations: Transport Equation}
-\subsection{Homogenous Transport Equation}
-\begin{defn}{Transport Equation}{} The transport equation is the equation $$\partial_tu(x,t)+v(x,t)\partial_xu(x,t)=0$$ or $$\frac{\partial u}{\partial t}(x,t)+v(x,t)\frac{\partial u}{\partial x}(x,t)=0$$
-\end{defn}
-
-\begin{defn}{Characteristics}{} The characteristic is the fucntion $\xi(t)$ satisfying the ODE $$\xi'(t)=v(\xi(t),t)$$ where $\xi(0)=x_0\in\R$. 
-\end{defn}
-
-\begin{prp}{}{} The solution to the transport equation is constant along the characteristics curve. \tcbline\begin{proof} We have that letting the position $x$ depends on $t$, meaning $x=\xi(t)$,
-\begin{align*}
-\frac{d}{dt}u(\xi(t),t)&=\partial_xu(\xi(t),t)\xi'(t)+\partial_tu(x,t)\\
-&=\partial_xu(\xi(t),t)v(x,t)+\partial_u(x,t)\\
-&=0
-\end{align*}
-Thus $u$ is constant along the characteristics. 
-\end{proof}
-\end{prp}
-
-\subsection{Inhomogenous Transport Equation}
-\begin{defn}{Transport Equation with Source}{} The transport equation with source term is the equation $$\partial_tu(x,t)+v(x,t)\partial_xu(x,t)=s(u)$$ or $$\frac{\partial u}{\partial t}(x,t)+v(x,t)\frac{\partial u}{\partial x}(x,t)=s(u)$$
-\end{defn}
-
-\begin{prp}{}{} Given the characteristic function $\xi(t)$, the transport equation with source amounts to solving the differential equation $$\frac{d}{dt}u(\xi(t),t)=s(\xi(t),t,u(\xi(t),t))$$ with given initial conditions. \tcbline
-\begin{proof}
-If $u(x,t)=u(\xi(t),t)$, then 
-\begin{align*}
-\frac{d}{dt}u(\xi(t),t)&=\xi'(t)\partial_xu(\xi(t),t)+\partial_tu(\xi(t),t)\\
-&=v(\xi(t),t)\partial_xu(\xi(t),t)+\partial_tu(\xi(t),t)\\
-&=s(\xi(t),t,u(\xi(t),t))
-\end{align*}
-thus we are done. 
-\end{proof}
-\end{prp}
-
-\subsection{Non-Linear Transpot Equation}
-\begin{defn}{Non-Linear Transport Equation}{} The non-linear transport equation is the equation $$\partial_tu(x,t)+v(u)\partial_xu(x,t)=0$$ or $$\frac{\partial u}{\partial t}(x,t)+v(u)\frac{\partial u}{\partial x}(x,t)=0$$ The difference being that $v$ is now a function of $u$. 
 \end{defn}
 
 \pagebreak
