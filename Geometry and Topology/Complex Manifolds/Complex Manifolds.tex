@@ -415,20 +415,6 @@ Let $M$ be a compact complex manifold. Then $H^{0,0}(M)=\C$.
 Let $M$ be a complex manifold. Then $H^{0,q}(M)=0$ for all $q>\dim(M)$. 
 \end{lmm}
 
-\begin{thm}{Serre Duality}{}\\
-Let $M$ be a compact complex manifold. Then we have $$H^{p,q}(M)\cong H^{\dim(X)-p,\dim(X)-q}(M)$$
-\end{thm}
-
-\subsection{Hodge's Theorem}
-
-\begin{crl}{}{}\\
-Let $M$ be a compact connected complex manifold. Then the following are true. 
-\begin{itemize}
-\item $H^{p,q}(M)$ is finite dimensional over $\C$. 
-\item $H^{\dim(M),\dim(M)}=1$. 
-\end{itemize}
-\end{crl}
-
 \subsection{Orientability}
 \begin{prp}{}{}\\
 Let $M$ be a complex manifold. Then $M$ is orientable. 
@@ -443,7 +429,7 @@ Let $M,N$ be complex manifolds. Let $f:M\to N$ be a holomorphic map. Then $f$ pr
 \section{Hermitian Manifolds}
 \subsection{Hermitian Metric}
 \begin{defn}{Hermitian Metric on a Vector Bundle}{}\\
-Let $M$ be a smooth manifold. Let $p:E\to M$ be a complex vector bundle. A Hermitian metric on $M$ is a smooth section $g\in\Gamma(M,(E\otimes\overline{E})^\ast)$ such that $g_p:E_p\times E_p\to\R$ is a Hermitian inner product for all $p\in M$. 
+Let $M$ be a smooth manifold. Let $p:E\to M$ be a complex vector bundle. A Hermitian metric on $M$ is a smooth section $h\in\Gamma(M,(E\otimes\overline{E})^\ast)$ such that $h_p:E_p\times E_p\to\R$ is a Hermitian inner product for all $p\in M$. 
 \end{defn}
 
 Equivalently, a Hermitian metric is an assignment $p\mapsto\langle-,-\rangle_p$ such that for any smooth sections $s,t\in\Gamma(M,E)$, the map $p\mapsto\langle s(p),t(p)\rangle_p$ is smooth. 
@@ -520,132 +506,113 @@ Let $M$ be a complex manifold whose associated almost complex structure is given
 \end{itemize}
 \end{prp}
 
-\pagebreak
-\section{Hodge Theory}
-\subsection{Hodge Theory for Smooth Manifolds}
-Let $V$ be a finite dimensional inner product over $\R$. The inner product induces an inner product on $\Lambda^k(V)$ given by $$\langle\alpha_{i_1}\wedge\cdots\wedge\alpha_{i_k},\beta_{j_1}\wedge\cdots\wedge\beta_{j_k}\rangle=\det\begin{pmatrix}
-\langle\alpha_{i_1},\beta_{j_1}\rangle & \cdots & \langle\alpha_{i_1}\wedge\beta_{j_k}\rangle\\
-\vdots & \ddots & \vdots\\
-\langle\alpha_{i_k},\beta_{j_1}\rangle & \cdots & \langle\alpha_{i_k}\wedge\beta_{j_k}\rangle
-\end{pmatrix}$$
-
-\begin{defn}{The $L^2$-Norm}{}\\
-Let $(M,g)$ be an orientable Riemmanian manifold. Let $\alpha,\beta\in\Omega^k(M)$ be differential forms of compact support. Define the $L^2$ norm on $M$ to be $$\langle\alpha,\beta\rangle_{L^2}=\int_M\langle\alpha,\beta\rangle\text{Vol}$$ where $\langle-,-\rangle$ is the induced metric on $\Omega^k(M)$ by $g$. 
-\end{defn}
-
-\begin{lmm}{}{}\\
-Let $(M,g)$ be an orientable Riemmanian manifold. Then $\langle-,-\rangle_{L^2}$ defines a norm on the vector space of compactly supported differential forms on $M$. 
-\end{lmm}
-
-\begin{defn}{The Hodge Star Operator}{}\\
-Let $(M,g)$ be an orientable Riemannian manifold. Let $n=\dim(M)$. 
-\begin{itemize}
-\item Let $p\in M$. Define $\ast_p:\Lambda^kT_p^\ast(M)\to\Lambda^{n-k}T_p^\ast(M)$ to be the unique $\C$-linear isomorphism such that $$\alpha\wedge(\ast_p\beta)=\langle\alpha,\beta\rangle_p\text{Vol}_p$$ where $\alpha,\beta\in\Lambda^kT_p^\ast(M)$ and $\text{Vol}$ is the volume form of $M$ associated to $g$, and $\langle-,-\rangle_p$ is the induced metric on $\Lambda^k(T_p^\ast(M))$. 
-\item Define the Hodge star operator of $M$ to be the map $$\ast\in\Gamma(M,\Hom(\Omega^k(M),\Omega^{n-k}(M)))$$ given by $p\mapsto\ast_p$. 
-\end{itemize}
-\end{defn}
-
-\begin{lmm}{}{}\\
-Let $(M,g)$ be an orientable Riemannian manifold. Then we have $$\ast^2=(-1)^{k(n-k)}$$ on $\Omega^k(M)$. 
-\end{lmm}
-
-\begin{lmm}{}{}\\
-Let $(M,g)$ be an orientable Riemmanian manifold. Let $\alpha,\beta\in\Omega^k(M)$ be differential forms. Then we have $$\langle\alpha,\beta\rangle_{L^2}=\int_M\alpha\wedge\ast\beta$$
-\end{lmm}
-
-\begin{defn}{Adjoint Differential Operator}{}\\
-Let $(M,g)$ be an orientable Riemannian manifold. Define the operator $d^\ast:\Omega^{k+1}(M)\to\Omega^k(M)$ by $$d^\ast=(-1)^k(\ast^{-1}\circ d\circ\ast)$$
-\end{defn}
-
-\begin{lmm}{}{}\\
-Let $(M,g)$ be an orientable Riemannian manifold. Then we have $$d^\ast=(-1)^{n(k+1)+1}(\ast\circ d\circ\ast)$$
-\end{lmm}
-
 \begin{prp}{}{}\\
-Let $(M,g)$ be an orientable Riemannian manifold. Let $\alpha\in\Omega^k(M)$ and $\beta\in\Omega^{k+1}(M)$ be differential forms with compact support. Then we have $$\langle\alpha,d^\ast\beta\rangle_{L^2}=\langle d\alpha,\beta\rangle_{L^2}$$
+Let $(M,h)$ be a complex Hermitian manifold. Let $\omega$ be its associated $2$-form. Then the volume form of $M$ is given by $$dV=\frac{1}{n!}\omega^n$$
 \end{prp}
 
-\begin{defn}{The Laplace-Beltrami Operator}{}\\
-Let $M$ be an orientable Riemannian manifold. Define the Laplace-Beltrami operator on $M$ to be the map $\Delta:\Omega^k(M)\to\Omega^k(M)$ given by $$\Delta=d^\ast\circ d+d\circ d^\ast$$
-\end{defn}
+\pagebreak
+\section{Complex Hodge Theory}
+Let $(M,h)$ be a (almost) complex manifold. Then $M$ is necessarily an orientable Riemannian manifold as seen above. Therefore Hodge theory applies to $M$. In particular, if $d$ is the exterior derivative of $M$, then there is an isomorphism $$\mH^k(M)\cong H_\text{dR}^k(M)$$ where the left hand side is the space of Harmonic $k$-forms on $M$. \\
 
-\begin{lmm}{}{}\\
-Let $M$ be an orientable Riemannian manifold. Then the following are true regarding the Laplace-Beltrami operator. 
+However, since $M$ is (almost) complex, the exterior derivative splits into its holomorphic $\partial$ and its antiholomorphic $\overline{\partial}$ counterpart, and so does the cohomology groups. In this section we will show that Hodge theory for $\overline{\partial}$ also holds true. 
+
+\subsection{Complex Properties of the Hodge Star Operator}
+\begin{prp}{}{}\\
+Let $(M,h)$ be a complex Hermitian manifold. Let $n=\dim(M)$. Then the following are true. 
 \begin{itemize}
-\item $\ast\circ\Delta=\Delta\circ\ast$. 
-\item $\langle\Delta\alpha,\beta\rangle_{L^2}=\langle\alpha,\Delta\beta\rangle_{L^2}$ for any compactly supported differential forms $\alpha,\beta\in\Omega^k(M)$. 
+\item $\ast\omega\in\Omega^{(n-p,n-q)}$ for any $\omega\in\Omega^{p,q}(M)$. 
+\item For any $\phi,\psi\in\Omega^{p,q}(M)$, we have $$\langle\phi,\psi\rangle_{L^2}dV=\phi\wedge\ast\psi$$
+\item For any $\psi\in\Omega^{(p,q)}(M)$, we have $\ast\ast\phi=(-1)^{p+q}\psi$. 
 \end{itemize}
-\end{lmm}
+\end{prp}
 
-\begin{defn}{Harmonic Forms}{}\\
-Let $M$ be an orientable Riemannian manifold. Let $\alpha\in\Omega^k(M)$. We say that $\alpha$ is harmonic if $\alpha\in\ker(\Delta)$. 
+\subsection{The Antiholomorphic Adjoint Differential Operator}
+\begin{defn}{The Adjoint of $\overline{\partial}$}{}\\
+Let $(M,h)$ be a complex Hermitian manifold. Define the operator $\overline{\partial}^\ast:\Omega^{p,q}(M)\to\Omega^{p,q-1}(M)$ to be the operator such that $$\langle\overline{\partial}^\ast\omega,\eta\rangle_{L^2}=\langle\omega,\overline{\partial}\eta\rangle_{L^2}$$ for all $\omega\in\Omega^{p,q}(M)$ and $\eta\in\Omega^{p,q-1}(M)$. 
 \end{defn}
 
-\begin{lmm}{}{}\\
-Let $M$ be an orientable Riemannian manifold. Let $\alpha\in\Omega^k(M)$. Then $\alpha$ is harmonic if and only if $d(\alpha)=0$ and $d^\ast(\alpha)=0$. 
-\end{lmm}
-
-\begin{defn}{The Space of Harmonic Forms}{}\\
-Let $M$ be an orientable Riemannian manifold. Define the space of harmonic $k$-forms to be $$\mH^k(M)=\ker(\Delta)$$
-\end{defn}
-
-\begin{thm}{Hodge Theorem}{}\\
-Let $M$ be an compact orientable Riemannian manifold. Then the following are true. 
+\begin{prp}{}{}\\
+Let $(M,h)$ be a complex Hermitian manifold. Then the following are true. 
 \begin{itemize}
-\item $\mH^k$ is finite dimensional for all $k\in\N$. 
-\item There is a decomposition $$\Omega^k(M)\cong\mH^k(M)\oplus\im(\Delta)$$
+\item $\overline{\partial}^\ast=-\ast\overline{\partial}\ast$. 
+\item $\overline{\partial}^\ast\circ\overline{\partial}^\ast=0$. 
+\end{itemize}
+\end{prp}
+
+\begin{defn}{The Complex Laplacian Operator}{}\\
+Let $(M,h)$ be a complex Hermitian manifold. Define the complex Laplacian operator to be the map $\Delta_{\overline{\partial}}:\Omega^{p,q}(M)\to\Omega^{p,q}(M)$ by $$\Delta_{\overline{\partial}}=\overline{\partial}\circ\overline{\partial}^\ast+\overline{\partial}^\ast\circ\overline{\partial}$$
+\end{defn}
+
+\begin{defn}{Complex Harmonic Forms}{}\\
+Let $M$ be a complex Hermitian manifold. Let $\omega\in\Omega^{p,q}(M)$ be a differential form. We say that $\omega$ is harmonic if $\omega\in\ker(\Delta_{\overline{\partial}})$. 
+\end{defn}
+
+\begin{defn}{Space of Harmonic Forms}{}\\
+Let $M$ be a complex Hermitian manifold. Define the space of harmonic $(p,q)$-forms to be $$\mH^{p,q}(M)=\ker(\Delta_{\overline{\partial}})$$
+\end{defn}
+
+\begin{thm}{Complex Hodge Theorem}{}\\
+Let $M$ be a complact complex Hermitian manifold. Then the following are true. 
+\begin{itemize}
+\item $\mH^{p,q}(M)$ is finite dimensional for all $p,q\in\N$. 
+\item There is a decomposition $$\Omega^{p,q}(M)\cong\mH^{p,q}(M)\oplus\overline{\partial}(\Omega^{p,q-1}(M))\oplus\overline{\partial}^\ast(\Omega^{p,q+1}(M))$$
 \end{itemize}
 \end{thm}
 
 \begin{crl}{}{}\\
-Let $M$ be an orientable Riemannian manifold. Then the quotient map induces an isomorphism $$\mH^k(M)\cong H_\text{dR}^k(M)$$ for all $k\in\N$. 
+Let $M$ be a compact complex Hermitian manifold. Then the quotient map induces an isomorphism $$\mH^{p,q}(M)\cong H^{p,q}(M)$$
 \end{crl}
 
-\subsection{Hodge Star Operator for Complex Manifolds}
-\begin{defn}{The Hodge Star Operator}{}\\
-Let $(M,h)$ be a complex Hermitian manifold. Let $n=\dim(M)$. 
-\begin{itemize}
-\item Let $p\in M$. Define $\ast_p:\Lambda^kT_p^\ast(M)\to\Lambda^{n-k}T_p^\ast(M)$ to be the unique $\C$-linear isomorphism such that $$\alpha\wedge\overline{\ast_p\beta}=\langle\alpha,\beta\rangle_p\text{Vol}_p=\det\begin{pmatrix}
-h_p(\alpha_{i_1},\beta_{j_1}) & \cdots & h_p(\alpha_{i_1}\wedge\beta_{j_k})\\
-\vdots & \ddots & \vdots\\
-h_p(\alpha_{i_k},\beta_{j_1}) & \cdots & h_p(\alpha_{i_k}\wedge\beta_{j_k})
-\end{pmatrix}\text{Vol}_p$$ where $\alpha,\beta\in\Lambda^kT_p^\ast(M)$ and $\text{Vol}$ is the volume form of $M$, and $\langle-,-\rangle_p$ is the induced metric on $\Lambda^k(T_p^\ast(M))$. 
-\item Define the Hodge star operator of $M$ to be the map $$\ast\in\Gamma(M,\Hom(\Omega^k(M),\Omega^{n-k}(M)))$$ given by $p\mapsto\ast_p$. 
-\end{itemize}
-\end{defn}
-
-\begin{lmm}{}{}\\
-Let $M$ be a complex manifold. Then we have $$\ast^2=(-1)^{k(n-k)}$$ on $\Omega^k(M)$. 
-\end{lmm}
-
-\begin{defn}{Adjoint Dolbeault Operators}{}\\
-Let $M$ be a complex manifold. 
-\begin{itemize}
-\item Define the operator $d^\ast:\Omega^{k+1}(M)\to\Omega^k(M)$ by $$d^\ast=(-1)^k(\ast^{-1}\circ d\circ\ast)$$
-\item Define the operators $\partial^\ast:\Omega^{k+1}(M)\to\Omega^k(M)$ by $\partial^\ast=-(\ast\circ\overline{\partial}\circ\ast)$. 
-\item Define the operators $\overline{\partial}^\ast:\Omega^{k+1}(M)\to\Omega^k(M)$ by $\overline{\partial}^\ast=-(\ast\circ\partial\circ\ast)$. 
-\end{itemize}
-\end{defn}
-
-\begin{defn}{The $L^2$-Norm}{}\\
-Let $(M,h)$ be a complex Hermitian manifold. Let $\alpha,\beta\in\Omega^k(M)$ be differential forms of compact support. Define the $L^2$ norm on $M$ to be $$\langle\alpha,\beta\rangle_{L^2}=\int_M\langle\alpha,\beta\rangle\text{Vol}$$ where $\langle-,-\rangle$ is the induced metric on $\Omega^k(M)$ from $h$. 
-\end{defn}
-
-\begin{lmm}{}{}\\
-Let $M$ be a complex manifold. If $M$ is compact, then $\langle-,-\rangle_{L^2}$ defines a norm on $\Omega^k(M)$. 
-\end{lmm}
-
-\begin{lmm}{}{}\\
-Let $M$ be a complex manifold. Let $\alpha,\beta\in\Omega^k(M)$ be differential forms of compact support. Then we have $$\langle\alpha,\beta\rangle_{L^2}=\int_M\alpha\wedge\overline{\ast\beta}$$
-\end{lmm}
-
 \begin{prp}{}{}\\
-Let $M$ be a complex manifold. Let $\alpha\in\Omega^k(M)$ and $\beta\in\Omega^{k+1}(M)$ be differential forms of compact support. Then the following are true. 
+Let $M$ be a compact complex Hermitian manifold. Let $n=\dim(M)$. Then the following are true. 
 \begin{itemize}
-\item $d$ and $d^\ast$ are formal adjoints as linear operators over the $L^2$ norm. This means that $$\langle\alpha,d^\ast\beta\rangle_{L^2}=\langle d\alpha,\beta\rangle_{L^2}$$
-\item $\partial$ and $\partial^\ast$ are formal adjoints as linear operators over the $L^2$ norm. This means that $$\langle\alpha,\partial^\ast\beta\rangle_{L^2}=\langle\partial\alpha,\beta\rangle_{L^2}$$
-\item $\overline{\partial}$ and $\overline{\partial}^\ast$ are formal adjoints as linear operators over the $L^2$ norm. This means that $$\langle\alpha,\overline{\partial}^\ast\beta\rangle_{L^2}=\langle\overline{\partial}\alpha,\beta\rangle_{L^2}$$
+\item $H^{n,n}(M)=\C$. 
+\item There is a perfect pairing $H^{p,q}(M)\times H^{n-p,n-q}(M)\to\C$ given by $$(\alpha,\beta)\mapsto\int_M\alpha\wedge\beta$$
 \end{itemize}
 \end{prp}
+
+\pagebreak
+\section{Kahler Manifolds}
+\begin{defn}{Kahler Manifolds}{}\\
+Let $(M,h)$ be a complex Hermitian manifold. Let $\omega$ be the associated form of $M$. We say that $M$ is a Kahler manifold if $d\omega=0$. 
+\end{defn}
+
+Note: This makes Kahler manifolds also symplectic manifolds. 
+
+\begin{eg}{}{}\\
+Let $M$ be a $2$-dimensional complex manifold. Then $M$ is Kahler. 
+\end{eg}
+
+\begin{thm}{Hodge Decomposition Theorem}{}\\
+Let $M$ be a compact Kahler manifold. Then the following are true. 
+\begin{itemize}
+\item There is an isomorphism $$H_\text{dR}^k(M)\cong\bigoplus_{p+q=k}H^{p,q}(M)$$ for all $k\in\N$. 
+\item There is an isomorphism $$H^{p,q}(M)\cong\overline{H^{q,p}(M)}$$ for all $p,q\in\N$. 
+\item $\dim_\R(H_\text{dR}^k(M))$ is even for all $k\in\N$. 
+\end{itemize}
+\end{thm}
+
+\begin{defn}{Hodge Filtration}{}\\
+Let $M$ be a compact Kahler manifold. Define the Hodge filtration of $M$ to be $$F^iH_\text{dR}^k(M;\C)=\bigoplus_{p\geq i}H^{p,q}(M)$$
+\end{defn}
+
+\begin{defn}{The Lefschetz Operator}{}\\
+Let $M$ be a Kahler manifold. Let $\omega$ be its associated form. Define the Lefschetz operator to be the map $L:\Omega^k(M)\to\Omega^{k+2}(M)$ given by $$\alpha\mapsto\alpha\wedge\omega$$
+\end{defn}
+
+\begin{thm}{Hard Lefschetz Theorem}{}\\
+Let $M$ be a compact Kahler manifold. Then the following are true. 
+\begin{itemize}
+\item The Lefschetz operator induces an isomorphism $$L^k:H_\text{dR}^{n-k}(M)\overset{\cong}{\longrightarrow} H_\text{dR}^{n+k}(M)$$
+\end{itemize}
+\end{thm}
+
+\begin{defn}{Primitive Cohomology}{}\\
+Let $M$ be a compact Kahler manifold. Let $n=\dim(M)$. Define the primitive cohomology of $M$ to be $$H_\text{prim}^i(M)=\ker(L^{n-i+1}:H_\text{dR}^i(M)\to H_\text{dR}^{2n-i+2}(M))$$
+\end{defn}
+
+\begin{defn}{Lefschetz Decomposition}{}\\
+Let $M$ be a compact Kahler manifold. Define the Lefschetz decomposition of $M$ to be $$H_\text{dR}^k(M)=\bigoplus_{2r\leq k} L^r(H_\text{prim}^{k-2r}(M))$$
+\end{defn}
 
 \end{document}

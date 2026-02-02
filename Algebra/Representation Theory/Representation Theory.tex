@@ -286,6 +286,11 @@ Let $G$ be a finite group. Let $k$ be an algebraically closed field such that $\
 \item $\chi_V(1_G)=\dim(V)$. 
 \item $\chi_V(hgh^{-1})=\chi(g)$ for all $g,h\in G$. 
 \end{itemize}
+\begin{proof}\\
+By Linear Algebra, we have that $$\chi_V(1_G)=\text{tr}(\rho(1_G))=\text{tr}(\text{id}_V)=\text{tr}(I_{\dim(V)})=\dim(V)$$ so $\chi_V(1_G)=\dim(V)$. \\
+
+Let $g,h\in G$. Then we have $$\chi_V(hgh^{-1})=\text{tr}(\rho(h)\rho(g)\rho(h^{-1}))=\text{tr}(\rho(h)\rho(h^{-1})\rho(g))=\text{tr}(\rho(hh^{-1})\rho(g))=\text{tr}(\rho(g))=\chi_V(g)$$ by properties of the trace map. 
+\end{proof}
 \end{prp}
 
 The second item implies that $\chi$ descends to a function on conjugation classes $\chi:\text{Cl}(G)\to k$. 
@@ -297,7 +302,9 @@ Let $G$ be a finite group. Let $\rho:G\to\text{End}_\C(V)$ be a complex represen
 \item We have $\chi_V(g^{-1})=\overline{\chi_V(g)}$. 
 \end{itemize}
 \begin{proof}\\
-Let $H=\langle g\rangle$. Then $V$ is also a $\C[H]$-module. Let $V=\bigoplus_{i=1}^mV_i$ be the decomposition of $V$ into irreducible $\C[H]$-submodules. Since $H$ is cyclic, we must have $\dim(V_i)=1$. 
+Let $H=\langle g\rangle$. Then $V$ is also a $\C[H]$-module. Let $V=\bigoplus_{i=1}^mV_i$ be the decomposition of $V$ into irreducible $\C[H]$-submodules. Since $H$ is cyclic, we must have $\dim(V_i)=1$ by crl2.1.2. Choose non-zero $v_i\in V_i$. Then $E=\{v_1,\dots,v_n\}$ is a basis for $V$ and $[\rho(g)]_E^E$ is a diagonal matrix. Now for each $i$, $V_i$ is a $\C[H]$-module. Hence $\rho(g)(v_i)\in V_i$ implies that $\rho(g)(v_i)=\lambda_iv_i$ for some $\lambda_i\in\C^\times$. Then we have $\lambda^{\abs{g}}v_i=\rho(g)^{\abs{g}}(v_i)=v_i$ so that $\lambda$ is a $\abs{g}$th root of unity. Since $\rho(g)$ is diagonal, we conclude that the trace of $\rho(g)$ is a sum of $\abs{g}$th roots of unity. \\
+
+From the above proof, we know that $[\rho(g)]_E^E=\text{diag}(\omega^{-j_1},\dots,\omega^{-j_m})=\text{diag}(\overline{\omega^{j_1}},\dots,\overline{\omega^{j_m}})$. Hence $\chi_V(g^{-1})=\overline{\chi_V(g)}$. 
 \end{proof}
 \end{prp}
 
@@ -631,177 +638,6 @@ Let $n\in\N^+$. Let $\lambda$ be a partition for $n$. Define the Specht module a
 \begin{thm}{}{}\\
 Let $n\in\N^+$. Then $\{S^\lambda\;|\;\lambda\text{ is a partition for }n\}$ forms the complete list of non-isomorphic irreducible $\C[S_n]$-modules. 
 \end{thm}
-
-\pagebreak
-\section{Some Combinatorics}
-\subsection{Partitions}
-(To be separated to notes on combinatorics:)
-\begin{defn}{Partitions of an Integer}{} Let $n\in\N$. A partition $\lambda$ of $n$ is a list $(\lambda_1,\lambda_2,\dots,\lambda_l)$ with $\lambda_1\geq\lambda_2\geq\cdots\geq\lambda_l>0$ and $\sum_{i=1}^l\lambda_i=n$. 
-\end{defn}
-
-\begin{defn}{Dominance of Partitions}{} Let $\lambda$ and $\mu$ be two partitions of $n$. We say that $\lambda$ dominates $\mu$ if for all $k\in\N$, $$\sum_{i=1}^k\lambda_i\geq\sum_{i=1}^k\mu_i$$ In this case we denote it as $\lambda\trianglerighteq\mu$. 
-\end{defn}
-
-\begin{lmm}{}{} Let $n\in\N$. Then the set of partitions of $n$ together with dominance forms a poset. 
-\end{lmm}
-
-\begin{defn}{Lexicographical Ordering}{} Let $\lambda$ and $\mu$ be partitions of $n$. We say that $\lambda<\mu$ if for some $i\in\N$, the following are true. 
-\begin{itemize}
-\item For all $j<i$, $\lambda_j=\mu_i$
-\item $\lambda_i<\mu_i$
-\end{itemize}
-\end{defn}
-
-\begin{lmm}{}{} Let $n\in\N$. Then the lexicographical order on the set of all partitions of $n$ form a total ordering. 
-\end{lmm}
-
-\begin{prp}{}{} Let $\lambda$ and $\mu$ be partitions of $n$. If $\lambda\trianglerighteq\mu$, then $\lambda\geq\mu$. 
-\end{prp}
-
-\subsection{Young Diagrams and Young Tabloids}
-\begin{prp}{}{} Let $\lambda$ be a partition of $n$. Let $T$ be the set of all $\lambda$-tabloids. Then $S_n$ acts on $T$ by $$\tau\cdot[t_j]=[\tau(t_j)]$$
-\end{prp}
-
-\begin{defn}{Young Subgroup}{} Let $\lambda$ be a partition of $n$. Define the Young subgroup of $S_\lambda\leq S_n$ to $\lambda$ is defined as $$S_\lambda=S_{1,\dots,\lambda_1}\times S_{\lambda_1+1,\dots,\lambda_1+\lambda_2}\times\cdots\times S_{n-\lambda_l+1,\dots,n}$$
-\end{defn}
-
-\begin{defn}{Row and Column Stabilizers}{} Let $t$ be a tableau with rows $R_1,\dots,R_l$ and columns $C_1,\dots,C_k$. Define the row stabilizer of $t$ to be the group $$R_t=S_{R_1}\times\cdots\times S_{R_l}$$ Define the column stabilizer of $t$ to be the group $$C_t=S_{C_1}\times\cdots\times S_{C_k}$$
-\end{defn}
-
-For $\tau\in R_t$, we have that $\tau([t])=[t]$. In fact every element of $[t]$ is given in this way. Thus by writing $$R_tt=\{\tau(t)\;|\;\tau\in R_t\}$$ we can identify the tabloid as $$[t]=R_tt$$
-
-
-\pagebreak
-\section{Representations of the Symmetric Group}
-\subsection{Representations Associated to a Partition}
-Recall that a partition $\lambda=(\lambda_1,\dots,\lambda_k)$ of an integer $n$ gives a Young diagram, which $n$ left-aligned boxes with $\lambda_i$ boxes on row $i$. By writing $1,\dots,n$ in the boxes, we obtain a Young tableau. We then consider its equivalence class of Young tableau, in which we say that two Young tableau are equivalent if row $i$ of the two tableau contains the same element for all $i$. Such an equivalence class is called a Young tabloid of shape $\lambda$. \\~\\
-
-We have also seen that $S_n$ acts on the set of all tabloids by permuting the numbers in the boxes. The stabilizer of a tabloid $t$ is precisely the row stabilizers $R_t=S_{R_1}\times\cdots\times S_{R_l}$, for $R_1,\dots,R_l$ the rows of the tabloid. 
-
-\begin{defn}{Permutation Module Associated to a Partition}{} Let $\lambda$ be a partition of $n$. Let $[t_1],\dots,[t_k]$ be a complete list of $\lambda$-tabloids. Define the permutation module associated to $\lambda$ to be $$M^\lambda=\C\langle[t_1],\dots,[t_k]\rangle$$ This means that $\rho:S_n\to\text{GL}(M^\lambda)$ where $$\rho(\tau):M^\lambda\to M^\lambda$$ for $\tau\in S_n$ is defined on the basis by sending $[t_j]$ to $[\tau(t_j)]$. 
-\end{defn}
-
-\begin{prp}{}{} Let $\lambda$ be a partition of $n$. Let $T=S_n/S_\lambda$ be the set of cosets of $S_\lambda$. Then the following representations are equivalent. 
-\begin{itemize}
-\item The induced representation $\text{Ind}_{S_\lambda}^{S_n}1$
-\item The permutation representation $\rho:S_n\to\text{GL}(\C T)$ where $\rho(\tau):\C T\to\C T$ for $\tau\in S_n$ is defined on the basis by sending $\pi_kS_\lambda$ to $\tau\pi_kS_\lambda$
-\item The permutation module $\psi:S_n\to\text{GL}(M^\lambda)$ corresponding to $\lambda$
-\end{itemize}
-\end{prp}
-
-Recall that for a tableau $t$, the columns stabilizer of $t$ is given by $$C_t=S_{C_1}\times\cdots\times S_{C_k}$$ if $C_1,\dots,C_k$ are the columns of the tableau. 
-
-\begin{defn}{Associated Polytabloid}{} Let $\lambda$ be a partition of $n$. Let $t$ be a $\lambda$-tableau. Define the associated polytabloid $e_t\in M^\lambda$ by $$e_t=\sum_{\pi\in C_t}\text{sign}(\pi)(\pi\cdot[t])$$
-\end{defn}
-
-\begin{lmm}{}{} Let $t$ be a tableau of $n$ boxes and let $\pi\in S_n$ be a permutation. Then the following are true. 
-\begin{itemize}
-\item $R_{\pi t}=\pi R_t\pi^{-1}$
-\item $C_{\pi t}=\pi C_t\pi^{-1}$
-\item $\kappa_{\pi t}=\pi\kappa_t\pi^{-1}$
-\item $e_{\pi t}=\pi e_t$. 
-\end{itemize}
-\end{lmm}
-
-\subsection{Representations of the Symmetric Group}
-\begin{defn}{Specht Module}{} Let $\lambda$ be a partition of $n$. Define the Specht module $S^\lambda$ to be the submodule of $M^\lambda$ where $$S^\lambda=\C\langle e_t\;|\;t\text{ has shape }\lambda\rangle$$
-\end{defn}
-
-\begin{lmm}{}{} Let $n\in\N$. Then the following are true 
-\begin{itemize}
-\item Then the representation $\rho:S_n\to\text{GL}(S^{(n)})$ is the trivial representation. 
-\item The representation $\rho:S_n\to\text{GL}(S^{(1^n)})$ is equivalent to the sign representation. 
-\end{itemize}
-\end{lmm}
-
-\begin{lmm}{}{} Let $\lambda$ and $\mu$ be partitions of $n$. Let $t$ be a $\lambda$-tableau and let $s$ be a $\mu$-tableau. Then the following are true. 
-\begin{itemize}
-\item If $\sum_{\pi\in C_t}\text{sign}(\pi)(\pi\cdot[s])\neq 0$, then $\lambda\trianglerighteq\mu$. 
-\item If $\lambda=\mu$, then $\sum_{\pi\in C_t}\text{sign}(\pi)(\pi\cdot[s])\in\{-e_t,e_t\}$. 
-\end{itemize}
-\end{lmm}
-
-\begin{thm}{The Submodule Theorem}{} Let $\lambda$ be a partition of $n$. Let $U$ be a submodule of $M^\lambda$. Then either $S^\lambda\subseteq U$ or $U\subseteq(S^\lambda)^\perp$. 
-\end{thm}
-
-\begin{lmm}{}{} Let $\lambda$ and $\mu$ be partitions of $n$. Let $f\in\Hom_{S_n}(S^\lambda,M^\mu)$ be non-zero. Then $\lambda\trianglerighteq\mu$. If $\lambda=\mu$ then $f$ is multiplication by a scalar. \tcbline
-\begin{proof}
-$S^\lambda$ is generated by $e_t$ by definition. Since $f\neq 0$, there exists a tableau $t$ such that $f(e_t)\neq 0$. Since $S^\lambda$ is a submodule of $M^\lambda$, we have that $M^\lambda=S^\lambda\oplus(S^\lambda)^\perp$. Define an extension $\tilde{f}:M^\lambda\to M^\mu$ of $f$ as follows. For $v\in(S^\lambda)^\perp$, set $\tilde{f}(v)=0$. Now we have that ??? (5.4.2)
-\end{proof}
-\end{lmm}
-
-\begin{thm}{}{} Let $n\in\N$. Then the set of all $S^\lambda$ for $\lambda$ a partition of $n$ forms a complete list of irreducible $S_n$-representations. \tcbline
-\begin{proof}
-We first prove that $S^\lambda$ is irreducible. Let $U\subseteq S^\lambda$ be a subrepresentation. By the submodule theorem, either $S^\lambda\subseteq U$ or $U\subseteq(S^\lambda)^\perp$. Thus $S^\lambda=U$ or $U\subseteq S^\lambda\cap(S^\lambda)^\perp=0$. \\~\\
-
-It is clear that the number of conjugacy classes of $S_n$ is equal to the number of partitions of $n$. Thus the set of all $S^\lambda$ for $\lambda$ a partition of $n$ has cardinality equal to the the number of conjugacy classes of $S_n$. By theorem 2.4.6, the number of pairwise non-isomorphic irreducible representations of $S_n$ is equal to the number of conjugacy classes of $S_n$. Thus it remains to show that they are pairwise non-isomorphic. \\~\\
-
-Suppose that $S^\lambda$ is equivalent to $S^\mu$ for some partitions $\lambda$ and $\mu$ of $n$. Then there exists a non-zero $f\in\Hom_{S_n}(S^\lambda,S^\mu)$ which can be interpreted as an element of $\Hom_{S_n}(S^\lambda,M^\mu)$. By the above lemma, we conclude that $\lambda\trianglerighteq\mu$. Similarly, we conclude that $\mu\trianglerighteq\lambda$. Thus $\lambda=\mu$. 
-\end{proof}
-\end{thm}
-
-\subsection{Character Tables for $S_3$}
-\begin{prp}{The Sign Representation}{} Let $n\in\N$. Then the map $\rho:S_n\to\C^\ast$ defined by $$\rho(\tau)=\text{sign}(\tau)$$ for $\tau\in S_n$ is a one dimensional complex representation of $S_n$. 
-\end{prp}
-
-Recall that any two permutations in $S_n$ of the same cycle type are conjugate. This completely determines the conjugacy classes of $S_n$. In particular, this means that the number of conjugacy classes of $S_n$ is given by the number of integer partitions of $n$. 
-
-\begin{prp}{}{} Let $X=\{a,b,c\}$ such that $S_3$ acts on $X$ by permutation. Consider the permutation representation $\rho:S_3\to\text{GL}(\C X)$. Then the subspace $$U=\C\langle a+b+c\rangle$$ of $\C X$ is a subrepresentation of $G$. \tcbline
-\begin{proof}
-We want to show that $tau\cdot u\in U$ for all $u\in U$. We just have to check this for the basis. We have that $$tau\cdot(a+b+c)=\tau(a)+\tau(b)+\tau(c)$$ Since $\tau$ is a permutation, $\{\tau(a),\tau(b),\tau(c)\}=\{a,b,c\}$ hence we are done. 
-\end{proof}
-\end{prp}
-
-\begin{prp}{}{} Let $X=\{a,b,c\}$ such that $S_3$ acts on $X$ by permutation. Consider the permutation representation $\rho:S_3\to\text{GL}(\C X)$ and the subrepresentation $U=\C\langle a+b+c\rangle$ of $\C X$. Then $V/U$ is an irreducible representation of $G$. \tcbline
-\begin{proof}
-We already know that $V/U$ is a representation, it remains to show that it is irreducible. We wish to invoke 2.3.5. The representation $\overline{\rho}:S_3\to\text{GL}(V/U)$ is given by $\rho(\tau)(v+U)=\tau(v)+U$. We give a non-canonical basis of $\{a+V/U,b+V/U\}$ to $V/U$. The character of $V/U$ is given as follows. \\~\\
-
-There are three conjugacy classes of $S_3$ given by $\{1\},\{(a,b),(b,c),(a,c)\}$ and $\{(a,b,c),(a,c,b)\}$. We have that 
-\begin{itemize}
-\item $\chi_{\overline{\rho}}(1)=\text{tr}(I)=2$
-\item Under the given basis, the matrix of $\overline{\rho}(a,b)$ is $\begin{pmatrix}
-0 & 1\\
-1 & 0
-\end{pmatrix}$. Hence $\chi_{\overline{\rho}}((a,b))=0$
-\item Under the given basis, the matrix of $\overline{\rho}(a,b,c)$ is $\begin{pmatrix}
-0 & -1\\
-1 & -1
-\end{pmatrix}$. Hence $\chi_{\overline{\rho}}((a,b,c))=-1$
-\end{itemize}
-Now we have that 
-\begin{align*}
-\langle\chi_{\overline{\rho}},\chi_{\overline{\rho}}\rangle&=\frac{1}{\abs{S_3}}\sum_{\tau\in S_3}\chi_{\overline{\rho}}(\tau)^2\\
-&=\frac{1}{6}(1\cdot 2^2+3\cdot 0+2\cdot(-1)^2)\\
-&=1
-\end{align*}
-By lemma 2.3.5, we conclude that $V/U$ is irreducible. 
-\end{proof}
-\end{prp}
-
-\begin{thm}{}{} There are a total of three irreducible complex representations of $S_3$ given by 
-\begin{itemize}
-\item The trivial representation $\rho_1(\tau)=1$
-\item The sign representation $\rho_2(\tau)=\text{sign}(\tau)$
-\item The representation $\overline{\rho}$ given by 6.3.3. 
-\end{itemize} \tcbline
-\begin{proof}
-We have seen that each of these are irreducible. There are three conjugacy classes of $S_3$. By 2.4.6 we conclude that we have exhausted all the irreducible representations. 
-\end{proof}
-\end{thm}
-
-\begin{thm}{}{} The character table of $S_3$ is given as follows. 
-\begin{center}
-\begin{tabular}{ c|ccc } 
-$G$ & $1$ & $\{(1,2),(1,3),(2,3)\}$ & $\{(1,2,3),(1,3,2)\}$ \\\hline
-$\chi_{\text{trivial}}$ & $1$ & $1$ & $1$ \\
-$\chi_{\text{sign}}$ & $1$ & $-1$ & $1$ \\
-$\chi_{\overline{\rho}}$ & $2$ & $0$ & $-1$ \\
-\end{tabular}
-\end{center}
-\end{thm}
-
-
-\subsection{Representations of the Alternating Group}
 
 
 \end{document}

@@ -37,8 +37,10 @@ To describe the Riemannian metric in local coordinates, we need some simple alge
 Then isomorphism carries over to vector bundles, and so we have an isomorphism $(TM\otimes TM)^\ast\cong TM^\ast\otimes TM^\ast$. This is how the Riemannian metric is a $(0,2)$-tensor field. 
 
 \begin{prp}{}{}\\
-Let $(M,g)$ be a Riemannian manifold. Let $p\in M$. Let $(U,x^1,\dots,x^n)$ be a chart at $p$. Then $g_p$ as an element of $T_p(M)^\ast\otimes T_p(M)^\ast$ is given locally on the chart by $$g_p=\sum_{i,j=1}^ng_{i,j}|_p\;(dx^i)|_p\otimes(dx^j)_p$$ where $g_{i,j}|_p=g_p\left(\frac{\partial}{\partial x^i}\bigg{|}_p,\frac{\partial}{\partial x^j}\bigg{|}_p\right)$ where the latter $g_p$ is thought of as an element of $(T_p(M)\otimes T_p(M))^\ast$. 
+Let $(M,g)$ be a Riemannian manifold. Let $p\in M$. Let $(U,x^1,\dots,x^n)$ be a chart at $p$. Then $g_p$ as an element of $T_p(M)^\ast\otimes T_p(M)^\ast$ is given locally on the chart by $$g_p=\sum_{1\leq i,j\leq n}g_{i,j}(p)\;(dx^i)|_p\otimes(dx^j)_p$$ where $g_{i,j}:U\to\R$ are smooth functions such that $g_{i,j}(p)=g_p\left(\frac{\partial}{\partial x^i}\bigg{|}_p,\frac{\partial}{\partial x^j}\bigg{|}_p\right)$. 
 \end{prp}
+
+Let $v,w\in T_p(M)$ be tangent vectors. Then locally on the chart $(U,x^1,\dots,x^n)$, we may compute the Riemannian metric by $$g_p(v,w)=\sum_{1\leq i,j\leq n}g_{i,j}(p)(dx^i)|_p(v)(dx^j)|_p(w)$$
 
 \begin{thm}{}{}\\
 Every smooth manifold admits a Riemannian metric and hence is a Riemannian manifold. 
@@ -72,12 +74,6 @@ In general, not every Riemannian manifold is flat. This can be shown once we dis
 \begin{defn}{Orthogonal Tangent Vectors}{} Let $(M,g)$ be a Riemannian manifold. Let $p\in M$. We say that two tangent vectors $v,w\in T_pM$ are orthogonal if $$g_p(v,w)=0$$
 \end{defn}
 
-\begin{defn}{Length of a Curve}{} Let $(M,g)$ be a Riemannian manifold. Let $\gamma:(a,b)\to M$ be a curve. Define the length of the curve by $$L(\gamma)=\int_a^b\sqrt{g_{\gamma(s)}(\gamma'(s),\gamma'(s))}\,ds$$
-\end{defn}
-
-\begin{defn}{Angle between two Curves}{} Let $(M,g)$ be a Riemannian manifold. Let $\gamma_1:(a,b)\to M$ and $\gamma_2:(c,d)\to M$ be two curves that intersecting at $p=\gamma_1(t_1)=\gamma_2(t_2)\in M$ and that $\gamma_1'(t_1)\neq 0$ and $\gamma_2'(t)\neq 0$. Define the angle between $\gamma_1$ and $\gamma_2$ at $p$ to be the unique $\theta\in[0,\pi]$ such that $$\cos(\theta)=\frac{g_p(X_{\gamma_1,p},X_{\gamma_2,p})}{\abs{X_{\gamma_1,p}}_g\abs{X_{\gamma_2,p}}_g}$$
-\end{defn}
-
 \subsection{Musical Isomorphism}
 \begin{defn}{The Flat Map}{} Let $(M,g)$ be a Riemannian manifold. Let $p\in M$. For each $X\in T_pM$, define the flat map $$\flat:T_pM\to T_p^\ast M$$ by sending $X\in T_pM$ to the map $X^\flat:T_pM\to\R$ by $X^\flat(Y)=g_p(X,Y)$. 
 \end{defn}
@@ -88,90 +84,40 @@ In general, not every Riemannian manifold is flat. This can be shown once we dis
 \begin{defn}{The Sharp Map}{} Let $(M,g)$ be a Riemannian manifold. Let $p\in M$. Define the sharp map $$\#:T_p^\ast M\to T_pM$$ to be the inverse of the flat map. 
 \end{defn}
 
-\subsection{Bundle Metric}
-\begin{defn}{Bundle Metric}{} Let $M$ be a topological manifold and $p:E\to M$ a vector bundle on $M$. Then a bundle metric on $E$ is a section of $E^\ast\otimes E^\ast$ such that it is nondegenerate and symmetric. 
+\begin{eg}{}{}\\
+Let $(M,g)$ be a Riemannian manifold. Let $p\in U$. Let $(U,x^1,\dots,x^n)$ be a chart at $p$. Let $g$ be given locally at the chart by $$g_p=\sum_{1\leq i,j\leq n}g_{i,j}(p)(dx^i)_p\otimes(dx^j)_p$$ Then the following are true. 
+\begin{itemize}
+\item The flat map is given locally by $$\left(\frac{\partial}{\partial x^i}\bigg{|}_p\right)^\flat=\sum_{j=1}^ng_{i,j}(p)(dx^j)_p$$
+\item The sharp map is given locally by $$\left((dx^i)_p\right)^\#=\sum_{j=1}^ng^{i,j}(p)\frac{\partial}{\partial x^j}\bigg{|}_p$$ where $(g^{i,j}(p))_{1\leq i,j\leq n}=\left((g_{i,j}(p))_{1\leq i,j\leq n}\right)^{-1}$. 
+\end{itemize}
+\end{eg}
+
+\subsection{The Induced Metric on Cotangent Bundles}
+
+\subsection{Riemannain Manifolds as a Metric Space}
+\begin{defn}{Piecewise Regular Paths}{}\\
+Let $(M,g)$ be a Riemannian manifold. A piecewise regular path in $M$ consists of smooth functions $\gamma_i:[a_i,b_i]\to M$ for $1\leq i\leq k$ such that the following are true. 
+\begin{itemize}
+\item For $1\leq i\leq k-1$, we have $\gamma_i(b_i)=\gamma_{i+1}(a_i)$. 
+\item For $1\leq i\leq k$, we have $\abs{\gamma_i'(t)}\neq 0$ for all $t\in[a_i,b_i]$. 
+\end{itemize}
 \end{defn}
 
-In other words, a bundle metric is an assignment to each fibre, an inner product. Bilinearity is seen from $E^\ast\otimes E^\ast$, which is exactly the set of all bilinear forms $E\times E\to\R$. 
-
-\begin{prp}{}{} Let $M$ be a smooth manifold. Then a Riemannian metric give rise to a bundle metric on $TM$. A bundle metric on $TM$ gives rise to a Riemannian metric. 
-\end{prp}
-
-\pagebreak
-\section{Calculus on Manifolds}
-\subsection{Integration of Functions on Riemannian Manifolds}
-\begin{defn}{The Riemannian Volume Form}{}\\
-Let $(M,g)$ be an orientable Riemannian manifold. Define the volume form $dV$ of $M$ to be given locally at $p\in M$ on the chart $(U,x^1,\dots,x^n)$ by $$dV_p=\sqrt{\abs{g_p}}dx^1|_p\wedge\cdots\wedge dx^n|_p$$
+\begin{defn}{Length of a Curve}{}\\
+Let $(M,g)$ be a Riemannian manifold. Let $\gamma:[a,b]\to M$ be a piecewise regular path in $M$. Define the length of $\gamma$ to be $$L(\gamma)=\int_a^b\abs{\gamma'(t)}_g\;dt$$
 \end{defn}
 
-\subsection{Differential Operators}
-\begin{defn}{The Gradient of a Function}{}
-\end{defn}
-
-\begin{defn}{The Divergence of a Vector Field}{}
-\end{defn}
-
-\begin{defn}{The $\beta$-Operator}{}
-\end{defn}
-
-\begin{defn}{The Curl of a Vector Field}{}
+\begin{defn}{Riemannian Distance Function}{}\\
+Let $(M,g)$ be a Riemannian manifold. Define the Riemannian distance function of $M$ to be the function $d_g:M\times M\to\R$ given by $$d_g(p,q)=\inf\{L(\gamma)\;|\;\gamma:I\to M\text{ is a piecewise regular path }\}$$
 \end{defn}
 
 \begin{prp}{}{}\\
-Let $(M,g)$ be an oriented smooth manifold of dimension $3$. Then the following diagram is commutative: \\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	{\mC^\infty(M)} & {\mathfrak{X}(M)} & {\mathfrak{X}(M)} & {\mC^\infty(M)} \\
-	{\Omega^0(M)} & {\Omega^1(M)} & {\Omega^2(M)} & {\Omega^3(M)}
-	\arrow["{\text{grad}}", from=1-1, to=1-2]
-	\arrow["{\text{id}}"', from=1-1, to=2-1]
-	\arrow["{\text{curl}}", from=1-2, to=1-3]
-	\arrow["\flat"', from=1-2, to=2-2]
-	\arrow["{\text{div}}", from=1-3, to=1-4]
-	\arrow["\beta", from=1-3, to=2-3]
-	\arrow["\flat", from=1-4, to=2-4]
-	\arrow["d"', from=2-1, to=2-2]
-	\arrow["d"', from=2-2, to=2-3]
-	\arrow["d"', from=2-3, to=2-4]
-\end{tikzcd}}\\
+Let $(M,g)$ be a Riemannian manifold. Then the following are true. 
+\begin{itemize}
+\item $d_g$ is a metric on $M$. 
+\item The topology of $M$ is given by the metric topology induced by $d_g$. 
+\end{itemize}
 \end{prp}
-
-\begin{defn}{The Laplacian of a Function}{}
-\end{defn}
-
-\subsection{Calculus on Manifolds}
-Let $M$ be an oriented smooth manifold of dimension $n$. let $p\in\partial M$. Then $T_p(\partial M)$ is an $(n-1)$-dimensional vector subspace of $T_p(M)$. Recall that a boundary chart of $M$ at $p\in M$ is a chart $(U,\phi)$ such that the following are true. 
-\begin{itemize}
-\item $\phi(U)\subseteq\{(x_1,\dots,x_n)\in\R^n\;|\;x_n\geq 0\}$. 
-\item $\phi^{-1}(\{(x_1,\dots,x_n)\in\R^n\;|\;x_n=0\})\subseteq\partial M$. 
-\item $\phi(p)=0$. 
-\end{itemize}
-
-\begin{defn}{Unit Normal Vectors}{}\\
-Let $(M,g)$ be a Riemannian manifold of dimension $n$ with boundary. Let $p\in\partial M$. Define the normal vector $n(p)$ of $p$ to be the unique vector in $T_p(M)$ such that the following are true. 
-\begin{itemize}
-\item $n(p)$ is normal to the hyperplane $T_p(\partial M)$ in $T_p(M)$ with respect to the inner product $g_p$. 
-\item $n(p)$ is a unit vector. 
-\item Choose a boundary chart $(U,\phi)$ at $p$. Denote $(\phi_\ast)_p:T_p(M)\to T_{\phi(p)}(\R^n)$ the differential of $\phi$. Then $n$th coordinate of $(\phi_\ast)_p(n_p)$ is less than $0$ under the standard basis of $T_{\phi(p)}(\R^n)$. 
-\end{itemize}
-\end{defn}
-
-\begin{lmm}{}{}\\
-Let $(M,g)$ be a Riemannian manifold of dimension $n$ with boundary. If $M$ is orientable, then the assignment $p\mapsto n(p)$ is a smooth map from $\partial M$ to $TM$. 
-\end{lmm}
-
-\begin{thm}{The Gradient Theorem}{}\\
-Let $M\subseteq\R^n$ be a smooth compact connected $1$-dimensional manifold. Let $r:[a,b]\to M$ be a smooth curve such that $\im(r)=M$. Let $f\in\mC^\infty(M)$ be a smooth function. Then we have $$\int_M\nabla f=f(r(b))-f(r(a))$$
-\end{thm}
-
-\begin{thm}{The Divergence Theorem}{}\\
-Let $M\subseteq\R^n$ be a smooth compact manifold of dimension $n$ with boundary. Let $F:M\to\R^n$ be a smooth function. Then we have $$\int_M\text{div}(F)=\int_{\partial M}F\cdot n(x)$$ where both integrals are Riemann integrals. 
-\end{thm}
-
-\begin{thm}{}{}
-\end{thm}
-
-\pagebreak
-\section{The Hodge Star Operator}
 
 \pagebreak
 \section{Connections and Parallel Transports}
@@ -245,8 +191,8 @@ For each $t\in I$, choose a chart $(U,\phi=(x^1,\dots,x^n))$ for $\gamma(t)\in M
 
 
 \pagebreak
-\section{Geometry on Manifolds}
-\subsection{Geodesics}
+\section{Geometry on Riemannian Manifolds}
+\subsection{Geodesics on Riemannian Manifolds}
 Let $M$ be a smooth manifold. Let $\gamma:I\to M$ be a smooth curve on $M$. Then we can compute its differential to obtain a tangent vector $$\gamma'(t)\in T_{\gamma(t)}M$$ for each $t\in I$. This defines a vector field in $\mathfrak{X}(\gamma)$. 
 
 \begin{defn}{Geodesics}{} Let $M$ be a smooth manifold. Let $\nabla$ be an affine connection on $M$. A geodesic on $M$ is a curve $\gamma:I\to M$ such that $$D_t(\gamma'(t))=0$$ where $D_t$ is the associated covariant derivative of $\nabla$ and $\gamma$. 
@@ -254,8 +200,59 @@ Let $M$ be a smooth manifold. Let $\gamma:I\to M$ be a smooth curve on $M$. Then
 
 We have seen geodesics for metric spaces, but these are slightly different. We require geodesics on manifolds to only minimize the distance locally. 
 
+\subsection{Minimizing Curves}
+\begin{defn}{Minimizing Curves}{}\\
+Let $(M,g)$ be a Riemannian manifold. Let $\gamma:[a,b]\to M$ be a smooth curve in $M$. We say that $\gamma$ is minimizing if $$L(\gamma)=d_g(\gamma(a),\gamma(b))$$
+\end{defn}
+
+\begin{defn}{Locally Minimizing Curves}{}\\
+Let $(M,g)$ be a Riemannian manifold. Let $\gamma:[a,b]\to M$ be a smooth curve in $M$. We say that $\gamma$ is locally minimizing if for all $t\in[a,b]$, there exists a neighbourhood $[c,d]\subseteq[a,b]$ of $t$ such that $\gamma|_{[c,d]}$ is a minimizing curve. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $(M,g)$ be a Riemannian manifold. Let $\gamma:[a,b]\to M$ be a smooth curve in $M$. Then the following are true. 
+\begin{itemize}
+\item If $\gamma$ is a minimizing curve, then $\gamma$ is a geodesic. 
+\item If $\gamma$ is a geodesic, then $\gamma$ is a locally minimizing curve. 
+\end{itemize}
+\end{prp}
+
+\subsection{Geodesically Complete Riemannian Manifolds}
+\begin{defn}{Geodesically Complete}{}
+\end{defn}
+
+\begin{prp}{}{}\\
+Geodesically complete iff exp map well defined
+\end{prp}
+
+\begin{thm}{Hopf-Rinow Theorem}{}\\
+Let $(M,g)$ be a connected Riemannian manifold. Then the following are equivalent. 
+\begin{itemize}
+\item $M$ is geodeically complete. 
+\item $M$ is complete as a metric space. 
+\item Every closed and bounded set in $M$ is compact. 
+\end{itemize}
+\end{thm}
+
+\begin{prp}{}{}\\
+Let $(M,g)$ be a connected Riemannian manifold. Let $p,q\in M$. Then there exists a minimizing geodesic from $p$ to $q$. 
+\end{prp}
+
 \pagebreak
 \section{Measuring the Curvature}
+\subsection{The Curvature Tensor}
+\begin{defn}{The Curvature Tensor}{}\\
+Let $(M,g)$ be a Riemannian manifold. Define the curvature tensor of $M$ to be the map $R:\mathfrak{X}(M)\times\mathfrak{X}(M)\times\mathfrak{X}(M)\to\mathfrak{X}(M)$ given by $$R(X,Y)Z=[\nabla_X,\nabla_Y]Z-\nabla_{[X,Y]}Z$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $(M,g)$ be a Riemannian manifold. Then $M$ is flat if and only if $R=0$. 
+\end{prp}
+
+Recall: Flat iff locally isometric to $\R^n$. 
+
+\subsection{The Second Fundamental Form}
+
 \subsection{Gauss-Bonnet Theorem}
 \begin{thm}{The Gauss-Bonnet Formula}{} Let $(M,g)$ be an oriented smooth $2$-manifold. Let $\gamma$ be a positively oriented curved polygon in $M$ and let $\Omega$ be its interior. Then $$\int_\Omega K\,dA+\int_\gamma\kappa_N\,ds+\sum_{i=1}^k\varepsilon_i=2\pi$$ where 
 \begin{itemize}
@@ -272,6 +269,215 @@ We have seen geodesics for metric spaces, but these are slightly different. We r
 \begin{crl}{}{} Let $(M,g)$ be an smooth compact $2$-dimensional Riemannian manifold without boundary. Let $K$ be the Gaussian curvature of $M$. Then $$\int_MK\,dA=2\pi\chi(M)$$
 \end{crl}
 
+
+\pagebreak
+\section{Calculus on Manifolds}
+\subsection{Integration of Functions on Riemannian Manifolds}
+\begin{defn}{The Riemannian Volume Form}{}\\
+Let $(M,g)$ be an orientable Riemannian manifold. Define the volume form $dV$ of $M$ to be given locally at $p\in M$ on the chart $(U,x^1,\dots,x^n)$ by $$(dV)_p=\sqrt{\det(g_{i,j}(p))}(dx^1)_p\wedge\cdots\wedge(dx^n)_p$$ where $g$ is given locally at the chart by $g_p=\sum_{1\leq i,j\leq n}g_{i,j}(p)(dx^i)_p\otimes(dx^j)_p$. 
+\end{defn}
+
+Let $(M,g)$ be a compact orientable Riemannian manifold. Let $f:M\to\R$ be a compactly supported smooth function. Then we may define the integral of $f$ over $M$ to be the value $\int_MfdV$. 
+
+\begin{defn}{The Volume of a Compact Orientable Manifold}{}\\
+Let $(M,g)$ be a compact orientable Riemannian manifold. Define the volume of $M$ to be $$\text{Vol}(M)=\int_M1dV$$
+\end{defn}
+
+\subsection{Differential Operators}
+\begin{defn}{The Gradient of a Function}{}\\
+Let $(M,g)$ be a Riemannian manifold. Let $f:M\to\R$ be a smooth function. Define the gradient of $f$ to be $$\text{grad}(f)=(df)^\#$$
+\end{defn}
+
+By definition, the gradient of $f$ is the unique section of $TM$ such that $$(df)_p(w)=g_p(\text{grad}(f)_p,w)$$ for all $p\in M$ and $w\in T_pM$. 
+
+\begin{prp}{}{}\\
+Let $(M,g)$ be a Riemannian manifold. Let $(U,x^1,\dots,x^n)$ be a chart in $M$. Let $f:M\to\R$ be a smooth function. Let $g$ be given locally at the chart by $$g_p=\sum_{1\leq i,j\leq n}g_{i,j}(p)(dx^i)_p\otimes(dx^j)_p$$ Let $(g^{i,j}(p))=(g_{i,j}(p))^{-1}$ be the inverse of the matrix. Then locally at $U$, the gradient of $f$ at $p$ is given by $$\text{grad}(f)(p)=\sum_{1\leq i,j\leq n}\frac{\partial f}{\partial x^i}\bigg{|}_pg^{i,j}(p)\frac{\partial}{\partial x^j}\bigg{|}_p$$
+\end{prp}
+
+\begin{eg}{}{}\\
+Let $f:\R^n\to\R$ be a smooth function. Then the gradient of $f$ at $p\in\R^n$ is given by $$\text{grad}(f)(p)=\sum_{i=1}^n\frac{\partial f}{\partial x_i}\bigg{|}_p\frac{\partial}{\partial x_i}\bigg{|}_p$$
+\end{eg}
+
+\begin{defn}{The Divergence of a Vector Field}{}\\
+Let $(M,g)$ be a Riemannian manifold. Let $X:M\to TM$ be a smooth vector field. Define the divergence of $X$ to be the unique smooth function $\text{div}(X):M\to\R$ such that for each $p\in M$ and $(U,x^1,\dots,x^n)$ a chart at $p$, we have $$(d(X\lrcorner dV))_p=(\text{div}(X)(p))(dV)_p$$ where $dV$ is the local top form given by $(dV)_p=\sqrt{\det(g_{i,j}(p))}(dx^1)_p\wedge\cdots\wedge(dx^n)_p$ and $g$ is given locally at the chart by $g_p=\sum_{1\leq i,j\leq n}g_{i,j}(p)(dx^i)_p\otimes(dx^j)_p$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $(M,g)$ be a Riemannian manifold. Let $(U,x^1,\dots,x^n)$ be a chart in $M$. Let $X:M\to TM$ be a smooth vector field. Suppose that $g$ and $X$ are given locally at the chart by $$g_p=\sum_{1\leq i,j\leq n}g_{i,j}(p)(dx^i)_p\otimes(dx^j)_p\;\;\;\text{ and }\;\;\;X(p)=\sum_{i=1}^na_i\frac{\partial}{\partial x^i}\bigg{|}_p$$ respectively. Then locally at $U$, the divergence of $X$ at $p\in U$ is given by $$\text{div}(X)(p)=\frac{1}{\sqrt{\det(g_{i,j}(p))}}\sum_{k=1}^n\frac{\partial(a_k\circ\sqrt{\det(g_{i,j})})}{\partial x^k}\bigg{|}_p$$
+\end{prp}
+
+\begin{eg}{}{}\\
+Let $X:\R^n\to\R^n$ be a smooth vector field whose components are given by $X_i:\R^n\to\R$. Then the divergence of $X$ at $p\in\R^n$ is given by $$\text{div}(X)(p)=\sum_{i=1}^n\frac{\partial X_i}{\partial x_i}\bigg{|}_p$$
+\end{eg}
+
+\begin{defn}{The Laplacian of a Function}{}\\
+Let $(M,g)$ be a Riemannian manifold. Let $f:M\to\R$ be a smooth function. Define the Laplacian of $f$ to be the function $\Delta f:M\to\R$ given by $$\Delta f=\text{div}(\text{grad}(f))$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $(M,g)$ be a Riemannian manifold. Let $f:M\to\R$ be a smooth function. Let $(U,x^1,\dots,x^n)$ be a chart in $M$. Let $g$ be given locally at the chart by $$g_p=\sum_{1\leq i,j\leq n}g_{i,j}(p)(dx^i)_p\otimes(dx^j)_p$$ Let $(g^{i,j}(p))=(g_{i,j}(p))^{-1}$ be the inverse of the matrix. Then locally at $U$, the laplcian of $f$ at $p$ is given by $$\Delta(f)(p)=\frac{1}{\sqrt{\det(g_{i,j}(p))}}\sum_{1\leq k,l\leq n}\frac{\partial(g^{k,l}\circ\sqrt{\det(g_{i,j})}\circ\frac{\partial f}{\partial x^l})}{\partial x^k}\bigg{|}_p$$
+\end{prp}
+
+\begin{eg}{}{}\\
+Let $f:\R^n\to\R$ be a smooth function. Then the laplacian of $f$ at $p\in\R^n$ is given by $$\Delta(f)(p)=\sum_{i=1}^n\frac{\partial^2f}{\partial x_i^2}\bigg{|}_p$$
+\end{eg}
+
+\subsection{Curl and The Case of Dimension 3}
+\begin{defn}{The $\beta$-Operator}{}\\
+Let $(M,g)$ be an oriented Riemannian manifold of dimension $3$. Define the $\beta$-operator to be the map $\beta:TM\to\bigwedge_{i=1}^2(T^\ast M)$ by $$\beta(X)=X\lrcorner dV$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $(M,g)$ be an oriented Riemannian manifold of dimension $3$. Then $\beta$ is a smooth bundle isomorphism. 
+\end{lmm}
+
+\begin{defn}{The Curl of a Vector Field}{}\\
+Let $(M,g)$ be an oriented Riemannian manifold of dimension $3$. Let $X:M\to TM$ be a smooth vector field. Define the curl of $X$ to be the vector field $\text{curl}(X):M\to TM$ given by $$\text{curl}(X)=\beta^{-1}(d(X^\flat))$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $(M,g)$ be an oriented Riemannian manifold of dimension $3$. Then the following diagram is commutative: \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\mC^\infty(M)} & {\mathfrak{X}(M)} & {\mathfrak{X}(M)} & {\mC^\infty(M)} \\
+	{\Omega^0(M)} & {\Omega^1(M)} & {\Omega^2(M)} & {\Omega^3(M)}
+	\arrow["{\text{grad}}", from=1-1, to=1-2]
+	\arrow["{\text{id}}"', from=1-1, to=2-1]
+	\arrow["{\text{curl}}", from=1-2, to=1-3]
+	\arrow["\flat"', from=1-2, to=2-2]
+	\arrow["{\text{div}}", from=1-3, to=1-4]
+	\arrow["\beta", from=1-3, to=2-3]
+	\arrow["\flat", from=1-4, to=2-4]
+	\arrow["d"', from=2-1, to=2-2]
+	\arrow["d"', from=2-2, to=2-3]
+	\arrow["d"', from=2-3, to=2-4]
+\end{tikzcd}}\\
+\end{prp}
+
+\subsection{Calculus on Manifolds}
+Let $M$ be an oriented smooth manifold of dimension $n$. let $p\in\partial M$. Then $T_p(\partial M)$ is an $(n-1)$-dimensional vector subspace of $T_p(M)$. Recall that a boundary chart of $M$ at $p\in M$ is a chart $(U,\phi)$ such that the following are true. 
+\begin{itemize}
+\item $\phi(U)\subseteq\{(x_1,\dots,x_n)\in\R^n\;|\;x_n\geq 0\}$. 
+\item $\phi^{-1}(\{(x_1,\dots,x_n)\in\R^n\;|\;x_n=0\})\subseteq\partial M$. 
+\item $\phi(p)=0$. 
+\end{itemize}
+
+\begin{defn}{Unit Normal Vectors}{}\\
+Let $(M,g)$ be a Riemannian manifold of dimension $n$ with boundary. Let $p\in\partial M$. Define the normal vector $n(p)$ of $p$ to be the unique vector in $T_p(M)$ such that the following are true. 
+\begin{itemize}
+\item $n(p)$ is normal to the hyperplane $T_p(\partial M)$ in $T_p(M)$ with respect to the inner product $g_p$. 
+\item $n(p)$ is a unit vector. 
+\item Choose a boundary chart $(U,\phi)$ at $p$. Denote $(\phi_\ast)_p:T_p(M)\to T_{\phi(p)}(\R^n)$ the differential of $\phi$. Then $n$th coordinate of $(\phi_\ast)_p(n_p)$ is less than $0$ under the standard basis of $T_{\phi(p)}(\R^n)$. 
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $(M,g)$ be a Riemannian manifold of dimension $n$ with boundary. If $M$ is orientable, then the assignment $p\mapsto n(p)$ is a smooth map from $\partial M$ to $TM$. 
+\end{lmm}
+
+\begin{thm}{The Gradient Theorem}{}\\
+Let $M\subseteq\R^n$ be a smooth compact connected $1$-dimensional manifold. Let $r:[a,b]\to M$ be a smooth curve such that $\im(r)=M$. Let $f\in\mC^\infty(M)$ be a smooth function. Then we have $$\int_M\nabla f=f(r(b))-f(r(a))$$
+\end{thm}
+
+\begin{thm}{The Divergence Theorem}{}\\
+Let $M\subseteq\R^n$ be a smooth compact manifold of dimension $n$ with boundary. Let $F:M\to\R^n$ be a smooth function. Then we have $$\int_M\text{div}(F)=\int_{\partial M}F\cdot n(x)$$ where both integrals are Riemann integrals. 
+\end{thm}
+
+\begin{thm}{}{}
+\end{thm}
+
+\pagebreak
+\section{The Hodge Star Operator}
+\subsection{The Hodge Star Operator}
+\begin{defn}{The Hodge Star Operator}{}\\
+Let $(M,g)$ be an orientable Riemannian manifold. Let $n=\dim(M)$. 
+\begin{itemize}
+\item Let $p\in M$. Define $\ast_p:\Lambda^kT_p^\ast(M)\to\Lambda^{n-k}T_p^\ast(M)$ to be the unique $\C$-linear isomorphism such that $$\alpha\wedge(\ast_p\beta)=g_p(\alpha,\beta)(dV)_p$$ where $\alpha,\beta\in\Lambda^kT_p^\ast(M)$ and $\text{Vol}$ is the volume form of $M$ associated to $g$, and $\langle-,-\rangle_p$ is the induced metric on $\Lambda^k(T_p^\ast(M))$. 
+\item Define the Hodge star operator of $M$ to be the map $$\ast\in\Gamma(M,\Hom(\Omega^k(M),\Omega^{n-k}(M)))$$ given by $p\mapsto\ast_p$. 
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $(M,g)$ be an orientable Riemannian manifold. Then the following are true regrading the Hodge star operator. 
+\begin{itemize}
+\item $\ast f=fdV$ for any smooth function $f\in\mC^\infty(M)$. 
+\item $\ast\ast\omega=(-1)^{k(n-k)}\omega$ for any smooth $k$-form $\omega\in\Omega^k(M)$. 
+\end{itemize}
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $(M,g)$ be an orientable Riemannian manifold. Let $X:M\to TM$ be a smooth vector field. Then the following are true. 
+\begin{itemize}
+\item $X\lrcorner dV=\ast(X^\flat)$. 
+\item $\text{div}(X)=(\ast\circ d\circ\ast)(X^\flat)$
+\end{itemize}
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $(M,g)$ be an orientable Riemannian manifold of dimension $3$. Let $X:M\to TM$ be a smooth vector field. Then we have $$\text{curl}(X)=(\ast\circ d(X^\flat))^\#$$
+\end{lmm}
+
+\subsection{The $L^2$-Norm}
+\begin{defn}{The $L^2$-Norm}{}\\
+Let $(M,g)$ be an orientable Riemannian manifold. Define the $L^2$-norm on $M$ to be the map $\langle -,-\rangle_{L^2}:\Omega^k(M)\times\Omega^k(M)\to\R$ by the formula $$\langle\alpha,\beta\rangle_{L^2}=\int_M\langle\alpha,\beta\rangle_gdV$$ where $\langle-,-\rangle_g$ is the induce inner product on $k$-forms. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $(M,g)$ be an orientable Riemannian manifold. Then $\langle-,-\rangle_{L^2}$ defines an inner product on the compactly supported smooth $k$-forms on $M$ for any $k\in\N$. 
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $(M,g)$ be an orientable Riemannian manifold. Let $\alpha,\beta\in\Omega^k(M)$ be compactly supported smooth $k$-forms. Then we have $$\langle\alpha,\beta\rangle_{L^2}=\int_M\alpha\wedge\ast\beta$$
+\end{lmm}
+
+\subsection{The Adjoint Differential Operator}
+\begin{defn}{The Adjoint Differential Operator}{}\\
+Let $(M,g)$ be an orientable Riemannian manifold. Define the operator $d^\ast:\Omega^k(M)\to\Omega^{k-1}(M)$ by $$d^\ast(\omega)=(-1)^{n(k+1)+1}(\ast\circ d\circ\ast)(\omega)$$ for $\omega\in\Omega^k(M)$. Also define $d^\ast(\omega)=0$ for $\omega\in\Omega^0(M)$ by convention. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $(M,g)$ be an orientable Riemannian manifold. Then we have $d^\ast\circ d^\ast=0$. 
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $(M,g)$ be a compact orientable Riemannian manifold. Then we have $$\langle d^\ast\omega,\eta\rangle_{L^2}=\langle\omega,d\eta\rangle_{L^2}$$ for any $\omega\in\Omega^{k+1}(M)$ and $\eta\in\Omega^k(M)$. 
+\end{prp}
+
+\begin{defn}{The Laplace-Beltrami Operator}{}\\
+Let $M$ be an orientable Riemannian manifold. Define the Laplace-Beltrami operator on $M$ to be the map $\Delta:\Omega^k(M)\to\Omega^k(M)$ given by $$\Delta=d^\ast\circ d+d\circ d^\ast$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $M$ be an orientable Riemannian manifold. Then the following are true regarding the Laplace-Beltrami operator. 
+\begin{itemize}
+\item $\ast\circ\Delta=\Delta\circ\ast$. 
+\item $\langle\Delta\alpha,\beta\rangle_{L^2}=\langle\alpha,\Delta\beta\rangle_{L^2}$ for any compactly supported differential forms $\alpha,\beta\in\Omega^k(M)$. 
+\end{itemize}
+\end{lmm}
+
+\subsection{The Hodge Theorem for Riemannian Manifolds}
+\begin{defn}{Harmonic Forms}{}\\
+Let $M$ be an orientable Riemannian manifold. Let $\alpha\in\Omega^k(M)$. We say that $\alpha$ is harmonic if $\alpha\in\ker(\Delta)$. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $M$ be an orientable Riemannian manifold. Let $\alpha\in\Omega^k(M)$. Then $\alpha$ is harmonic if and only if $d(\alpha)=0$ and $d^\ast(\alpha)=0$. 
+\end{lmm}
+
+\begin{defn}{The Space of Harmonic Forms}{}\\
+Let $M$ be an orientable Riemannian manifold. Define the space of harmonic $k$-forms to be $$\mH^k(M)=\ker(\Delta)$$
+\end{defn}
+
+\begin{thm}{Hodge Theorem}{}\\
+Let $M$ be an compact orientable Riemannian manifold. Then the following are true. 
+\begin{itemize}
+\item $\mH^k$ is finite dimensional for all $k\in\N$. 
+\item There is a decomposition $$\Omega^k(M)\cong\mH^k(M)\oplus\im(\Delta)$$
+\end{itemize}
+\end{thm}
+
+\begin{crl}{}{}\\
+Let $M$ be an orientable Riemannian manifold. Then the quotient map induces an isomorphism $$\mH^k(M)\cong H_\text{dR}^k(M)$$ for all $k\in\N$. 
+\end{crl}
 
 
 

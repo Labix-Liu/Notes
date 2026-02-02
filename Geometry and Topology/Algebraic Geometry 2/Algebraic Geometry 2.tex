@@ -2274,6 +2274,8 @@ Let $X$ be a scheme over a scheme $S$. Let $\Delta:X\to X\times_SX$ be the diago
 Let $X,Y$ be schemes. Let $f:X\to Y$ be a morphism. Let $U\subseteq X\times_YX$ be the largest open subset such that $\Delta:X\to U$ is a closed immersion. Let $\mI$ be the ideal sheaf of $\Delta:X\to U$. Define the sheaf of relative differentials of $f$ to be $$\Omega_{X/Y}^1=\Delta^\ast(\mI/\mI^2)$$
 \end{defn}
 
+If $f$ is separated, then $\Delta:X\to X\times_YX$ is already a closed immersion and there is no need to take an open subset of $X\times_YX$ to form the ideal sheaf. In this case, we have $\Omega_{X/Y}^1=\mI/\mI^2$. \\
+
 \begin{lmm}{}{}\\
 Let $X,Y$ be schemes. Let $f:X\to Y$ be a morphism. Then $\Omega_{X/Y}^1$ is a quasicoherent $\mO_X$-module. 
 \end{lmm}
@@ -2387,9 +2389,19 @@ where
 Let $X,Y$ be schemes. Let $f:X\to Y$ be a morphism. Define the differential $d:\mO_X\to\Omega_{X/Y}^1$ to be the morphism of sheaves of abelian groups given by
 \end{defn}
 
+Note: They are $f^{-1}\mO_Y$-linear, but not $\mO_X$-linear. 
+
 \begin{lmm}{}{}\\
 Let $X,Y$ be schemes. Let $f:X\to Y$ be a morphism. Let $V\subseteq Y$ be an affine open subset. Let $U\subseteq f^{-1}(V)$ be an affine open subset of $X$. Then $\Gamma(d|_U):\mO_X(U)\to\Omega_{X/Y}^1(U)$ is given by the universal derivation associated to the module of Kahler differentials $\Omega_{\Gamma(U)/\Gamma(V)}^1$. 
 \end{lmm}
+
+\begin{defn}{The Relative de Rham Complex}{}\\
+Let $X,Y$ be schemes. Let $f:X\to Y$ be a morphism. Define the relative de Rham complex $\Omega_{X/Y}^\bullet\in\bold{Ch}(\bold{Ab}(X))$ of $X$ over $Y$ by the following data. 
+\begin{itemize}
+\item The $n$th term is given by $\Omega_{X/Y}^n=\bigwedge_{i=1}^n\Omega_{X/Y}^1$
+\item The boundary operator $d^n:\Omega_{X/Y}^n\to\Omega_{X/Y}^{n+1}$ is given by $d^n=\bigwedge_{i=1}^nd$
+\end{itemize}
+\end{defn}
 
 \begin{defn}{The Canonical Sheaf}{}\\
 Let $k$ be an algebraically closed field. Let $X$ be a regular scheme over $k$. Define the canonical sheaf of $X$ to be $$\mK_X=\Omega_{X/k}^{\dim(X)}=\bigwedge_{i=1}^{\dim(X)}\Omega_{X/k}^1$$
@@ -2397,6 +2409,13 @@ Let $k$ be an algebraically closed field. Let $X$ be a regular scheme over $k$. 
 
 \pagebreak
 \section{Cohomology of Schemes}
+Let $X$ be a space. Let $\mU$ be an open cover of $X$. Let $\mF$ be a sheaf on $X$. Recall that there is a natural map $$\text{\v{H}}^p(X,\mU,\mF)\to H^p(X,\mF)$$ where $\text{\v{H}}^p(X,\mU,\mF)$ is the \v{C}ech cohomology of $X$ (the cohomology of the chain complex $C^\bullet(X,\mU,\mF)\in\bold{Ch}(\mA)$. 
+
+\begin{prp}{}{}\\
+Let $X$ be a space. Let $\mU$ be an affine open cover of $X$. Let $\mF$ be a sheaf on $X$. If $X$ is Noetherian and separated, then there are isomorphisms $$\text{\v{H}}^p(X,\mU,\mF)\cong H^p(X,\mF)$$ for all $p>0$ induced by the natural map. 
+\end{prp}
+
+
 \subsection{Cohomology of a Noetherian Affine Scheme}
 \begin{prp}{}{} Let $I$ be an injective module over a Noetherian ring $A$. Then the sheaf $\widetilde{I}$ on $\text{Spec}(A)$ is flasque. 
 \end{prp}
@@ -2433,6 +2452,26 @@ Let $k$ be a field.
 Let $S$ be a scheme. Let $X$ be a scheme over $S$. Define the $n$th algebraic de Rham cohomology group by $$H_\text{dR}^n(X/S)=\H^n(X;\Omega_{X/S}^\bullet)$$
 \end{defn}
 
+\begin{lmm}{}{}\\
+Let $S$ be a scheme. Let $X$ be a scheme over $S$. Then $\text{Tot}^\oplus\left(\mC^\bullet(X,\mU,\Omega_{X/S}^\bullet)\right)$ is an acyclic resolution of $\Omega_{X/S}^\bullet$. 
+\end{lmm}
+
+Thus one way to compute the de Rham cohomology would be $$H_\text{dR}^n(X/S)\cong H^n(\text{Tot}^\oplus(\mC^\bullet(X,\mU,\Omega_{X/S}^\bullet))$$
+
+\begin{eg}{}{}\\
+Let $U_0=\text{Spec}(R_0=k[x,y]/(y^2-f(x)))$ where $k$ is a field of characteristic $0$ and $f$ is separable and $\deg(f)=2g+1$ or $2g+2$. Let $U_1=\text{Spec}(R_1=k[u,v]/(v^2-h(u)))$ where $h(u)=u^{2g+2}h(1/u)$. Then we have $$H_\text{dR}^i(X/k)=H^i\left(R_0\oplus R_1\to R_0\frac{dx}{y}\oplus R_1\frac{du}{v}\oplus R_0[1/x]\to R_0[1/x]dx\right)$$ where the first map is given by $(w,z)\mapsto(dw,dz,w-z(1/x,y/x^{g+1}))$, the second map is given by $(wdx,zdu,g(x,y))\mapsto wdx-zdu-dg$ where $du=-z(1/x, y/x^{g+1})dx/x^2$. 
+\begin{itemize}
+\item $H_\text{dR}^0(X/k)\cong k$. 
+\item $H_\text{dR}^2(X/k)\cong H_\text{dR}^1(X/k)$. 
+\item $H^0(X,\Omega_{X/k}^0)\hookrightarrow H_\text{dR}^1(X/k)$ given by $\omega\mapsto(\omega|_{U_0},\omega|_{U_1},0)$ is an inclusion since the global sections are constant. 
+\item There is a map $H_\text{dR}^1(X/kk)\to H^1(X,\mO_X$ given by $(\omega_0,\omega_1,g)\mapsto g$ and precomposing with the above map gives $0$. It is clearly surjective. 
+\item So we have an exact sequence $$0\to H^0(X,\Omega_{X/k}^\bullet)\to H_\text{dR}^1(X/k)\to H^1(X,\mO_X)\to 0$$ called the Hodge filtration on $H_\text{dR}^1(X/k)$. In characteristic $p$ this is more subtle: not all global differentials are closed. 
+\item What can we say about the map $H_\text{dR}^1(X/k)\to H_\text{dR}^1(U_0/k)$ given by $(\omega_0,\omega_1,g)\mapsto g$. 
+\item The LES in local cohomology gives $$0\to H^1(X(\C),\C)\to H^1(U_0(\C),\C)\to H^2(X(\C),U_0(\C),\C)\to H^2(X(\C),\C)\to 0$$ and $H^2(X(\C),U_0(\C),\C)\cong H^0((X-U_0)(\C),\C)\cong\C^{\abs{X-U_0}(\C)}$. If $\deg(f)$ is odd, $\abs{(X-U_0)(\C)}=1$. Then $H^1(X(\C),\C)\to H^1(U_0(\C),\C)$ is an isomrophism. If $\deg(f)$ is even, then we have $0\to H^1(X(\C),\C)\to H^1(U_0(\C),\C)\to\C\to 0$. 
+Same thing happens for de Rham cohomology. Surjectivity of $H_\text{dR}^1(X/k)\to H_\text{dR}^1(U_0/k)$ iff every class $(\omega_0)$ for $\omega_0\in\Omega_{R_0/k}^1$ is the image of $\ker(R_0dx/y\oplus R_1du/v\oplus R_0[1/x]\to R_0[1/x]dx)$. i.e. $\exists\omega_1\in R_1du/v$, $g\in R_0[1/x]$ such that $\omega_0-\omega_1=dg$. The obstruction to finding such an $\omega_1$ and $g$ would be the residue of a differential. Pick $z\in(X-U_0)(\overline{k})$ a closed point and a parameter $t$ at $z$. Write $\omega$ as $F(t)=\sum_{i=0}^\infty a_it^i\in\overline{k}[[t]]$. Eg any meromorphic can be written as rational function times dt, then, take formal power series. Then $\text{Res}_z(\omega)=a_1$ of $F(t)$. If $\omega_1\in\Omega_{R_1/k}^1$ then $\text{Res}_z=0$ (indeed it has no pole). Also $\text{Res}_z(dg)=0$. Then image of $H_\text{dR}^1(X/k)$ is contained in the kernel of the residue map $$\text{Res}:H_\text{dR}^0(U_0/k)\to\bigoplus_{Z\in(X-U_0(\overline{k})}\overline{k}$$ Fact: For any open $U\subseteq X$, $\omega\in H^0(U,\Omega_{X/k})$, then $$\sum_{Z\in(X-U)(\overline{k})}\text{Res}_z(\omega)=0$$
+\end{itemize}
+\end{eg}
+
 \begin{prp}{}{}\\
 Let $S$ be a scheme. Let $X$ be a scheme over $S$. Then the following are true. 
 \begin{itemize}
@@ -2454,8 +2493,33 @@ Let $S$ be a scheme. Let $X$ be a scheme over $S$. Then $H_\text{dR}^\ast(X/S)$ 
 
 
 \begin{lmm}{}{}\\
-Let $k$ be a field of characteristic $0$. Let $X$ be a smooth affine variety over $k$. Then we have $$H_\text{dR}^n(X)=H^n(\Gamma(X,\Omega_{X/k}^\bullet))$$
+Let $k$ be a field of characteristic $0$. Let $X$ be a smooth affine variety over $k$. Then we have $$H_\text{dR}^n(X)=H^n(\Gamma(X,\Omega_{X/k}^\bullet))$$ for all $n\in\N$. 
 \end{lmm}
+
+\begin{eg}{}{}\\
+Let $k$ be a field of characteristic $0$. Let $R=k[x_1,\dots,x_n]$ be the polynomial ring over $k$. Then $\Gamma\left(X,\Omega_{\text{Spec}(R)/k}^1\right)=\Omega_{R/k}^1=\bigoplus_{i=1}^nRdx_i$. Then we have $$\Gamma\left(X,\Omega_{\text{Spec}(R)/k}^j\right)=\bigoplus_{1\leq i_1<\cdots<i_j\leq n} Rdx_{i_1}\wedge\cdots\wedge dx_{i_j}$$ Then we have $$H_\text{dR}^i(R/k)=\begin{cases}
+k & \text{ if }i=0\\
+0 & \text{ otherwise }
+\end{cases}$$
+\end{eg}
+
+TBR:
+
+\begin{eg}{}{}\\
+Let $k$ be a field of characteristic $p>0$. Then we have $$\dim_k(H^1(\Gamma(\text{Spec}(k[t]),\Omega_{\text{Spec}(k[t])/k}^1)))=\infty$$ Indeed, we have $$H^1(\Gamma(\text{Spec}(k[t]),\Omega_{\text{Spec}(k[t])/k}^1))=\frac{k[t]}{\langle f'(t)\;|\;f\in k[t]\rangle}=\frac{k[t]}{\bigoplus_{i=1}^\infty it^{i-1}dt}\cong\bigoplus_{i=1}^\infty t^{ip-1}dt$$
+\end{eg}
+
+\begin{eg}{}{}\\
+$\Omega_{\Z[\sqrt{2}]/\Z}^1\cong(\Z/2\Z)d\sqrt{2}$. $H^1(\Gamma(\text{Spec}(\Z\sqrt{2}),\Omega_{\Z[\sqrt{2}]/\Z}^1))\neq0$
+\end{eg}
+
+\begin{eg}{}{}\\
+Let $k$ be a field of characteristic $p\neq 2$. Let $f\in k[x]$ be separable. Let $R=\frac{k[x,y]}{y^2-f(x)}$. Then we have $$\Omega_{R/k}^1\cong\frac{\Omega_{k[x,y]/k}^1\otimes_{k[x,y]}k}{(2ydy-f'(x)dx)}\cong\frac{Rdx\oplus Rdy}{R(2ydy-f'(x)dx)}$$ Using the quotient relation, we may write $dy=\frac{f'(x)dx}{2y}$ in the module. Thus $dx/y$ is a generator of the module. \\
+
+Since $f$ is separable, there exists $g,h\in k[x]$ such that $gf+hf'=1$. Let $\omega=aydx+2bdy\in\Omega_{R/k}^1$. Then we have $y\omega=dx$. Hence $y$ divides $dx$ and $\omega=dx/y$. \\
+
+Now let $z=a(x)+b(x)y\in R$ be arbitrary. Then we have $$dz=(a'(x)+b'(x)y)dx+h(x)dy=(ya'(x)+b'(x)f(x)+\frac{1}{2}b(x)f'(x))\omega$$ Thus every element of $\Omega_{R/k}^1$ is of the form $q(x)\omega$ for some $q(x)\in k[x]$. If $\deg(q)\geq\deg(f)$, then there exists $p\in k[x]$ such that $\deg(p)>\deg(q)$ such that $$[p(x)\omega]=[q(x)\omega]$$ in $H_\text{dR}^1(R/k)$. 
+\end{eg}
 
 \begin{lmm}{}{}\\
 Let $k$ be a field of characteristic $0$. Let $X$ be a smooth variety over $k$. Then the following are true. 
@@ -2469,7 +2533,36 @@ Let $k$ be a field of characteristic $0$. Let $X$ be a smooth variety over $k$. 
 
 \end{prp}
 
-\subsection{Hodge Cohomology}
+\subsection{Hodge de Rham Spectral Sequences}
+\begin{defn}{The Hodge Filtration}{}\\
+Let $S$ be a scheme. Let $X$ be a scheme over $S$. Define the Hodge filtration $F^\bullet\Omega_{X/S}^\bullet$ of $X$ to be $$F^i\Omega_{X/S}^j=\begin{cases}
+\Omega_{X/S}^j & \text{ if }j\geq i\\
+0 & \text{ otherwise }
+\end{cases}$$
+\end{defn}
+
+Thus for each $i$, the collection of complexes $$F^i\Omega_{X/S}^\bullet=(0\to\Omega_{X/S}^i\to\Omega_{X/S}^{i+1}\to\cdots)$$ form the filtration for $\Omega_{X/S}^\bullet$. 
+
+\begin{lmm}{}{}\\
+Let $S$ be a scheme. Let $X$ be a scheme over $S$. Then $F^\bullet\Omega_{X/S}^\bullet$ is an exhaustive filtration. 
+\end{lmm}
+
+\begin{defn}{The Hodge de Rham Spectral Sequence}{}\\
+Let $S$ be a scheme. Let $X$ be a scheme over $S$. Define the Hodge de Rham spectral sequence to be the spectral sequence associated to the Hodge siltration $F^\bullet\Omega_{X/S}^\bullet$. 
+\end{defn}
+
+The $E^0$ page is given by $$E_0^{p,q}=\frac{F^p\Omega_{X/S}^{p+q}}{F^{p+1}\Omega_{X/S}^{p+q}}=\frac{\Omega_{X/S}^q}{\Omega_{X/S}^{q-1}}$$
+
+\begin{lmm}{}{}\\
+Let $S$ be a scheme. Let $X$ be a scheme over $S$. Then we have $$E_1^{p,q}=H^q(X,\Omega_{X/S}^p)\Rightarrow H_\text{dR}(X/S)$$
+\end{lmm}
+
+\begin{thm}{Deligne}{}\\
+If $S=\text{Spec}(k)$, $k$ char $0$, $X\to S$ smooth and proper. Then the Hodge de Rham spectral sequence degenerates at the $E_1$ page (all differentials in page $1$ is $0$). 
+\end{thm}
+
+When you have a $2$-step filtration: $0\to F^1C^\bullet\to C^\bullet\to C^\bullet/F^1C^\bullet\to 0$, the spectral sequence is the long exact sequence in cohomology. 
+
 
 \pagebreak
 \section{Intersection Theory}

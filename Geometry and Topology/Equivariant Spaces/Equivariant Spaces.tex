@@ -37,39 +37,278 @@ Notice that every group can be given the discrete topology, and so every group i
 \begin{defn}{Discrete Group}{} Let $G$ be a topological group. We say that $G$ is a discrete group if it has the discrete topology. 
 \end{defn}
 
-\begin{prp}{}{} Let $G$ be a topological group. Let $H$ be a subgroup of $G$. Then $H$ and $\overline{H}$ are both topological groups. Moreover, if $H$ is normal, then $\overline{H}$ is normal. 
+\begin{prp}{}{}\\
+Let $G$ be a topological group. Let $H\leq G$ be a subgroup. Then $H$ is a topological group. 
 \end{prp}
 
-\begin{prp}{}{} Let $G$ be a topological group. Let $H$ be a subgroup of $G$. Then the normalizer $N_G(H)$ and the centralizer $C_G(H)$ are closed subgroups of $G$. 
-\end{prp}
-
-\begin{defn}{The Coset Space}{} Let $G$ be a topological group and $H$ a closed subgroup of $G$. Define the coset space of $H$ in $G$ to be the quotient space $$G/H=\{gH\;|\;g\in G\}$$ together with the (topological) quotient map $p:G\to G/H$ such that $U\subseteq G/H$ is open if and only if $p^{-1}(U)$ is open. 
+\begin{defn}{Continuous Homomorphisms}{}\\
+Let $G,H$ be topological groups. Let $\varphi:G\to H$ be a function. We say that $\varphi$ is a continuous homomorphism if the following are true. 
+\begin{itemize}
+\item $\varphi$ is a group homomorphism. 
+\item $\varphi$ is continuous. 
+\end{itemize}
 \end{defn}
 
-\begin{thm}{}{} Let $G$ be a topological group. Let $H$ be a subgroup of $G$. Then the (topological) quotient map $$p:G\to G/H$$ is an open map. Moreover, the following are true regarding the quotient. 
+\begin{defn}{Topological Group Isomorphism}{}\\
+Let $G,H$ be topological groups. Let $\varphi:G\to H$ be a continuous homomorphism. We say that $\varphi$ is a topological group isomorphism if there exists a continuous homomorphism $\psi:H\to G$ such that $$\psi\circ\varphi=\text{id}_G\;\;\;\text{ and }\;\;\;\varphi\circ\psi=\text{id}_H$$
+\end{defn}
+
+\subsection{Equivariant Spaces}
+\begin{defn}{Continuous Group Actions}{}\\
+Let $G$ be a topological group. Let $X$ be a space. A continuous group action of $G$ on $X$ is a function $\cdot:G\times X\to X$ such that it is a group action and is continuous. In this case, we say that $X$ is a $G$-space. 
+\end{defn}
+
+Frequently a continuous group action is also called a (topological) transformation group, for example in Milnor's Topology of Fiber Bundles or Introduction to Compact Topological Groups. 
+
+\begin{defn}{Group of Homeomorphisms}{}\\
+Let $X$ be a space. Define the group of homeomorphisms of $X$ to be $$\text{Homeo}(X)=\{f:X\to X\;|\;X\text{ is a homeomorphism }\}$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $G$ be a topological group. Let $X$ be a $G$-space. Then the map $G\to\text{Homeo}(X)$ defined by $g\mapsto(x\mapsto g\cdot x)$ is a group homomorphism. 
+\end{prp}
+
+Let $\varphi:G\to\text{Homeo}(X)$ be a group homomorphism. Then the induced group action $g\mapsto(x\mapsto g\cdot x)$ may not necessarily be continuous. Hence the set of continuous group actions is not quite the set of group homomorphisms from $G$ to $\text{Homeo}(X)$. This is the same as saying not every group action of $G$ on $X$ is continuous. 
+
+\begin{defn}{G-Equivariant Maps}{}\\
+Let $G$ be a topological group. Let $X,Y$ be $G$-spaces. Let $f:X\to Y$ be a map. We say that $f$ is $G$-equivariant if we have $$f(g\cdot x)=g\cdot f(x)$$ for all $x\in X$ and $g\in G$. 
+\end{defn}
+
+\begin{eg}{}{}\\
+Let $G,H$ be topological groups. Let $f:G\to H$ be a function. Give $H$ the structure of a $G$-space by the action $g\cdot h=f(g)h$. Then $f$ is a $G$-equivariant map if and only if $f$ is a continuous homomorphism. 
+\end{eg}
+
+Thus the theory of equivariant spaces subsumes the theory of topological groups. 
+
+\begin{defn}{Equivariant Isomorphisms}{}\\
+Let $G$ be a topological group. Let $X,Y$ be $G$-spaces. Let $f:X\to Y$ be a $G$-equivariant map. We say that $f$ is an equivariant isomorphism if there exists a $G$-equivariant map $h:Y\to X$ such that $$h\circ f=\text{id}_X\;\;\;\text{ and }f\circ h=\text{id}_Y$$
+\end{defn}
+
+\begin{defn}{Homogeneous Space}{}\\
+Let $G$ be a topoglogical group. Let $X$ be a $G$-space. We say that $X$ is a homogeneous $G$-space if $G$ acts transitively on $X$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $G$ be a topological group. Then $G$ is a homogeneous $G$-space with the action of left multiplication. 
+\end{prp}
+
+\subsection{The Coset Space and The Isomorphism Theorems}
+\begin{defn}{The Coset Space}{}\\
+Let $G$ be a topological group. Let $H\leq G$ be a subgroup. Define the coset space of $H$ in $G$ to be the quotient space $$G/H=\{gH\;|\;g\in G\}$$ whose equivalent relation is given by $g_1\sim g_2$ if $g_1g_2^{-1}\in H$
+\end{defn}
+
+Being a quotient space, the coset space comes equipped with the universal property: Let $p:G\to G/H$ be the quotient map. For any continuous map $f:G\to X$ to a space $X$ such that $f(h_1)=f(h_2)$ for $h_1,h_2\in H$, there exists a unique map $\widetilde{f}:G/H\to X$ such that the following diagram commutes: \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	G & {G/H} \\
+	& X
+	\arrow["p", from=1-1, to=1-2]
+	\arrow["f"', from=1-1, to=2-2]
+	\arrow["{\exists!\widetilde{f}}", dashed, from=1-2, to=2-2]
+\end{tikzcd}}\\
+
+\begin{prp}{}{}\\
+Let $G$ be a topological group. Let $H\leq G$ be a subgroup. Consider the action of $G$ on $G/H$ by left multiplication. Then $G/H$ is a homogeneous $G$-space. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $G$ be a topological group. Let $H,K\leq G$ be subgroups. Then the following are true. 
 \begin{itemize}
-\item $G/H$ is Hausdorff if and only if $H$ is closed in $G$
-\item $G/H$ is discrete if and only if $H$ is open in $G$. 
-\item If $H$ is normal and closed in $G$, then $G/H$ is a topological group. 
+\item There exists a $G$-equivariant map $G/H\to G/K$ if and only if $H$ and $K$ are conjugate. 
+\item Let $\varphi:G/H\to G/K$ be a $G$-equivariant map. Then there exists $g\in G$ such that $gHg^{-1}=K$ and $\varphi(aH)=gaH$. 
+\item Let $\varphi_g:G/H\to G/K$ be the map given by $\varphi_g(aH)=gaH$ for $g\in G$ such that $gHg^{-1}=K$. Then $\varphi_g=\varphi_h$ if and only if $gh^{-1}\in K$. 
 \end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $G$ be a topological group. Let $H\trianglelefteq G$ be a normal subgroup. Then $G/H$ is a topological group. 
+\end{prp}
+
+If $H$ is a normal subgroup, then the universal property of quotient spaces and the universal property of quotient groups give the following universal property: For any topological group $K$ and any continuous homomorphism $f:G\to K$ such that $f(h)=1_K$ for all $h\in H$, there exists a unique continuous homomorphism $\widetilde{f}:G/H\to K$ such that the following diagram commutes: \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	G & {G/H} \\
+	& K
+	\arrow["p", from=1-1, to=1-2]
+	\arrow["f"', from=1-1, to=2-2]
+	\arrow["{\exists!\widetilde{f}}", dashed, from=1-2, to=2-2]
+\end{tikzcd}}\\
+
+Let $G,H$ be a topological groups. Let $\varphi:G\to H$ be a continuous homomorphism. By the first isomorphism theorem of groups, there is a group isomorphism $G/\ker(\varphi)\cong\im(\varphi)$ induced by $\varphi$. In general, the induced map $G/\ker(\varphi)\to\im(\varphi)$ is only a continuous homomorphism that is a bijection, and hence not a topological group isomorphism. 
+
+\begin{thm}{The First Isomorphism Theorem for Topological Groups}{}\\
+Let $G,H$ be topological groups. Let $\varphi:G\to H$ be a continuous homomorphism. If $G$ is compact, then the induced map $$\overline{\varphi}:\frac{G}{\ker(\varphi)}\to\im(\varphi)$$ is a topological group isomorphism. 
 \end{thm}
 
-\subsection{Morphisms Between Topological Groups}
-\begin{defn}{Continuous Homomorphisms}{} Let $G$ and $H$ be topological groups. A function $f:G\to H$ is said to be a continuous homomorphism if it is continuous and a group homomorphism. 
+\begin{prp}{}{}\\
+Let $G$ be a topological group. Let $X$ be a $G$-space. Let $x_0\in X$. Then there is an isomorphism of $G$-spaces $$\frac{G}{\text{Stab}_G(x_0)}\cong\text{Orb}_G(x_0)$$ induced by the map $p:G\to\text{Orb}_G(x_0)$ given by $g\mapsto g\cdot x_0$. 
+\end{prp}
+
+\begin{thm}{The Second Isomorphism Theorem for Topological Groups}{}\\
+Let $G$ be a topological group. Let $H,K\trianglelefteq G$ be normal subgroups such that $H\subseteq K$. Then there is a topological group isomorphism $$\frac{G/H}{K/H}\cong G/K$$ induced by the map $G/H\to G/K$ given by $gH\mapsto gK$. 
+\end{thm}
+
+\begin{prp}{}{}\\
+Let $G$ be a topological group. Let $H,K\leq G$ be subgroups of $G$ such that $H\leq K$. Then the following are true. 
+\begin{itemize}
+\item The topology of $K/H$ as the quotient space of $K$ and the topology of $K/H$ as a subgroup of $G/H$ agree. 
+\item Every subgroup of $G/H$ is isomorphic as a topological groups as a quotient group of $K/H$. 
+\end{itemize}
+\end{prp}
+
+Warning: There is no third isomorphism theorem for topological groups. If it were true, it would describe an isomorphism $$\frac{H}{H\cap K}\cong\frac{H+K}{K}$$ where $H,K\leq G$ are subgroups such that $K\trianglelefteq G$ (we use addition here as the group operation on $G$). We construct a counter example for this statement. Let $G=\R$, $K=\Z$ and $H=\lambda\Z$ for $\lambda\in\R\setminus\Q$. Then $H\cap K=\{0\}$ so the left hand side is isomorphic to $\Z$ equipped with the discrete topology. If $\Z+\lambda\Z$ is dense in $\R$, then the right handside evaluates to $\frac{\Z+\lambda\Z}{\Z}$ as a dense subspace of $\R/\Z\cong S^1$. But it does not carry the discrete topology since every open set of $S^1$ intersects $\frac{\Z+\lambda\Z}{\Z}$ at infinitely many points, so that no finite set is open. \\
+
+So it remains to show that $\Z+\lambda\Z$ is dense in $\R$. 
+
+\subsection{Fundamental Systems of Neighbourhoods}
+\begin{defn}{Fundamental Systems of Neighbourhoods}{}\\
+Let $X$ be a space. Let $x\in X$. A fundamental system of neighbourhoods of $x$ consists of a collection of open neighbourhoods $$\mF_x\subseteq\{U\subseteq X\;|\;U\text{ is an open neighbourhood of }x\}$$ of $x$ such that for any open neighbouhood $V\subseteq X$ of $x$, there exists $U\in\mF$ such that $U\subseteq V$. 
 \end{defn}
 
-\begin{prp}{}{} Let $G,H$ be topological groups. Let $\varphi:G\to H$ be a surjective continuous homomorphism. Then $\ker(\varphi)$ is a closed subgroup of $G$ and $\varphi$ is a continuous bijection. 
+\begin{lmm}{}{}\\
+Let $X$ be a space. Let $\mF_x$ be a fundamental system of neighbourhoods of $x$ for each $x\in X$. Then $\bigcup_{x\in X}\mF_x$ is a basis for $X$. 
+\end{lmm}
+
+Let $G$ be a topological group. Let $\mF$ be a fundamental system of neighbourhoods of $1_G$. Then for any $g\in G$, the set $\mF_g=\{gU\;|\;U\in\mF\}$ is a fundamental system of neighbourhoods of $g$ since left multiplication by $g$ is a homeomorphism. This is the first example of how the local topology of $g$ can be understood just by looking locally at $1_G$ because $G$ is a homogeneous $G$-space with the action of left multiplication. 
+
+\begin{prp}{}{}\\
+Let $G$ be a topological group. Let $\mF$ be a fundamental system of neighbourhoods at $1_G$. Then the following are true. 
+\begin{itemize}
+\item FN1: If $U,V\in\mF$, then there exists $W\in\mF$ such that $W\subseteq U\cap V$. 
+\item FN2: If $g\in U\in\mF$, then there exists $V\in\mF$ such that $gV\subseteq U$. 
+\item FN3: If $U\in\mF$, then there exists $V\in\mF$ such that $V^{-1}V\subseteq U$. 
+\item FN4: If $U\in\mF$ and $g\in G$, then there exists $V\in\mF$ such that $g^{-1}Vg\subseteq U$. 
+\end{itemize}
 \end{prp}
 
-When the topological group $G$ is compact, the first isomorphism theorem in fact gives a homeomorphism. 
-
-\begin{prp}{}{} Let $G,H$ be topological groups. Let $\varphi:G\to H$ be a surjective continuous homomorphism. If $G$ is compact, then $$\overline{\varphi}:\frac{G}{\ker(\varphi)}\to H$$ is a homeomomorphism. 
+\begin{prp}{}{}\\
+Let $G$ be a group. Let $\mF\subseteq\mP(G)$ be a collection of subsets of $G$ such that for each $U\in\mF$, we have $1_G\in\mF$ and that the following are satisfied: 
+\begin{itemize}
+\item FN1: If $U,V\in\mF$, then there exists $W\in\mF$ such that $W\subseteq U\cap V$. 
+\item FN2: If $g\in U\in\mF$, then there exists $V\in\mF$ such that $gV\subseteq U$. 
+\item FN3: If $U\in\mF$, then there exists $V\in\mF$ such that $V^{-1}V\subseteq U$. 
+\item FN4: If $U\in\mF$ and $g\in G$, then there exists $V\in\mF$ such that $g^{-1}Vg\subseteq U$. 
+\end{itemize}
+Then there exists a unique topology on $G$ such that $G$ is a topological group and $\mF$ is a fundamental system of neighbourhoods of $1_G$. 
 \end{prp}
 
-\begin{prp}{}{} Let $G$ be a compact topological group. Let $g\in G$. Then $$A=\overline{\{g^n\;|\;n\in\N\}}$$ is a subgroup of $G$. 
+As described above, the local topology of $G$ can be understood by the properties around $1_G$. Therefore the connected component of $1_G$ plays a special role. 
+
+\begin{defn}{The Identity Component}{}\\
+Let $G$ be a topological group. Define the identity component of $G$ to be $$G_0=\bigcup_{1_G\in U\text{ is connected }}U$$
+\end{defn}
+
+\subsection{Topological Properties of Topological Groups}
+We investigate topological properties of topological groups, and the relation of topological properties between its subgroups and quotient groups. This includes the separation axioms, connectedness and compactness. \\
+
+We begin with a discussion of Hausdorffness. 
+
+\begin{prp}{}{}\\
+Let $G$ be a topological group. Let $H\leq G$ be a subgroup. Then the following are true. 
+\begin{itemize}
+\item $H$ and $\overline{H}$ are topological groups. 
+\item If $H$ is normal, then $\overline{H}$ is normal. 
+\item $N_G(H)$ and $C_G(H)$ are closed subgroups of $G$. 
+\end{itemize}
 \end{prp}
 
-\subsection{Some Real Topological Groups}
+\begin{prp}{}{}\\
+Let $G$ be a topological group. Let $H\leq G$ be a subgroup. Then the following are true. 
+\begin{itemize}
+\item If $H$ is open, then $H$ is closed. 
+\item If $H$ is closed and $[G:H]<\infty$, then $H$ is open. 
+\item If $U\subseteq G$ is open and $1_G\in U\subseteq H$, then $H$ is open. 
+\end{itemize}
+\end{prp}
+
+Let $X$ be a space. Recall that $X$ is $T_1$ if $\{x\}$ is a closed subset for all $x\in X$. 
+
+\begin{prp}{}{}\\
+Let $G$ be a topological group. Then the following are equivalent. 
+\begin{itemize}
+\item $G$ is Hausdorff. 
+\item For any topological group $H$ and any continuous homomorphism $\varphi:H\to G$, we have that $\ker(\varphi)$ is a closed subgroup of $H$. 
+\item $\{1_G\}$ is a closed subgroup of $G$. 
+\item $G$ is a $T_1$ space. 
+\item For any fundamental system of neighbourhoods $\mF$ of $1_G$, we have $$\bigcap_{U\in\mF}U=\{1_G\}$$
+\item We have $$\bigcap_{1_G\in U\text{ is open }}U=\{1_G\}$$
+\end{itemize}
+\end{prp}
+
+Let $X$ be a space. Recall that $X$ is $T_0$ if for any $x,y\in X$, there exists an open set $U\subseteq X$ such that $x\in U$ or $y\in U$ and not both. 
+
+\begin{prp}{}{}\\
+Let $G$ be a topological group. Let $G$ be a $T_0$ space. Then $G$ is Hausdorff. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $G$ be a topological group. Let $H\leq G$ be a subgroup. Then the following are true. 
+\begin{itemize}
+\item $G/H$ is Hausdorff if and only if $H$ is closed in $G$. 
+\item If $H$ and $G/H$ are Hausdorff, then $G$ is Hausdorff. 
+\item $G/H$ is discrete if and only if $H$ is open in $G$. 
+\end{itemize}
+\end{prp}
+
+Let $X$ be a space. Recall that $X$ is regular if one of the following equivalent conditions are satisfied: 
+\begin{itemize}
+\item For all $x\in X$, and all open set $U\subseteq X$ such that $x\in U$, there exists an open set $V\subseteq U$ containing $x$ such that $\overline{V}\subseteq U$. 
+\item For all $x\in X$ and any closed set $C$ such that $x\notin C$, there exists disjoint open subsets $U,V\subseteq X$ such that $x\in U$ and $C\subset V$. 
+\end{itemize}
+
+\begin{prp}{}{}\\
+Let $G$ be a topological group. Then the following are true. 
+\begin{itemize}
+\item $G$ is regular. 
+\item If $H\leq G$ is a subgroup, then $G/H$ is regular. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $G$ be a topological group. Let $H\leq G$ be a subgroup. Then the following are true. 
+\begin{itemize}
+\item If $G$ is connected, then $G/H$ is connected. 
+\item If $H$ and $G/H$ are connected, then $G$ is connected. 
+\item If $H$ and $G/H$ are totally disconnected, then $G$ is totally disconnected. 
+\end{itemize}
+\end{prp}
+
+\begin{lmm}{}{}\\
+Let $G$ be a topological group. If $G$ is connected, then $G$ has no proper open subgroups. 
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $G$ be a topological group. Then the following are true regarding the identity component. 
+\begin{itemize}
+\item $G_0$ is a closed normal subgroup of $G$. 
+\item $G/G_0$ is totally disconnected and Hausdorff. 
+\item The connected components of $G$ are the cosets of $G_0$. 
+\item Every open subgroup of $G$ contains $G_0$. 
+\item $G_0$ is compact. 
+\item We have $$G_0=\bigcap_{\substack{H\leq G\text{ is open}\\\text{and normal}}}H$$
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $G$ be a topological group. Let $H\leq G$ be a subgroup. Then the following are true. 
+\begin{itemize}
+\item If $G$ is compact, then $[G:H]<\infty$. 
+\item If $G$ is compact and $H$ is closed, then $H$ is compact. 
+\item If $H$ and $G/H$ are compact, then $G$ is compact. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $G$ be a topological group. Let $G_0$ be the connected component of $G$ containing $1_G$. Then $G$ is locally compact if and only if there exist $1_G\subseteq U\subseteq G$ such that $U$ is compact. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $G$ be a topological group. Let $H\leq G$ be a subgroup. Then the following are true. 
+\begin{itemize}
+\item If $G$ is locally compact, then $G/H$ is locally compact. 
+\item If $H$ and $G/H$ are locally compact, then $G$ is locally compact. 
+\end{itemize}
+\end{prp}
+
+\subsection{Subgroups of the Matrix Group}
 \begin{prp}{The Group of Matrices as a Topological Group}{} The group of real $n\times n$ matrices $$M_n(\R)=\{(a_{ij})_{n\times n}\;|\;a_{ij}\in\R\}$$ with group structure given by matrix addition can be given the structure of a topological group whose topology is given by the topology of $\R^{n^2}$ and a choice of bijection of sets $\R^{n^2}\cong M_n(\R)$. 
 \end{prp}
 
@@ -90,72 +329,189 @@ Beware that $GL(n,\R),O(n,\R),SL(n,\R),SO(n,\R)$ are not topological groups as s
 Moreover, they are closed subsets of $GL(n,\R)$. 
 \end{prp}
 
-\subsection{Some Complex Topological Groups}
-
 $GL(n,\C), U(n), SU(n)$
 
 \pagebreak
-\section{Equivariant Spaces}
-\subsection{G-Spaces and G-Equivariant Maps}
-In algebraic topology, we have the results of considering groups acting on spaces. We can in fact consider topological groups acting on spaces. 
+\section{Equivariant Topology}
+\subsection{More on Homogeneous Spaces}
+\begin{crl}{}{}\\
+Let $G$ be a topological group. Let $X$ be a $G$-space. Then the following are true. 
+\begin{itemize}
+\item If $X$ is a homogeneous $G$-space, then there is an isomorphism of $G$-spaces $$\frac{G}{\text{Stab}_G(x_0)}\cong X$$ induced by the map $G\to X$ given by $g\mapsto g\cdot x_0$ for any $x_0\in X$. 
+\item If $X$ is a homogeneous $G$-space and the action of $G$ on $X$ is free, then there is an isomorphism of $G$-spaces $$G\cong X$$ given by the map $g\mapsto g\cdot x_0$. 
+\end{itemize}
+\end{crl}
 
-\begin{defn}{Continuous Group Actions}{} Let $G$ be a topological group and $X$ a space. We say that $G$ is a continuous group action if $G$ is a group acting on $X$ such that the group action map $$\cdot:G\times X\to X$$ is continuous. In this case we say that $X$ is a $G$-space. 
-\end{defn}
-
-Frequently a continuous group action is also called a (topological) transformation group, for example in Milnor's Topology of Fiber Bundles or Introduction to Compact Topological Groups. 
-
-\begin{prp}{}{} Let $G$ be a continuous group action of $X$. Then for each $g\in G$, the left action map $x\mapsto g\cdot x$ is a homeomorphism of $X$. \tcbline
-\begin{proof}
-Every element of $g$ has an inverse $g^{-1}$ which are both continuous and are bijections on $X$. 
-\end{proof}
+\begin{prp}{}{} Let $G$ be a topological group and let $X$ be a homogenous $G$-space. Then the following are true. 
+\begin{itemize}
+\item For any $\varphi\in\text{Homeo}(X)$, $x\in X$ and $\varphi(x)$ has the same stabilizers
+\item If $x,y\in X$ has the same stabilizers, then there exists $\varphi\in\text{Homeo}(X)$ such that $\varphi(x)=y$. 
+\end{itemize}
 \end{prp}
 
-\begin{prp}{}{} Let $G$ be a topological group and $(X,\mathcal{T})$ a topological space. Then $G$ is a continuous group action on $X$ if and only if $G$ acts on $\mathcal{T}$. \tcbline
-\begin{proof}
-Suppose that $G$ is a continuous group action on $X$. Then for each $g\in G$, $g\cdot U=\{g\cdot x\;|\; x\in U\}$ for $U\in\mathcal{T}$ is open since $A_g$ as above is a homeomorphism. Now suppose that $G$ acts on $\mathcal{T}$. Then for each open set $U$ of $X$, $g^{-1}\cdot U$ is open. Thus $G$ is a continuous group action. 
-\end{proof}
+\begin{lmm}{}{} Let $G$ be a topological group and let $X$ be a homogenous $G$-space. Let $A$ be a subgroup of $\text{Homeo}(X)$. Then $A=\text{Homeo}(X)$ if and only if for any $x,y\in X$ such that $\text{Stab}_G(x)=\text{Stab}_G(y)$, there exists $\varphi\in A$ such that $\varphi(x)=y$. 
+\end{lmm}
+
+\begin{prp}{}{} Let $G$ be a topological group and let $X$ be a homogenous $G$-space. Then there is a isomorphism of left $G$-spaces $$\frac{N(\text{Stab}_G(x_0))}{\text{Stab}_G(x_0)}\cong\text{Homeo}(X)$$
 \end{prp}
 
-In particular, some authors would assume one knows this fact, so it is always nice to see it spelled out. It is also standard to denote this action just by the element $g$ instead of $A_g$. 
-
-\begin{defn}{Group of Homeomorphisms}{} Let $X$ be a space. Define the group of homeomorphisms of $X$ to be $$\text{Homeo}(X)=\{f:X\to X\;|\;f\text{ is a homeomorphism}\}$$ together with composition of functions. We say that a group $A$ is a subgroup of homeomorphisms of $X$ if $A$ is isomorphic to a subgroup of $\text{Homeo}(X)$. 
+\subsection{Orbit Spaces}
+\begin{defn}{The Orbit Space}{}\\
+Let $G$ be a topological group. Let $X$ be a $G$-space. Define the orbit space of $X$ by $G$ to be the quotient space $$X/G=\{\text{Orb}_G(x)\;|\;x\in X\}$$ of $X$ whose equivalent relation is given by $x\sim y$ if $gx=y$ for some $g\in G$. 
 \end{defn}
 
-\begin{lmm}{}{} Let $G$ be a topological group. Let $X$ be a $G$-space. Then there is a group homomorphism $\varphi:G\to\text{Homeo}(X)$ defined by $$g\mapsto\left(x\mapsto g\cdot x\right)$$ \tcbline
-\begin{proof}
-We have already seen that for any $g\in G$, the map $x\mapsto g\cdot x$ is a homeomorphism. Thus the above mapping is well defined. Now we have that 
-\begin{align*}
-\varphi(gh)(x)&=gh\cdot x\\
-&=g\cdot(h\cdot x)\\
-&=(\varphi(g)\circ\varphi(h))(x)
-\end{align*}
-and so $\varphi$ is a group homomorphism. 
+Let $G$ be a topological group. Let $H\leq G$ be a subgroup. We discussed extensively the topology of $G/H$ defined by the quotient map $p:G\to G/H$. As usual, there is viewpoint of group actions. Consider the action of $H$ on $G$ by left multiplication. Then the orbit space is precisely $G/H$. Thus once again the theory of $G$-spaces subsumes the theory of topological groups. 
+
+\begin{prp}{}{}\\
+Let $G$ be a topological group. Let $X$ be a $G$-space. Suppose that $G$ and $X$ are Hausdorff, and $G$ is compact. Let $p:X\to X/G$ be the quotient map. Then the following are true. 
+\begin{itemize}
+\item $p$ is a closed map. 
+\item $p$ is a proper map. 
+\item $X$ is compact if and only if $X/G$ is compact. 
+\item $X$ is locally compact if and only if $X/G$ is locally compact. 
+\end{itemize}
+\end{prp}
+
+\subsection{Proper Group Actions}
+Let $G$ be a group. Let $X$ be a space. We would like to ask for criteria in which $X/G$ is a Hausdorff. 
+
+\begin{prp}{}{}\\
+Let $G$ be a group. Let $X$ be a space. Let $\varphi:G\to\text{Homeo}(X)$ be a group homomorphism. Then $X/G$ is Hausdorff if and only if for all $[g],[h]\in X/G$ distinct, there exists neighbourhoods $U,V\subseteq X$ of $g$ and $h$ respectively such that $U\cap(k\cdot V)=\emptyset$ for all $k\in G$. 
+\end{prp}
+
+This is the most general necessary and sufficient criterion. However, it is not an easy criterion to check. Therefore we turn to the notion of proper group action. 
+
+\begin{defn}{Proper Group Actions}{}\\
+Let $G$ be a topological group. Let $X$ be a $G$-space. We say that the action of $G$ on $X$ is proper if the map $G\times X\to X\times X$ given by $$(g,x)\mapsto(x,g\cdot x)$$ is a proper map. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $G$ be a compact topological group. Let $X$ be a Hausdorff $G$-space. Then the action of $G$ on $X$ is proper. 
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $G$ be a topological group. Let $X$ be a Hausdorff $G$-space. Then the action of $G$ on $X$ is proper if and only if for every compact subset $K\subseteq X$, the set $$\{g\in G\;|\;(g\cdot K)\cap K=\emptyset\}$$ is compact. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $G$ be a topological group. Let $X$ be a locally compact Hausdorff $G$-space. If the action of $G$ on $X$ is proper, then $X/G$ is Hausdorff. (Lee Topological Manifolds 12.24)
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $G$ be a topological group. Let $X$ be a $G$-space. Suppose that $G$ and $X$ are Hausdorff and $X$ is locally compact. Suppose that the action of $G$ on $X$ is proper. Then the following are true. 
+\begin{itemize}
+\item The map $f:G\to X$ given by $g\mapsto g\cdot x$ is proper for any $x\in X$. 
+\item $\text{Stab}_G(x)$ is compact for any $x\in X$. 
+\item The map $$\frac{G}{\text{Stab}_G(x)}\to\text{Orb}_G(x)$$ induced by $f$ is a homeomorphism for any $x\in X$. 
+\item $\text{Orb}_G(x)$ is closed in $X$ for all $x\in X$. 
+\end{itemize} (Tom Dieck Transformation Groups 3.19)
+\end{prp}
+
+\subsection{Covering Space Actions}
+Let $G$ be a group (not necessarily topological). Let $X$ be a space. We ask the question of when is the projection map $p:X\to X/G$ a covering space. 
+
+\begin{defn}{Covering Space Actions}{}\\
+Let $G$ be a group. Let $X$ be a space. Let $\varphi:G\to\text{Homeo}(X)$ be a group homomorphism. We say that the action of $G$ on $X$ is a covering space action if for all $x\in X$, there exist a neighbourhood $U\subseteq X$ of $x$ such that $$U\cap(g\cdot U)\neq\emptyset$$ implies $g=1_G$. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $G$ be a group. Let $X$ be a space. Let $\varphi:G\to\text{Homeo}(X)$ be a group homomorphism. Then the action of $G$ on $X$ is a covering space action if and only if for each $x\in X$, there exists a neighbourhood $U\subseteq X$ of $x$ such that $$(g_1\cdot U)\cap(g_2\cdot U)\neq\emptyset$$ implies $g_1=g_2$. 
+\begin{proof}\\
+True since $(g_1\cdot U)\cap(g_2\cdot U)\neq\emptyset$ if and only if $U\cap(g_1^{-1}g_2\cdot U)\neq\emptyset$. 
 \end{proof}
 \end{lmm}
 
-Notice that if the above group homomorphism is injective, then the structure group $G$ is a subgroup of homeomorphisms of $G$. 
-
-\begin{defn}{G-Equivariant Maps}{} Let $G$ be a topological group and let $X,Y$ be $G$-spaces. A $G$-equivariant map is a continuous map $f:X\to Y$ such that $f$ is equivariant. In other words, we require that $$f(g\cdot x)=g\cdot f(x)$$ for all $x\in X$ and all $g\in G$. 
+\begin{defn}{Wandering Actions}{}\\
+Let $G$ be a group. Let $X$ be a space. Let $\varphi:G\to\text{Homeo}(X)$ be a group homomorphism. We say that the action of $G$ on $X$ is a wandering action if for all $x\in X$, there exists a neighbourhood $U\subseteq X$ of $x$ such that $(g\cdot U)\cap U\neq\emptyset$ for finitely many $g\in G$. 
 \end{defn}
 
-\begin{defn}{Isomorphic G-Spaces}{} Let $G$ be a topological group and let $X,Y$ be $G$-space. We say that $G$ and $H$ are isomorphic $G$-spaces if there exists a $G$-equivariant map such that $f$ is a homeomorphism. 
-\end{defn}
-
-\begin{thm}{}{} Let $G$ be a topological group and let $X$ be a $G$-space. Then the map $$p:\frac{G}{\text{Stab}_G(x_0)}\to Gx_0\subseteq X$$ induced by the map $g\mapsto g\cdot x_0$ is well defined. Moreover, it is isomorphic to the left $G$-space $Gx_0$. \tcbline
-\begin{proof}
-To show that it s well defined, we want to show that if $g\in\text{Stab}_G(x_0)$, then $g\cdot x_0=x_0$. But this is true by definition of the stabilizer. By definition of the induced map, it is continuous. Also, the orbit of $x_0$ is precisely $Gx_0$ and hence $p$ is a bijection. It remains to show that $p$ is an open map. \\~\\
-
-To show isomorphism, we also need to show that $p$ is a $G$-equivariant map. We have that 
-\begin{align*}
-p(g\cdot(h\text{Stab}_G(x_0)))&=p(gh\text{Stab}_G(x_0))\\
-&=(gh)\cdot x_0\\
-&=g\cdot(h\cdot x_0)\\
-&=g\cdot p(h\text{Stab}_G(x_0))
-\end{align*}
-so that $p$ is $G$-equivariant. 
+\begin{prp}{}{}\\
+Let $G$ be a group. Let $X$ be a space. Let $\varphi:G\to\text{Homeo}(X)$ be a group homomorphism. 
+\begin{itemize}
+\item If the action of $G$ on $X$ is a covering space action, then the action is free and wandering. 
+\item If the action of $G$ on $X$ is free and wandering, and $X$ is Hausdorff, then the action is a covering space action. 
+\end{itemize}
+\begin{proof}\\
+Suppose that $g\cdot x=x$ for some $x\in X$ and $g\in G$. Since the action is a covering space action, there exists a neighbourhood $U\subseteq X$ of $x$ such that $U\cap(g\cdot U)\neq\emptyset$ implies $g=1_G$. But indeed, $x=g\cdot x\in g\cdot U$ implies $x\in U\cap(g\cdot U)$. Hence $g=1_G$. Clearly covering space actions are wandering. 
 \end{proof}
-\end{thm}
+\end{prp}
 
+\begin{prp}{}{}\\
+Let $X$ be a space. Let $p:\widetilde{X}\to X$ be a covering space of $X$. Then the action of $\text{Deck}(p)$ on $\widetilde{X}$ is a covering space action. 
+\begin{proof}\\
+Let $x\in\widetilde{X}$. Let $\widetilde{U}\subseteq\widetilde{X}$ be an open neighbourhood of $\widetilde{x}$ such that $p$ induce a homeomorphism from $\widetilde{U}$ to $U=p(\widetilde{U})$. Suppose that $\widetilde{U}\cap f(\widetilde{U})\neq\emptyset$ for some $f\in\text{Deck}(p)$. Then there exists $y_1,y_2\in\widetilde{X}$ such that $y_1=f(y_2)$. Since $f$ is a deck transformation, there exists $z\in X$ such that $y_1,y_2\in p^{-1}(z)$. But $p|_{\widetilde{U}}:\widetilde{U}\to U$ is a homeomorphism. Hence $y_1=y_2$. By covering space theory, $f$ fixing one point implies that $f=\text{id}_{\widetilde{X}}$. Hence we are done. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $G$ be a group. Let $X$ be a space. Let $\varphi:G\to\text{Homeo}(X)$ be a group homomorphism. Then the quotient map $X\to X/G$ is a covering space if and only if the action of $G$ on $X$ is a covering space action. 
+\begin{proof}\\
+Suppose that $X\to X/G$ is a covering space. Then for each $g\in G$, we have $g\cdot-:X\to X$ is clearly a deck transformation. By definition, we have $g_1\cdot -=g_2\cdot -$ if and only if $g_1=g_2$. Hence $G$ is a subgroup of $\text{Deck}(p)$. Hence $G$ is also a covering space action. \\
+
+Let $x\in X$. Let $U\subseteq X$ be the open neighbourhood of $x$ given by the covering space action. By definition of the quotient map, for each $g\in G$, the quotient map sends $g\cdot U$ homeomorphically to $p(U)$. Hence we are done. 
+
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $G$ be a group. Let $X$ be a space. Let $\varphi:G\to\text{Homeo}(X)$ be a group homomorphism. Suppose that the action of $G$ on $X$ is a covering space action. Then the following are true. 
+\begin{itemize}
+\item The quotient map $p:X\to X/G$ is a regular covering space. 
+\item If $X$ is path connected, then there is a group isomorphism $G\cong\text{Deck}(p)$. 
+\item If $X$ is path connected and locally path connected, then there is a group isomorphism $$G\cong\frac{\pi_1(X/G,x_0)}{p_\ast(\pi_1(X,\widetilde{x_0}))}$$ for any $x_0\in X$ and $\widetilde{x_0}\in p^{-1}(x_0)$. 
+\end{itemize}
+\begin{proof}\\
+We have seen that $p$ is a covering space. It is regular since $g_2^{-1}g_1$ sends $g_1\cdot U$ to $g_2\cdot U$. \\
+
+For each $g\in G$, the map $g\cdot -:X\to X$ is a deck transformation, and $g_1\cdot -=g_2\cdot -$ if and only if $g_1=g_2$. Hence $G$ is a subgroup of $\text{Deck}(p)$. If $X$ is path connected, let $f\in\text{Deck}(p)$. Then for any $x\in X$, we have $p(x)=p(f(x))$ by definition. Hence $[x]=[f(x)]\in X/G$. Thus there exists $g\in G$ such that $g\cdot x=f(x)$. Since $X$ is path connected, by the unique lifting property, we have $g\cdot -=f$. Hence $G\cong\text{Deck}(p)$. \\
+
+The last part follows by crl4.2.4 in Algebraic Topology 1. 
+\end{proof}
+\end{prp}
+
+\begin{lmm}{}{}\\
+Let $X$ be a space. Let $p:\widetilde{X}\to X$ be a regular covering space. Then $p$ induces an homeomorphism $$\frac{\widetilde{X}}{\text{Deck}(p)}\cong X$$
+\begin{proof}\\
+Since $p$ is a covering map, we may invoke the universal property of the quotient space $\widetilde{X}/\text{Deck}(p)$ to obtain a map to $X$. On the other hand, since $p$ is surjective and regular, the function $X\to\widetilde{X}/\text{Deck}(p)$ given by $x\mapsto[p^{-1}(x)]$ is well defined. Since $p$ is sends open sets to open sets, the function is continuous and clearly the desired inverse. 
+\end{proof}
+\end{lmm}
+
+Thus the quotient map $X\to X/G$ is a covering space when the action of $G$ on $X$ is a covering space action. But under what conditions is a group action a covering space action? There are a few criteria (We already saw two: free + $X$ Hausdorff + wandering action implies covering space action, covering spaces $X\to X/G$ conversely give covering space actions). 
+
+\begin{prp}{}{}\\
+Let $G$ be a discrete group. Let $X$ be a locally compact Hausdorff $G$-space. Suppose that the action of $G$ on $X$ is free. Suppose that one of the following are true. 
+\begin{itemize}
+\item For all $K\subseteq X$ compact subsets, the set $$\{g\in G\;|\;(g\cdot K)\cap K=\emptyset\}$$ is finite. 
+\item The action of $G$ on $X$ is proper. 
+\end{itemize}
+Then the following are true. 
+\begin{itemize}
+\item The action of $G$ on $X$ is a covering space action. 
+\item $X/G$ is locally compact and Hausdorff. 
+\item $X\to X/G$ is a regular covering space. 
+\end{itemize}
+\end{prp}
+
+Under mild assumptions, proper group actions are also covering space actions. 
+
+\begin{prp}{}{}\\
+Let $G$ be a group. Let $X$ be a space. Let $\varphi:G\to\text{Homeo}(X)$ be a group homomorphism. Suppose that $X/G$ is Hausdorff and the action of $G$ on $X$ is a covering space action. Then the action of $G$ as a discrete group on $X$ is a proper group action. 
+\end{prp}
+
+\begin{crl}{}{}\\
+Let $G$ be a discrete group. Let $X$ be a locally compact and Hausdorff $G$-space. Then the following are equivalent. 
+\begin{itemize}
+\item $X/G$ is Hausdorff and the action of $G$ on $X$ is a covering space action. 
+\item The action of $G$ on $X$ is proper and free. 
+\end{itemize}
+\begin{proof}\\
+Immediate from the above. 
+\end{proof}
+\end{crl}
+
+\pagebreak
+\section{The Categorical Viewpoint}
+\subsection{The Category of Equivariant Spaces}
 \begin{defn}{The Category of G-Spaces}{} Let $G$ be a topological space. Define the category of $G$-spaces $${_G}\bold{Top}$$ to consist of the following data. 
 \begin{itemize}
 \item The objects are the $G$-spaces
@@ -172,6 +528,8 @@ There is an obvious forgetful functor ${_G}\bold{Top}\to\bold{Top}$. One of its 
 \item For each map $f:X\to Y$, $\text{Triv}(f)=f$ because $f$ is trivially equivariant. 
 \end{itemize}
 \end{defn}
+
+Note: inverses limits in ${_G}\bold{Top}$ always exists. 
 
 \subsection{Induced and Restricted G-Spaces}
 \begin{defn}{Induced G-Spaces}{} Let $G$ be a topological group. Let $H\leq G$ be a subgroup. Let $X$ be an $H$-space. Define the induced $G$-space of $X$ to be the space $$\text{Ind}_H^GX=G\times_HX=\frac{G\times X}{\sim}$$ where the relation is generated by $(g\cdot h,x)\sim(g,h\cdot x)$ for $g\in G$, $h\in H$ and $x\in X$. 
@@ -205,17 +563,10 @@ Check: it is well defined.
 \begin{prp}{}{} Let $G$ be a topological group. There is an adjunction $$\text{Triv}:\bold{Top}\rightleftarrows{_G\bold{Top}}:(-)^G$$ This means that there is an isomorphism $$\Hom_{_G\bold{Top}}(\text{Triv}X,Y)\cong\Hom_\bold{Top}(X,Y^G)$$ that is natural in $X$ and $Y$. 
 \end{prp}
 
-\begin{defn}{The Orbit Space}{} Let $X$ be a space and $G$ be a group acting on $X$. Define the orbit space of $X$ and $G$ to be $$\frac{X}{G}=\{\text{Orb}_G(x)\;|\; x\in X\}$$ the set of all orbits of $G$ on $X$, inherited with the quotient topology of the equivalence relation of orbits. 
-\end{defn}
-
-This has the quotient topology because recall from groups and rings that $\text{Orb}_G(x)$ defines an equivalence relation on $X$. 
-
 \subsection{The Pointed Analogue}
-\begin{defn}{Pointed G-Spaces}{} Let $G$ be a topological group. A pointed $G$-space is a space $X$ together with a $G$-equivariant map $\ast\to X$. We denote it by $(X,x_0)$ where $x_0$ is the image of the map $\ast\to X$. 
+\begin{defn}{Pointed G-Spaces}{}\\
+Let $G$ be a topological group. Let $(X,x_0)$ be a pointed space. Suppose that $X$ is a $G$-space. We say that $(X,x_0)$ is a pointed $G$-space if $x_0$ is a fixed point of the action. 
 \end{defn}
-
-\begin{lmm}{}{} Let $G$ be a topological group. Let $X$ be a $G$-space. Let $(X,x_0)$ be a pointed space. Then $(X,x_0)$ is a pointed $G$-space if and only if $x_0$ is a $G$-fixed point of $X$. 
-\end{lmm}
 
 \begin{defn}{Induced Pointed G-Spaces}{} Let $G$ be a topological group. Let $H\leq G$ be a subgroup. Let $(X,x_0)$ be a pointed $H$-space. Define the induced pointed $G$-space of $(X,x_0)$ to be the space $$\text{Ind}_H^GX=G_+\wedge_HX=\frac{G_+\wedge X}{\sim}$$ where the relation is generated by $(g\cdot h,x)\sim(g,h\cdot x)$ for all $g\in G$, $h\in H$ and $x\in X$. 
 \end{defn}
@@ -224,108 +575,6 @@ Pushout?
 
 \begin{prp}{}{} Let $G$ be a topological group. Let $H\leq G$ be a subgroup. Then there is an adjunction $$\text{Ind}_H^G:{_H\bold{Top}_\ast}\rightleftarrows{_G\bold{Top}_\ast}:\text{Res}_H^G$$ This means that there is an isomorphism $$\Hom_{_G\bold{Top}_\ast}(\text{Ind}_H^GX,Y)\cong\Hom_{_H\bold{Top}_\ast}(X,\text{Res}_H^GY)$$ that is natural in $X$ and $Y$. 
 \end{prp}
-
-\pagebreak
-\section{Types of Actions on G-Spaces}
-\subsection{Homogenous G-Spaces}
-Recall that a group action $G$ on $X$ is said to be transitive if for any $x,y\in X$, there exists $g\in G$ such that $g\cdot x=y$. 
-
-\begin{defn}{Homogenous G-Space}{} Let $G$ be a topological group and let $X$ be a $G$-space. We say that $X$ is a Homogenous $G$-space if $G$ acts transitively on $X$. 
-\end{defn}
-
-Much of the theorem we considered in covering space theory was in fact on homogenous $G$-spaces. For instance, when $\tilde{X}$ is path connected, prp2.4.7 says that the fibers $p^{-1}(x_0)$ of the covering space is a homogenous $\pi_1(X,x_0)$-space. The following corollary proves thm 2.4.9
-
-\begin{crl}{}{} Let $G$ be a topological group and let $X$ be a homogenous $G$-space. Then there is an isomorphism of $G$-spaces $$\frac{G}{\text{Stab}_G(x_0)}\cong X$$ induced by the map $g\mapsto g\cdot x_0$. \tcbline
-\begin{proof}
-Since $G$ is transitive on $X$, we have that $Gx_0=X$. Hence by the above theorem, we obtain the desired isomorphism. 
-\end{proof}
-\end{crl}
-
-Indeed, if $p:\tilde{X}\to X$ is a covering space, $p^{-1}(x_0)$ is a homogenous $\pi_1(X,x_0)$-space and it follows that $$\frac{\pi_1(X,x_0)}{p_\ast(\pi_1(\tilde{X},\tilde{x}_0))}\cong p^{-1}(x_0)$$ Notice that $\text{Stab}_{\pi_1(X,x_0)}=\im(p_\ast)$ is a non-trivial fact that was proven in prp 2.4.7. 
-
-\begin{crl}{}{} Let $G$ be a topological group and let $X$ be a homogenous $G$-space. If $G$ is more over a free action on $X$, there is an isomorphism of $G$-spaces $$G\cong X$$ given by the map $g\mapsto g\cdot x_0$. \tcbline
-\begin{proof}
-If $G$ is free, then the stabilizer is trivial. By the above corollary, we obtain the desired isomorphism. 
-\end{proof}
-\end{crl}
-
-\begin{thm}{}{} Let $G$ be a topological group and let $X$ be a homogenous $G$-space. Then the following are true. 
-\begin{itemize}
-\item For any $\varphi\in\text{Homeo}(X)$, $x\in X$ and $\varphi(x)$ has the same stabilizers
-\item If $x,y\in X$ has the same stabilizers, then there exists $\varphi\in\text{Homeo}(X)$ such that $\varphi(x)=y$. 
-\end{itemize}
-\end{thm}
-
-\begin{lmm}{}{} Let $G$ be a topological group and let $X$ be a homogenous $G$-space. Let $A$ be a subgroup of $\text{Homeo}(X)$. Then $A=\text{Homeo}(X)$ if and only if for any $x,y\in X$ such that $\text{Stab}_G(x)=\text{Stab}_G(y)$, there exists $\varphi\in A$ such that $\varphi(x)=y$. 
-\end{lmm}
-
-\begin{thm}{}{} Let $G$ be a topological group and let $X$ be a homogenous $G$-space. Then there is a isomorphism of left $G$-spaces $$\frac{N(\text{Stab}_G(x_0))}{\text{Stab}_G(x_0)}\cong\text{Homeo}(X)$$
-\end{thm}
-
-\subsection{Properly Discontinuous Group Actions}
-\begin{defn}{Proper Group Actions}{} Let $G$ be a topological group acting continuously on a topological space $X$. The action is said to be proper if the map $G\times X\to X\times X$ defined by $$(g,x)\mapsto(x,g\cdot x)$$ is a proper map. 
-\end{defn}
-
-\begin{defn}{Properly Discontinuous Group Actions}{} Let $G$ be a group acting on a space $X$. Then we say that $G$ is a properly discontinuous group action if for every compact set $K\subseteq X$, we have $$(g\cdot K)\cap K\neq\emptyset$$ for finitely many $g\in G$. 
-\end{defn}
-
-\begin{prp}{}{} Every properly discontinuous group action is a wandering action. 
-\end{prp}
-
-\begin{prp}{}{} If $G$ is a proper group action on a space $X$, then the action is properly discontinuous. 
-\end{prp}
-
-The converse is not true in general, unless we assume that $X$ is locally compact. \\~\\
-
-Recall the notion of a covering space action. $G$ is a covering space action on $X$ if $g\cdot U\cap U\neq\emptyset$ implies $g=1$. This is also related to properly discontinuous group actions. In fact, properly discontinuous group actions are in general stronger than covering space actions. 
-
-\begin{prp}{}{} Let $G$ be a covering space action on $X$. If $X$ is locally compact and Hausdorff, then $G$ is a properly discontinuous group action on $X$. 
-\end{prp}
-
-\subsection{Covering Space Actions}
-\begin{defn}{Wandering Actions}{} Let $X$ be a space. Let $G$ be a group acting on $X$. We say that $G$ is a wandering action on $X$ if for all $x\in X$, there exists a neighbourhood $U$ of $x$ such that $$(g\cdot U)\cap U\neq\emptyset$$ for finitely many $g\in G$. 
-\end{defn}
-
-Algebraic topologists are primarily interested in the following type of group actions. 
-
-\begin{defn}{Covering Space Action}{} Let $X$ be a space and $G$ be a group acting on $X$. We say that $G$ is a covering space action if for each $x\in X$, there is a neighbourhood $U$ of $x$ such that $$(g_1\cdot U)\cap(g_2\cdot U)=\emptyset$$ for all $g_1,g_2\in G$. 
-\end{defn}
-
-\begin{lmm}{}{} Every covering space action is wandering and free. \tcbline
-\begin{proof}
-Let $G$ be a covering space action. Then $(g\cdot U)\cap U=\emptyset$ for all $g\in G$ implies that $g\cdot x$ cannot be equal to $x$. Thus $G$ is a free action on $X$. It is clear that $G$ is a wandering action on $X$ since we require all actions of $g\in G$ to be disjoint while for wandering actions, we only require a finite amount of actions of $g\in G$ to be disjoint. 
-\end{proof}
-\end{lmm}
-
-The following proposition will show where the name of covering space actions comes from. In particular, we will see that if $X$ is path connected, then there is one unique covering space action on $X$, namely via the deck group $\text{Deck}(p)$. 
-
-\begin{prp}{}{} Let $X$ be a space and $p:\tilde{X}\to X$ be a covering of $X$. Then the action of $\text{Deck}(p)$ on $\tilde{X}$ is a covering space action. \tcbline
-\begin{proof}
-Suppose that $\tilde{x}\in(\tau_1\cdot U)\cap(\tau_2\cdot U)$. Then this means that $\tau_1(\tilde{x}_1)=\tau_2(\tilde{x}_2)$ for some $\tilde{x}_1,\tilde{x}_2\in U$. But we have that $p\circ\tau_1=p\circ\tau_2$ which implies that $\tilde{x}_1$ and $\tilde{x}_2$ lie in the same fiber $p^{-1}(x)$ for some $x\in X$. By definition of covering spaces, the fiber $p^{-1}(x_0)$ intersects $U$ at exactly one point so that $\tilde{x}_1=\tilde{x_2}$. But this implies that $\tau_2^{-1}\tau_1$ fixes one point in $\tilde{X}$ so that $\tau_2^{-1}\tau_1=1$ and $tau_1=\tau_2$. 
-\end{proof}
-\end{prp}
-
-\begin{lmm}{}{} Let $X$ be a space and let $p:\tilde{X}\to X$ be a regular covering space of $X$. Then the orbit space of the deck group $$\frac{\tilde{X}}{\text{Deck}(p)}\cong X$$ is isomorphic to the base space. 
-\end{lmm}
-
-\begin{prp}{}{} Let $X$ be a space and let $G$ be a covering space action on $X$. Then the quotient map $p:X\to X/G$ defined by $p(x)=\text{Orb}_G(x)$ is a regular covering space of $X/G$. 
-\end{prp}
-
-\begin{thm}{}{} Let $X$ be a path connected space. Let $G$ be a covering space action on $X$. Then $G\cong\text{Deck}(p)$ where $p:X\to X/G$ is the regular covering space of $X/G$. 
-\end{thm}
-
-\begin{crl}{}{} Let $X$ be a path connected and locally path connected space. Then there is a group isomorphism $$\text{Deck}(p)\cong\frac{\pi_1\left(\frac{X}{\text{Deck}(p)},x_0\right)}{p_\ast(\pi_1\left(X,p(x_0))\right)}$$ for any $x_0\in X$. 
-\end{crl}
-
-\pagebreak
-\section{Equivariance in Algebraic Topology}
-\subsection{G-Homotopy}
-\begin{defn}{G-Homotopy}{} Let $G$ be a topological group and let $X,Y$ be $G$-spaces. Let $f,g:X\to Y$ be $G$-equivariant maps. A $G$-homotopy from $f$ to $g$ is a homotopy $H:X\times I\to Y$ from $f$ to $g$ such that for each $t\in I$, the map $$H(-,t):X\to Y$$ is $G$-equivariant map. 
-\end{defn}
-
-\subsection{Equivariant CW Complexes}
-
-
 
 
 

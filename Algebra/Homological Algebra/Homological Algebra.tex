@@ -1928,6 +1928,14 @@ Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a right exact functor.
 Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a left exact functor. Let $A\in\mA$ be an object. Let $Q^\bullet$ be an $F$-acyclic resolution of $A$. Then we have $$R^nF(A)=H^nF(Q^\bullet)$$
 \end{prp}
 
+\begin{lmm}{}{}\\
+Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a functor. Let $A\in\mA$. 
+\begin{itemize}
+\item Suppose that $F$ is right exact. If $P_\bullet$ is an projective resolution for $A$, then $P_\bullet$ is $F$-acyclic. 
+\item Suppose that $F$ is left exact. If $I^\bullet$ is an injective resolution for $A$, then $I^\bullet$ is $F$-acyclic. 
+\end{itemize}
+\end{lmm}
+
 \subsection{$\delta$-Functors}
 \begin{defn}{$\delta$-Functors}{} Let $\mA$ and $\mB$ be abelian categories. A homological $\delta$-functor is a collection $\{T_n:\mA\to\mB\;|\;n\in\N\}$ of additive functors such that for any short exact sequence \\~\\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
@@ -2398,6 +2406,15 @@ Let $\mA$ be an abelian group. Let $a\in\N$. Let $(A_{\bullet,\bullet},E_{\bulle
 \end{itemize}
 \end{prp}
 
+\subsection{Filtrations of Chain Complexes}
+\begin{defn}{Induced Filtration on Homology}{}\\
+Let $\mA$ be an abelian category. Let $C_\bullet\in\bold{Ch}(mA)$ be a chain complex. Let $(F_pC_\bullet)_{p\in\N}$ be a filtration. Define a filtration on $H_n(C_\bullet)$ by $$F_p(H_n(C_\bullet))=\im(H_n(F_p(C)\to H_n(C))$$
+\end{defn}
+
+\begin{defn}{Bounded Filtrations on Chain Complexes}
+Let $\mA$ be an abelian category. Let $C_\bullet\in\bold{Ch}(mA)$ be a chain complex. Let $(F_pC_\bullet)_{p\in\N}$ be a filtration. We say that the filtration is bounded if for each $n\in\Z$, there exists $s<t$ such that $F_sC_n=0$ and $F_tC_n=C_n$. 
+\end{defn}
+
 \subsection{The Spectral Sequence of Filtrations}
 \begin{lmm}{}{}\\
 Let $\mA$ be an abelian category. Let $C_\bullet\in\bold{Ch}(\mA)$ be a chain complex. Let $(F_pC_\bullet)_{p\in\N^+}$ be an ascending filtration of $C_\bullet$. Consider the following data: 
@@ -2429,7 +2446,7 @@ There is a more explicit way of constructing the associated spectral sequence.
 
 \begin{defn}{Spectral Sequence Arising from Filtered Chain Complexes}{} Let $\mA$ be an abelian category. Let $(C_\bullet,d_\bullet)\in\bold{Ch}(\mA)$ be a chain complex. Let $F_pC$ be a filtered chain complex that is exhaustive. Define the following objects and subobjects in $\mA$. 
 \begin{itemize}
-\item Define an object $E_{p,q}^0=\frac{F_pC_{p+q}}{F_{p-1}C_{p+q}}$ and a chain complex $E_p^0=\frac{F_pC}{F_{p-1}C}$. 
+\item Define an object $E_{p,q}^0=\frac{F_pC_{p+q}}{F_{p-1}C_{p+q}}$ and a chain complex $E_{p,\bullet}^0=\frac{F_pC_{p+\bullet}}{F_{p-1}C_{p+\bullet}}$. 
 \item For each $p,r\in\N$, define $$A_p^r=\{c\in F_pC\;|\;d(c)\in F_{p-r}C\}$$ called approximately cycles
 \item Write $\eta_p:F_pC\to\frac{F_pC}{F_{p-1}C}=E_p^0$ for the sujection, which is a chain map. 
 \item For each $p,r\in\N$, define $$Z_p^r=\eta_p(A_p^r)\subseteq E_p^0$$
@@ -2451,135 +2468,54 @@ Evidently, there is a tower of subobjects of $E_p^0$ given by $$0=B_p^0\subseteq
 \end{thm}
 
 \subsection{The Spectral Sequence of Double Complexes}
-
-\subsection{Hyperhomology and Hypercohomology}
-\begin{defn}{Cartan-Eilenberg Resolution}{} Let $\mA$ be an abelian category with enough projectives. Let $A_\bullet\in\bold{Ch}(\mA)$ be a chain complex as follows: \\~\\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	\cdots & {A_{p-1}} & {A_p} & {A_{p+1}} & \cdots
-	\arrow[from=1-1, to=1-2]
-	\arrow[from=1-2, to=1-3]
-	\arrow[from=1-3, to=1-4]
-	\arrow[from=1-4, to=1-5]
-\end{tikzcd}}\\~\\
-A Cartan-Eilenberg resolution of $A_\bullet$ is an upper half double complex $P_{\bullet,\bullet}$ together with augmentation maps $\varepsilon:P_{P,\bullet}\to A_p$ as follows: \\~\\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	& \vdots & \vdots & \vdots \\
-	\cdots & {P_{p-1,1}} & {P_{p,1}} & {P_{p+1,1}} & \cdots \\
-	\cdots & {P_{p-1,0}} & {P_{p,0}} & {P_{p+1,0}} & \cdots \\
-	\cdots & {A_{p-1}} & {A_p} & {A_{p+1}} & \cdots
-	\arrow[from=1-2, to=2-2]
-	\arrow[from=1-3, to=2-3]
-	\arrow[from=1-4, to=2-4]
-	\arrow[from=2-2, to=2-1]
-	\arrow[from=2-2, to=3-2]
-	\arrow[from=2-3, to=2-2]
-	\arrow[from=2-3, to=3-3]
-	\arrow[from=2-4, to=2-3]
-	\arrow[from=2-4, to=3-4]
-	\arrow[from=2-5, to=2-4]
-	\arrow[from=3-2, to=3-1]
-	\arrow["\varepsilon", from=3-2, to=4-2]
-	\arrow[from=3-3, to=3-2]
-	\arrow["\varepsilon", from=3-3, to=4-3]
-	\arrow[from=3-4, to=3-3]
-	\arrow["\varepsilon", from=3-4, to=4-4]
-	\arrow[from=3-5, to=3-4]
-	\arrow[from=4-2, to=4-1]
-	\arrow[from=4-3, to=4-2]
-	\arrow[from=4-4, to=4-3]
-	\arrow[from=4-5, to=4-4]
-\end{tikzcd}}\\~\\
-such that the following are true. 
+\begin{defn}{Row and Column Filtrations}{}\\
+Let $\mA$ be an abelian category. Let $C_{\bullet,\bullet}$ be a double complex in $\mA$. 
 \begin{itemize}
-\item If $A_p=0$ then $P_{p,\bullet}=0$
-\item For each $p\in\Z$, the chain complex $(B_\bullet,d^v)$ of boundaries where $B_q=d^h(P_{p+1,q})$ form a projective resolution of $A_p$. This means that the vertical chain complexes \\~\\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	\vdots \\
-	{d^h(P_{p,0})\subseteq P_{p,1}} \\
-	{d^h(P_{p+1,0})\subseteq P_{p,0}} \\
-	{A_p}
-	\arrow[from=1-1, to=2-1]
-	\arrow[from=2-1, to=3-1]
-	\arrow["\varepsilon", from=3-1, to=4-1]
-\end{tikzcd}}\\~\\
-are projective resolutions. 
-\item For each $p\in\Z$, the chain complex $(H_\bullet,d^v)$ of the homology groups where $$H_q=H_p(P_{\bullet,q},d^h)$$ form a projective resolution of $H_p(A_\bullet)$. This means that the vertical chain complexes \\~\\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	\vdots \\
-	{H_p(P_{\bullet,1},d^h)} \\
-	{H_p(P_{\bullet,0},d^h)} \\
-	{H_p(A_\bullet)}
-	\arrow[from=1-1, to=2-1]
-	\arrow["{d^v}", from=2-1, to=3-1]
-	\arrow["\varepsilon", from=3-1, to=4-1]
-\end{tikzcd}}\\~\\
-are projective resolutions. 
+\item Define the column filtration of $C_{\bullet,\bullet}$ by $$(C_{i,j}^I)_n=\begin{cases}
+C_{i,j} & \text{ if } i\leq n\\
+0 & \text{ otherwise }
+\end{cases}$$
+\item Define the row filtration of $C_{\bullet,\bullet}$ by $$(C_{i,j}^{II})_n=\begin{cases}
+C_{i,j} & \text{ if } j\leq n\\
+0 & \text{ otherwise }
+\end{cases}$$
 \end{itemize}
 \end{defn}
 
-\begin{thm}{}{} Let $\mA$ be an abelian category. Then every chain complex $A_\bullet\in\bold{Ch}(\mA)$ has a Cartan-Eilenberg resolution $P_{\bullet,\bullet}\to A_\bullet$. 
-\end{thm}
-
-\begin{defn}{Left Hyperderived Functors}{} Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a right exact functor. Define the left hyperderived functors $$\L_i F:\bold{Ch}(\mA)\to\mB$$ by the following. 
+\begin{defn}{Filtrations on the Total Complex}{}\\
+Let $\mA$ be an abelian category. Let $C_{\bullet,\bullet}$ be a double complex in $\mA$. 
 \begin{itemize}
-\item For $A_\bullet$ a chain complex in $\mA$, choose a Cartan-Eilenberg resolution $P_{\bullet,\bullet}\to A_\bullet$ of $A_\bullet$. Then $$\L_i F(A_\bullet)=H_i(\text{Tot}^\oplus(F(P_{\bullet,\bullet})))$$
-\item For $f:A_\bullet\to B_\bullet$ a chain map, choose Cartan-Eilenberg resolutions for both complexes and consider the induced map $\overline{f}:P_{\bullet,\bullet}\to Q_{\bullet,\bullet}$. Define $$\L_i F(f)=H_i(\text{Tot}^\oplus(\overline{f})):\L_iF(A_\bullet)\to\L_iF(B_\bullet)$$
+\item Define the column filtration on the total complex by $$F_n^IC_{\bullet,\bullet}=\text{Tot}^\oplus((C_{i,j}^I)_n)$$
+\item Define the row filtration on the total complex by $$F_n^{II}C_{\bullet,\bullet}=\text{Tot}^\oplus((C_{i,j}^{II})_n)$$
 \end{itemize}
 \end{defn}
 
-
-\begin{defn}{Right Hyperderived Functors}{} Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a left exact functor. Define the right hyperderived functors $$\R^i F:\bold{CCh}(\mA)\to\mB$$ by the following. 
+\begin{defn}{Spectral Sequences Associated to a Double Complex}{}\\
+Let $\mA$ be an abelian category. Let $C_{\bullet,\bullet}$ be a double complex in $\mA$. 
 \begin{itemize}
-\item For $A_\bullet$ a cochain complex in $\mA$, choose a Cartan-Eilenberg resolution $A_\bullet\to I_{\bullet,\bullet}$ of $A_\bullet$. Then $$\R^i F(A_\bullet)=H^i(\text{Tot}^\oplus(F(I_{\bullet,\bullet})))$$
-\item For $f:A_\bullet\to B_\bullet$ a chain map, choose Cartan-Eilenberg resolutions for both complexes and consider the induced map $\overline{f}:I_{\bullet,\bullet}\to J_{\bullet,\bullet}$. Define $$\R^i F(f)=H^i(\text{Tot}^\oplus(\overline{f})):\R^iF(A_\bullet)\to\R^iF(B_\bullet)$$
+\item Define $({^I}E_{\bullet,\bullet}^r)_{r\geq 0}$ to be the spectral sequence associated to the filtration $F_n^IC_{\bullet,\bullet}$ on the double complex. 
+\item Define $({^{II}}E_{\bullet,\bullet}^r)_{r\geq 0}$ to be the spectral sequence associated to the filtration $F_n^{II}C_{\bullet,\bullet}$ on the double complex. 
 \end{itemize}
 \end{defn}
 
-\begin{lmm}{}{} Let $\mA$ and $\mB$ be abelian categories. Let $X\in\mA$ be an object. Then the following are true. 
+\begin{eg}{}{}\\
+Let $\mA$ be an abelian category. Let $C_{\bullet,\bullet}$ be a double complex in $\mA$. Then we may compute some of the terms in the spectral sequences associated to the double complex. 
 \begin{itemize}
-\item Let $F:\mA\to\mB$ be right exact. By considering $X$ as a chain complex with only non-zero term in degree $0$, the hyperderived left functor $\L_i F(X)=L_iF(X)$ is the same as the usual left derived functor. 
-\item Let $F:\mA\to\mB$ be left exact. By considering $X$ as a cochain complex with only non-zero term in degree $0$, the hyperderived right functor $\R^iF(X)=R^iF(X)$ is the same as the usual right derived functor. 
+\item ${^IE}_{p,q}^0=^{II}E_{p,q}^0=C_{p,q}$. 
+\item ${^I}E_{p,q}^1=H_q(C_{p,\bullet})$. 
+\item ${^{II}}E_{p,q}^1=H_q(C_{\bullet,p})$. 
+\item ${^I}E_{p,q}^2=H_p^h(H_q^v(C_{\bullet,\bullet}))$ (where $v$ refers to taking homology groups vertically and likewise for $h$). 
+\item ${^{II}}E_{p,q}^2=H_p^v(H_q^h(C_{\bullet,\bullet}))$. 
 \end{itemize}
-\end{lmm}
+\end{eg}
 
-\begin{lmm}{}{} Let $\mA$ and $\mB$ be abelian categories. Then the following are true. 
+\begin{prp}{}{}\\
+Let $\mA$ be an abelian category. Let $C_{\bullet,\bullet}$ be a double complex in $\mA$. Then the following are true. 
 \begin{itemize}
-\item Let $F:\mA\to\mB$ be right exact. Then the restriction of $\L_i F:\bold{Ch}(\mA)\to\mB$ to $\bold{Ch}^+(\mA)$ are precisely the left derived functor $L_i (H_0F):\bold{Ch}^+(\mA)\to\mB$ of the functor $H_0F:\bold{Ch}(\mA)^+\to\mB$. 
-\item Let $F:\mA\to\mB$ be left exact. Then the restriction of $\R^i F:\bold{CCh}(\mA)\to\mB$ to $\bold{CCh}^+(\mA)$ are precisely the left derived functor $R^i (H^0F):\bold{CCh}^+(\mA)\to\mB$ of the functor $H^0F:\bold{CCh}(\mA)^+\to\mB$. 
+\item If $C_{\bullet,\bullet}$ is a first quadrant double complex, then we have $${^I}E_{p,q}^2=H_p^h(H_q^v(C_{\bullet,\bullet}))\Rightarrow H_{p+q}(\text{Tot}^\oplus(C_{\bullet,\bullet}))$$
+\item If $C_{\bullet,\bullet}$ is a first quadrant double complex, then we have $${^{II}}E_{p,q}^2=H_p^h(H_q^v(C_{\bullet,\bullet}))\Rightarrow H_{p+q}(\text{Tot}^\oplus(C_{\bullet,\bullet}))$$
 \end{itemize}
-\end{lmm}
-
-\begin{lmm}{}{} Let $\mA$ and $\mB$ be abelian categories. Let the following \\~\\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	0 & A & B & C & 0
-	\arrow[from=1-1, to=1-2]
-	\arrow[from=1-2, to=1-3]
-	\arrow[from=1-3, to=1-4]
-	\arrow[from=1-4, to=1-5]
-\end{tikzcd}}\\~\\
-be a short exact sequence of chain complexes in $\bold{Ch}^+(\mA)$. Let $F:\mA\to\mB$ be right exact. Then there exists a long exact sequence \\~\\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	\cdots & {\L_{i+1}F(C)} & {\L_iF(A)} & {\L_iF(B)} & {\L_iF(C)} & {\L_{i-1}F(A)} & \cdots
-	\arrow[from=1-1, to=1-2]
-	\arrow["\delta", from=1-2, to=1-3]
-	\arrow[from=1-3, to=1-4]
-	\arrow[from=1-4, to=1-5]
-	\arrow["\delta", from=1-5, to=1-6]
-	\arrow[from=1-6, to=1-7]
-\end{tikzcd}}\\~\\
-\end{lmm}
-
-\begin{prp}{}{} There is always a convergent spectral sequence $$E_{pq}^2=(L_pF)(H_q(A))\Rightarrow\L_{p+q}F(A)$$
 \end{prp}
-
-\begin{crl}{}{} Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a right exact functor. Then the following are true. 
-\begin{itemize}
-\item If $A$ is exact, then $\L_iF(A)=0$ for all $i$. 
-\item If $f:A\to B$ is a quasi-isomorphism, then it induces isomorphisms $\L_iF(A)\cong\L_iF(B)$
-\end{itemize}
-\end{crl}
-
-Next: dual versions of the above propositions. 
 
 \pagebreak
 \section{Triangulated Categories}
@@ -2875,6 +2811,16 @@ Notice that in particular, if $X\in\mA$ is an object considered as a chain compl
 
 \pagebreak
 \section{Hyper-Derived Functors}
+Let $\mA$ be an abelian category. Let $X\in\mA$. Let $F$ be a right (left) exact functor. To define the left (right) derived functors of $X$ we first need to talk about projective (injective) resolutions. There are two ways to think about a projective resolution. 
+\begin{itemize}
+\item A projective resolution of $X$ is an exact sequence $P_\bullet$ of projective objects together with a morphism $P_0\to X$. 
+\item A projective resolution of $X$ is a chain complex $P_\bullet$ of projective objects together with a quasi-isomorphism $P_\bullet\to X[0]$
+\end{itemize}
+
+Now consider $C_\bullet\in\bold{Ch}(\mA)$ be a chain complex. It is an abelian category in its own right and so it makes sense to talk about projective resolutions. In view of the first definition, a projective resolution of $C_\bullet$ is an exact sequence $(P_\bullet)_\bullet$ of complexes in which each $P_\bullet$ is a projective object in $\bold{Ch}(\mA)$. Note that this implies that each $(P_k)_j$ is a projective object in $\mA$, and for each $k\in\N$, $(P_k)_\bullet$ is a projective resolution of $C_k$. Neither of these converses are true. \\
+
+On the other hand, the second definition gives a deceptive alternate definition of projective resolutions. Namely, a projective resolution of $C_\bullet$ is a chain complex $P_\bullet$ of projective objects of $\mA$ together with a quasi-isomorphism $C_\bullet\to P_\bullet$. These are not projective objects in the category of $\bold{Ch}(\mA)$, but it turns out that they can be used in place for defining the left derived functors for $\bold{Ch}(\mA)$. 
+
 \subsection{Cartan-Eilenberg Resolutions}
 \begin{defn}{Left Cartan-Eilenberg Resolutions}{}\\
 Let $\mA$ be an abelian category. Let $C_\bullet\in\bold{Ch}(\mA)$ be a chain complex in $\mA$. A left Cartan-Eilenberg resolution of $C_\bullet$ is a double complex $P_{\bullet,\bullet}$ together with a chain map $P_{\bullet,0}\to C_\bullet$ such that the following are true. 
@@ -2903,6 +2849,10 @@ Let $\mA$ be an abelian category. If $\mA$ has enough projectives, then every ch
 Let $\mA$ be an abelian category. Let $C_\bullet\in\bold{Ch}(\mA)$ be a chain complex in $\mA$. Let $P_{\bullet,\bullet},Q_{\bullet,\bullet}$ be left Cartan-Eilenberg resolutions of $C_\bullet$. Then $P_{\bullet,\bullet},Q_{\bullet,\bullet}$ are homotopy equivalent. 
 \end{lmm}
 
+\begin{prp}{}{}\\
+Let $\mA$ be an abelian category. Let $C_\bullet\in\bold{Ch}(\mA)$ be a chain complex in $\mA$. Let $P_{\bullet,\bullet}$ be a left Cartan-Eilenberg resolution of $C_\bullet$. Then $P_{\bullet,\bullet}$ is a projective resolution for $C_\bullet$. 
+\end{prp}
+
 \begin{defn}{Right Cartan-Eilenberg Resolutions}{}\\
 Let $\mA$ be an abelian category. Let $C^\bullet\in\bold{CCh}(\mA)$ be a cochain complex in $\mA$. A right Cartan-Eilenberg resolution of $C^\bullet$ is a double cochain complex $I^{\bullet,\bullet}$ together with a chain map $C^\bullet\to I^{\bullet,0}$ such that the following are true. 
 \begin{itemize}
@@ -2930,14 +2880,24 @@ Let $\mA$ be an abelian category. If $\mA$ has enough injectives, then every coc
 Let $\mA$ be an abelian category. Let $C^\bullet\in\bold{CCh}(\mA)$ be a cochain complex in $\mA$. Let $I^{\bullet,\bullet},J^{\bullet,\bullet}$ be right Cartan-Eilenberg resolutions of $C^\bullet$. Then $I^{\bullet,\bullet},J^{\bullet,\bullet}$ are homotopy equivalent. 
 \end{lmm}
 
+\begin{prp}{}{}\\
+Let $\mA$ be an abelian category. Let $C^\bullet\in\bold{CCh}(\mA)$ be a cochain complex in $\mA$. Let $I^{\bullet,\bullet},J^{\bullet,\bullet}$ be right Cartan-Eilenberg resolutions of $C^\bullet$. Then $I^{\bullet,\bullet}$ is an injective resolution for $C^\bullet$. 
+\end{prp}
+
 \subsection{Hyper-Derived Functors}
-\begin{defn}{Left Hyper-Derived Functors}{}\\
-Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a right exact functor. Suppose that $\mA$ has enough projectives. Define the $i$th left hyper-derived functor $\L_iF:\bold{Ch}(\mA)\to\mB$ of $F$ by $$\L_iF(C_\bullet)=H_i(\text{Tot}^\oplus(F(P_{\bullet,\bullet})))$$ where $P_{\bullet,\bullet}$ is a left Cartan-Eilenberg resolution of $C_\bullet$. 
+\begin{defn}{Left Hyperderived Functors}{}\\
+Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a right exact functor. Suppose that $\mA$ has enough projectives. Define the $i$th left hyper-derived functor $\L_iF:\bold{Ch}(\mA)\to\mB$ of $F$ by $$\L_iF(C_\bullet)=H_i(\text{Tot}^\oplus(F((P_\bullet)_\bullet)))$$ where $(P_\bullet)_\bullet\in\bold{Ch}(\bold{Ch}(\mA))$ is an projective resolution of $\bold{Ch}(\mA)$. 
 \end{defn}
 
 Functoriality: 
 
-Note: we need to restrict to either $\bold{Ch}_+(\mA)$ or that $\mB$ is cocomplete. 
+Note: we need to restrict to either $\bold{Ch}_+(\mA)$ or that $\mB$ is cocomplete. \\
+
+Since left Cartan-Eilenberg resolutions are projective resolutions, we may use them to compute the values of the left hyperderived functor. However, in general there is no need to use double complexes, and use the following. 
+
+\begin{prp}{}{}\\
+Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a right exact functor. Suppose that $\mA$ has enough projectives. Let $C_\bullet\in\bold{Ch}(\mA)$ be a chain complex. Suppose that $P_\bullet\in\bold{Ch}(\mA)$ be a chain complex of projective objects and $f:P_\bullet\to C_\bullet$ is a quasi-isomorphism. Then we have $$\L_iF(C_\bullet)=H_i(F(P_\bullet))$$
+\end{prp}
 
 \begin{prp}{}{}\\
 Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a right exact functor. Suppose that $\mA$ has enough projectives. Then the following are true. 
@@ -2982,6 +2942,12 @@ Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a right exact functor.
 Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a left exact functor. Suppose that $\mA$ has enough injectives. Define the $i$th right hyper-derived functor $\R^iF:\bold{CCh}(\mA)\to\mB$ by $$\R^iF(C^\bullet)=H^i(\text{Tot}^{\prod}(F(I^{\bullet,\bullet})))$$ where $I^{\bullet,\bullet}$ is a right Cartan-Eilenberg resolution of $C^\bullet$. 
 \end{defn}
 
+Similarly, since right Cartan-Eilenberg resolutions are injective resolutions, we may use them to compute the values of the right hyperderived functor. Also similar to the case of left hyper derived functors, in general there is no need to use double complexes, and use the following. 
+
+\begin{prp}{}{}\\
+Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a left exact functor. Suppose that $\mA$ has enough injectives. Let $C^\bullet\in\bold{CCh}(\mA)$ be a chain complex. Suppose that $I^\bullet\in\bold{CCh}(\mA)$ be a chain complex of projective objects and $f:C^\bullet\to I^\bullet$ is a quasi-isomorphism. Then we have $$\R^iF(C^\bullet)=H^i(F(I^\bullet))$$
+\end{prp}
+
 \begin{prp}{}{}\\
 Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a left exact functor. Suppose that $\mA$ has enough injectives. Then the following are true. 
 \begin{itemize}
@@ -3021,6 +2987,40 @@ Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a left exact functor. 
 \end{itemize}
 \end{crl}
 
+\begin{lmm}{}{} Let $\mA$ and $\mB$ be abelian categories. Then the following are true. 
+\begin{itemize}
+\item Let $F:\mA\to\mB$ be right exact. Then the restriction of $\L_i F:\bold{Ch}(\mA)\to\mB$ to $\bold{Ch}^+(\mA)$ are precisely the left derived functor $L_i (H_0F):\bold{Ch}^+(\mA)\to\mB$ of the functor $H_0F:\bold{Ch}(\mA)^+\to\mB$. 
+\item Let $F:\mA\to\mB$ be left exact. Then the restriction of $\R^i F:\bold{CCh}(\mA)\to\mB$ to $\bold{CCh}^+(\mA)$ are precisely the left derived functor $R^i (H^0F):\bold{CCh}^+(\mA)\to\mB$ of the functor $H^0F:\bold{CCh}(\mA)^+\to\mB$. 
+\end{itemize}
+\end{lmm}
+
+
+\begin{prp}{}{} There is always a convergent spectral sequence $$E_{pq}^2=(L_pF)(H_q(A))\Rightarrow\L_{p+q}F(A)$$
+\end{prp}
+
+\begin{crl}{}{} Let $\mA,\mB$ be abelian categories. Let $F:\mA\to\mB$ be a right exact functor. Then the following are true. 
+\begin{itemize}
+\item If $A$ is exact, then $\L_iF(A)=0$ for all $i$. 
+\item If $f:A\to B$ is a quasi-isomorphism, then it induces isomorphisms $\L_iF(A)\cong\L_iF(B)$
+\end{itemize}
+\end{crl}
+
+\subsection{Hyperderived Spectral Sequences}
+\begin{defn}{Hyperderived Spectral Sequences}{}\\
+Let $\mA,\mB$ be abelian categories. Let $C^\bullet\in\bold{CCh}(\mA)$ be a cochain complex. Let $F:\mA\to\mB$ be a left exact functor. 
+\begin{itemize}
+\item Choose an right Cartan-Eilenberg resolution $I^{\bullet,\bullet}$ of $C^\bullet$. Define the (column-wise) hyperderived spectral sequence to be the spectral sequence associated to the column filtration of $F(I^{\bullet,\bullet})$. 
+\item Choose an right Cartan-Eilenberg resolution $I^{\bullet,\bullet}$ of $C^\bullet$. Define the (column-wise) hyperderived spectral sequence to be the spectral sequence associated to the row filtration of $F(I^{\bullet,\bullet})$. 
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $\mA,\mB$ be abelian categories. Let $C^\bullet\in\bold{CCh}(\mA)$ be a cochain complex. Let $F:\mA\to\mB$ be a left exact functor. Let $I^{\bullet,\bullet}$ be a right Cartan-Eilenberg resolution of $C^\bullet$. Then the following are true. 
+\begin{itemize}
+\item We have $$\prescript{I}{}{E_2}^{p,q}=(R^pF)(H^q(C^\bullet))\Rightarrow\R^{p+q}F(C^\bullet)$$
+\item We have $$\prescript{II}{}{E_2}^{p,q}=H^p((R^qF)(C^\bullet))\Rightarrow\R^{p+q}F(C^\bullet)$$
+\end{itemize}
+\end{prp}
 
 
 
