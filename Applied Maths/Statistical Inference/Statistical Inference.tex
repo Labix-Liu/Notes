@@ -1,0 +1,180 @@
+\documentclass[a4paper]{article}
+
+\input{C:/Users/liula/Desktop/Latex/Headers/Headers.tex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Labix}
+\lhead{Statistical Inference}
+\rfoot{\thepage}
+
+
+\title{Statistical Inference}
+
+\author{Labix}
+
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+Notes for the basics of Probability Theory. 
+\end{abstract}
+\pagebreak
+\tableofcontents
+\pagebreak
+
+\section{Fundamentals of Statistics}
+\subsection{Random Samples and Statistics}
+\begin{defn}{Random Samples}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X_1,\dots,X_n:\Omega\to\R$ be random variables. We say that they are a random sample of size $n$ from the population $f$ if the following are true. 
+\begin{itemize}
+\item $X_1,\dots,X_n$ are pairwise independent. 
+\item The probability density (mass) function is given by $f_{X_i}=f_X$. 
+\end{itemize}
+\end{defn}
+
+The fact that their probability density functions are equal imply that the random variables are identically distributed. 
+
+\begin{defn}{Statistics}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X_1,\dots,X_n:\Omega\to\R$ be a random sample. A statistic of the random sample is a random variable $T(X_1,\dots,X_n)$ for some function $T:\R^n\to\R$. 
+\end{defn}
+
+\begin{defn}{Sample Mean}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X_1,\dots,X_n:\Omega\to\R$ be a random sample. Define the sample mean of the random sample to be the statistic defined by $$\overline{X}=\frac{1}{n}\sum_{i=1}^nX_i$$
+\end{defn}
+
+\begin{defn}{Sample Variance}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X_1,\dots,X_n:\Omega\to\R$ be a random sample. Define the sample variance of the random sample to be the statistic defined by $$S^2=\frac{1}{n-1}\sum_{i=1}^n(X_i-\overline{X})^2$$
+\end{defn}
+
+\begin{defn}{Sample Standard Deviation}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X_1,\dots,X_n:\Omega\to\R$ be a random sample. Define the sample standard deviation of the random sample to be the statistic defined by $$S=\sqrt{S^2}$$
+\end{defn}
+
+\pagebreak
+\section{Principles of Data Reduction}
+\subsection{Sufficiency Principle}
+Suppose that $(\Omega,\mF,P)$ is a probability space. Often we do not know what $P$ is actually like. To probe the properties of $P$, we may use statistics $T(X_1,\dots,X_n)$ on the probability space. \\
+
+A sufficient statistic $T$ is a statistic where, informally speaking, all information about $P$ must come from $T$. 
+
+\begin{defn}{Sufficient Statistics}{}\\
+Let $(\Omega,\mF,P_\theta)$ be a collection of probability spaces for $\theta\in I$. Let $X_1,\dots,X_n:\Omega\to\R$ be a random sample. Let $T$ be a statistic of the random sample. We say that $T$ is sufficient if $$P_{\theta_1}(X^{-1}(A)\;|\;T^{-1}(t))=P_{\theta_2}(X^{-1}(A)\;|\;T^{-1}(t))$$ for all $\theta_1,\theta_2\in I$ and all $A\in\mF$ and all $t\in\R$. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $(\Omega,\mF,P_\theta)$ be a collection of probability spaces for $\theta\in I$. Let $X_1,\dots,X_n:\Omega\to\R$ be a random sample. Let $T$ be a statistic of the random sample. If the ratio $$\frac{f_{X_1,\dots,X_n}(x_1,\dots,x_n)}{f_{T(X_1,\dots,X_n)}(x_1,\dots,x_n)}$$ does not depend on $\theta$, then $T$ is a sufficient statistics. 
+\begin{proof}\\
+Firstly notice that if $t\notin\im(T)$ then the probability is $0$. Hence we only need to consider the case that $T(X_1,\dots,X_n)=T(x_1,\dots,x_n)$. Denote $\bold{X}=(X_1,\dots,X_n)$ and $\bold{x}=(x_1,\dots,x_n)$. We have that 
+\begin{align*}
+P_\theta(\bold{X}=\bold{x}\;|\;T(\bold{X})=T(\bold{x}))&=\frac{P_\theta((\bold{X}=\bold{x})\cap(T(\bold{X})=T(\bold{x})))}{P_\theta(T(\bold{X})=T(\bold{x}))}\\
+&=\frac{P_\theta(\bold{X}=\bold{x})}{P_\theta(T(\bold{X})=T(\bold{x}))}\\
+&=\frac{f_{X_1,\dots,X_n}(x_1,\dots,x_n)}{f_{T(X_1,\dots,X_n)}(x_1,\dots,x_n)}
+\end{align*}
+so if the ratio does not depend on $\theta$, we are done. 
+\end{proof}
+\end{lmm}
+
+\begin{eg}{}{}\\
+Let $\Omega,\mF,P)$ be a probability space. Let $X_1,\dots,X_n:\Omega\to\R$ be a random sample of Bernoulli distribution with parameter $\theta\in(0,1)$ (Note that for each $\theta$, $P_{X_i}=f_{X_i}$ is different since the formula for $f_{X_i}$ depends on $\theta$). Then $T=\sum_{i=1}^nX_i$ is a sufficient statistic for $\theta$. 
+\begin{proof}\\
+Let $\theta\in\R$. We use the above lemma. We have
+\begin{align*}
+P_\theta(\bold{X}=\bold{x}\;|\;T(\bold{X})=T(\bold{x}))&=\frac{f_{X_1,\dots,X_n}(x_1,\dots,x_n)}{f_{T(X_1,\dots,X_n)}(x_1,\dots,x_n)}\\
+&=\frac{\prod_{i=1}^nf_{X_i}(x_i)}{f_{X_1+\dots+X_n}(x_1,\dots,x_n)}\\
+&=\frac{\prod_{i=1}^n\theta^{x_i}(1-\theta)^{1-x_i}}{\binom{n}{\sum_{i=1}^nx_i}\theta^{\sum_{i=1}^nx_i}(1-\theta)^{n-\sum_{i=1}^nx_i}}\\
+&=\frac{\theta^{\sum_{i=1}^nx_i}(1-\theta)^{\sum_{i=1}^nx_i}}{\binom{n}{\sum_{i=1}^nx_i}\theta^{\sum_{i=1}^nx_i}(1-\theta)^{n-\sum_{i=1}^nx_i}}\\
+&=\frac{1}{\binom{n}{\sum_{i=1}^nx_i}}
+\end{align*}
+\end{proof}
+\end{eg}
+
+\begin{thm}{Neyman-Fisher Factorization Theorem}{}\\
+Let $(\Omega,\mF,P_\theta)$ be a collection of probability spaces for $\theta\in I$. Let $X_1,\dots,X_n:\Omega\to\R$ be a random sample. Let $T$ be a statistic of the random sample. Let $f_\theta$ be the probability density function of $P_\theta$. Then $T$ is sufficient if and only if there exists probability density functions $g_\theta$ for each $\theta$ such that $$f_\theta(x)=g_\theta(T(x))h(x)$$ for all $x\in\Omega$ and all $\theta\in I$. 
+\end{thm}
+
+\begin{defn}{Minimal Sufficient Statistics}{}\\
+Let $(\Omega,\mF,P_\theta)$ be a collection of probability spaces for $\theta\in I$. Let $X_1,\dots,X_n:\Omega\to\R$ be a random sample. Let $T$ be a sufficient statistic of the random sample. We say that $T$ is minimal if for any other sufficient statistic $T'$, we have $T$ is a function of $T'$. 
+\end{defn}
+
+\begin{defn}{Ancillary Statistics}{}
+\end{defn}
+
+\begin{defn}{Complete Statistics}{}
+\end{defn}
+
+\begin{thm}{Basu's Theorem}{}
+\end{thm}
+
+\subsection{Likelihood Principle}
+
+\subsection{Conditionality Principle}
+
+\subsection{Equivariance Principle}
+
+\pagebreak
+\section{Estimators}
+Suppose some real life problem is modelling statistically by the probability space $(\Omega,\mF,P)$. To probe what $P$ looks like, we sample the space using random variables $X_1,\dots,X_n:\Omega\to\R$. Based on the sample, we may infer that $P$ may have parameter $\widehat{\theta}$ (naturally $\widehat{\theta}$ should be a function of $X_1,\dots,X_n$). We may then need to evaluate how accurate $\widehat{\theta}$ is compared to the actual parameter $\theta$. \\
+
+There are two main branches in estimator theory: We need different methods for finding estimators, and we need to evaluate how accurate the estimators are. \\
+
+There are also two types of estimators: Point estimators and interval estimators. 
+
+\subsection{Finding Point Estimators}
+\begin{defn}{Point Estimators}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X_1,\dots,X_n$ be a random sample. A point estimator of the random sample is a random variable $T(X_1,\dots,X_n)$ for some function $T:\R^n\to\R$. 
+\end{defn} 
+
+Note: This the same definition of a statistic. 
+
+\begin{defn}{Method of Moments}{}\\
+\end{defn}
+
+\begin{defn}{Maximum Likelihood Estimators}{}
+\end{defn}
+
+\subsection{Evaluating Point Estimators}
+\begin{defn}{Bias of a Point Estimator}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X_1,\dots,X_n:\Omega\to\R$ be a random sample. Let $\widehat{\theta}$ be a point estimator of the random sample. Define the bias of $\widehat{\theta}$ to be $$\text{Bias}(\widehat{\theta})=E[\widehat{\theta}]-\theta$$
+\end{defn}
+
+\begin{defn}{Unbiased Point Estimators}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X_1,\dots,X_n:\Omega\to\R$ be a random sample. Let $\widehat{\theta}$ be a point estimator of the random sample. We say that $\widehat{\theta}$ is unbiased if $\text{Bias}(\widehat{\theta})=0$. 
+\end{defn}
+
+\begin{defn}{Mean Squared Error}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X_1,\dots,X_n:\Omega\to\R$ be a random sample. Let $\widehat{\theta}$ be a point estimator of the random sample. Define the mean squared error of $\widehat{\theta}$ to be $$\text{MSE}(\widehat{\theta})=E[(\widehat{\theta}-\theta)^2]$$
+\end{defn}
+
+\begin{thm}{The Bias Variance Trade Off}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X_1,\dots,X_n:\Omega\to\R$ be a random sample. Let $\widehat{\theta}$ be a point estimator of the random sample. Then we have $$\text{MSE}(\widehat{\theta})=\text{Var}(\widehat{\theta})+(\text{Bias}(\widehat{\theta}))^2$$
+\end{thm}
+
+\subsection{Finding Interval Estimators}
+
+\pagebreak
+\section{Hypothesis Testing}
+
+\pagebreak
+\section{Regression Analysis}
+
+\begin{defn}{Linear Regression Space}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R^n$ be a random sample. Define the linear regression space of the sample to be $$\mH(X)=\left\{\sum_{i=1}^n\beta_iX_i+\alpha\;|\;\alpha,\beta_i\in\R\right\}$$
+\end{defn}
+
+\begin{defn}{Linear Regression}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R^n$ be a random sample. Let $Y:\Omega\to\R^n$ be a random sample. Let $L:\mH\to\R$ be a loss function. The linear regression of $Y$ on $X$ with $L$ is a random variable $\widehat{Y}\in\mH(X)$ such that $$L(\widehat{Y})=\min\{L(Z)\;|\;Z\in\mH(X)\}$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R^n$ be a random sample. Let $Y:\Omega\to\R^n$ be a random sample. Then the linear regression of $Y$ on $X$ with the mean squared error exists and is unique. 
+\end{prp}
+
+
+
+
+
+
+
+
+\end{document}

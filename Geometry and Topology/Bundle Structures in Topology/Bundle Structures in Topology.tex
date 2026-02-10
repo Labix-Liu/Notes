@@ -134,14 +134,14 @@ This is true since Hurewicz fibrations satisfies the homotopy lifting property w
 \section{Vector Bundles}
 \subsection{Basic Definitions}
 \begin{defn}{Vector Bundles}{}\\
-Let $K$ be a field. Let $E,B$ be spaces with $B$ connected. Let $p:E\to B$ be a continuous map. We say that $p$ is a vector bundle of dimension $d\in\N$ over $K$ if the following are true. 
+Let $F$ be a field. Let $E,B$ be spaces with $B$ connected. Let $p:E\to B$ be a continuous map. We say that $p$ is a vector bundle of dimension $d\in\N$ over $F$ if the following are true. 
 \begin{itemize}
 \item $p:E\to B$ is surjective. 
-\item Local Triviality: There exists a collection $$\{(U_k\subseteq B,\phi_k:p^{-1}(U_k)\to U_k\times F)\;|\;k\in I\}$$ called local trivialization charts such that the following diagram commutes: \\
+\item Local Triviality: There exists a collection of homeomorphisms $$\{(U_i\subseteq B,\phi_i:p^{-1}(U_i)\to U_i\times F^k)\;|\;i\in I\}$$ called local trivialization charts such that $B=\bigcup_{i\in I}U_i$ and the following diagram commutes: \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
-	{p^{-1}(U_k)} && {U_k\times K^d} \\
-	& U_k
-	\arrow["{\phi_k}", from=1-1, to=1-3]
+	{p^{-1}(U_i)} && {U_i\times F^k} \\
+	& U_i
+	\arrow["{\phi_i}", from=1-1, to=1-3]
 	\arrow["p"', from=1-1, to=2-2]
 	\arrow["\pi", from=1-3, to=2-2]
 \end{tikzcd}}\\
@@ -151,6 +151,10 @@ We say that $B$ is the base space, $E$ the total space. It is denoted as $(F,E,B
 \end{defn}
 
 The local trivialization means that locally at a neighbourhood, the vector bundle looks the same the open set times $F^k$. In particular, there is also a notion of trivial bundle which means that the bundle is globally just $B\times\R^r$. 
+
+\begin{eg}{}{}\\
+Let $B$ be a space. Let $F$ be a field. The trivial bundle $p:B\times F^k\to B$ defined by $p(b,v)=b$ is a vector bundle. 
+\end{eg}
 
 \begin{lmm}{}{}\\
 Let $K$ be a field. Let $p:E\to B$ be a vector bundle of dimension $d\in\N$ over $K$. Then the local trivialization charts induces a homeomorhpsim $$p^{-1}(b)\cong K^d$$ for all $b\in B$. 
@@ -169,14 +173,11 @@ Let $k$ be a field. Let $p:E\to B$ be a vector bundle over $k$. Then the followi
 \end{lmm}
 
 \begin{defn}{The Space of Sections}{}\\
-Let $k$ be a field. Let $p:E\to B$ be a vector bundle over $k$. Define the vector space of sections to be the set $$s(E)=\{s:B\to E\;|\;s\text{ is a section of }p\}$$ together with addition and scalar multiplication defined pointwise. 
+Let $k$ be a field. Let $p:E\to B$ be a vector bundle over $k$. Define the $F$-vector space of sections to be the set $$s(E)=\{s:B\to E\;|\;s\text{ is a section of }p\}$$ together with addition and scalar multiplication defined pointwise. 
 \end{defn}
 
-\begin{prp}{}{} Let $p:E\to B$ be a vector bundle. Let $s,s_1,s_2$ be sections of $E$. Then $s_1+s_2$ and $\lambda s$ are also vector bundles for any $\lambda\in\R$. Moreover, the set of all sections $s(E)$ is a vector space. 
-\end{prp}
-
 \begin{defn}{Morphism of Vector Bundles}{} Let $p_1:E_1\to B_1$ and $p_2:E_2\to B_2$ be vector bundles. A morphism of these vector bundles is given by is a pair of continuous maps $f:E_1\to E_2$ and $g:B_1\to B_2$ such that the following diagram commutes \\
-\adjustbox{scale=1.1,center}{\begin{tikzcd}
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
 E_1\arrow[r, "f"]\arrow[d, "p_1"] & E_2\arrow[d, "p_2"]\\
 B_1\arrow[r, "g"] & B_2
 \end{tikzcd}} \\
@@ -190,34 +191,140 @@ E_1\arrow[rr, "f"]\arrow[rd, "p_1"] && E_2\arrow[ld, "p_2"]\\
 \begin{defn}{Isomorphism of Vector Bundles}{} A bundle homomorphism from $E_1$ to $E_2$ is an isomorphism if there exists an inverse bundle homomorphism from $E_2$ to $E_1$. In this case, we say that $E_1$ and $E_2$ are isomorphic. 
 \end{defn}
 
+\begin{lmm}{}{}\\
+Let $B$ be space. Let $p_1:E_1\to B$ and $p_2:E_2\to B$ be vector bundles. Let $f:E_1\to E_2$ be a morphism of vector bundles. Then $f$ is an isomorphism if and only if $f|_{p_1^{-1}(b)}$ is an isomorphism for all $b\in B$. 
+\begin{proof}\\
+If $f$ is an isomorphism, then the inverse of $f|_{p_1^{-1}(b)}$ is clearly given by $f^{-1}|_{p_2^{-1}(b)}$. \\
+
+Now suppose that $f|_{p_1^{-1}(b)}$ is an isomorphism for all $b\in B$. Then clearly $f$ is bijective. I claim that $p_2=p_1\circ f^{-1}$. Let $x\in E_2$. Then there exists $y\in E_1$ such that $f(y)=x$. Then $p_1(f^{-1}(x))=p_1(y)$. But $p_1=p_2\circ f$ by definition of morphisms of vector bundles. Hence $p_1(y)=p_2(f(y))=p_2(x)$ and we conclude. \\
+
+It remains to show that $f^{-1}$ is continuous. Let $U\subseteq E_1$ be an open set. Then there exists local trivialization charts $(V_i,\phi_i)$ of $E_1$ such that the $V_i$'s cover $p_1(U)$. Then we have $U=\bigcup_{i\in I}U\cap V_i$ and $f^{-1}(U)$ is open if and only if $f^{-1}(U\cap V_i)$ is open. But since restrictions of local trivialization charts are also local trivialization charts, it suffices to prove that $f$ is continuous on local trivialization charts. \\
+
+So let $(U,\phi)$ be a local trivialization chart of $E_1$. Since $E_2$ is also covered by local trivialization charts, WLOG assume that $(U,\psi)$ is a local trivialization chart of $E_2$. Now the map $\psi\circ f\circ\phi^{-1}:U\times F^k\to U\times F^n$ sends $(x,v)$ to $(x,g(x)(v))$ for some function $g(x):F^k\to F^n$. Since the map is a homeomorphism, the map $v\mapsto g(x)(v)$ must be a homeomorphism, and hence $k=n$. Since restriction to each fiber is a bijection, $g(x)$ must be an invertible linear map and hence continuous. Hence $\phi\circ f^{-1}\circ\psi^{-1}$ is continuous. Thus $f$ is continuous. 
+\end{proof}
+\end{lmm}
+
 \subsection{The Cocycle Conditions}
 Given two charts $(U_\alpha,\phi_\alpha)$ and $(U_\beta,\phi_\beta)$ of a vector bundle, $$\phi_\beta\circ\phi_\alpha^{-1}:(U_\alpha\cap U_\beta)\times F^k\to(U_\alpha\cap U_\beta)\times F^k$$ is a well defined function. In particular, by fixing a point in $U_\alpha\cap U_\beta$, we obtain a linear map. 
 
-\begin{defn}{Transition Functions}{} Let $p:E\to B$ be an $F$-vector bundle of rank $r$. Let $(U_\alpha,\phi_\alpha)$ and $(U_\beta,\phi_\beta)$ be local trivialization. For each $x\in U_\alpha\cap U_\beta$, $\phi_\beta\circ\phi_\alpha^{-1}(x,-):F^k\to F^k$ is a linear map. Define $g_{U_\alpha U_\beta}:U_\alpha\cap U_\beta\to\text{GL}(n,F)$ by $$x\mapsto\phi_\beta\circ\phi_\alpha^{-1}(x,-):F^k\to F^k$$ In other words, $g_{U_\alpha U_\beta}$ is such that $$\phi_\beta\circ\phi_\alpha^{-1}(x,v)=(x,g_{U_\alpha U_\beta}(x)v)$$ For $x\in U_\alpha\cap U_\beta$ and $v\in F^k$. 
+\begin{defn}{Transition Functions}{}\\
+Let $p:E\to B$ be an $F$-vector bundle of rank $k$. Let $(U_\alpha,\phi_\alpha)$ and $(U_\beta,\phi_\beta)$ be local trivialization. Define $g_{\alpha,\beta}:U_\alpha\cap U_\beta\to\text{GL}(n,F)$ by $$x\mapsto\phi_\beta\circ\phi_\alpha^{-1}(x,-):F^k\to F^k$$ In other words, $g_{\alpha,\beta}$ is such that $$\phi_\beta\circ\phi_\alpha^{-1}(x,v)=(x,g_{\alpha,\beta}(x)v)$$ For $x\in U_\alpha\cap U_\beta$ and $v\in F^k$. 
 \end{defn}
 
-\begin{prp}{}{} Let $p:E\to B$ be a $K$-vector bundle of rank $r$. The transition functions of the vector bundle satisfies the following. 
+\begin{prp}{}{}\\
+Let $p:E\to B$ be a $K$-vector bundle of rank $k$. The transition functions of the vector bundle satisfies the following. 
 \begin{itemize}
-\item Cocycle condition: $g_{\alpha\beta}\circ g_{\beta\gamma}\circ g_{\gamma\alpha}=I_r$ on $U_\alpha\cap U_\beta\cap U_\gamma$
-\item $g_{\alpha\alpha}=I_r$ on $U_\alpha$
+\item Cocycle condition: $g_{\gamma,\alpha}(x)\circ g_{\beta,\gamma}(x)\circ g_{\alpha,\beta}(x)=\text{id}$ on $U_\alpha\cap U_\beta\cap U_\gamma$ for all $x\in U_\alpha\cap U_\beta\cap U_\gamma$. 
+\item $g_{\alpha\alpha}(x)=I_r$ for all $x\in U_\alpha$. 
 \end{itemize}
+\begin{proof}\\
+We have $$\phi_\alpha\circ\phi_\gamma^{-1}\circ\phi_\gamma\circ\phi_\beta^{-1}\circ\phi_\beta\circ\phi_\alpha^{-1}=\text{id}$$ Hence $$(x,(g_{\gamma,\alpha}(x)\circ g_{\beta,\gamma}(x)\circ g_{\alpha,\beta}(x))(v))=(x,v)$$ for all $x\in U_\alpha\cap U_\beta\cap U_\gamma$ and all $v\in F^k$. Hence the cocycle condition is achieved. \\
+
+Clearly $g_{\alpha,\alpha}(x,-)$ is the identity by definition. 
+\end{proof}
 \end{prp}
+
+The cocycle conditions completely determine a vector bundle. 
+
+\begin{defn}{Associated Vector Bundle}{}\\
+Let $F$ be a field. Let $B$ be a space. Let $\{U_i\;|\;i\in I\}$ be an open cover of $B$. Let $g_{i,j}:U_i\cap U_j\to\text{GL}(k,F)$ be a continuous functions for $i,j\in I$ such that $g_{k,i}(x)\circ g_{j,k}(x)\circ g_{i,j}(x)=\text{id}$ for all $x\in U_i\cap U_j\cap U_k$ and $g_{i,i}(x)=\text{id}$ for all $x\in U_i$. Define the associated vector bundle to be the space $$E_g=\frac{\coprod_{i\in I}U_i\times F^k}{\sim}$$ where $(i,b,v)\sim(j,b,g_{i,j}(b)(v))$ if $b\in U_i\cap U_j$, together with the induced projection map $\text{proj}:E_g\to B$. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $F$ be a field. Let $B$ be a space. Let $\{U_i\;|\;i\in I\}$ be an open cover of $B$. Let $g_{i,j}:U_i\cap U_j\to\text{GL}(k,F)$ be a continuous functions for $i,j\in I$. Then $p:E_g\to B$ is a vector bundle of rank $k$. 
+\begin{proof}\\
+Firstly note that the projection map $E_g\to B$ is well defined by the universal property of quotient. We then need to prove that the local triviality condition is satisfied. Clearly the composition $U_i\times F^k\hookrightarrow\coprod_{i\in I}U_i\times F^k\to E_g$ composed with the canonical projection map commutes. It is a homeomorphism following the universal property of quotients. 
+\end{proof}
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $F$ be a field. Let $B$ be a space. Let $p:E\to B$ be a vector bundle over $F$. Let $g=\{g_{i,j}\;|\;i,j\in I\}$ be the transition functions. Then the transition functions induce an isomorphism $$E_g\cong E$$ of vector bundles. 
+\end{lmm}
 
 \subsection{Operations on Vector Bundles}
 \begin{defn}{Whitney Sum}{} Let $p_1:E_1\to B$ and $p_2:E_2\to B$ be two vector bundles. Define the direct sum of the vector bundles to be $$E_1\oplus E_2=\{(v_1,v_2)\in E_1\times E_2\;|\;p_1(v_1)=p_2(v_2)\}$$ together with the projection $p:E_1\oplus E_2\to B$ defined by $(v_1,v_2)\mapsto p_1(v)=p_2(v)$. 
 \end{defn}
 
-\begin{lmm}{}{} The Whitney sum $E_1\oplus E_2$ of two vector bundles is again a vector bundle. 
-\end{lmm}
+\begin{defn}{Pullback Bundle}{}\\
+Let $F$ be a field. Let $X,Y$ be spaces. Let $p:E\to Y$ be a vector bundle over $F$. Let $f:X\to Y$ be a map. Define the pullback bundle of $f$ to be the space $$f^\ast(E)=\{(x,e)\in X\times E\;|\;f(x)=p(e)\}$$ together with the projection map $p^\ast:f^\ast(E)\to X$ given by $p^\ast(x,e)=x$. 
+\end{defn}
 
-\begin{prp}{Tensor Product Bundle}{} Let $p_1:E_1\to B$ and $p_2:E_2\to B$ be vector bundles. Define the tensor product bundle of it to be $$E_1\otimes E_2=\{p_1^{-1}(x)\otimes p_2^{-1}(x)|x\in B\}$$ The construction $E_1\otimes E_2$ is a vector bundle over $B$. 
+\begin{defn}{The Hom Bundle}{}\\
+Let $F$ be a field. Let $B$ be a space. Let $p_1:E_1\to B$ and $p_2:E_2\to B$ be vector bundles over $F$. Define the Hom bundle of $E_1$ and $E_2$ to be the space $$\Hom(E_1,E_2)=\coprod_{b\in B}\Hom_F(p_1^{-1}(b),p_2^{-1}(b))$$ together with the coproduct of the maps $\Hom_F(p_1^{-1}(b),p_2^{-1}(b))\to\{b\}$. 
+\end{defn}
+
+\begin{defn}{The Dual Bundle}{}\\
+Let $F$ be a field. Let $B$ be a space. Let $p:E\to B$ be a vector bundle over $F$. Define the dual bundle of $p$ to be the vector bundle $$E^\ast=\Hom(E,F\times B)$$
+\end{defn}
+
+\begin{defn}{The Tensor Product Bundle}{}\\
+Let $F$ be a field. Let $B$ be a space. Let $p_1:E_1\to B$ and $p_2:E_2\to B$ be vector bundles over $F$. Define the tensor product bundle to be the space $$E_1\otimes E_2=\coprod_{b\in B}p_1^{-1}(b)\otimes_F p_2^{-1}(b)$$ together with the coproduct of the maps $p_1^{-1}(b)\otimes p_2^{-1}(b)\to\{b\}$. 
+\end{defn}
+
+\begin{defn}{The Exterior Product Bundle}{}\\
+Let $F$ be a field Let $B$ be a space. Let $p:E\to B$ be a vector bundle. Define the $n$th exterior product bundle of $E$ to be $$\Lambda^n(E)=\coprod_{b\in B}\Lambda^n(p^{-1}(b))$$  together with the coproduct of the maps $\Lambda^n(p_1^{-1}(b))\to\{b\}$. 
+\end{defn}
+
+\subsection{Almost Complex Structures}
+\begin{defn}{Linear Complex Structure}{}\\
+Let $V$ be a vector space over $\R$. A linear complex structure on $V$ is a linear map $J:V\to V$ such that $J^2=-\text{id}_V$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $V$ be a vector space over $\R$. Let $J$ be a linear complex structure on $V$. Then $V$ is a $\C$-vector space whose action is given by $$(x+iy)\cdot v=xv+yJ(v)$$ for $v\in V$ and $x+iy\in\C$. 
 \end{prp}
 
-\begin{thm}{Pullback Bundle}{} Let $p:E\to Y$ be a vector bundle. Let $f:X\to Y$ be a continuous map. Then there exists $E'$ and $p'$ such that $p':E'\to X$ is a vector bundle. 
-\end{thm}
+\begin{prp}{}{}\\
+Let $V$ be a finite dimensional vector space over $\R$. Then the following are true. 
+\begin{itemize}
+\item $V$ admits a linear complex structure if and only if $\dim_\R(V)$ is even. 
+\item In this case, we have $\dim_\C(V)=2\dim_\R(V)$. 
+\end{itemize}
+\end{prp}
 
-\begin{thm}{Dual Bundle}{} Let $p:E\to B$ be a $K$-vector bundle. Then the dual bundle $p^\ast:E^\ast\to B$ defined by $$E_b^\ast=\Hom_K(E_b,K)$$ is a vector bundle over $B$. 
-\end{thm}
+\begin{eg}{}{}\\
+Let $J:\R^{2n}\to\R^{2n}$ be the map defined in block matrix form $$J=\begin{pmatrix}
+0 & -I_n\\
+I_n & 0
+\end{pmatrix}$$
+Then $J$ defines a linear complex structure on $\R^{2n}$. In particular, if $e_1,\dots,e_{2n}$ are the standard basis vectors for $\R^{2n}$, then $\frac{1}{2}(e_1-ie_{2n+1}),\dots,\frac{1}{2}(e_n-ie_{2n})$ is a basis for $V$ as a $\C$-vector space. 
+\end{eg}
+
+\begin{prp}{}{}\\
+Let $V$ be a vector space over $\R$. Let $J$ be a linear complex structure on $V$. Let $T:V\to V$ be an $\R$-linear transformation. Then $T$ is a $\C$-linear transformation if and only if $J\circ T=T\circ J$. 
+\end{prp}
+
+The linear complex structure on an $\R$-vector space gives an intrinsic way of giving the $\R$-vector space the structure of a $\C$-vector space. However, we already know an external way of giving $\R$-vector spaces $\C$-multiplication: namely by extension of scalars. 
+
+\begin{prp}{}{}\\
+Let $V$ be a vector space over $\R$. Let $J$ be a linear complex structure on $V$. Then the following are true. 
+\begin{itemize}
+\item $J$ extends to a linear complex structure on $V\otimes_\R\C$ by $J(v\otimes z)=J(v)\otimes z$. 
+\item The eigenvalues of $J:V\otimes_\R\C\to V\otimes_\R\C$ is given by $\pm i$ and the eigenspaces of $J$ are given by $$E_i=\{v\otimes 1-J(v)\otimes i\;|\;v\in V\}\;\;\;\text{ and }\;\;\;E_{-i}=\{v\otimes 1+J(v)\otimes i\;|\;v\in V\}$$
+\item There is a natural isomorphism of $\C$-vector space $V\cong E_i$ given by $v\mapsto v\otimes 1-J(v)\otimes i$. 
+\item The conjugation map $\overline{(-)}:V\otimes_R\C\to V\otimes_\R\C$ given by $\overline{v\otimes z}=v\otimes\overline{z}$ restricts to an isomorphism $$\overline{(-)}|_{E_i}:E_i\overset{\cong}{\to}E_{-i}$$ whose inverse is given by $\overline{(-)}|_{E_{-i}}$. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $V$ be a vector space over $\R$. Let $J$ be a linear complex structure on $V$. Then $J^T$ defines a linear complex structure on $V^\ast$. 
+\end{prp}
+
+\begin{defn}{Almost Complex Structure}{}\\
+Let $B$ be a space. Let $p:E\to B$ be a vector bundle over $\R$. An almost complex structure on $p$ is a vector bundle isomorphism $j:E\to E$ such that $j\circ j=\text{id}$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $B$ be a space. Let $p:E\to B$ be a vector bundle over $\R$. Let $J$ be an almost complex structure on $p$. Then the following are true. 
+\begin{itemize}
+\item The rank of $E$ over $\R$ is even. 
+\item $E$ is a complex vector bundle whose action is given by $$(x+iy)\cdot v=xv+yJ_b(v)$$ for $v\in E_b$ and $x+iy\in\C$ for each $b\in B$. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $B$ be a space. Let $p:E\to B$ be a vector bundle over $\C$ of rank $n$. Then $E$ is a real vector bundle of rank $2n$. 
+\end{prp}
 
 \pagebreak
 \section{The Topology of Fiber Bundles}

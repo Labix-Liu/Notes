@@ -1,0 +1,1118 @@
+\documentclass[a4paper]{article}
+
+\input{C:/Users/liula/Desktop/Latex/Headers/Headers.tex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Labix}
+\lhead{My Learning Draft}
+\rfoot{\thepage}
+
+\title{My Learning Draft}
+
+\author{Labix}
+
+\date{\today}
+\begin{document}
+\maketitle
+
+\pagebreak
+\tableofcontents
+
+\pagebreak
+\section{More on Simplicial Homology}
+\subsection{Relation to Singular Homology}
+\begin{thm}{}{} Let $X$ be a topological space endowed with a $\Delta$-complex structure $(T,\abs{T}\cong X)$. The induced map $H_n^\Delta(X)\to H_n(X)$ by the map $s:\Delta^n\to X$ for each $s\in T^n$ is an isomorphism. 
+\begin{proof}
+Firstly, every $n$-simplex $s\in T$ induces a canonical continuous map $s:\Delta^n\to X$. This extends to a homomorphism $\Delta_n(T)\to C_n(X)$ and so to a chain map and descends to homology. \\
+
+Denote $T^k$ the $\Delta$-sets of simplices in $T$ of dimension at most $k$. Define $\Delta_\bullet(T^k,T^{k-1})=\Delta_\bullet(T^k)/\Delta_\bullet(T^{k-1})$ and accordingly, $H_n(\Delta_\bullet(T^k,T^{k-1}))$. Then the short exact sequence of chain complexes \\
+\adjustbox{scale=1,center}{\begin{tikzcd}
+	0 & {\Delta_\bullet(T^{k-1})} & {\Delta_\bullet(T^k)} & {\Delta_\bullet(T^k,T^{k-1})} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}} \\
+Together with the inclusion maps and by naturality in theorem 1.4.3, give the following: \\
+\adjustbox{scale=0.8,center}{\begin{tikzcd}
+	\cdots & {H_{n+1}(T^k,T^{k-1})} & {H_n(T^{k-1})} & {H_n(T^{k-1})} & {H_n(T^k,T^{k-1})} & {H_{n-1}(T^{k-1})} & \cdots \\
+	\cdots & {H_{n+1}(\abs{T^k},\abs{T^{k-1}})} & {H_n(\abs{T^{k-1}})} & {H_n(\abs{T^{k-1}})} & {H_n(\abs{T^k},\abs{T^{k-1}})} & {H_{n-1}(\abs{T^{k-1}})} & \cdots
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-3, to=2-3]
+	\arrow[from=1-4, to=1-5]
+	\arrow[from=1-4, to=2-4]
+	\arrow[from=1-5, to=1-6]
+	\arrow[from=1-5, to=2-5]
+	\arrow[from=1-6, to=1-7]
+	\arrow[from=1-6, to=2-6]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-3, to=2-4]
+	\arrow[from=2-4, to=2-5]
+	\arrow[from=2-5, to=2-6]
+	\arrow[from=2-6, to=2-7]
+\end{tikzcd}} \\
+When $k=0$, $\abs{T^0}$ is a discrete topological space on the set $T^0$, and the map $H_n(T^0)\to H_n(\abs{T^0})$ is an isomorphism. By induction and the five lemma, the middle map is an isomorphism provided that the first and fourth maps are isomorphisms. \\
+
+Note that $\Delta_\bullet(T^{k-1})$ is a chain complex in degrees $k-1$, $k-2$, down to $0$. And $\Delta_\bullet(T^k)$ is the same chain complex with an additional term $\Z T_k$ in degree $k$. It follows that $\Delta_\bullet(T^k,T^{k-1})$ is the chain complex with $\Z T^k$ concentrated in degree $k$. In particular, we have that $$H_n(T^k,T^{k-1})=\begin{cases}
+\Z T^k & \text{ if } n=k\\
+0 & \text{ otherwise }
+\end{cases}$$
+By construction of the geometric realization, we have a homeomorphism $$\frac{\abs{T^k}}{\abs{T^{k-1}}}\cong\frac{\Delta^k\times T^k}{\partial\Delta^k\times T^k}\cong\bigvee_{T_k}\frac{\Delta^k}{\partial\Delta^k}$$ Using lemma 6.2.4 and lemma 6.2.5, we have that $$H_n(\abs{T^k},\abs{T^{k-1}})\cong\widetilde{H_n}(\abs{T^k}/\abs{T^{k-1}})\cong\begin{cases}
+\Z T_k & \text{ if } n=k\\
+0 & \text{ otherwisev }
+\end{cases}$$
+with generators corresponding to elements $s\in T^k$ via the relative cycles $s:\Delta^k\to\abs{T^k}$. It follows that an isomorphism occurs in the first and fourth position of the long exact sequence of relative homology groups. \\
+
+If $T=T^n$ for some $n\in\N$, we are done. \\
+
+Continuing the proof, let $z\in Z_n(T)$ be an $n$-cycle whose image in $H_n(\abs{T})$ vanishes. Then there exists $\tau\in C_{n+1}(\abs{T})$ with $\partial\tau=z$. Now since $\abs{T}$ is the geometric realization, we must have every compact subspace of $\abs{T}$ lying in some $\abs{T^k}$. Hence $\tau\in C_{n+1}(\abs{T^k})$ for some $k>n$. We deduce that $z$ maps to $0$ in $H_n(\abs{T^k})$. By the previous argument, we have taht $z=0\in H_n(T^k)=H_n(T)$. This shows injectivity of $H_n(T)\to H_n(\abs{T})$. \\
+
+Similarly, let $\sigma\in Z_n(T)$ be an $n$-cycle. We have seen that $\sigma\in Z_n(\abs{T^k})$ for some $k>n$ and by the argument above, $[\sigma]$ comes from $H_n(T^k)=H_n(T)$. This shows surjectivity of $H_n(T)\to H_n(\abs{T})$ and so we are done. 
+\end{proof}
+\end{thm}
+
+We can finally show that simplicial homology is independent of the choice of $\Delta$-complex structure. 
+
+\begin{crl}{}{} The simplicial homology $H_\bullet^\Delta(X)$ depends on $X$ only and not on the $\Delta$-complex structure. 
+\begin{proof}
+Indeed the geometric realization of any two $\Delta$-complex structure is isomorphic to the same singular homology group. 
+\end{proof}
+\end{crl}
+
+\begin{crl}{}{} Suppose $X$ has a $\Delta$-complex structure with simplicies in dimension $\leq k$ only. Then $H_n(X)=0$ for all $n>k$. 
+\begin{proof}
+Direct since singular homology coincides with simplicial homology. 
+\end{proof}
+\end{crl}
+
+\subsection{Simplicial Cohomology}
+\begin{defn}{Simplicial Cohomology Groups}{}\\
+Let $X$ be a $\Delta$-complex. Let $R$ be a ring. Let $M$ be an $R$-module. Define the $n$th simplicial cohomology group of $X$ $$H_\Delta^n(X;M)=H^n(\Hom(\Delta_\bullet(X),M))$$ to be the $n$th cohomology group of the dual of the simplicial complex $\Delta_\bullet(X)$ of $X$. 
+\end{defn}
+
+\subsection{}
+\begin{prp}{}{}\\
+Let $S$ be a simplicial complex. Let $\sigma\in S$. Let $p\in\abs{\sigma}^\circ$. Then we have $$H_\text{sing}^k(\abs{S},\abs{S}\setminus p)\cong\widetilde{H}_\Delta^{k-\abs{\sigma}}(\text{lk}(\sigma))$$
+\end{prp}
+
+\pagebreak
+\section{Polyhedrons and Polytopes}
+\subsection{Convex Geometry}
+\begin{defn}{Convex Sets}{}\\
+Let $C\subseteq\R^n$. We say that $C$ is convex if for all $x,y\in C$ and $t\in[0,1]$, we have $(1-t)x+ty\in C$. 
+\end{defn}
+
+\begin{defn}{Convex Hull}{}\\
+Let $S\subseteq\R^n$ be a subset. Define the convex hull of $S$ to be $$\text{Conv}(S)=\left\{\sum_{k=1}^n\lambda_kx_k\;\bigg{|}\;x_k\in S\text{ and }\sum_{k=1}^n\lambda_k=1\right\}$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $S\subseteq\R^n$ be a subset. Then the following are sets are equal. 
+\begin{itemize}
+\item The convex hull $\text{Conv}(S)$. 
+\item $\bigcap_{C\subseteq\R^n\text{ is convex}}C$. 
+\item The smallest convex set containing $S$. 
+\end{itemize}
+\end{prp}
+
+\subsection{Polyhedrons and its Properties}
+Polytopes exists more generically in Euclidean space. We lose nothing discussing polytopes in $\R^n$ since Euclidean spaces maybe identified with $\R^n$ canonically. 
+
+\begin{defn}{Halfspaces}{}\\
+A halfspace of $\R^n$ is a subset of $\R^n$ of the form $$\{x\in\R^n\;|\;\langle a,x\rangle+b\geq 0\}$$ for some $a,b\in\R^n$. 
+\end{defn}
+
+\begin{defn}{Polyhedrons}{}\\
+A polyhedron in $\R^n$ is an intersection of finitely many halfspaces. 
+\end{defn}
+
+\begin{defn}{Polytopes}{}\\
+A polytope in $\R^n$ is a polyhedron that is bounded. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $P\subseteq\R^n$ be a subset. Then $P$ is a polytope if and only if there exists a finite subset $S\subseteq\R^n$ such that $P=\text{Conv}(S)$. 
+\end{prp}
+
+\begin{defn}{Dimension}{}\\
+Let $P\subseteq\R^n$ be a polytope. Define the dimension of $P$ to be the dimension of the smallest affine subspace containing $P$. 
+\end{defn}
+
+\begin{defn}{Affinely Isomorphic}{}\\
+Let $P_1\subseteq\R^{n_1}$ and $P_2\subseteq\R^{n_2}$ be polytopes. We say that $P_1$ and $P_2$ are affinely isomorphic if there exists an affine transformation $f:\R^{n_1}\to\R^{n_2}$ such that $f|_{P_1}$ is a bijection. 
+\end{defn}
+
+Note that $f$ itself need not be an affine isomorphism (i.e. an isomorphism of affine spaces). 
+
+\subsection{The Faces of a Polyhedron}
+\begin{defn}{Supporting Hyperplane}{}\\
+Let $P\subseteq\R^n$ be a polyhedron. Let $H\subseteq\R^n$ be a hyperplane. We say that $H$ is a supporting hyperplane for $P$ if the following are true. 
+\begin{itemize}
+\item $P\cap H\neq\emptyset$. 
+\item $P$ lies entirely in one of the halfspaces defined by $H$. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Faces}{}\\
+Let $P\subseteq\R^n$ be a polyhedron. A face of $P$ is a subset of $P$ defined by $$F=P\cap H$$ where $H$ is a supporting hyperplane for $P$. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $P\subseteq\R^n$ be a polyhedron. Let $F\subseteq P$ be a face. Then $F$ is a polytope. 
+\end{lmm}
+
+\begin{defn}{Vertices, Edges and Facets}{}\\
+Let $P\subseteq\R^n$ be a polyhedron. Let $F\subseteq P$ be a face. 
+\begin{itemize}
+\item We say that $F$ is a vertex if $\dim(F)=0$. 
+\item We say that $F$ is an edge if $\dim(F)=1$. 
+\item We say that $F$ is a facet if $\dim(F)=\dim(P)-1$. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{The Face Poset}{}\\
+Let $P\subseteq\R^n$ be a polyhedron. Define the face poset $\mF(P)$ of $P$ to be the set of faces of $P$ together with inclusion. 
+\end{defn}
+
+\begin{defn}{The Face Vector}{}\\
+Let $P\subseteq\R^n$ be a polytope of dimension $d$. Define the face vector $(f_0,\dots,f_{d-1})$ of $S$ by the formula $$f_i=\text{The number of }i\text{-dimensional faces of }P$$ for $0\leq i\leq d$ and by convention, $f_{-1}=f_d=1$. 
+\end{defn}
+
+\begin{lmm}{Euler's Formula}{}\\
+Let $P\subseteq\R^n$ be a polytope of dimension $d$. Then we have $$\sum_{i=0}^{d-1}(-1)^if_i=1+(-1)^d$$
+\end{lmm}
+
+\begin{defn}{Combinatorially Equivalent}{}\\
+Let $P_1\subseteq\R^{n_1}$ and $P_2\subseteq\R^{n_2}$ be polytopes. We say that $P_1$ and $P_2$ are combinatorially equivalent if there exists a inclusion preserving bijection between $\mF(P_1)$ and $\mF(P_2)$. In this case we write $P_1\simeq P_2$. 
+\end{defn}
+
+\pagebreak
+\section{Duality in Polytopes}
+\subsection{Polar Sets}
+\begin{defn}{Polar Sets}{}\\
+Let $S\subseteq\R^n$ be a subset. Define the polar set of $S$ to be $$S^\ast=\{f\in(\R^n)^\ast\;|\;f(x)\leq 1\text{ for all }x\in S\}$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $P\subseteq\R^n$ be a polytope. If $0\in P$, then $P^\ast$ is a polytope. 
+\end{prp}
+
+\begin{eg}{}{}\\
+The polar set of the cube $C^3=\{(a,b,c)\in\R^3\;|\;-1\leq a,b,c\leq 1\}$ is the octahedron $$(C^3)^\ast=\{(x,y,z)\in(\R^3)^\ast\;|\;\pm x+\pm y+\pm z\leq 1\}$$
+\end{eg}
+
+$P=(P^\ast)^\ast$. 
+
+$\mF(P)^\text{op}\cong\mF(P^\ast)$. 
+
+\subsection{Simplicial Polytopes}
+\begin{defn}{Simplicial Polytopes}{}\\
+Let $P\subseteq\R^n$ be a polytope. We say that $P$ is a simplicial polytope if all its facets are simplicies. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $P\subseteq\R^n$ be a polytope. Then $\partial P$ is a simplicial complex. 
+\end{lmm}
+
+\begin{prp}{The Dehn-Sommerville Equation}{}\\
+Let $P\subseteq\R^n$ be a simplicial polytope of dimension $d$. Then the following are true: $$\sum_{j=k}^{d-1}(-1)^j\binom{j+1}{k+1}f_j=(-1)^{d-1}f_k$$ for $-1\leq k\leq d-2$. 
+\end{prp}
+
+In particular, $\partial P$ is a simplicial complex. The notion of face vector coincides, and they enjoy both the Dehn-Sommerville equation and its relation with the $h$-vector. 
+
+\subsection{Simple and Simplicial Polytopes}
+\begin{defn}{Simple Polytopes}{}\\
+Let $P\subseteq\R^n$ be a polytope. We say that $P$ is a simple polytope if for all vertices $v\in P$, there exists $n$ edges $e_1,\dots,e_n\subseteq P$ such that $v\in\partial e_i$ for all $i$. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $P_1\subseteq\R^n$ and $P_2\subseteq\R^m$ be simple polytopes. Then the Cartesian product $P_1\times P_2$ is a simple polytope. 
+\end{lmm}
+
+\subsection{The Duality Between Simple and Simplicial Polytopes}
+\begin{prp}{}{}\\
+Let $P\subseteq\R^n$. Then $P$ is simple if and only $P^\ast$ is simplicial. 
+\end{prp}
+
+Duality of $d$-dimensional faces with $(n-d)$-dimensional faces. 
+
+\begin{prp}{}{}\\
+Let $P\subseteq\R^n$ be a polytope. If $P$ is both simple and simplicial, then $P$ belongs to one of the following types of polytopes. 
+\begin{itemize}
+\item $n=2$ (and so $P$ is a polygon). 
+\item $P$ is a simplex. 
+\end{itemize}
+\end{prp}
+
+\subsection{Nerve Complex}
+\begin{defn}{The Nerve Complex}{}\\
+Let $P\subseteq\R^n$ be a simple polytope. Define the nerve complex of $P$ to be the simplicial complex $$\mK_P=\partial(P^\ast)$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $P\subseteq\R^n$ be a simple polytope. Then $\mK_P$ is a triangulation of $S^{n-1}$. 
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $P_1\subseteq\R^n$ and $P_2\subseteq\R^m$ be simple polytopes. Then we have $$\mK_{P_1\times P_2}\cong\mK_{P_1}\ast\mK_{P_2}$$
+\end{lmm}
+
+\pagebreak
+\section{Piecewise Linear Topology}
+\subsection{Relation between Polyhedra and Simplicial Complexes}
+\begin{defn}{Locally Finite Collections}{}\\
+Let $X$ be a space. Let $P\subseteq\mP(X)$ be a collection of subsets. We say that $P$ is locally finite if for each $p\in X$, there exists a neighbourhood $U\subseteq X$ of $p$ such that the set $$\{V\in P\;|\;U\cap V\neq\emptyset\}$$ is finite. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $P$ be a polyhedra. Then $P$ is a locally finite union of simplexes. 
+\end{prp}
+
+Thus if $P$ is a polytope, then $P$ has the underlying structure of a simplicial complex. 
+
+\subsection{Piecewise Linear Maps}
+\begin{defn}{Piecewise Linear Maps between Polyhedra}{}\\
+Let $P,Q$ be polyhedra. Let $f:P\to Q$ be a function. We say that $f$ is piecewise linear if there exists a locally finite decomposition into polyhedra $P=\bigcup_{\alpha\in I}P_\alpha$ such that for each $\alpha\in I$, the restriction $f|_{P_\alpha}$ is affine linear. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $P,Q$ be polyhedra. Let $f:P\to Q$ be a function. Then the following are equivalent. 
+\begin{itemize}
+\item $f$ is piecewise linear. 
+\item For each $p\in P$, there exists $L\subseteq P$ such that $f(\lambda p+\mu x)=\lambda f(p)+\mu f(x)$ for all $\lambda,\mu\geq 0$ and $\lambda+\mu=1$ and $x\in L$. 
+\item $\Gamma(f)=\{(x,f(x))\;|\;x\in P\}$ is a polyhedron. 
+\item There exists locally finite decompositions of $P$ and $Q$ into simplexes such that $f$ sends simplexes to simplexes and $f$ restricted to each simplex is affine linear. 
+\end{itemize}
+\end{prp}
+
+\begin{defn}{PL Homeomorphism}{}\\
+Let $P,Q$ be polyhedra. Let $f:P\to Q$ be a piecewise linear function. We say that $f$ is a PL homeomorphism if there exists a piecewise linear function $g:Q\to P$ such that $$g\circ f=\text{id}_P\;\;\;\text{ and }\;\;\;f\circ g=\text{id}_Q$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $P,Q$ be polyhedra. Let $f:P\to Q$ be a piecewise linear function. If $f$ is a homeomorphism, then $f$ is a piecewise linear homeomorphism. 
+\end{lmm}
+
+Motivated by the equivalent definitions of piecewise linear maps between polyhedra, we define piecewise linear maps between spaces in general. 
+
+\begin{defn}{Piecewise Linear Maps in General}{}\\
+Let $X,Y$ be spaces. Let $f:X\to Y$ be a function. We say that $f$ is piecewise linear if there exists locally finite triangulations of $X$ and $Y$ such that $f$ restricted to each simplex is affine linear. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $S,T$ be simplicial complexes. Let $f:V(S)\to V(T)$ be a simplicial map. Then $\abs{f}:\abs{S}\to\abs{T}$ is piecewise linear. 
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $S,T$ be simplicial complexes. Let $f:\abs{S}\to\abs{T}$ be a function. Then $f$ is piecewise linear if and only if there exists subdivisions $S'$ of $S$ and $T'$ of $T$ such that $f:\abs{S'}\to\abs{T'}$ is simplicial. 
+\end{prp}
+
+\subsection{Piecewise Linear Manifolds}
+\begin{prp}{}{}\\
+The set $$\Gamma=\{f:U\to V\;|\;U,V\subseteq\R^n\text{ are open }, f\text{ is a PL homeomorphism }\}$$ defines a pseudogroup of transformations on $\R^n$. 
+\end{prp}
+
+\begin{defn}{Piecewise Linear Manifolds}{}\\
+A piecewise linear manifold is a manifold whose pseudogroup of transformations is given by $\Gamma$. 
+\end{defn}
+
+\subsection{Triangulated Manifolds}
+\begin{defn}{Triangulated Manifolds}{}\\
+Let $M$ be a topological manifold. We say that $M$ is a triangulated manifold if $M$ is triangulated as a topological space. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $X$ be a piecewise linear manifold. Then $X$ is a triangulated manifold. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $M$ be a triangulated manifold triangulated by the simplicial complex $K$. Then the following are equivalent. 
+\begin{itemize}
+\item $M$ is a PL manifold. 
+\item For every $\emptyset\neq\sigma\in K$, we have that $\text{lk}(\sigma)$ is PL homeomorphic to $\abs{\Delta^d}$ where $d=\dim(M)-\abs{\sigma}$. 
+\item For every $p\in V(K)$, we have that $\text{st}(p)$ is PL homeomorphic to $\abs{\Delta^{\dim(M)}}$. 
+\end{itemize}
+\end{prp}
+
+The Hauptvermutung asks whether any two homeomorphic triangulated spaces are PL homemorphic (i.e. if $S,T$ are simplicial complexes and $\abs{S}$ is homeomorphic to $\abs{T}$, is there a PL homeomorphism between $\abs{S}$ and $\abs{T}$?). This is shown to be False by Milnor using Reidemeister torsion. \\
+
+The manifold Hauptvermutung asks whether any two homeomorphic triangulated manifolds are PL homemorphic. This is also show to be false using an obstruction in cohomology. 
+
+\begin{prp}{}{} Every finite CW complex is homotopy equivalent to a topological manifold. 
+\end{prp}
+
+\subsection{Pseudo-Manifolds}
+\begin{defn}{Pseudo-Manifolds From Simplicial Complexes}{}\\
+Let $\mK$ be a simplicial complex. We say that $\mK$ is a pseudo-manifold of dimension $n$ if the following are true. 
+\begin{itemize}
+\item All maximal simplicies of $\mK$ are of dimension $n$. 
+\item Each $(n-1)$-simplex of $\mK$ is the face of two $n$-simplicies of $\mK$. 
+\item For any two $n$-simplicies $\sigma,\sigma'\in\mK$, there exists $n$-simplicies $\sigma=\sigma_0,\dots,\sigma_k=\sigma'$ such that $\sigma_i\cap\sigma_{i+1}$ is an $(n-1)$-simplex for $0\leq i\leq k-1$. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Pseudo-Manifolds in General}{}\\
+Let $X$ be a space. We say that $X$ is a pseudo-manifold if $X$ is triangulated by a simplicial complex $\mK$ that is a pseudo-manifold. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $X$ be a pseudo-manifold of dimension $n$. Then $H_n(X)\cong\Z$ or $0$. 
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $\mK$ be a triangulation of $S^n$. Then the following are true. 
+\begin{itemize}
+\item $\mK$ is a pseudo-manifold. 
+\item If $\mK$ is finite, then the generator of $H_n(\mK)$ is represented by the sum of $n$-simplicies of $\mK$. 
+\end{itemize}
+\end{lmm}
+
+\pagebreak
+\section{Cones and Fans}
+\subsection{Cones and its Properties}
+\begin{defn}{Cones}{}\\
+Let $C\subseteq\R^n$. We say that $C$ is a cone if $x\in C$ implies that $sx\in C$ for all $s\geq 0$. 
+\end{defn}
+
+\begin{defn}{Polyhedral Cones}{}\\
+A cone in $\R^n$ is a subset $C\subseteq\R^n$ such that if $c_1,\dots,c_n\in C$, then $\sum_{i=1}^n\lambda_ic_i\in C$ for all $\lambda_1,\dots,\lambda_n\geq 0$. 
+\end{defn}
+
+\begin{defn}{Conical Hull}{}\\
+Let $S\subseteq\R^n$ be finite. Define the conical hull of $S$ to be $$\text{Cone}(S)=\left\{\sum_{s\in S}\lambda_ss\;\bigg{|}\;\lambda_s\geq 0\right\}$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $C\subseteq\R^n$ be a subset. Then the following are equivalent. 
+\begin{itemize}
+\item $C$ is a polyhedral cone. 
+\item There exists a finite subset $S\subseteq\R^n$ such that $C=\text{Cone}(S)$. 
+\item $C$ is the intersection of finitely many halfspaces containing $0$ in their boundary. 
+\end{itemize}
+\end{prp}
+
+Therefore cones are also polyhedrons. 
+
+\begin{defn}{Dimension of a Cone}{}\\
+Let $C\subseteq\R^n$ be a cone. Define the dimension of $C$ to be the dimension of the smallest affine subspace containing $C$. 
+\end{defn}
+
+\begin{defn}{Rational Cones}{}\\
+Let $C\subseteq\R^n$ be a cone. We say that $C$ is rational if there exists a finite set $S\subseteq\Z^n$ such that $C=\text{Cone}(S)$. 
+\end{defn}
+
+\begin{defn}{Regular Cones}{}\\
+Let $C\subseteq\R^n$ be a cone. We say that $C$ is regular if there exists a finite set $S\subseteq\Z^n$ such that the following are true. 
+\begin{itemize}
+\item $C=\text{Cone}(S)$. 
+\item Elements of $S$ are $\Z$-linearly independent. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Simplicial Cones}{}\\
+Let $C\subseteq\R^n$ be a cone. We say that $C$ is simplicial if there exists a finite set $S\subseteq\R^n$ such that the following are true. 
+\begin{itemize}
+\item $C=\text{Cone}(S)$. 
+\item Elements of $S$ are $\R$-linearly independent. 
+\end{itemize}
+\end{defn}
+
+\subsection{The Dual Cone}
+\begin{defn}{The Dual of a Cone}{}\\
+Let $C\in\R^n$ be a cone. Define the dual of $C$ to be $$C^\vee=\{x\in\R^n\;|\;\langle x,c\rangle\geq 0\text{ for all }c\in C\}$$
+\end{defn}
+
+\begin{defn}{Associated Hyperplane and Halfspace of a Linear Functional}{}\\
+Let $\phi\in(\R^n)^\ast$. Define the associated hyperplane of $\phi$ to be $$H_\phi=\{x\in\R^n\;|\;\phi(x)=0\}$$ Define the associated halfspace of $\phi$ to be $$H_\phi^+=\{x\in\R^n\;|\;\phi(x)\geq 0\}$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $C\in\R^n$ be a cone. Let $H$ be a hyperplane in $\R^n$. Then $H$ is a supporting hyperplane of $C$ if and only if there exists $\phi\in C^\vee$ such that $H=H_\phi$. 
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $C\in\R^n$ be a polyhedral cone. Then the following are true. 
+\begin{itemize}
+\item $C^\vee$ is a polyhedral cone. 
+\item $(C^\vee)^\vee=C$. 
+\item $C=\bigcap_{i=1}^nH_{\phi_i}$ for $\phi_i\in(\R^n)^\ast$ if and only if $C^\vee=\text{Cone}(\phi_1,\dots,\phi_n)$. 
+\item If $C$ is strongly convex, then $C^\vee$ is strongly convex. 
+\end{itemize}
+\end{lmm}
+
+\begin{lmm}{Separation Lemma}{}\\
+Let $C_1,C_2\subseteq\R^n$ be cones such that $F=C_1\cap C_2$ is a face of both $C_1$ and $C_2$. Then there exists $\phi\in C_1^\vee\cap(-C_2)^\vee$ such that $$F=C_1\cap H_\phi=C_2\cap H_\phi$$
+\end{lmm}
+
+\begin{defn}{Strongly Convex Cones}{}\\
+Let $C\subseteq\R^n$ be a cone. We say that $C$ is strongly convex if $C$ does not contain a line. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $C\subseteq\R^n$ be a cone. Then the following are equivalent. 
+\begin{itemize}
+\item $C$ is strongly convex. 
+\item $\{0\}$ is a face of $C$. 
+\item $C\cap(-C)=\{0\}$. 
+\item $\dim(C^\vee)=n$. 
+\end{itemize}
+\end{lmm}
+
+\subsection{Fans and its Properties}
+\begin{defn}{Fans}{}\\
+Let $n\in\N^+$. A fan in $\R^n$ is a finite set of cones $\Sigma$ such that the following are true. 
+\begin{itemize}
+\item Each $C\in\Sigma$ is a strongly convex rational polyhedral cone. 
+\item For each cone $C\in\Sigma$ and each face $F$ of $C$, we have $F\in\Sigma$. 
+\item For cones $C_1,C_2\in\Sigma$, we have $C_1\cap C_2$ are faces of $C_1$ and $C_2$. 
+\end{itemize}
+We write $\Sigma(d)=\{C\in\Sigma\;|\;\dim(C)=d\}$ for the $d$-dimensional cones in the fan. 
+\end{defn}
+
+\begin{defn}{The Support of a Fan}{}\\
+Let $n\in\N^+$. Let $\Sigma$ be a fan in $\R^n$. Define the support of $\Sigma$ to be $$\abs{\Sigma}=\cup_{C\in\Sigma}C$$
+\end{defn}
+
+\begin{defn}{Types of Fans}{}
+\end{defn}
+
+\begin{defn}{Complete Fans}{}\\
+Let $n\in\N^+$. Let $\Sigma$ be a fan in $\R^n$. We say that $\Sigma$ is complete if $\abs{\Sigma}=\R^n$. 
+\end{defn}
+
+\pagebreak
+\section{Some Results on the Classification of Polytopes}
+Let $P$ be a simplicial polytope of dimension $4$. Since $P$ is homeomorphic to $D^4$, the following classification problems are equivalent. 
+\begin{itemize}
+\item Classification of simplicial polytopes up to uniqueness of the face vector. 
+\item Classification of triangulations of the $3$-sphere up to uniqueness of the face vector of the simplicial complex. 
+\end{itemize}
+(More subtle, this is not true for higher dimensions: see https://math.mit.edu/~rstan/pubs/pubfiles/54.pdf)
+
+
+Of course, two polytopes that are not combinatorially equivalent can still have the same face vector. Let $(f_0,f_1,f_2,f_3)$ be the face vector of $P$. A few is known in this particular case. 
+\begin{itemize}
+\item Since $P$ is simplicial, we have the bound $f_i\leq\binom{f_0}{i+1}$ from here
+%https://en.wikipedia.org/wiki/Cyclic_polytope
+\item The Euler characteristic of the sphere tells us that $f_0-f_1+f_2-f_3=0$. 
+\item %https://arxiv.org/pdf/math/0604018
+shows that $f_1\geq 4f_0-10$. 
+\item The same paper tells us that $f_2=2f_1-2f_0$ and $f_3=f_1-f_0$ (also this paper: %https://math.mit.edu/~rstan/pubs/pubfiles/54.pdf)
+\item For every pair of $(f_0,f_1)$ such that $f_0\geq 5$ and $\frac{f_0(f_0-1)}{2}\geq f_1\geq 4f_0-10$, there exists a triangulation of the $3$-sphere whose face vectors are $(f_0,f_1,2f_1-2f_0,f_1-f_0)$. 
+\end{itemize}
+
+Recalling that every $d$ dimensional polytope must have $d+1$ vertices,we start enumerating the possible cases with $f_0=5$. 
+
+\begin{itemize}
+\item By the above, we must have $f_1\geq 10$, and there is guaranteed to be a triangulation if $f_1\leq 10$. So $(5,10,10,5)$ is one such face vector. By the upper bound of the face vector, this is the only possible face vector. 
+\end{itemize}
+
+
+\subsection{}
+\begin{thm}{}{}\\
+The following are true regarding the classification of polytopes up to combinatorial type. 
+\begin{itemize}
+\item The number of polytopes of dimension $d$ with $d+1$ vertices is $1$. 
+\item The number of polytopes of dimension $d$ with $d+1$ vertices is $[1/4d^2]$. 
+\end{itemize}
+\end{thm}
+
+\subsection{}
+\begin{defn}{Polytopal Spheres}{}\\
+Let $\mK$ be a simplicial complex that is the triangulation of a sphere. We say that the triangulation is polytopal if $\mK$ is the boundary of a simplicial polytope. 
+\end{defn}
+
+Convex polytopes p.424
+
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\substack{\text{Polytopal}\\\text{Spheres}} & \substack{\text{PL}\\\text{Spheres}} & \substack{\text{Triangulated}\\\text{Spheres}}
+	\arrow["\subseteq", shift right=3, draw=none, from=1-1, to=1-2]
+	\arrow["\subseteq", shift right=3, draw=none, from=1-2, to=1-3]
+\end{tikzcd}}\\
+
+Let $d$ be the dimension of the sphere (hence the underlying polytope has dimension $d+1$). If $d=2$, all inclusions are equalities. If the simplicial complex of the triangulation has at most $d+4$ vertices, all inclusions are equalities. \\
+
+The smallest non-trivial case is then $d=3$ such that the polytope has dimension $4$ and $8$ vertices. The triangulations are classified by ``David Barnette. The triangulations of the 3-sphere with up to 8 vertices'' where there are a total of $39$ triangulations, of which $37$ are polytopal, and the polytopes are given in ``BRANKO GRUJNBAUM AND V. P. SREEDHARAN. An Enumeration of Simplicial 4-Polytopes with 8 Vertices''. \\
+
+%https://mathoverflow.net/questions/74798/polytopes-with-few-vertices
+
+
+
+
+
+Toric topology p,79
+
+
+\pagebreak
+\section{}
+Pre-req: Commutative Algebra 2, Simplicial Complexes
+\subsection{Stanley-Reisner Rings}
+\begin{thm}{}{}\\
+Let $R$ be a commutative ring. Let $n\in\N$. There is a bijection $$\substack{\text{Abstract Simplicial}\\\text{Complexes on }\{1,\dots,n\}}\;\;\overset{1:1}{\leftrightarrow}\;\;\substack{\text{Squarefree monomial}\\\text{ideals of }R[x_1,\dots,x_n]}$$ given by sending a simplicial set $S$ to the ideal $\left\langle\prod_{j\in J}x_j\;|\;J\in\mP(\{1,\dots,n\})\setminus S\right\rangle$. 
+\end{thm}
+
+\begin{defn}{Stanley-Reisner Rings}{}\\
+Let $R$ be a commutative ring. Let $n\in\N$. Let $S$ be an abstract simplicial complex on $\{1,\dots,n\}$. Define the Stanley-Reisner ring of $S$ to be $$R[S]=\frac{k[x_1,\dots,x_n]}{\left\langle\prod_{j\in J}x_j\;|\;J\in\mP(\{1,\dots,n\})\setminus S\right\rangle}$$ The ideal $I_S=\left\langle\prod_{j\in J}x_j\;|\;J\in\mP(\{1,\dots,n\})\setminus S\right\rangle$ is called the Stanley-Reisner ideal of $S$. 
+\end{defn}
+
+\begin{eg}{}{}\\
+Let $R$ be a commutative ring. The Stanley-Reisner ring of the standard $n$-simplex $\Delta^n$ is given by $$R[\Delta^n]=k[x_1,\dots,x_n]$$
+\end{eg}
+
+\begin{eg}{}{}\\
+Let $R$ be a commutative ring. The Stanley-Reisner ring of the abstract simplicial complex $S=\mP(\{1,2,3\})\cup\mP(\{1,3,4\})\cup\mP(\{2,4\})$ over $\{1,2,3,4\}$ is given by $$R[S]=\frac{k[x_1,x_2,x_3,x_4]}{(x_1x_2x_4,x_2x_3x_4)}$$
+\end{eg}
+
+\begin{prp}{}{}\\
+Let $R$ be a commutative ring. Let $n\in\N$. Let $S$ be an abstract simplicial complex on $\{1,\dots,n\}$. Then we have $$I_S=\bigcap_{J\in S}\langle x_i\;|\;i\notin J\rangle$$
+\end{prp}
+
+Maps of simplicial sets -> Maps of k-algebra. 
+
+\begin{prp}{}{}\\
+Let $R$ be a commutative ring. Let $\mK_1,\mK_2$ be simplicial complexes. Then we have $$R[\mK_1\ast\mK_2]\cong R[\mK_1]\otimes_RR[\mK_2]$$
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $R$ be a commutative ring. Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. If $\mK$ is a flag complex, then $R[\mK]$ is a Koszul algebra. 
+\end{prp}
+
+\subsection{The Hilbert Series of Stanley-Reisner Rings}
+\begin{thm}{Stanley}{}\\
+Let $k$ be a field. Let $n\in\N$. Let $S$ be an abstract simplicial complex on $\{1,\dots,n\}$. Let $(f_0,\dots,f_n)$ be the face vector of $S$. Let $(h_0,\dots,h_n)$ be the $h$-vector of $S$. Then the Hilbert series of $k[S]$ is given by $$HS_{k[S]}(t)=\sum_{i=0}^{n+1}f_{k-1}\left(\frac{t^2}{1-t^2}\right)^k=\frac{1}{(1-t^2)^{n+1}}\sum_{i=0}^{n+1}h_it^{2i}$$
+\end{thm}
+
+\begin{eg}{}{}|\
+Let $\Delta^n$ be the standard $n$-simplex. Then the following are true. 
+\begin{itemize}
+\item The Hilbert series for the Stanley-Reisner ring of $\Delta^n$ is given by $$HS_{k[\Delta^n]}(t)=\frac{1}{(1-t^2)^{n+1}}$$
+\item The Hilbert series for the Stanley-Reisner ring of $\partial\Delta^n$ is given by $$HS_{k[\partial\Delta^n]}(t)=\frac{1}{(1-t^2)^{n+1}}\sum_{i=0}^{n+1}t^{2i}$$
+\end{itemize}
+\end{eg}
+
+\pagebreak
+\section{Moment-Angle Complexes}
+Pre req: Equivariant (co)homology, homological algebra, PL manifolds?
+\subsection{Basic Definitions}
+\begin{prp}{}{}\\
+Let $n\in\N$. Let $\mu:\C^n\to\R^n$ be the map $(z_1,\dots,z_n)\to(\abs{z_1}^2,\dots,\abs{z_n}^2)$. Suppose that $(S^1)^n\subseteq\C^n$ act on $\C^n$ by left multiplication. Then $\mu$ descends to a homeomorphism of orbit spaces $$\frac{\C^n}{(S^1)^n}\cong\{(x_1,\dots,x_n)\in\R^n\;|\;x_i\geq 0\text{ for all }i\}\subseteq\R^n$$
+\end{prp}
+
+\begin{lmm}{}{}\\
+Let $n\in\N$. Let $\mu:\C^n\to\R^n$ be the map $(z_1,\dots,z_n)\to(\abs{z_1}^2,\dots,\abs{z_n}^2)$. Then the above homeomorphism induces a homeomorphism $$\frac{D^n}{(S^1)^n}\cong[0,1]^n$$
+\end{lmm}
+
+Recall the construction of the cubical embedding $i_c:\Delta^n\to[0,1]^{n+1}$. 
+\begin{enumerate}
+\item For $1\leq k\leq n$, the barycenter of the $k$-dimensional face $B([e_{i_1},\dots,e_{i_k}])$ is sent to $(u_1,\dots,u_n)\in[0,1]^{n+1}$ where $u_j=0$ if $j\in\{i_1,\dots,i_k\}$ and $u_j=1$ otherwise. 
+\item Extend this into a piecewise linear embedding $i_c:\Delta^n\to[0,1]^{n+1}$ as follows. For each simplex $[p_1,\dots,p_l]$ in the barycentric subdivision of $\Delta^n$, $[i_c(p_1),\dots,i_c(p_l)]$ lies on a face of $[0,1]^{n+1}$. Hence there exists an simplicial map sending $[p_1,\dots,p_l]$ to $[i_c(p_1),\dots,i_c(p_l)]$. 
+\end{enumerate}
+
+Since every finite abstract simplicial complex can be realized as a subcomplex of $\Delta^n$ for large $n$, we also get the cubical embedding of a finite abstract simplicial complex, which is denoted by $\text{cc}(\K)$. 
+
+\begin{defn}{Moment-Angle Complex}{}\\
+Let $n\in\N$. Let $\mK$ be an abstract simplicial complex over $\{1,\dots,n\}$. Define the moment-angle complex of $\mK$ to be $$\mZ_\mK=\mu^{-1}(\text{cc}(\mK))\subseteq D^n$$
+\end{defn}
+
+Equivalently, it is the pullback of the inclusion map $\mZ_\mK=\text{cc}(\mK)\to[0,1]^n$ and the quotient map $\mu:D^n\to[0,1]^n$. 
+
+\begin{eg}{}{}\\
+Let $n\in\N$. Then the following are true. 
+\begin{itemize}
+\item $\mZ_\emptyset=(S^1)^n$. 
+\item $\mZ_{\Delta^n}=D^{n+1}$. 
+\end{itemize}
+\end{eg}
+
+\begin{lmm}{}{}\\
+Let $n\in\N$. Let $\mK$ be an abstract simplicial complex over $\{1,\dots,n\}$. The following are true regarding the moment-angle complex of $\mK$. 
+\begin{itemize}
+\item $\mZ_\mK$ is a $(S^1)^n$-invariant subspace. 
+\item The homeomorphism $\frac{D^n}{(S^1)^n}\cong[0,1]^n$ induced by the map $\mu(z_1,\dots,z_n)=(\abs{z_1}^2,\dots,\abs{z_n}^2)$ descends to a homeomorphism $$\frac{\mZ_\mK}{(S^1)^n}\cong\text{cc}(\mK)$$
+\end{itemize}
+\end{lmm}
+
+Recall that $\text{cc}(\mK)$ is equal to the union of a finite number of faces of $[0,1]^n$. Also recall the notation $$C_I=\{(x_1,\dots,x_n)\in[0,1]^n\;|\;x_i=0\text{ if }i\in I\}$$ for a face of the cube $[0,1]^n$ that contains the origin and $I\subseteq\{1,\dots,n\}$. 
+
+\begin{lmm}{}{}\\
+Let $n\in\N$. Let $\mK$ be an abstract simplicial complex over $\{1,\dots,n\}$. Suppose that $\text{cc}(\mK)=\bigcup_{I\in\mK}C_I$. Then there is a homeomorphism $$\mZ_\mK=\bigcup_{I\in\mK}\mu^{-1}(C_I)=\bigcup_{I\in\mK}\{(x_1,\dots,x_n)\in D^n\;|\;\abs{z_j}^2=1\text{ for all }j\in\{1,\dots,n\}\setminus I\}$$ where $\mu$ is the map $\mu(z_1,\dots,z_n)=(\abs{z_1}^2,\dots,\abs{z_n}^2)$. 
+\end{lmm}
+
+For $I\subseteq\{1,\dots,n\}$, the condition that $\abs{z_j}^2=1$ for $j\in\{1,\dots,n\}\setminus I$ means that for those coordinates in $D^n$, they only consist of the boundary which is $S^1$. Hence we may think of $\mZ_\mK$ as the union of products $$\mZ_\mK=\bigcup_{I\in\mK}\left(\prod_{i\in I}D^2\times\prod_{i\in\{1,\dots,n\}\setminus I}S^1\right)$$ But note that this product is ambiguous on which coordinates should be $S^1$ and which should be $D^2$ (because we have a chosen embedding into $\C^n$ although swapping the order of the products give homeomorphic spaces). Moreover, because we are taking the union over all $I\in\mK$, it suffices to consider the maximal simplicies in $\mK$. 
+
+\begin{eg}{}{}\\
+Let $n\in\N\setminus\{0\}$. Then the following are true. 
+\begin{itemize}
+\item The moment angle complex of $\partial\Delta^n$ is given by $$\mZ_{\partial\Delta^n}\cong S^{2n+1}$$
+\item The moment angle complex of the $n$-gon is given by 
+\end{itemize}
+\begin{proof}\\
+It suffices to consider the maximal simplicies in $\partial\Delta^n$. They are of the form $I\subseteq\{1,\dots,n+1\}$ for $\abs{I}=n$. Hence we have
+\begin{align*}
+\mZ_{\partial\Delta^n}&=(D^2\times\cdots\times D^2\times S^1)\cup\cdots\cup(S^1\times D^2\times\cdots\times D^2)\\
+&=\partial(D^2\times\cdots\times D^2)\\
+&\cong\partial D^{2n+2}\\
+&\cong S^{2n+1}
+\end{align*}
+
+For the moment angle complex of the $n$-gon, we note that the simplicial complex is given by $1$-simplicies of the form $\{i,i+1\}$ for $1\leq i\leq n$ together with $\{1,n+1\}$. Hence $$\mZ_{n\text{-gon}}=(D^2\times D^2\times S^1\times\cdots\times S^1)\cup\cdots\cup(S^1\times\cdots\times S^1\times D^2\times D^2)\cup(D^2\times S^1\times\cdots\times S^1\times D^2)$$
+\end{proof}
+\end{eg}
+
+\begin{prp}{}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. If $\mK$ is a triangulation of $S^{m-1}$, then $\mZ_\mK$ is a closed topological manifold of dimension $n+m$. 
+\end{prp}
+
+\subsection{Polyhedral Products}
+\begin{defn}{Polyhedral Products}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Let $(\bold{X},\bold{A})=\{(X_1,A_1),\dots,(X_n,A_n)\}$ be pairs of spaces. Define the polyhedral product of $(\bold{X},\bold{A})$ corresponding to $\mK$ to be $$(\bold{X},\bold{A})^\mK=\bigcup_{I\in\mK}\left\{(x_1,\dots,x_n)\in\prod_{i=1}^nX_i\;|\;x_i\in A_i\text{ for }i\notin I\right\}=\bigcup_{I\in\mK}\left(\prod_{i\in I}X_i\times\prod_{i\notin I}A_i\right)$$
+\end{defn}
+
+\subsection{Algebraic Invariants of the Moment Angle Complex}
+\begin{prp}{}{}\\
+Let $R$ be a commutative ring. Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Then the following are true. 
+\begin{itemize}
+\item There is an isomorphism of rings $$H^\ast((\C\Prj^\infty,\ast)^\mK;R)\cong R[\mK]$$
+\item The inclusion $(\C\Prj^\infty,\ast)^\mK\hookrightarrow(\C\Prj^\infty,\ast)^n$ induces the quotient map $$H^\ast((\C\Prj^\infty)^m;R)\cong R[v_1,\dots,v_n]\to R[\mK]\cong H^\ast((\C\Prj^\infty,\ast)^\mK;R)$$ (where $v_1,\dots,v_n$ are degree $2$ elements). 
+\item The inclusion $i:(\C\Prj^\infty,\ast)^\mK\hookrightarrow(\C\Prj^\infty,\ast)^n$ decomposes into a homotopy equivalence and fibration in the following way: \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{(\C\Prj^\infty,\ast)^\mK} && {(\C\Prj^\infty,\ast)^n} \\
+	& {ET^m\times_{T^m}\mZ_\mK}
+	\arrow[hook, from=1-1, to=1-3]
+	\arrow["\simeq"', from=1-1, to=2-2]
+	\arrow["{\text{fib.}}"', from=2-2, to=1-3]
+\end{tikzcd}}\\
+Moreover, the fiber of the fibration is $\mZ_\mK$. 
+\item $\mZ_\mK(BS^1,\ast)=ET^m\times_{T^m}\mZ_\mK$. 
+\item $H^\ast(ET^m\times_{T^m}\mZ_\mK)=R[\mK]$. 
+\end{itemize}
+\end{prp}
+
+\begin{thm}{(Davis-Januskiewicz)}{}\\
+Let $R$ be a commutative ring. Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Then the equivariant cohomology ring of $\mZ_\mK$ is given by $$H_{T^m}^\ast(\mZ_\mK;R)\cong R[\mK]$$ (natural in $\mK$)
+\end{thm}
+
+\begin{prp}{}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Then the following are true regarding the homotopy groups of $\mZ_\mK$. 
+\begin{itemize}
+\item $\mZ_\mK$ is two-connected. 
+\item $\pi_i(\mZ_\mK)\cong\pi_i((\C\Prj^\infty,\ast)^\mK)$ for $i\geq 3$. 
+\end{itemize}
+\end{prp}
+
+Consider the decomposition of $D^2$ into the following CW complex structure: 
+\begin{itemize}
+\item One $0$-cell $1\in D^2$. 
+\item One $1$-cell $S^1$. 
+\item One $2$-cell $D^2$. 
+\end{itemize}
+
+Let $n\in\N$. This gives the product complex $D^{2n}$ a CW complex structure, whose cells are a product of $1$-cells and $2$-cells. We parameterize the cells in the following way. For $J,I\subseteq\{1,\dots,n\}$ with $J\cap I=\emptyset$, we denote $\chi(J,I)$ as the $(\abs{J}+\abs{I})$-cell corresponding to the cell with the factor of a $1$-cell in the $j$th position for $j\in J$, the factor of a $0$-cell in the $i$th position for $i\in I$, and the factor of a $0$-cell for $k\notin I\cup J$. \\
+
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Then $\mZ_\mK$ is a union of cells in $D^{2n}$, and so is a cellular subcomplex of $D^{2n}$. Namely, for each $I\in\mK$, we have that $\chi(J,I)\subseteq\mZ_\mK$ for all $J\subseteq\{1,\dots,n\}\setminus I$. 
+
+
+Q: How does the cellular cochain split into a bicomplex
+
+\begin{defn}{Bigrading in the Cochain Complex}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Define a bigrading in $C^\ast(\mZ_\mK;\Z)$ as follows. For each basis element $\chi(J,I)$, define $\deg(\chi(J,I))=(-\abs{J},2(\abs{I}+\abs{J}))$. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Then the following are true. 
+\begin{itemize}
+\item The $(2j)$th components for each $j\in\N$ defines a cochain complex $C^{-i,2j}(\mZ_\mK;\Z)$ in $i$. 
+\item $(C^{-\ast,\ast}(\mZ_\mK;\Z),d_{CW},0)$ is a double cochain complex. 
+\item The cellular cochain complex of $\mZ_\mK$ splits into a direct sum $$C^\ast(\mZ_\mK;\Z)=\text{Tot}^\oplus(C^{-\ast,\ast}(\mZ_\mK))=\bigoplus_{j\in\N}C^{-\ast,2j}(\mZ_\mK;\Z)$$ where $$C^k(\mZ_\mK;\Z)=\bigoplus_{2j-i=k}C^{-i,2j}(\mZ_\mK;\Z)$$
+\end{itemize}
+\end{lmm}
+
+The consequence of the splitting is that cohomology also accquires a splitting $$H^n(\mZ_\mK;\Z)=\bigoplus_{2j-i=n}H^{-i}(C^{-\ast,2j}(\mZ_\mK;\Z))$$
+
+\begin{prp}{}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Then the following are true. 
+\begin{itemize}
+\item There are natural isomorphisms $$H^{-p}(C^{-\ast,2q}(\mZ_\mK;\Z))\cong H_{-p}\left(\Lambda\left(\bigoplus_{i=1}^n\Z[\mK]u_i\right)\right)_{2q}=H_{-p}\left(\Lambda\left(\bigoplus_{i=1}^n\Z[\mK]u_i\right)_{2q}\right)$$ where $\Lambda\left(\bigoplus_{i=1}^nR[\mK]u_i\right)$ is the differential graded algebra whose homological grading is given by $\deg(u_i)=-1$, internal grading is given by $\deg(v_i)=2$ and differential is given by $d(u_i)=v_i$ (and $d(v_i)=0$ since we think of the DGA as a DGA over the ring $\Z[\mK]$). 
+\item There above natural isomorphisms induces natural isomorphisms $$H^k(\mZ_\mK;\Z)\cong\bigoplus_{2q-p=k}H_{-p}\left(\Lambda\left(\bigoplus_{i=1}^n\Z[\mK]u_i\right)\right)_{2q}$$
+\item The above natural isomorphisms induce a natural isomorphism of rings $$H^\ast(\mZ_\mK;\Z)\cong H_\ast\left(\Lambda\left(\bigoplus_{i=1}^n\Z[\mK]u_i\right)\right)$$
+\end{itemize}
+\end{prp}
+
+Note that $H^n(\mZ_\mK;\Z)$ is not isomorphic to $H_{-n}\left(\Lambda\left(\bigoplus_{i=1}^n\Z[\mK]u_i\right)\right)$ despite the suggestive notation. This is a mismatch of algebraic objects since the left is an abelian group while the right hand side is a $\Z[\mK]$-module. In order to have an isomorphism of abelian groups we must further decompose each homology $\Z[\mK]$-modules further into $\Z$-modules by considering $\Z[\mK]$ as a $\Z$-module. But this results in a shift of degrees. \\
+
+Let $K_\bullet(v_1,\dots,v_n;\Z[\mK])$ be the Koszul complex over $\Z[v_1,\dots,v_n]$. Notice that the cochain complex defined by $K^n=K_n(v_1,\dots,v_n;\Z[\mK])$ is precisely our differential graded algebra $\Lambda\left(\bigoplus_{i=1}^n\Z[\mK]u_i\right)$. Then the cohomology of $\mZ_\mK$ acquires an additional description: $$H^n(\mZ_\mK;\Z)\cong\bigoplus_{2q-p=n}\left(H_p\left(K_\bullet(v_1,\dots,v_n;\Z[\mK])\right)\right)_{2q}$$ Finally, since $K_\bullet(v_1,\dots,v_n)$ is a free resolution for $\Z$ as a $\Z[v_1,\dots,v_n]$-module, we know that $$H_p(K_\bullet(v_1,\dots,v_n;R[\mK]))=\text{Tor}_p^{\Z[v_1,\dots,v_n]}(\Z[\mK],\Z)$$ The Koszul algebra gives the Tor groups the structure of an algebra, and so the cohomology ring acquires the description $$H^\ast(\mZ_\mK;\Z)\cong\text{Tor}_\ast^{\Z[v_1,\dots,v_n]}(\Z[v_1,\dots,v_n],\Z)$$ But again note that the $n$th cohomology group of $\mZ_\mK$ is not isomorphic to the $n$th Tor group of $\Z[\mK]$ and $\Z$ by virtually the same reason as above. 
+
+\begin{prp}{}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Then the following are true. 
+\begin{itemize}
+\item There are natural isomorphisms of cochain complexes $$\bigoplus_{J\subseteq\{1,\dots,n\}}C^{k-\abs{J}-1}(\mK_J;\Z)\cong C^\ast(\mZ_\mK;\Z)$$ given by $$\alpha_L\mapsto\varepsilon(L,J)\chi(J\setminus L,L)$$ where $\alpha_L$ is the cochain basis of Hochster's formula given by the simplex $L\subseteq J$ and $$\varepsilon(L,J)=\prod_{j\in L}\varepsilon(j,J)$$ and $\varepsilon(j,J)=(-1)^{r-1}$ if $j$ is in the $r$th position of $J$. 
+\item There above natural isomorphisms induces natural isomorphisms $$H^{-i}(C^{-\ast,2j}(\mZ_\mK;\Z))\cong\bigoplus_{\substack{J\subseteq\{1,\dots,n\}\\\abs{J}=j}}\widetilde{H}^{j-i-1}(\mK_J;\Z)$$ where by convention we set $\widetilde{H}^{-1}(\mK_\emptyset)=\Z$. 
+\item The above natural isomorphisms induces natural isomorphisms $$H^k(\mZ_\mK;\Z)\cong\bigoplus_{J\subseteq\{1,\dots,n\}}\widetilde{H}^{k-\abs{J}-1}(\mK_J;\Z)$$
+\end{itemize}
+\end{prp}
+
+We are missing a description of the cup product in terms of Hochster's formula. It is given by the following definition. 
+
+\begin{defn}{Ring Structure in Hochster's Formula}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Define a ring structure in $\bigoplus_{J\subseteq\{1,\dots,n\}}\widetilde{H}^\ast(\mK_\mJ;\Z)$ as follows. Let $\alpha_L$ be the cochain basis element in $C^p(\mK_I;\Z)$ corresponding to the simplex $L\subseteq I$. The ring structure is induced by the map $$C^p(\mK_I;\Z)\otimes_\Z C^q(\mK_\mJ;\Z)\to C^{p+q+1}(\mK_{I\cup J})$$ defined by $$\alpha_L\otimes\alpha_M\mapsto\begin{cases}
+\varepsilon(L,I)\varepsilon(M,J)\varepsilon(L\cup M,I\cup J)\alpha_{L\amalg M} & \text{ if }I\cap J=\emptyset\\
+0 & \text{ otherwise }
+\end{cases}$$
+where $\varepsilon(L,I)=\prod_{j\in L}\varepsilon(j,J)$ and $\varepsilon(j,J)=(-1)^{r-1}$ if $j$ is in the $r$th position in $J$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Then the following are true. 
+\begin{itemize}
+\item The ring structure in Hochster's formula is equal to the relative Kunneth theorem for $$H^\ast(\abs{\mK_I\ast\mK_J})=H^\ast(\Sigma(\abs{\mK_I}\wedge\abs{\mK_J}))=\widetilde{H}^{\ast-1}(\abs{K_I}\times\abs{K_J},\abs{K_I\vee K_J})$$ via the inclusion $\mK_{I\amalg J}\hookrightarrow\mK_I\ast\mK_J$. 
+\item The natural isomorphism in the above prp induces a natural isomorphism of rings $$H^\ast(\mZ_\mK;\Z)\cong\bigoplus_{J\subseteq\{1,\dots,n\}}\widetilde{H}^\ast(\mK_J;\Z)$$
+\end{itemize}
+\end{prp}
+
+While the cohomology groups can be easily computed using Hochster's formula, the ring structure can be seen more easily using the DGA. 
+
+\begin{eg}{}{}\\
+Let $\mK$ be the standard polygon with vertices given by $\{1,\dots,5\}$ and edges given by $\{\{1,2\},\dots,\{4,5\},\{1,5\}\}$. We compute that 
+\begin{itemize}
+\item $H^0(\mZ_\mK;\Z)=\bigoplus_{J\subseteq\{1,\dots,5\}}\widetilde{H}^{0-\abs{J}-1}(\mK_\mJ;\Z)=\widetilde{H}^{-1-\abs{\emptyset}}(\mK_\emptyset;\Z)=\Z$. 
+\item $H^1(\mZ_\mK;\Z)=H^2(\mZ_\mK;\Z)=H^5(\mZ_\mK;\Z)=H^6(\mZ_\mK;\Z)=0$. 
+\end{itemize}
+Also we have 
+\begin{align*}
+H^3(\mZ_\mK;\Z)&=\bigoplus_{J\subseteq\{1,\dots,5\}}\widetilde{H}^{2-\abs{J}}(\mK_\mJ;\Z)\\
+&=\widetilde{H}^0(\mK_{\{1,3\}};\Z)\oplus\widetilde{H}^0(\mK_{\{1,4\}};\Z)\oplus\widetilde{H}^0(\mK_{\{2,4\}};\Z)\oplus\widetilde{H}^0(\mK_{\{2,5\}};\Z)\oplus\widetilde{H}^0(\mK_{\{3,5\}};\Z)\\
+&=\Z[\alpha_{\{3\}}]\oplus\Z[\alpha_{\{4\}}]\oplus\Z[\alpha_{\{4\}}]\oplus\Z[\alpha_{\{5\}}]\oplus\Z[\alpha_{\{5\}}]\\
+&=\Z[u_1v_3]\oplus\Z[u_1v_4]\oplus\Z[u_2v_4]\oplus\Z[u_2v_5]\oplus\Z[u_3v_5]
+\end{align*}
+\begin{align*}
+H^4(\mZ_\mK;\Z)&=\bigoplus_{J\subseteq\{1,\dots,5\}}\widetilde{H}^{3-\abs{J}}(\mK_\mJ;\Z)\\
+&=\widetilde{H}^0(\mK_{\{1,2,4\}};\Z)\oplus\widetilde{H}^0(\mK_{\{2,3,5\}};\Z)\oplus\widetilde{H}^0(\mK_{\{1,3,4\}};\Z)\oplus\widetilde{H}^0(\mK_{\{2,4,5\}};\Z)\oplus\widetilde{H}^0(\mK_{\{1,3,5\}};\Z)\\
+&=\Z[\alpha_{\{4\}}]\oplus\Z[\alpha_{\{5\}}]\oplus\Z[\alpha_{\{1\}}]\oplus\Z[\alpha_{\{2\}}]\oplus\Z[\alpha_{\{3\}}]\\
+&=\Z[-u_1u_2v_4]\oplus\Z[-u_2u_3v_5]\oplus\Z[-u_3u_4v_1]\oplus\Z[-u_4u_5v_2]\oplus\Z[u_1u_5v_3]
+\end{align*}
+and 
+\begin{align*}
+H^7(\mZ_\mK;\Z)&=\bigoplus_{J\subseteq\{1,\dots,5\}}\widetilde{H}^{6-\abs{J}}(\mZ_\mK;\Z)\\
+&=\widetilde{H}^1(\mK;\Z)\\
+&=\Z[\alpha_{\{1,2\}}]\\
+&=\Z[-u_3u_4u_5v_1v_2]
+\end{align*}
+where wee identified the generators in Hochster's formula to generators in the DGA via the given formulas. Denote the generators of $H^3$ by $x_1,\dots,x_5$ and denote the generators of $H^4$ by $y_1,\dots,y_5$ and denote the generator of $H^7$ by $z$. Then we have the relations $x_1y_4=x_2y_2=-x_3y_5=x_4y_3=x_5y_1=z$, and $0$ otherwise. Thus relabelling the generators give $$H^\ast(\mZ_\mK;\Z)\cong\frac{\Lambda_\Z[x_1,\dots,x_5,y_1,\dots,y_5]}{(x_iy_i-x_jy_j,x_iy_j,x_ix_j,y_i,y_j\;|\;1\leq i\neq j\leq 5)}$$ where $\deg(x_i)=3$ and $\deg(y_i)=4$. Notice that this is precisely the cohomology ring of $(S^3\times S^4)^{\#5}$. 
+\end{eg}
+
+There are three descriptions of the cohomology groups: $$H^k(\mZ_\mK;\Z)\cong\bigoplus_{2q-p=k}H_{-p}\left(\Lambda\left(\bigoplus_{i=1}^n\Z[\mK]u_i\right)\right)_{2q}=\bigoplus_{J\subseteq\{1,\dots,n\}}\widetilde{H}^{k-\abs{J}-1}(\mK_J;\Z)$$ For $L\subseteq J$ such that $\alpha_L$ is a cochain basis in the Hochster formula, we have $$[\varepsilon(L,J)\chi(J\setminus L,L)]\leftrightarrow[\varepsilon(L,J)u_{J\setminus L}v_L]\leftrightarrow\alpha_L$$
+
+\begin{prp}{}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots.n\}$. Then the following are true. 
+\begin{itemize}
+\item $\text{rank}(H^0(C^{-\ast,0}(\mZ_\mK;\Z)))=1$. 
+\item $\text{rank}(H^0(C^{-\ast,2q}(\mZ_\mK;\Z)))=0$ for $q\neq 0$.
+\item $\text{rank}(H^{-p}(C^{-\ast,2q}(\mZ_\mK;\Z)))$ for $p>q$ or $q>n$. 
+\item $\text{rank}(H^{-p}(C^{-\ast,2q}(\mZ_\mK;\Z)))$ for $p\geq q>0$ or $q-p>\dim(\mK)+1$. 
+\item $\text{rank}(H^{-1}(C^{-\ast,4}(\mZ_\mK;\Z)))=\binom{n}{2}-f_1$ (recall that $f_1$ is the number of edges of $\mK$). 
+\item $\text{rank}(H^{-(n-\dim(\mK)+1)}(C^{-\ast,2n}(\mZ_\mK;\Z)))=\text{rank}(\widetilde{H}^{\dim(\mK)}(\mK))$. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots.n\}$. Then the following are true. 
+\begin{itemize}
+\item $\text{rank}(H^0(\mZ_\mK;\Z))=1$. 
+\item $\text{rank}(H^1(\mZ_\mK;\Z))=\text{rank}(H^2(\mZ_\mK;\Z))=0$. 
+\item $\text{rank}(H^3(\mZ_\mK;\Z))=\binom{n}{2}-f_1$ (recall that $f_1$ is the number of edges of $\mK$). 
+\item $\text{rank}(H^{n+\dim(\mK)+1}(\mZ_\mK;\Z))=\text{rank}(\widetilde{H}^{\dim(\mK)}(\mK))$. 
+\end{itemize}
+\end{prp}
+
+\begin{lmm}{}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. If $\mK$ is a triangulation of $S^{m-1}$, then the top cohomology $H^{n+m}(\mZ_\mK;\Z)$ is generated by $[\chi(\{1,\dots,n\}\setminus I,I)]$ for any $I\in\mK$ and such that $\abs{I}=n$. 
+\end{lmm}
+
+If we use the Koszul complex as the cohomology model for $\mZ_\mK$, then the top cohomology is generated by $u_{\{1,\dots,n\}\setminus I}v_I$ for any $I\in\mK$ such that $\abs{I}=n$. 
+
+\pagebreak
+\section{Algebra}
+\subsection{Algebra, Coalgebra and Bialgebra}
+Let $R$ be a commutative ring. Recall that an $R$-algebra is a ring $A$ together with a ring homomorphism $R\to A$. Equivalently, it is an $R$-module with multiplication that is associative and respects the $R$-module structure. 
+
+\begin{prp}{}{}\\
+Let $R$ be a commutative ring. Let $A\in\bold{Mod}_R$ be an $R$-module. Let $m:A\otimes_R A\to A$ and $u:R\to A$ be  $R$-module homomorphisms. Then $(A,m,u)$ is an associative algebra with multiplication given by $m$ and identity given $u(1)$ if and only if the following diagrams commute: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{(A\otimes_RA)\otimes_RA} & {A\otimes_RA} & A & {R\otimes_RA} & {A\otimes_RA} & {A\otimes R} \\
+	{A\otimes_R(A\otimes_RA)} & {A\otimes_RA} &&& A
+	\arrow["{m\otimes 1}", from=1-1, to=1-2]
+	\arrow["\alpha"', from=1-1, to=2-1]
+	\arrow["m", from=1-2, to=1-3]
+	\arrow["{u\otimes\text{id}_A}", from=1-4, to=1-5]
+	\arrow["\lambda"', from=1-4, to=2-5]
+	\arrow["m"', from=1-5, to=2-5]
+	\arrow["{\text{id}_A\otimes u}"', from=1-6, to=1-5]
+	\arrow["\mu", from=1-6, to=2-5]
+	\arrow["{1\otimes m}"', from=2-1, to=2-2]
+	\arrow["m"', from=2-2, to=1-3]
+\end{tikzcd}} \\
+where $\alpha$ is the natural isomorphism from associativity of tensor products, and $\lambda,\mu$ is the natural isomorphism from the unitality of tensor products. 
+\end{prp}
+
+Equivalently, the above proposition is the same as saying $(A,m,u)$ is a monoid object in the monoidal category $(\bold{Mod}_R,\otimes_R,R)$. Motivated by the categorical description of an $R$-algebra, we define coalgebras as the formal dual of the above object in the following way. 
+
+\begin{defn}{Coalgebras}{}\\
+Let $R$ be a commutative ring. Let $C\in\bold{Mod}_R$ be an $R$-module. Let $\Delta:C\to C\otimes_RC$ and $\varepsilon:C\to R$ be $R$-module homomorphisms. We say that $(C,\Delta,\varepsilon)$ is a coalgebra if the following diagrams commute: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	C & {C\otimes_RC} & {(C\otimes_RC)\otimes_RC} && C \\
+	& {C\otimes_RC} & {C\otimes_R(C\otimes_RC)} & {R\otimes_RC} & {C\otimes C} & {C\otimes_RR}
+	\arrow["\Delta", from=1-1, to=1-2]
+	\arrow["\Delta"', from=1-1, to=2-2]
+	\arrow["{\Delta\otimes 1}", from=1-2, to=1-3]
+	\arrow["\alpha", from=1-3, to=2-3]
+	\arrow["\lambda"', from=1-5, to=2-4]
+	\arrow["\Delta", from=1-5, to=2-5]
+	\arrow["\mu", from=1-5, to=2-6]
+	\arrow["{1\otimes\Delta}"', from=2-2, to=2-3]
+	\arrow["{\varepsilon\otimes\text{id}_A}", from=2-5, to=2-4]
+	\arrow["{\text{id}_A\otimes\varepsilon}"', from=2-5, to=2-6]
+\end{tikzcd}} \\
+where $\alpha$ is the natural isomorphism from associativity of tensor products, and $\lambda,\mu$ is the natural isomorphism from the unitality of tensor products. 
+\end{defn}
+
+\begin{defn}{Bialgebras}{}\\
+Let $R$ be a commutative ring. Let $B\in\bold{Mod}_R$ be an $R$-module. Let $m:B\otimes_RB\to B$, $u:R\to B$, $\Delta:B\to B\otimes_RB$ and $\varepsilon:B\to R$ be $R$-module homomorphisms. We say that $B$ is an $R$-bialgebra if the following are true. 
+\begin{itemize}
+\item $(B,m,u)$ is an $R$-algebra. 
+\item $(B,\Delta,\varepsilon)$ is an $R$-coalgebra. 
+\item Multiplication and comultiplication are compatible: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{B\otimes_RB} & B & {B\otimes_RB} \\
+	{B\otimes_RB\otimes_RB\otimes_RB} && {B\otimes_RB\otimes_RB\otimes_RB}
+	\arrow["m", from=1-1, to=1-2]
+	\arrow["{\Delta\otimes\Delta}"', from=1-1, to=2-1]
+	\arrow["\Delta", from=1-2, to=1-3]
+	\arrow["{\text{id}\otimes\tau\otimes\text{id}}"', from=2-1, to=2-3]
+	\arrow["{m\otimes m }"', from=2-3, to=1-3]
+\end{tikzcd}} \\
+where $\tau$ is the natural isomorphism from commutativity of tensor products. 
+\item Multiplication and counit are compatible: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{B\otimes_RB} & B \\
+	{R\otimes_RR} & R
+	\arrow["m", from=1-1, to=1-2]
+	\arrow["{\varepsilon\otimes\varepsilon}"', from=1-1, to=2-1]
+	\arrow["\varepsilon", from=1-2, to=2-2]
+	\arrow["\lambda"', from=2-1, to=2-2]
+\end{tikzcd}} \\
+where $\lambda$ is the natural isomorphism from unitality of tensor products. 
+\item Comultiplication and unit are compatible: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	R & B \\
+	{R\otimes_RR} & {B\otimes_RB}
+	\arrow["u", from=1-1, to=1-2]
+	\arrow["\lambda"', from=1-1, to=2-1]
+	\arrow["\Delta", from=1-2, to=2-2]
+	\arrow["{\Delta\otimes\Delta}"', from=2-1, to=2-2]
+\end{tikzcd}} \\
+where $\lambda$ is the natural isomorphism from unitality of tensor products. 
+\item Unit and counit are compatible: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	R && R \\
+	& B
+	\arrow["{\text{id}}", from=1-1, to=1-3]
+	\arrow["u"', from=1-1, to=2-2]
+	\arrow["\varepsilon"', from=2-2, to=1-3]
+\end{tikzcd}} \\
+\end{itemize}
+\end{defn}
+
+\subsection{Hopf Algebra}
+\begin{defn}{Hopf Algebras}{}\\
+Let $R$ be a commutative ring. Let $(H,m,u,\Delta,\varepsilon)$ be an $R$-bialgebra. Let $S:H\to H$ be an $R$-module homomorphism. We say that $(H,m,u,\Delta,\varepsilon,S)$ is a Hopf algebra if the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	& {H\otimes_RH} && {H\otimes_RH} \\
+	H && R && H \\
+	& {H\otimes_RH} && {H\otimes_RH}
+	\arrow["{S\otimes\text{id}_H}", from=1-2, to=1-4]
+	\arrow["m", from=1-4, to=2-5]
+	\arrow["\Delta", from=2-1, to=1-2]
+	\arrow["\varepsilon", from=2-1, to=2-3]
+	\arrow["\Delta"', from=2-1, to=3-2]
+	\arrow["u", from=2-3, to=2-5]
+	\arrow["{\text{id}_H\otimes S}"', from=3-2, to=3-4]
+	\arrow["m"', from=3-4, to=2-5]
+\end{tikzcd}} \\
+\end{defn}
+
+\subsection{Differential Graded Algebras}
+\begin{defn}{Differential Graded Algebras}{}\\
+Let $R$ be a commutative ring. A differential graded $R$-algebra consists of the following data. 
+\begin{itemize}
+\item A $\Z$-graded $R$-algebra $A$. 
+\item An $R$-algebra homomorphism of degree $-1$ (called homological dgas) or of degree $1$ (called cohomological dgas). 
+\end{itemize}
+such that the following are true. 
+\begin{itemize}
+\item Differential: $d\circ d=0$. 
+\item Graded Leibniz: $d(ab)=(da)b+(-1)^{\deg(a)}a(db)$ for $a,b$ homogeneous elements of $A$. 
+\end{itemize}
+\end{defn}
+
+The differential property means that any (homological) differential graded algebra decomposes into a chain complex whose differential is given by $d$. 
+
+\begin{defn}{Homomorphisms of Differential Graded Algebras}{}\\
+Let $R$ be a commutative ring. Let $A,B$ be differential graded algebras. A morphism $\varphi:A\to B$ of differential graded algebras is a graded $R$-algebra homomorphism. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $R$ be a commutative ring. Let $(A,d)$ be a cohomological differential graded algebra. Then $H^\ast(A,d)=\bigoplus_{n\in\Z}H^n(A,d)$ is a graded ring with multiplication defined by $$[u]\cdot[v]=[uv]$$ for $u\in H^n(A,d)$ and $v\in H^m(A,d)$. 
+\begin{proof}\\
+Notice that by the graded Leibniz rule, we have $d(uv)=(du)v+(-1)^nud(v)=0$ since $u$ and $v$ are cocycles. Hence $uv$ is also a cocycle. 
+\end{proof}
+\end{lmm}
+
+\begin{defn}{Commutative Differential Graded Algebras}{}\\
+Let $R$ be a commutative ring. Let $A$ be a differential graded algebra. We say that $A$ is commutative (cdga) if $A$ is graded commutative. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $R$ be a commutative ring. Let $M$ be an $R$-module. Let $\varphi:M\to R$ be an $R$-module homomrphism. Then $K_\bullet(\varphi)$ is a commutative differential graded algebra. 
+\end{lmm}
+
+\subsection{Models for DGAs}
+
+\pagebreak
+\section{Koszul Algebras and Quadratic Algebras}
+
+\pagebreak
+\section{Profinite Groups}
+\subsection{Basic Properties}
+\begin{defn}{Profinite Groups}{}\\
+Let $G$ be a topological group. We say that $G$ is a profinite group if there exists an inverse system $X:\mI\to{_G}\bold{Top}$ consisting of finite groups with the discrete topology such that $$G=\lim_\mI X$$
+\end{defn}
+
+In particular, this means that $G$ is equipped with the weak topology. 
+
+\begin{prp}{}{}\\
+Let $G$ be a topological group. Then $G$ is profinite if and only if $G$ is compact and totally disconnected. 
+\end{prp}
+
+\begin{crl}{}{}\\
+Let $G$ be a profinite group. Then the following are true. 
+\begin{itemize}
+\item $G$ is Haudorff. 
+\item $G$ is locally compact. 
+\end{itemize}
+\end{crl}
+
+\begin{prp}{}{}\\
+Let $G$ be a compact topological group. Then $G/G_0$ is a profinite group. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $G$ be a profinite group. Let $H\leq G$ be a subgroup. Then the following are true. 
+\begin{itemize}
+\item If $H$ is closed, then $H$ is profinite. 
+\item If $H$ is closed and normal, then $G/H$ is profinite. 
+\item $H$ is open if and only if $H$ is closed and $[G:H]<\infty$. 
+\end{itemize}
+\end{prp}
+
+\subsection{Profinite Completion}
+
+\pagebreak
+\section{Equivariant Algebraic Topology}
+\subsection{G-Homotopy}
+\begin{defn}{G-Homotopy}{} Let $G$ be a topological group and let $X,Y$ be $G$-spaces. Let $f,g:X\to Y$ be $G$-equivariant maps. A $G$-homotopy from $f$ to $g$ is a homotopy $H:X\times I\to Y$ from $f$ to $g$ such that for each $t\in I$, the map $$H(-,t):X\to Y$$ is $G$-equivariant map. 
+\end{defn}
+
+\subsection{Equivariant CW Complexes}
+\subsection{}
+\begin{defn}{The Homotopy Quotient (Borel Construction)}{}\\
+Let $G$ be a topological group. Let $X$ be a $G$-space. Define the homotopy quotient of $X$ to be the orbit space $$EG\times_GX=\frac{EG\times X}{G}$$ where the action of $G$ on $EG\times X$ is given by $g\cdot(e,x)=(g\cdot e,g^{-1}\cdot x)$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $G$ be a topological group. Let $X$ be a $G$-space. Then $$X\hookrightarrow EG\times_GX\to BG$$ is a fibration. 
+\end{prp}
+
+\begin{lmm}{}{}\\
+Let $G$ be a topological group. Let $X$ be a $G$-space. If $G$ acts freely on $X$, then there is a homotopy equivalence $$EG\times_GX\simeq\frac{X}{G}$$ induced by the projection map $EG\times_GX\to X$. 
+\end{lmm}
+
+\pagebreak
+\section{}
+\begin{defn}{Gauge Group}{}\\
+Let $G$ be a topological group. Let $p:E\to X$ be a principal $G$-bundle. Define the gauge group of $p$ to be the set $$G(p)=\{f:E\to E\;|\;f\text{ is an isomorphism of }p\}$$ together with composition of functions. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $G$ be a topological group. Let $p:E\to X$ be a principal $G$-bundle. Then there is a group isomorphism $$G(p)\cong\Gamma(\widetilde{p})$$ where $\widetilde{p}$ is the associated principal bundle where $G$ acts on the fibers by the adjoint representation. 
+\end{prp}
+
+Note: The associated principal bundle is the space $$\frac{E\times G}{\sim}$$ where $(p,g)\sim(ph^{-1},hgh^{-1})$ for $p\in E$ and $g,h\in G$. 
+
+\pagebreak
+\section{}
+There is a one to one bijection between representations of $\pi_1(X)$ and locally constant sheaves (called local systems). 
+
+\begin{defn}{}{}\\
+Let $X$ be a space. Let $x_0\in X$. Define the functor $\text{Fib}_{x_0}:\text{Cov}(X)\to{_{\pi_1(X,x_0)}}\bold{Sets}$ as follows. 
+\begin{itemize}
+\item For $p:\widetilde{X}\to X$ a covering space, define $\text{Fib}_{x_0}(p)=p^{-1}(x_0)$. 
+\item For $f:\widetilde{X}_1\to\widetilde{X}_2$ a map of covering spaces, define $\text{Fib}_{x_0}(f)$ to be $f|_{p^{-1}(x_0)}$. 
+\end{itemize}
+\end{defn}
+
+%https://arxiv.org/pdf/2208.05940
+
+\begin{thm}{}{}\\
+Let $X$ be a connected and locally simply connected space. Let $x_0\in X$. Then $$\text{Fib}_{x_0}:\text{Cov}(X)\to{_{\pi_1(X,x_0)}}\bold{Sets}$$ is fully faithful and essentially surjective. 
+\end{thm}
+
+\begin{thm}{Classification of Local Systems}{}\\
+Let $X$ be a space (locally compact, Hausdorff, second countable, locally path connected, semi locally path connected, path connected). Then there is an equivalent of categories $$\text{Func}(\bold{Open}^\text{op},\text{Vect}_\C)\simeq\text{Rep}(\pi_1(X))$$
+\end{thm}
+
+%https://www.math.lsu.edu/~pramod/tc/07s-7280/notes3.pdf
+
+Ref: Galois Groups and Fundamental Groups
+
+\begin{thm}{Classification Theorem for Flat Connections}{}\\
+Let $M$ be a connected Riemannian manifold. Let $G$ be a Lie group. Then there is a one to one correspondence $$\frac{\{(P,A)\;|\;P\to M\text{ is a principal }G\text{-bundle and }A\text{ is a flat connection}\}}{\sim}\;\;\overset{1:1}{\longleftrightarrow}\;\;\text{Rep}(\pi_1(X),G)$$ where $(P_1,A_1)\sim(P_2,A_2)$ if there exists bundle isomorphism $\varphi:P_1\to P_2$ such that $\varphi^\ast A_2=A_1$. 
+\end{thm}
+
+Ref: Differential Geometry; Taubes
+Bijection described in: Geometry of Characteristic classes; Morita
+
+There is a natural bijection between principal bundles and vector bundles by taking the associated bundle. If $G=GL(V)$ for some finite dimensional vector space $V$ over the field $k=\R$ or $\C$, the sheaf of sections of the associated bundle is a locally constant sheaf. \\
+%https://mathoverflow.net/questions/17786/why-are-local-systems-and-representations-of-the-fundamental-group-equivalent
+
+Also: Upgrade to diffeomorphism. 
+
+\section{Infinite Galois Theory}
+\begin{prp}{}{}\\
+Let $F$ be a field. Let $K/F$ be a Galois extension. Then the following are true. 
+\begin{itemize}
+\item The inverse limit of the system $\text{Gal}(L/F)$ for $L/F$ a finite Galois extension is $\text{Gal}(K/F)$. 
+\item $\text{Gal}(K/F)$ is a profinite group. 
+\item The projection maps $\text{Gal}(K/F)\to\text{Gal}(L/F)$ for $L/F$ a finite Galois extension is a surjective homomorphism. 
+\item Let $F<L<K$ be a field extension. Then $K/L$ is a Galois extension and $\text{Gal}(K/L)$ is a closed subgroup of $\text{Gal}(K/F)$. 
+\end{itemize}
+\end{prp}
+
+\begin{thm}{Krull}{}\\
+Let $F$ be a field. Let $K/F$ be a field extension. Then there is an inclusion reversing bijection $$\left\{\substack{\text{Closed subgroups of}\\\text{Aut}_F(K)}\right\}\;\;\overset{\text{1:1}}{\longleftrightarrow}\;\;\left\{\substack{\text{Intermediary subfields}\\ F<L<K}\right\}$$ given as follows. 
+\begin{itemize}
+\item For a subgroup $H\leq\text{Aut}_F(K)$, $H\mapsto\text{Fix}_F(H)$. 
+\item For an intermediary subfield $M$, $M\mapsto\text{Aut}_L(K)$. 
+\end{itemize}
+\end{thm}
+
+\begin{prp}{}{}\\
+Let $F$ be a field. Let $K/F$ be a Galois extension. Then the above bijection restricts to a bijection $$\left\{\substack{\text{Normal Subgroups}\\\text{of }\text{Aut}_K(L)}\right\}\;\;\overset{\text{1:1}}{\longleftrightarrow}\;\;\left\{\substack{\text{Normal Extensions}\\ K<M}\right\}$$ 
+\end{prp}
+
+
+\end{document}

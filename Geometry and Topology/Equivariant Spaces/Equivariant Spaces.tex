@@ -510,6 +510,132 @@ Immediate from the above.
 \end{crl}
 
 \pagebreak
+\section{The Covering Space Correspondence}
+It is easy to see that given a space $X$, the set $\text{Aut}(X)$ of automorphisms of $X$ form a group. It is often that one studies also the the maps in and out of the object one is studying. In our case, the interesting maps for the covering spaces would be deck transformations. 
+
+\subsection{Deck Groups}
+\begin{defn}{Deck Transformations}{} Let $X$ be a space and $p:\tilde{X}\to X$ a covering space. A deck transformation of $p$ is a homeomorphism $\tau:\tilde{X}\to X$ such that $p\circ\tau=p$. The set of all deck transformations of a cover is called $\text{Deck}(p)$. 
+\end{defn}
+
+The condition that $p\circ\tau=p$ restricts the set of maps that we are considering in $\text{Aut}(\tilde{X})$. In particular, it is a group in its own right, so that $\text{Deck}(p)$ is a subgroup of $\text{Aut}(\tilde{X})$. 
+
+\begin{prp}{}{} Let $p:\tilde{X}\to X$ be a covering. Then $\text{Deck}(p)$ is a group. 
+\begin{proof}
+Let $\tau,\phi\in\text{Deck}(p)$. Then $p\circ(\tau\circ\phi)=(p\circ\tau)\circ\phi=p\circ\phi=p$ which means that the operation is closed. Composition of functions is clearly associativity. The identity map $\text{id}:\tilde{X}\to\tilde{X}$ satisfies the definition of a deck transformation. Finally, since $\tau$ is a homeomorphism, it has an inverse, $\tau^{-1}$. Then by pre-composing with $\tau^{-1}$, we get that $p\circ\tau=p$ implies $p=p\circ\tau^{-1}$ thus $\tau^{-1}\in\text{Deck}(p)$. 
+\end{proof}
+\end{prp}
+
+The condition that $p\circ\tau=p$ also restricts what deck transformations can do. As a result, deck transformations are a lot more restrictive compared to simply automophisms. In particular, one can see that for $x\in X$, a deck transformation $\tau:\tilde{X}\to\tilde{X}$ necessarily permutes elements of the fiber $p^{-1}(x_0)$. Moreover, we have the following proposition. 
+
+\begin{prp}{}{4.1.3} Let $X$ be a space and $p:\tilde{X}\to X$ a path connected covering space. Then $\tau\in\text{Deck}(p)$ is the identity if and only if $\tau$ has at least one fixed point. 
+\begin{proof}
+If $\tau$ is the identity then $\tau$ fixes all points. Now suppose that $\tau$ fixes $\tilde{x}_0\in\tilde{X}$. Let $\tilde{x}\in\tilde{X}$ be an arbitrary point. Since $\tilde{X}$ is path connected, there exists a path $f:I\to\tilde{X}$ from $\tilde{x}_0$ to $\tilde{x}$. Similarly, there exists a path $g:I\to\tilde{X}$ from $\tau(\tilde{x}_0)=\tilde{x}_0$ to $\tau(\tilde{x})$. Since $p\circ\tau=p$, we have that $p\circ f=p\circ g$. By uniqueness of path lifting, $f$ and $g$ both start at $\tilde{x}_0=\tau(\tilde{x}_0)$ so they also both end at the same point. Thus $\tau(\tilde{x})=\tilde{x}$ and so we are done. 
+\end{proof}
+\end{prp}
+
+Similar to the fundamental group, the deck group also has a right action on the fibers of a covering space. 
+
+\begin{prp}{}{} Let $X$ be a space and $x_0\in X$. Let $p:(\tilde{X},\tilde{x}_0)\to(X,x_0)$ be a covering space. Then the map $\cdot:\text{Deck}(p)\times p^{-1}(x_0)\to p^{-1}(x_0)$ defined by $$\tau\cdot\tilde{x}_0=\tau(\tilde{x}_0)$$ is a group action on $p^{-1}(x_0)$. 
+\end{prp}
+
+\begin{prp}{}{} Let $X$ be a space and $x_0\in X$. Let $p:(\tilde{X},\tilde{x}_0)\to(X,x_0)$ be a covering space. Then the action of $\text{Deck}(p)$ on $p^{-1}(x_0)$ is free. 
+\begin{proof}
+If $\tau\in\text{Deck}(p)$ is such that $\tau(\tilde{x})=\tilde{x}$ for some $\tilde{x}\in\tilde{X}$, then by \ref{prp:4.1.3}, $\tau=\text{id}$. Thus the group action is free. 
+\end{proof}
+\end{prp}
+
+\subsection{Regular Covering Spaces}
+When there is only one element in the conjugacy class of a subgroup, that group is then a normal subgroup. We will now consider covering spaces such that their induced subgroup of the fundamental group is normal. This classification will also fit in well with our theory of Galois correspondence. We will also see how the deck group is related to normality of the subgroups. 
+
+\begin{defn}{Regular Covering Spaces}{} Let $X$ be a space and $x_0\in X$. We say that a covering space $p:(\tilde{X},\tilde{x}_0)\to(X,x_0)$ is regular if $\text{Deck}(p)$ acts transitively on $p^{-1}(x_0)$. 
+\end{defn}
+
+Some authors such as Hatcher calls regular covering spaces as normal covering spaces. The reason is given by the following proposition. 
+
+\begin{prp}{}{} Let $p:(\tilde{X},\tilde{x}_0)\to (X,x_0)$ with $\tilde{X}$ path connected. Then $p$ is a regular covering space if and only if $p_\ast(\pi_1(\tilde{X},\tilde{x}_0))$ is a normal subgroup of $\pi_1(X,x_0)$. 
+\begin{proof}
+Suppose that $\text{Deck}(p)$ is transitive on $p^{-1}(x_0)$. Let $[\gamma]\in\pi_1(X,x_0)$. By by the path lifting property of covering spaces, $\gamma$ lifts to $\tilde{\gamma}$ where $\tilde{x}_1=\tilde{\gamma}(1)\in p^{-1}(x_0)$. Since $\text{Deck}(p)$ is transitive, there exists $\tau:(\tilde{X},\tilde{x}_0)\to(\tilde{X},\tilde{x}_1)$. By the lifting criterion, \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	&& {(\tilde{X},\tilde{x}_1)} \\
+	\\
+	{(\tilde{X},\tilde{x}_0)} && {(X,x_0)}
+	\arrow["p"', from=1-3, to=3-3]
+	\arrow["{\tau}", from=3-1, to=1-3]
+	\arrow["p"', from=3-1, to=3-3]
+\end{tikzcd}}\\
+we have that $p_\ast(\pi_1(\tilde{X},\tilde{x}_0))\subseteq p_\ast(\pi_1(\tilde{X},\tilde{x}_1))$. Since $\tau$ is a homeomorphism, $\tau^{-1}$ and the lifting criterion gives $$p_\ast(\pi_1(\tilde{X},\tilde{x}_0))=p_\ast(\pi_1(\tilde{X},\tilde{x}_1))$$ By \ref{prp:2.5.1}, we have that $$[\gamma]p_\ast(\pi_1(\tilde{X},\tilde{x}_0))[\overline{\gamma}]=p_\ast(\pi_1(\tilde{X},\tilde{x}_1))=p_\ast(\pi_1(\tilde{X},\tilde{x}_0))$$ Since this is true for any $[\gamma]\in\pi_1(X,x_0)$, we conclude that $p_\ast(\pi_1(\tilde{X},\tilde{x}_0))$ is a normal subgroup. \\
+
+Now suppose that $p_\ast(\pi_1(\tilde{X},\tilde{x}_0))$ is a normal subgroup. Choose $\tilde{x}_1\in p^{-1}(x_0)$. Then for any $[\gamma]\in\pi_1(X,x_0)$ such that it lifts to $\tilde{\gamma}:I\to\tilde{X}$ with $\tilde{\gamma}(1)=\tilde{x}_1$, by \ref{prp:2.5.1} we have that $$p_\ast(\pi_1(\tilde{X},\tilde{x}_0))=[\gamma]p_\ast(\pi_1(\tilde{X},\tilde{x}_0))[\overline{\gamma}]=p_\ast(\pi_1(\tilde{X},\tilde{x}_1))$$ This satisfies the lifting criterion: \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	&& {(\tilde{X},\tilde{x}_1)} \\
+	\\
+	{(\tilde{X},\tilde{x}_0)} && {(X,x_0)}
+	\arrow["p"', from=1-3, to=3-3]
+	\arrow["{\exists!\tau}"{description}, dashed, from=3-1, to=1-3]
+	\arrow["p"', from=3-1, to=3-3]
+\end{tikzcd}}\\
+So there exists a map $\tau:(\tilde{X},\tilde{x}_0)\to(\tilde{X},\tilde{x}_1)$. By inverting the orientation of $\gamma$, we can invert the results of the lifting criterion so that $\tau$ has an inverse. Thus $\tau$ is a deck transformation. Since this is true for any $\tilde{x}_1\in p^{-1}(x_0)$, we conclude. 
+\end{proof}
+\end{prp}
+
+We can now improve on the bijection $\deg(p)=[\pi_1(X,x_0):p_\ast(\pi_1(\tilde{X},\tilde{x}_0))]$, albeit an indirect one. The consequence of the theorem for when $p$ is a regular covering will show that this theorem is indeed a generalization. 
+
+\begin{thm}{}{4.2.3} Let $(X,x_0)$ be a path connected and locally path connected space. Let $p:(\tilde{X},\tilde{x}_0)\to(X,x_0)$ be a path connected covering space of $X$. Then we have that $$\text{Deck}(p)\cong\frac{N(p_\ast(\pi_1(\tilde{X},\tilde{x}_0)))}{p_\ast(\pi_1(\tilde{X},\tilde{x}_0))}$$ for any $\tilde{x}_0\in p^{-1}(x_0)$, where $N$ is the normalizer. 
+\end{thm}
+
+As an immediate result, the deck group of a regular covering space $p:\tilde{X}\to X$ is isomorphic to the quotient group with the induced subgroup of $p_\ast$ since the normalizer of the image subgroup is all of $\pi_1(X,x_0)$ in this case. 
+
+\begin{crl}{}{} Let $(X,x_0)$ be a path connected and locally path connected space. Let $p:(\tilde{X},\tilde{x}_0)\to(X,x_0)$ be a regular covering space of $X$. Then $$\text{Deck}(p)\cong\frac{\pi_1(X,x_0)}{p_\ast\left(\pi_1(\tilde{X},\tilde{x}_0)\right)}$$ 
+\begin{proof}
+Since $p_\ast(\pi_1(\tilde{X},\tilde{x}_0))$ is a normal subgroup in this case, the normalizer is all of $\pi_1(X,x_0)$ and so \ref{thm:4.2.3} implies the result. \\
+
+But we can also give an independent proof. Define a homomorphism $\phi:\pi_1(X,x_0)\to\text{Deck}(p)$ defined by $[\gamma]\mapsto\tau$ where $\tau$ is the unique deck transformation sending $\tilde{\gamma}(0)$ to $\tilde{\gamma}(1)$ (This is possible since $\tilde{X}$ is a regular cover). This is a homomorphism since for $[f]$ and $[g]$ in $\pi_1(X,x_0)$ that lifts to $\tilde{f}$ sending $\tilde{x}_0$ to $\tilde{x}_1$ and $\tilde{g}$ sending $\tilde{x}_1$ to $\tilde{x}_2$, $\phi([f]\cdot[g])$ the unique deck transformation sending $\tilde{x}_0$ to $\tilde{x}_2$. It is clear that $\phi([f])\circ\phi([g])$ has the same effect. \\
+
+Notice that this map is surjective. Indeed, given a deck transformation $\tau:(\tilde{X}_0,\tilde{x}_0)\to(\tilde{X},\tilde{x}_1)$, since $\tilde{X}$ is path connected, there exists a path $\tilde{\gamma}:I\to\tilde{X}$ from $\tilde{x}_0$ to $\tilde{x}_1$. By definition of a deck transformation, $p(\tilde{x}_0)=p(\tilde{x}_1)$ so that $p\circ\tilde{\gamma}=\gamma$ is indeed a loop in $X$. So $\phi([\gamma])=\tau$. \\
+
+We also find the kernel of the map. For $[\gamma]\in\ker(\phi)$, $\phi([\gamma])$ is the identity map of $\tilde{X}$. In particular, $\tilde{\gamma}$ must be a loop in $\tilde{X}$ so that $\tilde{\gamma}$ in $p_\ast(\pi_1(\tilde{X},\tilde{x}_0))$. Conversely, given $[\tilde{\theta}]\in p_\ast(\tilde{X},\tilde{x}_0)$, $\phi([p\circ\tilde{\theta}])$ is the deck transformation associated to $\tilde{\theta}$ sending $\tilde{\theta}(0)$ to $\tilde{\theta}(1)=\tilde{\theta}(0)$ thus the associated deck transformation is the identity. We conclude that $\ker(\phi)=p_\ast(\pi_1(\tilde{X},\tilde{x}_0))$. \\
+
+The first isomorphism theorem thus implies that $$\text{Deck}(p)\cong\frac{\pi_1(X,x_0)}{p_\ast\left(\pi_1(\tilde{X},\tilde{x}_0)\right)}$$ and so we are done. 
+\end{proof}
+\end{crl}
+
+Combining \ref{thm:3.3.8}, this means that if $p$ is a regular covering, we have that $$\text{Deck}(p)\cong\frac{\pi_1(X,x_0)}{p_\ast\left(\pi_1(\tilde{X},\tilde{x}_0)\right)}$$ implying $$\abs{\text{Deck}(p)}=\abs{\frac{\pi_1(X,x_0)}{p_\ast\left(\pi_1(\tilde{X},\tilde{x}_0)\right)}}=[\pi_1(X,x_0):p_\ast(\pi_1(\tilde{X},\tilde{x}_0))]=\abs{p^{-1}(x_0)}=\deg(p)$$ Wow, this has gotten messy. 
+
+\begin{crl}{}{} Let $(X,x_0)$ be a path connected and locally path connected space. Let $p:(\tilde{X},\tilde{x}_0)\to(X,x_0)$ be the universal covering space of $X$. Then $$\text{Deck}(p)\cong\pi_1(X,x_0)$$ 
+\begin{proof}
+In addition to being normal, the universal covering space has trivial fundamental group so that \ref{thm:4.2.3} directly implies the result. 
+\end{proof}
+\end{crl}
+
+Combining results from the previous sections, we now have the equality $$\abs{\pi_1(X,x_0)}=\abs{p^{-1}(x_0)}=\deg(p)=\abs{\text{Deck}(p)}$$ when $p:(\tilde{X},\tilde{x}_0)\to(X,x_0)$ is the universal covering space. 
+
+\subsection{The Correspondence Theorem for Deck Groups}
+\begin{defn}{Intermediate Covering Spaces}{}\\
+Let $X$ be a space. Let $p:\widetilde{X}\to X$ and $q:Z\to X$ be covering spaces. We say that $q$ is an intermediate covering space of $p$ if there exists a covering space homomorphism $f:\widetilde{X}\to Z$ such that the following diagram commutes: \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\widetilde{X}} & Z \\
+	& X
+	\arrow["{\exists f}", dashed, from=1-1, to=1-2]
+	\arrow["p"', from=1-1, to=2-2]
+	\arrow["q", from=1-2, to=2-2]
+\end{tikzcd}}\\
+\end{defn}
+
+\begin{thm}{Galois Correspondence for Deck Groups}{}\\
+Let $(X,x_0)$ be a locally connected space. Let $p:\widetilde{X}\to X$ be a regular covering space. Then there is a one to one inclusion reversing correspondence $$\{q:Z\to X\;|\;q\text{ is an intermediate covering space }\}\;\;\overset{1:1}{\longleftrightarrow}\;\;\{H\leq\text{Deck}(p)\;|\;H\text{ is a subgroup of Deck}(p)\}$$ given as follows. 
+\begin{itemize}
+\item An intermediate covering $q:Z\to X$ is sent to $\text{Deck}(q)$. 
+\item An subgroup of $\text{Deck}(p)$ gives the covering space $\widetilde{X}/H$. 
+\end{itemize}
+\end{thm}
+
+When $p$ is the universal covering space, we recover the standard correspondence between the fundamental group and all path connected covering spaces. 
+
+\begin{prp}{}{}\\
+Let $(X,x_0)$ be a locally connected space. Let $p:\widetilde{X}\to X$ be a regular covering space. The above one to one correspondence induces a bijection $$\left\{q:Z\to X\;|\;\substack{q\text{ is an intermediate}\\\text{regular covering space }}\right\}\;\;\overset{1:1}{\longleftrightarrow}\;\;\{H\leq\text{Deck}(p)\;|\;H\text{ is a normal subgroup of Deck}(p)\}$$ In this case, we have $\text{Deck}(q:\widetilde{X}/H\to X)\cong\frac{\text{Deck}(p)}{H}$. 
+\end{prp}
+
+\pagebreak
 \section{The Categorical Viewpoint}
 \subsection{The Category of Equivariant Spaces}
 \begin{defn}{The Category of G-Spaces}{} Let $G$ be a topological space. Define the category of $G$-spaces $${_G}\bold{Top}$$ to consist of the following data. 

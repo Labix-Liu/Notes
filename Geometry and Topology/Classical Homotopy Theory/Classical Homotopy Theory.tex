@@ -622,7 +622,7 @@ Since each $\R\Prj^n$ is a path connected, we know that the direct limit $\R\Prj
 \end{eg}
 
 \begin{thm}{Homology Long Exact Sequence in Cofibration}{} Let $p:X\to Y$ be a cofibration with cofiber $C=\frac{Y}{p(X)}$. Let $\text{proj}:Y\to C$ be the projection map. Then there is a long exact sequence in homology groups: \\~\\
-\adjustbox{scale=0.85,center}{\begin{tikzcd}
+\adjustbox{scale=1.05,center}{\begin{tikzcd}
 	\cdots & {\widetilde{H}_{n+1}(C)} & {\widetilde{H}_n(X)} & {\widetilde{H}_n(Y)} & {\widetilde{H}_n(C)} & {\widetilde{H}_{n-1}(X} & \cdots & {\widetilde{H}_0(Y)} & {\widetilde{H}_0(B,b_0)}
 	\arrow[from=1-1, to=1-2]
 	\arrow["\partial", from=1-2, to=1-3]
@@ -689,68 +689,247 @@ We can rephrase some of the corner stone theorems of homotopy theory using $n$-c
 
 \pagebreak
 \section{Homotopy Pullbacks and Pushouts}
-Homotopy pullbacks and pushouts are a special case of homotopy limits and colimits. It would be fruitful for us to first consider this case also because of how it is related to maps of spaces and (co)fibrations. 
+Pushouts and pullbacks are not well suited for studying homotopy invariant properties. Most of the invariants in algebraic topology detect differences up to homotopy equivalence, but pushouts and pullbacks are more rigid than homotopy equivalence: 
 
-\subsection{Homotopy Commutative and Homotopy Coherence Squares}
-\begin{defn}{Homotopy Commutative Squares}{} Let $W,X,Y,Z$ be spaces. Consider the following diagram: \\~\\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	W & Y \\
-	X & Z
-	\arrow["f", from=1-1, to=1-2]
-	\arrow["g"', from=1-1, to=2-1]
-	\arrow["h", from=1-2, to=2-2]
-	\arrow["k"', from=2-1, to=2-2]
-\end{tikzcd}}\\~\\
-of spaces. We say that the square is homotopy commutative if there exists a homotopy $H$ from $k\circ f$ to $h\circ g$. 
-\end{defn}
-
-Commutative squares are homotopy commutative. 
-
-\subsection{The Standard Homotopy Pullback and Pushout}
-Consider the following diagram: \\~\\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	X & Z & Y \\
-	{X'} & {Z'} & {Y'}
-	\arrow["f", from=1-1, to=1-2]
-	\arrow["{e_X}"', from=1-1, to=2-1]
-	\arrow["{e_Z}"', from=1-2, to=2-2]
-	\arrow["g"', from=1-3, to=1-2]
-	\arrow["{e_Y}", from=1-3, to=2-3]
-	\arrow["{f'}"', from=2-1, to=2-2]
-	\arrow["{g'}", from=2-3, to=2-2]
-\end{tikzcd}}\\~\\
-We can form pullbacks of the upper and lower horizontals and obtain an induced map. However, when $e_X,e_Y,e_Z$ are homotopy equivalences, the induced map is not a homotopy equivalence. We remedy this by introducing a homotopic notion of pullbacks. 
-
-\begin{defn}{The Standard Homotopy Pullback}{} Let $X,Y,Z\in\bold{CGWH}$ be spaces. Let $f:X\to Z$ and $g:Y\to Z$ be maps. Define the standard homotopy pullback of $f$ and $g$ to be the subspace $$\text{holim}(X\overset{f}{\rightarrow}Z\overset{g}{\leftarrow}Y)=\{(x,\alpha,y)\in X\times\text{Map}(I,Z)\times Y\;|\;\alpha(0)=f(x),\alpha(1)=g(y)\}$$
-\end{defn}
-
-The idea is that normally in pullbacks, we require that under $f$ and $g$ the elements of the pullback must arrive at the same point in $Z$. But here we relax the requirement by simply allowing elements of the homotopy pullback to arrive at the same path component of $Z$ (so up to the existence of an homotopy of the two points in $Z$). 
-
-\begin{defn}{The Canonical Map of Homotopy Pullbacks}{} Let $X,Y,Z\in\bold{CGWH}$ be spaces. Let $f:X\to Y$ and $g:Y\to Z$ be maps. Define the canonical map from the pullback to the homotopy pullback $$c:\lim(X\overset{f}{\rightarrow}Z\overset{g}{\leftarrow}Y)\to\text{holim}(X\overset{f}{\rightarrow}Z\overset{g}{\leftarrow}Y)$$ to be given by $(x,y)\mapsto(x,e_{f(x)=g(y)},y)$ where $e$ refers to the constant loop at $f(x)=g(y)$. 
-\end{defn}
-
-Recall that we motivated the definition of a homotopy pullback from the fact that pullbacks does not work well with homotopy. We can now show that homotopy pullbacks remedy the issue. 
-
-\begin{thm}{The Matching Lemma}{} Suppose that we have a commutative diagram of spaces \\~\\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	X & Z & Y \\
-	{X'} & {Z'} & {Y'}
-	\arrow["f", from=1-1, to=1-2]
-	\arrow["{e_X}"', from=1-1, to=2-1]
-	\arrow["{e_Z}"', from=1-2, to=2-2]
-	\arrow["g"', from=1-3, to=1-2]
-	\arrow["{e_Y}", from=1-3, to=2-3]
-	\arrow["{f'}"', from=2-1, to=2-2]
-	\arrow["{g'}", from=2-3, to=2-2]
-\end{tikzcd}}\\~\\
-in $\bold{CGWH}$. Define the map $$\phi_{X,Z,Y}^{X',Z',Y'}:\text{holim}(X\overset{f}{\rightarrow}Z\overset{g}{\leftarrow}Y)\to\text{holim}(X'\overset{f'}{\rightarrow}Z'\overset{g'}{\leftarrow}Y')$$ by the formula $(x,\gamma,y)\mapsto(e_X(x),e_Z\circ\gamma,e_Y(y))$. Then the following are true. 
 \begin{itemize}
-\item If each $e_X,e_Y,e_Z$ are homotopy equivalences, then $\phi$ is a homotopy equivalence. 
-\item If each $e_X,e_Y,e_Z$ are weak equivalences, then $\phi$ is a weak equivalence. 
-\end{itemize} 
+\item Their universal properties guarantee that they are unique up to homeomorphism. 
+\item Pushouts and pullbacks are determined by three spaces and two maps. But if we supply homotopy equivalent spaces then the pushout / pullback is not homotopy equivalence. 
+\end{itemize}
+
+The following example is given in \cite{PHC}. 
+
+\begin{eg}{}{} Consider the following commutative diagram:   
+ \\~\\ \adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\ast & {S^n} & {D^{n+1}} \\
+	\ast & {S^n} & \ast
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=1-1]
+	\arrow[hook, from=1-2, to=1-3]
+	\arrow["{\text{id}}"', from=1-2, to=2-2]
+	\arrow["\ast", from=1-3, to=2-3]
+	\arrow[from=2-2, to=2-1]
+	\arrow[from=2-2, to=2-3]
+\end{tikzcd}} \\~\\
+While all the vertical arrows are weak equivalences, the induced map of pushouts is given by $S^{n+1}\to\ast$ which is clearly not a weak equivalence. 
+\end{eg}
+
+Therefore we concern ourselves with a homotopy invariant version of this concept. The ordinary pushouts and pullbacks are unique up to homeomorphism. We can explicitly define a set and its topology and show that it satisfies a universal property. We take a similar approach here and first introduce a model for homotopy pushouts. Our main reference for this section is \cite{CHT}. 
+
+\subsection{The Standard Models for Homotopy Pushouts and Pullbacks}
+\begin{defn}{Standard Homotopy Pushout}{}\\
+Let $W,X,Y\in\bold{Top}$ be spaces. Let $f:W\to X$ and $g:W\to Y$ be maps. Define the standard homotopy pushout of $f$ and $g$ to be the quotient space $$\text{hocolim}(X\overset{f}{\leftarrow}W\overset{g}{\rightarrow}Y)=\frac{X\amalg(W\times I)\amalg Y}{\sim}$$ where $\sim$ is the equivalence relation generated by $f(w)\sim (w,0)$ and $g(w)\sim(w,1)$ for $w\in W$. 
+\end{defn}
+
+\begin{defn}{Standard Homotopy Pullback}{}\\
+Let $X,Y,Z\in\bold{Top}$ be spaces. Let $f:X\to Z$ and $g:Y\to Z$ be maps. Define the standard homotopy pullback of $f$ and $g$ to be the subspace $$\text{holim}(X\overset{f}{\rightarrow}Z\overset{g}{\leftarrow}Y)=\{(x,\alpha,y)\in X\times\text{Map}(I,Z)\times Y\;|\;\alpha(0)=f(x),\alpha(1)=g(y)\}$$
+\end{defn}
+
+We will use the following two ways to recgonize homotopy pushouts and homotopy pullbacks as certain limits and colimits. 
+
+\begin{prp}{}{}\\
+Let $X,Y,Z\in\bold{Top}$ be spaces. Let $f:X\to Z$ and $g:Y\to Z$ be maps. Then the there is a homeomorphism $$\lim(X\overset{f}{\rightarrow}Z\leftarrow P_g)\cong\text{holim}(X\overset{f}{\rightarrow}Z\overset{g}{\leftarrow}Y)$$ given by the map $(x,(y,\gamma))\mapsto(x,\gamma,y)$. 
 \begin{proof}
-We first prove the case for homotopy equivalence. Consider the following commutative diagram: \\~\\
+Recall that the limit on the left is given by $\{(x,(y,\gamma))\in X\times P_g\;|\;\gamma(1)=f(x)\}$. Also $(y,\gamma)\in P_g$ means that $\gamma(0)=g(y)$. So the map defined by $(x,(y,\gamma))\mapsto(x,\gamma,y)$ is a well defined map and is clearly a homeomorphism. \cite{CHT}
+\end{proof}
+\end{prp}
+
+Notice that we could have equally replaced the space $X$ with $P_f$ to obtain a homeomorphism between the limit and homotopy pullback entirely by symmetry.  
+
+Dually we have a homeomorphism $$\text{colim}(X\overset{f}{\leftarrow}Z\rightarrow M_g)\cong\text{hocolim}(X\overset{f}{\leftarrow}Z\overset{g}{\rightarrow}Y)$$ Moreover, since the diagram of spaces is symmetric, we could have equally replaced the space on the left by the mapping path space / mapping cylinder and we would yet again obtain a homeomorphism. 
+
+\begin{prp}{}{}\\
+Let $X,Y,Z\in\bold{Top}$ be spaces. Let $f:X\to Z$ and $g:Y\to Z$ be maps. Then the there is a homeomorphism $$\lim(P_f\rightarrow Z\leftarrow P_g)\cong\text{holim}(X\overset{f}{\rightarrow}Z\overset{g}{\leftarrow}Y)$$ given by the map $((x,\gamma_1),(y,\gamma_2))\mapsto(x,\gamma_1\cdot\overline{\gamma_2},y)$. 
+\begin{proof}
+Notice that the map is well defined because by definition, we have that $$\lim(P_f\rightarrow Z\leftarrow P_g)=\{((x,\gamma_1),(y,\gamma_2))\in P_f\times P_g\;|\;\gamma_1(0)=f(x),\gamma_2(0)=g(y),\gamma_1(1)=\gamma_2(1)\}$$ The evident inverse of the given map is then $(x,\gamma,y)\mapsto((x,\gamma|_{[0,1/2]}),(y,\gamma_{[1/2,1]}))$. \cite{CHT}
+\end{proof}
+\end{prp}
+
+Dually we have a homeomorphism $$\text{colim}(M_f\leftarrow W\rightarrow M_g)\cong\text{hocolim}(X\overset{f}{\leftarrow}W\overset{g}{\rightarrow}Y)$$ 
+
+\begin{prp}{}{}\\
+Let $X,Y,Z$ be spaces. Let $f:X\to Z$ and $g:Y\to Z$ be maps. If one of $f$ or $g$ is a fibration, then the canonical map $$\lim(X\rightarrow Z\leftarrow Y)\simeq\text{holim}(X\rightarrow Z\leftarrow Y)$$ is a homotopy equivalence. 
+\begin{proof}
+Without loss of generality suppose that $f$ is a fibration. Replace $g$ by a homotopy equivalence $h:Y\to P_g$ and a fibration $k:P_g\to Z$. We then obtain a commutative diagram:  
+ \\~\\ \adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\text{lim}(X\rightarrow Z\leftarrow Y)} & Y \\
+	{\text{holim}(X\rightarrow Z\leftarrow Y)} & {P_g} \\
+	X & Z
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow["h", from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-1, to=3-1]
+	\arrow["k", from=2-2, to=3-2]
+	\arrow["f"', from=3-1, to=3-2]
+\end{tikzcd}} \\~\\
+It is commutative because the map from the limit to $X$ is precisely the projection map to $X$. Since the outer rectangle and the bottom square are pullbacks, the pasting law \ref{prp:Pasting1} shows that the upper square is also a pullback. Now since $f$ is a fibration and the bottom square is a pullback, we conclude that the middle horizontal arrow is a fibration by \ref{prp:PullPFib}. Since $h$ is a homotopy equivalence, we conclude that the map from the limit to the homotopy limit is a homotopy equivalence by \ref{prp:PullFibPWeak}. Hence we conclude. 
+\end{proof}
+\end{prp}
+
+We can compute some examples of homotopy pushouts and pullbacks. 
+
+\begin{eg}{}{}\\
+Let $f:X\to Y$ be a map. For any $y\in Y$ recall that the homotopy fiber of $f$ is defined to be the space $$\text{hofib}_y(f)=\{(x,\gamma)\in X\times\text{Map}(I,Y)\;|\;\gamma(0)=f(x),\gamma(1)=y\}$$ This is precisely the definition of $\text{holim}(X\overset{f}{\rightarrow}Y\leftarrow\{y\})$. Also note that if we take actual limits instead of homotopy limits then the same diagram would give us the fiber of $f$, thus justifying its name. By replacing the space $X$ with $P_f$, we a homeomorphism $$\text{hofib}_{y}(X\rightarrow Y\leftarrow\{y\})\cong\lim(P_f\rightarrow Y\leftarrow\{y\})=\text{fib}_{y}(P_f\rightarrow Y)$$ 
+
+Similarly, the homotopy cofiber of $f$ is defined to be $$\text{hocofib}(f)=\frac{(X\times I)\amalg Y}{\sim}$$ where the relation is generated by $(x,1)\sim(x',1)$ and $(x,0)\sim f(x)$ for $x,x'\in X$. This is precisely the definition of $\text{hocolim}(\ast\leftarrow X\overset{f}{\rightarrow}Y)$. 
+\end{eg}
+
+\begin{eg}{}{}\\
+Let $X$ be a pointed space. There is a unique map $X\to\ast$ to the terminal object in $\bold{Top}$. The homotopy pushout of $\ast\leftarrow X\rightarrow\ast$ is given by $$\text{hocolim}(\ast\leftarrow X\rightarrow\ast)=\frac{\ast\amalg(X\times I)\amalg\ast}{\sim}$$ where $\sim$ is generated by $\ast\sim(x,0)$ and $\ast\sim(x,1)$. This is precisely the definition of $\Sigma X$. 
+
+Similarly, there is a unique map $\ast\to X$ sending $\ast$ to the base point of $X$. The homotopy pullback of $\ast\rightarrow X\leftarrow\ast$ is given by 
+\begin{align*}
+\text{holim}(\ast\rightarrow X\leftarrow\ast)&=\{(\ast,\gamma,\ast)\in\ast\times\text{Map}(I,X)\times\ast\;|\;\gamma(0)=\ast=\gamma(1)\}\\
+&\cong\{\gamma\in\text{Map}(I,X)\;|\;\gamma\text{ is a loop at the base point }\}
+\end{align*}
+This is precisely the definition of $\Omega X$. 
+\end{eg}
+
+\begin{eg}{}{}\\
+Let $f:X\to Y$ be a map. The homotopy pullback of $f$ and the identity map on $Y$ is given by 
+\begin{align*}
+\text{holim}(X\overset{f}{\rightarrow}Y\overset{\text{id}}{\leftarrow}Y)&=\{(x,\gamma,y)\in X\times\text{Map}(I,Y)\times Y\;|\;\gamma(0)=x,\gamma(1)=y\}\\
+&\cong\{(x,\gamma)\in X\times\text{Map}(I,Y)\;|\;\gamma(0)=x\}\\
+&=P_f
+\end{align*}
+In particular, the homotopy pullback is homotopy equivalent to $X$ by \ref{prp:Factorization}
+
+Similarly, the homotopy pushout of $f$ and the identity map on $X$ is given by \begin{align*}
+\text{hocolim}(Y\overset{f}{\leftarrow}X\overset{\text{id}}{\rightarrow}X)&=\frac{Y\amalg(X\times I)\amalg X}{f(x)\sim(x,0), x\sim(x,1)}\\
+&\cong\frac{Y\amalg(X\times I)}{f(x)\sim(x,0)}\\
+&=M_f
+\end{align*}
+In particular, the homotopy pushout is homotopy equivalent to $Y$. 
+\end{eg}
+
+\begin{eg}{}{}\\
+Let $X,Y$ be pointed spaces. The homotopy pushout of the initial maps $\ast\to X$ and $\ast\to Y$ that maps the unique object to the base point is given by $$\text{hocolim}(X\leftarrow\ast\rightarrow Y)\cong\frac{X\amalg I\amalg Y}{x_0\sim 0,y_0\sim 1}$$ which is just the spaces $X$ and $Y$ together with the unit interval connecting the base points. Since $I$ deformation retracts to a point, we see that the homotopy colimit is homotopy equivalent to $X\vee Y$. Another way to see this is that because the two initial maps are cofibration, the homotopy pushout is homotopy equivalent to the ordinary limit.  
+
+Dually, the homotopy pullback of the final maps $X\to\ast$ and $Y\to\ast$ is given by 
+\begin{align*}
+\text{holim}(X\rightarrow\ast\leftarrow Y)&=\{(x,\gamma,y)\in X\times\text{Map}(I,\ast)\times Y\;|\;\gamma(0)=\ast=\gamma(1)\}\\
+&\cong X\times\text{Map}(I,\ast)\times Y\cong X\times Y
+\end{align*}
+\end{eg}
+
+\begin{eg}{}{}\\
+Let $X,Y$ be spaces. There is an evident inclusion map $X\vee Y\to X\times Y$. We can ask for its homotopy pushout with the terminal map $X\vee Y\to\ast$. But $X\vee Y\to X\times Y$ is a closed inclusion and so is a cofibration (Refer to section 2.4 of \cite{MC}). Therefore the homotopy pushout is precisely the cofiber of this map, which is the quotient $X\wedge Y=\frac{X\times Y}{X\vee Y}$. 
+\end{eg}
+
+\begin{prp}{}{}\\
+Suppose that the following is a commutative diagram of spaces:  
+ \\~\\ \adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{X_1} & {X_3} & {X_2} \\
+	{Z_1} & {Z_3} & {Z_2} \\
+	{Y_1} & {Y_3} & {Y_2}
+	\arrow["{h_1}", from=1-1, to=1-2]
+	\arrow["{f_1}"', from=1-1, to=2-1]
+	\arrow["{f_3}"', from=1-2, to=2-2]
+	\arrow["{h_2}"', from=1-3, to=1-2]
+	\arrow["{f_2}", from=1-3, to=2-3]
+	\arrow["{l_1}", from=2-1, to=2-2]
+	\arrow["{l_2}"', from=2-3, to=2-2]
+	\arrow["{g_1}", from=3-1, to=2-1]
+	\arrow["{k_1}"', from=3-1, to=3-2]
+	\arrow["{g_3}", from=3-2, to=2-2]
+	\arrow["{g_2}"', from=3-3, to=2-3]
+	\arrow["{k_2}", from=3-3, to=3-2]
+\end{tikzcd}} \\~\\
+Let $R_i$ be the homotopy pullback of the $i$th row, let $C_i$ be the homotopy pullback of the $i$th column. Then there is a homeomorphism $$\text{holim}(R_1\rightarrow R_3\leftarrow R_2)\cong\text{holim}(C_1\rightarrow C_3\leftarrow C_2)$$ 
+\begin{proof}
+Using the definition of the homotopy pullback we have $$\text{holim}(C_1\rightarrow C_3\leftarrow C_2)=\left\{((x_1,\alpha_1,y_1),\Gamma,(x_2,\alpha_2,y_2))\in C_1\times\text{Map}(I,C_3)\times C_2\;\bigg{|}\;\substack{\Gamma(0)=(f_1(x_1),l_1\circ\alpha_1,g_1(y_1))\\\Gamma(1)=(f_2(x_2),l_2\circ\alpha_2,g_2(y_2))}\right\}$$ Notice that the data of $\Gamma$ is equivalent to a homotopy $\Gamma:I\times I\to Z_3$, from $\Gamma(0,-):l_1\circ\alpha_1$ to $\Gamma(1,-):l_2\circ\alpha_2$. Similarly, we have $$\text{holim}(R_1\rightarrow R_3\leftarrow R_2)=\left\{((x_1,\beta_X,x_2),\Gamma,(y_1,\beta_Y,y_2))\in R_1\times\text{Map}(I,R_3)\times R_2\;\bigg{|}\;\substack{\Gamma(0)=(h_1(x_1),f_3\circ\beta_X,h_2(x_2))\\\Gamma(1)=(k_1(y_1),g_3\circ\beta_Y,k_2(y_2))}\right\}$$ and again the data of $\Gamma$ is equivalent to a homotopy $I\times I\to Z_3$, from $f_3\circ\beta_X$ to $g_3\circ\beta_Y$. Then the map $\text{holim}(C_1\rightarrow C_3\leftarrow C_2)\to\text{holim}(R_1\rightarrow R_3\leftarrow R_2)$ defined by $$((x_1,\alpha_1,y_1),\Gamma,(x_2,\alpha_2,y_2))\mapsto((x_1,\Gamma(-,0),x_2),\Gamma,(y_1,\Gamma(-,1),y_2))$$ gives the desired homeomorphism. 
+\end{proof}
+\end{prp}
+
+The dual of the above is also true. Namely, if we have a commutative diagram of spaces:  
+ \\~\\ \adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{X_1} & {X_3} & {X_2} \\
+	{Z_1} & {Z_3} & {Z_2} \\
+	{Y_1} & {Y_3} & {Y_3}
+	\arrow[from=1-2, to=1-1]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=2-1, to=1-1]
+	\arrow[from=2-1, to=3-1]
+	\arrow[from=2-2, to=1-2]
+	\arrow[from=2-2, to=2-1]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-2, to=3-2]
+	\arrow[from=2-3, to=1-3]
+	\arrow[from=2-3, to=3-3]
+	\arrow[from=3-2, to=3-1]
+	\arrow[from=3-2, to=3-3]
+\end{tikzcd}} \\~\\
+Then the homotopy pushout of the homotopy pushout of the rows is homeomorphic to the homotopy pushout of the homotopy pushout of the columns. Using this we can show the following: 
+
+\begin{eg}{}{}\\
+Let $X,Y,Z,W$ be pointed spaces. Let $f:X\to Y$ and $g:X\to Z$ be maps. Then there is a homeomorphism $$W\wedge\text{hocolim}(Y\leftarrow X\rightarrow Z)\cong\text{holim}(W\wedge Y\leftarrow W\wedge X\rightarrow W\wedge Z)$$ To prove this, notice that there is a homeomorphism $$\text{holim}(W\times Y\leftarrow W\times X\rightarrow W\times Z)\cong W\times\text{hocolim}(Y\leftarrow X\rightarrow Z)$$ given by the identity map. 
+
+We can also show that wedge sums commute with homotopy pushouts. To see this, consider the following diagram: \\~\\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
+	W & W & W \\
+	\ast & \ast & \ast \\
+	Y & X & Z
+	\arrow[from=1-2, to=1-1]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=2-1, to=1-1]
+	\arrow[from=2-1, to=3-1]
+	\arrow[from=2-2, to=1-2]
+	\arrow[from=2-2, to=2-1]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-2, to=3-2]
+	\arrow[from=2-3, to=1-3]
+	\arrow[from=2-3, to=3-3]
+	\arrow[from=3-2, to=3-1]
+	\arrow[from=3-2, to=3-3]
+\end{tikzcd}}\\~\\
+For each column, its homotopy pushout is precisely the wedge of $W$ and the corresponding space because the initial map $\ast\to W$ is a cofibration. Therefore the homotopy pushout of the homotopy pushout is the homotopy pushout of wedge sums. On the other hand, the homotopy pushout of the first row is $W$, the homotopy pushout of the second row is $\ast$ hence the homotopy pushout of the homotopy pushout of the rows is given by $W\vee\text{hocolim}(Y\leftarrow X\rightarrow Z)$. 
+
+Then consider the commutative diagram: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{W\times Y} & {W\times X} & {W\times Z} \\
+	{W\vee Y} & {W\vee X} & {W\vee Z} \\
+	\ast & \ast & \ast
+	\arrow[from=1-2, to=1-1]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=2-1, to=1-1]
+	\arrow[from=2-1, to=3-1]
+	\arrow[from=2-2, to=1-2]
+	\arrow[from=2-2, to=2-1]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-2, to=3-2]
+	\arrow[from=2-3, to=1-3]
+	\arrow[from=2-3, to=3-3]
+	\arrow[from=3-2, to=3-1]
+	\arrow[from=3-2, to=3-3]
+\end{tikzcd}}\\~\\
+where the top vertical arrows are inclusions. The homotopy pushout of each column is precisely the corresponding smash product by \ref{eg:Smash}. The homotopy pushout of the homotopy pushout of the rows is given by $$\text{hocolim}(W\times\text{hocolim}(Y\leftarrow X\rightarrow Z)\leftarrow W\vee\text{hocolim}(Y\leftarrow X\rightarrow Z)\rightarrow\ast)$$ Therefore we have homeomorphisms 
+\begin{align*}
+W\wedge\text{hocolim}(Y\leftarrow X\rightarrow Z)&\cong\text{hocolim}(W\times\text{hocolim}(Y\leftarrow X\rightarrow Z)\leftarrow W\vee\text{hocolim}(Y\leftarrow X\rightarrow Z)\rightarrow\ast)\\
+&\cong\text{hocolim}(W\wedge Y\leftarrow W\wedge X\rightarrow W\wedge Z)
+\end{align*}
+\end{eg}
+
+By taking $W=S^1$, we also deduce that suspension commutes with taking standard homotopy pushouts. 
+
+Recall that ordinary pullbacks are not well-suited for studying homotopy invariant concepts. The following theorem shows that homotopy pullbacks remedies the situation. 
+
+\begin{prp}{}{}\\
+Suppose that we have a commutative diagram of spaces  
+ \\~\\ \adjustbox{scale=1.0,center}{\begin{tikzcd}
+	X & Z & Y \\
+	{X'} & {Z'} & {Y'}
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["{e_X}"', from=1-1, to=2-1]
+	\arrow["{e_Z}"', from=1-2, to=2-2]
+	\arrow["g"', from=1-3, to=1-2]
+	\arrow["{e_Y}", from=1-3, to=2-3]
+	\arrow["{f'}"', from=2-1, to=2-2]
+	\arrow["{g'}", from=2-3, to=2-2]
+\end{tikzcd}} \\~\\
+in $\bold{Top}$. Define the map $$\phi_{X,Z,Y}^{X',Z',Y'}:\text{holim}(X\overset{f}{\rightarrow}Z\overset{g}{\leftarrow}Y)\to\text{holim}(X'\overset{f'}{\rightarrow}Z'\overset{g'}{\leftarrow}Y')$$ by the formula $(x,\gamma,y)\mapsto(e_X(x),e_Z\circ\gamma,e_Y(y))$. If each $e_X,e_Y,e_Z$ are homotopy equivalences, then $\phi$ is a homotopy equivalence. 
+\begin{proof}
+Consider the following commutative diagram:  
+ \\~\\ \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	X & Z & Y \\
 	X & {Z'} & Y \\
 	{X'} & {Z'} & {Y'}
@@ -766,8 +945,8 @@ We first prove the case for homotopy equivalence. Consider the following commuta
 	\arrow["{e_Y}", from=2-3, to=3-3]
 	\arrow["{f'}"', from=3-1, to=3-2]
 	\arrow["{g'}", from=3-3, to=3-2]
-\end{tikzcd}}\\~\\
-We prove that the homotopy pullback of the first row is homotopy equivalent to that of the second, and we prove that the homotopy pullback of the second row is homotopy equivalent to that of the third. \\~\\
+\end{tikzcd}} \\~\\
+We prove that the homotopy pullback of the first row is homotopy equivalent to that of the second, and we prove that the homotopy pullback of the second row is homotopy equivalent to that of the third.  
 
 Since $e_Z$ is a homotopy equivalence, we can find a homotopy inverse $k$ for $e_Z$ and a homotopy $H:Z\times I\to Z$ such that $H(-,0)=\text{id}_Z$ and $H(-,1)=k\circ e_Z$. Define a map $$\rho:\text{holim}(X\overset{f}{\rightarrow}Z'\overset{g}{\leftarrow}Y)\to\text{holim}(X\overset{e_Z\circ f}{\rightarrow}Z\overset{e_Z\circ g}{\leftarrow}Y)$$ by the formula $$(x,\gamma',y)\mapsto(x,H(f(x),-)\ast k(\gamma'(-))\ast\overline{H(g(y),-)}:I\to Z,y)$$ where $\ast$ denotes concatenation of paths. The path concatenation is well defined because we have that $H(f(x),1)=(k\circ e_Z\circ f)(x)=(k\circ\gamma')(0)$ and $k(\gamma'(1))=k(e_Z(g(y)))=H(g(y),1)$. This is well defined on the homotopy pullback because we have that 
 \begin{itemize}
@@ -781,88 +960,185 @@ I claim that this map is the homotopy inverse to the map $\phi=\phi_{X,Y,Z}^{X,Y
 \end{align*}
 Now I claim that the middle path is homotopic to $\gamma$. For the first component of the concatenation, the path $H(f(x),t):I\to Z$ can be contracted to $H(f(x),0)=f(x)=\gamma(0)$ so you can homotope the traversal along $H(f(x),-)$ to the single point $f(x)=\gamma(0)$. For the third component of the concatenation, this is similar so we can homotope the traversal of $\overline{H(g(y),-)}$ to the single point $g(y)=\gamma(1)$. The middle part of the path is homotopic to $\gamma$ because $k\circ e_Z$ is homotopic to $\text{id}_Z$. Thus we conclude. 
 \end{proof}
-\end{thm}
+\end{prp}
 
-Dually, we define the notion of standard homotopy pushouts. 
+We note that the above is still true if we replace homotopy equivalences by weak equivalences. Then the induced map between standard homotopy pushouts is a weak equivalence. This is given in \cite{CHT}. 
 
-\begin{defn}{The Standard Homotopy Pushout}{} Let $X,Y,Z\in\bold{CGWH}$ be spaces. Let $f:Z\to X$ and $g:Z\to Y$ be maps. Define the standard homotopy pushout of the diagram to be the quotient space $$\text{hocolim}(X\overset{f}{\leftarrow}Z\overset{g}{\rightarrow}Y)=\frac{X\amalg(Z\times I)\amalg Y}{\sim}$$ where $\sim$ is the equivalence relation generated by $f(z)\sim (z,0)$ and $g(z)\sim(z,1)$ for $z\in Z$. 
-\end{defn}
+\subsection{Homotopy Pushout and Pullback Squares}
+Recall that we want our new pushout to be a homotopy invariant, not a homeomorphic invariant. Any homeomorphic spaces has one unique way of writing it down set theoretically up to bijection of the underlying set and the topology, but homotopy equivalent spaces are not determined by its set theoretic representation. 
 
-TBA: Mimic the univ property up to homotopy
-
-\begin{defn}{The Canonical Map of Homotopy Pushouts}{} Let $X,Y,Z\in\bold{CGWH}$ be spaces. Let $f:Z\to X$ and $g:Z\to Y$ be maps. Define the canonical map of the homotopy pushout of the diagram to be the map $$s:\text{hocolim}(X\overset{f}{\leftarrow}Z\overset{g}{\rightarrow}Y)\to\colim(X\overset{f}{\leftarrow}Z\overset{g}{\rightarrow}Y)$$ given by the formula $$u\mapsto\begin{cases}
-u & \text{ if }u\in X\\
-f(z)=g(z) & \text{ if }u=(z,t)\in Z\times I\\
-u & \text{ if }u\in Y
-\end{cases}$$
-\end{defn}
-
-\begin{thm}{The Gluing Lemma}{} Suppose that we have a commutative diagram of spaces \\~\\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	X & Z & Y \\
-	{X'} & {Z'} & {Y'}
-	\arrow["f"', from=1-2, to=1-1]
-	\arrow["{e_X}"', from=1-1, to=2-1]
-	\arrow["{e_Z}"', from=1-2, to=2-2]
-	\arrow["g", from=1-2, to=1-3]
-	\arrow["{e_Y}", from=1-3, to=2-3]
-	\arrow["{f'}", from=2-2, to=2-1]
-	\arrow["{g'}"', from=2-2, to=2-3]
-\end{tikzcd}}\\~\\
-in $\bold{CGWH}$. If each $e_X,e_Y,e_Z$ are (homotopy) weak equivalences, then the induced map $$\text{hocolim}(X\overset{f}{\leftarrow}Z\overset{g}{\rightarrow}Y)\to\text{hocolim}(X'\overset{f'}{\leftarrow}Z'\overset{g'}{\rightarrow}Y')$$ defined by the formula $$u\mapsto\begin{cases}
-e_X(u) & \text{ if }u\in X\\
-(e_Z(v),t) & \text{ if }u=(v,t)\in Z\times I\\
-e_Y(u) & \text{ if }u\in Y
-\end{cases}$$ is a (homotopy) weak equivalence. 
-\end{thm}
-
-\subsection{Homotopy Pullbacks and Pushout Squares}
-\begin{defn}{Homotopy Commutative Squares}{} Let $W,X,Y,Z\in\bold{CGWH}$ be spaces such that there is a (not necessarily commutative) diagram \\~\\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
+\begin{defn}{Homotopy Commutative Square}{}\\
+Let $W,X,Y,Z\in\bold{Top}$ be spaces such that the following is (not necessarily commutative) diagram:  
+ \\~\\ \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	W & Y \\
 	X & Z
-	\arrow[from=1-1, to=1-2]
-	\arrow[from=1-1, to=2-1]
-	\arrow[from=1-2, to=2-2]
-	\arrow[from=2-1, to=2-2]
-\end{tikzcd}}\\~\\
-We say that the diagram is homotopy commutative if there exists a homotopy $H$ from $W\to X\to Z$ to $W\to Y\to Z$. 
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["g", from=1-1, to=2-1]
+	\arrow["h", from=1-2, to=2-2]
+	\arrow["k", from=2-1, to=2-2]
+\end{tikzcd}} \\~\\
+We say that the square is homotopy commutative if there exists homotopy from $h\circ f$ to $k\circ g$. 
 \end{defn}
 
-Notice that hidden from the square is the data of a homotopy. This is different from the commutative diagrams that we are used to. 
+Since homotopy is an equivalent relation on maps we see that the existence of a homotopy from $k\circ g$ to $h\circ f$ also gives us a homotopy commutative square. 
 
-\begin{defn}{Homotopy Pullback Squares}{} Let $W,X,Y,Z\in\bold{CGWH}$ be spaces such that there is a (not necessarily commutative) diagram \\~\\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
+\begin{eg}{}{}\\
+Consider the following square:  
+ \\~\\ \adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\text{holim}(X\rightarrow Z\leftarrow Y) & Y \\
+	X & Z
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["g", from=1-1, to=2-1]
+	\arrow["h", from=1-2, to=2-2]
+	\arrow["k", from=2-1, to=2-2]
+\end{tikzcd}} \\~\\
+where the arrows from the homotopy pullback is given by projections. The diagram is not commutative because going through the two possible compositions only give points in $Z$ that are connected by a path. However, it is homotopy commutative if we consider the homotopy $H:\text{holim}(X\rightarrow Z\leftarrow Y)\times I\to Z$ defined by $$H((x,\gamma,y),t)=\gamma(t)$$ The situation is dual with the standard homotopy pushout. 
+\end{eg}
+
+In particular, a commutative square is also homotopy commutative since we can take the constant homotopy between the two maps. 
+
+\begin{defn}{Homotopy Pushout Square}{}\\
+Let $W,X,Y,Z\in\bold{Top}$ be spaces such that there is a homotopy commutative diagram  
+ \\~\\ \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	W & Y \\
 	X & Z
-	\arrow[from=1-1, to=1-2]
-	\arrow[from=1-1, to=2-1]
-	\arrow[from=1-2, to=2-2]
-	\arrow[from=2-1, to=2-2]
-\end{tikzcd}}\\~\\
+	\arrow["g", from=1-1, to=1-2]
+	\arrow["f", from=1-1, to=2-1]
+	\arrow["k", from=1-2, to=2-2]
+	\arrow["h", from=2-1, to=2-2]
+\end{tikzcd}} \\~\\
+whose homotopy from $h\circ f$ to $k\circ g$ is witnessed by $H:W\times I\to Z$. Define the map $\alpha:\text{hocolim}(X\leftarrow W\rightarrow Y)\to Z$ by the formula $$\alpha(u)=\begin{cases}
+h(u) & \text{ if }u\in X\\
+k(u) & \text{ if }u\in Y\\
+H(w,t) & \text{ if }u=(w,t)\in W\times I
+\end{cases}$$ (Notice that it is well defined since $H(w,0)=h(f(w))$ and $H(W,1)=k(g(y))$). 
 \begin{itemize}
-\item We say that the diagram is a homotopy pullback if the map $$\alpha:W\to\lim(X\overset{f}{\rightarrow}Z\overset{g}{\leftarrow}Y)\overset{c}{\longrightarrow}\text{holim}(X\overset{f}{\rightarrow}Z\overset{g}{\leftarrow}Y)$$ is a weak equivalence. 
-\item We say that the diagram is $k$-cartesian if $\alpha$ is $k$-connected. 
+\item We say that the square is a homotopy pushout square if $\alpha$ is a weak equivalence. 
+\item We say that the diagram is $k$-cocartesian if $\alpha$ is $k$-connected. 
 \end{itemize}
 \end{defn}
 
-\begin{defn}{Homotopy Pushout Squares}{} Let $W,X,Y,Z\in\bold{CGWH}$ be spaces such that there is a (not necessarily commutative) diagram \\~\\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
+The idea is similar to standard pushouts in the sense that if we have a commutative square  
+ \\~\\ \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	W & Y \\
 	X & Z
 	\arrow[from=1-1, to=1-2]
 	\arrow[from=1-1, to=2-1]
 	\arrow[from=1-2, to=2-2]
 	\arrow[from=2-1, to=2-2]
-\end{tikzcd}}\\~\\
+\end{tikzcd}} \\~\\
+then by the universal property of pushouts one would obtain a comparison map $W\to\lim(X\rightarrow Z\leftarrow Y)$. When this is a homeomorphism we call $W$ a pushout of the diagram. Similarly we define homotopy pullback squares dually. 
+
+\begin{defn}{Homotopy Pullback Square}{}Let $W,X,Y,Z\in\bold{Top}$ be spaces such that there is a homotopy commutative diagram  
+ \\~\\ \adjustbox{scale=1.0,center}{\begin{tikzcd}
+	W & Y \\
+	X & Z
+	\arrow["g", from=1-1, to=1-2]
+	\arrow["f", from=1-1, to=2-1]
+	\arrow["k", from=1-2, to=2-2]
+	\arrow["h", from=2-1, to=2-2]
+\end{tikzcd}} \\~\\
+whose homotopy from $h\circ f$ to $k\circ g$ is witnessed by $H:W\times I\to Z$. Let $\beta:W\to\text{holim}(X\rightarrow Z\leftarrow Y)$ be the map defined by $$\beta(w)=(f(w),H(w,-),g(y))$$ (notice that the map is well defined since $H(w,0)=h(f(w))$ and $H(w,1)=k(g(y))$). 
 \begin{itemize}
-\item We say that the square is a homotopy pushout square if the map $$\beta:\text{hocolim}(X\overset{f}{\leftarrow}W\overset{g}{\rightarrow}Y)\overset{s}{\longrightarrow}\colim(X\overset{f}{\leftarrow}W\overset{g}{\rightarrow}Y)\to Z$$ is a weak equivalence. 
-\item We say that the diagram is $k$-cocartesian if $\beta$ is $k$-connected. 
+\item We say that the diagram is a homotopy pullback if the $\beta$ is a weak equivalence. 
+\item We say that the diagram is $k$-cartesian if $\beta$ is $k$-connected. 
 \end{itemize}
 \end{defn}
 
-\begin{prp}{}{} Consider the following (not necessarily commutative) square \\~\\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
+In the two definitions, I considered homotopy commutative square to be homotopy pushouts and homotopy pullbacks by considering the existence of a weak equivalence. One may ask to enforce the map to be a homotopy equivalence instead. While \cite{CHT} only requires the map is a weak equivalence, \cite{IHT} and \cite{MCHT} require them to be homotopy equivalences. Because every homotopy equivalence is a weak equivalence, using merely weak equivalences allows for a wider class of spaces to represent the same homotopy pushout or pullback. However the biggest drawback is that weak equivalences are not invertible in general, unless in specific examples such as CW complexes, in which case there is no difference between specifying the map to be a weak equivalence or a homotopy equivalence. 
+
+Suppose the following is a commutative square in $\bold{Top}$:  
+ \\~\\ \adjustbox{scale=1.0,center}{\begin{tikzcd}
+	W & Y \\
+	X & Z
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}} \\~\\
+Notice that the map $\alpha$ factors through the limit because we are taking the homotopy recording this homotopy commutative square to be the constant homotopy. The same is true for the comparison map for homotopy pullbacks. 
+
+\cite{CHT} only compares homotopy pushouts / pullbacks with commutative squares and so defines a square to homotopy pushout / pullback if the comparison map is a weak equivalence. However the notion is quite limiting since the simplest examples fail to be a homotopy pushout square. For instance, the square  
+ \\~\\ \adjustbox{scale=1.0,center}{\begin{tikzcd}
+	W & Y \\
+	X & {\text{hocolim}(X\leftarrow W\rightarrow Y)}
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}} \\~\\
+is not even an honest commutative square. 
+
+\begin{prp}{}{}\\
+Let the following be a pullback square:  
+ \\~\\ \adjustbox{scale=1.0,center}{\begin{tikzcd}
+	W & Y \\
+	X & Z
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}} \\~\\
+If one of $X\to Z$ or $Y\to Z$ is a fibration, then the square is a homotopy pullback square. 
+\begin{proof}
+By \ref{prp:FibRecog}, if one of $X\to Z$ or $Y\to Z$ is a fibration, then the canonical map from the limit to the homotopy limit is a homotopy equivalence. Hence we obtain a weak equivalence $W\cong\lim(X\rightarrow Z\leftarrow Y)\to\text{holim}(X\rightarrow Z\leftarrow Y)$. 
+\end{proof}
+\end{prp}
+
+The following proposition shows that recognizing homotopy pullback squares can be done through other factorizations of maps into weak equivalences and fibrations. The theorem can be found in section 13.3 of \cite{MCL}. The following proof is original. 
+
+\begin{prp}{}{}\\
+Let $W,X,Y,Z\in\bold{Top}$ be spaces such that there is a homotopy commutative diagram  
+ \\~\\ \adjustbox{scale=1.0,center}{\begin{tikzcd}
+	W & Y \\
+	X & Z
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow["g", from=1-2, to=2-2]
+	\arrow["f", from=2-1, to=2-2]
+\end{tikzcd}} \\~\\
+Then the square is a homotopy pullback square if and only if for any factorization of $Y\to Z$ into a weak equivalence $Y\to M$ and a fibration $M\to Z$, the induced map $$W\to\lim(X\rightarrow Z\leftarrow M)$$ is a weak equivalence. 
+\begin{proof}
+Further factorize $Y\to M$ into a weak equivalence $Y\to E$ and fibration $E\to M$ so that we have a acyclic cofibration $Y\to E$ and a fibration $E\to Z$. This is possible by section 2 of \cite{TBER}, which in turn cites \cite{NC}. Then notice that we have the following commutative diagram:  
+ \\~\\ \adjustbox{scale=1.0,center}{\begin{tikzcd}
+	Y & {P_g} \\
+	E & Z
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}} \\~\\
+because they are both factorizations of $Y\to Z$, the diagram is commutative. Since $Y\to E$ is an acyclic cofibration and $P_g\to Z$ is a fibration, there exists a lift $E\to P_g$ making the above diagram commute by \ref{prp:Lift}. Since $Y\to P_g$ and $Y\to E$ are weak equivalences, $E\to P_g$ is also a weak equivalence by the two out of three property in \ref{prp:2o3}. Consider the following diagram: 
+ \\~\\ \adjustbox{scale=1.0,center}{\begin{tikzcd}
+	W && Y \\
+	& {\lim(P_f\rightarrow Z\leftarrow E)} & E \\
+	& {\lim(P_f\rightarrow Z\leftarrow P)} & {P_g} \\
+	X & {P_f} & Z
+	\arrow[from=1-1, to=1-3]
+	\arrow[from=1-1, to=2-2]
+	\arrow[bend right=10, from=1-1, to=3-2]
+	\arrow[from=1-1, to=4-1]
+	\arrow[from=1-3, to=2-3]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-2, to=3-2]
+	\arrow[from=2-3, to=3-3]
+	\arrow[from=3-2, to=3-3]
+	\arrow[from=3-2, to=4-2]
+	\arrow[from=3-3, to=4-3]
+	\arrow[from=4-1, to=4-2]
+	\arrow[from=4-2, to=4-3]
+\end{tikzcd}} \\~\\
+where the maps from $W$ to the limits are induced by the universal property of pullbacks, and so the triangle with $W$ and the two limits is a commutative diagram. By \ref{prp:WeakLims}, $\lim(P_f\rightarrow Z\leftarrow E)\to\lim(P_f\rightarrow Z\leftarrow P_g)$ is a weak equivalence. By the two out of three property \ref{prp:2o3}, $W\to\lim(P_f\to Z\leftarrow P_g)\cong\text{holim}(X\rightarrow Z\leftarrow Y)$ is a weak equivalence if and only if $W\to\lim(P_f\to Z\leftarrow E)$ is a weak equivalence.  
+
+Finally, notice that since $Y\to E\to M$ is a factorization of the map $Y\to M$, we know that $E\to M$ is a weak equivalence by the two out of three property \ref{prp:2o3}. By \ref{prp:WeakLims} we know that $\lim(P_f\rightarrow Z\leftarrow E)\to\lim(P_f\rightarrow Z\leftarrow M)$ is a weak equivalence. Therefore by the two out of three property \ref{prp:2o3}, $W\to\lim(P_f\rightarrow Z\leftarrow E)$ is a weak equivalence if and only if $W\to\lim(P_f\rightarrow Z\leftarrow M)$ is a weak equivalence. This shows that $W\to\text{holim}(X\rightarrow Z\leftarrow Y)$ is a weak equivalence if and only if $W\to\lim(P_f\rightarrow Z\leftarrow M)$ is a weak equivalence, proving our claim. 
+\end{proof}
+\end{prp}
+
+The following proposition is a generalization of the one given in \cite{CHT} since it deals with homotopy commutative squares instead of strictly commutative squares. The proof is inspired by that in section 13.3 of \cite{MCL}
+
+\begin{prp}{}{}\\
+Consider the following homotopy commutative square:  
+ \\~\\ \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	{X_1} & {X_2} & {X_3} \\
 	{Y_1} & {Y_2} & {Y_3}
 	\arrow[from=1-1, to=1-2]
@@ -872,12 +1148,33 @@ Notice that hidden from the square is the data of a homotopy. This is different 
 	\arrow[from=1-3, to=2-3]
 	\arrow[from=2-1, to=2-2]
 	\arrow[from=2-2, to=2-3]
-\end{tikzcd}}\\~\\
-in $\bold{CGWH}$. Let the right square be a homotopy pullback square. Then the left square is a homotopy pullback if and only if the rectangle is a homotopy pullback square. (6.4.4 Arkhowitz)
+\end{tikzcd}} \\~\\
+in $\bold{Top}$. Let the right square be a homotopy pullback square. Then the left square is a homotopy pullback if and only if the rectangle is a homotopy pullback square. 
+\begin{proof}
+Factorize $X_3\to Y_3$ into a weak equivalence $X_3\to P$ and a fibration $P\to Y_3$ where $P$ is the mapping path space of the map $X_3\to Y_3$. We then obtain the following commutative diagram:  
+ \\~\\ \adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{X_1} & {X_2} & {X_3} \\
+	{\lim(Y_1\rightarrow Y_3\leftarrow P)} & {\lim(Y_2\rightarrow Y_3\leftarrow P)} & P \\
+	{Y_1} & {Y_2} & {Y_3}
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow["\simeq", from=1-3, to=2-3]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-1, to=3-1]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-2, to=3-2]
+	\arrow["{\text{fib}}", from=2-3, to=3-3]
+	\arrow[from=3-1, to=3-2]
+	\arrow[from=3-2, to=3-3]
+\end{tikzcd}} \\~\\
+where the two vertical maps on the top left is induced by the canonical map of the homotopy pullback square. We are given that $X_2\to\lim(Y_2\rightarrow Y_3\leftarrow P)$ is a weak equivalence. By the pasting law of pullback squares \ref{prp:Pasting1}, we know that the bottom left square is a pullback square. Since $P\to Y_3$ is a fibration and the bottom right square is a pullback square, the middle lower vertical map is a fibration by \ref{prp:PullPFib}. 
+
+Notice that the map $X_2\to Y_2$ is factored into a weak equivalence $X_2\to\lim(Y_2\rightarrow Y_3\leftarrow P)$ followed by a fibration $\lim(Y_2\rightarrow Y_3\leftarrow P)\to Y_2$. Moreover by the pasting law, the bottom left square is a pullback. Therefore the left square in the original diagram is a homotopy pullback square if and only if $X_1\to\lim(Y_1\rightarrow Y_3\leftarrow P)$ is a weak equivalence by \ref{prp:AnyFac}. But also the same map is a weak equivalence if and only if the outer rectangle is a homotopy pullback square by definition. Hence we conclude.
+\end{proof}
 \end{prp}
 
-\begin{prp}{}{} Consider the following (not necessarily commutative) square \\~\\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
+The dual version for homotopy pushouts is also true. Namely, if the following is homotopy commutative: 
+ \\~\\ \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	{X_1} & {X_2} & {X_3} \\
 	{Y_1} & {Y_2} & {Y_3}
 	\arrow[from=1-1, to=1-2]
@@ -887,150 +1184,185 @@ in $\bold{CGWH}$. Let the right square be a homotopy pullback square. Then the l
 	\arrow[from=1-3, to=2-3]
 	\arrow[from=2-1, to=2-2]
 	\arrow[from=2-2, to=2-3]
-\end{tikzcd}}\\~\\
-in $\bold{CGWH}$. Let the right square be a homotopy pullback square. Then the left square is a homotopy pullback if and only if the rectangle is a homotopy pullback square. (6.4.4 Arkhowitz)
-\end{prp}
+\end{tikzcd}} \\~\\
+Assume that the left square is a homotopy pushout square, then the right square is a homotopy pushout square if and only if the left square is a homotopy pushout square. A proof in the case where the diagram is strictly commutative can be found in proposition 3.7.26 of \cite{CHT}. In the proof of \ref{thm:BMT} we will use the strictly commutative version. 
 
-\begin{prp}{}{} Let $W,X,Y,Z\in\bold{CGWH}$ be spaces such that there is a (not necessarily commutative) diagram \\~\\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
+\begin{prp}{}{}\\
+Let $W,X,Y,Z\in\bold{Top}$ be spaces such that there is a homotopy commutative diagram  
+ \\~\\ \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	W & Y \\
 	X & Z
 	\arrow[from=1-1, to=1-2]
 	\arrow[from=1-1, to=2-1]
 	\arrow[from=1-2, to=2-2]
-	\arrow[from=2-1, to=2-2]
-\end{tikzcd}}\\~\\
+	\arrow["f", from=2-1, to=2-2]
+\end{tikzcd}} \\~\\
 Then the following are true. 
 \begin{itemize}
 \item If the square is a homotopy pullback, and $Y\to Z$ is a weak equivalence, then $W\to X$ is a weak equivalence. 
 \item If $Y\to Z$ and $W\to X$ are weak equivalence, then the square is a homotopy pullback. 
-\end{itemize}
+\end{itemize} 
+\begin{proof}
+The important square to consider is the following pullback square:  
+ \\~\\ \adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\text{holim}(X\rightarrow Z\leftarrow Y) & Y \\
+	P_f & Z
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}} \\~\\
+Since $Y\to Z$ is a weak equivalence and $P_f\to Z$ is a fibration, \ref{prp:PullFibPWeak} implies that $\text{holim}(X\rightarrow Z\leftarrow Y)\to P_f$ is a weak equivalence. Since this map is given by the composition $\text{holim}(X\rightarrow Z\leftarrow Y)\to X\to P_f$ and $X\to P_f$ is a weak equivalence, the two out of three property \ref{prp:2o3} gives that $\text{holim}(X\rightarrow Z\leftarrow Y)\to X$ is a weak equivalence. Since we have a weak equivalence $W\to\text{holim}(X\rightarrow Z\leftarrow Y)$, we again apply the two out of three property \ref{prp:2o3} so that the composition $W\to X$ is a weak equivalence.  
+
+Conversely, if $Y\to Z$ and $W\to X$ are weak equivalence, then the same reasoning shows that $\text{holim}(X\rightarrow Z\leftarrow Y)\to P_f$ is a weak equivalence and hence $\text{holim}(X\rightarrow Z\leftarrow Y)\to X$ is a weak equivalence by two out of three \ref{prp:2o3}. Since $W\to X$ is also a weak equivalence, by two out of three \ref{prp:2o3} we conclude that $W\to\text{holim}(X\rightarrow Z\leftarrow Y)$ is a weak equivalence and so the square in question is a homotopy pullback.
+\end{proof}
 \end{prp}
 
-\subsection{Relation to (Co)Fibrations}
-\begin{prp}{}{} Let $X,Y,Z\in\bold{CGWH}$ be spaces. Let $f:X\to Z$ and $g:Y\to Z$ be maps. Then the following spaces are homeomorphic to $$\text{holim}(X\overset{f}{\rightarrow}Z\overset{g}{\leftarrow}Y)$$ via the canonical map. 
-\begin{itemize}
-\item $\lim(P_f\rightarrow Z\overset{g}{\leftarrow}Y)$
-\item $\lim(X\overset{f}{\rightarrow}Z\leftarrow P_g)$
-\item $\lim(P_f\rightarrow Z\leftarrow P_g)$
-\end{itemize}
-\end{prp}
-
-In model theoretic terms: the homotopy pullback can be computed by the standard pullback of fibrant replacements. \\
-
-\begin{prp}{}{} Let $X,Y,Z\in\bold{CGWH}$ be spaces. Let $f:Z\to X$ and $g:Z\to Y$ be maps. Then the following spaces are homeomorphic to $$\text{hocolim}(X\overset{f}{\leftarrow}Z\overset{g}{\rightarrow}Y)$$ via the canonical map. 
-\begin{itemize}
-\item $\colim(M_f\leftarrow Z\rightarrow Y)$
-\item $\colim(X\leftarrow Z\rightarrow M_g)$
-\item $\colim(M_f\leftarrow Z\rightarrow M_g)$
-\end{itemize}
-\end{prp}
-
-When one of the maps $f$ or $g$ is a fibration, then the notion of a pullback coincides with that of homotopy pullback. 
-
-\begin{prp}{}{} Let $X,Y,Z\in\bold{CGWH}$ be spaces. Let $f:X\to Z$ and $g:Y\to Z$ be maps. If $f$ or $g$ is a fibration, then there is a homotopy equivalence $$\lim(X\overset{f}{\rightarrow}Z\overset{g}{\leftarrow}Y)\simeq\text{holim}(X\overset{f}{\rightarrow}Z\overset{g}{\leftarrow}Y)$$ induced by the canonical map. 
-\end{prp}
-
-\begin{prp}{}{} Let $X,Y,Z\in\bold{CGWH}$ be spaces. Let $f:Z\to X$ and $g:Z\to Y$ be maps. If $f$ or $g$ is a cofibration, then there is a homotopy equivalence $$\colim(X\overset{f}{\leftarrow}Z\overset{g}{\rightarrow}Y)\simeq\text{hocolim}(X\overset{f}{\leftarrow}Z\overset{g}{\rightarrow}Y)$$ induced by the canonical map. 
-\end{prp}
-
-Recall that the mapping path space $P_f$ of a map $f:X\to Y$ is defined to be $$P_f=f^\ast(\text{Map}(I,Y))=\{(x,\phi)\subseteq X\times\text{Map}(I,Y)\;|\;f(x)=\pi_0(\phi)=\phi(0)\}$$ we can now prove that $P_f$ is a homotopy invariance. 
-
-\begin{prp}{}{} Let $X,Y\in\bold{CGWH}$ be spaces. Let $f,g:X\to Y$ be maps. If $f$ and $g$ are homotopic, then the following are true. 
-\begin{itemize}
-\item $P_f\simeq P_g$
-\item $M_f\simeq M_g$
-\end{itemize}
-\end{prp}
-
-\subsection{Relation to Homotopy (Co)Fibers}
-\begin{prp}{}{} Let $X,Y\in\bold{CGWH}$ be spaces. Let $f,g:X\to Y$ be maps. If $f$ and $g$ are homotopic, then the following are true. 
-\begin{itemize}
-\item $\text{hofiber}_y(f)\simeq\text{hofiber}_y(g)$ for any $y\in Y$. 
-\item $\text{hocofiber}(f)\simeq\text{hocofiber}(g)$
-\end{itemize}
-\end{prp}
-
-Recall that the fiber of a map $f:X\to Y$ behaves poorly because the fibers are not homeomorphic and not even homotopy equivalent. However, we can now prove that the homotopy fibers are the correct notion of a fiber to study because they are homotopy equivalent. 
-
-\begin{crl}{}{} Let $X,Y\in\bold{CGWH}$ be space. Let $f:X\to Y$ be a map. If $y_1,y_2\in Y$ are path connected, then there is a homotopy equivalence $$\text{hofiber}_{y_1}(f)=\text{hofiber}_{y_2}(f)$$
-\end{crl}
-
-We can we interpret homotopy pullbacks and pushouts using homotopy (co)fibers. 
-
-\begin{prp}{}{} Let $W,X,Y,Z\in\bold{CGWH}$ be spaces such that following is a (not necessarily commutative) square \\~\\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
+The statement dualizers into a version involving homotopy pushout squares: Namely if one has a square: 
+ \\~\\ \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	W & Y \\
 	X & Z
 	\arrow[from=1-1, to=1-2]
 	\arrow[from=1-1, to=2-1]
 	\arrow[from=1-2, to=2-2]
-	\arrow[from=2-1, to=2-2]
-\end{tikzcd}}\\~\\
-Then the following are true. 
-\begin{itemize}
-\item The square is a homotopy pullback if and only if for all $x\in X$, the map $$\text{hofiber}_x(W\to X)\to\text{hofiber}_{f(x)}(Y\to Z)$$ is a weak equivalence. 
-\item The square is $k$-cartesian if and only if for all $x\in X$, the map $$\text{hofiber}_x(W\to X)\to\text{hofiber}_{f(x)}(Y\to Z)$$ is $k$-connected. 
-\end{itemize} 
-\begin{proof}
-Begin with the homotopy pullback square \\~\\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	{\text{holim}(X\rightarrow Z\leftarrow Y)} & Y \\
+	\arrow["f", from=2-1, to=2-2]
+\end{tikzcd}} \\~\\
+and $W\to X$ is a weak equivalence, then the square is a homotopy pushout if and only if $Y\to Z$ is a weak equivalence. The proof of this can be found in \cite{CHT}. 
+
+\begin{prp}{}{}\\
+Let $W,X,Y,Z\in\bold{Top}$ be spaces such that following is a homotopy commutative square  
+ \\~\\ \adjustbox{scale=1.0,center}{\begin{tikzcd}
+	W & Y \\
 	X & Z
 	\arrow[from=1-1, to=1-2]
-	\arrow[from=1-1, to=2-1]
-	\arrow[from=1-2, to=2-2]
-	\arrow[from=2-1, to=2-2]
-\end{tikzcd}}\\~\\
-We know that there is a homotopy pullback square given by \\~\\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	{\text{holim}_y(g)} && Y \\
-	\ast & X & Z
-	\arrow[from=1-1, to=1-3]
-	\arrow[from=1-1, to=2-1]
-	\arrow["g", from=1-3, to=2-3]
-	\arrow[from=2-1, to=2-2]
-	\arrow[from=2-2, to=2-3]
-\end{tikzcd}}\\~\\
-We can view this as a homotopy pullback square where we consider the composition $\text{holim}_y(g)\to\ast\to X$ as one single map. The gives a comparison of a homotopy pullback square with the standard homotopy pullback. Hence we obtain \\~\\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	{\text{holim}_y(g)} & {\text{holim}(X\rightarrow Z\leftarrow Y)} & Y \\
-	\ast & X & Z
-	\arrow[from=1-1, to=1-2]
-	\arrow[from=1-1, to=2-1]
-	\arrow[from=1-2, to=1-3]
-	\arrow[from=1-2, to=2-2]
-	\arrow["g", from=1-3, to=2-3]
-	\arrow[from=2-1, to=2-2]
-	\arrow[from=2-2, to=2-3]
-\end{tikzcd}}\\~\\
-By the above prp, we conclude that the square on the left is a homotopy pullback. By the same method, we can glue two more squares to obtain the diagram: \\~\\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	{\text{holim}_y(\alpha)} & {\text{holim}_y(f)} & W \\
-	\ast & {\text{holim}_y(g)} & {\text{holim}(X\rightarrow Z\leftarrow Y)} & Y \\
+	\arrow["h", from=1-1, to=2-1]
+	\arrow["g", from=1-2, to=2-2]
+	\arrow["f", from=2-1, to=2-2]
+\end{tikzcd}} \\~\\
+The square is a homotopy pullback if and only if for all $x\in X$, the map $$\text{hofib}_x(h)\to\text{hofib}_{f(x)}(g)$$ is a weak equivalence. 
+\begin{proof}
+Consider the following homotopy commutative diagram. 
+ \\~\\ \adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\text{hofib}_{\gamma(f(x))}(\alpha)} & {\text{hofib}_{x}(h)} & W \\
+	\ast & {\text{hofib}_{f(x)}(g)} & {\text{holim}(X\rightarrow Z\leftarrow Y)} & Y \\
 	& \ast & X & Z
 	\arrow[from=1-1, to=1-2]
 	\arrow[from=1-1, to=2-1]
 	\arrow[from=1-2, to=1-3]
-	\arrow["u", from=1-2, to=2-2]
+	\arrow["\beta", from=1-2, to=2-2]
 	\arrow["\alpha", from=1-3, to=2-3]
 	\arrow[from=2-1, to=2-2]
-	\arrow[from=2-2, to=2-3]
+	\arrow["\gamma", from=2-2, to=2-3]
 	\arrow[from=2-2, to=3-2]
 	\arrow[from=2-3, to=2-4]
 	\arrow[from=2-3, to=3-3]
 	\arrow["g", from=2-4, to=3-4]
 	\arrow[from=3-2, to=3-3]
 	\arrow[from=3-3, to=3-4]
-\end{tikzcd}}\\~\\
-If $\alpha$ is a weak equivalence, then since the top wide rectangle is a homotopy pullback we have $\text{holim}_y(\alpha)$ is weakly equivalent to $\ast$. But the top left square is a homotopy pullback hence $\text{holim}_y(f)$ is weakly equivalent to $\text{holim}_y(g)$. Conversely, suppose that $u$ is a weak equivalence. Since the top left square is a homotopy pullback, this implies that $\text{holim}_y(\alpha)$ is weakly contractible for all $y$. In articular it is $n$-connected for all $n$. Then this implies that $\alpha$ is $(n+1)$-connected for all $n$. Hence $\alpha$ is a weak equivalence. 
+\end{tikzcd}} \\~\\
+Notice that by definition, the map $W\to\text{holim}(X\rightarrow Z\leftarrow Y)\to X$ is precisely the map $h$. By repeated application of \ref{prp:Pasting2} we conclude that all four squares above are homtopy pullback squares. 
+
+If $\alpha$ is a weak equivalence, then since the top wide rectangle is a homotopy pullback we have $\text{hofib}_{\gamma(f(x))}(\alpha)$ is weakly equivalent to $\ast$. But the top left square is a homotopy pullback hence $\text{holim}_x(h)$ is weakly equivalent to $\text{holim}_{f(x)}(g)$. Conversely, suppose that $\beta$ is a weak equivalence for all $x$. Since the top left square is a homotopy pullback, this implies that $\text{hofib}_{\gamma(f(x))}(\alpha)$ is weakly contractible for all $x$. In particular it is $n$-connected for all $n$. Then this implies that $\alpha$ is $(n+1)$-connected for all $n$. Hence $\alpha$ is a weak equivalence. 
 \end{proof}
 \end{prp}
 
-\subsection{Connectedness of Homotopy Squares}
+The above proposition is also true if we replace weak equivalence with $k$-cartesian and can be found in \cite{CHT}. 
 
-\pagebreak
-\section{Blakers-Massey Theorem}
+\begin{prp}{}{}\\
+Let $W,X,Y,Z\in\bold{Top}$ be spaces such that there is a homotopy pushout square  
+ \\~\\ \adjustbox{scale=1.0,center}{\begin{tikzcd}
+	W & Y \\
+	X & Z
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}} \\~\\
+Then there exists a pushout square  
+ \\~\\ \adjustbox{scale=1.0,center}{\begin{tikzcd}
+	W' & Y' \\
+	X' & Z'
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}} \\~\\
+such that $W'\to X'$, $W'\to Y'$, $\text{colim}(X'\leftarrow W'\rightarrow Y')\to Z$ are cofibrations, and a map of squares  
+ \\~\\ \adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{W'} && {Y'} \\
+	& W && Y \\
+	{X'} && {Z'} \\
+	& X && Z
+	\arrow[from=1-1, to=1-3]
+	\arrow[from=1-1, to=2-2]
+	\arrow[from=1-1, to=3-1]
+	\arrow[from=1-3, to=2-4]
+	\arrow[from=1-3, to=3-3]
+	\arrow[from=2-2, to=2-4]
+	\arrow[from=2-2, to=4-2]
+	\arrow[from=2-4, to=4-4]
+	\arrow[from=3-1, to=3-3]
+	\arrow[from=3-1, to=4-2]
+	\arrow[from=3-3, to=4-4]
+	\arrow[from=4-2, to=4-4]
+\end{tikzcd}} \\~\\
+where the maps $W'\to W$, $X'\to X$, $Y'\to Y$, $Z'\to Z$ are homotopy equivalences. 
+\begin{proof}
+Take $W'=W$, $Y'$ the mapping cylinder of $W\to Y$ and $X'$ the mapping cylinder of $W\to X$. Take $Z'$ to be the mapping cylinder of $$\text{colim}(M_{W\to X}\leftarrow W\rightarrow M_{W\to Y})\cong\text{holim}(X\leftarrow W\rightarrow Y)\to Z$$ It is clear that $W'\to X'$ and $W'\to Y'$ are cofibrations. Moreover, $\text{colim}(X'\leftarrow W'\rightarrow Y')\to Z'$ is also a cofibration is a same reasoning. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $W,X,Y,Z\in\bold{Top}$ be spaces such that there is a commutative homotopy pullback square  
+ \\~\\ \adjustbox{scale=1.0,center}{\begin{tikzcd}
+	W & Y \\
+	X & Z
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}} \\~\\
+Then the homotopy fiber of the induced map $W\to X\times Y$ is weakly equivalent to $\Omega Z$. Moreover, the fiber sequence as in \ref{thm:FiberSeq} induces a long exact sequence of homotopy groups:
+\\~\\ \adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\cdots & {\pi_{n+1}(Z)} & {\pi_n(W)} & {\pi_n(X)\times\pi_n(Y)} & \cdots & {\pi_0(X)\times\pi_0(Y)}
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+	\arrow[from=1-5, to=1-6]
+\end{tikzcd}} 
+\begin{proof}
+Consider the following commutative diagram:
+\\~\\ \adjustbox{scale=1.0,center}{\begin{tikzcd}
+	X & Z & Y \\
+	X & \ast & Y \\
+	\ast & \ast & \ast
+	\arrow[from=1-1, to=1-2]
+	\arrow["{\text{id}}"', from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=1-3, to=1-2]
+	\arrow["{\text{id}}", from=1-3, to=2-3]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-3, to=2-2]
+	\arrow[from=3-1, to=2-1]
+	\arrow[from=3-1, to=3-2]
+	\arrow[from=3-2, to=2-2]
+	\arrow[from=3-3, to=2-3]
+	\arrow[from=3-3, to=3-2]
+\end{tikzcd}} \\~\\
+Using \ref{eg:Hofib} and \ref{eg:Wedge&Prod}, we see that the homotopy limit of the homotopy limit of the rows is precisely the homotopy fiber of the map $\text{holim}(X\rightarrow Z\leftarrow Y)\to X\times Y$. The homotopy limit of the homotopy limit of the columns is homotopy equivalent to $\text{holim}(\ast\rightarrow Z\leftarrow\ast)\cong\Omega Z$ using \ref{eg:Identity} and \ref{eg:SusLoop}. Now the maps $W\to\text{holim}(X\rightarrow Z\leftarrow Y)\to X,Y$ is precisely the maps $W\to X,Y$ in the original diagram by definition. Therefore we obtain the following commutative diagram: 
+\\~\\ \adjustbox{scale=1.0,center}{\begin{tikzcd}
+	W & {\text{holim}(X\rightarrow Z\leftarrow Y)} \\
+	{X\times Y} & {X\times Y}
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow["{\text{id}}"', from=2-1, to=2-2]
+\end{tikzcd}} \\~\\
+Since the top horizontal arrow is a weak equivalence, we conclude that this square is a homotopy pullback square by \ref{prp:HpullSqPWeak}. Then there is a weak equivalence $$\text{hofib}_{(x,y)}(W\to X\times Y)\to\text{hofib}_{(x,y)}(\text{holim}(X\rightarrow Z\leftarrow Y)\to X\times Y)$$ by \ref{prp:Hpull&Hfib}. Since the latter space is homotopy equivalent to $\Omega Z$, the long exact sequence in \ref{thm:FiberSeq} completes the proof. 
+\end{proof}
+\end{prp}
+
 \subsection{The Blakers-Massey Theorem for Squares}
 The Blakers-Massey theorem is a direct generalization of the homotopy excision theorem. Its proof takes a similar form to the homotopy excision theorem. Let us recall some definitions used. 
 

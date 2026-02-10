@@ -19,13 +19,36 @@
 \tableofcontents
 \pagebreak
 
+\section{Estimation Theory}
+
+
+\pagebreak
 \section{General Methods in Statistical Modeling}
+An overview of statistical modelling. \\
+
+The fundamental problem: We are given a problem. The problem is probed and some data is generated. We would like to understand the problem by statistically analyzing the data. 
+
+We classify the different types of statistical modelling in the following way. 
+\begin{itemize}
+\item Supervised vs Unsupervised: If outputs of the sample data are contained in the data used for modelling, then it is supervised. In this case we aim to find a relation between the variables and the responses of the measurement based on the given data. If it is unsupervised, then we are mainly interested in the relation between the variables themselves or the observations. 
+\item Parametric vs Non-parametric Methods: They both fall under supervised statistical modelling. Parametric methods assume that the relationship between the variable and the responses follow a specific pattern. Non-parametric methods do not assume this. This is a classic trade off between accuracy and efficiency. 
+\item Regression vs Classification Problems: Variables can be classified into quantitative or qualitative. The values of quantitative variables are numeric. Therefore the functions used to model the relationship are mathematical in nature. The techniques belonging to these type of variables are called regressions. In contrast, the values of qualitative variables includes classes or categories (e.g. blood type). Techniques belonging to modelling the relationship between these variables and responses are called classification problems. 
+\end{itemize}
+
+We mainly work with supervised statistical modelling techniques in the rest of the notes. 
+
+
+
+
+
+
 Given a collection of pairs of data $\{(x_i,y_i)\in\R^n\times\R\;|\;i\in I\}$, we would like to ask whether there is a relation between $x_i$ and $y_i$. Formally, we may ask for a simple function $f:\R^n\to\R$ such that $y_i=f(x_i)$ for all $i\in I$. We may then ask how close does the approximation $f$ models the actual relation between $x_i$ and $y_i$. \\
 
 There are three components to the problem. One is to ask for candidates of the function $f$ that describes the relation, the second is to find the best fitting parameters for the function $f$, the third is to measure how accurate the best fitting parameters estimate the relation. 
 
-\subsection{Estimators}
-\begin{defn}{Least Square Estimation}{}
+\subsection{Estimating Model Parameters}
+\begin{defn}{Least Square Estimation}{}\\
+Let $\{(x_i,y_i)\in\R^n\times\R\;|\;1\leq i\leq N\}$ be a collection of pairs of data. Let $\widehat{f}:\R^n\to\R$ be a regression model. Define the least square estimation of $f$ to be $$\text{LSE}(f)=\sum_{i=1}^N(y_i-\widehat{f}(x_i))^2$$
 \end{defn}
 
 \begin{defn}{Maximum Likelihood Estimation}{}
@@ -37,6 +60,18 @@ There are three components to the problem. One is to ask for candidates of the f
 
 \begin{defn}{Alternative Hypothesis}{}
 \end{defn}
+
+\subsection{Evaluating the Accuracy of the Model}
+Concept of loss functions
+
+\begin{defn}{Mean Squared Estimation}{}\\
+Let $\{(x_i,y_i)\in\R^n\times\R\;|\;1\leq i\leq N\}$ be a collection of pairs of data. Let $\widehat{f}:\R^n\to\R$ be a regression model. Suppose that $f$ is the true relation. Define the mean squared estimation of $f$ to be $$\text{MSE}(\widehat{f})=\frac{1}{N}\sum_{i=1}^N(y_i-\widehat{f}(x_i))^2=E[(\widehat{f}-f)^2]$$
+\end{defn}
+
+\begin{thm}{The Bias Variance Trade Off}{}\\
+Let $\{(x_i,y_i)\in\R^n\times\R\;|\;1\leq i\leq N\}$ be a collection of pairs of data. Let $f:\R^n\to\R$ be a regression model. Then we have $$\text{MSE}(\widehat{f})=\text{Var}(\widehat{f})+(E[\widehat{f}]-f)^2$$
+\end{thm}
+
 
 \pagebreak
 \section{Regression Analysis}
@@ -64,6 +99,22 @@ To employ regression analysis, researchers often assume the following are true.
 \subsection{Linear Regression}
 \begin{defn}{Linear Regression Model}{} A linear regression model assumes the relationship between the dependent random variable $Y$ and the independent random variables $X_1,\dots,X_n$ are linear. In other words, there exists $\beta_0,\dots,\beta_n\in\R$ together with an unobserved random variable $\varepsilon$ such that $$Y=\beta_0+\sum_{k=1}^n\beta_kX_k+\varepsilon$$
 \end{defn}
+
+When we have a linear regression model, the least square estimation can be rewritten in terms of matrices. 
+
+\begin{lmm}{}{}\\
+Let $\{(x_i,y_i)\in\R^n\times\R\;|\;1\leq i\leq N\}$ be a collection of pairs of data. Let $f=\sum_{i=1}^N\beta_ix_i+\beta_0$ be a linear regression model. Denote $$X=\begin{pmatrix}
+1 & \cdots & 1\\
+\mid & & \mid\\
+x_1 & \cdots & x_N\\
+\mid & & \mid
+\end{pmatrix}^T\;\;\;\text{ and }\;\;\;Y=\begin{pmatrix}
+y_1 \\ \vdots \\ y_N
+\end{pmatrix}\;\;\;\text{ and }\;\;\;\beta=\begin{pmatrix}
+\beta_0 \\ \vdots \\ \beta_n
+\end{pmatrix}$$
+Then we have $$L(f)=(Y-X\beta)^T(y-X\beta)$$
+\end{lmm}
 
 \subsection{Logistic Regression}
 
