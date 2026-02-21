@@ -32,7 +32,7 @@ References:
 \section{The Categorical Viewpoint}
 Recall that the category of topological spaces $\bold{Top}$ is complete and cocomplete. This means that all kinds of limits and colimits exists in $\bold{Top}$. We have already seen the product space and disjoint union with their universal property as a limit / colimit. There are also more constructs that can be recognized / defined in terms of the universal property. 
 
-\subsection{Different Categories of Spaces}
+\subsection{Categories of Spaces}
 \begin{defn}{The Category of Pointed Topological Spaces}{} Define the category of pointed topological spaces $\bold{Top}_\ast$ to consist of the following data. 
 \begin{itemize}
 \item The objects are a pair $(X,x_0)$ where $X$ is a topological space and $x_0\in X$ is a chosen base point. 
@@ -44,31 +44,38 @@ Recall that the category of topological spaces $\bold{Top}$ is complete and coco
 \begin{prp}{}{} Let $(X,x_0)$ and $(Y,y_0)$ be pointed spaces. Then the product and coproduct of the two spaces in $\bold{Top}_\ast$ are $$(X\times Y,(x_0,y_0))\;\;\;\;\text{ and }\;\;\;\;(X\vee Y,x_0=y_0)$$ respectively. 
 \end{prp}
 
-\begin{defn}{The Category of CW Complexes}{} Define the category of CW complexes $\bold{CW}$ to consist of the following data. 
-\begin{itemize}
-\item The objects are CW complexes. 
-\item For $X$ and $Y$ two CW complexes, the morphisms $$\Hom_{\bold{CW}}(X,Y)=\{f:X\to Y\;|\;f\text{ is continuous}\}$$ are the continuous maps from $X$ to $Y$. 
-\item Composition is defined as the composition of functions. 
-\end{itemize}
-Define similarly the category $\bold{CW}_\ast$ of pointed topological spaces. 
-\end{defn}
-
 \begin{defn}{The Category of Pairs of Spaces}{} Define the category of pairs of topological spaces $\bold{Top}^2$ to consist of the following data. 
 \begin{itemize}
 \item The objects are a pair $(X,A)$ where $X$ is a topological space $A\subseteq X$ is a subspace of $X$. 
 \item For $(X,A)$ and $(Y,B)$ two pointed spaces, the morphisms $$\Hom_{\bold{Top}^2}((X,A),(Y,B))=\{f:X\to Y\;|\;f\text{ is continuous and }f(A)\subseteq B\}$$ are the continuous maps from $X$ to $Y$ such that subspaces are mapped to subspaces. 
 \item Composition is defined as the composition of functions such that subspaces are mapped to subspaces. 
 \end{itemize}
-Define similarly the category $\bold{CW}^2$ of pairs of CW complexes. 
 \end{defn}
 
-\begin{defn}{Homotopy Category of Spaces}{} Define the homotopy category of topological spaces $\bold{hTop}$ to consist of the following data. 
+\begin{defn}{The Set of Homotopy Classes of Maps}{}\\
+Let $X,Y$ be spaces. Define the set of homotopy classes of maps from $X$ to $Y$ to be the quotient $$[X,Y]=\frac{\{f:X\to Y\;|\;f\text{ is continuous }\}}{\sim}$$ where $f\sim g$ if $f$ and $g$ are homotopic. 
+\end{defn}
+
+\begin{defn}{The Homotopy Category of Spaces}{}\\
+Define the homotopy category of topological spaces $\bold{hTop}$ to consist of the following data. 
 \begin{itemize}
 \item The objects are topological spaces. 
-\item For $X$ and $Y$ two spaces, the morphisms $$\Hom_{\bold{CW}}(X,Y)=\{f:X\to Y\;|\;f\text{ is continuous}\}/\sim$$ are the homotopy classes of continuous maps from $X$ to $Y$. 
-\item Composition is defined as the composition of functions. 
+\item For $X$ and $Y$ two spaces, the morphisms $$\Hom_{\bold{hTop}}(X,Y)=[X,Y]$$ are the homotopy classes of continuous maps from $X$ to $Y$. 
+\item Composition is defined by $[g]\circ[f]=[g\circ f]$ for $[f]\in\Hom_{\bold{hTop}}(X,Y)$ and $[g]\in\Hom_{\bold{hTop}}(Y,Z)$. 
 \end{itemize}
-Define similar the homotopy category $\bold{hTop}_\ast$ of pointed topological spaces and pointed homotopy classes of maps. 
+\end{defn}
+
+\begin{defn}{The Set of Pointed Homotopy Classes of Maps}{}\\
+Let $(X,x_0),(Y,y_0)$ be pointed spaces. Define the set of pointed homotopy classes of maps from $(X,x_0)$ to $(Y,y_0)$ to be the quotient $$[(X,x_0),(Y,y_0)]_\ast=\frac{\{f:X\to Y\;|\;f\text{ is continuous and }f(x_0)=y_0\}}{\sim}$$ where $f\sim g$ if $f$ and $g$ are homotopic relative to $x_0$. 
+\end{defn}
+
+\begin{defn}{The Homotopy Category of Pointed Spaces}{}\\
+Define the homotopy category of pointed spaces $\bold{hTop}_\ast$ to consist of the following data. 
+\begin{itemize}
+\item The objects are pointed topological spaces. 
+\item For two pointed spaces $(X,x_0)$ and $(Y,y_0)$, the morphisms $$\Hom_{\bold{hTop}_\ast}((X,x_0),(Y,y_0))=[(X,x_0),(Y,y_0)]_\ast$$ are the pointed homotopy classes of continuous maps from $(X,x_0)$ to $(Y,y_0)$. 
+\item Composition is defined by $[g]\circ[f]=[g\circ f]$ for $[f]\in\Hom_{\bold{hTop}_\ast}((X,x_0),(Y,y_0))$ and $[g]\in\Hom_{\bold{hTop}_\ast}((Y,y_0),(Z,z_0))$. 
+\end{itemize}
 \end{defn}
 
 \subsection{Categorical Constructs in the Category of Spaces}
@@ -104,6 +111,38 @@ The final CW complex $X$ is then obtained by the union with the weak topology. B
 
 \begin{prp}{}{} Let $X,Y$ be spaces with chosen base point $x_0$ and $y_0$ respectively. Then the wedge product $$X\vee Y=X\amalg_fY$$ is an adjunction space with $Z=\{x_0\}$ and map $f:Z\to Y$ defined by $f(x_0)=y_0$. 
 \end{prp}
+
+\begin{defn}{Mapping Cone}{} Let $X,Y$ be spaces. Let $f:X\to Y$ be a map. Define the mapping cone of $f$ to be $$C_f=CX\amalg_fY=\frac{CX\amalg Y}{\sim}$$ where the relation is generated by $(x,0)\sim f(x)$ for $x\in X$, and $CX$ is the unreduced cone of $X$. 
+\end{defn}
+
+\subsection{Categories of CW Complexes}
+\begin{defn}{The Category of CW Complexes}{}\\
+Define the category of CW complexes $\bold{CW}$ to consist of the following data. 
+\begin{itemize}
+\item The objects are CW complexes. 
+\item For $X$ and $Y$ two CW complexes, the morphisms $$\Hom_{\bold{CW}}(X,Y)=\{f:X\to Y\;|\;f\text{ is a cellular map }\}$$ are the continuous maps from $X$ to $Y$. 
+\item Composition is defined as the composition of functions. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{The Category of Pointed CW Complexes}{}\\
+Define the category of CW complexes $\bold{CW}_\ast$ to consist of the following data. 
+\begin{itemize}
+\item The objects are pairs where $(X,x_0)$ where $X$ is a CW complex and $x_0\in X^0$ lies in the zero skeleton. 
+\item For $(X,x_0)$ and $(Y,y_0)$ two pointed CW complexes, the morphisms are given by $$\Hom_{\bold{CW}_\ast}(X,Y)=\{f:X\to Y\;|\;f\text{ is a cellular map and }f(x_0)=y_0\}$$
+\item Composition is defined as the composition of functions. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{The Category of Pairs of CW Complexes}{}\\
+Define the category of pairs of CW complexes $\bold{CW}^2$ to consist of the following data. 
+\begin{itemize}
+\item The objects are pairs $(X,A)$ where $X$ is a CW complex and $A$ is a subcomplex of $X$. 
+\item For $(X,A)$ and $(Y,B)$ two pairs of CW complexes, the morphisms are given by $$\Hom_{\bold{CW}^2}((X,A),(Y,B))=\{f:X\to Y\;|\;f(A)\subseteq B, f\text{ and }f|_A\text{ are a celluar maps }\}$$
+\item Composition is defined as the composition of functions. 
+\end{itemize}
+\end{defn}
+
 
 \pagebreak
 
@@ -2872,82 +2911,174 @@ By the set bijection $[\Sigma^nX,Y]_\ast\cong[X,\Omega^nY]_\ast$, we can endow t
 \end{defn}
 
 \pagebreak
-\section{Relation Between (Co)Homology Theories}
+\section{Homotopy Groups and (Co)Homology Groups}
+\subsection{Weak Equivalences and Homological Isomorphisms}
+\begin{prp}{}{} Let $X,Y$ be spaces and let $f:X\to Y$ be a weak homotopy equivalence. Then $f$ induces isomorphisms $$f_\ast:H_n(X;G)\overset{\cong}{\longrightarrow}H_n(Y;G)\;\;\;\;\text{ and }\;\;\;\;f^\ast:H^n(Y;G)\overset{\cong}{\longrightarrow}H^n(X;G)$$ for any group $G$ and all $n\in\N$. 
+\end{prp}
+
+This theorem shows that the higher homotopy groups is not a weaker invariant than homology and cohomology. Indeed, the theorem states that if the all homotopy groups are isomorphic, then all their (co)homology groups will be isomorphic. 
+
+
+\subsection{The Hurewicz Homomorphism}
+\begin{thm}{Hurewicz's Homomorphism}{} Let $X$ be a path connected space. Then for any $n\in\N$, there is a group homomorphism $$h_n:\pi_n(X)\to H_n(X)$$ called the Hurewicz homomorphism, defined as follows. Let $[u_n]\in H_n(S^n)$ be a canonical generator. Then $h_n([f])=f_\ast(u_n)$. 
+\end{thm}
+
+\begin{thm}{Hurewicz's Theorem}{} Let $X$ be a space. Then the following are true regarding Hurewicz's homomorphism. 
+\begin{itemize}
+\item Let $n\geq 2$. If $X$ is $(n-1)$-connected, then $\widetilde{H}_k(X)=0$ for all $0\leq k<n$. Moreover, the Hurewicz homomorphism $$h_n:\pi_n(X)\to H_n(X)$$ is an isomorphism. Moreover, $h_{n+1}$ is a surjection. 
+\item Let $n=1$, then Hurewicz's homomorphism induces an isomorphism $$\overline{h_1}:\pi_1(X)^\text{ab}\to H_1(X)$$ 
+\end{itemize}
+\end{thm}
+
+\begin{thm}{Relative Hurewicz's Homomorphism}{} Let $(X,A)$ be a pair of spaces. Then for any $n\geq 1$, there is a group homomorphism $$h_n:\pi_n(X,A)\to H_n(X,A)$$ called the relative Hurewicz homomorphism, defined as follows. Let $[u_n]\in H_n(S^n,\partial S^n)$ be a canonical generator. Then $h_n([f])=f_\ast(u_n)$. 
+\end{thm}
+
+\begin{thm}{Relative Hurewicz's Theorem}{} Let $(X,A)$ be a pair of spaces. Let $n\geq 2$. If $X$ and $A$ are path connected and $(X,A)$ is $(n-1)$-connected, then $H_k(X,A)=0$ for all $0\leq k<n$. Moreover, the Hurewicz homomorphism $$h_n:\pi_n(X,A,x_0)\to H_n(X,A)$$ is an isomorphism. 
+\end{thm}
+
+\begin{thm}{Naturality of Hurewicz's Homomorphism}{} Let $(X,x_0)$ and $(Y,y_0)$ be pointed spaces and let $f:(X,x_0)\to(Y,y_0)$ be a map. Then the following diagram is commutative: \\
+\adjustbox{scale=1,center}{\begin{tikzcd}
+	{\pi_k(X,x_0)} & {\pi_k(Y,y_0)} \\
+	{H_k(X)} & {H_k(Y)}
+	\arrow["{\pi_k(f)}", from=1-1, to=1-2]
+	\arrow["{h_k}"', from=1-1, to=2-1]
+	\arrow["{h_k}", from=1-2, to=2-2]
+	\arrow["{f_\ast}"', from=2-1, to=2-2]
+\end{tikzcd}}\\
+where $h$ is the Hurewicz homomorphism. Moreover, a similar diagram is also commutative for the relative Hurewicz homomorphism. 
+\end{thm}
+
+The connection between the homotopy groups and the homology groups begs the question of whether there is a relationship between the homotopy groups and cohomology groups that is not implicit by the relation between homology and cohomology. This is answered in Stable Homotopy Theory, when we introduced Brown's representability theorem. 
+
+\pagebreak
+\section{The Eilenberg-Steenrod Axioms}
 We have seen that the homotopy groups, the homology groups and the cohomology groups all satisfy a functorial property. This means that they can be considered as functors from the category of spaces to the category of some algebraic structures. It is meaningful to study all of them at once, and to compare different versions of homology and cohomology. \\
 
-In general, there are different parameters of the (co)homology theories. 
+In general, there are different parameters for (co)homology theories. 
 \begin{itemize}
-\item Including ``for CW Pairs'' means that the theory is tailored for CW pairs. If we want a general theory for any topological spaces, we must add a new axiom so that weak equivalences (isomorphisms in homotopy groups) gives isomorphisms (in homology groups). This is true for CW complexes but not for arbitrary topological spaces. 
-\item ``Generalized'' means that that dimension axiom is dropped. This enables wilder (co)homology theories such as (co)bordism to appear. ``Ordinary'' means that the dimension axiom is included. In the case that we restrict to CW complexes, this axiom ensures that all (co)homology theories of this type are isomorphic to each other. 
+\item Including ``for CW Pairs'' means that the theory is tailored for CW pairs. If we want a general theory for any topological spaces, we must add a new axiom so that weak equivalences (isomorphisms in homotopy groups) gives isomorphisms in homology groups. This is true for CW complexes but not for arbitrary topological spaces by Whitehead's theorem. 
+\item ``Generalized'' means that the additivity and dimension axioms are dropped. This enables wilder (co)homology theories such as (co)bordism to appear. ``Ordinary'' means that the dimension axiom is included. In the case that we restrict to CW complexes, this axiom ensures that all (co)homology theories of this type are isomorphic to each other. 
 \item ``Reduced'' theories typically throw away the relative context in order to gain more concrete computations. There is a theorem that says that determining a generalized (co)homology theory is the ``same'' determining a reduced theory and vice versa. 
 \end{itemize}
 
-\subsection{The Mapping Cone}
-\begin{defn}{Mapping Cone}{} Let $X,Y$ be spaces. Let $f:X\to Y$ be a map. Define the mapping cone of $f$ to be $$C_f=CX\amalg_fY=\frac{CX\amalg Y}{\sim}$$ where the relation is generated by $(x,0)\sim f(x)$ for $x\in X$, and $CX$ is the unreduced cone of $X$. 
+\subsection{Generalized (Co)Homology Theories for Spaces}
+\begin{defn}{Generalized Homology Theory for Spaces}{}\\
+A generalized homology theory is a collection of functors and natural transformations $$h_n:\bold{Top}^2\to\bold{Ab}\;\;\;\;\text{ and }\;\;\;\;\delta_n:h_n\Rightarrow h_n\circ F$$ for each $n\in\N$, where $F$ is the functor defined by $F(X,A)=(A,\emptyset)$, such that the following are true. 
+\begin{itemize}
+\item Homotopy Invariance: Let $(X,A)$ and $(Y,B)$ be pairs of spaces. If $f\simeq g:(X,A)\to(Y,B)$ are homotopy equivalent maps, then $$h_n(f)=h_n(g):h_n(X,A)\to h_n(Y,B)$$
+\item Exactness: Let $(X,A)$ be a pair of space. Then there exists an exact sequence \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\cdots & {h_{n+1}(X,A)} & {h_n(A,\emptyset)} & {h_n(X,\emptyset)} & {h_n(X,A)} & {h_{n-1}(A,\emptyset)} & \cdots
+	\arrow[from=1-1, to=1-2]
+	\arrow["{\delta_{n+1}}", from=1-2, to=1-3]
+	\arrow["h_n(i)", from=1-3, to=1-4]
+	\arrow["h_n(j)", from=1-4, to=1-5]
+	\arrow["{\delta_n}", from=1-5, to=1-6]
+	\arrow[from=1-6, to=1-7]
+\end{tikzcd}}\\~\\
+where $i:(A,\emptyset)\to(X,\emptyset)$ and $j:(X,\emptyset)\to(X,A)$ are the inclusions maps. 
+\item Excision: Let $(X,A)$ be a pair of space. Let $E\subseteq X$ be a subspace of $X$ such that $\overline{E}\subseteq A^\circ\subseteq X$, then the inlcusion map induces an isomorphism $$h_n(i):h_n(X\setminus E,A\setminus E)\overset{\cong}{\longrightarrow}h_n(X,A)$$ for all $n\in\N$. 
+\item Weak Equivalence: Let $(X,A)$ and $(Y,B)$ be pairs of spaces. If $f:(X,A)\to(Y,B)$ is a weak equivalence, then there are isomorphisms $$h_n(f):h_n(X,A)\overset{\cong}{\longrightarrow}h_n(Y,B)$$ for all $n\in\N$. 
+\end{itemize}
 \end{defn}
 
-\subsection{Reduced Homology Theory}
-In Algebraic Topology 2, we have also encountered the notion of reduced singular homology. This is derived directly from singular homology, where one simply defines reduced singular homology by also considering the augmented chain complex. Such a construction can easily be extended to arbitrary homology theories: Indeed there is no need for a topological argument in the definition of reduced singular homology. \\
+Note that the axiom for weak equivalence is not present in the definition of generalized homology theories for CW complexes. Indeed, we have just shown that weak equivalences between CW complexes are homotopy equivalences. This also shows that this definition really is redundant: 
 
-In fact, this subsection will also prove a unification theorem for the following four homolog theories: 
+\begin{prp}{}{}\\
+Any generalized homology theory on $\bold{Top}^2$ determines and is determined by a generalized homology theory on $\bold{CW}^2$.
+\end{prp}
+
+\begin{defn}{Additive Homology Theory}{}\\
+Let $h_n:\bold{Top}^2\to\bold{Ab}$ be a generalized homology theory. We say that $h_n$ is additive if the following axiom is satisfied. 
 \begin{itemize}
-\item Generalized homology theory for CW complexes
-\item Generalized homology theory for spaces
-\item Reduced homology theory for CW complexes
-\item Reduced homology theory for spaces
+\item Additivity: If $(X,A)=\coprod_{i\in I}(X_i,A_i)$, then the direct sum of the inclusion maps $$\bigoplus_{i\in I}h_n(X_i,A_i)\cong h_n(X,A)$$ is an isomorphism
 \end{itemize}
+\end{defn}
 
-and they can be unified only because of the unnatural condition posed for homology theory for spaces. The axiom of weak equivalences enables the use of CW approximations. 
-
-\begin{defn}{Reduced Homology Theory for CW Complexes}{} A reduced Homology Theory is a collection of functors $$\widetilde{h}_n:\bold{CW}_\ast\to\bold{Ab}$$ that satisfies the following. 
+\begin{defn}{Ordinary Homology Theory}{}\\
+Let $h_n:\bold{Top}^2\to\bold{Ab}$ be a generalized homology theory. We say that $h_n$ is ordinary if there exists an abelian group $A$ such that the following axiom is satisfied. 
 \begin{itemize}
-\item Homotopy Invariance: If $f\simeq g:(X,x_0)\to(Y,y_0)$ then $$\widetilde{h}_n(f)=\widetilde{h}_n(g):\widetilde{h}_n(X,x_0)\to\widetilde{h}_n(Y,y_0)$$
-\item Exactness: If $X$ is a CW-complex and $A\subseteq X$ and $x_0\in A$, then there is a short exact sequence \\
+\item Dimension: $$h_n(\ast)=\begin{cases}
+A & \text{ if } n=0\\
+0 & \text{ otherwise }
+\end{cases}$$
+\end{itemize}
+\end{defn}
+
+\begin{thm}{Eilenberg-Steenrod Uniqueness Theorem}{} Let $T:(h_n,\delta_n)\to(h_n',\delta_n')$ be a natural transformation of generalized homology theories defined on $\bold{CW}^2$ such that $h_n(\ast)\cong h_n'(\ast)$, then $T$ is a natural isomorphism $$(h_n,\delta_n)\cong(h_n',\delta_n')$$
+\end{thm}
+
+\begin{defn}{Generalized Cohomology Theory for Spaces}{}\\
+A generalized cohomology theory is a collection of contravariant functors and natural transformations $$h^n:\bold{Top}^2\to\bold{Ab}\;\;\;\;\text{ and }\;\;\;\;\delta^n:h^n\circ F\Rightarrow h^{n+1}\circ F$$ for each $n\in\N$, where $F$ is the functor defined by $F(X,A)=(A,\emptyset)$, such that the following are true. 
+\begin{itemize}
+\item Homotopy Invariance: Let $(X,A)$ and $(Y,B)$ be pairs of spaces. If $f\simeq g:(X,A)\to(Y,B)$ are homotopy equivalent, then $$h^n(f)=h^n(g):h^n(X,A)\to h^n(Y,B)$$
+\item Exactness: Let $(X,A)$ be a pair of spaces. Then there exists an exact sequence\\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\cdots & {h^{n-1}(A,\emptyset)} & {h^n(X,A)} & {h^n(X,\emptyset)} & {h^n(A,\emptyset)} & {h^{n+1}(A,\emptyset)} & \cdots
+	\arrow[from=1-1, to=1-2]
+	\arrow["{\delta^{n-1}}", from=1-2, to=1-3]
+	\arrow["{h^n(j)}", from=1-3, to=1-4]
+	\arrow["{h^n(i)}", from=1-4, to=1-5]
+	\arrow["{\delta^n}", from=1-5, to=1-6]
+	\arrow[from=1-6, to=1-7]
+\end{tikzcd}}\\~\\
+where $i:(A,\emptyset)\to(X,\emptyset)$ and $j:(X,\emptyset)\to(X,A)$ are the inclusion maps. 
+\item Excision: Let $(X,A)$ be a pair of space. Let $E\subseteq X$ be a subspace of $X$ such that $\overline{E}\subseteq A^\circ\subseteq X$, then the inlcusion map induces an isomorphism $$h^n(i):h^n(X,A)\overset{\cong}{\longrightarrow}h^n(X\setminus E,A\setminus E)$$ for all $n\in\N$. 
+\item Weak Equivalence: Let $(X,A)$ and $(Y,B)$ be pairs of spaces. If $f:(X,A)\to(Y,B)$ is a weak equivalence, then there are isomorphisms $$h^n(f):h^n(Y,B)\overset{\cong}{\longrightarrow}h^n(X,A)$$ for all $n\in\N$. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Additive Cohomology Theories}{}\\
+Let $h_n:\bold{Top}^2\to\bold{Ab}$ be a generalized cohomology theory. We say that $h_n$ is additive if it satisfies the following axiom. 
+\begin{itemize}
+\item Additivity: Denote the inclusion map as $\iota_k:(X_k,A_k)\to\coprod_{k\in I}(X_k,A_k)$. Then the product of the induced maps of inclusions induce an isomorphism $$\prod_{k\in I}(\iota_k)^\ast:h^n\left(\coprod_{k\in I}(X_k,A_k)\right)\overset{\cong}{\longrightarrow}\prod_{k\in I}h^n(X_k,A_k)$$
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{} Let $F$ and $G$ be two generalized cohomology theories for CW pairs. Let $\lambda:F\Rightarrow G$ be a natural transformation such that $$\lambda:F(\ast,\emptyset)\overset{\cong}{\longrightarrow}G(\ast,\emptyset)$$ is an isomorphism for $\ast$ the one-point space. Then $\lambda$ is a natural isomorphism. 
+\end{prp}
+
+\subsection{Reduced (Co)Homology Theory for CW Complexes}
+\begin{defn}{Reduced Homology Theory for CW Complexes}{}\\
+A reduced Homology Theory is a collection of functors $$\widetilde{h}_n:\bold{CW}_\ast\to\bold{Ab}$$ that satisfies the following. 
+\begin{itemize}
+\item Homotopy Invariance: Let $(X,x_0)$ and $(Y,y_0)$ be pointed CW complexes. If $f\simeq g:(X,x_0)\to(Y,y_0)$ are homotopy equivalent, then $$\widetilde{h}_n(f)=\widetilde{h}_n(g):\widetilde{h}_n(X,x_0)\to\widetilde{h}_n(Y,y_0)$$
+\item Exactness: If $(X,x_0)$ is a pointed CW-complex and $(A,x_0)$ is a subcomplex, then there is an exact sequence \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	{\widetilde{h}_n(A,x_0)} & {\widetilde{h}_n(X,x_0)} & {\widetilde{h}_n(X/A,\ast)}
-	\arrow["{\iota_\ast}", from=1-1, to=1-2]
-	\arrow["{p_\ast}", from=1-2, to=1-3]
+	\arrow["{\widetilde{\iota}}", from=1-1, to=1-2]
+	\arrow["{\widetilde{p}}", from=1-2, to=1-3]
 \end{tikzcd}}\\
-where $\iota:A\to X$ is the inclusion and $p:X\to X/A$ is the projection. 
+for each $n\in\N$, where $\iota:A\to X$ is the inclusion and $p:X\to X/A$ is the projection. 
+\item Suspension: Let $(X,x_0)$ be a pointed CW complex. Then the suspension functor induces a natural isomorphism $$\Sigma:\widetilde{h}_n(X,x_0)\overset{\cong}{\longrightarrow}\widetilde{h}_{n+1}(\Sigma X,\ast)$$
+\end{itemize}
+\end{defn}
 
-\item Suspension: There is a natural isomorphism $$\Sigma:\widetilde{h}_n(X,x_0)\overset{\cong}{\longleftrightarrow}\widetilde{h}_{n+1}(\Sigma X,\ast)$$
-
-\item Additivity: If $X=\bigvee_{i\in I}X_i$, then the direct sum of the inclusion maps $$\bigoplus_{i\in I}\widetilde{h}_n(X_i)\cong\widetilde{h}_n(X)$$ is an isomorphism
+\begin{defn}{Additive Reduced Homology Theories}{}\\
+Let $\widetilde{h}_n:\bold{CW}_\ast\to\bold{Ab}$ be a reduced homology theory. We say that $h^n$ is additive if it satisfies the following axiom. 
+\begin{itemize}
+\item Additivity: Let $(X_k,x_k)$ be a collection of CW complexes for $k\in I$. Denote the inclusion map as $\iota_k:(X_k,x_k)\hookrightarrow\bigvee_{i\in I}(X_i,x_i)$. Then there is an isomorphism $$\bigoplus_{i\in I}\widetilde{h}_n(\iota_i):\bigoplus_{i\in I}\widetilde{h}_n(X_i,x_i)\overset{\cong}{\longrightarrow}\widetilde{h}_n\left(\bigvee_{i\in I}(X_i,x_i)\right)$$
 \end{itemize}
 \end{defn}
 
 \begin{lmm}{}{} Let $\widetilde{h}_n:\bold{CW}_\ast\to\bold{Ab}$ be a reduced homology theory. Then $$\widetilde{h}_n(\ast)=0$$
 \end{lmm}
 
-\begin{thm}{}{} Let $h_n:\bold{CW}^2\to\bold{Ab}$ be a generalized homology theory for CW complexes. Define a collection of functors $$\widetilde{h}_n:\bold{CW}_\ast\to\bold{Ab}$$ by $(X,x_0)\mapsto\widetilde{h}_n(X,x_0)=h_n(X,\{x_0\})$. Then  $\widetilde{h}_n$ defines a reduced homology theory for CW complexes. 
-\end{thm}
+\begin{prp}{}{} Let $h_n:\bold{CW}^2\to\bold{Ab}$ be a generalized homology theory for CW complexes. Define a collection of functors $$\widetilde{h}_n:\bold{CW}_\ast\to\bold{Ab}$$ by $(X,x_0)\mapsto\widetilde{h}_n(X,x_0)=h_n(X,\{x_0\})$. Then  $\widetilde{h}_n$ defines a reduced homology theory for CW complexes. 
+\end{prp}
 
-\begin{thm}{}{} Let $\widetilde{h}_n:\bold{CW}_\ast\to\bold{Ab}$ be a reduced homology theory for CW complexes. Define a collection of functors $$\widetilde{h}_n:\bold{CW}^2\to\bold{Ab}$$ by $(X,A)\mapsto\widetilde{h}_n(X/A,\ast=A)$ and a collection of natural transformations $$\delta_n:h_n(X,Y)\to(Y,\emptyset)$$ by ??? Then $h_n$ and $\delta_n$ defines a generalized homology theory for CW complexes. 
-\end{thm}
+\begin{prp}{}{} Let $\widetilde{h}_n:\bold{CW}_\ast\to\bold{Ab}$ be a reduced homology theory for CW complexes. Define a collection of functors $$\widetilde{h}_n:\bold{CW}^2\to\bold{Ab}$$ by $(X,A)\mapsto\widetilde{h}_n(X/A,\ast=A)$ and a collection of natural transformations $$\delta_n:h_n(X,Y)\to(Y,\emptyset)$$ by ??? Then $h_n$ and $\delta_n$ defines a generalized homology theory for CW complexes. 
+\end{prp}
 
-\begin{thm}{}{} Any generalized homology theory for CW complexes determines and is determined by a reduced homology theory for CW complexes. 
-\end{thm}
+\begin{prp}{}{} Any generalized homology theory for CW complexes determines and is determined by a reduced homology theory for CW complexes. 
+\end{prp}
 
-We have now showed that reduced homology theory and generalized homology theory for CW complexes really are the same thing: $$\substack{\text{Reduced Homology Theory}\\\text{for CW Complexes}}\overset{1:1}{\longleftrightarrow}\substack{\text{Generalized Homology Theory}\\\text{for CW Complexes}}$$ Let us now show the same for homology theories for spaces in general and moreover, establish such a relation between spaces and CW complexes. 
-
-\begin{defn}{Reduced Homology Theory for Spaces}{} A reduced Homology Theory for spaces is a collection of functors $$\widetilde{h}_n:\bold{Top}_\ast\to\bold{Ab}$$ that the above axioms (Homotopy Invariance, Exactness, Suspension, Additivity) and the following: 
-\begin{itemize}
-\item Weak Equivalences: If $f:(X,x_0)\to(Y,y_0)$ is a weak equivalence then $$f_\ast:\widetilde{h}_n(X,x_0)\to\widetilde{h}_n(Y,y_0)$$ is an isomorphism for all $n$. 
-\end{itemize}
-\end{defn}
-
-\begin{thm}{}{} Any reduced homology theory for spaces determines and is determined by a reduced homology theory on spaces. 
-\end{thm}
-
-\begin{thm}{}{} Any reduced homology theory for spaces determines and is determined by a generalized homology theory on spaces. 
-\end{thm}
-
-Thus we have showed that under the conditions of all the given axioms of all such homology theories, we really just have the same thing: $$\substack{\text{Generalized  Homology Theory}\\\text{for Spaces}}\overset{1:1}{\longleftrightarrow}\substack{\text{Reduced Homology Theory}\\\text{for Spaces}}\overset{1:1}{\longleftrightarrow}\substack{\text{Reduced Homology Theory}\\\text{for CW Complexes}}\overset{1:1}{\longleftrightarrow}\substack{\text{Generalized Homology Theory}\\\text{for CW Complexes}}$$ We once again note that such a bijection is only possible when we introduce the weak equivalence axiom for homology theories on spaces. Such an axiom in fact restricts the amount of valid homology theories, but it is only through this axiom that we can declare all such homology theories are essentially determined by one another. \\
+Thus we have showed that under the conditions of all the given axioms of all such homology theories, we really just have the same thing: $$\substack{\text{Reduced Homology Theory}\\\text{for CW Complexes}}\rightleftarrows\substack{\text{Generalized Homology Theory}\\\text{for CW Complexes}}\rightleftarrows\substack{\text{Generalized Homology Theory}\\\text{for Spaces}}$$ Note that such a bijection is only possible when we introduce the weak equivalence axiom for homology theories on spaces. Such an axiom in fact restricts the amount of valid homology theories, but it is only through this axiom that we can declare all such homology theories are essentially determined by one another. \\
 
 Some authors indeed does not require the weak equivalence axiom to exist. In such cases the bijection between generalized homology theories and reduced homology theories can be constructed, but there is no passage between homology of CW complexes and homology of spaces in general. 
 
-\subsection{Reduced Cohomology Theories}
-\begin{defn}{Reduced Cohomology Theory for CW Complexes}{} A reduced cohomology theory is a collection of contravariant functors $$h^n:\bold{CW}_\ast\to\bold{Ab}$$, for each $n\in\N$ such that the following are true. 
+\begin{defn}{Reduced Cohomology Theory for CW Complexes}{}\\
+A reduced cohomology theory is a collection of contravariant functors $$h^n:\bold{CW}_\ast\to\bold{Ab}$$,for each $n\in\N$ such that the following are true. 
 \begin{itemize}
 \item Homotopy Invariance: If $f\simeq g:X\to Y$ then $$h^n(f)=h^n(g):h^n(X)\to h^n(Y)$$
 \item Exactness: If $f:A\to X$ is an inclusion of CW complexes, then there is an exact sequence \\
@@ -2965,7 +3096,10 @@ where $i:X\to C_f$ is the inclusion map.
 \begin{lmm}{}{} Let $\widetilde{h}_n:\bold{CW}\to\bold{Ab}$ be a reduced homology theory. Then $$\widetilde{h}_n(\ast)=0$$
 \end{lmm}
 
-TBA: Unreduced = reduced. 
+\subsection{Brown's Representability Theorem}
+\begin{thm}{Brown's Representability Theorem for Singular Cohomology}{}\\
+Let $G$ be an abelian group. Then there is a natural isomorphism $$H^n(-;G)\cong[-,K(G,n)]$$ for each $n\in\N$. 
+\end{thm}
 
 \pagebreak
 \section{The Euler Characteristic}

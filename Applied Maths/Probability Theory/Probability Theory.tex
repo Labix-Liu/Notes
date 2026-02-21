@@ -165,9 +165,9 @@ Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a random var
 
 Recall that $X$ is an $\mF$-measurable function if $X^{-1}(B)\in\mF$ for $B\in\mE$. 
 
-\begin{defn}{Probability Distribution}{}\\
-Let $(\Omega,\mF,\Prj)$ be a probability space. Let $(E,\mE)$ be a measurable space. Let $X:\Omega\to E$ be a measurable function. Define the probability distribution of $X$ to be the pushforward measure $P\circ X^{-1}=P_X:\mE\to[0,1]$ defined by $$P_X(A)=P(X^{-1}(A))$$ for $A\in\mE$. 
-\end{defn}
+\begin{eg}{}{}\\
+Let $\Omega$ be the the sample space of tossing three fair coins. Let $X:\Omega\to\R$ be the number of heads observed. Let $Y:\Omega\to\R$ be the number of tails observed. Then $X$ and $Y$ are identically distributed, but $X\neq Y$. 
+\end{eg}
 
 \begin{defn}{Probability Density Functions and Probability Mass Function}{}\\
 Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a random variable. 
@@ -177,19 +177,30 @@ Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a random var
 \end{itemize}
 \end{defn}
 
-Recall that this means that $f_X$ satisfies the property that $$P_X(A)=\int_A f_X d\mu$$ for any measurable set $A\subseteq\R$. In particular, if $A=\{a\}\subseteq\mF$, then we have $$P_X(a)=f_X(a)$$ The probability distribution function has its input as every measurable subset of $\R$, while the probability density function takes input as individual points of $\R$. They are really the same thing because having its probability be determined on singletons is sufficient to determine the probability of every measurable subset. 
+Recall that this means that $f_X$ satisfies the property that $$P_X(A)=\int_A f_X d\mu$$ for any measurable set $A\subseteq\R$. In particular, if $A=\{a\}\subseteq\mF$, then we have $$f_X(a)=P_X(a)$$ The probability distribution function has its input as every measurable subset of $\R$, while the probability density function takes input as individual points of $\R$. They are really the same thing because having its probability be determined on singletons is sufficient to determine the probability of every measurable subset. 
+
+\begin{prp}{}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $f:X\to\R$ be a function. Then the following are true. 
+\begin{itemize}
+\item $f$ is the probability mass function of a discrete random variable if and only if $f\geq 0$ and $\sum_{x\in X}f_X=1$. 
+\item $f$ is the probability density function of a continuous random variable if and only if $f\geq 0$ and $\int_{-\infty}^\infty f\;dx=1$. 
+\end{itemize}
+\end{prp}
 
 \begin{prp}{}{}\\
 Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a random variable. Let $g:\R\to\R$ be a function. Then the following are true. 
 \begin{itemize}
-\item Suppose that $X$ is a discrete random variable. Then the probability density function of $Y=g\circ X$ is given by $$f_Y(y)=\sum_{x\in g^{-1}(y)}f_X(x)$$
-\item Suppose that $X$ is a continuous random variable. Suppose that $g$ is strictly monotone and differentiable.  Then the probability density function of $Y=g\circ X$ is given by $$f_Y(y)=f_X(g^{-1}(y))\abs{\frac{d}{dy}(g^{-1}(y))}$$ for all $y\in\mathbb{R}$
+\item Suppose that $X$ is a discrete random variable. Then the probability density function of $Y=g\circ X$ is given by $$f_Y(y)=
+\begin{cases}
+\sum_{x\in g^{-1}(y)}f_X(x) & \text{ if }y\in\im(g)\\
+0 & \text{ otherwise }
+\end{cases}$$
+\item Suppose that $X$ is a continuous random variable. Suppose that $g$ is strictly monotone and differentiable.  Then the probability density function of $Y=g\circ X$ is given by $$f_Y(y)=\begin{cases}
+f_X(g^{-1}(y))\abs{\frac{d}{dy}(g^{-1}(y))} & \text{ if }y\in\im(g)\\
+0 & \text{ otherwise }
+\end{cases}$$
 \end{itemize}
 \end{prp}
-
-\begin{defn}{Independent Random Variables}{}\\
-Let $(\Omega,\mF,P)$ be a probability space. Let $(E,\mE)$ be a measurable space. Let $X,Y:\Omega\to E$ be random variables. We say that $X$ and $Y$ are independent if for any $A,B\in\mE$, we have that $X^{-1}(A)$ and $Y^{-1}(B)$ are independent events in $\mF$. 
-\end{defn}
 
 \subsection{Cumulative Density Functions}
 \begin{defn}{Cummulative Distribution Function}{}\\
@@ -216,6 +227,28 @@ Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a random var
 \begin{prp}{}{}\\
 Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a random variable. Then we have $$P(\{\omega\in\Omega\;|\;a<X(\omega)\leq b\})=F_X(b)-F_X(a)$$
 \end{prp}
+
+\subsection{Independent Variables and Identical Distributions}
+\begin{defn}{Independent Random Variables}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $(E,\mE)$ be a measurable space. Let $X,Y:\Omega\to E$ be random variables. We say that $X$ and $Y$ are independent if for any $A,B\in\mE$, we have that $X^{-1}(A)$ and $Y^{-1}(B)$ are independent events in $\mF$. 
+\end{defn}
+
+\begin{defn}{Probability Distribution}{}\\
+Let $(\Omega,\mF,\Prj)$ be a probability space. Let $(E,\mE)$ be a measurable space. Let $X:\Omega\to E$ be a measurable function. Define the probability distribution of $X$ to be the pushforward measure $P\circ X^{-1}=P_X:\mE\to[0,1]$ defined by $$P_X(A)=P(X^{-1}(A))$$ for $A\in\mE$. 
+\end{defn}
+
+\begin{defn}{Identical Distributions}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random variables. We say that $X$ and $Y$ are identically distributions if $P_X=P_Y$. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random variables. Then the following are equivalent. 
+\begin{itemize}
+\item $X$ and $Y$ are identically distributed. 
+\item $f_X=f_Y$. 
+\item $F_X=F_Y$. 
+\end{itemize}
+\end{lmm}
 
 \subsection{Examples of Discrete Random Variables}
 \begin{defn}{Discrete Uniform Distribution}{}\\
@@ -275,30 +308,10 @@ Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a random var
 \begin{defn}{Gamma Distribution}{}
 \end{defn}
 
-\subsection{Multiple Random Variables}
-\begin{defn}{Joint Probability Density and Mass Functions}{}\\
-Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random variables. 
-\begin{itemize}
-\item Suppose that $X$ and $Y$ are discrete random variables. Define the joint probability mass function of $X$ and $Y$ to be the Radon-Nikodym derivative $$f_X=\frac{(X,Y)_\ast P}{d\#}$$ where $\#$ is the counting measure on $\R^2$. 
-\item Suppose that $X$ and $Y$ are continuous random variables. Define the joint probability density function of $X$ and $Y$ to be the Radon-Nikodym derivative $$f_X=\frac{(X,Y)_\ast P}{d\mu^2}$$ where $\mu^2$ is the Lebesgue measure on $\R^2$. 
-\end{itemize}
-\end{defn}
-
-As with the case of pmfs with one random variable, we have $$f_X(x,y)=P(X=x,Y=y)$$ for all $x,y\in\R$. 
-
 \subsection{Algebra of Random Variables}
 \begin{prp}{}{}\\
 Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random variables. Then we have $$f_{X+Y}(z)=\int_{-\infty}^\infty f_X(w)f_Y(z-w)\;dw$$
 \end{prp}
-
-\subsection{Conditional Probability Density and Mass Functions}
-\begin{defn}{Conditional Probability Density and Mass Functions}{}\\
-Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random variables. Suppose that $f_Y(y)>0$ for some $y\in\Omega$. 
-\begin{itemize}
-\item Suppose that $X,Y$ are discrete. Define the conditional probability mass function of $X$ given $Y=y$ to be the function $$f_{X|Y}(x,y)=\frac{f_{X,Y}(x,y)}{f_X(x)}$$
-\item Suppose that $X,Y$ are continuous. Define the conditional probability density function of $X$ given $Y=y$ to be the function $$f_{X|Y}(x,y)=\frac{f_{X,Y}(x,y)}{f_X(x)}$$
-\end{itemize}
-\end{defn}
 
 \pagebreak
 \section{Expectation and Variance}
@@ -308,7 +321,7 @@ Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a random var
 \end{defn}
 
 \begin{lmm}{}{}\\
-Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a random variable. Then we have $$E[X]=\int_\R xf_X(x)\;dx$$
+Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a random variable. Then we have $$E[X]=\int_{-\infty}^\infty xf_X(x)\;dx$$
 \end{lmm}
 
 \begin{eg}{}{}\\
@@ -339,9 +352,6 @@ E[X]&=\int_0^\infty\frac{1}{\lambda}xe^{-x/\lambda}\;dx\\
 \end{proof}
 \end{eg}
 
-\begin{prp}{Law of the Unconscious Staticians}{} Let $(\Omega,\mathcal{F},P)$ be a probability space. Let $X_1,\dots,X_n:\Omega\to\R$ be random variables. Let $g:\R\to\R$ be a function. Then we have $$E[g\circ(X_1,\dots,X_n)]=\int_{\R^n}g(x_1,\dots,x_n)f_{(X_1,\dots,X_n)}(x_1,\dots,x_n)\;dx_1\cdots dx_n$$
-\end{prp}
-
 \begin{prp}{}{} Let $(\Omega,\mathcal{F},P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random variables. Then the following are true. 
 \begin{itemize}
 \item If $X,Y$ are random variables and $a,b\in\R$, then $$E[aX+bY]=aE[X]+bE[Y]$$
@@ -371,40 +381,33 @@ Let $(\Omega,\mathcal{F},P)$ be a probability space. Let $X:\Omega\to\R$ be a ra
 \end{itemize}
 \end{lmm}
 
-\begin{prp}{}{} Suppose that $X_1,\dots,X_n$ are independent variables with finite variance. Then $$\text{Var}\left(\sum_{k=1}^nX_k\right)=\sum_{k=1}^n\text{Var}(X_k)$$
-\end{prp}
-
-\begin{defn}{Covariance}{} Let $X,Y$ be two random variables. The covariance of $X,Y$ is defined as $$\text{Cov}(X,Y)=E[(X-E(X))(Y-E(Y))]$$
+\begin{defn}{Covariance}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random variables. Define the covariance of $X$ and $Y$ to be $$\text{Cov}(X,Y)=E[(X-E(X))(Y-E(Y))]$$
 \end{defn}
 
-\begin{prp}{}{} Suppose that $X,Y$ are random variables. 
+\begin{lmm}{}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a random variable. Then we have $$\text{Cov}(X,X)=\text{Var}(X)$$
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random variables. Then the following are true. 
 \begin{itemize}
-\item $\text{Cov}(X,Y)=\text{Cov}(Y,X)$
-\item $\text{Cov}(X,X)=\text{Var}(X)$
-\item $\text{Cov}(X,Y)=E(XY)-E(X)E(Y)$
-\item If $X,Y$ are independent, $\text{Cov}(X,Y)=0$
-\item $\text{Cov}(aX+bY,Z)=a\text{Cov}(X,Z)+b\text{Cov}(Y,Z)$
+\item $\text{Cov}(X,Y)=\text{Cov}(Y,X)$. 
+\item $\text{Cov}(X,Y)=E[XY]-E[X]E[Y]$. 
+\item If $X,Y$ are independent, $\text{Cov}(X,Y)=0$. 
 \end{itemize}
 \end{prp}
 
-\begin{prp}{Variance of Sums}{} For random variables $X_1,\dots,X_n$, we have $$\text{Var}\left(\sum_{i=1}^{n}X_i\right)=\sum_{i=1}^n\text{Var}\left(X_i\right)+2\sum_{1\leq i<j\leq n}\text{Cov}\left(X_i,X_j\right)$$
+\begin{lmm}{}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y,Z:\Omega\to\R$ be random variables. Then we have $$\text{Cov}(aX+bY,Z)=a\text{Cov}(X,Z)+b\text{Cov}(Y,Z)$$ for any $a,b\in\R$. 
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X_1,\dots,X_n:\Omega\to\R$ be random variables. Then we have $$\text{Var}\left(\sum_{i=1}^{n}X_i\right)=\sum_{i=1}^n\text{Var}\left(X_i\right)+2\sum_{1\leq i<j\leq n}\text{Cov}\left(X_i,X_j\right)$$
 \end{prp}
 
-\begin{thm}{}{} Given two random variables $X$ and $Y$, we have $$\abs{\text{Cov}(X,Y)}\leq\sqrt{\text{Var}(X)\text{Var}(Y)}$$
-\end{thm}
-
-\begin{thm}{Correlation Coefficient}{} The correlation coefficient between two random variables $X$ and $Y$ is given by $$\rho(X,Y)=\frac{\text{Cov}(X,Y)}{\sqrt{\text{Var}(X)\text{Var}(Y)}}$$
-\end{thm}
-
-\begin{prp}{}{} Let $X$ and $Y$ be random variables. We have $$-1\leq\rho(X,Y)\leq 1$$ Moreover, for any $a,b,c,d\in\mathbb{R}$ with $a,c>0$, we have $$\rho(aX+b,cY+d)=\rho(X,Y)$$
-\end{prp}
-
-\begin{prp}{}{} Let $X$, $Y$ be random variables. 
-\begin{itemize}
-\item $\rho(X,X)=1$
-\item $\rho(X,-X)=-1$
-\item $X,Y$ are uncorrelated if $\rho(X,Y)=0$
-\end{itemize}
+\begin{prp}{}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random variables. Then we have $$\abs{\text{Cov}(X,Y)}\leq\sqrt{\text{Var}(X)\text{Var}(Y)}$$
 \end{prp}
 
 \subsection{Moments and Moment Generating Functions}
@@ -438,6 +441,44 @@ Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a random var
 \begin{prp}{}{} Let $X$, $Y$ be two random variables. Assume that the moment generating functions of $X$, $Y$ exists and are finite on an interval of the form $(-\epsilon,\epsilon)$. Assume further that $M_X(t)=M_Y(t)$ for all $t\in(-\epsilon,\epsilon)$. Then $X$, $Y$ have the same distribution. 
 \end{prp}
 
+\pagebreak
+\section{Multivariate Probability Theory}
+\subsection{Multiple Random Variables}
+\begin{defn}{Joint Probability Density and Mass Functions}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random variables. 
+\begin{itemize}
+\item Suppose that $X$ and $Y$ are discrete random variables. Define the joint probability mass function of $X$ and $Y$ to be the Radon-Nikodym derivative $$f_{X,Y}=\frac{d(X,Y)_\ast P}{d\#}$$ where $\#$ is the counting measure on $\R^2$. 
+\item Suppose that $X$ and $Y$ are continuous random variables. Define the joint probability density function of $X$ and $Y$ to be the Radon-Nikodym derivative $$f_{X,Y}=\frac{d(X,Y)_\ast P}{d\mu^2}$$ where $\mu^2$ is the Lebesgue measure on $\R^2$. 
+\end{itemize}
+\end{defn}
+
+As with the case of pmfs with one random variable, we have $$f_{X,Y}(x,y)=P(X=x,Y=y)$$ for all $x,y\in\R$. 
+
+\begin{lmm}{}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random variables. Then the following are equivalent. 
+\begin{itemize}
+\item $X$ and $Y$ are independent. 
+\item $f_{X,Y}=f_Xf_Y$. 
+\item There exists functions $g,h:\R\to\R$ such that $f_{X,Y}=gh$. 
+\end{itemize}
+\end{lmm}
+
+\begin{prp}{Law of the Unconscious Staticians}{} Let $(\Omega,\mathcal{F},P)$ be a probability space. Let $X_1,\dots,X_n:\Omega\to\R$ be random variables. Let $g:\R^n\to\R$ be a function. Then we have $$E[g\circ(X_1,\dots,X_n)]=\int_{\R^n}g(x_1,\dots,x_n)f_{(X_1,\dots,X_n)}(x_1,\dots,x_n)\;dx_1\cdots dx_n$$
+\end{prp}
+
+\subsection{The Expectation and Variance Vector}
+
+\pagebreak
+\section{Conditional Probability Theory}
+\subsection{Conditional Probability Density and Mass Functions}
+\begin{defn}{Conditional Probability Density and Mass Functions}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random variables. Suppose that $f_Y(y)>0$ for some $y\in\Omega$. 
+\begin{itemize}
+\item Suppose that $X,Y$ are discrete. Define the conditional probability mass function of $X$ given $Y=y$ to be the function $$f_{X|Y}(x,y)=\frac{f_{X,Y}(x,y)}{f_X(x)}$$
+\item Suppose that $X,Y$ are continuous. Define the conditional probability density function of $X$ given $Y=y$ to be the function $$f_{X|Y}(x,y)=\frac{f_{X,Y}(x,y)}{f_X(x)}$$
+\end{itemize}
+\end{defn}
+
 \subsection{Conditional Expectations}
 \begin{defn}{Conditional Expectations on Subalgebras}{} Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a random variable. Let $\mH$ be a $\sigma$-subalgebra of $\mF$. Define $E[X\;|\;\mH]:\Omega\to\R$ to be a random variable such that the following are true. 
 \begin{itemize}
@@ -459,23 +500,8 @@ Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a random var
 \begin{defn}{Conditional Expectation on Random Variables}{} Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random variables. Define the conditional expectation of $X$ on $Y$ to be $$E[X\;|\;Y]=E[X\;|\;\sigma(Y)]$$
 \end{defn}
 
-\begin{defn}{Conditional Density}{} Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random variables. Define the conditional density of $X$ on the event $\{\omega\in\Omega\;|\;Y(\omega)=y\}$ by $$f_{X\;|\;Y}(x,y)=\frac{f_{X,Y}(x,y)}{f_Y(y)}$$
-\end{defn}
-
-\begin{lmm}{}{} Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random variables. Then we have $$E[X\;|\;Y](\omega)=E[X\;|\;Y=Y(\omega)]=\int_{-\infty}^\infty xf_{X\;|\;Y}(x,Y(\omega))\;dx$$
+\begin{lmm}{}{} Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random variables. Then we have $$E[X\;|\;Y](\omega)=E[X\;|\;Y=Y(\omega)]=\int_{-\infty}^\infty xf_{X|Y}(x,Y(\omega))\;dx$$
 \end{lmm}
-
-\pagebreak
-\section{}
-\subsection{}
-\begin{defn}{The Space of Random Variables}{}\\
-Let $(\Omega,\mathcal{F},P)$ be a probability space. Define the $\R$-vector space of (real-valued) random variables to be the set $$L^2(\Omega)=\{X:\Omega\to\R\;|\;X\text{ is a random variable and }E[X^2]<\infty\}$$ together with pointwise addition and scalar multiplication. 
-\end{defn}
-
-\begin{prp}{}{}\\
-Let $(\Omega,\mathcal{F},P)$ be a probability space. Then $L^2(\Omega)$ is a Hilbert space with innner product given by $$\langle X,Y\rangle=E[XY]$$
-\end{prp}
-
 
 \pagebreak
 \section{Convergence of Random Variables}
@@ -514,139 +540,15 @@ Let $(\Omega,\mathcal{F},P)$ be a probability space. Then $L^2(\Omega)$ is a Hil
 \end{thm}
 
 \pagebreak
-\section{}
+\section{Functional Analysis of Random Variables}
 \subsection{}
-\begin{defn}{Random Samples}{}\\
-Let $(\Omega,\mF,P)$ be a probability space. Let $X_1,\dots,X_n:\Omega\to\R$ be random variables. We say that they are a random sample of size $n$ from the population $f$ if the following are true. 
-\begin{itemize}
-\item $X_1,\dots,X_n$ are pairwise independent. 
-\item The probability density (mass) function is given by $f_{X_i}=f_X$. 
-\end{itemize}
+\begin{defn}{The Space of Random Variables}{}\\
+Let $(\Omega,\mathcal{F},P)$ be a probability space. Define the $\R$-vector space of (real-valued) random variables to be the set $$L^2(\Omega)=\{X:\Omega\to\R\;|\;X\text{ is a random variable and }E[X^2]<\infty\}$$ together with pointwise addition and scalar multiplication. 
 \end{defn}
 
-The fact that their probability density functions are equal imply that the random variables are identically distributed. 
-
-\begin{defn}{Statistics}{}\\
-Let $(\Omega,\mF,P)$ be a probability space. Let $X_1,\dots,X_n:\Omega\to\R$ be a random sample. A statistic of the random sample is a random variable $T(X_1,\dots,X_n)$ for some function $T:\R^n\to\R$. 
-\end{defn}
-
-\begin{defn}{Sample Mean}{}\\
-Let $(\Omega,\mF,P)$ be a probability space. Let $X_1,\dots,X_n:\Omega\to\R$ be a random sample. Define the sample mean of the random sample to be the statistic defined by $$\overline{X}=\frac{1}{n}\sum_{i=1}^nX_i$$
-\end{defn}
-
-\begin{defn}{Sample Variance}{}\\
-Let $(\Omega,\mF,P)$ be a probability space. Let $X_1,\dots,X_n:\Omega\to\R$ be a random sample. Define the sample variance of the random sample to be the statistic defined by $$S^2=\frac{1}{n-1}\sum_{i=1}^n(X_i-\overline{X})^2$$
-\end{defn}
-
-\begin{defn}{Sample Standard Deviation}{}\\
-Let $(\Omega,\mF,P)$ be a probability space. Let $X_1,\dots,X_n:\Omega\to\R$ be a random sample. Define the sample standard deviation of the random sample to be the statistic defined by $$S=\sqrt{S^2}$$
-\end{defn}
-
-\pagebreak
-\section{Principles of Data Reduction}
-\subsection{Sufficiency Principle}
-Suppose that $(\Omega,\mF,P)$ is a probability space. Often we do not know what $P$ is actually like. To probe the properties of $P$, we may use statistics $T(X_1,\dots,X_n)$ on the probability space. \\
-
-A sufficient statistic $T$ is a statistic where, informally speaking, all information about $P$ must come from $T$. 
-
-\begin{defn}{Sufficient Statistics}{}\\
-Let $(\Omega,\mF,P_\theta)$ be a collection of probability spaces for $\theta\in I$. Let $X_1,\dots,X_n:\Omega\to\R$ be a random sample. Let $T$ be a statistic of the random sample. We say that $T$ is sufficient if $$P_{\theta_1}(X^{-1}(A)\;|\;T^{-1}(t))=P_{\theta_2}(X^{-1}(A)\;|\;T^{-1}(t))$$ for all $\theta_1,\theta_2\in I$ and all $A\in\mF$ and all $t\in\R$. 
-\end{defn}
-
-\begin{lmm}{}{}\\
-Let $(\Omega,\mF,P_\theta)$ be a collection of probability spaces for $\theta\in I$. Let $X_1,\dots,X_n:\Omega\to\R$ be a random sample. Let $T$ be a statistic of the random sample. If the ratio $$\frac{f_{X_1,\dots,X_n}(x_1,\dots,x_n)}{f_{T(X_1,\dots,X_n)}(x_1,\dots,x_n)}$$ does not depend on $\theta$, then $T$ is a sufficient statistics. 
-\begin{proof}\\
-Firstly notice that if $t\notin\im(T)$ then the probability is $0$. Hence we only need to consider the case that $T(X_1,\dots,X_n)=T(x_1,\dots,x_n)$. Denote $\bold{X}=(X_1,\dots,X_n)$ and $\bold{x}=(x_1,\dots,x_n)$. We have that 
-\begin{align*}
-P_\theta(\bold{X}=\bold{x}\;|\;T(\bold{X})=T(\bold{x}))&=\frac{P_\theta((\bold{X}=\bold{x})\cap(T(\bold{X})=T(\bold{x})))}{P_\theta(T(\bold{X})=T(\bold{x}))}\\
-&=\frac{P_\theta(\bold{X}=\bold{x})}{P_\theta(T(\bold{X})=T(\bold{x}))}\\
-&=\frac{f_{X_1,\dots,X_n}(x_1,\dots,x_n)}{f_{T(X_1,\dots,X_n)}(x_1,\dots,x_n)}
-\end{align*}
-so if the ratio does not depend on $\theta$, we are done. 
-\end{proof}
-\end{lmm}
-
-\begin{eg}{}{}\\
-Let $\Omega,\mF,P)$ be a probability space. Let $X_1,\dots,X_n:\Omega\to\R$ be a random sample of Bernoulli distribution with parameter $\theta\in(0,1)$ (Note that for each $\theta$, $P_{X_i}=f_{X_i}$ is different since the formula for $f_{X_i}$ depends on $\theta$). Then $T=\sum_{i=1}^nX_i$ is a sufficient statistic for $\theta$. 
-\begin{proof}\\
-Let $\theta\in\R$. We use the above lemma. We have
-\begin{align*}
-P_\theta(\bold{X}=\bold{x}\;|\;T(\bold{X})=T(\bold{x}))&=\frac{f_{X_1,\dots,X_n}(x_1,\dots,x_n)}{f_{T(X_1,\dots,X_n)}(x_1,\dots,x_n)}\\
-&=\frac{\prod_{i=1}^nf_{X_i}(x_i)}{f_{X_1+\dots+X_n}(x_1,\dots,x_n)}\\
-&=\frac{\prod_{i=1}^n\theta^{x_i}(1-\theta)^{1-x_i}}{\binom{n}{\sum_{i=1}^nx_i}\theta^{\sum_{i=1}^nx_i}(1-\theta)^{n-\sum_{i=1}^nx_i}}\\
-&=\frac{\theta^{\sum_{i=1}^nx_i}(1-\theta)^{\sum_{i=1}^nx_i}}{\binom{n}{\sum_{i=1}^nx_i}\theta^{\sum_{i=1}^nx_i}(1-\theta)^{n-\sum_{i=1}^nx_i}}\\
-&=\frac{1}{\binom{n}{\sum_{i=1}^nx_i}}
-\end{align*}
-\end{proof}
-\end{eg}
-
-\begin{thm}{Neyman-Fisher Factorization Theorem}{}\\
-Let $(\Omega,\mF,P_\theta)$ be a collection of probability spaces for $\theta\in I$. Let $X_1,\dots,X_n:\Omega\to\R$ be a random sample. Let $T$ be a statistic of the random sample. Let $f_\theta$ be the probability density function of $P_\theta$. Then $T$ is sufficient if and only if there exists probability density functions $g_\theta$ for each $\theta$ such that $$f_\theta(x)=g_\theta(T(x))h(x)$$ for all $x\in\Omega$ and all $\theta\in I$. 
-\end{thm}
-
-\begin{defn}{Minimal Sufficient Statistics}{}\\
-Let $(\Omega,\mF,P_\theta)$ be a collection of probability spaces for $\theta\in I$. Let $X_1,\dots,X_n:\Omega\to\R$ be a random sample. Let $T$ be a sufficient statistic of the random sample. We say that $T$ is minimal if for any other sufficient statistic $T'$, we have $T$ is a function of $T'$. 
-\end{defn}
-
-\begin{defn}{Ancillary Statistics}{}
-\end{defn}
-
-\begin{defn}{Complete Statistics}{}
-\end{defn}
-
-\begin{thm}{Basu's Theorem}{}
-\end{thm}
-
-\subsection{Likelihood Principle}
-
-\subsection{Conditionality Principle}
-
-\subsection{Equivariance Principle}
-
-\pagebreak
-\section{Estimators}
-Suppose some real life problem is modelling statistically by the probability space $(\Omega,\mF,P)$. To probe what $P$ looks like, we sample the space using random variables $X_1,\dots,X_n:\Omega\to\R$. Based on the sample, we may infer that $P$ may have parameter $\widehat{\theta}$ (naturally $\widehat{\theta}$ should be a function of $X_1,\dots,X_n$). We may then need to evaluate how accurate $\widehat{\theta}$ is compared to the actual parameter $\theta$. \\
-
-There are two main branches in estimator theory: We need different methods for finding estimators, and we need to evaluate how accurate the estimators are. \\
-
-There are also two types of estimators: Point estimators and interval estimators. 
-
-\subsection{Finding Point Estimators}
-\begin{defn}{Point Estimators}{}\\
-Let $(\Omega,\mF,P)$ be a probability space. Let $X_1,\dots,X_n$ be a random sample. A point estimator of the random sample is a random variable $T(X_1,\dots,X_n)$ for some function $T:\R^n\to\R$. 
-\end{defn} 
-
-Note: This the same definition of a statistic. 
-
-\begin{defn}{Method of Moments}{}\\
-\end{defn}
-
-\begin{defn}{Maximum Likelihood Estimators}{}
-\end{defn}
-
-\subsection{Evaluating Point Estimators}
-\begin{defn}{Bias of a Point Estimator}{}\\
-Let $(\Omega,\mF,P)$ be a probability space. Let $X_1,\dots,X_n:\Omega\to\R$ be a random sample. Let $\widehat{\theta}$ be a point estimator of the random sample. Define the bias of $\widehat{\theta}$ to be $$\text{Bias}(\widehat{\theta})=E[\widehat{\theta}]-\theta$$
-\end{defn}
-
-\begin{defn}{Unbiased Point Estimators}{}\\
-Let $(\Omega,\mF,P)$ be a probability space. Let $X_1,\dots,X_n:\Omega\to\R$ be a random sample. Let $\widehat{\theta}$ be a point estimator of the random sample. We say that $\widehat{\theta}$ is unbiased if $\text{Bias}(\widehat{\theta})=0$. 
-\end{defn}
-
-\begin{defn}{Mean Squared Error}{}\\
-Let $(\Omega,\mF,P)$ be a probability space. Let $X_1,\dots,X_n:\Omega\to\R$ be a random sample. Let $\widehat{\theta}$ be a point estimator of the random sample. Define the mean squared error of $\widehat{\theta}$ to be $$\text{MSE}(\widehat{\theta})=E[(\widehat{\theta}-\theta)^2]$$
-\end{defn}
-
-\begin{thm}{The Bias Variance Trade Off}{}\\
-Let $(\Omega,\mF,P)$ be a probability space. Let $X_1,\dots,X_n:\Omega\to\R$ be a random sample. Let $\widehat{\theta}$ be a point estimator of the random sample. Then we have $$\text{MSE}(\widehat{\theta})=\text{Var}(\widehat{\theta})+(\text{Bias}(\widehat{\theta}))^2$$
-\end{thm}
-
-\subsection{Finding Interval Estimators}
-
-\pagebreak
-\section{Hypothesis Testing}
-
-
+\begin{prp}{}{}\\
+Let $(\Omega,\mathcal{F},P)$ be a probability space. Then $L^2(\Omega)$ is a Hilbert space with innner product given by $$\langle X,Y\rangle=E[XY]$$
+\end{prp}
 
 
 

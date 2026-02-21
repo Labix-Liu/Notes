@@ -40,8 +40,8 @@ The writer's first exposure towards Algebraic Topology lies in one particular mo
 \tableofcontents
 \pagebreak
 
-\section{Homotopies and the Fundamental Group}
-\subsection{Homotopies and Homotopy Equivalences}
+\section{Introduction to Homotopy Theory and the Fundamental Group}
+\subsection{Homotopies}
 In general, showing that two spaces are not homeomorphic is hard. Therefore we turn to a weaker statement: homotopy equivalence. It will become aparent that homeomorphic spaces are necessarily homotopic, but homotopic spaces may not be homeomorphic in general. 
 
 \begin{defn}{Homotopy}{} Let $X,Y$ be spaces. Let $f,g:X\to Y$ be maps. A homotopy from $f$ to $g$ is a continuous function $H:X\times I\to Y$ such that $$H(x,0)=f(x)\;\;\;\;\text{ and }\;\;\;\;H(x,1)=g(x)$$ for all $x\in X$. In this case, we say that $f$ is homotopic to $g$ and write $f\simeq g$. 
@@ -61,6 +61,10 @@ Then this map is continuous by the pasting lemma.
 \end{proof}
 \end{prp}
 
+\begin{defn}{The Set of Homotopy Classes of Maps}{}\\
+Let $X,Y$ be spaces. Define the set of homotopy classes of maps from $X$ to $Y$ to be $$[X,Y]=\frac{\{f:X\to Y\;|\;f\text{ is continuous }\}}{\sim}$$ where $f\sim g$ if $f$ and $g$ are homotopic. 
+\end{defn}
+
 The concept of a homotopy allows us to relax the condition on homeomorphism. 
 
 \begin{defn}{Homotopy Equivalence}{} Let $X$ and $Y$ be spaces. We say that $X$ and $Y$ are homotopy equivalent if there exists maps $f:X\to Y$ and $g:Y\to X$ such that $g\circ f\simeq I_X$ and $f\circ g\simeq I_Y$. In this case $g$ is said to be the homotopic inverse of $f$. 
@@ -79,7 +83,6 @@ Suppose that $F:X\times I\to Y$ gives the homotopy for $f_{1,2}$ and $G:Y\times 
 \begin{defn}{Null-Homotopic Maps}{} Let $f:X\to Y$ be a map of spaces. We say that $f$ is null-homotopic if it is homotopic to a constant map. 
 \end{defn}
 
-\subsection{Retractions}
 Retractions and deformation retracts are closely related to homotopy. In particular, deformation retracts provide us with a large amount of examples of homtopically equivalent spaces. We first define the notion of a retract. 
 
 \begin{defn}{Retract}{} We say that $A\subset X$ is a retract of $X$ a topological space if there is a continuous function $r:X\to A$ such that $r(a)=a$ for all $a\in A$. 
@@ -126,43 +129,45 @@ This is a good place to mention that whenever there is a local version of a topo
 
 It is very untrue that the local topological property on every point implies the topological property globally, nor is it true that the global property implies the local version. 
 
-\subsection{The 0th Homotopy Group}
-This section will officially begin with the development of $\pi_0$, the zero homotopy group down the line. This is established by equivalences between points. As we go up along the homotopy groups, we will encounter $\pi_1$, which is equivalences between paths, characterized by intervals. In general, $\pi_n$ is given from functions coming from $I^n$, the unit box. 
-
-\begin{defn}{Paths}{} Let $X$ be a space and $x,y\in X$. A path from $x$ to $y$ is a map $f:I\to X$ such that $f(0)=x$ and $f(1)=y$. If $x=y$ then we say that $f$ is a loop. Denote $e_x:I\to X$ the constant path on $x\in X$. This means that $e_x(t)=x$ for $t\in I$. 
+\subsection{The Path Connected Components}
+\begin{defn}{The Path Connected Components}{} Let $X$ be a space. Define the path connected components of $X$ to be $$\pi_0(X)=\{\text{Path components of }X\}$$
 \end{defn}
-
-Notice that the domain of a path is the unit interval $I$. In fact it does not matter whether one uses an arbitrary interval $(a,b)$ for $a<b$. We can simply reparameterize the path (essentially changing the velocity in which we travel on the path) so that paths are standardized with the unit interval $I$ as the domain. \\
-
-\begin{defn}{Orientation Reversal}{} Let $X$ be a space. Let $f:I\to X$ be a path in $X$. Denote $$\overline{f}(t)=f(1-t)$$ for $t\in[0,1]$ the reverse traversal of the path $f$. 
-\end{defn}
-
-There is an uninteresting invariant of spaces which is the path components of $X$. 
-
-\begin{defn}{0th Homotopy Group}{} Let $X$ be a space. Define $$\pi_0(X)=\{\text{Path components of }X\}$$ to be the $0$th homotopy group of $X$. 
-\end{defn}
-
-By this definition, the zero homotopy group measures the path connected components of a space $X$. There is no additional structure on this set, compared to the fundamental group in later sections. 
 
 \begin{prp}{}{} Let $X$ be a space. Define a relation on $X$ where $x\sim y$ if and only if there is a path from $x$ to $y$. Then $\pi_0(X)=\frac{X}{\sim}$. 
 \end{prp}
 
-\subsection{Equivalent Paths and the Fundamental Group}
-Aside from point equivalence given by the group $\pi_0$, we also have path equivalence which gives us the fundamental group $\pi_1$. In general we extend this homotopy group construction $\pi_n$ later. For now we only investigate properties of $\pi_1$. 
-
+\subsection{Homotopies Relative to a Subset}
 \begin{defn}{Homotopy Relative to a Subset}{} Let $X,Y$ be a space and $A\subseteq X$ a subset of $X$. We say that a homotopy $H:X\times I\to Y$ is a homotopy relative to $A$ if $$H(a,t)=f(a)=g(a)$$ for all $a\in A$ and all $t\in I$. This means that the homotopy fixes all the values in $A$. In this case, we write $f\overset{A}{\simeq}g$. 
 \end{defn}
 
-We will only be interested in homotopy of paths for the rest of the section. This is a homotopy $H:I\times I\to X$ where $H(s,0)=f_0(s)$ is the starting path and $H(s,1)=f_1(s)$ is the ending path. It is best to keep in mind that the first variable is the time variable for traversing through the path $f_t(s)=H(s,t)$ while the second variable is the time variable for the homotopy. \\
+\begin{prp}{}{}\\
+$\overset{A}{\simeq}$ is a homotopy equivalence. 
+\end{prp}
 
-We will also be only interested in homotopy of paths relative to their boundary. We write this as $f\overset{\partial}{\simeq}g$ if $f$ and $g$ are path and $\partial$ the boundary of the fixed subset. Since in our case the fixed subset is the boundary, this means that the homotopy is on two paths $f$ and $g$ with the same starting and ending point. \\
-
-We reiterate the above digression in the form of a definition. 
-
-\begin{defn}{Homotopic Paths Relative to Boundary}{} Let $f,g:I\to X$ be paths in $X$. We say that $f$ and $g$ are homotopic paths relative to boundary if there is a homotopy $H:I\times I\to X$ such that the homotopy has initial data $$H(s,0)=f(s)\;\;\;\;\text{ and }\;\;\;\;H(s,1)=g(s)$$ and that it is relative to the boundary $$f(0)=H(0,t)=g(0)\;\;\;\;\text{ and }\;\;\;\;f(1)=H(1,t)=g(1)$$ for all $t\in I$. 
+\subsection{Pointed Spaces and Pointed Homotopies}
+\begin{defn}{Pointed Spaces}{}\\
+A pointed space is a pair $(X,x_0)$ where $X$ is a space and $x_0\in X$. 
 \end{defn}
 
-The important observation for us to establish the fundamental group is that we can view homotopic paths as one entity on its own. We write $[f]$ for the equivalence class of $f:I\to X$. Another path $g:I\to X$ lies in $[f]$ if and only if $f$ and $g$ are homotopic. 
+\begin{defn}{Pointed Maps}{}\\
+Let $(X,x_0)$ and $(Y,y_0)$ be pointed spaces. Let $f:X\to Y$ be a map. We say that $f$ is pointed if $f(x_0)=y_0$. 
+\end{defn}
+
+\begin{defn}{Pointed Homotopies}{}\\
+Let $(X,x_0)$ and $(Y,y_0)$ be pointed spaces. Let $f,g:X\to Y$ be pointed maps. A pointed homotopy from $f$ to $g$ is a homotopy $H:X\times I\to Y$ from $f$ to $g$ relative to $\{x_0\}$. 
+\end{defn}
+
+\begin{defn}{The Set of Pointed Homotopy Classes of Maps}{}\\
+Let $(X,x_0),(Y,y_0)$ be spaces. Define the set of homotopy classes of maps from $(X,x_0)$ to $(Y,y_0)$ to be $$[(X,x_0),(Y,y_0)]_\ast=\frac{\{f:(X,x_0)\to(Y,y_0)\;|\;f\text{ is a pointed map }\}}{\sim}$$ where $f\sim g$ if there exists a pointed homotopy from $f$ to $g$. 
+\end{defn}
+
+\subsection{The Algebra of Paths}
+\begin{defn}{The Constant Path}{}\\
+Let $X$ be a space. Let $x_0\in X$. Define the constant path of $X$ at $x_0$ to be the path $e_{x_0}:I\to X$ defined by $$e_{x_0}(t)=x_0$$
+\end{defn}
+
+\begin{defn}{Orientation Reversal}{} Let $X$ be a space. Let $f:I\to X$ be a path in $X$. Denote $$\overline{f}(t)=f(1-t)$$ for $t\in[0,1]$ the reverse traversal of the path $f$. 
+\end{defn}
 
 \begin{defn}{Concatenation of Paths}{} Let $f,g:[0,1]\to X$ be continuous paths to a topological space $X$ such that $f(1)=g(0)$. Then the concatenation of $f$ and $g$ can be defined:
 \begin{align*}
@@ -204,63 +209,22 @@ e_y(s)=y & \text{ if } \frac{t+1}{2}\leq s\leq 1
 \end{proof}
 \end{prp}
 
-We further restrict our attention of homotopic paths relative to boundaries to simply loops of $X$. 
-
-\begin{thm}{The Fundamental Group}{} Let $X$ be a space and let $x\in X$. The set of all closed paths (loops) based at $x$ form a group $$\pi_1(X,x)=\left\{[f]\;\bigg{|}\;f:I\to X\text{ is a loop}\right\}$$ with the rule $$[f]\cdot[g]=[f\cdot g]$$ for equivalent classes of loops $[f]$ and $[g]$. 
-\begin{proof}
-Notice that the rule of composing loops are well defined since they will always have the same base point. The identity of the group is simply the constant path $[e_x]$, as proved in \ref{lmm:1.4.4}. I claim that $[f]\cdot[\overline{f}]=[e_x]$. In particular, I will prove that $f\cdot\overline{f}\simeq e_x$. \\
-But the homotopy $$H(s,t)=\begin{cases}
-e_x(s)=x & \text{ if }0\leq s\leq\frac{t}{2}\text{ or }1-\frac{t}{2}\leq s\leq 1\\
-f(2s-t) & \text{ if } \frac{t}{2}\leq s\leq\frac{1}{2}\\
-\overline{f}(2s+t-1) & \text{ if }\frac{1}{2}\leq s\leq 1-\frac{t}{2}
-\end{cases}$$
-completes the job. The proof is similar for $\overline{f}\cdot f\simeq I_{(X,x)}$. \\
-Associativity follows by proving $(f\cdot g)\cdot h\simeq f\cdot(g\cdot h)$. But the homotopy is clear from reparametrization. 
-\end{proof}
-\end{thm}
-
-An alternative view point of loops is that instead of $I=[0,1]$ as the domain of a path $f:I\to X$, since $f(0)=f(1)$, we can think of $f$ as a map $f:S^1\to X$. Indeed, $S^1\cong\frac{I}{0\sim 1}$ makes this possible. 
-
-\subsection{Properties of the Fundamental Group}
-The fundamental group enjoys a number of properties for easy calculation. For convenience, we introduce a notation. 
-
-\begin{defn}{Pointed Space}{} A pointed space is a pair $(X,x_0)$ of a space $X$ and a point $x_0\in X$ called the base point. A map of pointed spaces $f:(X,x_0)\to(Y,y_0)$ is a continuous map such that $f(x_0)=y_0$. 
+\subsection{The Fundamental Group}
+\begin{defn}{Loops of a Space}{}\\
+Let $X$ be a space. Let $f:I\to X$ be a path. We say that $f$ is a loop if $f(0)=f(1)$. 
 \end{defn}
 
-Notice that $\pi_1$ takes in a pointed space. We shall see that the difference in base point amounts only to an isomorphism, given by the following theorem. 
+\begin{defn}{The Fundamental Group}{}\\
+Let $(X,x_0)$ be a pointed space. Define the fundamental group of $(X,x_0)$ to be the set $$\pi_1(X,_0)=\frac{\{f:(I,0)\to(X,x_0)\;|\;f\text{ is a pointed map such that }f\text{ is a loop }\}}{\sim}$$ where $f\sim g$ if there exists a pointed homotopy equivalence from $f$ to $g$, together with the binary operation given by $$[f]\cdot[g]=[f\cdot g]$$
+\end{defn}
 
-\begin{thm}{Change of Base Point}{} Let $X$ be a space and let $x_0,x_1\in X$ be such that they are connected by a path $u:I\to X$. Then this path induces a group isomorphism $$\beta_u:\pi_1(X,x_0)\to\pi_1(X,x_1)$$ given by $\beta_u([f])=[\overline{u}\cdot f\cdot u]$. In particular, 
-\begin{itemize}
-\item If $u\overset{\partial}{\simeq} u'$ are homotopic then $\beta_u=\beta_{u'}$
-\item $\beta_{e_{x_0}}=\text{id}_{\pi_1(X,x_0)}$
-\item If $v:I\to X$ is a path from $x_1$ to $x_2$ then $\beta_{u\cdot v}=\beta_v\circ\beta_u$
-\end{itemize} 
-\begin{proof}
-We first show that $\beta_u$ is an isomorphism. Suppose that $[\overline{u}\cdot f\cdot u]=[e_{x_0}]$ for $[f]\in\pi_1(X,x_0)$. Then it is easy to see that 
-\begin{align*}
-[u]\cdot[\overline{u}\cdot f\cdot u]\cdot[\overline{u}&=[u]\cdot[e_{x_0}]\cdot[\overline{u}]\\
-[f]&=[e_{x_0}]
-\end{align*}
-Thus $\beta_u$ is injective. For every $[g]\in\pi_1(X,x_1)$, it is clear that $[u\cdot g\cdot\overline{u}]\in\pi_1(X,x_0)$ is such that $\beta_u([u\cdot g\cdot\overline{u}])=[g]$. Thus $\beta_u$ is surjective. \\
+\begin{lmm}{}{}\\
+Let $(X,x_0)$ be a pointed space. Then $\pi_1(X,x_0)$ is a group. 
+\end{lmm}
 
-For the remaining functorial properties, we have that 
-\begin{itemize}
-\item If $u\overset{\partial}{\simeq} u'$ then $[u]=[u']$. This means that for any $[f]\in\pi_1(X,x_0)$, we have $$[\overline{u}]\cdot[f]\cdot[u]=[\overline{u'}]\cdot[f]\cdot[u']$$ thus $\beta_u([f])=\beta_{u'}([f])$ for any $[f]\in\pi_1(X,x_0)$. 
-\item Clearly, $\beta_{e_{x_0}}([f])=[\overline{e_{x_0}}\cdot f\cdot e_{x_0}]=[f]$ so that $\beta_{e_{x_0}}$ is the identity. 
-\item Let $[f]\in\pi_1(X,x_0)$. Then we have 
-\begin{align*}
-\beta_{u\cdot v}([f])&=[\overline{u\cdot v}\cdot f\cdot u\cdot v]\\
-&=[\overline{v}\cdot\overline{u}\cdot f\cdot u\cdot v]\\
-&=[\overline{v}]\cdot\beta_u([f])\cdot[v]\\
-&=\beta_v(\beta_u([f]))
-\end{align*}
-so that $\beta_{u\cdot v}=\beta_v\circ\beta_u$. 
-\end{itemize}
-And so we are done. 
-\end{proof}
-\end{thm}
-
-This means that the base point does not really matter, as long as they are path connected. In particular, if the entirety of $X$ is path connected, then they really only have one unique fundamental group. However, beware that in the case that the change of base point can be given by two non-homotpic maps. This means that two different paths could potentially give rise to two different isomorphisms. It is common in this case to say that there is no canonical isomorphism. \\
+\begin{lmm}{}{}\\
+Let $(X,x_0)$ be a pointed space. Then there is a bijection of sets $$\pi_1(X,x_0)=[(S^1,1),(X,x_0)]_\ast$$
+\end{lmm}
 
 Recall that the notion of homotopy is to attempt to classify topological spaces up to homeomorphism. The big question is whether the fundamental group is invariant under homeomorphism. Before we answer this question, we first look at how the fundamental group reacts to a continuous map. 
 
@@ -326,6 +290,39 @@ Recall that a map of sets $g\circ f$ has the property that $g$ is surjective and
 \end{prp}
 
 The proposition is useful in the following sense. If $r:X\to A$ is a retraction that the inclusion $i_\ast$ is injective and $r_\ast$ is surjective. If there is no group homomorphism for which $r_\ast$ can be surjective or $i_\ast$ can be injective, then we have reached a contradiction so that there is no retraction from $X$ to $A$.  
+
+\begin{thm}{Change of Base Point}{} Let $X$ be a space and let $x_0,x_1\in X$ be such that they are connected by a path $u:I\to X$. Then this path induces a group isomorphism $$\beta_u:\pi_1(X,x_0)\to\pi_1(X,x_1)$$ given by $\beta_u([f])=[\overline{u}\cdot f\cdot u]$. In particular, 
+\begin{itemize}
+\item If $u\overset{\partial}{\simeq} u'$ are homotopic then $\beta_u=\beta_{u'}$
+\item $\beta_{e_{x_0}}=\text{id}_{\pi_1(X,x_0)}$
+\item If $v:I\to X$ is a path from $x_1$ to $x_2$ then $\beta_{u\cdot v}=\beta_v\circ\beta_u$
+\end{itemize} 
+\begin{proof}
+We first show that $\beta_u$ is an isomorphism. Suppose that $[\overline{u}\cdot f\cdot u]=[e_{x_0}]$ for $[f]\in\pi_1(X,x_0)$. Then it is easy to see that 
+\begin{align*}
+[u]\cdot[\overline{u}\cdot f\cdot u]\cdot[\overline{u}&=[u]\cdot[e_{x_0}]\cdot[\overline{u}]\\
+[f]&=[e_{x_0}]
+\end{align*}
+Thus $\beta_u$ is injective. For every $[g]\in\pi_1(X,x_1)$, it is clear that $[u\cdot g\cdot\overline{u}]\in\pi_1(X,x_0)$ is such that $\beta_u([u\cdot g\cdot\overline{u}])=[g]$. Thus $\beta_u$ is surjective. \\
+
+For the remaining functorial properties, we have that 
+\begin{itemize}
+\item If $u\overset{\partial}{\simeq} u'$ then $[u]=[u']$. This means that for any $[f]\in\pi_1(X,x_0)$, we have $$[\overline{u}]\cdot[f]\cdot[u]=[\overline{u'}]\cdot[f]\cdot[u']$$ thus $\beta_u([f])=\beta_{u'}([f])$ for any $[f]\in\pi_1(X,x_0)$. 
+\item Clearly, $\beta_{e_{x_0}}([f])=[\overline{e_{x_0}}\cdot f\cdot e_{x_0}]=[f]$ so that $\beta_{e_{x_0}}$ is the identity. 
+\item Let $[f]\in\pi_1(X,x_0)$. Then we have 
+\begin{align*}
+\beta_{u\cdot v}([f])&=[\overline{u\cdot v}\cdot f\cdot u\cdot v]\\
+&=[\overline{v}\cdot\overline{u}\cdot f\cdot u\cdot v]\\
+&=[\overline{v}]\cdot\beta_u([f])\cdot[v]\\
+&=\beta_v(\beta_u([f]))
+\end{align*}
+so that $\beta_{u\cdot v}=\beta_v\circ\beta_u$. 
+\end{itemize}
+And so we are done. 
+\end{proof}
+\end{thm}
+
+This means that the base point does not really matter, as long as they are path connected. In particular, if the entirety of $X$ is path connected, then they really only have one unique fundamental group. However, beware that in the case that the change of base point can be given by two non-homotpic maps. This means that two different paths could potentially give rise to two different isomorphisms. It is common in this case to say that there is no canonical isomorphism. \\
 
 \begin{prp}{}{} Let $(X,x_0)$ and $(Y,y_0)$ be pointed topological spaces. Then $$\pi_1(X\times Y,(x_0,y_0))\cong\pi_1(X,x_0)\times\pi_1(Y,y_0)$$
 \end{prp}
@@ -931,6 +928,272 @@ It is clear that $S^1\vee S^1$ is path connected so any choice of base point wou
 \end{proof}
 \end{thm}
 
+\pagebreak
+
+\section{The Higher Homotopy Groups}
+The journey of Algebraic Topology began with the fundamental group, where we assigned a group to every space functorially. The notion of fundamental group heavily involves the notion of homotopy and therefore is heavily related to the notion of homotopy. However, one realizes that even with Seifert-van Kampen theorem and the theory of covering spaces, it is not easy to compute the fundamental group of a space. This is party, but not wholly due to the fundamental group is in general not abelian. If we instead work in an abelian setting, one is able to distinguish two non-isomorphic groups simply by analysing the torsion subgroups. Therefore we refine the concept of the fundamental group and procured the notion of homology and cohomology. Both functorial invariants now produce graded abelian groups for each space, one for each dimension $n\in\N$. In the case of cohomology, there is a canonical ring structure on cohomology that interacts with the topology of the underlying space. \\
+
+Now we turn to the final main invariant of topological spaces. The homotopy groups $\pi_n(X,x_0)$ serves as both a generalization of the fundamental group $\pi_1(X,x_0)$ in higher dimensions and a homotopic analogue to homology via the Hurewicz homomorphism $$h:\pi_n(X)\to H_n(X)$$ It is a strong invariant that is closely related to the notion of homotopy, all the while having mostly abelian groups as its output. The trade off is that the homotopy groups are very hard to compute. Such trade off has led to the blossoming of Algebraic Topology in its fullest. For instance, stable homotopy theory stems from a crucial fact called the Freudenthal suspension theorem, which states that such a sequence $$\pi_n(X)\to\pi_{n+1}(\Sigma X)\to\cdots$$ eventually stabilizes for large enough $n$. \\
+
+In this chapter we will closely study the $n$th homotopy groups such as its properties and develop tools to compute them. 
+
+\subsection{The nth Homotopy Groups}
+We begin not with the definition of the homotopy groups, but rather a slight generalization of pointed spaces and maps between them. 
+
+\begin{defn}{Pairs of Space}{} Let $X$ be a topological space. A pair of space is a pair $(X,A)$ where $A\subseteq X$ is a subspace of $X$. A map of pairs $f:(X,A)\to(Y,B)$ is a continuous map $f:X\to Y$ such that $f(A)\subseteq B$. 
+\end{defn}
+
+\begin{defn}{Homotopy between Maps of Pairs}{} Let $f,g:(X,A)\to (Y,B)$ be maps of pairs. A homotopy between $f$ and $g$ is a homotopy $H:X\times[0,1]\to Y$ such that $H(A\times[0,1])\subseteq B$. 
+\end{defn}
+
+\begin{defn}{The nth Homotopy Groups}{} Let $(X,x_0)$ be a pointed space. Define the $n$th homotopy group $\pi_n(X,x_0)$ to be $$\pi_n(X,x_0)=\frac{\left\{\gamma:\left(I^n,\partial I^n\right)\to\left(X,\{x_0\}\right)\;\bigg{|}\;\gamma\text{ is continuous }\right\}}{\simeq}$$ where we say that $f\simeq g$ if there exists a homotopy between $f$ and $g$. 
+\end{defn}
+
+Notice that the definition coincides with that of the fundamental group when $n=1$, and hence $\pi_n$ is indeed a generalization. \\
+
+Now we have defined the set $\pi_n(X,x_0)$ for a pointed space to have the word group in its name. We will also need to procure a canonical group structure on the set $\pi_n(X,x_0)$. This will be similar with that of the fundamental group. 
+
+\begin{defn}{Concatenation}{} Let $n\geq 1$. Let $(X,x_0)$ be a pointed space. Let $f,g:(I^n,\partial I^n)\to(X,x_0)$ be maps. Define the composition of $f$ and $g$ by the formula $$(f\cdot g)(t_1,\dots,t_n)=\begin{cases}
+f(2t_1,t_2,\dots,t_n) & \text{ if } 0\leq t_1\leq\frac{1}{2}\\
+g(2t_1-1,t_2,\dots,t_n) & \text{ if } \frac{1}{2}\leq t\leq 1
+\end{cases}$$ for $f,g\in\pi_n(X,x_0)$. 
+\end{defn}
+
+Notice that concatenation is really just the same concatenation between elements of the fundamental group but instead with more coordinates. The group structure on $\pi_n(X,x_0)$ uses concatenation and such a proof also uses the same homotopies as in Algebraic Topology 1, but with more coordinates. 
+
+\begin{thm}{}{} Let $(X,x_0)$ be a pointed space and $n\geq 1$. The operation $\cdot$ on the equivalence classes in $\pi_n(X,x_0)$ is well defined and endows it with the structure of a group. 
+\begin{proof}
+We first show that the operation is well defined on $\pi_n(X,x_0)$. Suppose that $f_1\overset{\partial}{\simeq} g_1:(I^n,\partial I^n)\to(X,x_0)$ via the homotopy $H_1$ and $f_2\overset{\partial}{\simeq} g_2:(I^n,\partial I^n)\to(X,x_0)$ via the homotopy $H_2$. Consider the map $H:I^n\times[0,1]\to X$ defined by $$H(x_1,\dots,x_n,t)=\begin{cases}
+H_1(2x_1,\dots,x_n,t) & \text{if } 0\leq x_1\leq\frac{1}{2}\\
+H_2(2x_1-1,\dots,x_n,t) & \text{if }\frac{1}{2}\leq x_1\leq 1
+\end{cases}$$ 
+Now when $t=0$, we have that $H(x_1,\dots,x_n,0)=f_1\cdot f_2$. When $t=1$, we have that $H(x_1,\dots,x_n,1)=g_1\cdot g_2$. Now notice that by definition of $H_1$ and $H_2$, if one of $x_1,\dots,x_n$ is equal to $0$ or $1$, then $H_1$ and $H_2$ is constant and maps to $x_0$. This means that $H$ also has such property and hence $H$ is a homotopy $(I,\partial I^n)$ to $(X,x_0)$. \\
+
+We now have an appropriate binary operation on $\pi_n(X,x_0)$. It is clearly associative since the composition of maps are associativity and one can re-parametrize homotopies with different traversal speeds. I claim that the constant map $e_{x_0}:(I,\partial I^n)\to(X,x_0)$ defined by $e_{x_0}(x)=x_0$ is the identity. Let $f:(I^n,\partial I^n)\to(X,x_0)$ be arbitrary. Define the homotopy from $e_{x_0}\cdot f$ to $f$ by $$H(x_1,\dots,x_n,t)=\begin{cases}
+e_{x_0}(x_1,\dots,x_n)=x_0 & \text{ if }0\leq x_1\leq\frac{1-t}{2}\\
+f\left(\frac{2s+t-1}{t+1}\right) & \text{ if }\frac{1-t}{2}\leq x_1\leq 1
+\end{cases}$$ A similar homotopy proves that $f\cdot e_{x_0}\simeq f$. For the inverse, I claim that $\overline{f}:(I^n,\partial I^n)\to(X,x_0)$ defined by $\overline{f}(1-x_1,\dots,x_n)$ is the inverse of $f$. Indeed, define a homotopy from $f\cdot\overline{f}$ to $e_{x_0}$ by $$H(x_1,\dots,x_n,t)=\begin{cases}
+e_{x_0}(x_1,\dots,x_n)=x_0 & \text{ if }0\leq x_1\leq\frac{t}{2}\text{ or }\frac{1-t}{2}\leq x_1\leq 1\\
+f(2x_1-t,x_2,\dots,x_n) & \text{ if }\frac{t}{2}\leq x_1\leq\frac{1}{2}\\
+\overline{f}(2s+t-1) & \text{ if }\frac{1}{2}\leq x_1\leq\frac{1-t}{2}
+\end{cases}$$
+\end{proof}
+\end{thm}
+
+However, what makes each $\pi_n(X,x_0)$ for $n\geq 2$ different from the fundamental group $\pi_1(X,x_0)$ is the abelian group structure on $\pi_n(X,x_0)$. 
+
+\begin{thm}{}{} Let $(X,x_0)$ be a pointed space. Then the $n$th homotopy group $$\pi_n(X,x_0)$$ together with concatenation is abelian. 
+\begin{proof}
+Define a new operation $\star:\pi_n(X,x_0)\times\pi_n(X,x_0)\to\pi_n(X,x_0)$ by $$[f]\star[g]=\begin{cases}
+f(t_1,2t_2,\dots,t_n) & \text{ if } 0\leq t_1\leq\frac{1}{2}\\
+g(t_1,2t_2-1,\dots,t_n) & \text{ if } \frac{1}{2}\leq t\leq 1
+\end{cases}$$ Such an operation clearly also defines an abelian group structure on $\pi_n(X,x_0)$ using the same argument. Now I want to prove that $$([f]\ast[g])\star([h]\ast [k])=([f]\star [h])\ast([g]\star [k])$$ This is true because $$([f]\ast[g])\star([h]\ast [k])=\begin{cases}
+f(2x_1,2x_2,x_3,\dots,x_n) & \text{ if } 0\leq x_1,x_2\leq\frac{1}{2}\\
+g(2x_1,2x_2-1,x_3,\dots,x_n) & \text{ if } 0\leq x_1\leq\frac{1}{2} \text{ and } \frac{1}{2}\leq x_2\leq 1\\
+h(2x_1-1,2x_2,x_3,\dots,x_n) & \text{ if } \frac{1}{2}\leq x_1\leq 1 \text{ and } 0\leq x_2\leq\frac{1}{2}\\
+k(2x_1,2x_2-1,x_3,\dots,x_n) & \text{ if } \frac{1}{2}\leq x_1,x_2\leq 1
+\end{cases}$$ and $$([f]\star [h])\ast([g]\star [k])=\begin{cases}
+f(2x_1,2x_2,x_3,\dots,x_n) & \text{ if } 0\leq x_1,x_2\leq\frac{1}{2}\\
+h(2x_1-1,2x_2,x_3,\dots,x_n) & \text{ if } \frac{1}{2}\leq x_1\leq 1 \text{ and } 0\leq x_2\leq\frac{1}{2}\\
+g(2x_1,2x_2-1,x_3,\dots,x_n) & \text{ if } 0\leq x_1\leq\frac{1}{2} \text{ and } \frac{1}{2}\leq x_2\leq 1\\
+k(2x_1,2x_2-1,x_3,\dots,x_n) & \text{ if } \frac{1}{2}\leq x_1,x_2\leq 1
+\end{cases}$$ which are entirely the same. Now I claim that $\ast=\star$. It is clear that both binary operations have the same identity element $e_{x_0}$. Now we have that $$f\ast g=(f\star 1)\ast (1\star g)=(f\ast 1)\star(1\ast g)=f\star g$$ Finally, I claim that $\ast$ is commutative. We have that $$f\ast g=(1\star f)\ast(g\star 1)=(1\ast g)\star(f\ast 1)=g\star f=g\ast f$$ Thus we conclude. 
+\end{proof}
+\end{thm}
+
+The above technique is actually called the Eckmann-Hilton argument. In particular, it shows that concatenation of paths need not be defined via the first coordinate. Any choice of coordinate to perform concatenation will result in the same group structure. \\
+
+\begin{eg}{}{}\\
+The homotopy groups of the sphere is given by $$\pi_n(S^1)\cong\begin{cases}
+\Z & \text{ if } n=1\\
+0 & \text{ otherwise }
+\end{cases}$$
+\begin{proof}\\
+We have seen that $\pi_0(S^1)=0$ and $\pi_1(S^1)\cong\Z$. \\
+
+When $n\geq 2$, suppose that $[f]\in\pi_n(S^1)$. Then we have a map $f:S^k\to S^1$. By the lifting criterion in Algebraic Topology 1, we may lift the map to the covering space $p:\R\to S^1$ since $0=f_\ast(\pi_1(S^k))\leq p_\ast(\pi_1(\R))=0$. Hence $f$ factors through a contractible space, and so is null homotopic. Hence $[f]=0$. 
+\end{proof}
+\end{eg}
+
+\begin{lmm}{}{}\\
+For any $n\in\N^+$, the two spaces $(I^n,\partial I^n)$ and $(S^n,s_0)$ are homotopy equivalent. 
+\end{lmm}
+
+\begin{crl}{}{}\\
+Let $(X,x_0)$ be a pointed space. Then we have $$\pi_n(X,x_0)=[(S^n,1),(X,x_0)]_\ast$$
+\end{crl}
+
+Therefore an alternate viewpoint of the homotopy groups is instead the collection of maps from the pointed $n$-sphere to the space $X$ quotient homotopy. Indeed an $n$-dimensional sphere has an $n$-dimensional hole enclosed by the sphere itself. Therefore in order to detect $n$-dimensional holes in a space, we are permitted to try and fit $n$-spheres into the space. \\
+
+Spheres are also advantageous for the definition of $\pi_n$ because spheres only has an $n$-dimensional hole and no other holes in any dimension. Therefore we are capturing the minimal amount of information on $n$-dimensional holes without producing excess data. \\
+
+The group structure of $\pi_n$ is also easy to understand in terms of spheres. 
+
+\begin{lmm}{}{}\\
+Let $(X,x_0)$ be a pointed space. Let $f,g:S^n\to X$ be pointed maps. Then $[f]\cdot[g]\in\pi_n(X,x_0)$ is represented by the map $$S^n\overset{\text{proj.}}{\to} S^n\vee S^n\overset{f\vee g}{\to}X$$ where the projection map is given by $S^n\vee S^n\cong\frac{S^n}{S^{n-1}}$ where $S^{n-1}\hookrightarrow S^n$ is the inclusion along the equator. 
+\end{lmm}
+
+\subsection{Functorial Properties of Homotopy}
+The homotopy groups also satisfy functorial properties similar to the fundamental group and the (co)homology groups. 
+
+\begin{thm}{Functoriality}{} Let $(X,x_0)$ and $(Y,y_0)$ be pointed spaces and let $f:(X,x_0)\to(Y,y_0)$ be a pointed map. Then the induced map $$\pi_n(f):\pi_n(X,x_0)\to\pi_n(Y,y_0)$$ defined by $[\gamma]\mapsto[f\circ\gamma]$ is a group homomorphism. Moreover, it satisfies the following functorial properties. 
+\begin{itemize}
+\item If $g:(Y,y_0)\to(Z,z_0)$ is a pointed map then $$\pi_n(g\circ f)=\pi_n(g)\circ\pi_n(f)$$
+\item If $\text{id}_{(X,x_0)}:(X,x_0)\to(X,x_0)$ is the identity map then $$\pi_n(\text{id}_{(X,x_0)})=\text{id}_{\pi_n(X,x_0)}$$
+\end{itemize} 
+\begin{proof}
+Firstly, let us show that it is a group homomorphism. Let $\gamma_1,\gamma_2\in\pi_n(X,x_0)$. We have that $$\pi_n(f)([\gamma_1]\cdot[\gamma_2])=[f\circ(\gamma_1\cdot\gamma_2)]=[f\circ\gamma_1\cdot f\circ\gamma_2]=\pi_n(f)([\gamma_1])\cdot\pi_n(f)([\gamma_2])$$ where the second equality is true because homotopies are preserved under function composition. It remains to show associativity and unitality. 
+\begin{itemize}
+\item Associativity: We have that $$\pi_n(g\circ f)([\gamma])=[g\circ f\circ\gamma]=\pi_n(g)([f\circ\gamma])=(\pi_n(g)\circ\pi_n(f))([\gamma])$$
+\item Unitality: We have that $$\pi_n(\text{id}_{(X,x_0)})([\gamma])=[\text{id}_{(X,x_0)}\circ\gamma]=[\gamma]=\text{id}_{\pi_n(X,x_0)}([\gamma])$$
+\end{itemize}
+And so we conclude. 
+\end{proof}
+\end{thm}
+
+Similar to all other functorial properties we have seen throughout algebraic topology, a homeomorphism of spaces give an isomorphism on homotopy groups. Now that we know about category theory, we see that such a result does not depend on the definition of the homotopy groups or the (co)homology groups, but is in fact due to the functorial properties of each invariant. \\
+
+Similar to (co)homology and the fundamental group, the homotopy groups are defined via a quotient with homotopy. Therefore we expect the homotopy groups to not be able to distinguish between homotopy equivalent spaces but not homeomorphic spaces. 
+
+\begin{thm}{Homotopy Equivalence}{} Let $(X,x_0),(Y,y_0)$ be pointed spaces and $f,g:(X,x_0)\to (Y,y_0)$ be pointed maps. If $f$ and $g$ are homotopic, then the induced maps $$\pi_n(f)=\pi_n(g):\pi_n(X,x_0)\to\pi_n(Y,y_0)$$ are equal. Moreover, if $f$ is a homotopy equivalence, then $\pi_n(f)$ is an isomorphism. 
+\begin{proof}
+Let $[\gamma]\in\pi_n(X,x_0)$. Suppose that $f$ and $g$ are homotopic via $F:X\times I\to Y$. now define $$H(x_1,\dots,x_n,t)=F(\gamma(x_1,\dots,x_n),t)$$ Then it is clear that $H(x_1,\dots,x_n,0)=f\circ\gamma$ and $H(x_1,\dots,x_n,1)=g\circ\gamma$. Thus $[f\circ\gamma]=[g\circ\gamma]$ and so we conclude that $\pi_n(f)([\gamma])=\pi_n(g)([\gamma])$. \\
+
+If $f$ is a homotopy equivalence, then there exists $g:(Y,y_0)\to(X,x_0)$ such that $g\circ f\simeq\text{id}_{(X,x_0)}$ and $f\circ g\simeq\text{id}_{(Y,y_0)}$. By funtoriality and homotopy equivalence, we have that $$\pi_n(g)\circ\pi_n(f)=\text{id}_{\pi_n(X,x_0)}\;\;\;\;\text{ and }\;\;\;\;\pi_n(f)\circ\pi_n(g)=\text{id}_{\pi_n(Y,y_0)}$$ and so we conclude. 
+\end{proof}
+\end{thm}
+
+Similar to the fundamental group, changing the base point via a path induces isomorphisms on homotopy groups with the same space but different base point. 
+
+\begin{thm}{}{} Let $(X,x_0)$ and $(X,x_1)$ be pointed spaces with the same base space. Let $u:I\to X$ be a path from $x_0$ to $x_1$. Define the induced map $$u_\#:\pi_n(X,x_0)\to\pi_n(X,x_1)$$ as follows. For $[\gamma]\in\pi_n(X,x_0)$ define $u_\#([\gamma])$ by first shrinking the domain of $\gamma$ to a smaller concentric cube in $I^n$. Then inserting the path $\gamma$ on each radical segment of the shell between the smaller cube and $\partial I^n$. \\
+The construction of $u_\#$ is a group isomorphism. Moreover, it satisfies the following universal properties. 
+\begin{itemize}
+\item If $v:I\to X$ is a path from $x_1$ to $x_2$ and $u\cdot v$ is the concatenation of these paths, then $$(u\cdot v)_\#=u_\#\circ v_\#$$
+\item If $c_{x_0}$ is the constant path from $x_0$ to $x_0$ then $(c_{x_0})_\#$ is the identity
+\end{itemize}
+\end{thm}
+
+\begin{prp}{}{} Let $X_i$ for $i\in I$ be a family of path connected spaces. Then there are isomorphisms $$\pi_n\left(\prod_{i\in I}X_i\right)\cong\prod_{i\in I}\pi_n(X_i)$$
+\end{prp}
+
+\begin{prp}{}{} Let $(X,x_0)$ and $(X,x_1)$ be pointed spaces with the same base space. Let $u,v:I\to X$ be paths from $x_0$ to $x_1$. If $u$ and $v$ are homotopic relative to end points then the induced maps $$u_\#=v_\#:\pi_n(X,x_0)\to\pi_n(X,x_1)$$ are equal. 
+\end{prp}
+
+This shows that if $X$ is path connected, then $\pi_n(X,x_0)$ no longer depends on the choice of base point. Although there are no canonical isomorphisms between $\pi_n(X,x_0)$ and $\pi_n(X,x_1)$, we still forget about the base point in this case and write the homotopy groups as $\pi_n(X)$. 
+
+\subsection{The Action of the Fundamental Group}
+\begin{prp}{}{}\\
+Let $(X,x_0)$ be a pointed space. Let $n\geq 1$. Then the map $\pi_1(X,x_0)\times\pi_n(X,x_0)\to\pi_n(X,x_0)$ defined by $$([u],[f])\mapsto u_\#(f)$$ is a group action on $\pi_n(X,x_0)$. 
+\end{prp}
+
+When $n=1$, the above group action is just left multiplication in $\pi_1(X,x_0)$. 
+
+
+\subsection{Relative Homotopy Groups}
+\begin{defn}{Triplets of Spaces}{} Let $X$ be a topological space. A pointed pair of space is a triple $(X,A_1,A_2)$ where $A_2\subseteq A_1\subseteq X$ are subspaces of $X$. A map between triplets of spaces $f:(X,A_1,A_2)\to(Y,B_1,B_2)$ is a map $f:X\to Y$ such that $f(A_1)\subseteq B_1$ and $f(A_2)\subseteq B_2$. \\
+If $A_2=\{x_0\}$ is a single point we say that $(X,A,x_0)$ is a pointed pair of spaces. 
+\end{defn}
+
+\begin{defn}{Homotopy between Maps of Triplets}{} Let $f,g:(X,A_1,A_2)\to(Y,B_1,B_2)$ be maps triplets of spaces. A homotopy between $f$ and $g$ is a homotopy between $f:X\to Y$ and $g:X\to Y$, namely $H:X\times[0,1]\to Y$ such that $H(A_1\times[0,1])\subseteq B_1$ and $H(A_2\times[0,1])\subseteq B_2$. 
+\end{defn}
+
+\begin{defn}{The nth Relative Homotopy Groups}{} Let $(X,A,x_0)$ be a pointed pair of space. Let $n\geq 2$. Regard $I^{n-1}$ sitting inside $I^n$ by $I^{n-1}=\{(x_1,\dots,x_n)\in I^n\;|\;x_n=0\}$ and let $J^{n-1}=\overline{\partial I^n\setminus I^{n-1}}$. Define the relative homotopy groups of the triple by $$\pi_n(X,A,x_0)=\frac{\left\{\gamma:\left(I^n,\partial I^n,J^{n-1}\right)\to\left(X,A,x_0\right)\;\bigg{|}\;\gamma\text{ is continuous }\right\}}{\simeq}$$ where we say that $f\simeq g$ if there exists a homotopy between $f$ and $g$. 
+\end{defn}
+
+It is easy to see that $\pi_n(X,x_0,x_0)=\pi_n(X,x_0)$ so that homotopy groups are a special case of the relative homotopy groups. 
+
+\begin{lmm}{}{} For any $n\in\N$, the two triplets $(I^n,\partial I^n,J^{n-1})$ and $(D^n,S^{n-1},s_0)$ are homotopy equivalent. 
+\end{lmm}
+
+\begin{thm}{}{} Let $(X,A,x_0)$ be a pointed pair of space. The composition law on definition 1.1.4 defines a group structure on $\pi_n(X,A,x_0)$ for $n\geq 2$. Moreover, $\pi_n(X,A,x_0)$ is abelian for $n\geq 3$. 
+\end{thm}
+
+\subsection{Induced Maps of Relative Homotopy Groups}
+\begin{thm}{}{} Let $(X,A,x_0)$ and $(Y,B,y_0)$ be pointed pairs of spaces and $f:(X,A,x_0)\to(Y,B,y_0)$ a map. Then $f$ induces a map on the relative homotopy groups $$f_\ast:\pi_n(X,A,x_0)\to\pi_n(Y,B,y_0)$$ for $n\geq 2$ satisfying the following functorial properties: 
+\begin{itemize}
+\item $f_\ast$ is a group homomorphism
+\item If $g:(Y,B,y_0)\to(Z,C,z_0)$ is a map, then $$(g\circ f)_\ast=g_\ast\circ f_\ast$$
+\item If $\text{id}_{(X,A,x_0)}$ is the identity map on $(X,A,x_0)$, then $$(\text{id}_{(X,A,x_0)})_\ast=\text{id}_{\pi_n(X,A,x_0)}$$
+\end{itemize}
+\end{thm}
+
+\begin{thm}{}{} Let $(X,A,x_0),(Y,B,y_0)$ be pointed pairs of spaces and $f,g:(X,A,x_0)\to (Y,B,y_0)$ be pointed maps. If $f$ and $g$ are homotopic, then the induced maps $$f_\ast=g_\ast:\pi_n(X,A,x_0)\to\pi_n(Y,B,y_0)$$ are equal. Moreover, if $f$ is a homotopy equivalence, then $f_\ast$ is an isomorphism. 
+\end{thm}
+
+TBA: change of base point isomorphisms. 
+
+\subsection{Long Exact Sequence in Homotopy Groups}
+\begin{lmm}{Compression Criterion}{} Let $(X,A,x_0)$ be a pair of spaces with basepoint. Let $f:(D^n,S^{n-1},\ast)\to(X,A,x_0)$ be a map. Then $[f]=[e_{x_0}]\in\pi_n(X,A,x_0)$ if and only if $$(f:D^n\to X)\overset{S^{n-1}}{\simeq}(g:D^n\to X)$$ where $g$ is any map such that $g(X)\subseteq A$. 
+\begin{proof}
+Suppose that the second criterion is satisfied. Then it clearly shows that $[f]=[g]\in\pi_n(X,A,x_0)$. Let $r:D^n\times I\to D^n$ be a deformation retract from $D^n$ to $\ast\in S^{n-1}\subset D^n$. Consider the map $g\circ r:D^n\times I\to X$. When $t=0$, this is the map $g$. When $t=1$, $g\circ r$ factors through $\ast$ and so becomes a map $\ast\to X$. In other words, it is the constant map $e_{x_0}$. Moreover, it $g\circ r$ has image in $A$ and so in particular it sends $S^{n-1}$ to $A$. Thus $g\circ r$ is a homotopy between $\text{e}_{x_0}$ and $g$. We conclude that $[f]=[g]=[e_{x_0}]$. \\
+
+Now suppose that $[f]=[e_{x_0}]\in\pi_n(X,A,x_0)$ is given by the homotopy $H:D^n\times I\to X$. This means that $H(D^n\times\{1\})\subseteq\{x_0\}\subset A$ and $H(S^{n-1}\times I)\subset A$. Now $D^n\times I$ deformation retracts to the cup $D^n\times\{1\}\cup S^{n-1}\times I$ by radical projection from the center point of $D^n\times\{0\}$. Thus $H$ can be converted into a map from $D^n\times\{1\}\cup S^{n-1}\times I$ to $X$. Then $H$ is now a homotopy from $f$ to a map $H(-,1):D^n\to X$ which has image in $A$, relative to $S^{n-1}$. Thus we conclude. 
+\end{proof}
+\end{lmm}
+
+\begin{thm}{}{} Let $X$ be a space and $A,B$ be subspaces of $X$ such that $B\subseteq A\subseteq X$. Let $x_0\in B$. Then there is a long exact sequence in relative homotopy groups: \\
+\adjustbox{scale=0.88,center}{\begin{tikzcd}
+	\cdots & {\pi_n(A,B,x_0)} & {\pi_n(X,B,x_0)} & {\pi_n(X,A,x_0)} & {\pi_{n-1}(A,B,x_0)} & \cdots & {\pi_1(X,A,x_0)}
+	\arrow[from=1-1, to=1-2]
+	\arrow["{i_\ast}", from=1-2, to=1-3]
+	\arrow["{j_\ast}", from=1-3, to=1-4]
+	\arrow["{\partial_n}", from=1-4, to=1-5]
+	\arrow[from=1-5, to=1-6]
+	\arrow[from=1-6, to=1-7]
+\end{tikzcd}}\\
+where $i:(A,B,x_0)\to(X,B,x_0)$ and $j:(X,B,x_0)\to(X,A,x_0)$ are the inclusions and $\partial:\pi_n(X,A,x_0)\to\pi_{n-1}(A,B,x_0)$ is given by $[\gamma]\mapsto[\gamma|_{I^{n-1}}]$ 
+\begin{proof}{}{}
+\end{proof}
+\end{thm}
+
+TBA: Naturality of the sequence. 
+
+\begin{thm}{}{} Let $(X,A,x_0)$ be a pointed pair of spaces. The relative homotopy groups and (absolute) homotopy groups of $(X,A,x_0)$ fit into a long exact sequence \\
+\adjustbox{scale=0.75,center}{\begin{tikzcd}
+	\cdots & {\pi_{n+1}(X,A,x_0)} & {\pi_n(A,x_0)} & {\pi_n(X,x_0)} & {\pi_n(X,A,x_0)} & {\pi_{n-1}(A,x_0)} & \cdots & {\pi_0(X,x_0)} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["{\partial_{n+1}}", from=1-2, to=1-3]
+	\arrow["{i_\ast}", from=1-3, to=1-4]
+	\arrow["{j_\ast}", from=1-4, to=1-5]
+	\arrow["{\partial_n}", from=1-5, to=1-6]
+	\arrow[from=1-6, to=1-7]
+	\arrow[from=1-8, to=1-9]
+	\arrow[from=1-7, to=1-8]
+\end{tikzcd}}\\
+where $\partial_n$ is defined by $[f]\mapsto [f|_{I^{n-1}}]$ and $i_\ast$ and $j_\ast$ are induced by inclusions. 
+\end{thm}
+
+Note that even though at the end of the sequence group structures are not defined, exactness still makes sense: kernels in this case consists of elements that map to the homotopy class of the constant map. 
+
+\subsection{Homotopical Connectivity}
+\begin{defn}{n-Connected Space}{}\\
+Let $X$ be a space. We say that it is $n$-connected if $$\pi_k(X,x_0)=0$$ for $0\leq k\leq n$ and some $x_0\in X$. 
+\end{defn}
+
+Note that $\pi_0(X,x_0)$ implies that $X$ is path connected. Hence the notion of $n$-connectedness does not depend on the base point by the change of base point isomorphism. In particular, $\pi_k(X,x_0)=0$ for $0\leq k\leq n$ and some $x_0\in X$ if and only if $\pi_k(X,x_0)=0$ for $0\leq k\leq n$ for all $x_0\in X$. (Hatcher)
+
+\begin{defn}{n-Connected Pair of Spaces}{}\\
+Let $(X,A)$ be a pair of space. We say that it is $n$-connected if the following are true. 
+\begin{itemize}
+\item $\pi_k(X,A,x_0)=0$ for $0<k\leq n$ and all $x_0\in A$. 
+\item $\pi_0(\iota):\pi_0(A)\to\pi_0(X)$ is surjective. 
+\end{itemize}
+\end{defn}
+
+TBA: conditions in P.346 of Hatcher
+
+\begin{defn}{Weakly Contractible}{}\\
+Let $X$ be a space. We say that $X$ is weakly contractible if $$\pi_n(X)=0$$ for all $n\geq 0$. 
+\end{defn}
+
+\begin{defn}{Weak Homotopy Equivalence}{} We say that a map $f:X\to Y$ is a weak homotopy equivalence if it induces isomorphisms on all homotopy groups $\pi_n$ on any choice of base point. 
+\end{defn}
+
+TBA: compression lemma in Hatcher
+
+\begin{prp}{}{}\\
+Let $X,Y$ be spaces and let $f:X\to Y$ be a weak homotopy equivalence. Then $f$ induces bijections $$[Z,X]\cong[Z,Y]\;\;\;\;\text{ and }\;\;\;\;[Z,X]_\ast\cong[Z,Y]_\ast$$ for all CW-complexes $Z$. 
+\end{prp}
 
 \pagebreak
 \section{CW Complexes}
@@ -981,7 +1244,8 @@ Suppose that $A$ is open in $X$. Then $A\cap X^n$ is open in $X^n$ for every $n$
 \end{proof}
 \end{prp}
 
-\begin{defn}{Subcomplex}{} A subcomplex of a CW complex $X$ is a space $A$ that is a union of cells $D_\alpha^n\setminus S_\alpha^{n-1}$ in $X$ such that for every cell it also contains its closure. 
+\begin{defn}{Subcomplex}{}\\
+Let $X$ be a CW complex. A CW subcomplex of $X$ is a CW complex $A$ such that every $n$-cell of $A$ is an $n$-cell of $X$ for all $n\in\N$. 
 \end{defn}
 
 \begin{prp}{}{} A compact topological subspace of a CW complex $X$ is contained in a finite subcomplex. 
@@ -994,7 +1258,6 @@ Since we know that $C$ meets finitely many cells of $X$, and these finitely many
 \end{proof}
 \end{prp}
 
-\subsection{Properties of CW Complexes}
 \begin{prp}{}{} Every CW complex is a normal space and hence Hausdorff. 
 \end{prp}
 
@@ -1036,6 +1299,10 @@ Let $X,Y$ be CW complexes. Suppose that one of the following holds.
 \end{itemize}
 Then the product complex $X\times Y$ is homeomorphic to the product of $X$ and $Y$ as topological spaces. 
 \end{prp}
+
+\begin{defn}{Cellular Maps}{}\\
+Let $X,Y$ be CW complexes. Let $f:X\to Y$ be a map. We say that $f$ is a cellular map if $f(X^n)\subseteq Y^n$ for all $n\in\N$. 
+\end{defn}
 
 \subsection{Admitting CW-Complex Structures}
 It is natural to ask that given a space and data mapping $n$-cells into the space, when will the space admit a CW complex structure. The answer is given by the following. 
@@ -1237,6 +1504,100 @@ Notice that the green part $U_2$ which is a Mobius band deformation retracts to 
 \end{thm}
 
 A similar method can be employed for the torus and the Klein bottle. 
+
+\pagebreak
+\section{Whitehead's Theorem and CW Approximations}
+\subsection{Whitehead's Theorem}
+\begin{thm}{Whitehead's Theorem}{} If $X$ and $Y$ are CW-complexes and $f:X\to Y$ is a weak homotopy equivalence, then $f$ is a homotopy equivalence. 
+\end{thm}
+
+TBA: extension lemma in Hatcher. 
+
+\begin{crl}{}{} If $X$ and $Y$ are CW-complexes with $\pi_1(X)=\pi_1(Y)=0$ and $f:X\to Y$ induces isomorphisms on homology groups $H_n$ for all $n$, then $f$ is a homotopy equivalence. 
+\end{crl}
+
+\subsection{Cellular Approximations}
+\begin{defn}{Cellular Approximations}{} Let $X$ and $Y$ be CW-complexes. We say that $f:X\to Y$ has a cellular approximations if $f$ is homotopic to a cellular map $f':X\to Y$. 
+\end{defn}
+
+To this end we need to revisit the notion of polyhedra. 
+
+\begin{defn}{Convex Polyhedra}{} Let $n\in\N$. A convex polyhedra is a subset $S$ of $\R^n$ of the form $$S=\left\{x=(x_1,\dots,x_n)\in\R^n\;\bigg{|}\;\sum_{k=1}^na_{k,1}x_k\leq b_1,\dots,\sum_{k=1}^n a_{k,s}x_k\leq b_s\right\}$$ for some $a_{1,1},\dots,a_{n,s},b_1,\dots,b_s\in\R$. 
+\end{defn}
+
+\begin{lmm}{}{} Let $X$ be a CW complex. Let $Y\subseteq X$ be a CW subcomplex. Let $Z$ be obtained by attaching a cell $e^k$ to $Y$. Let $f:I^n\to Z$ be a map. Then there exists a map $g:I^n\to X$ such that $$f\overset{f^{-1}(Y)}{\simeq} g$$ and $g$ is such that the following is true. There exists a simplex $\Delta^k\subset e^k$ and polyhedra $P_1,\dots,P_d$ such that $g$ is the (possibly empty) union $$g^{-1}(\Delta^k)=\bigcup_{k=1}^n$$ and $g|_{P_t}$ is the restriction of a linear surjection $\R^n\to\R^k$ for all $t$. 
+\end{lmm}
+
+\begin{thm}{Cellular Approximation Theorem}{}\\
+Let $X,Y$ be CW complexes. Let $f:X\to Y$ be a map. Then the following are true. 
+\begin{itemize}
+\item $f$ is homotopic to a cellular map (called its cellular approximation). 
+\item If $f$ is homotopic to a cellular map $f'$ and $f$ is already cellular for some subcomplex $A\subseteq X$, then the homotopy to its cellular approximation can be taken such that $f'|_A=f|_A$. 
+\end{itemize}
+\end{thm}
+
+\begin{eg}{}{}\\
+Let $0\leq n<m$. Then $\pi_n(S^m)=0$. 
+\begin{proof}\\
+Let $[f]\in\pi_n(S^m)$. By the above theorem, we know that $f:S^n\to S^m$ is homotopic to a cellular map, where $S^n$ is given the CW structure of a $0$-cell and an $n$-cell. But the $n$-skeleton of $S^m$ only consists of its $0$-cell. Hence the cellular approximation of $f$ is null-homotopic. Hence $[f]=0$. 
+\end{proof}
+\end{eg}
+
+\begin{eg}{}{}\\
+$S^\infty=\text{colim}_{n\in\N}S^n$ is weakly contractible and contractible. 
+\begin{proof}\\
+Let $n\in\N$. Let $[f]\in\pi_n(S^\infty)$. Then $f:S^n\to S^\infty$ has a compact image since $S^n$ is compact. By definition of the colimit, we have that $\{S^n\;|\;n\in\N\}$ is an open cover of $S^\infty$, hence the image of $f$ lies in $S^{n_1},\dots,S^{n_k}$ for some $n_1,\dots,n_k\in\N$. Let $m=\max\{n_1,\dots,n_k,n+1\}$. Since the colimit is a direct limit and each map is an inclusion, we have that $f$ factors into the following: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{S^n} && {S^\infty} \\
+	& {S^m}
+	\arrow["f", from=1-1, to=1-3]
+	\arrow["g"', from=1-1, to=2-2]
+	\arrow[from=2-2, to=1-3]
+\end{tikzcd}}\\
+But $m>n$ since $m\geq n+1$, and we know that $\pi_n(S^m)=0$ for $m>n$. Hence $g$ is null homotopic, and so is $f$. Since $S^\infty$ is a CW complex, by Whitehead's theorem, $S^\infty$ is contractible. 
+\end{proof}
+\end{eg}
+
+\begin{thm}{Relative Cellular Approximation}{} Any map $f:(X,A)\to (Y,B)$ between pairs of CW-complexes has a cellular approximation. 
+\end{thm}
+
+\begin{crl}{}{} Let $A\subset X$ be CW-complexes and suppose that all cells $X\setminus A$ have dimension larger than $n$. Then $(X,A)$ is $n$-connected. 
+\end{crl}
+
+\begin{crl}{}{} Let $X$ be a CW complex and let $X^n$ be its $n$-skeleton. Then $(X,X^n)$ is $n$-connected. Moreover, the inclusion $X^n\hookrightarrow X$ induces an isomorphism $$\pi_k(X^n)\to\pi_k(X)$$ for $0\leq k<n$ and a surjection for $k=n$. 
+\end{crl}
+
+\subsection{CW Approximations}
+\begin{defn}{CW Approximation}{} Let $X$ be a space. A CW approximation of $X$ is a weak homotopy equivalence $f:Z\to X$ where $Z$ is a CW complex. 
+\end{defn}
+
+The goal of this section is that every space has a CW approximation. The given homotopy equivalence makes this notion powerful because this means that for any space $X$, there exists a CW-complex such that $X$ and $Z$ are homotopy equivalent, and moreover, has isomorphic homotopy, homology and cohomology groups. 
+
+\begin{defn}{CW Model}{} Let $(X,A)$ be a non-empty pair of CW-complexes. An $n$-connected CW model of $(X,A)$ is an $n$-connected CW pair $(Z,A)$ together with a map $f:Z\to X$ with $f|_A=\text{id}_A$ such that $$f_\ast:\pi_i(Z)\to\pi_i(X)$$ is an isomorphism for $i>n$ and an injection for $i=n$ for any choice of base point. 
+\end{defn}
+
+\begin{thm}{}{} For any non-empty pair $(X,A)$ of CW-complexes, there exists an $n$-connected model $(Z,A)$. Moreover, $Z$ can be built from $A$ by attaching cells of dimension greater than $n$. 
+\end{thm}
+
+\begin{thm}{}{} Every pair of spaces $(X,A)$ has a CW approximation. Such a CW approximation is unique up to homotopy equivalence. 
+\end{thm}
+
+\subsection{Eilenberg-MacLane Spaces}
+\begin{defn}{Eilenberg-MacLane Space}{}\\
+Let $G$ be a group and $n\in\N$. We say that a space $X$ is an Eilenberg-MacLane space of type $K(G,n)$ if $$\pi_k(X)=\begin{cases}
+K(G,n) & \text{ if } k=n\\
+0 & \text{ otherwise }
+\end{cases}$$
+\end{defn}
+
+We often denote this space $X$ directly by $X=K(G,n)$. 
+
+\begin{prp}{}{} Let $G$ be a group. Then there exists a $K(G,1)$-CW complex. 
+\end{prp}
+
+\begin{thm}{}{} Let $G$ be an abelian group and $n\geq 2$. Then there exists a $K(G,n)$-CW complex. Moreover, it is uniquely determined by $G$ and $n$. 
+\end{thm}
+
 
 
 

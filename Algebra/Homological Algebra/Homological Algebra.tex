@@ -221,19 +221,10 @@ More generally, the tensor-hom adjunction is a phenomena that exhibits ${_R}\bol
 \begin{prp}{}{} Let $R$ be a ring. Then $({_R}\bold{Mod},\otimes_R,R)$ is a symmetric monoidal category. Moreover, it is a closed monoidal category with internal hom given by the usual hom functor $\text{HOM}_{{_R}\bold{Mod}}(-,-)=\Hom_R(-,-)$. 
 \end{prp}
 
-We have seen that the left and right Hom functors $$\Hom(M,-):{_R\bold{Mod}}\to{_R\bold{Mod}}\;\;\;\;\text{ and }\;\;\;\;\Hom(-,M):{_R\bold{Mod}}\to{_R\bold{Mod}}$$ are left exact functors. Using the tensor-hom adjunction, we can deduce the following. 
+Notice that because there is a canonical isomorphism $M\otimes_RN\cong N\otimes_RM$, we can replace $-\otimes_RM$ in the natural isomorphism $$\Hom_{_R\bold{Mod}}(-\otimes_RM,-)\cong\Hom_{_R\bold{Mod}}(-,\Hom_{_R\bold{Mod}}(M,-))$$ with $M\otimes_R-$. This leaves us with the question: What is the functor $\Hom(-,M)$ adjoint to? The answer is itself! $$\Hom_R(A,\Hom_R(B,C))\cong\Hom(B,\Hom(A,C))$$ Therefore it is more often to discuss $\Hom(M,-)$ in conjunction with $-\otimes_RM$, while $\Hom(-,M)$ is often left behind. 
 
-\begin{prp}{}{} Let $R$ be a ring and let $M$ be an $R$-module. Then both $$-\otimes_R M:{_R\bold{Mod}}\to{_R\bold{Mod}}\;\;\;\;\text{ and }\;\;\;\;M\otimes_R-:{_R\bold{Mod}}\to{_R\bold{Mod}}$$ are right exact functors. 
-\end{prp}
-
-We find it important to notice the relation between all four functor here. Notice that because there is a canonical isomorphism $M\otimes_RN\cong N\otimes_RM$, we can replace $-\otimes_RM$ in the natural isomorphism $$\Hom_{_R\bold{Mod}}(-\otimes_RM,-)\cong\Hom_{_R\bold{Mod}}(-,\Hom_{_R\bold{Mod}}(M,-))$$ with $M\otimes_R-$. This leaves us with the question: What is the functor $\Hom(-,M)$ adjoint to? The answer is itself! $$\Hom_R(A,\Hom_R(B,C))\cong\Hom(B,\Hom(A,C))$$ Therefore it is more often to discuss $\Hom(M,-)$ in conjunction with $-\otimes_RM$, while $\Hom(-,M)$ is often left behind. \\~\\
-
-\begin{thm}{Change of Base Ring I}{}\\
-Let $R,S$ be commutative rings. Let $\varphi:R\to S$ be a ring homomorphism. Then there is an adjunction $$-\otimes_RS:\bold{Mod}_R\overset{\dashv}{\rightleftarrows}\bold{Mod}_S:-|_R$$
-\end{thm}
-
-\begin{thm}{Change of Base Ring II}{}\\
-Let $R,S$ be commutative rings. Let $\varphi:R\to S$ be a ring homomorphism. Then there is an adjunction $$-|_R:\bold{Mod}_S\overset{\dashv}{\rightleftarrows}\bold{Mod}_R:\Hom_R(S,-)$$
+\begin{thm}{Change of Base Rings}{}\\
+Let $R,S$ be rings. Let $\varphi:R\to S$ be a ring homomorphism. Then there is an adjunction $$\text{Ind}_R^S:\bold{Mod}_R\overset{\dashv}{\rightleftarrows}\bold{Mod}_S:\text{Res}_R^S$$
 \end{thm}
 
 \subsection{Graded Objects and Filtrations}
@@ -1730,7 +1721,7 @@ Moreover, any two such chain maps are homotopic.
 \begin{defn}{Projective Resolution}{}\\
 Let $\mA$ be an abelian category. Let $A\in\mA$. A projective resolution of $A$ is a chain complex $P\in\bold{Ch}_{\geq 0}(\mA)$ such that the following are true. 
 \begin{itemize}
-\item $P_n$ is injective for all $n\geq 0$. 
+\item $P_n$ is projective for all $n\geq 0$. 
 \item $P_\bullet$ is a left resolution of $A$. 
 \end{itemize}
 \end{defn}
@@ -2152,7 +2143,7 @@ Let $R$ be a ring. Let $M$ be a left $R$-module. Let $\varphi:M\to R$ be an $R$-
 When $M$ is a finitely generated free $R$-module, it suffices to see where a set of $R$-basis is mapped to. 
 
 \begin{defn}{Koszul Complex on Central Elements}{}\\
-Let $R$ be a ring. Let $x_1,\dots,x_n\in Z(R)$ be central elements. Define the Koszul complex on $x_1,\dots,x_n$ to be $$K_\bullet(x_1,\dots,x_n)=K\left((r_1,\dots,r_n)\in R^n\mapsto\sum_{i=1}^nr_ix_i\in R\right)$$
+Let $R$ be a ring. Let $x_1,\dots,x_n\in Z(R)$ be central elements. Let $M$ be an $R$-module. Define the Koszul complex of $M$ on $x_1,\dots,x_n$ to be $$K_\bullet(x_1,\dots,x_n;M)=K_\bullet(\varphi)$$ where $\varphi:M^n\to M$ is the map $\varphi(m_1,\dots,m_n)=\sum_{i=1}^nx_i\cdot m_i$. 
 \end{defn}
 
 Let $R$ be a ring. Let $x_1,\dots,x_n\in R$ be central elements. Let $e_1,\dots,e_n$ be an $R$-basis for $R^n$. Then we may describe the differential on the $R$-basis of $\Lambda^k(R^n)$ as follows: $$d(e_{i_1}\wedge\cdots\wedge e_{i_k})=\sum_{j=1}^k(-1)^{j+1}x_je_{i_1}\wedge\cdots\wedge\widehat{e_{i_j}}\wedge\cdots\wedge e_{i_k}$$
@@ -2192,11 +2183,21 @@ The differentials are given as follows.
 \begin{defn}{Koszul (Co)Homology}{} Let $R$ be a ring. Let $x_1,\dots,x_n\in Z(R)$ be central elements. Let $M$ be an $R$-module. Define the Koszul homology of $M$ with respect to $x_1,\dots,x_n$ by $$H_k^\text{Kos}(x_1,\dots,x_n;M)=H_k(K(x_1,\dots,x_n;M))$$ Define the Koszul cohomology of $M$ with respect to the central elements by $$H_\text{Kos}^k(x_1,\dots,x_n;M)=H^k(\Hom_R(K(x_1,\dots,x_n)),M)$$
 \end{defn}
 
-\begin{lmm}{}{} Let $R$ be a ring. Let $x_1,\dots,x_n\in Z(R)$ be central elements. Let $M$ be an $R$-module. Then the following are true. 
+\begin{lmm}{}{}\\
+Let $R$ be a ring. Let $x_1,\dots,x_n\in Z(R)$ be central elements. Let $M$ be an $R$-module. Then the following are true. 
 \begin{itemize}
 \item $H_0^\text{Kos}(x_1,\dots,x_n;M)=\frac{M}{(x_1,\dots,x_n)M}$
-\item $H_\text{Kos}^0(x_1,\dots,x_n;M)=\{m\in M\;|\;x_im=0\text{ for all }i\}$
+\item $H_n^\text{Kos}(x_1,\dots,x_n;M)=\{m\in M\;|\;x_im=0\text{ for all }i\}$
 \end{itemize}
+\begin{proof}
+Notice that the map $K_1(x_1,\dots,x_n;M)\to K_0(x_1,\dots,x_n;M)$ is given by $(m_1,\dots,m_n)\mapsto\sum_{i=1}^nx_i\cdot m_i$. Hence the image of the map is given by $(x_1,\dots,x_n)M$. Thus we have $$H_0^\text{Kos}(x_1,\dots,x_n;M)=\frac{\ker(M\to 0)}{\im(K_1(x_1,\dots,x_n;M)\to K_0(x_1,\dots,x_n;M))}=\frac{M}{(x_1,\dots,x_n)M}$$ Similarly, the map $K_n(x_1,\dots,x_n;M)\to K_{n-1}(x_1,\dots,x_n;M)$ is given by $$m\mapsto\begin{pmatrix}
+(-1)^{n+1}x_n\\
+\vdots\\
+(-1)^{i+1}x_i\\
+\vdots\\
+x_1
+\end{pmatrix}$$ Hence the kernel of the map is given by $\{m\in M\;|\;x_im=0\text{ for all }1\leq i\leq n\}$. Thus we have $$H_n^\text{Kos}(x_1,\dots,x_n;M)=\frac{\ker(K_n(x_1,\dots,x_n;M)\to K_{n-1}(x_1,\dots,x_n;M))}{\im(0\to M)}=\{m\in M\;|\;x_im=0\text{ for all }i\}$$ So we are done. 
+\end{proof}
 \end{lmm}
 
 \begin{thm}{Kunneth Theorem}{} Let $R$ be a ring. Let $x_1,\dots,x_n\in R$ be central elements. Let $C_\bullet$ be a chain complex of $R$-modules. Then there is an exact sequence given by \\~\\
@@ -2209,7 +2210,8 @@ The differentials are given as follows.
 \end{tikzcd}}
 \end{thm}
 
-\begin{thm}{Self Duality of the Koszul Complex}{} Let $R$ be a ring. Let $x_1,\dots,x_n\in Z(R)$ be central elements. Let $M$ be a left $R$-module. Then there is a natural isomorphism of chain complexes $$\Hom(K(x_1,\dots,x_n);M)\cong K(x_1,\dots,x_n;M)$$
+\begin{thm}{Self Duality of the Koszul Complex}{}\\
+Let $R$ be a ring. Let $x_1,\dots,x_n\in Z(R)$ be central elements. Let $M$ be a left $R$-module. Then there is a natural isomorphism of chain complexes $$\Hom(K(x_1,\dots,x_n);M)\cong K(x_1,\dots,x_n;M)$$ where we think of the left complex as a chain complex. 
 \end{thm}
 
 The self duality of the Koszul complex means that we could have equally defined the differential to be going up the chain instead of down. In this case, the complex can be defined as \\~\\

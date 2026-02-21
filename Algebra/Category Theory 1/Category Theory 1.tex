@@ -1071,7 +1071,12 @@ Consider the category of categories $\bold{CAT}$. Let $\mC,\mD$ be objects. Then
 \subsection{Pullbacks and Pushouts}
 Following this we have a stronger notion of products which restricts the product to an even stronger sense by forcing them to be related by a commutative square. 
 
-\begin{defn}{Pullbacks and Pushouts}{} Let $\mC$ be a category. A pullback is the limit of a diagram $X:\mJ\to\mC$ where $\mJ=\left(\cdot\rightarrow\cdot\leftarrow\cdot\right)$. We denote the limit in this case as $$\lim_\mJ X=C\times_DB$$ Dually, a pushout is the colimit of a diagram $X:\mJ^{\text{op}}\to\mC$, where $\mJ=\left(\cdot\leftarrow\cdot\rightarrow\cdot\right)$. We denote the colimit in this case as $$\colim_\mJ X=C\amalg_DB$$
+\begin{defn}{Pullbacks}{}\\
+Let $\mC$ be a category. Suppose that $\mJ=\left(1\rightarrow 0\leftarrow 2\right)$. A pullback in $\mC$ is the limit of a diagram $X:\mJ\to\mC$. We denote the pullback by $$X(1)\times_{X(0)}X(2)=\lim_\mJ X$$
+\end{defn}
+
+\begin{defn}{Pushouts}{}\\
+Let $\mC$ be a category. Suppose that $\mJ=\left(1\leftarrow0\rightarrow2\right)$. A pushout in $\mC$ is the colimit of a diagram $X:\mJ\to\mC$. We denote the pushout by $$X(1)\amalg_{X(0)}X(2)=\text{colim}_\mJ X$$
 \end{defn}
 
 In particular, the universal product of limits means that for any $X\in\text{Obj}(\mC)$ together with maps $\lambda_C:X\to C$ and $\lambda_B:X\to B$ such that $f\circ\lambda_C=g\circ\lambda_D$, there exists a unique $u:X\to C\times_DB$ such that the following diagram commutes (Dually, the diagram on the right): \\
@@ -1083,53 +1088,47 @@ X\arrow[rrdd, "\lambda_C", bend left=25]\arrow[ddddr, "\lambda_B"', bend right=2
  & B\arrow[r, "g"] & D & & & & & B\arrow[uu, "\iota_B"']\arrow[uuuul, "\lambda_B", bend left=25] & D\arrow[l, "g"']\arrow[uu, "f"']
 \end{tikzcd}}\\
 
-\begin{prp}{}{} The following categories exhibit pullbacks and pushouts. 
+\begin{prp}{}{}\\
+Let $X,Y,Z\in\bold{Set}$ be sets. Then the following are true regarding pullbacks and pushouts. 
 \begin{itemize}
-\item For $\mC=\text{Set}$, the pullback is precisely $$C\times_DB\cong\{(x,y)\in C\times B\;|\;f(x)=g(y)\}$$ and the pushout is precisely $$C\amalg_DB\cong\frac{C\amalg B}{\sim}$$ where $x\in C\sim y\in B$ if and only if $f(x)=g(y)$ for $C,D,B$ sets. 
-\item For $\mC=\text{Top}$, pullbacks and pushouts are the same as in Set. 
-\item For $\mC=\text{Grp}$, pullbacks are the same as pullbacks in Set. The pushout is precisely $$\colim\left(G\overset{f}{\leftarrow}K\overset{g}{\rightarrow}H\right)=G\ast_KH$$ the amalgamated product of the groups $G$ and $H$ over $K$. \\(Recall the amalgamated product is defined by $G\ast_KH=\frac{G\ast H}{N}$ for $N$ the normalizer of $\{f(k)\cdot(g(k))^{-1}\;|\;k\in K\}$
-\end{itemize} 
-\begin{proof}
-Define $\lambda_C:\{(c,b)\in C\times B\;|\;f(c)=g(b)\}\to C$ by $(c,b)\mapsto c$ and similarly for $\lambda_B$. It is then clear that $f\circ\lambda_C=g\circ\lambda_B$ by definition of the set. By the universal property of pushouts, we obtain a unique map $u:\{(c,b)\in C\times B\;|\;f(c)=g(b)\}\to C\times_DB$. Now define a map $$v:C\times_DB\to \{(c,b)\in C\times B\;|\;f(c)=g(b)\}$$ by $v(z)=(\pi_C(z),\pi_B(z))$ Note that we have $\lambda_C(v(z))=\pi_C(z)$ and a similar argument shows that $\lambda_B\circ v=\pi_B$. Now apply $X=C\times_DB$ to the universal property of $C\times_DB$. Then there exists a unique map $C\times_DB\to C\times_DB$ such that the diagram in the above definition commutes. The identity is such a map and hence it is the unique map. But $u\circ v$ also allows the above diagram to commute because 
-\begin{align*}
-(\pi_C\circ u\circ v)(z)&=\lambda_C(v(z))\\
-&=\lambda_C(\pi_C(z),\pi_B(z))\\
-&=\pi_C(z)
-\end{align*}
-and similarly for $\pi_B\circ u\circ v=\pi_B$. Thus $u\circ v=\text{id}$. 
-\end{proof}
-\end{prp}
-
-\subsection{Inverse and Direct Limits}
-For diagram constructing purposes we define the category of natural numbers. 
-
-\begin{defn}{Category of Natural Numbers}{} The category of natural numbers $(\N,\leq)$ is the category where 
-\begin{itemize}
-\item the objects are $\N$
-\item the morphisms are $f_{ij}:i\to j$ for $i\leq j$
-\item Composition is defined such that $f_{jk}\circ f_{ij}=f_{ik}$
-\end{itemize}
-\end{defn}
-
-\begin{defn}{Inverse and Direct Limits}{} Let $\mC$ be a category. A direct limit is the limit of a diagram $X:(\N,\leq)\to\mC$. Dually, the inverse limit is the limit of a diagram $X:\mJ^{\text{op}}\to\mC$ where $\mJ^{\text{op}}=(\N,\leq)^{\text{op}}$. \\
-
-The universal property of the inverse limit is given by the following: For $C\in\text{Obj}(\mC)$ and maps $\lambda_i:C\to X(i)$, there exists a unique map $u:C\to\lim_{(\N,\leq)^{\text{op}}}X$ such that the following diagram commutes: \\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-&C\arrow[dd, "\exists!u", dashed]\arrow[bend right=25, ldddd, "\lambda_i"']\arrow[bend left=25, rdddd, "\lambda_j"]&\\
-&&\\
-& \lim X\arrow[ldd, "\pi_j"']\arrow[rdd, "\pi_i"] &\\
-&&\\
-X(i)\arrow[rr, "f_{ij}"] & & X(j)
-\end{tikzcd}}\\
-\end{defn}
-
-\begin{prp}{}{} The following categories exhibit inverse and direct limits. 
-\begin{itemize}
-\item For $\mC=\text{Set}$, the direct limit is $$\lim_{(\N,\leq)}X=\left\{(x_0,x_1,\dots)\in\prod_{i\in \N}X(i)\;\bigg{|}\;x_j=f_{ij}(x_i)\text{ for all }i\leq j\right\}=\varinjlim_{n\in\N}X(n)$$ and the inverse limit is $$\lim_{(\N,\leq)^\text{op}}X=\frac{\coprod_{i\in\N}X(i)}{\sim}=\varprojlim_{n\in\N}X(n)$$ where $x_i\sim x_j$ for $i<j$ and $x_i\in X(i)$ and $x_j\in X(j)$ if and only if there exists some $k\in K$ such that $f_{ik}(x_i)=f_{jk}(x_j)$. 
+\item Let $f:X\to Z$ and $g:Y\to Z$ be functions. Then the pullback of $f$ and $g$ is given by $$X\times_ZY=\{(x,y)\in X\times Y\;|\;f(x)=g(y)\}$$
+\item Let $f:Z\to X$ and $g:Z\to Y$ be functions. Then the pushout of $f$ and $g$ is given by $$X\amalg_ZY=\frac{X\amalg Y}{\sim}$$ where $f(z)\sim g(z)$ for $z\in Z$. 
 \end{itemize}
 \end{prp}
 
-\begin{prp}{}{} Let $X:(\N,\leq)\to\text{Set}$ such that each map $X_i\to X_{i+1}$ is a subset inclusion. Then $$\lim_{(\N,\leq)}X=\bigcup_{i=0}^\infty X_i$$
+\begin{prp}{}{}\\
+Let $X,Y,Z\in\bold{Top}$ be spaces. Then the following are true regarding pullbacks and pushouts. 
+\begin{itemize}
+\item Let $f:X\to Z$ and $g:Y\to Z$ be maps. Then the pullback of $f$ and $g$ is given by $$X\times_ZY=\{(x,y)\in X\times Y\;|\;f(x)=g(y)\}$$ together with the subspace topology. 
+\item Let $f:Z\to X$ and $g:Z\to Y$ be maps. Then the pushout of $f$ and $g$ is given by $$X\amalg_ZY=\frac{X\amalg Y}{\sim}$$ where $f(z)\sim g(z)$ for $z\in Z$, together with the quotient topology. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $G,H,K\in\bold{Grp}$ be groups. Then the following are true regarding pullbacks and pushouts. 
+\begin{itemize}
+\item Let $f:G\to K$ and $g:H\to K$ be maps. Then the pullback of $f$ and $g$ is given by $$G\times_KH=\{(x,y)\in G\times H\;|\;f(x)=g(y)\}$$ as a subgroup of $G\times H$. 
+\item Let $f:K\to G$ and $g:K\to H$ be maps. Then the pushout of $f$ and $g$ is given by the amalgamated product $$G\amalg_KH=G\ast_KH=\frac{G\ast H}{N_{G\ast H}(\{f(k)\cdot(g(k))^{-1}\;|\;k\in K\})}$$
+\end{itemize}
+\end{prp}
+
+\subsection{Inverse and Direct Limts}
+\begin{defn}{Inverse Limits}{}\\
+Let $I$ be a poset. Let $\mI$ be the category associated to $I$. Let $\mC$ be category. An inverse limit of $I$ in $\mC$ is the limit of a diagram $X:\mI^\text{op}\to\mC$. We denote the limit in this case as $$\varprojlim_\mI X=\lim_{\mI^\text{op}}X$$
+\end{defn}
+
+\begin{defn}{Directed Limits}{}\\
+Let $I$ be a poset. Let $\mI$ be the category associated to $I$. Let $\mC$ be category. A directed limit of $I$ in $\mC$ is the limit of a diagram $X:\mI\to\mC$. We denote the limit in this case as $$\varinjlim_\mI X=\lim_\mI X$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Consider the category $\bold{Set}$ of sets. 
+\begin{itemize}
+\item Let $X:\N^\text{op}\to\mC$ be a diagram. Then the inverse limit of $X$ is given by $$
+\varprojlim_\N X=\left\{(x_i)_{i\in\N}\in\prod_{i\in\N}X(i)\;\bigg{|}\;x_j=f_{ij}(x_i)\text{ for all }i\leq j\right\}$$
+\item Let $X:\N\to\mC$ be a diagram. Then the direct limit of $X$ is given by $$
+\varinjlim_\N X=\frac{\coprod_{i\in\N}X(i)}{\sim}$$ where $x_i\in X(i)\sim x_j\in X(j)$ if $i<j$ and there exists $k\in\N$ such that $f_{ik}(x_i)=f_{jk}(x_j)$. 
+\end{itemize}
 \end{prp}
 
 \subsection{Equalizers and Coequalizers}

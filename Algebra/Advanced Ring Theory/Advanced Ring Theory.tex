@@ -434,20 +434,27 @@ where the first inequality $\abs{q-\zeta^t}>q-1$ is clear since $\zeta^t\neq 1$ 
 \end{thm}
 
 \pagebreak
-\section{Structure Theorem for Semisimple Rings}
+\section{Decomposing Modules into Products by Orthogonal Idempotents}
 Simple modules are easy to understand since they have minimal internal structure. Semisimple modules are the next best modules one can consider. Artin-Wedderburn theorem at the very end not only gives a decomposition of semisimple rings using matrix rings over division rings, it also shows that semisimplicity does not depend on the left / right module structure. 
 
-
-\subsection{Peirce Decomposition for Modules}
-\begin{defn}{Idempotents}{} Let $R$ be a ring. We say that $e\in R$ is idempotent if $e^2=e$. 
+\subsection{Orthogonal Idempotents}
+\begin{defn}{Orthogonal Idempotents}{}\\
+Let $R$ be a ring. Let $e,f\in R$ be idempotents. We say that $e$ adn $f$ are orthogonal if $ef=fe=0$. 
 \end{defn}
 
-\begin{defn}{Full System of Orthogonal Idempotents}{} Let $R$ be a ring. Two idempotents $e,f$ are orthogonal if $ef=fe=0$. A full system of orthogonal idempotents is a finite collection of non-zero pairwise orthogonal idempotent elements $e_1,\dots,e_n\in R$ such that $e_1+\dots+e_n=1$. 
+\begin{defn}{Complete Set of Orthogonal Idempotents}{}\\
+Let $R$ be a ring. A complete set of orthogonal idempotents consists of elements $e_1,\dots,e_n\in R$ such that the following are true. 
+\begin{itemize}
+\item $e_i$ is idempotent for $1\leq i\leq n$. 
+\item $e_i$ and $e_j$ are orthogonal idempotents for $i\neq j$. 
+\item $\sum_{i=1}^ne_i=1$. 
+\end{itemize}
 \end{defn}
 
 Such a system always exists and may not be unique up even just up to the size $n\in\N$. Indeed one such trivial system is to take the identity $1$. 
 
-\begin{prp}{}{} Let $M$ be an $R$-module. Then there is a bijection $$\left\{\substack{\text{Finite direct sum}\\\text{decompositions }M=\bigoplus_{i=1}^n M_i}\right\}\;\;\overset{1:1}{\longleftrightarrow}\;\;\left\{\substack{\text{Full orthogonal system}\\\text{of idempotentes in }\text{End}_R(M)}\right\}$$ between the set of all finite direct sum decompositions $M=\bigoplus_{i=1}^n M_i$ with all $M_i\neq 0$ and the set of all full orthogonal system of idempotents in $\text{End}_R(M)$. 
+\begin{prp}{}{}\\
+Let $R$ be a ring. Let $M$ be an $R$-module. Then there is a bijection $$\left\{\substack{\text{Finite direct sum}\\\text{decompositions }M=\bigoplus_{i=1}^n M_i}\right\}\;\;\overset{1:1}{\longleftrightarrow}\;\;\left\{\substack{\text{Complete set of}\\\text{orthogonal idempotents in }\text{End}_R(M)}\right\}$$ between the set of all finite direct sum decompositions $M=\bigoplus_{i=1}^n M_i$ with all $M_i\neq 0$ and the set of all full orthogonal system of idempotents in $\text{End}_R(M)$. 
 \begin{proof}
 A decomposition $M=\bigoplus_{i=1}^nM_i$ gives a system of idempotents through its component maps $e_k:M\to M$ defined by $(x_1,\dots,x_n)\mapsto(0,\dots,0,x_i,0,\dots,0)$. This map is an endomorphism since it is the composition of the projection with to $M_k$ with the inclusion to $M$. It is clear that they form a full system of orthogonal idempotents for $\text{End}_R(M)$. \\
 
@@ -470,55 +477,82 @@ It is clear that these constructions are inverse functions between the stated se
 \end{proof}
 \end{prp}
 
-Note that in particular, we can also take $M$ to just be $R$ to get a decomposition on idempotents by ideals of $R$. This means that for $\{e_1,\dots,e_n\}$ a full orthogonal system of idempotents, we have a decomposition $$R=Re_1\oplus\cdots\oplus Re_n$$
-
-\begin{defn}{Peirce Decompositions}{} Let $M$ be an $R$-module. A finite direct sum decomposition $$M=\bigoplus_{i=1}^nM_i$$ arising from a full orthogonal system of idempotents are called Peirce decompositions. 
-\end{defn}
-
-For two idempotents $e$ and $f$, $eRf$ loses the structure of a ring and is just an abelian group. We give a useful interpretation of $eRf$ as follows. 
-
-\begin{prp}{}{} Let $e,f,g\in R$ be idempotents of a ring. Then the map $\psi:eRf\to\Hom_R(Re,Rf)$ defined by $$\psi(erf):Re\to Rf$$ to be the map $se\mapsto serf$ is an isomorphism of abelian groups such that $\psi(erf)\psi(fsg)=\psi(erfsg)$. In particular, if $e=f$, then $\psi$ is a ring isomorphism. 
+\begin{prp}{}{}\\
+Let $R$ be a ring. Let $e,f\in R$ be orthogonal idempotents. Then $eRf$ is a ring 
 \end{prp}
 
-By collecting all the abelian groups $eRf$ in a matrix, we can recover the ring $R$ itself. 
+\subsection{Indecomposable Modules}
+\begin{defn}{Indecomposale Modules}{}\\
+Let $R$ be a ring. Let $M$ be an $R$-module. We say that $R$ is indecomposable if $M\cong N\oplus L$ for some $R$-submodules $N,L\leq M$ implies that $M=N$ or $M=L$. 
+\end{defn}
 
-\begin{thm}{Two-Sided Peirce Decompositions}{} Let $R$ be a ring and $M$ an $R$-module. A full orthogonal system of idempotents in $R$ gives a direct sum decomposition of $R$ and $M$ into $\Z$-modules that can be written in matrix forms $$R=\bigoplus_{i,j=1}^n e_iRe_j=\begin{pmatrix}
-e_1Re_1 & \cdots & e_1Re_n\\
-\vdots & \ddots & \vdots\\
-e_nRe_1 & \cdots & e_nRe_n
-\end{pmatrix}\;\;\;\;\text{ and }\;\;\;\;M=\bigoplus_{i=1}^ne_iM=\begin{pmatrix}
-e_1M\\
-\vdots\\
-e_nM
-\end{pmatrix}$$ that satisfies the following: 
+\begin{crl}{}{}\\
+Let $R$ be a ring. Let $M$ be an $R$-module. Then the following are equivalent. 
 \begin{itemize}
-\item If $R$ is an $\F$-algebra for $\F$ a field, then all $e_iRe_j$ and $e_iM$ are $\F$-vector subspaces
-\item The multiplication in $R$ defines the structure of a ring on each $e_iRe_j$. This ring is non-zero. 
-\item The $R$-module action on $M$ defines a structure of $e_iRe_i$-module on $e_iM$
-\item In the matrix interpretation, the multiplication in $R$ and the $R$ action on $M$ satisfies the standard matrix rules
-\end{itemize} 
-\begin{proof}
-Let $e_1,\dots,e_n$ be the given full orthogonal system of idempotents of the ring $R$.  Then by proposition 3.1.3 we obtain a finite direct sum decomposition $$R=\bigoplus_{i=1}^ne_iR\;\;\;\;\text{ and }\;\;\;\;M=\bigoplus_{i=1}^ne_iM$$ Each $e_iR$ is an $R$-module since they are left ideals. Thus we can apply proposition 3.1.3 again to obtain $e_iR=\bigoplus_{i=1}^ne_iRe_j$ so that we obtain the required decompositions for $R$ and $M$. \\
+\item $M$ is indecomposable. 
+\item The only idempotents of $M$ are $0$ or $1$. 
+\end{itemize}
+\end{crl}
 
-Let $\lambda\in\F$ and $e_iye_j\in e_iRe_j$ for some $y\in R$. Then $$\lambda e_iye_j=e_i(y\lambda)e_j\in e_iRe_j$$ since $R$ is an $\F$-algebra. Since $e_iRe_j$ is an abelian subgroup, it follows that $e_iRe_j$ is an $\F$-vector subspace. The proof for $e_iM$ is similar. \\
+\begin{defn}{Primitive Idempotents}{}\\
+Let $R$ be a ring. Let $e\in R$ be an idempotent. We say that $e$ is primitive if $e$ is not the sum of two non-zero idempotents. 
+\end{defn}
 
-Multiplication in $R$ is given by $(e_ixe_i)\cdot(e_iye_i)=e_ixye_i$ so that multiplication is closed. Moreover, $1_{e_iRe_i}=e_i$ is not equal to $0$ so that the ring is non-zero. \\
+\begin{crl}{}{}\\
+Let $R$ be a ring. Let $M$ be an $R$-module. Let $e\in R$ be an idempotent. Then $eM$ is indecomposable if and only if $e$ is primitive. 
+\end{crl}
 
-Similarly, $(e_ixe_i)\cdot(e_im)=e_ixm\in e_iM$ so that $e_iM$ is closed under the ring action. Thus $e_iM$ becomes an $e_iRe_i$-module. \\
+\begin{crl}{}{}\\
+Let $R$ be a ring. Let $M$ be an $R$-module. Then the one to one correspondence between finite direct sums and full orthogonal systems induces a bijection: $$\left\{\substack{\text{Finite direct sum}\\\text{decompositions }M=\bigoplus_{i=1}^n M_i\\\text{Each }M_i\text{ is indecomposable }}\right\}\;\;\overset{1:1}{\longleftrightarrow}\;\;\left\{\substack{\text{Full orthogonal system}\\\text{of primitive idempotentes in }\text{End}_R(M)}\right\}$$
+\end{crl}
 
-It is easy to check that multiplication defined in the matrix way makes sense. 
-\end{proof}
+\begin{thm}{Krull-Schmidt Theorem for Modules}{}\\
+Let $R$ be a ring. Let $M\neq 0$ be an $R$-module. Suppose that $M$ has finite length. Then $M$ is a finite direct sum of unique (up to isomorphism) indecomposable modules unique up to permutation. 
 \end{thm}
 
-Note component wise multiplication only defines a group isomorphism between $R=\bigoplus_{i,j=1}^ne_iRe_j$ To obtain a ring isomorphism, one needs to consider multiplication as matrices. 
+\subsection{Peirce Decomposition}
+\begin{lmm}{}{}\\
+Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $e,f\in A$ be orthogonal idempotents. Then the following are true. 
+\begin{itemize}
+\item $eAf$ is an $R$-module. 
+\item $eAe$ and $eA$ are $R$-algebras. 
+\item Let $M$ be an $A$-module. Then $eM$ is an $eAe$-module and $eA$-module. 
+\end{itemize}
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $e,f\in A$. Let $\psi:eAf\to\Hom_A(Ae,Af)$ be the function given by $$\psi(erf)(se)=serf$$ Then the following are true. 
+\begin{itemize}
+\item If $e,f$ are orthogonal idempotents of $A$, then $\psi$ is an $R$-module isomorphism. 
+\item If $e=f$, then $\psi$ is an $R$-algebra isomorphism. 
+\end{itemize}
+\end{lmm}
+
+\begin{thm}{Peirce Decomposition}{}\\
+Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $e_1,\dots,e_n$ be a complete set of orthogonal idempotents in $A$. Then the following are true. 
+\begin{itemize}
+\item There is an isomorphism of $R$-algebras $$A\cong\bigoplus_{i=1}^ne_iA$$
+\item Let $M$ be an $A$-modules. There is an isomorphism of $R$-modules $$M\cong\bigoplus_{i=1}^ne_iM$$
+\end{itemize}
+\end{thm}
+
+Let $M$ be an $(R_1\times R_2)$-module. The above decomposition means that $M$ is isomorphic as an abelian group to a product $M_1\times M_2$ where $M_1$ is an $R_1$-module and $M_2$ is an $R_2$-module. 
+
+\begin{thm}{Two Sided Peirce Decomposition}{}\\
+Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $e_1,\dots,e_n$ be a complete set of orthogonal idempotents in $A$. Then the following are true. 
+\begin{itemize}
+\item There is an isomorphism of $R$-modules $$A\cong\bigoplus_{i,j=1}^ne_iAe_j\cong\begin{pmatrix}
+e_1Ae_1 & \cdots & e_1Ae_n\\
+\vdots & \ddots & \vdots\\
+e_nAe_1 & \cdots & e_nAe_n
+\end{pmatrix}$$
+\item Let $M$ be an $A$-module. Then there is an isomorphism of $R$-modules $$M\cong\bigoplus_{i=1}^ne_iM\cong\begin{pmatrix}
+e_1M\\\vdots\\e_nM
+\end{pmatrix}$$
+\end{itemize}
+\end{thm}
 
 \subsection{The Matrix Rings}
-Recall that for a ring $R$, we can define the matrix ring over $R$ by $$M_n(R)=\left\{\begin{pmatrix}
-a_{11} & \cdots & a_{1n}\\
-\vdots & \ddots & \vdots\\
-a_{n1} & \cdots & a_{nn}
-\end{pmatrix}\right\}$$ The latter section will focus on matrix rings over division rings. 
-
 \begin{prp}{}{} Let $R$ be a ring. Then the ideals in $R$ are in one to one correspondence with the ideals in $M_n(R)$ $$\left\{I\subseteq R\;\bigg{|}\;I\text{ is an ideal of} R\right\}\;\;\;\;\overset{1:1}{\longleftrightarrow}\;\;\;\;\left\{\overline{I}\subseteq M_n(R)\;\bigg{|}\;\overline{I}\text{ is an ideal}\right\}$$ via the following. For each $I$ an ideal of $R$, $M_n(I)$ is an ideal of $M_n(R)$. For each ideal $\overline{I}$ of $M_n(R)$, the set $$I=\{a_{11}\in R\;|\;(a_{ij})_{n\times  n}\in\overline{I}\}$$ is an ideal in $R$. 
 \end{prp}
 
@@ -528,57 +562,55 @@ a_{n1} & \cdots & a_{nn}
 \subsection{Artin-Wedderburn Theorem}
 Artin-Wedderburn not only completely classifies every semisimple left $R$-module for a ring $R$, it also gives a decomposition of the semisimple module into simple matrix rings over division rings. Therefore one often is allowed to reduce a question of semisimple rings into matrix rings. 
 
-\begin{thm}{Artin-Wedderburn Theorem}{} Let $R$ be a ring. Then the following are equivalent characterizations of semisimplicity. 
+\begin{thm}{Artin-Wedderburn Theorem}{}\\
+Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Then the following are equivalent. 
 \begin{itemize}
-\item Every left $R$-module is semisimple
-\item The ring $R$ as a left $R$-module is semisimple
-\item There is an isomorphism of rings $$R\cong\bigoplus_{i=1}^kM_{n_i}(D_i)$$ where each $D_i$ is a division ring and $n_i\in\N$. Moreover, the decomposition is unique up to reordering of the factors. 
+\item $A$ is semisimple as a left $A$-module. 
+\item Every left $A$-module is semisimple. 
+\item There is an isomorphism of $R$-algebras $$A\cong\bigoplus_{i=1}^kM_{n_i}(D_i)$$ where each $D_i$ is a division algebra over $R$ and $n_i\in\N^+$. Moreover, the decomposition is unique up to reordering of the factors. 
 \end{itemize} 
-\begin{proof}~\\
-\begin{itemize}
-\item $(1)\implies(2)$ is obvious because $R$ is also a left $R$-module. 
-\item $(2)\implies(1)$: Let $M$ be an $R$-module. Choose a generating set $B$ of $M$. Then $M$ is a quotient of the free module $\bigoplus_{b\in B}Rb$. Since $R$ is semisimple, $RB$ is also semisimple. By corollary 6.1.4, $M$ is also a semisimple module. 
-\item $(2)\implies(3)$: Write the $R$-module $R$ as a direct sum of simple modules $R=\bigoplus_{i\in I}S_i$. Note that the set $I$ is finite because $1=\sum_{i\in I}s_i$  for $s_i\in S_i$ and so we can remove the $0$ in the sum to get $1=s_1,\dots,s_m$. Then each element $r\in R$ can be written as $r=rs_1+\dots+rs_m$. Hence $R=\bigoplus_{i=1}^mS_i$. \\
-
-Let $L_1,\dots,L_k$ be distinct simple modules among the $S_i$. By Schur's lemma, $D_i=\text{End}_RL_i$ is a division ring. Reorder the summands so that we can group them as following: $$R=\underbrace{S_1\oplus\cdots\oplus S_{n_1}}_{\text{each }S_i\cong L_1}\oplus\cdots\oplus\underbrace{S_{n_1+\dots+n_{k-1}+1}\oplus\cdots\oplus S_m}_{\text{each }S_i\cong L_k}$$ Replace each $S_i$ with the corresponding $L_j$ together with lemma 2.4.3 to get $$R\cong\text{End}_R\cong\text{End}_R\left(\underbrace{L_1\oplus\cdots\oplus L_1}_{n_1}\oplus\cdots\oplus\underbrace{L_{i_k}\oplus\cdots\oplus L_k}_{n_k}\right)=\text{End}_R\left(\bigoplus_{j=1}^kL_j^{n_j}\right)$$ Now let $e_1,\dots,e_m$ be the full system of orthogonal idempotents corresponding to the above decomposition by proposition 6.2.4. Consider $e_j$ in the $j$th group and $e_t$ in the $t$th group. By proposition 6.2.5, we have $$e_jRe_t\cong\Hom_R(L_j,L_t)=\begin{cases}
-0 & \text{ if } j\neq t\\
-D_j=\text{End}_R(L_j) & \text{ if }j=t
-\end{cases}$$ Then by the Peirce decomposition, $$R=\begin{pmatrix}
-D_1 & \cdots & D_1 & 0 & \cdots & 0 & \cdots\\
-\vdots & & \vdots & \vdots & & \vdots & \\
-D_1 & \cdots & D_1 & 0 & \cdots & 0 & \cdots\\
-0 & \cdots & 0 & D_2 & \cdots & D_2 & \cdots\\
-\vdots & & \vdots & \vdots & & \vdots & \\
-0 & \cdots & 0 & D_2 & \cdots & D_2 & \cdots\\
-\vdots & & \vdots & \vdots & & \vdots & 
-\end{pmatrix}=M_{n_1}(D_1)\times M_{n_2}(D_2)\times\cdots\times M_{n_k}(D_k)$$
-\item $(3)\implies(2)$: Let $R=\prod_{i=1}^kM_{n_i}(D_i)$. Since $D_i$ is a division ring, we have seen that $M_{n_i}(D_i)$ is left semisimple thus their product is also left semisimple. 
-\end{itemize}
-\end{proof}
 \end{thm}
 
 Using the matrix ring over division rings, Artin-Wedderburn theorem implies that every semisimple module is built out of these matrix rings. Moreover, semisimplicity no longer distinguishes between left and right. 
 
-\begin{crl}{}{} A ring is left semisimple if and only if it is right semisimple. 
+\begin{crl}{}{}\\
+Let $R$ be a ring. Then $R$ is semisimple as a left $R$-module if and only if $R$ is semisimple as a right $R$-module. 
 \begin{proof}
 $R$ is a right $R$-module if and only if it is a left $R^{\text{op}}$-module. Moreover $M_n(D)^\text{op}\cong M_n(D^\text{op})$. Explicitly, we have seen that each $M_n(D)$ for $D$ a division ring is both left and right semisimple. 
 \end{proof}
 \end{crl}
 
-\begin{crl}{}{}\\
-Let $k$ be a field. Let $A$ be a semisimple $k$-algebra. Then there is an $k$-algebra isomorphism $$A\cong\bigoplus_{i=1}^kM_{n_i}(D_i)$$ of left $A$-modules where $n_i\in\N$ and each $D_i$ is a division algebra over $k$. 
-\begin{proof}\\
-In the proof of the Artin-Wdderburn theorem, notice that $D_i$ is defined to be a division algebra over $k$. 
-\end{proof}
-\end{crl}
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $A$ be a semisimple $k$-algebra. Let $A\cong\bigoplus_{i=1}^kM_{k_i}(D_i)$ be the Artin-Wedderburn decomposition of $A$. Then $A$ has $k$ unique (up to isomorphism) simple modules given by $M_{k_i}(D_i)$ for $1\leq i\leq k$. 
+\end{prp}
+
+\pagebreak
+\section{Finite Dimensional Algebras}
+\subsection{Basic Algebras}
+\begin{defn}{Basic Algebras}{}\\
+Let $k$ be a field. Let $A$ be a finite dimensional $k$-algebra. We say that $A$ is a basic algebra if the Artin-Wedderburn decomposition of $A/J(A)$ is given by $$\frac{A}{J(A)}\cong\bigoplus_{i=1}^nk$$ for some $n\in\N$. 
+\end{defn}
 
 \begin{prp}{}{}\\
-Let $k$ be a field. Let $A$ be a semisimple $k$-algebra. Let $A\cong\bigoplus_{i=1}^kM_{k_i}(D_i)$ be the Artin-Wedderburn decomposition of $A$. Then the following are true. 
-\begin{itemize}
-\item Up to isomorphism, $A$ has $k$ simple modules given by the unique (up to isomorphism) simple submodule of $M_{n_i}(D_i)$. 
-\item The simple modules of $A$ are isomorphic as $k$-vector spaces to $D_i^{n_i}$. 
-\end{itemize}
+Let $k$ be a field. Let $A$ be a finite dimensional $k$-algebra. Then $A$ is basic if and only if there exists a full orthogonal system of primitive idempotents $e_1,\dots,e_n$ of $A$ such that $e_iA\cong e_jA$ implies $i=j$. 
 \end{prp}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $A$ be a basic $k$-algebra. Let $M$ be a simple $A$-module. Then $\dim_k(M)=1$. 
+\end{prp}
+
+\begin{defn}{The Associated Basic Algebra}{}\\
+Let $k$ be a field. Let $A$ be a finite dimensional $k$-algebra. Let $e_1,\dots,e_n$ be a full orthogonal system of primitive idempotents. Define the associated basic algebra of $A$ to be the subalgebra $$A^\flat=(e_1+\dots+e_n)A(e_1+\dots+e_n)$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $A$ be a finite dimensional $k$-algebra. Then $A^\flat$ is a basic algebra. 
+\end{lmm}
+
+\subsection{Wedderburn-Malcev Theorem}
+\begin{thm}{Wedderburn-Malcev Theorem}{}\\
+Let $k$ be an algebraically closed field. Let $A$ be a finite dimensional $k$-algebra. Then there is a $k$-algebra isomorphism $$A\cong\frac{A}{J(A)}\oplus J(A)$$
+\end{thm}
 
 \pagebreak
 \section{Central Simple Algebras}

@@ -705,13 +705,30 @@ Following the above, we have that $\dim(R/(x_1,\dots,x_d))=0$. Thus we have that
 \pagebreak
 \section{Regular Sequences}
 \subsection{Regular Sequences}
-\begin{defn}{Regular Elements}{} Let $R$ be a commutative ring. Let $M$ be an $R$-module. Let $x\in R$. We say that $x$ is an $M$-regular element if for all $0\neq m\in M$, $xm\neq 0$. 
+\begin{defn}{Regular Elements}{}\\
+Let $R$ be a commutative ring. Let $M$ be an $R$-module. Let $x\in R$. We say that $x$ is an $M$-regular element if for all $0\neq m\in M$, $xm\neq 0$. 
 \end{defn}
 
 Note that this is the same as saying the multiplication map $\phi_x:M\to M$ is injective, and in the case that $M=R$, that $x$ is a not a zero divisor. 
 
-\begin{defn}{Regular Sequences}{} Let $R$ be a commutative ring and let $M$ be an $R$-module. Let $I$ be an ideal of $R$. Let $x_1,\dots,x_n\in I$ be an ordered sequence in $R$. We say that the sequence is $M$-regular in $I$ if $x_k$ is a regular element of $\frac{M}{(x_1,\dots,x_{k-1})M}$ for $1\leq k\leq n$. 
+\begin{defn}{Regular Sequences}{}\\
+Let $R$ be a commutative ring and let $M$ be an $R$-module. Let $I$ be an ideal of $R$. Let $x_1,\dots,x_n\in I$ be an ordered sequence in $R$. We say that the sequence is $M$-regular in $I$ if $x_k$ is a regular element of $\frac{M}{(x_1,\dots,x_{k-1})M}$ for $1\leq k\leq n$. 
 \end{defn}
+
+The order of the regular sequence matters in general. 
+
+\begin{eg}{}{}\\
+Let $F$ be a field. Then the following are true. 
+\begin{itemize}
+\item The sequence $x-1,xy,xz$ is regular in $F[x,y,z]$. 
+\item The sequence $xy,xz,x-1$ is not regular in $F[x,y,z]$. 
+\end{itemize}
+\begin{proof}\\
+Clearly $x-1$ is a regular element since it is not a zero divisor of $F[x,y,z]$. Now we have $\frac{F[x,y,z]}{(x-1)}\cong F[y,z]$ and the image of $xy$ and $xz$ in the isomorphism is $y$ and $z$ respectively. Then it is clear that $y$ is regular in $F[y,z]$ and $z$ is regular in $F[y,z]/(y)\cong F[z]$. \\
+
+On the other hand, $xy$ is a regular element of $F[x,y,z]$ since it is not a zero divisor. But $xz$ is not a zero divisor of $F[x,y,z]/(xy)$ because multiplication by $y$ gives the zero element. 
+\end{proof}
+\end{eg}
 
 \begin{lmm}{}{} Let $R$ be a commutative ring. Let $M$ be an $R$-module. If $x_1,\dots,x_n$ is an $M$-regular sequence, then $x_1^r,\dots,x_n^r$ is an $M$-regular sequence for all $r\in\N\setminus\{0\}$. 
 \end{lmm}
@@ -763,7 +780,35 @@ The differentials are given as follows.
 \begin{prp}{}{}\\
 Let $R$ be a commutative ring and let $M$ be an $R$-module. Let $x_1,\dots,x_n\in R$ be an ordered sequence in $R$. If $x_1,\dots,x_n$ is an $M$-regular sequence, then $$H_p^\text{Kos}(x_1,\dots,x_n;M)=0$$ for all $p\geq 1$. 
 \begin{proof}\\
-We induct on $n$. When $n=1$, then $x_1$ being a non-zero divisor means that the multiplication by $x_1$ map is injective. Hence $H_1(x_1;M)=0$. 
+We first need to prove the following: $(x_1,\dots,x_n)$ annihilates $H_k^\text{Kos}(x_1,\dots,x_n;M)$ for all $k$. It suffices to show that $x_i$ annihilates $H_k^\text{Kos}(x_1,\dots,x_n;M)$. I claim that multiplication by $x_i$ is a null homotopic chain map $K_\bullet(x_1,\dots,x_n;M)\to K_\bullet(x_1,\dots,x_n;M)$. WLOG suppose $i=1$. We first decompose the Koszul complex and the chain map into $x_1\otimes\text{id}:K_\bullet(x_1)\otimes_RK_\bullet(x_2,\dots,x_n;M)\to K_\bullet(x_1)\otimes_RK_\bullet(x_2,\dots,x_n;M)$. But the map $x_1:K_\bullet(x_1)\to K_\bullet(x_1)$ is null homotopic via the homotopy $\eta_0=\text{id}_R:R\to R$ and $\eta_k=0$ for $k\neq 0$. Thus multiplication by $x_i$ is a null homotopic chain map $K_\bullet(x_1,\dots,x_n;M)\to K_\bullet(x_1,\dots,x_n;M)$. Descending to homology, the induced chain map $H_k^\text{Kos}(x_1,\dots,x_n;M)\to H_k^\text{Kos}(x_1,\dots,x_n;M)$ is the zero map. But this means that $x_i$ annihilates $H_k^\text{Kos}(x_1,\dots,x_n;M)$. \\
+
+Write $\bold{x}$ to be the sequence $x_1,\dots,x_n$. By functoriality of the Koszul complex, we obtain a short exact sequence of chain complexes: \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {K_\bullet(\bold{x};M)} & {K_\bullet(\bold{x};M)} & {K_\bullet(\bold{x};M/x_iM)} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["{x_i}", from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\~\\
+This induces a long exact sequence in homology: \\
+\adjustbox{scale=0.85,center}{\begin{tikzcd}
+	\cdots & {H_{k+1}^\text{Kos}(\bold{x};M/x_iM)} & {H_k^\text{Kos}(\bold{x};M)} & {H_k^\text{Kos}(\bold{x};M)} & {H_k^\text{Kos}(\bold{x};M/x_iM)} & {H_{k-1}^\text{Kos}(\bold{x};M)} & \cdots
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow["{x_i}", from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+	\arrow[from=1-5, to=1-6]
+	\arrow[from=1-6, to=1-7]
+\end{tikzcd}}\\~\\
+Since multiplication by $x_i$ annihilates $H_k^\text{Kos}(\bold{x};M)$, we obtain short exact sequences: \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {H_k^\text{Kos}(\bold{x};M)} & {H_k^\text{Kos}(\bold{x};M/x_iM)} & {H_{k-1}^\text{Kos}(\bold{x};M)} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\~\\
+We now induct on $n$. When $n=1$, computations in Homological Algebra already shows that $H_1^\text{Kos}(\bold{x};M)=0$. Suppose it is true for some $n$. Since $x_2,\dots,x_n$ is a regular sequence for $M/x_1M$, we know that $H_k^\text{Kos}(\bold{x};M/x_1)=0$ by induction hypothesis. Hence $H_k^\text{Kos}(\bold{x};M)$ for all $k\geq 1$ following the above short exact sequence. 
 \end{proof}
 \end{prp}
 
@@ -825,11 +870,11 @@ Clearly $y+t$ is a non-zero divisor because the ideal in the quotient does not c
 \end{itemize}
 \end{prp}
 
-\begin{prp}{}{}\\
+\begin{thm}{Rees' Theorem}{}\\
 Let $R$ be a Noetherian commutative ring. Let $I$ be an ideal of $R$. Let $M$ be a finitely generated $R$-module such that $IM\neq M$. Then we have $$\text{depth}_I(M)=\min\{n\in\N\;|\;\text{Ext}_R^n(R/I,M)\neq 0\}$$
 \begin{proof}
 \end{proof}
-\end{prp}
+\end{thm}
 
 \begin{lmm}{}{} Let $(R,m)$ be a Noetherian local ring. Let the following be an exact sequence of finitely generated $R$-modules. \\~\\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
@@ -892,7 +937,13 @@ It follows that
 \begin{prp}{}{} Let $R$ be a commutative ring. Let $M$ be an $R$-module. Then $M$ has a projective resolution of length $\leq d\in\N$ if and only if $\text{Ext}_R^{d+1}(M,N)=0$ for all $R$-modules $N$. 
 \end{prp}
 
-It follows that $$\text{pd}_R(M)=\min\{d\in\N\;|\;\text{Ext}_R^{d+1}(M,N)=0\text{ for all }R\text{-modules }N\}$$
+\begin{crl}{}{}\\
+Let $R$ be a commutative ring. Let $M$ be an $R$-module. Then we have $$\text{pd}_R(M)=\min\{d\in\N\;|\;\text{Ext}_R^{d+1}(M,N)=0\text{ for all }R\text{-modules }N\}$$
+\end{crl}
+
+\begin{crl}{}{}\\
+Let $R$ be a Noetherian commutative ring. Let $M$ be a finitely generated $R$-module. Then we have $$\text{depth}_I(M)\leq\text{pd}_R(R/I)$$
+\end{crl}
 
 \subsection{Minimal Resolutions}
 Let $R$ be a commutative ring. Recall that if $R$ is a local ring or if $R$ is graded, then any finitely generated free (graded) modules that are projective must be free. Thus projective resolutions and free resolutions of these rings amount to the same thing. 
@@ -919,8 +970,13 @@ TBA: The Koszul complex is a minimal free resolution.
 Let $R$ be an $\N$-graded ring such that $R_0$ is a field. Let $M$ be a finitely generated graded $R$-module. Let $(F,d)$ be a minimal free resolution of $M$. Then we have $$\text{Tor}_i^R(M,R_0)=F_i\otimes_RR_0$$
 \end{prp}
 
+\begin{prp}{}{}\\
+Let $(R,m)$ be local ring. Let $M$ be a finitely generated $R$-module. Then we have $$\text{pd}_R(M)=\sup\{i\in\N\;|\;\text{Tor}_i^R(R/m,M)\}$$
+\end{prp}
+
 \subsection{Global Dimensions}
-\begin{defn}{Global Dimension}{} Let $R$ be a commutative ring. Define the global dimension of $R$ to be $$\text{gl dim}(R)=\sup\{\text{pd}(M)\;|\;M\in{_R\bold{Mod}}\}$$
+\begin{defn}{Global Dimension}{}\\
+Let $R$ be a commutative ring. Define the global dimension of $R$ to be $$\text{gl dim}(R)=\sup\{\text{pd}(M)\;|\;M\in{_R\bold{Mod}}\}$$
 \end{defn}
 
 \begin{prp}{}{} Let $R$ be a commutative ring. Then the following numbers are equal. 
@@ -945,7 +1001,12 @@ Let $R$ be an $\N$-graded ring such that $R_0$ is a field. Let $M$ be a finitely
 Let $Q_\bullet\to M/xM$ be a free resolution. Then there exists a free resolution $P_\bullet\to M$ of $M$ together with a chain map $P_\bullet\to Q_\bullet$ such that $\rank(H_k(P_\bullet))=\rank(H_k(Q_\bullet))$. In the graded case, the graded pieces of the resolutions have the same degrees. 
 \end{lmm}
 
-\begin{thm}{Hilbert's Syzygy Theorem}{} Let $k$ be a field. Let $M$ be a finitely generated graded module over $k[x_1,\dots,x_n]$. Then $M$ has a (graded) free resolution of length at most $n$. 
+\begin{thm}{Hilbert's Syzygy Theorem}{}\\
+Let $k$ be a field. Let $M$ be a finitely generated module over $k[x_1,\dots,x_n]$. Then the following are true. 
+\begin{itemize}
+\item $M$ has a free resolution of length at most $n$. 
+\item If $M$ is graded, then $M$ has a graded free resolution of length at most $n$. 
+\end{itemize}
 \end{thm}
 
 \pagebreak

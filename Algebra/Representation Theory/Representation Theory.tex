@@ -40,7 +40,11 @@ Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $M$ be an $R$-modu
 
 The $A$-module structure can also be seen in the representation $\rho:A\to\text{End}_R(M)$. It is given by $a\cdot m=\rho(a)(m)$. In particular, not every $A$-module $M$ gives a representation; the action of $A$ on $M$ must be bilinear in the scalars $R$. Therefore these modules are often called $R$-linear $A$-modules. \\
 
-However, if $R=k$ is a field and the structure map $k\to A$ is non-zero, then $k\to A$ is necessarily injective so that $A$ contains $k$ as a subring. Then the $k$-linearity of $f:A\times M\to M$ is null so that $A$-modules are the same as representations of $A$ over $k$. \\
+However, if $R=k$ is a field and the structure map $k\to A$ is non-zero, then $k\to A$ is necessarily injective so that $A$ contains $k$ as a subring. Then the $k$-linearity of $f:A\times M\to M$ is null so that $A$-modules are the same as representations of $A$ over $k$. 
+
+\begin{crl}{}{}\\
+Let $k$ be a field. Let $A$ be a $k$-algebra. Let $V$ be a $k$-vector space. Let $f:A\times V\to V$ be a function. Then the map $a\mapsto f(a,-)$ is a representation of $A$ if and only if $f$ defines an $A$-module structure on $V$. 
+\end{crl}
 
 Since representations of an algebra $A$ are $A$-modules, it follows that the following notions in Rings and Modules apply to representations. 
 \begin{itemize}
@@ -54,7 +58,7 @@ Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $M$ be a represent
 \begin{itemize}
 \item We say that $M$ is irreducible if it is simple as an $A$-module. 
 \item We say that $M$ is semisimple if it is semisimple as an $A$-module. 
-\item We say that $M$ is indecomposable if it is not completely reducible. 
+\item We say that $M$ is indecomposable if it is indecomposable as an $A$-module. 
 \end{itemize}
 \end{defn}
 
@@ -222,6 +226,18 @@ Let $k$ be an algebraically closed field. Let $A$ be a finite semisimple $k$-alg
 \begin{crl}{}{}\\
 Let $k$ be an algebraically closed field. Let $A$ be a finite semisimple $k$-algebra. Let $\chi$ be a character of $A$. Then there exists a representation $V$ of $A$ such that $\chi=\chi_V$. 
 \end{crl}
+
+\subsection{Reduction to Indecomposable Basic Algebras}
+Let $A$ be a finite dimensional $k$-algebra over a field $k$. Recall that $A^\flat=eAe$ is the basic algebra associated to $A$, where $e=\sum_{i=1}^ne_i$ and $e_1,\dots,e_n$ is a full orthogonal system of primitive idempotents. 
+
+\begin{prp}{}{}\\
+Let $k$ be an algebraically closed field. Let $A$ be a finite dimensional $k$-algebra. Then there is an equivalence of categories $$
+{_A}\bold{FGMod}\simeq{_{A^\flat}}\bold{FGMod}$$ given by the restriction and extension of scalars. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $k$ be an algebraically closed field. Let $A,B$ be $k$-algebras. Let $V$ be a finite dimensional irreducible representation of $A\times B$. Then there exists irreducible representations $V_A$ and $V_B$ of $A$ and $B$ respectively, such that $V\cong V_A\otimes_k V_B$. 
+\end{prp}
 
 
 \pagebreak
@@ -501,9 +517,9 @@ Let $G$ be a finite group. Let $\chi$ be a character of $G$. Let $\rho:G\to\C^\t
 
 \subsection{Representation Theory of Subgroups}
 \begin{defn}{Restriction of Representation to a Subgroup}{}\\
-Let $k$ be a field. Let $G$ be a group. Let $H\leq G$ be a subgroup. Let $V$ be a representation of $G$ over $k$. 
+Let $R$ be a commutative ring. Let $G$ be a group. Let $H\leq G$ be a subgroup. Let $V$ be a representation of $G$ over $R$. 
 \begin{itemize}
-\item Define the restriction of $V$ to $H$ to be the vector space $$\text{Res}_H^G(V)=V$$ together with the action of $k[H]$ given by restricting the action of $k[G]$ to $k[H]$. 
+\item Define the restriction of $V$ to $H$ to be the $R$-module $$\text{Res}_H^G(V)=V$$ together with the action of $R[H]$ given by restricting the action of $R[G]$ to $R[H]$. 
 \item Define the restriction of $\chi_V$ to $H$ by $\text{Res}_H^G\chi_V$. 
 \end{itemize}
 \end{defn}
@@ -548,7 +564,7 @@ Notice that $$\sum_{i=1}^rd_i^2=\langle\text{Res}_H^G\chi,\text{Res}_H^G\chi\ran
 \end{prp}
 
 \begin{defn}{The Induced Representation}{}\\
-Let $G$ be a finite group. Let $H\leq G$ be a subgroup. Let $g_1H,\dots,g_nH$ be the complete list of distinct left cosets of $H$ in $G$. Let $U$ be a $\C[H]$-module. 
+Let $R$ be a commutative ring. Let $G$ be a finite group. Let $H\leq G$ be a subgroup. Let $g_1H,\dots,g_nH$ be the complete list of distinct left cosets of $H$ in $G$. Let $U$ be a $R[H]$-module. 
 \begin{itemize}
 \item Define the induced representation of $U$ to be $$\text{Ind}_H^G(U)=\bigoplus_{i=1}^ng_iU$$ together with the action of $G$ given by left multiplication. 
 \item Denote the character of the induced representation of $\chi$ by $\text{Ind}_H^G\chi$. 
@@ -571,12 +587,12 @@ Then the induced representations of the modules are given by
 \end{itemize}
 \end{eg}
 
-\begin{prp}{}{}\\
-Let $G$ be a finite group. Let $H\leq G$ be a subgroup. Then there is an adjunction $$\text{Ind}_H^G:\bold{Rep}_H\overset{\dashv}{\leftrightarrows}\bold{Rep}_G:\text{Res}_H^G$$
-\end{prp}
+\begin{lmm}{}{}\\
+Let $R$ be a commutative ring. Let $G$ be a finite group. Let $H\leq G$ be a subgroup. Let $U$ be a $R[H]$-module. Then we have isomorphisms $$\text{Ind}_H^G(U)\cong R[G]\otimes_{R[H]}U\cong\Hom_{R[H]}(R[G],U)$$
+\end{lmm}
 
 \begin{thm}{Frobenius Reciprocity Theorem}{}\\
-Let $G$ be a finite group. Let $H\leq G$ be a subgroup. Let $\chi$ be a character of $G$. Let $\psi$ be a character of $H$. Then we have $$\langle\text{Ind}_H^G\psi,\chi\rangle_G=\langle\psi,\text{Res}_H^G\chi\rangle_H$$
+Let $G$ be a finite group. Let $H\leq G$ be a subgroup. Let $\chi$ be a character of $G$. Let $\psi$ be a character of $H$. Then the change of base rings aduncntion induces the following: $$\langle\text{Ind}_H^G\psi,\chi\rangle_G=\langle\psi,\text{Res}_H^G\chi\rangle_H$$
 \end{thm}
 
 \begin{prp}{The Mackey Formula}{}\\
@@ -644,5 +660,170 @@ Let $n\in\N^+$. Let $\lambda$ be a partition for $n$. Define the Specht module a
 Let $n\in\N^+$. Then $\{S^\lambda\;|\;\lambda\text{ is a partition for }n\}$ forms the complete list of non-isomorphic irreducible $\C[S_n]$-modules. 
 \end{thm}
 
+\pagebreak
+\section{Quivers and Path Algebras}
+\subsection{Basics of Quivers}
+\begin{defn}{Quivers}{}\\
+A quiver consists of two sets $V$ and $E$ called vertices and edges, together with two functions $s,t:E\to V$ called the source and target respectively. 
+\end{defn}
+
+\begin{defn}{Finite Quivers}{}\\
+Let $Q=(V,E,s,t)$ be a quiver. We say that $Q$ is finite if $V$ and $E$ are finite. 
+\end{defn}
+
+\begin{defn}{Connected Quivers}{}\\
+\end{defn}
+
+\begin{defn}{Paths and Stationary Path}{}\\
+Let $Q=(V,E,s,t)$ be a quiver. Let $a,b\in V$. A path from $a$ to $b$ of length $n\in\N^+$ is a function $\gamma:\{1,\dots,n\}\to E$ such that the following are true. 
+\begin{itemize}
+\item $s(\gamma(1))=a$. 
+\item $s(\gamma(i+1))=t(\gamma(i))$ for $1\leq i\leq n-1$. 
+\item $t(\gamma(n))=b$. 
+\end{itemize}
+For each $v\in V$, we associate a path $\varepsilon_v$ of length $0$ called the stationary path at $v$. 
+\end{defn}
+
+\begin{defn}{Cycles}{}\\
+Let $Q=(V,E,s,t)$ be a quiver. Let $\gamma:\{1,\dots,n\}\to E$ be a path in $Q$. We say that $\gamma$ is a cycle if $s(\gamma(1))=t(\gamma(n))$. 
+\end{defn}
+
+\begin{defn}{Acyclic Quivers}{}\\
+Let $Q$ be quiver. We say that $Q$ is acyclic if $Q$ contains no cycles. 
+\end{defn}
+
+\subsection{Path Algebra}
+\begin{defn}{The Path Algebra of a Quiver}{}\\
+Let $Q$ be a quiver. Let $k$ be a field. Define the path algebra $k[Q]$ of $Q$ over $k$ to be the $k$-vector space $$k\langle Q\rangle=k\langle\gamma\;|\;\gamma\text{ is a path in }Q\rangle$$ together with multiplication given as follows. For two paths $\gamma_1:\{1,\dots,n_1\}\to E$ and $\gamma_2:\{1,\dots,n_2\}\to E$, define $\gamma_1\cdot\gamma_2:\{1,\dots,n_1+n_2\}\to E$ by $$(\gamma_1\cdot\gamma_2)(i)=\begin{cases}
+\gamma_1(i) & \text{ if }1\leq i\leq n_1\\
+\gamma_2(i-n_1) & \text{ if }n_1+1\leq i\leq n_2
+\end{cases}$$ if $t(\gamma_1(n_1))=s(\gamma_2(1))$ and $0$ otherwise. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $Q=(V,E,s,t)$ be a quiver. Let $k$ be a field. If $V$ is finite, then the following are true. 
+\begin{itemize}
+\item $k\langle Q\rangle$ is a graded $k$-algebra whose grading is given by the length of the paths. 
+\item We have $1_{k\langle Q\rangle}=\sum_{v\in V}\varepsilon_v$. 
+\item $\{\gamma:\{1\}\to E\;|\;\gamma\text{ is a path in }Q\}$ is a generating set for $k\langle Q\rangle$ as a module over itself. 
+\item $\{\varepsilon_v\;|\;v\in V\}$ forms a full orthogonal system of primitive idempotents for $k\langle Q\rangle$. 
+\end{itemize}
+\end{lmm}
+
+\begin{eg}{}{}\\
+Let $Q=(V,E,s,t)$ be the quiver given by $V=\{v\}$ and $E=\{\alpha_i\;|\;i\in I\}$. Then we have a $k$-algebra isomorphism $$k\langle Q\rangle\cong k\langle\alpha_i\;|\;i\in I\rangle$$ to the free associative algebra generated by $E$. 
+\end{eg}
+
+\begin{prp}{}{}\\
+Let $Q$ be a quiver. Let $k$ be a field. Then the following are true. 
+\begin{itemize}
+\item $k\langle Q\rangle$ is finite dimensional over $k$ if and only if $Q$ is finite and acyclic. 
+\item $k\langle Q\rangle$ is indecomposable if and only if $Q$ is connected. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{Universal Property of Finite Connected Quivers Algebras}{}\\
+Let $Q=(V,E,s,t)$ be a finite connected quiver. Let $k$ be a field. Then $k\langle Q\rangle$ and the inclusion functions $\iota_V:V\to k\langle Q\rangle$ and $\iota_E:E\to k\langle Q\rangle$ satisfies the following universal property: For any $k$-algebra $A$ and any maps $\varphi_V:V\to A$ and $\varphi_E:E\to A$ such that the following are true: 
+\begin{itemize}
+\item $1=\sum_{v\in V}\varphi_V(v)$, $\varphi_V(v)^2=\varphi_V(v)$ and $\varphi_V(v)\varphi_V(w)=0$ for all $v,w\in V$ and $v\neq w$. 
+\item We have $\varphi_E(p)=\varphi_V(s(p))\varphi_E(p)\varphi_V(t(p))$ for all $p\in E$. 
+\end{itemize}
+there exists a unique $k$-algebra homomorphism $\varphi:k\langle Q\rangle\to A$ such that the following diagram commutes: \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	V & {k\langle Q\rangle} & E \\
+	& A
+	\arrow["{\iota_V}", from=1-1, to=1-2]
+	\arrow["{\varphi_V}"', from=1-1, to=2-2]
+	\arrow["{\exists!\varphi}"', dashed, from=1-2, to=2-2]
+	\arrow["{\iota_E}"', from=1-3, to=1-2]
+	\arrow["{\varphi_E}", from=1-3, to=2-2]
+\end{tikzcd}}\\~\\
+Moreover, $k\langle Q\rangle$ is the unique (up to unique isomorphism) $k$-algebra with the above property. 
+\end{prp}
+
+\begin{defn}{The Arrow Ideal}{}\\
+Let $Q$ be a finite quiver. Let $k$ be a field. Define the arrow ideal of the path algebra $k\langle Q\rangle$ to be $$R_Q=k\langle\gamma\;|\;\gamma\text{ is a path in }Q\text{ of length at least }1\rangle$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $Q$ be a finite quiver. Let $k$ be a field. Then the following are true. 
+\begin{itemize}
+\item $R_Q$ is a two sided graded ideal of $k\langle Q\rangle$. 
+\item The quotient of the path algebra by the arrow ideal is given by $$k\langle Q\rangle/R_Q=k\langle\varepsilon_v\;|\;v\in V\rangle$$
+\item For each $n\in\N^+$, the product of the arrow ideal is given by $$R_Q^n=k\langle\gamma\;|\;\gamma\text{ is a path in }Q\text{ of length at least }n\rangle$$
+\item For each $n\in\N^+$, we have $$R_Q^n/R_Q^{n+1}=k\langle\gamma\;|\;\gamma\text{ is a path in }Q\text{ of length }n\rangle$$
+\end{itemize}
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $Q$ be a finite quiver. Let $k$ be a field. If $Q$ is acyclic, then the following are true. 
+\begin{itemize}
+\item $J(k\langle Q\rangle)=R_Q$. 
+\item $k\langle Q\rangle$ is a finite dimensional basic algebra over $k$. 
+\end{itemize}
+\end{prp}
+
+\begin{defn}{Admissible Ideals}{}\\
+Let $Q$ be a finite quiver. Let $k$ be a field. Let $I$ be an ideal of $k\langle Q\rangle$. We say that $I$ is admissible if there exists $n\geq 2$ such that $$R_Q^n\subseteq I\subseteq R_Q^2$$
+\end{defn}
+
+\begin{defn}{Bound Quiver Algebra}{}\\
+Let $Q$ be a finite quiver. Let $k$ be a field. Let $I$ be an ideal of $k\langle Q\rangle$. We say that $k\langle Q\rangle/I$ is a bound quiver algebra if $I$ is an admissible ideal. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $Q=(V,E,s,t)$ be a finite quiver. Let $k$ be a field. Let $I$ be an admissible ideal of $k\langle Q\rangle$. Then $\{\varepsilon_v+I\;|\;v\in V\}$ is a full orthogonal system of primitive idempotents for the bound quiver algebra $k\langle Q\rangle/I$. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $Q$ be a finite quiver. Let $k$ be a field. Let $I$ be an admissible ideal of $k\langle Q\rangle$. Then the following are true. 
+\begin{itemize}
+\item $I$ is finitely generated. 
+\item $J(k\langle Q\rangle/I)=R_Q/I$. 
+\item $k\langle Q\rangle/I$ is a finite dimensional basic algebra over $k$. 
+\item $k\langle Q\rangle/I$ is indecomposable if and only if $k\langle Q\rangle$ is indecomposable. 
+\end{itemize}
+\end{prp}
+
+\subsection{The Quiver of a Finite Dimensional Basic Algebra}
+\begin{defn}{The Quiver of a Basic Algebra}{}\\
+Let $k$ be a field. Let $A$ be a finite dimensional basic algebra over $k$. Let $e_1,\dots,e_n$ be a full orthogonal system of primitive idempotents. Define the quiver $Q_A=(V,E,s,t)$ associated to $A$ as follows. 
+\begin{itemize}
+\item The vertices are given by $V=\{e_1,\dots,e_n\}$. 
+\item For $e_i,e_j\in V$, the set of arrows from $e_i$ to $e_j$ are given by $e_i\frac{J(A)}{J^2(A)}e_j$. 
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $A$ be a finite dimensional basic algebra over $k$. Then $Q_A$ does not depend on the choice of full orthogonal system of primitive idempotents. 
+\end{lmm}
+
+\begin{thm}{Gabriel}{}\\
+Let $k$ be an algebraically closed field. Let $A$ be a finite dimensional basic algebra over $k$. Then there exists an admissible ideal $I$ of $k\langle Q_A\rangle$ such that there is a $k$-algebra isomorphism $$A\cong\frac{k\langle Q_A\rangle}{I}$$
+\end{thm}
+
+\begin{crl}{}{}\\
+Let $k$ be an algebraically closed field. Let $A$ be a finite dimensional algebra over $k$. Then $A$ is Morita equivalent to $k\langle Q_{A^\flat}\rangle/I$ where $I$ is an admissible ideal of $k\langle Q_{A^\flat}\rangle$. 
+\end{crl}
+
+Thus the representation theory of a finite dimensional algebra over an algebraically closed field is equivalent to the representation theory of bound finite quiver algebras. 
+
+\pagebreak
+\section{Representation Theory of Quivers}
+\subsection{Representations of Quivers}
+\begin{defn}{The Category of Representations of a Quiver}{}
+\end{defn}
+
+\begin{defn}{The Category of Representations of a Quiver over an Admissible Ideal}{}\\
+Let $k$ be a field. Let $Q$ be a quiver. Let $I$ be an admissible ideal of the path algebra $k\langle Q\rangle$. Define $\bold{Rep}_I(Q)$ to be the full subcategory of $\bold{Rep}(Q)$ consisting of objects $((V_i)_{i\in V},(T_j)_{j\in E})$ such that $V_k=0$ for all $k\in I$. 
+\end{defn}
+
+\subsection{Relation to Representations of the Path Algebra}
+\begin{prp}{}{}\\
+Let $Q$ be a finite quiver. Let $k$ be a field. Let $I$ be an admissible ideal of $k\langle Q\rangle$. Then the following are true. 
+\begin{itemize}
+\item There 
+\end{itemize}
+\end{prp}
 
 \end{document}
