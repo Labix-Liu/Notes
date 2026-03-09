@@ -20,6 +20,564 @@
 \pagebreak
 \tableofcontents
 \pagebreak
+\section{Representation of Groups}
+\subsection{Basic Definitions}
+\begin{defn}{Representations}{}\\
+Let $G$ be a group. Let $k$ be a field. A representation of $G$ is a $k$-vector space $V$ together with a group homomorphism $$\rho:G\to\text{End}_k(V)$$
+\end{defn}
+
+\begin{eg}{}{}\\
+The following are representations of $D_8=\langle r,s\;|\;r^4,s^2,rsrs\rangle$. 
+\begin{itemize}
+\item $\rho:D_8\to GL_2(\C)$ defined by $\rho(r)=\begin{pmatrix}
+0 & -1\\
+1 & 0
+\end{pmatrix}$ and $\rho(s)=\begin{pmatrix}
+-1 & 0\\
+0 & 1
+\end{pmatrix}$. 
+\item $\rho:D_8\to GL_n(\C)$ defined by $\rho(r)=\rho(s)=I_n$. 
+\item $\rho:D_8\to\C^\times$ defined by $\rho(r)=\pm1$ and $\rho(s)=\pm1$. 
+\item $\rho:D_8\to GL_4(\C)$ defined by $\rho(r)=\begin{pmatrix}
+0 & 0 & 0 & 1\\
+1 & 0 & 0 & 0\\
+0 & 1 & 0 & 0\\
+0 & 0 & 1 & 0
+\end{pmatrix}$ and $\rho(s)=\begin{pmatrix}
+0 & 1 & 0 & 0\\
+1 & 0 & 0 & 0\\
+0 & 0 & 0 & 1\\
+0 & 0 & 1 & 0
+\end{pmatrix}$. 
+\end{itemize}
+\end{eg}
+
+\begin{lmm}{}{}\\
+Let $G$ be a group. Let $k$ be a field. Then there is a one to one correspondence $$\left\{\rho:G\to\text{End}_k(V)\;\bigg{|}\;\substack{\rho\text{ is a }\\\text{representation of }G}\right\}\;\;\overset{1:1}{\longleftrightarrow}\;\;\left\{\rho:k[G]\to\text{End}_k(V)\;\bigg{|}\;\substack{\rho\text{ is a }k\text{-algebra}\\\text{homomorphism }}\right\}$$ given by the universal property of the group ring $k[G]$. 
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $G$ be a group. Let $k$ be a field. Then there is a one to one correspondence $$\left\{\rho:k[G]\to\text{End}_k(V)\;\bigg{|}\;\substack{\rho\text{ is a }k\text{-algebra}\\\text{homomorphism }}\right\}\;\;\overset{1:1}{\longleftrightarrow}\;\;\left\{f:k[G]\times V\to V\;\bigg{|}\;\substack{f\text{ defines an }k[G]\text{-module}\\\text{structure on }V}\right\}$$ given by $\rho\mapsto((g,v)\mapsto\rho(g)(v))$. 
+\end{lmm}
+
+\begin{defn}{Types of Representations}{}\\
+Let $G$ be a group. Let $k$ be a field. Let $V$ be a representation of $G$. 
+\begin{itemize}
+\item We say that $V$ is irreducible if it is simple as a $k[G]$-module. 
+\item We say that $V$ is semisimple if it is semisimple as a $k[G]$-module. 
+\item We say that $V$ is indecomposable if it is indecomposable as a $k[G]$-module. 
+\end{itemize}
+\end{defn}
+
+\begin{eg}{}{}\\
+The representation of $C_3=\langle x\;|\;x^3\rangle$ on $\F_3^2$ given by $$\rho(x)=\begin{pmatrix}
+1 & 1\\
+0 & 1
+\end{pmatrix}$$ is not semisimple.
+\end{eg}
+
+\begin{defn}{Composition Factors}{}\\
+Let $G$ be a group. Let $k$ be a field. Let $V$ be a semisimple representation of $G$. Define the composition factors of $V$ to be $$\text{Comp}(V)=\{V_1,\dots,V_n\}$$ where the irreducible decomposition of $V$ is given by $$V\cong\bigoplus_{i=1}^nV_i$$
+\end{defn}
+
+\begin{defn}{Multiplicity of an Irreducible Submodule}{}\\
+Let $G$ be a group. Let $k$ be a field. Let $V$ be a semisimple representation of $G$. Let $W$ be an irreducible representation of $V$. Define the multiplicity of $W$ in $V$ to be $$\text{mult}_W(V)=\abs{\{V_i\in\text{Comp}(V)\;|\;V_i\cong W\text{ as }k[G]\text{-modules }\}}$$
+\end{defn}
+
+\begin{defn}{The Set of (Irreducible) Representations}{}\\
+Let $G$ be a group. Let $k$ be a field. 
+\begin{itemize}
+\item Define the set of representations of $G$ by $$\text{Rep}(G)=\{[V]\;|\;V\text{ is a representation of }G\}$$
+\item Define the set of representations of $G$ by $$\text{IrrRep}(G)=\{[V]\;|\;V\text{ is an irreducible representation of }G\}$$
+\end{itemize}
+\end{defn}
+
+\begin{defn}{The Regular Representations}{}\\
+Let $G$ be a group. Let $k$ be a field. Define the regular representation of $G$ to be the function $\text{reg}_G:G\to\text{End}_k(k[G])$ given by $$\rho(g)(h)=g\cdot h$$
+\end{defn}
+
+Thus the regular representation of $G$ is just the $k[G]$-algebra $k[G]$. 
+
+\begin{defn}{The Permutation Representations}{}\\
+Let $X$ be a set. Let $G$ be a group acting on $X$. Let $k$ be a field. Define the permutation representation $\rho:G\to\text{GL}(k\langle X\rangle)$ of $G$ on $X$ over $k$ by the formula $$\rho(g)(x)=g\cdot x$$ and then extending it $k$-linearly. 
+\end{defn}
+
+The regular representation is just the permutation representation with the group action on itself. 
+
+\begin{defn}{$G$-Invariant Subspaces}{}\\
+Let $G$ be a group. Let $k$ be a field. Let $V$ be a representation of $G$. Define the $G$-invariant subspace of $V$ to be $$V^G=\{v\in V\;|\;\rho(g)(v)=v\text{ for all }g\in G\}$$
+\end{defn}
+
+If we think of representations as actions of $k[G]$ on $V$ and hence actions of $G$ on $V$, then $V^G$ is just the fixed points of the action. 
+
+\subsection{Maps between Representations}
+\begin{defn}{Homomorphisms of Representations}{}\\
+Let $G$ be a group. Let $k$ be a field. Let $\rho:G\to\text{End}_k(V)$ and $\theta:G\to\text{End}_k(W)$ be representations of $G$. Let $f:V\to W$ be a function. We say that $f$ is a homomorphism of representations if the following are true. 
+\begin{itemize}
+\item $f$ is a $k$-linear map. 
+\item $f\circ\rho(g)=\theta(g)\circ f$ for all $g\in G$. 
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $G$ be a group. Let $k$ be a field. Let $V,W$ be representations of $G$. Let $f:V\to W$ be a function. Then $f$ is a homomorphism of representations if and only if $f$ is a $k[G]$-algebra homomorphism. 
+\end{lmm}
+
+\begin{defn}{Isomorphisms of Representations}{}\\
+Let $G$ be a group. Let $k$ be a field. Let $V,W$ be representations of $G$. Let $f:V\to W$ be a homomorphism. We say that $f$ is an isomorphism if there exists a homomorphism $g:W\to V$ such that $$g\circ f=\text{id}_V\;\;\;\text{ and }\;\;\;f\circ g=\text{id}_W$$ In this case we say that $V$ and $W$ are isomorphic representations. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $G$ be a group. Let $k$ be a field. Let $V,W$ be representations of $G$. Let $f:V\to W$ be a homomorphism. Then $f$ is an isomorphism if and only if $f$ is an isomorphism of $k$-vector spaces. 
+\end{lmm}
+
+Let $R$ be a ring. Let $M,N$ be $R$-modules. Recall that in general there is no canonical module structure for $\Hom_R(M,N)$ unless $R$ is commutative. Hence $\Hom_{k[G]}(V,W)$ is a priori not a representation of $G$. However, we will give a module structure to it by giving a $k[G]$-module structure to $\Hom_k(V,W)$ and identifying $\Hom_{k[G]}(V,W)$ with $\Hom_k(V,W)^G$. 
+
+\begin{lmm}{}{}\\
+Let $G$ be a group. Let $k$ be a field. Let $\rho_V:G\to\text{End}_k(V)$ and $\rho_W:G\to\text{End}_k(W)$ be representations of $G$. Then $\Hom_k(V,W)$ is also a representation of $G$ via the map $g\mapsto\rho_W(g)\circ -\circ\rho_V(g)^{-1}$. 
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $G$ be a group. Let $k$ be a field. Let $V,W$ be representations of $G$. Then there is a vector space isomorphism $$\Hom_{k[G]}(V,W)\cong\Hom_k(V,W)^G$$ given by restriction of scalars. 
+\begin{proof}\\
+Let $f:V\to W$ be a $k[G]$-module homomorphism. We claim that after restricting to $k$, we have $f\in\Hom_k(V,W)^G$. Indeed, since $f$ is a homomorphism of representations, we have $\rho_W(g)\circ f=f\circ\rho_V(g)$ for all $g\in G$. This implies that $\rho_{\Hom_k(V,W)}(g)(f)=\rho_W(g)\circ f\circ\rho_V(g)^{-1}=f$. Hence $f\in\Hom_k(V,W)^G$. Hence we have a well defined $k$-linear map $\Hom_{k[G]}(V,W)\to\Hom_k(V,W)^G$. This map is clearly injective and so is a vector space isomorphism. 
+\end{proof}
+\end{prp}
+
+Note that the above isomorphism of vector spaces give $\Hom_{k[G]}(V,W)$ the structure of a $k[G]$-module. 
+
+\subsection{One Dimensional Representations}
+Let $G$ be a group. A one dimensional representation of $G$ is a group homomorphism $G\to k^\times$. Since $k^\times$ is abelian, we may invoke the universal property of the abelianization $G^\text{ab}$ in Advanced Group Theory to see that there is a one to one bijection between one dimensional representations of $G$ and one dimensional representations $G^\text{ab}$. 
+
+\begin{lmm}{}{}\\
+Let $G$ be a group. If $G^\text{ab}$ is finite, then the number of one dimensional representations of $G$ is $G^\text{ab}$. 
+\end{lmm}
+
+
+Let $G$ be a group. Recall that $G$ is perfect if $G=[G,G]$. Equivalently, this is the same as saying that $G^\text{ab}=0$. 
+
+\begin{lmm}{}{}\\
+Let $G$ be a group. If $G$ is perfect, then there are no non-trivial one dimensional representations of $G$. 
+\end{lmm}
+
+Thus simple groups have no non-trivial one dimensional representations. 
+
+\begin{prp}{}{}\\
+Let $G$ be a group. Let $k$ be a field. Let $\rho:G\to\text{End}_k(V)$ be a representation of $G$. Let $\theta:G\to k^\times$ be a one dimensional representation of $G$. Then the following are true. 
+\begin{itemize}
+\item $\theta\rho:G\to\text{End}_k(V)$ is also a representation of $G$. 
+\item $\theta\rho$ is irreducible if and only if $\rho$ is irreducible. 
+\item $\theta\rho$ is the tensor product of $\theta$ and $\rho$ as $k[G]$-modules. 
+\end{itemize}
+\begin{proof}\\
+Let $g,h\in G$. Then we have $$(\theta\rho)(gh)=\theta(gh)\rho(gh)=\theta(g)\theta(h)\rho(g)\rho(h)=\theta(g)\rho(g)\theta(h)\theta(h)=(\theta\rho)(g)(\theta\rho)(h)$$ since $\theta(h)\in k^\times$ is a scalar. Hence $\theta\rho$ is a representation. \\
+
+Suppose that $\rho$ has a subrepresentation $W$. Then for all $w\in W$, we have $(\theta\rho)(g)(w)=\theta(g)(w)\rho(g)(w)\in W$ since $\theta(g)(w)\in k^\times$ is a scalar and $W$ is a vector space. Hence $W$ is a subrepresentation of $\theta\rho$. Conversely, notice that if $\theta:G\to k^\times$ is a representation, then $(-)^{-1}\circ\theta:G\to k^\times$ is also a one dimensional representation. Thus if $W$ is a subrepresentation of $\theta\rho$, then $W$ is a subrepresentation of $((-)^{-1}\circ\theta)\theta\rho=\rho$. \\
+
+The third item follows from the fact that $k\otimes_kV\cong V$ as vector spaces. 
+\end{proof}
+\end{prp}
+
+\subsection{Representations over Algebraically Closed Fields}
+\begin{lmm}{Schur's Lemma III}{}\\
+Let $G$ be a group. Let $k$ be an algebraically closed field. Let $V,W$ be irreducible representations of $G$. Let $\phi:V\to W$ be a homomorphism. Then the following are true. 
+\begin{itemize}
+\item If $V\cong W$ and they are finite dimensional, then $\phi=\lambda\text{id}_V$ for some $\lambda\in k$. 
+\item If $V\not\cong W$, then $\phi=0$. 
+\end{itemize}
+\end{lmm}
+
+\begin{crl}{}{}\\
+Let $G$ be a group. Let $k$ be an algebraically closed field. Let $V$ be a finite dimensional representations of $G$. If $G$ is abelian, then $\dim_k(V)=1$. 
+\end{crl}
+
+\begin{crl}{}{}\\
+Let $G$ be a group. Let $k$ be an algebraically closed field. Let $V,W$ be finite dimensional irreducible representations of $G$. Then we have $$\dim_k(\Hom_{k[G]}(V,W))=\begin{cases}
+1 & \text{ if }V\cong W\\
+0 & \text{ otherwise }
+\end{cases}$$
+\end{crl}
+
+\begin{crl}{}{}\\
+Let $G$ be a group. Let $k$ be an algebraically closed field. Let $V,W$ be finite dimensional representations of $G$ such that $W$ is irreducible. Then we have $$\dim_k(\Hom_{k[G]}(V,W))=\text{mult}_W(V)$$
+\end{crl}
+
+\subsection{Representations of Finite Groups over Algebraically Closed Fields}
+Landmark result: Maschke's theorem. Recall that it says that $k[G]$ is a semisimple $k$-algebra if $G$ is finite and $\text{char}(k)$ does not divide $\abs{G}$. By a result in Rings and Modules, this implies that every $k[G]$-module is semisimple. Hence every representation of $G$ is semisimple. \\
+
+\begin{prp}{}{}\\
+Let $G$ be a finite group. Let $k$ be an algebraically closed field such that $\text{char}(k)$ does not divide $\abs{G}$. Suppose that $$k[G]\cong\bigoplus_{i=1}^n\text{End}_k(V_i)$$ be the decomposition given by the Artin-Wedderburn theorem. Then we have $$\text{IrrRep}(G)=\{[V_1],\dots,[V_n]\}$$
+\begin{proof}\\
+Follows from a corollary of Artin-Wedderburn theorem in Advanced Ring Theory. 
+\end{proof}
+\end{prp}
+
+\begin{crl}{}{}\\
+Let $G$ be a finite group. Let $k$ be an algebraically closed field such that $\text{char}(k)$ does not divide $\abs{G}$. Then we have $$\abs{G}=\sum_{V\in\text{IrrRep}(G)}(\dim_k(V))^2$$
+\begin{proof}\\
+Follows from the above proposition. 
+\end{proof}
+\end{crl}
+
+\begin{eg}{}{}\\
+Let $G$ be a group of order $8$. Let $k$ be an algebraically closed field such that $\text{char}(k)\neq 2$. Let $V_1,\dots,V_n$ be the complete list of non-isomorphic irreducible $k[G]$-modules. Then exactly one of the following is true (up to reordering of the modules). 
+\begin{itemize}
+\item $n=8$ and $\dim(V_i)=1$. 
+\item $n=5$ and $\dim(V_1)=\dots=\dim(V_4)=1$ and $\dim(V_5)=2$. 
+\end{itemize}
+\end{eg}
+
+\begin{crl}{}{}\\
+Let $G$ be a finite group. Let $k$ be an algebraically closed field such that $\text{char}(k)$ does not divide $\abs{G}$. If $[V]\in\text{IrrRep}(G)$ is an irreducible representation, then we have $$\dim_k(V)<\sqrt{\abs{G}}$$
+\begin{proof}\\
+We have $$\abs{G}=\sum_{V\in\text{IrrRep}(G)}(\dim_k(V))^2>\dim_k(V)^2$$ where the inequality is strict because the trivial representation is irreducible and always exists. 
+\end{proof}
+\end{crl}
+
+\pagebreak
+\section{Character Theory}
+\subsection{Basic Definitions}
+\begin{defn}{Characters}{}\\
+Let $G$ be a finite group. Let $k$ be an algebraically closed field. Let $\rho:G\to\text{End}_k(V)$ be a finite dimensional representation of $G$. Define the character of $V$ to be the function $\chi_V:G\to k$ given by $$\chi_V(g)=\text{tr}(\rho(g))$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $G$ be a finite group. Let $k$ be an algebraically closed field such that $\text{char}(k)$ does not divide $\abs{G}$. Let $\rho:G\to\text{End}_k(V)$ be a representation of $G$. Then the following are true. 
+\begin{itemize}
+\item $\chi_V(1_G)=\dim(V)$. 
+\item $\chi_V(hgh^{-1})=\chi(g)$ for all $g,h\in G$. 
+\end{itemize}
+\begin{proof}\\
+By Linear Algebra, we have that $$\chi_V(1_G)=\text{tr}(\rho(1_G))=\text{tr}(\text{id}_V)=\text{tr}(I_{\dim(V)})=\dim(V)$$ so $\chi_V(1_G)=\dim(V)$. \\
+
+Let $g,h\in G$. Then we have $$\chi_V(hgh^{-1})=\text{tr}(\rho(h)\rho(g)\rho(h^{-1}))=\text{tr}(\rho(h)\rho(h^{-1})\rho(g))=\text{tr}(\rho(hh^{-1})\rho(g))=\text{tr}(\rho(g))=\chi_V(g)$$ by properties of the trace map. 
+\end{proof}
+\end{prp}
+
+The second item implies that $\chi$ descends to a function on conjugation classes $\chi:\text{Cl}(G)\to k$. 
+
+\begin{lmm}{}{}\\
+Let $G$ be a finite group. Let $k$ be an algebraically closed field. Then $\chi$ descends to a well defined class function $\chi:\text{Cl}(G)\to k$. 
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $G$ be a finite group. Let $k$ be an algebraically closed field. Let $V,W$ be finite dimensional representations of $G$. Then the following are true. 
+\begin{itemize}
+\item If $W\leq V$ is a subrepresentation, then $\chi_V=\chi_W+\chi_{V/W}$. 
+\item $\chi_{V\otimes W}=\chi_V\chi_W$. 
+\item $\chi_{V^\ast}=\overline{\chi}$. 
+\item $\chi_{\Hom_k(V,W)}=\overline{\chi_V}\chi_W$. 
+\end{itemize}
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $G$ be a finite group. Let $k$ be an algebraically closed field. Let $V,W$ be finite dimensional representations of $G$. If $V\cong W$ are isomorphic, then we have $$\chi_V=\chi_W$$
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $G$ be a finite group. Let $\rho:G\to\text{End}_\C(V)$ be a complex representation of $G$. Let $g\in G$. Then the following are true. 
+\begin{itemize}
+\item Let $\omega$ be a $\abs{g}$th root of unit. Then we have $$\chi(g)=\sum_{i=1}^k\omega^{j_i}$$ for some $j_i\in\N$ and $k\in\N$. 
+\item We have $\chi_V(g^{-1})=\overline{\chi_V(g)}$. 
+\end{itemize}
+\begin{proof}\\
+Let $H=\langle g\rangle$. Then $V$ is also a $\C[H]$-module. Let $V=\bigoplus_{i=1}^mV_i$ be the decomposition of $V$ into irreducible $\C[H]$-submodules. Since $H$ is cyclic, we must have $\dim(V_i)=1$ by crl2.1.2. Choose non-zero $v_i\in V_i$. Then $E=\{v_1,\dots,v_n\}$ is a basis for $V$ and $[\rho(g)]_E^E$ is a diagonal matrix. Now for each $i$, $V_i$ is a $\C[H]$-module. Hence $\rho(g)(v_i)\in V_i$ implies that $\rho(g)(v_i)=\lambda_iv_i$ for some $\lambda_i\in\C^\times$. Then we have $\lambda^{\abs{g}}v_i=\rho(g)^{\abs{g}}(v_i)=v_i$ so that $\lambda$ is a $\abs{g}$th root of unity. Since $\rho(g)$ is diagonal, we conclude that the trace of $\rho(g)$ is a sum of $\abs{g}$th roots of unity. \\
+
+From the above proof, we know that $[\rho(g)]_E^E=\text{diag}(\omega^{-j_1},\dots,\omega^{-j_m})=\text{diag}(\overline{\omega^{j_1}},\dots,\overline{\omega^{j_m}})$. Hence $\chi_V(g^{-1})=\overline{\chi_V(g)}$. 
+\end{proof}
+\end{prp}
+
+\begin{defn}{Irreducible Characters}{}\\
+Let $G$ be a finite group. Let $k$ be an algebraically closed field. Let $V$ be a finite dimensional representation of $G$. We say that $\chi_V$ is irreducible if $V$ is irreducible. 
+\end{defn}
+
+\begin{defn}{Characters of a Group}{}\\
+Let $G$ be a finite group. Let $k$ be an algebraically closed field. Let $\chi:G\to k$ be a function. We say that $\chi$ is a character of $G$ if there exists a finite dimensional representation $V$ of $G$ such that $\chi=\chi_V$. 
+\end{defn}
+
+\subsection{Orthogonality of Characters of Irreducible Representations}
+\begin{defn}{The Inner Product Space of Class Functions}{}\\
+Let $G$ be a finite group. Define the inner product space of class functions of $G$ to be the $\C$-vector space $$\Hom_{\bold{Set}}(\text{Cl}(G),\C)$$ together with the inner product given by $$\langle f_1,f_2\rangle=\frac{1}{\abs{G}}\sum_{g\in G}f_1(g)\overline{f_2(g)}$$ for $f_1,f_2\in\Hom_{\bold{Set}}(\text{Cl}(G),\C)$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $G$ be a finite group. Let $V,W$ be finite representations of $G$ over $\C$. Then we have $$\langle\chi_V,\chi_W\rangle=\dim_\C(\Hom_{\C[G]}(V,W))$$
+\begin{proof}\\
+Step 1: \\
+Let $T:V\to V^G$ be the map defined by $v\mapsto\frac{1}{\abs{G}}\sum_{g\in G}\rho(g)(v)$. I claim that $\text{tr}(T)=\dim_\C(V^G)$. Notice that since $V^G$ is $G$-invariant, we have that $T^2=T$. I claim that $V^G=\ker(T)\oplus\im(T)$. Suppose that $v\in\ker(T)\cap\im(T)$. Then there exists $w\in V$ such that $T(w)=v$. Now $v=T(w)=T^2(w)=T(T(w))=T(v)=0$. Hence $\ker(T)$ and $\im(T)$ has empty intersection. Now let $v\in V$. Then we have $v=(v-T(v))+T(v)$. The latter lies in $\im(T)$ and the former lies in $\ker(T)$ since $T(v-T(v))=T(v)-T(T(v))=T(v)-T(v)=0$. Hence $V=\ker(T)\oplus\im(T)$. Choose a basis $b_1,\dots,b_k$ for $\im(T)$, choose a basis for $b_{k+1},\dots,b_n$ for $\ker(T)$. Since $V=\ker(T)\oplus\im(T)$, matrix for $T$ under the basis $b_1,\dots,b_n$ is given by $\begin{pmatrix}
+I_{\dim(\im(T))} & 0\\0 & 0
+\end{pmatrix}$. Hence $\text{tr}(T)=\dim(\im(T))=\dim(V^G)$. \\
+
+Step 2: \\
+We have $$\langle\chi_{\text{triv}},\chi_V\rangle=\frac{1}{\abs{G}}\sum_{g\in G}\overline{\chi_V(g)}=\frac{1}{\abs{G}}\sum_{g\in G}\overline{\text{tr}(\rho(g))}=\text{tr}\left(\frac{1}{\abs{G}}\sum_{g\in G}\overline{\rho(g)}\right)=\text{tr}(\overline{T})=\overline{\text{tr}(T)}=\dim_\C(V^G)$$
+
+Step 3: \\
+We have $$\langle\chi_V,\chi_W\rangle=\frac{1}{\abs{G}}\sum_{g\in G}\chi_V(g)\overline{\chi_W(g)}=\frac{1}{\abs{G}}\sum_{g\in G}1\cdot\overline{\overline{\chi_V(g)}\chi_W(g)}=\langle 1,\overline{\chi_V}\chi_W\rangle=\langle\chi_{\text{triv}},\chi_{\Hom_\C(V,W)}\rangle$$
+
+Step 4: \\
+Combining all the above, we have $$\langle\chi_V,\chi_W\rangle=\langle\chi_{\text{triv}},\chi_{\Hom_\C(V,W)}\rangle=\dim_\C(\Hom_\C(V,W)^G)=\dim_\C(\Hom_{\C[G]}(V,W))$$
+\end{proof}
+\end{prp}
+
+\begin{crl}{}{}\\
+Let $G$ be a finite group. Let $V,W$ be finite representations of $G$ over $\C$. Then the following are true. 
+\begin{itemize}
+\item If $V$ and $W$ are irreducible, then we have $$
+\langle\chi_V,\chi_W\rangle=\begin{cases}
+1 & \text{ if }V\cong W\\
+0 & \text{ otherwise }
+\end{cases}$$
+\item $V$ is irreducible if and only if $\langle\chi_V,\chi_V\rangle=1$. 
+\end{itemize}
+\begin{proof}\\
+Follows directly from the properties of $\dim_\C(\Hom_{\C[G]}(V,W))$. 
+\end{proof}
+\end{crl}
+
+\begin{prp}{}{}\\
+Let $G$ be a finite group. Then the following are true. 
+\begin{itemize}
+\item We have $\abs{\text{IrrRep}(G)}=\dim_\C(\Hom_{\bold{Set}}(\text{Cl}(G),\C))=\abs{\text{Cl}(G)}$. 
+\item The set $\{\chi_V\;|\;V\in\text{IrrRep}(G)\}$ is an orthonormal basis for $\Hom_{\bold{Set}}(\text{Cl}(G),\C)$. 
+\end{itemize}
+\begin{proof}\\
+I claim that $\dim_\C(Z(\C[G]))=\abs{\text{Cl}(G)}$. Let $x=\sum_{h\in G}\lambda_hh\in\C[G]$. Notice that $xy=yx$ for all $y\in\C[G]$ if and only if $xg=gx$ for all $g\in G$ by linearity. Now notice that we have $gxg^{-1}=x$ if and only if $$\sum_{h\in G}\lambda_hghg^{-1}=\sum_{h\in G}\lambda_hh$$ By comparing basis for $\C[G]$, we see that this is true if and only if $\lambda_{g^{-1}hg}=\lambda_h$ for all $h\in G$. Thus $x=\sum_{h\in G}\lambda_hh\in Z(\C[G])$ if and only if $\lambda_{g^{-1}hg}=\lambda_h$ for all $h\in G$. This means that $x$ is constant on conjugacy classes. Such a vector space has dimension $\abs{\text{Cl}(G)}$. \\
+
+Now by Artin-Wedderburn theorem, we have $$\C[G]\cong\bigoplus_{V\in\text{IrrRep(G)}}\text{End}_\C(V)$$ Since taking center respects products, we have $$Z(\C[G])\cong\bigoplus_{V\in\text{IrrRep}(G)}Z(\text{End}_\C(V))\cong\C^{\abs{\text{IrrRep}(G)}}$$ since $\text{End}_\C(V)\cong M_{\dim(V)}(\C)$ and from advanced ring theory we have seen that $Z(M_{\dim(V)}(\C))\cong\C$. Taking dimensions on both sides, we deduce that $\abs{\text{Cl}(G)}=\dim_\C(Z(\C[G]))=\abs{\text{IrrRep}(G)}$. 
+
+Now since $\{\chi_V\;|\;V\in\text{IrrRep}(G)\}$ are orthogonal, they are linearly independent and has the same cardinality the dimension of $\Hom_{\bold{Set}}(\text{Cl}(G),\C)$. Hence they form an orthonormal basis. 
+\end{proof}
+\end{prp}
+
+\begin{crl}{}{}\\
+Let $G$ be a finite group. Let $g,h\in G$. Then $g$ and $h$ are conjugate if and only if $\chi(g)=\chi(h)$ for all characters $\chi$ of $G$. 
+\end{crl}
+
+\begin{crl}{}{}\\
+Let $G$ be a finite group. Let $g\in G$. Then $g$ and $g^{-1}$ are conjugate if and only if $\chi(g)\in\R$ for all characters $\chi$ of $G$. 
+\end{crl}
+
+\subsection{Character Tables}
+\begin{defn}{The Character Table of a Finite Group}{}\\
+Let $G$ be a finite group. Let $V_1,\dots,V_{\abs{\text{Cl}(G)}}$ be the complete list of non-isomorphic irreducible $\C[G]$-modules. Let $\text{Cl}(g_1),\dots,\text{Cl}(g_{\abs{\text{Cl}(G)}})$ be the complete list of distinct conjugacy classes of $G$. Define the character table of $G$ to be the matrix $(a_{i,j})\in M_{\abs{\text{Cl}(G)}}(\C)$ defined by $$a_{i,j}=\chi_{V_i}(g_j)$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $G$ be a finite group. Let $\text{Cl}(g_1),\dots,\text{Cl}(g_{\abs{\text{Cl}(G)}})$ be the complete list of distinct conjugacy classes of $G$. Let $A=(a_{i,j})\in M_{\abs{\text{Cl}(G)}}(\C)$ be the character table of $G$. Then the following are true. 
+\begin{itemize}
+\item The rows of $A$ are orthogonal: $$\frac{1}{\abs{G}}\sum_{j=1}^\abs{\text{Cl}(G)}\abs{\text{Cl}(g_j)}\chi_{V_r}(g_j)\overline{\chi_{V_s}(g_j)}=\sum_{j=1}^\abs{\text{Cl}(G)}\abs{\text{Cl}(g_j)}a_{r,j}\overline{a_{s,j}}=\begin{cases}
+1 & \text{ if }r=s\\
+0 & \text{ otherwise }
+\end{cases}$$
+\item The columns of $A$ are orthogonal. This means that $$\sum_{i=1}^\abs{\text{Cl}(G)}\chi_{V_i}(g_r)\overline{\chi_{V_i}(g_s)}=\sum_{i=1}^\abs{\text{Cl}(G)}a_{i,r}\overline{a_{i,s}}=\begin{cases}
+\abs{\text{Cl}(g_r)} & \text{ if }r=s\\
+0 & \text{ otherwise }
+\end{cases}$$
+\end{itemize}
+\end{prp}
+
+A number of previous theorems help determining the character table. To compute the number of irreducible representations, we may use the following facts. 
+\begin{itemize}
+\item $\abs{G}=\sum_{V\in\text{IrrRep}(G)}\dim(V)^2$. 
+\item $\abs{\text{Cl}(G)}=\abs{\text{IrrRep}(G)}$. 
+\end{itemize}
+To then figure out the character table, we may use the following facts. 
+\begin{itemize}
+\item $\chi_V(1_G)=\dim(V)$. 
+\item The trivial map $G\to\C$ given by $g\mapsto 1$ is always a representation of $G$ corresponding to the trivial representation. 
+\item Orthogonality relations between the rows and the columns
+\item $\chi(g^{-1})=\overline{\chi(g)}$ for all characters $\chi$. 
+\item $g$ and $g^{-1}$ are conjugate if and only if $\chi(g)\in\R$ for all characters $\chi$. 
+\item If $\chi$ is an irreducible character, then $\overline{\chi}$ is also an irreducible character corresponding to the dual representation. 
+\item If $V$ is one-dimensional, then $\chi_V=\rho$ and $\chi$ is a group homomorphism. 
+\end{itemize}
+
+\begin{eg}{}{}\\
+The character table for $D_6=\langle r,s\;|\;r^3,s^2,rsrs\rangle$ is given by 
+\begin{center}
+\begin{tabular}{ c|ccc } 
+$D_6$ & $1$ & $\{r,r^2\}$ & $\{s,sr,sr^2\}$ \\\hline
+$\chi_{\text{Trivial}}$ & $1$ & $1$ & $1$\\
+$\chi_2$ & $1$ & $1$ & $-1$\\
+$\chi_3$ & $2$ & $-1$ & $0$\\
+\end{tabular}
+\end{center}
+where $\chi_2$ is the character associated to the representation $D_6\to\C$ given by $r\mapsto 1$, $s\mapsto -1$ and $\chi_3$ is the character associated to the representation 
+\end{eg}
+
+\begin{eg}{}{}\\
+The character table for $D_8=\langle r,s\;|\;r^4,s^2,rsrs\rangle$ is given by 
+\begin{center}
+\begin{tabular}{ c|ccccc } 
+$D_8$ & $1$ & $\{r,r^3\}$ & $\{r^2\}$ & $\{s,sr^2\}$ & $\{sr,sr^3\}$ \\\hline
+$\chi_{\text{Trivial}}$ & $1$ & $1$ & $1$ & $1$ & $1$\\
+$\chi_2$ & $1$ & $1$ & $1$ & $-1$ & $-1$\\
+$\chi_3$ & $1$ & $-1$ & $1$ & $1$ & $-1$\\
+$\chi_4$ & $1$ & $-1$ & $1$ & $-1$ & $1$\\
+$\chi_5$ & $2$ & $0$ & $-2$ & $0$ & $0$\\
+\end{tabular}
+\end{center}
+\end{eg}
+
+\begin{eg}{}{}\\
+The character table for $A_4$ is given by 
+\begin{center}
+\begin{tabular}{ c|cccc } 
+$A_4$ & $1$ & $\begin{pmatrix}1&2\end{pmatrix}\begin{pmatrix}3 & 4\end{pmatrix}$ & $\begin{pmatrix}1&2&3\end{pmatrix}$ & $\begin{pmatrix}1&3&2\end{pmatrix}$ \\\hline
+$\chi_{\text{Trivial}}$ & $1$ & $1$ & $1$ & $1$\\
+$\chi_2$ & $1$ & $1$ & $e^{2\pi i/3}$ & $e^{4\pi i/3}$\\
+$\chi_3$ & $1$ & $1$ & $e^{4\pi i/3}$ & $e^{2\pi i/3}$\\
+$\chi_3$ & $3$ & $-1$ & $0$ & $0$\\
+\end{tabular}
+\end{center}
+where $\chi_2$ is the character associated to the representation $D_6\to\C$ given by $r\mapsto 1$, $s\mapsto -1$ and $\chi_3$ is the character associated to the representation 
+\end{eg}
+
+\begin{eg}{}{}\\
+The character table for $C_n$ is given by the matrix: $$\begin{pmatrix}
+1 & 1 & \cdots & 1\\
+1 & \zeta & \cdots & \zeta^{n-1}\\
+\vdots & \vdots & \ddots & \vdots\\
+1 & \zeta^{n-1} & \cdots & (\zeta^{n-1})^{n-1}
+\end{pmatrix}$$ where $\zeta=e^{2\pi i/n}$. 
+\end{eg}
+
+\subsection{Representation Theory of Subgroups}
+Recall that we have the notion of restriction of scalars and extension of scalars in Rings and Modules. Let $G$ be a group. Let $k$ be a field. Let $H\leq G$ be a subgroup. 
+\begin{itemize}
+\item Let $V$ be a representation of $G$. The restriction of $V$ to $H$ is be the $k$-vector space $$\text{Res}_H^G(V)=V$$ together with the action of $k[H]$ given by restricting the action of $k[G]$ to $k[H]$. 
+\item Let $U$ be a representation of $H$. The extension of $U$ to $G$ is the $k$-vector space $$\text{Ind}_H^G(U)=k[G]\otimes_{k[H]}U$$ together with the action of $k[G]$ given by the action on the component $k[G]$ in the tensor product. 
+\end{itemize}
+
+Note: Even if $V$ is an irreducible $k[G]$-module, it may not be an irreducible $k[H]$-module, and the reverse is also true. 
+
+\begin{prp}{}{}\\
+Let $G$ be a finite group. Let $H\leq G$ be a subgroup. Let $\psi$ be a non-zero character of $H$. Then there exists an irreducible character $\chi$ of $G$ such that $\langle\text{Res}_H^G\chi,\psi\rangle\neq 0$. 
+\begin{proof}\\
+Let $\chi_1,\dots,\chi_k$ be the complete list of irreducible characters of $G$. Let $\chi_\text{reg}$ be the character of the regular representation of $G$. Then we know that $\chi_\text{reg}=\sum_{i=1}^k\chi_i(1_G)\chi_i$. Notice that the regular $\C[G]$-module contains $\C[H]$ and $\C[H]$ is closed under the action of $H$. Hence $\C[H]$ is a submodule of $\text{Res}_H^G(\C[G])$. \\
+
+Suppose that $\psi$ is irreducible. Then the corresponding $\C[H]$-module $V$ is a submodule of the regular representation $\C[H]$. Thus $\langle\text{Res}_H^G\chi_\text{reg},\psi\rangle\neq 0$. Then we have $$0\neq\left\langle\sum_{i=1}^k\chi_i(1_G)\text{Res}_H^G\chi_i,\psi\right\rangle=\sum_{i=1}^k\chi_i(1_G)\langle\text{Res}_H^G\chi_i,\psi\rangle$$ Thus there exists $\chi_i$ such that $\langle\text{Res}_H^G\chi_i,\psi\rangle\neq 0$. \\
+
+We can extend this to the case where $\psi$ is reducible by noting that for a character $\psi_j$ for some irreducible composition factor of $\psi$, we have $\langle\text{Res}_H^G\chi_i,\psi_j\rangle\neq 0$. 
+\end{proof}
+\end{prp}
+
+\begin{thm}{Clifford's Theorem}{}\\
+Let $G$ be a finite group. Let $H\trianglelefteq G$ be a normal subgroup. Let $\chi$ be an irreducible character of $G$. Let $\psi_1,\dots,\psi_n$ be the complete list of irreducible characters of $H$ such that $\text{Res}_H^G\chi$ is a linear combination of $\psi_1,\dots,\psi_n$ with non-zero coefficients. Then the following are true. 
+\begin{itemize}
+\item Each $\psi_i$ have the same dimension. 
+\item $\langle\text{Res}_H^G\chi,\psi_i\rangle$ is the same for all $i$. 
+\end{itemize}
+\begin{proof}\\
+Let $V$ be an irreducible $\C[G]$-module corresponding to $\chi$. Let $U$ be an irreducible $\C[H]$-module of $\text{Res}_H^G(V)$. For all $g\in G$, the set $g\cdot U$ is a subspace of $V$. For all $h\in H$, we have $$h(gu)=g(g^{-1}hg)u\in gU$$ since $U$ is a $\C[H]$-module and $H$ is normal implies $g^{-1}hg\in H$. So $g\cdot U$ is a $\C[H]$-submodule of $\text{Res}_H^G(V)$. \\
+
+I claim that $g\cdot U$ is irreducible. Suppose that $W$ is a $\C[H]$-submodule of $g\cdot U$. Then $g^{-1}\cdot W$ is a $\C[H]$-submodule of $U$ by the above paragraph. Hence $g^{-1}\cdot W$ is $U$ or $0$ since $U$ is irreducible. Hence $W$ is equal to $g\cdot U$ or $0$. Thus $g\cdot U$ is irreducible. Since $g\cdot -$ is an invertible linear map, we have $\dim_\C(g\cdot U)=\dim_\C(U)$. \\
+
+Let $g_1,\dots,g_l$ be complete list of distinct elements in $G$ such that $g_1\cdot U,\dots,g_l\cdot U$ are pairwise not equal to each other. Then $\bigoplus_{j=1}^lg_j\cdot U$ is a $\C[G]$-submodule of $V$. Since $V$ is an irreducible $\C[G]$-module, we have $\bigoplus_{g\in G}g\cdot U=V$. Hence $V$ is the direct sum of these irreducible submodules of equal dimension. This proves part 1 of the theorem. 
+\end{proof}
+\end{thm}
+
+\begin{prp}{}{}\\
+Let $G$ be a finite group. Let $H\leq G$ be a subgroup. Let $\chi$ be an irreducible character of $G$. Let $\psi_1,\dots,\psi_r$ be the complete list of irreducible characters of $H$. Suppose that $\text{Res}_H^G\chi=\sum_{i=1}^rd_i\psi_i$. Then the following are true. 
+\begin{itemize}
+\item We have $\sum_{i=1}^rd_i^2\leq[G:H]$. 
+\item The above equality holds if and only if $\chi(g)=0$ for all $g\in G\setminus H$. 
+\end{itemize}
+\begin{proof}\\
+Notice that $$\sum_{i=1}^rd_i^2=\langle\text{Res}_H^G\chi,\text{Res}_H^G\chi\rangle_H=\frac{1}{\abs{H}}\sum_{h\in H}\chi(h)\overline{\chi(h)}$$ and also $$1=\langle\chi,\chi\rangle_G=\frac{1}{\abs{G}}\left(\sum_{h\in H}\chi(h)\overline{\chi(h)}+\sum_{g\in G\setminus H}\chi(g)\overline{\chi(g)}\right)=\frac{\abs{H}}{\abs{G}}\left(\sum_{i=1}^rd_i^2\right)+\frac{1}{\abs{G}}\sum_{g\in G\setminus H}\chi(g)\overline{\chi(g)}$$ so we are done. 
+\end{proof}
+\end{prp}
+
+\begin{lmm}{}{}\\
+Let $G$ be a group. Let $k$ be a field. Let $H\leq G$ be a subgroup. Let $g_1H,\dots,g_nH$ be the complete list of distinct left cosets of $H$ in $G$. Let $U$ be a representation of $H$. Then we have $$\text{Ind}_H^G(U)\cong\bigoplus_{i=1}^ng_iH$$
+\end{lmm}
+
+\begin{eg}{}{}\\
+Let $G=D_3=\langle a,b\;|\;a^3,b^2,abab\rangle=S_3$. Let $H=\langle a\rangle\leq D_3$. Then the complete list of irreducible $\C[H]$-modules are given by 
+\begin{itemize}
+\item $W_1=\C\langle 1_H+a+a^2\rangle$. 
+\item $W_2=\C\langle 1_H+\omega a+\omega^2a^2\rangle$. 
+\item $W_3=\C\langle 1_H+\omega^2a+\omega a^2\rangle$. 
+\end{itemize}
+where $\omega=e^{2\pi i/3}$. 
+Then the induced representations of the modules are given by 
+\begin{itemize}
+\item $\text{Ind}_H^G(W_1)=\C\langle 1_H+a+a^2,b+ba+ba^2\rangle$. 
+\item $\text{Ind}_H^G(W_2)=\C\langle 1_H+\omega a+\omega^2a^2,b+\omega ba+\omega^2ba^2\rangle$. 
+\item $\text{Ind}_H^G(W_3)=\C\langle 1_H+\omega a+\omega^2a^2,b+\omega ba+\omega^2ba^2\rangle$. 
+\end{itemize}
+\end{eg}
+
+Recall that we have a change of rings adjunction formula: $$\Hom_{k[G]}(\text{Ind}_H^G(U),V)\cong\Hom_{k[H]}(U,\text{Res}_H^G(V))$$
+
+\begin{thm}{Frobenius Reciprocity Theorem}{}\\
+Let $G$ be a finite group. Let $H\leq G$ be a subgroup. Let $\chi$ be a character of $G$. Let $\psi$ be a character of $H$. Then the change of base rings adjuncntion induces the following: $$\langle\text{Ind}_H^G\psi,\chi\rangle_G=\langle\psi,\text{Res}_H^G\chi\rangle_H$$
+\end{thm}
+
+\begin{prp}{The Mackey Formula}{}\\
+Let $G$ be a finite group. Let $H\leq G$ be a subgroup. Let $\psi$ be a character of $H$. 
+Then we have $$\text{Ind}_H^G\psi(g)=\frac{1}{\abs{H}}\sum_{y\in G, ygy^{-1}\in H}\psi(ygy^{-1})$$
+\end{prp}
+
+\pagebreak
+\section{Representation Theory of the Symmetric Group}
+\subsection{}
+The conjugacy classes of $S_n$ is the given by the cycle type of the permutations. These are indexed by partitions $\lambda=(\lambda_1,\dots,\lambda_k)$ such that $\sum_{i=1}^k\lambda_i=n$ and $\lambda_i\geq\lambda_{i+1}$. We write $\lambda\vdash n$. These can be drawn into Young diagrams: 
+\begin{itemize}
+\item There are $\lambda_i$ boxes in row $i$. 
+\item Rows are left justified. 
+\end{itemize}
+
+Let $S_\lambda$ be the subgroup of $S_n$ given by $$S_\lambda=S_{1,\dots,\lambda_1}\times S_{\lambda_1+1,\dots,\lambda_1+\lambda_2}\times\cdots\times S_{n-\lambda_k+1,\dots,n}\cong S_{\lambda_1}\times\cdots\times S_{\lambda_k}$$ Let $M^\lambda$ be the module associated to the character $\text{Triv}_{S_\lambda}^{S_n}$. This is not generally irreducible. But we can order partitions of $n$ such that the following are true. 
+\begin{itemize}
+\item $M^{\lambda(1)}$ is irreducible (call it $S^{\lambda(1)}$)
+\item $M^{\lambda(2)}$ contain copies of $S^{\lambda(1)}$ and a unique copy of a new irreducible module $S^{\lambda(2)}$. 
+\item etc... 
+\end{itemize}
+
+$S^{\lambda(i)}$ are called Specht modules. $M^{\lambda(i)}$ are called the permutation modules corresponding to $\lambda$. The ordering needed is reverse-lexicographic (revlex). Largest number to smallest number, starting with the first component and moving to latter components to break ties. \\
+
+Let $\overline{t_i}$ denote the distinct $\lambda$-tabloids: fill the young diagram of $\lambda$ with $\{1,\dots,n\}$ (this is called a Young tableau) and mark two as equivalent if each corresponding row has the same elements. Then $M^\lambda=\C\langle\overline{t_1},\dots,\overline{t_k}\rangle$. 
+
+\begin{eg}{}{}\\
+The partitions of $\{1,\dots,4\}$ is given by $$\{(4),(3,1),(2,2),(2,1,1),(1,1,1,1)\}$$ 
+\end{eg}
+
+\begin{eg}{}{}\\
+Let $\lambda=(n)$. Then $M^\lambda\cong\C$ and $S_n$ acts on this trivially. Thus $\text{Ind}_{S_\lambda}^{S_n}\text{Triv}=\text{Triv}$. \\
+
+Let $\lambda=(1,\dots,1)$. Then $M^\lambda\cong\C^{n!}$. Then $\text{Ind}_{S_\lambda}^{S_n}\text{Triv}=\chi_\text{reg}$. \\
+
+Let $\lambda=(n-1,1)$. Then $M^\lambda\cong\C^n$. Then $\text{Ind}_{S_\lambda}^{S_n}\text{Triv}$ is the character of the permutation representation. 
+\end{eg}
+
+\begin{defn}{Young Diagram}{}\\
+Let $n\in\N^+$. Let $\lambda=(\lambda_1,\dots,\lambda_k)$ be a partition of $n$. Define the Young diagram of $\lambda$ to be $$Y(\lambda)=\{(i,j)\in\N^+\times\N^+\;|\;1\leq i\leq k,1\leq j\leq\lambda_i\}$$
+\end{defn}
+
+\begin{defn}{Young Tableau}{}\\
+Let $n\in\N^+$. Let $\lambda$ be a partition of $n$. A Young tableau of $\lambda$ is a bijection $t:Y(\lambda)\to\{1,\dots,n\}$. Denote the set of all Young tableau of $\lambda$ by $\Delta^\lambda$. 
+\end{defn}
+
+\begin{defn}{Young Tabloid}{}\\
+Let $n\in\N^+$. Let $\lambda$ be a partition of $n$. 
+\begin{itemize}
+\item Let $t_1,t_2$ be Young tableau of $\lambda$. We say that $t_1$ and $t_2$ are equivalent if $$\{t_1(r_0,j)\;|\;1\leq j\leq\lambda_i\}=\{t_2(r_0,j)\;|\;1\leq j\leq\lambda_k\}$$ for all $1\leq r_0\leq k$ (in other words the rows of the tableau are equal up to permutation). 
+\item A Young tabloid of $\lambda$ is an equivalence class $[t]$ where $t$ is a Young tableau of $\lambda$. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{The Associated Polytabloid of a Tableau}{}\\
+Let $n\in\N^+$. Let $\lambda$ be a partition of $n$. Let $t$ be a $\lambda$-tableau. Define the associated polytabloid to be $$e(t)=\sum_{\sigma\in C(t)}\text{sign}(\sigma)(\sigma\cdot[t])$$ where $C(t)=\prod_{i=1}^k\text{Sym}(C_i)$ where $C_i$ is the $i$th column of $t$. 
+\end{defn}
+
+\begin{defn}{The Specht Module of a Partition}{}\\
+Let $n\in\N^+$. Let $\lambda$ be a partition for $n$. Define the Specht module associated to $\lambda$ to be the $\C$-vector space $$S^\lambda=\C\langle e(t)\;|\;t\text{ is a }\lambda\text{-tableau }\rangle$$
+\end{defn}
+
+\begin{thm}{}{}\\
+Let $n\in\N^+$. Then $\{S^\lambda\;|\;\lambda\text{ is a partition for }n\}$ forms the complete list of non-isomorphic irreducible $\C[S_n]$-modules. 
+\end{thm}
 
 \pagebreak
 \section{Basic Definitions of Representations}
@@ -184,6 +742,14 @@ Let $k$ be an algebraically closed field. Let $A$ be a $k$-algebra. Let $V,W$ be
 Let $k$ be an an algebraically closed field. Let $A$ be a $k$-algebra. Let $\rho:A\to\text{End}_k(V)$ be a finite dimensional representation of $A$. Then $\chi_V$ descends to a well defined function $\chi_V:\frac{A}{[A,A]}\to k$. 
 \end{prp}
 
+Let $G$ be a finite group. Since $\C[G]$ is a semisimple $\C$-algebra, we know that there are $\C$-vector space isomorphisms
+\begin{align*}
+\Hom_\C\left(\frac{\C[G]}{[\C[G],\C[G]]},\C\right)&=\{f\in\Hom_\C(\C[G],\C)\;|\;f(ghg^{-1}h^{-1})=0\text{ for all }g,h\in G\}\\
+&=\{f\in\Hom_{\bold{Set}}(G,\C)\;|\;f(ghg^{-1})=f(h)\text{ for all }g,h\in G\}\\
+&=\Hom_{\bold{Set}}(\text{Cl}(G),\C)
+\end{align*}
+Hence the above proposition mimics character theory in representations of finite groups. 
+
 \begin{lmm}{}{}\\
 Let $k$ be an algebraically closed field. Let $A$ be a $k$-algebra. Let $V$ be a finite dimensional representation of $A$. Let $W\leq V$ be a subrepresentation. Then we have $$\chi_V=\chi_W+\chi_{V/W}$$
 \end{lmm}
@@ -239,426 +805,6 @@ Let $k$ be an algebraically closed field. Let $A$ be a finite dimensional $k$-al
 Let $k$ be an algebraically closed field. Let $A,B$ be $k$-algebras. Let $V$ be a finite dimensional irreducible representation of $A\times B$. Then there exists irreducible representations $V_A$ and $V_B$ of $A$ and $B$ respectively, such that $V\cong V_A\otimes_k V_B$. 
 \end{prp}
 
-
-\pagebreak
-\section{Representation Theory of Finite Groups}
-\subsection{Structural Results}
-By the natural isomorphism $$\Hom_{\bold{Alg}_k}(k[G],\text{End}_k(V))\cong\Hom_{\bold{Grp}}(G,\text{End}_k(V))$$ we see that representations of a group is the same as representation of the group ring. 
-
-\begin{eg}{}{}\\
-The following are representations of $D_8=\langle r,s\;|\;r^4,s^2,rsrs\rangle$. 
-\begin{itemize}
-\item $\rho:D_8\to GL_2(\C)$ defined by $\rho(r)=\begin{pmatrix}
-0 & -1\\
-1 & 0
-\end{pmatrix}$ and $\rho(s)=\begin{pmatrix}
--1 & 0\\
-0 & 1
-\end{pmatrix}$. 
-\item $\rho:D_8\to GL_n(\C)$ defined by $\rho(r)=\rho(s)=I_n$. 
-\item $\rho:D_8\to\C^\times$ defined by $\rho(r)=\pm1$ and $\rho(s)=\pm1$. 
-\item $\rho:D_8\to GL_4(\C)$ defined by $\rho(r)=\begin{pmatrix}
-0 & 0 & 0 & 1\\
-1 & 0 & 0 & 0\\
-0 & 1 & 0 & 0\\
-0 & 0 & 1 & 0
-\end{pmatrix}$ and $\rho(s)=\begin{pmatrix}
-0 & 1 & 0 & 0\\
-1 & 0 & 0 & 0\\
-0 & 0 & 0 & 1\\
-0 & 0 & 1 & 0
-\end{pmatrix}$. 
-\end{itemize}
-\end{eg}
-
-\begin{defn}{Permutation Representations}{}\\
-Let $X$ be a set. Let $G$ be a group acting on $X$. Let $k$ be a field. Define the permutation representation $\rho:G\to\text{GL}(k\langle X\rangle)$ of $G$ on $X$ over $k$ by the formula $$\rho(g)(x)=g\cdot x$$ and then extending it $k$-linearly. 
-\end{defn}
-
-Every group $G$ has an action on itself by left multiplication. In this case the permutation representation is just the regular representation. 
-
-\begin{eg}{}{}\\
-The representation of $C_3=\langle x\;|\;x^3\rangle$ on $\F_3^2$ given by $$\rho(x)=\begin{pmatrix}
-1 & 1\\
-0 & 1
-\end{pmatrix}$$ is not semisimple.
-\end{eg}
-
-Let $k$ be an algebraically closed field. Let $G$ be a finite group. Suppose that $\text{char}(k)$ does not divide $\abs{G}$. Maschke's theorem which implies that $k[G]$ is semisimple is a powerful tool to classify irreducible representations of $G$ because of the corollaries it gives from section 1. 
-\begin{itemize}
-\item Since $\abs{G}$ is finite, every representation of $G$ is finite dimensional. Moreover, there are only finitely many non-isomorphic irreducible representations $V_1,\dots,V_n$. 
-\item Combining the above corollary, we have a decomposition of the regular representation into irreducible representations $$k[G]\cong\bigoplus_{i=1}^n\bigoplus_{j=1}^{\dim(V_i)}V_i$$
-\item This gives the formula $$\abs{G}=\sum_{i=1}^n\dim_k(V_i)^2$$
-\end{itemize}
-
-\begin{eg}{}{}\\
-Let $G$ be a group of order $8$. Let $k$ be an algebraically closed field such that $\text{char}(k)\neq 2$. Let $V_1,\dots,V_n$ be the complete list of non-isomorphic irreducible $k[G]$-modules. Then exactly one of the following is true (up to reordering of the modules). 
-\begin{itemize}
-\item $n=8$ and $\dim(V_i)=1$. 
-\item $n=5$ and $\dim(V_1)=\dots=\dim(V_4)=1$ and $\dim(V_5)=2$. 
-\end{itemize}
-\end{eg}
-
-Similar to the case of representations, the character of a representation of a finite group $\chi:k[G]\to k$ is the same information as a function $\chi:G\to k$ simply be restriction and extension via scalars. 
-
-\begin{prp}{}{}\\
-Let $G$ be a finite group. Let $k$ be an algebraically closed field such that $\text{char}(k)$ does not divide $\abs{G}$. Let $\rho:G\to\text{End}_k(V)$ be a representation of $G$. Then the following are true. 
-\begin{itemize}
-\item $\chi_V(1_G)=\dim(V)$. 
-\item $\chi_V(hgh^{-1})=\chi(g)$ for all $g,h\in G$. 
-\end{itemize}
-\begin{proof}\\
-By Linear Algebra, we have that $$\chi_V(1_G)=\text{tr}(\rho(1_G))=\text{tr}(\text{id}_V)=\text{tr}(I_{\dim(V)})=\dim(V)$$ so $\chi_V(1_G)=\dim(V)$. \\
-
-Let $g,h\in G$. Then we have $$\chi_V(hgh^{-1})=\text{tr}(\rho(h)\rho(g)\rho(h^{-1}))=\text{tr}(\rho(h)\rho(h^{-1})\rho(g))=\text{tr}(\rho(hh^{-1})\rho(g))=\text{tr}(\rho(g))=\chi_V(g)$$ by properties of the trace map. 
-\end{proof}
-\end{prp}
-
-The second item implies that $\chi$ descends to a function on conjugation classes $\chi:\text{Cl}(G)\to k$. 
-
-\begin{prp}{}{}\\
-Let $G$ be a finite group. Let $\rho:G\to\text{End}_\C(V)$ be a complex representation of $G$. Let $g\in G$. Then the following are true. 
-\begin{itemize}
-\item Let $\omega$ be a $\abs{g}$th root of unit. Then we have $$\chi(g)=\sum_{i=1}^k\omega^{j_i}$$ for some $j_i\in\N$ and $k\in\N$. 
-\item We have $\chi_V(g^{-1})=\overline{\chi_V(g)}$. 
-\end{itemize}
-\begin{proof}\\
-Let $H=\langle g\rangle$. Then $V$ is also a $\C[H]$-module. Let $V=\bigoplus_{i=1}^mV_i$ be the decomposition of $V$ into irreducible $\C[H]$-submodules. Since $H$ is cyclic, we must have $\dim(V_i)=1$ by crl2.1.2. Choose non-zero $v_i\in V_i$. Then $E=\{v_1,\dots,v_n\}$ is a basis for $V$ and $[\rho(g)]_E^E$ is a diagonal matrix. Now for each $i$, $V_i$ is a $\C[H]$-module. Hence $\rho(g)(v_i)\in V_i$ implies that $\rho(g)(v_i)=\lambda_iv_i$ for some $\lambda_i\in\C^\times$. Then we have $\lambda^{\abs{g}}v_i=\rho(g)^{\abs{g}}(v_i)=v_i$ so that $\lambda$ is a $\abs{g}$th root of unity. Since $\rho(g)$ is diagonal, we conclude that the trace of $\rho(g)$ is a sum of $\abs{g}$th roots of unity. \\
-
-From the above proof, we know that $[\rho(g)]_E^E=\text{diag}(\omega^{-j_1},\dots,\omega^{-j_m})=\text{diag}(\overline{\omega^{j_1}},\dots,\overline{\omega^{j_m}})$. Hence $\chi_V(g^{-1})=\overline{\chi_V(g)}$. 
-\end{proof}
-\end{prp}
-
-\subsection{The Dual and Tensor Products of Representations}
-\begin{defn}{The Dual Representation}{}\\
-Let $G$ be a finite group. Let $\rho:G\to\text{End}_\C(V)$ be a complex representation of $G$. Define the dual of $\rho$ to be the representation $\rho^\ast:G\to\text{End}_\C(V^\ast)$ given by $$\rho^\ast(g)=\rho(g^{-1})^T$$
-\end{defn}
-
-\begin{lmm}{}{}\\
-Let $G$ be a finite group. Let $\rho:G\to\text{End}_\C(V)$ be a complex representation of $G$. Then we have $\rho^\ast(g)(f)=f\circ\rho(g)$ for $f\in V^\ast$. 
-\end{lmm}
-
-\begin{prp}{}{}\\
-Let $G$ be a finite group. Let $V$ be a $\C[G]$-module. Then the following are true. 
-\begin{itemize}
-\item We have $\chi_{V^\ast}=\overline{\chi_V}$. 
-\item $V$ is irreducible if and only if $V^\ast$ is irreducible. 
-\end{itemize}
-\end{prp}
-
-\subsection{Orthogonality of Characters of Irreducible Representations}
-Let $G$ be a finite group. Since $\C[G]$ is a semisimple $\C$-algebra, we know that there are $\C$-vector space isomorphisms
-\begin{align*}
-\Hom_\C\left(\frac{\C[G]}{[\C[G],\C[G]]},\C\right)&=\{f\in\Hom_\C(\C[G],\C)\;|\;f(ghg^{-1}h^{-1})=0\text{ for all }g,h\in G\}\\
-&=\{f\in\Hom_{\bold{Set}}(G,\C)\;|\;f(ghg^{-1})=f(h)\text{ for all }g,h\in G\}\\
-&=\Hom_{\bold{Set}}(\text{Cl}(G),\C)
-\end{align*}
-By a previous result, the vector space has a basis given by the characters of $G$. We now define an inner product on the $\C$-space. 
-
-\begin{defn}{The Inner Product Space of Class Functions}{}\\
-Let $G$ be a finite group. Define the inner product space of class functions of $G$ to be the $\C$-vector space $$\Hom_{\bold{Set}}(\text{Cl}(G),\C)$$ together with the inner product given by $$\langle f_1,f_2\rangle=\frac{1}{\abs{G}}\sum_{g\in G}f_1(g)\overline{f_2(g)}$$ for $f_1,f_2\in\Hom_{\bold{Set}}(\text{Cl}(G),\C)$. 
-\end{defn}
-
-\begin{prp}{}{}\\
-Let $G$ be a finite group. Let $\phi,\psi$ be characters of $G$. Then we have $\langle\phi,\psi\rangle\in\R$. 
-\begin{proof}\\
-Let $\phi,\psi$ be characters. Then we have
-\begin{align*}
-\overline{\langle\phi,\psi\rangle}&=\overline{\frac{1}{\abs{G}}\sum_{g\in G}\phi(g)\overline{\psi(g)}}\\
-&=\frac{1}{\abs{G}}\sum_{g\in G}\overline{\phi(g)}\psi(g)\\
-&=\frac{1}{\abs{G}}\sum_{g\in G}\phi(g^{-1})\psi(g)\\
-&=\frac{1}{\abs{G}}\sum_{h\in G}\phi(h)\psi(h^{-1})\tag{Let $h=g^{-1}$}\\
-&=\langle\phi,\psi\rangle
-\end{align*}
-so we are done. 
-\end{proof}
-\end{prp}
-
-\begin{lmm}{}{}\\
-Let $G$ be a finite group. Let $V,W$ be irreducible $\C[G]$-modules whose representation is given by $\rho$ and $\sigma$ respectively. Let $f:V\to W$ be a morphism. Let $\widetilde{f}:V\to W$ be the map defined by $$\widetilde{f}(v)=\frac{1}{\abs{G}}\sum_{g\in G}\rho(g^{-1})\circ f\circ\sigma(g)$$ Then $\widetilde{f}$ is a $\C[G]$-module homomorphism. Moreover, we have $$\widetilde{f}=\begin{cases}
-\frac{\text{tr}(f)}{\dim(V)}\text{id}_V & \text{ if }V\cong W\\
-0 & \text{ otherwise }
-\end{cases}$$
-\end{lmm}
-
-\begin{prp}{}{}\\
-Let $G$ be a finite group. Let $V,W$ be irreducible $\C[G]$-modules. Then we have $$
-\langle\chi_V,\chi_W\rangle=\begin{cases}
-1 & \text{ if }V\cong W\\
-0 & \text{ otherwise }
-\end{cases}$$
-\end{prp}
-
-\begin{thm}{}{}\\
-Let $G$ be a finite group. Let $V,W$ be $\C[G]$-modules such that $W$ is irreducible. Then we have $$\langle\chi_V,\chi_W\rangle=\text{mult}_W(V)$$
-\end{thm}
-
-\begin{crl}{}{}\\
-Let $G$ be a finite group. Let $V,W$ be irreducible $\C[G]$-modules. Then $V\cong W$ if and only if $\chi_V=\chi_W$. 
-\end{crl}
-
-\begin{prp}{}{}\\
-Let $G$ be a finite group. Let $V$ be a $\C[G]$-module. Then $V$ is irreducible if and only if $\langle\chi_V,\chi_V\rangle=1$. 
-\end{prp}
-
-\begin{lmm}{}{}\\
-Let $G$ be a finite group. Then we have $$\dim_\C(\Hom_{\bold{Set}}(\text{Cl}(G),\C))=\abs{\text{Cl}(G)}$$
-\end{lmm}
-
-\begin{lmm}{}{}\\
-Let $G$ be a finite group. Let $\rho:G\to\text{End}_\C(V)$ be an irreducible representation of $G$. Let $f\in\Hom_{\bold{Set}}(\text{Cl}(G),\C)$. Let $\varphi:V\to V$ be the map defined by $$\varphi(v)=\sum_{g\in G}f(g)\rho(g)$$ Then we have $$\varphi(v)=\frac{\abs{G}}{\dim(V)}\langle f,\overline{\chi_V}\rangle v$$ for all $v\in V$. 
-\end{lmm}
-
-\begin{lmm}{}{}\\
-Let $G$ be a finite group. Let $f\in\Hom_{\bold{Set}}(\text{Cl}(G),\C)$. Let $V_1,\dots,V_n$ be the complete list of non-isomorphic irreducible $\C[G]$-modules. If $\langle f,\chi_{V_i}\rangle$ for all $1\leq i\leq n$, then we have $f=0$. 
-\end{lmm}
-
-\begin{prp}{}{}\\
-Let $G$ be a finite group. Let $V_1,\dots,V_n$ be a complete list of non-isomorphic irreducible $\C[G]$-modules. Then $\{\chi_{V_1},\dots,\chi_{V_n}\}$ is an orthonormal basis for $\Hom_{\bold{Set}}(\text{Cl}(G),\C)$. 
-\end{prp}
-
-\begin{crl}{}{}\\
-Let $G$ be a finite group. Then there are exactly $\abs{\text{Cl}(G)}$ non-isomorphic irreducible $\C[G]$-modules. 
-\end{crl}
-
-\begin{crl}{}{}\\
-Let $G$ be a finite group. Let $g,h\in G$. Then $g$ and $h$ are conjugate if and only if $\chi(g)=\chi(h)$ for all characters $\chi$ of $G$. 
-\end{crl}
-
-\begin{crl}{}{}\\
-Let $G$ be a finite group. Let $g\in G$. Then $g$ and $g^{-1}$ are conjugate if and only if $\chi(g)\in\R$ for all characters $\chi$ of $G$. 
-\end{crl}
-
-\subsection{Character Tables}
-\begin{defn}{The Character Table of a Finite Group}{}\\
-Let $G$ be a finite group. Let $V_1,\dots,V_{\abs{\text{Cl}(G)}}$ be the complete list of non-isomorphic irreducible $\C[G]$-modules. Let $\text{Cl}(g_1),\dots,\text{Cl}(g_{\abs{\text{Cl}(G)}})$ be the complete list of distinct conjugacy classes of $G$. Define the character table of $G$ to be the matrix $(a_{i,j})\in M_{\abs{\text{Cl}(G)}}(\C)$ defined by $$a_{i,j}=\chi_{V_i}(g_j)$$
-\end{defn}
-
-\begin{eg}{}{}\\
-The character table for $\Z/3\Z$ is given by 
-\begin{center}
-\begin{tabular}{ c|ccc } 
-$\Z/3\Z$ & $[0]$ & $[1]$ & $[2]$ \\\hline
-$\chi_{\text{Trivial}}$ & $1$ & $1$ & $1$\\
-$\chi_2$ & $1$ & $e^{2\pi i/3}$ & $e^{4\pi i/3}$\\
-$\chi_3$ & $1$ & $e^{4\pi i/3}$ & $e^{2\pi i/3}$\\
-\end{tabular}
-\end{center}
-where $\chi_2$ is the character associated to the representation $\Z/3\Z\to\C$ given by $[1]\mapsto e^{2\pi i/3}$ and $\chi_3$ is the character associated to the representation $\Z/3\Z\to\C$ given by $[1]\mapsto e^{4\pi i/3}$. 
-\end{eg}
-
-\begin{eg}{}{}\\
-The character table for $D_6=\langle r,s\;|\;r^3,s^2,rsrs\rangle$ is given by 
-\begin{center}
-\begin{tabular}{ c|ccc } 
-$D_6$ & $1$ & $r$ & $s$ \\\hline
-$\chi_{\text{Trivial}}$ & $1$ & $1$ & $1$\\
-$\chi_2$ & $1$ & $1$ & $-1$\\
-$\chi_3$ & $2$ & $-1$ & $0$\\
-\end{tabular}
-\end{center}
-where $\chi_2$ is the character associated to the representation $D_6\to\C$ given by $r\mapsto 1$, $s\mapsto -1$ and $\chi_3$ is the character associated to the representation 
-\end{eg}
-
-\begin{eg}{}{}\\
-The character table for $A_4$ is given by 
-\begin{center}
-\begin{tabular}{ c|cccc } 
-$A_4$ & $1$ & $\begin{pmatrix}1&2\end{pmatrix}\begin{pmatrix}3 & 4\end{pmatrix}$ & $\begin{pmatrix}1&2&3\end{pmatrix}$ & $\begin{pmatrix}1&3&2\end{pmatrix}$ \\\hline
-$\chi_{\text{Trivial}}$ & $1$ & $1$ & $1$ & $1$\\
-$\chi_2$ & $1$ & $1$ & $e^{2\pi i/3}$ & $e^{4\pi i/3}$\\
-$\chi_3$ & $1$ & $1$ & $e^{4\pi i/3}$ & $e^{2\pi i/3}$\\
-$\chi_3$ & $3$ & $-1$ & $0$ & $0$\\
-\end{tabular}
-\end{center}
-where $\chi_2$ is the character associated to the representation $D_6\to\C$ given by $r\mapsto 1$, $s\mapsto -1$ and $\chi_3$ is the character associated to the representation 
-\end{eg}
-
-\begin{prp}{}{}\\
-Let $G$ be a finite group. Let $A=(a_{i,j})\in M_{\abs{\text{Cl}(G)}}(\C)$ be the character table of $G$. Then the following are true. 
-\begin{itemize}
-\item The rows of $A$ are orthogonal: $$\sum_{j=1}^\abs{\text{Cl}(G)}\frac{a_{r,j}\overline{a_{s,j}}}{\abs{C_G(g_j)}}=\delta_{r,s}$$
-\item The columns of $A$ are orthogonal: $$\sum_{i=1}^\abs{\text{Cl}(G)}\frac{a_{i,r}\overline{a_{i,s}}}{\abs{C_G(g_s)}}=\delta_{r,s}$$
-\end{itemize}
-\end{prp}
-
-Motivated by the above proposition, we define an augmented version of the character table as follows. 
-
-\begin{defn}{The Augmented Character Table}{}\\
-Let $G$ be a finite group. Let $V_1,\dots,V_{\abs{\text{Cl}(G)}}$ be the complete list of non-isomorphic irreducible $\C[G]$-modules. Let $\text{Cl}(g_1),\dots,\text{Cl}(g_{\abs{\text{Cl}(G)}})$ be the complete list of distinct conjugacy classes of $G$. Define the character table of $G$ to be the matrix $(a_{i,j})\in M_{\abs{\text{Cl}(G)}}(\C)$ defined by $$a_{i,j}=\frac{\chi_{V_i}(g_j)}{\abs{C_G(g_j)}}$$
-\end{defn}
-
-\begin{crl}{}{}\\
-Let $G$ be a finite group. Let $A$ be the augmented character table of $G$. Then $A$ is an orthonormal matrix. 
-\end{crl}
-
-A number of previous theorems help determining the character table. To compute the number of conjugacy classes, we may use the following facts. Suppose that $V_1,\dots,V_n$ is the complete list of non-isomorphic irreducible representations of a finite group $G$. 
-\begin{itemize}
-\item  Use the fact that $\abs{G}=\sum_{i=1}^n\dim(V_i)^2$ and arithmetic to figure out $n$. 
-\item $\abs{\text{Cl}(G)}=n$. 
-\end{itemize}
-To then figure out the character table, we may use the following facts. 
-\begin{itemize}
-\item $\chi_{V_i}(1_G)=\dim(V_i)$. 
-\item The trivial map $G\to\C$ is always a representation of $G$. 
-\item Orthogonality relations between the rows and the columns
-\item $\chi(g^{-1})=\overline{\chi(g)}$ for all characters $\chi$. 
-\item $g$ and $g^{-1}$ are conjugate if and only if $\chi(g)\in\R$ for all characters $\chi$. 
-\item If $\chi$ is an irreducible character, then $\overline{\chi}$ is also n irreducible character. 
-\end{itemize}
-
-\begin{prp}{}{}\\
-Let $G$ be a finite group. Let $\chi$ be a character of $G$. Let $\rho:G\to\C^\times$ be a representation of $G$. Then the following are true. 
-\begin{itemize}
-\item $\chi\rho$ is a representation of $G$. 
-\item If $\chi$ is irreducible, then $\chi\rho$ is irreducible. 
-\end{itemize}
-\end{prp}
-
-\subsection{Representation Theory of Subgroups}
-\begin{defn}{Restriction of Representation to a Subgroup}{}\\
-Let $R$ be a commutative ring. Let $G$ be a group. Let $H\leq G$ be a subgroup. Let $V$ be a representation of $G$ over $R$. 
-\begin{itemize}
-\item Define the restriction of $V$ to $H$ to be the $R$-module $$\text{Res}_H^G(V)=V$$ together with the action of $R[H]$ given by restricting the action of $R[G]$ to $R[H]$. 
-\item Define the restriction of $\chi_V$ to $H$ by $\text{Res}_H^G\chi_V$. 
-\end{itemize}
-\end{defn}
-
-Note: Even if $V$ is an irreducible $k[G]$-module, it may not be an irreducible $k[H]$-module. 
-
-\begin{prp}{}{}\\
-Let $G$ be a finite group. Let $H\leq G$ be a subgroup. Let $\psi$ be a non-zero character of $H$. Then there exists an irreducible character $\chi$ of $G$ such that $\langle\text{Res}_H^G\chi,\psi\rangle\neq 0$. 
-\begin{proof}\\
-Let $\chi_1,\dots,\chi_k$ be the complete list of irreducible characters of $G$. Let $\chi_\text{reg}$ be the character of the regular representation of $G$. Then we know that $\chi_\text{reg}=\sum_{i=1}^k\chi_i(1_G)\chi_i$. Notice that the regular $\C[G]$-module contains $\C[H]$ and $\C[H]$ is closed under the action of $H$. Hence $\C[H]$ is a submodule of $\text{Res}_H^G(\C[G])$. \\
-
-Suppose that $\psi$ is irreducible. Then the corresponding $\C[H]$-module $V$ is a submodule of the regular representation $\C[H]$. Thus $\langle\text{Res}_H^G\chi_\text{reg},\psi\rangle\neq 0$. Then we have $$0\neq\left\langle\sum_{i=1}^k\chi_i(1_G)\text{Res}_H^G\chi_i,\psi\right\rangle=\sum_{i=1}^k\chi_i(1_G)\langle\text{Res}_H^G\chi_i,\psi\rangle$$ Thus there exists $\chi_i$ such that $\langle\text{Res}_H^G\chi_i,\psi\rangle\neq 0$. \\
-
-We can extend this to the case where $\psi$ is reducible by noting that for a character $\psi_j$ for some irreducible composition factor of $\psi$, we have $\langle\text{Res}_H^G\chi_i,\psi_j\rangle\neq 0$. 
-\end{proof}
-\end{prp}
-
-\begin{thm}{Clifford's Theorem}{}\\
-Let $G$ be a finite group. Let $H\trianglelefteq G$ be a normal subgroup. Let $\chi$ be an irreducible character of $G$. Let $\psi_1,\dots,\psi_n$ be the complete list of irreducible characters of $H$ such that $\text{Res}_H^G\chi$ is a linear combination of $\psi_1,\dots,\psi_n$ with non-zero coefficients. Then the following are true. 
-\begin{itemize}
-\item Each $\psi_i$ have the same dimension. 
-\item $\langle\text{Res}_H^G\chi,\psi_i\rangle$ is the same for all $i$. 
-\end{itemize}
-\begin{proof}\\
-Let $V$ be an irreducible $\C[G]$-module corresponding to $\chi$. Let $U$ be an irreducible $\C[H]$-module of $\text{Res}_H^G(V)$. For all $g\in G$, the set $g\cdot U$ is a subspace of $V$. For all $h\in H$, we have $$h(gu)=g(g^{-1}hg)u\in gU$$ since $U$ is a $\C[H]$-module and $H$ is normal implies $g^{-1}hg\in H$. So $g\cdot U$ is a $\C[H]$-submodule of $\text{Res}_H^G(V)$. \\
-
-I claim that $g\cdot U$ is irreducible. Suppose that $W$ is a $\C[H]$-submodule of $g\cdot U$. Then $g^{-1}\cdot W$ is a $\C[H]$-submodule of $U$ by the above paragraph. Hence $g^{-1}\cdot W$ is $U$ or $0$ since $U$ is irreducible. Hence $W$ is equal to $g\cdot U$ or $0$. Thus $g\cdot U$ is irreducible. Since $g\cdot -$ is an invertible linear map, we have $\dim_\C(g\cdot U)=\dim_\C(U)$. \\
-
-Let $g_1,\dots,g_l$ be complete list of distinct elements in $G$ such that $g_1\cdot U,\dots,g_l\cdot U$ are pairwise not equal to each other. Then $\bigoplus_{j=1}^lg_j\cdot U$ is a $\C[G]$-submodule of $V$. Since $V$ is an irreducible $\C[G]$-module, we have $\bigoplus_{g\in G}g\cdot U=V$. Hence $V$ is the direct sum of these irreducible submodules of equal dimension. This proves part 1 of the theorem. 
-\end{proof}
-\end{thm}
-
-\begin{prp}{}{}\\
-Let $G$ be a finite group. Let $H\leq G$ be a subgroup. Let $\chi$ be an irreducible character of $G$. Let $\psi_1,\dots,\psi_r$ be the complete list of irreducible characters of $H$. Suppose that $\text{Res}_H^G\chi=\sum_{i=1}^rd_i\psi_i$. Then the following are true. 
-\begin{itemize}
-\item We have $\sum_{i=1}^rd_i^2\leq[G:H]$. 
-\item The above equality holds if and only if $\chi(g)=0$ for all $g\in G\setminus H$. 
-\end{itemize}
-\begin{proof}\\
-Notice that $$\sum_{i=1}^rd_i^2=\langle\text{Res}_H^G\chi,\text{Res}_H^G\chi\rangle_H=\frac{1}{\abs{H}}\sum_{h\in H}\chi(h)\overline{\chi(h)}$$ and also $$1=\langle\chi,\chi\rangle_G=\frac{1}{\abs{G}}\left(\sum_{h\in H}\chi(h)\overline{\chi(h)}+\sum_{g\in G\setminus H}\chi(g)\overline{\chi(g)}\right)=\frac{\abs{H}}{\abs{G}}\left(\sum_{i=1}^rd_i^2\right)+\frac{1}{\abs{G}}\sum_{g\in G\setminus H}\chi(g)\overline{\chi(g)}$$ so we are done. 
-\end{proof}
-\end{prp}
-
-\begin{defn}{The Induced Representation}{}\\
-Let $R$ be a commutative ring. Let $G$ be a finite group. Let $H\leq G$ be a subgroup. Let $g_1H,\dots,g_nH$ be the complete list of distinct left cosets of $H$ in $G$. Let $U$ be a $R[H]$-module. 
-\begin{itemize}
-\item Define the induced representation of $U$ to be $$\text{Ind}_H^G(U)=\bigoplus_{i=1}^ng_iU$$ together with the action of $G$ given by left multiplication. 
-\item Denote the character of the induced representation of $\chi$ by $\text{Ind}_H^G\chi$. 
-\end{itemize}
-\end{defn}
-
-\begin{eg}{}{}\\
-Let $G=D_3=\langle a,b\;|\;a^3,b^2,abab\rangle=S_3$. Let $H=\langle a\rangle\leq D_3$. Then the complete list of irreducible $\C[H]$-modules are given by 
-\begin{itemize}
-\item $W_1=\C\langle 1_H+a+a^2\rangle$. 
-\item $W_2=\C\langle 1_H+\omega a+\omega^2a^2\rangle$. 
-\item $W_3=\C\langle 1_H+\omega^2a+\omega a^2\rangle$. 
-\end{itemize}
-where $\omega=e^{2\pi i/3}$. 
-Then the induced representations of the modules are given by 
-\begin{itemize}
-\item $\text{Ind}_H^G(W_1)=\C\langle 1_H+a+a^2,b+ba+ba^2\rangle$. 
-\item $\text{Ind}_H^G(W_2)=\C\langle 1_H+\omega a+\omega^2a^2,b+\omega ba+\omega^2ba^2\rangle$. 
-\item $\text{Ind}_H^G(W_3)=\C\langle 1_H+\omega a+\omega^2a^2,b+\omega ba+\omega^2ba^2\rangle$. 
-\end{itemize}
-\end{eg}
-
-\begin{lmm}{}{}\\
-Let $R$ be a commutative ring. Let $G$ be a finite group. Let $H\leq G$ be a subgroup. Let $U$ be a $R[H]$-module. Then we have isomorphisms $$\text{Ind}_H^G(U)\cong R[G]\otimes_{R[H]}U\cong\Hom_{R[H]}(R[G],U)$$
-\end{lmm}
-
-\begin{thm}{Frobenius Reciprocity Theorem}{}\\
-Let $G$ be a finite group. Let $H\leq G$ be a subgroup. Let $\chi$ be a character of $G$. Let $\psi$ be a character of $H$. Then the change of base rings aduncntion induces the following: $$\langle\text{Ind}_H^G\psi,\chi\rangle_G=\langle\psi,\text{Res}_H^G\chi\rangle_H$$
-\end{thm}
-
-\begin{prp}{The Mackey Formula}{}\\
-Let $G$ be a finite group. Let $H\leq G$ be a subgroup. Let $\psi$ be a character of $H$. 
-Then we have $$\text{Ind}_H^G\psi(g)=\frac{1}{\abs{H}}\sum_{y\in G, ygy^{-1}\in H}\psi(ygy^{-1})$$
-\end{prp}
-
-\pagebreak
-\section{Representation Theory of the Symmetric Group}
-\subsection{}
-The conjugacy classes of $S_n$ is the given by the cycle type of the permutations. These are indexed by partitions $\lambda=(\lambda_1,\dots,\lambda_k)$ such that $\sum_{i=1}^k\lambda_i=n$ and $\lambda_i\geq\lambda_{i+1}$. We write $\lambda\vdash n$. These can be drawn into Young diagrams: 
-\begin{itemize}
-\item There are $\lambda_i$ boxes in row $i$. 
-\item Rows are left justified. 
-\end{itemize}
-
-Let $S_\lambda$ be the subgroup of $S_n$ given by $$S_\lambda=S_{1,\dots,\lambda_1}\times S_{\lambda_1+1,\dots,\lambda_1+\lambda_2}\times\cdots\times S_{n-\lambda_k+1,\dots,n}\cong S_{\lambda_1}\times\cdots\times S_{\lambda_k}$$ Let $M^\lambda$ be the module associated to the character $\text{Triv}_{S_\lambda}^{S_n}$. This is not generally irreducible. But we can order partitions of $n$ such that the following are true. 
-\begin{itemize}
-\item $M^{\lambda(1)}$ is irreducible (call it $S^{\lambda(1)}$)
-\item $M^{\lambda(2)}$ contain copies of $S^{\lambda(1)}$ and a unique copy of a new irreducible module $S^{\lambda(2)}$. 
-\item etc... 
-\end{itemize}
-
-$S^{\lambda(i)}$ are called Specht modules. $M^{\lambda(i)}$ are called the permutation modules corresponding to $\lambda$. The ordering needed is reverse-lexicographic (revlex). Largest number to smallest number, starting with the first component and moving to latter components to break ties. \\
-
-Let $\overline{t_i}$ denote the distinct $\lambda$-tabloids: fill the young diagram of $\lambda$ with $\{1,\dots,n\}$ (this is called a Young tableau) and mark two as equivalent if each corresponding row has the same elements. Then $M^\lambda=\C\langle\overline{t_1},\dots,\overline{t_k}\rangle$. 
-
-\begin{eg}{}{}\\
-The partitions of $\{1,\dots,4\}$ is given by $$\{(4),(3,1),(2,2),(2,1,1),(1,1,1,1)\}$$ 
-\end{eg}
-
-\begin{eg}{}{}\\
-Let $\lambda=(n)$. Then $M^\lambda\cong\C$ and $S_n$ acts on this trivially. Thus $\text{Ind}_{S_\lambda}^{S_n}\text{Triv}=\text{Triv}$. \\
-
-Let $\lambda=(1,\dots,1)$. Then $M^\lambda\cong\C^{n!}$. Then $\text{Ind}_{S_\lambda}^{S_n}\text{Triv}=\chi_\text{reg}$. \\
-
-Let $\lambda=(n-1,1)$. Then $M^\lambda\cong\C^n$. Then $\text{Ind}_{S_\lambda}^{S_n}\text{Triv}$ is the character of the permutation representation. 
-\end{eg}
-
-\begin{defn}{Young Diagram}{}\\
-Let $n\in\N^+$. Let $\lambda=(\lambda_1,\dots,\lambda_k)$ be a partition of $n$. Define the Young diagram of $\lambda$ to be $$Y(\lambda)=\{(i,j)\in\N^+\times\N^+\;|\;1\leq i\leq k,1\leq j\leq\lambda_i\}$$
-\end{defn}
-
-\begin{defn}{Young Tableau}{}\\
-Let $n\in\N^+$. Let $\lambda$ be a partition of $n$. A Young tableau of $\lambda$ is a bijection $t:Y(\lambda)\to\{1,\dots,n\}$. Denote the set of all Young tableau of $\lambda$ by $\Delta^\lambda$. 
-\end{defn}
-
-\begin{defn}{Young Tabloid}{}\\
-Let $n\in\N^+$. Let $\lambda$ be a partition of $n$. 
-\begin{itemize}
-\item Let $t_1,t_2$ be Young tableau of $\lambda$. We say that $t_1$ and $t_2$ are equivalent if $$\{t_1(r_0,j)\;|\;1\leq j\leq\lambda_i\}=\{t_2(r_0,j)\;|\;1\leq j\leq\lambda_k\}$$ for all $1\leq r_0\leq k$ (in other words the rows of the tableau are equal up to permutation). 
-\item A Young tabloid of $\lambda$ is an equivalence class $[t]$ where $t$ is a Young tableau of $\lambda$. 
-\end{itemize}
-\end{defn}
-
-\begin{defn}{The Associated Polytabloid of a Tableau}{}\\
-Let $n\in\N^+$. Let $\lambda$ be a partition of $n$. Let $t$ be a $\lambda$-tableau. Define the associated polytabloid to be $$e(t)=\sum_{\sigma\in C(t)}\text{sign}(\sigma)(\sigma\cdot[t])$$ where $C(t)=\prod_{i=1}^k\text{Sym}(C_i)$ where $C_i$ is the $i$th column of $t$. 
-\end{defn}
-
-\begin{defn}{The Specht Module of a Partition}{}\\
-Let $n\in\N^+$. Let $\lambda$ be a partition for $n$. Define the Specht module associated to $\lambda$ to be the $\C$-vector space $$S^\lambda=\C\langle e(t)\;|\;t\text{ is a }\lambda\text{-tableau }\rangle$$
-\end{defn}
-
-\begin{thm}{}{}\\
-Let $n\in\N^+$. Then $\{S^\lambda\;|\;\lambda\text{ is a partition for }n\}$ forms the complete list of non-isomorphic irreducible $\C[S_n]$-modules. 
-\end{thm}
 
 \pagebreak
 \section{Quivers and Path Algebras}

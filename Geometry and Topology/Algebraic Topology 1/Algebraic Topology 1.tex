@@ -15,33 +15,13 @@
 \date{\today}
 \begin{document}
 \maketitle
-\begin{abstract}
-Algebraic topology aims to classify topological spaces by associating them with algebraic invariants. In these set of notes, we will discuss the notion of homotopic paths and the fundamental group as an algebraic invariant of spaces and discuss its properties, applications and limitations. \\
-
-We will then discuss specific maps that preserve homotopies. One such type is covering spaces and covering maps. The theory of covering spaces and the fundamental group is strongly related, with a major result establishing a correspondence between subgroups of the fundamental group and covering spaces. The deck group as automorphisms of a covering space is also helpful in identifying normal subgroups in the fundamental group. These groups represents covering spaces which attain maximal symmetry in terms of base point switching. \\
-
-Finally, we will end the discussion with CW-complexes which allows handy calculation of the fundamental group by constructing CW-complexes of a given space and apply Seifert-van Kampen theorem so that we find ourselves deformation retracting subspaces into known spaces such as circles and the Möbius band. \\
-~\\
-\end{abstract}
-References: 
-\begin{itemize}
-\item Algebraic Topology by Allen Hatcher: \\
-Hatcher's book is recognized as the best introduction to Algebraic Topology. Indeed, Hatcher's book is mostly self-contained with a gentle introduction to common objects and operations such as CW complexes, suspensions, loop space and more. It then begins with the study of the fundamental group, one of the most intuitive algebraic invariants in Algebraic Topology. Hatcher's book is also far reaching. There is material as deep as fiber bundles, spectra and more. \\
-
-For our purposes, chapter 1 of Hatcher's book will cover most of the materials in the notes, other than that on topological groups. The trade-off of the detailed explanation of each and every intuition makes the books slightly too terse for the writer. For instance, statements of the theorems and definitions are sometimes implicit in the long explanations above. Readers who want to skim through the subject may have a hard time following. 
-
-\item MA3F1 Lecture Notes in University of Warwick: \\
-The writer's first exposure towards Algebraic Topology lies in one particular module choice in Warwick. Therefore most of the material follow the plan of the lectures. However, such lectures did not go through topological groups. 
-
-\item Algebraic Topology: An Introduction by W. S. Massey: \\
-\end{itemize}
 
 \pagebreak
 \tableofcontents
 \pagebreak
 
 \section{Introduction to Homotopy Theory and the Fundamental Group}
-\subsection{Homotopies}
+\subsection{Homotopy between two Maps}
 In general, showing that two spaces are not homeomorphic is hard. Therefore we turn to a weaker statement: homotopy equivalence. It will become aparent that homeomorphic spaces are necessarily homotopic, but homotopic spaces may not be homeomorphic in general. 
 
 \begin{defn}{Homotopy}{} Let $X,Y$ be spaces. Let $f,g:X\to Y$ be maps. A homotopy from $f$ to $g$ is a continuous function $H:X\times I\to Y$ such that $$H(x,0)=f(x)\;\;\;\;\text{ and }\;\;\;\;H(x,1)=g(x)$$ for all $x\in X$. In this case, we say that $f$ is homotopic to $g$ and write $f\simeq g$. 
@@ -814,6 +794,12 @@ Hence $\phi$ is injective.
 \end{proof}
 \end{thm}
 
+\begin{eg}{Fundamental Group of $T^n$}{} The fundamental group of the $n$-torus is $$\pi_1(T^n,x_0)\cong\pi_1(S^1,1)\times\cdots\times\pi_1(S^1,1)$$ the product of $n$ fundamental groups of the circle for any $x_0\in T^n$. 
+\begin{proof}
+Since $T^n$ is path connected, the choice of base point does not matter. By the product rule of the fundamental group, we conclude. 
+\end{proof}
+\end{eg}
+
 There are a number of important consequences deducible from the fundamental group of circle, via comparing it to other fundamental groups. 
 
 \begin{prp}{}{3.1.2} The disc $D^2$ does not retract to $S^1\subset D^2$. 
@@ -870,6 +856,22 @@ where $i_1,i_2$ are induced by the inclusions $A\cap B$ to $A$ and $B$ respectiv
 
 Category theorists can realize that this is a pushout diagram of the inclusions $\pi_1(A\cap B,x_0)\to\pi_1(A,x_0),\pi_1(B,x_0)$. 
 
+\begin{eg}{Fundamental Group of $S^n$}{}\\
+Let $n\geq 2$ be an integer and $x_0\in S^n$. Then $\pi_1(S^n,x_0)\cong\{0\}$. 
+\begin{proof}\\
+Notice that the choice of basepoint does not matter since for $n\geq 2$, $S^n$ is path connected. Let $U=\{(x_1,\dots,x_{n+1})\in S^n\;|\;x_{n+1}>0-\epsilon\}$ be the upper hemisphere of $S^n$ and $V=\{(x_1,\dots,x_{n+1}\in S^n\;|\; x_{n+1}<0+\epsilon\}$ be the lower hemisphere of $S^n$ for $\epsilon>0$ a small number. It is clear that $U\cup V=S^n$ and $U\cap V\simeq\R^n\setminus\{0\}$ is homotopic equivalent to $S^{n-1}$. But $U$ and $V$ are contractible. By the Seifert-van Kampen theorem, we obtain $$\pi_1(S^n,x_0)\cong\{1\}\ast_{\pi_1(S^{n-1},s)}\{1\}\cong\{1\}$$ and so we conclude. 
+\end{proof}
+\end{eg}
+
+We will see how the lifting correspondence helps us deduce the fundamental group of the projective space. 
+
+\begin{eg}{Fundamental Group of Projective Space}{}\\
+For $n\geq 2$, the fundamental group of $\R\Prj^n$ is $$\pi_1(\R\Prj^n,x_0)\cong\Z/2\Z$$ for any base point $x_0\in\R\Prj^n$. 
+\begin{proof}\\
+Recall that $\R\Prj^n$ is the set of all lines passing through $0$ in $\R^{n+1}$. Each line intersects with $S^n$ in exactly two points where $\abs{x}=1$. Thus $S^n$ is a $2$-sheeted covering of $\R\Prj^n$. But $\pi_1(S^n,x)\cong\{1\}$ which means that $S^n$ is the universal covering o $\R\Prj^n$. By \ref{thm:3.3.5}, we have that $\pi_1(\R\Prj^n,x)$ is of order $2$ since $p:S^n\to\R\Prj^n$ is a $2$-sheeted cover. But there is only one unique group of order $2$ up to isomorphism and so we conclude. 
+\end{proof}
+\end{eg}
+
 \begin{crl}{}{} Let $X$ be a space such that $A,B\subseteq X$ covers $X$. If $A\cap B$ is simply connected, then for any $x_0\in A\cap B$, there is an isomorphism $$\pi_1(X,x_0)\cong\pi_1(A,x_0)\ast\pi_1(B,x_0)$$ between the fundamental group of $X$ and the free product. 
 \begin{proof}
 Immediate by \ref{thm:Seifert-van Kampen}. 
@@ -892,41 +894,16 @@ Note that $\Psi$ is induced by the inclusions $i_\alpha:U_\alpha\hookrightarrow 
 
 Reminiscing the baby Seifert-van Kampen theorem, the above general isomorphism $$\frac{\ast_\alpha\pi_1(U_\alpha,x_0)}{\ker(\Psi)}\cong\pi_1(X,x_0)$$ is precisely the amalgamated product of a collection of groups. 
 
+\subsection{Wedge Sum of Spaces}
 \begin{defn}{Wedge Sum of Spaces}{} Let $\{(X_i,x_i)\;|\;i\in I\}$ be a family of pointed spaces. Define their wedge sum to be the quotient space $$\bigvee_{i\in I}(X_i,x_i)=\frac{\coprod_{i\in I}X_i}{\coprod_{i\in I}\{x_i\}}$$
 \end{defn}
 
-\subsection{Fundamental Groups of Important Spaces}
-\begin{thm}{Fundamental Group of $T^n$}{} The fundamental group of the $n$-torus is $$\pi_1(T^n,x_0)\cong\pi_1(S^1,1)\times\cdots\times\pi_1(S^1,1)$$ the product of $n$ fundamental groups of the circle for any $x_0\in T^n$. 
-\begin{proof}
-Since $T^n$ is path connected, the choice of base point does not matter. By the product rule of the fundamental group, we conclude. 
+\begin{lmm}{}{}\\
+Let $(X,x_0)$ and $(Y,y_0)$ be pointed spaces. If the base point of $(X,x_0)\vee(Y,y_0)$ has a simply connected neighbourhood, then there is an isomorphism $$\pi_1((X,x_0)\vee(Y,y_0))\cong\pi_1(X,x_0)\ast\pi_1(Y,y_0)$$ given by Seifert-van Kampen theorem. 
+\begin{proof}\\
+Follows directly from the theorem. 
 \end{proof}
-\end{thm}
-
-\begin{thm}{Fundamental Group of $S^n$}{} Let $n\geq 2$ be an integer and $x_0\in S^n$. Then $\pi_1(S^n,x_0)\cong\{0\}$. 
-\begin{proof}
-Notice that the choice of basepoint does not matter since for $n\geq 2$, $S^n$ is path connected. Let $U=\{(x_1,\dots,x_{n+1})\in S^n\;|\;x_{n+1}>0-\epsilon\}$ be the upper hemisphere of $S^n$ and $V=\{(x_1,\dots,x_{n+1}\in S^n\;|\; x_{n+1}<0+\epsilon\}$ be the lower hemisphere of $S^n$ for $\epsilon>0$ a small number. It is clear that $U\cup V=S^n$ and $U\cap V\simeq\R^n\setminus\{0\}$ is homotopic equivalent to $S^{n-1}$. But $U$ and $V$ are contractible. By the Seifert-van Kampen theorem, we obtain $$\pi_1(S^n,x_0)\cong\{1\}_{\pi_1(S^{n-1},s)}\{1\}\cong\{1\}$$ and so we conclude. 
-\end{proof}
-\end{thm}
-
-\begin{crl}{}{} For $n\geq 2$, $T^n$ is not homotopic equivalent and not homeomorphic to $S^n$. 
-\begin{proof}
-Homotopic equivalent spaces should have isomorphic fundamental groups. Since they are not homotopic, they are also not homeomorphic. 
-\end{proof}
-\end{crl}
-
-We will see how the lifting correspondence helps us deduce the fundamental group of the projective space. 
-
-\begin{thm}{Fundamental Group of Projective Space}{} For $n\geq 2$, the fundamental group of $\R\Prj^n$ is $$\pi_1(\R\Prj^n,x_0)\cong\Z/2\Z$$ for any base point $x_0\in\R\Prj^n$. 
-\begin{proof}
-Recall that $\R\Prj^n$ is the set of all lines passing through $0$ in $\R^{n+1}$. Each line intersects with $S^n$ in exactly two points where $\abs{x}=1$. Thus $S^n$ is a $2$-sheeted covering of $\R\Prj^n$. But $\pi_1(S^n,x)\cong\{1\}$ which means that $S^n$ is the universal covering o $\R\Prj^n$. By \ref{thm:3.3.5}, we have that $\pi_1(\R\Prj^n,x)$ is of order $2$ since $p:S^n\to\R\Prj^n$ is a $2$-sheeted cover. But there is only one unique group of order $2$ up to isomorphism and so we conclude. 
-\end{proof}
-\end{thm}
-
-\begin{thm}{Fundamental Group of the Figure 8}{} The fundamental group of the figure 8 $S^1\vee S^1$ is given by $$\pi_1(S^1\vee S^1,x)\cong\Z\ast\Z$$ where $x\in S^1\vee S^1$ is any base point. 
-\begin{proof}
-It is clear that $S^1\vee S^1$ is path connected so any choice of base point would suffice. So let us choose the wedge point $x$. Let $U$ be a contractible neighbourhood of $x$. Label the two circles by $S_1^1$ and $S_2^1$ respectively. Then $S_1^1\cup U$ and $S_2^1\cup U$ form an open cover of $S^1\vee S^1$ with intersection $U$. Since $U$ is contractible, $\pi_1(U,x)=\{1\}$. $S^1\cup U$ deformation retracts to $S^1$ so that $\pi_1(S^1\cup U,x)\cong\Z$. By Seifert-van Kampen theorem, we have that $$\pi_1(S^1\vee S^1,x)\cong\pi_1(S_1^1\cup U,x)\ast_{\pi_1(U,x)}\pi_1(S_2^1\cup U,x)\cong\Z\ast\Z$$ and so we conclude. 
-\end{proof}
-\end{thm}
+\end{lmm}
 
 \pagebreak
 
@@ -1212,10 +1189,7 @@ A CW complex is a space $X$ defined inductively in the following way.
 We say that $e_\alpha^n=D_\alpha^n\setminus S_\alpha^{n-1}$ the open cells of $X$ and $D_\alpha^n$ are the closed cells with boundary $S_\alpha^{n-1}$. If the inductive construction terminates at the $n$th skeleton, we say that $X$ is of dimension $n$. 
 \end{defn}
 
-Basically, the above procedure is to slowly fill up the empty holes with more faces. Given a set of points, $X^0$, we can fill in the holes between the points by drawing line segments between two points. And between two lines, we can fill in the hole created from two lines that enclose a space with a $2$ dimensional disk (cell). This process repeats itself by filling $n+1$ holes in places where boundaries are $n$ dimensions. \\
-The unions being disjoint is trivial since they belong to different $n$ dimensional boundaries. The attaching maps are used to identify what disk has boundaries belonging to what $n$ dimensional hole. The equivalence relation is given since attaching the disk to $S$ means that the boundary of the disk will be duplicated. \\
-
-On the other hand, we say that a space $X$ is a CW complex if it admits a CW complex structure. 
+The weak topology is just the quotient topology when the inductive build up of the CW complex terminates after finite steps. 
 
 \begin{defn}{Characteristic Maps}{} Let $X$ be a CW-complex. Let $D_\alpha^n$ be a closed cell of $X$. Define the characteristic map of $D_\alpha^n$ to be the map $$\Phi_\alpha^n:D_\alpha^n\to X$$ given by the following diagram \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
@@ -1230,9 +1204,16 @@ On the other hand, we say that a space $X$ is a CW complex if it admits a CW com
 where $X^n$ arises by identifying $x\sim\varphi_\alpha^n(x)$ meaning $q$ is the quotient map induced by the identification. 
 \end{defn}
 
-Each of the $\varphi_\alpha^n$ defines $\Phi_\alpha^n$ because the attaching maps describes how the boundary of a cell is attached and the remaining interior is mapped arbitrarily and continuously. Notice that the restriction of $\Phi_\alpha^n$ to $e_\alpha^n$ is a homeomorphism to its image, which we also denote by $e_\alpha^n$. We can therefore characterize CW-complexes in terms of the disjoint union of all cells of the form $e_\alpha^n$. \\
+Each of the $\varphi_\alpha^n$ defines $\Phi_\alpha^n$ because the attaching maps describes how the boundary of a cell is attached and the remaining interior is mapped arbitrarily and continuously. Notice that the restriction of $\Phi_\alpha^n$ to $e_\alpha^n$ is a homeomorphism to its image, which we also denote by $e_\alpha^n$. We can therefore characterize CW-complexes in terms of the disjoint union of all cells of the form $e_\alpha^n$. 
 
-The weak topology is just the quotient topology when the inductive build up of the CW complex terminates after finite steps. 
+\begin{eg}{}{}\\
+The following are CW complexes. 
+\begin{itemize}
+\item $S^n$ for each $n\in\N$. 
+\item $\R\Prj^n$ for each $n\in\N^+$. 
+\item $\C\Prj^n$ for each $n\in\N^+$. 
+\end{itemize}
+\end{eg}
 
 \begin{prp}{}{} Let $X$ be a CW complex. Then the following are true regarding the topology of $X$. 
 \begin{itemize}

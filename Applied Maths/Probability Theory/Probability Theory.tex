@@ -48,7 +48,7 @@ Let $(\Omega,\mF,P)$ be a probability space.
 \end{itemize}
 \end{defn}
 
-\begin{eg}{}{}\\
+\begin{eg}{Uniform Probability}{}\\
 Let $\Omega$ be the set of all possible outcomes of flipping a coin ten times. Let $\mF=\mP(\Omega)$ be the set of subsets of $\Omega$. Let $P:\mF\to[0,1]$ be the function defined by $P(E)=\frac{\abs{E}}{\abs{\Omega}}$ for all $E\in\mF$. Then $(\Omega,\mF,P)$ is a probability space. 
 \end{eg}
 
@@ -69,9 +69,9 @@ Let $A\subset B\subset\Omega$ be events in $\Omega$.
 
 \begin{eg}{The Birthday Problem}{}\\
 Suppose that there are $k$ people in a room, all of whom are equally likely to have a birthday in one of the 365 days in a year. Suppose that the birthdays of the people in the room are independent of each other. What is the probability that two or more people in the room have the same birthday?
-\begin{proof}\\
+\begin{answer}\\
 Let $\Omega=\{\{n_1,\dots,n_k\}\;|\;1\leq n_1,\dots,n_k\leq 365\}$. These indicate all the possible birthday configurations. Let $\mF=\mP(\Omega)$. This means that every birthday configuration we constructed is possible. By the assumptions of the question, we set $P(E)=\frac{\abs{E}}{\abs{\Omega}}$ for an event $E\in\mF$. Then we have $$P(\text{at least one birthday match})=1-P(\text{no birthday matches})=1-\frac{365!}{(365)^k(365-k)!}$$
-\end{proof}
+\end{answer}
 \end{eg}
 
 \begin{thm}{Principle of Inclusion Exclusion}{}\\
@@ -86,35 +86,72 @@ A\cup(B\setminus A)&=A\cup(B\cap A^c)\\
 \end{proof}
 \end{thm}
 
-\begin{thm}{Extended Principle of Inclusion Exclusion}{} Let $A_k\subset\Omega$ be a sample space and $P$ the probability measure for all $k\leq n\in\mathbb{N}$. Then $$P\left(\bigcup_{k=1}^n A_k\right)=\sum_{k=1}^n(-1)^{k+1}\sum_{1\leq i_1\leq\dots\leq i_k\leq n}P(A_{i_1}\cap A_{i_2}\cap\dots\cap A_{i_k})$$
+\begin{thm}{Extended Principle of Inclusion Exclusion}{} Let $A_k\subset\Omega$ be a sample space and $P$ the probability measure for all $k\leq n\in\mathbb{N}$. Then $$P\left(\bigcup_{k=1}^n A_k\right)=\sum_{k=1}^n(-1)^{k+1}\sum_{1\leq i_1<\cdots<i_k\leq n}P(A_{i_1}\cap A_{i_2}\cap\dots\cap A_{i_k})$$
 \end{thm}
+
+\begin{eg}{}{}\\
+A casino offers a card game with the following rules. You draw a card from a deck of cards. The host then draws a card from the deck without replacement. If your card is strictly larger than the card your host holds, you win. What is your probability of winning? (c.f. Green Book of Quant)
+\begin{answer}\\
+We could have used the law of total probability (refer to later sections), but we could just use logic. Let $E_1$ be the event that your card has strictly larger value than the host. Let $E_2$ be the converse. Let $E_3$ be the event that both card has the same value. Since $E_1,E_2,E_3$ are pairwise disjoint events that covers all possible outcomes, we have $P(E_1)+P(E_2)+P(E_3)=1$ by the principle of inclusion exclusion. Since $E_1$ and $E_2$ are symmetric, we have $P(E_1)=P(E_2)$. Finally, notice that $P(E_3)=\frac{3}{51}=\frac{1}{17}$. Hence we conclude that $P(E_1)=\frac{8}{17}$. 
+\end{answer}
+\end{eg}
+
+\begin{eg}{}{}\\
+A line of 100 airline passengers are waiting to board a plane, and they each hold a ticket to one of the 100 seats on that flight; for convenience, let's say that the nth passenger in line has a ticket for seat number n. Being drunk, the first person in line picks a random seat, equally likely for each seat. All of the other passengers are sober and will go to their proper seats unless it is already occupied; in that case, they will randomly choose a free seat. You're person number 100. What is the probability that you end up in your seat (i.e., seat 100)? (c.f. Green Book of Quant)
+\begin{answer}\\
+Let $E_1$ be the event that seat 100 is taken before seat 1. Let $E_2$ be the event that seat 1 is taken before seat 100. I claim that $E_2$ is equal to the event that you take your own seat. Indeed, since you are the last passenger to board, if you take your own seat, then seat 1 must have already been taken. Now suppose that seat 1 is taken before seat 100 and suppose that the first passenger has taken seat n. Then passengers 2 to n-1 will have their own seat, and passenger n either randomly takes seat 1 or any other seat. If he takes seat 1, then passengers n+1 to 99 will seat at their own seats and hence you will seat at your own seat. If he does not take seat 1, and takes seat m instead for $100>m>n$, then the process repeats until seat 1 is taken before seat 100 or $m=99$, in which case by assumption passenger 99 must take seat 1 and you are left with seat 100. \\
+
+Now $E_1$ and $E_2$ are disjoint events that covers all possible outcomes and are symmetric. By the principle of inclusion exclusion, we conclude that $P(E_2)=\frac{1}{2}$. 
+\end{answer}
+\end{eg}
+
+\begin{eg}{}{}\\
+Given $N$ points on a circle, what is the probability that they all lie in a semicircle? (c.f. Green Book of Quant)
+\end{eg}
 
 \subsection{Conditional Probability}
 \begin{defn}{Conditional Probability}{}\\
 Let $(\Omega,\mF,P)$ be a probability space. Let $A,B\in\mF$ be events. Define the conditional probability of $A$ given $B$ to be $$P(A\;|\;B)=\frac{P(A\cap B)}{P(B)}$$
 \end{defn}
 
+\begin{eg}{Two Children Problem}{}\\
+\end{eg}
+
+\begin{eg}{}{}\\
+A family has two children. Given that one of them is a boy, what is the probability that both children are boys. 
+\begin{answer}\\
+We use the sample space $\Omega=\{(b,b),(b,g),(g,b),(g,g)\}$ and $\mF=\mP(\Omega)$ for the space of events. We assume uniform probability in the four cases. Let $A$ be the event that both children are boys. Let $B$ be the event that one of the child is a boy. Then we have $$P(A\;|\;B)=\frac{P(A\cap B)}{P(B)}=\frac{P(\{(b,b)\})}{P(\{(b,b),(b,g),(g,b)\})}=\frac{1}{3}$$
+\end{answer}
+\end{eg}
+
 \begin{prp}{Multiplication Rule}{}\\
 Let $(\Omega,\mF,P)$ be a probability space. Let $A_1,\dots,A_n\in\mF$ be events. Then we have 
-$$P\left(\bigcap_{i=1}^nA_i\right)=P(A_1)\cdot\prod_{i=2}^nP\left(A_i\;|\;\bigcap_{j=1}^{i-1}A_j\right)$$
+$$P\left(\bigcap_{i=1}^nA_i\right)=P(A_1)\cdot\prod_{i=2}^nP\left(A_i\;\bigg{|}\;\bigcap_{j=1}^{i-1}A_j\right)$$
 \begin{proof}\\
 Follow immediately by induction on the definition of conditional probability. 
 \end{proof}
 \end{prp}
 
-\begin{thm}{Bayes' Rule}{}\\
-Let $(\Omega,\mF,P)$ be a probability space. Let $A,B\in\mF$ be spaces such that $P(A),P(B)>0$. Then we have $$P(A|B)=\frac{P(B|A)P(A)}{P(B)}$$
+\begin{eg}{}{}\\
+Suppose there are five buckets whose labels (1,2,3,4,5) are covered up. Suppose that there are five balls with the same labels. A ball is placed randomly into each bucket. What is the probability that none of the labels of the balls match the labels on the buckets? (c.f. Green Book of Quant)
+\begin{answer}\\
+Let $E_i$ be the event that the $i$th ball is placed correctly into the $i$th bucket. By the principle of inclusion exclusion, we have $$P\left(\bigcup_{i=1}^5E_i\right)=\sum_{k=1}^5(-1)^{k+1}\sum_{1\leq i_1<\cdots<i_k\leq 5}P(E_{i_1}\cap\cdots\cap E_{i_k})$$ When $k=1$, since we assume that the random placement of the ball is uniform, we have $P(E_i)=\frac{1}{5}$. When $2\leq k\leq 5$, by the multiplication rule, we deduce that $$P(E_{i_1}\cap\cdots\cap E_{i_k})=P(E_{i_1})\prod_{j=2}^kP\left(E_{i_j}\;\bigg{|}\;\bigcap_{t=1}^{j-1}E_{i_t}\right)=\frac{1}{5}\prod_{j=2}^k\frac{1}{6-j}=\frac{(5-k)!}{5!}$$ Combining with the principle of inclusion exclusion, we have $$P\left(\bigcup_{i=1}^5E_i\right)=\sum_{k=1}^5(-1)^{k+1}\binom{5}{k}\frac{(5-k)!}{5!}=\sum_{k=1}^5(-1)^{k+1}\frac{1}{k!}=\frac{19}{30}$$ So the probability that no labels of the balls match the labels on the bucket is $\frac{11}{30}$. 
+\end{answer}
+\end{eg}
+
+\begin{thm}{Bayes' Theorem}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $A,B\in\mF$ be spaces such that $P(A),P(B)>0$. Then we have $$P(A\;|\;B)=\frac{P(B\;|\;A)P(A)}{P(B)}$$
 \begin{proof}\\
-We have that $P(A\cap B)=P(A|B)P(B)$ and $P(A\cap B)=P(B|A)P(A)$. 
+We have that $P(A\cap B)=P(A\;|\;B)P(B)$ and $P(A\cap B)=P(B\;|\;A)P(A)$. 
 \end{proof}
 \end{thm}
 
 \begin{thm}{Law of Total Probability}{}\\
-Let $(\Omega,\mF,P)$ be a probability space. Let $A_1,\dots,A_n\in\mF$ be events that partition $\Omega$ such that $P(A_i)>0$ for $1\leq i\leq n$. Let $B\in\mF$ be an event. Then we have $$P(B)=\sum_{k=1}^nP(A_k)P(B|A_k)$$
+Let $(\Omega,\mF,P)$ be a probability space. Let $A_1,\dots,A_n\in\mF$ be events that partition $\Omega$ such that $P(A_i)>0$ for $1\leq i\leq n$. Let $B\in\mF$ be an event. Then we have $$P(B)=\sum_{k=1}^nP(A_k)P(B\;|\;A_k)$$
 \begin{proof}\\
 Note that since $A_1,\dots,A_n$ is a partition of $\Omega$, $B\cap A_1,\dots,B\cap A_n$ is a partition of $B$. Then we have
 \begin{align*}
-\sum_{k=1}^nP(A_k)P(B|A_k)&=\sum_{k=1}^nP(B\cap A_k)\\
+\sum_{k=1}^nP(A_k)P(B\;|\;A_k)&=\sum_{k=1}^nP(B\cap A_k)\\
 &=P\left(\bigcup_{k=1}^nB\cap A_k\right)\\
 &=P(B\cap\Omega)\\
 &=P(B)
@@ -122,17 +159,33 @@ Note that since $A_1,\dots,A_n$ is a partition of $\Omega$, $B\cap A_1,\dots,B\c
 \end{proof}
 \end{thm}
 
+\begin{eg}{}{}\\
+Suppose that a coin tossing game is played among person A and B. If A has $n+1$ fair coins and B has $n$ fair coins, what is the probability that A has more heads than B if they both flip all their coins? (c.f. Green Book of Quant)
+\begin{answer}\\
+Let $\Omega=\{(i,j)\in\N^2\;|\;0\leq i\leq n+1,0\leq j\leq n\}$ be the sample space. Let $\mF=\mP(\Omega)$ be the set of events. Let $P:\mF\to[0,1]$ be the uniform probability on $\Omega$. Then we have $$P(\text{A has more heads than B})=\sum_{i=0}^nP(\text{A has more heads than B}\;|\;B\text{ has }i\text{ heads})P(\text{B has i heads})$$ by the law of total probability. We deduce that $$P(\text{A has more heads than B})=\sum_{i=0}^n\frac{n-i+1}{n+2}\frac{1}{n+1}=\frac{1}{(n+2)(n+1)}\frac{(n+2)(n+1)}{2}=\frac{1}{2}$$
+\end{answer}
+\end{eg}
+
 \begin{eg}{Gambler's Ruin}{}\\
 A gambler starts with an initial fortune of £k for $1\leq k\leq n$. On each successive gamble, the gambler either wins £1 or loses £1 independent of past games, with a probability of $p$ and $1-p$ respectively for $p\in(0,1)$. What is the probability that the gambler reaches £n dollars before reaching £0?
-\begin{proof}\\
+\begin{answer}\\
 The gambler is said to have lost the game if the gambler reaches £0 after any round. Let $a_i$ denote the probability that the gambler reaches £n dollars before reaching £0, when the gambler has £i. By the law of total probability, we obtain a recurrence relation $$a_i=pa_{i+1}+(1-p)a_{i-1}$$ This makes for a difference equation with boundary conditions $a_0=1$ and $a_n=0$. Solving it gives $$a_i=\begin{cases}
 \frac{i}{n} & \text{ if }p=\frac{1}{2}\\
 \frac{1-((1-p)/p)^i}{1-((1-p)/p)^n} & \text{ otherwise }
-\end{cases}$$
-\end{proof}
+\end{cases}$$ Notice that the $p=1/2$ case is consistent with the $p\neq 1/2$ cases since $\lim_{p\to 1/2}\frac{1-((1-p)/p)^i}{1-((1-p)/p)^n}=\frac{i}{n}$. 
+\end{answer}
 \end{eg}
 
-Notice that the $p=1/2$ case is consistent with the $p\neq 1/2$ cases since $\lim_{p\to 1/2}\frac{1-((1-p)/p)^i}{1-((1-p)/p)^n}=\frac{i}{n}$. 
+\begin{eg}{}{}\\
+You are given 1000 coins. Among them, 1 coin has heads on both sides. The other 999 coins are fair coins. You randomly choose a coin and toss it 10 times. Each time, the coin turns up heads. What is the probability that the coin you choose is the unfair one? (c.f. Green Book of Quant)
+\begin{answer}\\
+Let $A$ be the event that the chosen coin was unfair. Let $B$ be the event that the coin turns up heads ten times. Using Bayes' theorem and the law of total probability, we get $$P(A\;|\;B)=\frac{P(B\;|\;A)P(A)}{P(B)}=\frac{P(A)}{P(A)P(B\;|\;A)+P(A^c)P(B\;|\;A^c)}=\frac{1/1000}{1/1000+999/1000\times(1/2)^{10}}$$ which can be evaluated into $\frac{1024}{2023}$. 
+\end{answer}
+\end{eg}
+
+\begin{prp}{}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $B\in\mF$ be an event such that $P(B)>0$. Then $(\Omega,\mF,P(-\;|\;B))$ is a probability space. 
+\end{prp}
 
 \subsection{Independent Events}
 \begin{defn}{Independent Events}{}\\
@@ -253,9 +306,9 @@ Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random var
 \subsection{Examples of Discrete Random Variables}
 \begin{defn}{Discrete Uniform Distribution}{}\\
 Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a random variable. We say that $X$ has a discrete uniform distribution if the probability density function of $X$ is given by $$f_X(x)=\begin{cases}
-\frac{1}{n} & \text{ if }x=1,\dots,n\\
+\frac{1}{b-a+1} & \text{ if }x\in\Z\text{ and }a\leq x\leq b\\
 0 & \text{otherwise}
-\end{cases}$$ for some $n\in\N$. 
+\end{cases}$$ for some $a\leq b$. In this case, we write $X\sim\text{Uniform}(a,b)$
 \end{defn}
 
 \begin{defn}{Bernoulli Distribution}{}\\
@@ -295,7 +348,7 @@ Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to[a,b]$ be a random 
 \end{defn}
 
 \begin{defn}{Normal Distribution}{}\\
-Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a random variable. We say that $X$ has a normal distribution if the probability density function of $X$ is given by $$f_X(x)=\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}$$ for some $\mu,\sigma\in\R$ such that $\sigma>0$. In this case we write $X\sim\text{Normal}(\mu,sigma)$. 
+Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a random variable. We say that $X$ has a normal distribution if the probability density function of $X$ is given by $$f_X(x)=\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}$$ for some $\mu,\sigma\in\R$ such that $\sigma>0$. In this case we write $X\sim\text{Normal}(\mu,\sigma)$. 
 \end{defn}
 
 \begin{defn}{Exponential Distribution}{}\\
@@ -322,6 +375,10 @@ Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a random var
 
 \begin{lmm}{}{}\\
 Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a random variable. Then we have $$E[X]=\int_{-\infty}^\infty xf_X(x)\;dx$$
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $A\in\mF$ be an event. Then we have $$E[1_A]=P(A)$$
 \end{lmm}
 
 \begin{eg}{}{}\\
@@ -472,36 +529,78 @@ Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random var
 \section{Conditional Probability Theory}
 \subsection{Conditional Probability Density and Mass Functions}
 \begin{defn}{Conditional Probability Density and Mass Functions}{}\\
-Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random variables. Suppose that $f_Y(y)>0$ for some $y\in\Omega$. 
-\begin{itemize}
-\item Suppose that $X,Y$ are discrete. Define the conditional probability mass function of $X$ given $Y=y$ to be the function $$f_{X|Y}(x,y)=\frac{f_{X,Y}(x,y)}{f_X(x)}$$
-\item Suppose that $X,Y$ are continuous. Define the conditional probability density function of $X$ given $Y=y$ to be the function $$f_{X|Y}(x,y)=\frac{f_{X,Y}(x,y)}{f_X(x)}$$
-\end{itemize}
+Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random variables. Suppose that $f_Y(y)>0$ for some $y\in\Omega$. Define the conditional probability mass function of $X$ given $Y=y$ to be the function $$f_{X|Y}(x,y)=\frac{f_{X,Y}(x,y)}{f_Y(y)}$$
 \end{defn}
 
-\subsection{Conditional Expectations}
-\begin{defn}{Conditional Expectations on Subalgebras}{} Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a random variable. Let $\mH$ be a $\sigma$-subalgebra of $\mF$. Define $E[X\;|\;\mH]:\Omega\to\R$ to be a random variable such that the following are true. 
+\subsection{Conditional Expectations on an Event}
+\begin{defn}{Conditional Expectations on an Event}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a random variable. Let $A\in\mF$ be an event such that $P(A)>0$. Define the conditional expectation of $X$ on $A$ to be $$E[X\;|\;A]=\frac{E[X\cdot 1_A]}{P(A)}$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a random variable. Let $A\in\mF$ be an event such that $P(A)>0$. Then we have $$E[X\;|\;A]=\int_\Omega X\;dP(-\;|\;A)$$
+\end{lmm}
+
+In other words, conditional expectation is just the definition of expectations applied to conditional probability $(\Omega,\mF,P(-\;|\;A))$. 
+
+\begin{lmm}{}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random variables. Then we have $$E[X\;|\;Y=y]=\int_{x\in\im(X)}xf_{X|Y}(x,y)$$
+\end{lmm}
+
+\subsection{Conditional Expectations on Sigma Subalgebras}
+\begin{defn}{Conditional Expectations on Subalgebras}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a random variable. Let $\mH$ be a $\sigma$-subalgebra of $\mF$. Define $E[X\;|\;\mH]:\Omega\to\R$ to be a random variable such that the following are true. 
 \begin{itemize}
 \item $E[X\;|\;\mH]$ is $\mH$-measurable. 
 \item For any $A\in\mH$, we have $E[X\cdot 1_A]=E[E[X\;|\;\mH]\cdot 1_A]$
 \end{itemize}
 \end{defn}
 
-\begin{lmm}{}{} Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a random variable. Let $\mH$ be a $\sigma$-subalgebra of $\mF$. Then the random variable $E[X\;|\;\mH]$ exists and is unique up to almost surely equality. 
+\begin{lmm}{}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a random variable. Let $\mH$ be a $\sigma$-subalgebra of $\mF$. Then the random variable $E[X\;|\;\mH]$ exists and is unique up to almost surely equality. 
 \end{lmm}
 
-\begin{lmm}{}{} Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random variables. Let $\mH$ be a $\sigma$-subalgebra of $\mF$. Then the following are true. 
+\begin{lmm}{}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R$ be a random variable. Let $\mH$ be a $\sigma$-subalgebra of $\mF$. Then we have $$\int_AE[X\;|\;\mH]\;dP=\int_AX\;dP$$ for all $A\in\mH$. 
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $A\in\mF$ be an event. Let $\mA=\{\emptyset,A,\Omega\setminus A,\Omega\}$. Then we have $$E[X\;|\;\mA]=E[X\;|\;A]1_A+E[X\;|\;\Omega\setminus A]1_{\Omega\setminus A}$$
+\end{lmm}
+
+Thus conditional expectations on $\sigma$-subalgebras generalize conditional expectations on events. 
+
+\begin{lmm}{}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random variables. Let $\mH$ be a $\sigma$-subalgebra of $\mF$. Then the following are true. 
 \begin{itemize}
+\item Linearity: If $X,Y$ is $\mH$-measurable and $\lambda,\mu\in\R$, then we have $E[\lambda X+\mu Y\;|\;\mH]=\lambda E[X\;|\;\mH]+\mu E[Y\;|\;\mH]$. 
+\item Tower property: If $X$ is $\mH$-measurable and $\mG$ is a $\sigma$-subalgebra of $\mH$, then we have $E[E[X\;|\;\mH]\;|\;\mG]=E[X\;|\;\mG]$. 
 \item Stability: If $X$ is $\mH$-measurable, then $E[XY\;|\;\mH]=XE[Y\;|\;\mH]$. 
 \item Independence: If $\sigma(X)$ and $\mH$ are independent, then $E[X\;|\;\mH]=E[X]$. 
 \end{itemize}
 \end{lmm}
 
-\begin{defn}{Conditional Expectation on Random Variables}{} Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random variables. Define the conditional expectation of $X$ on $Y$ to be $$E[X\;|\;Y]=E[X\;|\;\sigma(Y)]$$
+\begin{defn}{Conditional Expectation on Random Variables}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random variables. Define the conditional expectation of $X$ on $Y$ to be $$E[X\;|\;Y]=E[X\;|\;\sigma(Y)]$$
 \end{defn}
 
-\begin{lmm}{}{} Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random variables. Then we have $$E[X\;|\;Y](\omega)=E[X\;|\;Y=Y(\omega)]=\int_{-\infty}^\infty xf_{X|Y}(x,Y(\omega))\;dx$$
-\end{lmm}
+\begin{thm}{Law of Total Expectations}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random variables. Then we have $$E[X]=E[E[X\;|\;Y]]=\int_{\im(Y)}E[X\;|\;Y=y]f_Y(y)\;dy$$
+\end{thm}
+
+\begin{eg}{}{}\\
+Suppose you roll a fair dice. For each roll, you are paid the face value. If a roll gives $4,5,6$, you may roll again. Otherwise, the game stops. What is the expected payoff of the game? (c.f. Green Book of Quant)
+\begin{answer}\\
+Let $E[X]$ be the expected pay off of a roll. Let $Y$ be the random variable that is the roll of the first dice. By the law of total expectations, we have
+\begin{align*}
+E[X]&=E[E[X\;|\;Y]]\\
+&=\sum_{y\in Y}E[X\;|\;Y=y]f|_Y(y)\\
+&=E[X\;|\;Y=\{1,2,3\}]\frac{1}{2}+E[X\;|\;Y=\{4,5,6\}]\frac{1}{2}\\
+&=1+\frac{1}{2}(5+E[X])
+\end{align*}
+Solving this gives $E[X]=7$. 
+\end{answer}
+\end{eg}
 
 \pagebreak
 \section{Convergence of Random Variables}

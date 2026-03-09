@@ -216,20 +216,33 @@ Let $X,Y$ be metric spaces. Let $f:X\to Y$ be a function. Let $p\in X$ be an acc
 \item $f$ is continuous at $p$. 
 \item For every sequence $(x_n)_{n\in\N}\subseteq X$ such that $(x_n)_{n\in\N}\to x$, we have $(f(x_n))_{n\in\N}\to f(p)$. 
 \item $\lim_{x\to p}f(x)=f(p)$. 
-\item For every open subset $V\subseteq Y$, we have $f^{-1}(U)\subseteq X$ is open. 
 \end{itemize}
 \begin{proof}
 \end{proof}
 \end{prp}
 
 \begin{prp}{}{}\\
-Let $X,Y$ be metric spaces. Let $f:X\to Y$ be a function. Then $f$ is continuous if and only if for every open subset $V\subseteq Y$, we have $f^{-1}(U)\subseteq X$ is open. 
+Let $X,Y$ be metric spaces. Let $f:X\to Y$ be a function. Then the following are equivalent. 
+\begin{itemize}
+\item $f$ is continuous. 
+\item For all $y\in Y$ and $r>0$, we have that $f^{-1}(B_r(y))$ is open in $X$. 
+\item For all open subsets $V\subseteq Y$, we have that $f^{-1}(V)$ is open in $X$. 
+\end{itemize}
 \begin{proof}\\
-Suppose that $f$ is continuous. Let $\Omega\subset V$ such that $\Omega$ is open. Then for every $p\in f^{-1}(V)$, there exists $\epsilon>0$ such that $B_{\epsilon}(f(p))\subset V$. By continuity, there exists $\delta>0$ such that $f(B_{\delta(p)})\subset B_{\epsilon}(f(p))$. This implies $B_{\delta}(p)\subset f^{-1}(B_{\epsilon}(f(p)))$. But also since $B_{\epsilon}(f(p))\subset V$, we have $$B_{\delta}(p)\subset f^{-1}(B_{\epsilon}(f(p)))\subset f^{-1}(V)$$ Since this is true for every $p$, $f^{-1}(V)$ must be open. \\
+Suppose that $f$ is continuous. Let $r>0$. By continuity, there exists $\delta>0$ such that $f(B_\delta(p))\subset B_r(f(p))$. This implies that $B_\delta(p)\subset f^{-1}(B_r(f(p))$. Thus $f^{-1}(B_r(f(p))$ is open. \\
+
+Now suppose that for all $y\in Y$ and $r>0$, we have $f^{-1}(B_r(y))$ is open in $X$. Let $V\subseteq Y$ be an open subset. Let $x\in f^{-1}(V)$. Then there exists $r>0$ such that $B_r(f(x))\subseteq V$. This means that $x\in f^{-1}(B_r(f(x))\subseteq f^{-1}(V)$. Since $f^{-1}(B_r(f(x))$ is open, there exists $s>0$ such that $$B_s(x)\subseteq f^{-1}(B_r(f(x))\subseteq f^{-1}(V)$$ Since this is true for all $x\in f^{-1}(V)$, we conclude that $f^{-1}(V)$ is open. \\
 
 Now suppose that $\Omega\subset V$ is open imply $f^{-1}(\Omega)$ is open. Let $p\in \Omega$. Then there exists $\epsilon>0$ such that $B_{\epsilon}(f(p))\subset\Omega$. By assumption, we must have $f^{-1}(B_{\epsilon}(f(p)))$ is open. The fact that this is open means there exists $\delta>0$ such that $B_{\delta}(p)\subset f^{-1}(B_{\epsilon}(f(p)))$. Then we have $$f(B_{\delta}(p))\subset B_{\epsilon}(f(p))$$ and we are done. 
 \end{proof}
 \end{prp}
+
+\begin{eg}{}{}\\
+Let $X$ be a metric space. Let $y\in X$. Prove that the map $d(-,y):X\to\R$ is continuous. 
+\begin{answer}\\
+Let $(a,b)\subseteq\R$. If the inverse image is empty, then we are done. So suppose that $z\in\{x\in X\;|\;a<d(x,y)<b\}$. Choose $0<r<b-d(z,y)$. Then for any $w\in B_r(z)$, we have $$d(w,y)\leq d(w,z)+d(z,y)<r+d(z,y)<b-d(z,y)+d(z,y)=b$$ Hence $B_r(z)\subseteq\{x\in X\;|\;a<d(x,y)<b\}$ and so the latter is an open set. By the above proposition we conclude. 
+\end{answer}
+\end{eg}
 
 \begin{lmm}{}{}\\
 Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces. Let $f:X\to Y$ be a distance preserving map. Then $f$ is continuous. 

@@ -18,6 +18,7 @@
 \maketitle
 \begin{abstract}
 \end{abstract}
+\pagebreak
 \tableofcontents
 
 \pagebreak
@@ -43,145 +44,208 @@
 \end{defn}
 
 \subsection{Hitting Time and Stopping Time}
-\begin{defn}{Hitting Time}{} Let $(\Omega,\mathcal{F},P)$ be a probability space. Let $(S,\Sigma)$ be a measurable space. Let $X:\Omega\times T\to S$ be a stochastic process. Let $A\in\Sigma$ be a measurable set. Define the hitting time of $X$ to be the random variable $H_A:\Omega\to T$ given by $$H_A(\omega)=\inf\{t\in T\;|\;X(\omega,t)\in A\}$$
+\begin{defn}{Hitting Time}{}\\
+Let $(\Omega,\mathcal{F},P)$ be a probability space. Let $(S,\Sigma)$ be a measurable space. Let $X:\Omega\times T\to S$ be a stochastic process. Let $A\in\Sigma$ be a measurable set. Define the hitting time of $X$ to be the random variable $H_A:\Omega\to T$ given by $$H_A(\omega)=\inf\{t\in T\;|\;X(\omega,t)\in A\}$$
 \end{defn}
+
+The hitting time measures the first time that a stochastic process enters $A$ for the first time. \\
 
 Recall that for a $\sigma$-algebra $\mF$ and a subset $Y\subseteq\mF$, $\sigma(Y)$ is the smallest $\sigma$-algebra that contains $Y$. 
 
-\begin{defn}{Stopping Time}{} Let $(\Omega,\mathcal{F},P)$ be a probability space. Let $(S,\Sigma)$ be a measurable space. Let $X:\Omega\times T\to S$ be a stochastic process. Let $S:\Omega\to T$ be a random variable. We say that $S$ is a stopping time if $S$ has the property that $$\{\omega\in\Omega\;|\;S(\omega)\leq t\}\subseteq\sigma(X_t)$$ for all $t\in T$. 
+\begin{defn}{Stopping Time}{}\\
+Let $(\Omega,\mathcal{F},P)$ be a probability space. Let $(S,\Sigma)$ be a measurable space. Let $X:\Omega\times T\to S$ be a stochastic process. Let $S:\Omega\to T$ be a random variable. We say that $S$ is a stopping time if $S$ has the property that $$\{\omega\in\Omega\;|\;S(\omega)\leq t\}\subseteq\sigma(X_t)$$ for all $t\in T$. 
 \end{defn}
 
 In other words, events determined by $S$ up to some time $t\in T$ is dictated entirely using the variables $X_0,\dots,X_t$. 
 
-\begin{lmm}{}{} Let $(\Omega,\mathcal{F},P)$ be a probability space. Let $(S,\Sigma)$ be a measurable space. Let $X:\Omega\times T\to S$ be a stochastic process. Let $S:\Omega\to T$ be a random variable. Then $S$ is a stopping time if and only if $S$ has the property that $$\{\omega\in\Omega\;|\;S(\omega)=t\}\subseteq\sigma(X_t)$$ for all $t\in T$. 
+\begin{lmm}{}{}\\
+Let $(\Omega,\mathcal{F},P)$ be a probability space. Let $(S,\Sigma)$ be a measurable space. Let $X:\Omega\times T\to S$ be a stochastic process. Let $S:\Omega\to T$ be a random variable. Then $S$ is a stopping time if and only if $S$ has the property that $$\{\omega\in\Omega\;|\;S(\omega)=t\}\subseteq\sigma(X_t)$$ for all $t\in T$. 
 \end{lmm}
+
+\begin{crl}{}{}\\
+Let $(\Omega,\mathcal{F},P)$ be a probability space. Let $(S,\Sigma)$ be a measurable space. Let $X:\Omega\times T\to S$ be a stochastic process. Let $A\in\Sigma$ be a measurable set. Then $H_A$ is a stopping time. 
+\end{crl}
 
 \begin{thm}{Début Theorem}{}
 \end{thm}
 
 \pagebreak
-\section{Markov Chains}
-\subsection{Markov Chains}
-\begin{defn}{Stochastic Matrix}{} Let $P=(p_{i,j})\in M_n(\R)$ be a matrix. We say that $P$ is a stochastic matrix if the following are true. 
-\begin{itemize}
-\item $0\leq p_{i,j}\leq 1$ for $1\leq i,j\leq n$. 
-\item For any fixed $1\leq k\leq n$, we have $$\sum_{j=1}^np_{k,j}=1$$
-\end{itemize}
+\section{Discrete Time Markov Chains}
+\subsection{Basic Definitions}
+\begin{defn}{Discrete Time Markov Chains}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\times\N\to\R$ be a discrete time stochastic process. We say that $X$ is a Markov chain if $$P(X_{n+1}=i_{n+1}\;|\;X_j=i_j\text{ for }0\leq j\leq n)=P(X_{n+1}=i_{n+1}\;|\;X_n=i_n)$$ for all $n\in\N$. 
 \end{defn}
 
-\begin{defn}{Markov Chain}{} Let $(\Omega,\mF,\Prj)$ be a probability space. Let $I=\{1,\dots,k\}\subseteq\N$. Let $\{X_n:\Omega\to I\;|\;n\in\N\}$ be a discrete stochastic process. Let $\lambda:I\to[0,1]$ be a probability distribution. Let $P=(p_{i,j})$ be a stochastic matrix. We say that $(X_n)_{n\geq 0}$ is a Markov chain with initial distribution $\lambda$ and transition matrix $P$ if the following are true. 
-\begin{itemize}
-\item $P_{X_0}=\lambda$
-\item For any $i_0,\dots,i_{n+1}\in I$, we have $$\Prj(X_{n+1}=i_{n+1}\;|\;X_k=i_k\text{ for }0\leq k\leq n)=\lambda(i_0)\cdot\prod_{j=0}^n p_{i_j,i_{j+1}}$$ 
-\end{itemize}
-In this case we say that $(X_n)_{n\geq 0}$ is $\text{Markov}(\lambda,P)$. 
+\begin{defn}{State Space}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\times\N\to\R$ be a discrete time Markov chain. Define the state space of $X$ to be $\im(X)$. 
 \end{defn}
 
-In other words, Markov chains are a sequence of random variables where the next step does not depends on what states you visited previously, but only on the state now. There is an important property that makes studying Markov chains worth while. 
-
-\begin{prp}{}{} Let $(\Omega,\mF,\Prj)$ be a probability space. Let $I=\{1,\dots,k\}$. Let $\{X_n:\Omega\to I\;|\;n\in\N\}$ be a sequence of random variables. Let $\lambda:I\to[0,1]$ be a probability distribution. Then $(X_n)_{n\geq 0}$ is a Markov chain if and only if $$\Prj(X_{n+1}=i_{n+1}\;|\;X_k=i_k\text{ for }0\leq k\leq n)=\Prj(X_{n+1}=i_{n+1}\;|\;X_n=i_n)$$ for any $i_0,\dots,i_{n+1}\in I$. In this case, the transition matrix of the Markov chain is given by $$P=\begin{pmatrix}
-\Prj(X_1=1\;|\;X_0=1) & \cdots & \Prj(X_1=k\;|\;X_0=1)\\
-\vdots & \ddots & \vdots\\
-\Prj(X_1=1\;|\;X_0=k) & \cdots & \Prj(X_1=k\;|\;X_0=k)
-\end{pmatrix}$$
-\end{prp}
-
-\begin{thm}{Markov Property}{} Let $(X_n)_{n\geq0}$ be a markov chain. Suppose that $X_m=E_m$ is given. Then $(X_{m+n})_{n\geq 0}$ is a Markov chain. 
-\end{thm}
-
-
-Notice that the transition probabbility $\Prj(X_{n+1}=j|X_n=i)$ still depedns on $i,j,n$. We further restrict out study of Markov chains to the following type. 
-
-\begin{defn}{Homogenous Markov Chains}{} We say that a Markov chain $(X_n)_{n\geq 0}$ is homogenous if $$\Prj(X_{n+1}=j|X_n=i)=\Prj(X_1=j|X_0=i)$$
+\begin{defn}{Homogeneous Markov Chains}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\times\N\to\R$ be a discrete time Markov chain. We say that $X$ is homogeneous if $$P(X_{n+1}=j\;|\;X_n=i)=P(X_1=j\;|\;X_0=i)$$
 \end{defn}
 
-This means that homogenous Markov chains are time independent. 
-
-\begin{lmm}{}{} The transition matrix $P$ of a homogenous Markov chain is a Stochastic matrix. 
-\end{lmm}
-
-\begin{thm}{}{} Let $(X_n)_{n\geq 0}$ be Markov. Then for all $m,n\geq0$, we have
-\begin{itemize}
-\item $\Prj(X_n=j|X_0=i)=\Prj(X_1=j|X_0=i)^n$
-\item $\Prj(X_n=j)=\sum_{i\in I}\Prj(X_0=i)\Prj(X_n=j|X_0=i)$
-\end{itemize}
-\end{thm}
-
-This theorem is saying that $\Prj(X_n=j|X_0=i)$ is equal to the $i,j$th entry of the matrix $P^n$ if $P$ is the transition matrix. To find out the total probability of reaching the $j$th state at the $n$the step regardless of the starting point, you sum up the $\Prj(X_n=j|X_0=i)$ multiplying the probability that you start at state $i$. \\~\\
-
-We often like to create new Markov chains from old (at least from exams). If we want to show that a squence $(X_n)_{n\geq 0}$ of random vriables is Markov, try and write $X_{n+1}=X_n+\text{ some term only related to }n+1$. 
-
-We use $$h_i^A=\Prj(H^A<\infty|X_0=i)$$ to denote the corresponding probability. We use $$k_i^A=E_i[H_A]=\sum_{k=0}^\infty k\Prj(H_A=k|X_0=i)+\infty\Prj(H_A=\infty|X_0=i)$$ to denote the expectation. 
-
-\begin{prp}{}{} We can find the probabilities of all hitting times by solving the system of linear equations $$\begin{cases}
-\Prj(H_A<\infty|X_0=i)=1 & i\in A\\
-\Prj(H_A<\infty|X_0=i)=\sum_{j\in I}\Prj(X_1=j|X_0=i)\Prj(H_A<\infty|X_0=j) & x\notin A
-\end{cases}$$
-\end{prp}
-
-\begin{prp}{}{} We can find the expected number of hitting times by solving the system of linear equations $$\begin{cases}
-E_i[H_A]=0 & i\in A\\
-E_i[H_A]=1+\sum_{j\notin A}\Prj(X_1=j|X_0=i)E_j[H_A] & i\notin A
-\end{cases}$$
-\end{prp}
-
-\begin{thm}{Strong Markov Property}{} Let $(X_n)_{n\geq 0}$ be Markov$(\lambda,P)$ and $T$ a stopping time of $(X_n)_{n\geq 0}$. Then conditional on both $\{X_T=i\}$ and $\{T<\infty\}$, we have $(X_{T+n})_{n\geq 0}$ is Markov$(\delta_i,P)$ and independent of $X_0,\dots,X_T$. 
+\begin{thm}{Strong Markov Property}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\times\N\to\R$ be a discrete time Markov chain. Let $T:\Omega\to\N$ be a stopping time. Then $(X_{T+n})_{n\geq 0}$ is a discrete time Markov chain. 
 \end{thm}
 
 \subsection{Communicating Classes}
-\begin{defn}{Talks and Communicates}{} Let $i,j$ be states. We say that $i$ talks to $j$ which is $i\rightarrow j$ if there exists $n\in\N$ such that $$\Prj(X_n=j|X_0=i)>0$$ We say that two states $i$ and $j$ communicate if $i\leftrightarrow j$. 
-\end{defn}
-
-\begin{defn}{Communicating Class}{} Let $C\subseteq I$. $C$ is a communicating class if $\forall i,j\in C$, $i\leftrightarrow j$ and $\forall i\in C$ and $\forall k\in I\setminus C$, $i\not{\rightarrow} k$ 
-\end{defn}
-
-\begin{defn}{Closed and Absorbing}{} We say that a class is closed if no states in the class talks to any states outside of that class. We say that a class is absorbing if it forms a closed class by itself. 
-\end{defn}
-
-\begin{defn}{Irreducible Markov Chains}{} A Markov chain is said to be irreducible if for all $i,j\in I$, $i\leftrightarrow j$. 
-\end{defn}
-
-\subsection{Recurrence and Transcience}
-\begin{defn}{Recurrence and Transcience}{} A state $i\in I$ is recurrent if $\Prj_i(X_n=i\text{ for infinitely many }n)=1$. A state $i\in I$ is transient if $\Prj_i(X_n=i\text{ for infinitely many }n)=0$. 
-\end{defn}
-
-\begin{defn}{$k$-th Passage Time}{} The first passage time of state $i$ is a stopping time such that $$T_i(\omega)=\inf\{n\geq 1|X_n(\omega)=i\}$$ The $k$-th passage time is a stopping time such that $$T_i^{(k)}(\omega)=\inf\{n\geq T_i^{(k-1)}|X_n(\omega)=i\}$$ The $k$-th excursion time is defined by $$S_i^{(k)}=\begin{cases}
-T_i^{(k)}-T_i^{(k-1)} & \text{ if }T_i^{(k-1)}<\infty\\
-\infty & \text{ otherwise }
-\end{cases}$$
-\end{defn}
-
-Intuitively, $T_i^{(k)}$ outputs the time it takes for the Markov chain to reach state $i$ for the $k$th time and $S_i^k$ outputs the number of steps taken between consecutive visits. 
-
-\begin{lmm}{}{} For $k=2,3,\dots$ and if $T_i^{(k-1)}<\infty$, then $S_i^{(k)}$ is independent of $\{X_m:m\leq T_i^{(k-1)}\}$ and $$\Prj(S_i^{(k)}=n|T_i^{(k-1)}<\infty)=\Prj_i(T_i=n)$$
-\end{lmm}
-
-\begin{defn}{Visit Counting Function}{} Let $i\in I$ be a state. Define $$V_i=\sum_{k=0}^\infty1_{\{X_n=i\}}$$ the number of visits ever to state $i$. 
-\end{defn}
-
-\begin{lmm}{}{} If $V_i$ counts the number of vists to state $i$, then $$E_i(V_i)=\sum_{k=0}^\infty P_{ii}^{(k)}$$
-\end{lmm}
-
-\begin{lmm}{}{} For $k=0,1,2,\dots$, we have $$\Prj_i(V_i>k)=(\Prj_i(T_i<\infty))^k$$
-\end{lmm}
-
-This lemma means that $V_i$ asserts a geometric distribution. 
-
-\begin{thm}{Characteristic of Recurrent and Transient States}{} Let $(X_n)_{n\geq 0}$ be a Markov chain. Let $T_i$ be the first passage time of state $i$. If $\Prj_i(T_i<\infty)=1$, then $i$ is recurrent and $\sum_{k=1}^\infty\Prj(X_1=k|X_0=k)^n=\infty$. If $\Prj_i(T_i<\infty)<1$, then $i$ is transient and $\sum_{k=1}^\infty\Prj(X_1=k|X_0=k)^n<\infty$. 
-\end{thm} 
-
-\begin{thm}{}{} Let $C$ be a communicating class. Then either all states in $C$ are transient or all are recurrent. 
-\end{thm}
-
-\begin{thm}{}{} Let $C\subset I$ be a class of a Markov chain. Then
+\begin{defn}{Talking and Communicating States}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\times\N\to\R$ be a discrete time Markov chain. 
 \begin{itemize}
-\item Every recurrent class is closed
-\item Every finite closed class is recurrent
+\item We say that $i\in I$ talks to $j\in I$ if $P(X_n=j\;|\;X_0=i)>0$ for some $n\in\N$. 
+\item We say that $i,j\in I$ communicates if $i$ talks to $j$ and $j$ talks to $i$. 
 \end{itemize}
-\end{thm}
+\end{defn}
 
-\begin{thm}{}{} If $P$ is irreducible and recurrent then for all $j\in I$, $$\Prj(T_j<\infty)=1$$
-\end{thm}
+\begin{defn}{Communicating Class}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\times\N\to\R$ be a discrete time Markov chain. A communicating class of $X$ is an element of $\frac{\R}{\sim}$ where $x\sim y$ if $x$ and $y$ communicates. 
+\end{defn}
+
+\begin{defn}{Closed Classes}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\times\N\to\R$ be a discrete time Markov chain. Let $C$ be a communicating class. We say that $C$ is closed if no states in the class talks to any state outside of the class. 
+\end{defn}
+
+\begin{defn}{Irreducible Discrete Time Markov Chains}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\times\N\to\R$ be a discrete time Markov chain. We say that $X$ is irreducible if it has one communicating class. 
+\end{defn}
+
+\subsection{Recurrent and Transient States}
+\begin{defn}{Visit Counting Function}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\times\N\to\R$ be a discrete time Markov chain. Define the visit counting function of $i\in\R$ to be the random variable $V_i:\Omega\to\R$ given by $$V_i=\sum_{j=0}^\infty 1_{X_j=i}$$
+\end{defn}
+
+\begin{defn}{Recurrent and Transient States}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\times\N\to\R$ be a discrete time Markov chain. 
+\begin{itemize}
+\item We say that that $i\in I$ is a recurrent state if $$P(V_i=\infty\;|\;X_0=i)=1$$
+\item We say that $i\in I$ is a transient state if $$P(V_i=\infty\;|\;X_0=i)=0$$
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Passage Time}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\times\N\to\R$ be a discrete time Markov chain. Define the $r$th passage time of state $i\in\R$ to be the random variable $T_i^{(r)}:\Omega\to\N$ given by $$T_i^{(r)}(\omega)=\inf\{n> T_i^{(r-1)}\;|\;X_n(\omega)=i\}$$ if $r\geq 1$ and $T_i^{(0)}(\omega)=0$. 
+\end{defn}
+
+\begin{defn}{Excursion Time}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\times\N\to\R$ be a discrete time Markov chain. Define the $r$th excusion time of state $i\in\R$ to be the random variable $S_i^{(r)}:\Omega\to\N$ given by $$S_i^{(r)}(\omega)=\begin{cases}
+T_i^{(r)}(\omega)-T_i^{(r-1)}(\omega) & \text{ if }T_i^{(r-1)}(\omega)<\infty\\
+\infty & \text{ otherwise }
+\end{cases}$$ for $r\geq 1$. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\times\N\to\R$ be a discrete time Markov chain. Let $r\geq 2$. Then the following are true. 
+\begin{itemize}
+\item $S_i^{(r)}$ and $X_m$ for $m\leq T_i^{(r-1)}$ are independent random variables. 
+\item $P(S_i^{(r)}=n\;|\;;T_i^{(r-1)}<\infty)=P(T_i=n\;|\;X_0=i)$. 
+\end{itemize}
+\begin{proof}\\
+Since $T_i$ is a stopping time, the first item follows from the strong Markov property. \\
+
+By definition, we have $$S_i^{(r)}=\inf\{n\geq 1\;|\;X_{T_i^{(r-1)}+n}\}$$ so that $S_i^{(r)}$ is the first passage time of the Markov chain $(X_{T_i^{(r-1)}+n})$ to state $i$. 
+\end{proof}
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\times\N\to\R$ be a discrete time Markov chain. Then we have $$P(V_i>r\;|\;X_0=i)=P(T_i<\infty\;|\;X_0=i)^r$$
+\begin{proof}\\
+Notice that $$\{\omega\in\Omega\;|\;V_i(\omega)>r\text{ and }X_0(\omega)=i\}=\{\omega\in\Omega\;|\;T_i^{(r)}<\infty\text{ and }X_0(\omega)=i\}$$ We proceed by induction. When $r=0$, we have $P(V_i>0\;|\;X_0=i)=1=P(T_i<\infty\;|\;X_0=i)^0$ trivially. Now suppose it is true for some $k\in\N$. Then we have
+\begin{align*}
+P(V_i>k+1\;|\;X_0=i)&=P(T_i^{(r+1)}<\infty\;|\;X_0=i)\\
+&=P(T_i^{(r)}<\infty\cap S_i^{r+1}<\infty\;|\;X_0=i)\\
+&=P(T_i^{(r)}<\infty\;|\;X_0=i)P(T_i<\infty\;|\;X_0=i)\\
+&=P(T_i<\infty\;|\;X_0=i)^rP(T_i<\infty\;|\;X_0=i)\\
+&=P(T_i<\infty\;|\;X_0=i)^{r+1}
+\end{align*}
+\end{proof}
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\times\N\to\R$ be a discrete time Markov chain. Let $i\in\R$ be a state. Then the following are true. 
+\begin{itemize}
+\item If $P(T_i<\infty\;|\;X_0=i)=1$, then $i$ is a recurrent state. 
+\item If $P(T_i<\infty\;|\;X_0=i)<1$, then $i$ is a transient state. 
+\end{itemize}
+\begin{proof}\\
+If $P(T_i<\infty\;|\;X_0=i)=1$, then we have $$P(V_i=\infty\;|\;X_0=i)=\lim_{n\to\infty}P(V_i>n\;|\;X_0=i)=\lim_{n\to\infty}P(T_i<\infty\;|\;X_0=i)^n=1$$ Hence $i$ is recurrent. \\
+
+Now suppose that $P(T_i<\infty\;|\;X_0=i)<1$. Then we have $$P(V_i=\infty\;|\;X_0=i)=\lim_{n\to\infty}P(V_i>n\;|\;X_0=i)=\lim_{n\to\infty}P(T_i<\infty\;|\;X_0=i)^n=0$$ Hence $i$ is transient. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\times\N\to\R$ be a discrete time Markov chain. Let $i,j\in\R$ be communicating states. Then $i$ is recurrent if and only if $j$ is recurrent. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\times\N\to\R$ be a discrete time Markov chain. Let $C$ be a communicating class. Then the following are true. 
+\begin{itemize}
+\item If $C$ is recurrent, then $C$ is closed. 
+\item If $C$ is finite and closed, then $C$ is recurrent. 
+\end{itemize}
+\end{prp}
+
+\begin{defn}{Positive Recurrent}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\times\N\to\R$ be a discrete time Markov chain. Let $i\in\R$. We say that $i$ is positive recurrent if $E[T_i\;|\;X_0=i]<\infty$. 
+\end{defn}
+
+The definition means that we can always expect to visit state $i$ again in finite time. 
+
+\subsection{Discrete Time Markov Chains with Finite State Space}
+\begin{defn}{Transition Matrix}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Suppose that $I=\{1,\dots,n\}$. Let $X:\Omega\times\N\to I$ be a discrete time Markov chain. Define the transition matrix of $X$ to be $$T=\begin{pmatrix}
+P(X_1=1\;|\;X_0=1) & \cdots & P(X_1=n\;|\;X_0=1)\\
+\vdots & \ddots & \vdots\\
+P(X_1=1\;|\;X_0=n) & \cdots & P(X_1=n\;|\;X_0=n)
+\end{pmatrix}$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Suppose that $I=\{1,\dots,n\}$. Let $X:\Omega\times\N\to I$ be a discrete time Markov chain. Let $T$ be the transition matrix of $X$. Then we have $$P(X_n=j\;|\;X_0=i)=(T^n)_{i,j}$$ where $(T^n)_{i,j}$ is the $(i,j)$th entry of $T^n$. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Suppose that $I=\{1,\dots,n\}$. Let $X:\Omega\times\N\to I$ be a discrete time Markov chain. Then we have $$P(X_n=j)=\sum_{i\in I}P(X_0=i)P(X_1=j\;|\;X_0=i)^n$$
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Suppose that $I=\{1,\dots,n\}$. Let $X:\Omega\times\N\to I$ be a discrete time Markov chain. Let $A\subseteq I$. Let $(v_1,\dots,v_n)$ be the minimal non-negative solution of the system of linear equations: $$x_i=\begin{cases}
+\sum_{j\in I}P(X_1=j\;|\;X_0=i)x_j & \text{ if }i\notin A\\
+1 & \text{ otherwise }
+\end{cases}$$
+Then we have $v_i=P(H_A<\infty\;|\;X_0=i)$. 
+\end{prp}
+
+\begin{eg}{}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Suppose that $I=\{1,\dots,n\}$. Let $X:\Omega\times\N\to I$ be a discrete time Markov chain whose transition matrix is given by $$\begin{pmatrix}
+0 & 1/2 & 1/2 & 0\\
+1/2 & 0 & 1/2 & 0\\
+1/3 & 1/3 & 0 & 1/3\\
+0 & 0 & 0 & 1
+\end{pmatrix}$$
+Let $A=\{2\}$. Then the system of linear equations of the hitting time is given by $$x_1=\frac{1}{2}x_2+\frac{1}{2}x_3\;\;\;\text{ and }\;\;\;x_2=1\;\;\;\text{ and }\;\;\;x_3=\frac{1}{3}x_1+\frac{1}{3}x_2+\frac{1}{3}x_4$$ The minimal solution is given by $(4/5,1,3/5,0)$. Hence we have $$P(H_A<\infty\;|\;X_0=1)=\frac{4}{5}\;\;\;\text{ and }\;\;\;P(H_A<\infty\;|\;X_0=3)=\frac{3}{5}$$
+\end{eg}
+
+\begin{eg}{}{}\\
+A pair of fair dice is rolled and its sum of the values are recorded. What is the probability that a sum of $12$ appears before two consecutive sums of $7$?
+\begin{answer}
+We consider a Markov chain whose states are: the starting state, a sum of $7$ appearing, two consecutive sums of $7$ appearing and a sum of $12$ appearing. Labelling them as $1,\dots,4$ respectively, the transition matrix is given by $$\begin{pmatrix}
+\frac{29}{36} & \frac{1}{6} & 0 & \frac{1}{36}\\
+\frac{29}{36} & 0 & \frac{1}{6} & \frac{1}{36}\\
+0 & 0 & 1 & 0\\
+0 & 0 & 0 & 1
+\end{pmatrix}$$
+Let $x_i$ be the probability that state $4$ is reached before state $3$ starting at state $i$. Similar to the linear equalities in hitting times, we have the system of linear equations $$x_1=\frac{29}{36}x_1+\frac{1}{6}x_2+\frac{1}{36}x_4\;\;\;\text{ and }\;\;\;x_2=\frac{29}{36}x_1+\frac{1}{6}x_3+\frac{1}{36}x_4\;\;\;\text{ and }\;\;\;x_3=0\;\;\;\text{ and }\;\;\;x_4=1$$ Solving it gives $x_1=\frac{7}{13}$. 
+\end{answer}
+\end{eg}
+
+\begin{prp}{}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Suppose that $I=\{1,\dots,n\}$. Let $X:\Omega\times\N\to I$ be a discrete time Markov chain. Let $A\subseteq I$. Let $(v_1,\dots,v_n)$ be the minimal non-negative solution of the system of linear equations: $$x_i=\begin{cases}
+1+\sum_{j\in I}P(X_1=j\;|\;X_0=i)x_j & \text{ if }i\notin A\\
+0 & \text{ otherwise }
+\end{cases}$$
+Then we have $v_i=E[H_A\;|\;X_0=i]$. 
+\end{prp}
 
 \begin{defn}{Component Independent Simple Random Walk on $\Z^d$}{} A component independent simple random walk on $\Z^d$ for $d\in\N$ is defined as $$X_{n+1}=X_n+Z_{n+1}$$ where $Z_{n+1}=(Z_{n+1}^1,\dots,Z_{n+1}^d)$ with $$Z_m^j=\begin{cases}
 1 & \text{ with probability }p_j\\
@@ -200,104 +264,30 @@ where $Z_m^j$ are independent for all $j,m$.
 \end{itemize}
 \end{prp}
 
-\subsection{Branching Process}
-\begin{defn}{Branching Process}{} Let $(X_n)_{n\geq 0}$ be the number of individuals in a population at time $n$ where $X_n\in\{0\}\cup\N$. At every time step each individual in the population gives birth to a random number of offspring. Thus $X_{n+1}$ is defined to be $$X_{n+1}=\sum_{k=1}^{X_n}Z_k^n$$ where $Z_k^n\sim Z$ and $\Prj(Z\geq 0)=1$. Then $(X_n)_{n\geq 0}$ is said to be a branching process. 
+\subsection{Stationary Distributions}
+\begin{defn}{Stationary Distribution}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Suppose that $I=\{1,\dots,n\}$. Let $X:\Omega\times\N\to I$ be a discrete time Markov chain. Let $v=(v_1,\dots,v_n)\in\R_{\geq 0}^n$ be a vector. Let $T$ be the transition matrix of $X$. We say that $v$ is a stationary distribution of $X$ if the following are true. 
+\begin{itemize}
+\item $\sum_{i=1}^nv_i=1$. 
+\item $Tv=v$. 
+\end{itemize}
 \end{defn}
 
-\begin{prp}{}{} Define $G(s)=E[s^Z]$ and $F_{n+1}(s)=E[S^{X_{n+1}}|X_0=1]$ for $s\in(0,1)$. Then $$F_n(s)=G(F_{n-1}(s))$$
+\begin{lmm}{}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Suppose that $I=\{1,\dots,n\}$. Let $X:\Omega\times\N\to I$ be a discrete time Markov chain. Let $v$ be a stationary distribution of $X$. Then the probability distribution function of $X_i$ is given by $$f_{X_n}(i)=v_i$$ for all $n\in\N$. 
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Suppose that $I=\{1,\dots,n\}$. Let $X:\Omega\times\N\to I$ be a discrete time Markov chain. Let $T$ be the transition matrix of $X$. Suppose that there exists $i\in I$ such that $((T^n)_{i,j})_{n\in\N}$ converges to some $v_j\in\R$ for all $j\in I$. Then $(v_1,\dots,v_n)$ is a stationary distribution of $X$. 
 \end{prp}
 
-\begin{prp}{}{} For a braching process $(X_n)_{n\geq 0}$ with off-spring distribution $Z$ where $E[Z]=\mu$, we have $$E[X_n]=\mu^n$$
+\begin{prp}{}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Suppose that $I=\{1,\dots,n\}$. Let $X:\Omega\times\N\to I$ be a discrete time Markov chain. Suppose that $X$ is irreducible. Then the following are true. 
+\begin{itemize}
+\item Every state is positive recurrent. 
+\item $\left(\frac{1}{E[T_i\;|\;X_0=1]},\dots,\frac{1}{E[T_i\;|\;X_0=n]}\right)$ is the unique stationary distribution of $X$. 
+\end{itemize}
 \end{prp}
-
-\begin{thm}{Extinction Probability}{} The extinction probability is the smallest non-negative root of $G(\alpha)=\alpha$. 
-\end{thm}
-
-\begin{thm}{}{} Suppose that $G(0)>0$, $\mu=E[Z]=G'(1)$. Then $\mu\leq 1$ implies certain extiction. $\mu>1$ implies uncertain extinction. 
-\end{thm}
-
-\subsection{Invariant Distributions on a Markov Chain}
-\begin{defn}{Invariant Distribution}{} A measure $\lambda=(\lambda_i:i\in I)$ with non-negative entries is said to be an invariant distribution if 
-\begin{itemize}
-\item $\lambda P=P$
-\item $\pi_i\in[0,1]$ for all $i$
-\item $\sum_{i\in I}\pi_i=1$
-\end{itemize}
-\end{defn}
-
-The following theorem shows that after applying a Markov process to an invariant distribution, the new distribution will be the same as the old one. Notice here that right multiplication of a distribution gives the next step on the Markov chain instead of the usual left multiplication. 
-
-\begin{thm}{}{} Let $(X_n)_{n\geq 0}$ be Markov$(\pi,P)$, where $\pi$ is an invariant distribution for $P$. Then $\forall m\geq 0$, $(X_{n+m})_{n\geq 0}$ is Markov$(\pi,P)$. \tcbline
-\begin{proof}
-By the Markov property, the new sequence will be Markov. But we do not yet know its distribution. We have that 
-\begin{align*}
-\Prj(X_m=i)&=(\pi P^m)_i\tag{this denotes the $i$th entry of $P$}\\
-&=(\pi PP^{m-1})_i\\
-&=(\pi P^{m-1})_i
-\end{align*}
-Thus by induction, we see that $\Prj(X_m=i)=\pi_i$ thus we are done. 
-\end{proof}
-\end{thm}
-
-\begin{thm}{}{} Let $I$ be finite. Suppose that for some $i\in I$, $$P_{ij}^n\to\pi_j$$ for all $j\in I$. Then $\pi=(\pi_j:j\in I)$ is an invariant distribution. 
-\end{thm}
-
-Let us look at an example. 
-
-\begin{eg}{Gene Mutation}{} Recall the gene mutation example that has transition matrix $P=\begin{pmatrix}
-1-\alpha & \alpha\\
-\beta & 1-\beta
-\end{pmatrix}$. Recall that $$P^n=\begin{pmatrix}
-\frac{\beta}{\alpha+\beta}+\frac{\alpha}{\alpha+\beta}(1-\alpha-\beta)^n & \frac{\alpha}{\alpha+\beta}-\frac{\alpha}{\alpha+\beta}(1-\alpha-\beta)^n\\
-? & ?
-\end{pmatrix}$$
-As $n\to\infty$, observe that the first entry tends to $\frac{\beta}{\alpha+\beta}$ the second entry tends to $\frac{\alpha}{\alpha+\beta}$. This means that $\pi=\left(\frac{\beta}{\alpha+\beta},\frac{\alpha}{\alpha+\beta}\right)$ is an invariant distribution for the gene mutation model. \\~\\
-We can also find the invariant distribution directly: Let $\pi=(\pi_1,\pi_2)$ be an invariant distribution for $P$. We have that 
-\begin{align*}
-\pi P&=\pi\\
-\begin{pmatrix}
-\pi_1(1-\alpha)+\pi_2\beta & \pi_1\alpha+\pi_2(1-\beta)
-\end{pmatrix}&=\begin{pmatrix}
-\pi_1 & \pi_2
-\end{pmatrix}\\
-\begin{pmatrix}
-\pi_2\beta-\pi_1\alpha & \pi_1\alpha-\pi_2\beta
-\end{pmatrix}&=0\\
-\end{align*} Notice that these two equations mean the same thing. (In general if you have an $n\times n$ transition matrix, only the first $n-1$ equations will be useful and the last one will be redundant.) This is why we need to use the fact that $\pi_1+\pi_2=1$ as our final equation. \\~\\
-Now solving it, we have that $\pi=\left(\frac{\beta}{\alpha+\beta},\frac{\alpha}{\alpha+\beta}\right)$ which is the exact same answer as the one given in the first method. \\~\\
-A third way to think about it is that notice that $P^T\pi^T=\pi^T$ is the equation that we are attempting to solve. Recall that $1$ is necessarily an eigenvector of a transtition matrix which means that this equation really is just a question of finding eigenvectors from the eigenvalue $1$. 
-\end{eg}
-
-The above examples gives a lot of practical information when calculating the invariant distribution of a transition matrix. 
-
-\begin{defn}{Expected Time Spent}{} Define the expected time spent in state $i$ in between visits to state $k$ by $$\gamma_i^k=E_k\left(\sum_{n=0}^{T_k-1}\mathcal{X}_{X_n=i}\right)$$
-\end{defn}
-
-This uses $k$ as a reference, and as we keep going back to $k$, this records how much time we have spent in $i$ in the process of leaving and returning to $k$. 
-
-\begin{thm}{}{} Let $P$ be irreducible and recurrent. Then
-\begin{itemize}
-\item $\gamma_k^k=1$
-\item $\gamma^k=(\gamma_i^k:i\in I)$ is an invariant measure satisfying $\gamma^kP=\gamma^k$
-\item $0<\gamma_i^k<\infty\;\forall i\in I$
-\end{itemize}
-\end{thm}
-
-\begin{thm}{}{} Let $P$ be irreducible and $\lambda$ and invariant measure and $\lambda_k=1$ for some $k$. Then $\lambda\geq\gamma^k$. If we also have that $P$ is recurrent, then $\lambda=\gamma^k$
-\end{thm}
-
-This theorem assesrts that as long as $P$ is irreducible and recurrent, then any invariant measure is exactly equal to the $\gamma^k$ we defined, which means that there is really only one invariant measure up to rescaling. 
-
-\begin{defn}{Positive Recurrent}{} A state $i\in I$ is positive recurrent if it is recurrent and $$E_i[T_i]<\infty$$ A state which is not positive recurrent but is recurrent is called null recurrent. 
-\end{defn}
-
-\begin{thm}{}{} Let $P$ be irreducible. Then the following are equivalent. 
-\begin{itemize}
-\item Every state is positive recurrent
-\item Some state $i$ is positive recurrent
-\item $P$ has an invariant distribution $\pi$. More over, $\pi_i=\frac{1}{E_i[T_i]}$
-\end{itemize}
-\end{thm}
 
 \pagebreak
 \section{Brownian Motion}
