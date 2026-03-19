@@ -528,6 +528,12 @@ Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random var
 \pagebreak
 \section{Conditional Probability Theory}
 \subsection{Conditional Probability Density and Mass Functions}
+\begin{lmm}{}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random variables. Suppose that $P(Y=y\;|\;X=x)$ exists for all $x\in X$ and $y\in Y$. Then $Y\;|\;X=x:\Omega\to\R$ given by $y\mapsto P(Y=y\;|\;X=x)$ is a random variable. 
+\end{lmm}
+
+Thus it makes sense to talk about its probability density / mass function. 
+
 \begin{defn}{Conditional Probability Density and Mass Functions}{}\\
 Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random variables. Suppose that $f_Y(y)>0$ for some $y\in\Omega$. Define the conditional probability mass function of $X$ given $Y=y$ to be the function $$f_{X|Y}(x,y)=\frac{f_{X,Y}(x,y)}{f_Y(y)}$$
 \end{defn}
@@ -583,6 +589,20 @@ Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random var
 \begin{defn}{Conditional Expectation on Random Variables}{}\\
 Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random variables. Define the conditional expectation of $X$ on $Y$ to be $$E[X\;|\;Y]=E[X\;|\;\sigma(Y)]$$
 \end{defn}
+
+\begin{lmm}{}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random variables. Then we have $$E[Y\;|\;X](\omega)=E[Y\;|\;X=X(\omega)]$$
+\end{lmm}
+
+We have the following commutative diagram: \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\Omega && \R \\
+	\R && {\{Z:\Omega\to\R\;|\;Z\text{ is a random variable }\}}
+	\arrow["{E[Y\;|\;X]}", from=1-1, to=1-3]
+	\arrow["X"', from=1-1, to=2-1]
+	\arrow["{x\mapsto Y\;|\;X=x}"', from=2-1, to=2-3]
+	\arrow["{E[-]}"', from=2-3, to=1-3]
+\end{tikzcd}}\\
 
 \begin{thm}{Law of Total Expectations}{}\\
 Let $(\Omega,\mF,P)$ be a probability space. Let $X,Y:\Omega\to\R$ be random variables. Then we have $$E[X]=E[E[X\;|\;Y]]=\int_{\im(Y)}E[X\;|\;Y=y]f_Y(y)\;dy$$
