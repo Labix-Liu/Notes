@@ -191,31 +191,25 @@ The following are some more properties of a split torus $T$:
 \item If $V$ is a representation of $T$, then we can decompose $V$ into its eigenspaces: $$V=\bigoplus_{\chi\in\chi(T)}V_\chi$$
 \end{itemize}
 
-Recall that the character of a torus $T$ is a group homomorphism $T\to\C^\times$. 
-
-\begin{defn}{Character Lattices}{}\\
-Let $k$ be a field. Let $T$ be a torus over $k$. Define the character lattice of $T$ to be the group of characters $$\chi(T)=\Hom_{\bold{GrpSch}_k}(T,\G_m)$$
-\end{defn}
-
 Let $(m_1,\dots,m_n)\in\Z^n$, we have a character $\chi:T\to\C^\times$ defined by $(t_1,\dots,t_n)\mapsto t_1{m_1}\cdots t_n^{m_n}$. All characters of $T$ are of this form. In other words, we have $M=\Hom(T,\C^\times)\cong\Z^n$. 
 
 \begin{defn}{One-parameter Subgroups}{}\\
 Let $k$ be a field. Let $T$ be a torus over $k$. A one-parameter subgroup of $T$ is a homomorphism of group schemes $\G_m\to T$. 
 \end{defn}
 
-Since $\chi$ is the inverse to $D$, we have the following result. 
+\begin{defn}{The Group of One-Parameter Subgroups}{}\\
+Let $k$ be a field. Let $T$ be a torus over $k$. Define the group of one parameter subgroups of $T$ to be the set $$\lambda(T)=\{\lambda:\G_m\to T\;|\;\lambda\text{ is a one-parameter subgroup }\}$$ together with pointwise multiplication. 
+\end{defn}
 
 \begin{lmm}{}{}\\
-Let $k$ be a field. Let $T$ be a split torus over $k$. Then the following are true. 
-\begin{itemize}
-\item The map $$\chi(T)\times\Hom_{\bold{GrpSch}_k}(\G_m,T)\to\Z$$ defined by $(\chi,\lambda)\to\chi\circ\lambda$ is a perfect pairing. 
-\item A choice of an isomorphism $T\cong\G_m^n$ induces a isomorphisms $\chi(T)\cong\Z^n\cong\Hom_{\bold{GrpSch}_k}(\G_m,T)$ such that the above perfect pairing is the standard Euclidean dot product. 
-\end{itemize}
+Let $k$ be a field. Let $T$ be a torus over $k$. Let $f:T\to\G_m^n$ be an isomorphism. Then $f$ induces isomorphisms $$\chi(T)\cong\Z^n\;\;\;\text{ and }\;\;\;\lambda(T)\cong\Z^n$$
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $T$ be a split torus over $k$. Then the map $$\langle-,-\rangle:\chi(T)\times\lambda(T)\to\chi(\G_m)\cong\Z$$ given by $\langle\chi,\lambda\rangle\mapsto\chi\circ\lambda$ is a perfect pairing. 
 \end{lmm}
 
 \subsection{General Toric Varieties}
-Recall that the $t$ functor $t:\bold{Var}_k\to\bold{Sch}_k$ is the fully faithful functor whose inverse restricted to the essential image sends a scheme $X$ to its underlying $k$-points $X(k)$. When $X=\text{Spec}(\C[x_1,\dots,x_n]/I)$ is affine over $\C$ then the $\C$-points are precisely $\V(I)$. When $X$ is projective over $\C$ then its $\C$-points are described locally as the $\C$-points on the affine varieties in each standard affine cover. Thus we freely interchange notations between scheme theory and classical algebraic geometry. 
-
 \begin{defn}{Toric Varieties}{}\\
 Let $X$ be an irreducible variety over $\C$. We say that $X$ is a toric variety if the following are true. 
 \begin{itemize}
@@ -223,6 +217,12 @@ Let $X$ be an irreducible variety over $\C$. We say that $X$ is a toric variety 
 \item The action of $T_X$ on itself extends to $X$. 
 \end{itemize}
 \end{defn}
+
+The idea is that toric varieties consists of the underlying points together with limit points. Recall that there is a vector space decomposition $$\C[T]\cong\bigoplus_{\chi\in\chi(T)}\C\cdot\chi$$ This means that the character functions span coordinate ring of the torus as a vector space. 
+
+The one parameter subgroups $\lambda\in\lambda(T)$ traces out the curves on the torus. To add in limit points to the torus $T$ is the same as adding in the limit $\lim_{t\to 0}\lambda(t)$ since $\lambda$ is defined on $\C\setminus\{0\}$. \\
+
+For example, suppose we wish to add in the point $(1,0)\in\C^2$ to the torus $T=(\C^\times)^2$. When we add int limit points, we expect certain characters on the torus to no longer be elements of the coordinate ring of the toric variety. Let $x^ay^b\in\C[T]$ be a general character of a torus. Then it is well defined on the point $(1,0)$ if and only if $b>0$. This adds a linear inequality to the lattice $\chi(T)$. On the other hand, we may think of $(1,0)$ as the limit point of the one parameter subgroup $\lambda(t)=(t^1,t^0)$. However we also need to consider the equivariant action of the torus, so adding just the point $(1,0)$ is not enough. 
 
 \begin{eg}{}{}\\
 The following are true. 
@@ -243,9 +243,7 @@ There are two ways to construct normal toric varieties: \\
 
 (2): Encode a projective variety as the proj construction given by a polytope. 
 
-\pagebreak
-\section{Constructing Affine Toric Varieties}
-\subsection{Equivalent Constructions of Affine Toric Varieties}
+\subsection{Constructing Affine Toric Varieties}
 \begin{defn}{Affine Toric Varieties Associated to Characters}{}\\
 Let $T$ be a torus over $\C$. Let $\mA=\{\chi_1,\dots,\chi_s\}\subseteq\chi(T)$ be characters of $T$. Define the affine toric variety associated to $\mA$ to be $$Y_\mA=\overline{\im(\Phi_\mA)}$$ where $\Phi_\mA:T\to\A_\C^s$ is the map defined by $\Phi_\mA(t)=(\chi_1(t),\dots,\chi_s(t))$
 \end{defn}
@@ -307,9 +305,21 @@ Let $X$ be an irreducible affine variety over $\C$. Then the following are equiv
 \end{itemize}
 \end{prp}
 
-\subsection{Cones and Affine Toric Varieties}
-By the main result in the last section, there is a close connection between affine toric varieties and affine semigroups. In combinatorial commutative algebra we have seen how to construct an affine semigroup from cones and vice versa. We will investigate the connection between cones and affine toric varieties here. 
+Let $S$ be an affine semigroup. Recall that the saturation of $S$ is the affine semigroup $$S_\text{sat}=\R_{\geq 0}S\cap G(S)$$ where $G(S)$ is the Grothendieck completion of $S$. 
 
+\begin{lmm}{}{}\\
+Let $X=\text{Spec}(\C[S])$ be an affine toric variety over $\C$ where $S$ is an affine semigroup. Then the normalization of $X$ is given by $$\widetilde{X}=\text{Spec}(\C[S_{\text{sat}}])$$ together with the normalization map given by the inclusion $\C[S]\hookrightarrow\C[S_{\text{sat}}]$. 
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $k$ be an algebraically closed field. Let $S$ be an affine semi-group with generators given by $m_1,\dots,m_s$. Then there is a bijection $$\{p\in\text{Spec}(k[S])\;|\;p\text{ is a closed point }\}\;\;\overset{1:1}{\longleftrightarrow}\;\;\{\phi:S\to(\C,\cdot)\;|\;\phi\text{ is a monoid homomorphism }\}$$ given as follows. 
+\begin{itemize}
+\item Each closed point $p\in\text{Spec}(k[S])$ corresponds to the monoid homomorphism $\gamma_p:S\to\C$ defined by $$\gamma_p\left(\sum_{i=1}^s\lambda_im_i\right)=\sum_{i=1}^s\lambda_ix_i(p)$$ where $x_i\in\C[S]$ is the $i$th coordinate function. 
+\item Each monoid homomorphism $\gamma:S\to(\C,\cdot)$ corresponds to the point $(\gamma(m_1),\dots,\gamma(m_s))$. 
+\end{itemize}
+\end{prp}
+
+\subsection{Cones and Affine Normal Toric Varieties}
 \begin{defn}{Affine Semigroup Associated to a Cone}{}\\
 Let $\sigma\subseteq\R^n$ be a rational polyhedral cone. Define the associated affine semigroup to be $$S_\sigma=\sigma^\vee\cap(\R^n)^\ast$$
 \end{defn}
@@ -349,34 +359,7 @@ Let $V$ be an affine toric variety. Then the following are equivalent.
 \begin{itemize}
 \item $V$ is normal. 
 \item $V=\text{Spec}(\C[S])$ where $S$ is a saturated affine semigroup. 
-\item $V=\text{Spec}(\C[S_\sigma])$ where $\sigma $ is a strongly convex rational polyhedral cone. 
-\end{itemize}
-\end{prp}
-
-Let $S$ be an affine semigroup. Recall that the saturation of $S$ is the affine semigroup $$S_\text{sat}=\R_{\geq 0}S\cap G(S)$$ where $G(S)$ is the Grothendieck completion of $S$. 
-
-\begin{lmm}{}{}\\
-Let $X=\text{Spec}(\C[S])$ be an affine toric variety over $\C$ where $S$ is an affine semigroup. Then the normalization of $X$ is given by $$\widetilde{X}=\text{Spec}(\C[S_{\text{sat}}])$$ together with the normalization map given by the inclusion $\C[S]\hookrightarrow\C[S_{\text{sat}}]$. 
-\end{lmm}
-
-\begin{prp}{}{}\\
-Let $V$ be an affine toric variety. Then $V$ is smooth if and only if $V=\text{Spec}(\C[S_\sigma])$ where $\sigma$ is a strongly convex regular rational polyhedral cone. 
-\end{prp}
-
-Thus we have constructed a dictionary 
-\begin{align*}
-\text{Affine Toric Varieties}\;\;&\overset{1:1}{\longleftrightarrow}\;\;\text{Rational Polyhedral Cones}\\
-\text{Affine Normal Toric Varieties}\;\;&\overset{1:1}{\longleftrightarrow}\;\;\text{Strongly Convex Rational Polyhedral Cones}\\
-\text{Affine Smooth Toric Varieties}\;\;&\overset{1:1}{\longleftrightarrow}\;\;\text{Regular Rational Polyhedral Cones}\\
-\text{Affine Toric Orbifolds}\;\;&\overset{1:1}{\longleftrightarrow}\;\;\text{Simplicial Rational Polyhedral Cones}
-\end{align*}
-
-\subsection{Properties of Affine Toric Varieties}
-\begin{prp}{}{}\\
-Let $k$ be an algebraically closed field. Let $S$ be an affine semi-group with generators given by $m_1,\dots,m_s$. Then there is a bijection $$\{p\in\text{Spec}(k[S])\;|\;p\text{ is a closed point }\}\;\;\overset{1:1}{\longleftrightarrow}\;\;\{\phi:S\to(\C,\cdot)\;|\;\phi\text{ is a monoid homomorphism }\}$$ given as follows. 
-\begin{itemize}
-\item Each closed point $p\in\text{Spec}(k[S])$ corresponds to the monoid homomorphism $\gamma_p:S\to\C$ defined by $$\gamma_p\left(\sum_{i=1}^s\lambda_im_i\right)=\sum_{i=1}^s\lambda_ix_i(p)$$ where $x_i\in\C[S]$ is the $i$th coordinate function. 
-\item Each monoid homomorphism $\gamma:S\to(\C,\cdot)$ corresponds to the point $(\gamma(m_1),\dots,\gamma(m_s))$. 
+\item $V=\text{Spec}(\C[S_\sigma])$ where $\sigma$ is a strongly convex rational polyhedral cone. 
 \end{itemize}
 \end{prp}
 
@@ -391,11 +374,9 @@ We already computed that $\C[S_\sigma]=\frac{\C[x,y,z,w]}{(xy-zw)}$. Notice that
 \end{proof}
 \end{eg}
 
-\subsection{Morphisms between Affine Toric Varieties}
+\subsection{Polytopes and Projective Toric Varieties}
 
-\pagebreak
-\section{Constructing Generic Toric Varieties}
-\subsection{Fans and Toric Varieties}
+\subsection{Fans and Normal Toric Varieties}
 \begin{defn}{Scheme Associated to a Fan}{}\\
 Let $n\in\N^+$. Let $\Sigma$ be a fan in $\R^n$. Define the scheme $X_\Sigma$ associated to $\Sigma$ by the following gluing data. 
 \begin{itemize}
@@ -432,15 +413,6 @@ Let $X$ be a normal separated toric variety. Then there exists a fan $\Sigma$ in
 
 Intuition: Adding a new cone to a fan partially compactifies. 
 
-\begin{prp}{}{}\\
-Let $n\in\N^+$. Let $\Sigma$ be a fan in $\R^n$. Then the following are true. 
-\begin{itemize}
-\item $X_\Sigma$ is smooth if and only if $\sigma$ is smooth for all $\sigma\in\Sigma$. 
-\item $X_\Sigma$ is an orbifold if and only if $\sigma$ is simplicial for all $\sigma\in\Sigma$. 
-\item $\Sigma$ is complete if and only if $X_\Sigma$. 
-\end{itemize}
-\end{prp}
-
 \begin{eg}{}{}\\
 Let $e_1,e_2\subseteq\R^2$ be the standard basis vectors. Let $\Sigma$ be the fan whose maximal cones are given by $\text{Cone}(e_1,e_2),\text{Cone}(e_1,-e_1-e_2),\text{Cone}(e_2,-e_1-e_2)$. Then $X_\Sigma=\Prj^2$. 
 \end{eg}
@@ -448,6 +420,29 @@ Let $e_1,e_2\subseteq\R^2$ be the standard basis vectors. Let $\Sigma$ be the fa
 \begin{prp}{}{}\\
 Let $n_1,n_2\in\N^+$. Let $\Sigma_1,\Sigma_2$ be fans in $\R^{n_1}$ and $\R^{n_2}$ respectively. Then we have $$X_{\Sigma_1\times\Sigma_2}\cong X_{\Sigma_1}\times X_{\Sigma_2}$$
 \end{prp}
+
+\subsection{Geometric Properties of Toric Varieties}
+\begin{prp}{}{}\\
+Let $N$ be a lattice of dimension $n$. Let $\sigma\subseteq N\otimes_\Z\R$ be a rational polyhedral cone. Then the following are equivalent. 
+\begin{itemize}
+\item $\text{Spec}(\C[S_\sigma])$ is normal. 
+\item $\dim(\text{Spec}(\C[S_\sigma]))=n$. 
+\item $T_{\text{Spec}(\C[S_\sigma])}=N\otimes_\Z\C^\times$. 
+\item $\sigma$ is strongly convex. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $V$ be an affine toric variety. Then $V$ is smooth if and only if $V=\text{Spec}(\C[S_\sigma])$ where $\sigma$ is a strongly convex regular rational polyhedral cone. 
+\end{prp}
+
+Thus we have constructed a dictionary 
+\begin{align*}
+\text{Affine Toric Varieties}\;\;&\overset{1:1}{\longleftrightarrow}\;\;\text{Rational Polyhedral Cones}\\
+\text{Affine Normal Toric Varieties}\;\;&\overset{1:1}{\longleftrightarrow}\;\;\text{Strongly Convex Rational Polyhedral Cones}\\
+\text{Affine Smooth Toric Varieties}\;\;&\overset{1:1}{\longleftrightarrow}\;\;\text{Regular Rational Polyhedral Cones}\\
+\text{Affine Toric Orbifolds}\;\;&\overset{1:1}{\longleftrightarrow}\;\;\text{Simplicial Rational Polyhedral Cones}
+\end{align*}
 
 \subsection{Orbit Cone Correspondence}
 \begin{defn}{Distinguished Point of a Cone}{}\\
@@ -458,33 +453,29 @@ Let $\sigma\subseteq\R^n$ be a cone. Let $\gamma:S_\sigma\to\C$ be the monoid ho
 Define the distinguished point of $\sigma$ to be the closed point in $\text{Spec}(\C[S_\sigma])$ associated to $\gamma$. We denote it by $p_\sigma$. 
 \end{defn}
 
-\begin{defn}{Torus Orbits}{}\\
-Let $\Sigma$ be a fan in $\R^n$. Let $\sigma\in\Sigma$ be a cone. Define the orbit of $\sigma$ to be $$O(\sigma)=p_\sigma\cdot T_{X_\Sigma}$$
-\end{defn}
-
 \begin{lmm}{}{}\\
-Let $\Sigma$ be a fan in $\R^n$. Let $\sigma\in\Sigma$ be a cone. Then we have $$\dim(O(\sigma))=n-\dim(\sigma)$$
+Let $\Sigma$ be a fan in $\R^n$. Let $\sigma\in\Sigma$ be a cone. Then we have $$\dim(\text{Orb}_{T_{X_\Sigma}}(p_\sigma))=n-\dim(\sigma)$$
 \end{lmm}
 
 \begin{thm}{The Orbit-Cone Correspondence}{}\\
-Let $\Sigma$ be a fan in $\R^n$. Then there is a one to one correspondence $$\Sigma\;\;\overset{1:1}{\longleftrightarrow}T_{X_{\Sigma}}\text{ orbits in }X_\Sigma$$ given by $\sigma\mapsto O(\sigma)$. 
+Let $\Sigma$ be a fan in $\R^n$. Then there is a one to one correspondence $$\Sigma\;\;\overset{1:1}{\longleftrightarrow}X_\Sigma/T_{X_\Sigma}$$ given by $\sigma\mapsto\text{Orb}_{T_{X_\Sigma}}(p_\sigma)$. 
 \end{thm}
 
 \begin{prp}{}{}\\
-Let $\Sigma$ be a fan in $\R^n$. Let $\sigma\in\Sigma$ be a cone. Then we have $$\text{Spec}(\C[S_\sigma])=\bigcup_{\tau\text{ is a face of }\sigma}O(\tau)$$
+Let $\Sigma$ be a fan in $\R^n$. Let $\sigma\in\Sigma$ be a cone. Then we have $$\text{Spec}(\C[S_\sigma])=\bigcup_{\tau\text{ is a face of }\sigma}\text{Orb}_{T_{X_\Sigma}}(\tau)$$
 \end{prp}
 
 \subsection{Divisors on Toric Varieties}
 \begin{prp}{}{}\\
-Let $\Sigma$ be a fan in $\R^n$. Let $\chi$ be a character of $T_{X_\Sigma}$. Then the following are true. 
+Let $N$ be a lattice. Let $\Sigma$ be a fan in $N\otimes_\Z\R$. Let $\chi$ be a character of $T_{X_\Sigma}$. Then the following are true. 
 \begin{itemize}
 \item $\chi$ is a rational function on $X_\Sigma$. 
-\item The divisor of $\chi$ is given by $$\text{div}(\chi)=\sum_{\rho\in\Sigma(1)}\langle\chi,u_\rho\rangle\overline{O(\rho)}$$ where $u_\rho$ is a generator for $\rho\cap\Z^n$. 
+\item The divisor of $\chi$ is given by $$\text{div}(\chi)=\sum_{\rho\in\Sigma(1)}\langle\chi,u_\rho\rangle\overline{\text{Orb}_{T_{X_\Sigma}}(p_\rho)}$$ where $u_\rho$ is a generator of $\rho\cap N$. 
 \end{itemize}
 \end{prp}
 
 \begin{defn}{$T$-Invariant Divisor Group}{}\\
-Let $\Sigma$ be a fan in $\R^n$. Define the $T_{X_\Sigma}$-invariant divisor group of $X_\Sigma$ to be the subgroup $$\text{Div}_{T_{X_\Sigma}}(X_\Sigma)=\bigoplus_{\rho\in\Sigma(1)}\Z\overline{O(\rho)}\leq\text{Div}(X_\Sigma)$$
+Let $\Sigma$ be a fan in $\R^n$. Define the $T_{X_\Sigma}$-invariant divisor group of $X_\Sigma$ to be the subgroup $$\text{Div}_{T_{X_\Sigma}}(X_\Sigma)=\bigoplus_{\rho\in\Sigma(1)}\Z\overline{\text{Orb}_{T_{X_\Sigma}}(\rho)}\leq\text{Div}(X_\Sigma)$$
 \end{defn}
 
 \begin{prp}{}{}\\

@@ -26,11 +26,8 @@
 \pagebreak
 \section{Vector Bundles}
 \subsection{Basic Definitions}
-\begin{defn}{Vector Bundles}{}\\
-Let $F$ be a field. Let $E,B$ be spaces with $B$ connected. Let $p:E\to B$ be a continuous map. We say that $p$ is a vector bundle of dimension $d\in\N$ over $F$ if the following are true. 
-\begin{itemize}
-\item $p:E\to B$ is surjective. 
-\item Local Triviality: There exists a collection of homeomorphisms $$\{(U_i\subseteq B,\phi_i:p^{-1}(U_i)\to U_i\times F^k)\;|\;i\in I\}$$ called local trivialization charts such that $B=\bigcup_{i\in I}U_i$ and the following diagram commutes: \\
+\begin{defn}{Local Trivialization Charts}{}\\
+Let $F$ be a field. Let $E,B$ be spaces. Let $p:E\to B$ be a map. A local trivialization chart of $p$ is a pair $(U,\phi)$ where $U\subseteq B$ is open and $\phi:p^{-1}(U)\to U\times F^k$ is a homeomorphism such that the following diagram commutes: \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	{p^{-1}(U_i)} && {U_i\times F^k} \\
 	& U_i
@@ -38,7 +35,14 @@ Let $F$ be a field. Let $E,B$ be spaces with $B$ connected. Let $p:E\to B$ be a 
 	\arrow["p"', from=1-1, to=2-2]
 	\arrow["\pi", from=1-3, to=2-2]
 \end{tikzcd}}\\
-where $\pi$ is the projection by forgetting the second variable. 
+\end{defn}
+
+\begin{defn}{Vector Bundles}{}\\
+Let $F$ be a field. Let $E,B$ be spaces with $B$ connected. Let $p:E\to B$ be a continuous map. We say that $p$ is a vector bundle of dimension $d\in\N$ over $F$ if the following are true. 
+\begin{itemize}
+\item $p:E\to B$ is surjective. 
+\item There exists a collection $\{(U_i\subseteq B,\phi_i:p^{-1}(U)\to U\times F^d)\;|\;i\in I\}$ of local trivialization charts such that $B=\bigcup_{i\in I}U_i$. 
+\item For each $b\in B$, the map $\phi_i|_{p^{-1}(b)}:p^{-1}(b)\to\{b\}\times F^k$ is a linear isomorphism. 
 \end{itemize}
 We say that $B$ is the base space, $E$ the total space. It is denoted as $(F,E,B)$. 
 \end{defn}
@@ -55,6 +59,14 @@ Let $B$ be a space. Let $F$ be a field. The trivial bundle $p:B\times F^k\to B$ 
 
 \begin{eg}{The Mobius Strip}{}\\
 Let $E=\frac{I\times\R}{\sim}$ where $(0,x)\sim(1,-x)$ for $x\in\R$. Then the projection map $E\to\frac{I}{0\sim 1}\cong S^1$ is a vector bundle of rank $1$. 
+\end{eg}
+
+\begin{eg}{The Real Line Bundle over $\R\Prj^n$}{}\\
+Consider $\R\Prj^n=\frac{\R^{n+1}\setminus\{0\}}{\sim}$ where $x\sim y$ if $y=\lambda x$ for some $\lambda\in\R^\times$. Define the line bundle $$\gamma_1:E_{\gamma_1}=\{([x],v)\in\R\Prj^n\times\R^{n+1}\;|\;v\in[x]\}\to\R\Prj^n$$ to be the map $([x],v)\mapsto[x]$ where $v\in[x]$ or $v=0$. The local trivialization charts are given by the open cover $U_0,\dots,U_n$ where $$U_i=\{[x_0:\cdots:x_n]\;|\;x_i\neq 0\}$$ and the map $\gamma_1^{-1}(U_i)\to U_i\times\R$ is given by $([x],v)\mapsto([x],\lambda)$ where $v=\lambda(x_0,\cdots,x_{i-1},1,x_{i+1},\cdots:x_n)$ and $[x]=[x_0:\cdots:x_{i-1}:1:x_{i+1}:\cdots:x_n]$. 
+\end{eg}
+
+\begin{eg}{The Complex Line Bundle over $\C\Prj^n$}{}\\
+Consider $\C\Prj^n=\frac{\C^{n+1}\setminus\{0\}}{\sim}$ where $x\sim y$ if $y=\lambda x$ for some $\lambda\in\C^\times$. Define the line bundle $\gamma_1:\{([x],v)\in\C\Prj^n\times\C^{n+1}\;|\;v\in[x]\}\to\C\Prj^n$ to be the map $([x],v)\mapsto[x]$ where $v\in[x]$ or $v=0$. 
 \end{eg}
 
 \begin{lmm}{}{}\\
@@ -86,20 +98,25 @@ So let $(U,\phi)$ be a local trivialization chart of $E_1$. Since $E_2$ is also 
 \end{proof}
 \end{lmm}
 
-\begin{defn}{Sections}{}\\
-Let $k$ be a field. Let $p:E\to B$ be a vector bundle over $k$. A section of $p$ is a map $s:B\to E$ such that $p\circ s=\text{id}_B$. 
+\begin{defn}{Set of Isomorphism Classes of Vector Bundles}{}\\
+Let $X$ be a space. Let $F$ be a field. Denote the set of isomorphism classes of vector bundles by $$\text{Vect}_n^F(X)=\frac{\{p:E\to B\;|\;E\text{ is a vector bundle of }B\text{ over }F\}}{\sim}$$ where $E\sim E'$ if $E$ and $E'$ are isomorphic bundles. 
+\end{defn}
+
+\subsection{Sections and Frames}
+\begin{defn}{Local Sections}{}\\
+Let $k$ be a field. Let $p:E\to B$ be a vector bundle over $k$. Let $U\subseteq B$ be an open subset. A local section of $p$ is a map $s:U\to E$ such that $p\circ s=\text{id}_U$. 
 \end{defn}
 
 \begin{lmm}{}{}\\
-Let $k$ be a field. Let $p:E\to B$ be a vector bundle over $k$. Then the following are true. 
+Let $k$ be a field. Let $p:E\to B$ be a vector bundle over $k$. Let $U\subseteq B$ be an open subset. Then the following are true. 
 \begin{itemize}
-\item Let $s_1,s_2:B\to E$ be sections of $p$. Then $s_1+s_2$ is a section of $p$. 
-\item Let $s:B\to E$ be a section of $p$. Let $\lambda\in k$. Then $\lambda s$ is a section of $p$. 
+\item Let $s_1,s_2:U\to E$ be local sections of $p$. Then $s_1+s_2$ is a section of $p$. 
+\item Let $s:U\to E$ be a local section of $p$. Let $\lambda\in k$. Then $\lambda s$ is a section of $p$. 
 \end{itemize}
 \end{lmm}
 
 \begin{defn}{The Space of Sections}{}\\
-Let $F$ be a field. Let $p:E\to B$ be a vector bundle over $F$. Define the $F$-vector space of sections to be the set $$s(E)=\{s:B\to E\;|\;s\text{ is a section of }p\}$$ together with addition and scalar multiplication defined pointwise. 
+Let $F$ be a field. Let $p:E\to B$ be a vector bundle over $F$. Let $U\subseteq B$ be an open subset. Define the $F$-vector space of local sections to be the set $$s(U,E)=\{s:U\to E\;|\;s\text{ is a section of }p\}$$ together with addition and scalar multiplication defined pointwise. We write $s(B,E)=s(E)$ as the space of global sections. 
 \end{defn}
 
 \begin{lmm}{}{}\\
@@ -113,8 +130,8 @@ Suppose that it is trivial. By the above lemma, there exists a global section $s
 \end{proof}
 \end{eg}
 
-\begin{defn}{Set of Isomorphism Classes of Vector Bundles}{}\\
-Let $X$ be a space. Let $F$ be a field. Denote the set of isomorphism classes of vector bundles by $$\text{Vect}_n^F(X)=\frac{\{p:E\to B\;|\;E\text{ is a vector bundle of }B\text{ over }F\}}{\sim}$$ where $E\sim E'$ if $E$ and $E'$ are isomorphic bundles. 
+\begin{defn}{Local Frames}{}\\
+Let $F$ be a field. Let $p:E\to B$ be a vector bundle over $F$. Let $U\subseteq B$ be an open set. A local frame of $E$ at $U$ is a collection of local sections $s_1,\dots,s_n:U\to E$ such that $s_1(b),\dots,s_n(b)$ is a basis for $E_b$. 
 \end{defn}
 
 \subsection{The Cocycle Conditions}
@@ -181,6 +198,10 @@ Let $F$ be a field. Let $B$ be a space. Let $p:E\to B$ be a vector bundle over $
 Let $F$ be a field. Let $B$ be a space. Let $p_1:E_1\to B$ and $p_2:E_2\to B$ be vector bundles over $F$. Define the tensor product bundle to be the space $$E_1\otimes E_2=\coprod_{b\in B}p_1^{-1}(b)\otimes_F p_2^{-1}(b)$$ together with the coproduct of the maps $p_1^{-1}(b)\otimes p_2^{-1}(b)\to\{b\}$. 
 \end{defn}
 
+\begin{defn}{Tensor Product with a Vector Space}{}\\
+Let $F$ be a field. Let $B$ be a space. Let $p:E\to B$ be a vector bundle over $F$. Let $V$ be an $F$-vector space. Define the tensor product of $E$ and $V$ to be $$E\otimes V=E\otimes(B\times V)$$
+\end{defn}
+
 \begin{defn}{The Exterior Product Bundle}{}\\
 Let $F$ be a field. Let $B$ be a space. Let $p:E\to B$ be a vector bundle. Define the $n$th exterior product bundle of $E$ to be $$\Lambda^n(E)=\coprod_{b\in B}\Lambda^n(p^{-1}(b))$$  together with the coproduct of the maps $\Lambda^n(p_1^{-1}(b))\to\{b\}$. 
 \end{defn}
@@ -201,67 +222,6 @@ Let $X,Y$ be paracompact spaces. Let $f:X\to Y$ be a map. If $f$ is a homotopy e
 \begin{crl}{}{}\\
 Let $B$ be a paracompact space. Let $p:E\to B$ be a vector bundle. If $B$ is contractible, then $E$ is trivial. 
 \end{crl}
-
-\subsection{Almost Complex Structures}
-\begin{defn}{Linear Complex Structure}{}\\
-Let $V$ be a vector space over $\R$. A linear complex structure on $V$ is a linear map $J:V\to V$ such that $J^2=-\text{id}_V$. 
-\end{defn}
-
-\begin{prp}{}{}\\
-Let $V$ be a vector space over $\R$. Let $J$ be a linear complex structure on $V$. Then $V$ is a $\C$-vector space whose action is given by $$(x+iy)\cdot v=xv+yJ(v)$$ for $v\in V$ and $x+iy\in\C$. 
-\end{prp}
-
-\begin{prp}{}{}\\
-Let $V$ be a finite dimensional vector space over $\R$. Then the following are true. 
-\begin{itemize}
-\item $V$ admits a linear complex structure if and only if $\dim_\R(V)$ is even. 
-\item In this case, we have $\dim_\C(V)=2\dim_\R(V)$. 
-\end{itemize}
-\end{prp}
-
-\begin{eg}{}{}\\
-Let $J:\R^{2n}\to\R^{2n}$ be the map defined in block matrix form $$J=\begin{pmatrix}
-0 & -I_n\\
-I_n & 0
-\end{pmatrix}$$
-Then $J$ defines a linear complex structure on $\R^{2n}$. In particular, if $e_1,\dots,e_{2n}$ are the standard basis vectors for $\R^{2n}$, then $\frac{1}{2}(e_1-ie_{2n+1}),\dots,\frac{1}{2}(e_n-ie_{2n})$ is a basis for $V$ as a $\C$-vector space. 
-\end{eg}
-
-\begin{prp}{}{}\\
-Let $V$ be a vector space over $\R$. Let $J$ be a linear complex structure on $V$. Let $T:V\to V$ be an $\R$-linear transformation. Then $T$ is a $\C$-linear transformation if and only if $J\circ T=T\circ J$. 
-\end{prp}
-
-The linear complex structure on an $\R$-vector space gives an intrinsic way of giving the $\R$-vector space the structure of a $\C$-vector space. However, we already know an external way of giving $\R$-vector spaces $\C$-multiplication: namely by extension of scalars. 
-
-\begin{prp}{}{}\\
-Let $V$ be a vector space over $\R$. Let $J$ be a linear complex structure on $V$. Then the following are true. 
-\begin{itemize}
-\item $J$ extends to a linear complex structure on $V\otimes_\R\C$ by $J(v\otimes z)=J(v)\otimes z$. 
-\item The eigenvalues of $J:V\otimes_\R\C\to V\otimes_\R\C$ is given by $\pm i$ and the eigenspaces of $J$ are given by $$E_i=\{v\otimes 1-J(v)\otimes i\;|\;v\in V\}\;\;\;\text{ and }\;\;\;E_{-i}=\{v\otimes 1+J(v)\otimes i\;|\;v\in V\}$$
-\item There is a natural isomorphism of $\C$-vector space $V\cong E_i$ given by $v\mapsto v\otimes 1-J(v)\otimes i$. 
-\item The conjugation map $\overline{(-)}:V\otimes_R\C\to V\otimes_\R\C$ given by $\overline{v\otimes z}=v\otimes\overline{z}$ restricts to an isomorphism $$\overline{(-)}|_{E_i}:E_i\overset{\cong}{\to}E_{-i}$$ whose inverse is given by $\overline{(-)}|_{E_{-i}}$. 
-\end{itemize}
-\end{prp}
-
-\begin{prp}{}{}\\
-Let $V$ be a vector space over $\R$. Let $J$ be a linear complex structure on $V$. Then $J^T$ defines a linear complex structure on $V^\ast$. 
-\end{prp}
-
-\begin{defn}{Almost Complex Structure}{}\\
-Let $B$ be a space. Let $p:E\to B$ be a vector bundle over $\R$. An almost complex structure on $p$ is a vector bundle isomorphism $j:E\to E$ such that $j\circ j=\text{id}$. 
-\end{defn}
-
-\begin{prp}{}{}\\
-Let $B$ be a space. Let $p:E\to B$ be a vector bundle over $\R$. Let $J$ be an almost complex structure on $p$. Then the following are true. 
-\begin{itemize}
-\item The rank of $E$ over $\R$ is even. 
-\item $E$ is a complex vector bundle whose action is given by $$(x+iy)\cdot v=xv+yJ_b(v)$$ for $v\in E_b$ and $x+iy\in\C$ for each $b\in B$. 
-\end{itemize}
-\end{prp}
-
-\begin{prp}{}{}\\
-Let $B$ be a space. Let $p:E\to B$ be a vector bundle over $\C$ of rank $n$. Then $E$ is a real vector bundle of rank $2n$. 
-\end{prp}
 
 \pagebreak
 \section{Sequences of Vector Bundles}
@@ -350,10 +310,15 @@ Note: category of vector bundles is not an abelian category.
 \pagebreak
 \section{Reduction of Structure Group}
 \subsection{Structure Groups}
+\begin{defn}{Reduction of Structure Groups}{}\\
+Let $F$ be a field. Let $B$ be a space. Let $p:E\to B$ be a vector bundle over $F$. Let $H\leq\text{GL}(n,F)$ be a subgroup. We say that $E$ admits a reduction of structure groups to $H$ if there exists a vector bundle $p:E'\to B$ over $F$ such that the following are true. 
+\begin{itemize}
+\item The transition functions $g_{\alpha,\beta}:U_\alpha\cap U_\beta\to\text{GL}(n,F)$ satisfy $\im(g_{\alpha,\beta})\leq H$ for any local trivialization charts $(U_\alpha,\phi_\alpha)$ and $(U_\beta,\phi_\beta)$. 
+\item $E$ and $E'$ are isomorphic vector bundles. 
+\end{itemize}
+\end{defn}
 
-\pagebreak
-\section{Metrics on Vector Bundles}
-\subsection{}
+\subsection{Metrics Structures}
 \begin{defn}{Metrics}{}\\
 Let $F$ be a field. Let $B$ be a space. Let $p:E\to B$ be a vector bundle. 
 \begin{itemize}
@@ -367,7 +332,106 @@ Let $F=\R$ or $\C$. Let $B$ be a space. Let $p:E\to B$ be a vector bundle. If $B
 \end{lmm}
 
 Note: ses of vector bundles of paracompact spaces are split exact. 
-Note: vector bundles have reduction of structure group to $O(n)$ and $U(n)$ when they admit a metric. 
+Note: vector bundles have reduction of structure group to $O(n)$ and $U(n)$ if and only if they admit a metric. 
+
+\subsection{Orientability}
+\begin{defn}{Orientation on Vector Spaces}{}\\
+Let $V$ be a finite dimensional vector space over $\R$. An orientation of $V$ is an equivalence class $[B]\in\frac{\{B\subseteq V\;|\;B\text{ is a basis for }V\}}{\sim}$ where $B\sim C$ if the change of basis matrix $[T]_B^C$ satisfies $\det([T]_B^C)>0$. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $V$ be a finite dimensional vector space over $\R$. Then $V$ admits exactly two orientations. 
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $V,W$ be finite dimensional vector spaces over $\R$. Let $T:V\to W$ be a linear isomorphism. If $[B]$ is an orientation of $V$, then $[T(B)]$ is an orientation of $W$. 
+\end{prp}
+
+\begin{defn}{Orientation of a Vector Bundle}{}\\
+Let $B$ be a space. Let $p:E\to B$ be a vector bundle of rank $n$ with fiber $\R$. Let $w_b$ be an orientation of $E_b$ for each $b\in B$. We say that $(w_b)_{b\in B}$ is an orientation of $E$ if for each local trivialization chart $(U,\phi)$ and any chosen orientation $u$ of $\R^n$, the map $U\to\{\pm1\}$ given by $$b\mapsto\begin{cases}
+1 & \text{ if }\phi_{E_b}(w_b)=u\\
+-1 & \text{ otherwise }
+\end{cases}$$
+is a constant map. 
+\end{defn}
+
+\begin{defn}{Orientability}{}\\
+Let $B$ be a space. Let $p:E\to B$ be a vector bundle of rank $n$ with fiber $\R$. We say that $E$ is orientable if $E$ admits an orientation. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $B$ be a space. Let $p:E\to B$ be a vector bundle of rank $n$ with fiber $\R$. Then $E$ is orientable if and only if $E$ admits a reduction of structure group to $\text{SL}(n,\R)$. 
+\end{prp}
+
+Frame bundle Fr(E)
+
+orientable iff Fr(E) times +-1 over general linear group admits global section
+
+\subsection{Subbundles}
+$O(n)$-vector bundle admits $k$-dimensional subbundle if and only if it has reduction of structure group to $O(k)\times O(n-k)$. 
+
+\subsection{Almost Complex Structures}
+\begin{defn}{Linear Complex Structure}{}\\
+Let $V$ be a vector space over $\R$. A linear complex structure on $V$ is a linear map $J:V\to V$ such that $J^2=-\text{id}_V$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $V$ be a vector space over $\R$. Let $J$ be a linear complex structure on $V$. Then $V$ is a $\C$-vector space whose action is given by $$(x+iy)\cdot v=xv+yJ(v)$$ for $v\in V$ and $x+iy\in\C$. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $V$ be a finite dimensional vector space over $\R$. Then the following are true. 
+\begin{itemize}
+\item $V$ admits a linear complex structure if and only if $\dim_\R(V)$ is even. 
+\item In this case, we have $\dim_\C(V)=2\dim_\R(V)$. 
+\end{itemize}
+\end{prp}
+
+\begin{eg}{}{}\\
+Let $J:\R^{2n}\to\R^{2n}$ be the map defined in block matrix form $$J=\begin{pmatrix}
+0 & -I_n\\
+I_n & 0
+\end{pmatrix}$$
+Then $J$ defines a linear complex structure on $\R^{2n}$. In particular, if $e_1,\dots,e_{2n}$ are the standard basis vectors for $\R^{2n}$, then $\frac{1}{2}(e_1-ie_{2n+1}),\dots,\frac{1}{2}(e_n-ie_{2n})$ is a basis for $V$ as a $\C$-vector space. 
+\end{eg}
+
+\begin{prp}{}{}\\
+Let $V$ be a vector space over $\R$. Let $J$ be a linear complex structure on $V$. Let $T:V\to V$ be an $\R$-linear transformation. Then $T$ is a $\C$-linear transformation if and only if $J\circ T=T\circ J$. 
+\end{prp}
+
+The linear complex structure on an $\R$-vector space gives an intrinsic way of giving the $\R$-vector space the structure of a $\C$-vector space. However, we already know an external way of giving $\R$-vector spaces $\C$-multiplication: namely by extension of scalars. 
+
+\begin{prp}{}{}\\
+Let $V$ be a vector space over $\R$. Let $J$ be a linear complex structure on $V$. Then the following are true. 
+\begin{itemize}
+\item $J$ extends to a linear complex structure on $V\otimes_\R\C$ by $J(v\otimes z)=J(v)\otimes z$. 
+\item The eigenvalues of $J:V\otimes_\R\C\to V\otimes_\R\C$ is given by $\pm i$ and the eigenspaces of $J$ are given by $$E_i=\{v\otimes 1-J(v)\otimes i\;|\;v\in V\}\;\;\;\text{ and }\;\;\;E_{-i}=\{v\otimes 1+J(v)\otimes i\;|\;v\in V\}$$
+\item There is a natural isomorphism of $\C$-vector space $V\cong E_i$ given by $v\mapsto v\otimes 1-J(v)\otimes i$. 
+\item The conjugation map $\overline{(-)}:V\otimes_R\C\to V\otimes_\R\C$ given by $\overline{v\otimes z}=v\otimes\overline{z}$ restricts to an isomorphism $$\overline{(-)}|_{E_i}:E_i\overset{\cong}{\to}E_{-i}$$ whose inverse is given by $\overline{(-)}|_{E_{-i}}$. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $V$ be a vector space over $\R$. Let $J$ be a linear complex structure on $V$. Then $J^T$ defines a linear complex structure on $V^\ast$. 
+\end{prp}
+
+\begin{defn}{Almost Complex Structure}{}\\
+Let $B$ be a space. Let $p:E\to B$ be a vector bundle over $\R$. An almost complex structure on $p$ is a vector bundle isomorphism $j:E\to E$ such that $j\circ j=\text{id}$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $B$ be a space. Let $p:E\to B$ be a vector bundle over $\R$. Let $J$ be an almost complex structure on $p$. Then the following are true. 
+\begin{itemize}
+\item The rank of $E$ over $\R$ is even. 
+\item $E$ is a complex vector bundle whose action is given by $$(x+iy)\cdot v=xv+yJ_b(v)$$ for $v\in E_b$ and $x+iy\in\C$ for each $b\in B$. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $B$ be a space. Let $p:E\to B$ be a vector bundle over $\C$ of rank $n$. Then $E$ is a real vector bundle of rank $2n$. 
+\end{prp}
+
+\subsection{Symplectic Structures}
 
 \pagebreak
 \section{The Topology of Fiber Bundles}
@@ -426,6 +490,13 @@ Indeed, all of these are covering spaces and hence fiber bundles by the above le
 
 \begin{eg}{}{}\\
 Let $M=\frac{[-1,1]\times[-1,1]}{(t,-1)\sim(1-t,1)}$ be the Mobius strip. Then the projection map $p:M\to C$ defined by $p(t,s)=s$ is a fiber bundle with fiber $[-1,1]$. 
+\end{eg}
+
+\begin{eg}{The Mapping Torus}{}\\
+Let $X$ be a space. Let $f:X\to X$ be a homeomorphism. Define the map $$p:\frac{X\times I}{(x,0)\sim(f(x),1)}\to S^1$$ by $[(x,t)]\mapsto e^{2\pi it}$. Then it is a fiber bundle with fiber $X$. 
+\begin{proof}\\
+Consider the open cover $U=S^1\setminus\{1\}$ and $V=S^1\setminus\{-1\}$. Then $p^{-1}(U)=X\times(0,1)$ and so the local trivialization condition is satisfied. Now $p^{-1}(V)=\frac{X\times[0,1/2)\cup(1/2,1]}{(x,0)\sim(f(x),1)}$ and is clearly homeomorphic to $V\times X$. 
+\end{proof}
 \end{eg}
 
 \begin{prp}{}{} Every fiber bundle is a Serre fibration. 

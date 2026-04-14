@@ -24,12 +24,27 @@ Notes for the basics of Probability Theory.
 \pagebreak
 
 \section{Fundamentals of Statistics}
+\subsection{Statistical Models}
+\begin{defn}{Statistical Models}{}\\
+Let $(\Omega,\mF)$ be a measurable space. A statistical model is a family of probability measures $$\mP=\{P_\theta:\mF\to[0,1]\;|\;\theta\in I\}$$ for some indexing set $I$. 
+\begin{itemize}
+\item $I$ is called the parameter space of the statistical model. 
+\item We denote the corresponding probability distribution by $f_\theta$. 
+\end{itemize}
+\end{defn}
+
+Let $X:\Omega\to\R$ be a random variable. For each probability measure $P_\theta$, the probability density function $f_X$ also depends on $\theta$, and we obtain a family of probability density functions $\{f_\theta\;|\;\theta\in I\}$. Some authors use this as the definition of statistical models, but our definition naturally implies this alternative one. 
+
+\begin{defn}{Parametric Models}{}\\
+Let $(\Omega,\mF)$ be a measurable space. Let $\mP$ be a statistical model indexed by $I$. We say that $\mP$ is parametric if $I\subseteq\R^k$ for some $k\in\N$. 
+\end{defn}
+
 \subsection{Random Samples and Statistics}
 \begin{defn}{Random Samples}{}\\
 Let $(\Omega,\mF,P)$ be a probability space. Let $X_1,\dots,X_n:\Omega\to\R$ be random variables. We say that they are a random sample of size $n$ from the population $f$ if the following are true. 
 \begin{itemize}
 \item $X_1,\dots,X_n$ are pairwise independent. 
-\item The probability density (mass) function is given by $f_{X_i}=f_X$. 
+\item The probability density (mass) function is given by $f_{X_i}=f$. 
 \end{itemize}
 \end{defn}
 
@@ -56,12 +71,10 @@ Let $(\Omega,\mF,P)$ be a probability space. Let $X_1,\dots,X_n:\Omega\to\R$ be 
 \pagebreak
 \section{Principles of Data Reduction}
 \subsection{Sufficiency Principle}
-Suppose that $(\Omega,\mF,P)$ is a probability space. Often we do not know what $P$ is actually like. To probe the properties of $P$, we may use statistics $T(X_1,\dots,X_n)$ on the probability space. \\
-
 A sufficient statistic $T$ is a statistic where, informally speaking, all information about $P$ must come from $T$. 
 
 \begin{defn}{Sufficient Statistics}{}\\
-Let $(\Omega,\mF,P)$ be a collection of probability spaces for $\theta\in I$. Let $\{D_\theta\;|\;\theta\in I\}$ be a class of distributions. Let $X_\theta:\Omega\to\R^n$ be a random sample with distribution $D_\theta$. Let $T$ be a statistic of the random sample. We say that $T$ is sufficient if the conditional probability density function $f_{X_\theta|T}$ is a constant function with respect to $\theta$. 
+Let $(\Omega,\mF)$ be a measurable space. Let $\mP=\{P_\theta\;|\;\theta\in I\}$ be a parametric model. Let $X:\Omega\to\R^n$ be a random sample with distribution $f_\theta$. Let $T:\R^n\to\R$ be a statistic. We say that $T$ is sufficient for $I$ if the conditional probability density function $f_{X_1,\dots,X_n|T}$ is a constant function with respect to $\theta$. 
 \end{defn}
 
 \begin{eg}{}{}\\
@@ -79,7 +92,7 @@ P_\theta(\bold{X}=\bold{x}\;|\;T(\bold{X})=T(\bold{x}))&=\frac{f_{X_1,\dots,X_n}
 \end{eg}
 
 \begin{thm}{Neyman-Fisher Factorization Theorem}{}\\
-Let $(\Omega,\mF,P)$ be a probability space. Let $\{D_\theta\;|\;\theta\in I\}$ be a family of distributions. Let $X_\theta:\Omega\to\R^n$ be a random sample with distribution $D_\theta$. Let $T$ be a statistic of the random sample. Let $f_\theta$ be the probability density function of $X_\theta$. Then $T$ is sufficient if and only if there exists probability density functions $g_\theta$ for each $\theta$ such that $$f_\theta(x)=g_\theta(T(x))h(x)$$ for all $x\in\Omega$ and all $\theta\in I$. 
+Let $(\Omega,\mF)$ be a measurable space. Let $\mP=\{P_\theta\;|\;\theta\in I\}$ be a parametric model. Let $X:\Omega\to\R^n$ be a random sample with distribution $f_\theta$. Let $T:\R^n\to\R$ be a statistic. Then $T$ is sufficient for $I$ if and only if there exists $g:\R\times I\to\R$ and $h:\R^n\to\R$ such that $$f_\theta(x)=g(T(x),\theta)h(x)$$ for all $x\in\im(X)$ and all $\theta\in I$. 
 \end{thm}
 
 \begin{defn}{Minimal Sufficient Statistics}{}\\
@@ -99,7 +112,7 @@ Let $(\Omega,\mF,P)$ be a probability space. Let $\{D_\theta\;|\;\theta\in I\}$ 
 
 \subsection{Likelihood Principle}
 \begin{defn}{The Likelihood Function}{}\\
-Let $(\Omega,\mF,P)$ be a probability space. Let $\{D_\theta\;|\;\theta\in I\}$ be a family of distributions. Let $X_\theta:\Omega\to\R^n$ be a random sample with distribution $D_\theta$. Define the likelihood function $L:I\to\{g:\R\to\R\;|\;g\text{ is a function }\}$ of the random sample to be $$L(\theta)=f_\theta$$ where $f_\theta$ is the probability density (mass) function of $X_\theta$. 
+Let $(\Omega,\mF)$ be a measurable space. Let $\mP=\{P_\theta\;|\;\theta\in I\}$ be a parametric model. Let $X:\Omega\to\R^n$ be a random sample with distribution $f_\theta$. Define the likelihood function $L:I\to\{g:\R\to\R\;|\;g\text{ is a function }\}$ of the random sample to be $$L(\theta)=f_\theta$$
 \end{defn}
 
 \subsection{Conditionality Principle}
@@ -107,20 +120,40 @@ Let $(\Omega,\mF,P)$ be a probability space. Let $\{D_\theta\;|\;\theta\in I\}$ 
 \subsection{Equivariance Principle}
 
 \pagebreak
-\section{Estimators}
+\section{Point Estimators}
 Suppose some real life problem is modelling statistically by the probability space $(\Omega,\mF,P)$. To probe what $P$ looks like, we sample the space using random variables $X_1,\dots,X_n:\Omega\to\R$. Based on the sample, we may infer that $P$ may have parameter $\widehat{\theta}$ (naturally $\widehat{\theta}$ should be a function of $X_1,\dots,X_n$). We may then need to evaluate how accurate $\widehat{\theta}$ is compared to the actual parameter $\theta$. \\
 
 There are two main branches in estimator theory: We need different methods for finding estimators, and we need to evaluate how accurate the estimators are. \\
 
 There are also two types of estimators: Point estimators and interval estimators. 
 
-\subsection{Finding Point Estimators}
+\subsection{Basics of Point Estimators}
 \begin{defn}{Point Estimators}{}\\
-Let $(\Omega,\mF,P)$ be a probability space. Let $I\subseteq\R$ be an indexing set. Let $\{D_\theta\;|\;\theta\in I\}$ be a family of distributions. Let $X_\theta:\Omega\to\R^n$ be a random sample with distribution $D_\theta$. A point estimator of the random sample is a function $\widehat{\theta}\circ X_\theta:\Omega\to I$. 
-\end{defn} 
+Let $(\Omega,\mF)$ be a measurable space. Let $\mP=\{P_\theta\;|\;\theta\in I\}$ be a parametric model. Let $X:\Omega\to\R^n$ be a random sample with distribution $f_\theta$. Let $T:\R^n\to\R$ be a statistic. We say that $T$ is a point estimator if $\im(T)\subseteq I$. 
+\end{defn}
 
-Note: This the same definition of a statistic. 
+Estimators: A way to predict what the true parameter is (they are random variables because it depends on the actual measurements). 
+Estimate: The value of an estimator of a given measurement. 
+We also need a way to evaluate how good the estimators are (their input is a random variable and output is a real number). (In particular, one way to get a good estimator is to first find an method of evaluating estimators, then minimize it)
 
+\subsection{Evaluating the Accuracy of Point Estimators}
+\begin{defn}{Bias of a Point Estimator}{}\\
+Let $(\Omega,\mF)$ be a measurable space. Let $\mP=\{P_\theta\;|\;\theta\in I\}$ be a parametric model. Let $X:\Omega\to\R^n$ be a random sample with distribution $f_\theta$. Let $\widehat{\theta}:\R^n\to I$ be a point estimator. Define the bias of $\widehat{\theta}$ to be $$\text{Bias}(\widehat{\theta})=E[\widehat{\theta}]-\theta$$
+\end{defn}
+
+\begin{defn}{Unbiased Point Estimators}{}\\
+Let $(\Omega,\mF)$ be a measurable space. Let $\mP=\{P_\theta\;|\;\theta\in I\}$ be a parametric model. Let $X:\Omega\to\R^n$ be a random sample with distribution $f_\theta$. Let $\widehat{\theta}:\R^n\to I$ be a point estimator. We say that $\widehat{\theta}$ is unbiased if $\text{Bias}(\widehat{\theta})=0$. 
+\end{defn}
+
+\begin{defn}{Mean Squared Error}{}\\
+Let $(\Omega,\mF)$ be a measurable space. Let $\mP=\{P_\theta\;|\;\theta\in I\}$ be a parametric model. Let $X:\Omega\to\R^n$ be a random sample with distribution $f_\theta$. Let $\widehat{\theta}:\R^n\to I$ be a point estimator. Define the mean squared error of $\widehat{\theta}$ to be $$\text{MSE}(\widehat{\theta})=E[(\widehat{\theta}-\theta)^2]$$
+\end{defn}
+
+\begin{thm}{The Bias Variance Trade Off}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X_1,\dots,X_n:\Omega\to\R$ be a random sample. Let $\widehat{\theta}$ be a point estimator of the random sample. Then we have $$\text{MSE}(\widehat{\theta})=\text{Var}(\widehat{\theta})+(\text{Bias}(\widehat{\theta}))^2$$
+\end{thm}
+
+\subsection{Constructing Point Estimators}
 \begin{defn}{Method of Moments}{}\\
 Let $(\Omega,\mF,P)$ be a probability space. Let $J_1,\dots,J_k\subseteq\R$ be indexing sets. Let $\{D_{\theta_1,\dots,\theta_k}\;|\;\theta_i\in J_i\}$ be a family of distributions. Let $X_{\theta_1,\dots,\theta_k}:\Omega\to\R^n$ be a random sample with distribution $D_{\theta_1,\dots,\theta_k}$ and probability distribution function $f_{\theta_1,\dots,\theta_k}$. Define the methods of moments estimator to be the statistics $\widehat{\theta}_1,\dots,\widehat{\theta}_k$ given by the solving the system of equations $$\frac{1}{n}\sum_{j=1}^n(X_{\theta_1,\dots,\theta_k})_j^i=E[D_{\widehat{\theta}_1,\dots,\widehat{\theta}_k}^i]$$ for $1\leq i\leq k$. 
 \end{defn}
@@ -136,57 +169,102 @@ Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R^n$ be a random s
 \end{eg}
 
 \begin{defn}{Maximum Likelihood Estimators}{}\\
-Let $(\Omega,\mF,P)$ be a probability space. Let $I\subseteq\R$ be an indexing set. Let $\{D_\theta\;|\;\theta\in I\}$ be a family of distributions. Let $X_\theta:\Omega\to\R^n$ be a random sample with distribution $D_\theta$. Let $\widehat{\theta}$ be a point estimator for the random sample. We say that $\widehat{\theta}$ is a maximum likelihood estimator if there exists $x\in\R^n$ such that $$L(\widehat{\theta}(x))(x)=\max\{L(\theta)(x):\theta\in I\}$$
+Let $(\Omega,\mF)$ be a measurable space. Let $\mP=\{P_\theta\;|\;\theta\in I\}$ be a parametric model. Let $X:\Omega\to\R^n$ be a random sample with distribution $f_\theta$. Let $\widehat{\theta}:\R^n\to I$ be a point estimator. We say that $\widehat{\theta}$ is a maximum likelihood estimator if there exists $x\in\R^n$ such that $$L(\widehat{\theta}(x))(x)=\max\{L(\theta)(x):\theta\in I\}$$
 \end{defn}
 
-\subsection{Evaluating Point Estimators}
-\begin{defn}{Bias of a Point Estimator}{}\\
-Let $(\Omega,\mF,P)$ be a probability space. Let $X_1,\dots,X_n:\Omega\to\R$ be a random sample. Let $\widehat{\theta}$ be a point estimator of the random sample. Define the bias of $\widehat{\theta}$ to be $$\text{Bias}(\widehat{\theta})=E[\widehat{\theta}]-\theta$$
-\end{defn}
-
-\begin{defn}{Unbiased Point Estimators}{}\\
-Let $(\Omega,\mF,P)$ be a probability space. Let $X_1,\dots,X_n:\Omega\to\R$ be a random sample. Let $\widehat{\theta}$ be a point estimator of the random sample. We say that $\widehat{\theta}$ is unbiased if $\text{Bias}(\widehat{\theta})=0$. 
-\end{defn}
-
-\begin{defn}{Mean Squared Error}{}\\
-Let $(\Omega,\mF,P)$ be a probability space. Let $X_1,\dots,X_n:\Omega\to\R$ be a random sample. Let $\widehat{\theta}$ be a point estimator of the random sample. Define the mean squared error of $\widehat{\theta}$ to be $$\text{MSE}(\widehat{\theta})=E[(\widehat{\theta}-\theta)^2]$$
-\end{defn}
-
-\begin{thm}{The Bias Variance Trade Off}{}\\
-Let $(\Omega,\mF,P)$ be a probability space. Let $X_1,\dots,X_n:\Omega\to\R$ be a random sample. Let $\widehat{\theta}$ be a point estimator of the random sample. Then we have $$\text{MSE}(\widehat{\theta})=\text{Var}(\widehat{\theta})+(\text{Bias}(\widehat{\theta}))^2$$
-\end{thm}
-
-\subsection{Finding Interval Estimators}
-
-\subsection{Evaluating Interval Estimators}
+\begin{lmm}{}{}\\
+Let $(\Omega,\mF)$ be a measurable space. Let $\mP=\{P_\theta\;|\;\theta\in I\}$ be a parametric model. Let $X:\Omega\to\R^n$ be a random sample with distribution $f_\theta$. If $L$ is differentiable, then the maximum likelihood estimator exists and is given by the root of the equation $$\nabla L=0$$
+\end{lmm}
 
 \pagebreak
 \section{Hypothesis Testing}
-\subsection{Finding Hypothesis Tests}
+Let $(\Omega,\mF)$ be a measurable space. Let $\mP=\{P_\theta\;|\;\theta\in I\}$ be a parametric model. We are interested in the following question: Suppose we know that the parameter lies in one of two set $H_0,H_1\subseteq I$ with $H_0\cap H_1=\emptyset$. We wish to use random samples $X:\Omega\to\R^n$ to determine whether it lies in $H_0$ or $H_1$. 
+
+\subsection{Basics of Hypothesis Testing}
 \begin{defn}{Hypothesis}{}\\
-Let $(\Omega,\mF,P)$ be a probability space. Let $\{D_\theta\;|\;\theta\in I\}$ be a family of distributions. Let $X_\theta:\Omega\to\R^n$ be a random sample with distribution $D_\theta$. A hypothesis is s subset of $I$. 
+Let $(\Omega,\mF)$ be a measurable space. Let $\mP=\{P_\theta\;|\;\theta\in I\}$ be a parametric model. A hypothesis of the parameter are two subsets $H_0,H_1\subseteq I$ such that $H_0\cap H_1=\emptyset$. 
 \end{defn}
 
-\subsection{Evaluating Hypothesis Tests}
+\begin{defn}{Test Functions}{}\\
+Let $(\Omega,\mF)$ be a measurable space. Let $\mP=\{P_\theta\;|\;\theta\in I\}$ be a parametric model. Let $X:\Omega\to\R^n$ be a random sample with distribution $f_\theta$. A test function is a function $\delta:\im(X)\to\{0,1\}$. 
+\end{defn}
+
+A test function takes the value $0$ when the sample indicates that the parameter lies in $H_0$, and vice versa for $H_1$. A test function usually take values depending on a certain condition, so they are usually of the form $$\delta(x)=\begin{cases}
+1 & \text{ if } T(x)\in C\\
+0 & \text{ otherwise }
+\end{cases}$$ for some statistic $T$ and some set $C\in\im(T)$. \\
+
+\subsection{Evaluating the Accuracy of Hypothesis Tests}
+Similar to point estimators, we also need to evaluate how accurate the test function $\delta$ is. In the case of hypothesis testing, we can easily classify the possible errors. 
+\begin{itemize}
+\item True parameter: $0$, decision: $0$. There is no error. 
+\item True parameter: $0$, decision: $1$. We call this type I error. 
+\item True parameter: $1$, decision: $0$. We call this type II error. 
+\item True parameter $1$, decision: $1$. There is no error. 
+\end{itemize}
+
+\begin{defn}{Error Probabilities}{}\\
+Let $(\Omega,\mF)$ be a measurable space. Let $\mP=\{P_\theta\;|\;\theta\in I\}$ be a parametric model. Let $X:\Omega\to\R^n$ be a random sample with distribution $f_\theta$. Let $H_0,H_1\subseteq I$ be a hypothesis. Let $\delta:\im(X)\to\{0,1\}$ be a test function. 
+\begin{itemize}
+\item Define the type I error probability to be the map $h_0:H_0\to[0,1]$ given by $$h_0(\theta)=P_\theta(\delta=1)$$
+\item Define the type II error probability to be the map $h_1:H_1\to[0,1]$ given by $$h_1(\theta)=P_\theta(\delta=0)$$
+\end{itemize}
+\end{defn}
+
+\subsection{Constructing Test Functions}
+It is not possible to simultaneously minimize $h_0$ and $h_1$. Therefore one way to find a good test function is to put emphasis on $H_0$ before $H_1$. In practice most scientific experiments have a more important error to prevent from having false positives. 
+
+\begin{defn}{The Neyman-Pearson Framework}{}\\
+Let $(\Omega,\mF)$ be a measurable space. Let $\mP=\{P_\theta\;|\;\theta\in I\}$ be a parametric model. Let $X:\Omega\to\R^n$ be a random sample with distribution $f_\theta$. Let $H_0,H_1\subseteq I$ be a hypothesis. The Neyman-Pearson framework is the following algorithm that ???
+\begin{enumerate}
+\item Fix $\alpha\in(0,1)$ and call it the significance level of the test. 
+\item Define the class of test functions that respect the level $$\mD(H_0,\alpha)=\{\delta:\im(X)\to\{0,1\}\;|\;\sup_{\theta\in H_0}P_\theta(\delta=1)\leq\alpha\}$$
+\item Find the test function $\delta\in\mD(H_0,\alpha)$ that minimizes $h_1$. 
+\end{enumerate}
+\end{defn}
+
+\subsection{Hypothesis Testing for One Dimensional Parameters}
+\begin{defn}{Simple and Lateral Hypothesis}{}\\
+Let $(\Omega,\mF)$ be a measurable space. Let $\mP=\{P_\theta\;|\;\theta\in I\}$ be a parametric model such that $I\subseteq\R$. Let $X:\Omega\to\R^n$ be a random sample with distribution $f_\theta$. Let $H_0,H_1\subseteq I$ be a hypothesis. 
+\begin{itemize}
+\item We say that the hypothesis is a simple vs simple if $H_0,H_1$ are one point sets. 
+\item We say that the hypothesis is unilateral if $H_0=\{\theta\in I\;|\;\theta\leq\theta_0\}$ and $H_1=I\setminus H_0$ or $H_0=\{\theta\in I\;|\;\theta\geq\theta_0\}$ and $H_1=I\setminus H_0$ for some $\theta_0\in I$. 
+\item We say that the hypothesis is simple vs bilateral if $H_0$ is a one point set and $H_1=I\setminus H_0$. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{p-Value}{}\\
+Let $(\Omega,\mF)$ be a measurable space. Let $\mP=\{P_\theta\;|\;\theta\in I\}$ be a parametric model such that $I\subseteq\R$. Let $X:\Omega\to\R^n$ be a random sample with distribution $f_\theta$. Let $H_0,H_1\subseteq I$ be a hypothesis that it is either simple vs simple, unilateral or simple vs bilateral. Let $\delta:\im(X)\to\{0,1\}$ be a test function of one of the following forms: $$\delta=1_{T>q_{1-\alpha}}\;\;\;\text{ or }\;\;\;\delta=1_{T\leq q_\alpha}$$ where $T$ is some statistic and $q_z$ is the $z$-quantile of the distribution $G_0(t)=P_{\theta_0}(T\leq t)$. Define the $p$-value of $X$ to be $$\inf\{\alpha\in(0,1)\;|\;\delta_\alpha=1\}$$
+\end{defn}
 
 \pagebreak
-\section{Regression Analysis}
-
-\begin{defn}{Linear Regression Space}{}\\
-Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R^n$ be a random sample such that $E[X]<\infty$. Define the linear regression space of the sample to be $$\mH(X)=\left\{\sum_{i=1}^n\beta_iX_i+\alpha\;\bigg{|}\;\alpha,\beta_i\in\R\right\}\subseteq L^2(\Omega)$$
+\section{Interval Estimators}
+\subsection{Basics of Interval Estimators}
+\begin{defn}{Two Sided Confidence Intervals}{}\\
+Let $(\Omega,\mF)$ be a measurable space. Let $\mP=\{P_\theta\;|\;\theta\in I\}$ be a parametric model such that $I\subseteq\R$. Let $X:\Omega\to\R^n$ be a random sample with distribution $f_\theta$. Let $\alpha\in(0,1)$. Let $L,U:\R^n\to\R$ be two statistics such that $$\inf_{\theta\in I}P_\theta(L\leq\theta\leq U)\geq 1-\alpha$$ Define the two sided confidence interval for $\theta$ with confidence level $1-\alpha$ to be the interval $$[L(X),U(X)]\subseteq\R$$
 \end{defn}
 
-\begin{defn}{Linear Regression}{}\\
-Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R^n$ be a random sample. Let $Y:\Omega\to\R^n$ be a random sample. Let $L:\mH\to\R$ be a loss function. The linear regression of $Y$ on $X$ with $L$ is a random variable $\widehat{Y}\in\mH(X)$ such that $$L(\widehat{Y})=\min\{L(Z)\;|\;Z\in\mH(X)\}$$
+\pagebreak
+\section{}
+\subsection{}
+Let $X,Y$ be random variables. Regression is about understanding the relationship of $Y$ given $X$. Clearly this is a question in conditional probability: If I observed $X=x$, what can I say about the distribution of $Y$? \\
+
+Suppose we sample $p$ data points $(X_1,Y_1),\dots,(X_p,Y_p)$, i.e. we assume we have a random sample with distribution $(X,Y)$. We would like to assume that there is some function $f$ such that when $X_i=x_i$ and $Y_i=y_i$ are observed, then we have $y_i=f(x_i)$. In reality, if we also consider the fact that our observations may have measurement errors or inherent randomness, then we find that $y_i\in f(x_i)+\varepsilon$ where $\varepsilon$ is some random variable representing the measurement error / inherent randomness. Hence $Y_i=f(x_i)+\varepsilon$ is really the starting equation for us to use to find what $f$ is. Assume that $E[\varepsilon]=0$, that is on average our measurement error is $0$, we find that $E[Y_i]=f(x_i)$. Since this is a function of $x_i$, we may rewrite it as $E[Y_i\;|\;X_i=x_i]=f(x_i)$. This means that we are asking the question of on average, what is the relationship between the outcome $Y_i$ given $X_i=x_i$. \\
+
+The above assumes that the relationship between $Y$ and $X$ is given by a function. In general, there are other types of relationships that we may ask for e.g. variance regression: asking for how the variance of $Y$ is related to $X$ instead of how the outcome $Y$ is related to $X$. 
+
+\begin{defn}{Regression Models}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $(X_1,Y_1),\dots,(X_p,Y_p):\Omega\to\R^n\times\R$ be a random sample. A regression model is a parameteric statistical model $\mP$ on the random variable $Y_i\;|\;X_i=x$. 
 \end{defn}
 
-\begin{prp}{}{}\\
-Let $(\Omega,\mF,P)$ be a probability space. Let $X:\Omega\to\R^n$ be a random sample. Let $Y:\Omega\to\R^n$ be a random sample. Then the linear regression of $Y$ on $X$ with the mean squared error exists and is unique. 
-\end{prp}
+Notice that $i$ does not matter in the regression model because $(X_i,Y_i)$ are independently identically distributed. 
 
+\begin{defn}{Linear Regression Models}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $(X_1,Y_1),\dots,(X_p,Y_p):\Omega\to\R^n\times\R$ be a random sample. Let $\mP$ be a regression model parameterized by $I\subseteq\R^k$. We say that $\mP$ is linear if $E[Y_i\;|\;X_i=x_i]$ is a linear function of the parameter $\theta\in I$. 
+\end{defn}
 
-
-
+\begin{defn}{Design Matrix}{}\\
+\end{defn}
 
 
 

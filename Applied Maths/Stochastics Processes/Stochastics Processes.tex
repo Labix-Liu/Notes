@@ -37,11 +37,25 @@
 \begin{defn}{Discrete Time Stochastic Processes}{} Let $(\Omega,\mathcal{F},P)$ be a probability space. Let $(S,\Sigma)$ be a measurable space. Let $X:\Omega\times T\to S$ be a stochastic process. We say that the stochastic process has discrete time if $T\subseteq\N$. 
 \end{defn}
 
-\begin{defn}{Filtrations}{} Let $\mF=\{\mF_t\;|\;t\in T\}$ be a family of $\sigma$-algebras. We say that $\mF$ is a filtration if $\mF_t\leq\mF_s$ for $t\leq s$. 
+\begin{defn}{Filtrations}{}\\
+Let $T$ be an indexing set. Let $\{\mF_t\;|\;t\in T\}$ be a family of $\sigma$-algebras. We say that $\mF$ is a filtration if $\mF_t\leq\mF_s$ for $t\leq s$. 
 \end{defn}
 
-\begin{defn}{Adapted Stochastic Process}{} Let $(\Omega,\mathcal{F},P)$ be a probability space. Let $(S,\Sigma)$ be a measurable space. Let $X:\Omega\times T\to S$ be a stochastic process. Let $\mF=\{\mF_t\;|\;t\in T\}$ be a filtration. We say that $X$ is adapted to $\mF$ if $X_t$ is $\mF_t$-measurable for all $t\in T$. 
+\begin{defn}{Right Continuous Filtrations}{}\\
+Let $T$ Be an indexing set. Let $\{\mF_t\;|\;t\in T\}$ be a family of $\sigma$-algebras that is a filtration. We say that the filtration is right continuous if $$\mF_t=\bigcap_{s>t}\mF_s$$
 \end{defn}
+
+\begin{defn}{Stochastic Bases (Filtered Probability Spaces)}{}\\
+Let $I\subseteq\R$. A stochastic basis is a probability space $(\Omega,\mF,P)$ together with a filtration $\{\mF_t\;|\;t\in I\}$. 
+\end{defn}
+
+\begin{defn}{Adapted Stochastic Process}{}\\
+Let $T\subseteq\R$. Let $(\Omega,\mF,P)$ be a stochastic basis with filtration $\{\mF_t\;|\;t\in T\}$. Let $X:\Omega\times T\to\R$ be a stochastic process. We say that $X$ is adapted to the filtration if $X_t$ is $\mF_t$ measurable for all $t\in T$. 
+\end{defn}
+
+The filtration here means that we learn more information as time passes. Indeed we assume that $\mF_s\subseteq\mF_t$ whenever $s\leq t$ so that as $t$ increases, the random variable $X_t$ has a bigger and bigger domain. \\
+
+Right continuity means that information arrives continuously with no sudden jumps. 
 
 \subsection{Hitting Time and Stopping Time}
 \begin{defn}{Hitting Time}{}\\
@@ -310,7 +324,18 @@ Let $(\Omega,\mF,P)$ be a probability space. Suppose that $I=\{1,\dots,n\}$. Let
 \end{itemize}
 \end{defn}
 
+Intuitively, this means that your best guess of the future value $E[M_{t_2}\;|\;\mF_{t_1}]$ given the current information is the current value $M_{t_1}$. It means that even if you know all history, you cannot predict the next move. 
+
 \begin{defn}{Continuous Martingale Process}{} Let $(\Omega,E,P)$ be a probability space. Let $(S,\Sigma)$ be a measurable space. Let $M:\Omega\times[0,T]\to S$ be a continuous stochastic process. We say that $M$ is continuous if for all $\omega\in\widetilde{\Omega}$ such that $P(\widetilde{\Omega})=1$, the function $$M(\omega,-):[0,T]\to S$$ is continuous. 
+\end{defn}
+
+\begin{defn}{Local Martingales}{}\\
+Let $(\Omega,\mF,P)$ be a probability space with filtration $\{\mF_t\;|\;t\in[0,\infty)\}$. Let $X:\Omega\times[0,\infty)\to\R$ be an adapted stochastic process. We say that $M$ is a local martingale if there exists a sequence stopping times $\tau_k:\Omega\to[0,\infty)$ for $k\in\N$ such that the following are true. 
+\begin{itemize}
+\item $\tau_k$ are almost surely increasing: $P(\tau_k<\tau_{k+1})=1$. 
+\item $\tau_k$ diverge almost surely: $P(\lim_{k\to\infty}\tau_k=\infty)=1$. 
+\item The random variable $M_{\min\{t,\tau_k\}}$ is martingale for all $k$. 
+\end{itemize}
 \end{defn}
 
 \begin{defn}{Standard Brownian Filtration}{}

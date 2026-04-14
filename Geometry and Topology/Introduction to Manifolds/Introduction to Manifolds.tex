@@ -551,13 +551,22 @@ We first consider $O(n,\R)$. Let $S_n$ denote the set of symmetric matrices in $
 While the previous section introduced general vector bundles over an arbitrary topological space, the concept of smooth bundles are exclusive solely to smooth manifolds. Indeed the notion of smoothness exists only in smooth manifolds when we say that the transition maps of the charts are smooth functions from Euclidean spaces. 
 
 \subsection{Smooth Vector Bundles}
-\begin{defn}{Smooth Vector Bundles}{} Let $p:E\to M$ be an $\R$-vector bundle of rank $r$. The vector bundle is said to be smooth if $E,M$ are smooth manifolds, $p$ is a smooth map of manifolds and the local trivializations $(U,\phi)$ are diffeomorphisms from $p^{-1}(U)$ to $U\times\R^r$. 
+\begin{defn}{Smooth Vector Bundles}{}\\
+Let $M$ be a smooth manifold. Let $p:E\to M$ be a vector bundle. We say that $p$ is smooth if the following are true. 
+\begin{itemize}
+\item $E$ is a smooth manifold. 
+\item $p$ is a smooth map. 
+\item The local trivialization charts are diffeomorphisms. 
+\end{itemize}
 \end{defn}
 
-Diffeomorphisms here means the following. Let $(\widetilde{U},\widetilde{\phi})$ be a chart on $E$ and $(U,\phi)$ a chart on $M$. Then if $(V,\psi)$ are local trivializations, we require that $$\phi\circ\psi\circ\widetilde{\phi}^{-1}:\widetilde{\phi}(\widetilde{U})\subseteq\R^e\to\phi(U)\subseteq\R^m$$ to be diffeomorphisms whenever $\psi(V)\subseteq U$. 
+\begin{defn}{Smooth Sections}{}\\
+Let $M$ be a smooth manifold. Let $p:E\to M$ be a smooth vector bundle. Define the smooth sections of $p$ to be the subgroup $$\mC^\infty(E)=\{s:M\to E\;|\;s\text{ is a smooth map }\}\leq\Gamma(E)$$ together with the operation $\mC^\infty(M)\times\mC^\infty(E)\to\mC^\infty(E)$ given by $(f,s)\mapsto fs$. 
+\end{defn}
 
-\begin{prp}{}{} Let $p:E\to M$ be a smooth vector bundle. Then the set of all $C^\infty$ sections $$\Gamma(E)=\{s:M\to E\;|\;s\text{ is a smooth section }\}$$ is a vector space over $\R$ and a module over the ring $C^\infty(M)$. 
-\begin{proof}
+\begin{prp}{}{}\\
+Let $M$ be a smooth manifold. Let $p:E\to M$ be a smooth vector bundle. Then $\mC^\infty(E)$ is a $\mC^\infty(M)$-module. 
+\begin{proof}\\
 It is clear that $_1+s_2$ and $fs$ is a section. It remains to check that they are smooth sections. Let $p\in M$. Let $(U,\phi)$ be a smooth local trivialization of $p:E\to M$ containing $p$. Suppose that $\phi\circ s:M\to U\times\R^k$ is given by $$(\phi\circ s_1)(q)=(q,a_1(q),\dots,a_k(q))$$ and similarly $(\phi\circ s_2)(q)=(q,b_1(q),\dots,b_k(q))$ for $q\in U$. Since $s_1,s_2$ are smooth maps, $a_i$ and $b_j$ are smooth functions on $U$. Since $\phi$ is linear on each fiber, $$(\phi\circ(s_1+s_2))(q)=(q,(a_1+b_1)(q),\dots,(a_k+b_k)(q))$$ so that $s_1+s_2$ is a smooth map on $U$ and hence at $p$. Since $p$ is an arbitrary point we conclude. \\
 
 The proof for the module structure is similar to the above. 
@@ -588,6 +597,11 @@ c_r
 \end{pmatrix}=Ac$$ At each point of $V$, $A$ is the transition matrix between the two bases and so is invertible. By Crammer's rule, $A^{-1}$ is a matrix of smooth functions on $V$. Hence $c=A^{-1}b$ is a column vector of smooth functions on $V$. This proves that $c_1,\dots,c_r$ are smooth functions at $p\in U$. Since $p$ is arbitrary, the coefficients $c_j$ are smooth functions on $U$. 
 \end{proof}
 \end{prp}
+
+\subsection{The Tensor Characterization Lemma}
+\begin{lmm}{The Tensor Characterization Lemma}{}\\
+Let $M$ be a smooth manifold. Let $p:E\to M$ and $p_i:E_i\to M$ be smooth vector bundles for $1\leq i\leq n$. Then there is an isomorphism of $\mC^\infty(M)$-modules $$\Hom_{\mC^\infty(M)}\left(\prod_{i=1}^n\mC^\infty(E_i),\mC^\infty(E)\right)\cong\mC^\infty\left(\bigotimes_{i=1}^nE_i^\ast\otimes E\right)$$
+\end{lmm}
 
 \subsection{The Tangent Bundle}
 \begin{defn}{The Tangent Bundle}{} Let $M$ be a smooth manifold. Define the tangent bundle of $M$ to be the disjoint union $$TM=\coprod_{p\in M}T_pM$$ Define the projection map $\pi:TM\to M$ by $\pi(v)=p$ if $v\in T_pM$. 
@@ -629,16 +643,13 @@ Finally, if $\{(U_\alpha,\phi_\alpha\}$ is a smooth atlas on $M$, then $\{(T(U_\
 \end{thm}
 
 \subsection{Vector Fields}
-\begin{defn}{Vector Fields}{} Let $M$ be a manifold and $T_p(M)$ the tangent space of $p$ in $M$. A vector field $X:M\to T_p(M)$ assigns for each $p\in M$ an element in the tangent space. This means that $X$ is a section of the tangent bundle $\pi:T(M)\to M$. 
+\begin{defn}{Vector Fields}{}\\
+Let $M$ be a smooth manifold. A vector field on $M$ is a section of the tangent bundle $\pi:TM\to M$. 
 \end{defn}
 
-\begin{defn}{Smooth Vector Fields}{} Let $M$ be a smooth manifold. A vector field $X$ is smooth if it is smooth as a map from $M$ to $TM$. Denote the set of all smooth vector fields on $M$ by $\mathfrak{X}(M)$. 
+\begin{defn}{Smooth Vector Fields}{}\\
+Let $M$ be a smooth manifold. Define the smooth vector fields of $M$ to be the $\mC^\infty(M)$-module $$\mathfrak{X}(M)=\mC^\infty(TM)$$
 \end{defn}
-
-From now on, we will only consider smooth vector fields as they carry the most structure for our smooth manifolds. $\mathfrak{X}(M)$ has a rich structure in terms of algebra. 
-
-\begin{prp}{}{} Let $M$ be a smooth manifold. Then $\mathfrak{X}(M)$ is an $\R$-vector space and a $C^\infty(M)$-module. 
-\end{prp}
 
 In particular, $\mathfrak{X}(M)$ is also a Lie algebra. \\
 

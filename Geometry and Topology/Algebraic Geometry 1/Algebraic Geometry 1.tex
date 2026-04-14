@@ -864,6 +864,14 @@ Applying the above proposition gives $$\V^H(H_i(f)\;|\;f\in I)=\V^H(\I^H(\overli
 \begin{prp}{}{} Let $k$ be a field. Then there is a bijection $$\text{Cones in }\A_k^{n+1}\;\;\overset{1:1}{\longleftrightarrow}\;\;\text{Projective Varieties in }\Prj_k^n$$ given by the maps $P(-)$ and $C(-)$. 
 \end{prp}
 
+\begin{prp}{}{}\\
+Let $f_1,\dots,f_r\in k[x_0,\dots,x_n]$ be homogeneous polynomials. The following are true regarding the affine cone and projectivization. 
+\begin{itemize}
+\item The affine cone of $V^H(f_1,\dots,f_r)$ is given by $\V(f_1,\dots,f_r)$. 
+\item The projectivization of $\V(f_1,\dots,f_r)$ is given by $\V^H(f_1,\dots,f_r)$. 
+\end{itemize}
+\end{prp}
+
 \pagebreak
 \section{Classical Constructions}
 \subsection{Veronese Maps}
@@ -885,31 +893,37 @@ We have seen that the product of two affine varieties is also an affine variety.
 \begin{defn}{The Segre Map}{} Define the general Segre map $\Sigma_{m,n}:\Prj^m\times\Prj^n\to\Prj^{(m+1)(n+1)-1}$ by $$\Sigma_{m,n}([x_0:\cdots:x_m],[y_0:\cdots:y_n])=[x_0y_0:x_0y_1:\cdots:x_iy_j:\cdots:x_my_n]$$
 \end{defn}
 
+\begin{eg}{}{}
 When $n=m=1$, the Segre map $\Sigma_{1,1}:\Prj^1\times\Prj^1\to\Prj^3$ is defined by $$([s:t],[u:v])\mapsto[su:sv:tu:tv]$$
+\end{eg}
 
-\begin{prp}{}{} Let $m,n\in\N$. Then the following are true regarding the Segre map $$\Sigma_{m,n}:\Prj^m\times\Prj^n\to\Prj^{(m+1)(n+1)-1}$$
-\begin{itemize}
-\item $\Sigma_{m,n}$ is a well defined map of projective space
-\item $\im(\Sigma_{m,n})$ is a projective subvariety
-\item $\Prj^m\times\Prj^n$ is in bijection as a set to $\im(\Sigma_{m,n})$
-\end{itemize} 
-\begin{proof}~\\
-\begin{itemize}
-\item Firstly, notice that 
+\begin{lmm}{}{}\\
+Let $m,n\in\N$. Then the Segre map $\Sigma_{m,n}:\Prj^m\times\Prj^n\to\Prj^{(m+1)(n+1)-1}$ is a well defined map of projective space. 
+\begin{proof}\\
+notice that 
 \begin{align*}
 ([\lambda x_0:\cdots:\lambda x_m],[\mu y_0,\dots,y_n])&\mapsto[\lambda\mu x_0y_0:\lambda\mu x_0y_1:\cdots:\lambda\mu x_iy_j:\cdots:\lambda\mu x_my_n]\\
 &=[x_0y_0:x_0y_1:\cdots:x_iy_j:\cdots:x_my_n]
-\end{align*} so that the Segre map is well defined with respect to homogeneous coordinates. Moreover, every point $[x_0:\cdots:x_m]$ in $\Prj^m$ must have at least one coordinate $x_i$ non-zero. Similarly every point $[y_0:\cdots:y_n]$ in $\Prj^n$ must have at least one coordinate $y_j$ non-zero. Then $x_iy_j$ is non-zero so that $\Sigma_{m,n}$ never maps points in $\Prj^m\times\Prj^n$ to $[0:\cdots:0]$. It is clear that every coordinate is globally expressed as a polynomial in $x_0,\dots,x_n,y_0,\dots,y_m$ so that $\Sigma_{m,n}$ is a well defined morphism of quasi-projective varieties. 
-\item Write the projective coordinates of $\Prj^{(m+1)(n+1)-1}$ in matrix form as $$\begin{bmatrix}
-z_{0,0} & \cdots & z_{0,n}\\
+\end{align*} so that the Segre map is well defined with respect to homogeneous coordinates. Moreover, every point $[x_0:\cdots:x_m]$ in $\Prj^m$ must have at least one coordinate $x_i$ non-zero. Similarly every point $[y_0:\cdots:y_n]$ in $\Prj^n$ must have at least one coordinate $y_j$ non-zero. Then $x_iy_j$ is non-zero so that $\Sigma_{m,n}$ never maps points in $\Prj^m\times\Prj^n$ to $[0:\cdots:0]$. It is clear that every coordinate is globally expressed as a polynomial in $x_0,\dots,x_n,y_0,\dots,y_m$ so that $\Sigma_{m,n}$ is well defined. 
+\end{proof}
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $m,n\in\N$. Write the projective coordinates of $\Prj^{(m+1)(n+1)-1}$ in matrix form as $$\Prj^{(m+1)(n+1)-1}=\left\{\begin{bmatrix}
+z_{00} & \cdots & z_{0n}\\
 \vdots & \ddots & \vdots\\
-z_{m,0} & \cdots & z_{m,n}
-\end{bmatrix}$$
-We can now rewrite the coordinates in the target of the Segre map as a matrix in the following way: $$([x_0:\cdots:x_n],[y_0:\cdots:y_m])=\begin{bmatrix}
-x_0y_0 & \cdots & x_0y_n\\
+z_{m0} & \cdots & z_{mn}
+\end{bmatrix}\;\bigg{|}\;z_{ij}\in k\text{ and they are not all }0\right\}$$ Then there is a bijection of sets 
+\begin{align*}
+\im(\Sigma_{m,n})&=\V^H(z_{ij}z_{kl}-z_{il}z_{kj}\;|\;1\leq i\neq k\leq m,1\leq j\neq l\leq n)\\
+&=\V^H\left(\text{2x2 minors of }\begin{pmatrix}
+z_{00} & \cdots & z_{0n}\\
 \vdots & \ddots & \vdots\\
-x_my_0 & \cdots & x_my_n
-\end{bmatrix}$$ I claim that $\im(\Sigma_{m,n})=\V(\{z_{ij}z_{kl}-z_{il}z_{kj}\;|\;1\leq i,k\leq m\text{ and }1\leq j,l\leq n\text{ and }i\neq k\text{ and }j\neq l\})$. Firstly, notice that if $\begin{bmatrix}
+z_{m0} & \cdots & z_{mn}
+\end{pmatrix}\right)
+\end{align*}
+\begin{proof}\\
+Firstly, notice that if $\begin{bmatrix}
 x_0y_0 & \cdots & x_0y_n\\
 \vdots & \ddots & \vdots\\
 x_my_0 & \cdots & x_my_n
@@ -922,11 +936,16 @@ a_0b_0 & \cdots & a_0b_n\\
 \vdots & \ddots & \vdots\\
 a_mb_0 & \cdots & a_mb_n
 \end{pmatrix}$$ which is in the image of $\Sigma_{m,n}$. Hence the image of the Segre map is a projective subvariety of $\Prj^{(m+1)(n+1)-1}$. 
-
-\item We just have to show that $\Sigma_{m,n}$ is injective. 
-\end{itemize}
 \end{proof}
 \end{prp}
+
+\begin{prp}{}{}\\
+Let $m,n\in\N$. Then $\Prj^m\times\Prj^n$ is in bijection as a set to $\im(\Sigma_{m,n})$. 
+\end{prp}
+
+\begin{eg}{}{}\\
+We have that $$\im(\Sigma_{1,1})=\V^H(xy-zw)\subseteq\Prj^3$$
+\end{eg}
 
 \begin{defn}{Zariski Topology on Products of Projective Spaces}{} Let $m,n\in\N$. Define the Zariski topology on $\Prj^m\times\Prj^n$ by transferring the Zariski topology of $\im(\Sigma_{m,n})$ in $\Prj^{(m+1)(n+1)-1}$ through the bijection of sets that is the Segre map $\Sigma_{m,n}$. 
 \end{defn}

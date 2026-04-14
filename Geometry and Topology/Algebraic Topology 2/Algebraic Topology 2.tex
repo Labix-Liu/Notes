@@ -1741,18 +1741,14 @@ Using the above lemma, we now have a spliced diagram :
 \end{tikzcd}}\\
 where the diagonals come from the long exact sequence in the proof of the first part of lemma 7.4.3. The $d_n$ is then defined through the composition of the diagonal arrows. 
 
-\begin{lmm}{}{} The composition $d_n\circ d_{n+1}$ is zero. 
-\begin{proof}
-The composition $d_n\circ d_{n+1}$ factors through the two blue arrows in the diagram. They are part of a long exact sequence and so their composition is $0$. 
-\end{proof}
-\end{lmm}
-
-\begin{defn}{Cellular Chain Complex}{} Let $X$ be a CW-complex. Define the cellular chain complex $C_\bullet^\text{CW}(X)$ where $$C_n^{\text{CW}}(X)=H_n(X^n,X^{n-1})$$ together with differentials $d_n$ as defined above. Define the cellular homology groups of this chain complex to be $$H_n^\text{CW}(X)=H_n(C_\bullet^\text{CW}(X))$$
+\begin{defn}{Cellular Boundary}{}\\
+Let $X$ be a CW complex. Let $\alpha:H_{n+1}(X^{n+1},X^n)\to H_n(X^n)$ be the induced map from the long exact sequence of relative homology. Let $\beta:H_n(X^n)\to H_n(X^n,X^{n-1})$ be the quotient map in the long exact sequence of relative homology. Define the cellular boundary map of $X$ to be $d_\text{CW}=\beta\circ\alpha$. 
 \end{defn}
 
-\begin{lmm}{}{} For any CW-complex $X$, there are canonical isomorphisms $$H_n^\text{CW}(X)\cong H_n(X)$$ 
-\begin{proof}
-Since $\delta$ is injective, we have that $$\ker(d_n)=\ker(\gamma)=\im(\beta)$$ Also by lemma 7.3.2, we have that $H_n(X^{n+1})\cong H_n(X)$. This means that $$H_n(X)\cong\text{coker}(\alpha)\cong\frac{\im(\beta)}{\im(\beta\circ\alpha)}=\frac{\ker(d_n)}{\im(d_{n+1})}$$ where the second isomorphism comers from the fact that $\beta$ is injective. 
+\begin{lmm}{}{}\\
+Let $X$ be a CW complex. Then we have $d_\text{CW}\circ d_\text{CW}=0$. 
+\begin{proof}\\
+The composition $d_n\circ d_{n+1}$ factors through the two blue arrows in the diagram. They are part of a long exact sequence and so their composition is $0$. 
 \end{proof}
 \end{lmm}
 
@@ -1763,16 +1759,33 @@ Recall that a CW-complex $X$ is defined recursively through the use of attaching
 	\arrow[two heads, from=1-2, to=1-3]
 \end{tikzcd}} \\
 
-To compute the cellular homology of a CW complex, we already know that the chain complex has terms given by lemma 7.3.2. It remains to compute what the differentials look like. We will use this map in the following formula. 
-
-\begin{thm}{Cellular Boundary Formula}{} Let $X$ be a CW-complex with attaching maps denoted $\phi_\alpha$, and $C_\bullet^\text{CW}(X)$ the cellular chain complex of $X$ with generators $\{[D_\alpha^n]|_{\alpha\in I_n}\}$ for each degree $n$. The boundary operator of the chain complex is given by the following formula: 
+\begin{thm}{Cellular Boundary Formula}{} Let $X$ be a CW-complex with attaching maps denoted $\phi_\alpha$, and $C_\bullet^\text{CW}(X)$ the cellular chain complex of $X$ with generators $\{[D_\alpha^n]|_{\alpha\in I_n}\}$ for each degree $n$. Then the cellular boundary is given as follows. 
 \begin{itemize}
 \item In degree $n=1$, we have $$d_1\left([D_\alpha^1]\right)=[\phi_\alpha(1)]-[\phi_\alpha(0)]$$
 \item In degrees $n>1$, we have $$d_n\left([D_\alpha^n]\right)=\sum_{\beta\in I_{n-1}}d_{\alpha\beta}\cdot[D_\beta^{n-1}]$$ where $$d_{\alpha\beta}=\deg\left(\Delta_{\alpha\beta}:S_\alpha^{n-1}\overset{\phi_\alpha}{\rightarrow}X^{n-1}\overset{\pi_\beta}{\rightarrow}S_\beta^{n-1}\right)$$ 
 \end{itemize}
 \end{thm}
 
-On computation, one crucial fact to notice is that the map $\pi_\beta$ is a projection to the quotient topology. This means that after applying $\pi_\beta$, the map $$\Delta_{\alpha\beta}=\pi_\beta\circ\phi_\alpha:S_\alpha^{n-1}\to S_\beta^{n-1}$$ forgets about every boundary of the attached discs to $X^n$ other than the boundary of the disc $D_\beta^n$. Also notice that $\alpha\in I_n$ loops over all attaching maps and disks on the $n$th dimension, while $\beta\in I_{n-1}$ loops over that of the $n-1$ dimension. Notice that in the formula, $\beta$ is used to indicate the $S^{n-1}$ which are of dimension $n$. This makes sense because in $\pi_\beta$, there is a projection $X^{n-1}\to X^{n-1}/X^{n-2}$. $$\frac{X^{n-1}}{X^{n-2}}=\bigvee_{\beta\in I_{n-1}}\frac{D_\beta^{n-1}}{\partial D_\beta^{n-1}}$$ is then a wedge sum of all disks in dimension $n-1$ modulo boundary. \\
+On computation, one crucial fact to notice is that the map $\pi_\beta$ is a projection to the quotient topology. This means that after applying $\pi_\beta$, the map $$\Delta_{\alpha\beta}=\pi_\beta\circ\phi_\alpha:S_\alpha^{n-1}\to S_\beta^{n-1}$$ forgets about every boundary of the attached discs to $X^n$ other than the boundary of the disc $D_\beta^n$. Also notice that $\alpha\in I_n$ loops over all attaching maps and disks on the $n$th dimension, while $\beta\in I_{n-1}$ loops over that of the $n-1$ dimension. Notice that in the formula, $\beta$ is used to indicate the $S^{n-1}$ which are of dimension $n$. This makes sense because in $\pi_\beta$, there is a projection $X^{n-1}\to X^{n-1}/X^{n-2}$. $$\frac{X^{n-1}}{X^{n-2}}=\bigvee_{\beta\in I_{n-1}}\frac{D_\beta^{n-1}}{\partial D_\beta^{n-1}}$$ is then a wedge sum of all disks in dimension $n-1$ modulo boundary. 
+
+\begin{defn}{Cellular Chain Complex}{}\\
+Let $X$ be a CW complex. Define the cellular chain complex $C_\bullet^\text{CW}(X)$ as follows. 
+\begin{itemize}
+\item For each $n$, define $C_n^\text{CW}=H_n(X^n,X^{n-1})\cong\bigoplus_{\alpha}\Z\cdot\{D_\alpha^n\}$ where $D_\alpha^n$ is an $n$-cell of $X$. 
+\item Define the differential $d$ to be the cellular boundary. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{}{}\\
+Let $X$ be a CW complex. Define the $n$th cellular homology of $X$ to be $$H_n^\text{CW}(X)=H_n(C_\bullet^\text{CW}(X),d_\text{CW})$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+For any CW-complex $X$, there are canonical isomorphisms $$H_n^\text{CW}(X)\cong H_n(X)$$ 
+\begin{proof}
+Since $\delta$ is injective, we have that $$\ker(d_n)=\ker(\gamma)=\im(\beta)$$ Also by lemma 7.3.2, we have that $H_n(X^{n+1})\cong H_n(X)$. This means that $$H_n(X)\cong\text{coker}(\alpha)\cong\frac{\im(\beta)}{\im(\beta\circ\alpha)}=\frac{\ker(d_n)}{\im(d_{n+1})}$$ where the second isomorphism comers from the fact that $\beta$ is injective. 
+\end{proof}
+\end{lmm}
 
 We can now compute the singular homology of more complicated spaces such as the projective space. 
 
@@ -1807,6 +1820,28 @@ where $d_k=\pm2$ if $k$ is even and $d_k=0$ if $k$ is odd. It follows that $$\de
 \pm2 & \text{ if } n \text{ is even}\\
 0 & \text{ if } n \text{ is odd}
 \end{cases}$$
+\end{proof}
+\end{eg}
+
+\begin{eg}{}{}\\
+Let $X$ be the space obtained by attaching an $(n+1)$-cell to $S^n$ by a map $f:S^n\to S^n$ of degree $p$. Then we have $$H_k(X)=\begin{cases}
+\Z & \text{ if }k=0\\
+\Z/p\Z & \text{ if }n=k\\
+0 & \text{ otherwise }
+\end{cases}$$
+\begin{proof}\\
+Using cellular homology, we compute that $d_\text{CW}([D^{n+1}])=\deg(S^n\to X^n=S^n)\cdot[D^n]=p\cdot[D^n]$. So we have $H_n(X)=\frac{\ker(\Z[D^n]\to 0)}{\im(\Z[D^[n+1]\to\Z[D^n])}=\Z/p\Z$. Since the map $\Z[D^{n+1}]\to\Z[D^n]$ is injective, we have $H_{n+1}(X)=0$. 
+\end{proof}
+\end{eg}
+
+\begin{eg}{}{}\\
+Let $X$ be the space obtained by attaching two $(n+1)$-cells to $S^n$ by a maps $f:S^n\to S^n$ of degree $p$ and $q$ respectively. Then we have $$H_k(X)=\begin{cases}
+\Z & \text{ if }k=0,n+1\\
+\Z/\gcd(p,q)\Z & \text{ if }k=n\\
+0 & \text{ otherwise }
+\end{cases}$$
+\begin{proof}\\
+Using a similar strategy, we note that $C_{n+1}^\text{CW}(X)\to C_n^\text{CW}(X)$ is the map $\Z^2\to\Z$ given by $(1,0)\mapsto p$ and $(0,1)\mapsto q$. Then we have $H_n(X)=\frac{\Z}{\gcd(p,q)\Z}$ and the $H_{n+1}(X)=\ker(\Z^2\overset{(p,q)}{\to}\Z)$ is infinite cyclic.  
 \end{proof}
 \end{eg}
 
@@ -2692,6 +2727,17 @@ It is important to note that the above proposition (graded commutativity) is onl
 \begin{prp}{}{} Let $\R^n$ be equipped with the structure of a division algebra over $\R$. Then $n$ is a power of $2$. 
 \end{prp}
 
+\begin{prp}{}{}\\
+Let $X$ and $Y$ be spaces. Then we have an isomorphism of graded rings $$H^\ast(X\vee Y)\cong\frac{H^\ast(X)\times H^\ast(Y)}{\langle 1_X,1_Y\rangle}$$ where $1_X$ and $1_Y$ are the identities of $H^\ast(X)$ and $H^\ast(Y)$ respectively. 
+\end{prp}
+
+\begin{eg}{}{}\\
+$\C\Prj^2$ and $S^2\vee S^4$ are not homotopy equivalent. 
+\begin{proof}\\
+We note that $H^\ast(S^2\vee S^4)\cong\frac{\Z[a,b]}{(a^2,b^2,ab)}$. This ring is not isomorphic to $H^\ast(\C\Prj^2)\cong\frac{\Z[t]}{(t^3)}$. 
+\end{proof}
+\end{eg}
+
 \subsection{The Relative Cup Product}
 \begin{defn}{The Relative Cup Product}{} Let $X$ be a space. Let $A,B\subseteq X$ be open. Let $R$ be a ring. Define the relative cup product of $A$ and $B$ to be the map $$\smile:H^k(X,A;R)\times H^l(X,B;R)\to H^{k+l}(X,A\cup B;R)$$ by the formula $$(\phi\smile\psi)(\sigma)=\phi(\sigma|_{[v_0,\dots,v_k]})\cdot\psi(\sigma|_{[v_k,\dots,v_{k+l}]})$$ for $\phi\in C_\text{Sing}^k(X,A;R)$ and $\psi\in C_\text{Sing}^l(X,B;R)$. 
 \end{defn}
@@ -2774,6 +2820,10 @@ Let $R$ be a commutative ring. Let $M$ and $N$ be graded $R$-modules. Recall tha
 \begin{eg}{}{} There is an isomorphism of graded rings $$H^\ast(T;\Z)\cong\frac{\Z\langle s,t\rangle}{(s^2,t^2,st+ts)}$$ where $s,t$ are elements of degree $1$. 
 \end{eg}
 
+\begin{eg}{}{}\\
+Let $R$ be a commutative ring. Let $p,q\in\N^+$. There is an isomorphism of graded rings $$H^\ast(S^p\times S^q;R)\cong\Lambda(Rx\oplus Ry)=\frac{R\langle x,y\rangle}{(x^2,y^2,xy+(-1)^{pq+1}yx)}$$ where $\deg(x)=p$ and $\deg(y)=q$. 
+\end{eg}
+
 \begin{thm}{The Relative Kunneth Formula}{} Let $(X,A)$ and $(Y,B)$ be CW complex pairs. Let $R$ be a commutative ring. Then the cross product $$\times:H^\ast(X,A;R)\otimes_R H^\ast(Y,B;R)\to H^\ast(X\times Y,X\times B\cup A\times Y;R)$$ is graded ring homomorphism. Moreover, it is an isomorphism of graded rings if $H^k(Y,B;R)$ is a finitely generated free $R$-module for all $k$. 
 \end{thm}
 
@@ -2823,7 +2873,13 @@ By definition of quotients, the reduced suspension defines a canonical continuou
 \begin{eg}{}{} Let $n\in\N$. Then there is a homeomorphism $\Sigma S^n\cong S^{n+1}$. 
 \end{eg}
 
-\begin{prp}{}{} Let $X$ be a space. Then the suspension map induces natural isomorphisms $$\widetilde{H}_{k+1}(\Sigma X)\cong\widetilde{H}_k(X)$$ for $k\geq -1$. 
+\begin{prp}{}{}\\
+Let $X$ be a space. Let $R$ be a ring. Then the following are true. 
+\begin{itemize}
+\item $\widetilde{H}_{k+1}(\Sigma X)\cong\widetilde{H}_k(X)$ for all $k\geq 0$. 
+\item $\widetilde{H}^{k+1}(\Sigma X;R)\cong\widetilde{H}^k(X;R)$ for all $k\geq 0$. 
+\item All cup products in $H^\ast(X;R)$ are $0$. 
+\end{itemize}
 \end{prp}
 
 \begin{defn}{(Reduced) Cone}{} Let $(X,x_0)$ be a pointed space. Define the reduced cone of the space to be $$CX=\frac{X\times I}{X\times\{1\}\cup\{x_0\}\times I}$$ together with the base point $[(x_0,1)]=X\times\{1\}\cup\{x_0\}\times I$. 
@@ -3068,6 +3124,16 @@ The Euler characteristic is similar to a notion of size. In set theory we have c
 \subsection{The Characteristic as an Invariant}
 \begin{defn}{The Euler Characteristic}{} Let $X$ be a space with only finitely many non-zero homology groups, all of which are finitely generated abelian groups. Then the Euler characteristic is defined as $$\chi(X)=\sum_{n\geq 0}(-1)^n\rank(H_n(X))$$
 \end{defn}
+
+\begin{eg}{}{}\\
+The following are true. 
+\begin{itemize}
+\item $\chi(S^n)=1+(-1)^n$. 
+\item $\chi(\R\Prj^n)=0$ if $n$ is odd and $\chi(\R\Prj^n)=1$ if $n$ is even. 
+\item $\chi(\C\Prj^n)=n+1$. 
+\item $\chi(T)=0$. 
+\end{itemize}
+\end{eg}
 
 \begin{lmm}{}{} Let $C_\bullet$ be a chain complex with only finitely many non-zero terms, all of which are finitely generated abelian groups. Then $$\sum_{n\in\Z}(-1)^n\rank(C_n)=\sum_{n\in\Z}(-1)^n\rank(H_n(C_\bullet))$$ 
 \begin{proof}

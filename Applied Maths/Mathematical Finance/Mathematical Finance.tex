@@ -18,6 +18,149 @@
 \maketitle
 \tableofcontents
 
+Plan of the notes: 
+
+Introduce financial assets
+
+No arbitrage assumption and its mathematical consequences. 
+
+Binomial and Black Scholes model. 
+
+
+\pagebreak
+\section{}
+
+\subsection{Modeling the Market with Stochastic Processes}
+A bond is a financial asset in which you lend $£B_0$ to a bank today and received $£B_T$ at time $T\in\R_{\geq 0}$. The value of the bond at time $t\in[0,T]$ is given by $B_t$. The value of the bond is fixed and has no uncertainty. We model this as a stochastic process in the following way. 
+
+\begin{defn}{Bonds}{}\\
+Let $(\Omega,\mF,P)$ be a filtered probability space with filtration $\{\mF_t\;|\;t\geq 0\}$. A bond is an adapted stochastic process $B:\Omega\times[0,\infty)\to\R$ be an adapted stochastic process that is a finite variation process. 
+\end{defn}
+
+Recall that an adapted stochastic process is a finite variation process if the following are true. 
+\begin{itemize}
+\item $B_0=0$ almost surely. 
+\item $t\mapsto B_t$ is a finite variation function almost surely. 
+\end{itemize}
+
+Recall that a consequence is that $B$ has no local martingale component: It has no local irreducible randomness. 
+
+A stock is a financial asset in which you buy a share in a company at price $S_0$ today, but the price of the stock in the future $S_t\in\R_{\geq 0}$ are unknown. It depends on earning reports, competitor action, macroeconomic news and other random factors. We define more generally the concept of a risky asset. 
+
+\begin{defn}{Risky Assets}{}\\
+Let $(\Omega,\mF,P)$ be a probability space with filtration $\{\mF_t\;|\;t\in[0,\infty)\}$. A risky asset on the space is a semimartingale $S:\Omega\times[0,\infty)\to\R$. 
+\end{defn}
+
+We call them risky because the local martingale component makes the random variable truely random. 
+
+\begin{defn}{Market Models}{}\\
+Let $(\Omega,\mF,P)$ be a probability space with filtration $\{\mF_t\;|\;t\in[0,\infty)\}$. A market model on the space consists of a bond $B:\Omega\times[0,\infty)\to\R$ and $d$ risky assets $S_i:\Omega\times[0,\infty)\to\R$ for $1\leq i\leq d$. 
+\end{defn}
+
+It is important to incorporate bonds when we are modelling stock prices. This is because it is related to the time value of money. Suppose that $B_t$ is the bond at time $t$ if you lend the bank $£1$ at time $t=0$. This means the bank has deemed that the value of $£1$ today is worth the same as $£B_t$ at time $t$ in the future. This is precisely the depreciation of money. Indeed when we try to model stock prices, we need to take into account the time depreciation of money, and bonds are precisely the way to represent it. 
+
+\begin{defn}{Discounted Values}{}\\
+Let $(\Omega,\mF,P)$ be a probability space with filtration $\{\mF_t\;|\;t\in[0,\infty)\}$. Let $(B,S_1,\dots,S_d)$ be a market model. Define the discounted value of $S_i$ to be $$\widetilde{S}_i=\frac{S_i}{B}$$
+\end{defn}
+
+This is the value of the stock when the time value of money is accounted for. 
+
+\begin{defn}{Trading Strategies}{}\\
+Let $(\Omega,\mF,P)$ be a probability space with filtration $\{\mF_t\;|\;t\in[0,\infty)\}$. Let $(B,S_1,\dots,S_d)$ be a market model. A trading strategy is a predictable process $\varphi:\Omega\times[0,\infty)\to\R^{d+1}$. 
+\end{defn}
+
+Trading strategies are predictable processes because we would like the trader to only use information strictly from the past. 
+
+\begin{defn}{Portfolio Value}{}\\
+Let $(\Omega,\mF,P)$ be a probability space with filtration $\{\mF_t\;|\;t\in[0,\infty)\}$. Let $(B,S_1,\dots,S_d)$ be a market model. Let $\varphi:\Omega\times[0,\infty)\to\R$ be a trading strategy. 
+\begin{itemize}
+\item Define the portfolio value of $\varphi$ to be the stochastic process $V(\varphi):\Omega\times[0,\infty)\to\R$ given by $$V=\varphi_0B+\sum_{i=1}^d\varphi_iS_i$$
+\item Define the discounted portfolio value of $\varphi$ to be the stochastic process $\widetilde{V}:\Omega\times[0,\infty)\to\R$ given by $$\widetilde{V}(\varphi)=\frac{V}{B}=\varphi_0+\sum_{i=1}^d\varphi_i\widetilde{S}_i$$
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Admissible Trading Strategies}{}\\
+Let $(\Omega,\mF,P)$ be a probability space with filtration $\{\mF_t\;|\;t\in[0,\infty)\}$. Let $(B,S_1,\dots,S_d)$ be a market model. Let $\varphi:\Omega\times[0,\infty)\to\R^{d+1}$ be a trading strategy. We say that $\varphi$ is admissible if the following are true. 
+\begin{itemize}
+\item $\varphi$ is $\widetilde{S}$-integrable. 
+\item There exists $a\in[0,\infty)$ such that $\widetilde{V}(\varphi)\geq-a$ almost surely for all $t\in[0,\infty)$. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Self-Funding Trading Strategies}{}\\
+Let $(\Omega,\mF,P)$ be a probability space with filtration $\{\mF_t\;|\;t\in[0,\infty)\}$. Let $(B,S_1,\dots,S_d)$ be a market model. Let $\varphi:\Omega\times[0,\infty)\to\R^{d+1}$ be a trading strategy. We say that $\varphi$ is self financing if $$\widetilde{V}(\varphi)(-,t)=\widetilde{V}_0(\varphi)(-,t)+\int_0^t(\varphi_1(-,s),\dots,\varphi_d(-,s))d\widetilde{S}(-,s)$$ almost surely. 
+\end{defn}
+
+An arbitrage opportunity is a trading strategy that 
+\begin{itemize}
+\item Requires no money upfront (zero initial cost)
+\item Never leads to a loss
+\item Makes a profit with positive probability. 
+\end{itemize}
+
+\begin{defn}{Arbitrage}{}\\
+Let $(\Omega,\mF,P)$ be a probability space with filtration $\{\mF_t\;|\;t\in[0,T]\}$. Let $(B,S_1,\dots,S_d)$ be a market model. Let $\varphi:\Omega\times[0,T]\to\R^{d+1}$ be an admissible and self-funding trading strategy. We say that $\varphi$ is an arbitrage if the following are true. 
+\begin{itemize}
+\item $\widetilde{V}(\varphi)(-,0)=0$ almost surely. 
+\item $\widetilde{V}(\varphi)(-,T)\geq 0$ almost surely. 
+\item $P(\widetilde{V}(\varphi)(-,T)>0)>0$. 
+\end{itemize}
+\end{defn}
+
+We assume that arbitrage opportunities do not exist in financial markets. 
+
+\begin{defn}{No Free Lunch with Vanishing Risk}{}\\
+Let $(\Omega,\mF,P)$ be a probability space with filtration $\{\mF_t\;|\;t\in[0,T]\}$. Let $(B,S_1,\dots,S_d)$ be a market model. We say that the market satisfies No Free Lunch with Vanishing Risk (NFLVR) if there are no sequence $(\varphi^n)$ of admissible strategies such that 
+\begin{itemize}
+\item $\widetilde{V}(\varphi^n)(-,T)\geq-\frac{1}{n}$. 
+\item $\widetilde{V}(\varphi^n)(-,T)$ converges to $X$ almost surely where $X$ is a random variable such that $P(X>0)>0$. 
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $(\Omega,\mF,P)$ be a probability space with filtration $\{\mF_t\;|\;t\in[0,T]\}$. Let $(B,S_1,\dots,S_d)$ be a market model. If the market satisfies NFLVR, then are no arbitrages in the market. 
+\end{lmm}
+
+\begin{thm}{The Fundamental Theorem of Asset Pricing}{}\\
+
+\end{thm}
+
+An option is a contract that gives the buyer the right, but not the obligation to buy or sell a stock at a pre-agreed price. \\
+
+A European call option on a stock $S$ with strike price $K\in\R_{\geq 0}$ and maturity $T\in\R_{\geq 0}$ is a contract that pays its holder $$\max\{S_T-K,0\}$$ at time $T$. It gives the holder the right to buy the stock at price $K$. \\
+
+A European put option on a stock $S$ with strike price $K\in\R_{\geq 0}$ and maturity $T\in\R_{\geq 0}$ is a contract that pays its holder $$\max\{K-S_T,0\}$$ at time $T$. It gives the holder the right to sell the stock at price $K$. \\
+
+Put-call parity: $$C_0-P_0=S_0-Ke^{-rT}$$
+
+\subsection{The Binomial Model}
+The one step binomial is a simple model for stock prices and it has two possible futures: the stock either goes up or down in value. The bond grows in a fixed factor. 
+
+\begin{defn}{The One Step Binomial}{}\\
+The one step binomial is the following market model. 
+\begin{itemize}
+\item The probability space $\Omega=\{w_u,w_d\}$, $\mF=\mP(\Omega)$ and $P(\{w_u\})=p$ and $P(\{w_d\})=1-p$ for some $p\in(0,1)$. 
+\item The filtration $\mF_0=\{\emptyset,\Omega\}$ and $\mF_1=P(\Omega)$. 
+\item The bond $B:\Omega\times\{0,1\}\to\R$ given by $B_0=1$ and $B_1=1+r$ for some $r>0$. 
+\item The stock $S:\Omega\times\{0,1\}\to\R$ given by $S_0>0$ and $S_1=uS_01_{w_u}+dS_01_{w_d}$ where $u>d>0$. 
+\end{itemize}
+\end{defn}
+
+Notice that $S_0$ is $\mF_1$-measurable but not $\mF_0$-measurable: its value at time $1$ is not know at time $0$, while the bond is $\mF_0$-measurable because it is deterministic. 
+
+\begin{lmm}{Arbitrage in the One Step Binomial Model}{}\\
+Let $(\Omega,\mF,P,B,S)$ be the one step binomial model given by the above. Let $\varphi=(\varphi^0,\varphi^1)$ be a trading strategy. Then $\varphi$ is an arbitrage if and only if the following are true. 
+\begin{itemize}
+\item $V_0(\varphi)=0$. 
+\item $V_1(\varphi)\geq 0$. 
+\item $V_1(\varphi)(x)>0$ for some $x\in\Omega$. 
+\end{itemize}
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $(\Omega,\mF,P,B,S)$ be the one step binomial model given by the above. Then it has no arbitrage if and only if $d<B_1<u$. 
+\end{lmm}
+
 \pagebreak
 \section{Basic Concepts in Finance}
 \subsection{The Time Value of Money}

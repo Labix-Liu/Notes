@@ -21,26 +21,33 @@
 \pagebreak
 \section{Topological Spaces}
 \subsection{Basic Definitions}
-\begin{defn}{Topological Space}{}\\
-A topological space is a pair $(X,\mT)$ where $X$ is a set and $\mT\subseteq\mP(X)$ such that the following are true. 
+\begin{defn}{Topologies}{}\\
+Let $X$ be a set. Let $\mT\subseteq\mP(X)$ be a subset. We say that $\mT$ is a topology on $X$ if the following are true. 
 \begin{itemize}
-\item $\emptyset,X\in\mT$. 
-\item Let $W\subseteq\mT$. Then we have $\bigcup_{U\in W}U\in\mT$. 
-\item Let $n\in\N$. Let $U_1,\dots,U_n\in\mT$. Then we have $\bigcap_{i=1}^nU_i\in\mT$. 
+\item $\emptyset, X\in\mT$. 
+\item For all $W\subseteq\mT$, we have $$\bigcup_{U\in W}U\in\mT$$
+\item For all $n\in\N$ and $U_1,\dots,U_n\in\mT$, we have $$\bigcap_{i=1}^nU_i\in\mT$$
 \end{itemize}
-We call $\mT$ the topology on $X$ and elements of $\mT$ are called open sets of $X$. 
+\end{defn}
+
+\begin{defn}{Topological Spaces}{}\\
+A topological space is a pair $(X,\mT)$ where $X$ is a set and $\mT$ is a topology on $X$. 
 \end{defn}
 
 \begin{eg}{}{}\\
 Let $X=\{1,2,3,4\}$. Let $\mT=\{\emptyset,\{1\},\{1,2\},\{1,3\},\{1,2,3\},X\}$. Then $(X,\mT)$ is a topological space. 
 \end{eg}
 
-\begin{defn}{Closed Sets}{} A subset $A$ of a topological space $X$ is said to be closed if $X\setminus A$ is open. 
+\begin{defn}{Open and Closed Sets}{}\\
+Let $(X,\mT)$ be a topological space. Let $U\subseteq X$. 
+\begin{itemize}
+\item We say that $U$ is an open set if $U\in\mT$. 
+\item We say that $U$ is a closed set if $X\setminus U\in\mT$. 
+\end{itemize}
 \end{defn}
 
-Beware that this definition means that sets which are both open and closed could exist. They are not binary and should not be treated as such. As taking complements of sets allows De Morgans' law to be applied with unions and intersection, we have the following so called alternative definition of a topological space. 
-
-\begin{prp}{}{} Let $(X,\mathcal{T})$ be a topological space. 
+\begin{prp}{}{}\\
+Let $(X,\mT)$ be a topological space. Then the following are true. 
 \begin{itemize}
 \item $X$ and $\emptyset$ is closed
 \item If $U_1,\dots,U_n$ are closed then $\bigcup_{k=1}^nU_k$ is closed
@@ -56,9 +63,10 @@ Let $(X,\mathcal{T})$ be a topological space.
 \end{proof}
 \end{prp}
 
-\begin{defn}{Basis}{} Let $X$ be a set. A collection of sets $\mathcal{B}\subseteq\mathcal{P}(X)$ is called a basis on $X$ if
+\begin{defn}{Basis}{}\\
+Let $X$ be a set. Let $\mB\subseteq\mP(X)$ be a subset. We say that $\mB$ is a basis of $X$ if the following are true. 
 \begin{itemize}
-\item For every $x\in X$, there exists $B\in\mathcal{B}$ such that $x\in B$, meaning $\bigcup_{B\in\mathcal{B}}B=X$
+\item We have $\bigcup_{B\in\mB}B=X$. 
 \item For every $B_1,B_2\in\mathcal{B}$, for every $x\in B_1\cap B_2$, there exists $B\in\mathcal{B}$ such that $x\in B\subseteq B_1\cap B_2$
 \end{itemize}
 \end{defn}
@@ -75,7 +83,29 @@ Similar to a vector space, we allow a smaller collection of open sets to "genera
 
 Aside from the concept of a basis which generates a topology, sub basis also generates a topology. 
 
-\begin{defn}{Sub Basis}{} A sub basis for a topology $\mathcal{T}$ on $T$ is a collection $\mathcal{B}\subset\mathcal{T}$ such that every set $\mathcal{T}$ is a union of finite intersections of sets from $\mathcal{B}$. 
+\begin{eg}{}{}\\
+Consider the real numbers $\R$ and the set $$\mB=\{(a,b)\subseteq\R\;|\;a<b\}$$ Then $\mB$ is a basis of $\R$. The induced topology is called the standard or Euclidean topology. 
+\begin{proof}\\
+Clearly the union of all elements of $\mB$ is $\R$. Now suppose that $x\in(a,b)\cap(c,d)$. Then $J=(\max\{a,c\},\min\{b,d\})$ is an interval such that $x\in J(a,b)\cap(c,d)$. Hence $\mB$ is indeed a basis for $\R$. 
+\end{proof}
+\end{eg}
+
+\begin{eg}{}{}\\
+Let $a,b\in\R$. Then the following are true regarding the standard topology on $\R$. 
+\begin{itemize}
+\item $(a,b)$ is open and is not closed. 
+\item $(a,b]$ and $[a,b)$ is not open and is not closed. 
+\item $[a,b]$ is not open and is closed. 
+\end{itemize}
+\begin{proof}\\
+By definition we know that $(a,b)$ is open. To prove that it is not closed, we need to show that the complement $(-\infty,a]\cup[b,\infty)$ is not open. Suppose for a contradiction that it is open. Since open intervals form a basis of standard topology, every open set is a union of open intervals $$(-\infty,a]\cup[b,\infty)=\bigcup_{i\in I}(x_i,y_i)$$ for some indexing set $I$. Notice that $a\in(-\infty,a]\cup[b,\infty)$. By definition there exists an open interval $(x_i,y_i)$ containing $a$. From real analysis we know that there exists $z\in\R$ such that $a<z<\min\{y_i,b\}$. But then $z\in(x_i,y_i)\subseteq\bigcup_{i\in I}(x_i,y_i)$ and $z\notin(-\infty,a]\cup[b,\infty)$. This is a contradiction. \\
+
+By a similar argument we can show that $(a,b]$ and $[a,b)$ is not open and not closed, and that $[a,b]$ is neither open nor closed. 
+\end{proof}
+\end{eg}
+
+\begin{defn}{Sub Basis}{}\\
+Let $(X,\mT)$ be a topological space. Let $\mB\subseteq\mT$ be a subset. We say that $\mB$ is a subbasis of $\mT$ if every set in $\mT$ is a union of finite intersections of sets in $\mB$. 
 \end{defn}
 
 Comparing the two notions of basis in a topology, a basis generates the topology by creating unions of sets while a sub basis generates a topology using finite intersections. In practice both are useful in their respectful places. Often sub basis consists of less sets, but requires you to think about finite intersections which may or may not be harder depending on the situation. 
@@ -88,7 +118,12 @@ Let $\mathcal{B}$ be a sub basis of a topology $\mathcal{T}$. Then by definition
 
 \subsection{Closure, Interior and Boundary}
 We give some more names to some more random sets. 
-\begin{defn}{Neighbourhood}{} A neighbourhood of $x\in X$ a topological space is a set $U\subset X$ such that $x\in B\subset U$ for some $B\in\mathcal{T}$. 
+\begin{defn}{Neighbourhoods}{}\\
+Let $(X,\mT)$ be a topological space. Let $x\in X$. Let $U\subseteq X$. We say that $U$ is a neighbourhood of $x$ if the following are true. 
+\begin{itemize}
+\item $x\in U$. 
+\item There exists $B\in\mT$ such that $x\in B\subseteq U$. 
+\end{itemize}
 \end{defn}
 
 The neighbourhood acts like the open ball in metric spaces. Since we have no open balls in a topological space, this acts like the open ball for more potential structures such as limits. In fact the open balls are stricter than open neighbourhoodds in a metric space, but they are mostly interchangable. \\
@@ -96,36 +131,36 @@ Also, the $B$ seems quite random in the definition, but is in fact neccessary. T
 
 In the remainder of the section, three operations will be given to sets in a topological space. They each have unique properties which will soon prove itself useful. 
 
-\begin{defn}{Closure}{} Let $(X,\mathcal{T})$ be a topological space. Let $A\subset X$.Define the closure of $A$, denoted $\overline{A}$ to be the intersection of all closed subsets of $X$ that contain $A$, meaning $$\overline{A}=\bigcap_{\substack{A\subseteq U\subseteq X\\U\text{ is closed}}}U$$
+\begin{defn}{Closure}{}\\
+Let $(X,\mathcal{T})$ be a topological space. Let $A\subseteq X$. Define the closure of $A$ to be $$\overline{A}=\bigcap_{\substack{A\subseteq U\subseteq X\\U\text{ is closed}}}U$$
 \end{defn}
 
 You can think of closure as the boundary of a set plus the set itself.  It sort of completes the set by closing it. Inherently it implies that $\overline{A}$ is the smallest closed set containing $A$. Indeed if there were an even smaller closed set $F$ between $A$ and $\overline{A}$, then it should be contained in the intersection as well, which means that $\overline{A}\subset F$, a contradiction of the construction of $F$. We dedicate the next few theorems in establishing properties of closure. 
 
-\begin{lmm}{}{} Let $X$ be a topological space. Let $A\subset X$. Then $\overline{A}$ is closed. 
-\begin{proof}
-$\overline{A}$ is necessarily closed since it is the intersection of closed subsets. 
+\begin{lmm}{}{}\\
+Let $X$ be a topological space. Let $A\subseteq X$. Then the following are true. 
+\begin{itemize}
+\item $\overline{A}$ is closed. 
+\item $A$ is closed if and only if $\overline{A}=A$. 
+\end{itemize}
+\begin{proof}\\
+Clearly $\overline{A}$ is closed since it is the intersection of closed subsets. \\
+
+Suppose that $A$ is closed. Then $A$ is the smallest closed subset of $X$ that contains $A$. Hence $\overline{A}=A$. Now suppose that $\overline{A}=A$. Then $\overline{A}$ being closed implies that $A$ is closed. 
 \end{proof}
 \end{lmm}
 
 Closed sets are special in the sense that limits of convergence sequences will be contained in these sets (in particularly nice spaces), as we will see later, by taking the closure of a set, we are implicitly containing all all limits of sequences into the original set. And as you ahve already seem, closed intervals in real analysis give rise to many interesting theorems such as Bolzano-Weierstrass theorem as well as a bunch of continuity theorems that actually depend on the fact that its domain is a closed set . 
 
-\begin{prp}{}{} Let $(X,\mathcal{T})$ be a topological space. Let $A\subset X$. $A$ is closed if and only if $\overline{A}=A$. 
-\begin{proof}
-First let $A$ be closed. Then $A$ is the smallest subset of $X$ that contains $A$. Thus the intersection of all closed subsets larger than $A$ is equal to $A$. Thus $\overline{A}=A$. \\
-Suppose that $\overline{A}=A$. Then $\overline{A}$ is proved to be closed already. 
-\end{proof}
-\end{prp}
-
-That gives us a neat condition to show that whether a set is closed instead of having to show that its complement is open. However, this privilege must wait until we define the boundary of a set. 
-
-\begin{prp}{}{} Let $(X,\mathcal{T})$ be a topological space. Let $A,B\subset X$. Then 
+\begin{prp}{}{}\\
+Let $(X,\mathcal{T})$ be a topological space. Let $A,B\subset X$. Then the following are true regarding the closure operation. 
 \begin{itemize}
 \item $\overline{\overline{A}}=\overline{A}$
 \item $A\subseteq\overline{A}$
 \item $A\subseteq B\implies\overline{A}\subseteq\overline{B}$
 \item $\overline{A\cup B}=\overline{A}\cup\overline{B}$
 \end{itemize}
-\begin{proof} Let $X$ be a topological space and $A\subset X$. 
+\begin{proof}\\
 \begin{itemize}
 \item Immediate from the above two proposition. 
 \item The closure is defined by taking intersection of subsets $U$ of $X$ where $A\subseteq U$. Thus necessarily $A$ is also a subset of the intersection of those subsets. 
@@ -136,58 +171,57 @@ Now we prove the opposite inclusion. Notice that since $A,B\subseteq A\cup B$, w
 \end{proof}
 \end{prp}
 
-Notice that $\overline{A \cap B}=\overline{A}\cap\overline{B}$ is generally wrong. A typical counter example would be two unit sqaures not including boundaries centered at $(0.5,0)$ and $(-0.5,0)$ respectively. Since they don't include their boudaries their intersection is empty, and taking closure of the mptyset is the emptyset. But if you take closure before you intersect them, their boundaries will meet and taking intersewctions would give the line segment between $(0,0.5)$ and $(0,-0.5)$. \\
+The closure of an intersection is not necessarily the intersection of closures. 
 
-We finish the topic of closure with the following characterization of closure. 
+\begin{eg}{}{}\\
+We have $$\overline{(0,1)\cap(1,2)}\neq\overline{(0,1)}\cap\overline{(1,2)}$$ in $\R$. 
+\end{eg}
 
-\begin{thm}{}{} Let $(X,\mathcal{T})$ be a topological space, let $A\subset X$. Then $$\overline{A}=\{x\in X|\;\forall\;U\in\mathcal{T}\text{ with }x\in U,U\cap A\neq\emptyset\}$$ 
-\begin{proof}
+\begin{prp}{}{}\\
+Let $(X,\mathcal{T})$ be a topological space, let $A\subset X$. Then $$\overline{A}=\{x\in X\;|\;\text{ for all }U\in\mT\text{ such that }x\in U,U\cap A\neq\emptyset\}$$ 
+\begin{proof}\\
 Let $x\in\overline{A}$. Suppose for a contradiction that there exists an open set $U$ containing $x$ such that $U\cap A=\emptyset$. Then $X\setminus U$ does not contain $x$ and is closed. Then $\overline{A}\subseteq X\setminus U$ which is a contradiction since $x$ in $\overline{A}$ but $x\notin X\setminus U$. \\
 Now suppose that $x\in X$ such that for all open sets $U$, $U\cap A\neq\emptyset$. Suppose for a contradiction that $x\notin\overline{A}$. Then there exists a closed set $F$ such that $x\notin F$ and $A\subseteq F$. Then $X\setminus F$ is open and contains $x$ but $X\setminus F\cap A=\emptyset$ thus this is a contradiction. 
 \end{proof}
-\end{thm}
-
-If we can "complete" a set into its closed form by closure, we could also dig out the contents and leave out its boundary (if it has one) with interior. 
-
-\begin{defn}{Interior}{} Let $A$ be a subset of a topological space $(X,\mathcal{T})$. We say that $x\in A$ is an interior point of $A$ if there exists an open set $U$ such that $x\in U\subset A$. Denote the set of all interior points of $A$ by $A^\circ$. Then $$A^\circ=\{x\in A|\exists U\in\mathcal{T},x\in U\subset A\}$$
-\end{defn}
-
-We have the following equivalent characterization of interiors. 
-
-\begin{prp}{}{} Let $(X,\mathcal{T})$ be a topological space and $A\subset X$. Then $A^\circ$ is the union of all open sets of $X$ contained in $A$. In other words, $$A^\circ=\bigcup_{\substack{U\subset A\\U\text{ is open}}}U$$
-\begin{proof}
-Let $x\in\bigcup_{\substack{U\subset A\\U\text{ is open}}}U$. Then $x\in U$ for some open set $U\subset A$. Thus $\bigcup_{\substack{U\subset A\\U\text{ is open}}}U\subseteq A^\circ$. \\
-Let $x\in A^\circ$. Then there exists $U\in\mathcal{T}$ such that $x\in U\subset A$ with $U$ open. Thus $x\in\bigcup_{\substack{U\subset A\\U\text{ is open}}}U$ and we are done. 
-\end{proof}
 \end{prp}
+
+\begin{eg}{}{}\\
+The closure of $(a,b)$ in $\R$ is given by $[a,b]$. 
+\begin{proof}\\
+I claim that $a,b\in\overline{(a,b)}$. Let $U$ be an open set containing $a$. Since open intervals form a basis for $\R$ and every open set is a union of elements in the basis, it suffices to check the condition when $U$ is an open interval. So let $U=(c,d)$ contain $a$. Then $c<a<d$ and in particular $c<a<\min\{d,b\}$. From real analysis, we know that there exists $y\in\R$ such that $a<y<\min\{d,b\}$. Then $y\in(c,d)\cap(a,b)\neq\emptyset$. Hence $a\in\overline{(a,b)}$. By a similar argument we conclude that $b\in\overline{(a,b)}$. \\
+
+Now $\{a,b\}\cup(a,b)=[a,b]$ is a closed set. I claim that it is the smallest closed set containing $(a,b)$. To prove this we just have to prove that $(a,b)$, $[a,b)$ and $(a,b]$ are not closed. But we have already seen this. Hence $[a,b]$ is the closure of $(a,b)$. 
+\end{proof}
+\end{eg}
+
+\begin{defn}{Interior}{}\\
+Let $(X,\mT)$ be a space. Let $A\subseteq X$. Define the interior of $A$ to be $$A^\circ=\bigcup_{\substack{U\subseteq A\\U\text{ is open}}}U$$
+\end{defn}
 
 Similar to the observation in closure, from this definition we see that $A^\circ$ is the largest open set contained in $A$ because if there were an even larger set, then taking union of that set will imply that $A^\circ\subset A^\circ\cup U\subset A$ which means that $A^\circ\cup U$ should be contained in $A^\circ$, a contradiction. 
 
-\begin{prp}{}{} Let $(X,\mathcal{T})$ be a topological space and $A\subset X$. Then $A$ is open if and only if $A=A^\circ$. 
-\begin{proof}
-Let $A$ be open. Since $A$ is open and $A$ is the largest subset of $A$, by the equivalent characterization $A^\circ=A$ thus we are done. \\
-Let $A^\circ=A$. Then $A$ is the union of open subsets thus $A$ is also open. 
+\begin{prp}{}{}\\
+Let $(X,\mT)$ be a topological space. Let $A\subseteq X$. Then the following are true. 
+\begin{itemize}
+\item $A^\circ$ is open. 
+\item $A$ is open if and only if $A^\circ=A$. 
+\end{itemize}
+\begin{proof}\\
+Clearly $A^\circ$ is open since $A^\circ$ is the union of open sets. \\
+
+Suppose that $A$ is open. Then $A$ is the largest open set containing $A$. Hence $A$ lies in the union defining $A^\circ$. Hence $A=A^\circ$. Now suppose that $A^\circ=A$. Then $A^\circ$ being open implies that $A$ is open. 
 \end{proof}
 \end{prp}
 
-The following lemma is already implicitly used above but for completeness I will state it here. 
-
-\begin{lmm}{}{} Let $(X,\mathcal{T})$ be a topological space and $A\subset X$. Then $A^\circ$ is open. 
-\begin{proof}
-$A^\circ$ is a union of open sets. 
-\end{proof}
-\end{lmm}
-
-If taking closure has the useful property that all its limits will be included (in metric spaces), we will soon see, and as I have already hinted, that open sets provide a notion of how close two points are in a topological space. Open sets also serve as the core part of a notion in topological spaces such as continuity and connecredness as we will see later. It is therefore often useful to consider interiors of a set if wanted to do a prove with open sets. 
-
-\begin{prp}{}{} Let $(X,\mathcal{T})$ be a topological space. Let $A,B\subset X$. Then
+\begin{prp}{}{}\\
+Let $(X,\mathcal{T})$ be a topological space. Let $A,B\subset X$. Then the following are true regarding the interior operation. 
 \begin{itemize}
 \item $(A^\circ)^\circ=A^\circ$
 \item $A^\circ\subseteq A$
 \item $A\subseteq B\implies A^\circ\subseteq B^\circ$
 \item $(A\cap B)^\circ=A^\circ\cap B^\circ$
 \end{itemize}
-\begin{proof} Let $A,B\subset X$. 
+\begin{proof}\\
 \begin{itemize}
 \item Immediate from the above two propositions
 \item Direct from the definition
@@ -198,10 +232,26 @@ Now we prove the opposite inclusion. Notice that $A^\circ\cap B^\circ$ is open a
 \end{proof}
 \end{prp}
 
-In general, $(A\cup B)^\circ\neq A^\circ\cup B^\circ$. Try and consider the two unit squares again but this time include their boundaries. \\
+We have the following equivalent characterization of interiors. 
+
+\begin{prp}{}{}\\
+Let $(X,\mathcal{T})$ be a topological space. Let $A\subseteq X$. Then we have $$A^\circ=\{x\in A\;|\;\exists U\in\mT\text{ such that }x\in U\subseteq A\}$$
+\begin{proof}
+Suppose that $z\in A^\circ$. By definition, there exists $U\subseteq A$ open such that $z\in U$. Hence $z\in\{x\in A\;|\;\exists U\in\mT\text{ such that }x\in U\subseteq A\}$. Now suppose that $z\in\{x\in A\;|\;\exists U\in\mT\text{ such that }x\in U\subseteq A\}$. Then $z\in U\subseteq A$ for some open set $U$ implies that $z\in A^\circ$ because $U$ lies in the union. 
+\end{proof}
+\end{prp}
+
+\begin{eg}{}{}\\
+The closure of $[a,b]$ in $\R$ is given by $(a,b)$. 
+\begin{proof}\\
+Clearly $(a,b)$ is an open set that $[a,b]$ contains. So we just have to show that $(a,b]$ and $[a,b)$ are not open. But we have already seen that. Hence $(a,b)$ is the largest open set that $[a,b]$ contains. 
+\end{proof}
+\end{eg}
+
 Finally, we relate the two operations by the following rule. 
 
-\begin{prp}{}{} Let $(X,\mathcal{T})$ be a topological space. Let $A\subset X$. Then $$A^\circ=X\setminus\overline{(X\setminus A)}\text{ and }\overline{A}=X\setminus(X\setminus A)^\circ$$ 
+\begin{prp}{}{}\\
+Let $(X,\mathcal{T})$ be a topological space. Let $A\subset X$. Then we have $$A^\circ=X\setminus\overline{(X\setminus A)}\text{ and }\overline{A}=X\setminus(X\setminus A)^\circ$$ 
 \begin{proof}
 Let $(X,\mathcal{T})$ be a topological space and $A\subset X$. 
 \begin{itemize}
@@ -212,10 +262,9 @@ Let $(X,\mathcal{T})$ be a topological space and $A\subset X$.
 
 Closures and interiors are like opposite operations. However from the above we can see that they are not opposite in the sense of set complements. 
 
-\begin{defn}{Boundary}{} Let $(X,\mathcal{T})$ be a topological space and $A\subset X$. $x$ is a boundary point of $A$ if for every neighbourhood $U$ of $x$, $U\cap A\neq\emptyset$ and $U\cap X\setminus A\neq\emptyset$. Denote the set of all boundary points by $\partial A$. 
+\begin{defn}{Boundary}{}\\
+Let $(X,\mathcal{T})$ be a topological space. Let $A\subseteq X$. Define the boundary of $A$ to be $$\partial A=\{x\in X\;|\;\text{ for all }U\in\mT\text{ such that }x\in U,U\cap A\neq\emptyset\text{ and }U\cap(X\setminus A)\neq\emptyset\}$$
 \end{defn}
-
-If you are able to concretely graspe the meaning of interiors and closures, you will see that they are very suitably names, especially when considering sets in $\R^n$. Boundary is no exception. These proposition will seem very trivial once the image is well produced in the back of your head. 
 
 \begin{prp}{}{} Let $(X,\mathcal{T})$ be a topological space and $A\subseteq X$. Then 
 \begin{itemize}
@@ -223,7 +272,7 @@ If you are able to concretely graspe the meaning of interiors and closures, you 
 \item $\overline{A}=A\cup\partial A$
 \item $\partial A=\overline{A}\setminus A^\circ$
 \end{itemize} 
-\begin{proof}~\\
+\begin{proof}\\
 \begin{itemize}
 \item Let $x\in\partial A$. Then for every open neighbourhood $U$ of $x$, $U\cap A\neq\emptyset$ implies that $x\in\overline{A}$ and $U\cap(X\setminus A)\neq\emptyset$ implies that $x\in\overline{X\setminus A}$. \\
 The above statements can all be reversed thus we are done. 
@@ -235,38 +284,43 @@ Now suppose that $x\in\overline{A}\setminus A^\circ$. Then since $x\in\overline{
 \end{proof}
 \end{prp}
 
-We now give a name to a special type of points, where will see the reasonning later. 
+\begin{eg}{}{}\\
+The boundary of $(a,b)$ and $[a,b]$ in $\R$ is given by $\{a,b\}$. 
+\begin{proof}\\
+Use the fact that $\partial A=\overline{A}\setminus A^\circ$. 
+\end{proof}
+\end{eg}
 
-\begin{defn}{Limit Points}{} Let $(X,\mathcal{T})$ be a topological space and $A\subset X$. $x$ is a limit point of $A$ if every neighbourhood of $x$ intersects with $A\setminus\{x\}$. Meaning if $U$ is a neighbourhood of $x$, then $$U\cap A\setminus\{x\}\neq\emptyset$$ A point in $A$ that is not a limit point is called an isolated point. 
+\begin{defn}{Limit Points}{}\\
+Let $(X,\mT)$ be a topological space. Let $A\subseteq X$. Let $x\in X$. We say that $x$ is a limit point of $A$ if for all open neighbourhoods $U$ of $x$, we have $$U\cap(A\setminus\{x\})\neq\emptyset$$
 \end{defn}
 
 Note that limit points does not necessarily lie inside the set itself. 
 
-\begin{prp}{}{} Let $(X,\mathcal{T})$ be a topological space and $A\subset X$. Then $$\overline{A}=A\cup\{\text{Limit points of }A\}$$
+\begin{prp}{}{}\\
+Let $(X,\mathcal{T})$ be a topological space. Let $A\subset X$. Then we have $$\overline{A}=A\cup\{x\in X\;|\;x\text{ is a limit point of }A\}$$
 \end{prp}
 
 The final type of sets are called dense sets, which accurately as its name indicates, it dictates the sparseness of a subset with respect to its topological space. 
 
-\begin{defn}{Dense Sets}{} Let $(X,\mathcal{T})$ be a topological space. Let $D\subseteq X$. $D$ is said to be dense if $\overline{D}=X$
+\begin{defn}{Dense Sets}{}\\
+Let $X$ be a topological space. Let $D\subseteq X$. We say that $D$ is dense in $X$ if $\overline{D}=X$. 
 \end{defn}
 
-\begin{lmm}{}{} Every set is dense in and of itself. 
-\begin{proof}
-Let $X$ be a toplogical space. Then $X$ is trivially closed thus $\overline{X}=X$. 
+\begin{eg}{}{}\\
+$\Q$ is dense in $\R$ in the standard topology. 
+\begin{proof}\\
+We need to prove that the closure $\Q$ is $\R$. Let $x\in\R$. Let $U$ be an open neighbourhood of $x$. Since open intervals form a basis for $\R$, it suffices to consider the case where $U$ is an interval. So let $U=(a,b)$. From Real Analysis we know that there exists a rational number between any numbers. So there exists $p\in\Q$ such that $a<p<b$. Then $p\in(a,b)\cap\Q\neq\emptyset$. Hence by 1.2.6 we conclude that $\overline{\Q}=\R$. 
 \end{proof}
-\end{lmm}
+\end{eg}
 
-Unfortunately this lemma does not give much insight as to why this is the case. A good example would be that $\Q$ is dense in $\Q$ and also dense in $\R$. The meaning of dense here is something we have already seen in real analysis. We already know that rational numbers are dense in the sense that there exists a countably amount of rational numbers between any two. It is also dense in $\R$ because there are an countable number of real numbers between any two rational numbers. (In fact there should be an infinite amount instead of countably infinite but we have yet to seen this result). \\
-Another way to think about this is that since I have secretly told you that taking closure will include the limit points of the original set, we know that every irrational number can be approximated by a sequence of rational numbers. Thus every real number is a limit of some sequence in $\Q$, which gives the name dense its meaning. 
-
-\begin{prp}{}{} Let $(X,\mathcal{T})$ be a topological space. $D$ is dense if and only if for all non-empty $U\subset X$, $D\cap U\neq\emptyset$. 
-\end{prp}
-
-\begin{defn}{Separable Space}{} A topological space $X$ is said to be separable if it has a countably dense subset. 
+\begin{defn}{Separable Space}{}\\
+A topological space $X$ is said to be separable if it has a countably dense subset. 
 \end{defn}
 
 \subsection{Continuity and Homeomorphism}
-\begin{defn}{Continuity}{} Let $(X,\mathcal{T})$ and $(Y,\mathcal{U})$ be topological spaces. Let $f:X\to Y$ be a function. We say that $f$ is continuous if $f^{-1}(U)\in\mathcal{T}$ for every $U\in\mathcal{U}$. 
+\begin{defn}{Continuity}{}\\
+Let $(X,\mathcal{T})$ and $(Y,\mathcal{U})$ be topological spaces. Let $f:X\to Y$ be a function. We say that $f$ is continuous if $f^{-1}(U)\in\mathcal{T}$ for every $U\in\mathcal{U}$. 
 \end{defn}
 
 \begin{prp}{}{}\\
@@ -318,11 +372,17 @@ Let $X$ be a topological space. Let $Y\subseteq X$ be a subspace of $X$. Let $U\
 \begin{itemize}
 \item If $U$ is open in $Y$ and $Y$ is open in $X$, then $U$ is open in $X$. 
 \item The subspace topology of $U$ from $Y$ is the same as the subspace topology of $U$ from $X$. 
-\item $\overline{U}_Y=Y\cap\overline{U}_X$, where $\overline{Z}_Y$ is the closure of $Z$ in $Y$. 
 \end{itemize}
 \end{prp}
 
-\begin{lmm}{Pasting Lemma}{} Let $(X,\mathcal{T})$ and $(Y,\mathcal{U})$ be topological spaces. Let $A,B\subset X$, either both open or both closed, such that $X=A\cup B$ and both are subspaces of $X$. Let $f:A\to Y$ and $g:B\to Y$ be continuous functions that agree on $A\cap B$. Define $h:X\to Y$ by $$h(x)=\begin{cases}
+Closed sets do not enjoy the same properties as open sets in the subspace topology. 
+
+\begin{eg}{}{}\\
+Let $a,b,c\in\R$ such that $a<b<c$. Then $(a,b]$ is a closed set in the subspace $(a,c)$. 
+\end{eg}
+
+\begin{lmm}{Pasting Lemma}{}\\
+Let $(X,\mathcal{T})$ and $(Y,\mathcal{U})$ be topological spaces. Let $A,B\subset X$, either both open or both closed, such that $X=A\cup B$ and both are subspaces of $X$. Let $f:A\to Y$ and $g:B\to Y$ be continuous functions that agree on $A\cap B$. Define $h:X\to Y$ by $$h(x)=\begin{cases}
 f(x) & \text{ if }x\in A\\
 g(x) & \text{ if }x\in B
 \end{cases}$$ Then $h$ is continuous. 
@@ -331,22 +391,36 @@ Problem arises when an open set that is part of both $A$ and $B$ is considered. 
 \end{proof}
 \end{lmm}
 
-\subsection{Product Topology}
-\begin{defn}{Product Topology}{}\\
-Let $(X,\mT_X)$ and $(Y,\mT_Y)$ be topological spaces. Define the product topology on $X\times Y$ to be the topology generated by the basis $$\{U\times V\;|\;U\in\mT_X, V\in\mT_Y\}$$
+\begin{defn}{Relative Closure}{}\\
+Let $X$ be a space. Let $Y\subseteq X$ be a subspace of $X$. Let $U\subseteq Y$. Define the relative closure $\overline{U}_Y$ of $U$ to be the closure of $U$ in $Y$. 
 \end{defn}
 
 \begin{prp}{}{}\\
-Let $(X,\mathcal{T})$ and $(Y,\mathcal{U})$ be topological spaces. Let $\mathcal{B}_X$ and $\mathcal{B}_Y$ be bases on $X$ and $Y$ that generate $\mathcal{T}$ and $\mathcal{U}$, respectively. Then $$\mathcal{B}=\{U\times V|U\in\mathcal{B}_X, V\in\mathcal{B}_Y\}$$ is a basis for the product topology on $X\times Y$. 
+Let $X$ be a topological space. Let $Y\subseteq X$ be a subspace of $X$. Let $U\subseteq Y$ be a subset. Then we have $$\overline{U}_Y=Y\cap\overline{U}_X$$
 \end{prp}
 
-\begin{prp}{}{} Let $(X,\mathcal{T})$ and $(Y,\mathcal{U})$ be topological spaces. Let $x\in X$. Define a map $f:Y\to X\times Y$ by $f(y)=(x,y)$ for all $y\in Y$. Then $f$ is a homeomorphism onto its image. 
+\subsection{Product Topology}
+\begin{defn}{Product Topology}{}\\
+Let $\{(X_i,\mT_i)\;|\;i\in I\}$ be a collection of spaces. Define the product topology on $\prod_{i\in I}X_i$ to be the topology generated by the basis $$\left\{\prod_{i\in I}U_i\;\bigg{|}\;U_i\in\mT_i\text{ and }U_i\neq X_i\text{ for all but finitely many }i\in I\right\}$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $(X,\mathcal{T})$ and $(Y,\mathcal{U})$ be topological spaces. Let $\mathcal{B}_X$ and $\mathcal{B}_Y$ be bases on $X$ and $Y$ that generate $\mathcal{T}$ and $\mathcal{U}$, respectively. Then $$\mathcal{B}=\{U\times V\;|\;U\in\mathcal{B}_X, V\in\mathcal{B}_Y\}$$ is a basis for the product topology on $X\times Y$. 
+\end{prp}
+
+\begin{eg}{}{}\\
+The set $$\mB=\{B_r(x)\;|\;x\in\R^n,r\in\R\text{ and }r>0\}$$ is a basis for $\R^n$. The induced topology is called the standard or Euclidean topology on $\R^n$. 
+\end{eg}
+
+\begin{prp}{}{}\\
+Let $(X,\mathcal{T})$ and $(Y,\mathcal{U})$ be topological spaces. Let $x\in X$. Define a map $f:Y\to X\times Y$ by $f(y)=(x,y)$ for all $y\in Y$. Then $f$ is a homeomorphism onto its image. 
 \begin{proof}
 The subspace $\{x\}\cup Y$ has open sets of the form $\emptyset\times U$ or $\{x\}\times U$ for $U\in\mathcal{U}$. Then $f$ is continuous since $f^{-1}(\{x\}\cup U)=U$ and $f^{-1}(\emptyset\cup U)=\emptyset$. $f$ is bijective since they have the same cardinality. The inverse map is also continuous since $f(U)=\{x\}\times U$ is open for open sets $U$. 
 \end{proof}
 \end{prp}
 
-\begin{prp}{Universal Property of Product Spaces}{} Let $(X,\mT_X)$ and $(Y,\mT_Y)$ be topological spaces. Then the product space $X\times Y$ satisfies the following universal property. \\
+\begin{prp}{Universal Property of Product Spaces}{}\\
+Let $(X,\mT_X)$ and $(Y,\mT_Y)$ be topological spaces. Then the product space $X\times Y$ satisfies the following universal property. \\
 
 For any topological space $(Z,\mT_Z)$ and continuous functions $f:Z\to X$ and $g:Z\to Y$, there exists a unique continuous function $u:Z\to X\times Y$ such that the following diagram commutes: \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}

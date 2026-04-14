@@ -1,0 +1,434 @@
+\documentclass[a4paper]{article}
+
+\input{C:/Users/liula/Desktop/Latex/Headers/Headers.tex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Labix}
+\lhead{Representation Theory of Algebras and Quivers}
+\rfoot{\thepage}
+
+\title{Representation Theory of Algebras and Quivers}
+
+\author{Labix}
+
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+\end{abstract}
+\pagebreak
+\tableofcontents
+
+\pagebreak
+\section{Basic Definitions of Representations}
+\subsection{Representation of an Algebra}
+\begin{defn}{Representation of an Algebra}{}\\
+Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. A representation of $A$ is a left $R$-module $M$ and a homomorphism of $R$-algebras $$\rho:A\to\text{End}_R(M)$$
+\end{defn}
+
+Let $A,M$ be sets. Recall that there is a natural bijection $$\Hom_{\bold{Sets}}(A\times M,M)\cong\Hom_{\bold{Sets}}(A,\Hom_{\bold{Sets}}(M,M))$$ given by curling. A representation of an $R$-algebra $A$ is an element in $$\Hom_{\bold{Alg}_R}(A,\text{End}_R(M))\subseteq\Hom_{\bold{Sets}}(A,\Hom_{\bold{Sets}}(M,M))$$ Therefore we may ask what kinds of maps of the form $A\times M\to M$ give a representation of $A$. 
+
+\begin{prp}{}{}\\
+Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $M$ be an $R$-module. Let $f:A\times M\to M$ be a function. Then the map $a\mapsto f(a,-)$ defines a representation of $A$ if and only if the following are true. 
+\begin{itemize}
+\item $f$ is an $R$-module homomorphism. 
+\item $f$ defines an $A$-module structure on $M$. 
+\end{itemize}
+\end{prp}
+
+The $A$-module structure can also be seen in the representation $\rho:A\to\text{End}_R(M)$. It is given by $a\cdot m=\rho(a)(m)$. In particular, not every $A$-module $M$ gives a representation; the action of $A$ on $M$ must be bilinear in the scalars $R$. Therefore these modules are often called $R$-linear $A$-modules. \\
+
+However, if $R=k$ is a field and the structure map $k\to A$ is non-zero, then $k\to A$ is necessarily injective so that $A$ contains $k$ as a subring. Then the $k$-linearity of $f:A\times M\to M$ is null so that $A$-modules are the same as representations of $A$ over $k$. 
+
+\begin{crl}{}{}\\
+Let $k$ be a field. Let $A$ be a $k$-algebra. Let $V$ be a $k$-vector space. Let $f:A\times V\to V$ be a function. Then the map $a\mapsto f(a,-)$ is a representation of $A$ if and only if $f$ defines an $A$-module structure on $V$. 
+\end{crl}
+
+Since representations of an algebra $A$ are $A$-modules, it follows that the following notions in Rings and Modules apply to representations. 
+\begin{itemize}
+\item Subrepresentations. 
+\item Quotient Representations. 
+\item Sum of Representations. 
+\end{itemize}
+
+\begin{defn}{Types of Representations}{}\\
+Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $M$ be a representation of $A$. 
+\begin{itemize}
+\item We say that $M$ is irreducible if it is simple as an $A$-module. 
+\item We say that $M$ is semisimple if it is semisimple as an $A$-module. 
+\item We say that $M$ is indecomposable if it is indecomposable as an $A$-module. 
+\end{itemize}
+\end{defn}
+
+\begin{eg}{}{}\\
+Let $k$ be a field. Define a representation $\rho:k[x]\to\text{End}_k(k^2)\cong M_2(k)$ by $x\mapsto\begin{pmatrix}
+1 & 1\\
+0 & 1
+\end{pmatrix}$ then extended it $R$-linearly and respecting products of $x$. Then $\rho$ is indecomposable but reducible. 
+\begin{proof}\\
+Suppose for a contradiction that $\rho$ is decomposable. Then there exists $1$-dimensional linear subspaces $L_1,L_2$ of $k^2$ such that $\rho_{L_1}$ and $\rho_{L_2}$ are representations. Suppose that $L_1=k\langle v_1\rangle$ and $L_2=k\langle v_2\rangle$. Then $x\cdot v_1\in L_1$ and $x\cdot v_2\in L_2$ implies that $v_1$ and $v_2$ are linearly independent eigenvectors of $\rho(x)$. But by an easy computation, we see that the only eigenvalue of $\rho(x)$ is $1$ and its eigenspace has dimension $1$. Hence this is a contradiction. \\
+
+From the above, we see that the eigenspace of $\rho(x)$ is a subrepresentation of $\rho$. Hence $\rho$ is reducible. 
+\end{proof}
+\end{eg}
+
+\begin{defn}{The Regular Representation}{}\\
+Let $k$ be a field. Let $A$ be a $k$-algebra. Define the regular representation $\text{reg}:A\to\text{End}_k(A)$ of $A$ by $$\text{reg}(a)(b)=ab$$
+\end{defn}
+
+\begin{defn}{Composition Factors}{}\\
+Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $M$ be a semisimple representation of $A$. Suppose that the irreducible decomposition of $M$ is given by $$M\cong\bigoplus_{i=1}^nM_i$$ Define the composition factors of $M$ to be $$\text{Comp}(M)=\{M_1,\dots,M_n\}$$
+\end{defn}
+
+\begin{defn}{Multiplicity of an Irreducible Submodule}{}\\
+Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $M$ be a semisimple representation of $A$. Let $N$ be an irreducible $A$-module. Define the multiplicity of $N$ in $M$ to be $$\text{mult}_N(M)=\abs{\{M_i\in\text{Comp}(M)\;|\;M_i\cong N\}}$$
+\end{defn}
+
+\subsection{Maps between Representations}
+\begin{defn}{Homomorphisms of Representations}{}\\
+Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $M,N$ be representations of $A$. Let $f:M\to N$ be a function. We say that $f$ is a homomorphism of representations if the following are true. 
+\begin{itemize}
+\item $f$ is an $A$-module homomorphism. 
+\item $f$ is $R$-linear. 
+\end{itemize}
+\end{defn}
+
+Since $M$ and $N$ are $A$-modules, the definition of homomorphism implies that such a morphism must be an $A$-module homomorphism. Conversely, since not every $A$-module is an $R$-linear $A$-module, $A$-module homomorphisms are not necessarily morphisms between representations. 
+
+\begin{defn}{Set of Homomorphisms of Representations}{}\\
+Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $M,N$ be representations of $A$. Define the set of homomorphisms from $M$ to $N$ to be $$\Hom_{A_R}(M,N)=\left\{f:M\to N\;\bigg{|}\;\substack{f\text{ is a homomorphism}\\\text{of representations from }M\text{ to }N}\right\}\subseteq\Hom_A(M,N)$$
+\end{defn}
+
+\begin{defn}{Isomorphisms of Representations}{}
+Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $M,N$ be $R$-modules. Let $\rho:A\to\text{End}_R(M)$ and $\tau:A\to\text{End}_R(N)$ be representations of $A$. Let $\phi:M\to N$ be a homomorphism of representations. We say that $\phi$ is an isomorphism if there exists a homomorphism of representations $\psi:N\to M$ such that $$\psi\circ\phi=\text{id}_M\;\;\;\text{ and }\;\;\;\phi\circ\psi=\text{id}_N$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $M,N$ be $R$-modules. Let $\rho:A\to\text{End}_R(M)$ and $\tau:A\to\text{End}_R(N)$ be representations of $A$. Let $\phi:M\to N$ be a homomorphism of representations. Then $\phi$ is an isomorphism if and only if $\phi$ is an isomorphism of $R$-modules. 
+\end{lmm}
+
+\begin{thm}{First Isomorphism Theorem for Representations}{}\\
+Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $M,N$ be $R$-modules. Let $\rho:A\to\text{End}_R(M)$ and $\tau:A\to\text{End}_R(N)$ be representations of $A$. Let $\phi:M\to N$ be a homomorphism of representations. Then the following are true. 
+\begin{itemize}
+\item $\ker(\phi)$ is a subrepresentation of $M$. 
+\item $\im(\phi)$ is a subrepresentation of $N$. 
+\item There is an isomorphism of representations $$M/\ker(\phi)\cong\im(\phi)$$ given by $\phi$. 
+\end{itemize}
+\end{thm}
+
+\begin{prp}{}{}\\
+Let $R$ be a commutative ring. Let $A$ be a finite $R$-algebra. Let $\rho:A\to\text{End}_R(M)$ be an irreducible representation of $A$. Then $M$ is finitely generated. 
+\begin{proof}\\
+Let $0\neq m\in M$. Then $\rho(A)(m)$ is a submodule of $M$. Since $M$ is irreducible, we must have $\rho(A)(m)=M$. Since $A$ is finite over $R$, we must have $\rho(A)(m)$ is finitely generated over $R$. Hence $M$ is finitely generated over $R$. 
+\end{proof}
+\end{prp}
+
+\subsection{The Set of Representations}
+\begin{defn}{The Set of Representations}{}\\
+Let $R$ be a commutative ring. Let $A$ be an $R$-algebra. Let $M$ be an $R$-module. Define the space of representations of $A$ on $M$ to be the set $$\text{Rep}(A,M)=\{[\rho:A\to\text{End}_R(M)]\;|\;[\rho]\text{ is an isomorphism class of representations }\}$$
+\end{defn}
+
+\pagebreak
+\section{Finite Dimensional Representations of Algebra over Algebraically Closed Fields}
+\subsection{Schur's Lemma and its Consequences}
+Recall from Rings and Modules that we have Schur's lemma: A homomorphism $M\to N$ of simple $R$-modules is either the $0$ map or an isomorphism. 
+
+\begin{lmm}{Schur's Lemma III}{}\\
+Let $k$ be an algebraically closed field. Let $A$ be a $k$-algebra. Let $V$ be a finite dimensional $k$-vector space. Let $\rho:A\to\text{End}_k(V)$ be an irreducible representations of $A$. Let $\phi:V\to V$ be a homomorphism of representations. Then $\phi=\lambda\text{id}_V$ for some $\lambda\in k$. 
+\begin{proof}\\
+Since $\phi$ is a homomorphism of simple $A$-modules, by Schur's lemma we know that $\phi=0$ or $\phi$ is an isomorphism. If $\phi=0$ then we are done. Otherwise, since $k$ is algebraically closed, the endomorphism $\phi$ admits an eigenvalue $\lambda\in k$ and eigenvector $v\in V$. Consider the homomorphism of representations $\phi-\lambda\text{id}_V$. By Schur's lemma, this map is either $0$ or an isomorphism. But it is not an isomorphism since $\phi(v)-\lambda v=0$. Hence $\phi-\lambda\text{id}_V=0$. So we are done. 
+\end{proof}
+\end{lmm}
+
+\begin{crl}{}{}\\
+Let $k$ be an algebraically closed field. Let $A$ be a commutative $k$-algebra. Let $V$ be a finite dimensional $k$-vector space. Let $\rho:A\to\text{End}_k(V)$ be an irreducible representations of $A$. Then $\dim(V)=1$. 
+\begin{proof}\\
+By Schur's lemma III, we know that $\rho(a):V\to V$ is a scalar operator for all $a\in A$. This means that $\rho(a)(v)=\lambda_av$ for some $\lambda_a\in k$ and all $v\in V$. For any fixed $v_0\in V$, this implies that $k\langle v_0\rangle$ is a subrepresentation of $\rho$. If $\dim(V)\geq 2$, then $k\langle v_0\rangle$ is a non-trivial subrepresentation, contradicting the irreducible assumption. Hence $\dim(V)=1$. 
+\end{proof}	
+\end{crl}
+
+In other words, every finite dimensional representation of a commutative algebra over an algebraically closed field must be of dimension $1$. And these are easy to classify. 
+
+\begin{prp}{}{}\\
+Let $k$ be an algebraically closed field. Let $A$ be a $k$-algebra. Let $V,W$ be finite dimensional irreducible representations of $A$. Then we have $$\dim_k(\Hom_{A_k}(V,W))=\begin{cases}
+1 & \text{ if }V\cong W\\
+0 & \text{ otherwise }
+\end{cases}$$
+\begin{proof}\\
+If $V$ is not isomorphic to $W$, then by Schur's lemma we must have $\Hom_{\bold{Rep}(A)}(V,W)\subseteq\Hom_A(V,W)=\{0\}$. If $V=W$, then Schur's lemma III implies that $\text{id}_V$ generates the $k$-vector space. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $k$ be an algebraically closed field. Let $A$ be a $k$-algebra. Let $V_i,W_j$ be finite dimensional irreducible representations of $A$ for $1\leq i\leq n$ and $1\leq j\leq m$. Then we have $$\dim_k\left(\Hom_{A_k}\left(\bigoplus_{i=1}^nV_i,\bigoplus_{j=1}^mW_j\right)\right)=\sum_{i=1}^n\sum_{j=1}^m\dim_k(\Hom_{A_k}(V_i,W_j))$$
+\end{prp}
+
+\begin{crl}{}{}\\
+Let $k$ be an algebraically closed field. Let $A$ be a $k$-algebra. Let $V,W$ be finite dimensional representations of $A$ such that $W$ is irreducible. Then we have $$\dim_k(\Hom_{A_k}(V,W))=\text{mult}_W(V)$$
+\end{crl}
+
+\subsection{Character Theory}
+Let $k$ be an algebraically closed field. Recall that the trace of a $k$-linear map between finite dimensional vector spaces have a basis independent description. 
+
+\begin{defn}{Characters of a Representation}{}\\
+Let $k$ be an algebraically closed field. Let $A$ be a $k$-algebra. Let $\rho:A\to\text{End}_k(V)$ be a finite dimensional representation of $A$. Define the character of $\rho$ to be function $\chi_V:A\to k$ given by $$\chi_V(a)=\text{tr}(\rho(a))$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $k$ be an algebraically closed field. Let $A$ be a $k$-algebra. Let $V,W$ be isomorphic finite dimensional representations of $A$. Then $\chi_V=\chi_W$. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $k$ be an an algebraically closed field. Let $A$ be a $k$-algebra. Let $\rho:A\to\text{End}_k(V)$ be a finite dimensional representation of $A$. Then $\chi_V$ descends to a well defined function $\chi_V:\frac{A}{[A,A]}\to k$. 
+\end{prp}
+
+Let $G$ be a finite group. Since $\C[G]$ is a semisimple $\C$-algebra, we know that there are $\C$-vector space isomorphisms
+\begin{align*}
+\Hom_\C\left(\frac{\C[G]}{[\C[G],\C[G]]},\C\right)&=\{f\in\Hom_\C(\C[G],\C)\;|\;f(ghg^{-1}h^{-1})=0\text{ for all }g,h\in G\}\\
+&=\{f\in\Hom_{\bold{Set}}(G,\C)\;|\;f(ghg^{-1})=f(h)\text{ for all }g,h\in G\}\\
+&=\Hom_{\bold{Set}}(\text{Cl}(G),\C)
+\end{align*}
+Hence the above proposition mimics character theory in representations of finite groups. 
+
+\begin{lmm}{}{}\\
+Let $k$ be an algebraically closed field. Let $A$ be a $k$-algebra. Let $V$ be a finite dimensional representation of $A$. Let $W\leq V$ be a subrepresentation. Then we have $$\chi_V=\chi_W+\chi_{V/W}$$
+\end{lmm}
+
+\begin{defn}{Irreducible Characters}{}\\
+Let $k$ be an algebraically closed field. Let $A$ be a $k$-algebra. Let $V$ be a representation of $A$. We say that $\chi_V$ is irreducible if $V$ is irreducible. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $k$ be an algebraically closed field. Let $A$ be a $k$-algebra. Let $V_1,\dots,V_n$ be finite dimensional irreducible representations of $A$. Then $\{\chi_{V_1},\dots,\chi_{V_n}\}$ are linearly independent in $\Hom_k(A/[A,A],k)$. 
+\end{prp}
+
+\begin{defn}{Characters of an Algebra}{}\\
+Let $k$ be an algebraically closed field. Let $A$ be a $k$-algebra. Let $\phi:A\to k$ be a function. We say that $\phi$ is a character of $A$ if there exists a finite dimensional representation $V$ of $A$ such that $\phi=\chi_V$. 
+\end{defn}
+
+\subsection{The Semisimple Condition}
+\begin{prp}{}{}\\
+Let $k$ be an algebraically closed field. Let $A$ be a finite semisimple $k$-algebra. Let $V_1,\dots,V_n$ be the complete list of non-isomorphic representations of $A$. Then there is a $k$-algebra isomorphism $$A\cong\bigoplus_{i=1}^n\text{End}_k(V_i)$$
+\begin{proof}\\
+By the Artin Wedderburn theorem, there is a $k$-algebra isomorphism $$A\cong\bigoplus_{i=1}^pM_{n_i}(D_i)$$ where each $D_i$ is a division algebra over $k$. Since $k$ is algerbaically closed, we have $D_i=k$. By a corollary of the Artin-Wedderburn theorem, the complete list of simple $A$-modules is given by the unique simple $M_{n_i}(k)$-submodule $T_i$ of itself. Hence $n=p$. Moreover, by reordering the index, we have isomorphisms of $M_{n_i}(k)$-modules $V_i\cong T_i$ that are isomorphisms of $A$-modules (since the ring structure of the product of matrices is given by the product of the ring structures of the matrix ring, and the Artin-Wedderburn isomorphism is a ring isomorphism). Now $T_i\cong k^{n_i}$ as $k$-vector spaces. This gives an isomorphism $V_i\cong k^{n_i}$ of $k$-vector spaces and hence an isomorphism of rings $\text{End}_k(V_i)\cong M_{n_i}(k)$. Thus we have $$A\cong\bigoplus_{i=1}^pM_{n_i}(k)\cong\bigoplus_{i=1}^n\text{End}_k(V_i)$$
+\end{proof}
+\end{prp}
+
+\begin{crl}{}{}\\
+Let $k$ be an algebraically closed field. Let $A$ be a finite semisimple $k$-algebra. Let $V_1,\dots,V_n$ be the complete list of non-isomorphic representations of $A$. Then we have $$\dim_k(A)=\sum_{i=1}^n\dim_k(V_i)^2$$
+\end{crl}
+
+\begin{crl}{}{}\\
+Let $k$ be an algebraically closed field. Let $A$ be a finite $k$-algebra. Let $V$ be an irreducible representation of $A$. The we have $$\text{mult}_V(A)=\dim_k(\Hom_{A_k}(A,V))=\dim_k(V)$$
+\begin{proof}\\
+Direct from Artin-Wedderburn theorem and its corollaries. 
+\end{proof}
+\end{crl}
+
+\begin{prp}{}{}\\
+Let $k$ be an algebraically closed field. Let $A$ be a finite semisimple $k$-algebra. Let $V_1,\dots,V_n$ be the complete list of non-isomorphic irreducible finite dimensional representation of $A$. Then $\{\chi_{V_1},\dots,\chi_{V_n}\}$ is a basis for $\Hom_k(A/[A,A],k)$. 
+\end{prp}
+
+\begin{crl}{}{}\\
+Let $k$ be an algebraically closed field. Let $A$ be a finite semisimple $k$-algebra. Let $\chi$ be a character of $A$. Then there exists a representation $V$ of $A$ such that $\chi=\chi_V$. 
+\end{crl}
+
+\subsection{Reduction to Indecomposable Basic Algebras}
+Let $A$ be a finite dimensional $k$-algebra over a field $k$. Recall that $A^\flat=eAe$ is the basic algebra associated to $A$, where $e=\sum_{i=1}^ne_i$ and $e_1,\dots,e_n$ is a full orthogonal system of primitive idempotents. 
+
+\begin{prp}{}{}\\
+Let $k$ be an algebraically closed field. Let $A$ be a finite dimensional $k$-algebra. Then there is an equivalence of categories $$
+{_A}\bold{FGMod}\simeq{_{A^\flat}}\bold{FGMod}$$ given by the restriction and extension of scalars. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $k$ be an algebraically closed field. Let $A,B$ be $k$-algebras. Let $V$ be a finite dimensional irreducible representation of $A\times B$. Then there exists irreducible representations $V_A$ and $V_B$ of $A$ and $B$ respectively, such that $V\cong V_A\otimes_k V_B$. 
+\end{prp}
+
+
+\pagebreak
+\section{Quivers and Path Algebras}
+\subsection{Basics of Quivers}
+\begin{defn}{Quivers}{}\\
+A quiver consists of two sets $V$ and $E$ called vertices and edges, together with two functions $s,t:E\to V$ called the source and target respectively. 
+\end{defn}
+
+\begin{defn}{Finite Quivers}{}\\
+Let $Q=(V,E,s,t)$ be a quiver. We say that $Q$ is finite if $V$ and $E$ are finite. 
+\end{defn}
+
+\begin{defn}{Connected Quivers}{}\\
+\end{defn}
+
+\begin{defn}{Paths and Stationary Path}{}\\
+Let $Q=(V,E,s,t)$ be a quiver. Let $a,b\in V$. A path from $a$ to $b$ of length $n\in\N^+$ is a function $\gamma:\{1,\dots,n\}\to E$ such that the following are true. 
+\begin{itemize}
+\item $s(\gamma(1))=a$. 
+\item $s(\gamma(i+1))=t(\gamma(i))$ for $1\leq i\leq n-1$. 
+\item $t(\gamma(n))=b$. 
+\end{itemize}
+For each $v\in V$, we associate a path $\varepsilon_v$ of length $0$ called the stationary path at $v$. 
+\end{defn}
+
+\begin{defn}{Cycles}{}\\
+Let $Q=(V,E,s,t)$ be a quiver. Let $\gamma:\{1,\dots,n\}\to E$ be a path in $Q$. We say that $\gamma$ is a cycle if $s(\gamma(1))=t(\gamma(n))$. 
+\end{defn}
+
+\begin{defn}{Acyclic Quivers}{}\\
+Let $Q$ be quiver. We say that $Q$ is acyclic if $Q$ contains no cycles. 
+\end{defn}
+
+\subsection{Path Algebra}
+\begin{defn}{The Path Algebra of a Quiver}{}\\
+Let $Q$ be a quiver. Let $k$ be a field. Define the path algebra $k[Q]$ of $Q$ over $k$ to be the $k$-vector space $$k\langle Q\rangle=k\langle\gamma\;|\;\gamma\text{ is a path in }Q\rangle$$ together with multiplication given as follows. For two paths $\gamma_1:\{1,\dots,n_1\}\to E$ and $\gamma_2:\{1,\dots,n_2\}\to E$, define $\gamma_1\cdot\gamma_2:\{1,\dots,n_1+n_2\}\to E$ by $$(\gamma_1\cdot\gamma_2)(i)=\begin{cases}
+\gamma_1(i) & \text{ if }1\leq i\leq n_1\\
+\gamma_2(i-n_1) & \text{ if }n_1+1\leq i\leq n_2
+\end{cases}$$ if $t(\gamma_1(n_1))=s(\gamma_2(1))$ and $0$ otherwise. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $Q=(V,E,s,t)$ be a quiver. Let $k$ be a field. If $V$ is finite, then the following are true. 
+\begin{itemize}
+\item $k\langle Q\rangle$ is a graded $k$-algebra whose grading is given by the length of the paths. 
+\item We have $1_{k\langle Q\rangle}=\sum_{v\in V}\varepsilon_v$. 
+\item $\{\gamma:\{1\}\to E\;|\;\gamma\text{ is a path in }Q\}$ is a generating set for $k\langle Q\rangle$ as a module over itself. 
+\item $\{\varepsilon_v\;|\;v\in V\}$ forms a full orthogonal system of primitive idempotents for $k\langle Q\rangle$. 
+\end{itemize}
+\end{lmm}
+
+\begin{eg}{}{}\\
+Let $Q=(V,E,s,t)$ be the quiver given by $V=\{v\}$ and $E=\{\alpha_i\;|\;i\in I\}$. Then we have a $k$-algebra isomorphism $$k\langle Q\rangle\cong k\langle\alpha_i\;|\;i\in I\rangle$$ to the free associative algebra generated by $E$. 
+\end{eg}
+
+\begin{prp}{}{}\\
+Let $Q$ be a quiver. Let $k$ be a field. Then the following are true. 
+\begin{itemize}
+\item $k\langle Q\rangle$ is finite dimensional over $k$ if and only if $Q$ is finite and acyclic. 
+\item $k\langle Q\rangle$ is indecomposable if and only if $Q$ is connected. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{Universal Property of Finite Connected Quivers Algebras}{}\\
+Let $Q=(V,E,s,t)$ be a finite connected quiver. Let $k$ be a field. Then $k\langle Q\rangle$ and the inclusion functions $\iota_V:V\to k\langle Q\rangle$ and $\iota_E:E\to k\langle Q\rangle$ satisfies the following universal property: For any $k$-algebra $A$ and any maps $\varphi_V:V\to A$ and $\varphi_E:E\to A$ such that the following are true: 
+\begin{itemize}
+\item $1=\sum_{v\in V}\varphi_V(v)$, $\varphi_V(v)^2=\varphi_V(v)$ and $\varphi_V(v)\varphi_V(w)=0$ for all $v,w\in V$ and $v\neq w$. 
+\item We have $\varphi_E(p)=\varphi_V(s(p))\varphi_E(p)\varphi_V(t(p))$ for all $p\in E$. 
+\end{itemize}
+there exists a unique $k$-algebra homomorphism $\varphi:k\langle Q\rangle\to A$ such that the following diagram commutes: \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	V & {k\langle Q\rangle} & E \\
+	& A
+	\arrow["{\iota_V}", from=1-1, to=1-2]
+	\arrow["{\varphi_V}"', from=1-1, to=2-2]
+	\arrow["{\exists!\varphi}"', dashed, from=1-2, to=2-2]
+	\arrow["{\iota_E}"', from=1-3, to=1-2]
+	\arrow["{\varphi_E}", from=1-3, to=2-2]
+\end{tikzcd}}\\~\\
+Moreover, $k\langle Q\rangle$ is the unique (up to unique isomorphism) $k$-algebra with the above property. 
+\end{prp}
+
+\begin{defn}{The Arrow Ideal}{}\\
+Let $Q$ be a finite quiver. Let $k$ be a field. Define the arrow ideal of the path algebra $k\langle Q\rangle$ to be $$R_Q=k\langle\gamma\;|\;\gamma\text{ is a path in }Q\text{ of length at least }1\rangle$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $Q$ be a finite quiver. Let $k$ be a field. Then the following are true. 
+\begin{itemize}
+\item $R_Q$ is a two sided graded ideal of $k\langle Q\rangle$. 
+\item The quotient of the path algebra by the arrow ideal is given by $$k\langle Q\rangle/R_Q=k\langle\varepsilon_v\;|\;v\in V\rangle$$
+\item For each $n\in\N^+$, the product of the arrow ideal is given by $$R_Q^n=k\langle\gamma\;|\;\gamma\text{ is a path in }Q\text{ of length at least }n\rangle$$
+\item For each $n\in\N^+$, we have $$R_Q^n/R_Q^{n+1}=k\langle\gamma\;|\;\gamma\text{ is a path in }Q\text{ of length }n\rangle$$
+\end{itemize}
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $Q$ be a finite quiver. Let $k$ be a field. If $Q$ is acyclic, then the following are true. 
+\begin{itemize}
+\item $J(k\langle Q\rangle)=R_Q$. 
+\item $k\langle Q\rangle$ is a finite dimensional basic algebra over $k$. 
+\end{itemize}
+\end{prp}
+
+\begin{defn}{Admissible Ideals}{}\\
+Let $Q$ be a finite quiver. Let $k$ be a field. Let $I$ be an ideal of $k\langle Q\rangle$. We say that $I$ is admissible if there exists $n\geq 2$ such that $$R_Q^n\subseteq I\subseteq R_Q^2$$
+\end{defn}
+
+\begin{defn}{Bound Quiver Algebra}{}\\
+Let $Q$ be a finite quiver. Let $k$ be a field. Let $I$ be an ideal of $k\langle Q\rangle$. We say that $k\langle Q\rangle/I$ is a bound quiver algebra if $I$ is an admissible ideal. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $Q=(V,E,s,t)$ be a finite quiver. Let $k$ be a field. Let $I$ be an admissible ideal of $k\langle Q\rangle$. Then $\{\varepsilon_v+I\;|\;v\in V\}$ is a full orthogonal system of primitive idempotents for the bound quiver algebra $k\langle Q\rangle/I$. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $Q$ be a finite quiver. Let $k$ be a field. Let $I$ be an admissible ideal of $k\langle Q\rangle$. Then the following are true. 
+\begin{itemize}
+\item $I$ is finitely generated. 
+\item $J(k\langle Q\rangle/I)=R_Q/I$. 
+\item $k\langle Q\rangle/I$ is a finite dimensional basic algebra over $k$. 
+\item $k\langle Q\rangle/I$ is indecomposable if and only if $k\langle Q\rangle$ is indecomposable. 
+\end{itemize}
+\end{prp}
+
+\subsection{The Quiver of a Finite Dimensional Basic Algebra}
+\begin{defn}{The Quiver of a Basic Algebra}{}\\
+Let $k$ be a field. Let $A$ be a finite dimensional basic algebra over $k$. Let $e_1,\dots,e_n$ be a full orthogonal system of primitive idempotents. Define the quiver $Q_A=(V,E,s,t)$ associated to $A$ as follows. 
+\begin{itemize}
+\item The vertices are given by $V=\{e_1,\dots,e_n\}$. 
+\item For $e_i,e_j\in V$, the set of arrows from $e_i$ to $e_j$ are given by $e_i\frac{J(A)}{J^2(A)}e_j$. 
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $A$ be a finite dimensional basic algebra over $k$. Then $Q_A$ does not depend on the choice of full orthogonal system of primitive idempotents. 
+\end{lmm}
+
+\begin{thm}{Gabriel}{}\\
+Let $k$ be an algebraically closed field. Let $A$ be a finite dimensional basic algebra over $k$. Then there exists an admissible ideal $I$ of $k\langle Q_A\rangle$ such that there is a $k$-algebra isomorphism $$A\cong\frac{k\langle Q_A\rangle}{I}$$
+\end{thm}
+
+\begin{crl}{}{}\\
+Let $k$ be an algebraically closed field. Let $A$ be a finite dimensional algebra over $k$. Then $A$ is Morita equivalent to $k\langle Q_{A^\flat}\rangle/I$ where $I$ is an admissible ideal of $k\langle Q_{A^\flat}\rangle$. 
+\end{crl}
+
+Thus the representation theory of a finite dimensional algebra over an algebraically closed field is equivalent to the representation theory of bound finite quiver algebras. 
+
+\pagebreak
+\section{Representation Theory of Quivers}
+\subsection{Representations of Quivers}
+\begin{defn}{Representations of Quivers}{}\\
+Let $Q=(V,E,s,t)$ be a quiver. Let $R$ be a ring. A representation of $Q$ over $R$ consists of the following. 
+\begin{itemize}
+\item A collection of $R$-modules $M_v$ for each $v\in V$. 
+\item A collection of $R$-module homomorphisms $\varphi_e:M_{s(e)}\to M_{t(e)}$ for each $e\in E$. 
+\end{itemize}
+\end{defn}
+
+Note that the resulting diagram of $R$-modules need not be commutative because we have not imposed any conditions on commutativity. 
+
+\begin{defn}{Homomorphism of Representations}{}
+\end{defn}
+
+\begin{defn}{The Category of Representations of a Quiver}{}
+\end{defn}
+
+\begin{defn}{The Category of Representations of a Quiver over an Admissible Ideal}{}\\
+Let $k$ be a field. Let $Q$ be a quiver. Let $I$ be an admissible ideal of the path algebra $k\langle Q\rangle$. Define $\bold{Rep}(Q,I)$ to be the full subcategory of $\bold{Rep}(Q)$ consisting of objects $((V_i)_{i\in V},(T_j)_{j\in E})$ such that $V_k=0$ for all $k\in I$. 
+\end{defn}
+
+\subsection{Relation to Representations of the Path Algebra}
+\begin{prp}{}{}\\
+Let $Q$ be a quiver. Let $k$ be a field. Then there is a natural isomorphism $$\bold{Rep}(Q)\cong{_{k\langle Q\rangle}}\bold{Mod}$$
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $Q$ be a finite quiver. Let $k$ be a field. Let $I$ be an admissible ideal of $k\langle Q\rangle$. Then there is an equivalence of categories $$\bold{Rep}(Q,I)\simeq{_{k\langle Q\rangle/I}}\bold{FGMod}$$
+\end{prp}
+
+\begin{crl}{}{}\\
+Let $k$ be an algebraically closed field. Let $A$ be a finite dimensional $k$-algebra. Then there exists an admissible ideal $I$ of $Q_{A^\flat}$ such that there is an equivalence of categories $${_A}\bold{FGMod}\simeq\bold{Rep}(Q_{A^\flat},I)$$
+\end{crl}
+
+\end{document}
