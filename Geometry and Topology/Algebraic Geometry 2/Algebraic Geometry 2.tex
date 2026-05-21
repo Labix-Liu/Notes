@@ -2229,6 +2229,8 @@ When $X$ is integral, Cartier divisors and the Picard group is entirely the same
 Let $X$ be an integral scheme. Then the there is an isomorphism of groups $$\text{CCl}(X)\cong\text{Pic}(X)$$ defined by $[D]\mapsto\mL(D)$. 
 \end{prp}
 
+Recall that invertible sheaves correspond to line bundles. There is a more direct way to view Cartier divisors as line bundles. Indeed, one may check that for the Cartier data $\{(U_i,f_i)\;|\;i\in I\}$, the functions $g_{ij}=\frac{f_i}{f_j}$ satisfies the cocycle conditions. 
+
 \subsection{Comparison of Weil and Cartier Divisors}
 \begin{defn}{The Map from Cartier Divisors to Weil Divisors}{}\\
 Let $X$ be a locally Noetherian integral scheme. Define the function $d:\text{CDiv}(X)\to\text{Div}(X)$ by $$\{(U_i,f_i)\;|\;i\in I\}\mapsto\text{ The unique divisor }D\text{ such that }D|_{U_i}=\text{div}|_{U_i}(f_i)$$
@@ -2257,10 +2259,14 @@ Let $X$ be a normal Noetherian integral scheme. Let $D$ be a Weil divisor on $X$
 \begin{crl}{}{} Let $X=\Prj_k^n$ be the projective space over some field $k$. Then every invertible sheaf on $X$ is isomorphic to $\mO_X(m)$ for some $m\in\Z$. 
 \end{crl}
 
+\begin{defn}{Degree $0$ Picard Group}{}\\
+Let $X$ be an integral, separated Noetherian scheme such that all local rings are UFD. Define the degree $0$ picard group to be $$\text{Pic}^0(X)=\ker(\deg:\text{Pic}(X)\cong\text{Cl}(X)\to\Z)$$
+\end{defn}
+
 
 \pagebreak
 \section{Classifying Maps to Projective Space}
-\subsection{Base Points}
+\subsection{Base Points and Morphisms to Projective Space}
 \begin{defn}{Base Points}{}\\
 Let $X$ be a scheme. Let $\mL$ be an invertible sheaf. Let $p\in X$. We say that $p$ is a base point for $\mL$ if $s(p)=0$ for all $s\in\Gamma(X,\mL)$. 
 \end{defn}
@@ -2278,9 +2284,8 @@ Let $X$ be a scheme. Let $\mL$ be an invertible sheaf. Let $s_0,\dots,s_n\in\Gam
 \end{itemize}
 \end{lmm}
 
-\subsection{Relation to Invertible Sheaves}
 \begin{prp}{}{}\\
-Let $R$ be a commutative ring. Let $X$ be a scheme over $R$. Then there is a one to one correspondence $$\{\varphi:X\to\Prj_R^n\;|\;\varphi\text{ is an }R\text{-morphism }\}\;\;\overset{1:1}{\longleftrightarrow}\;\;\frac{\left\{(\mL,s_0,\dots,s_n)\;\bigg{|}\;\substack{\mL\text{ is an invertible sheaf on }X\\\text{ and }s_0,\dots,s_n\in\mL(X)\text{ generate }\mL(X)}\right\}}{\sim}$$ given by $\varphi\mapsto(\varphi^\ast(\mO_{\Prj_R^n}(1)),\varphi^\ast(s_0),\dots,\varphi^\ast(s_n))$ and $(\mL,s_0,\dots,s_n)\sim(\mL',s_0',\dots,s_n')$ if and only if there exists an isomorphism $\mL\cong\mL'$ such that $s_i$ corresponds to $s_i'$. 
+Let $R$ be a commutative ring. Let $X$ be a scheme over $R$. Then there is a one to one correspondence $$\{\varphi:X\to\Prj_R^n\;|\;\varphi\text{ is an }R\text{-morphism }\}\;\;\overset{1:1}{\longleftrightarrow}\;\;\frac{\left\{(\mL,s_0,\dots,s_n)\;\bigg{|}\;\substack{\mL\text{ is an invertible sheaf on }X\\\text{ and }s_0,\dots,s_n\in\mL(X)\text{ is base point free }}\right\}}{\sim}$$ given by $\varphi\mapsto(\varphi^\ast(\mO_{\Prj_R^n}(1)),\varphi^\ast(s_0),\dots,\varphi^\ast(s_n))$ and $(\mL,s_0,\dots,s_n)\sim(\mL',s_0',\dots,s_n')$ if and only if there exists an isomorphism $\mL\cong\mL'$ such that $s_i$ corresponds to $s_i'$. 
 \end{prp}
 
 \begin{prp}{}{}\\
@@ -2305,6 +2310,37 @@ Let $X$ be a Noetherian scheme. Let $\mL$ be an invertible sheaf of $\mO_X$-modu
 \end{defn}
 
 The condition that $\mF\otimes\mL^{\otimes n}$ is globally generated for large $n$ can be thought of as saying that $\mL^{\otimes n}$ eventually trivializes any coherent sheaf, or that $\mL$ is positive enough to overcome any twisting present in $\mF$. This is why ample sheaves are the correct algebraic generalization of positive line bundles in complex geometry. 
+
+\subsection{Relation to Divisors}
+\begin{defn}{The Associated Map of Divisors}{}\\
+Let $k$ be a field. Let $X$ be a variety over $k$. Let $D$ be a Cartier divisor on $X$. Define the associated map of $D$ to be the map $F_D:X\to\Prj(\Gamma(X,\mL(D))^\ast)$ given by $$p\mapsto\left[\text{ev}_p\right]$$ where $\text{ev}_p:\Gamma(X,\mL(D))\to\mL(D)_p\otimes_{\mO_{X,p}}k(p)$ is the map given by $f\mapsto f\otimes 1$. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $X$ be a variety over $k$. Let $D$ be a Cartier divisor on $X$. Let $s_0,\dots,s_n$ a basis for $\Gamma(X,\mL(D))$. Then the associated map is given by $$F_D(p)=[s_0(p):\cdots:s_n(p)]$$
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $X$ be a variety over $k$. Let $D$ be a Cartier divisor on $X$. Then the following are true. 
+\begin{itemize}
+\item $F_D$ is a rational map. 
+\item $F_D$ is a morphism if and only if $\mL(D)$ is base point free. 
+\end{itemize}
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $X$ be a variety over $k$. Let $D$ be a Cartier divisor on $X$. Suppose that $\mL(D)$ is base point free. Then $F_D$ corresponds to the morphism to projective space from the one to one correspondence to invertible sheaves. 
+\end{lmm}
+
+\begin{defn}{Complete Linear Systems}{}\\
+Let $k$ be a field. Let $X$ be a variety over $k$. Let $D$ be a Cartier divisor on $X$. Define the complete linear system of $D$ to be $$\abs{D}=\{D'\in\text{CDiv}(X)\;|\;D\sim D'\text{ and }D'\text{ is effective }\}$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $k$ be an algebraically closed field. Let $X$ be a smooth projective variety over $k$. Let $D$ be an effective Cartier divisor on $X$. Then there is a bijection $$\Prj(\Gamma(X,\mL(D))^\ast)\;\;\overset{1:1}{\longleftrightarrow}\;\;\{E\in[D]\;|\;E\text{ is effective }\}$$ given by $[f]\mapsto D+\text{div}(f)$. 
+\end{prp}
+
+Notice that if $D$ itself is effective, then the inverse of the above bijection sends $D$ to the equivalence class of all constant functions in $\Prj(\mL(D))$. 
 
 \pagebreak
 \section{Differentials}
@@ -2464,7 +2500,11 @@ Let $X,Y$ be schemes. Let $f:X\to Y$ be a morphism. Define the relative de Rham 
 \end{defn}
 
 \begin{defn}{The Canonical Sheaf}{}\\
-Let $k$ be an algebraically closed field. Let $X$ be a regular scheme over $k$. Define the canonical sheaf of $X$ to be $$\mK_X=\Omega_{X/k}^{\dim(X)}=\bigwedge_{i=1}^{\dim(X)}\Omega_{X/k}^1$$
+Let $k$ be a field. Let $X$ be a smooth schemes over $k$. Define the canonical sheaf of $X$ to be $$\mK_X=\Omega_{X/k}^{\dim(X)}=\bigwedge_{i=1}^{\dim(X)}\Omega_{X/k}^1$$
+\end{defn}
+
+\begin{defn}{The Canonical Divisor}{}\\
+Let $k$ be a field. Let $X$ be a smooth schemes over $k$. Define the canonical divisor of $X$ to be any Cartier divisor $K_X$ such that $$\mL(K_X)=\mK_X$$
 \end{defn}
 
 \pagebreak
@@ -2476,7 +2516,7 @@ Let $X$ be a space. Let $\mU$ be an open cover of $X$. Let $\mF$ be a sheaf on $
 Let $X$ be a Noetherian separated scheme. Let $\mU$ be an affine open cover of $X$. Let $\mF$ be a quasi-coherent sheaf of $\mO_X$-modules. Then there is a natural isomorphism $$\text{\v{H}}^i(X,\mU,\mF)\cong H^i(X,\mF)$$ for all $i>0$. 
 \end{prp}
 
-Recall that for any space $X$ and any sheaf $\mF$ on $X$, there are natural isomorphisms $$\text{Pic}(X)\cong\varinjlim_{\mU}\text{\v{H}}^1(X,\mU,\mF)\cong H^1(X,\mF)$$
+Recall that for any space $X$ and any sheaf $\mF$ on $X$, there are natural isomorphisms $$\varinjlim_{\mU}\text{\v{H}}^1(X,\mU,\mF)\cong H^1(X,\mF)$$
 
 \subsection{Cohomology of a Noetherian Scheme}
 \begin{thm}{Vanishing Theorem of Serre}{}\\
@@ -2524,183 +2564,24 @@ Let $k$ be a field. Let $\mF$ be a locally free sheaf on $\Prj_k^1$ of rank $m$.
 Let $R$ be a Noetherian commutative ring. Let $X$ be a proper scheme over $\text{Spec}(R)$. Let $\mL$ be an invertible sheaf on $X$. Then $\mL$ is ample if and only if for every coherent sheaf $\mF$ on $X$, there exists $N\in\N$ such that $$H^i(X,\mF\otimes\mL^{\otimes n})=0$$ for all $i>0$ and $n\geq N$. 
 \end{prp}
 
-\subsection{Algebraic de Rham Cohomology}
-\begin{defn}{Algebraic de Rham Cohomology}{}\\
-Let $S$ be a scheme. Let $X$ be a scheme over $S$. Define the $n$th algebraic de Rham cohomology group by $$H_\text{dR}^n(X/S)=\H^n(X;\Omega_{X/S}^\bullet)$$
-\end{defn}
-
+\subsection{Relation to Divisors}
 \begin{lmm}{}{}\\
-Let $S$ be a scheme. Let $X$ be a scheme over $S$. Then $\text{Tot}^\oplus\left(\mC^\bullet(X,\mU,\Omega_{X/S}^\bullet)\right)$ is an acyclic resolution of $\Omega_{X/S}^\bullet$. 
+Let $X$ be a scheme. Then there is a natural isomorphism $$\text{CDiv}(X)\cong H^0(X,Q_X^\ast/\mO_X^\ast)$$
 \end{lmm}
 
-Thus one way to compute the de Rham cohomology would be $$H_\text{dR}^n(X/S)\cong H^n(\text{Tot}^\oplus(\mC^\bullet(X,\mU,\Omega_{X/S}^\bullet))$$
-
-\begin{eg}{}{}\\
-Let $U_0=\text{Spec}(R_0=k[x,y]/(y^2-f(x)))$ where $k$ is a field of characteristic $0$ and $f$ is separable and $\deg(f)=2g+1$ or $2g+2$. Let $U_1=\text{Spec}(R_1=k[u,v]/(v^2-h(u)))$ where $h(u)=u^{2g+2}h(1/u)$. Then we have $$H_\text{dR}^i(X/k)=H^i\left(R_0\oplus R_1\to R_0\frac{dx}{y}\oplus R_1\frac{du}{v}\oplus R_0[1/x]\to R_0[1/x]dx\right)$$ where the first map is given by $(w,z)\mapsto(dw,dz,w-z(1/x,y/x^{g+1}))$, the second map is given by $(wdx,zdu,g(x,y))\mapsto wdx-zdu-dg$ where $du=-z(1/x, y/x^{g+1})dx/x^2$. 
-\begin{itemize}
-\item $H_\text{dR}^0(X/k)\cong k$. 
-\item $H_\text{dR}^2(X/k)\cong H_\text{dR}^1(X/k)$. 
-\item $H^0(X,\Omega_{X/k}^0)\hookrightarrow H_\text{dR}^1(X/k)$ given by $\omega\mapsto(\omega|_{U_0},\omega|_{U_1},0)$ is an inclusion since the global sections are constant. 
-\item There is a map $H_\text{dR}^1(X/kk)\to H^1(X,\mO_X$ given by $(\omega_0,\omega_1,g)\mapsto g$ and precomposing with the above map gives $0$. It is clearly surjective. 
-\item So we have an exact sequence $$0\to H^0(X,\Omega_{X/k}^\bullet)\to H_\text{dR}^1(X/k)\to H^1(X,\mO_X)\to 0$$ called the Hodge filtration on $H_\text{dR}^1(X/k)$. In characteristic $p$ this is more subtle: not all global differentials are closed. 
-\item What can we say about the map $H_\text{dR}^1(X/k)\to H_\text{dR}^1(U_0/k)$ given by $(\omega_0,\omega_1,g)\mapsto g$. 
-\item The LES in local cohomology gives $$0\to H^1(X(\C),\C)\to H^1(U_0(\C),\C)\to H^2(X(\C),U_0(\C),\C)\to H^2(X(\C),\C)\to 0$$ and $H^2(X(\C),U_0(\C),\C)\cong H^0((X-U_0)(\C),\C)\cong\C^{\abs{X-U_0}(\C)}$. If $\deg(f)$ is odd, $\abs{(X-U_0)(\C)}=1$. Then $H^1(X(\C),\C)\to H^1(U_0(\C),\C)$ is an isomrophism. If $\deg(f)$ is even, then we have $0\to H^1(X(\C),\C)\to H^1(U_0(\C),\C)\to\C\to 0$. 
-Same thing happens for de Rham cohomology. Surjectivity of $H_\text{dR}^1(X/k)\to H_\text{dR}^1(U_0/k)$ iff every class $(\omega_0)$ for $\omega_0\in\Omega_{R_0/k}^1$ is the image of $\ker(R_0dx/y\oplus R_1du/v\oplus R_0[1/x]\to R_0[1/x]dx)$. i.e. $\exists\omega_1\in R_1du/v$, $g\in R_0[1/x]$ such that $\omega_0-\omega_1=dg$. The obstruction to finding such an $\omega_1$ and $g$ would be the residue of a differential. Pick $z\in(X-U_0)(\overline{k})$ a closed point and a parameter $t$ at $z$. Write $\omega$ as $F(t)=\sum_{i=0}^\infty a_it^i\in\overline{k}[[t]]$. Eg any meromorphic can be written as rational function times dt, then, take formal power series. Then $\text{Res}_z(\omega)=a_1$ of $F(t)$. If $\omega_1\in\Omega_{R_1/k}^1$ then $\text{Res}_z=0$ (indeed it has no pole). Also $\text{Res}_z(dg)=0$. Then image of $H_\text{dR}^1(X/k)$ is contained in the kernel of the residue map $$\text{Res}:H_\text{dR}^0(U_0/k)\to\bigoplus_{Z\in(X-U_0(\overline{k})}\overline{k}$$ Fact: For any open $U\subseteq X$, $\omega\in H^0(U,\Omega_{X/k})$, then $$\sum_{Z\in(X-U)(\overline{k})}\text{Res}_z(\omega)=0$$
-\end{itemize}
-\end{eg}
+Recall that if $(X,\mO_X)$ is a locally ringed space, then we have $\text{Pic}(X)\cong H^1(X,\mO_X^\ast)$. 
 
 \begin{prp}{}{}\\
-Let $S$ be a scheme. Let $X$ be a scheme over $S$. Then the following are true. 
-\begin{itemize}
-\item $H_\text{dR}^n(X/S)$ is a $H_\text{dR}^0(X/S)$-module. 
-\item The map $H_\text{dR}^i(X/S)\times H_\text{dR}^j(X/S)\to H_\text{dR}^{i+j}(X/S)$ induced by the wedge of differential forms is a $H_\text{dR}^0(X/S)$-linear. 
-\end{itemize}
-\end{prp}
-
-\begin{defn}{The de Rham Cohomology Ring}{}\\
-Let $S$ be a scheme. Let $X$ be a scheme over $S$. Define the de Rham cohomology ring of $X$ to be $$H_\text{dR}^\ast(X/S)=\bigoplus_{i=0}^\infty H_\text{dR}^i(X/S)$$ together with ring structure given by wedge of differential forms. 
-\end{defn}
-
-\begin{lmm}{}{}\\
-Let $S$ be a scheme. Let $X$ be a scheme over $S$. Then $H_\text{dR}^\ast(X/S)$ is a graded commutative $H_\text{dR}^0(X/S)$-algebra. 
-\end{lmm}
-
-
-
-
-
-\begin{lmm}{}{}\\
-Let $k$ be a field of characteristic $0$. Let $X$ be a smooth affine variety over $k$. Then we have $$H_\text{dR}^n(X)=H^n(\Gamma(X,\Omega_{X/k}^\bullet))$$ for all $n\in\N$. 
-\end{lmm}
-
-\begin{eg}{}{}\\
-Let $k$ be a field of characteristic $0$. Let $R=k[x_1,\dots,x_n]$ be the polynomial ring over $k$. Then $\Gamma\left(X,\Omega_{\text{Spec}(R)/k}^1\right)=\Omega_{R/k}^1=\bigoplus_{i=1}^nRdx_i$. Then we have $$\Gamma\left(X,\Omega_{\text{Spec}(R)/k}^j\right)=\bigoplus_{1\leq i_1<\cdots<i_j\leq n} Rdx_{i_1}\wedge\cdots\wedge dx_{i_j}$$ Then we have $$H_\text{dR}^i(R/k)=\begin{cases}
-k & \text{ if }i=0\\
-0 & \text{ otherwise }
-\end{cases}$$
-\end{eg}
-
-TBR:
-
-\begin{eg}{}{}\\
-Let $k$ be a field of characteristic $p>0$. Then we have $$\dim_k(H^1(\Gamma(\text{Spec}(k[t]),\Omega_{\text{Spec}(k[t])/k}^1)))=\infty$$ Indeed, we have $$H^1(\Gamma(\text{Spec}(k[t]),\Omega_{\text{Spec}(k[t])/k}^1))=\frac{k[t]}{\langle f'(t)\;|\;f\in k[t]\rangle}=\frac{k[t]}{\bigoplus_{i=1}^\infty it^{i-1}dt}\cong\bigoplus_{i=1}^\infty t^{ip-1}dt$$
-\end{eg}
-
-\begin{eg}{}{}\\
-$\Omega_{\Z[\sqrt{2}]/\Z}^1\cong(\Z/2\Z)d\sqrt{2}$. $H^1(\Gamma(\text{Spec}(\Z\sqrt{2}),\Omega_{\Z[\sqrt{2}]/\Z}^1))\neq0$
-\end{eg}
-
-\begin{eg}{}{}\\
-Let $k$ be a field of characteristic $p\neq 2$. Let $f\in k[x]$ be separable. Let $R=\frac{k[x,y]}{y^2-f(x)}$. Then we have $$\Omega_{R/k}^1\cong\frac{\Omega_{k[x,y]/k}^1\otimes_{k[x,y]}k}{(2ydy-f'(x)dx)}\cong\frac{Rdx\oplus Rdy}{R(2ydy-f'(x)dx)}$$ Using the quotient relation, we may write $dy=\frac{f'(x)dx}{2y}$ in the module. Thus $dx/y$ is a generator of the module. \\
-
-Since $f$ is separable, there exists $g,h\in k[x]$ such that $gf+hf'=1$. Let $\omega=aydx+2bdy\in\Omega_{R/k}^1$. Then we have $y\omega=dx$. Hence $y$ divides $dx$ and $\omega=dx/y$. \\
-
-Now let $z=a(x)+b(x)y\in R$ be arbitrary. Then we have $$dz=(a'(x)+b'(x)y)dx+h(x)dy=(ya'(x)+b'(x)f(x)+\frac{1}{2}b(x)f'(x))\omega$$ Thus every element of $\Omega_{R/k}^1$ is of the form $q(x)\omega$ for some $q(x)\in k[x]$. If $\deg(q)\geq\deg(f)$, then there exists $p\in k[x]$ such that $\deg(p)>\deg(q)$ such that $$[p(x)\omega]=[q(x)\omega]$$ in $H_\text{dR}^1(R/k)$. 
-\end{eg}
-
-\begin{lmm}{}{}\\
-Let $k$ be a field of characteristic $0$. Let $X$ be a smooth variety over $k$. Then the following are true. 
-\begin{itemize}
-\item $H_\text{dR}^i(X)=0$ for all $i>2\dim(X)$. 
-\item If $X$ is affine, then $H_\text{dR}^i(X)=0$ for all $i>\dim(X)$. 
-\end{itemize}
-\end{lmm}
-
-\begin{prp}{}{}\\
-
-\end{prp}
-
-\subsection{Hodge de Rham Spectral Sequences}
-\begin{defn}{The Hodge Filtration}{}\\
-Let $S$ be a scheme. Let $X$ be a scheme over $S$. Define the Hodge filtration $F^\bullet\Omega_{X/S}^\bullet$ of $X$ to be $$F^i\Omega_{X/S}^j=\begin{cases}
-\Omega_{X/S}^j & \text{ if }j\geq i\\
-0 & \text{ otherwise }
-\end{cases}$$
-\end{defn}
-
-Thus for each $i$, the collection of complexes $$F^i\Omega_{X/S}^\bullet=(0\to\Omega_{X/S}^i\to\Omega_{X/S}^{i+1}\to\cdots)$$ form the filtration for $\Omega_{X/S}^\bullet$. 
-
-\begin{lmm}{}{}\\
-Let $S$ be a scheme. Let $X$ be a scheme over $S$. Then $F^\bullet\Omega_{X/S}^\bullet$ is an exhaustive filtration. 
-\end{lmm}
-
-\begin{defn}{The Hodge de Rham Spectral Sequence}{}\\
-Let $S$ be a scheme. Let $X$ be a scheme over $S$. Define the Hodge de Rham spectral sequence to be the spectral sequence associated to the Hodge siltration $F^\bullet\Omega_{X/S}^\bullet$. 
-\end{defn}
-
-The $E^0$ page is given by $$E_0^{p,q}=\frac{F^p\Omega_{X/S}^{p+q}}{F^{p+1}\Omega_{X/S}^{p+q}}=\frac{\Omega_{X/S}^q}{\Omega_{X/S}^{q-1}}$$
-
-\begin{lmm}{}{}\\
-Let $S$ be a scheme. Let $X$ be a scheme over $S$. Then we have $$E_1^{p,q}=H^q(X,\Omega_{X/S}^p)\Rightarrow H_\text{dR}^{p+q}(X/S)$$
-\end{lmm}
-
-\begin{thm}{Deligne}{}\\
-If $S=\text{Spec}(k)$, $k$ char $0$, $X\to S$ smooth and proper. Then the Hodge de Rham spectral sequence degenerates at the $E_1$ page (all differentials in page $1$ is $0$). 
-\end{thm}
-
-When you have a $2$-step filtration: $0\to F^1C^\bullet\to C^\bullet\to C^\bullet/F^1C^\bullet\to 0$, the spectral sequence is the long exact sequence in cohomology. 
-
-\subsection{Flat Connections}
-$X/\C$ smooth connected algebraic variety. $(V,\Delta)\to(V^\text{an})^{\Delta=0}$. 
-
-Cyclic vector theorem:
-$(V,\Delta)$ on $K(C)$, $C$ a connected curve over $k$. Suppose that $e\in V$. Let $e_i=\partial_i e$. 
-
-
-\pagebreak
-\section{Intersection Theory}
-\subsection{The Divisor of a Rational Function}
-\begin{defn}{The Order of a Function at a Subvariety}{}\\
-Let $k$ be a field. Let $X$ be a scheme of finite type over $k$. Let $W$ be an irreducible subvariety of $X$. Let $f/g\in K(W)^\ast$ for $f,g\in\mO_X(W)$ and $g\neq 0$. Let $V\subseteq W$ be an irreducible subvariety of codimension $1$. Define the order of $f$ at $V$ to be $$\text{ord}_V(f/g)=l_{\mO_X(W)}\left(\frac{\mO_X(W)}{(f)}\right)-l_{\mO_X(W)}\left(\frac{\mO_X(W)}{(g)}\right)$$
-\end{defn}
-
-\begin{defn}{The Divisor of a Rational Function}{}\\
-Let $k$ be a field. Let $X$ be a scheme of finite type over $k$. Let $W$ be an irreducible subvariety of $X$. Let $f\in K(W)^\ast$. Define the divisor of $f$ to be $$\text{div}(f)=\sum_{\substack{V\text{ is a codimension }1\\\text{irreducible subvariety of }W}}\text{ord}_V(f)\cdot V$$
-\end{defn}
-
-\subsection{The Chow Groups}
-\begin{defn}{The Group of $n$-Cycles}{}\\
-Let $k$ be a field. Let $X$ be a scheme of finite type over $k$. Let $n\in\N$. Define the group of $n$-cycles on $X$ to be the free abelian group $$Z_n(X)=\Z\langle V\;|\;\substack{V\text{ is an }n\text{-dimensional}\\\text{irreducible subvariety of }X}\rangle$$
-\end{defn}
-
-\begin{lmm}{}{}\\
-Let $k$ be a field. Let $X$ be a scheme of finite type over $k$. Let $W$ be an irreducible subvariety of $X$. Let $f\in K(W)^\ast$. Then $\text{div}(f)\in Z_{\dim(W)-1}(X)$. 
-\end{lmm}
-
-\begin{defn}{Cycles Rationally Equivalent to Zero}{}\\
-Let $k$ be a field. Let $X$ be a scheme of finite type over $k$. Let $V\in Z_n(X)$. We say that $V$ is rationally equivalent to $0$ if there exists finitely many $n+1$-dimensional irreducible subvarieties $W_1,\dots,W_r$ of $X$ and $f_i\in K(W_i)^\ast$ such that $$V=\sum_{i=1}^n\text{div}(f_i)$$
-\end{defn}
-
-\begin{prp}{}{}\\
-Let $k$ be a field. Let $X$ be a scheme of finite type over $k$. Let $V\in Z_n(X)$ be a cycle. Then $V$ is rationally equivalent to $0$ i and only if there exists $(n+1)$-dimensional irreducible subvarieties $W_1,\dots,W_r$ of $X\times\Prj_k^1$ such that the projection maps $p_i:W_i\to\Prj_k^1$ are dominant and $V=\sum_{i=1}^r[p_i^{-1}(0)]-[p_i^{-1}(\infty)]$
-\end{prp}
-
-\begin{defn}{The Chow Group}{}\\
-Let $k$ be a field. Let $X$ be a scheme of finite type over $k$. Define the $n$th Chow group of $X$ to be $$\text{CH}_n(X)=\frac{Z_n(X)}{\sim}$$ where we say that $V_1\sim V_2$ if $V_1-V_2$ is rationally equivalent to $0$. In this case, we say that $V_1$ and $V_2$ are rationally equivalent. 
-\end{defn}
-
-\subsection{The Ring Structure}
-
-\subsection{Pushfoward and Pullback of Cycles}
-\begin{defn}{The Push Forward Map}{}\\
-Let $k$ be a field. Let $X,Y$ be schemes of finite type over $k$. Define the push forward map $f_\ast:Z_n(X)\to Z_n(Y)$ by $$f_\ast(V)=\deg(V/f(V))f(V)$$ where $$\deg(V/f(V))=\begin{cases}
-[k(V):k(f(V))] & \text{ if }\dim(V)=\dim(f(V))\\
-0 & \text{ otherwise }
-\end{cases}$$
-\end{defn}
-
-\begin{prp}{}{}\\
-Let $k$ be a field. Let $X,Y$ be schemes of finite type over $k$. Then the push forward map descends to a well defined homomorphism $f_\ast:\text{CH}_n(X)\to\text{CH}_n(Y)$. 
-\end{prp}
-
-\begin{prp}{}{}\\
-Let $k$ be a field. Let $X$ be a scheme of finite type over $k$. Let $i:Y\hookrightarrow X$ be a closed subscheme of $X$. Let $j:X\setminus Y\hookrightarrow X$ be the inclusion map. Then there is an exact sequence \\
+Let $X$ be a scheme. Then the following diagram is commutative: \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
-	{\text{CH}_n(Y)} & {\text{CH}_n(X)} & {\text{CH}_n(X\setminus Y)} & 0
-	\arrow["{i_\ast}", from=1-1, to=1-2]
-	\arrow["{j\ast}", from=1-2, to=1-3]
-	\arrow[from=1-3, to=1-4]
+	{\text{CDiv}(X)} & {\text{Pic}(X)} \\
+	{H^0(X,Q_X^\ast/\mO_X^\ast)} & {H^1(X,\mO_X^\ast)}
+	\arrow[from=1-1, to=1-2]
+	\arrow["\cong"', from=1-1, to=2-1]
+	\arrow["\cong", from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
 \end{tikzcd}} \\
+where the bottom horizontal map is induced by the long exact sequence of the short exact sequence $0\to\mO_X^\ast\to Q_X^\ast\to\frac{Q_X^\ast}{\mO_X^\ast}\to 0$. 
 \end{prp}
 
 

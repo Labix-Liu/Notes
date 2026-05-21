@@ -41,6 +41,12 @@ Let $(U,\phi=z_1,\dots,z_n))$ be a chart of a complex manifold $M$. Write $z_k=x
 Let $M$ be a complex manifold. Let $U\subseteq M$ be an open subset. Then $U$ is a complex manifold. 
 \end{lmm}
 
+\begin{defn}{Almost Complex Manifolds}{}\\
+An almost complex manifold is a smooth manifold $M$ together with an almost complex structure on $TM$. 
+\end{defn}
+
+Even though every even dimensional vector space has a linear complex structure, they may not glue smoothly into an almost complex structure for a smooth manifold. This is a question of the reduction of the structure group from $GL_{2n}(\R)$ to the subgroup $GL_n(\C)$. 
+
 \subsection{The Sheaf of Holomorphic Forms}
 \begin{defn}{The Sheaf of Holomorphic Forms}{}\\
 Let $M$ be a complex manifold. Define the sheaf of holomorphic form $\mO_M$ as follows. 
@@ -59,10 +65,10 @@ Let $M$ be a complex manifold. Then $\mO_M$ is a coherent sheaf.
 \end{thm}
 
 \begin{defn}{The Sheaf of Meromorphic Forms}{}\\
-Let $M$ be a complex manifold. Define the sheaf of meromorphic form $\mK_M$ as follows. 
+Let $M$ be a complex manifold. Define the sheaf of meromorphic form $\mM_M$ as follows. 
 \begin{itemize}
-\item For each open set $U\subseteq M$, define $\mK_M(U)=Q(\mO_M(U))$. 
-\item For each inclusion of open sets $V\hookrightarrow U$, the map $\mK_M(U)\to\mK_M(V)$ is given by the restriction map $f\mapsto f|_V$. 
+\item For each open set $U\subseteq M$, define $\mM_M(U)=\text{Frac}(\mO_M(U))$. 
+\item For each inclusion of open sets $V\hookrightarrow U$, the map $\mM_M(U)\to\mM_M(V)$ is given by the restriction map $f\mapsto f|_V$. 
 \end{itemize}
 \end{defn}
 
@@ -70,13 +76,8 @@ Let $M$ be a complex manifold. Define the sheaf of meromorphic form $\mK_M$ as f
 \begin{defn}{Complex Submanifolds}{} Let $M$ be an $n$ dimensional manifold. An $m$ dimensional submanifold is a subset $Y$ of $M$ such that for every $y\in Y$, there exists a chart $(U,\phi)$ of $M$ such that $$\phi(Y\cap U)=\phi(U)\cap\{0\}^{n-m}\times\C^m=\{(z_1,\dots,z_n)\in\phi(U)|z_{n-m+1}=\dots=z_n=0\}$$
 \end{defn}
 
-\subsection{Almost Complex Manifolds}
-\begin{defn}{Almost Complex Manifolds}{}\\
-An almost complex manifold is a smooth manifold $M$ together with an almost complex structure on $TM$. 
-\end{defn}
-
-Even though every even dimensional vector space has a linear complex structure, they may not glue smoothly into an almost complex structure for a smooth manifold. This is a question of the reduction of the structure group from $GL_{2n}(\R)$ to the subgroup $GL_n(\C)$. 
-
+\pagebreak
+\section{More on Vector Bundles}
 \subsection{Holomorphic Vector Bundles}
 \begin{defn}{Holomorphic Vector Bundles}{}\\
 Let $M$ be a complex manifold. A holomorphic vector bundle is a vector bundle $p:E\to B$ over $\C$ such that the following are true. 
@@ -90,6 +91,31 @@ Let $M$ be a complex manifold. A holomorphic vector bundle is a vector bundle $p
 \begin{prp}{}{}\\
 Let $M$ be a complex manifold. Let $E$ be a complex manifold and $p:E\to M$ a vector bundle over $\C$. Then $p$ is a holomorphic vector bundle if and only if the transition maps $g_{i,j}:U_i\cap U_j\to\text{GL}(n,\C)$ are holomorphic. 
 \end{prp}
+
+\subsection{Vector Bundles and Sheaves}
+\begin{thm}{Serre's Correspondence for Topological Manifolds}{}\\
+Let $M$ be a topological manifold. Then there is an equivalence of categories $$\bold{Vect}^\R(M)\simeq\bold{LF}_{\mC_M^0}$$
+\end{thm}
+
+\begin{thm}{Serre's Correspondence for Smooth Manifolds}{}\\
+Let $M$ be a smooth manifold. Then there are equivalence of categories $$\bold{SmVect}^\R(M)\simeq\bold{LF}_{\mC_M^\infty}\;\;\;\text{ and }\;\;\;\bold{SmVect}^\C(M)\simeq\bold{LF}_{\mC_M^\infty\otimes_\R\C}$$
+\end{thm}
+
+\begin{thm}{Serre's Correspondence for Complex Manifolds}{}\\
+Let $M$ be a complex manifold. Then there is an equivalence of categories $$\bold{HolVect}^\C(M)\simeq\bold{LF}_{\mO_M}$$
+\end{thm}
+
+\begin{thm}{Serre-Swan Theorem for Manifolds}{}\\
+Let $M$ be a smooth manifold. Let $p:E\to M$ be a smooth vector bundle over $M$. Then the following are true. 
+\begin{itemize}
+\item $\mC^\infty(E)$ is a finitely generated and projective $\mC^\infty(M)$-module. 
+\item Suppose that $M$ is connected. There is an equivalence of categories $$\mC^\infty:\bold{SmVect}^\R(M)\overset{\simeq}{\to}\bold{proj}(\mC^\infty(M))$$
+\end{itemize}
+\end{thm}
+
+\begin{thm}{Serre-Swan Theorem}{}\\
+Let $X$ be a compact Hausdorff space. Then there are equivalence of categories $$\Gamma:\bold{Vect}^\R(X)\overset{\simeq}{\to}\bold{proj}(\mC^0(X))\;\;\;\text{ and }\;\;\;\Gamma:\bold{Vect}^\C(X)\overset{\simeq}{\to}\bold{proj}(\mC^0(X)\otimes_\R\C)$$
+\end{thm}
 
 \pagebreak
 \section{Tangent Spaces}
@@ -365,7 +391,7 @@ Let $(M,h)$ be a Hermitian manifold. Define the associated Riemannian metric of 
 In local coordinates, $g$ is expressed as $$g(u,v)=\frac{1}{2}\sum h_{\alpha\overline{\beta}}(dz_\alpha\otimes d\overline{z}_\beta+d\overline{z}_\beta\otimes dz_\alpha)$$
 
 \begin{lmm}{}{}\\
-Let $(M,h)$ be a Hermitian manifold. Then we have $\omega$ is a $(1,1)$-form. 
+Let $(M,h)$ be a Hermitian manifold. Then we have $\omega$ is symplectic structure on $TM$. 
 \end{lmm}
 
 \begin{lmm}{}{}\\
@@ -471,85 +497,5 @@ Let $M$ be a compact complex Hermitian manifold. Let $n=\dim(M)$. Then the follo
 \item There is a perfect pairing $H^{p,q}(M)\times H^{n-p,n-q}(M)\to\C$ given by $$(\alpha,\beta)\mapsto\int_M\alpha\wedge\beta$$
 \end{itemize}
 \end{prp}
-
-\pagebreak
-\section{Kahler Manifolds}
-\subsection{Properties of Kahler Manifolds}
-\begin{defn}{Kahler Forms}{}\\
-Let $M$ be a complex Hermitian manifold. Let $\omega$ be the associated form. We say that $\omega$ is a Kahler form if $d\omega=0$. 
-\end{defn}
-
-\begin{defn}{Kahler Manifolds}{}\\
-A Kahler manifold is a complex Hermitian manifold $M$ together with a Kahler form $\omega$. 
-\end{defn}
-
-Note: This makes Kahler manifolds also symplectic manifolds. 
-
-\begin{prp}{}{}\\
-Let $(M,g)$ be a Riemannian manifold of dimension $2n$. Then $M$ admits a Kahler form if and only if $\text{Hol}(\nabla^g)\leq U(n)$. 
-\end{prp}
-
-\begin{eg}{}{}\\
-$\C\Prj^n$ together with the Fubini-Study metric is a Kahler manifold. 
-\end{eg}
-
-\begin{eg}{}{}\\
-Every Riemann surfaces is a Kahler manifold. 
-\end{eg}
-
-\begin{thm}{Hodge Decomposition Theorem}{}\\
-Let $M$ be a compact Kahler manifold. Then the following are true. 
-\begin{itemize}
-\item There is an isomorphism $$H_\text{dR}^k(M;\C)\cong\bigoplus_{p+q=k}H^{p,q}(M)$$ for all $k\in\N$. 
-\item There is an isomorphism $$H^{p,q}(M)\cong\overline{H^{q,p}(M)}$$ for all $p,q\in\N$. 
-\item $\dim_\R(H_\text{dR}^k(M))$ is even for all $k\in\N$. 
-\end{itemize}
-\end{thm}
-
-\begin{eg}{}{}\\
-Every compact Riemann surface is of the form $\Sigma_g$ for some $g\geq 0$. We have seen above that $\Sigma_g$ is Kahler. We know that $$H_\text{dR}^k(\Sigma_g;\C)=\begin{cases}
-\C & \text{ if }k=0,2\\
-\C^{2g} & \text{ if }k=1\\
-0 & \text{ otherwise }
-\end{cases}$$
-From this we conclude that $H^{0,0}(\Sigma_g)=\C$. Now since $\dim_\C(H^{p,q}(M))=\dim_\C(\overline{H^{q,p}(\Sigma_g)})=\dim_\C(H^{q,p}(\Sigma_g))$, we conclude that $H^{1,0}(\Sigma_g)\cong H^{0,1}(\Sigma_g)\cong\C^g$. Also, since $\Sigma_g$ has complex dimension $1$, it has no holomorphic $2$-forms. Hence $H^{2,0}(\Sigma_g)=H^{0,2}(\Sigma_g)=0$. This leaves us with $H^{1,1}(\Sigma_g)=H^2(\Sigma_g)=\C$. The hodge diamond of $\Sigma_g$ is given by  \\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	& 1 & \\
-	g && g \\
-	& 1
-\end{tikzcd}} \\
-\end{eg}
-
-\begin{defn}{Hodge Filtration}{}\\
-Let $M$ be a compact Kahler manifold. Define the Hodge filtration of $M$ to be $$F^iH_\text{dR}^k(M;\C)=\bigoplus_{p\geq i}H^{p,q}(M)$$
-\end{defn}
-
-\begin{defn}{The Lefschetz Operator}{}\\
-Let $M$ be a Kahler manifold. Let $\omega$ be its associated form. Define the Lefschetz operator to be the map $L:\Omega^k(M)\to\Omega^{k+2}(M)$ given by $$\alpha\mapsto\alpha\wedge\omega$$
-\end{defn}
-
-\begin{thm}{Hard Lefschetz Theorem}{}\\
-Let $M$ be a compact Kahler manifold. Then the following are true. 
-\begin{itemize}
-\item The Lefschetz operator induces an isomorphism $$L^k:H_\text{dR}^{n-k}(M)\overset{\cong}{\longrightarrow} H_\text{dR}^{n+k}(M)$$
-\end{itemize}
-\end{thm}
-
-\begin{defn}{Primitive Cohomology}{}\\
-Let $M$ be a compact Kahler manifold. Let $n=\dim(M)$. Define the primitive cohomology of $M$ to be $$H_\text{prim}^i(M)=\ker(L^{n-i+1}:H_\text{dR}^i(M)\to H_\text{dR}^{2n-i+2}(M))$$
-\end{defn}
-
-\begin{defn}{Lefschetz Decomposition}{}\\
-Let $M$ be a compact Kahler manifold. Define the Lefschetz decomposition of $M$ to be $$H_\text{dR}^k(M)=\bigoplus_{2r\leq k} L^r(H_\text{prim}^{k-2r}(M))$$
-\end{defn}
-
-\begin{prp}{}{}\\
-Let $M$ be a compact Kahler manifold of complex dimension $2n$. Suppose that $h=\sum_{p=0}^{2m}\sum_{q=0}^{2m}(-1)^p\dim_\C(H^{p,q}(M))$. Then the signature of the non-degenerate symmetric bilinear form $H^n(X;\R)\times H^n(X;\R)\to\R$ from Poincare duality is given by $(h,2n-h)$. 
-\end{prp}
-
-\subsection{Line Bundles on Kahler Manifolds}
-\begin{thm}{Lefschetz Theorem on $(1,1)$-Classes}{}\\
-Let $M$ be a compact Kahler manifold. Then we have $$\im(\text{Pic}(M)\to H^2(M,\Z)\to H^2(M,\C))=\im(H^2(M,\Z)\to H^2(M,\C))\cap H^{1,1}(M)$$
-\end{thm}
 
 \end{document}

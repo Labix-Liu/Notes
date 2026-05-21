@@ -93,25 +93,35 @@ Now suppose that $m\leq x<m+1$ and $n\leq x<n+1$. From these we derive that $m\l
 \end{proof}
 \end{prp}
 
-\begin{lmm}{}{}\\ The positive solution to the equation $x^2-2=0 $, denoted $\sqrt{2}$ is irrational. 
-\begin{proof}\\ Suppose that $\sqrt{2}$ is rational, then it can be represented as $\frac{m}{n}$ with $hcf(m,n)=1$. Then we have $m^2=2n^2$, implying that $2|m^2$ and $2|m$. Thus we can say that $m=2k$ for some $k\in\Z$. Substituting $m=2k$, we have $2k^2=n^2$ which similarly implies that $2|n$ which is a contradiction since they have a common factor. 
-\end{proof}
+\begin{defn}{Square Root of a Real Number}{}\\
+Let $c\in\R^+$. Define the square root of $c$ to be $$\sqrt{c}=\sup\{x\in\R\;|\;x\geq 0\text{ and }x^2\leq c\}$$
+\end{defn}
+
+The number $\sqrt{c}$ exists because of the completeness property. 
+
+\begin{lmm}{}{}\\
+Let $c\in\R^+$. Then we have $(\sqrt{c})^2=c$. 
 \end{lmm}
 
-\begin{thm}{Density of the Rationals}{}\\ Between any pair of distinct real numbers there is a rational number. 
-\begin{proof}\\ Suppose $a,b\in\R$ and $a<b$. By the archimedean property we have that $n(b-a)>1$ for some $n\in\N$. Let $m=\floor{na}+1$. We have $na<m\leq na+1<nb$. Thus $a<\frac{m}{n}<b$. 
+\begin{eg}{}{}\\
+The number $\sqrt{2}$ is irrational. 
+\begin{proof}\\
+Suppose for a contradiction that $\sqrt{2}$ is rational. Then there exists $p,q\in\N^+$ and $\gcd(p,q)=1$ such that $\sqrt{2}=\frac{p}{q}$. Then we have $p=\sqrt{2}q$ which implies that $p^2=2q^2$. But this implies that $p^2$ is even, and hence $p$ is even. So there exists $k\in\N$ such that $p=2k$. Substituting gives $4k^2=2q^2$ and $2k^2=q^2$. But this also implies that $q^2$ is even and hence $q$ is even. This is a contradiction since $2$ is both a factor of $p$ and $q$, but we assumed that $\gcd(p,q)=1$. 
+\end{proof}
+\end{eg}
+
+\begin{thm}{Density of the Real Numbers}{}\\
+Let $a,b\in\R$. Then the following are true. 
+\begin{itemize}
+\item There exists $x\in\Q$ such that $a<x<b$. 
+\item There exists $y\in\R\setminus\Q$ such that $a<y<b$. 
+\end{itemize}
+\begin{proof}\\
+Suppose $a,b\in\R$ and $a<b$. By the archimedean property we have that $n(b-a)>1$ for some $n\in\N$. Let $m=\floor{na}+1$. We have $na<m\leq na+1<nb$. Thus $a<\frac{m}{n}<b$. \\
+
+Suppose $a,b\in\R$ and $a<b$. By the archimedean property we have that $n(b-a)>1$ for some $n\in\N$. Let $m=\floor{na}+1$. We have $na<m\leq na+1<nb$. Thus $a<\frac{m}{n}<b$. 
 \end{proof}
 \end{thm}
-
-\begin{thm}{Density of the Irrationals}{}\\ Between any pair of distinct real numbers there is an irrational number. 
-\begin{proof}\\ Suppose $a,b\in\R$ and $a<b$. By the density of the rationals we have that $\frac{a}{\sqrt{2}}<r<\frac{b}{\sqrt{2}}$ for some $r\in\Q$ thus $a<r\sqrt{2}<b$. 
-\end{proof}
-\end{thm}
-
-\begin{crl}{}{}\\ Between any pair of distinct real numbers there is an infinite number of rationals and irrationals. 
-\begin{proof}\\ Recursively apply density of rationals and density of irrationals. 
-\end{proof}
-\end{crl}
 
 \pagebreak
 \section{Sequences}
@@ -121,12 +131,13 @@ We begin our discussion we the definition and the first properties of sequences,
 A sequence $(a_n)_{n\in\N}$ in $\R$ is a function $f:\N\to\R$ that assigns to each natural number a real number $f(n)=a_n$. 
 \end{defn}
 
-\begin{defn}{Covergence of Sequences}{}\\
-Let $(a_n)_{n\in\N}$ be a sequence in $\R$. Let $a\in\R$. We say that the sequence converges to $a$ if for all $\varepsilon>0$, there exists $N\in\N$ such that $$n>N\implies \abs{a_n-a}<\varepsilon$$ In this case we write $(a_n)_{n\in\N}\to a$. 
+\begin{defn}{Limits and Convergence}{}\\
+Let $(a_n)_{n\in\N}$ be a sequence in $\R$. Let $a\in\R$. We say that the sequence converges to the limit $a$ if for all $\varepsilon>0$, there exists $N\in\N$ such that $$n>N\implies \abs{a_n-a}<\varepsilon$$ In this case we write $(a_n)_{n\in\N}\to a$. 
 \end{defn}
 
-\begin{eg}{}{} The sequence $(1/n)_{n\in\N}$ converges to $0$. 
-\begin{proof}
+\begin{eg}{}{}\\
+The sequence $(1/n)_{n\in\N}$ converges to $0$. 
+\begin{proof}\\
 Let $\varepsilon>0$. Choose $N>\frac{1}{\varepsilon}$. This is possible by the Archimedean property. For $n>N$, we have $$\frac{1}{n}<\frac{1}{N}<\varepsilon$$
 \end{proof}
 \end{eg}
@@ -159,10 +170,12 @@ Which is a contradiction.
 \end{proof}
 \end{prp}
 
-\begin{defn}{Divergence to Infinity}{}\\ A sequence $(a_n)_{n\in\N}$ in $\R$ is said to 
+\begin{defn}{Divergence to Infinity}{}\\
+Let $(a_n)_{n\in\N}$ be a sequence. 
 \begin{itemize}
-\item diverge to $\infty$ if for every real number $C>0$ there exists a number $N\in\N$ such that $$n>N\implies a_n>C$$
-\item diverge to $-\infty$ if for every real number $C<0$ there exists a number $N\in\N$ such that $$n>N\implies a_n<C$$
+\item We say that the sequence diverges to $\infty$ if for all $C\in\R^+$, there exists $N\in\N$ such that $a_n>C$ for all $n>N$. 
+\item We say that the sequence diverges to $-\infty$ if for all $C\in\R^-$, there exists $N\in\N$ such that $a_n<C$ for all $n>N$. 
+\item We say that the sequence diverges if it does not converge and does not diverge to $\pm\infty$. 
 \end{itemize}
 \end{defn}
 
@@ -208,7 +221,12 @@ Since we have $0<\abs{\frac{1}{b_n}-\frac{1}{b}}<\frac{2\abs{b_n-b}}{b^2}$ then 
 \end{proof}
 \end{prp}
 
-\begin{prp}{}{}\\ The following two statements are true about a sequence $(a_n)_{n\in\N}$. 
+\begin{eg}{}{}\\
+We have $$\left(\frac{\sqrt{9n^6+4n^2+7}}{4n^3+2n+5}\right)_{n\in\N}\to\frac{3}{4}$$
+\end{eg}
+
+\begin{prp}{}{}\\
+Let $(a_n)_{n\in\N}$ be a sequence. Then the following are true. 
 \begin{itemize}
 \item If $a_n\to\infty$ then $\frac{1}{a_n}\to 0$
 \item If $a_n\to 0$ and there exists $N\in\N$ such that $a_n>0$ for all $n>N$, then $\frac{1}{a_n}\to\infty$
@@ -221,7 +239,7 @@ Since we have $0<\abs{\frac{1}{b_n}-\frac{1}{b}}<\frac{2\abs{b_n-b}}{b^2}$ then 
 \end{proof}
 \end{prp}
 
-\begin{defn}{Categorization of Sequences}{}\\ A sequence $(a_n)$ in $\R$ may have different properties as below. 
+\begin{defn}{Monotone Sequences}{}\\ A sequence $(a_n)$ in $\R$ may have different properties as below. 
 \begin{itemize}
 \item $(a_n)_{n\in\N}$ is strictly increasing if $a_n<a_{n+1}$ for all $n\in\N$
 \item $(a_n)_{n\in\N}$ is increasing if $a_n\leq a_{n+1}$ for all $n\in\N$
@@ -231,10 +249,18 @@ Since we have $0<\abs{\frac{1}{b_n}-\frac{1}{b}}<\frac{2\abs{b_n-b}}{b^2}$ then 
 \end{itemize}
 \end{defn}
 
-\begin{thm}{Monotone Sequence Theorem}{}\\ Every bounded monotone sequence converges in $\R$. 
+\begin{thm}{Monotone Sequence Theorem}{}\\
+Let $(a_n)_{n\in\N}$ be a strictly increasing sequence and bounded above. Then $(a_n)_{n\in\N}$ converges. 
 \begin{proof}\\ Suppose $(a_n)_{n\in\N}$ is increasing and bounded. Then $S=\{a_n|n\in\N\}$ is bounded thus has a supremum. We have that $$\sup(S)-\varepsilon< a_N\leq a_{N+1}\leq\dots\leq\sup(S)<\sup(S)+\varepsilon$$ for all $n$ larger than some $N\in\N$. Thus we have the for all $n>N$, $$\sup(S)-\varepsilon<a_n<\sup(S)+\varepsilon\implies\abs{a_n-\sup(S)}<\varepsilon$$ The proof is similar for the decreasing version. 
 \end{proof}
 \end{thm}
+
+\begin{eg}{}{}\\
+Let $r>0$. Let $(a_n)_{n\in\N}$ be the sequence defined by $a_0=\sqrt{r}$ and $a_n=\sqrt{r+a_{n-1}}$. Then we have $$(a_n)_{n\in\N}\to\frac{1+\sqrt{1+4r}}{2}$$
+\begin{proof}\\
+Let $L=\frac{1+\sqrt{1+4r}}{2}$. Notice that $L^2-L-r=0$. The sequence is strictly increasing since $\frac{a_n}{a_{n-1}}=\sqrt{\frac{r}{a_{n-1}}+1}>1$ and $a_n>0$ by induction. We prove that the sequence is bounded above by $L$. When $n=0$, we have $a_0=\sqrt{r}=\sqrt{L^2-L}\leq\sqrt{L^2}=L$. Suppose that $a_{n-1}\leq L$. Then we have $$a_n=\sqrt{r+a_{n-1}}\leq\sqrt{r+L}=\sqrt{L^2}=L$$ Hence $(a_n)_{n\in\N}$ is strictly increasing and bounded above. By the monotone sequence theorem, we conclude that $(a_n)_{n\in\N}$ is convergent. Suppose that $a$ is the limit. Then since $(a_{n+1})_{n\in\N}$ and $(a_n)_{n\in\N}$ converges to the same limit, taking limit on the equation $a_{n+1}^2=r+a_n$, we get $$a^2=r+a$$ by the algebra of sequences. Then we have $a^2-a-r=0$. Solving gives $a=L$ since the other root is negative, but $(a_n)_{n\in\N}$ is strictly increasing and positive. 
+\end{proof}
+\end{eg}
 
 \subsection{Subsequences}
 \begin{defn}{Subsequences}{}\\ A subsequence of a sequence $(a_n)_{n\in\N}$ in $\R$ is a sequence $(a_{n_k})_{k\in\N}$, where $$0\leq n_1<n_2<\dots$$
@@ -338,8 +364,8 @@ As $m\to\infty$ we have $\left(\frac{l^m}{1-l}\right)\to0$ by the geometric sequ
 \end{proof}
 \end{prp}
 
-\subsection{Standard Limits}
-\begin{thm}{$n$th root}{}\\ For every $x\in\R$ and $n\in\N$ there exists a unique $n$th root denoted by $x^\frac{1}{n}$. 
+\begin{prp}{$n$th roots}{}\\
+For every $x\in\R$ and $n\in\N$ there exists a unique $n$th root denoted by $x^\frac{1}{n}$. 
 \begin{proof}\\ Let $A=\{x>0:x^n>a\}$ We want to show that the infinum of this set is exactly the $n$th root of $a$. Note that $(1+a)^n\geq1+na>a$ thus $A$ is non-empty. Also since $x>0$ we have that $0$ is a lower bound and thus its infinum exists by the completeness axiom. We let $b=\inf(A)$. Since $b$ is the infinum, we have some $a_k\in A$ such that $b\leq a_k<b+\frac{1}{k}$. By the sandwich theorem we have $a_k\to b$. By the product rule of series, we have $a_k^n\to b^n$. Recall that $a_k\in A$, then we have $a_k^n>a$, and $\lim_{k\to\infty}a_k^n\geq a$, thus $b^n\geq a$. \\~\\
 Assume now that $b^n>a$, we have $0<\frac{a}{b^n}<1$ so we may choose $\delta>0$ so that $\delta<\frac{b}{n}(1-\frac{a}{b^n})$. We now show that $b-\delta\in A$. Not that from our definition of $\delta$, we have $\delta<\frac{b}{n}(1-\frac{a}{b^n})$ and since $n>1$ and $0<1-\frac{a}{b^n}<1$, we have $\delta<\frac{b}{n}\left(1-\frac{a}{b^n}\right)<b$. Thus we have $\frac{\delta}{b}<1$, and $-\frac{\delta}{b}>-1$. Thus we can apply Bernoulli's Inequality. 
 \begin{align*}
@@ -355,7 +381,7 @@ Now we prove the uniqueness of the $n$th root. Suppose that $b^n=c^n=a$. Without
 \end{align*}
 But $c^{n-1}+bc^{n-2}+\dots+b^{n-2}c+b^{n-1}>nb^{n-1}$. Thus we can only have $b=c$. 
 \end{proof}
-\end{thm}
+\end{prp}
 
 \begin{eg}{}{}\\
 Let $x>0$ be a real number. Then we have $$\left(x^{\frac{1}{n}}\right)_{n\in\N}\to 1$$ 
@@ -375,6 +401,7 @@ from Bernoulli's Inquality. Thus we have that $1\leq n^\frac{1}{2n}<\frac{1}{\sq
 \end{proof}
 \end{eg}
 
+\subsection{Tests for Convergence}
 \begin{thm}{Ratio Lemma}{}\\ Suppose $0\leq l<1$. Let $(a_n)_{n\in\N}$ be a sequence. 
 \begin{itemize}
 \item If there exists some $N\in\N$ $\frac{a_{n+1}}{a_n}\leq l$ for all $n>N$, then $a_n\to 0$
@@ -417,6 +444,12 @@ Let $M<x$. Suppose for a contradiction that $S_n<M$ for all $n\in\N$.
 \end{proof}
 \end{lmm}
 
+Decimal representations are far from unique. 
+
+\begin{eg}{}{}\\
+We have $$1=0.\overline{9}$$
+\end{eg}
+
 \begin{defn}{Categorization of Decimals}{}\\
 Let $x\in\R$ be a real number. Let $x=d_0.d_1d_2\dots$ be a decimal representation of $x$. We say that the decimal is 
 \begin{itemize}
@@ -426,325 +459,41 @@ Let $x\in\R$ be a real number. Let $x=d_0.d_1d_2\dots$ be a decimal representati
 \end{itemize}
 \end{defn}
 
-\begin{thm}{}{}\\
+\begin{prp}{}{}\\
 Let $x\in\R$. Then $x$ is irrational if and only if $x$ is non-recurring. 
 \begin{proof}\\
 Suppose that $x=\frac{p}{q}$ with $p,q\in\N$. To represent a negative real number simply append the minus operation in front of $\frac{p}{q}$. Now, remove the integer part of $x$ so that the new number, $y$, is between $0$ and $1$. Then $y$ is also a rational number since alegra under rationals are closed. Let $y=\frac{m}{n}$. Let $m=d_0n+r_1$. Then let $10r_1=d_1n+r_2$. Recursively define $10r_{k-1}=d_{k-1}n+r_k$. Observe that $r_k\in\{o,\dots,n-1\}$. Thus the operation eventually repeats, and we obtain a recurring decimal. If the recurring block of the decimal is only $0$, then it is in fact a terminating decimal, a subset of recurring decimals. Note that the proof here required knowledge on basic number theory. \\~\\
 Now suppose that we have a recursive decimal $x$ with $0<x<1$, a non-recurring block of length $p$ and recurring block of length $q$. Then we have $(10^{p+q}-1)x=n\in\N$. Then we have $x=\frac{n}{10^{p+q}-1}$. Append any integer to the front of the decimal then any recurring decimal can be represented by a rational number. 
 \end{proof}
-\end{thm}
-
-\pagebreak
-\section{Series}
-\subsection{Series and Convergences}
-\begin{defn}{Definition of Series}{}\\ Let $(a_n)_{n\in\N}$ be a sequence of real numbers. We denote $$\sum_{k=1}^{\infty}a_n=a_1+a_2+\dots+a_k+\dots$$ as an infinite series. The $n$th partial sum of the series is defined by $$s_n=\sum_{k=1}^{n}a_k$$
-\end{defn} 
-
-\begin{defn}{Convergence of Series}{}\\ The series is said to converge if the sequence of partial sums converge. The series diverges if the sequence of partial sums diverge. 
-\end{defn}
-
-\begin{prp}{Algebra of Series}{}\\ Let $(a_n)_{n\in\N}$ and $(b_n)_{n\in\N}$ be sequecnces in $\R$ and let $s,t\in\R$. If $\sum_{k=1}^\infty a_k$ and $\sum_{k=1}^\infty b_k$ converges, then $$\sum_{k=1}^\infty(sa_k+tb_k)$$ converges. 
-\begin{proof}\\ Since series are also sequences, we can simply apply the arithmetic of sequences to obtain the results. 
-\end{proof}
 \end{prp}
-
-\begin{eg}{Geometric Series}{}\\ The geometric series $$\sum_{k=0}^{\infty}ar^k$$ where $a,r\in\R$ and $a\neq0$, converges if and only if $\abs{r}<1$. In this case $$\sum_{k=0}^{\infty}ar^k=\frac{a}{1-r}$$ 
-\begin{proof}\\ Consider the partial sum $s_n=a+ar+\dots+ar^{n}$. We have $s_n=\frac{1-r^{n+1}}{1-r}$. If $\abs{r}<1$, then $(r^{n+1})$ converges to $0$. Then for every $(1-r)\varepsilon>0$ there exists some $N$ such that $n\geq N$ implies $\abs{r^{n+1}}<(1-r)\varepsilon$. Then
-\begin{align*}
-\abs{\frac{1-r^{n+1}}{1-r}-\frac{1}{1-r}}&=\abs{\frac{r^{n+1}}{1-r}}\\
-&<\varepsilon
-\end{align*} Thus the geometric series converges if and only if $\abs{r}<1$. 
-\end{proof}
-\end{eg}
-
-\begin{prp}{Null Sequence Test}{}\\ If $(a_n)_{n\in\N}$ does not tend to $0$ then $\sum_{k=0}^\infty a_k$ diverges. 
-\begin{proof}\\ Suppose that $\sum_{n=0}^\infty a_n$ converges. Then we have that for all $\varepsilon>0$, there exists some $N$ such that $$\abs{\sum_{k=0}^m a_k-\sum_{k=0}^n a_k}<\varepsilon$$ whenever $n,m>N$. In particular, choosing $m=n+1$, we have
-\begin{align*}
-\abs{\sum_{k=0}^{n+1} a_k-\sum_{k=0}^n a_k}&=\abs{a_{n+1}}\\
-&<\varepsilon
-\end{align*} for all $n>N$. Thus we have that $(a_{n})\to 0$. 
-\end{proof}
-\end{prp}
-
-\subsection{Series with Non-negative Terms}
-\begin{prp}{}{}\\ If $a_n\geq 0 $ for all $n>N$ with $N\in\N$ then the series $\sum_{k=1}^\infty a_k$ converges in $\R$ if and only if its partial sums are bounded. 
-\begin{proof}\\ We first prove the forward implication. Suppose that $\sum_{k=1}^\infty a_k$ converges, then by 2.1.4 it is bounded. Now suppose that $\sum_{k=1}^\infty a_k$ is bounded. Then since $a_n\geq0$ then $\sum_{k=1}^\infty a_k$ is increasing. Then $\sum_{k=1}^\infty a_k$ is convergent by monotonic increasing theorem. 
-\end{proof}
-\end{prp}
-
-\begin{thm}{Direct Comparison Test}{}\\ Suppose $0\leq a_n\leq b_n$ for all $n>N$ with $N\in\N$.
-\begin{itemize}
-\item If $\sum_{k=1}^\infty b_k$ converges then $\sum_{k=1}^\infty a_k$ converges. 
-\item If $\sum_{k=1}^\infty a_k$ diverges then $\sum_{k=1}^\infty b_k$ diverges. 
-\end{itemize}
-\begin{proof}\\ Suppose $0\leq a_n\leq b_n$ for all $n>N$. 
-\begin{itemize}
-\item Suppose that $\sum_{k=1}^\infty b_k$ converges to $b$. Then since $a_n\leq b_n$ for all $n$ then $a_n$ is bounded above by $b$. Then by the monotonic increasing theorem $a_n$ converges. 
-\item Suppose that $\sum_{k=1}^\infty a_k$ diverges. Then for every $C>0$ there exists $N$ such that $\sum_{k=1}^\infty a_k>C$ for all $n>N$. Then $$C<\sum_{k=1}^\infty a_k\leq\sum_{k=1}^\infty b_k$$ thus we also have $\sum_{k=1}^\infty b_k\geq C$. Thus $\sum_{k=1}^\infty b_k$ diverges. 
-\end{itemize}
-\end{proof}
-\end{thm}
-
-\begin{eg}{}{}\\ The harmonic series $\sum_{k=1}^\infty\frac{1}{k}$ diverges. 
-\begin{proof}\\ Let $s_n=\sum_{k=1}^{n}\frac{1}{k}$. Then
-\begin{align*}
-s_{2n}&=\frac{1}{n+1}+\frac{1}{n+2}+\dots+\frac{1}{2n-1}+\frac{1}{2n}+s_n\\
-&\geq\frac{1}{2n}+\frac{1}{2n}+\dots+\frac{1}{2n}+\frac{1}{2n}+s_n\\
-&=s_n+\frac{1}{2}
-\end{align*}
-Now, we have 
-\begin{align*}
-s_{2^n}&\geq s_{2^{n-1}}+\frac{1}{2}\\
-&\geq s_{2^{n-2}}+\frac{1}{2}+\frac{1}{2}\\
-&\geq s_1+\frac{1}{2}+\dots+\frac{1}{2}\tag{$n$ times}\\
-&=1+\frac{n}{2}
-\end{align*}
-By the direct comparison test, we now have $s_n$ diverge since $1+\frac{n}{2}$ diverges. 
-\end{proof}
-\end{eg}
-
-\begin{eg}{}{}\\ $\sum_{k=1}^\infty\frac{1}{k^2}$ converges. 
-\begin{proof}\\ We first prove that $\sum_{k=2}^{\infty}\frac{1}{k^2-k}$ converges. Consider $s_n=\sum_{k=2}^{n}\frac{1}{(k)(k-1)}$. 
-\begin{align*}
-s_n&=\sum_{k=2}^{n}\left(\frac{1}{k-1}-\frac{1}{k}\right)\\
-&=\left(1+\frac{1}{2}+\frac{1}{3}+\dots+\frac{1}{n-1}\right)-\left(\frac{1}{2}+\frac{1}{3}+\dots+\frac{1}{n-1}+\frac{1}{n}\right)\\
-&=1-\frac{1}{n}
-\end{align*}
-Thus we have that $s_n\to1$. By the direct comparison test, we have that $\sum_{k=1}^\infty\frac{1}{k^2}$ converges. 
-\end{proof}
-\end{eg}
-
-\begin{thm}{$p$ series test}{}\\
-Let $p\in\R$ be a real number. Then $\sum_{k=1}^{\infty}\frac{1}{k^p}$ converges when $p>1$ and diverges when $0<p\leq 1$. 
-\begin{proof}\\
-When $0<p\leq1$, we have that $\sum_{k=1}^{\infty}\frac{1}{n^p}$ diverges by the direct comparison test with $\sum_{k=1}^\infty\frac{1}{n}$. Now suppose that $p>1$. Let $S_n=\sum_{k=1}^n\frac{1}{k^p}$. Let $m\in\N$. Since $(S_n)_{n\in\N}$ is a strictly increasing sequence, we have
-\begin{align*}
-S_{2m+1}&=\sum_{k=1}^{2m+1}\frac{1}{k^p}\\
-&=1+\sum_{i=1}^m\left(\frac{1}{(2i)^p}+\frac{1}{(2i+1)^p}\right)\\
-&<1+\sum_{i=1}^m\frac{2}{(2i)^p}\\
-&=1+\sum_{i=1}^m\frac{2^{1-p}}{i^p}\\
-&=1+2^{1-p}S_m\\
-&<1+2^{1-p}S_{2m+1}
-\end{align*}
-Rearranging gives $S_{2m+1}<\frac{1}{1-2^{1-p}}$. Again since the sequence is strictly increasing, we have that $S_n<\frac{1}{1-2^{1-p}}$ for all $n\in\N$. Since $(S_n)_{n\in\N}$ is increasing and bounded above, we conclude that it is convergent. 
-\end{proof}
-\end{thm}
-
-\begin{thm}{Limit Comparison Test}{}\\ Let $a_n, b_n>0$ for all $n>N$ with $N\in\N$. If $\frac{a_n}{b_n}$ converges to $x\in(0,\infty)$, then $\sum_{k=1}^\infty b_k$ converge if and only if $\sum_{k=1}^\infty a_k$ converges. 
-\begin{proof}\\ We know that for every $\varepsilon>0$ there exists $N$ such that $$\abs{\frac{a_n}{b_n}-x}<\varepsilon$$ whenever $n>N$. This means that $$(x-\varepsilon)b_n<a_n<(x+\varepsilon)b_n$$ As $x>0$, choose $\varepsilon$ so that $x-\varepsilon>0$. Then $b_n<\frac{1}{x-\varepsilon}a_n$ thus by the direct comparison test if $\sum_{k=1}^\infty a_k$ converges then $\sum_{k=1}^\infty b_k$ converges. Similarly, $\frac{1}{c+\varepsilon}<b_n$ so if $\sum_{k=1}^\infty a_k$ diverges, then $\sum_{k=1}^\infty b_k$ diverges. 
-\end{proof}
-\end{thm}
-
-\begin{thm}{Root Test}{}\\ Let $a_n\geq0$ for all $n$ and let $p=\lim_{n\to\infty}a_n^{1/n}$. 
-\begin{itemize}
-\item If $p<1$ then $\sum_{k=1}^\infty a_k$ converges
-\item If $p>1$ then $\sum_{k=1}^\infty a_k$ diverges
-\end{itemize} 
-\begin{proof}\\ We first proof the case with $p<1$. Choose $\varepsilon>0$ such that $p+\varepsilon<1$. Then for all $n>N$, we have $a_n^\frac{1}{n}<(p+\varepsilon)$ and $a_n\leq(p+\varepsilon)^n$. Since $p+\varepsilon<1$, $\sum_{k=0}^{\infty}(p+\varepsilon)^k$ converges and by comparison test, $\sum_{k=1}^\infty a_k$ converges. \\~\\
-Now suppose that $p>1$ then choose $\varepsilon>0$ such that $p-\varepsilon>1$. Then for all $n>N$ we have $a_n^\frac{1}{n}>p+\varepsilon$ thus $a_n>(p+\varepsilon)^n$. Then $\sum_{n=0}^{\infty}(p+\varepsilon)^n$ diverges by the geometric series and $\sum_{k=1}^\infty a_k$ diverges by comparison test. 
-\end{proof}
-\end{thm}
-
-\begin{thm}{Ratio Test}{}\\ Let $a_n>0$ for all $n>N$ with $N\in\N$. Let $r=\lim_{n\to\infty}\frac{a_{n+1}}{a_n}$
-\begin{itemize} 
-\item If $r<1$, then $\sum_{k=1}^\infty a_k$ converges. 
-\item If $r>1$, then $\sum_{k=1}^\infty a_k$ diverges. 
-\end{itemize} 
-\begin{proof}\\ Suppose that $r<1$. Then choose $$0<\varepsilon=\frac{1-r}{2}<1$$ Then there exists some $N$ such that for every $n>N$, $$\abs{\frac{a_{n+1}}{a_n}-r}<\frac{1-r}{2}\implies\frac{a_{n+1}}{a_n}<\frac{1+r}{2}<1$$ This means that $a_{n+1}<(\frac{1+r}{2})a_n$ and $a_{n+1}<(\frac{1+r}{2})^na_1$. Since $\frac{1+r}{2}<1$, $\sum_{n=0}^{\infty}(\frac{1+r}{2})^n$ converges by geometric series and $\sum a_n$ converges by comparison test. \\~\\
-Similarly for the divergence case, choose $$\varepsilon=\frac{r-1}{2}$$ Then there exists some $N$ such that for every $n>N$, $$\abs{\frac{a_{n+1}}{a_n}-r}<\frac{1-r}{2}\implies 1<\frac{r+1}{2}<\frac{a_{n+1}}{a_n}$$ Then $a_n(\frac{r+1}{2})<a_{n+1}$ and $a_1(\frac{r+1}{2})^n<a_{n+1}$. By geometric series $\sum_{n=0}^{\infty}(\frac{r+1}{2})^n$ diverges and by comparison test $\sum_{k=1}^\infty a_k$ diverges. 
-\end{proof}
-\end{thm}
-
-\subsection{Euler's Number}
-\begin{lmm}{}{}\\ The infinite sum $$\sum_{k=0}^{\infty}\frac{1}{k!}$$ converges. 
-\begin{proof}\\  For all $n>0$, we have that $n!\geq2^{n-1}$, we have that $\frac{1}{n!}\leq\frac{1}{2^{n-1}}$. Thus we have that $$\sum_{k=0}^{n}\frac{1}{k!}\leq\sum_{k=0}^{n}\frac{1}{2^{k}}$$ $\sum_{k=0}^{n}\frac{1}{2^{k}}$ is a geometric series so it converges then it has an upper bound. By the completeness axiom, we have that the sum converges. 
-\end{proof}
-\end{lmm}
-
-\begin{defn}{Euler's Number}{}\\ Define Euler's number to be $$e=\sum_{k=0}^{\infty}\frac{1}{k!}$$
-\end{defn}
-
-\begin{lmm}{}{}\\ The series $$a_n=\left(1+\frac{1}{n}\right)^n$$ converges. 
-\begin{proof}\\ Consider $\frac{a_{n+1}}{a_n}$. We have that $\frac{a_{n+1}}{a_n}=\left(1+\frac{1}{n+1}\right)\left(1-\frac{1}{(n+1)^2}\right)^n$. Note that since $\frac{-1}{(n+1)^2}>-1$, we can apply the Bernoulli's Inequality can be applied. Then $$\left(1+\frac{1}{n+1}\right)\left(1-\frac{1}{(n+1)^2}\right)^n\geq\left(1+\frac{1}{n+1}\left(1-\frac{n}{(n+1)^2}\right)\right)=1+\frac{1}{(n+1)^3}\geq 1$$ Thus $a_n$ is an increasing sequence. 
-\\~\\ Now note that $\left(1+\frac{1}{2n}\right)^n=\frac{1}{\left(1+\frac{1}{2n+1}\right)^n}$. Since $\frac{-1}{2n+1}>-1$. Thus we can apply Bernoulli's Inequality to have 
-\begin{align*}
-\left(1-\frac{1}{2n+1}\right)^n&\geq1-\frac{n}{2n+1} \\
-\left(1-\frac{1}{2n+1}\right)^n&\geq\frac{n+1}{2n+1} \\
-\frac{2n+1}{n+1}&\geq\frac{1}{\left(1-\frac{1}{2n+1}\right)^n} \\
-2-\frac{1}{n+1}&\geq\left(1+\frac{1}{2n}\right)^n \\
-2&\geq\left(1+\frac{1}{2n}\right)^n \\
-\end{align*}
-Then we have $0\leq a_{2n}\leq 4$, which is bounded. By the completeness axiom, this sequence converges. 
-\end{proof}
-\end{lmm}
-
-\begin{prp}{}{}\\ $$e=\lim_{n\to\infty}\left(1+\frac{1}{n}\right)^n=\sum_{k=0}^{\infty}\frac{1}{k!}$$ 
-\begin{proof}\\ We start by considering the $n$th term of both sequences. From the binomial theorem, we have that
-\begin{align*}
-\left(1+\frac{1}{n}\right)^n&=\sum_{k=0}^{n}\frac{1}{k!}\left(1-\frac{1}{n}\right)\left(1-\frac{2}{n}\right)\cdots\left(1-\frac{k-1}{n}\right)\\
-&\leq\sum_{k=0}^{n}\frac{1}{k!}
-\end{align*} Thus letting $n\to\infty$, we have $$\lim_{n\to\infty}\left(1+\frac{1}{n}\right)^n\leq\sum_{n=0}^{\infty}\frac{1}{n!}$$\\
-However, if $n>m$, $$\left(1+\frac{1}{n}\right)^n=\sum_{k=0}^{m}\frac{1}{k!}\left(1-\frac{1}{n}\right)\left(1-\frac{2}{n}\cdots\left(1-\frac{k-1}{n}\right)\right)$$ Letting $n\to\infty$, we have $e\geq s_m$. Letting $m\to\infty$, we have $e\geq s$. Thus we have $e=\lim_{n\to\infty}\left(1+\frac{1}{n}\right)^n$
-\end{proof}
-\end{prp}
-
-\begin{lmm}{}{}\\ The number $e$ is irrational. 
-\begin{proof}\\ Suppose that $e$ can be written in an irreducible fraction $\frac{p}{q}$. 
-\begin{align*}
-e-\sum_{k=1}^{q+1}\frac{1}{(k-1)!}&=\frac{p}{q}-\left(\frac{1}{0!}+\frac{1}{1!}+\dots+\frac{1}{q!}\right)\\
-&=\frac{p(q-1)!-(q!+q!+\frac{q!}{2}+\dots+1)}{q!}
-\end{align*}
-Then $k=p(q-1)!-(q!+q!+\frac{q!}{2}+\dots+1)\in\N$ and $e-\sum_{k=1}^{q+1}\frac{1}{(k-1)!}=\frac{k}{q!}$. 
-Now consider 
-\begin{align*}
-e-\sum_{k=1}^{q+1}\frac{1}{(k-1)!}&=\sum_{k=0}^{\infty}\frac{1}{k!}-\sum_{k=0}^{q}\frac{1}{k!}\\
-&=\frac{1}{(q+1)!}+\frac{1}{(q+2)!}+\dots\\
-&=\frac{1}{q!}\left(\frac{1}{q+1}+\frac{1}{(q+1)(q+2)}+\dots\right)\\
-&<\frac{1}{q!}\left(\frac{1}{2}+\frac{1}{2}\cdot\frac{1}{2}+\dots\right)\tag{since $q>1$}\\
-&=\frac{1}{q!}\left(\frac{1}{2}+\frac{1}{4}+\dots\right)\\
-&=\frac{1}{q!}\tag{by geometric series}\\
-\end{align*}
-Thus now we have that $\frac{k}{q!}<\frac{1}{q!}$ for some $k\in\N$ which is not possible for any choice of $k$. Thus we have arrived in a contradiction. 
-\end{proof}
-\end{lmm}
-
-\subsection{Alternating Series}
-\begin{defn}{Alternating Series}{}\\ An alternating series is one of the form $$\sum_{k=1}^{\infty}(-1)^{k+1}a_k$$ where $a_n>0$ for all $n\in\N$. 
-\end{defn}
-
-\begin{thm}{Alternating Series Test}{}\\ Suppose $a_n\geq a_{n+1}$ for all $n$ and $a_n\to0$. Then $$\sum_{k=1}^{\infty}(-1)^ka_k$$ converges. 
-\begin{proof}\\ Firstly note that $$s_{2n+2}=\sum_{k=1}^{2n}(-1)^ka_k-a_{2n+1}+a_{2n+2}$$ Since $a_n$ is decreasing, $a_{2n+1}\geq a_{2n+1}$ thus $s_{2n+2}\geq s_{2n}$. Similarly, we have $s_{2n+1}\leq s_{2n-1}$. Combining the two inequality, we have $$s_2\leq s_{2n}+a_{2n+1}=s_{2n+1}\leq s_1$$ Since $s_{2n}$ is increasing and bounded, it converges. Similarly, $s_{2n+1}$ is decreasing and bounded thus converges. Suppose that $(s_{2n})\to s$. Then $s_{2n}+a_{2n+1}=s_{2n+1}$. Thus $(s_{2n+1})\to s+0=s$. Suppose that for all $\varepsilon$, there exists $N$ such that $\abs{a_{n}}<\varepsilon$ whenever $n>N$. Then, we have
-\begin{align*}
-s_{2n}&\leq s\\
-s_{2n+1}-a_{2n+1}&\leq s\\
-s_{2n+1}-s&\leq a_{2n+1}\\
-\abs{s_{2n+1}-s}&\leq a_{2n+1}\\
-\abs{s_{2n+1}-s}&<\varepsilon\\
-\end{align*}
-Similarly, 
-\begin{align*}
-s&\leq s_{2n-1}\\
-s&\leq s_{2n}-a_{2n-1}\\
-s-s_{2n}&\leq a_{2n-1}\\
-\abs{s_{2n}-s}&\leq a_{2n-1}\\
-\abs{s_{2n}-s}&<\varepsilon\\
-\end{align*}
-Thus we have that $\abs{s_n-s}<\varepsilon$ whenever $n>N$ and $(s_n)$ converges. 
-\end{proof}
-\end{thm}
-
-\begin{eg}{}{}\\ The alternating harmonic series $$\sum_{k=1}^{\infty}\frac{(-1)^{k+1}}{k}$$ converges. 
-\begin{proof}\\ Simple application of the alternating series test. 
-\end{proof}
-\end{eg}
-
-\subsection{Absolute Convergence}
-\begin{defn}{Absolute Convergence}{}\\ A series $\sum_{k=0}^\infty a_k$ in $\R$ is said to converge absolutely if $$\sum_{k=0}^\infty\abs{a_k}$$ converges.
-\end{defn}
-
-\begin{prp}{}{}\\ Every absolutely convergent series is convergent.
-\begin{proof}\\ Consider $s_n=\sum_{k=1}^na_k$ and $t_n=\sum_{k=1}^n\abs{a_n}$. Without loss of generality suppose that $n>m$
-\begin{align*}
-\abs{s_n-s_m}&=\abs{a_n+a_{n-1}+\dots+a_{m+1}}\\
-&\leq \abs{a_n}+\abs{a_{n-1}}+\dots+\abs{a_{m+1}}\\
-&=t_n-t_m\\
-&=\abs{t_n-t_m}
-\end{align*}
-If $(t_n)$ converges then for every $\varepsilon>0$ there exists $N$ such that $\abs{t_n-t_m}<\varepsilon$ for all $n,m>N$. This implies that $\abs{s_n-s_m}<\varepsilon$ thus $s_n$ is convergent. 
-\end{proof}
-\end{prp}
-
-\begin{thm}{Ratio Test for Series}{}\\ Suppose $a_n\neq0$ for all $n$ and $\abs{\frac{a_{n+1}}{a_n}}\to l$. Then $\sum_{k=1}^{\infty}a_k$ converges absolutely if $0\leq l<1$ and diverges if $l>1$. 
-\begin{proof}\\
-Since $\frac{a_{n+1}}{a_n}\to l<1$, choose $\varepsilon>0$ such that $l+\varepsilon<1$. There exists an $N$ such that $\abs{\frac{a_{n+1}}{a_n}-l}<\varepsilon$ whenever $n>N$. 
-\begin{align*}
-\abs{\frac{a_{n+1}}{a_n}-l}&<\varepsilon\\
-\abs{\abs{\frac{a_{n+1}}{a_n}}-l}&<\varepsilon\\
-\abs{\frac{a_{n+1}}{a_n}}&<l+\varepsilon\\
-\abs{a_{n+1}}&<\abs{a_n}(l+\varepsilon)\\
-\abs{a_{n+1}}&<\abs{a_N}(l+\varepsilon)^{n+1-N}\\
-\end{align*}
-Since $$\sum_{k=1}^{\infty}\abs{a_N}(l+\varepsilon)^{k+1-N}=\frac{a_N}{1-(l+\varepsilon)}$$ We have that $\sum_{k=1}^{\infty}\abs{a_k}$ converges by comparison test. \\~\\
-Now suppose that $l>1$, there exists $N$ $\abs{a_{n+1}}>\abs{a_n}$ for some $n>N$. This means that $(a_n)$ does not converge to $0$ and by the null sequence test $\sum_{k=1}^{\infty}\abs{a_k}$ diverges. 
-\end{proof}
-\end{thm}
-
-\subsection{Rearrangement of Series}
-\begin{defn}{Rearrangement}{}\\ $(b_n)_{n\in\N}$ is a rearrangement of $(a_n)_{n\in\N}$ if there is a bijection $\sigma:\N\to\N$ such that for all $n\in\N$ $b_n=a_{\sigma(n)}$
-\end{defn}
-
-\begin{prp}{}{}\\ Suppose $(b_n)_{n\in\N}$ is a rearrangement of $(a_n)_{n\in\N}$ and $a_n>0$ for all $n$ and $\sum_{k=1}^{\infty}a_k$ converges. Then $\sum_{k=1}^{\infty}b_k$ converges and $$\sum_{k=1}^{\infty}b_k=\sum_{k=1}^{\infty}a_k$$ 
-\begin{proof}\\ Suppose that $s_n=\sum_{k=1}^{n}a_k$, $\sum_{k=1}^{\infty}a_k=s$ and $t_n=\sum_{k=1}^{n}b_k$. Suppose that $a_{\sigma(n)}=b_n$. Fix $N$ and consider $M_N=\max\{\sigma(r):r\leq N\}$. Then the first $a_{M_n}$ terms contains the first $b_n$ terms. Since $a_n,b_n>0$ for all $n$, we have $t_n<s_{M_N}<s$. Thus $t_n$ is increasing and bounded and converges by the completeness axiom to, say $t$ with $t\leq s$. Reverse the roles of $a_n$ and $b_n$ now given that $t_n$ converges, and we get $s\leq t$. Thus $s=t$. 
-\end{proof}
-\end{prp}
-
-\begin{prp}{}{}\\ Suppose $(b_n)_{n\in\N}$ is a rearrangement of $(a_n)_{n\in\N}$ and $\sum_{k=1}^{\infty}a_k$ converges absolutely. Then $\sum_{k=1}^{\infty}b_k$ converges and $\sum_{k=1}^{\infty}b_k=\sum_{k=1}^{\infty}a_k$. 
-\begin{proof}\\
-Let $\sum_{k=1}^{\infty}a_k$ converges absolutely and $\sum_{k=1}^{\infty}b_k$ a rearrangement of the series. Consider $u_n=\frac{1}{2}(\abs{a_n}+a_n)$, $v_n=\frac{1}{2}(\abs{a_n}-a_n)$, $x_n=\frac{1}{2}(\abs{b_n}+b_n)$, $y_n=\frac{1}{2}(\abs{b_n}-b_n)$. We have that $$u_n=\begin{cases}
-a_n & a_n\geq0\\
-0 & a_n\leq 0
-\end{cases}$$ $$v_n=\begin{cases}
-0 & a_n\geq0\\
-a_n & a_n\leq 0
-\end{cases}$$ $$x_n=\begin{cases}
-b_n & b_n\geq0\\
-0 & b_n\leq 0
-\end{cases}$$ $$y_n=\begin{cases}
-0 & b_n\geq0\\
-b_n & b_n\leq 0
-\end{cases}$$
-We have $\sum_{k=1}^{\infty}u_k\leq\sum_{k=1}^{\infty}\abs{a_k}$ thus $\sum_{k=1}^{\infty}u_k$ is convergent by completeness axiom and $$\sum_{k=1}^{\infty}-v_k\leq\sum_{k=1}^{\infty}\abs{a_k}$$ thus $\sum_{k=1}^{\infty}-v_k$ converges by completeness axiom and $$\sum_{k=1}^{\infty}-v_k=-\sum_{k=1}^{\infty}v_k$$ converges. We have that $\sum_{k=1}^{\infty} u_k=\sum_{k=1}^{\infty} x_k$ and $\sum_{k=1}^{\infty} v_k=\sum_{k=1}^{\infty} y_k$ by construction. Thus $$\sum_{k=1}^{\infty} a_k=\sum_{k=1}^{\infty}(u_k-v_k)=\sum_{k=1}^{\infty}(x_k-y_k)=\sum_{k=1}^{\infty} b_k$$ is convergent. 
-\end{proof}
-\end{prp}
-
-\begin{defn}{Conditionally Convergent}{}\\ A series $\sum_{k=1}^{\infty}a_k$ is said to be conditionally convergent if $\sum_{k=1}^{\infty}a_k$ is convergent but $$\sum_{k=1}^{\infty}\abs{a_k}$$ diverges. 
-\end{defn}
-
-\begin{prp}{}{}\\ Suppose $\sum_{k=1}^{\infty}a_k$ is conditionally convergent. Consider $\sum_{k=1}^{\infty}u_k$ and $\sum_{k=1}^{\infty}v_k$ where $$u_n=\begin{cases}
-a_n & \text{if $a_n\geq0$} \\
-0 & \text{if $a_n<0$}
-\end{cases}$$
-and
-$$v_n=\begin{cases}
-0 & \text{if $a_n\geq0$} \\
-a_n & \text{if $a_n<0$}
-\end{cases}$$
-Then $\sum_{k=1}^{\infty}u_k=+\infty$ and $\sum_{k=1}^{\infty}v_k=-\infty$. 
-\begin{proof}\\
-Note that $a_n=u_n-v_n$ and $\abs{a_n}=u_n+v_n$. Suppose for contradiction that $\sum u_n$ converges. Then $\abs{a_n}=2u_n-a_n$ and thus $\sum\abs{a_n}$ converges, a contradiction. Suppose also that $\sum v_n$ converges. Then again $\abs{a_n}=2v_n+a_n$ and thus $\sum\abs{a_n}$ converges, a contradiction. Thus we have $\sum u_n$ and $\sum v_n$ diverges. Since $u_n\geq 0$ and $v_n\leq 0$ for all n, we have that $\sum u_n=\infty$ and $\sum v_n=-\infty$. 
-\end{proof}
-\end{prp}
-
-\begin{thm}{Riemann's Rearrangement Theorem}{}\\ Suppose $\sum_{k=1}^{\infty}a_k$ is conditionally convergent. Then for every $l\in\R$ there exists a rearrangement $(b_n)$ of $(a_n)$ such that $\sum_{k=1}^{\infty}b_k=l$. 
-\begin{proof}\\
-Let $(p_n)$ be the subsequence of all positive terms of $(a_n)$ and $(q_n)$ all its negative terms. We have that $(p_n)\to+\infty$ and $(q_n)\to-\infty$. Consider $l\geq0$. There exists $N_1$ such that $S_1=\sum_{k=1}^{N_1}a_k<l$ and $S_1+a_{N_1+1}>l$. Then since $(q_n)\to-\infty$. There exists $M_1$ such that $T_1=S_1+\sum_{k=1}^{M_1}q_k<l$ but $S_1+\sum_{k=1}^{M_1-1}q_k>l$. Repeat the process to find the rearrangement of our sequence $$p_1,\dots,p_{N_1},q_1,\dots,q_{M_1},p_{N_1+1},\dots,p_{N_2},q_{M_1+1},\dots,q_{M_2},\dots$$
-Its partial sums converges since $\abs{S_i-l}\leq p_{N_i}$ and $\abs{T_i-l}\leq -q_{M_i}$ for all $i$ and $p_{N_i}$ and $q_{M_i}$ tends to $0$ since $a_n$ is null. Swap the roles of $q_n$ and $p_n$ for the case $l<0$. 
-\end{proof}
-\end{thm}
 
 \pagebreak
 \section{Limits and Continuity}
 \subsection{Limits at a Point}
-\begin{defn}{Limits at a Point}{}\\ Let $f:(a,c)\cup(c,b)\to\R$ be a function. We say that $f$ converges to $L\in\R$ at $c$ if for every $\varepsilon>0$, there exists $\delta>0$ such that for all $x$ for which $0<\abs{x-c}<\delta$, we have $\abs{f(x)-L}<\varepsilon$. In this case, we write $$\lim_{x\to c}f(x)=L$$
+\begin{defn}{Limits at a Point}{}\\
+Let $f:(a,c)\cup(c,b)\to\R$ be a function. We say that $f$ converges to $L\in\R$ at $c$ if for every $\varepsilon>0$, there exists $\delta>0$ such that for all $x$ for which $0<\abs{x-c}<\delta$, we have $\abs{f(x)-L}<\varepsilon$. In this case, we write $$\lim_{x\to c}f(x)=L$$
 \end{defn}
 
-\begin{defn}{One Sided Limits}{}\\ Let $f:(a,c)\cup(c,b)\to\R$ be a function. 
+\begin{defn}{One Sided Limits}{}\\
+Let $f:(a,c)\cup(c,b)\to\R$ be a function. 
 \begin{itemize}
 \item We say that $$\lim_{x\to c^+}f(x)=L\in\R$$ if for every $\varepsilon>0$ there exists $\delta>0$ such that for all $x\in(c,c+\delta)$ we have $\abs{f(x)-L}<\varepsilon$
 \item We say that $$\lim_{x\to c^-}f(x)=L\in\R$$ if for every $\varepsilon>0$ there exists $\delta>0$ such that for all $x\in(c-\delta,c)$ we have $\abs{f(x)-L}<\varepsilon$
 \end{itemize}
 \end{defn}
 
-\begin{lmm}{}{}\\ Let $f:(a,c)\cup(c,b)\to\R$ be a function. Let $L\in\R$. Then $\lim_{x\to c}f(x)=L$ if and only if $$\lim_{x\to c^+}f(x)=\lim_{x\to c^-}f(x)=L$$ 
+\begin{lmm}{}{}\\
+Let $f:(a,c)\cup(c,b)\to\R$ be a function. Let $L\in\R$. Then $\lim_{x\to c}f(x)=L$ if and only if $$\lim_{x\to c^+}f(x)=\lim_{x\to c^-}f(x)=L$$ 
 \begin{proof}\\ An easy manipulation of the definition of limits. 
 \end{proof}
 \end{lmm}
 
-\begin{thm}{Sequential Limits}{}\\ Let $f:(a,c)\cup(c,b)\to\R$ be a function. Then $$\lim_{x\to c}f(x)=L$$ if and only if for every sequence $(x_n)$ in $(a,b)\setminus\{c\}$ with $(x_n)\to c$ we have $(f(x_n))\to L$. 
+\begin{prp}{}{}\\
+Let $f:(a,c)\cup(c,b)\to\R$ be a function. Then $$\lim_{x\to c}f(x)=L$$ if and only if for every sequence $(x_n)$ in $(a,b)\setminus\{c\}$ with $(x_n)\to c$ we have $(f(x_n))\to L$. 
 \begin{proof}\\ Suppose that $\lim_{x\to c}f(x)=L$. Then for every $\varepsilon>0$ there exists a number $\delta>0$ such that if $\abs{x-c}<\delta$ then $\abs{f(x)-L}<\varepsilon$. Consider a sequence with $(x_n)\to c$. Then for every $\delta>0$ we have that $\abs{x_n-c}<\delta$ for all $n$ larger than some $N$. However this implies that $\abs{f(x_n)-L}<\varepsilon$ for all $n$ larger than $N$. Thus we have $(f(x_n))\to L$. \\~\\ 
 Now suppose that $(x_n)\to c\implies (f(x))\to L$. This means that for all $\delta>0$, there exists $N$ such that $\abs{x_n-c}<\delta$ for all $n>N$. Consider any $x$ in the interval $I$. Then there is a sequence $(x_n)$ that contains $x$. That sequence has the properties that $\abs{x_n-c}<\delta$. We thus have $\abs{f(x)-L}<\varepsilon$ by assumption. 
 \end{proof}
-\end{thm}
+\end{prp}
 
 \begin{prp}{Algebra of Limits}{}\\ Let $f,g:(a,c)\cup(c,b)\to\R$ be functions. Let $\lim_{x\to c}f(x)=L$ and $\lim_{x\to c}g(x)=L$. Then the following are true. 
 \begin{itemize}
@@ -779,10 +528,17 @@ Now suppose that $(x_n)\to c\implies (f(x))\to L$. This means that for all $\del
 \begin{defn}{Continuity}{}\\ A function $f:I\subseteq\R\to\R$ is said to be continuous at $c\in I$ if and only if for every $\varepsilon>0$ there exists $\delta>0$ such that for every $x\in I$, $$\abs{x-c}<\delta\implies\abs{f(x)-f(c)}<\varepsilon$$
 \end{defn}
 
+\begin{eg}{}{}\\
+Let $f:\R\to\R$ be the function defined by $f(x)=x$. Then $f$ is continuous at all $c\in\R$. 
+\begin{proof}\\
+Let $\varepsilon>0$. Choose $\delta=\varepsilon$. For any $x\in\R$ such that $0<\abs{x-c}<\delta$, we have $$\abs{f(x)-f(c)}=\abs{x-c}<\delta=\varepsilon$$
+\end{proof}
+\end{eg}
+
 \begin{defn}{Sequential Continuity}{}\\ Let $f:(a,b)\to\R$ be a function. Let $c\in (a,b)$. We say that $f$ is sequentially continuous at $c$ if for every sequence $(x_n)_{n\in\N}\subset(a,b)$ that converges to $c$, then $$(f(x_n))_{n\in\N}\to f(c)$$
 \end{defn}
 
-\begin{thm}{}{}\\ Let $f:(a,b)\to\R$ be a function. Let $c\in (a,b)$. Then the following are equivalent. 
+\begin{prp}{}{}\\ Let $f:(a,b)\to\R$ be a function. Let $c\in (a,b)$. Then the following are equivalent. 
 \begin{itemize}
 \item $f$ is continuous at $c$. 
 \item $f$ is sequentially continuous at $c$. 
@@ -793,7 +549,20 @@ Now suppose $f$ is not continuous at $c$. Then there are some $\varepsilon>0$ su
 
 $f$ is continuous if and only if for all $\epsilon>0$, there exists $\delta>0$ such that $x\in(c-\delta,c+\delta)$ implies $\abs{f(x)-f(c)}<\epsilon$. But this is precisely the definition of the limit of $f$. 
 \end{proof}
-\end{thm}
+\end{prp}
+
+\begin{eg}{}{}\\
+Let $f:\R\to\R$ be the function defined by $$f(x)=\begin{cases}
+0 & \text{ if }x\in\Q\\
+x & \text{ otherwise }
+\end{cases}$$
+Then $f$ is continuous at $c\in\R$ if and only if $c=0$. 
+\begin{proof}\\
+Suppose that $c=0$. Let $\varepsilon>0$. Let $\delta=\varepsilon$. Suppose that $x\in\R$ such that $0<\abs{x}<\delta$. Then $\abs{f(x)-f(0)}=\abs{f(x)}$. There are two cases. If $x\in\Q$, then $\abs{f(x)}=0$ so that $\abs{f(x)}<\delta=\varepsilon$. If $x\in\R\setminus\Q$, then $\abs{f(x)}=\abs{x}<\delta=\varepsilon$. Hence $f$ is continuous at $0$. \\
+
+Now suppose that $c\neq 0$. There are two cases. Suppose that $c\in\Q$. For each $n\in\N^+$, choose $a_n\in\R\setminus Q$ such that $c-\frac{1}{n}<a_n<c$. This is possible since irrational numbers are dense in $\R$. Then by sandwich theorem, we conclude that $(a_n)_{n\in\N}\to c$. But $(f(a_n))_{n\in\N}=(a_n)_{n\in\N}\to c$ but $f(c)=0$. Hence by the sequential continuity characterization, $f$ is not continuous at $c$. Finally suppose that $c\in\R\setminus\Q$. For each $n\in\N^+$, choose $b_n\in\Q$ such that $c-\frac{1}{n}<b_n<c$. This is possible since rational numbers are dense in $\R$. Then by sandwich theorem, we conclude that $(b_n)_{n\in\N}\to c$. But $(f(b_n))_{n\in\N}=(0)_{n\in\N}\to 0$ but $f(c)=c$. Hence by the sequential continuity characterization, $f$ is not continuous at $c$. 
+\end{proof}
+\end{eg}
 
 \begin{prp}{}{}\\ Let $f,g:I\subseteq\R\to\R$ and continuous at $c\in I$. Then
 \begin{itemize}
@@ -816,15 +585,11 @@ Now suppose that $f(s)>u$. Since $f$ is continuous, we can choose $\varepsilon=f
 \end{proof}
 \end{thm}
 
-\begin{prp}{}{}\\ If $f:I\subseteq\R\to\R$ is continuous on the interval $I$ then its range is an interval. 
+\begin{crl}{}{}\\
+Let $I\subseteq\R$ be an interval. Let $f:I\to\R$ be a continuous function. Then $f(I)$ is an interval. 
 \begin{proof}\\ Suppose that $a,b\in I$. Then $f(a),f(b)\in f(I)$ and by the IVT, for every $y$ between $f(a)$ and $f(b)$, you can find a corresponding $x$ such that $f(x)=y$. 
 \end{proof}
-\end{prp}
-
-\begin{prp}{Inverse Function Theorem}{}\\ Let $f:[a,b]\to\R$ be continuous and strictly increasing. Then $f$ has an inverse defined on its range and $f^{-1}$ is continuous. 
-\begin{proof}\\ Firstly, since $f$ is increasing, all of the values of $f$ lies between $f(a)=c$ and $f(b)=d$. Thus the range of $f$ is exactly $[c,d]$. By the IVT, for each $y\in[c,d]$ there is an unique number $x$ such that $f(x)=y$. Define $g=f^{-1}$ by setting $g(y)=x$ for every pair of $(x,y)$. By construction, $g$ is then increasing. Since $f$ is increasing, we have that $f(x-\varepsilon)<y=f(x)<f(x+\varepsilon)$ with $\varepsilon>0$. Since $f$ is continuous, we have that $$f(x-\varepsilon)<y-\delta<y<y+\delta<f(x+\varepsilon)$$ for some $\delta>0$. Thus we have that for every $y$ between $y-\delta$ and $y+\delta$, $x-\varepsilon<g(y)<x+\varepsilon$. Thus the definition of continuity is satisfied. 
-\end{proof}
-\end{prp}
+\end{crl}
 
 \begin{thm}{Boundedness of Continuous Functions}{}\\ Let $f:[a,b]\to\R$ be continuous. Then $f$ is bounded. 
 \begin{proof}\\ Suppose that $f$ is unbounded. For each $n$, choose $x_n\in[a,b]$ such that $\abs{f(x_n)}\geq n$. Since $f$ is continuous, we can choose a subsequence $(x_{n_k})$ such that it converges to $x$. Since the interval is closed we must have $x\in[a,b]$. Then $f(x_{n_k})\to f(x)$. But this is not possible since $f(x_{n_k})$ is becoming arbitrarily large. 
@@ -837,15 +602,34 @@ Now suppose that $f(s)>u$. Since $f$ is continuous, we can choose $\varepsilon=f
 \end{thm}
 
 \subsection{Uniform Continuity}
-\begin{defn}{Uniform Continuity}{}\\ Let $f:I\subseteq\to\R$. Then $f$ is uniformly continuous on $I$ if and only if for every $\varepsilon>0$ there exists $\delta>0$ such that for all $x,y\in I$ and $$\abs{x-y}<\delta\implies\abs{f(x)-f(y)}<\varepsilon$$ 
+\begin{defn}{Uniform Continuity}{}\\
+Let $I\subseteq\R$ be an interval. Let $f:I\to\R$ be a function. Then $f$ is uniformly continuous on $I$ if and only if for every $\varepsilon>0$ there exists $\delta>0$ such that for all $x,y\in I$ and $$\abs{x-y}<\delta\implies\abs{f(x)-f(y)}<\varepsilon$$ 
 \end{defn}
 
-\begin{prp}{}{}\\ Every uniformly continuous function is continuous. 
+\begin{eg}{}{}\\
+Let $a,b>0$. Let $f:[0,\infty)\to\R$ be the function defined by $$f(x)=\sqrt{ax^2+b}$$ Then $f$ is uniformly continuous. 
+\begin{proof}\\
+Let $\varepsilon>0$. Choose $\delta=\frac{\varepsilon}{\sqrt{a}}$. Let $x,y\in[0,\infty)$ such that $\abs{y-x}<\delta$. Then we have 
+\begin{align*}
+\abs{\sqrt{ay^2+b}-\sqrt{ax^2+b}}&=\abs{\frac{(ay^2+b)-(ax^2+b)}{\sqrt{ay^2+b}+\sqrt{ax^2+b}}}\\
+&=\abs{\frac{a(y-x)(y+x)}{\sqrt{ay^2+b}+\sqrt{ax^2+b}}}\\
+&\leq a\frac{\abs{y+x}}{\sqrt{a}(y+x)}\abs{y-x}\\
+&=\sqrt{a}\abs{y-x}\\
+&=\sqrt{a}\delta\\
+&=\varepsilon
+\end{align*}
+so we are done. 
+\end{proof}
+\end{eg}
+
+\begin{prp}{}{}\\
+Let $I\subseteq\R$ be an interval. Let $f:I\to\R$ be a function. If $f$ is uniformly continuous, then $f$ is continuous. 
 \begin{proof}\\ Fix $y$ and allow $x$ to vary. Then we have the definition of continuity at $(y,f(y))$. 
 \end{proof}
 \end{prp}
 
-\begin{thm}{}{}\\ If $f$ is continuous on a closed interval $[a,b]$, then $f$ is uniformly continuous on $[a,b]$. 
+\begin{prp}{}{}\\
+Let $I\subseteq\R$ be an interval. Let $f:I\to\R$ be a continuous function. If $I$ is a closed interval, then $f$ is uniformly continuous. 
 \begin{proof}\\ Suppose that $f$ is not uniformly continuous. Then there exists $\varepsilon>0$ such that for all $\delta>0$ there are points $x,y\in[a,b]$ such that $$\abs{x-y}<\delta\implies\abs{f(x)-f(y)}\geq\varepsilon$$ Now for every $k\in\N$, choose $x_k,y_k\in[a,b]$ such that $\abs{x_k-y_k}<\frac{1}{k}$ and $$\abs{f(x_k)-f(y_k)}\geq\varepsilon$$ We have that $(x_k)$ is bounded by $[a,b]$, thus by the Bolzano-Weierstrass theorem, there exists a convergent subsequence $(x_{k_i})$ such that it has a limit $x_0\in[a,b]$. Mirror for $y_k$. Now we have 
 \begin{align*}
 \abs{x_0-y_{k_i}}&\leq\abs{x_0-x_{k_i}}+\abs{x_{k_1}-y_{k_i}}\\
@@ -858,26 +642,44 @@ Thus we also have $y_{k_j}\to x_0$. But since $f$ is continuous at $x_0$, we mus
 &=\varepsilon
 \end{align*} This is a contradiction since we assumed that $\abs{f(x)-f(y)}\geq\varepsilon$. 
 \end{proof}
-\end{thm}
+\end{prp}
 
-\begin{thm}{}{}\\ If $f$ is uniformly continuous on a set $I$ and $(s_n)_{n\in\N}$ is a Cauchy sequence in $I$, then $(f(s_n))_{n\in\N}$ is a Cauchy sequence. 
-\begin{proof}\\ Since $s_n$ is Cauchy in $S$, then fix $\delta>0$. There exists $N$ such that $\abs{s_n-s_m}<\delta$ for all $m,n>N$. Since $f$ is uniformly continuous, for every $\varepsilon>0$, there exists $\delta>0$ such that $$\abs{s_n-s_m}<\delta\implies\abs{f(s_n)-f(s_m)}<\varepsilon$$ for all $m,n>N$. Thus $f(s_n)$ is Cauchy. 
+\begin{prp}{}{}\\
+Let $I\subseteq\R$ be an interval. Let $f:I\to\R$ be a uniformly continuous function. Suppose that $(s_n)_{n\in\N}$ is a Cauchy sequence in $I$. Then $(f(s_n))_{n\in\N}$ is a Cauchy sequence. 
+\begin{proof}\\ Since $s_n$ is Cauchy in $I$, then fix $\delta>0$. There exists $N$ such that $\abs{s_n-s_m}<\delta$ for all $m,n>N$. Since $f$ is uniformly continuous, for every $\varepsilon>0$, there exists $\delta>0$ such that $$\abs{s_n-s_m}<\delta\implies\abs{f(s_n)-f(s_m)}<\varepsilon$$ for all $m,n>N$. Thus $f(s_n)$ is Cauchy. 
 \end{proof}
-\end{thm}
+\end{prp}
 
 \pagebreak
 \section{Differentiation}
 \subsection{Properties of the Derivative}
-\begin{defn}{Derivative}{}\\ Let $f:(a,b)\to\R$ be a function and $c\in(a,b)$. We say $f$ is differentiable at $c$ or $f$ has a derivative at $c$ if the limit $$\lim_{x\to c}\frac{f(x)-f(c)}{x-c}$$ exists and is finite. We write $f'(c)$ or $\frac{df}{dx}\vert_{x=c}$ as the derivative of $f$ at $c$. 
+\begin{defn}{Derivative}{}\\ Let $f:(a,b)\to\R$ be a function and $c\in(a,b)$. We say $f$ is differentiable at $c$ or $f$ has a derivative at $c$ if the limit $$\lim_{x\to c}\frac{f(x)-f(c)}{x-c}$$ exists and is finite. We write $f'(c)$ or $\frac{df}{dx}\vert_{x=c}$ as the derivative of $f$ at $c$. We say that $f$ is differentiable if $f$ is differentiable at all $c\in(a,b)$. 
 \end{defn}
 
-\begin{prp}{}{}\\ Let $f:(a,b)\to\R$ be a function and $c\in(a,b)$. Then $f$ is differentiable at $c$ if and only if $$\lim_{h\to 0}\frac{f(c+h)-f(c)}{h}$$ exists and is finite. In this case this limit is equal to $f'(c)$. 
+\begin{eg}{}{}\\
+The following are true. 
+\begin{itemize}
+\item Let $k\in\R$. The function $f:\R\to\R$ defined by $f(x)=k$ is differentiable and $f'(x)=0$. 
+\item The function $g:\R\to\R$ defined by $g(x)=x$ is differentiable and $f'(x)=1$. 
+\item The function $h:[0,\infty)\to\R$ defined by $h(x)=\sqrt{x}$ is differentiable and $h'(x)=\frac{1}{2\sqrt{x}}$. 
+\end{itemize}
+\begin{proof}\\
+Let $c\in\R$. Then we have $$\lim_{x\to c}\frac{f(x)-f(c)}{x-c}=\lim_{x\to c}\frac{k-k}{x-c}=\lim_{x\to c}0=0$$ Hence $f$ is differentiable and $f'(c)=0$. \\
+
+Let $c\in\R$. Then we have $$\lim_{x\to c}\frac{g(x)-g(c)}{x-c}=\lim_{x\to c}\frac{x-c}{x-c}=\lim_{x\to c}1=1$$ Hence $g$ is differentiable and $g'(c)=1$. \\
+
+Let $c\in[0,\infty)$. Then we have $$\lim_{x\to c}\frac{h(x)-h(c)}{x-c}=\lim_{x\to c}\frac{\sqrt{x}-\sqrt{c}}{x-c}=\lim_{x\to c}\frac{x-c}{(x-c)(\sqrt{x}+\sqrt{c})}=\lim_{x\to c}\frac{1}{\sqrt{x}+\sqrt{c}}=\frac{1}{2\sqrt{c}}$$ Hence $h$ is differentiable and $h'(c)=\frac{1}{2\sqrt{c}}$. 
+\end{proof}
+\end{eg}
+
+\begin{lmm}{}{}\\ Let $f:(a,b)\to\R$ be a function and $c\in(a,b)$. Then $f$ is differentiable at $c$ if and only if $$\lim_{h\to 0}\frac{f(c+h)-f(c)}{h}$$ exists and is finite. In this case this limit is equal to $f'(c)$. 
 \begin{proof}\\
 Simple change of variables where $x=c+h$. 
 \end{proof}
-\end{prp}
+\end{lmm}
 
-\begin{prp}{}{}\\ If $f$ is differentiable at $c$ then $f$ is continuous at $c$. 
+\begin{prp}{}{}\\
+Let $I\subseteq\R$ be an interval. Let $f:I\to\R$ be a function. Let $c\in I$. If $f$ is differentiable at $c$, then $f$ is continuous at $c$. 
 \begin{proof}\\ Suppose that $f$ is differentiable at $c$. 
 \begin{align*}
 \lim_{x\to c}f(x)-f(c)&=\lim_{x\to c}\frac{(f(x)-f(c))(x-c)}{x-c}\\
@@ -887,14 +689,15 @@ Simple change of variables where $x=c+h$.
 \end{proof}
 \end{prp}
 
-\begin{thm}{Algebra of Derivatives}{}\\ Let $f$ and $g$ are differentiable at the point $c$, then
+\begin{thm}{Algebra of Derivatives}{}\\
+Let $I\subseteq\R$ be an interval. Let $f,g:I\to\R$. Suppose that $f$ and $g$ are differentiable at $c\in I$. Then the following are true. 
 \begin{itemize}
-\item $(f+g)'(c)=f'(c)+g'(c)$
-\item $(cf)'(c)=cf'(c)$
-\item $(fg)'(c)=f'(c)g(c)+g'(c)f(c)$
-\item $\left(\frac{f}{g}\right)'(c)=\frac{f'(c)g(c)-g'(c)f(c)}{\left(g(c)\right)^2}$ as long as $g(c)\neq 0$. 
+\item Sum rule: $f+g$ is differentiable at $c$ and $(f+g)'(c)=f'(c)+g'(c)$. 
+\item Product rule: $fg$ is differentiable at $c$ and $(fg)'(c)=f'(c)g(c)+f(c)g'(c)$. 
+\item Quotient rule: If $g'(c)\neq 0$, then $f/g$ is differentiable at $c$ and $(f/g)'(c)=\frac{f'(c)g(c)-f(c)g'(c)}{(g'(c))^2}$
 \end{itemize}
-\begin{proof}\\ Use the limit definition of the derivatives. 
+\begin{proof}\\
+Use the limit definition of the derivatives. 
 \end{proof}
 \end{thm}
 
@@ -908,26 +711,34 @@ Simple change of variables where $x=c+h$.
 \end{proof}
 \end{thm}
 
-\begin{defn}{$\mC^n$-Functions}{}\\ Let $f:U\subseteq\R\to\R$ be a function. We say that $f$ is a function of class $\mC^n(U)$ if the following are true. 
+\begin{defn}{$\mC^n$-Functions}{}\\
+Let $I\subseteq\R$ be an interval. Let $f:I\subseteq\R\to\R$ be a function. We say that $f$ is a function of class $\mC^n(I)$ if the following are true. 
 \begin{itemize}
-\item $f^{(k)}:U\to\R$ is differentiable for $0\leq k\leq n-1$
-\item $f^{(n)}:U\to\R$ is continuous. 
+\item $f^{(k)}:I\to\R$ is differentiable for $0\leq k\leq n-1$
+\item $f^{(n)}:I\to\R$ is continuous. 
 \end{itemize}
-We say that $f$ is a smooth function if $f$ is $C^n$ for all $n\in\N$. 
+We say that $f$ is a smooth function if $f$ is $\mC^n$ for all $n\in\N$. 
 \end{defn}
 
-\begin{defn}{Smooth Functions}{}\\ Let $f:U\subseteq\R\to\R$ be a function. We say that $f$ is a smooth function if $f\in\mC^n(U)$ for all $U$. In this case we write $f\in\mC^\infty(U)$. 
+\begin{defn}{Smooth Functions}{}\\
+Let $I\subseteq\R$ be an interval. Let $f:I\subseteq\R\to\R$ be a function. We say that $f$ is a smooth function if $f\in\mC^n(I)$ for all $n\in\N$. . In this case we write $f\in\mC^\infty(I)$. 
 \end{defn}
 
 \subsection{Inverse of the Derivative}
-\begin{thm}{}{}\\ If $f:I\subseteq\R\to\R$ is continuous and injective then $f^{-1}$ is either increasing or decreasing on the interval. 
-\begin{proof}\\ Suppose that $f^{-1}$ is neither increasing or decreasing on the interval $I$. Then $f^{-1}$ is decreasing on some interval $(a,b)\in I$ and not decreasing on end points. This means that $(c,a)\in I$ is not decreasing thus there is some interval $(c',a)\in(c,a)$ that is increasing, Then for every $y\in(\min{f(c),f(d)},f(a))$, the function is not injective. 
-\end{proof}
-\end{thm}
+\begin{prp}{}{}\\
+Let $I\subseteq\R$ be an interval. Let $f:I\to\R$ be a continuous and bijective function. Then $f^{-1}:f(I)\to I$ is continuous. 
+\end{prp}
 
-\begin{thm}{Inverse Function Theorem}{}\\ Let $f$ be a continuous injective function defined on an interval and suppose that $f$ is differentiable at $f^{-1}(b)$, with derivative $f'\left(f^{-1}(b)\right)\neq0$. Then $f^{-1}$ is differentiable at $b$ and $$\left(f^{-1}\right)'(b)=\frac{1}{f'\left(f^{-1}(b)\right)}$$ 
-\begin{proof}\\ Since $f$ is continuous and injective, the derivative exists. Suppose that $g=f^{-1}$. We have that $f(g(x))=x$ for all $x\in\im(f)$. Then we have $f'(g(x))g'(x)=1$ and $g'(x)=\frac{1}{f'(g(x))}$. 
-\end{proof}
+\begin{prp}{}{}\\
+Let $I\subseteq\R$ be an interval. Let $f:I\to\R$ be a continuous and bijective function. Suppose that $f$ is differentiable at $c\in I$ and $f'(c)\neq 0$. Then $f^{-1}$ is differentiable at $f(c)$ and $$(f^{-1})'(f(c))=\frac{1}{f'(c)}$$
+\end{prp}
+
+\begin{thm}{Inverse Function Theorem}{}\\
+Let $I\subseteq\R$ be an interval. Let $f:I\to\R$ be a $\mC^1$ function. Suppose that $f'(c)\neq 0$ for some $c\in I$. Then there exists an open interval $J\subseteq I$ such that $c\in J$ and the following are true. 
+\begin{itemize}
+\item $f|_J$ is bijective. 
+\item $f|_J^{-1}$ is a function of class $\mC^1$. 
+\end{itemize}
 \end{thm}
 
 \subsection{Mean Value Theorem}
@@ -973,14 +784,13 @@ f'(c)(g(b)-g(a))-g'(c)(f(b)-f(a))&=0
 \end{proof}
 \end{thm}
 
-
 \begin{thm}{Constant Function}{}\\ If $f:(a,b)\to\R$ is differentiable and $f'(x)=0$ for all $x\in(a,b)$ then $f$ is constant. 
 \begin{proof}\\ Suppose that $h,k\in(a,b)$. By the Mean Value Theorem, there exists $c\in(h,k)$ such that $$f'(c)=\frac{f(k)-f(h)}{k-h}$$ Since $f'(c)=0$ we have that $f(h)=f(k)$ Since this is true for every $h,k\in(a,b)$, we have that $$f(x)=m$$ for some $m\in\R$ for all $x\in(a,b)$. 
 \end{proof}
 \end{thm}
 
-
-\begin{thm}{}{}\\ Let $f:(a,b)\to\R$ be differentiable on $(a,b)$. 
+\begin{prp}{}{}\\
+Let $I\subseteq\R$ be an interval. Let $f:I\to\R$ be a differentiable function. Then the following are true. 
 \begin{itemize}
 \item If $\forall x\in I$, $f'(x)>0$ then $f$ is strictly increasing on the interval
 \item If $\forall x\in I$, $f'(x)<0$ then $f$ is strictly decreasing on the interval
@@ -989,11 +799,15 @@ f'(c)(g(b)-g(a))-g'(c)(f(b)-f(a))&=0
 \end{itemize}
 \begin{proof}\\ We demonstrate the proof only of the first item. $f'(x)>0$ implies $\lim_{x\to c}\frac{f(x)-f(c)}{x-c}>0$. If $x>c$, we must have $f(x)>f(c)$. If $x<c$, we must have $f(x)<f(c)$. Thus $f(x)$ is strictly increasing. 
 \end{proof}
-\end{thm}
+\end{prp}
 
-\begin{thm}{L'Hopital's Rule}{}\\ Suppose that $f,g:(a,b)\to\R$ are differentiable functions and $c\in(a,b)$. Suppose that $$\lim_{x\to c}\frac{f'(x)}{g'(x)}=L$$ exists. Then if $\lim_{x\to c}f(x)=\lim_{x\to c}g(x)=0$ then $$\lim_{x\to c}\frac{f(x)}{g(x)}=L$$ 
-\begin{proof}\\ Suppose that $\lim_{x\to c}\frac{f'(x)}{g'(x)}$ exists. Then $g'(x_n)\neq0$ for any sequence of $x_n$ that converges to $c$. Thus we can apply Cauchy's MVT. Since $f(c)=g(c)=0$, $$\lim_{x\to c}\frac{f(x)}{g(x)}=\lim_{x\to c}\frac{f(x)-f(c)}{g(x)-g(c)}$$ By Cauchy's MVT, there exists $t$ between $x$ and $c$ such that $\frac{f(x)-f(c)}{g(x)-g(c)}=\frac{f'(t)}{g'(t)}$. As $x\to c$, $t\to c$. Thus we have that $$\lim_{x\to c}\frac{f(x)}{g(x)}=\lim_{x\to c}\frac{f'(x)}{g'(x)}$$
-\end{proof}
+\begin{thm}{L'Hopital's Rule}{}\\
+Let $I\subseteq\R$ be an interval. Let $c\in\R$. Let $f,g:I\setminus\{c\}\to\R$ be differentiable functions such that $g(x)\neq 0$ and $g'(x)\neq 0$ for all $x\in I\setminus\{c\}$. Suppose that one of the following are true. 
+\begin{itemize}
+\item $\lim_{x\to c}f(x)=0$ and $\lim_{x\to c}g(x)=0$. 
+\item $\lim_{x\to c}g(x)=\pm\infty$. 
+\end{itemize}
+Then we have $$\lim_{x\to c}\frac{f(x)}{g(x)}=\lim_{x\to c}\frac{f'(x)}{g'(x)}$$
 \end{thm}
 
 \pagebreak
@@ -1355,6 +1169,121 @@ Similarly, we have that for every $\varepsilon>0$, there exists $N$ such that $R
 \end{proof}
 \end{thm}
 
+\pagebreak
+\section{Series}
+\subsection{Series and Convergences}
+\begin{defn}{Definition of Series}{}\\\
+Let $(a_n)_{n\in\N}$ be a sequence. Define the series with $n$th term $a_n$ to be the sequence $(s_n)_{n\in\N}$ given by $$s_n=\sum_{i=0}^na_i$$ We denote the limit of the sequence by $\sum_{k=0}^\infty a_k$. 
+\end{defn}
+
+\begin{eg}{Geometric Series}{}\\
+The geometric series $$\sum_{k=0}^{\infty}ar^k$$ where $a,r\in\R$ and $a\neq0$, converges if and only if $\abs{r}<1$. In this case $$\sum_{k=0}^{\infty}ar^k=\frac{a}{1-r}$$ 
+\begin{proof}\\ Consider the partial sum $s_n=a+ar+\dots+ar^{n}$. We have $s_n=\frac{1-r^{n+1}}{1-r}$. If $\abs{r}<1$, then $(r^{n+1})$ converges to $0$. Then for every $(1-r)\varepsilon>0$ there exists some $N$ such that $n\geq N$ implies $\abs{r^{n+1}}<(1-r)\varepsilon$. Then
+\begin{align*}
+\abs{\frac{1-r^{n+1}}{1-r}-\frac{1}{1-r}}&=\abs{\frac{r^{n+1}}{1-r}}\\
+&<\varepsilon
+\end{align*} Thus the geometric series converges if and only if $\abs{r}<1$. 
+\end{proof}
+\end{eg}
+
+\begin{prp}{Null Sequence Test}{}\\ If $(a_n)_{n\in\N}$ does not tend to $0$ then $\sum_{k=0}^\infty a_k$ diverges. 
+\begin{proof}\\ Suppose that $\sum_{n=0}^\infty a_n$ converges. Then we have that for all $\varepsilon>0$, there exists some $N$ such that $$\abs{\sum_{k=0}^m a_k-\sum_{k=0}^n a_k}<\varepsilon$$ whenever $n,m>N$. In particular, choosing $m=n+1$, we have
+\begin{align*}
+\abs{\sum_{k=0}^{n+1} a_k-\sum_{k=0}^n a_k}&=\abs{a_{n+1}}\\
+&<\varepsilon
+\end{align*} for all $n>N$. Thus we have that $(a_{n})\to 0$. 
+\end{proof}
+\end{prp}
+
+\subsection{Series with Non-negative Terms}
+\begin{prp}{}{}\\ If $a_n\geq 0 $ for all $n>N$ with $N\in\N$ then the series $\sum_{k=1}^\infty a_k$ converges in $\R$ if and only if its partial sums are bounded. 
+\begin{proof}\\ We first prove the forward implication. Suppose that $\sum_{k=1}^\infty a_k$ converges, then by 2.1.4 it is bounded. Now suppose that $\sum_{k=1}^\infty a_k$ is bounded. Then since $a_n\geq0$ then $\sum_{k=1}^\infty a_k$ is increasing. Then $\sum_{k=1}^\infty a_k$ is convergent by monotonic increasing theorem. 
+\end{proof}
+\end{prp}
+
+\begin{thm}{Direct Comparison Test}{}\\ Suppose $0\leq a_n\leq b_n$ for all $n>N$ with $N\in\N$.
+\begin{itemize}
+\item If $\sum_{k=1}^\infty b_k$ converges then $\sum_{k=1}^\infty a_k$ converges. 
+\item If $\sum_{k=1}^\infty a_k$ diverges then $\sum_{k=1}^\infty b_k$ diverges. 
+\end{itemize}
+\begin{proof}\\ Suppose $0\leq a_n\leq b_n$ for all $n>N$. 
+\begin{itemize}
+\item Suppose that $\sum_{k=1}^\infty b_k$ converges to $b$. Then since $a_n\leq b_n$ for all $n$ then $a_n$ is bounded above by $b$. Then by the monotonic increasing theorem $a_n$ converges. 
+\item Suppose that $\sum_{k=1}^\infty a_k$ diverges. Then for every $C>0$ there exists $N$ such that $\sum_{k=1}^\infty a_k>C$ for all $n>N$. Then $$C<\sum_{k=1}^\infty a_k\leq\sum_{k=1}^\infty b_k$$ thus we also have $\sum_{k=1}^\infty b_k\geq C$. Thus $\sum_{k=1}^\infty b_k$ diverges. 
+\end{itemize}
+\end{proof}
+\end{thm}
+
+\begin{eg}{}{}\\ The harmonic series $\sum_{k=1}^\infty\frac{1}{k}$ diverges. 
+\begin{proof}\\ Let $s_n=\sum_{k=1}^{n}\frac{1}{k}$. Then
+\begin{align*}
+s_{2n}&=\frac{1}{n+1}+\frac{1}{n+2}+\dots+\frac{1}{2n-1}+\frac{1}{2n}+s_n\\
+&\geq\frac{1}{2n}+\frac{1}{2n}+\dots+\frac{1}{2n}+\frac{1}{2n}+s_n\\
+&=s_n+\frac{1}{2}
+\end{align*}
+Now, we have 
+\begin{align*}
+s_{2^n}&\geq s_{2^{n-1}}+\frac{1}{2}\\
+&\geq s_{2^{n-2}}+\frac{1}{2}+\frac{1}{2}\\
+&\geq s_1+\frac{1}{2}+\dots+\frac{1}{2}\tag{$n$ times}\\
+&=1+\frac{n}{2}
+\end{align*}
+By the direct comparison test, we now have $s_n$ diverge since $1+\frac{n}{2}$ diverges. 
+\end{proof}
+\end{eg}
+
+\begin{eg}{}{}\\ $\sum_{k=1}^\infty\frac{1}{k^2}$ converges. 
+\begin{proof}\\ We first prove that $\sum_{k=2}^{\infty}\frac{1}{k^2-k}$ converges. Consider $s_n=\sum_{k=2}^{n}\frac{1}{(k)(k-1)}$. 
+\begin{align*}
+s_n&=\sum_{k=2}^{n}\left(\frac{1}{k-1}-\frac{1}{k}\right)\\
+&=\left(1+\frac{1}{2}+\frac{1}{3}+\dots+\frac{1}{n-1}\right)-\left(\frac{1}{2}+\frac{1}{3}+\dots+\frac{1}{n-1}+\frac{1}{n}\right)\\
+&=1-\frac{1}{n}
+\end{align*}
+Thus we have that $s_n\to1$. By the direct comparison test, we have that $\sum_{k=1}^\infty\frac{1}{k^2}$ converges. 
+\end{proof}
+\end{eg}
+
+\begin{thm}{$p$ series test}{}\\
+Let $p\in\R$ be a real number. Then $\sum_{k=1}^{\infty}\frac{1}{k^p}$ converges when $p>1$ and diverges when $0<p\leq 1$. 
+\begin{proof}\\
+When $0<p\leq1$, we have that $\sum_{k=1}^{\infty}\frac{1}{n^p}$ diverges by the direct comparison test with $\sum_{k=1}^\infty\frac{1}{n}$. Now suppose that $p>1$. Let $S_n=\sum_{k=1}^n\frac{1}{k^p}$. Let $m\in\N$. Since $(S_n)_{n\in\N}$ is a strictly increasing sequence, we have
+\begin{align*}
+S_{2m+1}&=\sum_{k=1}^{2m+1}\frac{1}{k^p}\\
+&=1+\sum_{i=1}^m\left(\frac{1}{(2i)^p}+\frac{1}{(2i+1)^p}\right)\\
+&<1+\sum_{i=1}^m\frac{2}{(2i)^p}\\
+&=1+\sum_{i=1}^m\frac{2^{1-p}}{i^p}\\
+&=1+2^{1-p}S_m\\
+&<1+2^{1-p}S_{2m+1}
+\end{align*}
+Rearranging gives $S_{2m+1}<\frac{1}{1-2^{1-p}}$. Again since the sequence is strictly increasing, we have that $S_n<\frac{1}{1-2^{1-p}}$ for all $n\in\N$. Since $(S_n)_{n\in\N}$ is increasing and bounded above, we conclude that it is convergent. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{Limit Comparison Test}{}\\ Let $a_n, b_n>0$ for all $n>N$ with $N\in\N$. If $\frac{a_n}{b_n}$ converges to $x\in(0,\infty)$, then $\sum_{k=1}^\infty b_k$ converge if and only if $\sum_{k=1}^\infty a_k$ converges. 
+\begin{proof}\\ We know that for every $\varepsilon>0$ there exists $N$ such that $$\abs{\frac{a_n}{b_n}-x}<\varepsilon$$ whenever $n>N$. This means that $$(x-\varepsilon)b_n<a_n<(x+\varepsilon)b_n$$ As $x>0$, choose $\varepsilon$ so that $x-\varepsilon>0$. Then $b_n<\frac{1}{x-\varepsilon}a_n$ thus by the direct comparison test if $\sum_{k=1}^\infty a_k$ converges then $\sum_{k=1}^\infty b_k$ converges. Similarly, $\frac{1}{c+\varepsilon}<b_n$ so if $\sum_{k=1}^\infty a_k$ diverges, then $\sum_{k=1}^\infty b_k$ diverges. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{Root Test}{}\\ Let $a_n\geq0$ for all $n$ and let $p=\lim_{n\to\infty}a_n^{1/n}$. 
+\begin{itemize}
+\item If $p<1$ then $\sum_{k=1}^\infty a_k$ converges
+\item If $p>1$ then $\sum_{k=1}^\infty a_k$ diverges
+\end{itemize} 
+\begin{proof}\\ We first proof the case with $p<1$. Choose $\varepsilon>0$ such that $p+\varepsilon<1$. Then for all $n>N$, we have $a_n^\frac{1}{n}<(p+\varepsilon)$ and $a_n\leq(p+\varepsilon)^n$. Since $p+\varepsilon<1$, $\sum_{k=0}^{\infty}(p+\varepsilon)^k$ converges and by comparison test, $\sum_{k=1}^\infty a_k$ converges. \\~\\
+Now suppose that $p>1$ then choose $\varepsilon>0$ such that $p-\varepsilon>1$. Then for all $n>N$ we have $a_n^\frac{1}{n}>p+\varepsilon$ thus $a_n>(p+\varepsilon)^n$. Then $\sum_{n=0}^{\infty}(p+\varepsilon)^n$ diverges by the geometric series and $\sum_{k=1}^\infty a_k$ diverges by comparison test. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{Ratio Test}{}\\ Let $a_n>0$ for all $n>N$ with $N\in\N$. Let $r=\lim_{n\to\infty}\frac{a_{n+1}}{a_n}$
+\begin{itemize} 
+\item If $r<1$, then $\sum_{k=1}^\infty a_k$ converges. 
+\item If $r>1$, then $\sum_{k=1}^\infty a_k$ diverges. 
+\end{itemize} 
+\begin{proof}\\ Suppose that $r<1$. Then choose $$0<\varepsilon=\frac{1-r}{2}<1$$ Then there exists some $N$ such that for every $n>N$, $$\abs{\frac{a_{n+1}}{a_n}-r}<\frac{1-r}{2}\implies\frac{a_{n+1}}{a_n}<\frac{1+r}{2}<1$$ This means that $a_{n+1}<(\frac{1+r}{2})a_n$ and $a_{n+1}<(\frac{1+r}{2})^na_1$. Since $\frac{1+r}{2}<1$, $\sum_{n=0}^{\infty}(\frac{1+r}{2})^n$ converges by geometric series and $\sum a_n$ converges by comparison test. \\~\\
+Similarly for the divergence case, choose $$\varepsilon=\frac{r-1}{2}$$ Then there exists some $N$ such that for every $n>N$, $$\abs{\frac{a_{n+1}}{a_n}-r}<\frac{1-r}{2}\implies 1<\frac{r+1}{2}<\frac{a_{n+1}}{a_n}$$ Then $a_n(\frac{r+1}{2})<a_{n+1}$ and $a_1(\frac{r+1}{2})^n<a_{n+1}$. By geometric series $\sum_{n=0}^{\infty}(\frac{r+1}{2})^n$ diverges and by comparison test $\sum_{k=1}^\infty a_k$ diverges. 
+\end{proof}
+\end{thm}
+
 \subsection{The Integral Test for Series}
 In this section here we suppose that the techniques and origins of integration is already properly introduced, it would be weird to add the integral test to the section of integration since it is developed for testing series convergence. 
 \begin{thm}{Integral Bounds}{}\\ Let $f$ be decreasing and non-negative and integrable on the interval $[1,\infty)$. Then $$\int_{m+1}^{n+1}f(x)\,dx\leq\sum_{k=m+1}^{n+1}f(k)\leq\int_{m}^{n}f(x)\,dx$$ 
@@ -1364,6 +1293,189 @@ In this section here we suppose that the techniques and origins of integration i
 
 \begin{thm}{Integral Test}{}\\ Let $f$ be decreasing and non-negative and integrable on the interval $[1,\infty)$. Then $s_n=\sum_{k=1}^{n}f(k)$ converges if and only if $\int_{1}^{\infty}f(x)\,dx$ converges. 
 \begin{proof}\\ From the integral bounds, we have $$\sum_{k=0}^{\infty}f(k)\leq\int_{1}^{\infty}f(x)\,dx$$ Thus when the integral is converges, the increasing sum is bounded. Thus by the monotone convergence theorem, the $\sum_{k=0}^{\infty}$ converges. When the integral diverges, then $$\int_{0}^{\infty}f(x)\,dx\leq\sum_{k=0}^{\infty}f(k)$$ also diverges by the comparison test. 
+\end{proof}
+\end{thm}
+
+\subsection{Euler's Number}
+\begin{lmm}{}{}\\ The infinite sum $$\sum_{k=0}^{\infty}\frac{1}{k!}$$ converges. 
+\begin{proof}\\  For all $n>0$, we have that $n!\geq2^{n-1}$, we have that $\frac{1}{n!}\leq\frac{1}{2^{n-1}}$. Thus we have that $$\sum_{k=0}^{n}\frac{1}{k!}\leq\sum_{k=0}^{n}\frac{1}{2^{k}}$$ $\sum_{k=0}^{n}\frac{1}{2^{k}}$ is a geometric series so it converges then it has an upper bound. By the completeness axiom, we have that the sum converges. 
+\end{proof}
+\end{lmm}
+
+\begin{defn}{Euler's Number}{}\\ Define Euler's number to be $$e=\sum_{k=0}^{\infty}\frac{1}{k!}$$
+\end{defn}
+
+\begin{lmm}{}{}\\ The series $$a_n=\left(1+\frac{1}{n}\right)^n$$ converges. 
+\begin{proof}\\ Consider $\frac{a_{n+1}}{a_n}$. We have that $\frac{a_{n+1}}{a_n}=\left(1+\frac{1}{n+1}\right)\left(1-\frac{1}{(n+1)^2}\right)^n$. Note that since $\frac{-1}{(n+1)^2}>-1$, we can apply the Bernoulli's Inequality can be applied. Then $$\left(1+\frac{1}{n+1}\right)\left(1-\frac{1}{(n+1)^2}\right)^n\geq\left(1+\frac{1}{n+1}\left(1-\frac{n}{(n+1)^2}\right)\right)=1+\frac{1}{(n+1)^3}\geq 1$$ Thus $a_n$ is an increasing sequence. 
+\\~\\ Now note that $\left(1+\frac{1}{2n}\right)^n=\frac{1}{\left(1+\frac{1}{2n+1}\right)^n}$. Since $\frac{-1}{2n+1}>-1$. Thus we can apply Bernoulli's Inequality to have 
+\begin{align*}
+\left(1-\frac{1}{2n+1}\right)^n&\geq1-\frac{n}{2n+1} \\
+\left(1-\frac{1}{2n+1}\right)^n&\geq\frac{n+1}{2n+1} \\
+\frac{2n+1}{n+1}&\geq\frac{1}{\left(1-\frac{1}{2n+1}\right)^n} \\
+2-\frac{1}{n+1}&\geq\left(1+\frac{1}{2n}\right)^n \\
+2&\geq\left(1+\frac{1}{2n}\right)^n \\
+\end{align*}
+Then we have $0\leq a_{2n}\leq 4$, which is bounded. By the completeness axiom, this sequence converges. 
+\end{proof}
+\end{lmm}
+
+\begin{prp}{}{}\\ $$e=\lim_{n\to\infty}\left(1+\frac{1}{n}\right)^n=\sum_{k=0}^{\infty}\frac{1}{k!}$$ 
+\begin{proof}\\ We start by considering the $n$th term of both sequences. From the binomial theorem, we have that
+\begin{align*}
+\left(1+\frac{1}{n}\right)^n&=\sum_{k=0}^{n}\frac{1}{k!}\left(1-\frac{1}{n}\right)\left(1-\frac{2}{n}\right)\cdots\left(1-\frac{k-1}{n}\right)\\
+&\leq\sum_{k=0}^{n}\frac{1}{k!}
+\end{align*} Thus letting $n\to\infty$, we have $$\lim_{n\to\infty}\left(1+\frac{1}{n}\right)^n\leq\sum_{n=0}^{\infty}\frac{1}{n!}$$\\
+However, if $n>m$, $$\left(1+\frac{1}{n}\right)^n=\sum_{k=0}^{m}\frac{1}{k!}\left(1-\frac{1}{n}\right)\left(1-\frac{2}{n}\cdots\left(1-\frac{k-1}{n}\right)\right)$$ Letting $n\to\infty$, we have $e\geq s_m$. Letting $m\to\infty$, we have $e\geq s$. Thus we have $e=\lim_{n\to\infty}\left(1+\frac{1}{n}\right)^n$
+\end{proof}
+\end{prp}
+
+\begin{lmm}{}{}\\ The number $e$ is irrational. 
+\begin{proof}\\ Suppose that $e$ can be written in an irreducible fraction $\frac{p}{q}$. 
+\begin{align*}
+e-\sum_{k=1}^{q+1}\frac{1}{(k-1)!}&=\frac{p}{q}-\left(\frac{1}{0!}+\frac{1}{1!}+\dots+\frac{1}{q!}\right)\\
+&=\frac{p(q-1)!-(q!+q!+\frac{q!}{2}+\dots+1)}{q!}
+\end{align*}
+Then $k=p(q-1)!-(q!+q!+\frac{q!}{2}+\dots+1)\in\N$ and $e-\sum_{k=1}^{q+1}\frac{1}{(k-1)!}=\frac{k}{q!}$. 
+Now consider 
+\begin{align*}
+e-\sum_{k=1}^{q+1}\frac{1}{(k-1)!}&=\sum_{k=0}^{\infty}\frac{1}{k!}-\sum_{k=0}^{q}\frac{1}{k!}\\
+&=\frac{1}{(q+1)!}+\frac{1}{(q+2)!}+\dots\\
+&=\frac{1}{q!}\left(\frac{1}{q+1}+\frac{1}{(q+1)(q+2)}+\dots\right)\\
+&<\frac{1}{q!}\left(\frac{1}{2}+\frac{1}{2}\cdot\frac{1}{2}+\dots\right)\tag{since $q>1$}\\
+&=\frac{1}{q!}\left(\frac{1}{2}+\frac{1}{4}+\dots\right)\\
+&=\frac{1}{q!}\tag{by geometric series}\\
+\end{align*}
+Thus now we have that $\frac{k}{q!}<\frac{1}{q!}$ for some $k\in\N$ which is not possible for any choice of $k$. Thus we have arrived in a contradiction. 
+\end{proof}
+\end{lmm}
+
+\subsection{Alternating Series}
+\begin{defn}{Alternating Series}{}\\
+Let $(a_n)_{n\in\N}$ be a sequence such that $a_n\geq 0$ for all $n\in\N$. Define the alternating series of the sequence to be the series whose $n$th term is given by $$s_n=\sum_{k=0}^\infty(-1)^ka_k$$
+\end{defn}
+
+\begin{thm}{Alternating Series Test}{}\\
+Let $(a_n)_{n\in\N}$ be a sequence. Suppose that the sequence is decreasing and converges to $0$. Then $\sum_{k=0}^\infty(-1)^ka_k$ converges. 
+\begin{proof}\\ Firstly note that $$s_{2n+2}=\sum_{k=1}^{2n}(-1)^ka_k-a_{2n+1}+a_{2n+2}$$ Since $a_n$ is decreasing, $a_{2n+1}\geq a_{2n+1}$ thus $s_{2n+2}\geq s_{2n}$. Similarly, we have $s_{2n+1}\leq s_{2n-1}$. Combining the two inequality, we have $$s_2\leq s_{2n}+a_{2n+1}=s_{2n+1}\leq s_1$$ Since $s_{2n}$ is increasing and bounded, it converges. Similarly, $s_{2n+1}$ is decreasing and bounded thus converges. Suppose that $(s_{2n})\to s$. Then $s_{2n}+a_{2n+1}=s_{2n+1}$. Thus $(s_{2n+1})\to s+0=s$. Suppose that for all $\varepsilon$, there exists $N$ such that $\abs{a_{n}}<\varepsilon$ whenever $n>N$. Then, we have
+\begin{align*}
+s_{2n}&\leq s\\
+s_{2n+1}-a_{2n+1}&\leq s\\
+s_{2n+1}-s&\leq a_{2n+1}\\
+\abs{s_{2n+1}-s}&\leq a_{2n+1}\\
+\abs{s_{2n+1}-s}&<\varepsilon\\
+\end{align*}
+Similarly, 
+\begin{align*}
+s&\leq s_{2n-1}\\
+s&\leq s_{2n}-a_{2n-1}\\
+s-s_{2n}&\leq a_{2n-1}\\
+\abs{s_{2n}-s}&\leq a_{2n-1}\\
+\abs{s_{2n}-s}&<\varepsilon\\
+\end{align*}
+Thus we have that $\abs{s_n-s}<\varepsilon$ whenever $n>N$ and $(s_n)$ converges. 
+\end{proof}
+\end{thm}
+
+\begin{eg}{}{}\\ The alternating harmonic series $$\sum_{k=1}^{\infty}\frac{(-1)^{k+1}}{k}$$ converges. 
+\begin{proof}\\ Simple application of the alternating series test. 
+\end{proof}
+\end{eg}
+
+\subsection{Absolute Convergence}
+\begin{defn}{Absolute Convergence}{}\\
+Let $(a_n)_{n\in\N}$ be a sequence. We say that the series with $n$th term $a_n$ converges absolutely if the series $\sum_{k=0}^\infty\abs{a_n}$ converges absolutely. 
+\end{defn}
+
+\begin{prp}{}{}\\ Every absolutely convergent series is convergent.
+\begin{proof}\\ Consider $s_n=\sum_{k=1}^na_k$ and $t_n=\sum_{k=1}^n\abs{a_n}$. Without loss of generality suppose that $n>m$
+\begin{align*}
+\abs{s_n-s_m}&=\abs{a_n+a_{n-1}+\dots+a_{m+1}}\\
+&\leq \abs{a_n}+\abs{a_{n-1}}+\dots+\abs{a_{m+1}}\\
+&=t_n-t_m\\
+&=\abs{t_n-t_m}
+\end{align*}
+If $(t_n)$ converges then for every $\varepsilon>0$ there exists $N$ such that $\abs{t_n-t_m}<\varepsilon$ for all $n,m>N$. This implies that $\abs{s_n-s_m}<\varepsilon$ thus $s_n$ is convergent. 
+\end{proof}
+\end{prp}
+
+\begin{thm}{Ratio Test for Series}{}\\
+Let $(a_n)_{n\in\N}$ be a sequence. Suppose $a_n\neq0$ for all $n$ and the sequence $\left(\frac{a_{n+1}}{a_n}\right)_{n\in\N}$ converges to some $l\in\R$. Then the following are true. 
+\begin{itemize}
+\item If $0\leq l<1$, then $\sum_{k=0}^\infty a_k$ converges absolutely. 
+\item If $l>1$, then $\sum_{k=0}^\infty a_k$ diverges. 
+\end{itemize}
+\begin{proof}\\
+Since $\frac{a_{n+1}}{a_n}\to l<1$, choose $\varepsilon>0$ such that $l+\varepsilon<1$. There exists an $N$ such that $\abs{\frac{a_{n+1}}{a_n}-l}<\varepsilon$ whenever $n>N$. 
+\begin{align*}
+\abs{\frac{a_{n+1}}{a_n}-l}&<\varepsilon\\
+\abs{\abs{\frac{a_{n+1}}{a_n}}-l}&<\varepsilon\\
+\abs{\frac{a_{n+1}}{a_n}}&<l+\varepsilon\\
+\abs{a_{n+1}}&<\abs{a_n}(l+\varepsilon)\\
+\abs{a_{n+1}}&<\abs{a_N}(l+\varepsilon)^{n+1-N}\\
+\end{align*}
+Since $$\sum_{k=1}^{\infty}\abs{a_N}(l+\varepsilon)^{k+1-N}=\frac{a_N}{1-(l+\varepsilon)}$$ We have that $\sum_{k=1}^{\infty}\abs{a_k}$ converges by comparison test. \\~\\
+Now suppose that $l>1$, there exists $N$ $\abs{a_{n+1}}>\abs{a_n}$ for some $n>N$. This means that $(a_n)$ does not converge to $0$ and by the null sequence test $\sum_{k=1}^{\infty}\abs{a_k}$ diverges. 
+\end{proof}
+\end{thm}
+
+\begin{thm}{Ratio Test for Series}{}\\
+Let $(a_n)_{n\in\N}$ be a sequence. Suppose that the sequence $\left(\abs{a_n}^{1/n}\right)$ converges to some $l\in\R$. Then the following are true. 
+\begin{itemize}
+\item If $0\leq l<1$, then $\sum_{k=0}^\infty a_k$ converges absolutely. 
+\item If $l>1$, then $\sum_{k=0}^\infty a_k$ diverges. 
+\end{itemize}
+\end{thm}
+
+\subsection{Rearrangement of Series}
+\begin{defn}{Rearrangement}{}\\ $(b_n)_{n\in\N}$ is a rearrangement of $(a_n)_{n\in\N}$ if there is a bijection $\sigma:\N\to\N$ such that for all $n\in\N$ $b_n=a_{\sigma(n)}$
+\end{defn}
+
+\begin{prp}{}{}\\ Suppose $(b_n)_{n\in\N}$ is a rearrangement of $(a_n)_{n\in\N}$ and $a_n>0$ for all $n$ and $\sum_{k=1}^{\infty}a_k$ converges. Then $\sum_{k=1}^{\infty}b_k$ converges and $$\sum_{k=1}^{\infty}b_k=\sum_{k=1}^{\infty}a_k$$ 
+\begin{proof}\\ Suppose that $s_n=\sum_{k=1}^{n}a_k$, $\sum_{k=1}^{\infty}a_k=s$ and $t_n=\sum_{k=1}^{n}b_k$. Suppose that $a_{\sigma(n)}=b_n$. Fix $N$ and consider $M_N=\max\{\sigma(r):r\leq N\}$. Then the first $a_{M_n}$ terms contains the first $b_n$ terms. Since $a_n,b_n>0$ for all $n$, we have $t_n<s_{M_N}<s$. Thus $t_n$ is increasing and bounded and converges by the completeness axiom to, say $t$ with $t\leq s$. Reverse the roles of $a_n$ and $b_n$ now given that $t_n$ converges, and we get $s\leq t$. Thus $s=t$. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{}\\ Suppose $(b_n)_{n\in\N}$ is a rearrangement of $(a_n)_{n\in\N}$ and $\sum_{k=1}^{\infty}a_k$ converges absolutely. Then $\sum_{k=1}^{\infty}b_k$ converges and $\sum_{k=1}^{\infty}b_k=\sum_{k=1}^{\infty}a_k$. 
+\begin{proof}\\
+Let $\sum_{k=1}^{\infty}a_k$ converges absolutely and $\sum_{k=1}^{\infty}b_k$ a rearrangement of the series. Consider $u_n=\frac{1}{2}(\abs{a_n}+a_n)$, $v_n=\frac{1}{2}(\abs{a_n}-a_n)$, $x_n=\frac{1}{2}(\abs{b_n}+b_n)$, $y_n=\frac{1}{2}(\abs{b_n}-b_n)$. We have that $$u_n=\begin{cases}
+a_n & a_n\geq0\\
+0 & a_n\leq 0
+\end{cases}$$ $$v_n=\begin{cases}
+0 & a_n\geq0\\
+a_n & a_n\leq 0
+\end{cases}$$ $$x_n=\begin{cases}
+b_n & b_n\geq0\\
+0 & b_n\leq 0
+\end{cases}$$ $$y_n=\begin{cases}
+0 & b_n\geq0\\
+b_n & b_n\leq 0
+\end{cases}$$
+We have $\sum_{k=1}^{\infty}u_k\leq\sum_{k=1}^{\infty}\abs{a_k}$ thus $\sum_{k=1}^{\infty}u_k$ is convergent by completeness axiom and $$\sum_{k=1}^{\infty}-v_k\leq\sum_{k=1}^{\infty}\abs{a_k}$$ thus $\sum_{k=1}^{\infty}-v_k$ converges by completeness axiom and $$\sum_{k=1}^{\infty}-v_k=-\sum_{k=1}^{\infty}v_k$$ converges. We have that $\sum_{k=1}^{\infty} u_k=\sum_{k=1}^{\infty} x_k$ and $\sum_{k=1}^{\infty} v_k=\sum_{k=1}^{\infty} y_k$ by construction. Thus $$\sum_{k=1}^{\infty} a_k=\sum_{k=1}^{\infty}(u_k-v_k)=\sum_{k=1}^{\infty}(x_k-y_k)=\sum_{k=1}^{\infty} b_k$$ is convergent. 
+\end{proof}
+\end{prp}
+
+\begin{defn}{Conditionally Convergent}{}\\ A series $\sum_{k=1}^{\infty}a_k$ is said to be conditionally convergent if $\sum_{k=1}^{\infty}a_k$ is convergent but $$\sum_{k=1}^{\infty}\abs{a_k}$$ diverges. 
+\end{defn}
+
+\begin{prp}{}{}\\ Suppose $\sum_{k=1}^{\infty}a_k$ is conditionally convergent. Consider $\sum_{k=1}^{\infty}u_k$ and $\sum_{k=1}^{\infty}v_k$ where $$u_n=\begin{cases}
+a_n & \text{if $a_n\geq0$} \\
+0 & \text{if $a_n<0$}
+\end{cases}$$
+and
+$$v_n=\begin{cases}
+0 & \text{if $a_n\geq0$} \\
+a_n & \text{if $a_n<0$}
+\end{cases}$$
+Then $\sum_{k=1}^{\infty}u_k=+\infty$ and $\sum_{k=1}^{\infty}v_k=-\infty$. 
+\begin{proof}\\
+Note that $a_n=u_n-v_n$ and $\abs{a_n}=u_n+v_n$. Suppose for contradiction that $\sum u_n$ converges. Then $\abs{a_n}=2u_n-a_n$ and thus $\sum\abs{a_n}$ converges, a contradiction. Suppose also that $\sum v_n$ converges. Then again $\abs{a_n}=2v_n+a_n$ and thus $\sum\abs{a_n}$ converges, a contradiction. Thus we have $\sum u_n$ and $\sum v_n$ diverges. Since $u_n\geq 0$ and $v_n\leq 0$ for all n, we have that $\sum u_n=\infty$ and $\sum v_n=-\infty$. 
+\end{proof}
+\end{prp}
+
+\begin{thm}{Riemann's Rearrangement Theorem}{}\\ Suppose $\sum_{k=1}^{\infty}a_k$ is conditionally convergent. Then for every $l\in\R$ there exists a rearrangement $(b_n)$ of $(a_n)$ such that $\sum_{k=1}^{\infty}b_k=l$. 
+\begin{proof}\\
+Let $(p_n)$ be the subsequence of all positive terms of $(a_n)$ and $(q_n)$ all its negative terms. We have that $(p_n)\to+\infty$ and $(q_n)\to-\infty$. Consider $l\geq0$. There exists $N_1$ such that $S_1=\sum_{k=1}^{N_1}a_k<l$ and $S_1+a_{N_1+1}>l$. Then since $(q_n)\to-\infty$. There exists $M_1$ such that $T_1=S_1+\sum_{k=1}^{M_1}q_k<l$ but $S_1+\sum_{k=1}^{M_1-1}q_k>l$. Repeat the process to find the rearrangement of our sequence $$p_1,\dots,p_{N_1},q_1,\dots,q_{M_1},p_{N_1+1},\dots,p_{N_2},q_{M_1+1},\dots,q_{M_2},\dots$$
+Its partial sums converges since $\abs{S_i-l}\leq p_{N_i}$ and $\abs{T_i-l}\leq -q_{M_i}$ for all $i$ and $p_{N_i}$ and $q_{M_i}$ tends to $0$ since $a_n$ is null. Swap the roles of $q_n$ and $p_n$ for the case $l<0$. 
 \end{proof}
 \end{thm}
 
@@ -1633,6 +1745,11 @@ Thus we are done.
 \subsection{The Trigonometric Series}
 \begin{lmm}{}{}\\
 The radius of convergence of the two power series $$\sum_{k=0}^\infty\frac{(-1)^kx^{2k+1}}{(2k+1)!}\;\;\;\text{ and }\;\;\;\sum_{k=0}^\infty\frac{(-1)^kx^{2k}}{(2k)!}$$ is $\infty$. 
+\begin{proof}\\
+Let $a_k=\frac{(-1)^kx^{2k+1}}{(2k+1)!}$. Then we have $\abs{\frac{a_{k+1}}{a_k}}=\frac{x^{2k+1}}{(2k+3)(2k+2)}\leq\frac{x^2}{k^2}$. Hence the ratio of the two terms converge to $0$. By the ratio test for series, the power series converges absolutely and hence converges for all $x\in\R$. \\
+
+Similarly, let $b_n=\frac{(-1)^kx^{2k}}{(2k)!}$. Then we have $\abs{\frac{b_{k+1}}{b_k}}=\frac{x^2}{(2k+2)(2k+1)}\leq\frac{x^2}{k^2}$. Hence the ratio of the two terms converge to $0$. By the ratio test for series, the power series converges absolutely and hence converges for all $x\in\R$. \\
+\end{proof}
 \end{lmm}
 
 \begin{defn}{Sine and Cosine}{}\\
@@ -1645,6 +1762,25 @@ The following are true regarding sine and cosine.
 \item $\frac{d}{dx}\sin(x)=\cos(x)$. 
 \item $\frac{d}{dx}\cos(x)=-\sin(x)$. 
 \end{itemize}
+\begin{proof}\\
+We have 
+\begin{align*}
+\frac{d}{dx}\sin(x)&=\frac{d}{dx}\left(\sum_{k=0}^\infty\frac{(-1)^kx^{2k+1}}{(2k+1)!}\right)\\
+&=\sum_{k=0}^\infty\frac{d}{dx}\left(\frac{(-1)^kx^{2k+1}}{(2k+1)!}\right)\\
+&=\sum_{k=0}^\infty\frac{(-1)^k(2k+1)x^{2k}}{(2k+1)!}\\
+&=\sum_{k=0}^\infty\frac{(-1)^kx^{2k}}{(2k)!}\\
+&=\cos(x)
+\end{align*}
+and 
+\begin{align*}
+\frac{d}{dx}\cos(x)&=\frac{d}{dx}\left(\sum_{k=0}^\infty\frac{(-1)^kx^{2k}}{(2k)!}\right)\\
+&=\sum_{k=0}^\infty\frac{d}{dx}\left(\frac{(-1)^kx^{2k}}{(2k)!}\right)\\
+&=\sum_{k=1}^\infty\frac{(-1)^k(2k)x^{2k-1}}{(2k)!}\\
+&=\sum_{k=1}^\infty\frac{(-1)^kx^{2k-1}}{(2k-1)!}\\
+&=-\sum_{k=0}^\infty\frac{(-1)^kx^{2k+1}}{(2k+1)!}\\
+&=-\sin(x)
+\end{align*}
+\end{proof}
 \end{lmm}
 
 \begin{lmm}{}{}\\
@@ -1778,13 +1914,19 @@ e^y&=e^{y-x}e^x\\
 \begin{defn}{The Logarithm}{}\\ Define the logarithm function as the inverse of $e^x$ as $\ln(x)$. 
 \end{defn}
 
-\begin{thm}{}{}\\ $f(x)=\ln(x)$ is continuous and differentiable for all $x\in(0,\infty)$ and the derivative is $$f'(x)=\frac{1}{x}$$ 
-\begin{proof}\\ Since $e^x$ is continuous then $\ln(x)$ is also continuous. By theorem 5.2.2, $\ln(x)$ is differentiable. Also by theorem 5.2.2 we have $f'(x)=\frac{1}{x}$. 
+\begin{prp}{}{}\\
+The following are true regarding the logarithm function. 
+\begin{itemize}
+\item $\ln(x):(0,\infty)\to\R$ is continuous. 
+\item $\ln(x)$ is differentiable and $\frac{d}{dx}\ln(x)=\frac{1}{x}$. 
+\end{itemize}
+\begin{proof}\\ Since $e^x$ is continuous then $\ln(x)$ is also continuous. By theorem 5.2.2, $\ln(x)$ is differentiable. Also by theorem 5.2.2 we have $\frac{d}{dx}\ln(x)=\frac{1}{x}$. 
 \end{proof}
-\end{thm}
+\end{prp}
 
-\begin{thm}{}{}\\ The Taylor Series for the $\ln(1-x)$ is $$\ln(1-x)=-\sum_{k=1}^\infty\frac{x^k}{k}$$ for $-1\leq x<1$
-\end{thm}
+\begin{prp}{}{}\\
+For all $-1\leq x<1$, we have $$\ln(1-x)=-\sum_{k=1}^\infty\frac{x^k}{k}$$
+\end{prp}
 
 Be cautious that the taylor series is only defined for $x\in[-1,1)$. Outside of the interval, the power series will diverge. With that in mind, we will complete the chapter by defining real exponents. This is defined through both the exponential function and the logarithm. 
 
@@ -1792,13 +1934,13 @@ Be cautious that the taylor series is only defined for $x\in[-1,1)$. Outside of 
 Let $x\in\R$ and $p\in\R$. Define the $x$ to the power $p$ to be the real number $$x^p=e^{p\ln(x)}$$
 \end{defn}
 
-\begin{thm}{Law of Exponents}{}\\ Let $x>0$ and $p,q\in\R$. 
+\begin{prp}{Law of Exponents}{}\\ Let $x>0$ and $p,q\in\R$. 
 \begin{itemize}
 \item $x^{p+q}=x^px^q$
 \item $(x^p)^q=x^{pq}$
 \end{itemize}
 \begin{proof}\\ Simply revert the real exponents in terms of $e$. 
 \end{proof}
-\end{thm}
+\end{prp}
 
 \end{document}

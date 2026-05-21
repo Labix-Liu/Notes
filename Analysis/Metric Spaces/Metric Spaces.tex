@@ -20,8 +20,6 @@
 \tableofcontents
 \pagebreak
 \section{Metric Spaces}
-Metric spaces lies in between analysis and topology. On one hand, they are the general setting to discuss the notion of length, and hence sequences and convergence. On the other hand, almost all of the notions of metric spaces are subsumed by topological spaces with a relative notion of closeness. Hence they form a large class of examples of topological spaces and its properties, while being easy to visualize. 
-
 \subsection{Basic Definitions}
 \begin{defn}{Metric}{}\\
 Let $X$ be a set. A metric on $X$ is a function $d:X\times X\to\R$ such that the following are true. 
@@ -95,28 +93,6 @@ Let $X$ be a metric space. Let $U\subseteq X$ be a subset. We say that $U$ is bo
 Let $X$ be a metric space. Let $U,V\subseteq X$ be subsets. Define the distance between $U$ and $V$ to be $$\text{dist}(U,V)=\inf\{d(u,v)\;|\;u\in U,v\in V)\}$$
 \end{defn}
 
-\subsection{Distance Preserving Maps}
-\begin{defn}{Distance Preserving Maps}{}\\
-Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces. Let $f:X\to Y$ be a function. We say that $f$ is distance preserving if for any $p,q\in X$, we have $$d_Y(f(p),f(q))=d_X(p,q)$$
-\end{defn}
-
-\begin{defn}{Isometries}{} Let $(X,d_1)$ and $(X,d_2)$ be metric spaces. Let $f:X\to Y$ be a distance preserving map. We say that $f$ is an isometry if there exists a distance preserving map $g:Y\to X$ such that $$g\circ f=\text{id}_X\;\;\;\;\text{ and }\;\;\;\;f\circ g=\text{id}_Y$$
-\end{defn}
-
-It is also common to use the term isometry to mean a distance preserving function and refer to our version of isometry as bijective isometries. 
-
-\begin{lmm}{}{} Let $(X,d_1)$ and $(X,d_2)$ be metric spaces. Let $f:X\to Y$ be a distance preserving map. Then $f$ is an isometry if and only if $f$ is bijective. 
-\begin{proof}\\
-Clearly, if $f$ is an isometry then $f$ has an inverse function. Conversely, suppose that $f$ is bijective. Then we have $$d_X(f^{-1}(p),f^{-1}(q))=d_Y(f(f^{-1}(p)),f(f^{-1}(q)))=d_Y(p,q)$$ for any $p,q\in Y$ since $f$ is distance preserving. Hence $f^{-1}$ is distance preserving. 
-\end{proof}
-\end{lmm}
-
-\begin{defn}{The Set of Isometries of a Metric Space}{}\\
-Let $(X,d)$ be a metric space. Define the set of isometries of $X$ to be $$\text{Isom}(X,d)=\{f:X\to X\;|\;f\text{ is an isometry }\}$$
-\end{defn}
-
-\pagebreak
-\section{Topological Properties}
 \subsection{Open and Closed Subsets}
 \begin{defn}{Open and Closed Sets}{}\\
 Let $X$ be a metric space. Let $U\subseteq X$. 
@@ -168,37 +144,68 @@ Suppose that $U_1,\dots,U_n$ are closed subsets of $X$. Then $X\setminus U_i$ fo
 \end{proof}
 \end{prp}
 
-\subsection{The Interior, Boundary and Closure Operators}
-\begin{defn}{Interior and Boundary Points}{}\\
-Let $X$ be a metric space. Let $U\subseteq X$ be a subset. Let $x\in X$. 
-\begin{itemize}
-\item We say that $x$ is an interior points of $U$ if there exists $r>0$ such that $B_r(x)\subset U$. 
-\item We say that $x$ is a boundary point of $U$ if for all $r>0$, we have $$B_r(x)\cap U\neq\emptyset\neq B_r(x)\cap(X\setminus U)$$
-\end{itemize}
+\subsection{Distance Preserving Maps}
+\begin{defn}{Distance Preserving Maps}{}\\
+Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces. Let $f:X\to Y$ be a function. We say that $f$ is distance preserving if for any $p,q\in X$, we have $$d_Y(f(p),f(q))=d_X(p,q)$$
 \end{defn}
 
-\begin{defn}{The Interior, Boundary and Closure Operator}{}\\
-Let $X$ be a metric space. Let $U\subseteq X$ be a subset. 
-\begin{itemize}
-\item Define the interior of $U$ to be $$U^\circ=\{x\in U\;|\;x\text{ is an interior point of }U\}$$
-\item Define the boundary of $U$ to be $$\partial U=\{x\in U\;|\;x\text{ is a boundary point of }U\}$$
-\item Define the closure of $U$ to be $$\overline{U}=U\cup\partial U$$
-\end{itemize}
+\begin{defn}{Isometries}{} Let $(X,d_1)$ and $(X,d_2)$ be metric spaces. Let $f:X\to Y$ be a distance preserving map. We say that $f$ is an isometry if there exists a distance preserving map $g:Y\to X$ such that $$g\circ f=\text{id}_X\;\;\;\;\text{ and }\;\;\;\;f\circ g=\text{id}_Y$$
 \end{defn}
+
+It is also common to use the term isometry to mean a distance preserving function and refer to our version of isometry as bijective isometries. 
+
+\begin{lmm}{}{} Let $(X,d_1)$ and $(X,d_2)$ be metric spaces. Let $f:X\to Y$ be a distance preserving map. Then $f$ is an isometry if and only if $f$ is bijective. 
+\begin{proof}\\
+Clearly, if $f$ is an isometry then $f$ has an inverse function. Conversely, suppose that $f$ is bijective. Then we have $$d_X(f^{-1}(p),f^{-1}(q))=d_Y(f(f^{-1}(p)),f(f^{-1}(q)))=d_Y(p,q)$$ for any $p,q\in Y$ since $f$ is distance preserving. Hence $f^{-1}$ is distance preserving. 
+\end{proof}
+\end{lmm}
+
+\begin{defn}{The Set of Isometries of a Metric Space}{}\\
+Let $(X,d)$ be a metric space. Define the set of isometries of $X$ to be $$\text{Isom}(X,d)=\{f:X\to X\;|\;f\text{ is an isometry }\}$$
+\end{defn}
+
+\pagebreak
+\section{Limits and Continuity}
+\subsection{Sequences}
+\begin{defn}{Sequences}{}\\
+Let $X$ be a metric space. A sequence in $X$ is a collection of elements $a_n\in X$ for each $n\in\N$. We denote the sequence by $(a_n)_{n\in\N}$. 
+\end{defn}
+
+\begin{defn}{Convergence}{}\\
+Let $(X,d)$ be a metric space. Let $(x_n)_{n\in\N}$ be a sequence in $X$. Let $x\in X$. We say that the sequence converges to the limit $x$ if for all $\varepsilon>0$, there exists $N\in\N$ such that $d(x_n,x)<\varepsilon$ for all $n>N$. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $X$ be a metric space. Let $(x_n)_{n\in\N}$ be a sequence in $X$. Suppose that $x,y\in X$ are the limits of the sequence, then $x=y$. 
+\begin{proof}\\
+Let $\varepsilon>0$. Since $(x_n)_{n\in\N}$ converges to $x$ and $y$, there exists $N_1,N_2\in\N$ such that $d(x_n,x)<\frac{\varepsilon}{2}$ and $d(x_m,y)<\frac{\varepsilon}{2}$ for all $n>N_1$ and $m>N_2$ respectively. Let $N=\max\{N_1,N_2\}$. Then we have $d(x_n,x)<\varepsilon$ and $d(x_n,y)<\frac{\varepsilon}{2}$ for all $n\in\N$. By the triangle inequality, we have $$d(x,y)<d(x_n,x)+d(x_n,y)=\frac{\varepsilon}{2}+\frac{\varepsilon}{2}=\varepsilon$$ Since $0\leq d(x,y)<\varepsilon$ for all $\varepsilon>0$, we deduce that $d(x,y)=0$. Hence $x=y$. 
+\end{proof}
+\end{lmm}
 
 \begin{prp}{}{}\\
-Let $X$ be a metric space. Let $U\subseteq X$. Then the following are true. 
-\begin{itemize}
-\item $U$ is open if and only if $U=U^\circ$ if and only if $U\cap\partial U=\emptyset$. 
-\item $U$ is closed if and only if $U=\overline{U}$. 
-\end{itemize}
-\begin{proof}
+Let $X$ be a metric space. Let $U\subseteq X$. Then $U$ is closed if and only if for all sequence $(x_n)_{n\in\N}$ in $U$ that converges in $x\in X$, we have $x\in U$. 
+\begin{proof} Suppose that $U$ is closed. Then $X\setminus U$ is open by definition. Let $\{x_n\}\subset U$ converge to $x\notin U$. Then $x\in X\setminus U$. By definition of convergence, for every $\epsilon>0$, there exists $N\in\N$ such that $x_n\in B_\epsilon(x)$ for $n>N$. But since $X\setminus U$ is open, there should be some $\epsilon$ such that $B_\epsilon(x)\subset X\setminus U$. In this case, we would have $x_n\in B_r(x)\subset X\setminus U$ which is a contradiction. \\
+Suppose that the right hand side is true. Suppose for a contradiction that $X\setminus U$ is not open. Then for every $\epsilon>0$, $B_\epsilon(x)$ is not a subset of $X\setminus U$ for some $x\in X\setminus U$. Let $y_k\in B_{1/k}(x)$ but $y_k\notin X\setminus U$. Then $y_k\in U$ and $y_k\to x\in X\setminus U$, a contradiction. 
 \end{proof}
 \end{prp}
 
+\begin{prp}{}{} Let $X,Y$ be metrics spaces. Let $((x_n,y_n))_{n\in\N}$ be a sequence in $X\times Y$. Let $(x,y)\in X\times Y$. Then $((x_n,y_n))_{n\in\N}$ converges to $(x,y)$ if and only if $(x_n)_{n\in\N}$ converges to $x$ and $(y_n)_{n\in\N}$ converges to $y$. 
+\end{prp}
+
+\begin{defn}{Cauchy Sequence}{} We say that $\{x_n\}\subset(X,d)$ is a Cauchy sequence if for every $\epsilon>0$, there exists some $N$ such that $d(x_n,x_m)<\epsilon$ for all $n,m>\epsilon$. 
+\end{defn}
+
+\begin{prp}{}{} Every convergent sequence is Cauchy. 
+\begin{proof}
+Let $(x_n)_{n\in\N}$ be a convergent sequence in a metric space $X$. Let $\epsilon>0$, then from convergence we have that for $d(x_n,x)<\frac{\epsilon}{2}$ for all $n>N$ for some $N\in\N$. Then choosing the same $N$, we have that $$d(x_n,x_m)\leq d(x_n,x)+d(x,x_m)<\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon$$ thus we are done. 
+\end{proof}
+\end{prp}
+
+We now give the definition of a complete space in terms of Cauchy sequences. 
+
 \subsection{Limits of Functions}
 \begin{defn}{Accumulation Points}{}\\
-Let $M$ be a metric space. Let $x\in M$. We say that $x$ is an accumulation point of $M$ if for all $r\in\R^+$, we have $$B_r(x)\setminus\{p\}\neq\emptyset$$
+Let $M$ be a metric space. Let $x\in M$. We say that $x$ is an accumulation point of $M$ if for all $r\in\R^+$, we have $$B_r(x)\setminus\{x\}\neq\emptyset$$
 \end{defn}
 
 \begin{defn}{Limits}{}\\
@@ -263,53 +270,33 @@ Let $X,Y,Z$ be metric spaces. Let $f:X\to Y$ and $g:Y\to Z$ be functions. If $f$
 \end{lmm}
 
 \subsection{Lipschitz Continuous Functions}
-\begin{defn}{Lipschitz Continuous}{} Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces and suppose that $f:X\to Y$. We say that $f$ is a Lipschitz map if there is a constant $K\geq 0$ such that $$d_Y(f(x),f(y))\leq Kd(x,y)$$ for all $x,y$ in $X$. \\
-If $Y=X$ and $K\in[0,1)$ then $f$ is a contraction mapping. 
+\begin{defn}{Lipschitz Continuous}{} Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces and suppose that $f:X\to Y$. We say that $f$ is a Lipschitz map if there is a constant $K\geq 0$ such that $$d_Y(f(x),f(y))\leq Kd(x,y)$$ for all $x,y$ in $X$. 
 \end{defn}
 
-\begin{lmm}{}{} If $f:X\to Y$ is Lipschitz continuous then it is continuous. 
+\begin{lmm}{}{} If $f:X\to Y$ is Lipschitz continuous then it is uniformly continuous. 
 \end{lmm}
+
+\begin{defn}{Contraction Maps}{}\\
+Let $X$ be a metric space. Let $f:X\to X$ be a function. We say that $f$ is a contraction map if $f$ is Lipschitz continuous with $K\in[0,1)$. 
+\end{defn}
 
 \pagebreak
 \section{Convergence in Metric Spaces}
-\subsection{Sequences}
-\begin{defn}{Sequences}{} Let $X$ be a metric space. A sequence in $X$ is an ordered set of numbers $x_0,x_1,x_2,\dots$ such that they all are in $X$. We denote this sequence by $(x_n)_{n\in\N}$. 
-\end{defn}
-
-\begin{defn}{Convergence}{} Let $(X,d)$ be a metric space. A sequence $(x_n)_{n\in\N}\subset X$ a metric space is said to converge to $x\in X$ if for every $\epsilon>0$ there exists $N$ such that $n>N$ implies $$d(x_n,x)<\epsilon$$
-\end{defn}
-
-\begin{lmm}{Uniqueness of Limit}{} Let $X$ be a metric space. Let $(x_n)_{n\in\N}$ be a sequence in $X$. If $(x_n)_{n\in\N}$ converges to $x\in X$ and $y\in X$, then $x=y$. 
-\end{lmm}
-
-\begin{prp}{}{} Let $X$ be a metric space. $U\subseteq X$ is closed if and only if for every sequence $(x_n)_{n\in\N}\subseteq U$ that converges, it converges to some $x\in U$. 
-\begin{proof} Suppose that $U$ is closed. Then $X\setminus U$ is open by definition. Let $\{x_n\}\subset U$ converge to $x\notin U$. Then $x\in X\setminus U$. By definition of convergence, for every $\epsilon>0$, there exists $N\in\N$ such that $x_n\in B_\epsilon(x)$ for $n>N$. But since $X\setminus U$ is open, there should be some $\epsilon$ such that $B_\epsilon(x)\subset X\setminus U$. In this case, we would have $x_n\in B_r(x)\subset X\setminus U$ which is a contradiction. \\
-Suppose that the right hand side is true. Suppose for a contradiction that $X\setminus U$ is not open. Then for every $\epsilon>0$, $B_\epsilon(x)$ is not a subset of $X\setminus U$ for some $x\in X\setminus U$. Let $y_k\in B_{1/k}(x)$ but $y_k\notin X\setminus U$. Then $y_k\in U$ and $y_k\to x\in X\setminus U$, a contradiction. 
-\end{proof}
-\end{prp}
-
-\begin{prp}{}{} Let $X,Y$ be metrics spaces. Let $((x_n,y_n))_{n\in\N}$ be a sequence in $X\times Y$. Let $(x,y)\in X\times Y$. Then $((x_n,y_n))_{n\in\N}$ converges to $(x,y)$ if and only if $(x_n)_{n\in\N}$ converges to $x$ and $(y_n)_{n\in\N}$ converges to $y$. 
-\end{prp}
-
-\begin{defn}{Cauchy Sequence}{} We say that $\{x_n\}\subset(X,d)$ is a Cauchy sequence if for every $\epsilon>0$, there exists some $N$ such that $d(x_n,x_m)<\epsilon$ for all $n,m>\epsilon$. 
-\end{defn}
-
-\begin{prp}{}{} Every convergent sequence is Cauchy. 
-\begin{proof}
-Let $(x_n)_{n\in\N}$ be a convergent sequence in a metric space $X$. Let $\epsilon>0$, then from convergence we have that for $d(x_n,x)<\frac{\epsilon}{2}$ for all $n>N$ for some $N\in\N$. Then choosing the same $N$, we have that $$d(x_n,x_m)\leq d(x_n,x)+d(x,x_m)<\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon$$ thus we are done. 
-\end{proof}
-\end{prp}
-
-We now give the definition of a complete space in terms of Cauchy sequences. 
-
 \subsection{Complete Metric Spaces}
-\begin{defn}{Complete Spaces}{} A metric space $(X,d)$ is complete if any Cauchy sequence in $X$ converges. 
+\begin{defn}{Complete Spaces}{}\\
+Let $X$ be a metric space. We say that $X$ is complete if every Cauchy sequence in $X$ converges. 
 \end{defn}
 
-\begin{prp}{}{} A subspace of a metric space is complete if and only if it is closed under a complete metric space. 
-\begin{proof}
-Suppose that $X$ is a metric space and $U\subset X$ is a complete metric space. Let $(x_n)_{n\in\N}\subset U$ and that $x_n\to x\in X$. Then $(x_n)_{n\in\N}$ is Cauchy thus it convergence to some $y\in U$. We will show that in fact $x=y$. This is true from the fact that $$d|_U(x_n,y)=d(x_n,y)$$ Thus $(x_n)_{n\in\N}$ is in fact a sequence that converges in $U$. This shows that $U$ is closed. \\
-Now suppose that $U$ is closed under a complete metric space $X$. Let $(x_n)_{n\in\N}$ be a Cauchy sequence in $U$. Then trivially it is also a Cauchy sequence in $X$ and thus is convergent. Since $U$ is closed, the limit is necessarily in $U$ and thus $U$ is complete. 
+\begin{prp}{}{}\\
+Let $X$ be a metric space. Let $Y\subseteq X$ be a subset. Then the following are true. 
+\begin{itemize}
+\item If $X$ is complete and $Y$ is closed, then $Y$ is complete. 
+\item If $Y$ is complete, then $Y$ is closed. 
+\end{itemize}
+\begin{proof}\\
+Suppose that $X$ is a complete metric space and $Y$ is closed. Let $(y_n)_{n\in\N}$ be a Cauchy sequence in $Y$. Since it is also a sequence in $X$, completeness of $X$ implies that it converges to some $x\in X$. But since $Y$ is closed, we must have $x\in Y$. Hence $Y$ is complete. \\
+
+Now suppose that $Y$ is complete. Then for any convergent sequence $(y_n)_{n\in\N}$ in $Y$, it is Cauchy and hence converges to some $Y\in Y$. Thus $Y$ is closed. 
 \end{proof}
 \end{prp}
 
@@ -321,11 +308,38 @@ For each $N\in\N$, choose $x_N\in S_N$. Then for all $n>N$, $x_n\in S_N$. Thus f
 
 Below are a few examples of complete spaces. 
 
-\begin{prp}{}{} $\R^n$ and $\C$ are both complete. 
-\begin{proof}
+\begin{eg}{}{}\\
+$\R^n$ is a complete metric space. 
+\begin{proof}\\
 Let $(x_k)_{k\in\N}$ be a Cauchy sequence in $\R^n$. Denote the $i$th component of $x_k$ by $x_{k,i}$. Then for every $\epsilon>0$, there exists $N$ such that $$\|x_k-x_m\|=\left(\sum_{i=1}^n\abs{x_{k,i}-x_{m,i}}^2\right)^{\frac{1}{2}}<\epsilon$$ for $k,m>N$. In particular, we have that each individual $$\abs{x_{k,i}-x_{m,i}}<\epsilon$$ for $m,n>N$. Thus $(x_{k,i})_{k\in\N}$ is a Cauchy sequence in $\R$. But we know that Cauchy sequences in $\R$ converges, thus $(x_{k,i})_{k\in\N}$ converges to $x_i\in\R$. Now define $x=(x_1,\dots,x_n)$, then $$\|x_k-x\|=\left(\abs{x_{k,i}-x_i}^2\right)^{\frac{1}{2}}<n\epsilon$$ by convergence of each individual component. Thus $(x_n)_{n\in\N}$ is a convergent sequence. \\
-The proof for $\C$ is the same in considering $\R^2$. 
 \end{proof}
+\end{eg}
+
+\subsection{Completion}
+The goal of this section is to attempt to complete a metric space by adding in the missing limits of a metric space. 
+
+\begin{defn}{Space of Bounded Real Functions}{}\\
+Let $X$ be a metric space. Define the set of bounded real functions of $X$ to be $$B(X)=\{f:X\to\R\;|\;\abs{f}\leq M\text{ for some }M\in\R\}$$
+\end{defn}
+
+\begin{defn}{The Supremum Metric}{}\\
+Let $X$ be a metric space. Define the supremum metric on $B(X)$ by the formula $$\|f-g\|_\infty=\sup_{x\in X}\abs{f(x)-g(x)}$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $X$ be a metric space. Then the metric space $B(X)$ whose metric induced by the supremum norm is complete. 
+\begin{proof}
+Let $(f_n)_{n\in\N}$ be a Cauchy sequence in $B(X)$. Then for every $\epsilon>0$, there exists $N$ such that $$\|f_n-f_m\|_{\infty}=\sup_{x\in X}\abs{f_n(x)-f_m(x)}<\epsilon$$ for all $n,m>N$. In particular, for each $x\in X$, the property of supremum implies that $\abs{f_n(x)-f_m(x)}<\epsilon$ for $n,m>N$. Thus $(f_n(x))_{n\in\N}\subset\R$ is Cauchy for each $x$. Since $\R$ is complete, $(f_n(x))_{n\in\N}$ converges for each $x\in X$. \\
+Now define the function $f:X\to\R$ by $$f(x)=\lim_{n\to\infty}f_n(x)$$ Then fix $\epsilon>0$, we have that $$\abs{f_n(x)-f(x)}<\epsilon$$ for all $n>N$ by letting $m\to\infty$ from the fact that $\abs{f_n(x)-f_m(x)}<\epsilon$. This $N$ does not depend on $x$. Fix $\epsilon=1$, then there exists $N_1\in\N$ such that 
+\begin{align*}
+\abs{f(x)-f_n(x)}\leq\abs{f(x)-f_{N_1}(x)}\\
+\leq 1+\abs{f_{N_1}(x)}
+\end{align*} for all $x\in X$ and $n>N_1$ thus $f$ is bounded. This means that $f\in B(X)$ and that $\|f_n-f\|_\infty<\epsilon$ for all $n>N$. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $X$ be a metric space. Then there exists a function $f:X\to B(X)$ such that map $f:X\to\im(f)$ is an isometry. 
 \end{prp}
 
 \subsection{The Contraction Mapping Theorem}
@@ -378,7 +392,8 @@ Let $X$ be a metric space. Let $f:[a,b]\to X$ be a path in $X$. Let $g:[c,d]\to 
 \end{defn}
 
 \subsection{Geodesics}
-\begin{defn}{Geodesics}{} Let $(X,d)$ be a metric space. A geodesic on $X$ is a distance preserving function $\gamma:I\subseteq\R\to X$. 
+\begin{defn}{Geodesics}{}\\
+Let $X$ be a metric space. Let $I\subseteq\R$ be an interval. Let $\gamma:I\to\R$ be a path. We say that $\gamma$ is a geodesic if $\gamma$ is distance preserving. 
 \end{defn}
 
 \begin{defn}{Geodesic Metric Spaces}{} Let $(X,d)$ be a metric space. We say that $X$ is geodesic if for all $a,b\in X$, there exists a geodesic $\gamma:I\to X$ from $a$ to $b$. 

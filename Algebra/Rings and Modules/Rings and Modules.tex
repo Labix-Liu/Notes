@@ -39,7 +39,6 @@ Notice that while most of the time we exclusively work with left $R$-modules, al
 The following are true. 
 \begin{itemize}
 \item $\Z$-modules are the same as abelian groups. 
-\item $\Z$-submodules are the same as subgroups. 
 \item Let $\F$ be a field. Then $\F$-modules are the same as vector spaces. 
 \end{itemize}
 \end{eg}
@@ -276,6 +275,21 @@ Any $\Z$-module homomorphism is determined by where $1$ is mapped to. Let $\varp
 \end{proof}
 \end{eg}
 
+\begin{prp}{}{}\\
+Let $R$ be a ring. Let $M_i$ be an $R$-module for each $i\in I$. Let $N$ be an $R$-module. Then the following are true. 
+\begin{itemize}
+\item There is an isomorphism of $Z(R)$-modules $$\Hom_R\left(\bigoplus_{i\in I}M_i,N\right)\cong\prod_{i\in I}\Hom_R(M_i,N)$$
+\item There is an isomorphism of $Z(R)$-modules $$\Hom_R\left(N,\prod_{i\in I}M_i\right)\cong\prod_{i\in I}\Hom_R(M_i,N)$$
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $R$ be a commutative ring. Let $M$ be an $R$-module. Then there is an $R$-module isomorphism $$\Hom_R(R,M)\cong M$$ given by $\phi\mapsto\phi(1)$. 
+\begin{proof}\\
+Clearly it is an $R$-module homomorphism. It remains to show that it is bijective. Suppose that $\phi$ lies in the kernel. Then we have $\phi(1)=0$. Let $r\in R$. Then we have $\phi(r)=r\phi(1)=0$. Hence $\phi=0$. Now suppose that $m\in M$. Define a function $\psi:R\to M$ by $\psi(r)=r\cdot m$. It is an $R$-module homomorphism since $M$ is an $R$-module, and we have $\psi(1)=m$. Hence $\psi\mapsto m$. Thus the homomorphism is bijective. 
+\end{proof}
+\end{prp}
+
 \begin{defn}{Endomorphisms of a Module}{}\\
 Let $R$ be a ring. Let $M$ be a left $R$-module. An endomorphism of $M$ is a homomorphism $\phi:M\to M$. Denote the set of all $R$-endomorphisms by $$\text{End}_R(M)=\{\phi:M\to M\;|\;\phi\text{ is a homomorphism of }M\}$$ together with two binary operations defined as follows: 
 \begin{itemize}
@@ -306,7 +320,7 @@ Thus we are done.
 The following lemma shows that endomorphisms of $R$ as an $R$-module consists of precisely the left multiplications of $R$ by each element in $R$ (Thus also having an isomorphism on right multiplication). Moreover, the ring structures are compatible so that it is not just a bijection. 
 
 \begin{prp}{}{}\\
-Let $R$ be a ring. Then there is an $R$-module isomorphism $$R\cong\text{End}_R(R)$$ given by $r\mapsto(x\mapsto r\cdot x)$. 
+Let $R$ be a ring. Then there is an $R$-module isomorphism $$R^\text{op}\cong\text{End}_R(R)$$ given by $r\mapsto(x\mapsto r\cdot x)$. 
 \begin{proof}\\
 We first check that the map $\phi:R\to\text{End}_R(R)$ is a ring homomorphism. For any $r,s\in R$ and $x\in M$, we have $$\phi(r+s)(x)=x\cdot (r+s)=x\cdot r+x\cdot s=\phi(r)(x)+\phi(s)(x)$$ We also have $\phi(1)(x)=x=\text{id}_R(x)$. Finally, we have $$\phi(rs)=x\cdot (rs)=(x\cdot r)\cdot s=\phi(s)(x\cdot r)=\phi(s)(\phi(r)(x))$$ It remains to show that $\phi$ is bijective. For injectivity: The kernel $\phi$ is $0$ because letting $r\in\ker(\phi)$, we have $\phi(r)=0$. But we also know that $\phi(r)(1_R)=1_R\cdot r$. Equating gives $r=0$. For surjectivity: Let $\eta\in\text{End}_R(R)$. Let $x\in R$. Then we have $$
 \eta(x)=\eta(x\cdot 1_R)=x\cdot\eta(1_R)=\phi(\eta(1_R))(x)$$ Thus $\phi$ is a ring isomorphism. 
@@ -406,7 +420,7 @@ Let $R$ be a commutative ring. Let $M,N$ be $R$-modules. Then $m\otimes 0=0\otim
 \end{eg}
 
 \begin{eg}{}{}\\
-Let $n,m\in\N^+$. Then we have $$\Z/n\Z\otimes_\Z\Z/n\Z=\Z/\gcd(n,m)\Z$$
+Let $n,m\in\N^+$. Then we have $$\Z/n\Z\otimes_\Z\Z/m\Z=\Z/\gcd(n,m)\Z$$
 \begin{proof}\\
 Define $\Z$-module homomorphism $f:\Z/m\Z\otimes\Z/n\Z\to\Z/\gcd(m,n)\Z$ by $a\otimes_\Z b\mapsto ab\;(\bmod\;\gcd(m,n))$. Clearly $f$ is surjective since $1\otimes 1\mapsto 1$. We also show that $f$ is injective. Suppose that $ab$ is divisible by $\gcd(m,n)$. Then there exists $k\in\N$ such that $ab=\gcd(m,n)k$. Then $a\otimes b=ab(1\otimes 1)=\gcd(m,n)k(1\otimes 1)$. By Bezout's lemma, there exists $x,y\in\Z$ such that $$a\otimes_\Z b=\gcd(m,n)k(1\otimes 1)=(mx+ny)k(1\otimes_\Z1)=xk(m\otimes 1)+yk(1\otimes n)=0+0=0$$ Hence $f$ is injective. 
 \end{proof}
@@ -1737,7 +1751,7 @@ Let $R$ be a PID. Let $M,N$ be a finitely generated $R$-modules with primary dec
 
 \pagebreak
 \section{Graded Structures}
-\subsection{Graded Rings}
+\subsection{Graded Rings and Graded Modules}
 \begin{defn}{Graded Rings}{}\\
 Let $R$ be a ring. We say that $R$ is $\Z$-graded if the following are true. 
 \begin{itemize}
@@ -1769,41 +1783,24 @@ Let $R=\bigoplus_{k\in\Z}R_k$ be a graded ring. Then the following are true.
 Let $R$ be a ring. Let $I$ be a left ideal of $R$. Define the graded ring associated to $R$ of $I$ to be $$\text{gr}_I(R)=\bigoplus_{n=0}^\infty\frac{I^n}{I^{n+1}}$$
 \end{defn}
 
-\begin{defn}{Graded Commutative Rings}{} Let $R=\bigoplus_{k=0}^\infty R_k$ be a graded ring. We say that $R$ is graded commutative if for all $r\in R_i$ and $r\in R_j$, $$r\cdot s=(-1)^{ij}s\cdot r$$
+\begin{defn}{Graded Commutative Rings}{}\\
+Let $R=\bigoplus_{k=0}^\infty R_k$ be a graded ring. We say that $R$ is graded commutative if for all $r\in R_i$ and $r\in R_j$, $$r\cdot s=(-1)^{ij}s\cdot r$$
 \end{defn}
 
-\begin{defn}{Homomorphism of Graded Rings}{}\\
-Let $R,S$ be graded rings. Let $\varphi:R\to S$ be a ring homomorphism. 
-\begin{itemize}
-\item We say that $\varphi$ has degree $n\in\Z$ if $\varphi(R_i)\subseteq S_{i+n}$ for all $i\in\Z$. 
-\item We say that $\varphi$ is a graded homomorphism if $\deg(\varphi)=0$. 
-\end{itemize}
+\begin{defn}{Graded Modules over a Graded Ring}{}\\
+Let $R$ be a graded ring. Let $M$ be an $R$-module. We say that $M$ is a graded module over $R$ if there is a decomposition $$M=\bigoplus_{k\in\Z}M_k$$ into abelian groups and $R_iM_j\subseteq M_{i+j}$. 
 \end{defn}
 
-\begin{defn}{Isomorphism of Graded Rings}{} Let $R,S$ be graded rings. Let $\varphi:R\to S$ be a ring homomorphism. We say that $\phi$ is a graded ring isomorphism if it is a graded ring homomorphism and an isomorphism of rings. 
-\end{defn}
-
-\subsection{Graded Modules}
-\begin{defn}{Graded Modules over a Graded Ring}{} Let $R$ be a graded ring. Let $M$ be an $R$-module. We say that $M$ is a graded module over $R$ if there is a decomposition $$M=\bigoplus_{k=0}^\infty M_k$$ into abelian groups and $R_iM_j\subseteq M_{i+j}$. 
-\end{defn}
-
-\begin{prp}{}{} Let $R=\bigoplus_{i=0}^\infty R_i$ be a graded ring. Let $M=\bigoplus_{i=0}^\infty M_i$ be a graded $R$-module. Then the following are true. 
+\begin{prp}{}{}\\
+Let $R$ be a graded ring. Let $M$ be a graded $R$-module. Then the following are true. 
 \begin{itemize}
 \item $M$ is an $R_0$-module. 
 \item $M_n$ is an $R_0$-module for each $n\in\N$. 
 \end{itemize}
 \end{prp}
 
-\begin{prp}{}{} Let $R$ be a graded ring. Let $M,N$ be graded $R$-modules. Then the tensor product $M\otimes_RN$ is also a graded $R$-module, with grading given by $$\left(M\otimes_RN\right)_n=\frac{\bigoplus_{i+j=n}M_i\otimes_\Z N_j}{\left\langle rm\otimes n-m\otimes rn\;|\;\substack{m\in M_a, n\in N_b, r\in R_c\\\text{ such that }a+b+c=n}\right\rangle}$$
-\end{prp}
-
-\begin{prp}{}{} Let $R,S$ be graded rings considered as graded $\Z$-modules. Then the graded $\Z$-module $R\otimes_\Z S$ is also a graded ring, with multiplication defined by $$(r_1\otimes s_1)(r_2\otimes s_2)=(-1)^{\abs{s_1}\abs{r_2}}(r_1r_2\otimes s_1s_2)$$
-\end{prp}
-
-\begin{lmm}{}{} Let $R,S$ be graded rings. If $R$ and $S$ are graded commutative, then $R\otimes_\Z S$ is also graded commutative. 
-\end{lmm}
-
-\begin{defn}{Twisting Graded Modules}{} Let $R=\bigoplus_{i=0}^\infty R_i$ be a graded ring. Let $M=\bigoplus_{i=0}^\infty M_i$ be a graded $R$-module. Let $n\in\N$. Define the $n$th twisted module $M(n)$ of $M$ to be the graded module whose $d$th graded piece is given by $M(n)_d=M_{d+n}$. 
+\begin{defn}{Twisting Graded Modules}{}\\
+Let $R$ be a graded ring. Let $M$ be a graded $R$-module. Let $n\in\N$. Define the $n$th twisted module $M(n)$ of $M$ to be the graded module whose $d$th graded piece is given by $M(n)_d=M_{d+n}$. 
 \end{defn}
 
 \subsection{Homogenity}
@@ -1868,6 +1865,68 @@ Let $R$ be a graded ring. Let $I\subseteq R$ be an ideal of $R$. Then the follow
 \end{itemize}
 \end{lmm}
 
+\subsection{Graded Structure in Module Related Constructs}
+\begin{defn}{Homomorphism of Graded Modules}{}\\
+Let $R$ be a graded ring. Let $M,N$ be graded $R$-modules. Let $\varphi:M\to N$ be an $R$-module homomorphism. 
+\begin{itemize}
+\item We say that $\varphi$ has degree $n\in\N$ if $\varphi(M_i)\subseteq N_{i+n}$ for all $i\in\Z$. 
+\item We say that $\varphi$ is a graded homomorphism if $\deg(\varphi)=0$. 
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $R$ be a graded ring. Let $M,N$ be graded $R$-modules. Let $\varphi:M\to N$ be an $R$-module homomorphism of degree $n\in\Z$. Then the following are true. 
+\begin{itemize}
+\item $\ker(\varphi)$ is a graded $R$-module with grading given by $(\ker(f))_i=\ker(f_i)$. 
+\item $\im(\varphi)$ is a graded $R$-module with grading given by $(\im(f))_i=\im(f_{n-i})$. 
+\end{itemize}
+\end{prp}
+
+\begin{defn}{The Graded Hom Module}{}\\
+Let $R$ be a graded ring. Let $M,N$ be graded $R$-modules. Define the abelian group $$\Hom_R^\text{gr}(M,N)_i=\{\varphi:M\to N\;|\;\varphi\text{ is a homomorphism of degree }i\}$$ Also define $$\Hom_R^\text{gr}(M,N)=\bigoplus_{n\in\Z}\Hom_R^\text{gr}(M,N)_n$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $R$ be a graded ring. Let $M,N$ be graded $R$-modules. Then the following are true. 
+\begin{itemize}
+\item $\Hom_R^\text{gr}(M,N)$ is a graded abelian group. 
+\item If $R$ is a commutative graded ring, then $\Hom_R^\text{gr}(M,N)$ is a graded $R$-module. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $R$ be a commutative graded ring. Let $M,N$ be graded $R$-modules. Let $\iota:\Hom_R^\text{gr}(M,N)\to\Hom_R(M,N)$ be the inclusion function. Then the following are true. 
+\begin{itemize}
+\item $\iota$ is an $R$-module homomorphism. 
+\item If $M$ is finitely generated, then $\iota$ is an isomorphism. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $R$ be a graded ring. Let $M,N$ be graded $R$-modules. Then the tensor product $M\otimes_RN$ is also a graded $R$-module, with grading given by $$\left(M\otimes_RN\right)_n=\frac{\bigoplus_{i+j=n}M_i\otimes_\Z N_j}{\left\langle rm\otimes n-m\otimes rn\;|\;\substack{m\in M_a, n\in N_b, r\in R_c\\\text{ such that }a+b+c=n}\right\rangle}$$
+\end{prp}
+
+\subsection{Graded Algebras}
+\begin{defn}{Graded Algebra}{}\\
+Let $R$ be a commutative graded ring. Let $A$ be an $R$-algebra. We say that $A$ is a graded algebra over $R$ if there is a decomposition $$A=\bigoplus_{k\in\Z}A_k$$ into $R$-modules such that $A_i\cdot A_j\subseteq A_{i+j}$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $R$ be a commutative graded ring. Let $A,B$ be graded $R$-algebras. Then the tensor product $A\otimes_RB$ is also a graded $R$-algebra, with grading given by $$\left(A\otimes_RB\right)_n=\frac{\bigoplus_{i+j=n}A_i\otimes_\Z B_j}{\left\langle rm\otimes n-m\otimes rn\;|\;\substack{m\in A_a, n\in B_b, r\in R_c\\\text{ such that }a+b+c=n}\right\rangle}$$ and multiplication given by $$(r_1\otimes s_1)(r_2\otimes s_2)=(-1)^{\abs{s_1}\abs{r_2}}(r_1r_2\otimes s_1s_2)$$
+\end{prp}
+
+\begin{lmm}{}{}\\
+Let $R$ be a commutative graded ring. Let $A,B$ be graded commutative $R$-algebras. Then $A\otimes_RB$ is a graded commutative $R$-algebra. 
+\end{lmm}
+
+\begin{defn}{Homomorphism of Graded Algebras}{}\\
+Let $R$ be a commutative graded ring. Let $A,B$ be graded $R$-algebras. Let $\varphi:R\to S$ be an $R$-algebra homomorphism. 
+\begin{itemize}
+\item We say that $\varphi$ has degree $n\in\Z$ if $\varphi(R_i)\subseteq S_{i+n}$ for all $i\in\Z$. 
+\item We say that $\varphi$ is a graded homomorphism if $\deg(\varphi)=0$. 
+\end{itemize}
+\end{defn}
+
 \subsection{Relevant Ideals}
 \begin{defn}{The Irrelevant Ideal}{}\\
 Let $S=\bigoplus_{n\in\Z}S_n$ be a graded ring. Define the irrelevant ideal of $S$ to be $$S_+=S\setminus S_0$$
@@ -1884,13 +1943,6 @@ Let $S$ be a graded ring. Let $I\subseteq S$ be a homogeneous ideal. Then $I_+$ 
 \begin{defn}{Irrelevant Ideals}{}\\
 Let $S$ be a graded ring. Let $I\subseteq S$ be a homogeneous ideal. We say that $I$ is irrelevant if $S_+\subseteq\sqrt{I}$. Otherwise, we say that $I$ is relevant. 
 \end{defn}
-
-\subsection{Graded Algebras}
-\begin{defn}{Graded Algebra}{} A graded algebra $A$ over $R$ is an algebra that is also a graded ring. 
-\end{defn}
-
-\begin{prp}{}{} Let $R$ be a graded ring. Let $A,B$ be graded $R$-algebras. Then the tensor product $A\otimes_RB$ is also a graded $R$-algebra, with grading given by $$\left(A\otimes_RB\right)_n=\frac{\bigoplus_{i+j=n}A_i\otimes_\Z B_j}{\left\langle rm\otimes n-m\otimes rn\;|\;\substack{m\in A_a, n\in B_b, r\in R_c\\\text{ such that }a+b+c=n}\right\rangle}$$ and multiplication given by $$(r_1\otimes s_1)(r_2\otimes s_2)=(-1)^{\abs{s_1}\abs{r_2}}(r_1r_2\otimes s_1s_2)$$
-\end{prp}
 
 \subsection{Noetherian Conditions}
 \begin{prp}{}{}\\ Let $R=\bigoplus_{n\in\N}R_i$ be a graded ring. Then $R$ is Noetherian if and only if $R_0$ is Noetherian and $R$ is finitely generated as an $R_0$-module. 
@@ -1916,86 +1968,33 @@ In this section, $R$ is a commutative ring with identity and we assume that the 
 \begin{prp}{}{} Let $M$ be an $R$-module. Then $T(M)$ is a graded $R$-algebra with the above defined multiplication rule. 
 \end{prp}
 
+\begin{eg}{}{}\\
+The following are true. 
+\begin{itemize}
+\item There is an isomorphism of abelian groups $$T(\Q/\Z)\cong\Z\oplus\Q/\Z$$
+\item There is an isomorphism of graded $R$-algebras $$T(\Z/n\Z)\cong\frac{\Z[x]}{(nx)}$$
+\end{itemize}
+\end{eg}
+
 \begin{prp}{Universal Property}{} The tensor algebra $T(M)$ of an $R$-module $M$ satisfies the following universal property. Let $A$ be any $R$-algebra and $\varphi:M\to A$ an $R$-module homomorphism. Then there is a unique $R$-algebra homomorphism $\psi:T(M)\to A$ such that $\psi|_M=\varphi$. 
 \end{prp}
 
-\begin{prp}{}{} Let $V$ be a finite dimensional vector space over $\F$ with basis $B=\{v_1,\dots,v_n\}$. Then the $k$-tensors $$v_{i_1}\otimes\cdots\otimes v_{i_k}$$ with $v_{i_1},\dots,v_{i_k}\in B$ are a basis for $T^k(V)$ over $\F$. In particular, $\dim_\F(T^k(V))=n^k$. 
-\end{prp}
-
-\subsection{Exterior Algebra}
-\begin{defn}{Exterior Algebra}{}\\
-Let $R$ be a commutative ring. Let $M$ be an $R$-module. Define the exterior algebra of $M$ to be the quotient $$\Lambda(M)=\frac{T(M)}{\langle m\otimes m\;|\;m\in M\rangle}$$ Elements of the form $m_1\otimes m_2$ are written as $m_1\wedge m_2$ by convention. 
-\end{defn}
-
-\begin{defn}{Exterior Powers}{} Let $R$ be a ring. Let $M$ be an $R$-module. Define the $k$th exterior power of $M$ to be $$\Lambda^k(M)=\frac{T^k(M)}{\langle m_1\otimes\cdots\otimes m_k\;|\;m_1,\dots,m_k\in M\text{ and }m_i=m_j\text{ for some }i\neq j\rangle}$$
-\end{defn}
-
-\begin{prp}{}{}\\
-Let $R$ be a commutative ring. Let $M$ be an $R$-module. Then $\Lambda(M)$ is a graded ring whose $k$th graded component is given by $\Lambda^k(M)$. 
-\end{prp}
-
-\begin{lmm}{}{} Let $M$ be an $R$-module. Then the following are true regarding the exterior algebra $\Lambda(M)$. 
-\begin{itemize}
-\item Alternating: $m\wedge m=0$ for all $m\in M$
-\item Anti-commutativity: $m_1\wedge m_2=-m_2\wedge m_1$ for any $m_1,m_2\in M$
-\item Graded commutativity: $m_1\wedge m_2=(-1)^{rs}m_2\wedge m_1$ for any $m_1\in\Lambda^r(M)$ and $m_2\in\Lambda^s(M)$
-\end{itemize}
-\end{lmm}
-
-\begin{lmm}{}{}\\
-Let $R$ be a commutative ring. Let $M$ be an $R$-module. Then the following are true regarding the exterior algebra. 
-\begin{itemize}
-\item $\Lambda^0(M)=R$
-\item $\Lambda^1(M)=M$
-\item $\Lambda(M)$ is an $R$-algebra. 
-\end{itemize}
-\end{lmm}
-
-\begin{lmm}{}{}\\
-Let $R$ be a commutative ring. Let $M$ be a free $R$-module with basis $m_1,\dots,m_n$. Then the following are true. 
-\begin{itemize}
-\item $\Lambda^n(M)\cong R$. 
-\item $\Lambda^k(M)=0$ for $k>n$. 
-\item Suppose that $M$ has $R$-basis $\{m_1,\dots,m_n\}$. Then an $R$-basis of $\Lambda^k(M)$ is given by $$\{m_{i_1}\wedge\cdots\wedge m_{i_k}\;|\;1\leq i_1<\cdots<i_k\leq n\}$$
-\item $\dim(\Lambda^k(M))=\binom{n}{k}$. 
-\end{itemize}
-\end{lmm}
-
-\begin{eg}{}{}\\
-Let $R$ be a commutative ring. Then there is an isomorphism of $R$-algebras $$\Lambda\left(\bigoplus_{i=1}^nRx_i\right)\cong\frac{R\langle x_1,\dots,x_n\rangle}{(x_ix_j+x_jx_i,x_i^2\;|\;1\leq i\neq j\leq n)}$$ It is common to denote this $R$-algebra by $\Lambda_R[x_1,\dots,x_n]$. 
-\end{eg}
-
-\begin{prp}{}{}\\
-Let $R$ be a commutative ring. Let $M,N$ be $R$-modules. Then the following are true. 
-\begin{itemize}
-\item For each $n\in\N$, we have $$\Lambda^n(M\oplus N)\cong\bigoplus_{p+q=n}\Lambda^p(M)\otimes_R\Lambda^q(N)$$
-\item We have $\Lambda(M\oplus N)\cong\Lambda(M)\otimes_R\Lambda(N)$. 
-\end{itemize}
-\end{prp}
-
 \subsection{Symmetric Algebra}
-\begin{defn}{Symmetric Quotient}{} Let $M$ be an $R$-module. The symmetric quotient is the ideal $$C(M)=\langle m_1\otimes m_2-m_2\otimes m_1|m_1,m_2\in M\rangle$$ of $T(M)$ generated by commutativity. 
+\begin{defn}{Symmetric Algebra}{}\\
+Let $R$ be a commutative ring. Let $M$ be an $R$-module. Define the symmetric algebra of $M$ to be the quotient $$S(M)=\frac{T(M)}{\langle m_1\otimes m_2-m_2\otimes m_1\;|\;m_1,m_2\in M\rangle}$$ Elements of the form $m_1\otimes\cdots\otimes m_n$ are written as $m_1\cdots m_n$ by convention. 
 \end{defn}
 
-\begin{lmm}{}{} The ideal $C(M)$ is a homogenous ideal. 
+\begin{defn}{Symmetric Powers}{}\\
+Let $R$ be a commutative ring. Let $M$ be an $R$-module. Define the $k$th symmetric power of $M$ to be $$S^k(M)=\frac{T^k(M)}{\langle m_1\otimes\cdots\otimes m_k-m_{\sigma(1)}\otimes\cdots\otimes m_{\sigma(k)}\;|\;m_1,\dots,m_k\in M,\sigma\in S_k\rangle}$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $R$ be a commutative ring. Let $M$ be an $R$-module. Then $S(M)$ is a commutative graded $R$-algebra whose $k$th graded component is given by $S^k(M)$. 
 \end{lmm}
 
-\begin{defn}{Symmetric Algebra}{} Let $M$ be an $R$-module. Define the symmetric algebra of $M$ to be the quotient $$S(M)=T(M)/C(M)$$ Elements of the form $m_1\otimes m_2$ are written as $m_1m_2$ by convention. 
-\end{defn}
-
-Again here we are quotienting out symmetric objects so that we can treat them as the same thing. 
-
-\begin{prp}{}{} Let $M$ be an $R$-module. Then the following are true regarding the symmetric algebra. 
-\begin{itemize}
-\item $S(M)$ is a graded ring with homogenous components $S^k(M)=T^k(M)/C^k(M)$ called the $k$th symmetric power
-\item $S^0(M)=R$
-\item $S^1(M)=M$
-\item $S(M)$ is an $R$-algebra. 
-\end{itemize}
+\begin{prp}{}{}\\
+Let $R$ be a commutative ring. Let $M$ be a free $R$-module with basis $m_1,\dots,m_n$. Then $S^k(M)$ is a free $R$-module with basis $$\{m_{i_1}\cdots m_{i_k}\;|\;1\leq i_1\leq\cdots\leq i_k\leq n\}$$
 \end{prp}
-
-\begin{thm}{}{} Let $M$ be an $R$-module. Let $$I=\langle m_1\otimes\cdots\otimes m_k-m_{\sigma(1)}\otimes\cdots\otimes m_{\sigma(k)}|m_1,\dots,m_k\in M, \sigma\in S_k\rangle$$ Then $S^k(M)=T^k(M)/I$. 
-\end{thm}
 
 \begin{prp}{Universal Property}{}\\
 Let $R$ be a ring. Let $M$ be an $R$-module. Then the symmetric algebra $S(M)$ satisfies the following universal property. For any commutative $R$-algebra $A$ and any $R$-module homomorphism $\varphi:M\to A$, there exists a unique $R$-algebra homomorphism $\psi:S(M)\to A$ such that the following diagram commutes: \\
@@ -2009,10 +2008,127 @@ Let $R$ be a ring. Let $M$ be an $R$-module. Then the symmetric algebra $S(M)$ s
 Moreover, $S(M)$ is the unique (up to unique isomorphism) $R$-algebra satisfying the above. 
 \end{prp}
 
+\subsection{Exterior Algebra}
+\begin{defn}{Exterior Algebra}{}\\
+Let $R$ be a commutative ring. Let $M$ be an $R$-module. Define the exterior algebra of $M$ to be the quotient $$\Lambda(M)=\frac{T(M)}{\langle m\otimes m\;|\;m\in M\rangle}$$ Elements of the form $m_1\otimes\cdots\otimes m_n$ are written as $m_1\wedge\cdots\wedge m_n$ by convention. 
+\end{defn}
+
+\begin{defn}{Exterior Powers}{}\\
+Let $R$ be a commutative ring. Let $M$ be an $R$-module. Define the $k$th exterior power of $M$ to be $$\Lambda^k(M)=\frac{T^k(M)}{\langle m_1\otimes\cdots\otimes m_k\;|\;m_1,\dots,m_k\in M\text{ and }m_i=m_j\text{ for some }i\neq j\rangle}$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $R$ be a commutative ring. Let $M$ be an $R$-module. Then $\Lambda(M)$ is a graded commutative $R$-algebra whose $k$th graded component is given by $\Lambda^k(M)$. 
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $R$ be a commutative ring. Let $M$ be a free $R$-module with basis $m_1,\dots,m_n$. Then the following are true. 
+\begin{itemize}
+\item $\Lambda^n(M)\cong R$. 
+\item $\Lambda^k(M)=0$ for $k>n$. 
+\item Suppose that $M$ has $R$-basis $\{m_1,\dots,m_n\}$. Then an $R$-basis of $\Lambda^k(M)$ is given by $$\{m_{i_1}\wedge\cdots\wedge m_{i_k}\;|\;1\leq i_1<\cdots<i_k\leq n\}$$
+\end{itemize}
+\end{lmm}
+
+\begin{eg}{}{}\\
+Let $R$ be a commutative ring. Then there is an isomorphism of $R$-algebras $$\Lambda\left(\bigoplus_{i=1}^nRx_i\right)\cong\frac{R\langle x_1,\dots,x_n\rangle}{(x_ix_j+x_jx_i,x_i^2\;|\;1\leq i\neq j\leq n)}$$ It is common to denote this $R$-algebra by $\Lambda_R[x_1,\dots,x_n]$. 
+\end{eg}
+
+\begin{prp}{}{}\\
+Let $R$ be a commutative ring. Let $M,N$ be $R$-modules. Then there is a graded $R$-algebra isomorphism $$\Lambda(M\oplus N)\cong\Lambda(M)\otimes_R\Lambda(N)$$
+\end{prp}
+
+\subsection{Symmetrization and Skew-Symmetrization}
+\begin{defn}{The Action of the Symmetric Group}{}\\
+Let $R$ be a commutative ring. Let $M$ be an $R$-module. Define the action of $S_k$ on $T^k(M)$ by the map $S_k\times T^k(M)\to T^k(M)$ given by $$\sigma\cdot(m_1\otimes\cdots\otimes m_k)\mapsto m_{\sigma(1)}\otimes\cdots\otimes m_{\sigma(k)}$$
+\end{defn}
+
+\begin{defn}{Symmetric Tensors}{}\\
+Let $R$ be a commutative ring. Let $M$ be an $R$-module. Define the set of symmetric $k$-tensors of $M$ to be $$T^k(M)^{S_k}=\{z\in T^k(M)\;|\;\sigma\cdot z=z\text{ for all }\sigma\in S^k\}$$
+\end{defn}
+
+\begin{defn}{Symmetrization}{}\\
+Let $R$ be a commutative ring. Let $M$ be an $R$-module. Define the symmetrization map $\text{Sym}:T^k(M)\to T^k(M)^{S_k}$ by $$\text{Sym}(z)=\sum_{\sigma\in S_k}\sigma\cdot z$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $R$ be a commutative ring. Let $M$ be an $R$-module. If $k!\in R^\times$, then the following are true. 
+\begin{itemize}
+\item We have $\im(\text{Sym})=T^k(M)^{S_k}$
+\item The universal property of quotients of $S^k(M)$ induces an $R$-module homomorphism $\frac{1}{k!}\text{Sym}:S^k(M)\to T^k(M)^{S_k}$. 
+\item The above map induces an isomorphism $$S^k(M)\cong T^k(M)^{S_k}$$
+\end{itemize}
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $R$ be a commutative ring. Let $M$ be an $R$-module. If $k!\in R^\times$, then there is a split exact sequence: \\~\\
+\adjustbox{scale=1,center}{\begin{tikzcd}
+	0 & {\ker(\text{proj})} & {T^k(M)} & {S^k(M)} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow["{\text{proj}}", from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\
+whose splitting $S^k(M)\to T^k(M)$ is given by $\frac{1}{k!}\text{Sym}$. 
+\end{prp}
+
+\begin{defn}{Alternating Tensors}{}\\
+Let $R$ be a commutative ring. Let $M$ be an $R$-module. Define the set of alternating $k$-tensors of $M$ to be $$T^k(M)^\text{sign}=\{z\in T^k(M)\;|\;\sigma(z)=\text{sign}(\sigma)z\text{ for all }\sigma\in S_k\}$$
+\end{defn}
+
+\begin{defn}{Skew-Symmetrization}{}\\
+Let $R$ be a commutative ring. Let $M$ be an $R$-module. Define the skew-symmetrization map $\text{Alt}:T^k(M)\to T^k(M)$ by $$\text{Alt}(z)=\sum_{\sigma\in S_k}\sigma\cdot z$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $R$ be a commutative ring. Let $M$ be an $R$-module. If $k!\in R^\times$, then the following are true. 
+\begin{itemize}
+\item We have $\im(\text{Alt})=T^k(M)^\text{sign}$
+\item The universal property of quotients of $\Lambda^k(M)$ induces an $R$-module homomorphism $\frac{1}{k!}\text{Alt}:\Lambda^k(M)\to T^k(M)^\text{sign}$. 
+\item The above map induces an isomorphism $$\Lambda^k(M)\cong T^k(M)^\text{sign}$$
+\end{itemize}
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $R$ be a commutative ring. Let $M$ be an $R$-module. If $k!\in R^\times$, then there is a split exact sequence: \\~\\
+\adjustbox{scale=1,center}{\begin{tikzcd}
+	0 & {\ker(\text{proj})} & {T^k(M)} & {\Lambda^k(M)} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow["{\text{proj}}", from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\
+whose splitting $\Lambda^k(M)\to T^k(M)$ is given by $\frac{1}{k!}\text{Alt}$. 
+\end{prp}
+
+\subsection{Tensor Algebra over Vector Spaces}
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $V$ be a finite dimensional vector space over $k$. Let $B$ be a basis of $V$. Then the following are true. 
+\begin{itemize}
+\item The set $\{v_{i_1}\otimes\cdots\otimes v_{i_n}\;|\;v_{i_j}\in B\}$ forms a basis of $T^n(V)$. 
+\item $\dim_k(T^n(V))=n^k$. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $V$ be a finite dimensional vector space over $k$. Let $B$ be a basis of $V$. Then the following are true. 
+\begin{itemize}
+\item The set $\{v_{i_1}\cdots v_{i_n}\;|\;v_{i_j}\in B\}$ forms a basis of $S^n(V)$. 
+\item $\dim_k(S^n(V))=\binom{n+k-1}{n}$. 
+\end{itemize}
+\end{prp}
+
 \begin{crl}{}{}\\
 Let $F$ be a field. Let $V$ be a vector space over $F$ of dimension $n$. Then there is a graded $F$-algebra isomorphism $$S(V)\cong F[x_1,\dots,x_n]$$ given as follows. Choose a basis $e_1,\dots,e_n$ of $V$. Then the map is given by $e_i\mapsto x_i$. 
 \end{crl}
 
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $V$ be a finite dimensional vector space over $k$. Let $B$ be a basis of $V$. Then the following are true. 
+\begin{itemize}
+\item The set $\{v_{i_1}\wedge\cdots\wedge v_{i_n}\;|\;v_{i_j}\in B\}$ forms a basis of $\Lambda^n(V)$. 
+\item $\dim_k(\Lambda^n(V))=\binom{n}{k}$. 
+\end{itemize}
+\end{prp}
 
 
 

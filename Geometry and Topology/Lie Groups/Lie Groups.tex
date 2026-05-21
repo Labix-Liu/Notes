@@ -75,6 +75,7 @@ Let $G,H$ be Lie groups. Let $\phi:G\to H$ be a Lie group homomorphism. We say t
 Let $G,H$ be Lie groups. Let $\phi:G\to H$ be a Lie group homomorphism. Then $\phi$ is an isomorphism if and only if $\phi$ is bijective. 
 \end{lmm}
 
+\subsection{Lie Subgroups and Quotients}
 \begin{defn}{Lie Subgroups}{}\\
 Let $G$ be a Lie group. A Lie subgroup of $G$ is a subset $H\subseteq G$ such that the following are true. 
 \begin{itemize}
@@ -101,13 +102,14 @@ Let $G$ be a Lie group. Let $H\leq G$ be an open subgroup of $G$. Then $H$ is a 
 Let $n\in\N^+$. Then $\text{O}(n,\R),\text{SO}(n,\R),\text{SL}(n,\R)$ are Lie subgroups of $\text{GL}(n,\R)$. 
 \end{eg}
 
-\begin{eg}{}{}\\
-The following are true regarding the determinant map. 
+\begin{prp}{}{}\\
+Let $G$ be a Lie group. Let $H\leq G$ be a Lie subgroup. Then the following are true. 
 \begin{itemize}
-\item $\det:GL_n(\R)\to\R$ is a Lie group homomorphism. 
-\item The map $(\det_\ast)_I:T_I(GL_n(\R))\to T_1(\R)$ is given by $(\det_\ast)_I(X)=\text{tr}(X)$. 
+\item $G/H$ admits the structure of a smooth manifold. 
+\item There is a vector space isomorphism $$T_1(G/H)\cong\frac{T_1(G)}{T_1(H)}$$
+\item If $H$ is normal, then $G/H$ is a Lie group. 
 \end{itemize}
-\end{eg}
+\end{prp}
 
 \begin{thm}{The First Isomorphism Theorem for Lie Groups}{}\\
 Let $G,H$ be Lie groups. Let $f:G\to H$ be a Lie group homomorphism. If $\im(G)$ is a closed subgroup of $H$, then $f$ induces an isomorphism of Lie groups $$\frac{G}{\ker(f)}\cong\im(G)$$
@@ -124,7 +126,9 @@ Let $G$ be a Lie group. Then the following are true.
 \end{itemize}
 \end{lmm}
 
-\subsection{Relation between Lie Groups and Lie Algebras}
+\pagebreak
+\section{The Lie Algebra of a Lie Group}
+\subsection{Basic Constructions}
 For a group $G$, denote the left multiplication map of $h\in G$ by $l_h$. If $G$ is a Lie group, we have seen that $l_h$ is a smooth map, and so it induces a differential $(l_h)_\ast$. 
 
 \begin{defn}{Left Invariant Vector Field}{} \\Let $G$ be a Lie group and $X$ a vector field on $G$. We say that $X$ is left invariant if $$(l_h)_\ast(X_g)=X_{hg}$$ for all $X_g\in T_g(G)$. 
@@ -150,6 +154,14 @@ Let $G,H$ be Lie groups. Let $f:G\to H$ be a Lie group homomorphism. Then the in
 In other words, we constructed a functor from Lie groups to Lie algebras sending a Lie group to the tangent space at the identity. 
 
 \begin{eg}{}{}\\
+The following are true regarding the determinant map. 
+\begin{itemize}
+\item $\det:GL_n(\R)\to\R$ is a Lie group homomorphism. 
+\item The map $(\det_\ast)_I:T_I(GL_n(\R))\to T_1(\R)$ is given by $(\det_\ast)_I(X)=\text{tr}(X)$. 
+\end{itemize}
+\end{eg}
+
+\begin{eg}{}{}\\
 Let $G$ be a closed subgroup of $GL_n(\R)$. Then we have $$\text{Lie}(G)=\{M\in M_n(\R)\;|\;e^{tX}\in G\text{ for all }t\in\R\}$$
 \end{eg}
 
@@ -160,6 +172,19 @@ Let $G,H$ be Lie groups. Let $f:G\to H$ be a Lie group homomorphism. Then the fo
 \item If $f(G)$ is a closed subgroup, then $\text{Lie}(\im(f))=\im(df)$. 
 \end{itemize}
 \end{prp}
+
+\subsection{The Adjoint Map}
+\begin{defn}{The Adjoint Map}{}\\
+Let $G$ be a Lie group. Let $\Psi_g:G\to G$ be the map $h\mapsto ghg^{-1}$. Define the adjoint map at $g$ to be the map $$\text{Ad}_g=(d\Psi_g)_{1_G}:T_{1_G}G\to T_{1_G}(G)$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $G$ be a Lie group. Let $g\in G$. Then $\text{Ad}_g$ is a Lie algebra homomorphism. 
+\end{lmm}
+
+\begin{eg}{}{}\\
+Let $G\leq\text{GL}(n,\R)$ be a closed subgroup. Let $g\in G$. Then we have $$\text{Ad}_g(X)=gXg^{-1}$$
+\end{eg}
 
 \subsection{The Exponential Map}
 \begin{defn}{One Parameter Subgroups}{}\\
@@ -221,7 +246,7 @@ Let $G$ be a Lie groups. Let $\mathfrak{h}\leq\text{Lie}(G)$ be a Lie subalgebra
 \pagebreak
 \section{Smooth Actions of Lie Groups}
 \subsection{Smooth Actions}
-\begin{defn}{}{}\\
+\begin{defn}{Smooth Actions}{}\\
 Let $G$ be a Lie group. Let $M$ be a smooth manifold. An action of $G$ on $M$ is a function $\cdot:G\times M\to M$ such that the following are true. 
 \begin{itemize}
 \item $G$ acts on $M$ as a group. 
@@ -231,18 +256,14 @@ Let $G$ be a Lie group. Let $M$ be a smooth manifold. An action of $G$ on $M$ is
 
 If $G$ is acts on a manifold $M$ as a Lie group, then in particular, it is also a topological group acting on a topological space continuously. 
 
-\subsection{The Adjoint Map}
-\begin{defn}{The Adjoint Map}{}\\
-Let $G$ be a Lie group. Let $\Psi_g:G\to G$ be the map $h\mapsto ghg^{-1}$. Define the adjoint map at $g$ to be the map $$\text{Ad}_g=(d\Psi_g)_{1_G}:T_{1_G}G\to T_{1_G}(G)$$
+\subsection{The Fundamental Vector Fields}
+\begin{defn}{The Fundamental Vector Field}{}\\
+Let $M$ be a smooth manifold. Let $G$ be a Lie group. Let $\Psi:G\times M\to M$ be a smooth action. Let $\xi\in\text{Lie}(G)$. Define the fundamental vector field of $\xi$ to be the vector field $\xi_M\in\mathfrak{X}(M)$ given by $$\xi_M(p)=\frac{d}{dt}\bigg{|}_{t=0}\Psi(\text{exp}(t\xi),p)$$
 \end{defn}
 
-\begin{lmm}{}{}\\
-Let $G$ be a Lie group. Let $g\in G$. Then $\text{Ad}_g$ is a Lie algebra homomorphism. 
-\end{lmm}
-
-\begin{eg}{}{}\\
-Let $G\leq\text{GL}(n,\R)$ be a closed subgroup. Let $g\in G$. Then we have $$\text{Ad}_g(X)=gXg^{-1}$$
-\end{eg}
+\begin{prp}{}{}\\
+Let $M$ be a smooth manifold. Let $G$ be a Lie group. Let $\Psi:G\times M\to M$ be a smooth action. Then we have $$\xi_M(p)=d(\Psi(-,p))_{1_G}(\xi)$$
+\end{prp}
 
 \subsection{Smooth Equivariant Maps}
 
@@ -257,11 +278,11 @@ Let $G$ be a connected abelian Lie group. Then $\text{exp}:\text{Lie}(G)\cong\R^
 Let $G$ be a connected abelian Lie group. Then there is a Lie group isomorphism $$G\cong T^k\times\R^{\dim(G)-k}$$ for some $k\in\N$. 
 \end{prp}
 
-\subsection{Properties of Tori}
 \begin{crl}{}{}\\
 Let $G$ be a compact connected abelian Lie group. Then there is a Lie group isomorphism $G\cong T^{\dim(G)}$. 
 \end{crl}
 
+\subsection{Properties of Tori}
 \begin{defn}{Generator of a Torus}{}\\
 Let $t\in T^k$. We say that $t$ is a generator of $T^k$ if the smallest closed subgroup containing $t$ is $T^k$. 
 \end{defn}
@@ -284,6 +305,10 @@ Let $G$ be a compact Lie group. A maximal torus of $G$ is a Lie subgroup $T\leq 
 \end{defn}
 
 \begin{prp}{}{}\\
+Let $G$ be a compact connected Lie group. Then $G$ contains a torus. 
+\end{prp}
+
+\begin{prp}{}{}\\
 Let $G$ be a compact connected Lie group. Let $T$ be a maximal torus of $G$. Then the following are true. 
 \begin{itemize}
 \item If $T'\leq G$ is another maximal torus of $G$, then $T$ and $T'$ are conjugates in $G$. 
@@ -296,13 +321,41 @@ Let $G$ be a compact connected Lie group. Let $T$ be a maximal torus of $G$. The
 
 \pagebreak
 \section{Representation Theory of Lie Groups}
+\subsection{Basic Constructions}
+\begin{defn}{Representations of Lie Groups}{}\\
+Let $G$ be a Lie group. A representation of $G$ is a smooth map $$\rho:G\to\text{GL}(V)$$ where $V$ is a finite dimensional vector space over $\R$ and $\text{GL}(V)$ is a manifold by identifying $\text{GL}(V)$ with $\text{GL}(n,\R)$ by choosing a basis. 
+\end{defn}
+
+\begin{defn}{The Set of Representations}{}\\
+Let $G$ be a Lie group. Define the set of representation of $G$ by $$\text{Rep}(G)=\{\rho:G\to\text{GL}(V)\;|\;\rho\text{ is a representation }\}$$
+\end{defn}
+
+\begin{defn}{Homomorphism of Representations}{}\\
+Let $G$ be a Lie group. Let $\rho:G\to\text{GL}(V)$ and $\tau:G\to\text{GL}(W)$ be representations of $G$. A homomorphism from $\rho$ to $\tau$ is a linear map $T:V\to W$ such that $$T\circ\rho(g)=\tau(g)\circ T$$ for all $g\in G$. 
+\end{defn}
+
+\begin{defn}{The Set of Homomorphisms of Representations}{}\\
+Let $G$ be a Lie group. Let $\rho:G\to\text{GL}(V)$ and $\tau:G\to\text{GL}(W)$ be representations of $G$. Define the set of homomorphisms from $\rho$ to $\tau$ by $$\Hom_{\text{Rep}(G)}(V,W)=\{T:V\to W\;|\;T\text{ is a homomorphism of representations }\}$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $G$ be a Lie group. Let $\rho:G\to\text{GL}(V)$ be a representation of $G$. Then $\rho_\ast:\text{Lie}(G)\to\mathfrak{gl}(V)$ is a representation of Lie algebras. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $G$ be a simply connected Lie group. Then the following are true. 
+\begin{itemize}
+\item There is a natural bijection $$\text{Rep}(G)\;\;\overset{1:1}{\longleftrightarrow}\;\;\text{Rep}(\mathfrak{g})$$
+\item There is a natural bijection $$\Hom_{\text{Rep}(G)}(V,W)\;\;\overset{1:1}{\longleftrightarrow}\;\;\Hom_{\text{Rep}(\text{Lie}(G))}(V,W)$$
+\end{itemize}
+\end{prp}
 
 \pagebreak
 \section{Homotopy Theory of Lie Groups}
 \begin{prp}{}{}\\
 Let $G$ be a connected Lie group. Then the following are true. 
 \begin{itemize}
-\item $G$ admits a universal covering space $\widetilde{G}$ that is a smooth manifold. 
+\item $G$ admits a universal covering space $\widetilde{G}$ that is a Lie group. 
 \item The structure map $p:\widetilde{G}\to G$ is a morphism of Lie groups. 
 \item We have $\pi_1(G)\cong\ker(p)$. 
 \end{itemize}

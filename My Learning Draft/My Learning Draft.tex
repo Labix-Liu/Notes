@@ -20,536 +20,7 @@
 \tableofcontents
 
 \pagebreak
-\section{More on Simplicial Homology}
-\subsection{Relation to Singular Homology}
-\begin{thm}{}{} Let $X$ be a topological space endowed with a $\Delta$-complex structure $(T,\abs{T}\cong X)$. The induced map $H_n^\Delta(X)\to H_n(X)$ by the map $s:\Delta^n\to X$ for each $s\in T^n$ is an isomorphism. 
-\begin{proof}
-Firstly, every $n$-simplex $s\in T$ induces a canonical continuous map $s:\Delta^n\to X$. This extends to a homomorphism $\Delta_n(T)\to C_n(X)$ and so to a chain map and descends to homology. \\
-
-Denote $T^k$ the $\Delta$-sets of simplices in $T$ of dimension at most $k$. Define $\Delta_\bullet(T^k,T^{k-1})=\Delta_\bullet(T^k)/\Delta_\bullet(T^{k-1})$ and accordingly, $H_n(\Delta_\bullet(T^k,T^{k-1}))$. Then the short exact sequence of chain complexes \\
-\adjustbox{scale=1,center}{\begin{tikzcd}
-	0 & {\Delta_\bullet(T^{k-1})} & {\Delta_\bullet(T^k)} & {\Delta_\bullet(T^k,T^{k-1})} & 0
-	\arrow[from=1-1, to=1-2]
-	\arrow[from=1-2, to=1-3]
-	\arrow[from=1-3, to=1-4]
-	\arrow[from=1-4, to=1-5]
-\end{tikzcd}} \\
-Together with the inclusion maps and by naturality in theorem 1.4.3, give the following: \\
-\adjustbox{scale=0.8,center}{\begin{tikzcd}
-	\cdots & {H_{n+1}(T^k,T^{k-1})} & {H_n(T^{k-1})} & {H_n(T^{k-1})} & {H_n(T^k,T^{k-1})} & {H_{n-1}(T^{k-1})} & \cdots \\
-	\cdots & {H_{n+1}(\abs{T^k},\abs{T^{k-1}})} & {H_n(\abs{T^{k-1}})} & {H_n(\abs{T^{k-1}})} & {H_n(\abs{T^k},\abs{T^{k-1}})} & {H_{n-1}(\abs{T^{k-1}})} & \cdots
-	\arrow[from=1-1, to=1-2]
-	\arrow[from=1-2, to=1-3]
-	\arrow[from=1-2, to=2-2]
-	\arrow[from=1-3, to=1-4]
-	\arrow[from=1-3, to=2-3]
-	\arrow[from=1-4, to=1-5]
-	\arrow[from=1-4, to=2-4]
-	\arrow[from=1-5, to=1-6]
-	\arrow[from=1-5, to=2-5]
-	\arrow[from=1-6, to=1-7]
-	\arrow[from=1-6, to=2-6]
-	\arrow[from=2-1, to=2-2]
-	\arrow[from=2-2, to=2-3]
-	\arrow[from=2-3, to=2-4]
-	\arrow[from=2-4, to=2-5]
-	\arrow[from=2-5, to=2-6]
-	\arrow[from=2-6, to=2-7]
-\end{tikzcd}} \\
-When $k=0$, $\abs{T^0}$ is a discrete topological space on the set $T^0$, and the map $H_n(T^0)\to H_n(\abs{T^0})$ is an isomorphism. By induction and the five lemma, the middle map is an isomorphism provided that the first and fourth maps are isomorphisms. \\
-
-Note that $\Delta_\bullet(T^{k-1})$ is a chain complex in degrees $k-1$, $k-2$, down to $0$. And $\Delta_\bullet(T^k)$ is the same chain complex with an additional term $\Z T_k$ in degree $k$. It follows that $\Delta_\bullet(T^k,T^{k-1})$ is the chain complex with $\Z T^k$ concentrated in degree $k$. In particular, we have that $$H_n(T^k,T^{k-1})=\begin{cases}
-\Z T^k & \text{ if } n=k\\
-0 & \text{ otherwise }
-\end{cases}$$
-By construction of the geometric realization, we have a homeomorphism $$\frac{\abs{T^k}}{\abs{T^{k-1}}}\cong\frac{\Delta^k\times T^k}{\partial\Delta^k\times T^k}\cong\bigvee_{T_k}\frac{\Delta^k}{\partial\Delta^k}$$ Using lemma 6.2.4 and lemma 6.2.5, we have that $$H_n(\abs{T^k},\abs{T^{k-1}})\cong\widetilde{H_n}(\abs{T^k}/\abs{T^{k-1}})\cong\begin{cases}
-\Z T_k & \text{ if } n=k\\
-0 & \text{ otherwisev }
-\end{cases}$$
-with generators corresponding to elements $s\in T^k$ via the relative cycles $s:\Delta^k\to\abs{T^k}$. It follows that an isomorphism occurs in the first and fourth position of the long exact sequence of relative homology groups. \\
-
-If $T=T^n$ for some $n\in\N$, we are done. \\
-
-Continuing the proof, let $z\in Z_n(T)$ be an $n$-cycle whose image in $H_n(\abs{T})$ vanishes. Then there exists $\tau\in C_{n+1}(\abs{T})$ with $\partial\tau=z$. Now since $\abs{T}$ is the geometric realization, we must have every compact subspace of $\abs{T}$ lying in some $\abs{T^k}$. Hence $\tau\in C_{n+1}(\abs{T^k})$ for some $k>n$. We deduce that $z$ maps to $0$ in $H_n(\abs{T^k})$. By the previous argument, we have taht $z=0\in H_n(T^k)=H_n(T)$. This shows injectivity of $H_n(T)\to H_n(\abs{T})$. \\
-
-Similarly, let $\sigma\in Z_n(T)$ be an $n$-cycle. We have seen that $\sigma\in Z_n(\abs{T^k})$ for some $k>n$ and by the argument above, $[\sigma]$ comes from $H_n(T^k)=H_n(T)$. This shows surjectivity of $H_n(T)\to H_n(\abs{T})$ and so we are done. 
-\end{proof}
-\end{thm}
-
-We can finally show that simplicial homology is independent of the choice of $\Delta$-complex structure. 
-
-\begin{crl}{}{} The simplicial homology $H_\bullet^\Delta(X)$ depends on $X$ only and not on the $\Delta$-complex structure. 
-\begin{proof}
-Indeed the geometric realization of any two $\Delta$-complex structure is isomorphic to the same singular homology group. 
-\end{proof}
-\end{crl}
-
-\begin{crl}{}{} Suppose $X$ has a $\Delta$-complex structure with simplicies in dimension $\leq k$ only. Then $H_n(X)=0$ for all $n>k$. 
-\begin{proof}
-Direct since singular homology coincides with simplicial homology. 
-\end{proof}
-\end{crl}
-
-\subsection{Simplicial Cohomology}
-\begin{defn}{Simplicial Cohomology Groups}{}\\
-Let $X$ be a $\Delta$-complex. Let $R$ be a ring. Let $M$ be an $R$-module. Define the $n$th simplicial cohomology group of $X$ $$H_\Delta^n(X;M)=H^n(\Hom(\Delta_\bullet(X),M))$$ to be the $n$th cohomology group of the dual of the simplicial complex $\Delta_\bullet(X)$ of $X$. 
-\end{defn}
-
-\subsection{}
-\begin{prp}{}{}\\
-Let $S$ be a simplicial complex. Let $\sigma\in S$. Let $p\in\abs{\sigma}^\circ$. Then we have $$H_\text{sing}^k(\abs{S},\abs{S}\setminus p)\cong\widetilde{H}_\Delta^{k-\abs{\sigma}}(\text{lk}(\sigma))$$
-\end{prp}
-
-\pagebreak
-\section{Polyhedrons and Polytopes}
-\subsection{Convex Geometry}
-\begin{defn}{Convex Sets}{}\\
-Let $C\subseteq\R^n$. We say that $C$ is convex if for all $x,y\in C$ and $t\in[0,1]$, we have $(1-t)x+ty\in C$. 
-\end{defn}
-
-\begin{defn}{Convex Hull}{}\\
-Let $S\subseteq\R^n$ be a subset. Define the convex hull of $S$ to be $$\text{Conv}(S)=\left\{\sum_{k=1}^n\lambda_kx_k\;\bigg{|}\;x_k\in S\text{ and }\sum_{k=1}^n\lambda_k=1\right\}$$
-\end{defn}
-
-\begin{prp}{}{}\\
-Let $S\subseteq\R^n$ be a subset. Then the following are sets are equal. 
-\begin{itemize}
-\item The convex hull $\text{Conv}(S)$. 
-\item $\bigcap_{C\subseteq\R^n\text{ is convex}}C$. 
-\item The smallest convex set containing $S$. 
-\end{itemize}
-\end{prp}
-
-\subsection{Polyhedrons and its Properties}
-Polytopes exists more generically in Euclidean space. We lose nothing discussing polytopes in $\R^n$ since Euclidean spaces maybe identified with $\R^n$ canonically. 
-
-\begin{defn}{Halfspaces}{}\\
-A halfspace of $\R^n$ is a subset of $\R^n$ of the form $$\{x\in\R^n\;|\;\langle a,x\rangle+b\geq 0\}$$ for some $a,b\in\R^n$. 
-\end{defn}
-
-\begin{defn}{Polyhedrons}{}\\
-A polyhedron in $\R^n$ is an intersection of finitely many halfspaces. 
-\end{defn}
-
-\begin{defn}{Polytopes}{}\\
-A polytope in $\R^n$ is a polyhedron that is bounded. 
-\end{defn}
-
-\begin{prp}{}{}\\
-Let $P\subseteq\R^n$ be a subset. Then $P$ is a polytope if and only if there exists a finite subset $S\subseteq\R^n$ such that $P=\text{Conv}(S)$. 
-\end{prp}
-
-\begin{defn}{Dimension}{}\\
-Let $P\subseteq\R^n$ be a polytope. Define the dimension of $P$ to be the dimension of the smallest affine subspace containing $P$. 
-\end{defn}
-
-\begin{defn}{Affinely Isomorphic}{}\\
-Let $P_1\subseteq\R^{n_1}$ and $P_2\subseteq\R^{n_2}$ be polytopes. We say that $P_1$ and $P_2$ are affinely isomorphic if there exists an affine transformation $f:\R^{n_1}\to\R^{n_2}$ such that $f|_{P_1}$ is a bijection. 
-\end{defn}
-
-Note that $f$ itself need not be an affine isomorphism (i.e. an isomorphism of affine spaces). 
-
-\subsection{The Faces of a Polyhedron}
-\begin{defn}{Supporting Hyperplane}{}\\
-Let $P\subseteq\R^n$ be a polyhedron. Let $H\subseteq\R^n$ be a hyperplane. We say that $H$ is a supporting hyperplane for $P$ if the following are true. 
-\begin{itemize}
-\item $P\cap H\neq\emptyset$. 
-\item $P$ lies entirely in one of the halfspaces defined by $H$. 
-\end{itemize}
-\end{defn}
-
-\begin{defn}{Faces}{}\\
-Let $P\subseteq\R^n$ be a polyhedron. A face of $P$ is a subset of $P$ defined by $$F=P\cap H$$ where $H$ is a supporting hyperplane for $P$. 
-\end{defn}
-
-\begin{lmm}{}{}\\
-Let $P\subseteq\R^n$ be a polyhedron. Let $F\subseteq P$ be a face. Then $F$ is a polytope. 
-\end{lmm}
-
-\begin{defn}{Vertices, Edges and Facets}{}\\
-Let $P\subseteq\R^n$ be a polyhedron. Let $F\subseteq P$ be a face. 
-\begin{itemize}
-\item We say that $F$ is a vertex if $\dim(F)=0$. 
-\item We say that $F$ is an edge if $\dim(F)=1$. 
-\item We say that $F$ is a facet if $\dim(F)=\dim(P)-1$. 
-\end{itemize}
-\end{defn}
-
-\begin{defn}{The Face Poset}{}\\
-Let $P\subseteq\R^n$ be a polyhedron. Define the face poset $\mF(P)$ of $P$ to be the set of faces of $P$ together with inclusion. 
-\end{defn}
-
-\begin{defn}{The Face Vector}{}\\
-Let $P\subseteq\R^n$ be a polytope of dimension $d$. Define the face vector $(f_0,\dots,f_{d-1})$ of $S$ by the formula $$f_i=\text{The number of }i\text{-dimensional faces of }P$$ for $0\leq i\leq d$ and by convention, $f_{-1}=f_d=1$. 
-\end{defn}
-
-\begin{lmm}{Euler's Formula}{}\\
-Let $P\subseteq\R^n$ be a polytope of dimension $d$. Then we have $$\sum_{i=0}^{d-1}(-1)^if_i=1+(-1)^d$$
-\end{lmm}
-
-\begin{defn}{Combinatorially Equivalent}{}\\
-Let $P_1\subseteq\R^{n_1}$ and $P_2\subseteq\R^{n_2}$ be polytopes. We say that $P_1$ and $P_2$ are combinatorially equivalent if there exists a inclusion preserving bijection between $\mF(P_1)$ and $\mF(P_2)$. In this case we write $P_1\simeq P_2$. 
-\end{defn}
-
-\pagebreak
-\section{Duality in Polytopes}
-\subsection{Polar Sets}
-\begin{defn}{Polar Sets}{}\\
-Let $S\subseteq\R^n$ be a subset. Define the polar set of $S$ to be $$S^\ast=\{f\in(\R^n)^\ast\;|\;f(x)\leq 1\text{ for all }x\in S\}$$
-\end{defn}
-
-\begin{prp}{}{}\\
-Let $P\subseteq\R^n$ be a polytope. If $0\in P$, then $P^\ast$ is a polytope. 
-\end{prp}
-
-\begin{eg}{}{}\\
-The polar set of the cube $C^3=\{(a,b,c)\in\R^3\;|\;-1\leq a,b,c\leq 1\}$ is the octahedron $$(C^3)^\ast=\{(x,y,z)\in(\R^3)^\ast\;|\;\pm x+\pm y+\pm z\leq 1\}$$
-\end{eg}
-
-$P=(P^\ast)^\ast$. 
-
-$\mF(P)^\text{op}\cong\mF(P^\ast)$. 
-
-\subsection{Simplicial Polytopes}
-\begin{defn}{Simplicial Polytopes}{}\\
-Let $P\subseteq\R^n$ be a polytope. We say that $P$ is a simplicial polytope if all its facets are simplicies. 
-\end{defn}
-
-\begin{lmm}{}{}\\
-Let $P\subseteq\R^n$ be a polytope. Then $\partial P$ is a simplicial complex. 
-\end{lmm}
-
-\begin{prp}{The Dehn-Sommerville Equation}{}\\
-Let $P\subseteq\R^n$ be a simplicial polytope of dimension $d$. Then the following are true: $$\sum_{j=k}^{d-1}(-1)^j\binom{j+1}{k+1}f_j=(-1)^{d-1}f_k$$ for $-1\leq k\leq d-2$. 
-\end{prp}
-
-In particular, $\partial P$ is a simplicial complex. The notion of face vector coincides, and they enjoy both the Dehn-Sommerville equation and its relation with the $h$-vector. 
-
-\subsection{Simple and Simplicial Polytopes}
-\begin{defn}{Simple Polytopes}{}\\
-Let $P\subseteq\R^n$ be a polytope. We say that $P$ is a simple polytope if for all vertices $v\in P$, there exists $n$ edges $e_1,\dots,e_n\subseteq P$ such that $v\in\partial e_i$ for all $i$. 
-\end{defn}
-
-\begin{lmm}{}{}\\
-Let $P_1\subseteq\R^n$ and $P_2\subseteq\R^m$ be simple polytopes. Then the Cartesian product $P_1\times P_2$ is a simple polytope. 
-\end{lmm}
-
-\subsection{The Duality Between Simple and Simplicial Polytopes}
-\begin{prp}{}{}\\
-Let $P\subseteq\R^n$. Then $P$ is simple if and only $P^\ast$ is simplicial. 
-\end{prp}
-
-Duality of $d$-dimensional faces with $(n-d)$-dimensional faces. 
-
-\begin{prp}{}{}\\
-Let $P\subseteq\R^n$ be a polytope. If $P$ is both simple and simplicial, then $P$ belongs to one of the following types of polytopes. 
-\begin{itemize}
-\item $n=2$ (and so $P$ is a polygon). 
-\item $P$ is a simplex. 
-\end{itemize}
-\end{prp}
-
-\subsection{Nerve Complex}
-\begin{defn}{The Nerve Complex}{}\\
-Let $P\subseteq\R^n$ be a simple polytope. Define the nerve complex of $P$ to be the simplicial complex $$\mK_P=\partial(P^\ast)$$
-\end{defn}
-
-\begin{lmm}{}{}\\
-Let $P\subseteq\R^n$ be a simple polytope. Then $\mK_P$ is a triangulation of $S^{n-1}$. 
-\end{lmm}
-
-\begin{lmm}{}{}\\
-Let $P_1\subseteq\R^n$ and $P_2\subseteq\R^m$ be simple polytopes. Then we have $$\mK_{P_1\times P_2}\cong\mK_{P_1}\ast\mK_{P_2}$$
-\end{lmm}
-
-\pagebreak
-\section{Piecewise Linear Topology}
-\subsection{Relation between Polyhedra and Simplicial Complexes}
-\begin{defn}{Locally Finite Collections}{}\\
-Let $X$ be a space. Let $P\subseteq\mP(X)$ be a collection of subsets. We say that $P$ is locally finite if for each $p\in X$, there exists a neighbourhood $U\subseteq X$ of $p$ such that the set $$\{V\in P\;|\;U\cap V\neq\emptyset\}$$ is finite. 
-\end{defn}
-
-\begin{prp}{}{}\\
-Let $P$ be a polyhedra. Then $P$ is a locally finite union of simplexes. 
-\end{prp}
-
-Thus if $P$ is a polytope, then $P$ has the underlying structure of a simplicial complex. 
-
-\subsection{Piecewise Linear Maps}
-\begin{defn}{Piecewise Linear Maps between Polyhedra}{}\\
-Let $P,Q$ be polyhedra. Let $f:P\to Q$ be a function. We say that $f$ is piecewise linear if there exists a locally finite decomposition into polyhedra $P=\bigcup_{\alpha\in I}P_\alpha$ such that for each $\alpha\in I$, the restriction $f|_{P_\alpha}$ is affine linear. 
-\end{defn}
-
-\begin{prp}{}{}\\
-Let $P,Q$ be polyhedra. Let $f:P\to Q$ be a function. Then the following are equivalent. 
-\begin{itemize}
-\item $f$ is piecewise linear. 
-\item For each $p\in P$, there exists $L\subseteq P$ such that $f(\lambda p+\mu x)=\lambda f(p)+\mu f(x)$ for all $\lambda,\mu\geq 0$ and $\lambda+\mu=1$ and $x\in L$. 
-\item $\Gamma(f)=\{(x,f(x))\;|\;x\in P\}$ is a polyhedron. 
-\item There exists locally finite decompositions of $P$ and $Q$ into simplexes such that $f$ sends simplexes to simplexes and $f$ restricted to each simplex is affine linear. 
-\end{itemize}
-\end{prp}
-
-\begin{defn}{PL Homeomorphism}{}\\
-Let $P,Q$ be polyhedra. Let $f:P\to Q$ be a piecewise linear function. We say that $f$ is a PL homeomorphism if there exists a piecewise linear function $g:Q\to P$ such that $$g\circ f=\text{id}_P\;\;\;\text{ and }\;\;\;f\circ g=\text{id}_Q$$
-\end{defn}
-
-\begin{lmm}{}{}\\
-Let $P,Q$ be polyhedra. Let $f:P\to Q$ be a piecewise linear function. If $f$ is a homeomorphism, then $f$ is a piecewise linear homeomorphism. 
-\end{lmm}
-
-Motivated by the equivalent definitions of piecewise linear maps between polyhedra, we define piecewise linear maps between spaces in general. 
-
-\begin{defn}{Piecewise Linear Maps in General}{}\\
-Let $X,Y$ be spaces. Let $f:X\to Y$ be a function. We say that $f$ is piecewise linear if there exists locally finite triangulations of $X$ and $Y$ such that $f$ restricted to each simplex is affine linear. 
-\end{defn}
-
-\begin{lmm}{}{}\\
-Let $S,T$ be simplicial complexes. Let $f:V(S)\to V(T)$ be a simplicial map. Then $\abs{f}:\abs{S}\to\abs{T}$ is piecewise linear. 
-\end{lmm}
-
-\begin{prp}{}{}\\
-Let $S,T$ be simplicial complexes. Let $f:\abs{S}\to\abs{T}$ be a function. Then $f$ is piecewise linear if and only if there exists subdivisions $S'$ of $S$ and $T'$ of $T$ such that $f:\abs{S'}\to\abs{T'}$ is simplicial. 
-\end{prp}
-
-\subsection{Piecewise Linear Manifolds}
-\begin{prp}{}{}\\
-The set $$\Gamma=\{f:U\to V\;|\;U,V\subseteq\R^n\text{ are open }, f\text{ is a PL homeomorphism }\}$$ defines a pseudogroup of transformations on $\R^n$. 
-\end{prp}
-
-\begin{defn}{Piecewise Linear Manifolds}{}\\
-A piecewise linear manifold is a manifold whose pseudogroup of transformations is given by $\Gamma$. 
-\end{defn}
-
-\subsection{Triangulated Manifolds}
-\begin{defn}{Triangulated Manifolds}{}\\
-Let $M$ be a topological manifold. We say that $M$ is a triangulated manifold if $M$ is triangulated as a topological space. 
-\end{defn}
-
-\begin{prp}{}{}\\
-Let $X$ be a piecewise linear manifold. Then $X$ is a triangulated manifold. 
-\end{prp}
-
-\begin{prp}{}{}\\
-Let $M$ be a triangulated manifold triangulated by the simplicial complex $K$. Then the following are equivalent. 
-\begin{itemize}
-\item $M$ is a PL manifold. 
-\item For every $\emptyset\neq\sigma\in K$, we have that $\text{lk}(\sigma)$ is PL homeomorphic to $\abs{\Delta^d}$ where $d=\dim(M)-\abs{\sigma}$. 
-\item For every $p\in V(K)$, we have that $\text{st}(p)$ is PL homeomorphic to $\abs{\Delta^{\dim(M)}}$. 
-\end{itemize}
-\end{prp}
-
-The Hauptvermutung asks whether any two homeomorphic triangulated spaces are PL homemorphic (i.e. if $S,T$ are simplicial complexes and $\abs{S}$ is homeomorphic to $\abs{T}$, is there a PL homeomorphism between $\abs{S}$ and $\abs{T}$?). This is shown to be False by Milnor using Reidemeister torsion. \\
-
-The manifold Hauptvermutung asks whether any two homeomorphic triangulated manifolds are PL homemorphic. This is also show to be false using an obstruction in cohomology. 
-
-\begin{prp}{}{} Every finite CW complex is homotopy equivalent to a topological manifold. 
-\end{prp}
-
-\subsection{Pseudo-Manifolds}
-\begin{defn}{Pseudo-Manifolds From Simplicial Complexes}{}\\
-Let $\mK$ be a simplicial complex. We say that $\mK$ is a pseudo-manifold of dimension $n$ if the following are true. 
-\begin{itemize}
-\item All maximal simplicies of $\mK$ are of dimension $n$. 
-\item Each $(n-1)$-simplex of $\mK$ is the face of two $n$-simplicies of $\mK$. 
-\item For any two $n$-simplicies $\sigma,\sigma'\in\mK$, there exists $n$-simplicies $\sigma=\sigma_0,\dots,\sigma_k=\sigma'$ such that $\sigma_i\cap\sigma_{i+1}$ is an $(n-1)$-simplex for $0\leq i\leq k-1$. 
-\end{itemize}
-\end{defn}
-
-\begin{defn}{Pseudo-Manifolds in General}{}\\
-Let $X$ be a space. We say that $X$ is a pseudo-manifold if $X$ is triangulated by a simplicial complex $\mK$ that is a pseudo-manifold. 
-\end{defn}
-
-\begin{lmm}{}{}\\
-Let $X$ be a pseudo-manifold of dimension $n$. Then $H_n(X)\cong\Z$ or $0$. 
-\end{lmm}
-
-\begin{lmm}{}{}\\
-Let $\mK$ be a triangulation of $S^n$. Then the following are true. 
-\begin{itemize}
-\item $\mK$ is a pseudo-manifold. 
-\item If $\mK$ is finite, then the generator of $H_n(\mK)$ is represented by the sum of $n$-simplicies of $\mK$. 
-\end{itemize}
-\end{lmm}
-
-\pagebreak
-\section{Cones and Fans}
-\subsection{Cones and its Properties}
-\begin{defn}{Cones}{}\\
-Let $C\subseteq\R^n$. We say that $C$ is a cone if $x\in C$ implies that $sx\in C$ for all $s\geq 0$. 
-\end{defn}
-
-\begin{defn}{Polyhedral Cones}{}\\
-A cone in $\R^n$ is a subset $C\subseteq\R^n$ such that if $c_1,\dots,c_n\in C$, then $\sum_{i=1}^n\lambda_ic_i\in C$ for all $\lambda_1,\dots,\lambda_n\geq 0$. 
-\end{defn}
-
-\begin{defn}{Conical Hull}{}\\
-Let $S\subseteq\R^n$ be finite. Define the conical hull of $S$ to be $$\text{Cone}(S)=\left\{\sum_{s\in S}\lambda_ss\;\bigg{|}\;\lambda_s\geq 0\right\}$$
-\end{defn}
-
-\begin{prp}{}{}\\
-Let $C\subseteq\R^n$ be a subset. Then the following are equivalent. 
-\begin{itemize}
-\item $C$ is a polyhedral cone. 
-\item There exists a finite subset $S\subseteq\R^n$ such that $C=\text{Cone}(S)$. 
-\item $C$ is the intersection of finitely many halfspaces containing $0$ in their boundary. 
-\end{itemize}
-\end{prp}
-
-Therefore cones are also polyhedrons. 
-
-\begin{defn}{Dimension of a Cone}{}\\
-Let $C\subseteq\R^n$ be a cone. Define the dimension of $C$ to be the dimension of the smallest affine subspace containing $C$. 
-\end{defn}
-
-\begin{defn}{Rational Cones}{}\\
-Let $C\subseteq\R^n$ be a cone. We say that $C$ is rational if there exists a finite set $S\subseteq\Z^n$ such that $C=\text{Cone}(S)$. 
-\end{defn}
-
-\begin{defn}{Regular Cones}{}\\
-Let $C\subseteq\R^n$ be a cone. We say that $C$ is regular if there exists a finite set $S\subseteq\Z^n$ such that the following are true. 
-\begin{itemize}
-\item $C=\text{Cone}(S)$. 
-\item Elements of $S$ are $\Z$-linearly independent. 
-\end{itemize}
-\end{defn}
-
-\begin{defn}{Simplicial Cones}{}\\
-Let $C\subseteq\R^n$ be a cone. We say that $C$ is simplicial if there exists a finite set $S\subseteq\R^n$ such that the following are true. 
-\begin{itemize}
-\item $C=\text{Cone}(S)$. 
-\item Elements of $S$ are $\R$-linearly independent. 
-\end{itemize}
-\end{defn}
-
-\subsection{The Dual Cone}
-\begin{defn}{The Dual of a Cone}{}\\
-Let $C\in\R^n$ be a cone. Define the dual of $C$ to be $$C^\vee=\{x\in\R^n\;|\;\langle x,c\rangle\geq 0\text{ for all }c\in C\}$$
-\end{defn}
-
-\begin{defn}{Associated Hyperplane and Halfspace of a Linear Functional}{}\\
-Let $\phi\in(\R^n)^\ast$. Define the associated hyperplane of $\phi$ to be $$H_\phi=\{x\in\R^n\;|\;\phi(x)=0\}$$ Define the associated halfspace of $\phi$ to be $$H_\phi^+=\{x\in\R^n\;|\;\phi(x)\geq 0\}$$
-\end{defn}
-
-\begin{lmm}{}{}\\
-Let $C\in\R^n$ be a cone. Let $H$ be a hyperplane in $\R^n$. Then $H$ is a supporting hyperplane of $C$ if and only if there exists $\phi\in C^\vee$ such that $H=H_\phi$. 
-\end{lmm}
-
-\begin{lmm}{}{}\\
-Let $C\in\R^n$ be a polyhedral cone. Then the following are true. 
-\begin{itemize}
-\item $C^\vee$ is a polyhedral cone. 
-\item $(C^\vee)^\vee=C$. 
-\item $C=\bigcap_{i=1}^nH_{\phi_i}$ for $\phi_i\in(\R^n)^\ast$ if and only if $C^\vee=\text{Cone}(\phi_1,\dots,\phi_n)$. 
-\item If $C$ is strongly convex, then $C^\vee$ is strongly convex. 
-\end{itemize}
-\end{lmm}
-
-\begin{lmm}{Separation Lemma}{}\\
-Let $C_1,C_2\subseteq\R^n$ be cones such that $F=C_1\cap C_2$ is a face of both $C_1$ and $C_2$. Then there exists $\phi\in C_1^\vee\cap(-C_2)^\vee$ such that $$F=C_1\cap H_\phi=C_2\cap H_\phi$$
-\end{lmm}
-
-\begin{defn}{Strongly Convex Cones}{}\\
-Let $C\subseteq\R^n$ be a cone. We say that $C$ is strongly convex if $C$ does not contain a line. 
-\end{defn}
-
-\begin{lmm}{}{}\\
-Let $C\subseteq\R^n$ be a cone. Then the following are equivalent. 
-\begin{itemize}
-\item $C$ is strongly convex. 
-\item $\{0\}$ is a face of $C$. 
-\item $C\cap(-C)=\{0\}$. 
-\item $\dim(C^\vee)=n$. 
-\end{itemize}
-\end{lmm}
-
-\subsection{Fans and its Properties}
-\begin{defn}{Fans}{}\\
-Let $n\in\N^+$. A fan in $\R^n$ is a finite set of cones $\Sigma$ such that the following are true. 
-\begin{itemize}
-\item Each $C\in\Sigma$ is a strongly convex rational polyhedral cone. 
-\item For each cone $C\in\Sigma$ and each face $F$ of $C$, we have $F\in\Sigma$. 
-\item For cones $C_1,C_2\in\Sigma$, we have $C_1\cap C_2$ are faces of $C_1$ and $C_2$. 
-\end{itemize}
-We write $\Sigma(d)=\{C\in\Sigma\;|\;\dim(C)=d\}$ for the $d$-dimensional cones in the fan. 
-\end{defn}
-
-\begin{defn}{The Support of a Fan}{}\\
-Let $n\in\N^+$. Let $\Sigma$ be a fan in $\R^n$. Define the support of $\Sigma$ to be $$\abs{\Sigma}=\cup_{C\in\Sigma}C$$
-\end{defn}
-
-\begin{defn}{Types of Fans}{}
-\end{defn}
-
-\begin{defn}{Complete Fans}{}\\
-Let $n\in\N^+$. Let $\Sigma$ be a fan in $\R^n$. We say that $\Sigma$ is complete if $\abs{\Sigma}=\R^n$. 
-\end{defn}
-
-\pagebreak
-\section{Some Results on the Classification of Polytopes}
-Let $P$ be a simplicial polytope of dimension $4$. Since $P$ is homeomorphic to $D^4$, the following classification problems are equivalent. 
-\begin{itemize}
-\item Classification of simplicial polytopes up to uniqueness of the face vector. 
-\item Classification of triangulations of the $3$-sphere up to uniqueness of the face vector of the simplicial complex. 
-\end{itemize}
-(More subtle, this is not true for higher dimensions: see https://math.mit.edu/~rstan/pubs/pubfiles/54.pdf)
-
-
-Of course, two polytopes that are not combinatorially equivalent can still have the same face vector. Let $(f_0,f_1,f_2,f_3)$ be the face vector of $P$. A few is known in this particular case. 
-\begin{itemize}
-\item Since $P$ is simplicial, we have the bound $f_i\leq\binom{f_0}{i+1}$ from here
-%https://en.wikipedia.org/wiki/Cyclic_polytope
-\item The Euler characteristic of the sphere tells us that $f_0-f_1+f_2-f_3=0$. 
-\item %https://arxiv.org/pdf/math/0604018
-shows that $f_1\geq 4f_0-10$. 
-\item The same paper tells us that $f_2=2f_1-2f_0$ and $f_3=f_1-f_0$ (also this paper: %https://math.mit.edu/~rstan/pubs/pubfiles/54.pdf)
-\item For every pair of $(f_0,f_1)$ such that $f_0\geq 5$ and $\frac{f_0(f_0-1)}{2}\geq f_1\geq 4f_0-10$, there exists a triangulation of the $3$-sphere whose face vectors are $(f_0,f_1,2f_1-2f_0,f_1-f_0)$. 
-\end{itemize}
-
-Recalling that every $d$ dimensional polytope must have $d+1$ vertices,we start enumerating the possible cases with $f_0=5$. 
-
-\begin{itemize}
-\item By the above, we must have $f_1\geq 10$, and there is guaranteed to be a triangulation if $f_1\leq 10$. So $(5,10,10,5)$ is one such face vector. By the upper bound of the face vector, this is the only possible face vector. 
-\end{itemize}
-
-
-\subsection{}
-\begin{thm}{}{}\\
-The following are true regarding the classification of polytopes up to combinatorial type. 
-\begin{itemize}
-\item The number of polytopes of dimension $d$ with $d+1$ vertices is $1$. 
-\item The number of polytopes of dimension $d$ with $d+1$ vertices is $[1/4d^2]$. 
-\end{itemize}
-\end{thm}
-
-\subsection{}
-\begin{defn}{Polytopal Spheres}{}\\
-Let $\mK$ be a simplicial complex that is the triangulation of a sphere. We say that the triangulation is polytopal if $\mK$ is the boundary of a simplicial polytope. 
-\end{defn}
-
-Convex polytopes p.424
-
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	\substack{\text{Polytopal}\\\text{Spheres}} & \substack{\text{PL}\\\text{Spheres}} & \substack{\text{Triangulated}\\\text{Spheres}}
-	\arrow["\subseteq", shift right=3, draw=none, from=1-1, to=1-2]
-	\arrow["\subseteq", shift right=3, draw=none, from=1-2, to=1-3]
-\end{tikzcd}}\\
-
-Let $d$ be the dimension of the sphere (hence the underlying polytope has dimension $d+1$). If $d=2$, all inclusions are equalities. If the simplicial complex of the triangulation has at most $d+4$ vertices, all inclusions are equalities. \\
-
-The smallest non-trivial case is then $d=3$ such that the polytope has dimension $4$ and $8$ vertices. The triangulations are classified by ``David Barnette. The triangulations of the 3-sphere with up to 8 vertices'' where there are a total of $39$ triangulations, of which $37$ are polytopal, and the polytopes are given in ``BRANKO GRUJNBAUM AND V. P. SREEDHARAN. An Enumeration of Simplicial 4-Polytopes with 8 Vertices''. \\
-
-%https://mathoverflow.net/questions/74798/polytopes-with-few-vertices
-
-
-
-
-
-Toric topology p,79
-
-
-\pagebreak
-\section{}
+\section{Combinatorial Commutative Algebra}
 Pre-req: Commutative Algebra 2, Simplicial Complexes
 \subsection{Stanley-Reisner Rings}
 \begin{thm}{}{}\\
@@ -596,115 +67,141 @@ Let $\Delta^n$ be the standard $n$-simplex. Then the following are true.
 \end{eg}
 
 \pagebreak
-\section{Moment-Angle Complexes}
-Pre req: Equivariant (co)homology, homological algebra, PL manifolds?
-\subsection{Basic Definitions}
-\begin{prp}{}{}\\
-Let $n\in\N$. Let $\mu:\C^n\to\R^n$ be the map $(z_1,\dots,z_n)\to(\abs{z_1}^2,\dots,\abs{z_n}^2)$. Suppose that $(S^1)^n\subseteq\C^n$ act on $\C^n$ by left multiplication. Then $\mu$ descends to a homeomorphism of orbit spaces $$\frac{\C^n}{(S^1)^n}\cong\{(x_1,\dots,x_n)\in\R^n\;|\;x_i\geq 0\text{ for all }i\}\subseteq\R^n$$
-\end{prp}
-
-\begin{lmm}{}{}\\
-Let $n\in\N$. Let $\mu:\C^n\to\R^n$ be the map $(z_1,\dots,z_n)\to(\abs{z_1}^2,\dots,\abs{z_n}^2)$. Then the above homeomorphism induces a homeomorphism $$\frac{D^n}{(S^1)^n}\cong[0,1]^n$$
-\end{lmm}
-
-Recall the construction of the cubical embedding $i_c:\Delta^n\to[0,1]^{n+1}$. 
-\begin{enumerate}
-\item For $1\leq k\leq n$, the barycenter of the $k$-dimensional face $B([e_{i_1},\dots,e_{i_k}])$ is sent to $(u_1,\dots,u_n)\in[0,1]^{n+1}$ where $u_j=0$ if $j\in\{i_1,\dots,i_k\}$ and $u_j=1$ otherwise. 
-\item Extend this into a piecewise linear embedding $i_c:\Delta^n\to[0,1]^{n+1}$ as follows. For each simplex $[p_1,\dots,p_l]$ in the barycentric subdivision of $\Delta^n$, $[i_c(p_1),\dots,i_c(p_l)]$ lies on a face of $[0,1]^{n+1}$. Hence there exists an simplicial map sending $[p_1,\dots,p_l]$ to $[i_c(p_1),\dots,i_c(p_l)]$. 
-\end{enumerate}
-
-Since every finite abstract simplicial complex can be realized as a subcomplex of $\Delta^n$ for large $n$, we also get the cubical embedding of a finite abstract simplicial complex, which is denoted by $\text{cc}(\K)$. 
-
-\begin{defn}{Moment-Angle Complex}{}\\
-Let $n\in\N$. Let $\mK$ be an abstract simplicial complex over $\{1,\dots,n\}$. Define the moment-angle complex of $\mK$ to be $$\mZ_\mK=\mu^{-1}(\text{cc}(\mK))\subseteq D^n$$
-\end{defn}
-
-Equivalently, it is the pullback of the inclusion map $\mZ_\mK=\text{cc}(\mK)\to[0,1]^n$ and the quotient map $\mu:D^n\to[0,1]^n$. 
-
-\begin{eg}{}{}\\
-Let $n\in\N$. Then the following are true. 
-\begin{itemize}
-\item $\mZ_\emptyset=(S^1)^n$. 
-\item $\mZ_{\Delta^n}=D^{n+1}$. 
-\end{itemize}
-\end{eg}
-
-\begin{lmm}{}{}\\
-Let $n\in\N$. Let $\mK$ be an abstract simplicial complex over $\{1,\dots,n\}$. The following are true regarding the moment-angle complex of $\mK$. 
-\begin{itemize}
-\item $\mZ_\mK$ is a $(S^1)^n$-invariant subspace. 
-\item The homeomorphism $\frac{D^n}{(S^1)^n}\cong[0,1]^n$ induced by the map $\mu(z_1,\dots,z_n)=(\abs{z_1}^2,\dots,\abs{z_n}^2)$ descends to a homeomorphism $$\frac{\mZ_\mK}{(S^1)^n}\cong\text{cc}(\mK)$$
-\end{itemize}
-\end{lmm}
-
-Recall that $\text{cc}(\mK)$ is equal to the union of a finite number of faces of $[0,1]^n$. Also recall the notation $$C_I=\{(x_1,\dots,x_n)\in[0,1]^n\;|\;x_i=0\text{ if }i\in I\}$$ for a face of the cube $[0,1]^n$ that contains the origin and $I\subseteq\{1,\dots,n\}$. 
-
-\begin{lmm}{}{}\\
-Let $n\in\N$. Let $\mK$ be an abstract simplicial complex over $\{1,\dots,n\}$. Suppose that $\text{cc}(\mK)=\bigcup_{I\in\mK}C_I$. Then there is a homeomorphism $$\mZ_\mK=\bigcup_{I\in\mK}\mu^{-1}(C_I)=\bigcup_{I\in\mK}\{(x_1,\dots,x_n)\in D^n\;|\;\abs{z_j}^2=1\text{ for all }j\in\{1,\dots,n\}\setminus I\}$$ where $\mu$ is the map $\mu(z_1,\dots,z_n)=(\abs{z_1}^2,\dots,\abs{z_n}^2)$. 
-\end{lmm}
-
-For $I\subseteq\{1,\dots,n\}$, the condition that $\abs{z_j}^2=1$ for $j\in\{1,\dots,n\}\setminus I$ means that for those coordinates in $D^n$, they only consist of the boundary which is $S^1$. Hence we may think of $\mZ_\mK$ as the union of products $$\mZ_\mK=\bigcup_{I\in\mK}\left(\prod_{i\in I}D^2\times\prod_{i\in\{1,\dots,n\}\setminus I}S^1\right)$$ But note that this product is ambiguous on which coordinates should be $S^1$ and which should be $D^2$ (because we have a chosen embedding into $\C^n$ although swapping the order of the products give homeomorphic spaces). Moreover, because we are taking the union over all $I\in\mK$, it suffices to consider the maximal simplicies in $\mK$. 
-
-\begin{eg}{}{}\\
-Let $n\in\N\setminus\{0\}$. Then the following are true. 
-\begin{itemize}
-\item The moment angle complex of $\partial\Delta^n$ is given by $$\mZ_{\partial\Delta^n}\cong S^{2n+1}$$
-\item The moment angle complex of the $n$-gon is given by 
-\end{itemize}
-\begin{proof}\\
-It suffices to consider the maximal simplicies in $\partial\Delta^n$. They are of the form $I\subseteq\{1,\dots,n+1\}$ for $\abs{I}=n$. Hence we have
-\begin{align*}
-\mZ_{\partial\Delta^n}&=(D^2\times\cdots\times D^2\times S^1)\cup\cdots\cup(S^1\times D^2\times\cdots\times D^2)\\
-&=\partial(D^2\times\cdots\times D^2)\\
-&\cong\partial D^{2n+2}\\
-&\cong S^{2n+1}
-\end{align*}
-
-For the moment angle complex of the $n$-gon, we note that the simplicial complex is given by $1$-simplicies of the form $\{i,i+1\}$ for $1\leq i\leq n$ together with $\{1,n+1\}$. Hence $$\mZ_{n\text{-gon}}=(D^2\times D^2\times S^1\times\cdots\times S^1)\cup\cdots\cup(S^1\times\cdots\times S^1\times D^2\times D^2)\cup(D^2\times S^1\times\cdots\times S^1\times D^2)$$
-\end{proof}
-\end{eg}
-
-\begin{prp}{}{}\\
-Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. If $\mK$ is a triangulation of $S^{m-1}$, then $\mZ_\mK$ is a closed topological manifold of dimension $n+m$. 
-\end{prp}
-
-\subsection{Polyhedral Products}
+\section{Polyhedral Products}
+\subsection{The Homotopy Theory of Polyhedral Products}
 \begin{defn}{Polyhedral Products}{}\\
-Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Let $(\bold{X},\bold{A})=\{(X_1,A_1),\dots,(X_n,A_n)\}$ be pairs of spaces. Define the polyhedral product of $(\bold{X},\bold{A})$ corresponding to $\mK$ to be $$(\bold{X},\bold{A})^\mK=\bigcup_{I\in\mK}\left\{(x_1,\dots,x_n)\in\prod_{i=1}^nX_i\;|\;x_i\in A_i\text{ for }i\notin I\right\}=\bigcup_{I\in\mK}\left(\prod_{i\in I}X_i\times\prod_{i\notin I}A_i\right)$$
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Let $(\bold{X},\bold{A})=\{(X_1,A_1),\dots,(X_n,A_n)\}$ be pairs of spaces. 
+\begin{itemize}
+\item Let $\sigma\in\mK$. Define $$(\bold{X},\bold{A})^\sigma=\left\{(x_1,\dots,x_n)\in\prod_{i=1}^nX_i\;\bigg{|}\;x_i\in A_i\text{ for }i\notin I\right\}$$
+\item Define the polyhedral product of $(\bold{X},\bold{A})$ corresponding to $\mK$ to be $$(\bold{X},\bold{A})^\mK=\bigcup_{I\in\mK}(\bold{X},\bold{A})^\sigma$$
+\end{itemize}
 \end{defn}
 
-\subsection{Algebraic Invariants of the Moment Angle Complex}
 \begin{prp}{}{}\\
-Let $R$ be a commutative ring. Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Then the following are true. 
-\begin{itemize}
-\item There is an isomorphism of rings $$H^\ast((\C\Prj^\infty,\ast)^\mK;R)\cong R[\mK]$$
-\item The inclusion $(\C\Prj^\infty,\ast)^\mK\hookrightarrow(\C\Prj^\infty,\ast)^n$ induces the quotient map $$H^\ast((\C\Prj^\infty)^m;R)\cong R[v_1,\dots,v_n]\to R[\mK]\cong H^\ast((\C\Prj^\infty,\ast)^\mK;R)$$ (where $v_1,\dots,v_n$ are degree $2$ elements). 
-\item The inclusion $i:(\C\Prj^\infty,\ast)^\mK\hookrightarrow(\C\Prj^\infty,\ast)^n$ decomposes into a homotopy equivalence and fibration in the following way: \\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	{(\C\Prj^\infty,\ast)^\mK} && {(\C\Prj^\infty,\ast)^n} \\
-	& {ET^m\times_{T^m}\mZ_\mK}
-	\arrow[hook, from=1-1, to=1-3]
-	\arrow["\simeq"', from=1-1, to=2-2]
-	\arrow["{\text{fib.}}"', from=2-2, to=1-3]
-\end{tikzcd}}\\
-Moreover, the fiber of the fibration is $\mZ_\mK$. 
-\item $\mZ_\mK(BS^1,\ast)=ET^m\times_{T^m}\mZ_\mK$. 
-\item $H^\ast(ET^m\times_{T^m}\mZ_\mK)=R[\mK]$. 
-\end{itemize}
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Let $(\bold{X},\bold{A})=\{(X_1,A_1),\dots,(X_n,A_n)\}$ be pairs of spaces. Then we have $$(\bold{X},\bold{A})^\mK=\colim_{\sigma\in\text{Cat}(\mK)}(\bold{X},\bold{A})^\sigma$$
 \end{prp}
 
-\begin{thm}{(Davis-Januskiewicz)}{}\\
-Let $R$ be a commutative ring. Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Then the equivariant cohomology ring of $\mZ_\mK$ is given by $$H_{T^m}^\ast(\mZ_\mK;R)\cong R[\mK]$$ (natural in $\mK$)
+\begin{prp}{}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Let $(\bold{X},\bold{A})$ and $(\bold{Y},\bold{B})$ be $n$ pairs of spaces. Let $f_i:(X_i,A_i)\to(Y_i,B_i)$ be a map of pair for $1\leq i\leq n)$. Then $(f_1,\dots,f_n)$ induces a map $$(\bold{X},\bold{A})^\mK\to(\bold{Y},\bold{B})^\mK$$
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $\mK,\mL$ be a simplicial complex on $\{1,\dots,n\}$. Let $(\bold{X},\bold{A})=\{(X_1,A_1),\dots,(X_n,A_n)\}$ be pairs of spaces. Let $f_i:(X_i,A_i)\to(Y_i,B_i)$ be a map of pair for $1\leq i\leq n)$. Then we have $$(\bold{X},\bold{A})^{\mK\ast\mL}=(\bold{X},\bold{A})^\mK\times(\bold{X},\bold{A})^\mL$$
+\end{prp}
+
+\begin{eg}{}{}\\
+Let $\mK$ be a simplicial complex. Then we have $$\text{cc}(\mK)=(I,1)^\mK$$
+\end{eg}
+
+\begin{eg}{}{}\\
+Let $\mK=\{\{1,\},\dots,\{n\}\}$. Let $\bold{X}=(X_1,\dots,X_n)$ be spaces. Then we have $$(\bold{X}X,\ast)^\mK=X_1\vee\cdots\vee X_n$$
+\end{eg}
+
+\begin{defn}{Polyhedral Smash Products}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Let $(\bold{X},\bold{A})$ be pairs of spaces. 
+\begin{itemize}
+\item Let $\sigma\in\mK$. Define $$(\bold{X},\bold{A})^{\wedge\sigma}=\left\{(x_1,\dots,x_n)\in\bigwedge_{i=1}^nX_i\;\bigg{|}\;x_i\in A_i\text{ for }i\notin I\right\}$$
+\item Define the polyhedral smash product of $(\bold{X},\bold{A})$ corresponding to $\mK$ to be $$(\bold{X},\bold{A})^\mK=\bigcup_{I\in\mK}(\bold{X},\bold{A})^{\wedge\sigma}$$
+\end{itemize}
+\end{defn}
+
+\begin{thm}{Bahri, Bendersky, Cohen, Gitler}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Let $(\bold{X},\bold{A})$ be $n$-pairs of CW complexes. Suppose that the inclusion maps $A_j\to X_j$ are null homotopic for $1\leq j\leq n$. Then there is a homotopy equivalence $$(\bold{X},\bold{A})^{\wedge\mK}\simeq\bigvee_{\sigma\in\mK}\abs{\text{lk}_\mK(\sigma)}\ast(\bold{X}_J,\bold{A}_J)^{\wedge\sigma}$$
 \end{thm}
 
+\begin{thm}{Bahri, Bendersky, Cohen, Gitler}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Let $(\bold{X},\bold{A})$ be $n$-pairs of CW complexes. Then there is a homotopy equivalence $$\Sigma(\bold{X},\bold{A})^\mK\simeq\Sigma\left(\bigvee_{J\subseteq\{1,\dots,n\}}(\bold{X}_J,\bold{A}_J)^{\wedge\mK_J}\right)$$ that is natural in $(\bold{X},\bold{A})$, where $(\bold{X}_J,\bold{A}_J)=\{(X_j,A_j)\;|\;j\in J\}$. 
+\end{thm}
+
+\begin{crl}{}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Let $(\bold{X},\bold{A})$ be $n$-pairs of CW complexes. Suppose that $A_i$ are null homotopic for all $i$. Then there is a homotopy equivalence $$\Sigma(\bold{X},\bold{A})^\mK\simeq\Sigma\left(\bigvee_{\sigma\in\mK}\bold{X}^{\wedge\sigma}\right)$$
+\end{crl}
+
+\begin{crl}{}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Let $(\bold{X},\bold{A})$ be $n$-pairs of CW complexes. Suppose that $X_i$ are null homotopic for all $i$. Then there is a homotopy equivalence $$\Sigma(\bold{X},\bold{A})^\mK\simeq\Sigma\left(\bigvee_{J\notin\mK}\abs{\mK_J}\ast\bold{A}^{\wedge J}\right)$$
+\end{crl}
+
+\begin{thm}{Grbic–Theriault, Iriye–Kishimoto}{}\\
+Let $\mK$ be a shifted simplicial complex on $\{1,\dots,n\}$. Let $\bold{A}$ be $n$ pointed CW complexes. Then there is a homotopy equivalence $$(CA,A)^\mK\simeq\bigvee_{J\notin\mK}\abs{\mK_J}\ast\bold{A}^{\wedge J}$$
+\end{thm}
+
+\begin{eg}{}{}\\
+Let $\bold{A}$ be $n$ pointed CW complexes. Then there is a homotopy equivalence $$(CA,A)^{\text{sk}_i\Delta^{n-1}}\simeq\bigvee_{k=i+2}^n\left(\bigvee_{1\leq j_1<\cdots<j_k\leq n}\left(\Sigma^{i+1}A_{j_1}\wedge\cdots\wedge A_{j_k}\right)^{\vee\binom{k-1}{i+1}}\right)$$
+\end{eg}
+
+\subsection{Fat Wedge Filtrations}
+
+\subsection{Other Results}
 \begin{prp}{}{}\\
-Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Then the following are true regarding the homotopy groups of $\mZ_\mK$. 
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Then we have $$H^\ast((\C\Prj^\infty,\ast)^\mK)\cong\Z[\mK]$$
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Then the inclusion map $(\C\Prj^\infty,\ast)^\mK\hookrightarrow(\C\Prj^\infty)^n$ induces the quotient map $$\Z[x_1,\dots,x_n]\to\Z[\mK]$$ where $\deg(x_i)=2$. 
+\end{prp}
+
+\pagebreak
+\section{Moment Angle Complexes}
+\subsection{Basic Definitions}
+\begin{defn}{Moment Angle Complexes}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Define the moment angle complex of $\mK$ to be $$\mZ_\mK=(D^2,S^1)^\mK$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Then the following diagram is a pullback \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\mZ_\mK} & {(D^2)^n\subseteq\C^n} \\
+	{\text{cc}(\mK)} & {I^n}
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow["\mu", from=1-2, to=2-2]
+	\arrow[hook, from=2-1, to=2-2]
+\end{tikzcd}}\\
+where $D^2\subseteq\C$ is the closed unit disc and $\mu:(D^2)^n\to I^n$ is the map given by $(z_1,\dots,z_n)\mapsto(\abs{z_1}^2,\dots,\abs{z_n}^2)$. 
+\end{prp}
+
+\begin{crl}{}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Then $\mZ_\mK$ is a $T^n$-equivariant subspace of $(D^2)^n$. 
+\end{crl}
+
+\begin{eg}{}{}\\
+The following are true. 
 \begin{itemize}
-\item $\mZ_\mK$ is two-connected. 
-\item $\pi_i(\mZ_\mK)\cong\pi_i((\C\Prj^\infty,\ast)^\mK)$ for $i\geq 3$. 
+\item $\mZ_{\Delta^{n-1}}=(D^2)^n$. 
+\item $\mZ_{\partial\Delta^{n-1}}\cong S^{2n-1}$. 
+\end{itemize}
+\end{eg}
+
+\begin{prp}{}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$ that is a triangulation of $S^m$. Then $\mZ_\mK$ is a compact topological manifold of dimension $m+n+1$. 
+\end{prp}
+
+\subsection{Homotopy Theory of Moment Angle Complexes}
+\begin{prp}{}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Then there is a factorization \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{(\C\Prj^\infty,\ast)^\mK} && {(\C\Prj^\infty)^n} \\
+	& {ET^n\times_{T^n}\mZ_\mK}
+	\arrow[hook, from=1-1, to=1-3]
+	\arrow["h"', from=1-1, to=2-2]
+	\arrow["p"', from=2-2, to=1-3]
+\end{tikzcd}}\\
+where $h$ is a homotopy equivalence and $p$ is a fibration with fiber $\mZ_\mK$. 
+\end{prp}
+
+\begin{crl}{}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Then we have $$H_{T^n}^\ast(\mZ_\mK)\cong\Z[\mK]$$
+\end{crl}
+
+\begin{prp}{}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Then the following are true. 
+\begin{itemize}
+\item $\mZ_\mK$ is $2$-connected. 
+\item $\pi_k(\mZ_\mK)\cong\pi_k((\C\Prj^\infty,\ast)^\mK)$ for $k\geq 3$. 
 \end{itemize}
 \end{prp}
 
+\subsection{Cohomology of Moment Angle Complexes}
 Consider the decomposition of $D^2$ into the following CW complex structure: 
 \begin{itemize}
 \item One $0$-cell $1\in D^2$. 
@@ -747,10 +244,17 @@ Note that $H^n(\mZ_\mK;\Z)$ is not isomorphic to $H_{-n}\left(\Lambda\left(\bigo
 
 Let $K_\bullet(v_1,\dots,v_n;\Z[\mK])$ be the Koszul complex over $\Z[v_1,\dots,v_n]$. Notice that the cochain complex defined by $K^n=K_n(v_1,\dots,v_n;\Z[\mK])$ is precisely our differential graded algebra $\Lambda\left(\bigoplus_{i=1}^n\Z[\mK]u_i\right)$. Then the cohomology of $\mZ_\mK$ acquires an additional description: $$H^n(\mZ_\mK;\Z)\cong\bigoplus_{2q-p=n}\left(H_p\left(K_\bullet(v_1,\dots,v_n;\Z[\mK])\right)\right)_{2q}$$ Finally, since $K_\bullet(v_1,\dots,v_n)$ is a free resolution for $\Z$ as a $\Z[v_1,\dots,v_n]$-module, we know that $$H_p(K_\bullet(v_1,\dots,v_n;R[\mK]))=\text{Tor}_p^{\Z[v_1,\dots,v_n]}(\Z[\mK],\Z)$$ The Koszul algebra gives the Tor groups the structure of an algebra, and so the cohomology ring acquires the description $$H^\ast(\mZ_\mK;\Z)\cong\text{Tor}_\ast^{\Z[v_1,\dots,v_n]}(\Z[v_1,\dots,v_n],\Z)$$ But again note that the $n$th cohomology group of $\mZ_\mK$ is not isomorphic to the $n$th Tor group of $\Z[\mK]$ and $\Z$ by virtually the same reason as above. 
 
+\begin{crl}{}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Then there is a homotopy equivalence $$\Sigma\mZ_\mK\simeq\bigvee_{J\notin\mK}\Sigma^{2+\abs{J}}\abs{\mK_J}$$
+\end{crl}
+
+\begin{crl}{}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Then the above homotopy equivalence descends to a natural isomorphism $$\bigoplus_{J\subseteq\{1,\dots,n\}}C^{k-\abs{J}-1}(\mK_J;\Z)\cong C^\ast(\mZ_\mK;\Z)$$ given by $$\alpha_L\mapsto\varepsilon(L,J)\chi(J\setminus L,L)$$ where $\alpha_L$ is the cochain basis of Hochster's formula given by the simplex $L\subseteq J$ and $$\varepsilon(L,J)=\prod_{j\in L}\varepsilon(j,J)$$ and $\varepsilon(j,J)=(-1)^{r-1}$ if $j$ is in the $r$th position of $J$. 
+\end{crl}
+
 \begin{prp}{}{}\\
 Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Then the following are true. 
 \begin{itemize}
-\item There are natural isomorphisms of cochain complexes $$\bigoplus_{J\subseteq\{1,\dots,n\}}C^{k-\abs{J}-1}(\mK_J;\Z)\cong C^\ast(\mZ_\mK;\Z)$$ given by $$\alpha_L\mapsto\varepsilon(L,J)\chi(J\setminus L,L)$$ where $\alpha_L$ is the cochain basis of Hochster's formula given by the simplex $L\subseteq J$ and $$\varepsilon(L,J)=\prod_{j\in L}\varepsilon(j,J)$$ and $\varepsilon(j,J)=(-1)^{r-1}$ if $j$ is in the $r$th position of $J$. 
 \item There above natural isomorphisms induces natural isomorphisms $$H^{-i}(C^{-\ast,2j}(\mZ_\mK;\Z))\cong\bigoplus_{\substack{J\subseteq\{1,\dots,n\}\\\abs{J}=j}}\widetilde{H}^{j-i-1}(\mK_J;\Z)$$ where by convention we set $\widetilde{H}^{-1}(\mK_\emptyset)=\Z$. 
 \item The above natural isomorphisms induces natural isomorphisms $$H^k(\mZ_\mK;\Z)\cong\bigoplus_{J\subseteq\{1,\dots,n\}}\widetilde{H}^{k-\abs{J}-1}(\mK_J;\Z)$$
 \end{itemize}
@@ -835,8 +339,115 @@ Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. If $\mK$ is a triangulatio
 
 If we use the Koszul complex as the cohomology model for $\mZ_\mK$, then the top cohomology is generated by $u_{\{1,\dots,n\}\setminus I}v_I$ for any $I\in\mK$ such that $\abs{I}=n$. 
 
+\subsection{Geometry of Moment Angle Complexes}
+\begin{defn}{Coordinate Subspaces}{}\\
+Let $I\subseteq\{1,\dots,n\}$. Define the coordinate subspace of $I$ to be $$L_I=\{(z_1,\dots,z_n)\in\C^n\;|\;z_j=0\text{ for all }j\in I\}$$
+\end{defn}
+
+\begin{defn}{Coordinate Subspace Arrangement}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Define the coordinate subspace arrangement of $\mK$ to be $$U(\mK)=\C^n\setminus\bigcup_{\sigma\in\mK}L_\sigma$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Then we have $U(\mK)=(\C,\C^\times)^\mK$. 
+\end{prp}
+
+\begin{thm}{}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. The map $(\C,\C^\times)\to(D^2,S^1)$ induces a $T^n$-equivariant deformation retract $$U(\mK)\simeq\mZ_\mK$$
+\end{thm}
+
+\subsection{Intersection of Quadrics}
+Let $P\subseteq\R^n$ be a polytope defined by $$P=\{x\in\R^n\;|\;\langle a_i,x\rangle+b_i\geq 0\text{ for }1\leq i\leq m\}$$ such that $a_1,\dots,a_m$ span $\R^n$. Let $$A=\begin{pmatrix}
+a_1\\
+\vdots\\
+a_m
+\end{pmatrix}\in M_{m\times n}(\R)\;\;\text{ and }\;\;b=\begin{pmatrix}
+b_1\\
+\vdots\\
+b_m
+\end{pmatrix}\in\R^m$$ Recall that $$P=\{x\in\R^n\;|\;Ax+b\geq 0\}$$
+
+\begin{defn}{Moment Angle Polytopes}{}\\
+Let $P\subseteq\R^n$ be a polytope defined by $A\in M_{m\times n}(\R)$ and $b\in\R^m$ such that $a_1,\dots,a_m$ span $\R^n$. Let $i_P:\R^n\to\R^m$ be the map $i_P(x)=Ax-b$. Let $\mu:\C^m\to\R^m$ be the map $\mu(z_1,\dots,z_m)=(\abs{z_1}^2,\dots,\abs{z_m}^2)$. Define the moment angle polytope $\mZ_{A,b}$ to be the pullback \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\mZ_{A,b}} & {\C^nm} \\
+	{P} & {\R^m}
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow["\mu", from=1-2, to=2-2]
+	\arrow["i_P", hook, from=2-1, to=2-2]
+\end{tikzcd}}\\
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $P\subseteq\R^n$ be a polytope defined by $A\in M_{m\times n}(\R)$ and $b\in\R^m$ such that $a_1,\dots,a_m$ span $\R^n$. Then there is a homeomorphism $$\mZ_{A,b}\cong\left\{z\in\C^m\;\bigg{|}\;\Gamma\begin{pmatrix}
+\abs{z_1}^2\\
+\vdots\\
+\abs{z_m}^2
+\end{pmatrix}=\Gamma b\right\}$$ where $\Gamma=\begin{pmatrix}
+\gamma_1\\
+\vdots\\
+\gamma_{m-n}\end{pmatrix}$ and $\gamma_1,\dots,\gamma_{m-n}$ is a basis for $\ker(A^T)$. 
+\end{prp}
+
+This makes $Z_{A,b}$ an intersection of quadrics in $\R$, as well as an intersection of Hermitian quadrics (Hermitian since $\abs{z_i}^2=z_i\overline{z_i}$). 
+
+\begin{prp}{}{}\\
+Let $P\subseteq\R^n$ be a polytope defined by $A\in M_{m\times n}(\R)$ and $b\in\R^m$ such that $a_1,\dots,a_m$ span $\R^n$. Then $P$ is simple if and only if $\mZ_{A,b}$ is a smooth manifold of real dimension $m+n$. 
+\end{prp}
+
+Smoothness criterion. 
+
+one to one between polytopes and intesections of quadrics
+
+\begin{prp}{}{}\\
+Let $P\subseteq\R^n$ be a polytope defined by $A\in M_{m\times n}(\R)$ and $b\in\R^m$ such that $a_1,\dots,a_m$ span $\R^n$. If $P$ is simple, then there is a $T^m$-equivariant homeomorphism $$\mZ_{\mK_P}\cong\mZ_{A,b}$$
+\end{prp}
+
+\begin{thm}{de Medrano}{}\\
+Let $P\subseteq\R^n$ be a simple polytope. Suppose that $\mZ_{\mK_P}$ is a non-empty and non-degenerate intersection of $3$ quadrics. Then exactly one of the following hold. 
+\begin{itemize}
+\item $P$ is combinatorially equivalent to a product of three simplicies, and there is a diffeomorphism $$\mZ_{\mK_P}\cong S^{n_1}\times S^{n_2}\times S^{n_3}$$ where $n_1,n_2,n_3$ are odd. 
+\item There is a diffeomorphism $$\mZ_{\mK_P}\cong\#_{k=3}^{n+1}(S^k\times S^{2n+3-k})^{\# q_k}$$ for some $q_k$ determined by the Gale diagram of $P$. 
+\end{itemize}
+\end{thm}
+
 \pagebreak
-\section{The Real Moment Angle Complex}
+\section{Real Moment Angle Complexes}
+\begin{defn}{Real Moment Angle Complexes}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Define the real moment angle complex of $\mK$ to be $$\R\mZ_\mK=(D^1,S^0)^\mK$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Then the following diagram is a pullback \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\R\mZ_\mK} & {(D^1)^n\subseteq\C^n} \\
+	{\text{cc}(\mK)} & {I^n}
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow["\mu", from=1-2, to=2-2]
+	\arrow[hook, from=2-1, to=2-2]
+\end{tikzcd}}\\
+where $D^1\subseteq\R$ is the closed unit disc and $\mu:(D^2)^n\to I^n$ is the map given by $(x_1,\dots,x_n)\mapsto(x_1^2,\dots,x_n^2)$. 
+\end{prp}
+
+\begin{eg}{}{}\\
+We have $$\mZ_{\partial\Delta^{n-1}}\cong S^{n-1}$$
+\end{eg}
+
+\begin{prp}{}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$ that is a triangulation of $S^m$. Then $\mZ_\mK$ is a compact topological manifold of dimension $m+1$. 
+\end{prp}
+
+\begin{eg}{}{}\\
+Let $\mK$ be the boundary of an $n$-gon. Then there is a homeomorphism $$\R\mZ_\mK\cong\Sigma_{1+(n-4)2^{n-3}}$$
+\end{eg}
+
+\begin{crl}{}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Then there is a homotopy equivalence $$\Sigma\R\mZ_\mK\simeq\bigvee_{J\notin\mK}\Sigma^2\abs{\mK_J}$$
+\end{crl}
+
+\subsection{The Fat Wedge Filtration of Real Moment Angle Complexes}
 Recall that cubical complex of a simplicial complex. We know that $$(D^1,S^0)^\sigma=\bigcup_{\substack{\mu\subseteq\tau\subseteq\text{Vert}(\mK)\\\tau\setminus\mu=\sigma}}C_{\mu\subseteq\tau}$$ and $$\R\mZ_{\mK}=\bigcup_{\sigma\in\mK}\bigcup_{\substack{\mu\subseteq\tau\subseteq\text{Vert}(\mK)\\\tau\setminus\mu=\sigma}}C_{\mu\subseteq\tau}$$ We consider the fat wedge filtration of $\R\mZ_\mK$. We note that at the $i$th step, we have $$\R\mZ_\mK^i=\bigcup_{I\subseteq\{1,\dots,n\},\abs{I}=i}\R\mZ_{\mK_I}$$
 
 \begin{prp}{}{}\\
@@ -850,6 +461,647 @@ Let us verify this for the case $\mK=\partial\Delta^2$. Pick $I=\{1\}$. Let $i_c
 
 
 Restricting this map to $\mK_I$, this the map sending $\{1\}$ to $C_{\{1\},\{1\}}^I$ which is the point $-1\in C_{\{1\},\{1\}}^I=D^1$, but is the point $(-1,1,1)$ in $I^3$. 
+
+\pagebreak
+\section{Research Notes}
+\subsection*{The Foundation}
+lMoment angle complexes are $T^n$-equivariant objects defined using combinatorial data. More specifically, choose a simplicial complex $\mK$ on $\{1,\dots,n\}$. For each simplex $\sigma\in\mK$, define the space $$(D^2,S^1)^\sigma=\prod_{i=1}^nY_i$$ where $$Y_i=\begin{cases}
+D^2 & \text{ if }i\in\sigma\\
+S^1 & \text{ otherwise }
+\end{cases}$$ In other words, $(D^2,S^1)^\sigma$ is a product of $D^2$ and $S^1$ depending on how many vertices of $\mK$ lie in $\sigma$. For any inclusion of simplicies $\sigma\subseteq\tau$, there is an inclusion map $(D^2,S^1)^\sigma\hookrightarrow(D^2,S^1)^\tau$. Then the definition of the moment angle complex $\mZ_\mK$ of $\mK$ is just the gluing of products of $D^2$ and $S^1$ along these inclusions, or $$\mZ_\mK=\bigcup_{\sigma\in\mK}(D^2,S^1)^\sigma$$ Being combinatorial in nature, they form a testing ground for conjectures in topology. Moreover, in good cases (eg $\mK$ is a triangulation of $S^m$), the moment angle complex $\mZ_\mK$ has the structure of a smooth manifold and they form a testing ground for conjectures in geometry. 
+
+These topological objects are also interesting because they lie at the intersection of a number of active fields. Other than moment angle complexes, there are other objects in topology and geometry that are defined in terms of combinatorial objects
+
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\mZ_\mK} & {\mZ_P} & {V_P} \\
+	{\text{(Topology)}} & {\text{(Symplectic Geometry)}} & {\text{(Algebraic Geometry)}}
+\end{tikzcd}} \\
+
+Moment angle polytopes $\mZ_P$ are intersection of Hermitian quadrics that define non-Kahler complex manifolds, also makes for a testing ground for theories in symplectic and complex geometry. 
+
+Projective toric varieties $V_P$ are combinatorial objects in algebraic geometry formed by certain types of polytopes that are also, explicit enough to form a testing ground for conjectures in algebraic geometry. 
+
+Subject to constraints, there is a relation between fans, polytopes and simplicial complexes\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	& {\text{Fans}} & \\
+	\begin{array}{c} \substack{\text{Simple}\\\text{Polytopes}} \end{array} && \begin{array}{c} \substack{\text{Simplicial}\\\text{Complexes}} \end{array}
+	\arrow[shift left, from=1-2, to=2-1]
+	\arrow[from=1-2, to=2-3]
+	\arrow[shift left, from=2-1, to=1-2]
+	\arrow[from=2-1, to=2-3]
+\end{tikzcd}} \\
+
+Choosing our polytopes carefully connects the three objects into a unified theory. 
+
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{U(\mK)} & {U(\Sigma_P)} & {U(\Sigma_P)/T^m} && {V_P} \\
+	\\
+	{\mZ_\mK} & {\mZ_P} & {\mZ_P/T^{m-n}} \\
+	{\text{(Topology)}} & {\text{(Symplectic Geometry)}} & {\text{(Algebraic Geometry)}}
+	\arrow["{\cong_{T^m}}", from=1-1, to=1-2]
+	\arrow["{\simeq_{T^m}}", from=1-1, to=3-1]
+	\arrow["{T^m\text{-Orbit}}", from=1-2, to=1-3]
+	\arrow["{\simeq_{T^m}}", from=1-2, to=3-2]
+	\arrow["\cong", from=1-3, to=1-5]
+	\arrow["{\cong\text{diffeo}}"{description}, from=1-3, to=3-3]
+	\arrow["{\cong_{T^m}}", from=3-1, to=3-2]
+	\arrow["{T^{m-n}\text{-Orbit}}", from=3-2, to=3-3]
+\end{tikzcd}} \\
+
+In fact, the first connection between symplectic geometry and combinatorics came from the following theorem. 
+
+\begin{thm}{The Atiyah–Guillemin–Sternberg convexity theorem (1982)}{}\\
+Let $(M,\omega)$ be a compact connected symplectic manifold. Let $T^k\times M\to M$ be a Hamiltonian torus action. Then $\mu(M)$ is a convex polytope in $\text{Lie}(T^k)^\ast$ given by $$\mu(M)=\text{Conv}(\text{Fix}_{T^k}(M))$$
+\end{thm}
+
+Delzant in 1988 proved that if the action is more over effective and $M$, then these polytopes completely determine the manifold structure. This motivates the definition of quasitoric manifolds: Smooth manifolds $M^{2n}$ with a torus action $T^n$ that locally looks like the standard action, together with a homeomorphism of the orbit space $M/T^n\cong P$ with a polytope. In 2008, the following conjecture is made. 
+
+\begin{conj}{Masuda–Suh (2008)}{}\\
+If $M$ and $N$ are quasitoric manifolds such that $$H^\ast(M)\cong H^\ast(N)$$ Then $M$ and $N$ are homeomorphic (or diffeomorphic). 
+\end{conj}
+
+We are interested in the cohomological rigidty of moment angle complexes instead. 
+
+\subsection*{The Focus of My Work}
+The first observation is that Hochster's formula shows that the cohomology of a moment angle complex is completely determined by the simplicial complex: 
+
+\begin{thm}{Hochster's Formula}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Then there is an isomorphism of rings $$H^\ast(\mZ_\mK)\cong\bigoplus_{J\subseteq\{1,\dots,n\}}H^\ast(\mK_J)$$ where 
+\begin{itemize}
+\item $\mK_J$ is the full subcomplex of $\mK$ with the vertices in $J$. 
+\item The additive isomorphism is given by $$H^n(\mZ_\mK)\cong\bigoplus_{J\subseteq\{1,\dots,n\}}H^{n-\abs{J}-1}(\mK_J)$$
+\item The ring structure is given the map $H^i(\mK_I)\otimes H^j(\mK_J)\to H^{i+j+1}(\mK_{I\cup H_J})$ which sends products of generators to generators if $I\cap J=\emptyset$ and $0$ otherwise. 
+\end{itemize}
+\end{thm}
+
+The second observation is that certain classes of simplicial complexes have the geometry of connected sums of products of spheres: 
+
+\begin{thm}{}{}\\
+Let $P$ be a stacked polytope. Let $n=\dim(P)$ and $m=\abs{V(P)}$. Then there is a diffeomorphism $$\mZ_{\partial P}\cong\#_{k=3}^{m-n+1}(S^k\times S^{m+n-k})^{(k-2)\binom{m-n}{k-1}}$$
+\end{thm}
+
+Among the class of topological spaces, spheres are homologically and homotopically the easiest to understand. It is natural to ask the question of in what conditions does a moment angle complex has its cohomology only involving spheres, and in this case is it possible to lift it to a homotopy equivalence, a homeomorphism or a diffeomorphism. Currently my work focuses on moment angle complexes coming from simplicial polytopes of dimension $4$ with $8$ vertices.  
+
+\subsection*{What is Known in the Simplicial 4-Polytopes and 8-Vertices Cases}
+There are $39$ simplicial complexes in dimension $4$ with $8$ vertices (no ghost vertices). Of which $37$ of them come from the boundary of a simplicial $4$-polytope with $8$ vertices (polytopal spheres). These are classified in [An Enumeration of Simplicial 4-Polytopes with 8-Vertices] by Grunbaum and Sreedharan, and whose list was later corrected by my supervisor. 
+
+$P_1^8$ is a stacked polytope where: 
+\begin{itemize}
+\item The starting simplex is $12356$. 
+\item Vertex $4$ is stacked on the facet $1235$. 
+\item Vertex $7$ is stacked on the facet $1236$. 
+\item Vertex $8$ is stacked on the facet $1256$. 
+\end{itemize}
+
+$P_2^8$ is a stacked polytope where: 
+\begin{itemize}
+\item The starting simplex is $12356$. 
+\item Vertex $4$ is stacked on the facet $1235$. 
+\item Vertex $7$ is stacked on the facet $1236$. 
+\item Vertex $8$ is stacked on the facet $1245$. 
+\end{itemize}
+
+$P_3^8$ is a stacked polytope where: 
+\begin{itemize}
+\item The starting simplex is $12345$. 
+\item Vertex $6$ is stacked on the facet $1235$. 
+\item Vertex $7$ is stacked on the facet $1236$. 
+\item Vertex $8$ is stacked on the facet $1234$. 
+\end{itemize}
+
+For a stacked polytope $P$, we have a theorem 
+
+\begin{thm}{}{}\\
+Let $P$ be a stacked polytope. Let $n=\dim(P)$ and $m=\abs{V(P)}$. Then there is a diffeomorphism $$\mZ_{\partial P}\cong\#_{k=3}^{m-n+1}(S^k\times S^{m+n-k})^{(k-2)\binom{m-n}{k-1}}$$
+\end{thm}
+
+Hence we conclude that $$\mZ_{\partial P_1^8}\cong\mZ_{\partial P_2^8}\cong\mZ_{\partial P_3^8}\cong(S^3\times S^9)^{\#6}\#(S^4\times S^8)^{\#8}\#(S^5\times S^7)^{\#3}$$
+
+Also $P_{35}^8$, $P_{36}^8$ and $P_{37}^8$ are neighbourly polytopes (one such is cyclic), and we have the following theorem. 
+
+\begin{thm}{Membrillo Solis, Theriault (2026)}{}\\
+Let $\mK$ be a simplicial complex such that the following are true. 
+\begin{itemize}
+\item $\mK$ is a triangulation of $S^{2n+1}$. 
+\item $\mK$ is neighbourly. 
+\end{itemize}
+Then there is a homotopy equivalence $$(D^k,S^{k-1})^\mK\simeq\#_{i=1}^j\left(S^{t_i}\times S^{s_i}\right)$$ for some $j\in\N^+$ and some $t_i,s_i\in\N^+$ for all $k\geq 2$. 
+\end{thm}
+
+So we have $$\mZ_{\partial P_{35}^8}\simeq\mZ_{\partial P_{36}^8}\simeq\mZ_{\partial P_{37}^8}\simeq(S^5\times S^7)^{\#16}\#(S^6\times S^6)^{\#15}$$
+
+Also $P_{34}^8$ is a cross polytope (It is given by $P_{34}^8=S^0\ast S^0\ast S^0\ast S^0$). 
+
+\begin{thm}{Fan, Cheng, Ma, Wang (2014)}{}\\
+Let $\mK$ be a simplicial complex such that $\mK$ is a triangulation of $S^n$ for $n\geq 2$. Suppose that $$H^\ast(\mZ_\mK)\cong H^\ast\left(\#_{i=1}^j\left(\prod_{k=1}^{t_i}S^{d_k}\right)\right)$$ Then the following are true. 
+\begin{itemize}
+\item If $t_i=n+1$ for some $i$, then $j=1$ and there is a homeomorphism $$\mZ_\mK\cong\prod_{i=1}^{n+1}S^3$$
+\item We have $$\abs{\left\{i\in\N\;\bigg{|}\;t_i\geq\floor*{\frac{n}{2}}+2\right\}}\leq 1$$
+\end{itemize}
+(MOMENT-ANGLE MANIFOLDS AND CONNECTED SUMS OF
+SPHERE PRODUCTS)
+\end{thm}
+
+Either by direction computation or the following theorem, we see that $$H^\ast(\mZ_{\partial P_{34}^8})\cong H^\ast(S^3\times S^3\times S^3\times S^3)$$ and it lifts to a homeomorphism $$\mZ_{\partial P_{34}^8}\cong S^3\times S^3\times S^3\times S^3$$
+
+\begin{thm}{(Oganisian, Panov (2024))}{}\\
+Let $\mK$ be a simplicial complex such that $\mK$ is a triangulation of $S^3$. Then $$H^\ast(\mZ_\mK)\cong H^\ast\left(\#_{i=1}^j\left(\prod_{k=1}^{t_i}S^{d_k}\right)\right)$$ if and only if exact;y one of the following are true. 
+\begin{itemize}
+\item $\mK=S^0\ast S^0\ast S^0\ast S^0$. 
+\item $G(\mK^1)$ is chordal. 
+\item $\mK^1$ has exactly two missing edges with distinct vertices (forming a square). 
+\end{itemize}
+\end{thm}
+
+The same paper by Fan, Cheng, Ma, Wang also shows: $$H^\ast(\mZ_{\partial P_{27}^8})\cong H^\ast(\mZ_{\partial P_{28}^8})\cong H^\ast(\mZ_{\partial P_{29}^8})\cong H^\ast\left((S^3\times S^3\times S^6)\#(S^5\times S^7)^{\#8}\#(S^6\times S^6)^{\#8}\right)$$ The paper [Iriye (2016)] ON THE MOMENT-ANGLE MANIFOLD CONSTRUCTED BY FAN, CHEN, MA AND WANG proves that there is a diffeomorphism $$\mZ_{\partial P_{28}^8}\cong(S^3\times S^3\times S^6)\#(S^5\times S^7)^{\#8}\#(S^6\times S^6)^{\#8}$$
+
+Summary: 
+\begin{itemize}
+\item The diffeomorphism types of the moment angle complexes of $P_1^8,P_2^8,P_3^8,P_{28}^8$ are understood (they are the stacked polytopes of dim 4 and vert 8 together with the example given by FCMW). 
+\item The homeomorphism type of the moment angle complexe of $P_{34}^8$ is understood (it is the cross polytope of dim 4). 
+\item The homotopy types of moment angle complexes of $P_{35}^8,P_{36}^8,P_{37}^8$ are understood (they are the neighbourly polytopes of dim 4 and vert 8). 
+\item The conditions for the cohomology type of moment angle complexes of simplicial complexes of dimension $3$ (and hence simplicial 4-polytopes) to be the connected sum of products of spheres is understood. 
+\end{itemize}
+
+\subsection*{Techniques and Research Directions}
+Going forward, there are a number of possible directions that I will focus my work on, in terms of the cohomology, the topology and the rigidity of moment angle complexes. 
+
+\subsubsection*{Analyzing the Cohomology}
+If $\mK$ is a simplicial complex that is a triangulation of $S^n$. Then the following are true. 
+\begin{itemize}
+\item $\mK_{[m]\setminus J}$ is a deformation retract of $\mK\setminus\mK_J$. 
+\item $\abs{\mK_J}$ is a compact locally contractible subspace of $\abs{\mK}$. 
+\item By Alexander duality, we have $$\widetilde{H}^i(\mK_J)\cong\widetilde{H}_{n-i-1}(S^n\setminus\mK_J)\cong\widetilde{H}_{n-i-1}(\mK\setminus\mK_J)\cong\widetilde{H}_{n-i-1}(\mK_{[m]\setminus J})$$
+\end{itemize}
+
+I have written python programs to compute the missing faces of a moment angle complex, which have significantly reduced the time needed to compute the ring structure in cohomology. I have also developed a simple graphing tool that visualizes subgraphs of the underlying graph of polytopes. Together with the equivalent characterization in [Oganisian, Panov (2024)], I found that only $P_7^8$, $P_{16}^8$, $P_{17}^8$, $P_{22}^8$ and $P_{26}^8$ do not have the cohomology of a connected sum of products of spheres, and all the others do. 
+
+I also explicitly computed $$H^\ast(\mZ_{\partial P_7^8})=H^\ast((S^3\times S^9)^{\#3}\#(S^4\times S^8)^{\#3}\#(S^5\times S^7)\# X)$$ where $$H^\ast(X)=\frac{\Z\langle a_1,a_2,b_1,b_2,c,d_1,d_2,e,f_1,f_2,g_1,g_2,h\rangle}{I}$$ and $I$ is the ideal generated by the following relations: 
+\begin{itemize}
+\item $a_1a_2=d_2$. 
+\item $a_ib_i=e$. 
+\item $a_ic=f_i$. 
+\item $a_1d_1=g_2,a_2d_2=g_1$. 
+\item $b_ic=g_i$. 
+\item Poincare relations $a_ig_i=b_if_i=ce=d_1d_2=h$. 
+\item $z^2=0$ for all generators $z$. 
+\end{itemize}
+and $\deg(a_i)=3$, $\deg(b_i)=4$, $\deg(c)=5$, $\deg(d_i)=6$, $\deg(e)=7$, $\deg(f_i)=8$, $\deg(h)=12$ (13 generators and 28 relations). It is interesting to find a model for $X$ and to see find the homotopy type of $\mZ_\mK$ in these odd cases, and I aim to use Macaulay2 to simply the above expression and the cohomology rings of the other odd cases. 
+
+\subsubsection*{Analyzing the Topology}
+There are retractions $\mZ_{\mK_J}\hookrightarrow\mZ_\mK\to\mZ_{\mK_J}$ where $J\subseteq\{1,\dots,n\}$ induced by retracting $(D^2,S^1)$ to $(S^1,S^1)$ by mapping $D^2$ to the base point, and these are typically easier to compute. In particular, the retraction may factor through the $(n-1)$-skeleton, which may reveal information about the topology of the moment angle complex. In [Membrilo Solis, Theriault (2026)] and [Iriye (2018)], certain $\mZ_{\mK_J}$ are wedges of spheres which are useful to knowing the topology because the remainder of $\mZ_{\mK_J}$ in $\mZ_\mK$ may be understood by attaching maps of spheres to wedges of spheres, and if this is the case we may use Hilton Milnor theorem to analyze the components. 
+
+In the general case, [BBCG] only decomposes the suspension of $\mZ_\mK$ as a wedge of spheres: $$\Sigma\mZ_\mK\simeq\bigvee_{J\notin\mK}\Sigma^{2+\abs{J}}\abs{\mK_J}$$ And work was done to desuspend this decomposition [Iriye, Kishimoto], the case for a shifted complex or disjoint points. 
+
+To understand $\mZ_\mK$ it is also useful to analyze fibrations related to $\mZ_\mK$. The following are some classical fiber bundles: 
+\begin{itemize}
+\item $T^{m-n}\to\mZ_\mK\to M(P,\Lambda)$ to quasi-toric manifolds. 
+\item $\mZ_\mK\to DJ(\mK)=(\C\Prj^\infty,\ast)^\mK\to BT^m$. 
+\end{itemize}
+
+\subsubsection*{Obstructions to Rigidity}
+Massey products cannot be detected in cohomological isomorphisms so it is a prime method to showing two spaces are not homeomorphic. There are combinatorial descriptions [Denham, Suciu (2005)] for whitehead products to be non-trivial using the underlying graph of simplicial complexes. More generally the same can be said for $A_\infty$ structures on the cohomology ring. 
+
+\pagebreak
+\section{Basic Definitions}
+\subsection{Symplectic Manifolds}
+\begin{defn}{Symplectic Manifolds}{}\\
+Let $M$ be a smooth manifold. Let $\omega\in\Omega^2(M)$ be a $2$-form. We say that $\omega$ is a symplectic form if the following are true. 
+\begin{itemize}
+\item $\omega$ is a symplectic structure on $TM$. 
+\item $d\omega=0$. 
+\end{itemize}
+In this case we call $(M,\omega)$ a symplectic manifold. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $(M,\omega)$ be a symplectic manifold. Then $\dim(M)$ is even. 
+\end{lmm}
+
+\begin{defn}{The Liouville Volume Form}{}\\
+Let $(M,\omega)$ be a symplectic manifold of dimension $2n$. Define the Liouville volume form of $M$ by $$\mu_M=\frac{\omega^n}{n!}$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $(M,\omega)$ be a symplectic manifold. Then the following are true. 
+\begin{itemize}
+\item $\mu_M$ is a nowhere-vanishing differential form. 
+\item $M$ is orientable. 
+\end{itemize}
+\end{prp}
+
+\begin{eg}{}{}\\
+The following are symplectic manifolds. 
+\begin{itemize}
+\item $\R^{2n}$ with coordinates $(x_1,\dots,x_n,y_1,\dots,y_n)$ and with symplectic form $$\sum_{i=1}^ndx_i\wedge dy_i$$
+\item For all $g\geq 1$, the compact orientable surface $\Sigma_g$ with any $\omega$ such that $0\neq[\omega]\in H_\text{dR}^2(\Sigma_g)$. 
+\end{itemize}
+\end{eg}
+
+\subsection{Standard Symplectic Coordinates}
+\begin{thm}{Moser's Theorem Relative Version}{}\\
+Let $M$ be a smooth manifold. Let $X$ be an embedded compact submanifold of $M$. Let $\iota:X\hookrightarrow M$ be the inclusion map. Let $\omega_0$ and $\omega_1$ be symplectic forms on $M$. If $\omega_0|_X=\omega_1|_X$, then there exists $X\subseteq U_0,U_1\subseteq M$ and a map $\varphi:U_0\to U_1$ such that the following are true. 
+\begin{itemize}
+\item $\iota=\varphi\circ\iota$. 
+\item $\varphi$ is a diffeomorphism. 
+\item $(\varphi|_X)^\ast\omega_1=\omega_0$. 
+\end{itemize}
+\end{thm}
+
+\begin{thm}{Darboux (1982)}{}\\
+Let $(M,\omega)$ be a symplectic manifold. Let $p\in M$. Then there exists a chart $(U,x^1,\dots,x^n,y^1,\dots,y^n)$ at $p$ such that $$\omega|_U=\sum_{i=1}^ndx^i\wedge dy^i$$
+\end{thm}
+
+\begin{defn}{Darboux Coordinates}{}\\
+Let $(M,\omega)$ be a symplectic manifold. Let $(U,x^1,\dots,x^n,y^1,\dots,y^n)$ be a local chart of $M$. We say that the chart is Darboux if $$\omega|_U=\sum_{i=1}^ndx^i\wedge dy^i$$
+\end{defn}
+
+\subsection{Maps Preserving the Symplectic Structure}
+\begin{defn}{Symplectic Maps}{}\\
+Let $(M,\omega)$ and $(N,\sigma)$ be symplectic manifolds. Let $f:M\to N$ be a smooth map. 
+\begin{itemize}
+\item We say that $f$ is symplectic if $$f^\ast\sigma=\omega$$
+\item We say that $f$ is a symplectomorphism if $f$ is symplectic and a diffeomorphism. 
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $(M,\omega)$ and $(N,\sigma)$ be symplectic manifolds. Let $f:M\to N$ be a symplectic map. Then $f$ is an immersion. 
+\end{lmm}
+
+\begin{defn}{The Group of Symplectomorphisms}{}\\
+Let $(M,\omega)$ be a symplectic manifold. Define the group of symplectomorphisms of $M$ to be the subgroup $$\text{Symp}(M,\omega)=\{f:M\to M\;|\;f\text{ is a symplectomorphism }\}\leq\text{Diff}(M)$$
+\end{defn}
+
+\subsection{Symplectic Structure on the Cotangent Bundle}
+Through out this section we denote the projection map $T^\ast M\to M$ by $\pi_M$. 
+
+\begin{defn}{The Canonical Hamiltonian Structure}{}\\
+Let $M$ be a smooth manifold. Define the canonical Hamiltonian structure $\omega$ on $T^\ast M$ as follows. At the local chart $(U,q^1,\dots,q^n,p^1,\dots,p^n)$, $\omega$ is given by $$\omega|_U=\sum_{i=1}^ndq^i\wedge dp^i$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $M$ be a smooth manifold. Let $\omega$ be the canonical Hamiltonian structure. Then $(T^\ast M,\omega)$ is a symplectic manifold. 
+\end{lmm}
+
+\begin{defn}{The Liouville 1-Form}{}\\
+Let $M$ be a smooth manifold. Let $\pi:T^\ast M\to M$ be the bundle map. Define the Lioville $1$-form $\theta\in\Omega^1(T^\ast M)$ as follows. For each $q\in M$ and $p\in T_q^\ast M$, define $$\theta_{(q,p)}=p(\pi_M(v))$$ for any $v\in T_{(q,p)}(T^\ast M)$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $M$ be a smooth manifold. Let $(U,q^1,\dots,q^n,p^1,\dots,p^n)$ be a chart of $T^\ast M$ where $(q_1,\dots,q_n)\in M$. Then $\theta$ is given in local coordinates by $$\theta|_U=\sum_{i=1}^np^idq^i$$
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $M$ be a smooth manifold. Let $\theta$ be the Liouville 1-form. Let $\omega$ be the canonical Hamitonian structure. Then we have $$\omega=-d\theta$$
+\end{prp}
+
+\begin{defn}{The Lift of a Diffeomorphism}{}\\
+Let $M,N$ be smooth manifolds. Let $f:M\to N$ be a diffeomorphism. Define the lift of $f$ to be the map $f_\#:T^\ast M\to T^\ast N$ given by $$f_\#(p,v)=(f(p),w)$$ where $w\in T_p^\ast M$ is the unique element such that $v=(df_p)^\ast w$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $M,N$ be smooth manifolds. Let $f:M\to N$ be a diffeomorphism. Then the following are true. 
+\begin{itemize}
+\item We have $f\circ\pi_M=\pi_N\circ f_\#$. 
+\item $f_\#^\ast\theta_N=\theta_M$. 
+\end{itemize}
+\end{prp}
+
+\pagebreak
+\section{Lagrangian Submanifolds}
+\begin{defn}{Lagrangian Vector Subspaces}{}\\
+Let $k$ be a field. Let $(V,\omega)$ be a symplectic vector space over $k$. Let $W\subseteq V$ be a subspace. We say that $W$ is Lagrangian if the following are true. 
+\begin{itemize}
+\item $\omega|_W=0$. 
+\item $2\dim(W)=\dim(V)$. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Lagrangian Submanifolds}{}\\
+Let $(M,\omega)$ be a symplectic manifold. Let $L$ be an embedded submanifold of $M$. We say that $L$ is Lagrangian if $T_pL$ is a Lagrangian subspace of $M$. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $(M,\omega)$ be a symplectic manifold. Let $L$ be an embedded submanifold of $M$. Then $L$ is Lagrangian if and only if the following are true. 
+\begin{itemize}
+\item $\iota^\ast\omega=0$ where $\iota:L\hookrightarrow M$ is the inclusion map. 
+\item $2\dim(L)=\dim(M)$. 
+\end{itemize}
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $M$ be a smooth manifold. Let $s\in\Omega^1(M)$. Then $\im(s)$ is a Lagrangian submanifold of $T^\ast M$ if and only if $ds=0$. 
+\end{prp}
+
+\begin{thm}{Weinstein Lagrangian Neighborhood Theorem}{}\\
+Let $M$ be a smooth manifold. Let $X$ be an embedded compact submanifold of $M$. Let $\iota:X\hookrightarrow M$ be the inclusion map. Let $\omega_0$ and $\omega_1$ be symplectic forms on $M$ such that $X$ is a Lagrangian submanifold of $(M,\omega_0)$ and $(M,\omega_1)$. Then there exists $X\subseteq U_0,U_1\subseteq M$ and a map $\varphi:U_0\to U_1$ such that the following are true. 
+\begin{itemize}
+\item $\iota=\varphi\circ\iota$. 
+\item $\varphi$ is a diffeomorphism. 
+\item $(\varphi|_X)^\ast\omega_1=\omega_0$. 
+\end{itemize}
+\end{thm}
+
+\subsection{Relation to Symplectomorphisms}
+\begin{prp}{}{}\\
+Let $(M,\omega)$ and $(N,\sigma)$ be symplectic manifolds. Let $f:M\to N$ be a diffeomorphism. Then $f$ is a symplectomorphism if and only if $\Gamma_f$ is a Lagrangian submanifold of $(M\times N,\text{proj}_M^\ast\omega-\text{proj}_N^\ast\sigma)$. 
+\end{prp}
+
+Recipe for producing symplectomorphisms. 
+\begin{enumerate}
+\item Start with a Lagrangian submanifold of $(T^\ast M\times T^\ast N,\omega\times\sigma)$. 
+\item Send the Lagrangian through the twist map $\tau:T^\ast M\times T^\ast N\to T^\ast M\times T^\ast N$ given by $(x,v)\mapsto(x,-v)$. The image is then a Lagrangian. 
+\item Check whether $\tau(\sigma)$ is the graph of some diffeomorphism $\varphi:M\to N$. 
+\item If it is, then $\varphi$ is a symplectomorphism. 
+\end{enumerate}
+
+\subsection{Generating Functions}
+\begin{defn}{Generating Functions}{}\\
+Let $M,N$ be smooth manifolds. Let $f\in\mC^\infty(M\times N)$. Define $$Y_f=\{(p,q,\text{proj}_{T_p^\ast M}d_{(p,q)}f,-\text{proj}_{T_q^\ast M}d_{(p,q)}f)\in M\times N\times T^\ast M\times T^\ast N\;|\;(p,q)\in M\times N\}$$ We say that $f$ is a generating function if there exists a diffeomorphism $\varphi:T^\ast M\to T^\ast N$ such that $Y_f=\Gamma_\varphi$. 
+\end{defn}
+
+In this case, we know that $\varphi:T^\ast M\to T^\ast N$ is given by $$\varphi(x,\text{proj}_{T_p^\ast M}d_{(p,q)}f)=(y,-\text{proj}_{T_q^\ast M}d_{(p,q)}f)$$
+
+\pagebreak
+\section{Calculus on Symplectic Manifolds}
+\subsection{Symplectic Vector Fields}
+\begin{defn}{Symplectic Vector Fields}{}\\
+Let $(M,\omega)$ be a symplectic manifold. Let $X\in\mathfrak{X}(M)$ be a vector field. We say that $X$ is symplectic if $\iota_X(\omega)$ is a closed form. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $(M,\omega)$ be a symplectic manifold. Let $X\in\mathfrak{X}(M)$ be a vector field. Let $\theta^X$ be the flow of $X$. Then $X$ is symplectic if and only if $\theta^X(t,-)$ is a symplectomorphism for all $t$. 
+\end{prp}
+
+\subsection{Hamiltonian Vector Fields}
+\begin{defn}{The Vector Field of a Function}{}\\
+Let $(M,\omega)$ be a symplectic manifold. Let $H\in\mC^\infty(M)$. Define the associated vector field of $H$ to be the unique vector field $X_H\in\mathfrak{X}(M)$ such that $$\iota_{X_H}(\omega)=df$$ where $\iota$ is the interior product. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $(M,\omega)$ be a symplectic manifold. Let $H\in\mC^\infty(M)$. Let $(U,x^1,\dots,x^n,y^1,\dots,y^n)$ be a Darboux chart. Then the vector field of $H$ is given locally at the chart by $$(X_H)|_U=\sum_{i=1}^n\left(\frac{\partial H}{\partial y^i}\frac{\partial}{\partial x^i}-\frac{\partial H}{\partial x^i}\frac{\partial}{\partial y^i}\right)$$
+\end{prp}
+
+\begin{defn}{Hamiltonian Vector Fields}{}\\
+Let $(M,\omega)$ be a symplectic manifold. Let $X\in\mathfrak{X}(M)$ be a vector field. We say that $X$ is Hamiltonian if there exists a smooth map $H\in\mC^\infty(M)$ such that $$X=X_H$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $(M,\omega)$ be a symplectic manifold. Let $X\in\mathfrak{X}(M)$ be a vector field. If $X$ is Hamiltonian, then $X$ is symplectic. 
+\end{prp}
+
+\begin{thm}{Liouville's Theorem}{}\\
+Let $(M,\omega)$ be a symplectic manifold. Let $X\in\mathfrak{X}(M)$ be a complete Hamiltonian vector field. Let $\theta^X$ be the flow of $X$. Then we have $$\theta^X(t,-)^\ast\mu_M=\mu_M$$
+\end{thm}
+
+\subsection{The Poisson Structure}
+\begin{defn}{The Poisson Bracket}{}\\
+Let $(M,\omega)$ be a symplectic manifold. Define the poisson bracket of $M$ to be the map $\{-,-\}:\mC^\infty(M)\times\mC^\infty(M)\to\mC^\infty(M)$ by $$\{f,g\}=X_f(g)$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $(M,\omega)$ be a symplectic manifold. Then the following are true. 
+\begin{itemize}
+\item $(M,\{-,-\})$ is a Lie algebra. 
+\item Leibniz rule: $\{f,gh\}=\{f,g\}h+g\{f,h\}$. 
+\end{itemize}
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $(M,\omega)$ be a symplectic manifold. Then the map $\mC^\infty(M)\to\mathfrak{X}(M)$ given by $f\mapsto X_f$ is a Lie algebra homomorphism. 
+\end{prp}
+
+\subsection{Integrable Systems}
+\begin{defn}{Hamiltonian Systems}{}\\
+A Hamiltonian system is a triple $(M,\omega,H)$ where $(M,\omega)$ is a symplectic manifold and $H\in\mC^\infty(M)$. 
+\end{defn}
+
+\begin{defn}{Integrable Systems}{}\\
+Let $(M,\omega,H)$ be a Hamiltonian system. Suppose that $\dim(M)=2n$. We say that it is integrable if there exists $f_i\in\mC^\infty(M)$ for $1\leq i\leq n$ and $f_1=H$ such that $$\{f_i,f_j\}=0$$ for all $i,j$. 
+\end{defn}
+
+\begin{thm}{Arnold-Liouville Theorem}{}\\
+Let $(M,\omega,H,f_2,\dots,f_n)$ be an integrable system. Let $c\in\R$. Then $(H,f_2,\dots,f_n)^{-1}(c)$ is a Lagrangian submanifold of $M$. Moreover, if $M$ is compact and connected, then the following are true. 
+\begin{itemize}
+\item $(H,f_2,\dots,f_n)^{-1}(c)$ is diffeomorphic to $T^k$ for some $k\in\N^+$. 
+\item Angle coordinates. 
+\end{itemize}
+\end{thm}
+
+\pagebreak
+\section{Symplectic and Hamiltonian Actions}
+\subsection{Symplectic Actions}
+\begin{defn}{Symplectic Actions}{}\\
+Let $(M,\omega)$ be a symplectic manifold. Let $G$ be a Lie group. Let $\varphi:G\to\text{Diff}(M)$ be a smooth action. We say that the action is symplectic if $$\im(\varphi)\subseteq\text{Symp}(M)$$
+\end{defn}
+
+\subsection{Moment Maps}
+\begin{defn}{Moment Maps}{}\\
+Let $(M,\omega)$ be a symplectic manifold. Let $G$ be a Lie group with a symplectic action on $M$. A moment map of $M$ is a map $$\mu:M\to\text{Lie}(G)^\ast\cong\R^{\dim(G)}$$ such that the following are true. 
+\begin{itemize}
+\item Hamilton's condition: For all $\xi\in\text{Lie}(G)$, the fundamental vector field $\xi_M$ is Hamiltonian via the map $\langle\mu,\xi\rangle:M\to\R$. 
+\item Equivariance: For all $g\in G$, we have $$\mu(g\cdot x)=\text{Ad}_g^\ast(\mu(x))$$ for all $x\in M$. 
+\end{itemize}
+\end{defn}
+
+\subsection{Hamiltonian Actions}
+
+\subsection{Hamiltonian Torus Actions}
+\begin{defn}{Hamiltonian Torus Actions}{}\\
+Let $(M,\omega)$ be a symplectic manifold. Let $T^k$ be a torus that acts on $M$ by symplectomorphisms. We say that the action is Hamiltonian if it admits a moment map $$\mu:M\to\text{Lie}(T^k)^\ast$$
+\end{defn}
+
+\begin{thm}{The Atiyah–Guillemin–Sternberg convexity theorem (1982)}{}\\
+Let $(M,\omega)$ be a compact connected symplectic manifold. Let $T^k\times M\to M$ be a Hamiltonian torus action. Then $\mu(M)$ is a convex polytope in $\text{Lie}(T^k)^\ast$ given by $$\mu(M)=\text{Conv}(\text{Fix}_{T^k}(M))$$
+\end{thm}
+
+\begin{defn}{Toric Symplectic Manifold}{}\\
+Let $(M,\omega)$ be a symplectic manifold of dimension $2n$. Let $T^n\times M\to M$ be a Hamiltonian torus action. We say that $M$ is a toric symplectic manifold if $M$ is compact connected and the action is faithful. 
+\end{defn}
+
+Delzant polytope: simple, rational, smooth
+
+\begin{thm}{Delzant (1988)}{}\\
+There is a one to one bijection $$\frac{\{(M,\omega)\;|\;(M,\omega)\text{ is a toric symplectic manifold }\}}{\cong}\;\;\overset{1:1}{\leftrightarrow}\;\;\{P\;|\;P\text{ is a Delzant polytope }\}$$
+\end{thm}
+
+\pagebreak
+\section{Quasitoric Manifolds}
+\subsection{The Davis-Januszkiewicz Classification Theorem}
+\begin{defn}{Quasitoric Manifolds}{}\\
+Let $M$ be a smooth manifold of dimension $2n$. Let $T^n$ be a torus acting smoothly on $M$. We say that $M$ is a quasitoric manifold if the following are true. 
+\begin{itemize}
+\item For each $p\in M$, there is a $T^n$-equivariant chart $(U,\varphi:U\to\C^n)$ where $\C^n$ is equipped with the standard torus action. 
+\item There exists a convex polytope $P$ such that there is a homeomorphism $$M/T^n\cong P$$
+\end{itemize}
+\end{defn}
+
+Toric symplectic manifolds are quasitoric manifolds. Moment angle manifolds are NOT quasitoric manifolds. 
+
+\begin{defn}{Orbit Type Strata}{}\\
+Let $M$ be a quasitoric manifold. Let $P$ be the underlying convex polytope. Let $H\leq T^n$ be a subgroup. Define the orbit type strata of $H$ to be $$M_{(H)}=\{x\in M\;|\;\text{Stab}_{T^n}(x)=H\}$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $M$ be a quasitoric manifold. Let $P$ be the underlying convex polytope. Then there is a bijection $$\{F\in\mF(P)\;|\;F\text{ has codimension }k\}\;\;\overset{1:1}{\leftrightarrow}\;\;\left\{N\subseteq M\;\bigg{|}\;\substack{N\text{ is an orbit type strata of subtori of }\\T^n\text{ of dimension }k}\right\}$$ given as follows. Let $\pi:M\to P$ be the quotient map. Then we have $$F_i\mapsto\pi^{-1}(\text{relint}(F))$$
+\end{prp}
+
+\begin{defn}{Primitive Vectors}{}\\
+Let $v=(v_1,\dots,v_n)\in\Z^n$. We say that $v$ is primitive if $v\neq\lambda u$ for any $\lambda\in\Z\setminus\{0\}$ and $u\in\Z^n$. 
+\end{defn}
+
+\begin{defn}{The Characteristic Matrix}{}\\
+Let $M$ be a quasitoric manifold. Let $P$ be the underlying convex polytope. Define the characteristic matrix $\Lambda$ as follows. For each facet $F_i$ of $P$ for $1\leq i\leq m$, the facet corresponds to a a circle $S_i^1\subseteq T^n$ by the above. Every circle $S_i^1\subseteq T^n$ corresponds to a unique primitive vector $v_i=(v_{1i},\dots,v_{1n})\in\Z^n$ up to sign. Then $$\Lambda=\begin{pmatrix}
+v_{11} & \cdots & v_{1m}\\
+\vdots & \ddots & \vdots\\
+v_{n1} & \cdots & v_{nm}
+\end{pmatrix}\in M_{n\times m}(\Z)$$
+\end{defn}
+
+\begin{defn}{Characteristic Pairs}{}\\
+Let $P$ be a simple polytope of dimension $n$. Let $F_1,\dots,F_m$ be the facets of $P$. Let $\Lambda\in M_{n\times m}(\Z)$ be a matrix. Let $c_1,\dots,c_m$ be the columns of $\Lambda$. We say that $(P,\Lambda)$ is a characteristic pair if the following are true. 
+\begin{itemize}
+\item $c_i$ is a primitive vector for all $1\leq i\leq m$. 
+\item If $F_{i_1}\cap\cdots\cap F_{i_n}$ is a vertex of $P$, then $$\det\begin{pmatrix}
+| & & |\\
+c_{i_1} & \cdots & c_{i_n}\\
+| & & |
+\end{pmatrix}=\pm1$$
+\end{itemize}
+\end{defn}
+
+\begin{defn}{The Associated Quasitoric Manifold}{}\\
+Let $(P,\Lambda)$ be a characteristic pair. Suppose that $\dim(P)=n$. Let $F_1,\dots,F_m$ be the facets of $P$. Let $c_1,\dots,c_m$ be the columns of $\Lambda$. Define the associated quasi-toric manifold of $(P,\Lambda)$ by $$M(P,\Lambda)=\frac{P\times T^n}{\sim}$$ where $(p,t_1)\sim(p,t_2)$ if $t_2^{-1}t_1\in\langle c_i\;|\;p\in F(p)\rangle\cong T^k\leq T^n$ and $F(p)$ is the unique facet such that $p\in\text{relint}(F(p))$ for any $p\in P$. 
+\end{defn}
+
+\begin{thm}{Davis-Januszkiewicz Classification Theorem}{}\\
+There is a one to one bijection $$\frac{\{M\;|\;M\text{ is a quasitoric manifold}\}}{\cong}\;\;\overset{1:1}{\leftrightarrow}\;\;\frac{\{(P,\Lambda)\text{ is a characteristic pair}\}}{\sim}$$ where $(P,\Lambda)\sim(Q,\Gamma)$ if $P$ and $Q$ are combinatorially equivalent and there exists $A\in\text{GL}(n,\Z)$ with $\det(A)=\pm1$ such that $A\Lambda$ and $Q$ are equal up to permutation of columns. 
+\end{thm}
+
+\subsection{Basic Structures}
+\begin{prp}{}{}\\
+Let $M$ be a quasitoric manifold with characteristic pair $(P,\Lambda)$. Let $F_1,\dots,F_m$ be the facets of $P$. Then there is an isomorphism of graded rings $$H^\ast(M;\Z)\cong\frac{\Z[x_1,\dots,x_m]}{I_\text{SR}+I_\Lambda}$$ where 
+\begin{itemize}
+\item $\deg(x_i)=2$ for $1\leq i\leq m$. 
+\item $I_\text{SR}$ is the Stanley-Reisner Ideal given by $$I_\text{SR}=(x{j_1}\cdots x_{j_t}\;|\;F_{j_1}\cap\cdots\cap F_{j_t}=\emptyset)$$
+\item $I_\Lambda$ is the linear relations given by $$I_\Lambda=\left(\Lambda(x_1,\dots,x_n)=0\right)$$
+\end{itemize}
+\end{prp}
+
+Recall that we denote $(h_0(P),\dots,h_n(p))$ by the $h$-vector of $P$. 
+
+\begin{crl}{}{}\\
+Let $M$ be a quasitoric manifold with characteristic pair $(P,\Lambda)$. Then we have $$\rank(H^{2k}(M;\Z))=h_k(P)$$
+\end{crl}
+
+\subsection{Bundles over Quasitoric Manifolds}
+\begin{prp}{}{}\\
+Let $M$ be a quasitoric manifold. Then $TM\oplus\R^k$ admits a complex structure for some $k\in\N$. 
+\end{prp}
+
+The chern class of $TM\oplus\R^k$ is given by $$c(TM\oplus\R^k)=\prod_{i=1}^m(1+x_i)\in H^\ast(M)\cong\frac{\Z[x_1,\dots,x_m]}{I_\text{SR}+I_\Lambda}$$
+
+There is a diffeo $Z_P/(G(P)\cong T^{m-n})\cong M(P,\Lambda)$ for any $P$. (from this perspective one can see that projective toric manifolds are quasi-toric manifolds). Also this map $Z_P\to M(P,\Lambda)$ is a principle $G(P)$-bundle. 
+
+If $M(P,\Lambda)=V_P$ is a projective toric variety, the classical construction $\C^m\setminus Z(\Sigma_P)$ exhibits $Z_P$ algebraically: there is an equivariant homotopy equivalence $\C^m\setminus Z(\Sigma_P)\simeq Z_P$. 
+
+\pagebreak
+\section{Kahler Manifolds}
+\subsection{Equivalent Definitions}
+\begin{defn}{Kahler Forms}{}\\
+Let $(M,h)$ be a complex Hermitian manifold. Let $\omega$ be the associated form. We say that $\omega$ is a Kahler form if $d\omega=0$. In this case, we say that $M$ is a Kahler manifold. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $M$ be a Kahler manifold. Then the following are true. 
+\begin{itemize}
+\item Let $g=\frac{1}{2}(h+\overline{h})$ be the associated Riemannian metric. Then $(M,g)$ is a Riemannian manifold. 
+\item Let $\omega=\frac{i}{2}(h-\overline{h})$ be the associated $(1,1)$-form. Then $(M,\omega)$ is a symplectic manifold. 
+\end{itemize}
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $(M,\omega)$ be a symplectic manifold. Then $\omega$ is a Kahler form if and only if $M$ admits an integrable almost complex structure $J$. In this case, the following are true. 
+\begin{itemize}
+\item The Riemannian metric is given by $g(u,v)=\omega(u,Jv)$. 
+\item The Hermitian metric is given by $h=g-i\omega$. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $(M,g)$ be a Riemannian manifold of dimension $2n$. Then $M$ admits a Kahler form if and only if $\text{Hol}(\nabla^g)\leq U(n)$. 
+\end{prp}
+
+\begin{eg}{}{}\\
+$\C\Prj^n$ together with the Fubini-Study metric is a Kahler manifold. 
+\end{eg}
+
+\begin{eg}{}{}\\
+Every Riemann surfaces is a Kahler manifold. 
+\end{eg}
+
+\subsection{Basic Structures}
+\begin{thm}{Banyaga}{}\\
+Let $M$ be a compact complex manifold. Let $\omega_1$ and $\omega_2$ be Kahler forms on $M$. Then $(M,\omega_1)$ and $(M,\omega_2)$ are symplectomorphic. 
+\end{thm}
+
+\subsection{Main Theorems}
+\begin{thm}{Hodge Decomposition Theorem}{}\\
+Let $M$ be a compact Kahler manifold. Then the following are true. 
+\begin{itemize}
+\item There is an isomorphism $$H_\text{dR}^k(M;\C)\cong\bigoplus_{p+q=k}H^{p,q}(M)$$ for all $k\in\N$. 
+\item There is an isomorphism $$H^{p,q}(M)\cong\overline{H^{q,p}(M)}$$ for all $p,q\in\N$. 
+\item $\dim_\R(H_\text{dR}^k(M))$ is even for all $k\in\N$. 
+\end{itemize}
+\end{thm}
+
+\begin{eg}{}{}\\
+Every compact Riemann surface is of the form $\Sigma_g$ for some $g\geq 0$. We have seen above that $\Sigma_g$ is Kahler. We know that $$H_\text{dR}^k(\Sigma_g;\C)=\begin{cases}
+\C & \text{ if }k=0,2\\
+\C^{2g} & \text{ if }k=1\\
+0 & \text{ otherwise }
+\end{cases}$$
+From this we conclude that $H^{0,0}(\Sigma_g)=\C$. Now since $\dim_\C(H^{p,q}(M))=\dim_\C(\overline{H^{q,p}(\Sigma_g)})=\dim_\C(H^{q,p}(\Sigma_g))$, we conclude that $H^{1,0}(\Sigma_g)\cong H^{0,1}(\Sigma_g)\cong\C^g$. Also, since $\Sigma_g$ has complex dimension $1$, it has no holomorphic $2$-forms. Hence $H^{2,0}(\Sigma_g)=H^{0,2}(\Sigma_g)=0$. This leaves us with $H^{1,1}(\Sigma_g)=H^2(\Sigma_g)=\C$. The hodge diamond of $\Sigma_g$ is given by  \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	& 1 & \\
+	g && g \\
+	& 1
+\end{tikzcd}} \\
+\end{eg}
+
+\begin{defn}{Hodge Filtration}{}\\
+Let $M$ be a compact Kahler manifold. Define the Hodge filtration of $M$ to be $$F^iH_\text{dR}^k(M;\C)=\bigoplus_{p\geq i}H^{p,q}(M)$$
+\end{defn}
+
+\begin{defn}{The Lefschetz Operator}{}\\
+Let $M$ be a Kahler manifold. Let $\omega$ be its associated form. Define the Lefschetz operator to be the map $L:\Omega^k(M)\to\Omega^{k+2}(M)$ given by $$\alpha\mapsto\alpha\wedge\omega$$
+\end{defn}
+
+\begin{thm}{Hard Lefschetz Theorem}{}\\
+Let $M$ be a compact Kahler manifold. Then the following are true. 
+\begin{itemize}
+\item The Lefschetz operator induces an isomorphism $$L^k:H_\text{dR}^{n-k}(M)\overset{\cong}{\longrightarrow} H_\text{dR}^{n+k}(M)$$
+\end{itemize}
+\end{thm}
+
+\begin{defn}{Primitive Cohomology}{}\\
+Let $M$ be a compact Kahler manifold. Let $n=\dim(M)$. Define the primitive cohomology of $M$ to be $$H_\text{prim}^i(M)=\ker(L^{n-i+1}:H_\text{dR}^i(M)\to H_\text{dR}^{2n-i+2}(M))$$
+\end{defn}
+
+\begin{defn}{Lefschetz Decomposition}{}\\
+Let $M$ be a compact Kahler manifold. Define the Lefschetz decomposition of $M$ to be $$H_\text{dR}^k(M)=\bigoplus_{2r\leq k} L^r(H_\text{prim}^{k-2r}(M))$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $M$ be a compact Kahler manifold of complex dimension $2n$. Suppose that $h=\sum_{p=0}^{2m}\sum_{q=0}^{2m}(-1)^p\dim_\C(H^{p,q}(M))$. Then the signature of the non-degenerate symmetric bilinear form $H^n(X;\R)\times H^n(X;\R)\to\R$ from Poincare duality is given by $(h,2n-h)$. 
+\end{prp}
+
+\subsection{Line Bundles on Kahler Manifolds}
+\begin{thm}{Lefschetz Theorem on $(1,1)$-Classes}{}\\
+Let $M$ be a compact Kahler manifold. Then we have $$\im(\text{Pic}(M)\to H^2(M,\Z)\to H^2(M,\C))=\im(H^2(M,\Z)\to H^2(M,\C))\cap H^{1,1}(M)$$
+\end{thm}
+
 \pagebreak
 \section{Algebra}
 \subsection{Algebra, Coalgebra and Bialgebra}
@@ -1021,7 +1273,32 @@ Let $k$ be a field. Let $A,B$ be cohomological differential graded algebras. The
 \end{itemize}
 \end{prp}
 
-\subsection{Models for DGAs}
+\subsection{Minimal DGAs}
+\begin{defn}{Free Graded-Commutative Algebra}{}\\
+Let $R$ be a commutative ring. Let $M$ be a graded $R$-module. Define the free graded-commutative algebra on $M$ by $$E(M)=\text{Sym}\left(\bigoplus_{i\in 2\Z}M_i\right)\oplus\Lambda\left(\bigoplus_{i\in2\Z+1}M_i\right)$$
+\end{defn}
+
+\begin{defn}{}{}\\
+Let $R$ be a ring. Let $M$ be a graded $R$-module. A minimal DGA over $M$ is a differential graded algebra $(E(M),d)$ such that $d(M)\subseteq E(M)_2$. 
+\end{defn}
+
+\subsection{Massey Products}
+\begin{defn}{Massey Triple Products}{}\\
+Let $R$ be a commutative ring. Let $A$ be a differential graded algebra. Let $u\in A^p$, $v\in A^q$ and $w\in A^r$. Suppose that $[u]\cdot[v]=[v]\cdot[w]=0$. Define the Massey triple product of the three elements to be $$\langle[u],[v],[w]\rangle=\{[\overline{s}\cdot w+\overline{u}\cdot t]\in H^{p+q+r-1}(A)\;|\;s\in A^{p+q-1},t\in A^{q+r-1}\text{ and }ds=\overline{u}\cdot v,dt=\overline{v}\cdot w\}$$ where $\overline{a}=(-1)^{1+\deg(a)}a$ for any homogeneous element $a\in A$. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $R$ be a commutative ring. Let $A$ be a differential graded algebra. Let $u\in A^p$, $v\in A^q$ and $w\in A^r$. Suppose that $[u]\cdot[v]=[v]\cdot[w]=0$. Then we have $$\langle[u],[v],[w]\rangle=\frac{H^{p+q+r-1}(A)}{[u]\cdot H^{q+r-1}(A)+H^{p+q-1}(A)\cdot[w]}$$
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $p,q,r\in\N$. Let $Y=S^p\vee S^q\vee S^r$. Let $\alpha\in\pi_p(Y)$, $\beta\in\pi_q(Y)$ and $\gamma\in\pi_r(Y)$ be generators. Let $X=Y\cup_{[\alpha,[\beta,\gamma]]}D^{p+q+r-1}$. Let $u,v,w,z\in H^\ast(X)$ be generators of degree $p,q,r,p+q+r-1$ respectively. Then the following are true. 
+\begin{itemize}
+\item $\langle u,v,w\rangle=(-1)^pz$. 
+\item $\langle v,w,u\rangle=(-1)^{pq+pr+p}z$. 
+\item $\langle w,u,v\rangle=0$. 
+\end{itemize}
+\end{prp}
 
 \pagebreak
 \section{Koszul Algebras and Quadratic Algebras}
@@ -1279,71 +1556,7 @@ Let $R,S$ be rings. Then $R$ and $S$ are Morita equivalent if and only if ${_R}\
 \end{prp}
 
 \pagebreak
-\section{}
-Trick: If $K$ is a triangulation of a sphere, then $K_{[n]\setminus J}$ is a deformation retract of $K\setminus K_J$. Now if $\abs{K}\cong S^m$, (claim: $K_J$ is a compact locally contractible subspace of $\abs{K}$) then by Alexander duality we have $$\widetilde{H}^i(K_J)\cong\widetilde{H}_{m-i-1}(S^m\setminus K_J)\cong\widetilde{H}_{m-i-1}(K\setminus K_J)$$ Then we have $$\widetilde{H}^i(K_J)\cong\widetilde{H}_{m-i-1}(K_{[n]\setminus J})$$
-
-$$H^\ast(\mZ_{\mK_1})\cong H^\ast(\mZ_{\mK_2})\cong H^\ast(\mZ_{\mK_3})\cong H^\ast((S^3\times S^9)^{\# 6}\#(S^4\times S^8)^{\# 8}\#(S^5\times S^7)^{\# 3})$$
-
-$$H^\ast(\mZ_{\mK_4})\cong H^\ast(\mZ_{\mK_5})\cong H^\ast(\mZ_{\mK_6})\cong H^\ast((S^3\times S^9)^{\# 5}\#(S^4\times S^8)^{\# 6}\#(S^5\times S^7)^{\# 4}\#(S^6\times S^6)^{\# 2})$$
-
-$$H^\ast(\mZ_{\mK_7})\cong H^\ast((S^3\times S^9)^{\# 3}\#(S^4\times S^8)^{\# 3}\#(S^5\times S^7))\otimes\frac{\Z\langle a,b,c,d,e,f\rangle}{(af-ce,bf-de,ad-bc,a^2,b^2,c^2,d^2,e^2,f^2)}$$ where $\deg(a)=\deg(b)=3$, $\deg(c)=\deg(d)=4$, $\deg(e)=5$, $\deg(f)=6$. 
-
-$$H^\ast(\mZ_{\mK_{34}})\cong H^\ast(S^3\times S^3\times S^3\times S^3)$$
-
-\pagebreak
-\section{Topics in Riemannian Geometry}
-
-\pagebreak
-\section{Vector Bundles on Complex Manifolds}
-\subsection{Serre's Correspondence}
-\begin{thm}{Serre's Correspondence}{}\\
-Let $M$ be a topological manifold. Then the following are true. 
-\begin{itemize}
-\item There is an equivalence of categories $$\bold{Vect}_n^\R(M)\simeq\bold{Loc}_n(M,\mC_M^0)$$
-\item Suppose that $M$ is a smooth manifold. Then there is an equivalence of categories $$\bold{SmVect}_n^\R(M)\simeq\bold{Loc}_n(M,\mC_M^\infty)$$
-\item Suppose that $M$ is a smooth manifold. Then there is an equivalence of categories $$\bold{SmVect}_n^\C(M)\simeq\bold{Loc}_n(M,\mC_M^\infty\otimes_\R\C)$$
-\item Suppose that $M$ is a complex manifold. Then there is an equivalence of categories $$\bold{HolVect}_n^\C(M)\simeq\bold{Loc}_n(M,\mO_M)$$
-\end{itemize}
-\end{thm}
-
-\subsection{Holomorphic Line Bundles}
-By Serre's correspondence, holomorphic line bundles correspond to locally free sheaves of $\mO_M$-modules of rank $1$, and recall isomorphism classes of these objects form a group structure with the tensor product, and it is group isomorphic to $H^1(M,\mO_M^\ast)$. 
-
-\begin{defn}{The Exponential Sequence}{}\\
-Let $M$ be a complex manifold. Define the exponential sequence of $M$ to be the short exact sequence of sheaves of $\mO_M$-modules given by \\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	0 & {\underline{\Z}} & {\mO_M} & {\mO_M^\ast} & 0
-	\arrow[from=1-1, to=1-2]
-	\arrow[hook, from=1-2, to=1-3]
-	\arrow["{f\mapsto e^{2\pi if}}", from=1-3, to=1-4]
-	\arrow[from=1-4, to=1-5]
-\end{tikzcd}} \\
-\end{defn}
-
-\begin{prp}{}{}\\
-Let $M$ be a complex manifold. Let $L$ be a holomorphic line bundle on $M$. Then the first chern class of $L$ is given by the image of $L$ in the homomorphism $$\text{Pic}(M)\cong H^1(M,\mO_M^\ast)\to H^2(M,\underline{\Z})\cong H^2(M,\Z)$$ induced by the long exact sequence of the exponential sequence. 
-\end{prp}
-
-\subsection{Kodaira Dimension}
-\begin{defn}{}{}\\
-Let $M$ be a complex manifold. Let $L$ be a holomorphic line bundle on $M$. Define ??? to be $$R(M,L)=\bigoplus_{m=0}^\infty H^0(M,L^{\otimes m})$$
-\end{defn}
-
-\begin{defn}{The Canonical Ring}{}\\
-Let $M$ be a complex manifold. Define the canonical ring of $M$ to be $$R(M)=R(M,\mK_M)=\bigoplus_{m=0}^\infty H^0(M,\mK_M^{\otimes m})$$
-\end{defn}
-
-\begin{lmm}{}{}\\
-Let $M$ be a complex manifold. If $M$ is connected, then $R(M)$ is an integral domain. 
-\end{lmm}
-
-\begin{defn}{Kodaira Dimension}{}\\
-Let $M$ be a connected complex manifold. Define the Kodaira dimension of $M$ to be $$\text{kod}(M)=\begin{cases}
--\infty & \text{ if }R(X)=\C\\
-\text{trdeg}_\C(Q(R(X)))-1 & \text{ otherwise }
-\end{cases}$$
-\end{defn}
-
+\section{Complex Analytic Space}
 \subsection{Complex Analytic Varieties}
 \begin{defn}{Complex Analytic Varieties}{}\\
 Let $Z\subseteq\C^n$. We say that $Z$ is a complex analytic variety if there exists an open set $Z\subseteq U\subseteq\C^n$ and $f_1,\dots,f_k\in\mO_{\C^n}(U)$ such that $$Z=\V(f_1,\dots,f_k)$$
@@ -1372,8 +1585,6 @@ In particular, complex analytic subvarieties of $\C^n$ are just complex analytic
 \begin{thm}{Cartan's (Coherence) Theorem}{} Let $M$ be a complex manifold and let $A$ be an analytic subset of $M$. Then $\mI_A$ is a coherent sheaf of $\mO_M$-modules. 
 \end{thm}
 
-\pagebreak
-\section{Complex Analytic Spaces}
 \subsection{Complex Analytic Spaces}
 \begin{defn}{Complex Analytic Spaces}{} Let $(X,\mO_X)$ be a locally ringed space. We say that $X$ is a complex analytic space if for all $p\in X$, there exists an open neighbourhood $U\subseteq X$ such that $(U,\mO_X|_U)$ is a complex analytic space. 
 \end{defn}
@@ -1391,48 +1602,13 @@ Let $(X,\mO_X)$ be a complex analytic space. Then $X$ is a complex manifold if a
 \begin{crl}{}{} Let $X$ be an irreducible compact complex space. Then every holomorphic function $f:X\to\C$ on $X$ is constant. 
 \end{crl}
 
-\subsection{Complex Analytic Subvarieties}
 \begin{defn}{Complex Analytic Subvarieties}{}\\
 Let $(X,\mO_X)$ be a complex analytic space. Let $Z\subseteq X$ be subset. We say that $Z$ is a complex analytic subvariety if for all $p\in X$, there exists an open neighbourhood $U\subseteq X$ and $f_1,\dots,f_k\in\mO_X(U)$ such that $$Z\cap U=\V_U(f_1,\dots,f_k)$$
 \end{defn}
 
 This definition generalizes complex analytic subvarieties of complex manifolds. 
 
-\pagebreak
-\section{Analytic Manifolds}
-\subsection{Real Analytic Manifolds}
-\begin{defn}{Real Analytic Manifolds}{} A real analytic manifold is a topological manifold with analytic transition maps. 
-\end{defn}
-
-In the real case, every analytic manifold is a smooth manifold because every analytic function is necessarily infinitely differentiable. While not every analytic function is smooth, we can still equip a smooth structure on analytic manifolds. 
-
-\begin{thm}{(Grauert-Whitney)}{} Every smooth manifolds admits a compatible real analytic structure. 
-\end{thm}
-
-\begin{defn}{Analytic Functions}{} Let $M$ be a real analytic manifold. Let $U\subseteq M$ be a subset. Let $f:U\to\R$ be a function. We say that $f$ is analytic if for all $x\in U$, there exists a chart $(V,\varphi=x^1,\dots,x^n))$ of $M$ such that $$f\circ\varphi^{-1}:\R^n\to\R$$ is analytic in the usual sense. 
-\end{defn}
-
-\begin{defn}{Sheaf of Analytic Functions}{} Let $M$ be an analytic manifold. Define the sheaf of analytic functions $$\mA_M:\bold{Open}\to\bold{CRing}$$ as follows. 
-\begin{itemize}
-\item For each open set $U\subseteq M$, $\mA_M(U)$ consists of the ring of analytic functions on $U$
-\item For each inclusion $V\subseteq U$, there is a unique morphism $$\text{res}_V^U:\mA_M(U)\to\mA_M(V)$$ given by $f\mapsto f|_V$
-\end{itemize}
-\end{defn}
-
-\pagebreak
-\section{Analytic Varieties}
-\subsection{Real Analytic Varieties}
-
-\subsection{Regular and Singular Points}
-\begin{defn}{Regular and Singular Points}{} Let $M$ be a complex manifold and let $A$ be an analytic subset of $M$. We say that $x\in A$ is a regular point if there exists some open neighbourhood $U$ of $x$ such that $A\cap U$ is a complex submanifold of $M$. Otherwise, $x$ is said to be singular. Denote $$A_\text{reg}=\{x\in A\;|\;x\text{ is a regular point }\}\;\;\;\;\text{ and }\;\;\;\; A_\text{sing}=\{x\in A\;|\;x\text{ is a singular point }\}$$
-\end{defn}
-
-\begin{thm}{}{} Let $M$ be a complex manifold and let $A$ be an analytic subset of $M$. Then $A_\text{sing}$ is an analytic subset of $A$. 
-\end{thm}
-
-\pagebreak
-\section{Trascendental Algebraic Geometry}
-\subsection{}
+\subsection{Connections to Algebraic Geometry}
 Recall that the category of schemes and the category of analytic spaces are both full subcategories of locally ringed spaces. 
 
 \begin{defn}{The Analytification of a Scheme}{}\\
@@ -1499,6 +1675,8 @@ Let $X$ be a proper scheme of finite type over $\C$. Then the following are true
 Let $X$ be a closed complex analytic subspace of $\C\Prj^n$. Then $X$ is a projective variety over $\C$. 
 \end{crl}
 
+The important point is that: the theory of smooth projective complex varieties are subsumed by the theory of Kahler manifolds. Divisors and line bundles correspond bijectively thanks to Chow's theorem. 
+
 \begin{thm}{Grothendieck}{}\\
 Let $X$ be a smooth variety over $\C$. Then there is a natural isomorphism $$H_\text{dR}^n(X)\cong H_\text{Holo}^n(X^\text{an})\cong H_\text{dR}^n(X^\text{an})$$ induced by the canonical map $\alpha:X^\text{an}\to X$. 
 \end{thm}
@@ -1511,6 +1689,91 @@ Let $X$ be a smooth variety over $\C$. Then the above isomorphism and de Rham's 
 Let $k$ be a subfield of $\C$. Let $X$ be a smooth variety over $k$. Then there is a natural isomorphism $$H_\text{dR}^\ast(X)\otimes_k\C\cong H_\text{sing}^\ast(X^\text{an};\Q)\otimes_\Q\C$$
 \end{thm}
 
+
+\pagebreak
+\section{Divisors and Line Bundles}
+\subsection{Divisors}
+\begin{defn}{Divisors on a Complex Manifold}{}\\
+Let $X$ be a complex manifold. A divisor on $X$ is a formal linear combination $$D=\sum_{\substack{V\text{ is an analytic variety of }X\\\text{ of dimension }\dim(X)-1}}n_V\cdot V$$ where $n_V\in\Z$, and such that for each $p\in X$, there exists an open neighbourhood $U$ of $p$ such that $U$ meets finitely many $V$ in the summand. 
+\end{defn}
+
+The locally finite condition here is required because in Algebraic Geometry, Noetherianess is assumed, otherwise they are the same. 
+
+\begin{defn}{Group of Divisors}{}\\
+Let $X$ be a complex manifold. Define the group of divisors of $X$ to be the set $$\text{Div}(X)=\{D\;|\;D\text{ is a divisor on }X\}$$ together with addition given as a subgroup of $\prod_V\Z\cdot V$. 
+\end{defn}
+
+\begin{defn}{Effective Divisors}{}\\
+Let $X$ be a complex manifold. Let $D=\sum_Vn_V\cdot V\in\text{Div}(X)$ be a divisor. We say that $D$ is effective if $n_V\geq 0$ for all $V$. 
+\end{defn}
+
+\begin{defn}{Divisors of Meromorphic Functions}{}\\
+Let $X$ be a complex manifold. Let $f\in\mM_X^\ast$ be a meromorphic function. Define the divisor of $f$ to be $$\text{div}(f)=\sum_V\nu_V(f)\cdot V$$ where $\nu_V$ is the valuation of $\mO_{X,V}$. 
+\end{defn}
+
+\begin{defn}{Cartier Divisors on a Complex Manifold}{}\\
+Let $X$ be a complex manifold. Define the group of divisors of $X$ to be $$\text{CDiv}(X)=H^0(X,\mM_X^\ast/\mO_X^\ast)=\Gamma(X,\mM_X^\ast/\mO_X^\ast)$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $X$ be a complex manifold. Then there is a natural isomorphism $$\text{Div}(X)\cong\text{CDiv}(X)$$
+\end{prp}
+
+\subsection{Holomorphic Line Bundles}
+\begin{prp}{}{}\\
+Let $X$ be a complex manifold. Then the following diagram is commutative: \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\text{CDiv}(X)} & {\text{Pic}(X)} \\
+	{H^0(X,Q_X^\ast/\mO_X^\ast)} & {H^1(X,\mO_X^\ast)}
+	\arrow[from=1-1, to=1-2]
+	\arrow["\cong"', from=1-1, to=2-1]
+	\arrow["\cong", from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}} \\
+where the bottom horizontal map is induced by the long exact sequence of the short exact sequence $0\to\mO_X^\ast\to\mM_X^\ast\to\frac{\mM_X^\ast}{\mO_X^\ast}\to 0$. 
+\end{prp}
+
+By Serre's correspondence, holomorphic line bundles correspond to locally free sheaves of $\mO_M$-modules of rank $1$, and recall isomorphism classes of these objects form a group structure with the tensor product, and it is group isomorphic to $H^1(M,\mO_M^\ast)$. 
+
+\begin{defn}{The Exponential Sequence}{}\\
+Let $M$ be a complex manifold. Define the exponential sequence of $M$ to be the short exact sequence of sheaves of $\mO_M$-modules given by \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {\underline{\Z}} & {\mO_M} & {\mO_M^\ast} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[hook, from=1-2, to=1-3]
+	\arrow["{f\mapsto e^{2\pi if}}", from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}} \\
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $M$ be a complex manifold. Let $L$ be a holomorphic line bundle on $M$. Then the first chern class of $L$ is given by the image of $L$ in the homomorphism $$\text{Pic}(M)\cong H^1(M,\mO_M^\ast)\to H^2(M,\underline{\Z})\cong H^2(M,\Z)$$ induced by the long exact sequence of the exponential sequence. 
+\end{prp}
+
+\subsection{Kodaira Dimension}
+\begin{defn}{}{}\\
+Let $M$ be a complex manifold. Let $L$ be a holomorphic line bundle on $M$. Define ??? to be $$R(M,L)=\bigoplus_{m=0}^\infty H^0(M,L^{\otimes m})$$
+\end{defn}
+
+\begin{defn}{The Canonical Ring}{}\\
+Let $M$ be a complex manifold. Define the canonical ring of $M$ to be $$R(M)=R(M,\mM_M)=\bigoplus_{m=0}^\infty H^0(M,\mM_M^{\otimes m})$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $M$ be a complex manifold. If $M$ is connected, then $R(M)$ is an integral domain. 
+\end{lmm}
+
+\begin{defn}{Kodaira Dimension}{}\\
+Let $M$ be a connected complex manifold. Define the Kodaira dimension of $M$ to be $$\text{kod}(M)=\begin{cases}
+-\infty & \text{ if }R(X)=\C\\
+\text{trdeg}_\C(Q(R(X)))-1 & \text{ otherwise }
+\end{cases}$$
+\end{defn}
+
+\pagebreak
+\section{Compact Kahler Manifolds}
+\subsection{Kodaira Embedding Theorem}
+
 \begin{prp}{}{}\\
 Let $X$ be a smooth projective variety over $\C$. Let $\mL$ be a line bundle over $X$. Then $\mL$ is ample if and only if $\mL^\text{an}$ is positive. 
 \end{prp}
@@ -1518,13 +1781,31 @@ Let $X$ be a smooth projective variety over $\C$. Let $\mL$ be a line bundle ove
 \begin{thm}{Kodaira Embedding}{}\\
 Let $X$ be a compact complex manifold. Then the following are equivalent. 
 \begin{itemize}
-\item There exists a projective variety $Z$ over $\C$ such that $Z^\text{an}=X$. 
+\item $X$ admits a holomorphic embedding into $\C\Prj^n$. 
+\item $X$ admits an ample line bundle. 
 \item $X$ admits a positive line bundle. 
-\item $X$ is Kahler and $H^{1,1}(X,\Z)\neq 0$. 
+\item $X$ is admits a Kahler metric $\omega$ such that $[\omega]\in H^{1,1}(X,\Z)$. 
+\item There exists a projective variety $Z$ over $\C$ such that $Z^\text{an}=X$. 
 \end{itemize}
 \end{thm}
 
-\subsection{}
+\begin{crl}{}{}\\
+There is an equivalence of categories between smooth projective varieties over $\C$ and compact Kahler manifolds given by the analytification functor. 
+\end{crl}
+
+\begin{thm}{Kodaira-Nakano Vanishing Theorem}{}\\
+Let $X$ be a compact Kahler manifold. Let $p:L\to X$ be a positive line bundle. Then we have $$H^q(X,\Omega^p(L))=0$$ for $p+q>\dim(X)$. 
+\end{thm}
+
+\begin{thm}{Lefschetz Hyperplane Theorem}{}\\
+Let $X$ be a compact Kahler manifold. Let $V\subseteq X$ be a smooth variety of dimension $\dim(X)-1$. Then the restriction map $$H^k(X,\Z)\to H^k(V,\Z)$$ induces isomorphisms for $0\leq k<\dim(X)-1$ and is injective for $k=\dim(X)-1$. 
+\end{thm}
+
+\begin{thm}{The Lefschetz $(1,1)$ Theorem}{}\\
+Let $X$ be a compact Kahler manifold. Let $\alpha\in H^2(X,\Z)$. Then $\alpha$ is the first Chern class of a line bundle if and only if $\alpha\in H^{1,1}(X)$. 
+\end{thm}
+
+\subsection{Projective Curves}
 \begin{prp}{}{}\\
 Let $X$ be a smooth projective curve over $\C$. Then $X^\text{an}$ is homeomorphic to $\Sigma_{p_g(X)}$ the orientable surface of genus $p_g(X)$. 
 \end{prp}
@@ -1534,9 +1815,51 @@ There is an equivalence of categories between smooth projective curves over $\C$
 \end{crl}
 
 \pagebreak
-\section{The Geometry of Fiber Bundles}
-\begin{prp}{Poincaré-Hopf Theorem}{}\\
-Let $M$ be a smooth manifold. Then we have $$e(TM)([M])=\chi(M)$$
+\section{Analytic Manifolds}
+\subsection{Real Analytic Manifolds}
+\begin{defn}{Real Analytic Manifolds}{} A real analytic manifold is a topological manifold with analytic transition maps. 
+\end{defn}
+
+In the real case, every analytic manifold is a smooth manifold because every analytic function is necessarily infinitely differentiable. While not every analytic function is smooth, we can still equip a smooth structure on analytic manifolds. 
+
+\begin{thm}{(Grauert-Whitney)}{} Every smooth manifolds admits a compatible real analytic structure. 
+\end{thm}
+
+\begin{defn}{Analytic Functions}{} Let $M$ be a real analytic manifold. Let $U\subseteq M$ be a subset. Let $f:U\to\R$ be a function. We say that $f$ is analytic if for all $x\in U$, there exists a chart $(V,\varphi=x^1,\dots,x^n))$ of $M$ such that $$f\circ\varphi^{-1}:\R^n\to\R$$ is analytic in the usual sense. 
+\end{defn}
+
+\begin{defn}{Sheaf of Analytic Functions}{} Let $M$ be an analytic manifold. Define the sheaf of analytic functions $$\mA_M:\bold{Open}\to\bold{CRing}$$ as follows. 
+\begin{itemize}
+\item For each open set $U\subseteq M$, $\mA_M(U)$ consists of the ring of analytic functions on $U$
+\item For each inclusion $V\subseteq U$, there is a unique morphism $$\text{res}_V^U:\mA_M(U)\to\mA_M(V)$$ given by $f\mapsto f|_V$
+\end{itemize}
+\end{defn}
+
+\pagebreak
+\section{Analytic Varieties}
+\subsection{Real Analytic Varieties}
+
+\subsection{Regular and Singular Points}
+\begin{defn}{Regular and Singular Points}{} Let $M$ be a complex manifold and let $A$ be an analytic subset of $M$. We say that $x\in A$ is a regular point if there exists some open neighbourhood $U$ of $x$ such that $A\cap U$ is a complex submanifold of $M$. Otherwise, $x$ is said to be singular. Denote $$A_\text{reg}=\{x\in A\;|\;x\text{ is a regular point }\}\;\;\;\;\text{ and }\;\;\;\; A_\text{sing}=\{x\in A\;|\;x\text{ is a singular point }\}$$
+\end{defn}
+
+\begin{thm}{}{} Let $M$ be a complex manifold and let $A$ be an analytic subset of $M$. Then $A_\text{sing}$ is an analytic subset of $A$. 
+\end{thm}
+
+\pagebreak
+\section{Chapter: The Geometry of Fiber Bundles}
+\section{Fundamental Constructions}
+\subsection{Properties of the Space of Vector Fields}
+\begin{defn}{The Lie Bracket}{}\\
+Let $M$ be a smooth manifold. Let $X,Y\in\mathfrak{X}(M)$ be smooth vector fields. Define the Lie bracket of $X$ and $Y$ to be the vector field $[X,Y]\in\mathfrak{X}(M)$ given by $$[X,Y]_p(f)=X_p(Y_p(f))-Y_p(X_p(f))$$ for all $f\in\mC^\infty(M)$ for each $p\in M$. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $M$ be a smooth manifold. Then $(\mathfrak{X}(M),[-,-])$ is a Lie algebra. 
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $M$ be a smooth manifold. Let $G$ be a Lie group acting smoothly on $M$. Then the map $\text{Lie}(G)\to\mathfrak{X}(M)$ given by $$\xi\mapsto\xi_M$$ is a Lie algebra homomorphism.  
 \end{prp}
 
 \subsection{The Normal Bundle}
@@ -1557,7 +1880,78 @@ Now we have $TS^n\oplus N_{\R^{n+1}/S^n}=T\R^{n+1}$. Applying the total Stiefel-
 \end{proof}
 \end{eg}
 
-\subsection{Principle Bundles over Lie Groups}
+\pagebreak
+\section{Smooth Fiber Bundles}
+\subsection{Basic Structures}
+\begin{defn}{Smooth Fiber Bundles}{}\\
+Let $E,M,F$ be smooth manifolds. Let $p:E\to M$ be a fiber bundle with fiber $F$ and local trivialization charts $(U_k,\phi_k)$ for $k\in I$. We say that $p$ is a smooth fiber bundle if the following are true. 
+\begin{itemize}
+\item $p$ is smooth. 
+\item $\phi_k$ is a diffeomorphism for all $k\in I$. 
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $p:E\to M$ be a smooth fiber bundle with fiber $F$. Let $p,q\in M$. If $M$ is connected, then $E_p$ is diffeomorphic to $E_q$. 
+\end{lmm}
+
+\begin{defn}{Smooth Sections}{}
+\end{defn}
+
+\subsection{The Jet Bundle}
+\begin{defn}{Differentiating Smooth Sections}{}\\
+Let $\pi:E\to M$ be a smooth fiber bundle with fiber $F$. Let $p\in M$. Let $(U,\theta=(x^1,\dots,x^{\dim(M)}))$ be a local chart of $M$ at $p$. Let $s:U\to E$ be a local section. Let $(V,\phi)$ be a local trivialization chart of $\pi$ containing $s(x)$. Let $(W,\psi)$ be a local chart of $F$ at $\text{proj}_F(\phi(s(p)))$. Define the derivative of $s$ at $p$ with respect to $x^k$ by to be $$\frac{\partial s}{\partial x^k}\bigg{|}_p=\frac{\partial(\psi\circ\text{proj}_F\circ\phi\circ s\circ\theta^{-1})}{\partial x_k}\bigg{|}_{\theta(p)}$$
+\end{defn}
+
+Prove: independent of choice of chart
+
+\begin{defn}{Jet Equivalence}{}\\
+Let $\pi:E\to M$ be a smooth fiber bundle with fiber $F$. Let $p\in M$. Let $U_1,U_2\subseteq M$ be subsets such that $p\in U_1,U_2$. Let $s_1:U_1\to E$ and $s_2:U_2\to E$ be smooth sections. We say that $s_1$ and $s_2$ are $k$-jet equivalent at $p$ if the following are true. 
+\begin{itemize}
+\item $s_1(p)=s_2(p)$. 
+\item There exist a chart $(U,\theta)$ of $M$ at $p$, a trivialization $(A,\phi)$ of $\pi$ over an open set containing $p$, and a chart $(W,\psi)$ of $F$ at $\mathrm{pr}_2(\phi(s_1(p)))$, such that for all $1\leq j\leq k$ and all $1\leq i_1,\dots,i_j\leq\dim(M)$:
+$$\frac{\partial^j(\psi\circ\mathrm{pr}_2\circ\phi\circ s_1\circ\theta^{-1})}{\partial x^{i_1}\cdots\partial x^{i_j}}\bigg|_{\theta(p)}=\frac{\partial^j(\psi\circ\mathrm{pr}_2\circ\phi\circ s_2\circ\theta^{-1})}{\partial x^{i_1}\cdots\partial x^{i_j}}\bigg|_{\theta(p)}$$
+\end{itemize}
+In this case we write $s_1\sim_p^ks_2$. 
+\end{defn}
+
+Prove: $\sim_p^k$ is an equivalence relation. 
+Prove: If derivatives are equal for some chart, then it i s equal for all charts. 
+
+\begin{defn}{Jet Equivalence}{}\\
+Let $\pi:E\to M$ be a smooth fiber bundle with fiber $F$. Define the $k$th jet bundle of $E$ to be the set $$J^k(E)=\coprod_{p\in M}\frac{\{s_p:U\to E\;|\;s\text{ is a smooth local section containing }p\}}{\sim_p^k}$$ together with the following data. 
+\begin{itemize}
+\item A smooth manifold structure given as follows. Fix an element $[s_p]\in J^k(M)$ for $p\in M$. Fix a chart $(U,\theta)$ at $p$, a trivialization chart $(A,\phi)$ of $\pi$, a chart $(W,\psi)$ of $F$ at $\text{proj}_F(\phi(s(p)))$, then a local chart of $M$ at $[s_p]$ is given by $$(\mU,(\theta,u,u_{i_1\cdots i_j}\;|\;1\leq j\leq k,1\leq i_1,\dots,i_j\leq\dim(M)))$$ where $\mU=\{[t_p]\in J^k(M)\;|\;p\in U,t(p)\in\pi^{-1}(A),\text{pr}_F(\phi(s(p)))\in W\}$ and $$u=(\psi\circ\text{proj}_F\circ\phi\circ s)(p)\in\R^{\dim(F)}$$ and $$u_{i_1,\dots,i_j}=\frac{\partial^j(\psi\circ\text{proj}_F\circ\phi\circ s\circ\theta^{-1})}{\partial x^{i_j}\cdots\partial x^{i_1}}\bigg{|}_{\theta(p)}$$
+\item The map $J^k(E)\to M$ given by $[s_p]\to p$. 
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $\pi:E\to M$ be a smooth fiber bundle with fiber $F$. Then the following are true. 
+\begin{itemize}
+\item $J^k(E)$ is a smooth vector bundle over $M$. 
+\item The manifold dimension of $J^k(E)$ is $$\dim(J^k(E))=\dim(M)+\dim(F)\sum_{j=0}^k\binom{\dim(M)+j-1}{j}$$
+\item For each $p\in M$, there is a diffeomorphism $$\pi^{-1}(p)\cong\R^{\dim(J^k(E))-\dim(M)}$$
+\end{itemize}
+\end{lmm}
+
+\begin{defn}{Lagrangian Density}{}
+\end{defn}
+
+\begin{defn}{Lagrangian Function}{}
+\end{defn}
+
+\begin{defn}{Contact Forms}{}
+\end{defn}
+
+Prove: A Lagrangian density modulo contact forms is a Lagrangian function tensored with a volume form. 
+
+\begin{defn}{The Action Functional of a Lagrangian Density}{}
+\end{defn}
+
+\pagebreak
+\section{Smooth Principle Bundles}
+\subsection{Basic Structures}
 \begin{prp}{}{}\\
 Let $M$ be a smooth manifold. Let $G$ be a Lie group with a free and smooth action on $M$. Then the following are true. 
 \begin{itemize}
@@ -1565,6 +1959,14 @@ Let $M$ be a smooth manifold. Let $G$ be a Lie group with a free and smooth acti
 \item The projection map $M\to M/G$ is a principal $G$-bundle. 
 \end{itemize}
 \end{prp}
+
+\begin{eg}{}{}\\
+Let $G$ be a Lie group. Let $H\leq G$ be a Lie subgroup. Then $G$ acts on $H$ by left multiplication. The above prp shows that $G/H$ is a Lie group and $G\to G/H$ is a principal $G$-bundle since the orbit space of $G$ acting on $H$ is just $G/H$. 
+\end{eg}
+
+\begin{thm}{Poincaré-Hopf Theorem}{}\\
+Let $M$ be a smooth manifold. Then we have $$e(TM)([M])=\chi(M)$$
+\end{thm}
 
 \subsection{Connections on a Principal Bundle}
 \begin{defn}{The Vertical Bundle}{}\\
@@ -1661,5 +2063,735 @@ Let $M$ be a smooth manifold. Let $\pi:P\to M$ be a smooth vector bundle of dime
 \item $[f_1(\Omega)],\dots,[f_n(\Omega)]$ are the Pontrjagin classes of $P$. 
 \end{itemize}
 \end{prp}
+
+
+\pagebreak
+\section{The Logical Chain of Classical Field Theory and Gauge Theory}
+
+\subsection*{Step 1: The Field}
+
+We observe a physical quantity distributed over spacetime — a temperature, a velocity, an electromagnetic strength. Mathematically this is a fiber bundle $\pi: E \to M$, where $M$ is spacetime and the fiber $E_x$ is the space of possible values of the quantity at $x$. A \textbf{section} $\phi \in \Gamma(E)$ is one complete specification of the quantity at every point — a possible physical configuration.
+
+\subsection*{Step 2: The Lagrangian as a Choice of Physics}
+
+A Lagrangian density $\Lambda \in \Omega^n(J^kE)$ is a choice of action functional
+\[
+S[\phi] = \int_\Omega (j^k\phi)^*\Lambda
+\]
+Different Lagrangians encode different physical theories. The Euler-Lagrange equations — the equations of motion — are derived from $\Lambda$ by the variational principle. The physical sections are the critical points of $S$.
+
+\subsection*{Step 3: Observing a Symmetry}
+
+You compute the Euler-Lagrange equations and notice that the Lagrangian $\Lambda$ is invariant under some subgroup of automorphisms of $E$. An \textbf{automorphism} of $\pi: E \to M$ is a fiber-preserving diffeomorphism $\Phi: E \to E$. Such an automorphism acts on sections by
+\[
+\phi \mapsto \Phi \circ \phi
+\]
+and the Lagrangian being invariant means
+\[
+S[\Phi \circ \phi] = S[\phi] \quad \text{for all } \phi \in \Gamma(E)
+\]
+At this stage, the symmetry group acts the same way at every point — it is \textbf{global}. You observe this as an empirical fact about your Lagrangian. 
+
+Symmetries of the action induces certain laws of physics, such as conservation of energy, momentum, charge etc. This is Noether's theorem. 
+
+Another note: Rather than starting with a Lagrangian and observe the symmetries of its action, we may also start with a set of symmetries that we would like to enforce, apply it to all differential forms and retain only the invariants, and see what Lagrangian you would get. 
+
+\subsection*{Step 4: The Absolute vs Relative Observation}
+The global symmetry exists because the field takes values in a space that has \textbf{no preferred origin or frame} — the fiber $E_x$ has a group of self-maps (rotations, phase shifts, color rotations) that are physically unobservable. Different observers, or different conventions, would describe the same physical situation using sections related by this group action. The global symmetry is an artifact of having made consistent conventional choices everywhere at once. We need not restrict ourselves to consider symmetries of the entire space, and this is supported by physics: 
+
+\subsubsection*{Argument 1: Special Relativity}
+
+Special relativity says there is no notion of simultaneity — two spacelike separated points have no canonical notion of ``the same moment.'' A global transformation is therefore not a physically coherent operation in a relativistic theory. If you believe in special relativity, you are forced to allow your symmetry to act differently at different points. The global symmetry is then a special case of the local one, not the fundamental object.
+
+\subsubsection*{Argument 2: The Gauge Principle}
+
+The difference induced by the symmetry of the action is not observable. The phase is therefore a \textbf{convention} --- a choice made by an observer at $x$ to  describe the field. If the phase is a convention, then different observers at different points of spacetime should be free to make different conventional choices independently. There is no physical mechanism that would force their conventions to agree globally. The true symmetry group of the theory is therefore not the global group $G$ but the local group $mathcal{G} = \mathrm{Map}(M, G)$ of all smooth $G$-valued functions on spacetime.
+
+This is the \textbf{gauge principle}: any redundancy in the description of a physical system should be a local redundancy. It is a postulate, not a theorem. Its justification is that it works --- every time it is applied, it produces a physically correct and predictive theory.
+
+\subsection*{Step 5: Promoting to Local Symmetry}
+
+This forces you to demand invariance not just under global $G$-transformations
+\[
+\phi(x) \mapsto g \cdot \phi(x), \quad g \in G \text{ constant}
+\]
+but under local $G$-transformations
+\[
+\phi(x) \mapsto g(x) \cdot \phi(x), \quad g: M \to G \text{ smooth}
+\]
+
+The Lagrangian, built from ordinary derivatives $\partial_\mu\phi$, immediately fails to be 
+locally invariant. The reason is fundamental: $\partial_\mu\phi$ compares field values at 
+nearby points $x$ and $x + dx$, which under local symmetry live in fibers with 
+\textbf{independent conventions}. Subtracting them is meaningless — it is comparing 
+quantities measured in different units.
+
+\subsection*{Step 6: The Mathematics Is Now Forced}
+
+To make sense of differentiation under local symmetry, we need a way to 
+\textbf{compare vectors in nearby fibers} compatibly with the $G$-structure. But this is 
+precisely the definition of a \textbf{connection}.
+Where does this connection live? The answer is that the principal bundle is not introduced 
+from outside — it is \textbf{already contained inside the vector bundle $E$}.
+
+The fibers $E_x$ are vector spaces, but the isomorphism $E_x \cong \mathbb{R}^r$ is not 
+canonical — it requires a choice of basis. A \textbf{frame} at $x$ is an ordered basis for 
+$E_x$. The set of all frames at $x$ carries a natural free transitive right action of 
+$GL(r, \mathbb{R})$, making it a $GL(r,\mathbb{R})$-torsor. Taking the disjoint union over 
+all $x \in M$ produces the \textbf{frame bundle}
+\[
+P := \bigsqcup_{x \in M} \{\text{ordered bases for } E_x\}
+\]
+a principal $GL(r, \mathbb{R})$-bundle canonically constructed from $E$.
+
+Now, the observation of a global $G$-symmetry in Step 3 is precisely the observation that 
+the physically relevant frames are not arbitrary frames, but only those related by 
+$G$-transformations. The structure group \textbf{reduces} from $GL(r, \mathbb{R})$ to $G$, 
+producing a principal $G$-bundle
+\[
+P_G \subset P
+\]
+canonically determined by the symmetry. The original vector bundle is recovered as the 
+associated bundle $E = P_G \times_G V$.
+
+The connection demanded by local symmetry lives on $P_G$, because $P_G$ is the bundle whose 
+fibers are $G$-torsors — they encode exactly the gauge freedom at each point. A connection 
+on $P_G$ transports $G$-frames between nearby fibers, and therefore transports everything 
+associated to those frames, including sections of $E = P_G \times_G V$.
+
+\subsection*{Step 7: What Follows From The Maths}
+
+Since the principal bundle is just a collection of frames at each fiber. A local section of the principal bundle is a choice of local coordinates. The mathematical fact that non-trivial principal bundles have no global sections can be interpreted as the fact that there is generally no globally consistent choice of coordinates because the symmetries now act locally. 
+
+A connection in the principal bundle gives a covariant derivative in the associated bundle. This gives a way to compare phases across different time space. 
+
+\pagebreak
+\section{Intersection Theory}
+\subsection{The Divisor of a Rational Function}
+\begin{defn}{The Order of a Function at a Subvariety}{}\\
+Let $k$ be a field. Let $X$ be a scheme of finite type over $k$. Let $W$ be an irreducible subvariety of $X$. Let $f/g\in K(W)^\ast$ for $f,g\in\mO_X(W)$ and $g\neq 0$. Let $V\subseteq W$ be an irreducible subvariety of codimension $1$. Define the order of $f$ at $V$ to be $$\text{ord}_V(f/g)=l_{\mO_X(W)}\left(\frac{\mO_X(W)}{(f)}\right)-l_{\mO_X(W)}\left(\frac{\mO_X(W)}{(g)}\right)$$
+\end{defn}
+
+\begin{defn}{The Divisor of a Rational Function}{}\\
+Let $k$ be a field. Let $X$ be a scheme of finite type over $k$. Let $W$ be an irreducible subvariety of $X$. Let $f\in K(W)^\ast$. Define the divisor of $f$ to be $$\text{div}(f)=\sum_{\substack{V\text{ is a codimension }1\\\text{irreducible subvariety of }W}}\text{ord}_V(f)\cdot V$$
+\end{defn}
+
+\subsection{The Chow Groups}
+\begin{defn}{The Group of $n$-Cycles}{}\\
+Let $k$ be a field. Let $X$ be a scheme of finite type over $k$. Let $n\in\N$. Define the group of $n$-cycles on $X$ to be the free abelian group $$Z_n(X)=\Z\langle V\;|\;\substack{V\text{ is an }n\text{-dimensional}\\\text{irreducible subvariety of }X}\rangle$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $X$ be a scheme of finite type over $k$. Let $W$ be an irreducible subvariety of $X$. Let $f\in K(W)^\ast$. Then $\text{div}(f)\in Z_{\dim(W)-1}(X)$. 
+\end{lmm}
+
+\begin{defn}{Cycles Rationally Equivalent to Zero}{}\\
+Let $k$ be a field. Let $X$ be a scheme of finite type over $k$. Let $V\in Z_n(X)$. We say that $V$ is rationally equivalent to $0$ if there exists finitely many $n+1$-dimensional irreducible subvarieties $W_1,\dots,W_r$ of $X$ and $f_i\in K(W_i)^\ast$ such that $$V=\sum_{i=1}^n\text{div}(f_i)$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $X$ be a scheme of finite type over $k$. Let $V\in Z_n(X)$ be a cycle. Then $V$ is rationally equivalent to $0$ i and only if there exists $(n+1)$-dimensional irreducible subvarieties $W_1,\dots,W_r$ of $X\times\Prj_k^1$ such that the projection maps $p_i:W_i\to\Prj_k^1$ are dominant and $V=\sum_{i=1}^r[p_i^{-1}(0)]-[p_i^{-1}(\infty)]$
+\end{prp}
+
+\begin{defn}{The Chow Group}{}\\
+Let $k$ be a field. Let $X$ be a scheme of finite type over $k$. Define the $n$th Chow group of $X$ to be $$\text{CH}_n(X)=\frac{Z_n(X)}{\sim}$$ where we say that $V_1\sim V_2$ if $V_1-V_2$ is rationally equivalent to $0$. In this case, we say that $V_1$ and $V_2$ are rationally equivalent. 
+\end{defn}
+
+\subsection{The Ring Structure}
+
+\subsection{Pushfoward and Pullback of Cycles}
+\begin{defn}{The Push Forward Map}{}\\
+Let $k$ be a field. Let $X,Y$ be schemes of finite type over $k$. Define the push forward map $f_\ast:Z_n(X)\to Z_n(Y)$ by $$f_\ast(V)=\deg(V/f(V))f(V)$$ where $$\deg(V/f(V))=\begin{cases}
+[k(V):k(f(V))] & \text{ if }\dim(V)=\dim(f(V))\\
+0 & \text{ otherwise }
+\end{cases}$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $X,Y$ be schemes of finite type over $k$. Then the push forward map descends to a well defined homomorphism $f_\ast:\text{CH}_n(X)\to\text{CH}_n(Y)$. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $X$ be a scheme of finite type over $k$. Let $i:Y\hookrightarrow X$ be a closed subscheme of $X$. Let $j:X\setminus Y\hookrightarrow X$ be the inclusion map. Then there is an exact sequence \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\text{CH}_n(Y)} & {\text{CH}_n(X)} & {\text{CH}_n(X\setminus Y)} & 0
+	\arrow["{i_\ast}", from=1-1, to=1-2]
+	\arrow["{j\ast}", from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+\end{tikzcd}} \\
+\end{prp}
+
+
+\section{Algebraic de Rham Cohomology}
+\begin{defn}{Algebraic de Rham Cohomology}{}\\
+Let $S$ be a scheme. Let $X$ be a scheme over $S$. Define the $n$th algebraic de Rham cohomology group by $$H_\text{dR}^n(X/S)=\H^n(X;\Omega_{X/S}^\bullet)$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $S$ be a scheme. Let $X$ be a scheme over $S$. Then $\text{Tot}^\oplus\left(\mC^\bullet(X,\mU,\Omega_{X/S}^\bullet)\right)$ is an acyclic resolution of $\Omega_{X/S}^\bullet$. 
+\end{lmm}
+
+Thus one way to compute the de Rham cohomology would be $$H_\text{dR}^n(X/S)\cong H^n(\text{Tot}^\oplus(\mC^\bullet(X,\mU,\Omega_{X/S}^\bullet))$$
+
+\begin{eg}{}{}\\
+Let $U_0=\text{Spec}(R_0=k[x,y]/(y^2-f(x)))$ where $k$ is a field of characteristic $0$ and $f$ is separable and $\deg(f)=2g+1$ or $2g+2$. Let $U_1=\text{Spec}(R_1=k[u,v]/(v^2-h(u)))$ where $h(u)=u^{2g+2}h(1/u)$. Then we have $$H_\text{dR}^i(X/k)=H^i\left(R_0\oplus R_1\to R_0\frac{dx}{y}\oplus R_1\frac{du}{v}\oplus R_0[1/x]\to R_0[1/x]dx\right)$$ where the first map is given by $(w,z)\mapsto(dw,dz,w-z(1/x,y/x^{g+1}))$, the second map is given by $(wdx,zdu,g(x,y))\mapsto wdx-zdu-dg$ where $du=-z(1/x, y/x^{g+1})dx/x^2$. 
+\begin{itemize}
+\item $H_\text{dR}^0(X/k)\cong k$. 
+\item $H_\text{dR}^2(X/k)\cong H_\text{dR}^1(X/k)$. 
+\item $H^0(X,\Omega_{X/k}^0)\hookrightarrow H_\text{dR}^1(X/k)$ given by $\omega\mapsto(\omega|_{U_0},\omega|_{U_1},0)$ is an inclusion since the global sections are constant. 
+\item There is a map $H_\text{dR}^1(X/kk)\to H^1(X,\mO_X$ given by $(\omega_0,\omega_1,g)\mapsto g$ and precomposing with the above map gives $0$. It is clearly surjective. 
+\item So we have an exact sequence $$0\to H^0(X,\Omega_{X/k}^\bullet)\to H_\text{dR}^1(X/k)\to H^1(X,\mO_X)\to 0$$ called the Hodge filtration on $H_\text{dR}^1(X/k)$. In characteristic $p$ this is more subtle: not all global differentials are closed. 
+\item What can we say about the map $H_\text{dR}^1(X/k)\to H_\text{dR}^1(U_0/k)$ given by $(\omega_0,\omega_1,g)\mapsto g$. 
+\item The LES in local cohomology gives $$0\to H^1(X(\C),\C)\to H^1(U_0(\C),\C)\to H^2(X(\C),U_0(\C),\C)\to H^2(X(\C),\C)\to 0$$ and $H^2(X(\C),U_0(\C),\C)\cong H^0((X-U_0)(\C),\C)\cong\C^{\abs{X-U_0}(\C)}$. If $\deg(f)$ is odd, $\abs{(X-U_0)(\C)}=1$. Then $H^1(X(\C),\C)\to H^1(U_0(\C),\C)$ is an isomrophism. If $\deg(f)$ is even, then we have $0\to H^1(X(\C),\C)\to H^1(U_0(\C),\C)\to\C\to 0$. 
+Same thing happens for de Rham cohomology. Surjectivity of $H_\text{dR}^1(X/k)\to H_\text{dR}^1(U_0/k)$ iff every class $(\omega_0)$ for $\omega_0\in\Omega_{R_0/k}^1$ is the image of $\ker(R_0dx/y\oplus R_1du/v\oplus R_0[1/x]\to R_0[1/x]dx)$. i.e. $\exists\omega_1\in R_1du/v$, $g\in R_0[1/x]$ such that $\omega_0-\omega_1=dg$. The obstruction to finding such an $\omega_1$ and $g$ would be the residue of a differential. Pick $z\in(X-U_0)(\overline{k})$ a closed point and a parameter $t$ at $z$. Write $\omega$ as $F(t)=\sum_{i=0}^\infty a_it^i\in\overline{k}[[t]]$. Eg any meromorphic can be written as rational function times dt, then, take formal power series. Then $\text{Res}_z(\omega)=a_1$ of $F(t)$. If $\omega_1\in\Omega_{R_1/k}^1$ then $\text{Res}_z=0$ (indeed it has no pole). Also $\text{Res}_z(dg)=0$. Then image of $H_\text{dR}^1(X/k)$ is contained in the kernel of the residue map $$\text{Res}:H_\text{dR}^0(U_0/k)\to\bigoplus_{Z\in(X-U_0(\overline{k})}\overline{k}$$ Fact: For any open $U\subseteq X$, $\omega\in H^0(U,\Omega_{X/k})$, then $$\sum_{Z\in(X-U)(\overline{k})}\text{Res}_z(\omega)=0$$
+\end{itemize}
+\end{eg}
+
+\begin{prp}{}{}\\
+Let $S$ be a scheme. Let $X$ be a scheme over $S$. Then the following are true. 
+\begin{itemize}
+\item $H_\text{dR}^n(X/S)$ is a $H_\text{dR}^0(X/S)$-module. 
+\item The map $H_\text{dR}^i(X/S)\times H_\text{dR}^j(X/S)\to H_\text{dR}^{i+j}(X/S)$ induced by the wedge of differential forms is a $H_\text{dR}^0(X/S)$-linear. 
+\end{itemize}
+\end{prp}
+
+\begin{defn}{The de Rham Cohomology Ring}{}\\
+Let $S$ be a scheme. Let $X$ be a scheme over $S$. Define the de Rham cohomology ring of $X$ to be $$H_\text{dR}^\ast(X/S)=\bigoplus_{i=0}^\infty H_\text{dR}^i(X/S)$$ together with ring structure given by wedge of differential forms. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $S$ be a scheme. Let $X$ be a scheme over $S$. Then $H_\text{dR}^\ast(X/S)$ is a graded commutative $H_\text{dR}^0(X/S)$-algebra. 
+\end{lmm}
+
+
+
+
+
+\begin{lmm}{}{}\\
+Let $k$ be a field of characteristic $0$. Let $X$ be a smooth affine variety over $k$. Then we have $$H_\text{dR}^n(X)=H^n(\Gamma(X,\Omega_{X/k}^\bullet))$$ for all $n\in\N$. 
+\end{lmm}
+
+\begin{eg}{}{}\\
+Let $k$ be a field of characteristic $0$. Let $R=k[x_1,\dots,x_n]$ be the polynomial ring over $k$. Then $\Gamma\left(X,\Omega_{\text{Spec}(R)/k}^1\right)=\Omega_{R/k}^1=\bigoplus_{i=1}^nRdx_i$. Then we have $$\Gamma\left(X,\Omega_{\text{Spec}(R)/k}^j\right)=\bigoplus_{1\leq i_1<\cdots<i_j\leq n} Rdx_{i_1}\wedge\cdots\wedge dx_{i_j}$$ Then we have $$H_\text{dR}^i(R/k)=\begin{cases}
+k & \text{ if }i=0\\
+0 & \text{ otherwise }
+\end{cases}$$
+\end{eg}
+
+TBR:
+
+\begin{eg}{}{}\\
+Let $k$ be a field of characteristic $p>0$. Then we have $$\dim_k(H^1(\Gamma(\text{Spec}(k[t]),\Omega_{\text{Spec}(k[t])/k}^1)))=\infty$$ Indeed, we have $$H^1(\Gamma(\text{Spec}(k[t]),\Omega_{\text{Spec}(k[t])/k}^1))=\frac{k[t]}{\langle f'(t)\;|\;f\in k[t]\rangle}=\frac{k[t]}{\bigoplus_{i=1}^\infty it^{i-1}dt}\cong\bigoplus_{i=1}^\infty t^{ip-1}dt$$
+\end{eg}
+
+\begin{eg}{}{}\\
+$\Omega_{\Z[\sqrt{2}]/\Z}^1\cong(\Z/2\Z)d\sqrt{2}$. $H^1(\Gamma(\text{Spec}(\Z\sqrt{2}),\Omega_{\Z[\sqrt{2}]/\Z}^1))\neq0$
+\end{eg}
+
+\begin{eg}{}{}\\
+Let $k$ be a field of characteristic $p\neq 2$. Let $f\in k[x]$ be separable. Let $R=\frac{k[x,y]}{y^2-f(x)}$. Then we have $$\Omega_{R/k}^1\cong\frac{\Omega_{k[x,y]/k}^1\otimes_{k[x,y]}k}{(2ydy-f'(x)dx)}\cong\frac{Rdx\oplus Rdy}{R(2ydy-f'(x)dx)}$$ Using the quotient relation, we may write $dy=\frac{f'(x)dx}{2y}$ in the module. Thus $dx/y$ is a generator of the module. \\
+
+Since $f$ is separable, there exists $g,h\in k[x]$ such that $gf+hf'=1$. Let $\omega=aydx+2bdy\in\Omega_{R/k}^1$. Then we have $y\omega=dx$. Hence $y$ divides $dx$ and $\omega=dx/y$. \\
+
+Now let $z=a(x)+b(x)y\in R$ be arbitrary. Then we have $$dz=(a'(x)+b'(x)y)dx+h(x)dy=(ya'(x)+b'(x)f(x)+\frac{1}{2}b(x)f'(x))\omega$$ Thus every element of $\Omega_{R/k}^1$ is of the form $q(x)\omega$ for some $q(x)\in k[x]$. If $\deg(q)\geq\deg(f)$, then there exists $p\in k[x]$ such that $\deg(p)>\deg(q)$ such that $$[p(x)\omega]=[q(x)\omega]$$ in $H_\text{dR}^1(R/k)$. 
+\end{eg}
+
+\begin{lmm}{}{}\\
+Let $k$ be a field of characteristic $0$. Let $X$ be a smooth variety over $k$. Then the following are true. 
+\begin{itemize}
+\item $H_\text{dR}^i(X)=0$ for all $i>2\dim(X)$. 
+\item If $X$ is affine, then $H_\text{dR}^i(X)=0$ for all $i>\dim(X)$. 
+\end{itemize}
+\end{lmm}
+
+\begin{prp}{}{}\\
+
+\end{prp}
+
+\subsection{Hodge de Rham Spectral Sequences}
+\begin{defn}{The Hodge Filtration}{}\\
+Let $S$ be a scheme. Let $X$ be a scheme over $S$. Define the Hodge filtration $F^\bullet\Omega_{X/S}^\bullet$ of $X$ to be $$F^i\Omega_{X/S}^j=\begin{cases}
+\Omega_{X/S}^j & \text{ if }j\geq i\\
+0 & \text{ otherwise }
+\end{cases}$$
+\end{defn}
+
+Thus for each $i$, the collection of complexes $$F^i\Omega_{X/S}^\bullet=(0\to\Omega_{X/S}^i\to\Omega_{X/S}^{i+1}\to\cdots)$$ form the filtration for $\Omega_{X/S}^\bullet$. 
+
+\begin{lmm}{}{}\\
+Let $S$ be a scheme. Let $X$ be a scheme over $S$. Then $F^\bullet\Omega_{X/S}^\bullet$ is an exhaustive filtration. 
+\end{lmm}
+
+\begin{defn}{The Hodge de Rham Spectral Sequence}{}\\
+Let $S$ be a scheme. Let $X$ be a scheme over $S$. Define the Hodge de Rham spectral sequence to be the spectral sequence associated to the Hodge siltration $F^\bullet\Omega_{X/S}^\bullet$. 
+\end{defn}
+
+The $E^0$ page is given by $$E_0^{p,q}=\frac{F^p\Omega_{X/S}^{p+q}}{F^{p+1}\Omega_{X/S}^{p+q}}=\frac{\Omega_{X/S}^q}{\Omega_{X/S}^{q-1}}$$
+
+\begin{lmm}{}{}\\
+Let $S$ be a scheme. Let $X$ be a scheme over $S$. Then we have $$E_1^{p,q}=H^q(X,\Omega_{X/S}^p)\Rightarrow H_\text{dR}^{p+q}(X/S)$$
+\end{lmm}
+
+\begin{thm}{Deligne}{}\\
+If $S=\text{Spec}(k)$, $k$ char $0$, $X\to S$ smooth and proper. Then the Hodge de Rham spectral sequence degenerates at the $E_1$ page (all differentials in page $1$ is $0$). 
+\end{thm}
+
+When you have a $2$-step filtration: $0\to F^1C^\bullet\to C^\bullet\to C^\bullet/F^1C^\bullet\to 0$, the spectral sequence is the long exact sequence in cohomology. 
+
+\subsection{Flat Connections}
+$X/\C$ smooth connected algebraic variety. $(V,\Delta)\to(V^\text{an})^{\Delta=0}$. 
+
+Cyclic vector theorem:
+$(V,\Delta)$ on $K(C)$, $C$ a connected curve over $k$. Suppose that $e\in V$. Let $e_i=\partial_i e$. 
+
+\pagebreak
+\section{Deformation of Manifold Structures}
+\subsection{}
+Recall: \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\substack{\text{Smooth}\\\text{Manifolds}} & \substack{\text{PL}\\\text{Manifolds}} & \substack{\text{Topological}\\\text{Manifolds}}\\
+	& \substack{\text{Combinatorial}\\\text{Manifolds}} & \substack{\text{Triangulated}\\\text{Manifolds}}
+	\arrow["\subset", shift right=3, draw=none, from=1-1, to=1-2]
+	\arrow["\subset", shift right=3, draw=none, from=1-2, to=1-3]
+	\arrow[leftrightarrow, from=2-2, to=1-2]
+	\arrow["\subset", shift right=3, draw=none, from=2-2, to=2-3]
+	\arrow[from=2-3, to=1-3]
+\end{tikzcd}}\\
+
+is every triangulated manifold a combinatorial manifold?
+manifold Hauptvermutung: 
+
+
+\begin{defn}{Smooth Embedding of a Simplex}{}\\
+Let $\Delta^k\subseteq\R^{k+1}$ be the standard $k$-simplex. Let $M$ be a smooth manifold. Let $\sigma:\Delta^k\to M$ be a map. We say that $\sigma$ is a smooth embedding if the following are true. 
+\begin{itemize}
+\item $f$ is injective. 
+\item $f$ induces a homeomorphism from $\Delta^k$ to $\im(f)$. 
+\item For all facets $F\subseteq\Delta^k$, the induced map $\sigma|_{F^\circ}$ is an immersion of smooth manifolds. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Smooth Triangulations}{}\\
+Let $M$ be a smooth manifold with boundary. Let $K$ be a simplicial complex that is a triangulation of $M$. We say that $K$ is a smooth triangulation if the following are true. 
+\begin{itemize}
+\item For each simplex $\sigma\in K$, the map $\sigma$ is a smooth embedding. 
+\item There exists a subcomplex $K'\subseteq K$ such that $K'$ is a triangulation of $\partial M$. 
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $M$ be a smooth manifold with boundary. Let $K$ be a smooth triangulation of $M$. Then $M$ admits a PL structure. 
+\end{lmm}
+
+\begin{thm}{Whitehead, 1940}{}\\
+Let $M$ be a smooth manifold with boundary. Then $M$ admits a smooth triangulation. Moreover, if $K$ and $K'$ are both smooth triangulations, then $\abs{K}$ and $\abs{K'}$ are PL-homeomorphic. 
+\end{thm}
+
+\subsection{Microbundles}
+Define the tangent microbundle $\tau_M$ for a topological $n$-manifold $M$. Stable topological microbundles over $M$ are classified by $BTop = \varinjlim_k B\mathrm{Top}(k)$, so the stable tangent microbundle determines a classifying map $M \to BTop$. Since $\mathrm{Top}(k)/\mathrm{PL}(k) \to Top/PL$ is a homotopy equivalence for $k \geq 5$, a lift of $M \to BTop$ through $BPL \to BTop$ is equivalent to a PL structure on the unstable tangent microbundle $\tau_M$. 
+
+\begin{lmm}{}{}\\
+The following are true. 
+\begin{itemize}
+\item There is a homotopy equivalence $$\text{hofib}(BPL\to BTop)\simeq K(\Z/2\Z,3)$$
+\item $BPL\to BTop$ is a principal fibration.
+\item The principal fibration induces a fibration $BTop\to K(\Z/2\Z,4)$. 
+\end{itemize}
+\end{lmm}
+
+\subsection{The Tangent Microbundle}
+\begin{thm}{Hirsch-Mazur
+ Theorem}{}\\
+Let $M$ be a topological manifold of dimension $n\geq 5$. Then $\tau_M$ admits a PL structure if and only if $M$ admits a PL structure. 
+\end{thm}
+
+\subsection{The Kirby-Siebenmann Class}
+\begin{defn}{The Kirby-Siebenmann Class}{}\\
+Let $M$ be a topological manifold. Define the Kirby-Siebenmann class of $M$ to be the element $$\kappa(M)\in H^4(M;\Z/2\Z)\cong[M,K(\Z/2\Z,4)]$$ given by the element $M\overset{\tau_M}{\to}BTop\to K(\Z/2\Z,4)$. 
+\end{defn}
+
+\begin{prp}{Kirby-Siebenmann Structure Theorem}{}\\
+Let $M$ be a compact topological manifold of dimension $n\geq 5$. Then the following are true. 
+\begin{itemize}
+\item $M$ admits a PL structure if and only if $\kappa(M)=0$. 
+\item If $\kappa(M)=0$, then the set of concordance classes of PL structure on $M$ is a torsor over $H^3(M;\Z/2\Z)$. 
+\end{itemize}
+\end{prp}
+
+\subsection{The Low Dimensional Case}
+\begin{thm}{Rado's Theorem}{}\\
+Let $M$ be topological manifold of dimension $2$. Then $M$ admits a unique smooth structure, unique PL structure and unique triangulation. 
+\end{thm}
+
+\begin{thm}{Moise's Theorem}{}\\
+Let $M$ be topological manifold of dimension $3$. Then $M$ admits a unique smooth structure, unique PL structure and unique triangulation. 
+\end{thm}
+
+\begin{thm}{Cairns-Hirsch}{}\\
+Let $M$ be piecewise linear manifold of dimension $4$. Then $M$ admits a unique smooth structure and a unique PL structure. 
+\end{thm}
+
+\begin{thm}{}{}\\
+Let $M$ be a topological manifold of dimension $4$. Then the following are true. 
+\begin{itemize}
+\item If $\kappa(M)\neq 0$, then $M$ admits no PL structure and no smooth structure. 
+\item If $\kappa(M)=0$ and $Q_M$ is not diagonalizable over $\Z$, then $M$ admits no PL structure and no smooth structure. 
+\end{itemize}
+\end{thm}
+
+\begin{thm}{}{}\\
+The following are true. 
+\begin{itemize}
+\item There exists uncountably many pairwise non-diffeomorphic smooth structures on $\R^4$. 
+\item For $n\neq 4$, there exists a unique smooth structure on $\R^n$. 
+\end{itemize}
+\end{thm}
+
+\begin{thm}{Manolescu 2016}{}\\
+For all $n\geq 5$, there exists a compact topological manifold of dimension $n$ that admits no triangulation. 
+\end{thm}
+
+\begin{thm}{}{}\\
+Let $M$ be PL manifold of dimension $n\leq 6$. Then $M$ admits a smooth structure. 
+\end{thm}
+
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\substack{\text{Smooth}\\\text{Manifolds}} & \substack{\text{PL}\\\text{Manifolds}} & \substack{\text{Topological}\\\text{Manifolds}}
+	\arrow["\subset", shift right=3, draw=none, from=1-1, to=1-2]
+	\arrow["\subset", shift right=3, draw=none, from=1-2, to=1-3]
+\end{tikzcd}}\\
+Summarizing: All inclusions are equalities for $\dim\leq 3$. The first inclusion is strict for $\dim=4$. 
+
+\pagebreak
+\section{Rational Homotopy Theory}
+\subsection{Homology with Coefficients in a Subring of $\Q$}
+\begin{thm}{Whitehead-Serre Theorem}{}\\
+Let $X,Y$ be simply connected spaces. Let $R$ be a subring of $\Q$. Let $f:X\to Y$ be a map. Then the following are equivalent. 
+\begin{itemize}
+\item $\pi_\ast(f)\otimes_\Z R$ is an isomorphism of graded abelian groups. 
+\item $H_\ast(f;R)$ is an isomorphism of graded rings. 
+\item $H_\ast(\Omega f;R)$ is an isomorphism of graded rings. 
+\end{itemize}
+\end{thm}
+
+\begin{lmm}{}{}\\
+Let $X$ be an $n$-connected space. Let $R$ be a subring of $\Q$. Suppose that one of the following are true. 
+\begin{itemize}
+\item $n\geq 1$. 
+\item $n=0$ and $\pi_1(X)$ is abelian. 
+\end{itemize}
+Then the Hurewicz homomorphism induces an isomorphism $$\pi_{n+1}(X)\otimes_\Z R\cong H_{n+1}(X;R)$$
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $A$ be an abelian group. Let $n\in\N^+$. Let $R$ be a subring of $\Q$. Then we have $A\otimes_\Z R=0$ if and only if $H_\ast(K(A,n);R)\cong H_\ast(\ast;R)$. 
+\end{prp}
+
+\subsection{P-Local Modules}
+\begin{defn}{P-Local Groups}{}\\
+Let $A$ be an abelian group. Let $P\subseteq\N$ be a set of prime numbers. We say that $A$ is $P$-local if for all $q\in\N\setminus P$, the map $\cdot q:A\to A$ is an isomorphism. 
+\end{defn}
+
+\begin{defn}{P-Localization Map}{}\\
+Let $A$ be an abelian group. Let $P\subseteq\N$ be a set of prime numbers. Define the $P$-localization map of $A$ to be the map $$A\to A\otimes_\Z S_P^{-1}\Z$$ where $S_P=\{n\in\Z\;|\;\gcd(n,p)=1\text{ for all }p\in P\}$.
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $A$ be an abelian group. Let $P\subseteq\N$ be a set of prime numbers. Let $S_P=\{n\in\Z\;|\;\gcd(n,p)=1\text{ for all }p\in P\}$. Then the following are equivalent. 
+\begin{itemize}
+\item $A$ is $P$-local. 
+\item $A$ is a $S_P^{-1}\Z$-module by extension of scalars. 
+\item The $P$-localization map $A\to A\otimes_\Z S_P^{-1}\Z$ is an isomorphism. 
+\end{itemize}
+\end{prp}
+
+When $P=\emptyset$, then $S_P^{-1}\Z=\Q$ is just rationalization. 
+
+\subsection{P-Local Spaces}
+\begin{defn}{P-Local Space}{}\\
+Let $X$ be a simply connected space. Let $P\subseteq\N$ be a set of prime numbers. We say that $X$ is $P$-local if $\pi_n(X)$ is a $P$-local group for all $n\geq 2$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $X$ be a simply connected space. Let $P\subseteq\N$ be a set of prime numbers. Then the following are equivalent. 
+\begin{itemize}
+\item $X$ is $P$-local. 
+\item $H_n(X,\ast)$ is $P$-local for all $n\geq 0$. 
+\item $H_n(\Omega X,\ast)$ is $P$-local for all $n\geq 0$. 
+\end{itemize}
+\end{prp}
+
+\begin{lmm}{}{}\\
+Let $A$ be an abelian group. Let $n\geq 1$. Let $P\subseteq\N$ be a set of prime numbers. If $A$ is $P$-local, then we have $$H_\ast(X;\Z/p\Z)\cong H_\ast(\ast,\Z/p\Z)$$ for all $p\notin P$. 
+\end{lmm}
+
+\begin{defn}{P-Localization}{}\\
+Let $X$ be a simply connected space. Let $P\subseteq\N$ be a set of prime numbers. A $P$-localization of $X$ is a space $X_P$ together with a map $i_p:X\to X_P$ such that $f$ induces an isomorphism $$\pi_n(X)\otimes_\Z S_P^{-1}\Z\to\pi_n(X_P)$$ for all $n\geq 2$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $X$ be a simply connected space. Let $P\subseteq\N$ be a set of prime numbers. Suppose that $X_P$ exists. Then the following are true. 
+\begin{itemize}
+\item Suppose that $Z$ is a $P$-local space and $f:X\to Z$ is a map. Then there exists a map $g:X_P\to Z$ such that $g\circ i_p=f$. 
+\item Suppose that $Z$ is a $P$-local space and $f_1,f_2:X\to Z$ are map. Suppose that $g_1,g_2:X_P\to Z$ are maps such that $g_1\circ i_p=f_1$ and $g_2\circ i_p=f_2$. Suppose that $H:X\times I\to Z$ is a homotopy from $f_1$ to $f_2$. Then there exists a homotopy $K:X_P\times I\to Z$ such that $K\circ i_p\times\text{id}_Z=H$. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $X$ be a simply connected space. Let $P\subseteq\N$ be a set of prime numbers. Then $X_P$ exists and is unique up to homotopy equivalence relative to $X$. 
+\end{prp}
+
+\subsection{Rational Homotopy Equivalence}
+\begin{defn}{Rational Model}{}\\
+Let $X$ be a simply connected space. A rational model of $X$ is a $P$-localization of $X$ where $P=\emptyset$. It is denoted by $X_\Q$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $X$ be a simply connected space. Then the following are true. 
+\begin{itemize}
+\item $X_\Q$ is homotopy equivalent to a CW complex. 
+\item $C_\ast(X_\Q)$ has all differentials as $0$. 
+\item $H_\ast(X_\Q)$ is a free graded $\Z$-module. 
+\end{itemize}
+\end{prp}
+
+\pagebreak
+\section{Topics in Simplicial Homology}
+\subsection{}
+\begin{prp}{}{}\\
+Let $S$ be a simplicial complex. Let $\sigma\in S$. Let $p\in\abs{\sigma}^\circ$. Then we have $$H_\text{sing}^k(\abs{S},\abs{S}\setminus p)\cong\widetilde{H}_\Delta^{k-\abs{\sigma}}(\text{lk}(\sigma))$$
+\end{prp}
+
+\pagebreak
+\section{Newtonian Mechanics}
+We begin with the assumption that we live in a smooth manifold of dimension $n$, together with an affine connection. 
+
+\begin{defn}{Inertial Frame of References}{}\\
+Let $M$ be a smooth manifold of dimension $n$. Let $\nabla$ be an affine connection on $M$. Let $(U,\varphi)$ be a chart of $M$. We say that $\varphi$ is an inertial frame of reference if $$\frac{d^2(\varphi\circ\gamma)}{dt^2}=0$$ for all geodesics $\gamma:I\to U$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $M$ be a smooth manifold of dimension $n$. Let $\nabla$ be an affine connection on $M$. If $M$ admits an inertial frame of reference, then $\nabla$ is flat and torsion-free. 
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $M$ be a smooth manifold of dimension $n$. Let $\nabla$ be an torsion-free affine connection on $M$. Then $M$ admits a global inertial frame of reference if and only if $\nabla$ is flat and $M$ is simply connected. 
+\end{prp}
+
+Newton's first law: inertial frames exists. 
+
+\subsection{Galilean Space}
+\begin{defn}{Galilean Space-Time Structure}{}\\
+Define a Galilean space-time structure to consist of the following data. 
+\begin{itemize}
+\item An affine space $(A,\R^4,+)$ called the universe. 
+\item A linear map $\tau:\R^4\to\R$ called time. 
+\item An inner product $\langle-,-\rangle:\ker(\tau)\times\ker(\tau)\to\R$. 
+\end{itemize}
+\end{defn}
+
+Idea: There are no fixed point of reference in $A$ (no point of origin for both space and time). We measure time relatively by the linear map $\tau$. Elements of $\ker(\tau)$ lies in the same time frame and are called simultaneous events. We measure the spatial difference between simultaneous events by the usual inner product. 
+
+\begin{defn}{Galilean Transformations}{}\\
+Let $(A,\R^4,+,\tau,\langle-,-\rangle)$ and $(A',\R^4,+,\tau',[-,-])$ be Galilean spaces. Let $T:A\to A'$ be an affine transformation. We say that $T$ is a Galilean transformation if the following are true. 
+\begin{itemize}
+\item $\tau'(\overline{T}(b)-\overline{T}(a))=\tau(b-a)$ for all $a,b\in\R^4$. 
+\item $[\overline{T}(b),\overline{T}(a)]=\langle a,b\rangle$ for all $a,b\in\ker(\tau)$. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Galilean Isomorphism}{}\\
+Let $(A,\R^4,+,\tau,\langle-,-\rangle)$ and $(A',\R^4,+,\tau',[-,-])$ be Galilean spaces. Let $T:A\to A'$ be a Galilean transformation. We say that $T$ is an isomorphism if there exists a Galilean transformation $S$ such that $$S\circ T=\text{id}_A\;\;\text{ and }\;\;T\circ S=\text{id}_{A'}$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $(A,\R^4,+,\tau,\langle-,-\rangle)$ be a Galilean space. Then $A$ is isomorphic to $\R^4$ as a Galilean space. 
+\end{prp}
+
+\begin{defn}{The Galilean Group}{}\\
+Let $(A,\R^4,+,\tau,\langle-,-\rangle)$ be a Galilean space. Define the Galilean group of $A$ to be the subgroup $$\text{Gal}(A)=\{T:A\to A\;|\;T\text{ is a Galilean transformation }\}\leq\text{Aff}(A)$$
+\end{defn}
+
+\begin{defn}{The Galilean Group for the Standard Galilean Space}{}\\
+Define the Galilean group for $\R^4$ by $$\text{Gal}(3)=\{T:\R^4\to\R^4\;|\;T\text{ is a Galilean transformation }\}\leq\text{Aff}(\R^4)$$ Let $T\in\text{Gal}(3)$. 
+\begin{itemize}
+\item We say that $T$ is uniform motion if $T$ is of the form $$T(x,t)=(x+vt,t)$$ for some $v\in\R^3$. 
+\item We say that $T$ is a translation if $T$ is of the form $$T(x,t)=(x+s_0,x+s_1)$$ for some $s_0\in\R^3$ and $s_1\in\R$. 
+\item We say that $T$ is a rotation if $T$ is of the form $$T(x,t)=(Gx,t)$$ for some $G\in O(3,\R)$. 
+\end{itemize}
+\end{defn}
+
+Decompose $\text{Gal}(3)$ into rotation + boost + translation
+
+\begin{prp}{}{}\\
+Let $T\in\text{Gal}(3)$. There exists a unique rotation $g_1\in\text{Gal}(3)$, a unique translation $g_2\in\text{Gal}(3)$ and a unique uniform motion $g_3\in\text{Gal}(3)$ such that $$T=g_1\circ g_2\circ g_3$$
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $(A,\R^4,+,\tau,\langle-,-\rangle)$ be a Galilean space. Then the following are true regarding inertial frames of references. 
+\begin{itemize}
+\item $A$ admits an inertial frame of reference. 
+\item Let $\phi$ be an inertial frame of reference. Let $T\in\text{Gal}(A)$ be a Galilean transformation. Then $\phi\circ T$ is an inertial frame of reference. 
+\item Let $\phi$ and $\psi$ be two inertial frames of references. Then there exists a unique $T\in\text{Gal}(A)$ such that $\psi=\phi\circ T$. 
+\end{itemize}
+\end{prp}
+
+\subsection{Newton's Laws and Equation of Motion}
+\begin{defn}{World Lines}{}\\
+Let $(A,\R^4,+,\tau,\langle-,-\rangle)$ be a Galilean space. Let $r:\mC^\infty(\R,\R^3)$ be a map. We say that $r$ is a world line if there exists an inertial frame of reference $\varphi:A\to\R^4$ and a geodesic $\gamma:\R\to A$ such that $$r=\pi\circ\varphi\circ\gamma$$ where $\pi:\R^4\to\R^3$ is the projection map to the first three coordinates. 
+\end{defn}
+
+\begin{defn}{Newtonian System}{}\\
+Let $(A,\R^4,+,\tau,\langle-,-\rangle)$ be a Galilean space. Let $N\in\N^+$. A Newtonian system of $N$ objects consists of the following data. 
+\begin{itemize}
+\item World lines $r_1,\dots,r_N\in\mC^\infty(\R,\R^3)$. 
+\item Masses $m_1,\dots,m_N\in\R^+$. 
+\item Force Laws $F_i:\R^{3N}\times\R^{3N}\times\R\to\R$ for $1\leq i\leq N$. 
+\end{itemize}
+such that $$m_i\frac{d^2r_i}{dt^2}=F_i\left(r_1,\dots,r_N,\frac{dr_1}{dt},\dots,\frac{dr_N}{dt},t\right)$$ for $1\leq i\leq N$. 
+\end{defn}
+
+The condition that $F_i$ is constant ration with $r''$ is Newton's second law. 
+
+Postulate: Newton's principle of determinacy: global solution of of the ode exists given initial data (only local solution is guaranteed by Picard-Lindelof)
+
+\begin{defn}{Galilean Newtonian System}{}\\
+Let $(A,\R^4,+,\tau,\langle-,-\rangle)$ be a Galilean space. Let $N\in\N^+$. Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a Newtonian system of $N$ objects. We say that the Newtonian system of $N$ objects is Galilean if $$F_i\left(Gr_1+vt+s_0,\dots,Gr_N+vt+s_0,G\frac{dr_1}{dt}+v,\dots,G\frac{dr_N}{dt}+v,t+s_1\right)=F_i\left(r_1,\dots,r_N,\frac{dr_1}{dt},\dots,\frac{dr_N}{dt},t\right)$$ for all $1\leq i\leq N$ and all $G\in O(3)$, $v,s_0\in\R^3$ and $s_1\in\R$. 
+\end{defn}
+
+Postulate: Galileo's principle of relativity. All observed forces are Galilean. (All Newtonian systems are Galilean)
+
+\subsection{Gravitational Force}
+\begin{defn}{System for Gravitational Force}{}\\
+The system for gravitational force is a Newtonian system of $2$ objects whose force law is given by $$F_1=\frac{Gm_1m_2}{\abs{r_2-r_1}^3}(r_2-r_1)\;\;\text{ and }\;\;F_2=\frac{Gm_1m_2}{\abs{r_1-r_2}^3}(r_1-r_2)$$ where $G$ is the gravitational constant. 
+\end{defn}
+
+\begin{eg}{}{}\\
+If the first object is a stone and the second object is earth, then $m_2>>m_1$. Then setting $F_1=m_1\frac{d^2r_1}{dt^2}$ and $F_2=m_2\frac{d^2r_2}{dt^2}$, we deduce that $$\frac{d^2r_2/dt^2}{d^2r_1/dt^2}=\frac{m_1}{m_2}\sim 0$$ This implies that and so $r_2(t)=k$ is approximately constant. Then the equation for $F_1$ reduces to $$\frac{d^2r_1}{dt^2}=-\frac{Gm_2}{\abs{r_1}^3}r_1$$ Assuming that the stone is close to the earth's surface, we have $\abs{r_1}\sim R$ where $R$ is the earth's radius. Write $r_1(t)=(x(t),y(t),z(t))$. In an appropriate inertial frame, we may decouple the equations to get $$\frac{d^2x}{dt^2}=0\;\;\text{ and }\;\;\frac{d^2y}{dt^2}=0\;\;\text{ and }\;\;\frac{d^2z}{dt^2}=-g$$ where $g=\frac{Gm_2}{R^2}$. Assuming that the stone is dropped from height $h_0$. Then solving the second order ODEs with the initial data gives $$r_1(t)=\left(0,0,h_0-\frac{1}{2}gt\right)$$ The stone hits the ground when $t=\sqrt{2h_0/g}$. 
+\end{eg}
+
+\pagebreak
+\section{Lagrangian Mechanics}
+\subsection{Configuration Space}
+\begin{defn}{Holonomic Constraints}{}\\
+Let $N\in\N^+$. Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a Newtonian system of $N$ objects. A holonomic constraint on the system is a function $f\in\mC^2(\R^{3N}\times\R,\R)$ such that $$f(r_1,\dots,r_N,t)=0$$
+\end{defn}
+
+\begin{defn}{Configuration Space}{}\\
+Let $N\in\N^+$. Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a Newtonian system of $N$ objects. Let $f_1,\dots,f_k$ be holonomic constrains on the system. Define the configuration space of the system to be $$Q=\{x\in\R^{3N}\;|\;f_j(x)=0\text{ for all }1\leq j\leq N\}$$
+\end{defn}
+
+Each point in the configuration space is not a point in spacetime, instead they represent a possible position for N particles to situate in space time. 
+
+\begin{defn}{Trajectories}{}\\
+Let $Q$ be a configuration space of $N$ objects. A trajectory on $Q$ is a smooth function $$\gamma:[t_1,t_2]\subseteq\R\to Q$$
+\end{defn}
+
+\begin{defn}{The Space of Trajectories}{}\\
+Let $Q$ be a configuration space of $N$ objects. Define the space of trajectories of $Q$ to be $$\Omega Q=\{\gamma\;|\;\gamma\text{ is a trajectory }\}$$
+\end{defn}
+
+\subsection{The Euler Lagrange Operator}
+\begin{defn}{Lagrangian}{}\\
+Let $Q$ be a configuration space of $N$ objects. A Lagrangian on $Q$ is a smooth function $$L:TQ\times\R\to\R$$
+\end{defn}
+
+\begin{defn}{The Action Functional}{}\\
+Let $Q$ be a configuration space of $N$ objects. Let $L:TQ\times\R\to\R$ be a Lagrangian. Let $\gamma:[t_1,t_2]\to Q$ be a trajectory. Define the action functional of $\gamma$ by $$S[\gamma]=\int_{t_1}^{t_2}L(\gamma(t),\gamma'(t),t)\;dt$$
+\end{defn}
+
+\begin{defn}{Space of Deformations}{}\\
+Let $Q$ be a configuration space of $N$ objects. Let $\gamma:[t_1,t_2]\to Q$ be a trajectory. Define the space of deformation of $\gamma$ by $$\Omega_\gamma=\{\eta:[t_1,t_2]\to TQ\;|\;\eta(t)\in T_{\gamma(t)}Q\text{ and }\eta(t_1)=\eta(t_2)=0\}$$
+\end{defn}
+
+\begin{defn}{Variations}{}\\
+Let $Q$ be a configuration space of $N$ objects. Let $L:TQ\times\R\to\R$ be a Lagrangian. Let $\gamma:[t_1,t_2]\to Q$ be a trajectory. Let $\eta\in\Omega_\gamma$ be a deformation. Define the variation of $\eta$ to be $$\delta S[\gamma](\eta)=\frac{d}{d\varepsilon}\bigg{|}_{\varepsilon=0}S[\gamma+\varepsilon\eta]$$
+\end{defn}
+
+Assumption: Hamilton's principle (principle of least / stationary action): the actual path taken by the system is the one for which $S[\gamma]$ is stationary under small perturbations (i.e. $\delta S[\gamma](\eta)=0$ for all $\eta$)
+
+\begin{defn}{Euler-Lagrange Operator}{}\\
+Let $Q$ be a configuration space of $N$ objects. Let $L:TQ\times\R\to\R$ be a Lagrangian. Define the Euler Lagrange operator to be the function $\text{EL}^i:\Omega\to\mC^0([t_1,t_2],\R^n)$ by $$\text{EL}^i(\gamma)(t)=\frac{\partial L}{\partial x^i}\bigg{|}_{\gamma(t)}-\frac{d}{dt}\frac{\partial L}{\partial x_i'}\bigg{|}_{\gamma(t)}$$ for any $\gamma\in\Omega$ where $(x_1',\dots,x_n',x^1,\dots,x^n)$ are the coordinates of $TQ$. 
+\end{defn}
+
+\begin{eg}{}{}\\
+Suppose that $Q=\R^1$ is the configuration space of $1$ object. Let $L:TQ\times\R\to\R$ be the Lagrangian given by $$L(v,x,t)=\frac{1}{2}mv^2-V(x)$$ Then for any $\gamma:[0,1]\to Q$, the Euler Lagrange equation operator reads $$\text{EL}(\gamma)=-V'(\gamma(t))-m\gamma''(t)$$ Notice that setting $\text{EL}(\gamma)$ recovers Newton's second equation of motion where $F=-V'(\gamma(t))$. 
+\end{eg}
+
+\begin{thm}{}{}\\
+Let $Q$ be a configuration space of $N$ objects. Let $L:TQ\times\R\to\R$ be a Lagrangian. Let $\gamma:[t_1,t_2]\to Q$ be a trajectory. Then we have $\delta S[\gamma](\eta)=0$ for all $\eta\in\Omega_\gamma$ if and only if $\text{EL}^i(\gamma)=0$ for all $i$. 
+\end{thm}
+
+\subsection{Symmetries and Noether's Theorem}
+\begin{defn}{Infinitesimal Symmetry}{}\\
+Let $Q$ be a configuration space of $N$ objects. Let $L:TQ\times\R\to\R$ be a Lagrangian. Let $\Phi:(-\varepsilon,\varepsilon)\times Q\to Q$ be a one parameter family of diffeomorphisms. We say that $\Phi$ is a symmetry of $L$ if $$L(\Phi_s,(T\Phi_s)(q'),t)=L(q,q',t)$$ for all $s\in(-\varepsilon,\varepsilon)$. 
+\end{defn}
+
+\begin{defn}{Infinitesimal Generator}{}\\
+Let $Q$ be a configuration space of $N$ objects. Let $L:TQ\times\R\to\R$ be a Lagrangian. Let $\Phi:(-\varepsilon,\varepsilon)\times Q\to Q$ be a symmetry of $L$. Define the infinitesimal generator of $\Phi$ to be the vector field $$\xi=\frac{d}{ds}_{s=0}\Phi_s$$
+\end{defn}
+
+\begin{thm}{Noether's Theorem}{}\\
+Let $Q$ be a configuration space of $N$ objects. Let $L:TQ\times\R\to\R$ be a Lagrangian. Let $\Phi:(-\varepsilon,\varepsilon)\times Q\to Q$ be a symmetry of $L$. Let $\gamma$ be a solution of $\text{EL}$. Then we have $$\frac{d}{dt}\frac{\partial L}{\partial x_i'}\xi^i\bigg{|}_{\gamma}=0$$
+\end{thm}
+
+\pagebreak
+\section{Hamiltonian Mechanics}
+
+\pagebreak
+\section{K Theory}
+\subsection{}
+\begin{defn}{The 0th K-Group}{}\\
+Let $R$ be a ring. Define the $0$th $K$-group of $R$ to be the set $$K_0(R)=\frac{\{P\;|\;P\text{ is a finitely generated projective }R\text{-module }\}}{\cong}$$ together with addition given by $[P_1]+[P_2]=[P_3]$ if there is a short exact sequence \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {P_1} & {P_3} & {P_2} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\~\\
+\end{defn}
+
+\begin{eg}{}{}\\
+Suppose that $R$ is a PID. Then there is an isomorphism $$K_0(R)\cong\Z$$ given by $[n]\mapsto[R^n]$. 
+\end{eg}
+
+\begin{defn}{The Change of Rings Homomorphism}{}\\
+Let $R,S$ be rings. Let $f:R\to S$ be a ring homomrphism. Define the change of rings homomorphism to be the map $K_0(f):K_0(R)\to K_0(S)$ given by $$[P]\mapsto[S\otimes_RP]$$
+\end{defn}
+
+Recall the Grothendieck completion of an abelian semi-group $G(-)$. 
+
+\begin{prp}{}{}\\
+Let $R$ be a ring. Let $P(R)=\{P\;|\;P\text{ is a finitely generated projective }R\text{-modules }\}$. Then there is a natural isomorphism $$K_0(R)\cong G(P(R),\oplus)$$
+\end{prp}
+
+\begin{prp}{Morita Equivalence}{}\\
+Let $R$ be a ring. Then there is a natural isomorphism $$K_0(R)\cong K_0(M_n(R))$$ given by $[P]\mapsto R^n\otimes_RP$ where $R^n$ is considered as an $(M_n(R),R)$-bimodule. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $R,S$ be rings. Then there is a natural isomrophism $$K_0(R\times S)\cong K_0(R)\times K_0(S)$$ induced by the product of the projection maps. 
+\end{prp}
+
+\begin{eg}{}{}\\
+Let $F$ be a field. Let $V$ be a vector space over $F$ of countable dimension. Then there is an isomorphism $$K_0(\text{End}_F(V))\cong\{1\}$$
+\end{eg}
+
+\begin{defn}{The Reduced 0th K-Group}{}\\
+Let $R$ be a ring. Define the reduced $0$th $K$-group to be the quotient $$\widetilde{K}_0(R)=\frac{K_0(R)}{\langle[R^m]-[R^n]\;|\;m,n\in\N\rangle}$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $R$ be a ring. Then there is a natural isomorphism $$\widetilde{K}_0(R)\cong\langle[R]\rangle\leq\widetilde{K}_0(R)$$
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $G$ be a group. Let $R$ be an integral domain. Then there is an isomorphism $$K_0(R[G])\cong\widetilde{K}_0(R[G])\oplus\Z$$ give by $[P]\mapsto([P],\dim_{\text{Frac}(R)}(\text{Frac}(R)\otimes_{R[G]}P))$
+\end{prp}
+
+\begin{conj}{Farrell-Jones Conjecture}{}\\
+Let $R$ be a regular ring. Let $G$ be a torsion free group. Then the inclusion map induces a natural isomorphism $$K_0(R)\cong K_0(R[G])$$
+\end{conj}
 
 \end{document}

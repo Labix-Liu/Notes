@@ -2770,6 +2770,18 @@ Let $R$ be a ring. Let $n\in\N^+$. Let $A\in M_n(R)$.
 Let $R$ be a ring. Let $n,m\in\N^+$. Let $A=(a_{i,j})\in M_{n\times m}(R)$ be a matrix. Define the transpose of $A$ to be $$A^T=(a_{j,i})\in M_{m\times n}(R)$$
 \end{defn}
 
+\begin{prp}{}{}\\
+Let $F$ be a ring. Let $A,B\in M_{m\times n}(R)$ be complex matrices. Then we have $$(\lambda A+\mu B)^T=\lambda A^T+\mu B^T$$ for any $\lambda,\mu\in R$. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $R$ be a ring. Let $A\in M_{m\times n}(R)$ and $B\in M_{k\times m}(R)$ be matrices. Then we have $$(BA)^T=A^TB^T$$
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $R$ be a ring. Let $A\in M_{m\times n}(\R)$. Then we have $(A^T)^T=A$. 
+\end{prp}
+
 \subsection{Determinants}
 Let $n\in\N^+$. Recall that $S_n$ is the group of all bijections of the set $\{1,\dots,n\}$ together with functional composition. 
 
@@ -2779,6 +2791,32 @@ Let $R$ be a ring. Let $A\in M_n(R)$. Define the determinant of $A$ to be $$\det
 
 \begin{eg}{}{}\\
 Let $R$ be a ring. Let $I\in M_n(R)$ be the identity matrix. Then $\det(I)=1$. 
+\end{eg}
+
+\begin{eg}{The Vandermonde Matrix}{}\\
+Let $\F$ be a field. The Vandermonde matrix is given by $$V=\begin{pmatrix}
+1 & a_1 & \cdots & a_1^{n-1}\\
+\vdots & \vdots & \ddots & \vdots\\
+1 & a_n & \cdots & a_n^{n-1}
+\end{pmatrix}\in M_n(\F)$$ for $a_1,\dots,a_n\in\F$. Then the determinant of the Vandermonde matrix is given by $$\det(V)=\prod_{1\leq i<j\leq n}(a_j-a_i)$$
+\begin{proof}\\
+When $n=1,2$ the results are clear. Let $M\in M_n(\F)$ be the matrix on the left. Using elementary row operations, we have 
+\begin{align*}
+\det(M)&=\det(A_{2,1}(-a_1)\cdots A_{n,n-1}(-a_1)M)\\
+&=\det\begin{pmatrix}
+1 & 0 & \cdots & 0\\
+1 & a_2-a_1 & \cdots & a_2^{n-2}(a_2-a_1)\\
+\vdots & \vdots & \ddots & \vdots\\
+1 & a_n-a_1 & \cdots & a_n^{n-2}(a_n-a_1)
+\end{pmatrix}\\
+&=\prod_{i=2}^n(a_i-a_1)\det\begin{pmatrix}
+1 & a_2 & \cdots & a_2^{n-2}\\
+\vdots & \vdots & \ddots & \vdots\\
+1 & a_n & \cdots & a_n^{n-2}
+\end{pmatrix}
+\end{align*}
+so by induction we are done. 
+\end{proof}
 \end{eg}
 
 \begin{prp}{}{}\\
@@ -2886,34 +2924,8 @@ Let $F$ be a field. Let $a\in F^\times$ be non-zero. Then the following are true
 \end{itemize}
 \end{lmm}
 
-\begin{eg}{The Vandermonde Matrix}{}\\
-Let $\F$ be a field. The Vandermonde matrix is given by $$V=\begin{pmatrix}
-1 & a_1 & \cdots & a_1^{n-1}\\
-\vdots & \vdots & \ddots & \vdots\\
-1 & a_n & \cdots & a_n^{n-1}
-\end{pmatrix}\in M_n(\F)$$ for $a_1,\dots,a_n\in\F$. Then the determinant of the Vandermonde matrix is given by $$\det(V)=\prod_{1\leq i<j\leq n}(a_j-a_i)$$
-\begin{proof}\\
-When $n=1,2$ the results are clear. Let $M\in M_n(\F)$ be the matrix on the left. Using elementary row operations, we have 
-\begin{align*}
-\det(M)&=\det(A_{2,1}(-a_1)\cdots A_{n,n-1}(-a_1)M)\\
-&=\det\begin{pmatrix}
-1 & 0 & \cdots & 0\\
-1 & a_2-a_1 & \cdots & a_2^{n-2}(a_2-a_1)\\
-\vdots & \vdots & \ddots & \vdots\\
-1 & a_n-a_1 & \cdots & a_n^{n-2}(a_n-a_1)
-\end{pmatrix}\\
-&=\prod_{i=2}^n(a_i-a_1)\det\begin{pmatrix}
-1 & a_2 & \cdots & a_2^{n-2}\\
-\vdots & \vdots & \ddots & \vdots\\
-1 & a_n & \cdots & a_n^{n-2}
-\end{pmatrix}
-\end{align*}
-so by induction we are done. 
-\end{proof}
-\end{eg}
-
 \begin{defn}{Upper Echelon Form}{}\\
-Let $R$ be a ring. Let $M\in M_n(R)$ be a matrix. We say that $M$ is in upper echelon form if the following are true. 
+Let $R$ be a ring. Let $M\in M_{m\times n}(R)$ be a matrix. We say that $M$ is in upper echelon form if the following are true. 
 \begin{itemize}
 \item All zero rows are below all non-zero rows. 
 \item The first non-zero entry of a row is to the right of the first non-zero entry of the row above. 
@@ -2922,19 +2934,60 @@ Let $R$ be a ring. Let $M\in M_n(R)$ be a matrix. We say that $M$ is in upper ec
 \end{defn}
 
 \begin{defn}{Row-reduced Form}{}\\
-We say that a matrix in upper echelon form is in row-reduced form if above and below every first non-zero entry of a row, all entries are $0$. 
+Let $\F$ be a field. Let $M\in M_{m\times n}(\F)$ be a matrix. We say that $M$ is in row-reduced echelon form if it is in upper echelon form and all entries below every first non-zero entry of a row is zero. We denote the the row-reduced echelon form of $M$ by $\text{rref}(M)$. 
 \end{defn}
 
 \begin{defn}{Reduction Procedure}{}\\
 Let $\F$ be a field. Let $m,n\in\N^+$. Let $A=(a_{ij})\in M_{m\times n}(\F)$. Define the reduction procedure on $A$ as follows. Start with $i=j=1$. 
 \begin{enumerate}
-\item If $a_{ij}$ and all entries below are $0$, move on pivot to the right to $a_{i,j+1}$ and repeat step 1, or terminate if $j=n$
+\item If $a_{ij}$ and all entries below are $0$, move on pivot to the right to $a_{i,j+1}$ and repeat step 1, or terminate if $j=n+1$
 \item If $a_{ij}=0$ but $(a_{kj})\neq 0$ for some $k>i$, apply $T_{i,k}$
 \item If $a_{ij}\neq 1$, apply $S_i(a_{ij}^{-1})$
 \item If for any $k\neq i$, $a_{kj}\neq 0$, apply $A_{k,i}(-a_{kj})$
-\item If $i=m$ or $j=n$ then terminate, else move pivot to $i+1,j+1$ and go back to step 1. 
+\item If $i=m+1$ or $j=n+1$ then terminate, else move pivot to $i+1,j+1$ and go back to step 1. 
 \end{enumerate}
 \end{defn}
+
+\begin{eg}{}{}\\
+Let $M\in M_{3\times 4}(\R)$ be the matrix given by $$M=\begin{pmatrix}
+1 & 2 & 3 & 4\\
+2 & 5 & 7 & 9\\
+3 & 7 & 10 & 14
+\end{pmatrix}$$
+Then we have $$\text{rref}(M)=\begin{pmatrix}
+1 & 0 & 1 & 0\\
+0 & 1 & 1 & 0\\
+0 & 0 & 0 & 1
+\end{pmatrix}$$
+\begin{proof}\\
+We follow the reduction procedure. Start with $i=j=1$. We have $a_{11}=1$ so we go to step 4. Apply $A_{2,1}(-2)$ and $A_{3,1}(-3)$ to get the matrix $$\begin{pmatrix}
+1 & 2 & 3 & 4\\
+0 & 1 & 1 & 1\\
+0 & 1 & 1 & 2
+\end{pmatrix}$$ We now move the pivot to $i=j=2$. We apply $A_{1,2}(-2)$ and $A_{3,2}(-1)$ to get $$\begin{pmatrix}
+1 & 0 & 1 & 2\\
+0 & 1 & 1 & 1\\
+0 & 0 & 0 & 1
+\end{pmatrix}$$ Finally, we move the pivot to $i=j=3$. Since it is $0$, we move the pivot to $j=4$. Apply $A_{1,3}(-2)$ and $A_{2,3}(-1)$ to get $$\begin{pmatrix}
+1 & 0 & 1 & 0\\
+0 & 1 & 1 & 0\\
+0 & 0 & 0 & 1
+\end{pmatrix}$$ Now moving the pivot we make it go out of bound so we are done. 
+\end{proof}
+\end{eg}
+
+\begin{prp}{}{}\\
+Let $\F$ be a field. Let $M\in M_{m\times n}(\F)$ be a matrix. Then the row-reduced echelon form of $M$ exists and is uniquely given by the reduction procedure. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $\F$ be a field. Let $M\in M_n(\F)$ be a matrix. Then $M$ is invertible if and only if $\text{rref}(M)=I$. 
+\begin{proof}\\
+Suppose that $\text{rref}(M)=I$. Then there exists row operation matrices $B_1,\dots,B_m$ such that $I=B_m\cdots B_1M$. Since row operation matrices are invertible, we have $B_1^{-1}\cdots B_m^{-1}=M$. Hence $M$ is a product of invertible matrices, and hence is invertible. \\
+
+Now suppose that $M$ is invertible. Since row operation matrices are invertible, we know that $\text{rref}(M)$ is invertible. I claim that no row of an invertible matrix $R$ is $0$. Suppose for a contradiction that row $i$ is $0$. Then the $(i,i)$th element of $RR^{-1}$ is given by $$1=\sum_{i=1}^nr_{ij}R_{ij}(R^{-1})_{ji}=\sum_{i=1}^n0\cdot(R^{-1})_{ji}=0$$ a contradiction. Thus no row of $\text{rref}(M)$ is $0$. By definition of the rref, we must conclude that $\text{rref}(M)=I$. 
+\end{proof}
+\end{prp}
 
 \subsection{Formula for the Inverse of an Invertible Matrix}
 \begin{defn}{The Adjoint of a Matrix}{}\\
@@ -2949,7 +3002,7 @@ a_{m,1} & \cdots & a_{m,j-1} & a_{m,j+1} & \cdots & a_{m,n}\\
 \end{defn}
 
 \begin{prp}{}{}\\
-Let $\F$ be a field. Let $A\in M_n(\F)$. Then we have $$A\cdot\text{adj}(A)=\det(A)\cdot I_n=\text{adj}(A)\cdot A$$
+Let $R$ be a ring. Let $A\in M_n(R)$. Then we have $$A\cdot\text{adj}(A)=\det(A)\cdot I_n=\text{adj}(A)\cdot A$$
 \end{prp}
 
 \begin{prp}{}{}\\
