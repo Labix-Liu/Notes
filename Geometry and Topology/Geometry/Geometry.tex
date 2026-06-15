@@ -396,10 +396,12 @@ The reason that we have this much constraints is for us to make sure that we are
 
 \pagebreak
 \section{Hyperbolic Geometry}
-\subsection{The Lorentz Inner Product}
+\subsection{Lorentzian Linear Algebra}
 \begin{defn}{Lorentz Inner Product}{}\\
-Define the Lorentz inner product on $\R^{n+1}$ to be the function $\langle-,-\rangle_L:\R^{n+1}\times\R^{n+1}\to\R$ given by $$\langle (x_1,\dots,x_{n+1}),(y_1,\dots,y_{n+1})=-x_1y_1+\sum_{i=2}^{n+1}x_iy_i$$
+Define the Lorentz inner product on $\R^{n+1}$ to be the function $\langle-,-\rangle_L:\R^{n+1}\times\R^{n+1}\to\R$ given by $$\langle(x_1,\dots,x_{n+1}),(y_1,\dots,y_{n+1})\rangle_L=-x_1y_1+\sum_{i=2}^{n+1}x_iy_i$$
 \end{defn}
+
+This is the associated symmetric bilinear form of a quadratic form with signature $(n,1)$. 
 
 \begin{defn}{Lorentz Norm}{}\\
 Define the Lorentz norm on $\R^{n+1}$ to be the function $\|-\|_L:\R^{n+1}\to\R$ given by $$\|x\|_L=\sqrt{\langle x,x\rangle_L}$$
@@ -409,16 +411,14 @@ Define the Lorentz norm on $\R^{n+1}$ to be the function $\|-\|_L:\R^{n+1}\to\R$
 Let $x,y\in\R^{n+1}$. Then we have $$\langle x,y\rangle_L=\frac{1}{4}\left(\|x+y\|_L^2-\|x-y\|_L^2\right)$$
 \end{lmm}
 
-\begin{defn}{Lorentz Identity Matrix}{}\\
-Define the Lorentz identity matrix to be $$J_n=\begin{pmatrix}
--1 & 0\\
-0 & I_{n-1}
-\end{pmatrix}\in M_n(\R)$$
-\end{defn}
+By Sylvester's law of inertia, the matrix of any quadratic form with signature $(n,1)$ is congruent to the same matrix called the Lorentz identity matrix. 
 
-\begin{lmm}{}{}\\
-Let $x,y\in\R^{n+1}$. Then we have $$\langle x,y\rangle_L=x^TJ_{n+1}y=\langle Jx,y\rangle$$
-\end{lmm}
+\begin{defn}{Lorentz Identity Matrix}{}\\
+Define the Lorentz identity matrix to be $$J_{n+1}=\begin{pmatrix}
+-1 & 0\\
+0 & I_n
+\end{pmatrix}\in M_{n+1}(\R)$$
+\end{defn}
 
 \begin{defn}{Lorentz Orthonormal Vectors}{}\\
 Let $v_1,\dots,v_{n+1}\in\R^{n+1}$. We say that the vectors are Lorentz orthonormal if $$\langle v_i,v_j\rangle_L=\begin{cases}
@@ -428,9 +428,40 @@ Let $v_1,\dots,v_{n+1}\in\R^{n+1}$. We say that the vectors are Lorentz orthonor
 \end{cases}$$
 \end{defn}
 
+This is a basis that is guaranteed by Sylvester's law of inertia. 
+
 \begin{lmm}{}{}\\
 Let $v_1,\dots,v_{n+1}\in\R^{n+1}$ be a set of Lorentz orthonormal vectors. Then $v_1,\dots,v_{n+1}$ forms a basis for $\R^{n+1}$. 
 \end{lmm}
+
+\begin{defn}{Lorentz Transformation}{}\\
+Let $T:\R^{n+1}\to\R^{n+1}$ be a function. We say that $T$ is a Lorentz transformation if $$\langle T(x),T(y)\rangle_L=\langle x,y\rangle_L$$ for all $x,y\in\R^{n+1}$. 
+\end{defn}
+
+So Lorentz transformations are just linear maps of $\R^{n+1}$ preserving the quadratic form with signature $(n,1)$. 
+
+\begin{prp}{}{}\\
+Let $T:\R^{n+1}\to\R^{n+1}$ be a linear map. Then the following are equivalent. 
+\begin{itemize}
+\item $T$ is a Lorentz transformation. 
+\item $[T]_E^E\in O(n,1)$, where $E$ is the standard basis of $\R^{n+1}$. 
+\item $\|T(x)\|_L=\|x\|_L$ for all $x\in\R^{n+1}$. 
+\item $T$ is linear and $T(e_1),\dots,T(e_{n+1})$ forms a Lorentz orthonormal basis for $\R^{n+1}$. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $A\in M_{n+1}(\R)$ be a matrix. Then the following are equivalent. 
+\begin{itemize}
+\item $A\in O(n,1)$. 
+\item The map $x\mapsto Ax$ is a Lorentz transformation. 
+\item $\|Ax\|_L=\|x\|_L$ for all $x\in\R^{n+1}$. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+There is a one to one bijection $$O(1,n)\;\;\overset{1:1}{\longleftrightarrow}\;\;\{T\in\Hom_\R(\R^{n+1},\R^{n+1})\;|\;T\text{ is a Lorentz transformation }\}$$ given by $A\mapsto(x\mapsto Ax)$. 
+\end{prp}
 
 \begin{defn}{Physical Interpretation of Vectors}{}\\
 Let $x\in\R^{n+1}$. 
@@ -497,41 +528,6 @@ Combining these and using the fact that $\cos(a)=\cos(\theta)$ gives our result.
 \end{prp}
 
 \subsection{The Group of Isometries of Hyperbolic Space}
-\begin{defn}{Lorentz Transformation}{}\\
-Let $T:\R^{n+1}\to\R^{n+1}$ be a function. We say that $T$ is a Lorentz transformation if $$\langle T(x),T(y)\rangle_L=\langle x,y\rangle_L$$ for all $x,y\in\R^{n+1}$. 
-\end{defn}
-
-\begin{defn}{Lorentz Orthogonal Matrix}{}\\
-Let $A\in M_{n+1}(\R)$ be a matrix. We say that $A$ is Lorentz orthogonal if $A^TJ_{n+1}A=J_{n+1}$. 
-\end{defn}
-
-\begin{prp}{}{}\\
-Let $T:\R^{n+1}\to\R^{n+1}$ be a linear map. Then the following are equivalent. 
-\begin{itemize}
-\item $T$ is a Lorentz transformation. 
-\item $[T]_E^E$ is Lorentz orthogonal, where $E$ is the standard basis of $\R^{n+1}$. 
-\item $\|T(x)\|_L=\|x\|_L$ for all $x\in\R^{n+1}$. 
-\item $T$ is linear and $T(e_1),\dots,T(e_{n+1})$ forms a Lorentz orthonormal basis for $\R^{n+1}$. 
-\end{itemize}
-\end{prp}
-
-\begin{prp}{}{}\\
-Let $A\in M_{n+1}(\R)$ be a matrix. Then the following are equivalent. 
-\begin{itemize}
-\item $A$ is Lorentz orthogonal. 
-\item The map $x\mapsto Ax$ is a Lorentz transformation. 
-\item $\|Ax\|_L=\|x\|_L$ for all $x\in\R^{n+1}$. 
-\end{itemize}
-\end{prp}
-
-\begin{defn}{Lorentz Group}{}\\
-Define the Lorentz group to be $$O(1,n)=\{A\in M_{n+1}(\R)\;|\;A\text{ is Lorentz orthogonal }\}$$
-\end{defn}
-
-\begin{prp}{}{}\\
-There is a one to one bijection $$O(1,n)\;\;\overset{1:1}{\longleftrightarrow}\{T\in\Hom_\R(\R^{n+1},\R^{n+1})\;|\;T\text{ is a Lorentz transformation }\}$$ given by $A\mapsto(x\mapsto Ax)$. 
-\end{prp}
-
 \begin{defn}{Positive Lorentz Transformation}{}\\
 Let $T:\R^{n+1}\to\R^{n+1}$ be a function. We say that $T$ is a positive Lorentz transformation if the following are true. 
 \begin{itemize}

@@ -999,7 +999,7 @@ Let $T=PJP^{-1}$ be the Jordan canonical form of $x$. Then $J$ has non-zero entr
 \section{Linearity in Two Variables}
 \subsection{Bilinear Maps}
 \begin{defn}{Bilinear Maps}{}\\
-Let $\F$ be a field. Let $V,W$ be vector spaces over $\F$. Let $B:V\times W\to\F$ be a function. We say that $B$ is a bilinear form if the following are true. 
+Let $\F$ be a field. Let $V,W$ be vector spaces over $\F$. Let $B:V\times W\to\F$ be a function. We say that $B$ is a bilinear map if the following are true. 
 \begin{itemize}
 \item $B(-,w):V\to\F$ is a linear map for all $w\in W$. 
 \item $B(v,-):W\to\F$ is a linear map for all $v\in V$. 
@@ -1056,10 +1056,19 @@ A bilinear form naturally induces a comparison map $V\to V^\ast$ by $v\mapsto\ta
 
 \begin{defn}{Symmetric and Skew-Symmetric of Bilinear Forms}{} Let $k$ be a field. Let $V$ be a vector space over $k$. Let $\tau:V\times V\to k$ be a bilinear form. 
 \begin{itemize}
-\item We say that $\tau$ is symmetric if $\tau(v,w)=\tau(w,v)$
-\item We say that $\tau$ is skew-symmetric if $\tau(v,w)=-\tau(w,v)$
+\item We say that $\tau$ is symmetric if $\tau(v,w)=\tau(w,v)$. 
+\item We say that $\tau$ is skew-symmetric if $\tau(v,w)=-\tau(w,v)$. 
+\item We say that $\tau$ is alternating if $\tau(v,v)=0$. 
 \end{itemize}
 \end{defn}
+
+\begin{lmm}{}{}\\
+Let $\F$ be a field. Let $V$ be a vector space over $\F$. Let $\tau$ be a bilinear form. Then the following are true. 
+\begin{itemize}
+\item If $\tau$ is alternating, then $\tau$ is skew-symmetric. 
+\item If $\text{char}(\F)\neq 2$, then $\tau$ is alternating if and only if $\tau$ is skew-symmetric. 
+\end{itemize}
+\end{lmm}
 
 \begin{prp}{}{} Let $\F$ be a field. Let $V$ be a vector space over $\F$. Let $\tau:V\times V\to\F$ be a bilinear form. Then the following are true. 
 \begin{itemize}
@@ -1089,15 +1098,27 @@ Let $k$ be a field. Let $V$ be a vector space over $k$. Let $\tau:V\times V\to k
 \end{itemize}
 \end{prp}
 
+\begin{defn}{Maps Preserving Bilinear Forms}{}\\
+Let $\F$ be a field. Let $V$ be a vector space over $\F$. Let $\tau:V\times V\to\R$ be a bilinear form. Let $T:V\to V$ be a linear map. We say that $T$ preserves $\tau$ if $$\tau(T(v),T(w))=\tau(v,w)$$ for all $v,w\in V$. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $\F$ be a field. Let $V$ be a vector space over $\F$. Let $\tau:V\times V\to\F$ be a bilinear form. Then the following are true. 
+\begin{itemize}
+\item $T,S:V\to V$ preserves $\tau$, then $S\circ T$ preserves $\tau$. 
+\item If $T:V\to V$ preserves $\tau$, then $T^{-1}$ preserves $\tau$. 
+\end{itemize}
+\end{lmm}
+
 \subsection{Quadratic Forms}
 \begin{defn}{Quadratic Forms}{}\\
 Let $\F$ be a field. Let $V$ be a vector space over $\F$. Let $q:V\to\F$ be a function. We say that $q$ is a quadratic form if there exists a symmetric bilinear form $B:V\times V\to\F$ such that $$q(v)=B(v,v)$$
 \end{defn}
 
-Under the bijection between bilinear forms on $V$ and $M_n(\F)$, the quadratic forms correspond to symmetric matrices. 
+Under the bijection between bilinear forms on $V$ and $M_n(\F)$, the quadratic forms correspond to symmetric matrices. When $\text{char}(\F)\neq 2$, quadratic forms are essentially the same as symmetric bilinear forms in the following way. 
 
 \begin{lmm}{}{}\\
-Let $\F$ be a field. Let $V$ be a vector space over $\F$. Let $q:V\to\F$ be a function. Then the following are equivalent. 
+Let $\F$ be a field such that $\text{char}(\F)\neq 2$. Let $V$ be a vector space over $\F$. Let $q:V\to\F$ be a function. Then the following are equivalent. 
 \begin{itemize}
 \item $q$ is a bilinear form. 
 \item $q(\lambda v)=\lambda^2 q(v)$ for all $v\in V$ and all $\lambda\in\F$. 
@@ -1245,7 +1266,7 @@ Let $\F$ be a field. Let $V$ be a vector space over $\F$. Let $\tau:V\times V\to
 \end{prp}
 
 \begin{defn}{Orthgonal Maps}{}\\
-Let $\F$ be a field. Let $V$ be a vector space over $\F$. Let $B$ be a symmetric bilinear form. Let $T:V\to V$ be a linear map. We say that $T$ is orthogonal if $$B(T(v),T(w))=B(v,w)$$ for all $v,w\in V$. 
+Let $\F$ be a field. Let $V$ be a vector space over $\F$. Let $B$ be a symmetric bilinear form. Let $T:V\to V$ be a linear map. We say that $T$ is orthogonal if $$B(T(v),T(w))=B(v,w)$$ for all $v,w\in V$, in other words if $T$ preserves $B$. 
 \end{defn}
 
 \begin{prp}{}{}\\
@@ -1263,27 +1284,6 @@ Let $\F$ be a field. Let $V$ be a vector space over $\F$. Let $B$ be a symmetric
 
 \pagebreak
 \section{Inner Products over $\R$}
-\subsection{Quadratic Forms over $\R$}
-\begin{thm}{Sylvester's Law of Inertia}{}\\
-Let $q:\R^n\to\R$ be a quadratic form. Then the following are true. 
-\begin{itemize}
-\item There exists a basis $b_1,\dots,b_n$ of $\R^n$ such that $$q\left(\sum_{i=1}^nx_ib_i\right)=\sum_{k=1}^tx_k^2-\sum_{k=1}^ux_k^2$$ where $t+u=\rank(q)$. 
-\item Suppose that $b_1,\dots,b_n$ and $b_1',\dots,b_n'$ are bass of $\R^n$ such that $$q\left(\sum_{i=1}^nx_ib_i\right)=\sum_{k=1}^tx_k^2-\sum_{k=1}^ux_k^2\;\;\;\text{ and }\;\;\;q\left(\sum_{i=1}^ny_ib_i'\right)=\sum_{k=1}^{t'}y_k^2-\sum_{k=1}^{u'}y_k^2$$ Then we have $t=t'$ and $u=u'$. 
-\end{itemize}
-\end{thm}
-
-\begin{crl}{}{}\\
-Let $M\in M_n(\R)$ be a symmetric matrix. Then $M$ is congruent to a matrix of the form $$\begin{pmatrix}
-I_t & 0 & 0\\
-0 & -I_u & 0\\
-0 & 0 & 0\\
-\end{pmatrix}$$ for some $t,u\in\N$. 
-\end{crl}
-
-\begin{defn}{The Signature of a Real Quadratic Form}{}\\
-Let $q:\R^n\to\R$ be a quadratic form. Let $b_1,\dots,b_n$ be a basis for $\R^n$ such that $$q\left(\sum_{i=1}^nx_ib_i\right)=\sum_{k=1}^tx_k^2-\sum_{k=1}^ux_k^2$$ Define the signature of $q$ to be $(t,u)\in\N^2$. 
-\end{defn}
-
 \subsection{Norms and Inner Products over $\R$}
 \begin{defn}{Inner Products over $R$}{}\\
 Let $V$ be a vector space over $\R$. An inner product on $V$ is a bilinear form $\langle-,-\rangle:V\times V\to\R$ such that the following are true. 
@@ -1362,6 +1362,10 @@ Let $(V,\langle-,-\rangle)$ be an inner product space over $\R$. Let $T:V\to V$ 
 \item $T$ maps orthonormal bases of $V$ to orthonormal bases. 
 \end{itemize}
 \end{prp}
+
+\begin{eg}{}{}\\
+We have $$O(n)=\{T:\R^n\to\R^n\;|\;T\text{ is orthogonal with respect to the standard inner product }\}$$
+\end{eg}
 
 \begin{prp}{}{}\\
  Let $(V,\langle-,-\rangle)$ be an inner product space over $\R$. Let $\|-\|$ be the induced norm. Let $b_1,\dots,b_n$ be an orthonormal basis for $V$. Let $v=\sum_{k=1}^na_kb_k\in V$. Then the following are true. 
@@ -1557,6 +1561,99 @@ P&=\begin{pmatrix}
 This means that we are done. 
 \end{proof}
 \end{eg}
+
+\pagebreak
+\section{Symmetric and Skew-Symmetric Bilinear Forms}
+\subsection{Quadratic Forms over $\R$}
+\begin{thm}{Sylvester's Law of Inertia}{}\\
+Let $q:\R^n\to\R$ be a quadratic form. Then the following are true. 
+\begin{itemize}
+\item There exists a basis $b_1,\dots,b_n$ of $\R^n$ such that $$q\left(\sum_{i=1}^nx_ib_i\right)=\sum_{k=1}^tx_k^2-\sum_{k=1}^ux_k^2$$ where $t+u=\rank(q)$. 
+\item Suppose that $b_1,\dots,b_n$ and $b_1',\dots,b_n'$ are bass of $\R^n$ such that $$q\left(\sum_{i=1}^nx_ib_i\right)=\sum_{k=1}^tx_k^2-\sum_{k=1}^ux_k^2\;\;\;\text{ and }\;\;\;q\left(\sum_{i=1}^ny_ib_i'\right)=\sum_{k=1}^{t'}y_k^2-\sum_{k=1}^{u'}y_k^2$$ Then we have $t=t'$ and $u=u'$. 
+\end{itemize}
+\end{thm}
+
+\begin{crl}{}{}\\
+Let $M\in M_n(\R)$ be a symmetric matrix. Then $M$ is congruent to a matrix of the form $$\begin{pmatrix}
+I_t & 0 & 0\\
+0 & -I_u & 0\\
+0 & 0 & 0\\
+\end{pmatrix}$$ for some $t,u\in\N$. 
+\end{crl}
+
+\begin{defn}{The Signature of a Real Quadratic Form}{}\\
+Let $q:\R^n\to\R$ be a quadratic form. Let $b_1,\dots,b_n$ be a basis for $\R^n$ such that $$q\left(\sum_{i=1}^nx_ib_i\right)=\sum_{k=1}^tx_k^2-\sum_{k=1}^ux_k^2$$ Define the signature of $q$ to be $(t,u)\in\N^2$. 
+\end{defn}
+
+\begin{defn}{The Indefinite Orthogonal Group}{}\\
+Let $q:\R^n\to\R$ be a quadratic form with signature $(t,u)$. Define the indefinite orthogonal groups by $$O(t,u)=\{T:\R^n\to\R^n\;|\;T\text{ preserves }q\}$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+The following are true. 
+\begin{itemize}
+\item $O(p,q)$ is a group. 
+\item $O(p,q)\cong O(q,p)$. 
+\item $O(p),O(q)\leq O(p,q)$. 
+\item $O(n,0)\cong O(n)\cong O(0,n)$. 
+\end{itemize}
+\end{lmm}
+
+\subsection{Symplectic Structures}
+\begin{defn}{Symplectic Forms}{}\\
+Let $V$ be a vector space over $\R$. A symplectic form on $V$ is a bilinear map $\omega:V\times V\to\R$ such that the following are true. 
+\begin{itemize}
+\item $\omega$ is skew-symmetric. 
+\item $\omega$ is non-degenerate. 
+\end{itemize}
+In this case we say that $(V,\omega)$ is a symplectic vector space. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $V$ be a finite dimensional vector space over $\R$. Let $\omega$ is a symplectic form on $V$. Then the following are true. 
+\begin{itemize}
+\item Let $B$ be a basis of $V$. Then $[\omega]_{B,B}$ is a skew-symmetric matrix. 
+\item $\dim(V)$ is even. 
+\end{itemize}
+\end{prp}
+
+\begin{defn}{Symplectic Bases}{}\\
+Let $(V,\omega)$ be a finite dimensional symplectic vector space over $\R$. Let $B=\{e_1,\dots,e_n,f_1,\dots,f_n\}$ be a basis of $V$. We say that $B$ is symplectic if the following are true. 
+\begin{itemize}
+\item $\omega(e_i,e_j)=0$ for all $1\leq i,j\leq n$. 
+\item $\omega(f_i,f_j)=0$ for all $1\leq i,j\leq n$. 
+\item $\omega(e_i,f_j)=\delta_{ij}$ for all $1\leq i,j\leq n$. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Symplectic Maps}{}\\
+Let $(V,\omega)$ and $(W,\tau)$ be symplectic vector spaces over $\R$. Let $T:V\to W$ be a linear map. We say that $T$ is a symplectic map if $$\tau(T(u),T(v))=\omega(u,v)$$ for all $u,v\in V$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $(V,\omega)$ and $(W,\tau)$ be symplectic vector spaces over $\R$. Let $T:V\to W$ be a symplectic map. Then the following are true. 
+\begin{itemize}
+\item $T$ is injective. 
+\item Suppose that $T$ is an isomorphism. If $B$ is a symplectic basis of $V$, then $T(B)$ is a symplectic basis of $W$. 
+\end{itemize}
+\end{prp}
+
+\begin{defn}{Group of Symplectic Maps}{}\\
+Let $(V,\omega)$ be a symplectic vector space over $\R$. Define the group of symplectic maps of $V$ to be the subgroup $$\text{Sp}(V,J)=\{T:V\to V\;|\;T\text{ is symplectic }\}\leq\text{GL}(V)$$
+\end{defn}
+
+\begin{thm}{Normal Form Theorem for Symplectic Maps}{}\\
+Let $(V,\omega)$ be a symplectic vector space over $\R$. Then the following are true. 
+\begin{itemize}
+\item $V$ admits a symplectic basis. 
+\item Let $V$ be a symplectic basis of $V$. Then we have $$[\omega]_{B,B}=\begin{pmatrix}
+0 & I_n\\
+-I_n & 0
+\end{pmatrix}$$
+\item There exists a symplectic isomorphism $T:(V,\omega)\to(\R^{\dim(V)},\omega_\text{std})$. 
+\item The above isomorphism induces a group isomorphism $$\text{Sp}(V,\omega)\cong\text{Sp}(\dim(V),\R)$$
+\end{itemize}
+\end{thm}
 
 \pagebreak
 \section{Sesquilinear Maps}

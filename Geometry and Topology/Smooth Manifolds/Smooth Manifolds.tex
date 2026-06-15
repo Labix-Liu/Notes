@@ -319,7 +319,7 @@ We first consider $O(n,\R)$. Let $S_n$ denote the set of symmetric matrices in $
 \section{Vector Bundles on Smooth Manifolds}
 While the previous section introduced general vector bundles over an arbitrary topological space, the concept of smooth bundles are exclusive solely to smooth manifolds. Indeed the notion of smoothness exists only in smooth manifolds when we say that the transition maps of the charts are smooth functions from Euclidean spaces. 
 
-\subsection{Smooth Vector Bundles}
+\subsection{Smooth Bundles and Smooth Sections}
 \begin{defn}{Smooth Vector Bundles}{}\\
 Let $M$ be a smooth manifold. Let $p:E\to M$ be a vector bundle. We say that $p$ is smooth if the following are true. 
 \begin{itemize}
@@ -329,12 +329,20 @@ Let $M$ be a smooth manifold. Let $p:E\to M$ be a vector bundle. We say that $p$
 \end{itemize}
 \end{defn}
 
+\begin{prp}{}{}\\
+Let $M$ be a smooth manifold. Let $p_1:E_1\to M$ and $p_2:E_2\to M$ be smooth vector bundles. Then $E_1\otimes E_2$ is a smooth bundle. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $M$ be a smooth manifold. Let $p:E\to M$ be a smooth vector bundle. Then $E^\ast$ is a smooth bundle. 
+\end{prp}
+
 \begin{defn}{Smooth Sections}{}\\
-Let $M$ be a smooth manifold. Let $p:E\to M$ be a smooth vector bundle. Define the smooth sections of $p$ to be the subgroup $$\mC^\infty(E)=\{s:M\to E\;|\;s\text{ is a smooth map }\}\leq\Gamma(E)$$ together with the operation $\mC^\infty(M)\times\mC^\infty(E)\to\mC^\infty(E)$ given by $(f,s)\mapsto fs$. 
+Let $M$ be a smooth manifold. Let $p:E\to M$ be a smooth vector bundle. Define the smooth sections of $p$ to be the subgroup $$\Gamma^\infty(E)=\{s:M\to E\;|\;s\text{ is smooth and }p\circ s=\text{id}_M\}\leq\Gamma(E)$$ together with the operation $\mC^\infty(M)\times\Gamma^\infty(E)\to\Gamma^\infty(E)$ given by $(f,s)\mapsto fs$. 
 \end{defn}
 
 \begin{prp}{}{}\\
-Let $M$ be a smooth manifold. Let $p:E\to M$ be a smooth vector bundle. Then $\mC^\infty(E)$ is a $\mC^\infty(M)$-module. 
+Let $M$ be a smooth manifold. Let $p:E\to M$ be a smooth vector bundle. Then $\Gamma^\infty(E)$ is a $\mC^\infty(M)$-module. 
 \begin{proof}\\
 It is clear that $_1+s_2$ and $fs$ is a section. It remains to check that they are smooth sections. Let $p\in M$. Let $(U,\phi)$ be a smooth local trivialization of $p:E\to M$ containing $p$. Suppose that $\phi\circ s:M\to U\times\R^k$ is given by $$(\phi\circ s_1)(q)=(q,a_1(q),\dots,a_k(q))$$ and similarly $(\phi\circ s_2)(q)=(q,b_1(q),\dots,b_k(q))$ for $q\in U$. Since $s_1,s_2$ are smooth maps, $a_i$ and $b_j$ are smooth functions on $U$. Since $\phi$ is linear on each fiber, $$(\phi\circ(s_1+s_2))(q)=(q,(a_1+b_1)(q),\dots,(a_k+b_k)(q))$$ so that $s_1+s_2$ is a smooth map on $U$ and hence at $p$. Since $p$ is an arbitrary point we conclude. \\
 
@@ -342,51 +350,47 @@ The proof for the module structure is similar to the above.
 \end{proof}
 \end{prp}
 
-\begin{defn}{Smooth Frames}{} Let $\pi:E\to M$ be a smooth vector bundle. A frame for $p$ is a collection of local sections $s_1,\dots,s_r:U\to E$ over $U\subseteq M$ such that for each $x\in M$, the set $$\{s_1(x),\dots,s_r(x)\}$$ is a basis for the fiber $E_x=p^{-1}(x)$. A frame is said to be smooth if $s_1,\dots,s_r$ are $C^\infty$ sections of $E$ over $U$. 
+\begin{defn}{Smooth Frames}{}\\
+Let $M$ be a smooth manifold. Let $p:E\to M$ be a smooth vector bundle. Let $(U,s_1,\dots,s_r)$ be a local frame of $E$. We say that the frame is smooth if $s_1,\dots,s_r\in\Gamma^\infty(E)$. 
 \end{defn}
 
 We write $\overline{e}_1,\dots,\overline{e}_r:M\to M\times\R^r$ for the trivial bundle $\pi:M\times\R^r\to M$, where each $\overline{e}_i:M\to M\times\R^r$ are defined by $$\overline{e}_i(p)=(p,e_i)$$ for $e_i$ the standard $i$th basis element of $R^r$. In particular, for a local trivialization $\phi:\pi^{-1}(U)\to U\times\R^r$ of a general vector bundle, we can define a smooth frame over the local trivialization in terms of frame of the trivial bundle. This is the frame $t_1,\dots,t_r:U\to E$ defined by $t_i(p)=\phi^{-1}(\overline{e_i}(p))=\phi^{-1}(p,e_i)$ for each $i$. 
 
-\begin{lmm}{}{} Let $\pi:E\to M$ be a smooth vector bundle. Let $\phi:\pi^{-1}(U)\to U\times\R^r$ be a local trivialization of an open set $U\subseteq M$. Let $t_1,\dots,t_r:U\to E$ be the smooth frame over the trivialization. Then a local section $$s=\sum_{k=1}^rb_kt_k$$ of $E$ over $U$ is smooth if and only if its coefficients $b_k$ relative to the frame $t_1,\dots,t_r$ are smooth. 
-\begin{proof}
-If the coefficients are smooth functions then by proposition 5.1.2, $s$ is smooth. Conversely, suppose that the section $s=\sum_{k=1}^rb_kt_k$ of $E$ over $U$ is smooth. Then $\phi\circ s$ is smooth. Notice that $$(\phi\circ s)(p)=\sum_{k=1}^rb_k(p)\phi(t_k(p))=\sum_{k=1}^rb_k(p)(p,e_k)=\left(p,\sum_{k=1}^rb_k(p)e_k\right)$$ Thus $b_k(p)$ for each $k$ are simply the fiber coordinates of $s(p)$ relative to the trivialization $\phi$. Since $\phi\circ s$ is smooth, all the $b_k$ are smooth. 
-\end{proof}
-\end{lmm}
+\subsection{Tensor Fields}
+\begin{defn}{Tensor Fields}{}\\
+Let $M$ be a smooth manifold. Let $p:E\to M$ be a smooth vector bundle. A $(p,q)$-tensor field is an element of $$\mT_q^p(E)=\Gamma^\infty(E^{\otimes p}\otimes(E^\ast)^{\otimes q})$$
+\end{defn}
 
-\begin{prp}{}{} Let $\pi:E\to M$ be a smooth vector bundle. Let $U\subseteq M$ be an open subset of $M$. Suppose that $s_1,\dots,s_r$ is a smooth frame for $E$ over $U$. Then a section $$s=\sum_{k=1}^rc^ks_k$$ of $E$ over $U$ is smooth if and only if the coefficients $c_k:U\to\R$ are smooth functions. 
-\begin{proof}
-If each $c_k$ are smooth functions, then by proposition 5.1.2, $s$ is smooth. Conversely, suppose that $s=\sum_{k=1}^rc^ks_k$ is a smooth section. Let $p\in U$ and choose a trivializing open set $V\subset U$ for $E$ containing $p$ with smooth trivialization $\phi:\pi^{-1}(V)\to V\times\R^r$. Let $t_1,\dots,t_r$ be the smooth frame of $\phi$. This means that $t_i(p)=\phi^{-1}(\overline{e}_i(p))=\phi^{-1}(p,e_i)$ . Then we have that $$\sum_{k=1}^rb_kt_k=s=\sum_{k=1}^r\sum_{j=1}^rc_ja_j^kt_k$$ Comparing coefficients give $b_k=\sum_{j=1}c_ja_j^k$. In matrix notation, we have that $$b=\begin{pmatrix}
-b_1\\
-\vdots\\
-b_r
-\end{pmatrix}=A\begin{pmatrix}
-c_1\\
-\vdots\\
-c_r
-\end{pmatrix}=Ac$$ At each point of $V$, $A$ is the transition matrix between the two bases and so is invertible. By Crammer's rule, $A^{-1}$ is a matrix of smooth functions on $V$. Hence $c=A^{-1}b$ is a column vector of smooth functions on $V$. This proves that $c_1,\dots,c_r$ are smooth functions at $p\in U$. Since $p$ is arbitrary, the coefficients $c_j$ are smooth functions on $U$. 
-\end{proof}
-\end{prp}
-
-\subsection{The Tensor Characterization Lemma}
 \begin{lmm}{The Tensor Characterization Lemma}{}\\
-Let $M$ be a smooth manifold. Let $p:E\to M$ and $p_i:E_i\to M$ be smooth vector bundles for $1\leq i\leq n$. Then there is an isomorphism of $\mC^\infty(M)$-modules $$\Hom_{\mC^\infty(M)}\left(\prod_{i=1}^n\mC^\infty(E_i),\mC^\infty(E)\right)\cong\mC^\infty\left(\bigotimes_{i=1}^nE_i^\ast\otimes E\right)$$
+Let $M$ be a smooth manifold. Let $p:E\to M$ and $p_i:E_i\to M$ be smooth vector bundles for $1\leq i\leq n$. Then there is an isomorphism of $\Gamma^\infty(M)$-modules $$\Hom_{\mC^\infty(M)}\left(\prod_{i=1}^n\Gamma^\infty(E_i),\Gamma^\infty(E)\right)\cong\Gamma^\infty\left(\bigotimes_{i=1}^nE_i^\ast\otimes E\right)$$
 \end{lmm}
+
+For example, a $\mC^\infty(M)$-linear map of sections $\Gamma^\infty(E_1)\to\Gamma^\infty(E_2)$ is the same data as as an element of $\Gamma^\infty(E_1^\ast\otimes E_2)$. 
+
+\begin{defn}{Components of a Tensor Field}{}\\
+Let $M$ be a smooth manifold. Let $p:E\to M$ be a smooth vector bundle. Let $F$ be a $(p,q)$-tensor field. Let $(U,s_1,\dots,s_k)$ be a smooth frame of $E$. Suppose that $F$ is given locally at the frame by $$F=\sum_{1\leq i_1,\dots,i_p,j_1,\dots,j_q\leq k}F^{i_1\cdots i_p}_{j_1\cdots j_q} s_{i_1}\otimes\cdots\otimes s_{i_p}\otimes s_{j_1}^\ast\otimes\cdots\otimes s_{j_q}^\ast$$ We say that the components of $F$ are the functions $F^{i_1\cdots i_p}_{j_1\cdots j_q}\in\mC^\infty(U)$. 
+\end{defn}
+
+For a $(p,q)$-tensor field, there are $n^{p+q}$ components in total. 
+
+\begin{defn}{Contraction}{}\\
+Let $M$ be a smooth manifold. Let $p:E\to M$ be a smooth vector bundle of rank $r$. Let $F$ be a tensor field of type $(p,q)$. Define the contraction of $F$ to be the $(p-1,q-1)$ tensor field $c_k^l(F)$ whose components are given by $$c_k^l(F)^{i_1,\dots,i_{p-1}}_{j_1,\dots,j_{q-1}}=\sum_{t=1}^rF^{i_1,\dots,i_{k-1},t,i_k,\dots,i_{p-1}}_{j_1,\dots,j_{l-1},t,j_l,\dots,j_{q-1}}$$
+\end{defn}
+
+In vector space notation, $c_k^l$ has the effect of pairing the $k$th copy of $V$ together with the $l$th copy of $V^\ast$ with the canonical pairing $V\times V^\ast\to\R$ which is evaluation. Since we assume $V^\ast$ comes with the dual basis of $V$, the canonical pairing always return $1$. 
 
 \subsection{The Tangent Bundle}
-\begin{defn}{The Tangent Bundle}{} Let $M$ be a smooth manifold. Define the tangent bundle of $M$ to be the disjoint union $$TM=\coprod_{p\in M}T_pM$$ Define the projection map $\pi:TM\to M$ by $\pi(v)=p$ if $v\in T_pM$. 
+\begin{defn}{The Tangent Bundle}{}\\
+Let $M$ be a smooth manifold. Define the tangent bundle of $M$ to be the disjoint union $$TM=\coprod_{p\in M}T_pM$$ together with the projection map $\pi:TM\to M$ given by $\pi(v)=p$ if $v\in T_pM$. 
 \end{defn}
 
-\begin{defn}{Local Trivialization Maps}{} Let $M$ be a smooth manifold of dimension $n$. Let $(U,\phi)$ be a chart on $M$. Let $$TU=\coprod_{q\in U}T_q(M)$$ Let $v\in TU$ and let $p=\pi(v)$. Then $v\in T_pM$ is given locally on a chart by $$v=\sum_{k=1}^n c_k\frac{\partial}{\partial x^k}\bigg{|}_p$$ for smooth functions $c_k:U\to\R$. Define the local trivialization map $$\widetilde{\phi}:TU\to U\times\R^n$$ by the formula $$\widetilde{\phi}(v)=(p,c_1(p),\dots,c_n(p))$$
+\begin{defn}{Local Trivialization Maps of the Tangent Bundle}{}\\
+Let $M$ be a smooth manifold. Let $(U,x^1,\dots,x^n)$ be a local chart of $M$. Define the induced local trivialization chart of $TM$ to be the pair $(U,\widetilde{\phi})$ where the map $\widetilde{\phi}:TU=\pi^{-1}(U)\to U\times\R^n$ is given by $$\widetilde{\phi}(v)=(\pi(v),c_1(p),\dots,c_n(p))$$ where $v\in T_pM$ is given locally at the chart by $v=\sum_{k=1}^nc_k(p)\frac{\partial}{\partial x^k}\bigg{|}_p$. 
 \end{defn}
 
-\begin{lmm}{}{} Let $M$ be a smooth manifold of dimension $n$. Let $(U,\phi)$ be a chart on $M$. Then the local trivialization maps $$\widetilde{\phi}:TU\to U\times\R^n$$ is a bijection. 
-\begin{proof}
-It is easy to see that the map defined by $$(\vb{x},c_1,\dots,c_n)\mapsto\left(\phi^{-1}(\vb{x}),\sum_{k=1}^nc_k\frac{\partial}{\partial x^k}\bigg{|}_p\right)$$ is an inverse to $\tilde{\phi}$. 
-\end{proof}
-\end{lmm}
-
-\begin{thm}{Topology on the Tangent Bundle}{} Let $M$ be a smooth manifold of dimension $n$. Then $TM$ is a topological space with basis $$\mB=\bigcup_{\alpha}\left\{A\subseteq TM\;\bigg{|}\;A\text{ is open in } T(U_\alpha)\text{ and } U_\alpha\text{ is a coordinate open set in }M\right\}$$ where we say that $A$ is open in $T(U_\alpha)$ if and only if $\tilde{\phi}(A)$ is open in $\phi(U)\times\R^n\subseteq\R^{2n}$. 
-\begin{proof}
+\begin{thm}{Topology on the Tangent Bundle}{}\\
+Let $M$ be a smooth manifold of dimension $n$. Then $TM$ is a topological space with basis $$\mB=\bigcup_{\alpha}\left\{A\subseteq TM\;\bigg{|}\;A\text{ is open in } T(U_\alpha)\text{ and } U_\alpha\text{ is a coordinate open set in }M\right\}$$ where we say that $A$ is open in $T(U_\alpha)$ if and only if $\tilde{\phi}(A)$ is open in $\phi(U)\times\R^n\subseteq\R^{2n}$. 
+\begin{proof}\\
 Firstly, notice that if $V\subseteq U$ is open, then $\phi(V)\times\R^n$ is an open subset of $\phi(U)\times\R^n$ so that the relative topology on $T(V)$ as a subset of $TU$ is the same as the topology induced from the bijection $\tilde{\phi}|_{T(V)}:T(V)\to\phi(V)\times\R^n$. \\
 
 Let $\{(U_\alpha,\phi_\alpha\}$ be the maximal atlas for $M$. Then $$TM=\bigcup_{\alpha}T(U_\alpha)\subseteq\bigcup_{A\in\mB}A\subseteq TM$$ so that equality holds everywhere. \\
@@ -395,13 +399,15 @@ Let $A$ be open in $T(U)$ and $B$ open in $T(V)$. The goal is to show that $A\ca
 \end{proof}
 \end{thm}
 
-\begin{prp}{}{} Let $M$ be a smooth manifold of dimension $n$. Then the tangent bundle $TM$ is a vector bundle of dimension $n$. 
+\begin{prp}{}{}\\
+Let $M$ be a smooth manifold of dimension $n$. Then the tangent bundle $TM$ is a vector bundle of dimension $n$. 
 \begin{proof}
 
 \end{proof}
 \end{prp}
 
-\begin{thm}{}{} Let $M$ be a manifold. Then the tangent space $TM$ is a manifold of dimension $2n$. 
+\begin{prp}{}{}\\
+Let $M$ be a manifold. Then the tangent space $TM$ is a manifold of dimension $2n$. 
 \begin{proof}
 Let $\{(U_\alpha,\phi_\alpha\}$ be the maximal atlas for $M$ and $\mB$ a countable basis for $M$. For each coordinate open set $U_\alpha$ and $p\in U_\alpha$, choose a basic open set $B_{p,\alpha}\in\mB$ such that $p\in B_{p,\alpha}\subset U_\alpha$. The collection $\{B_{p,\alpha}\}$ without duplicate elements is a subcollection of $\mB$ and is countable. For any open set $U$ in $M$ and $p\in U$, there is a coordinate open set $U_\alpha$ such that $p\in U_\alpha\subset U$. Hence $p\in B_{p,\alpha}\subset U$ so that $\{B_{p,\alpha}\}$ is a countable basis for $M$. Let $\{U_i\;|\;i\in\N\}$ be a countable basis of $M$ consisting of coordinate open sets. Let $\phi_i$ be the coordinate map on $U_i$. Since $T(U_i)$ is homeomorphic to the open subset $\phi_i(U_i)\times\R^n\subseteq\R^{2n}$ and any subset of a Euclidean space is second countable, $T(U_i)$ is second countable. For each $i$, choose a countable basis $\{B_{i,j}\;|\;j\in\N\}$ for $T(U_i)$. Then $\{B_{i,j}\;|\;i,j\in\N\}$ is a countable basis for $T(M)$ so that $(TM)$ is second countable. \\
 
@@ -409,20 +415,16 @@ For Hausdorffness,\\
 
 Finally, if $\{(U_\alpha,\phi_\alpha\}$ is a smooth atlas on $M$, then $\{(T(U_\alpha),\widetilde{\phi_\alpha})\}$ is a smooth atlas for $T(M)$. It is clear that $T(M)=\bigcup_{\alpha}T(U_\alpha)$. It remains to check that they are smoothly compatible. Recall that by proposition 3.1.7, if $(U_\alpha,\phi_\alpha=(x^1,\dots,x^n))$ and $(U_\beta,\phi_\beta=(y^1,\dots,y^n))$ are charts on $M$ and $p\in U\cap V$ such that $$X_p=\sum_{k=1}^na_k(p)\frac{\partial}{\partial x^k}\bigg{|}_p=\sum_{k=1}^nb_k(p)\frac{\partial}{\partial y^k}\bigg{|}_p$$ are the two representations of the same tangent vector in the two charts, then we have $$a_i(p)=\sum_{j=1}^nb_j(p)\frac{\partial x^i}{\partial y^j}\bigg{|}_p\;\;\;\;\text{ and }\;\;\;\; b_i(p)=\sum_{k=1}^na_k(p)\frac{\partial y^i}{\partial x^k}\bigg{|}_p$$ Now we have $$\widetilde{\phi_\beta}\circ\widetilde{\phi_\alpha}^{-1}:\phi_\alpha(U_\alpha\cap U_\beta)\times\R^n\to\phi_\beta(U_\alpha\cap U_\beta)\times\R^n$$ is given by $$(\phi_\alpha(p),a_1(p),\dots,a_n(p))\mapsto\left(p,\sum_{k=1}^na_k(p)\frac{\partial}{\partial x^k}\bigg{|}_p\right)\mapsto(\phi_\beta(p),b_1(p),\dots,b_n(p))$$ where each $b_i(p)$ is given by the formula $$b_i(p)=\sum_{k=1}^na_k(p)\frac{\partial y^i}{\partial x^k}\bigg{|}_p=\sum_{k=1}^na_k(p)\frac{\partial(\phi_\beta\circ\phi_\alpha^{-1})^i}{\partial x_j}\bigg{|}_{\phi_\alpha(p)}$$ where $(\phi_\beta\circ\phi_\alpha^{-1})^i$ means the $i$th component of the map $\phi_\beta\circ\phi_\alpha^{-1}$. Therefore $\widetilde{\phi_\beta}\circ\widetilde{\phi_\alpha}^{-1}$ is smooth. Thus we conclude. 
 \end{proof}
-\end{thm}
-
-\subsection{Vector Fields}
-\begin{defn}{Vector Fields}{}\\
-Let $M$ be a smooth manifold. A vector field on $M$ is a section of the tangent bundle $\pi:TM\to M$. 
-\end{defn}
-
-\begin{defn}{Smooth Vector Fields}{}\\
-Let $M$ be a smooth manifold. Define the smooth vector fields of $M$ to be the $\mC^\infty(M)$-module $$\mathfrak{X}(M)=\mC^\infty(TM)$$
-\end{defn}
+\end{prp}
 
 \begin{prp}{}{}\\
-Let $M$ be a smooth manifold. Let $(U,x^1,\dots,x^n)$ be a chart of $M$. Let $X$ be a smooth vector field of $M$. Then $X$ is given locally at $U$ by $$X|_U=\sum_{k=1}^na_k\frac{\partial}{\partial x^k}$$ for some $a_k\in\mC^\infty(U)$. 
+Let $M$ be a smooth manifold. Let $F$ be a tensor field of type $(p,q)$ over $TM$. Let $(U,x^1,\dots,x^n)$ be a local chart of $M$. Then the components of $F$ is given by $$F^{i_1\cdots i_p}_{j_1\cdots j_q}=F\left(dx^{i_1},\dots,dx^{i_p},\frac{\partial}{\partial x^{j_1}},\dots,\frac{\partial}{\partial x^{j_q}}\right)$$
 \end{prp}
+
+\subsection{Vector Fields}
+\begin{defn}{Smooth Vector Fields}{}\\
+Let $M$ be a smooth manifold. Define the smooth vector fields of $M$ to be the $\mC^\infty(M)$-module $$\mathfrak{X}(M)=\Gamma^\infty(TM)$$
+\end{defn}
 
 \begin{defn}{Parallelizable Manifolds}{}\\
 Let $M$ be a smooth manifold. We say that $M$ is parallelizable if $TM$ is isomorphic to the trivial bundle. 
@@ -501,20 +503,38 @@ For every point $p$, let $U(p)$ be a neighbourhood of $p$ and $\varepsilon(p)>0$
 If $M$ is a smooth compact manifold, then every smooth vector field on $M$ is complete. 
 \end{crl}
 
+\subsection{One Parameter Family of Diffeomorphisms}
+\begin{defn}{One Parameter Family of Diffeomorphisms}{}\\
+Let $M$ be a smooth manifold. Let $\varphi:\R\times M\to M$ be a smooth map. We say that $\varphi$ is a one parameter family of diffeomorphisms if the following are true. 
+\begin{itemize}
+\item For each $t\in\R$, we have $\varphi_t:M\to M$ is a diffeomorphism. 
+\item $\varphi(0,-)=\text{id}_M$. 
+\item $\varphi(s+t,-)=\varphi(t,-)\circ\varphi(s,-)$ for all $s,t\in\R$. 
+\end{itemize}
+\end{defn}
+
+\begin{eg}{}{}\\
+Let $M$ be a smooth manifold. Let $X\in\mathfrak{X}(M)$ be a complete vector field. Then $\theta^X$ is a one parameter family of diffeomorphisms. 
+\end{eg}
+
+\begin{defn}{Infinitesimal Generator}{}\\
+Let $M$ be a smooth manifold. Let $\varphi$ be a one parameter family of diffeomorphisms. Define the infinitesimal generator of $\varphi$ to be the vector field $X_\varphi\in\mathfrak{X}(M)$ given by $$X_\varphi=\frac{d}{dt}\bigg{|}_{t=0}\varphi(t,-)$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $M$ be a smooth manifold. Then there is a one to one bijection $$\{X\in\mathfrak{X}(M)\;|\;X\text{ is complete }\}\;\;\overset{1:1}{\longleftrightarrow}\;\;\{\varphi:\R\times M\to M\;|\;\varphi\text{ is a one parameter family of diffeomorphisms }\}$$
+\end{prp}
+
 \pagebreak
 \section{Differential Forms and its Applications}
 In considering a smooth section on the tangent bundle we obtain the notion of smooth vector fields. The smooth section on the cotangent bundle will lead to smooth $1$-forms. However, the theory of $k$-forms also provide a notion of integration on manifolds. In particular, Stoke's theorem on $n$-forms generalizes all notions of divergence and curl, including Green's theorem and the divergence theorem. By considering all differential $k$-forms as a whole, they also contain topological information including the number of holes of space. This odd similarity with that of cohomology in Algebraic Topology leads to de Rham's theorem, which states that there is an isomorphism between singular cohomology of a smooth manifold and de Rham cohomology. 
 
 \subsection{Differential 1-Forms}
-\begin{defn}{Differential 1-Forms}{} Let $M$ be a smooth manifold. A differential $1$-form on $M$ is a section $s:M\to T^\ast(M)$ of the cotangent bundle $p:T^\ast(M)\to M$. A smooth differential $1$-form on $M$ is a smooth section of the cotangent bundle. 
+\begin{defn}{Differential 1-Forms}{}\\
+Let $M$ be a smooth manifold. Define the differential forms of $M$ to be the $\mC^\infty(M)$-module $$\Omega^1(M)=\Gamma^\infty(T^\ast M)$$
 \end{defn}
 
-To write it in local coordinates, we make use of also the notion of cotangent spaces. 
-
-\begin{defn}{Cotangent Space}{} Let $M$ be a smooth manifold. Let $p\in M$. Define the cotangent space of $M$ to be $$T_p^\ast(M)=\Hom_\R(T_p(M),\R)$$ An element of the cotangent space is called a cotangent vector. The collection of all cotangent spaces for each point is in particular, the cotangent bundle. 
-\end{defn}
-
-\begin{defn}{Differential of a Function}{} Let $M$ be a smooth manifold. For each $f\in C^\infty(M)$, define $df:M\to T^\ast(M)$ to be the $1$-form such that for each $p\in M$, $(df)_p$ is a map from $T_p(M)$ to $\R$ where $$(df)_p(X_p)=X_p(f)$$
+\begin{defn}{Differential of a Function}{} Let $M$ be a smooth manifold. For each $f\in C^\infty(M)$, define $df:M\to T^\ast(M)$ to be the map given by $$(df)_p(X_p)=X_p(f)$$ for each $p\in M$. 
 \end{defn}
 
 Note that the above definition makes sense. Firstly, $df$ is a map from $M$ so to each point $p$ on $M$, we assign a covector $(df)_p$. But a covector is none other than an $\R$-linear map from $T_p(M)$ to $\R$ so we need to define what $(df)_p$ does to each $X_p\in T_p(M)$. \\
@@ -531,71 +551,75 @@ and so we conclude.
 \end{proof}
 \end{prp}
 
-Using the local basis of the cotangent space, we can also express the differential of a function and smooth $1$-forms locally. 
-
-\begin{lmm}{}{} Let $M$ be a smooth manifold and let $\omega$ be a smooth differential $1$-form on $M$. Let $(U,\phi=(x^1,\dots,x^n))$ be a local chart on $M$. Then on the local chart, $$\omega=\sum_{k=1}^na_kdx^k$$ where $a_k\in C^\infty(M)$ are smooth functions for each $k$. Moreover, for each $p\in U$, $$\omega_p=\sum_{k=1}^na_k(p)(dx^k)_p$$ 
-\begin{proof}
-For each point $p\in U$, the above proposition implies that $$\omega_p=\sum_{k=1}^na_k(p)(dx^k)|_p$$ By proposition 5.1.4, $a_k:U\to\R$ are smooth functions for each $k$. 
-\end{proof}
-\end{lmm}
-
-\begin{prp}{}{} Let $M$ be a smooth manifold. Let $f\in C^\infty(M)$ be a smooth function. Let $(U,\phi=(x^1,\dots,x^n))$ be a chart on $M$. Then locally on the chart, $$(df)_p=\sum_{k=1}^n\frac{\partial(f\circ\phi^{-1})}{\partial x_k}\bigg{|}_p(dx^k)_p$$ for $p\in U$. 
-\begin{proof}
-By the above lemma, we have $$df=\sum_{k=1}^na_kdx^k$$ for some smooth functions $a_k:U\to\R$. To compute $a_k$, we evaluate $\frac{\partial}{\partial x^j}$ on both sides to get $\frac{\partial f}{\partial x^j}=a_j$ and so we are done. 
+\begin{prp}{}{}\\
+Let $M$ be a smooth manifold. Let $f\in\mC^\infty(M)$ be a smooth function. Let $(U,x^1,\dots,x^n)$ be a chart on $M$. Then locally on the chart, $$(df)_p=\sum_{k=1}^n\frac{\partial f}{\partial x^k}\bigg{|}_p(dx^k)_p$$ for $p\in U$. 
+\begin{proof}\\
+Since $dx^1,\dots,dx^n$ is a smooth local frame for $T^\ast M$, there exists smooth functions $a_1,\dots,a_n:U\to\R$ such that $$df=\sum_{k=1}^na_kdx^k$$ Evaluating $\frac{\partial}{\partial x^i}$ on both sides give 
+\begin{align*}
+df\left(\frac{\partial}{\partial x^i}\right)&=\sum_{k=1}^na_kdx^k\left(\frac{\partial}{\partial x^i}\right)\\
+\frac{\partial f}{\partial x^i}&=a_i
+\end{align*}
+so we are done. 
 \end{proof}
 \end{prp}
 
-Notice that this coincides with the definition of a smooth vector field on local charts. Indeed this is no coincidence. To evaluate the total differential, simply plug in the value $\phi(p)$. We then obtain $$(df)_p=\sum_{k=1}^n\frac{\partial(f\circ\phi^{-1})}{\partial x^k}\bigg{|}_{\phi(p)}(dx^k)|_p$$
-
-\begin{lmm}{}{} Let $M$ be a smooth manifold. Let $f\in C^\infty(M)$ be a smooth function. Then $df:M\to T^\ast(M)$ is a smooth differential $1$-form. 
+\begin{lmm}{}{}\\
+Let $M$ be a smooth manifold. Then the map $d:\mC^\infty(M)\to\Omega^1(M)$ is an $\R$-derivation. 
+\begin{proof}\\
+Follows from the fact that $\frac{\partial}{\partial x^i}$ is an $\R$-derivation. 
+\end{proof}
 \end{lmm}
 
 \subsection{Differential k-Forms}
 Recall that $\Lambda(T^\ast(M))$ is a graded algebra that enjoys addition and wedging as multiplication. 
 
-\begin{defn}{Differential k-Forms}{} Let $M$ be a smooth manifold. A differential $k$-form on $M$ is a section $s:M\to\Lambda^k(T^\ast(M))$ of exterior product of the cotangent bundle $p:T^\ast(M)\to M$. A smooth differential $k$-form on $M$ is a smooth section of the vector bundle. We write $\Omega^k(M)$ for the vector space of all smooth differential $k$-forms on $M$. We write $$\Omega^\bullet(M)=\bigoplus_{k=0}^n\Omega^k(M)$$ for the exterior algebra of smooth differential forms. 
+\begin{defn}{Differential k-Forms}{}\\
+Let $M$ be a smooth manifold. Define the differential $k$-forms of $M$ to be the $\mC^\infty(M)$-module $$\Omega^k(M)=\Gamma^\infty(\Lambda^k(T^\ast M))$$
 \end{defn}
 
-The direct sum is finite since we know that wedge products of $n+1$ elements are necessarily zero in an $n$ dimensional vector space. \\
+Locally on a chart $(U,x^1,\dots,x^n)$ of $M$, a differential $k$-form $\omega$ is given by $$\omega=\sum_{1\leq i_1<\dots<i_k\leq n}a_{i_1,\dots,i_k}dx^{i_1}\wedge\dots\wedge dx^{i_k}$$
 
-Denote $$I\in\{(i_1,\dots,i_k)\;|\;i_1,\dots,i_k\in\{1,\dots,n\}, i_1<\dots<i_k\}$$ as a shorthand notation. Locally on a chart, we can rewrite $$\omega=\sum_{1\leq i_1<\dots<i_k\leq n}a_{i_1,\dots,i_k}dx^{i_1}\wedge\dots\wedge dx^{i_k}$$ in the following form. Moreover, under the following explicit formula, we have a characterization to whether $\omega$ is a smooth differential $k$-form. This is identical to the case for differential $1$-forms. 
-
-\begin{prp}{}{} Let $M$ be a smooth manifold and $(U,\phi=(x^1,\dots,x^n))$ a chart on $M$. Let $\omega$ be a differential $k$-form locally on the chart written as $$\omega=\sum_{I}a_Idx^I$$ Then $\omega$ is a smooth differential $k$-form if and only if the coefficient functions $a_I:U\to\R$ are smooth functions. 
-\end{prp}
-
-\begin{prp}{}{} Let $M$ be a smooth manifold. Let $\omega\in\Omega^k(M)$ and $\tau\in\Omega^l(M)$. Then $\omega\wedge\tau\in\Omega^{k+l}(M)$. 
+\begin{prp}{}{}\\
+Let $M$ be a smooth manifold. Let $\omega\in\Omega^k(M)$ and $\tau\in\Omega^l(M)$. Then $\omega\wedge\tau\in\Omega^{k+l}(M)$. 
 \begin{proof}
 We know that $\omega\wedge\tau\in\Lambda^{k+l}(T(M))$ by construction of the exterior product. Explicitly: if $\omega=\sum f_Idx^I$ and $\tau=\sum g_Jdx^J$, then $$\omega\wedge\tau=\sum f_Ig_Jdx^I\wedge dx^J$$ Clearly if $f_I$ and $g_J$ are smooth, then their product is also smooth. 
 \end{proof}
 \end{prp}
 
+\begin{defn}{The Graded Ring of Differential Forms}{}\\
+Let $M$ be a smooth manifold. Define the differential forms of $M$ to be the graded $\mC^\infty(M)$-module $$\Omega^\bullet(M)=\bigoplus_{i=0}^{\dim(M)}\Omega^i(M)$$ together with multiplication given by $\wedge:\Omega^k(M)\times\Omega^l(M)\to\Omega^{k+l}(M)$. 
+\end{defn}
+
 \subsection{The Induced Pullback Map}
 Now let $f:M\to N$ be a smooth map of manifolds. Recall that for each $p\in M$, there is a pushforward map of tangent spaces: $(f_\ast)_p:T_pM\to T_{f(p)}N$. Taking dual of the tangent spaces, we obtain the dual map $(f_\ast)_p^\ast:T_{f(p)}^\ast N\to T_p^\ast M$. We can then take the exterior power of the map to obtain $$\Lambda^k((f_\ast)_p^\ast):\Lambda^k(T_{f(p)}^\ast N)\to\Lambda^k(T_p^\ast M)$$ which is the main object of the next definition. Denote this map by $f^\ast$. 
 
-\begin{defn}{The Pullback Map}{} Let $f:M\to N$ be a smooth map of smooth manifolds. Define the pullback map of $f$ on differential forms as follows. For $\omega\in\Omega^k(N)$, the map $f^\ast:\Omega^\bullet(N)\to\Omega^\bullet(M)$ is defined pointwise as  $$f^\ast(\omega_{f(p)})=\Lambda^k((f_\ast)_p^\ast)(\omega_p)$$
+\begin{defn}{The Pullback Map}{}\\
+Let $M,N$ be smooth manifolds. Let $f:M\to N$ be a smooth map. Define the pullback map of $f$ on differential forms as follows. For $\omega\in\Omega^k(N)$, the map $f^\ast:\Omega^\bullet(N)\to\Omega^\bullet(M)$ is defined pointwise as  $$f^\ast(\omega_{f(p)})=\Lambda^k((f_\ast)_p^\ast)(\omega_p)$$
 \end{defn}
 
-A local expression would be better than the above abomination of a formula in this case. 
+\begin{prp}{}{}\\
+Let $M,N$ be smooth manifolds. Let $f:M\to N$ be a smooth map. Let $\omega\in\Omega^k(N)$ be a smooth $k$-form on $N$. Let $(V,y^1,\dots,y^n)$ be a chart on $N$. Suppose that the components of $\omega$ at the chart is given by $a_{i_1,\dots,i_k}:V\to\R$. Then locally at a chart containing $f^{-1}(V)$, we have $$f^\ast(\omega)=\sum_{1\leq i_1<\cdots<i_k\leq n}(a_{i_1,\dots,i_k}\circ f)f^\ast(dy^{i_1})\wedge\cdots\wedge f^\ast(dy^{i_k})$$
+\end{prp}
 
-\begin{thm}{}{} Let $f:M\to N$ be a smooth map of smooth manifolds. Let $(U,\phi=(x^1,\dots,x^m))$ be a chart on $M$ and $(V,\psi=(y^1,\dots,y^n))$ be a chart on $N$ such that $f(U)\subset V$. 
-\begin{itemize}
-\item For $dy^i$ an element of the dual basis of $T_{f(p)}^\ast(N)$, we have that $$f^\ast(dy^i)=\sum_{k=1}^n\frac{\partial(f_i\circ\phi^{-1})}{\partial x_k}dx^k=df_i$$
-\item For $\tau=\sum_{k=1}^n c_k\;dy^k$ a smooth $1$-form of $N$ in local coordinates, we have that $$f^\ast(\tau)=\sum_{k=1}^n(c_k\circ f)\;df_k$$
-\item For $\omega=\sum_Ia_I\;dy^I$ a smooth $k$-form of $N$ in local coordinates, we have that $$f^\ast(\omega)=\sum_I(a_I\circ f)\;df_{i_1}\wedge\cdots\wedge df_{i_k}$$
-\item If $f$ is a diffeomorphism, we have that $$f^\ast(dy^1\wedge\cdots\wedge dy^n)=\det\left(\frac{\partial\;\psi\circ f_i\circ\phi^{-1}}{\partial x_j}\right)dx^1\wedge\cdots\wedge dx^n$$
-\end{itemize}
-\end{thm}
+\begin{prp}{}{}\\
+Let $M,N$ be smooth manifolds. Let $f:M\to N$ be a smooth map. Let $(U,\phi=(x^1,\dots,x^m))$ and $(V,\psi=(y^1,\dots,y^n))$ be local charts on $M$ and $N$ respectively such that $f(U)\subseteq V$. If $f$ is a diffeomorphism, then $n=m$ and we have $$f^\ast(dy^1\wedge\cdots\wedge dy^n)=\det\left(f_\ast\right)dx^1\wedge\cdots\wedge dx^n$$ where $f_\ast$ is the Jacobian. 
+\end{prp}
 
-\begin{prp}{}{} Let $f:M\to N$ and $g:N\to K$ be a smooth map of manifolds. Let $\omega_1,\omega_2,\omega\in\Omega^\bullet(M)$. The following properties hold for the pull back of forms. 
+\begin{prp}{}{}\\
+Let $M,N$ be smooth manifolds. Let $f:M\to N$ be a smooth map. Then $f^\ast:\Omega^\bullet(N)\to\Omega^\bullet(M)$ is an $\R$-algebra homomorphism. 
+\end{prp}
+
+\begin{prp}{}{}\\
+The following are true regarding the pullback map. 
 \begin{itemize}
-\item $\R$-linearity: $f^\ast(a\omega_1+b\omega_2)=af^\ast(\omega_1)+bf^\ast(\omega_2)$ for $a,b\in\R$
-\item Wedge product: $f^\ast(\omega_1\wedge\omega_2)=f^\ast(\omega_1)\wedge f^\ast(\omega_2)$
-\item Respects composition: $(f\circ g)^\ast(\omega)=g^\ast(f^\ast(\omega))$
+\item Let $M,N,K$ be smooth manifolds. Let $f:M\to N$ and $g:N\to K$ be smooth maps. Then we have $(g\circ f)^\ast=f^\ast\circ g^\ast$. 
+\item Let $M$ be a smooth manifold. Then we have $(\text{id}_M)^\ast=\text{id}_{\Omega^\bullet(M)}$. 
 \end{itemize}
 \end{prp}
 
 \subsection{Exterior Derivatives}
-\begin{defn}{Exterior Derivative}{} Let $M$ be a smooth manifold. An exterior derivative on $M$ is a map $d:\Omega^\bullet(M)\to\Omega^\bullet(M)$ such that the following are true. 
+\begin{defn}{Exterior Derivative}{}\\
+Let $M$ be a smooth manifold. An exterior derivative on $M$ is a map $d:\Omega^\bullet(M)\to\Omega^\bullet(M)$ such that the following are true. 
 \begin{itemize}
 \item $d(\Omega^k(M))\subseteq\Omega^{k+1}(M)$ is an $\R$-linear map
 \item $d\circ d=0$
@@ -604,7 +628,8 @@ A local expression would be better than the above abomination of a formula in th
 \end{itemize}
 \end{defn}
 
-\begin{prp}{}{} Let $M$ be a smooth manifold. Then the exterior derivative exists and is unique. Moreover, if $(U,\phi)$ is a local chart on $M$ and $\omega=\sum_Ia_Idx^I\in\Omega^k(M)$ is a differential $k$-form, then locally on the chart $$d\omega=\sum_I(da_I)\wedge dx^I=\sum_I\sum_{k=1}^n\frac{\partial a_I}{\partial x^k}dx^k\wedge dx^I$$ 
+\begin{prp}{}{}\\
+Let $M$ be a smooth manifold. Then the exterior derivative exists and is unique. Moreover, if $(U,\phi)$ is a local chart on $M$ and $\omega=\sum_Ia_Idx^I\in\Omega^k(M)$ is a differential $k$-form, then locally on the chart $$d\omega=\sum_I(da_I)\wedge dx^I=\sum_I\sum_{k=1}^n\frac{\partial a_I}{\partial x^k}dx^k\wedge dx^I$$ 
 \begin{proof}
 Locally on each chart define $d:\Omega^\bullet(M)\to\Omega^\bullet(M)$ by the formula given. Then using a partition of unity subordinate to the open cover of $M$ via the charts, patch it up globally. Now we check the above criteria for the exterior derivative. 
 
@@ -651,11 +676,6 @@ and so we are done.
 \end{proof}
 \end{prp}
 
-\begin{defn}{Closed and Exact Forms}{} Let $\alpha$ be a $k$-form of $\R^n$. Then $\alpha$ is closed if $d\alpha=0$, and $\alpha$ is exact if there exists a $k-1$-form such that $d\beta=\alpha$. 
-\end{defn}
-
-The reason for these names is because in algebraic topology, we can define the cohomology group of this chain of algebras (called a complex). In particular, it is defined by taking the closed $k$-forms and quotienting the exact $k$-forms. 
-
 \subsection{Orientation of Smooth Manifold}
 \begin{defn}{Orientation}{}\\
 Let $M$ be a smooth manifold of dimension $n$. An orientation of $M$ is an equivalence class $[\omega]\in\frac{\Omega^n(M)}{\sim}$ of smooth $n$-forms where we say that $\omega_1\sim\omega_2$ if there exists an everywhere positive smooth function $f\in\mC^\infty(M)$ such that $\omega_1=f\omega_2$. 
@@ -666,7 +686,7 @@ Let $M$ be a smooth manifold. We say that $M$ is orientable if $M$ has an orient
 \end{defn}
 
 \begin{defn}{Oriented Atlas}{}\\
-Let $M$ be a smooth orientable manifold. Let $\{(U_i,\phi_i)\;|\;i\in I\}$ be an atlas on $M$. We say that the chart is oriented if for any two charts $(U,\phi=(x^1,\dots,x^n))$ and $(V,y^1,\dots,y^n)$ in the atlas we have that $$\det\left(\left(\frac{\partial y^j\circ\phi^{-1}}{\partial x_i}\right)_{1\leq i,j\leq n}\right)>0$$
+Let $M$ be a smooth orientable manifold. Let $\{(U_i,\phi_i)\;|\;i\in I\}$ be an atlas on $M$. We say that the atlas is oriented if for any two charts $(U,\phi=(x^1,\dots,x^n))$ and $(V,y^1,\dots,y^n)$ in the atlas we have that $$\det\left(\left(\frac{\partial y^j\circ\phi^{-1}}{\partial x_i}\right)_{1\leq i,j\leq n}\right)>0$$
 \end{defn}
 
 \begin{prp}{}{}\\
@@ -705,7 +725,7 @@ In order to complete Stoke's theorem, we need a canonical orientation on the bou
 \begin{defn}{Induced Orientation}{} Let $M$ be a smooth orientable manifold with boundary of dimension $n$. Let $\omega$ be a nowhere vanishing $1$-form representing an orientation on $M$. Suppose that in local coordinates, $\omega$ on the boundary of $M$ is given by $$\omega=\epsilon\;dx^1\wedge\cdots\wedge dx^n$$ where $\epsilon=\pm1$ and $x^n>0$. Then define the induced orientation $\omega'$ on $\partial M$ locally by $$\omega'=(-1)^n\epsilon\;dx^1\wedge\cdots\wedge dx^{n-1}$$
 \end{defn}
 
-\subsection{Integration of Smooth Differential $k$-forms}
+\subsection{Integration of Top Forms on Orientable Manifolds}
 There are a number of conditions for integration on manifolds. Namely, 
 \begin{enumerate}
 \item The manifold must be oriented
@@ -715,8 +735,12 @@ There are a number of conditions for integration on manifolds. Namely,
 
 Once the above conditions are satisfied, we can use the partition of unity to define integration.  
 
+\begin{defn}{Compactly Supported Differential Forms}{}\\
+Let $M$ be a smooth manifold. Let $\omega\in\Omega^k(M)$ be a differential form of $M$. We say that $\omega$ has compact support if $$\overline{\{p\in M\;|\;\omega_p\neq 0\}}\subseteq M$$ is compact. 
+\end{defn}
+
 \begin{defn}{Integration of Smooth Top Forms}{}\\
-Let $M$ be an oriented smooth manifold of dimension $n$. Let $\omega\in\Omega^n(M)$ be a smooth top form. Define the integral of $\omega$ over $M$ as follows. Choose an oriented atlas $\{(U_i,\phi_i)\;|\;i\in I\}$ of $M$. Choose a partition of unity $\{\theta_i\;|\;i\in I\}$ subordinate to the open cover of $M$ such that $\omega=\sum_{i\in I}\theta_i\omega$. Suppose that locally on each chart, we have $\theta_i\omega|_{U_i}=g_i dx_i^1\wedge\cdots\wedge dx_i^n$ where each $g_i\in\mC^\infty(M)$ has compact support. Then define the integral of $\omega$ over $M$ by $$\int_M\omega=\sum_{i\in I}\int_{\phi_i(U_i)}g_i\circ\phi_i^{-1}$$ where the integral on the right is the Riemann integral in $\R^n$. 
+Let $M$ be an oriented smooth manifold of dimension $n$. Let $\omega\in\Omega^n(M)$ be a compactly supported smooth top form. Define the integral of $\omega$ over $M$ as follows. Choose an oriented atlas $\{(U_i,\phi_i)\;|\;i\in I\}$ of $M$. Choose a partition of unity $\{\theta_i\;|\;i\in I\}$ subordinate to the open cover of $M$ such that $\omega=\sum_{i\in I}\theta_i\omega$. Suppose that locally on each chart, we have $\theta_i\omega|_{U_i}=g_i dx_i^1\wedge\cdots\wedge dx_i^n$ where each $g_i\in\mC^\infty(M)$ has compact support. Then define the integral of $\omega$ over $M$ by $$\int_M\omega=\sum_{i\in I}\int_{\phi_i(U_i)}g_i\circ\phi_i^{-1}$$ where the integral on the right is the Riemann integral in $\R^n$. 
 \end{defn}
 
 One property of partition of unity is that only finitely many $\theta_\alpha$ are not identically $0$ on $\omega$, so the above sum is finite. Moreover, since $\omega$ has compact support, each $g_\alpha\circ\phi_\alpha^{-1}$ is also of compact support. It remains to show that the definition of integral is independent of the choice of the partition of unity and the choice of the open cover. 
@@ -727,19 +751,18 @@ One property of partition of unity is that only finitely many $\theta_\alpha$ ar
 \begin{prp}{}{} Let $M$ be an oriented manifold of dimension $n$ without boundary. Let $\omega\in\Omega^n(M)$ be a top form of $M$ with compact support. If $-M$ denotes the opposite choice of orientation of $M$, then $$\int_{-M}\omega=-\int_M\omega$$
 \end{prp}
 
-We have actually seen examples of integration on manifolds before. Write $\omega=f_1\;dx_1+f_2\;dx_2+f_3\;dx_3$ be a smooth top form in $\R^3$ that is compactly supported. Let $\gamma:I\to\R^3$ be a diffeomorphism. Then $C=\gamma(I)$ is a $1$-dimensional manifold, and $$\int_C\omega=\sum_{i=1}^3\int_If_i(\gamma(t))\frac{d\gamma_i}{dt}\,dt$$ This is in fact the line integral of the vector field $f=(f_1,f_2,f_3)$ over $C$. 
-
-\begin{thm}{}{} Let $M$ be an $n$-dimensional oriented manifold. Let $\omega$ be an $n-1$ form with compact support. Then $$\int_Md\omega=0$$ 
-\begin{proof}
+\begin{prp}{}{}\\
+Let $M$ be an $n$-dimensional oriented manifold. Let $\omega$ be an $n-1$ form with compact support. Then $$\int_Md\omega=0$$ 
+\begin{proof}\\
 Choose a covering of $M$ and a partition of unity $\{\theta_i\;|\;i\in I\}$ subordinate to the cover such that we can write $$\omega=\sum_{i\in I}\theta_i\omega$$ Then in a chart, we can write $$\theta_i\omega=f_1\;dx^2\wedge\cdots\wedge dx^n-f_2\;dx^1\wedge dx^3\wedge\cdots\wedge dx^n+\cdots+(-1)^{n+1}f_n\;dx^1\wedge\cdots\wedge dx^{n-1}$$ so that $$d(\theta_i\omega)=\left(\frac{\partial f_1}{\partial x_1}+\cdots+\frac{\partial f_n}{\partial x_n}\right)dx^1\wedge\cdots\wedge dx^n$$ Now notice that $$\int_{\R^n}\frac{\partial f_1}{\partial x_1}\;dx^1\wedge\cdots\wedge dx^n=\int_\R\int_\R\cdots\left(\int_\R\frac{\partial f_1}{\partial x_1}\;dx^1\right)\;dx^2\cdots dx^n$$ using Fubini's theorem. Since $f_1$ has compact support, it vanishes for $\abs{x_1}>N$ for some $N\in\R$. So $$\int_\R\frac{\partial f_1}{\partial x_1}\;dx^1=f_1(N)-f_1(-N)=0$$ as $N$ tends to infinity. Continuing in the same way, the entire integral evaluates to $0$ and so we conclude. 
 \end{proof}
-\end{thm}
+\end{prp}
 
 This theorem in context says that integration on the manifold that does not touch the boundary contributes to the overall integration a sum of $0$. Indeed we are assuming $M$ to be an ordinary manifold without boundary in the above theorem. 
 
 \begin{thm}{Stokes' Theorem}{}\\
 Let $M$ be an $n$-dimensional oriented manifold with boundary $\partial M$ carrying the induced orientation. Let $\omega$ be an $n-1$ form with compact support. Then $$\int_Md\omega=\int_{\partial M}\omega|_{\partial M}$$ 
-\begin{proof}
+\begin{proof}\\
 Notice that when $n=1$, it is entirely the same as the fundamental theorem of calculus so that we only treat the case for when $n\geq 2$. Write $\omega=\sum_{i\in I}\theta_i\omega$ where $\{\theta_i\;|\;i\in I\}$ is a partition of unity subordinate to a choice of open cover on $M$. Now we have that $$\int_Md\omega=\sum_{i\in I}\int_Md(\theta_i\omega)$$ and we can write $$\theta_i\omega=f_1\;dx^2\wedge\cdots\wedge dx^n-f_2\;dx^1\wedge dx^3\wedge\cdots\wedge dx^n+\cdots+(-1)^{n+1}f_n\;dx^1\wedge\cdots\wedge dx^{n-1}$$ similar to the above proof. There are two types of chart in the choice of open cover. If $U_\alpha$ does not intersect with the boundary, the above theorem implies that the contribution to the integral is $0$. For those that do intersect, we have that 
 \begin{align*}
 \int_Md(\theta_i\omega)&=\int_{x_n\geq 0}\left(\frac{\partial f_1}{\partial x_1}+\cdots+\frac{\partial f_n}{\partial x_n}\right)\;dx_1\cdots\;dx_{n-1}\\
@@ -750,118 +773,6 @@ Notice that when $n=1$, it is entirely the same as the fundamental theorem of ca
 where the last equality follows because $$\theta_i\omega|_{\partial M}=(-1)^{n-1}f_n\;dx^1\wedge\cdots dx^{n-1}$$ and we used the induced orientation $(-1)^n\epsilon dx^1\wedge\cdots\wedge dx^{n-1}$. 
 \end{proof}
 \end{thm}
-
-As a result of Stoke's theorem, we prove several related theorems. 
-
-\begin{eg}{}{}\\
-Let $f:\R^3\to\R$ be a smooth function such that for all $p\in f^{-1}(\{0\})$, we have $Jf(p)\neq 0$. Let $\Omega=f^{-1}((-\infty,0])$. Let $U\subseteq\R^3$ be open such that $\Omega\subseteq U$. Let $F:U\to\R^3$ be a smooth function. Then we have $$\iiint_\Omega\text{div}(F)=\iint_{\partial\Omega}F\cdot d(\partial\Omega)$$
-\begin{proof}\\
-It is matter of translating notations in vector calculus to notations in differential geometry. Suppose that the components of $F$ are given by $F_1,F_2,F_3$. Let $\omega$ be the one form in $U$ given by $\omega=F_1dx_2\wedge dx_3+F_2dx_3\wedge dx_1+F_3dx_1\wedge dx_2$. \\
-
-By the implicit function theorem, clearly $\Omega$ is a smooth manifold with smooth boundary $\partial\Omega$. Without loss of generality, suppose that the implicit function theorem gives a globally defined implicit function $g$ (if not, then use partition of unity). Then $r:V\subseteq\R^2\to\partial\Omega$ defined by $r(x)=(x,g(x))$ is $\mC^\infty$ and $\im(r)=\partial\Omega$. 
-\end{proof}
-\end{eg}
-
-\begin{eg}{Divergence Theorem}{} Let $S$ be a compact oriented and connected $2$-dimensional manifold in $\R^3$ with smooth boundary. Let $F=(f_1,f_2,f_3)$ be a smooth vector field on $S$. Then $$\int_S\text{div}(F)\,dx_1\,dx_2\,dx_3=\int_{\partial S}(F\cdot u)dA$$ where $u=\frac{n}{\abs{n}}$ is the outward unit normal and $dA=\abs{n}dxdy$. 
-\begin{proof}
-Let $(U,(x,y))$ be a chart on $S$. We will work with this chart until we patch things up locally. Suppose that on the chart, $S$ is given by the graph of a smooth function $G:\R^2\to\R$. Then $h:\R^2\to\R^3$ given by $(x,y)\mapsto(x,y,G(x,y))$ is a diffeomorphism. Write $\omega=f_1dx_2\wedge dx_3+f_2dx_3\wedge dx_1+f_3dx_1\wedge dx_2$. The pull back of $\omega$ by $h$ is given by 
-\begin{align*}
-h^\ast(\omega)&=f_1\circ h\left(dy\wedge\left(\frac{\partial G}{\partial x}dx+\frac{\partial G}{\partial y}dy\right)\right)+f_2\circ h\left(\left(\frac{\partial G}{\partial x}dx+\frac{\partial G}{\partial y}dy\right)\wedge dx\right)+f_3\circ h(dx\wedge dy)\\
-&=\left(-\frac{\partial G}{\partial x}f_1-\frac{\partial G}{\partial y}f_2+f_3\right)dx\wedge dy
-\end{align*}
-Substituting into the integral, we have that locally on $U$, we have 
-\begin{align*}
-\int_U\omega&=\iint_{\R^2}h^\ast(\omega)\\
-&=\iint_{\R^2}\left(-\frac{\partial G}{\partial x}f_1-\frac{\partial G}{\partial y}f_2+f_3\right)dx\wedge dy\\
-&=\iint_{\R^2}F\cdot\begin{pmatrix}
--\frac{\partial G}{\partial x}\\
--\frac{\partial G}{\partial y}\\
-1
-\end{pmatrix}dxdy
-\end{align*}
-Locally on $U$, a tangent vector on $S$ is a linear combination of $\frac{\partial h}{\partial x}=\begin{pmatrix}
-1\\0\\-\frac{\partial G}{\partial x_1}
-\end{pmatrix}$ and $\frac{\partial h}{\partial y}=\begin{pmatrix}
-0\\1\\-\frac{\partial G}{\partial x_2}
-\end{pmatrix}$ so that for any tangent vector $X_p=a_1\begin{pmatrix}
-1\\0\\-\frac{\partial G}{\partial x_1}
-\end{pmatrix}+a_2\begin{pmatrix}
-0\\1\\-\frac{\partial G}{\partial x_2}
-\end{pmatrix}$, we have that $$\begin{pmatrix}
--\frac{\partial G}{\partial x}\\
--\frac{\partial G}{\partial y}\\
-1
-\end{pmatrix}\cdot\begin{pmatrix}
-a_1\\
-a_2\\
-a_1\frac{\partial G}{\partial x_1}+a_2\frac{\partial G}{\partial x_2}
-\end{pmatrix}=0$$ so that $n=\begin{pmatrix}
--\frac{\partial G}{\partial x}\\
--\frac{\partial G}{\partial y}\\
-1
-\end{pmatrix}$ is the normal vector to the level set $G$. Now define on $U$ the two form $dA=\abs{n}dx\wedge dy$. Then we have that $$\iint_{\R^2}F\cdot\begin{pmatrix}
--\frac{\partial G}{\partial x}\\
--\frac{\partial G}{\partial y}\\
-1
-\end{pmatrix}dxdy=\iint_{\R^2}F\cdot udA$$ where $u=\frac{n}{\abs{n}}$. Since $\omega$ is compactly supported, choose a partition of unity subordinate to the compacy support of $\omega$. Then we have that $$\int_{\partial S}\omega=\int_{\partial S}F\cdot udA$$ where the integral on the right is given the suitable partition function and that that partition can be chosen to be a finite cover so the sum of the partition functions and integral is finite since $S$ is compact. Now by Stoke's theorem, we have that $$\int_{\partial S}\omega=\int_Sd\omega=\int_S\text{div}(F)dx_1dx_2dx_3$$ and so we conclude. 
-\end{proof}
-\end{eg}
-
-As one can see, often the hardest part of deducing all other identities in vector calculus is translating the problem in terms of differential forms into one that involves notions in vector calculus. 
-
-\begin{eg}{Green's Formula in the Plane}{} Let $W$ be a compact and connected manifold with smooth boundary $\partial W$. Then $$\int_{\partial W}(f\,dx+g\,dy)=\int_W\left(\frac{\partial g}{\partial x}-\frac{\partial f}{\partial y}\right)\,dx\,dy$$ 
-\begin{proof}
-Set $\omega=f\,dx+g\,dy$, we then have by Stoke's theorem, 
-\begin{align*}
-\int_{\partial W}\omega&=\int_Wd\omega\\
-&=\int_Wd(f\,dx+g\,dy)\\
-&=\int_W\left(-\frac{\partial f}{\partial y}dx\wedge dy+\frac{\partial g}{\partial x}dx\wedge dy\right)\\
-&=\int_W\left(\frac{\partial g}{\partial x}-\frac{\partial f}{\partial y}\right)\,dx\,dy
-\end{align*}
-and so we conclude. 
-\end{proof}
-\end{eg}
-
-\pagebreak
-\section{Differential Operators on Manifolds}
-\subsection{The Gradient of a Scalar Function}
-\begin{defn}{The Gradient of a Scalar Function}{}\\
-Let $U\subseteq\R^n$ be an open subset. Let $f:U\to\R$ be a differentiable function. Define the gradient of $f$ to be function $\text{grad}(f):\R^n\to\R^n$ given by $$\text{grad}(f)=\begin{pmatrix}
-\frac{\partial f}{\partial x_1}\\ \vdots\\ \frac{\partial f}{\partial x_n}
-\end{pmatrix}$$
-\end{defn}
-
-\begin{lmm}{}{}\\
-Let $U\subseteq\R^n$ be an open subset. Let $f:U\to\R$ be a function. Let $v\in\R^n$. Then we have $$\text{grad}(f)(p)\cdot v=\partial_vf(p)$$ for any $p\in U$. 
-\end{lmm}
-
-\begin{lmm}{}{}\\
-Let $f:\R^n\to\R$ be a smooth function. Let $v\in\R^n$. Then we have $$\text{grad}(f)(p)\cdot v=df_p(v)$$ for any $v\in T_p(\R^n)$. 
-\end{lmm}
-
-\begin{defn}{Line Integrals}{}\\
-Let $U\subseteq\R^n$ be an open subset. Let $F:U\to\R^n$ be a function. Let $r:[a,b]\to U$ be a differentiable path. Let $C=\im(r)$. Define the integral of $F$ along $r$ to be $$\int_CF\;dr=\int_a^b F(r(t))\cdot r'(t)\;dt$$ if the integral exists. 
-\end{defn}
-
-\begin{thm}{The Fundamental Theorem of Line Integrals}{}
-Let $U\subseteq\R^n$ be an open subset. Let $f:U\to\R$ be a smooth function. Let $r:[a,b]\to U$ be a differentiable function in $U$. Let $C=\im(r)$. Then we have $$\int_C\text{grad}(f)\;dr=f(r(b))-f(r(a))$$
-\begin{proof}\\
-Suppose that the components of $r$ is given by $r(t)=(r_1(t),\dots,r_n(t))$. By definition of the line integral, we have that $$\int_C\text{grad}(f)\;dr=\int_a^b\text{grad}(f)(r(t))\cdot r'(t)\;dt=\int_a^b\sum_{i=1}^n\frac{\partial f}{\partial x_i}\bigg{|}_{r(t)}\frac{dr_i}{dt}dt=\int_{[a,b]}r^\ast(\text{grad}(f))$$ Let $\omega_p=\sum_{i=1}^n\frac{\partial f}{\partial x_i}\bigg{|}_pdx_i$. Then $\omega$ is a one form on $\R^n$. We may pull back the one form along $r$ onto the smooth manifold $\im(r)$ to give the one form $$r^\ast(\omega)_t=\sum_{i=1}^n\frac{\partial f}{\partial x_i}\bigg{|}_{r(t)}\frac{dr_i}{dt}dt$$ By definition of the integral of differential forms, we deduce that $$\int_C\text{grad}(f)\;dr=\int_{[a,b]}r^\ast(\omega)$$
-\end{proof}
-\end{thm}
-
-\begin{defn}{Conservative Vector Fields}{}\\
-Let $U\subseteq\R^n$ be an open subset. Let $F:U\to\R^n$ be a function. We say that $F$ is conservative if there exists a differentiable function $f:U\to\R$ such that $F=\nabla f$. 
-\end{defn}
-
-\begin{prp}{}{}\\
-Let $U\subseteq\R^n$ be an open subset. Let $F:U\to\R^n$ be a vector field. Then the following are equivalent. 
-\begin{itemize}
-\item $F$ is conservative. 
-\item If $r,s:[a,b]\to U$ are differentiable paths in $U$ such that $r(a)=s(a)$ and $r(b)=s(b)$, then we have $$\int_{r([a,b])}f\cdot dr=\int_{s([a,b])}f\cdot ds$$
-\item If $r:[a,b]\to U$ is a differentiable path in $U$ such that $r(a)=r(b)$, then we have $$\int_{r([a,b])}f\cdot dr=0$$
-\end{itemize}
-\end{prp}
 
 \pagebreak
 \section{De Rham Cohomology}
@@ -881,6 +792,11 @@ By proposition 6.2.4, the operator $d:\Omega^k(M)\to\Omega^{k+1}(M)$ for a smoot
 The complex is denoted as $(\Omega^\bullet(M),d)$, coinciding with the algebra of smooth differential forms. 
 \end{defn}
 
+\begin{defn}{Closed and Exact Forms}{} Let $\alpha$ be a $k$-form of $\R^n$. Then $\alpha$ is closed if $d\alpha=0$, and $\alpha$ is exact if there exists a $k-1$-form such that $d\beta=\alpha$. 
+\end{defn}
+
+The reason for these names is because in algebraic topology, we can define the cohomology group of this chain of algebras (called a complex). In particular, it is defined by taking the closed $k$-forms and quotienting the exact $k$-forms. 
+
 \begin{defn}{de Rham Cohomology Groups}{} Let $M$ be a smooth manifold of dimension $n$. Define the de Rham cohomology groups of $M$ to be the cohomology of the chain of differential forms: $$H_{\text{dR}}^k(M)=H^k(\Omega^\bullet(M);\R)$$ for $0\leq k\leq n$. 
 \end{defn}
 
@@ -889,60 +805,83 @@ The complex is denoted as $(\Omega^\bullet(M),d)$, coinciding with the algebra o
 \item $H_{\text{dR}}^k(M)$ is a vector space over $\R$ for all $k\in\N$. 
 \item For $r>n$ we have $H_{\text{dR}}^r(M)=0$
 \item If $M$ has $k$ connected components then $H_{\text{dR}}^0(M)\cong\R^k$
-\item $M$ is orientable if and only if $H_\text{dR}^n(M)\cong\R$. $M$ is non-orientable if and only if $H_\text{dR}^n(M)=0$. 
 \end{itemize}
 \end{prp}
 
-\begin{thm}{}{}\\
-Let $M$ be a smooth manifold of dimension $n$. Then the direct sum $$H_\text{dR}^\ast(M)=\bigoplus_{i=0}^nH_\text{dR}^i(M)$$ is a graded $\R$-algebra whose multiplication is given by exterior products. 
-\end{thm}
+\begin{defn}{de Rham Cohomology Ring}{}\\
+Let $M$ be a smooth manifold. Define the de Rham cohomology ring to be the direct sum $$H_\text{dR}^\ast(M)=\bigoplus_{i=0}^{\dim(M)}H_\text{dR}^i(M)$$ together with multiplication given by exterior products. 
+\end{defn}
 
-\begin{prp}{}{} Let $M,N$ be smooth manifolds and $f:M\to N$ a smooth map. Then $f$ induces an $\R$-linear map $$f^\ast:H_\text{dR}^\ast(N)\to H_\text{dR}^\ast(M)$$ such that $f^\ast(a\wedge b)=f^\ast(a)\wedge f^\ast(b)$. Moreover, it is functorial: 
+Check: $H_\text{dR}^\ast$ is a graded $\R$-algebra. 
+
+\begin{prp}{}{}\\
+Let $M,N$ be smooth manifolds. Let $f:M\to N$ be a smooth map. Then the induced map $$f^\ast:H_\text{dR}^\ast(N)\to H_\text{dR}^\ast(M)$$ given by $[\omega]\mapsto[f^\ast\omega]$ is a well defined $\R$-algebra homomorphism. 
+\end{prp}
+
+\subsection{Relation to Orientability}
+\begin{prp}{}{}\\
+Let $M$ be a smooth manifold. Then the following are true. 
 \begin{itemize}
-\item If $g:N\to K$ is another smooth map of manifolds, then $(g\circ f)^\ast=f^\ast\circ g^\ast$
-\item If $\text{id}:M\to M$ is the identity map on the manifold, then $\text{id}^\ast:H_\text{dR}^\ast(M)\to H_\text{dR}^\ast(M)$ is the trivial map on $\R$-algebras. 
+\item $M$ is orientable if and only if $H_\text{dR}^{\dim(M)}(M)\cong\R$. 
+\item $M$ is not orientable if and onlyif $H_\text{dR}^{\dim(M)}(M)=0$. 
 \end{itemize}
 \end{prp}
 
-\begin{thm}{Homotopy Invariance}{} Let $f:M\times I\to N$ be a smooth map of manifolds varying for each $t\in I=[0,1]$. Write $f_t(x)=f(x,t)$. Then the pull back maps $f_0^\ast,f_1^\ast:H_\text{dR}^\ast(N)\to H_\text{dR}^\ast(M)$ are equal: $$f_0^\ast=f_1^\ast$$
-\end{thm}
-
-\begin{thm}{}{} If $M$ is a compact, orientable connected $n$-dimensional manifold with a chosen orientation, then integration $$\int_M:H_\text{dR}^n(M)\to\R$$ defines a canonical isomorphism between $H_\text{dR}^n(M)$ and $\R$. 
-\end{thm}
-
-\subsection{De Rham's Theorem}
-\begin{prp}{}{} Let $M$ be a smooth manifold. Then there is an isomorphism $$\Hom(H_k(M;\Z),\R)\cong H^k(M;\R)$$ for any $k\in\N$. 
+\begin{prp}{}{}\\
+Let $M$ be a compact orientable connected smooth manifold. Then the map $$\int_M:H_\text{dR}^{\dim(M)}(M)\to\R$$ is a natural isomorphism. 
 \end{prp}
 
-\begin{thm}{}{} Let $M$ be a smooth manifold. Define the map $$I:H_{\text{dR}}^k(M)\to H^k(M;\R)$$ as follows. For $[\omega]\in H_{\text{dR}}^k(M)$, $I(\omega)\in H^k(M;\R)\cong\Hom(H_k(M;\Z),\R)$ sends $$[c]\overset{I(\omega)}{\mapsto}\int_c\omega$$ for $[c]\in H_k(M;\Z)$. Then this map is an isomorphism so that $$H_{\text{dR}}^k(M)\cong H^k(M;\R)$$ for any $k\in\N$. 
-\end{thm}
+\pagebreak
+\section{Integration of Densities}
+\subsection{The Density Bundle}
+\begin{defn}{Densities of a Vector Space}{}\\
+Let $V$ be a finite dimensional vector space over $\R$. Let $\mu:V^{\dim(V)}\to\R$ be a function. We say that $\mu$ is a density of $V$ if for any linear map $T:V\to V$, we have $$\mu(T(v_1),\dots,T(v_n))=\abs{\det(T)}\mu(v_1,\dots,v_n)$$
+\end{defn}
 
-The isomorphism established is in fact even stronger. In particular, the two graded rings arising from the respective cohomology theories are isomorphic as graded rings and the exterior product corresponds to the cup product. 
+\begin{defn}{The Space of Densities}{}\\
+Let $V$ be a finite dimensional vector space over $\R$. Define the space of densities of $V$ to be tje set $$\text{Den}(V)=\{\mu:V^{\dim(V)}\to\R\;|\;\mu\text{ is a density }\}$$ together with addition and scalar multiplication. 
+\end{defn}
 
-\subsection{Computations of the Cohomology Groups}
-\begin{prp}{}{} The real space $\R^n$ has the de Rham cohomology $$H_{\text{dR}}^k(\R^n)=\begin{cases}
-\R & \text{ if }k=0\\
-0 & \text{ otherwise }
-\end{cases}$$
+\begin{lmm}{}{}\\
+Let $V$ be a finite dimensional vector space over $\R$. Then $\text{Den}(V)$ is a vector space over $\R$ of dimension $1$. 
+\end{lmm}
+
+\begin{defn}{The Density Bundle}{}\\
+Let $M$ be a smooth manifold. Define the density bundle of $M$ by the set $$\text{Den}(M)=\coprod_{p\in M}\text{Den}(T_pM)$$ together with charts given as follows. For $(U,x^1,\dots,x^n)$ a local chart of $M$, the function $\abs{dx^1\wedge\cdots\wedge dx^n}$ is a chart of $\text{Den}(M)$. 
+\end{defn}
+
+\begin{defn}{Densities}{}\\
+Let $M$ be a smooth manifold. A density of $M$ is an element $$\mu\in\mC^\infty(M,\text{Den}(M))$$
+\end{defn}
+
+\begin{defn}{The Absolute Value}{}\\
+Let $M$ be a smooth manifold of dimension $n$. Define the map $\abs{\;\cdot\;}:\Lambda^nT^\ast M\to\text{Den}(M)$ as follows. Let $\omega\in\Lambda^nT^\ast M$. Let $(U,x^1,\dots,x^n)$ be a local chart of $M$. Suppose that $\omega$ is given locally by $\omega=fdx^1\wedge\cdots\wedge dx^n$. Define $\abs{\omega}$ to be the density whose locally at the same chart is given by $\abs{f}\abs{dx^1\wedge\cdots\wedge dx^n}$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $M$ be a smooth manifold. Then the following are true. 
+\begin{itemize}
+\item $\abs{\cdot}:\Lambda^nT^\ast M\to\text{Den}(M)$ is a bundle homomorphism. 
+\item If $M$ is orientable, then $\abs{\cdot}$ is an isomorphism. 
+\end{itemize}
 \end{prp}
 
-\begin{prp}{}{} The $n$-sphere $S^n$ has the de Rham cohomology $$H_{\text{dR}}^k(S^n)=\begin{cases}
-\R & \text{ if }k=0,n\\
-0 & \text{ otherwise }
-\end{cases}$$
+\begin{defn}{Pullback of Densities}{}\\
+Let $M,N$ be smooth manifolds of dimension $n$. Let $F:M\to N$ be a smooth map. Let $\mu:N\to\text{Den}(N)$ be a density of $N$. Define the pullback of $\mu$ by $F$ to be the density $F^\ast\mu\in\mC^\infty(M,\text{Den}(M))$ given by $$F^\ast\mu_p(v_1,\dots,v_n)=\mu_{F(p)}(dF_p(v_1),\dots,dF_p(v_n))$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $M,N$ be smooth manifolds of dimension $n$. Let $F:M\to N$ be a smooth map. Let $\mu:N\to\text{Den}(N)$ be a density of $N$. Let $(V,y^1,\dots,y^n)$ be a local chart of $N$. Let $(U,x^1,\dots,x^n)$ be a local chart of $M$ such that $F^{-1}(V)\subseteq U$. Suppose that $\mu$ is given locally at the chart by $\mu=u\abs{dy^1\wedge\cdots\wedge dy^n}$. Then locally at the charts, we have $$F^\ast(u\abs{dy^1\wedge\cdots\wedge dy^n})=(u\circ F)\abs{\det(DF)}\abs{dx^1\wedge\cdots\wedge dx^n}$$
 \end{prp}
 
-\begin{thm}{}{} Let $p,q\geq 1$, the sphere $S^{p+q}$ is not diffeomorphic to any $M\times N$ manifolds where $\dim(M)=p$ and $\dim(N)=q$. 
-\end{thm}
+\subsection{Integration of Densities}
+\begin{defn}{Compactly Supported Densities}{}\\
+Let $M$ be a smooth manifold. Let $\mu\in\mC^\infty(M,\text{Den}(M))$ be a density of $M$. We say that $\mu$ has compact support if $$\overline{\{p\in M\;|\;\mu_p\neq 0\}}\subseteq M$$ is compact. 
+\end{defn}
 
-\begin{prp}{}{} Every smooth vector fields on $S^{2n}$ vanishes at some point of the sphere. 
-\end{prp}
-
-\begin{prp}{}{} The real projective space $\R\Prj^n$ has the de Rham cohomology $$H_{\text{dR}}^k(\R\Prj^n)=\begin{cases}
-\R & \text{ if }k=0\text{ or }k=n\text{ where }n\text{ odd }\\
-0 & \text{ otherwise }
-\end{cases}$$
-\end{prp}
+\begin{defn}{Integration of Densities}{}\\
+Let $M$ be a smooth manifold of dimension $n$. Let $\mu\in\mC^\infty(M,\text{Den}(M))$ be a compactly supported density of $M$. Define the integral of $\omega$ over $M$ as follows. Choose an atlas $\{(U_i,\phi_i)\;|\;i\in I\}$ of $M$. Choose a partition of unity $\{\theta_i\;|\;i\in I\}$ subordinate to the open cover of $M$ such that $\mu=\sum_{i\in I}\theta_i\mu$. Suppose that locally on each chart, we have $\theta_i\mu|_{U_i}=g_i dx_i^1\wedge\cdots\wedge dx_i^n$ where each $g_i\in\mC^\infty(M)$ has compact support. Then define the integral of $\mu$ over $M$ by $$\int_M\mu=\sum_{i\in I}\int_{\phi_i(U_i)}g_i\circ\phi_i^{-1}$$ where the integral on the right is the Riemann integral in $\R^n$. 
+\end{defn}
 
 
 

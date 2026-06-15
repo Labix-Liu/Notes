@@ -1,0 +1,216 @@
+\documentclass[a4paper]{article}
+
+\input{Headers.tex}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  urlcolor=black,
+  linkcolor=black,
+  citecolor=black
+}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Labix}
+\lhead{First Year Report}
+\rfoot{\thepage}
+
+\title{First Year Report}
+
+\author{Labix}
+
+\date{\today}
+\begin{document}
+\maketitle
+
+\pagebreak
+\section*{The Foundation}
+Roughly speaking, toric topology is a subfield in algebraic topology that is concerned with spaces equipped with a continuous action of a torus $T=S^1\times\cdots\times S^1$. Our focus lies on a specific collection of toric spaces that is constructed with the combinatorial data of simplicial complexes. These are called moment angle complexes and are defined as follows. 
+
+Choose a simplicial complex $\mK$ on $\{1,\dots,n\}$. For each simplex $\sigma\in\mK$, define the space $$(D^2,S^1)^\sigma=\prod_{i=1}^nY_i\;\;\;\;\text{ where }\;\;\;\;Y_i=\begin{cases}
+D^2 & \text{ if }i\in\sigma\\
+S^1 & \text{ otherwise }
+\end{cases}$$ In other words, $(D^2,S^1)^\sigma$ is a product of $D^2$ and $S^1$ depending on which vertices of $\mK$ lie in $\sigma$. For any inclusion of simplicies $\sigma\subseteq\tau$, there is an inclusion map $(D^2,S^1)^\sigma\hookrightarrow(D^2,S^1)^\tau$. Then the definition of the moment angle complex $\mZ_\mK$ of $\mK$ is just the gluing of products of $D^2$ and $S^1$ along these inclusions, or $$\mZ_\mK=\bigcup_{\sigma\in\mK}(D^2,S^1)^\sigma$$ Being a union of products of $S^1$ and $D^2$ naturally gives $\mZ_\mK$ the action of a torus. Being combinatorial in nature, they form a testing ground for conjectures in topology. Moreover, in good cases (for example $\mK$ is a triangulation of $S^m$, see \cite{ToricTopology}), the moment angle complex $\mZ_\mK$ has the structure of a smooth manifold and they form a testing ground for conjectures in geometry. 
+
+These spaces are interesting because they lie at the intersection of a number of active fields. Other than moment angle complexes, there are other objects in topology and geometry that are defined in terms of combinatorial objects
+
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\mZ_\mK} & {\mZ_P} & {V_P} \\
+	{\text{(Topology)}} & {\text{(Symplectic Geometry)}} & {\text{(Algebraic Geometry)}}
+\end{tikzcd}} \\
+
+Moment angle polytopes $\mZ_P$ are intersection of Hermitian quadrics that define non-Kahler complex manifolds, which makes for a testing ground for theories in symplectic and complex geometry. The basic theory and manifold structure is introduced in \cite{ToricTopology}. 
+
+Projective toric varieties $V_P$ are combinatorial objects in algebraic geometry formed by certain types of polytopes. Typical constructions in algebraic geometry such as divisors and vector bundles can be described following the underlying combinatorics as in \cite{ToricVarieties}
+
+Choosing our polytopes carefully connects the three objects into a unified theory. 
+
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{U(\mK)} & {U(\Sigma_P)} & {U(\Sigma_P)/T^m} && {V_P} \\
+	\\
+	{\mZ_\mK} & {\mZ_P} & {\mZ_P/T^{m-n}} \\
+	{\text{(Topology)}} & {\text{(Symplectic Geometry)}} & {\text{(Algebraic Geometry)}}
+	\arrow["{\cong_{T^m}}", from=1-1, to=1-2]
+	\arrow["{\simeq_{T^m}}", from=1-1, to=3-1]
+	\arrow["{T^m\text{-Orbit}}", from=1-2, to=1-3]
+	\arrow["{\simeq_{T^m}}", from=1-2, to=3-2]
+	\arrow["\cong", from=1-3, to=1-5]
+	\arrow["{\cong\text{diffeo}}"{description}, from=1-3, to=3-3]
+	\arrow["{\cong_{T^m}}", from=3-1, to=3-2]
+	\arrow["{T^{m-n}\text{-Orbit}}", from=3-2, to=3-3]
+\end{tikzcd}} \\
+
+Here, the connection between topology and symplectic geometry is established in \cite{ToricTopology}. For any simple polytope $P$, $\mK$ is the nerve complex of $P$. The connection between $V_P$ as a GIT quotient in algebraic geometry, and symplectic reduction in symplectic geometry is given in \cite{ToricTopology} and \cite{ToricVarieties}. The $U(\mK)$ and $U(\Sigma_P)$ refers to the different constructions of coordinate subspace arrangements which end up being homeomorphic. 
+
+In fact, the first connection between symplectic geometry and combinatorics came from the following theorem which was proven independently in \cite{Atiyah} and \cite{Guillemin}. 
+
+\begin{thm}
+Let $(M,\omega)$ be a compact connected symplectic manifold. Let $T^k\times M\to M$ be a Hamiltonian torus action whose moment map is given by $\mu$. Then $\mu(M)$ is a convex polytope in $\text{Lie}(T^k)^\ast$ given by $$\mu(M)=\text{Conv}(\text{Fix}_{T^k}(M))$$
+\end{thm}
+
+Delzant in his paper \cite{Delzant} proved that if the action is moreover effective, then these polytopes completely determine the manifold structure. This motivates the definition of quasitoric manifolds: Smooth manifolds $M^{2n}$ with a torus action $T^n$ that locally looks like the standard action, together with a homeomorphism of the orbit space $M/T^n\cong P$ with a polytope. When $P$ is simple, $Z_P$ is a principal toric bundle over certain quasitoric manifolds. 
+
+One of the main conjectures in toric topology is stated in \cite{Masuda} and is called the cohomological rigidity conjecture for quasitoric manifolds. 
+
+\begin{conj}
+If $M$ and $N$ are quasitoric manifolds such that $$H^\ast(M)\cong H^\ast(N)$$ Then $M$ and $N$ are homeomorphic (or diffeomorphic). 
+\end{conj}
+
+More generally, it is interesting to ask whether certain classes of toric spaces are cohomologically rigid. We are interested in the cohomological rigidty of moment angle complexes instead. The first observation in this direction is that Hochster's formula \cite{ToricTopology} shows that the cohomology of a moment angle complex is completely determined by the simplicial complex: 
+
+\begin{thm}
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Then there is an isomorphism of rings $$H^\ast(\mZ_\mK)\cong\bigoplus_{J\subseteq\{1,\dots,n\}}H^\ast(\mK_J)$$ where 
+\begin{itemize}
+\item $\mK_J$ is the full subcomplex of $\mK$ with the vertices in $J$. 
+\item The additive isomorphism is given by $$H^n(\mZ_\mK)\cong\bigoplus_{J\subseteq\{1,\dots,n\}}H^{n-\abs{J}-1}(\mK_J)$$
+\item The ring structure is given the map $H^i(\mK_I)\otimes H^j(\mK_J)\to H^{i+j+1}(\mK_{I\cup H_J})$ which sends products of generators to generators if $I\cap J=\emptyset$ and $0$ otherwise. 
+\end{itemize}
+\end{thm}
+
+The second observation is that certain classes of simplicial complexes have the geometry of connected sums of products of spheres. For instance, see \cite{Mcgraven} and \cite{Bosio} for the following result on stacked polytopes. 
+
+\begin{thm}
+Let $P$ be a stacked polytope. Let $n=\dim(P)$ and $m=\abs{V(P)}$. Then there is a diffeomorphism $$\mZ_{\partial P}\cong\#_{k=3}^{m-n+1}(S^k\times S^{m+n-k})^{(k-2)\binom{m-n}{k-1}}$$
+\end{thm}
+
+Among the class of topological spaces, spheres are homologically and homotopically the easiest to understand. It is natural to ask the question in what conditions does a moment angle complex has its cohomology only involving spheres, and in this case is it possible to lift it to a homotopy equivalence, a homeomorphism or a diffeomorphism. Currently my work focuses on moment angle complexes coming from simplicial polytopes of dimension $4$ with $8$ vertices.  
+
+\section*{What is Known in the Simplicial 4-Polytopes and 8-Vertices Cases}
+There are $39$ simplicial complexes in dimension $4$ with $8$ vertices that does not contain ghost vertices, of which $37$ of them come from the boundary of a simplicial $4$-polytope with $8$ vertices (polytopal spheres). These are classified in \cite{Grunbaum}, and whose list was later corrected by my supervisor. Here we briefly survey some known results regarding the moment angle complexes of the polytopes coming from this paper. Following the convention in \cite{Grunbaum}, we denote $P_i^8$ the $i$th polytope in the list. 
+
+As seen above, the moment angle complexes of a stacked polytope has the diffeomorphism type of a connected sum of product of spheres. Stacked polytopes are simplicial polytopes that achieve the lower bound for f-vectors. These are $P_1^8,P_2^8,P_3^8$ in \cite{Grunbaum}. Thus we have diffeomorphisms $$\mZ_{\partial P_1^8}\cong\mZ_{\partial P_2^8}\cong\mZ_{\partial P_3^8}\cong(S^3\times S^9)^{\#6}\#(S^4\times S^8)^{\#8}\#(S^5\times S^7)^{\#3}$$
+
+On the other hand, neighbourly polytopes are simplicial polytopes that achieve the upper bound for f-vectors. These are $P_{35}^8,P_{36}^8,P_{37}^8$ in the list. My supervisor has proven the following in \cite{Amaranta}. 
+
+\begin{thm}
+Let $\mK$ be a simplicial complex that is a neighbourly triangulation of $S^{2n+1}$. Then there is a homotopy equivalence $$(D^k,S^{k-1})^\mK\simeq\#_{i=1}^j\left(S^{t_i}\times S^{s_i}\right)$$ for some $j\in\N^+$ and some $t_i,s_i\in\N^+$ for all $k\geq 2$. 
+\end{thm}
+
+So we have homotopy equivalences $$\mZ_{\partial P_{35}^8}\simeq\mZ_{\partial P_{36}^8}\simeq\mZ_{\partial P_{37}^8}\simeq(S^5\times S^7)^{\#16}\#(S^6\times S^6)^{\#15}$$ On the other hand, $P_{34}^8$ is a cross polytope (It is given by $P_{34}^8=S^0\ast S^0\ast S^0\ast S^0$). A direct computation shows that $$H^\ast(\mZ_{\partial P_{34}^8})\cong H^\ast(S^3\times S^3\times S^3\times S^3)$$ and the following theorem in \cite{Fan} lifts this isomorphism into a homeomorphism. 
+
+\begin{thm}
+Let $\mK$ be a simplicial complex such that $\mK$ is a triangulation of $S^n$ for $n\geq 2$. Suppose that $$H^\ast(\mZ_\mK)\cong H^\ast\left(\#_{i=1}^j\left(\prod_{k=1}^{t_i}S^{d_k}\right)\right)$$ Then the following are true. 
+\begin{itemize}
+\item If $t_i=n+1$ for some $i$, then $j=1$ and there is a homeomorphism $$\mZ_\mK\cong\prod_{i=1}^{n+1}S^3$$
+\item We have $$\abs{\left\{i\in\N\;\bigg{|}\;t_i\geq\floor*{\frac{n}{2}}+2\right\}}\leq 1$$
+\end{itemize}
+\end{thm}
+
+For the remainder of the simplicial $4$-polytopes with $8$ vertices, the paper \cite{Oganisian} constructs an equivalent characterization for those that have the cohomology of a connected sum of products of spheres in terms of the underlying graph of the polytope. 
+
+\begin{thm}
+Let $\mK$ be a simplicial complex such that $\mK$ is a triangulation of $S^3$. Then $$H^\ast(\mZ_\mK)\cong H^\ast\left(\#_{i=1}^j\left(\prod_{k=1}^{t_i}S^{d_k}\right)\right)$$ if and only if exact;y one of the following are true. 
+\begin{itemize}
+\item $\mK=S^0\ast S^0\ast S^0\ast S^0$. 
+\item The underlying graph of $\mK$ is chordal. 
+\item The underlying graph of $\mK$ has exactly two missing edges with distinct vertices (forming a square). 
+\end{itemize}
+\end{thm}
+
+The paper \cite{Fan} also compute explicitly the cohomology of the moment angle complex of $P_{28}^8$, which is given by $$H^\ast(\mZ_{\partial P_{28}^8})\cong H^\ast\left((S^3\times S^3\times S^6)\#(S^5\times S^7)^{\#8}\#(S^6\times S^6)^{\#8}\right)$$ The paper \cite{Iriye} lifts this cohomology isomorphism into a diffeomorphism 
+
+\begin{thm}
+There is a diffeomorphism $$\mZ_{\partial P_{28}^8}\cong(S^3\times S^3\times S^6)\#(S^5\times S^7)^{\#8}\#(S^6\times S^6)^{\#8}$$
+\end{thm}
+
+This involved analyzing the fat wedge filtration in \cite{IK} and using techniques from cobordism and the theory of fiber bundles. 
+
+\section*{Initial Progress}
+Other than catching up with the literature and learning about the main conjecture of Toric Topology, I have made a number of initial computations. 
+
+Following the equivalent characterization given in \cite{Oganisian}, we have produced a python program that computes missing faces and a visualization tool of the underlying graph. We conclude that the moment angle complexes of $P_7^8,P_{16}^8,P_{17}^8,P_{22}^8,P_{26}^8$ do not have the cohomology of a connected sum of products of spheres, while all the remaining ones do. 
+
+I explicitly computed $$H^\ast(\mZ_{\partial P_7^8})=H^\ast((S^3\times S^9)^{\#3}\#(S^4\times S^8)^{\#3}\#(S^5\times S^7)\# X)$$ where $$H^\ast(X)=\frac{\Z\langle a_1,a_2,b_1,b_2,c,d_1,d_2,e,f_1,f_2,g_1,g_2,h\rangle}{I}$$ and $I$ is the ideal generated by the following relations: 
+\begin{itemize}
+\item $a_1a_2=d_2$. 
+\item $a_ib_i=e$. 
+\item $a_ic=f_i$. 
+\item $a_1d_1=g_2,a_2d_2=g_1$. 
+\item $b_ic=g_i$. 
+\item Poincare relations $a_ig_i=b_if_i=ce=d_1d_2=h$. 
+\item $z^2=0$ for all generators $z$. 
+\end{itemize}
+and $\deg(a_i)=3$, $\deg(b_i)=4$, $\deg(c)=5$, $\deg(d_i)=6$, $\deg(e)=7$, $\deg(f_i)=8$, $\deg(h)=12$ (13 generators and 28 relations). It is interesting to find a model for $X$ and hence the homotopy type of $\mZ_\mK$ in these odd cases, and I aim to use Macaulay2 to simplify the above expression and the cohomology rings of the other odd cases. 
+
+\section*{Techniques and Research Directions}
+Going forward, there are a number of possible directions that our work will focus on, in terms of the cohomology, the topology and the rigidity of moment angle complexes. 
+
+\subsection*{Analyzing the Topology and Geometry}
+There are retractions $\mZ_{\mK_J}\hookrightarrow\mZ_\mK\to\mZ_{\mK_J}$ where $J\subseteq\{1,\dots,n\}$ induced by retracting $(D^2,S^1)$ to $(S^1,S^1)$ by mapping $D^2$ to the base point, and these are typically easier to compute. In particular, the retraction may factor through the $(n-1)$-skeleton, which may reveal information about the topology of the moment angle complex. In \cite{Amaranta} and \cite{Iriye}, certain $\mZ_{\mK_J}$ are wedges of spheres which are useful to knowing the topology because the remainder of $\mZ_{\mK_J}$ in $\mZ_\mK$ may be understood by attaching maps of spheres to wedges of spheres, and if this is the case we may use Hilton Milnor theorem to analyze the components. 
+
+In the general case, a powerful theorem of \cite{BBCG} decomposes the suspension of $\mZ_\mK$ as a wedge of spheres. 
+
+\begin{thm}
+Let $\mK$ be a simplicial complex. Then there is a homotopy equivalence $$\Sigma\mZ_\mK\simeq\bigvee_{J\notin\mK}\Sigma^{2+\abs{J}}\abs{\mK_J}$$
+\end{thm}
+
+Work was done to desuspend this decomposition. One such direction is to analyze the fat wedge filtration in \cite{IK}. Let $\bold{X}=X_1,\dots,X_n$ be a sequence of pointed spaces. The $i$th fat wedge filtration of $X_1\times\cdots\times X_n$ is the space $$\bold{X}^i=\{(x_1,\dots,x_n)\in X_1\times\cdots\times X_n\;|\;\text{ at least }n-i\text{ of }x_j\text{ are basepoints }\}$$ Since $\mZ_\mK$ is a subspace of $D^{2n}$, we define the fat wedge filtration of $\mZ_\mK$ by $$\mZ_\mK^i=\mZ_\mK(D^2,\dots,D^2)^i$$ The following theorem is proved in \cite{IK}. 
+
+\begin{thm}
+Let $\mK$ be a simplicial complex on $[n]$. Then the fat wedge filtration of $\mZ_\mK$ is trivial if and only if there is a homotopy equivalence $$\mZ_\mK\simeq\bigvee_{\emptyset\neq J\subseteq[n]}\Sigma^{1+\abs{I}}\abs{\mK_I}$$
+\end{thm}
+
+Here \cite{IK} shows that the fat wedge filtration of the real moment angle complex $\R\mZ_\mK$, constructed with the model space $(D^1,S^0)$ instead of $(D^2,S^1)$ (refer to \cite{ToricTopology}), can be decomposed into a collection of attachments of cones for each $I\subseteq\mK$. It is trivial if these attaching maps are null-homotopic. They also proved that the fat wedge filtration is trivial if $\mK$ is shellable. 
+
+The fat wedge filtration also desuspends if $\mK$ is a shifted complex. This is given in \cite{Grbric}. 
+
+Motivated by the above results, I will focus my work in the following way. 
+\begin{enumerate}
+\item Analyze the moment angle complexes coming from subcomplexes of $\mK$. It is expected that they have the homotopy type of a wedge of spheres. This result can come by from a number of different directions: analyzing the fat wedge filtration as in \cite{IK}, use homotopy theory as in \cite{Grbric}, or follow the procedure in \cite{Iriye} etc. 
+\item Prove that the CW skeleton of $\mZ_\mK$ has the homotopy type of a wedge of spheres, and analyze the remaining attaching maps to identify the homotopy type of $\mZ_\mK$. The main tool to analyze the attaching map under this assumption is the Hilton-Milnor theorem, following the procedure given in \cite{Amaranta}. 
+\item Use the theory of fiber bundles and cobordism to conclude that the diffeomorphism type of $\mZ_\mK$. This follows from \cite{Iriye}. 
+\end{enumerate}
+
+This will be the main goal of my next year and will be done first to a handful of examples, and then I will generalize the procedure to a larger class of polytopes. I have proposed a research timeline for the main tasks. 
+
+\begin{center}
+\includegraphics[scale = 0.45]{gantt_zk}
+\end{center}
+
+Other than the main projects, there are also other facets of these moment angle complexes that I aim to explore as side projects. 
+
+\subsection*{Algebraic Criterion for the Homotopy Type}
+The main tasks outlined are mostly topological and geometrical in nature. However, new methods in \cite{Amelotte} shows that the criterion for the CW skeleton to acquire the homotopy type of wedge of spheres can also be detected purely algebraically. We may be able to use algebraic criterion to conclude parts of our main task, especially since algebraic criterion are generally easier to compute and check than topological criterion. 
+
+\subsection*{Obstructions to Rigidity}
+Massey products cannot be detected in cohomological isomorphisms so it is a prime method to showing two spaces are not homeomorphic. There are combinatorial descriptions given in \cite{Denham} for whitehead products to be non-trivial using the underlying graph of simplicial complexes. 
+
+\subsection*{Connections to Other Areas}
+The viewpoint of symplectic geometry will be useful to my main tasks. For instance, the result on the diffeomorphism type of the moment angle complexes corresponding to stacked polytopes is proved from the view point of moment angle polytopes in symplectic geometry in \cite{Bosio}. 
+
+On the other hand, not much is known about toric orbifolds, which appears naturally in toric topology in \cite{ToricTopology} and toric geometry in \cite{ToricVarieties}. I am also interested in exploring these areas. 
+
+\pagebreak
+
+\bigskip
+
+% These are examples of the book titles as they can be put in. 
+% You can use different labeling methods, if you prefer, 
+% e.g., just enumerating the items  as [1], [2], etc.,
+% instead of making them [ATLAS], [B], etc.
+% Or use bibtex
+\vspace*{-1cm}
+\bibliographystyle{alphaurl}
+\bibliography{ref}
+
+
+\end{document}

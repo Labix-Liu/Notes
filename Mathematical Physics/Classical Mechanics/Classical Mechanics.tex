@@ -17,116 +17,539 @@
 \maketitle
 \pagebreak
 \tableofcontents
+
 \pagebreak
-
 \section{Newtonian Mechanics}
-\subsection{Galilean Space and Galilean Transformations}
-We begin with an experimental fact in classical mechanics. The experimental facts should be thought of as a set of axioms for classical mechanics to operate on. The question of accuracy of these axioms modeling real life phenomena is a different question. 
+\subsection{The Galilean Model of Our Universe}
+We begin with the assumption that we live in a smooth manifold of dimension $n$, together with an affine connection. 
 
-\begin{axm}{Space and Time}{}\\
-Our space is a three dimensional Euclidean space and time is one dimensional. 
-\end{axm}
-
-\begin{defn}{The Galilean Spacetime Structure}{}\\
-A Galilean spacetime structure consists of the following data. 
-\begin{itemize}
-\item An affine space $(A,\R^4,+)$. The vector space $\R^4$ are called the parallel displacements of $A$. 
-\item A metric $d:\R^4\times\R^4\to\R$ on the parallel displacements of $A$ defined by $$d((t_1,x_1,x_2,x_3),(t_2,y_1,y_2,y_3))=\begin{cases}
-\abs{t_2-t_1} & \text{ if } t_1\neq t_2\\
-\sqrt{(y_1-x_1)^2+(y_2-x_2)^2+(y_3-x_3)^2} & \text{ otherwise }
-\end{cases}$$
-\end{itemize}
-In this case, we call $A$ a Galilean space. 
-\end{defn}
-
-The definition of Galilean spacetime structure incorporates our first axiom in its fullest. \\
-
-Notice that we could have equally defined a Galilean spacetime structure by a non-zero linear map $t:\R^4\to\R$ together with the standard Euclidean metric on $\ker(t)$. Then up to isomorphism, the non-zero linear map $t:\R^4\to\R$ is just the projection to the first coordinate and the metric structure on $\ker(t)$ can be extended to any affine subspace $x+\ker(t)$ for any $x\in\R^4$. 
-
-\begin{defn}{Galilean Transformation}{}\\
-Let $A$ be a Galilean space. Let $f:A\to A$ be an affine transformation. We say that $f$ is the induced map of vector spaces $\overline{f}:\R^4\to\R^4$ is a distance preserving function of metric spaces. 
-\end{defn}
-
-\begin{defn}{Types of Galilean Transformation}{}\\
-Let $A$ be a Galilean space. Let $g:A\to A$ be a Galilean transformation and $\overline{g}:\R^4\to\R^4$ the induced map of vector spaces and metric spaces. 
-\begin{itemize}
-\item We say that $g$ is a uniform motion with velocity $v\in\R^3$ if $$\overline{g}(t,x)=(t,x+vt)$$
-\item We say that $g$ is a translation if there exists $s\in\R$ and $a\in\R^3$ such that $$\overline{g}(t,x)=(t+s,x+a)$$
-\item We say that $g$ is a rotation if there exists an orthogonal map $G:\R^3\to\R^3$ such that $$\overline{g}(t,x)=(t,G(x))$$
-\end{itemize}
-\end{defn}
-
-\begin{defn}{The Galilean Group}{}\\
-Let $A$ be a Galilean space. Define the Galilean group of $A$ to be $$\text{Gal}(A)=\{f:A\to A\;|\;f\text{ is a Galilean transformation }\}$$
-\end{defn}
-
-\begin{prp}{}{}\\
-Let $A$ be a Galilean space. Then every Galilean transformation can be uniquely decomposed as the composition of a rotation, translation and uniform motion. 
-\end{prp}
-
-\begin{prp}{}{}\\
-Let $A$ be a Galilean space. Then $\text{Gal}(A)$ is a Lie group of dimension $10$. 
-\end{prp}
-
-\subsection{Galilean Coordinate Systems}
-\begin{defn}{The Standard Galilean Space}{}\\
-Define the standard Galilean space to be $\R^4$ equipped with the action $\R^4\times\R^4\to\R^4$ that is vector addition. 
+\begin{defn}{Inertial Frame of References}{}\\
+Let $M$ be a smooth manifold of dimension $n$. Let $\nabla$ be an affine connection on $M$. Let $(U,\varphi)$ be a chart of $M$. We say that $\varphi$ is an inertial frame of reference if $$\frac{d^2(\varphi\circ\gamma)}{dt^2}=0$$ for all geodesics $\gamma:I\to U$. 
 \end{defn}
 
 \begin{lmm}{}{}\\
-Let $A$ be a Galilean space. Then there exists a bijective Galilean transformation $f:A\to\R^4$. 
+Let $M$ be a smooth manifold of dimension $n$. Let $\nabla$ be an affine connection on $M$. If $M$ admits an inertial frame of reference, then $\nabla$ is flat and torsion-free. 
 \end{lmm}
 
-\begin{defn}{Galilean Coordinate Systems}{}\\
-Let $A$ be a Galilean space. A Galilean coordinate system is a bijective Galilean transformation $A\to\R^4$. 
-\end{defn}
+\begin{prp}{}{}\\
+Let $M$ be a smooth manifold of dimension $n$. Let $\nabla$ be an torsion-free affine connection on $M$. Then $M$ admits a global inertial frame of reference if and only if $\nabla$ is flat and $M$ is simply connected. 
+\end{prp}
 
-Thus giving a bijective Galilean transformation is the same the act of giving concrete coordinates to a Galilean space. It is commonly called in literature as frames of references. 
+Newton's first law: inertial frames exists. 
 
-\begin{defn}{Uniform Movement}{}\\
-Let $A$ be a Galilean space. Let $\varphi_1,\varphi_2:A\to\R^4$ be two Galilean coordinate systems of $A$. We say that $\varphi_2$ moves uniformly with $\varphi_1$ if $$\varphi_1\circ\varphi_2^{-1}:\R^4\to\R^4$$ is a Galilean transformation. 
-\end{defn}
-
-\begin{axm}{Galileo's Principle of Relativity}{}\\
-Let $A$ be a Galilean space. Then there exists a collection of coordinate system $S=\{\varphi_i:A\to\R^4\;|\;i\in I\}$ such that the following are true. 
+\begin{defn}{Galilean Space-Time Structure}{}\\
+Define a Galilean space-time structure to consist of the following data. 
 \begin{itemize}
-\item Any law of nature holds true in $\im(\varphi_i)$ for any $i\in I$. 
-\item If $f:A\to\R^4$ is a Galilean coordinate system that moves uniformly with $\varphi$ for some $\varphi\in S$, then $f\in S$. 
+\item An affine space $(A,\R^4,+)$ called the universe. 
+\item A linear map $\tau:\R^4\to\R$ called time. 
+\item An inner product $\langle-,-\rangle:\ker(\tau)\times\ker(\tau)\to\R$. 
 \end{itemize}
-Any Galilean coordinate system in such a collection is called an inertial coordinate system. 
-\end{axm}
-
-Notice that for instance, if $\varphi$ is an inertial frame of reference and $g:\R^4\to\R^4$ is a Galilean transformation, then $\varphi\circ g$ is also an inertial frame of reference. 
-
-\subsection{Motions}
-\begin{defn}{Motions}{}\\
-A motion in $\R^3$ is a $C^\infty$ function $x:[a,b]\to\R^3$ for some $a,b\in\R$. 
 \end{defn}
 
-Let $X,Y$ be sets. Let $f:X\to Y$ be a function of sets. Recall that the graph of $f$ is the subset of $X\times Y$ defined by $$\Gamma(f)=\{(x,f(x))\in X\times Y\;|\;x\in X\}$$
+Idea: There are no fixed point of reference in $A$ (no point of origin for both space and time). We measure time relatively by the linear map $\tau$. Elements of $\ker(\tau)$ lies in the same time frame and are called simultaneous events. We measure the spatial difference between simultaneous events by the usual inner product. 
 
-\begin{defn}{World Lines}{}\\
-Let $A$ be a Galilean space. A world line of $A$ is the preimage of a graph of a motion $x:\R\to\R^3$ under a choice of Galilean coordinate system $\varphi:A\to\R^4$. 
+\begin{defn}{Galilean Transformations}{}\\
+Let $(A,\R^4,+,\tau,\langle-,-\rangle)$ and $(A',\R^4,+,\tau',[-,-])$ be Galilean spaces. Let $T:A\to A'$ be an affine transformation. We say that $T$ is a Galilean transformation if the following are true. 
+\begin{itemize}
+\item $\tau'(\overline{T}(b)-\overline{T}(a))=\tau(b-a)$ for all $a,b\in\R^4$. 
+\item $[\overline{T}(b),\overline{T}(a)]=\langle a,b\rangle$ for all $a,b\in\ker(\tau)$. 
+\end{itemize}
 \end{defn}
 
-\begin{defn}{Mechanical Systems}{}\\
-Let $A$ be a Galilean space. Let $n\in\N\setminus\{0\}$. A mechanical system of $n$ points in $A$ is a collection of $C^\infty$ function $x_1,\dots,x_n:\R\to\R^3$ together with a choice of Galilean coordinate system $\varphi:A\to\R^4$. 
+\begin{defn}{Galilean Isomorphism}{}\\
+Let $(A,\R^4,+,\tau,\langle-,-\rangle)$ and $(A',\R^4,+,\tau',[-,-])$ be Galilean spaces. Let $T:A\to A'$ be a Galilean transformation. We say that $T$ is an isomorphism if there exists a Galilean transformation $S$ such that $$S\circ T=\text{id}_A\;\;\text{ and }\;\;T\circ S=\text{id}_{A'}$$
 \end{defn}
-
-A mechanical system is closed when we have included all bodies whose interactions play a role in the study of the given phenomena. Normally, this would mean that the universe is the unique closed system we have to consider for any phenomena, but because most of the bodies contribute negligibly, we allow for a more lax definition of closed systems when implementing for particular phenomena. 
-
-\begin{axm}{Newton's Principle of Determinacy}{}\\
-Let $A$ be a Galilean space. Let $n\in\N\setminus\{0\}$. Let $x:\R\to\R^{3n}$ be a mechanical system. Then there exists a smooth function $F:\R^{3n}\times\R^{3n}\times\R\to\R^{3n}$ such that $$\left(\frac{d^2x_1}{dt^2},\dots,\frac{d^2x_n}{dt^2}\right)=F\left(x_1,\dots,x_n,\frac{dx_1}{dt},\dots,\frac{dx_n}{dt},t\right)$$ Equivalently, for each $1\leq i\leq n$, there exists $F_i:\R^{3n}\times\R^{3n}\times\R\to\R^{3n}$ such that $$\frac{d^2x_i}{dt^2}=F_i\left(x_1,\dots,x_n,\frac{dx_1}{dt},\dots,\frac{dx_n}{dt},t\right)$$
-\end{axm}
 
 \begin{prp}{}{}\\
-Let $A$ be a Galilean space. Let $n\in\N\setminus\{0\}$. Let $x:\R\to\R^{3n}$ be a closed mechanical system. Let $F$ be the smooth function from Newton's principle of determinacy for the system $x$. Then the following are true. 
+Let $(A,\R^4,+,\tau,\langle-,-\rangle)$ be a Galilean space. Then $A$ is isomorphic to $\R^4$ as a Galilean space. 
+\end{prp}
+
+\begin{defn}{The Galilean Group}{}\\
+Define the Galilean group of $\R^4$ to be the subgroup $$\text{Gal}(3)=\{T:\R^4\to\R^4\;|\;T\text{ is a Galilean transformation }\}\leq\text{Aff}(\R^4)$$
+\end{defn}
+
+\begin{defn}{Translations, Boosts and Rotations}{}\\
+Let $T\in\text{Gal}(3)$ be a Galilean transformation. 
 \begin{itemize}
-\item $F$ is not a function of time $t$. 
-\item If $G:\R^3\to\R^3$ is an orthogonal linear map, then $F_i(G\circ x_1,\dots,G\circ x_n,\dots,G\circ\frac{dx_1}{dt},\dots,G\circ\frac{dx_n}{dt})=G\circ F_i(x_1,\dots,x_n,\frac{dx_1}{dt},\dots,\frac{dx_n}{dt})$
-\item For $1\leq i\leq n$, $F_i$ is a function of $x_j-x_k$ and $\frac{dx_j}{dt}-\frac{dx_k}{dt}$ for $1\leq j<k\leq n$. 
+\item We say that $T$ is a boost if $T$ is of the form $$T(x,t)=(x+vt,t)$$ for some $v\in\R^3$. 
+\item We say that $T$ is a translation if $T$ is of the form $$T(x,t)=(x+x_0,t+t_0)$$ for some $x_0\in\R^3$ and $t_0\in\R$. 
+\item We say that $T$ is a rotation if $T$ is of the form $$T(x,t)=(Gx,t)$$ for some $G\in SO(3,\R)$. 
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{}\\
+There is an isomorphism $$\text{Gal}(3)\cong\R^4\rtimes(\R^3\rtimes SO(3))$$ given by decomposing a Galilean transformation into a boost followed by a translation followed by a rotation. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $(A,\R^4,+,\tau,\langle-,-\rangle)$ be a Galilean space. Then the following are true regarding inertial frames of references. 
+\begin{itemize}
+\item $A$ admits an inertial frame of reference. 
+\item Let $\phi$ be an inertial frame of reference. Let $T\in\text{Gal}(A)$ be a Galilean transformation. Then $\phi\circ T$ is an inertial frame of reference. 
+\item Let $\phi$ and $\psi$ be two inertial frames of references. Then there exists a unique $T\in\text{Gal}(A)$ such that $\psi=\phi\circ T$. 
 \end{itemize}
 \end{prp}
+
+\subsection{Newton's Laws and Equation of Motion}
+\begin{defn}{World Lines}{}\\
+Let $(A,\R^4,+,\tau,\langle-,-\rangle)$ be a Galilean space. Let $r:\mC^\infty(\R,\R^3)$ be a map. We say that $r$ is a world line if there exists an inertial frame of reference $\varphi:A\to\R^4$ and a geodesic $\gamma:\R\to A$ such that $$r=\pi\circ\varphi\circ\gamma$$ where $\pi:\R^4\to\R^3$ is the projection map to the first three coordinates. 
+\end{defn}
+
+\begin{defn}{Newtonian System}{}\\
+Let $(A,\R^4,+,\tau,\langle-,-\rangle)$ be a Galilean space. Let $N\in\N^+$. A Newtonian system of $N$ objects consists of the following data. 
+\begin{itemize}
+\item World lines $r_1,\dots,r_N\in\mC^\infty(\R,\R^3)$. 
+\item Masses $m_1,\dots,m_N\in\R^+$. 
+\item Force Laws $F_i:\R^{3N}\times\R^{3N}\times\R\to\R^3$ for $1\leq i\leq N$. 
+\end{itemize}
+such that $$m_i\frac{d^2r_i}{dt^2}=F_i\left(r_1,\dots,r_N,\frac{dr_1}{dt},\dots,\frac{dr_N}{dt},t\right)$$ for $1\leq i\leq N$. 
+\end{defn}
+
+The condition that $F_i$ is constant ration with $r''$ is Newton's second law. 
+
+Postulate: Newton's principle of determinacy: global solution of of the ode exists given initial data (only local solution is guaranteed by Picard-Lindelof)
+
+\begin{defn}{Galilean Newtonian System}{}\\
+Let $(A,\R^4,+,\tau,\langle-,-\rangle)$ be a Galilean space. Let $N\in\N^+$. Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a Newtonian system of $N$ objects. We say that the Newtonian system of $N$ objects is Galilean if $$F_i\left(Gr_1+vt+s_0,\dots,Gr_N+vt+s_0,G\frac{dr_1}{dt}+v,\dots,G\frac{dr_N}{dt}+v,t+s_1\right)=F_i\left(r_1,\dots,r_N,\frac{dr_1}{dt},\dots,\frac{dr_N}{dt},t\right)$$ for all $1\leq i\leq N$ and all $G\in O(3)$, $v,s_0\in\R^3$ and $s_1\in\R$. 
+\end{defn}
+
+Postulate: Galileo's principle of relativity. All observed forces are Galilean. (All Newtonian systems are Galilean)
+
+\begin{lmm}{}{}\\
+Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a Newtonian system of $N$ objects. If the system is Galilean, then $F_i$ is independent of the last variable for $1\leq i\leq N$. 
+\end{lmm}
+
+Thus our force laws are of the form $F_i:\R^{3N}\times\R^{3N}\to\R$. 
+
+\subsection{Work Done and Kinetic Energy}
+\begin{defn}{Work Done}{}\\
+Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a Newtonian system of $N$ objects. Let $[t_0,t_1]\subseteq\R$ Define the work done of $F$ along the world lines $r_1,\dots,r_N$ from $t_0$ to $t_1$ to be $$W=\int_{t_0}^{t_1}\sum_{i=1}^NF_i(r_1(t),\dots,r_N(t),r_1'(t),\dots,r_N'(t),t)\cdot r_i'(t)\;dt$$
+\end{defn}
+
+\begin{defn}{Kinetic Energy}{}\\
+Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a Newtonian system of $N$ objects. Define the kinetic energy of the system to be the function $K:\R^{3N}\to\R$ given by $$K=\sum_{i=1}^N\frac{1}{2}m_i\abs{\frac{dr_i}{dt}}^2$$
+\end{defn}
+
+\begin{thm}{Work Energy Theorem}{}\\
+Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a Newtonian system of $N$ objects. Then we have $$W=\Delta K$$
+\end{thm}
+
+\subsection{Potential Energy of Positional Systems}
+\begin{defn}{Positional Systems}{}\\
+Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a Newtonian system of $N$ objects. We say that the system is positional if $F_i$ only depends on $r_1,\dots,r_N$ for $1\leq i\leq N$. 
+\end{defn}
+
+Thus for a positional system, the force law is given by $F_i(r_1,\dots,r_N)=m_i\frac{d^2r}{dt^2}$ for $1\leq i\leq N$, where $F_i:\R^{3N}\to\R$ is a function. 
+
+\begin{defn}{Conservative Systems}{}\\
+Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a positional Newtonian system of $N$ objects. We say that the system is conservative if $(F_1,\dots,F_N):\R^{3N}\to\R^{3N}$ is conservative as a vector field. 
+\end{defn}
+
+\begin{defn}{Potential Energy}{}\\
+Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a conservative Newtonian system of $N$ objects. Define the potential energy of the system to be any function $U:\R^{3N}\to\R$ such that $$F_i=-\nabla_{r_i}U(r_1,\dots,r_N)$$ for all $1\leq i\leq N$. 
+\end{defn}
+
+Notice that if $U$ is potential energy, then $U+C$ is also potential energy for the same system, for some $C\in\R$. Also, note that existence of potential energy implies that the forces do not depend on $\frac{dr_i}{dt}$. 
+
+\begin{defn}{Total Mechanical Energy}{}\\
+Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a conservative Newtonian system of $N$ objects. Define the total mechanical energy of the system to be the function $E:\R^{6N}\to\R$ given by $$E=K+U$$
+\end{defn}
+
+\begin{thm}{Conservation of Energy}{}\\
+Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a conservative Newtonian system of $N$ objects. Then we have $$\frac{dE}{dt}=0$$
+\end{thm}
+
+\subsection{Internal and External Forces}
+\begin{defn}{Total Momentum}{}\\
+Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a Newtonian system of $N$ objects. Define the total momentum of the system by $$P=\sum_{i=1}^Nm_i\frac{dr_i}{dt}$$
+\end{defn}
+
+\begin{defn}{Pairwise Decomposable}{}\\
+Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a Newtonian system of $N$ objects. We say that the system is pairwise decomposable if there exists $F_1^\text{ext},\dots,F_N^\text{ext}:\R^{3N}\times\R^{3N}\times\R\to\R$ and $F_{ij}:\R^{3N}\times\R^{3N}\times\R\to\R$ for $1\leq i\neq j\leq N$ such that $$F_i=F_i^\text{ext}+\sum_{j\neq i}F_{ij}$$ In this case we call $F_i^\text{ext}$ the external fores and $\sum_{j\neq i}F_{ij}$ the internal forces. 
+\end{defn}
+
+Postulate: Newton's third law: $F_{ij}=-F_{ji}$ always hold
+
+\begin{defn}{Closed Systems}{}\\
+Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a pairwise decomposable Newtonian system of $N$ objects. We say that the system is closed if $F_i^\text{ext}=0$ for $1\leq i\leq N$. 
+\end{defn}
+
+\begin{thm}{Conservation of Momentum}{}\\
+Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a pairwise decomposable Newtonian system of $N$ objects. Then the system is closed if and only if $$\frac{dP}{dt}=0$$
+\end{thm}
+
+\subsection{Angular Momentum}
+Angular momentum is the rotational analogue of momentum. Classically it is defined as the sum of cross products $$L=\sum_{i=1}^Nm_ir_i\times\frac{dr_i}{dt}$$ The cross products require a choice of reference frame (a choice of the origin) in order to be well defined (the more general definition uses the exterior product). 
+
+\begin{defn}{Total Angular Momentum}{}\\
+Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a Newtonian system. Define the total angular momentum of the system to be $$L=\sum_{i=1}^Nm_ir_i\times\frac{dr_i}{dt}$$
+\end{defn}
+
+\begin{defn}{Total Torque}{}\\
+Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a Newtonian system. Define the total torque of the system by $$T=\sum_{i=1}^Nr_i\times F_i$$
+\end{defn}
+
+\begin{thm}{Conservation of Angular Momentum}{}\\
+Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a Newtonian system. If $T=0$, then we have $$\frac{dL}{dt}=0$$
+\end{thm}
+
+\subsection{Holonomic Constraints}
+\begin{defn}{Holonomic Constraints}{}\\
+Let $N\in\N^+$. Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a Newtonian system of $N$ objects. A holonomic constraint on the system is a function $f\in\mC^2(\R^{3N}\times\R,\R)$ such that $$f(r_1,\dots,r_N,t)=0$$
+\end{defn}
+
+\begin{defn}{Configuration Space}{}\\
+Let $N\in\N^+$. Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a Newtonian system of $N$ objects. Let $f_1,\dots,f_k$ be holonomic constraints on the system such that the Jacobian $J(f_1,\dots,f_k)$ achieves full rank. Define the configuration space of the system to be $$Q=\{x\in\R^{3N}\;|\;f_j(x)=0\text{ for all }1\leq j\leq k\}$$
+\end{defn}
+
+Each point in the configuration space is not a point in spacetime, instead they represent a possible position for N particles to situate in space time. The rank condition guarantees $Q$ to be a smooth manifold. 
+
+There is now a problem. The force laws $F_1,\dots,F_N$ works only on the ambient space $\R^{3N}R$. In general $F_i$ may point away from $Q$. We now have to introduce constraint forces $F_i^c$. 
+
+\begin{defn}{Constrained Newtonian Systems}{}\\
+A constrained Newtonian system consists of the following data. 
+\begin{itemize}
+\item World lines $r_1,\dots,r_N\in\mC^\infty(\R,\R^3)$. 
+\item Masses $m_1,\dots,m_N\in\R^+$. 
+\item Holonomic constraints $f_1,\dots,f_k:\R^{3N}\times\R\to\R$. 
+\item Lagrange multipliers $\lambda_1,\dots,\lambda_k:\R\to\R$. 
+\item Constraints forces $F_1^c,\dots,F_N^c:\R^{3N}\times\R^{3N}\times\R\to\R^3$ such that $$(F_1^c,\dots,F_N^c)=\sum_{j=1}^k\lambda_j\nabla f_j$$
+\item Force laws $F_i:\R^{3N}\times\R^{3N}\times\R\to\R^3$ for $1\leq i\leq N$ such that $$m_i\frac{d^2r}{dt^2}=(F_i+F_i^c)\left(r_1,\dots,r_N,\frac{dr_1}{dt},\dots,\frac{dr_N}{dt},t\right)$$ and that $F_1+F_i^c,\dots,F_N+F_i^c$ are Galilean. 
+\end{itemize}
+\end{defn}
+
+Postulate: d Alembert's principle: $F_i^c$ is normal to $Q$, which implies $(F_1^c,\dots,F_N^c)=\sum_{j=1}^k\lambda_j\nabla f_j$. (This is so that work done on the constraint forces are $0$, and that it doesnt affect conservation of energy)
+
+\subsection{The N-Body Problem}
+\begin{eg}{The N-body Problem}{}\\
+The N-body problem is a conservative Newtonian system of $N$ objects whose potential energy is given by $$U(r_1,\dots,r_n)=-\sum_{1\leq i<j\leq N}\frac{Gm_im_j}{\abs{r_i-r_j}}$$ where $G$ is the gravitational constant. In this case the force laws are given by $$F_i=\sum_{1\leq j\neq i\leq N}\frac{Gm_im_j}{\abs{r_i-r_j}^3}(r_j-r_i)$$
+\end{eg}
+
+\begin{eg}{Harmonic Oscillator}{}\\
+The system for a harmonic oscillator is a Newtonian system of $1$ object whose force law is given by $$m\frac{d^2x}{dt^2}=-kx$$ where $x:\R\to\R^3$ is a world line. 
+\end{eg}
+
+\begin{eg}{Kepler Orbits}{}\\
+In the case of $N=2$, the $N$ body problem with $m_2>>m_1$ is solvable. \\
+
+Setting $F_1=m_1\frac{d^2r_1}{dt^2}$ and $F_2=m_2\frac{d^2r_2}{dt^2}$, we deduce that $$\frac{d^2r_2/dt^2}{d^2r_1/dt^2}=\frac{m_1}{m_2}\sim 0$$ This implies that $r_2(t)=k$ is approximately constant. Then the equation for $F_1$ reduces to $$\frac{d^2r_1}{dt^2}=-\frac{Gm_2}{\abs{r_1}^3}r_1$$ Assuming that the stone is close to the earth's surface, we have $\abs{r_1}\sim R$ where $R$ is the earth's radius. Write $r_1(t)=(x(t),y(t),z(t))$. In an appropriate inertial frame, we may decouple the equations to get $$\frac{d^2x}{dt^2}=0\;\;\text{ and }\;\;\frac{d^2y}{dt^2}=0\;\;\text{ and }\;\;\frac{d^2z}{dt^2}=-g$$ where $g=\frac{Gm_2}{R^2}$. Assuming that the stone is dropped from height $h_0$. Then solving the second order ODEs with the initial data gives $$r_1(t)=\left(0,0,h_0-\frac{1}{2}gt^2\right)$$ The stone hits the ground when $t=\sqrt{2h_0/g}$. 
+\end{eg}
+
+\pagebreak
+\section{Lagrangian Mechanics}
+\subsection{Lagrangian Systems}
+\begin{defn}{Lagrangian Systems}{}\\
+A Lagrangian system consists of the following data. 
+\begin{itemize}
+\item A smooth manifold $Q$ called the configuration space. 
+\item A smooth function $L:TQ\times\R\to\R$ called the Lagrangian. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{The Space of Paths with Fixed Endpoints}{}\\
+Let $(Q,L)$ be a Lagrangian system. Let $q_1,q_2\in Q$. Define the space of paths from $q_1$ to $q_2$ to be the set $$\Omega(Q,q_1,q_2)=\{\gamma:[t_1,t_2]\to Q\;|\;\gamma\text{ is smooth such that }\gamma(t_1)=q_1\text{ and }\gamma(t_2)=q_2\}$$
+\end{defn}
+
+\begin{defn}{The Euler Lagrange Operator}{}\\
+Let $(Q,L)$ be a Lagrangian system. Let $\gamma\in\Omega(Q,q_1,q_2)$ be a smooth path. Define the Euler Lagrange $\text{EL}(\gamma)\in\mC^\infty(\gamma^\ast TQ)$ of $\gamma$ to be given in local coordinates $(x^1,\dots,x^{\dim(Q)},v^1,\dots,v^{\dim(Q)})$ of $TQ$ by $$\text{EL}(\gamma)(t)=\sum_{i=1}^{\dim(Q)}\left(\frac{\partial L}{\partial x^i}\bigg{|}_{\gamma(t)}-\frac{d}{dt}\frac{\partial L}{\partial v^i}\bigg{|}_{\gamma(t)}\right)$$
+\end{defn}
+
+\begin{defn}{The Energy Function}{}\\
+Let $(Q,L)$ be a Lagrangian system. Define the total energy of the system $E:TQ\times\R\to\R$ to be given in local coordinates $(x^1,\dots,x^{\dim(Q)},v^1,\dots,v^{\dim(Q)})$ of $TQ$ by $$E=\sum_{i=1}^{\dim(Q)}\frac{\partial L}{\partial v^k}v^k-L$$
+\end{defn}
+
+\begin{thm}{Conservation of Energy}{}\\
+Let $(Q,L)$ be a Lagrangian system. Let $\gamma:[t_1,t_2]\to Q$ be a smooth path such that $\text{EL}(\gamma)=0$. If $\frac{\partial L}{\partial t}=0$, then we have $$\frac{\partial E(\gamma(t),\gamma'(t),t)}{\partial t}=0$$
+\end{thm}
+
+\subsection{The Principle of Least Action}
+We now give a solution of the Euler Lagrangian using variational principles. 
+
+\begin{defn}{The Action Functional}{}\\
+Let $(Q,L)$ be a Lagrangian system. Let $\gamma:[t_1,t_2]\to Q$ be a smooth path. Define the action functional of $\gamma$ by $$S[\gamma]=\int_{t_1}^{t_2}L(\gamma(t),\gamma'(t),t)\;dt$$
+\end{defn}
+
+\begin{defn}{Variations}{}\\
+Let $(Q,L)$ be a Lagrangian system. Let $\gamma:[t_1,t_2]\to Q$ be a smooth path. A variation of $\gamma$ is a smooth map $$H:(-\varepsilon,\varepsilon)\times[t_1,t_2]\to Q$$ for some $\varepsilon>0$ such that the following are true. 
+\begin{itemize}
+\item $H(0,-)=\gamma$. 
+\item $H(s,t_1)=\gamma(t_1)$ and $H(s,t_2)=\gamma(t_2)$ for all $s\in(-\varepsilon,\varepsilon)$. 
+\end{itemize}
+We denote
+\end{defn}
+
+Note: this is essentially a homotopy. 
+
+\begin{defn}{Stationary Actions}{}\\
+Let $(Q,L)$ be a Lagrangian system. Let $\gamma:[t_1,t_2]\to Q$ be a smooth path. We say that $\gamma$ is stationary if for all variations $H:(-\varepsilon,\varepsilon)\times[t_1,t_2]\to Q$ of $\gamma$, we have $$\frac{d}{ds}\bigg{|}_{s=0}S[H(s,-)]=0$$
+\end{defn}
+
+Note: this makes sense because $s\in(-\varepsilon,\varepsilon)\mapsto S[H(s,-)]\in\R$ is a real function. 
+
+\begin{thm}{}{}\\
+Let $(Q,L)$ be a Lagrangian system. Let $\gamma:[t_1,t_2]\to Q$ be a smooth path. Then $\text{EL}(\gamma)=0$ if and only if $\gamma$ is stationary. 
+\end{thm}
+
+\subsection{Relation to Newtonian Systems}
+\begin{defn}{The Associated Lagrangian System}{}\\
+Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a conservative Newtonian system. Let $f_1,\dots,f_k$ be holonomic constraints such that the Jacobian $J(f_1,\dots,f_k)$ achieves full rank. Define the associated Lagrangian system by $(Q,L|_Q)$ where 
+\begin{itemize}
+\item $Q$ is the configuration space of the holonomic constraints. 
+\item $L|_Q$ is the Lagrangian given by $$L|_Q=\iota^\ast(K-U)$$ where $K$ is the kinetic energy and $U$ is the potential energy of the system and $\iota:Q\hookrightarrow\R^{3N}$ is the inclusion. 
+\end{itemize}
+We call $L=K-U$ by the ambient Lagrangian. 
+\end{defn}
+
+Not all Lagrangian systems come from Newtonian systems. Eg: motion of a point mass in a magnetic field (more generally electromagnetic theory is not compatible with classical mechanics). 
+
+\begin{thm}{}{}\\
+Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_n)$ be a constrained Newtonian system that is conservative with holonomic constraints $f_1,\dots,f_k$ such that the Jacobian $J(f_1,\dots,f_k)$ achieves full rank. Let $Q\subseteq\R^{3N}$ be the configuration space. Let $\gamma:\R\to Q$ be a smooth function with components $\gamma_1,\dots,\gamma_N:\R\to\R^3$. Denote $\gamma=(\gamma_1,\dots,\gamma_N)$. Then we have $$\text{EL}_L(\gamma)(t)=\sum_{j=1}^k\lambda_j(t)df_j|_{\gamma(t)}$$ if and only if $$m_i\frac{d^2\gamma_i}{dt^2}=(F_i+F_i^c)(\gamma)$$ for $1\leq i\leq N$, where $\text{EL}_L$ is the Euler Lagrange operator corresponding to $L$ in $\R^{3N}$. 
+\end{thm}
+
+Note that the above theorem uses coordinates of the ambient space $\R^{3N}$. We can also rewrite the theorem using intrinsic coordinates on $Q$. 
+
+\begin{thm}{}{}\\
+Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_n)$ be a constrained Newtonian system that is conservative with holonomic constraints $f_1,\dots,f_k$ such that the Jacobian $J(f_1,\dots,f_k)$ achieves full rank. Let $Q$ be the configuration space. Let $\gamma:\R\to Q$ be a smooth path with components functions $\gamma_1,\dots,\gamma_{3N-k}$ locally at a chart $(U,q^1,\dots,q^{3N-k})$. Then we have $$\text{EL}_{L|_Q}(\gamma)=0$$ if and only if $$m_i\frac{d^2\iota\circ\gamma_i}{dt^2}=(F_i+F_i^c)(\iota\circ\gamma)$$ for $1\leq i\leq N$ where $\text{EL}_{L|_Q}$ is the Euler Lagrange operator corresponding to $L|_Q$ in $Q$, and $\iota:Q\hookrightarrow\R^{3N}$ is the inclusion. 
+\end{thm}
+
+\begin{eg}{}{}\\
+Suppose that $Q=\R^1$ is the configuration space of $1$ object. Let $L:TQ\times\R\to\R$ be the Lagrangian given by $$L(v,x,t)=\frac{1}{2}mv^2-V(x)$$ Then for any $\gamma:[0,1]\to Q$, the Euler Lagrange equation operator reads $$\text{EL}(\gamma)=-V'(\gamma(t))-m\gamma''(t)$$ Notice that setting $\text{EL}(\gamma)=0$ recovers Newton's second equation of motion where $F=-V'(\gamma(t))$. 
+\end{eg}
+
+\begin{eg}{Double Pendulums}{}\\
+Consider a pendulum of length $l_1$ in $\R^3$, and another pendulum of length $l_2$ attached to the end of the first pendulum. Assume that the motion of the pendulum is restricted to the $xz$-plane. 
+
+Let $r_1(x,z)$ and $r_2(x,z)$ be the world lines of the pendulum. The force law for the first pendulum is given by $$F_1(r_1,r_2)=-\frac{T_1}{l_1}r_1+\frac{T_2}{l_2}(r_2-r_1)+m_1g\begin{pmatrix}0\\1\end{pmatrix}$$ where $T_1$ is the tension of the rod pulling towards the center and tension $T_2$ pulling towards the second pendulum and $g$ is the gravitational constant. Similarly, the force law for the second pendulum is given by $$F_2(r_1,r_2)=-\frac{T_2}{l_2}(r_2-r_1)+m_2g\begin{pmatrix}0\\1\end{pmatrix}$$ Since the rods are of constant length, we have holonomic constraints $$\abs{r_1}^2=l_1^2\;\;\;\text{ and }\;\;\;\abs{r_2-r_1}^2=l_2^2$$ This has six equations with six variables $r_1,r_2,T_1,T_2$ so it is solvable, but not easy. So we use the Lagrangian approach instead. (Note: $T_1,T_2$ are the Lagrange multipliers coming from the holonomic constraints)\\
+
+The configuration space given by the holonomic constraints is diffeomorphic to $T=S^1\times S^1$, where we use the variables $(\theta_1,\theta_2)\in T$ for a point in the product. Then the diffeomorphism is given by $$\begin{pmatrix}
+x_1\\z_1
+\end{pmatrix}=\begin{pmatrix}
+l_1\sin(\theta_1)\\
+-l_1\cos(\theta_1)
+\end{pmatrix}\;\;\;\text{ and }\;\;\;\begin{pmatrix}
+x_2\\z_2
+\end{pmatrix}=\begin{pmatrix}
+l_1\sin(\theta_1)+l_2\sin(\theta_2)\\
+-l_1\cos(\theta_1)-l_2\cos(\theta_2)
+\end{pmatrix}$$ The convention here is so that when $\theta_1=0$, pendulum one points downwards at rest. Now we compute kinetic energy and potential energy using the coordinates on $T$. We have that $$K=\frac{1}{2}(m_1+m_2)l_1^2\left(\frac{d\theta_1}{dt}\right)^2+\frac{1}{2}m_2l_2^2\left(\frac{d\theta_2}{dt}\right)^2+m_2l_1l_2\left(\frac{d\theta_1}{dt}\right)^2\left(\frac{d\theta_2}{dt}\right)^2\cos(\theta_1-\theta_2)$$ For the kinetic energy $U$, notice that solving the system of equations $F_i=-\nabla_{r_i}U$ gives $$U=m_1gz_1+m_2gz_2=-(m_1+m_2)gl_1\cos(\theta_1)-m_2gl_2\cos(\theta_2)$$ Now we compute the Euler Lagrange operator of $L=K-U$. We have $$\text{EL}=M(\theta)\frac{d^2\theta}{dt^2}+C\left(\theta,\frac{d\theta}{dt}\right)\frac{d\theta}{dt}+G(\theta)$$ where 
+\begin{gather*}
+\theta=(\theta_1,\theta_2)\\
+M(\theta)=\begin{pmatrix}
+(m_1+m_2)l_1^2 & m_2l_1l_2\cos(\theta_1-\theta_2)\\
+m_2l_1l_2\cos(\theta_1-\theta_2) & m_2l_2^2
+\end{pmatrix}\\
+C\left(\theta,\frac{d\theta}{dt}\right)=\begin{pmatrix}
+0 & -m_2l_1l_2\frac{d\theta_2}{dt}\sin(\theta_1-\theta_2)\\
+m_2l_1l_2\frac{d\theta_1}{dt}\sin(\theta_1-\theta_2) & 0
+\end{pmatrix}\\
+G(\theta)=\begin{pmatrix}
+(m_1+m_2)gl_1\sin(\theta_1)\\
+m_2gl_2\sin(\theta_2)
+\end{pmatrix}
+\end{gather*}
+\end{eg}
+
+\begin{eg}{The N-Body Problem}{}\\
+The Lagrangian of the N-body problem is given by $$L=\sum_{i=1}^N\frac{1}{2}m_i\abs{\frac{dx_i}{dt}}^2+\sum_{1\leq i<j\leq N}\frac{Gm_im_j}{\abs{x_i-x_j}}$$
+\end{eg}
+
+\subsection{Symmetries and Noether's Theorem}
+\begin{defn}{Infinitesimal Symmetry}{}\\
+Let $(Q,L)$ be a Lagrangian system. Let $\Phi:\R\times Q\to Q$ be a one parameter family of diffeomorphisms. We say that $\Phi$ is a symmetry of $L$ if $$L(\Phi_s,(d\Phi_s)(q'),t)=L(q,q',t)$$ for all $s\in\R$. 
+\end{defn}
+
+\begin{thm}{Noether's Theorem}{}\\
+Let $(Q,L)$ be a Lagrangian system. Let $\Phi:\R\times Q\to Q$ be a symmetry of $L$. Let $X_\Phi$ be the infinitesimal generator of $\varphi$. Let $\gamma$ be a solution of $\text{EL}$. Then locally at a chart $(x,v)$ of $TQ$,we have $$\frac{d}{dt}\frac{\partial L}{\partial x_i'}X_\Phi\bigg{|}_{\gamma}=0$$
+\end{thm}
+
+\pagebreak
+\section{Hamiltonian Mechanics}
+\subsection{Hamiltonian Systems}
+\begin{defn}{Hamiltonian Systems}{}\\
+A Hamiltonian system consists of the following data. 
+\begin{itemize}
+\item A symplectic manifold $(P,\omega)$ called the phase space. 
+\item A smooth function $H:P\times\R\to\R$ called the Hamiltonian. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Time Dependency}{}\\
+Let $(P,\omega,H)$ be a Hamiltonian system. 
+\begin{itemize}
+\item We say that the system is time independent if $H:P\times\R\to\R$ is constant on the second factor. 
+\item We say that the system is time dependent otherwise. 
+\end{itemize}
+\end{defn}
+
+\begin{thm}{Conservation of Energy}{}\\
+Let $(P,\omega,H)$ be a time independent Hamiltonian system. Let $\gamma:\R\to P$ be an integral curve of $X_H$. Then we have $$\frac{dH\circ\gamma}{dt}=0$$
+\end{thm}
+
+\begin{defn}{The Hamilton Operator}{}\\
+Let $(P,\omega,H)$ be a Hamiltonian system. Define the Hamilton operator by $$\mH(\gamma)(t)=d\gamma_t\left(\frac{d}{ds}\bigg{|}_{s=t}\right)-X_{H(-,t)}(\gamma(t))$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $(P,\omega,H)$ be a Hamiltonian system. Let $(U,q^1,\dots,q^n,p^1,\dots,p^n)$ be a Darboux chart of $P$. Suppose that $d\gamma_t\left(\frac{d}{ds}\bigg{|}_{s=t}\right)$ is given locally by $$d\gamma_t\left(\frac{d}{ds}\bigg{|}_{s=t}\right)=\frac{dq^i}{ds}\bigg{|}_{s=t}\frac{\partial}{\partial q^i}\bigg{|}_{\gamma(t)}+\frac{dp^i}{ds}\bigg{|}_{s=t}\frac{\partial}{\partial p^i}\bigg{|}_{\gamma(t)}$$ for some $\frac{dq^i}{ds},\frac{dp^i}{ds}\in\mC^\infty(U,\R)$. Suppose that $dH(-,t)$ is given locally by $$dH(-,t)=\sum_{i=1}^n\left(\frac{\partial H(-,t)}{\partial q^i}dq^i+\frac{\partial H(-,t)}{\partial p^i}dp^i\right)$$ for some $\frac{\partial H(-,t)}{\partial q^i},\frac{\partial H(-,t)}{\partial p^i}\in\mC^\infty(U,\R)$. Then the Hamilton operator is given locally by $$\mH(\gamma)(t)=\sum_{i=1}^n\left(\left(\frac{dq^i}{ds}\bigg{|}_{s=t}-\frac{\partial H(-,t)}{\partial p^i}\bigg{|}_{\gamma(t)}\right)\frac{\partial}{\partial q^i}\bigg{|}_{\gamma(t)}+\left(\frac{dp^i}{ds}\bigg{|}_{s=t}+\frac{\partial H(-,t)}{\partial q^i}\bigg{|}_{\gamma(t)}\right)\frac{\partial}{\partial p^i}\bigg{|}_{\gamma(t)}\right)$$
+\end{prp}
+
+\subsection{Relation to Lagrangian Systems}
+\begin{defn}{The Legendre Transform}{}\\
+Let $(Q,L)$ be a Lagrangian system. Define the Legendre transform to be the map $\text{FL}:TQ\times\R\to T^\ast Q\times\R$ given locally at a chart $(U,x^1,\dots,x^n,v^1,\dots,v^n)$ of $TQ$ by $$\text{FL}(x^1,\dots,x^n,v^1,\dots,v^n,t)=\left(x^1,\dots,x^n,\frac{\partial L}{\partial v^1},\dots,\frac{\partial L}{\partial v^n},t\right)$$
+\end{defn}
+
+\begin{defn}{Hyperregular Lagrangian}{}\\
+Let $(Q,L)$ be a Lagrangian system. We say that $L$ is hyperregular if $\text{FL}$ is a diffeomorphism. 
+\end{defn}
+
+\begin{defn}{The Associated Hamiltonian System}{}\\
+Let $(Q,L)$ be a Lagrangian system. Suppose that $L$ is hyperregular. Define the associated Hamiltonian system as follows. 
+\begin{itemize}
+\item The phase space is $T^\ast Q$ with the canonical symplectic structure. 
+\item The Hamiltonian is given locally at a chart of $T^\ast Q$ by $$\mH=E\circ\text{FL}^{-1}$$ where $E$ is the energy function of the Lagrangian. 
+\end{itemize}
+\end{defn}
+
+\begin{thm}{}{}\\
+Let $(Q,L)$ be a Lagrangian system. Suppose that $L$ is hyperregular. Let $\gamma:\R\to Q$ be a smooth path. Then we have $$\text{EL}(\gamma)=0\;\;\;\text{ if and only  if }\;\;\;\mH(\widetilde{\gamma})=0$$ where $\widetilde{\gamma}:\R\to T^\ast Q\times\R$ is the path $\widetilde{\gamma}(t)=\left(\gamma(t),\frac{d\gamma}{ds}\bigg{|}_{s=t},t\right)$. 
+\end{thm}
+
+\begin{crl}{}{}\\
+Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a constrained Newtonian system that is conservative with holonomic constraints $f_1,\dots,f_k$ such that the Jacobian $J(f_1,\dots,f_k)$ achieves full rank. Let $\gamma:\R\to Q$ be a smooth path with component functions $\gamma_1,\dots,\gamma_{3N-k}$ locally at a chart $(U,q^1,\dots,q^{3N-k}$. Then the following are equivalent. 
+\begin{itemize}
+\item For $1\leq i\leq N$, $m_i\frac{d^2\iota\circ\gamma_i}{dt^2}=(F_i+F_i^c)(\iota\circ\gamma)$ where $\iota:Q\hookrightarrow\R^{3N}$ is the inclusion map. 
+\item $\text{EL}_{L|_Q}(\gamma)=0$. 
+\item $\mH(\widetilde{\gamma})=0$ where $\widetilde{\gamma}:\R\to T^\ast Q\times\R$ is the path $\widetilde{\gamma}(t)=\left(\gamma(t),\frac{d\gamma}{ds}\bigg{|}_{s=t},t\right)$. 
+\end{itemize}
+\end{crl}
+
+\begin{crl}{}{}\\
+Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a conservative Newtonian system. Let $U$ be the potential energy. Let $K$ be the kinetic energy. Then the following are true. 
+\begin{itemize}
+\item The Lagrangian is given by $$L=K-V$$
+\item The Hamiltonian is given by $$\mH=K+V$$
+\end{itemize}
+\end{crl}
+
+\begin{defn}{Conserved Quantities}{}\\
+Let $(P,\omega,H)$ be a Hamiltonian system. Let $F:P\times\R\to\R$ be a smooth function. We say that $F$ is a conserved quantity of the system if for any integral curve $\gamma:\R\to P$ of the Hamiltonian vector field $X_H$, we have $$\frac{d}{dt}F(\gamma(t),t)=0$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $(P,\omega,H)$ be a Hamiltonian system. Let $F:P\times\R\to\R$ be a smooth function. Then $F$ is a conserved quantity if and only if $$\{F,H\}=-\frac{\partial F}{\partial t}$$
+\end{prp}
+
+\begin{eg}{The Hamiltonian of the Harmonic Oscillator}{}\\
+Recall that the Lagrangian of the harmonic oscillator is given by $$L(x,v)=\frac{1}{2}mv^2-\frac{1}{2}kx^2$$ where $v=\frac{dx}{dt}$. Notice that $$\frac{\partial L}{\partial v}\bigg{|}_{(x,v,t)}=mv$$ Hence the Hamiltonian is given by $$H\left(x,\frac{\partial L}{\partial v}\bigg{|}_{(x,v,t)},t\right)=\frac{1}{2m}\left(\frac{\partial L}{\partial v}\bigg{|}_{(x,v,t)}\right)^2+\frac{1}{2}kx^2$$ Hamilton's equations are given by $$v=\frac{dx}{dt}=\frac{1}{m}\frac{\partial L}{\partial v}\bigg{|}_{(x,v,t)}\;\;\text{ and }\;\;\frac{d}{dt}\frac{\partial L}{\partial v}\bigg{|}_{(x,v,t)}=-kx$$ Differentiating the first equation with respect to $t$ and substituting the second equations simplifies the system of differential equations into the single equation $$m\frac{d^2x}{dt^2}=-kx$$ Notice that this recovers the force law of the harmonic oscillator. 
+\end{eg}
+
+\subsection{Symmetries and Noether's Theorem}
+\begin{defn}{Hamiltonian Symmetry}{}\\
+Let $Q$ be a configuration space of $N$ objects. Let $L:TQ\times\R\to\R$ be a Lagrangian on $Q$. Let $\varphi:\R\times T^\ast Q\to T^\ast Q$ be a one parameter family of diffeomorphisms. We say that $\varphi$ is a Hamiltonian symmetry of $L$ if the following are true. 
+\begin{itemize}
+\item For each $s\in\R$, we have $\varphi(s,-)$ is a symplectomorphism. 
+\item $H(\varphi(s,-),s)=H(-,-,s)$. 
+\end{itemize}
+\end{defn}
+
+\begin{thm}{Hamiltonian Noether}{}\\
+Let $Q$ be a configuration space of $N$ objects. Let $L:TQ\times\R\to\R$ be a Lagrangian on $Q$. Let $\varphi:\R\times T^\ast Q\to T^\ast Q$ be a Hamiltonian symmetry. Let $X_\varphi$ be the infinitesimal generator of $\varphi$. If $\xi=X_F$ for some $F\in\mC^\infty(T^\ast Q)$, then we have $$\frac{dF}{dt}=0$$
+\end{thm}
+
+\subsection{Hamilton-Jacobi Theory}
+\begin{defn}{Generating Functions}{}\\
+Let $Q$ be a configuration space of $N$ objects. Let $S\in\mC^\infty(Q\times\R)$. We say that $S$ is a generating function if for each $t\in\R$, the map defined at a local chart $(U,x)$ of $Q$ by $$x\mapsto\left(x,\frac{\partial S}{\partial x}(x,t)\right)$$ is a section of $T^\ast Q$. 
+\end{defn}
+
+\begin{defn}{Hamilton-Jacobi Operator}{}\\
+Let $Q$ be a configuration space of $N$ objects. Let $L:TQ\times\R\to\R$ be a Lagrangian on $Q$. Define the Hamilton-Jacobi operator of the Lagrangian by $$\text{HJ}(S)=\frac{\partial S}{\partial t}+H\left(x,\frac{\partial S}{\partial x},t\right)=0$$ where $S\in\mC^\infty(Q\times\R)$ is a generating function. 
+\end{defn}
+
+\begin{defn}{Hamilton's Principal Function}{}\\
+Let $Q$ be a configuration space of $N$ objects. Let $L:TQ\times\R\to\R$ be a Lagrangian on $Q$. Let $S\in\mC^\infty(Q\times\R)$ be a generating function. We say that $S$ is a Hamilton principal function of $L$ if $$\text{HJ}(S)=0$$
+\end{defn}
+
+\begin{thm}{Complete Integral and Solution}{}
+\end{thm}
+
+\pagebreak
+\section{Rigid Body Dynamics}
+\subsection{Rigid Body Systems}
+\begin{defn}{Rigid Body Systems}{}\\
+A rigid body system is a Galilean Newtonian system $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ together with holonomic constraints $$\abs{r_i-r_j}^2=d_{ij}^2$$ for $d_{ij}\in\R$. 
+\end{defn}
+
+\begin{defn}{Total Mass}{}\\
+Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a rigid body system. Define the total mass of the system by $$M=\sum_{i=1}^Nm_i$$
+\end{defn}
+
+\begin{defn}{Center of Mass}{}\\
+Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a rigid body system. Define the center of mass of the system by $$x(t)=\frac{1}{M}\sum_{i=1}^Nm_ir_i(t)$$
+\end{defn}
+
+\begin{defn}{Reference Configurations}{}\\
+Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a rigid body system. Let $s_1,\dots,s_N\in\R^3$. We say that $s_1,\dots,s_N$ is a reference configuration if $$\sum_{i=1}^Nm_is_i=0$$
+\end{defn}
+
+\begin{defn}{Non-degenerate Rigid Body Systems}{}\\
+Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a rigid body system. Let $s_1,\dots,s_N\in\R^3$. We say that the system if non-degenerate if no three points of $s_1,\dots,s_N$ are collinear. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a rigid body system. Let $s_1,\dots,s_N\in\R^3$ be a reference configuration. If the system is non-degenerate, then there is a diffeomorphism $$Q\cong\R^3\rtimes\text{SO}(3)$$ given by $(r_1,\dots,r_N)\mapsto(x,R)$ where $R\in\text{SO}(3)$ is the unique matrix such that $Rs_i=r_i-x$ for $1\leq i\leq N$. 
+\end{prp}
+
+Notice that the diffeomorphism sends a point in $Q$ to its center of mass. Together with a rotation / orientation ($\text{SO}(3)$), this completely determines the configuration. Moreover, under the above identification of $Q$, the world lines $r_i$ can be written as $$r_i(t)=x(t)+R(t)s_i$$. From now on we have two frames to consider. The spatial frames which are the usual inertial frames of the underlying space, and the body frame which moves together with the rigid body. 
+
+\begin{thm}{Konig Decomposition}{}\\
+Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a rigid body system. Let $s_1,\dots,s_N\in\R^3$ be a reference configuration. Then the kinetic energy of the system is given by $$K=\frac{1}{2}M\abs{\frac{dx}{dt}}^2+\frac{1}{2}\Omega^TI(\Omega)$$
+\end{thm}
+
+\begin{defn}{Angular Velocity}{}\\
+Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a rigid body system. Let $s_1,\dots,s_N\in\R^3$ be a reference configuration. 
+\begin{itemize}
+\item Define the space angular velocity $\omega\in\mathfrak{so}(3)$ by $$\omega=\frac{dR}{dt}R^T$$
+\item Define the body angular velocity $\Omega\in\mathfrak{so}(3)$ by $$\Omega=R^T\frac{dR}{dt}$$
+\end{itemize}
+\end{defn}
+
+\subsection{The Inertia Tensor}
+\begin{defn}{The Inertia Tensor}{}\\
+Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a rigid body system. Let $s_1,\dots,s_N\in\R^3$ be a reference configuration. Define the inertia tensor to be the map $I:\R^3\to\R^3$ given by $$I(v)=\sum_{i=1}^Nm_i\left(s_i\times(v\times s_i)\right)$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a rigid body system. Let $s_1,\dots,s_N\in\R^3$ be a reference configuration. Then the matrix of $I$ is given by $(I_{ij})$ where $$I_{ij}=\sum_{k=1}^Nm_k\left(\abs{s_k}^2\delta_{ij}-(s_k)_i(s_k)_j\right)$$
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a rigid body system. Let $s_1,\dots,s_N\in\R^3$ be a reference configuration. If the system if non-degenerate, then $I$ is symmetric and positive definite. 
+\end{prp}
+
+\begin{defn}{Principal Moments of Inertia and Principal Axes}{}\\
+Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a rigid body system. Let $s_1,\dots,s_N\in\R^3$ be a reference configuration. Suppose that the system is non-degenerate. 
+\begin{itemize}
+\item Define the principal moments of inertia to be the three positive eigenvalues $I_1,I_2,I_3>0$ of $I$. 
+\item Define the principal axes to be the orthonormal eigenvectors of $I$. 
+\end{itemize}
+\end{defn}
+
+\subsection{The Lagrangian Perspective}
+\begin{defn}{The Lagrangian}{}\\
+Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a positional rigid body system. Define the Lagrangian of the system by $$L\left(x,\frac{dx}{dt},R,\frac{dR}{dt}\right)=K-V(x,R)$$ where $V$ is the potential energy. 
+\end{defn}
+
+
+\subsection{Free Systems}
+\begin{defn}{Free Rigid Body Systems}{}\\
+Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a positional rigid body system. We say that the system is free if $V=0$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $(r_1,\dots,r_N,m_1,\dots,m_N,F_1,\dots,F_N)$ be a positional rigid body system. If the system if free, then we have $$x(t)=x(0)+\frac{dx}{dt}\bigg{|}_{t=0}t$$
+\end{prp}
+
+
 
 
 

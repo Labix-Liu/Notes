@@ -24,39 +24,64 @@
 \section{Riemannian Metrics}
 \subsection{The Riemannian Metric}
 \begin{defn}{Riemannian Metric}{}\\
-Let $M$ be a smooth manifold. A Riemannian metric on $M$ is a smooth section $$g\in\mC^\infty(M,(TM\otimes TM)^\ast)$$ such that $g_p:T_p(M)\times T_p(M)\to\R$ is an inner product for all $p\in M$. 
+Let $M$ be a smooth manifold. A Riemannian metric on $M$ is a smooth section $$g\in\Gamma^\infty((TM\otimes TM)^\ast)$$ such that $g_p:T_p(M)\times T_p(M)\to\R$ is an inner product for all $p\in M$. 
 \end{defn}
 
 Equivalently, a Riemannian metric is an assignment $p\mapsto g_p$ such that for any smooth sections $s,t\in\Gamma(M,TM)$, the map $p\mapsto g_p(s(p),t(p))$ is smooth. 
 
-\begin{defn}{Riemannian Manifold}{} A Riemannian manifold $(M,g)$ is a manifold $M$ together with a Riemannian metric $g$ on $M$. 
+\begin{defn}{Riemannian Manifold}{}\\
+A Riemannian manifold $(M,g)$ is a manifold $M$ together with a Riemannian metric $g$ on $M$. 
 \end{defn}
 
-To describe the Riemannian metric in local coordinates, we need some simple algebra. Let $V$ be a finite dimensional vector space over a field $k$. Let $\{e_1,\dots,e_n\}$ be a basis for $V$. Let $\{e^1,\dots,e^n\}$ be the dual basis for $V^\ast$. Then we may establish a canonical isomorphism $$(V\otimes_kV)^\ast\cong V^\ast\otimes_kV^\ast$$ given by $f(-,-)\mapsto\sum_{i,j=1}^nf(e_i\otimes e_j)e^i\otimes e^j$. Its converse is given by $\varphi\otimes\psi\mapsto((v\otimes w)\mapsto\varphi(v)\psi(w))$. 
+Given a $(p,q)$-tensor field $F$ of a smooth vector bundle, recall that at a local frame $(U,s_1,\dots,s_k)$ the components of $F$ are the smooth functions $F^{i_1,\dots,i_p}_{j_1,\dots,j_q}$ such that $$F=\sum_{1\leq i_1,\dots,i_p,j_1,\dots,j_q\leq k}F^{i_1\cdots i_p}_{j_1\cdots j_q} s_{i_1}\otimes\cdots\otimes s_{i_p}\otimes s_{j_1}^\ast\otimes\cdots\otimes s_{j_q}^\ast$$ locally. When $E=TM$, we can recover the components by substituting: $$F^{i_1\cdots i_p}_{j_1\cdots j_q}=F\left(dx^{i_1},\dots,dx^{i_p},\frac{\partial}{\partial x^{j_1}},\dots,\frac{\partial}{\partial x^{j_q}}\right)$$ Notice that $g$ is a $(0,2)$-tensor field since $(TM\otimes TM)^\ast=TM^\ast\otimes TM^\ast$. So the components of $g$ are given by $$g_{ij}=g\left(\frac{\partial}{\partial x^i},\frac{\partial}{\partial x^j}\right)$$ In particular, for $p\in M$ and $v,w\in T_pM$, we have $$g_p(v,w)=\sum_{1\leq i,j\leq n}g_{i,j}\left(\frac{\partial}{\partial x^i}\bigg{|}_p,\frac{\partial}{\partial x^j}\bigg{|}_p\right)(dx^i)|_p(v)(dx^j)|_p(w)$$
 
-Then isomorphism carries over to vector bundles, and so we have an isomorphism $(TM\otimes TM)^\ast\cong TM^\ast\otimes TM^\ast$. This is how the Riemannian metric is a $(0,2)$-tensor field. 
+\begin{eg}{}{}\\
+Define the metric $g$ on $S^n$ as follows. For $p\in S^n\subseteq\R^{n+1}$, we have $$T_pS^n=\{v\in\R^{n+1}\;|\;\langle p,v\rangle_{\R^{n+1}}=0\}$$ Then define $$g_p(v,w)=\langle v,w\rangle_{\R^{n+1}}$$ Consider the charts $(U_+,\phi_+=(x_1,\dots,x_n))$ and $(U_-,\phi_-=(x_1,\dots,x_n))$ where $U_+$ and $U_-$ are the nothern and southern hemispheres respectively. In terms of the coordinates in $\R^{n+1}$, the basis for the tangent space is given by pushing forward along the inverse of the coordinate charts, and this gives the basis $$e_i\mp\frac{x_i}{1-\abs{x}^2}e_{n+1}$$ for $1\leq i\leq n$ at the point $p\in\phi_{\pm}^{-1}(x)$ where $e_1,\dots,e_{n+1}$ is the standard basis vector of $\R^{n+1}$. Then we compute that $$g_{ij}=\delta_{ij}+\frac{x_ix_j}{1-\abs{x}^2}$$
+\end{eg}
 
 \begin{prp}{}{}\\
-Let $(M,g)$ be a Riemannian manifold. Let $p\in M$. Let $(U,x^1,\dots,x^n)$ be a chart at $p$. Then $g_p$ as an element of $T_p(M)^\ast\otimes T_p(M)^\ast$ is given locally on the chart by $$g_p=\sum_{1\leq i,j\leq n}g_{i,j}(p)\;(dx^i)|_p\otimes(dx^j)_p$$ where $g_{i,j}:U\to\R$ are smooth functions such that $g_{i,j}(p)=g_p\left(\frac{\partial}{\partial x^i}\bigg{|}_p,\frac{\partial}{\partial x^j}\bigg{|}_p\right)$. 
+Every smooth manifold admits a Riemannian metric. 
 \end{prp}
 
-Let $v,w\in T_p(M)$ be tangent vectors. Then locally on the chart $(U,x^1,\dots,x^n)$, we may compute the Riemannian metric by $$g_p(v,w)=\sum_{1\leq i,j\leq n}g_{i,j}(p)(dx^i)|_p(v)(dx^j)|_p(w)$$
+\subsection{Maps Preserving the Riemannian Metric}
+\begin{prp}{}{}\\
+Let $M,N$ be a smooth manifolds. Let $g$ be a Riemannian metric on $N$. Let $f:M\to N$ be a smooth map. Then $f^\ast g$ is a Riemannian metric on $M$ if and only if $f$ is an immersion. 
+\end{prp}
 
-\begin{thm}{}{}\\
-Every smooth manifold admits a Riemannian metric and hence is a Riemannian manifold. 
-\end{thm}
+This shows that if we want a map $f:M\to N$ that preserves Riemannian metric, we need $f$ to at least be an immersion. 
 
-\begin{defn}{Isometries}{} Let $(M,g)$ and $(N,h)$ be two Riemannian manifolds. We say that $(M,g)$ and $(N,h)$ are isometric if there exists a diffeomorphisms $f:M\to N$ such that $$h\circ f=g$$ In this case $f$ is said to be an isometry. 
+\begin{defn}{Isometric Embedding}{}\\
+Let $(M_1,g_1)$ and $(M_2,g_2)$ be Riemannian manifolds. Let $f:M_1\to M_2$ be a smooth map. We say that $f$ is an isometric embedding if the following are true. 
+\begin{itemize}
+\item $f$ is an immersion. 
+\item $f^\ast g_2=g_1$. 
+\end{itemize}
 \end{defn}
 
-\begin{thm}{(Nash)}{}\\
+\begin{thm}{Nash}{}\\
 Let $(M,g)$ be a Riemannian manifold of dimension $n$. Then there exists an isometric embedding $f:M\to\R^{(n+2)(n+3)/2}$ with the standard Euclidean metric. 
 \end{thm}
 
-\begin{defn}{Local Isometries}{} Let $(M,g)$ and $(N,h)$ be two Riemannian manifolds. We say that they are locally isometric if for all $p\in M$, there exists an open neighbourhood $U\subseteq M$ of $p$ and $V\subseteq N$ open and an isometry $f:U\to V$. 
+\begin{defn}{Isometries}{}\\
+Let $(M_1,g_1)$ and $(M_2,g_2)$ be Riemannian manifolds. Let $f:M_1\to M_2$ be an isometric embedding. We say that $f$ is an isometry if there exists an isometric embedding $h:M_2\to M_1$ such that $$h\circ f=\text{id}_{M_1}\;\;\text{ and }\;\;f\circ h=\text{id}_{M_2}$$ In this case, we say that $M_1$ and $M_2$ are isometric. 
 \end{defn}
 
-\begin{defn}{Flat Manifolds}{} Let $(M,g)$ be a Riemannian manifold. We say that $(M,g)$ is flat if it is locally isometric to $\R^n$ with the standard metric. 
+\begin{prp}{}{}\\
+Let $(M_1,g_1)$ and $(M_2,g_2)$ be Riemannian manifolds. Let $f:M_1\to M_2$ be a smooth map. Then the following are equivalent. 
+\begin{itemize}
+\item $f$ is an isometry. 
+\item $f$ is an isometric embedding and a diffeomorphism. 
+\item $f$ is an isometric embedding that is bijective. 
+\item $f$ is an isometric embedding that is surjective. 
+\end{itemize}
+\end{prp}
+
+\begin{defn}{Local Isometries}{}\\
+Let $(M,g)$ and $(N,h)$ be two Riemannian manifolds. We say that they are locally isometric if for all $p\in M$, there exists an open neighbourhood $U\subseteq M$ of $p$ and $V\subseteq N$ open and an isometry $f:U\to V$. 
+\end{defn}
+
+\begin{defn}{Flat Manifolds}{}\\
+Let $(M,g)$ be a Riemannian manifold. We say that $(M,g)$ is flat if it is locally isometric to $\R^n$ with the standard metric. 
 \end{defn}
 
 In general, not every Riemannian manifold is flat. This can be shown once we discuss curvatures and torsions. However, this is true when $n=1$. 
@@ -64,44 +89,51 @@ In general, not every Riemannian manifold is flat. This can be shown once we dis
 \begin{lmm}{}{} Every 1 dimensional Riemannian manifold is flat. 
 \end{lmm}
 
-\subsection{Lengths and Angles}
-\begin{defn}{Length of a Tangent Vector}{} Let $(M,g)$ be a Riemannian manifold. Let $v\in T_p(M)$ be a tangent vector for $p\in M$. Define the length of $v$ to be $$\abs{v}_g=\sqrt{g_p(v,v)}$$
-\end{defn}
-
-\begin{defn}{Angle between two Tangent Vectors}{} Let $(M,g)$ be a Riemannian manifold. Let $p\in M$. For $v,w\in T_pM$ two tangent vectors, define the angle between $v$ and $w$ to be the unique $\theta\in[0,\pi]$ such that $$\cos(\theta)=\frac{g_p(v,w)}{\abs{v}_g\abs{w}_g}$$
-\end{defn}
-
-\begin{defn}{Orthogonal Tangent Vectors}{} Let $(M,g)$ be a Riemannian manifold. Let $p\in M$. We say that two tangent vectors $v,w\in T_pM$ are orthogonal if $$g_p(v,w)=0$$
-\end{defn}
-
 \subsection{The Musical Isomorphisms}
-\begin{defn}{The Flat Map}{} Let $(M,g)$ be a Riemannian manifold. Let $p\in M$. For each $X\in T_pM$, define the flat map $$\flat:T_pM\to T_p^\ast M$$ by sending $X\in T_pM$ to the map $X^\flat:T_pM\to\R$ by $X^\flat(Y)=g_p(X,Y)$. 
+\begin{defn}{The Flat Map}{}\\
+Let $(M,g)$ be a Riemannian manifold. Let $p\in M$. For each $X\in T_pM$, define the flat map $$\flat:T_pM\to T_p^\ast M$$ by sending $X\in T_pM$ to the map $X^\flat:T_pM\to\R$ by $X^\flat(Y)=g_p(X,Y)$. 
 \end{defn}
 
-\begin{thm}{The Musical Isomorphism}{} Let $(M,g)$ be a Riemannian manifold. Let $p\in M$. Then the flat map $$\flat:T_pM\to T_p^\ast M$$ is an isomorphism. 
+\begin{thm}{The Musical Isomorphism}{}\\
+Let $(M,g)$ be a Riemannian manifold. Let $p\in M$. Then the flat map $$\flat:T_pM\to T_p^\ast M$$ is an isomorphism. 
 \end{thm}
 
-\begin{defn}{The Sharp Map}{} Let $(M,g)$ be a Riemannian manifold. Let $p\in M$. Define the sharp map $$\#:T_p^\ast M\to T_pM$$ to be the inverse of the flat map. 
+\begin{defn}{The Sharp Map}{}\\
+Let $(M,g)$ be a Riemannian manifold. Let $p\in M$. Define the sharp map $$\#:T_p^\ast M\to T_pM$$ to be the inverse of the flat map. 
 \end{defn}
 
-\begin{eg}{}{}\\
-Let $(M,g)$ be a Riemannian manifold. Let $p\in U$. Let $(U,x^1,\dots,x^n)$ be a chart at $p$. Let $g$ be given locally at the chart by $$g_p=\sum_{1\leq i,j\leq n}g_{i,j}(p)(dx^i)_p\otimes(dx^j)_p$$ Then the following are true. 
+\begin{prp}{}{}\\
+Let $(M,g)$ be a Riemannian manifold. Then the following are true. 
 \begin{itemize}
-\item The flat map is given locally by $$\left(\frac{\partial}{\partial x^i}\bigg{|}_p\right)^\flat=\sum_{j=1}^ng_{i,j}(p)(dx^j)_p$$
-\item The sharp map is given locally by $$\left((dx^i)_p\right)^\#=\sum_{j=1}^ng^{i,j}(p)\frac{\partial}{\partial x^j}\bigg{|}_p$$ where $(g^{i,j}(p))_{1\leq i,j\leq n}=\left((g_{i,j}(p))_{1\leq i,j\leq n}\right)^{-1}$. 
+\item The components of the flat map are given by $g_{ij}$. 
+\item The components of the sharp map are given by elements of the inverse matrix $(g_{ij})^{-1}$. 
 \end{itemize}
-\end{eg}
+\end{prp}
 
-\subsection{The Induced Metric on Cotangent Bundles}
+We denote the components of the sharp map by $g^{ij}$. 
+
+\subsection{The Induced Inner Product on Tensor Fields}
 \begin{defn}{The Induced Metric on the Cotangent Bundle}{}\\
 Let $(M,g)$ be a Riemannian manifold. Define the induced metric on $T^\ast M$ to be the section $g^{-1}\in\Gamma(M,(T^\ast M\otimes T^\ast M)^\ast)$ by $$g^{-1}(\alpha,\beta)=g(\alpha^\#,\beta^\#)$$
 \end{defn}
 
 \begin{prp}{}{}\\
-Let $(M,g)$ be a Riemannian manifold. Let $(U,x^1,\dots,x^n)$ be a chart of $M$. Suppose that the components of $g^{-1}$ on the local chart is given by $g^{i,j}$. Then we have $$(g^{i,j})=(g_{i,j})^{-1}$$
+Let $(M,g)$ be a Riemannian manifold. Then the components of $g^{-1}$ is given by the elements of the inverse matrix $(g_{ij})^{-1}$. 
+\end{prp}
+
+\begin{defn}{Inner Product of Tensors}{}\\
+Let $(M,g)$ be a Riemannian manifold. Define the induced inner product on $\mT_p^q(TM)$ as follows. For each $x\in M$ and $v_1,\dots,v_p,w_1,\dots,w_p\in T_xM$ and $\alpha_1,\dots,\alpha_q,\beta_1,\dots,\beta_q\in T_x^\ast M$, define $$\langle v_1\otimes\cdots\otimes v_p\otimes\alpha_1\otimes\cdots\otimes\alpha_q,w_1\otimes\cdots\otimes w_p\otimes\beta_1\otimes\cdots\otimes\beta_q\rangle=\prod_{i=1}^pg_x(v_i,w_i)\cdot\prod_{j=1}^qg_x(\alpha_j,\beta_j)$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $(M,g)$ be a Riemannian manifold. Then the components of the induced inner product on $\mT_p^q(TM)$ is given by $$\langle-,-\rangle_{\substack{i_1,\dots,i_p,j_1,\dots,j_q\\k_1,\dots,k_p,l_1,\dots,l_q}}=g_{i_1k_1}\cdots g_{i_pk_p}g^{j_1l_1}\cdots g^{j_ql_q}$$
 \end{prp}
 
 \subsection{Riemannain Manifolds as a Metric Space}
+\begin{defn}{Length of a Tangent Vector}{}\\
+Let $(M,g)$ be a Riemannian manifold. Let $v\in T_p(M)$ be a tangent vector for $p\in M$. Define the length of $v$ to be $$\abs{v}_g=\sqrt{g_p(v,v)}$$
+\end{defn}
+
 \begin{defn}{Piecewise Regular Paths}{}\\
 Let $(M,g)$ be a Riemannian manifold. A piecewise regular path in $M$ consists of smooth functions $\gamma_i:[a_i,b_i]\to M$ for $1\leq i\leq k$ such that the following are true. 
 \begin{itemize}
@@ -126,15 +158,19 @@ Let $(M,g)$ be a Riemannian manifold. Then the following are true.
 \end{itemize}
 \end{prp}
 
+\begin{eg}{}{}\\
+For a moment, take it for granted that the short distance between two points on $S^n$ is just a segment of a great circle. Then for $p,q\in S^n$, we have $$d(p,q)=\int_0^1\abs{\gamma'(t)}_g\;dt$$ where $\gamma:[0,1]\to S^n$ is the path given as follows. Let $\theta\in[0,\pi]$ be the unique angle such that $\cos(\theta)=\langle p,q\rangle_{\R^{n+1}}$. Suppose that $p\neq\pm q$. Then $\gamma$ is given by $$\gamma(t)=\frac{\sin((1-t)\theta)}{\sin(\theta)}p+\frac{\sin(t\theta)}{\sin(\theta)}q$$ Then we have $$\gamma'(t)=\theta\left(-\frac{\cos((1-t)\theta)}{\sin(\theta)}p+\frac{\cos(t\theta)}{\sin(\theta)}q\right)$$ Then we have $\abs{\gamma'(t)}=\theta$ and so we have $$d(p,q)=\theta$$ This is precisely the spherical metric introduced in Geometry. 
+\end{eg}
+
 \pagebreak
 \section{Introduction to Connections}
 \subsection{Connections on Vector Bundles}
 Recall that for a smooth vector bundle $p:E\to M$, we denote the space of smooth sections on $E$ by $\Gamma(E)$. Moreover, $\mathfrak{X}(M)$ is the space of smooth sections on the tangent bundle $TM$. 
 
 \begin{defn}{Connections}{}\\
-Let $M$ be a smooth manifold. Let $p:E\to M$ be a smooth vector bundle. A connection on $p$ is a map $$\nabla:\mathfrak{X}(M)\times\mC^\infty(E)\to\mC^\infty(E)$$ where we denote $\nabla(V,T)$ by $\nabla_V(T)$, such that the following are true. 
+Let $M$ be a smooth manifold. Let $p:E\to M$ be a smooth vector bundle. A connection on $p$ is a map $$\nabla:\mathfrak{X}(M)\times\Gamma^\infty(E)\to\Gamma^\infty(E)$$ where we denote $\nabla(V,T)$ by $\nabla_V(T)$, such that the following are true. 
 \begin{itemize}
-\item $C^\infty(M)$-linearity in first variable: For each $T\in\mC^\infty(E)$, the map $V\mapsto\nabla_V(T)$ is $C^\infty(M)$-linear. This means that $$\nabla_{fV+hW}(T)=f\nabla_V(T)+g\nabla_W(T)$$ for $V,W\in\mathfrak{X}(M)$, $f,g\in C^\infty(M)$. 
+\item $C^\infty(M)$-linearity in first variable: For each $T\in\Gamma^\infty(E)$, the map $V\mapsto\nabla_V(T)$ is $C^\infty(M)$-linear. This means that $$\nabla_{fV+hW}(T)=f\nabla_V(T)+g\nabla_W(T)$$ for $V,W\in\mathfrak{X}(M)$, $f,g\in C^\infty(M)$. 
 \item $\R$-linearity in second variable: For each $V\in\mathfrak{X}(M)$, the map $T\mapsto\nabla_V(T)$ is $\R$-linear. This means that $$\nabla_V(\lambda T+\mu S)=\lambda\nabla_V(T)+\mu\nabla_V(S)$$
 \item Product rule: The map $\nabla$ satisfies the following product rule: $$\nabla_V(fT)=V(f)\cdot T+f\nabla_V(T)$$
 \end{itemize}
@@ -145,19 +181,58 @@ Let $M$ be a smooth manifold. Let $p:E\to M$ be a smooth vector bundle. Then $E$
 \end{prp}
 
 \begin{defn}{Set of Connections}{}\\
-Let $M$ be a smooth manifold. Let $p:E\to M$ be a smooth vector bundle. Define the set of connections of $E$ to be $$\mA(E)=\{\nabla:\mathfrak{X}(M)\times\mC^\infty(E)\to\mC^\infty(E)\;|\;\nabla\text{ is a connection }\}$$
+Let $M$ be a smooth manifold. Let $p:E\to M$ be a smooth vector bundle. Define the set of connections of $E$ to be $$\mA(E)=\{\nabla:\mathfrak{X}(M)\times\Gamma^\infty(E)\to\Gamma^\infty(E)\;|\;\nabla\text{ is a connection }\}$$
 \end{defn}
 
 \begin{prp}{}{}\\
-Let $M$ be a smooth manifold. Let $p:E\to M$ be a smooth vector bundle. A connection $\nabla$ on $E$ is equivalently an $\R$-linear map $$\nabla:\mC^\infty(E)\to\mC^\infty(T^\ast M\otimes E)=\Omega^1(M)\otimes_{\mC^\infty(M)}\mC^\infty(E)$$ such that $$\nabla(f\cdot s)=df\otimes s+f\cdot\nabla s$$ for all $f\in\mC^\infty(M)$ and $s\in\mC^\infty(E)$. 
+Let $M$ be a smooth manifold. Let $p:E\to M$ be a smooth vector bundle. A connection $\nabla$ on $E$ is equivalently an $\R$-linear map $$\nabla:\Gamma^\infty(E)\to\Gamma^\infty(T^\ast M\otimes E)=\Omega^1(M)\otimes_{\mC^\infty(M)}\Gamma^\infty(E)$$ such that $$\nabla(f\cdot s)=df\otimes s+f\cdot\nabla s$$ for all $f\in\mC^\infty(M)$ and $s\in\Gamma^\infty(E)$. 
 \end{prp}
 
 \begin{defn}{The Connection Forms}{}\\
-Let $M$ be a smooth manifold. Let $p:E\to M$ be a smooth vector bundle. Let $\nabla$ be a connection on $E$. Let $U\subseteq M$ be an open subset. Let $e_1,\dots,e_r$ be a local frame of $E$ on $U$. Define the connection $1$-forms of $\nabla$ on $U$ to be the unique $1$-forms $\omega_j^i:TU\to\R$ such that $$\nabla_Xe_j=\sum_{i=1}^r\omega_j^i(X)e_j$$ for all $X\in\mathfrak{U}$. 
+Let $M$ be a smooth manifold. Let $p:E\to M$ be a smooth vector bundle. Let $\nabla$ be a connection on $E$. Let $(U,e_1,\dots,e_r)$ be a local frame of $E$. Define the connection $1$-forms $\omega_j^i$ of $\nabla$ at the frame by $$\nabla_X(e_j)=\sum_{i=1}^r\omega_j^i(X)e_i$$ for all $X\in\mathfrak{X}(U)$. 
 \end{defn}
 
 \begin{prp}{}{}\\
-Let $M$ be a smooth manifold. Let $p:E\to M$ be a smooth vector bundle. Let $\nabla$ be a connection on $E$. Let $U\subseteq M$ be an open subset. Let $e,\overline{e}$ be local frames of $E$ on $U$. Suppose that $g:U\to\text{GL}(r,\R)$ is a transition function such that $\overline{e}=ge$. Suppose that $\omega_j^i$ and $\overline{\omega}_j^i$ are the connection forms of $\nabla$ with respect to $e$ and $\overline{e}$. Then we have $$\overline{\omega}_j^i=g^{-1}\omega g+g^{-1}dg$$
+Let $M$ be a smooth manifold. Let $p:E\to M$ be a smooth vector bundle. Let $\nabla$ be a connection on $E$. Let $(U,e_1,\dots,e_r)$ and $(U,\overline{e_1},\dots,\overline{e_r})$ be local frames of $E$. Suppose that $\omega_j^i$ and $\overline{\omega}_j^i$ are the corresponding connection forms. Suppose that $A:U\to\text{GL}(r,\R)$ is a transition function such that $\overline{e}=Ae$. Then we have $$\overline{\omega}_j^i=A^{-1}\omega_j^i A+A^{-1}dA$$
+\end{prp}
+
+\subsection{Connections of Tensor Fields}
+\begin{defn}{The Induced Connection on the Dual Bundle}{}\\
+Let $M$ be a smooth manifold. Let $p:E\to M$ be a smooth vector bundle. Let $\nabla$ be a connection on $M$. Define the induced connection on $E^\ast$ to be the connection $\nabla:\mathfrak{X}(M)\times\Omega^1(M)\to\Omega^1(M)$ by $$\nabla_X\xi(s)=X(\xi(s))-\xi(\nabla_Xs)$$
+\end{defn}
+
+\begin{defn}{The Induced Connection on Tensor Fields}{}\\
+Let $M$ be a smooth manifold. Let $p:E\to M$ be a smooth vector bundle. Let $\nabla$ be a connection on $M$. Define the induced connection of $\nabla$ to be the connection $\nabla:\mathfrak{X}(M)\times\mC^\infty(\mT_q^p(E))\to\mC^\infty(\mT_q^p(E))$ given by 
+\begin{align*}
+\nabla_XF(\omega_1,\dots,\omega_p,Y_1,\dots,Y_q)=&X(F(\omega_1,\dots,\omega_p,Y_1,\dots,Y_q))\\
+&-\sum_{i=1}^pF(\omega_1,\dots,\nabla_X\omega_i,\dots,\omega_p,Y_1,\dots,Y_q)\\
+&-\sum_{j=1}^qF(\omega_1,\dots,\omega_p,Y_1,\dots,\nabla_XY_i,\dots,Y_q)
+\end{align*}
+\end{defn}
+
+\begin{defn}{The Total Covariant Derivative}{}\\
+Let $M$ be a smooth manifold. Let $p:E\to M$ be a smooth vector bundle. Let $\nabla$ be a connection on $M$. Let $F$ be a tensor field of type $(p,q)$. Define the total covariant derivative of $F$ to be $\nabla F:X\mapsto\nabla_XF$. 
+\end{defn}
+
+\subsection{The Curvature Tensor}
+\begin{defn}{The Curvature Tensor}{}\\
+Let $M$ be a smooth manifold. Let $p:E\to M$ be a smooth vector bundle. Let $\nabla$ be a connection on $p$. Define the curvature of $\nabla$ to be the smooth section $R(\nabla)\in\mC^\infty(\text{End}(E)\otimes\Lambda^2T^\ast M)$ given by $$R(\nabla)(X,Y)(s)=[\nabla_X,\nabla_Y](s)-\nabla_{[X,Y]}(s)$$ for $X,Y\in\mathfrak{X}(M)$ and $s\in\mC^\infty(E)$. 
+\end{defn}
+
+Notice that the definition makes sense: Appealing to the tensor characterization lemma, a section of $\mC^\infty(\text{End}(E)\otimes\Lambda^2T^\ast M)$ corresponds to a homomorphism $\Lambda^2TM\to\mC^\infty(\text{End}(E))$. Applying the lemma to $\mC^\infty(\text{End}(E))=\mC^\infty(E^\ast\otimes E)$ again, we see that the curvature tensor corresponds to a map $$\Lambda^2TM\to\Hom_{\mC^\infty(M)}(\mC^\infty(E),\mC^\infty(E))$$
+
+\begin{defn}{The Curvature Form}{}\\
+Let $M$ be a smooth manifold. Let $p:E\to M$ be a smooth vector bundle. Let $\nabla$ be a connection on $E$. Let $U\subseteq M$ be an open subset. Let $e_1,\dots,e_r$ be a local frame of $E$ on $U$. Define the curvature forms of $\nabla$ on $U$ to be the unique two forms $\Omega_j^i\in\mC^\infty(U,E)$ such that $$R(\nabla)(X,Y)(e_j)=\sum_{i=1}^r\Omega_j^i(X,Y)e_j$$ for all $X,Y\in\mathfrak{U}$. 
+\end{defn}
+
+\begin{thm}{The Second Structural Equation}{}\\
+Let $M$ be a smooth manifold. Let $p:E\to M$ be a smooth vector bundle. Let $\nabla$ be a connection on $E$. Let $U\subseteq M$ be an open subset. Let $e_1,\dots,e_r$ be a local frame of $E$ on $U$. Then we have $$\Omega_j^i=d\omega_j^i+\sum_{k=1}^r\omega_k^i\wedge\omega_j^k$$
+\end{thm}
+
+Another way to think about it: The matrix $\Omega=(\Omega_j^i)$ is an element of $\Omega^2(U,\mathfrak{gl}(n,\R))$ (indeed locally $\text{End}(E)$ is isomorphic to $\mathfrak{gl}(n,\R)$). Gluing along local patches give $\Omega=d\omega+\omega\wedge\omega$. One can prove that $R(X,Y)=\Omega(X,Y)$. Indeed, $\Omega$ comes from the coordinate description of $R$, so patching it up should recover $R$. 
+
+\begin{prp}{}{}\\
+Let $M$ be a smooth manifold. Let $p:E\to M$ be a smooth vector bundle. Let $\nabla$ be a connection on $E$. Let $U\subseteq M$ be an open subset. Let $e,\overline{e}$ be local frames of $E$ on $U$. Suppose that $g:U\to\text{GL}(r,\R)$ is a transition function such that $\overline{e}=ge$. Suppose that $\Omega_j^i$ and $\overline{\Omega}_j^i$ are the curvature forms of $\nabla$ with respect to $e$ and $\overline{e}$. Then we have $$\overline{\Omega}_j^i=g^{-1}\Omega g$$
 \end{prp}
 
 \subsection{Directional Derivatives of a Vector Bundle}
@@ -187,39 +262,84 @@ Let $M$ be a smooth manifold. Let $p:E\to B$ be a smooth vector bundle. Let $\ga
 Let $M$ be a smooth manifold. Let $p:E\to B$ be a smooth vector bundle. Let $\gamma:[0,1]\to M$ be a smooth curve. Let $\nabla$ be a connection on $E$. Then $P_\gamma$ is a well defined linear map. 
 \end{lmm}
 
-\subsection{The Curvature Tensor}
-\begin{defn}{The Curvature Tensor}{}\\
-Let $M$ be a smooth manifold. Let $p:E\to M$ be a smooth vector bundle. Let $\nabla$ be a connection on $p$. Define the curvature of $\nabla$ to be the smooth section $R(\nabla)\in\mC^\infty(\text{End}(E)\otimes\Lambda^2T^\ast M)$ given by $$R(\nabla)(X,Y)(s)=[\nabla_X,\nabla_Y](s)-\nabla_{[X,Y]}(s)$$ for $X,Y\in\mathfrak{X}(M)$ and $s\in\mC^\infty(E)$. 
-\end{defn}
-
-Notice that the definition makes sense: Appealing to the tensor characterization lemma, a section of $\mC^\infty(\text{End}(E)\otimes\Lambda^2T^\ast M)$ corresponds to a homomorphism $\Lambda^2TM\to\mC^\infty(\text{End}(E))$. Applying the lemma to $\mC^\infty(\text{End}(E))=\mC^\infty(E^\ast\otimes E)$ again, we see that the curvature tensor corresponds to a map $$\Lambda^2TM\to\Hom_{\mC^\infty(M)}(\mC^\infty(E),\mC^\infty(E))$$
-
-\begin{defn}{The Curvature Form}{}\\
-Let $M$ be a smooth manifold. Let $p:E\to M$ be a smooth vector bundle. Let $\nabla$ be a connection on $E$. Let $U\subseteq M$ be an open subset. Let $e_1,\dots,e_r$ be a local frame of $E$ on $U$. Define the curvature forms of $\nabla$ on $U$ to be the unique two forms $\Omega_j^i\in\mC^\infty(U,E)$ such that $$R(\nabla)(X,Y)(e_j)=\sum_{i=1}^r\Omega_j^i(X,Y)e_j$$ for all $X,Y\in\mathfrak{U}$. 
-\end{defn}
-
-\begin{thm}{The Second Structural Equation}{}\\
-Let $M$ be a smooth manifold. Let $p:E\to M$ be a smooth vector bundle. Let $\nabla$ be a connection on $E$. Let $U\subseteq M$ be an open subset. Let $e_1,\dots,e_r$ be a local frame of $E$ on $U$. Then we have $$\Omega_j^i=d\omega_j^i+\sum_{k=1}^r\omega_k^i\wedge\omega_j^k$$
-\end{thm}
-
-Another way to think about it: The matrix $\Omega=(\Omega_j^i)$ is an element of $\Omega^2(U,\mathfrak{gl}(n,\R))$ (indeed locally $\text{End}(E)$ is isomorphic to $\mathfrak{gl}(n,\R)$). Gluing along local patches give $\Omega=d\omega+\omega\wedge\omega$. One can prove that $R(X,Y)=\Omega(X,Y)$. Indeed, $\Omega$ comes from the coordinate description of $R$, so patching it up should recover $R$. 
-
-\begin{prp}{}{}\\
-Let $M$ be a smooth manifold. Let $p:E\to M$ be a smooth vector bundle. Let $\nabla$ be a connection on $E$. Let $U\subseteq M$ be an open subset. Let $e,\overline{e}$ be local frames of $E$ on $U$. Suppose that $g:U\to\text{GL}(r,\R)$ is a transition function such that $\overline{e}=ge$. Suppose that $\Omega_j^i$ and $\overline{\Omega}_j^i$ are the curvature forms of $\nabla$ with respect to $e$ and $\overline{e}$. Then we have $$\overline{\Omega}_j^i=g^{-1}\Omega g$$
-\end{prp}
-
 \pagebreak
 \section{Connections on the Tangent Bundle}
 \subsection{Affine Connections}
 \begin{defn}{Affine Connections}{} Let $M$ be a smooth manifold. An affine connection of $M$ is a connection $$\nabla:\mathfrak{X}(M)\times\mathfrak{X}(M)\to\mathfrak{X}(M)$$ on the tangent bundle $TM$. 
 \end{defn}
 
-The directional derivative is the canonical affine connection on $\R^n$. In fact, every smooth manifold has such a canonical connection that generalizes the directional derivative. 
+The directional derivative is the canonical affine connection on $\R^n$. In fact, every smooth manifold has such a canonical connection that generalizes the directional derivative. \\
 
-\begin{defn}{The Torsion Tensor}{}
+Since the tangent bundle has a canonical local frame for every local chart, affine connections admit canonical connection components. 
+
+\begin{defn}{Connection Components}{}\\
+Let $M$ be a smooth manifold. Let $\nabla$ be an affine connection. Define the connection components $\Gamma_{ij}^k$ of $\nabla$ locally at a chart $(U,x^1,\dots,x^n)$ of $M$ by $$\nabla_{\frac{\partial}{\partial x^i}}\frac{\partial}{\partial x^j}=\sum_{k=1}^n\Gamma_{ij}^k\frac{\partial}{\partial x^k}$$ for $1\leq i,j,k\leq n$. 
 \end{defn}
 
-\subsection{The Levi-Civita Connection}
+\begin{prp}{}{}\\
+Let $M$ be a smooth manifold. Let $\nabla$ be an affine connection. Let $X,Y\in\mathfrak{X}(M)$ be vector fields. Suppose that the components of $X$ and $Y$ are given by $X^i$ and $Y^i$ respectively. Then locally at a chart $(U,x^1,\dots,x^n)$ of $M$, we have $$\nabla_XY=\sum_{k=1}^n\left(X(Y^k)+\sum_{i,j=1}^nX^iY^j\Gamma_{ij}^k\right)\frac{\partial}{\partial x^k}$$
+\end{prp}
+
+\begin{defn}{The Torsion Tensor}{}\\
+Let $M$ be a smooth manifold. Let $\nabla$ be an affine connection. Define the torsion of $\nabla$ to be the map $T(\nabla):\mathfrak{X}(M)\times\mathfrak{X}(M)\to\mathfrak{X}(M)$ given by $$T(\nabla)(X,Y)=\nabla_XY-\nabla_YX-[X,Y]$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $M$ be a smooth manifold. Let $\nabla$ be an affine connection. Then the components of the torsion tensor is given by $$T(\nabla)_{ij}^k=\Gamma_{ij}^k-\Gamma_{ji}^k$$
+\end{prp}
+
+\begin{defn}{The Torsion Form}{}\\
+Let $M$ be a smooth manifold. Let $\nabla$ be an affine connection. Let $(U,e_1,\dots,e_n)$ be a smooth local frame of $E$. Define the torsion form $\tau^i$ of $\nabla$ at the frame by $$T(\nabla)(X,Y)=\sum_{i=1}^n\tau^i(X,Y)e_i$$
+\end{defn}
+
+\begin{thm}{The First Structural Equation}{}\\
+Let $M$ be a smooth manifold. Let $\nabla$ be an affine connection. Let $(U,e_1,\dots,e_n)$ be a smooth local frame of $TM$. Then we have $$\tau^i=d\theta^i+\sum_{j=1}^n\omega_j^i\wedge\theta^j$$ where $(U,\theta^1,\dots,\theta^n)$ is the dual of the local frame in $T^\ast M$. 
+\end{thm}
+
+\begin{thm}{The First Bianchi Identity}{}\\
+Let $M$ be a smooth manifold. Let $\nabla$ be an affine connection. Let $(U,e_1,\dots,e_n)$ be a smooth local frame of $TM$. Then we have $$d\tau^i=\sum_{j=1}^n\Omega_j^i\wedge\theta^j-\omega_j^i\wedge\tau^j$$ where $(U,\theta^1,\dots,\theta^n)$ is the induced local frame of $T^\ast M$. 
+\end{thm}
+
+\begin{thm}{The Second Bianchi Identity}{}\\
+Let $M$ be a smooth manifold. Let $\nabla$ be an affine connection. Let $(U,e_1,\dots,e_n)$ be a smooth local frame of $TM$. Then we have $$d\Omega_j^i=\sum_{k=1}^n\Omega_k^i\wedge\omega_j^k-\omega_k^i\wedge\Omega_j^k$$ where $(U,\theta^1,\dots,\theta^n)$ is the induced local frame of $T^\ast M$. 
+\end{thm}
+
+\begin{defn}{The Einstein Tensor}{}\\
+Let $M$ be a smooth manifold. Let $\nabla$ be an affine connection. Let $(U,e_1,\dots,e_n)$ be a smooth local frame of $TM$. Define the Einstein tensor to be the $(0,2)$-tensor field whose components are given by $$G_{ab}=R_{ab}-\frac{1}{2}g_{ab}R$$
+\end{defn}
+
+\begin{thm}{The Contracted Second Bianchi Identity}{}\\
+Let $M$ be a smooth manifold. Let $\nabla$ be an affine connection. Let $(U,e_1,\dots,e_n)$ be a smooth local frame of $TM$. Then we have $$\sum_{a=1}^n\sum_{c=1}^ng^{ac}\nabla_{e_c}G_{ab}=0$$ for all $1\leq b\leq n$. 
+\end{thm}
+
+If $\nabla^{e_a}$ denotes raising the index ($\nabla^{e_a}=\sum_{c=1}^ng^{ac}\nabla_{e_c}$), then we recover the more common form of the Bianchi identity: $$\nabla^{e_a}G_{ab}=0$$
+
+\subsection{Curvature and Torsion of Affine Connections}
+Let $M$ be a smooth manifold. For an affine connection $\nabla$, the definition implies that $\nabla$ is a smooth section of $$\text{End}(TM)\otimes\Lambda^2 T^\ast M\cong TM\otimes T^\ast M\otimes\Lambda^2 T^\ast M$$ and this is exactly a map $TM\times TM\times TM\to TM$ where we think of the first two inputs as antisymmetric. 
+
+\begin{defn}{Curvature Components}{}\\
+Let $M$ be a smooth manifold. Let $\nabla$ be an affine connection on $M$. Define the curvature components $R_{kij}^l$ of $\nabla$ locally at a chart $(U,x^1,\dots,x^n)$ of $M$ by $$R(\nabla)\left(\frac{\partial}{\partial x^i},\frac{\partial}{\partial x^j}\right)\frac{\partial}{\partial x^k}=\sum_{l=1}^nR_{kij}^l\frac{\partial}{\partial x^l}$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $M$ be a smooth manifold. Let $\nabla$ be an affine connection on $M$. Then locally at a chart $(U,x^1,\dots,x^n)$ of $M$, we have $$R_{kij}^l=\frac{\partial\Gamma_{kj}^l}{\partial x^i}-\frac{\partial\Gamma_{ki}^l}{\partial x^j}+\sum_{m=1}^n\left(\Gamma_{mi}^l\Gamma_{kj}^m-\Gamma_{mj}^l\Gamma_{ki}^m\right)$$
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $(M,g)$ be a Riemannian manifold. Then $M$ is flat if and only if $R(\nabla^g)=0$. 
+\end{prp}
+
+Sometimes it is more convenient to lower the last index. 
+
+\begin{defn}{Riemannian Curvature Tensor}{}\\
+Let $M$ be a smooth manifold. Let $\nabla$ be an affine connection on $M$. Define the Riemannian curvature tensor of $\nabla$ by $$Rm(\nabla)=R(\nabla)^\flat$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $M$ be a smooth manifold. Let $\nabla$ be an affine connection on $M$. Then the components of $Rm$ is given by $$Rm_{kijl}=\sum_{m=1}^ng_{lm}R_{kij}^m$$
+\end{lmm}
+
+\subsection{Metric Connections}
 \begin{defn}{The Lie Bracket on Smooth Vector Fields}{} Let $M$ be a smooth manifold. Let $X,Y\in\mathfrak{X}(M)$ be smooth vector fields. Define the Lie bracket of $X$ and $Y$ to be the vector field $[X,Y]$ given by the formula $$[X,Y]_p(f)=X(Y_p(f))=Y(X_p(f))$$ for $p\in M$ and $f\in\mC_{M,p}^\infty$. 
 \end{defn}
 
@@ -229,6 +349,7 @@ The directional derivative is the canonical affine connection on $\R^n$. In fact
 \begin{defn}{Metric Connections}{} Let $M$ be a smooth manifold. Let $\nabla$ be an affine connection. We say that $\nabla$ is a metric connection if the $$\nabla(X,g(Y,Z))=g(\nabla(X,Y),Z)+g(Y,\nabla(X,Z))$$ for all $X,Y,Z\in\mathfrak{X}(M)$. 
 \end{defn}
 
+\subsection{The Levi-Civita Connection}
 \begin{defn}{Levi-Civita Connections}{}\\
 Let $(M,g)$ be a Riemannian manifold. Let $\nabla^g:\mathfrak{X}(M)\times\mathfrak{X}(M)\to\mathfrak{X}(M)$ be an affine connection on $M$. We say that $\nabla^g$ is a Levi-Civita connection if the following are true. 
 \begin{itemize}
@@ -240,20 +361,60 @@ Let $(M,g)$ be a Riemannian manifold. Let $\nabla^g:\mathfrak{X}(M)\times\mathfr
 \begin{thm}{Existence and Uniqueness of Levi-Civita Connections}{} Let $(M,g)$ be a Riemannian manifold. Then $M$ has a unique Levi-Civita connection. 
 \end{thm}
 
+\begin{defn}{Christoffel Symbols}{}\\
+Let $(M,g)$ be a Riemannian manifold. Define the Christoffel symbols of $\nabla$ to be the connection coefficients of the Levi-Civita connection. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $(M,g)$ be a Riemannian manifold. Then locally at a chart $(U,x^1,\dots,x^n)$ of $M$ we have $$\Gamma_{ij}^k=\frac{1}{2}\sum_{l=1}^ng^{kl}\left(\frac{\partial g_{il}}{\partial x^j}+\frac{\partial g_{jl}}{\partial x^i}-\frac{\partial g_{ij}}{\partial x^l}\right)$$ for $1\leq i,j,k\leq n$. 
+\end{prp}
+
 \begin{thm}{The Decomposition Theorem}{}
 \end{thm}
 
+\subsection{Curvature and Torsion of the Levi-Civita Connection}
 \begin{prp}{}{}\\
-Let $(M,g)$ be a Riemannian manifold. Then $M$ is flat if and only if $R(\nabla^g)=0$. 
+Let $(M,g)$ be a Riemannian manifold. Then the following are true regarding $Rm(\nabla^g)$. 
+\begin{itemize}
+\item $Rm(W,X,Y,Z)=-Rm(X,W,Y,Z)$. 
+\item $Rm(W,X,Y,Z)=-Rm(W,X,Z,Y)$. 
+\item $Rm(W,X,Y,Z)=Rm(Y,Z,W,X)$. 
+\end{itemize}
 \end{prp}
 
-Recall: Flat iff locally isometric to $\R^n$. 
+\begin{crl}{}{}\\
+Let $(M,g)$ be a Riemannian manifold. Then the following are true regarding the components of $Rm(\nabla^g)$. 
+\begin{itemize}
+\item $Rm_{kijl}=-Rm_{ikjl}$. 
+\item $Rm_{kijl}=-Rm_{kilj}$. 
+\item $Rm_{kijl}=Rm_{jlki}$. 
+\end{itemize}
+\end{crl}
 
-\subsection{Ricci Curvature}
+\begin{prp}{The Bianchi Identities}{}\\
+Let $(M,g)$ be a Riemannian manifold. Then the following are true. 
+\begin{itemize}
+\item $Rm(W,X,Y,Z)+Rm(X,Y,W,Z)+Rm(Y,W,X,Z)=0$. 
+\item $\nabla Rm(X,Y,Z,V,W)+\nabla Rm(X,Y,V,W,Z)+\nabla Rm(X,Y,W,Z,V)=0$. 
+\end{itemize}
+\end{prp}
+
+\subsection{Ricci and Scalar Curvature}
 \begin{defn}{Ricci Curvature}{}\\
 Let $(M,g)$ be a Riemannian manifold. Let $p\in M$. Define the Ricci curvature of $M$ to be the map $\text{Ric}:TM\times TM\to\R$ given by $$\text{Ric}(X,Y)=\text{tr}(Z\mapsto R(\nabla^g)(Z,X)(Y))$$
 \end{defn}
 
+\begin{defn}{Ricci Components}{}\\
+Let $(M,g)$ be a Riemannian manifold. Define the Ricci components $R_{ij}$ locally at a chart $(U,x^1,\dots,x^n)$ of $M$ by $$R_{ij}=\text{Ric}\left(\frac{\partial}{\partial x^i},\frac{\partial}{\partial x^j}\right)$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $(M,g)$ be a Riemannian manifold. Then locally at a chart $(U,x^1,\dots,x^n)$ of $M$, we have $$R_{ij}=\sum_{k=1}^nR_{kij}^k$$
+\end{prp}
+
+\begin{defn}{Scalar Curvature}{}\\
+Let $(M,g)$ be a Riemannian manifold. Define the scalar curvature of $M$ by $$R=\sum_{i,j=1}^ng^{ij}R_{ij}$$
+\end{defn}
 
 \pagebreak
 \section{Geometry on Riemannian Manifolds}
@@ -324,17 +485,13 @@ Let $(M,g)$ be a connected Riemannian manifold. Let $p,q\in M$. Then there exist
 \end{crl}
 
 \pagebreak
-\section{Calculus on Manifolds}
-\subsection{Integrating Functions on Riemannian Manifolds}
+\section{Differential Operators}
+\subsection{The Riemannian Volume Form and Density}
 \begin{defn}{The Riemannian Volume Form}{}\\
-Let $(M,g)$ be an orientable Riemannian manifold. Define the volume form $dV$ of $M$ to be given locally at $p\in M$ on the chart $(U,x^1,\dots,x^n)$ by $$(dV)_p=\sqrt{\det(g_{i,j}(p))}(dx^1)_p\wedge\cdots\wedge(dx^n)_p$$ where $g$ is given locally at the chart by $g_p=\sum_{1\leq i,j\leq n}g_{i,j}(p)(dx^i)_p\otimes(dx^j)_p$. 
+Let $(M,g)$ be an orientable Riemannian manifold. Define the volume form $dV$ of $M$ to be given locally at $p\in M$ on the chart $(U,x^1,\dots,x^n)$ by $$(dV)_p=\sqrt{\det(g_{ij}(p))}(dx^1)_p\wedge\cdots\wedge(dx^n)_p$$ where $g$ is given locally at the chart by $g=\sum_{1\leq i,j\leq n}g_{ij}(p)dx^i\otimes dx^j$. 
 \end{defn}
 
 Let $(M,g)$ be a compact orientable Riemannian manifold. Let $f:M\to\R$ be a compactly supported smooth function. Then we may define the integral of $f$ over $M$ to be the value $\int_MfdV$. 
-
-\begin{defn}{The Volume of a Compact Orientable Manifold}{}\\
-Let $(M,g)$ be a compact orientable Riemannian manifold. Define the volume of $M$ to be $$\text{Vol}(M)=\int_M1dV$$
-\end{defn}
 
 \begin{defn}{The Induced Volume Form at the Boundary}{}\\
 Let $(M,g)$ be an orientable Riemannian manifold with boundary. Define the induced volume form on $\partial M$ to be $$dS=\iota^\ast dV$$
@@ -343,6 +500,18 @@ Let $(M,g)$ be an orientable Riemannian manifold with boundary. Define the induc
 \begin{lmm}{}{}\\
 Let $(M,g)$ be an orientable Riemannian manifold with boundary. Let $(U,\phi)$ be a boundary chart of $M$. Then locally on $U$, the induced volume form is given by $$dS=\sqrt{\det(g_{ij}|_{\partial M})}dx^1\wedge\cdots\wedge dx^n$$
 \end{lmm}
+
+\begin{defn}{Riemannian Density}{}\\
+Let $(M,g)$ be a Riemannian manifold. Define the Riemannian density $\mu$ to be the density given at a local chart $(U,x^1,\dots,x^n)$ by $$\mu=\sqrt{\det(g_{ij})}\abs{dx^1\wedge\cdots\wedge dx^n}$$
+\end{defn}
+
+\begin{prp}{}{}\\
+If $M$ is orientable, then volume form of $M$ is just the Riemannian density. 
+\end{prp}
+
+\begin{defn}{Integrating Functions}{}\\
+Let $(M,g)$ be a Riemannian manifold. Let $\mu$ be the Riemannian density of $M$. Let $f\in\mC^\infty(M)$ such that $f\mu$ is a compactly supported density. Define the integral of $f$ on $M$ by $$\int_Mf\mu$$
+\end{defn}
 
 \subsection{Differential Operators}
 \begin{defn}{The Gradient of a Function}{}\\
@@ -414,7 +583,7 @@ Let $(M,g)$ be an oriented Riemannian manifold of dimension $3$. Then the follow
 \end{tikzcd}}\\
 \end{prp}
 
-\subsection{Calculus on Manifolds}
+\subsection{Classical Vector Calculus}
 Let $M$ be an oriented smooth manifold of dimension $n$. let $p\in\partial M$. Then $T_p(\partial M)$ is an $(n-1)$-dimensional vector subspace of $T_p(M)$. Recall that a boundary chart of $M$ at $p\in M$ is a chart $(U,\phi)$ such that the following are true. 
 \begin{itemize}
 \item $\phi(U)\subseteq\{(x_1,\dots,x_n)\in\R^n\;|\;x_n\geq 0\}$. 
@@ -591,7 +760,38 @@ Let $(M,g)$ be a Riemannian manifold of dimension $n$. Suppose that $M$ is simpl
 \end{itemize}
 \end{thm}
 
+\pagebreak
+\section{Pseudo-Riemannian Manifolds}
+\subsection{Basic Definitions}
+In linear algebra, inner products are symmetric and positive-definite bilinear forms. This implies that inner products are non-degenerate. We may relax the positive-definiteness condition with non-degeneracy, and such bilinear forms are closely related to quadratic forms. Similarly, we may relax the Riemannian metric to such bilinear forms. 
 
+\begin{defn}{Pseudo-Riemannian Metrics}{}\\
+Let $M$ be a smooth manifold. A pseudo-Riemannian metric on $M$ is a smooth section $$g\in\mC^\infty((TM\otimes TM)^\ast)$$ such that $g_p:T_pM\times T_pM\to\R$ is a symmetric and non-degenerate bilinear form for all $p\in M$. 
+\end{defn}
+
+\begin{defn}{Pseudo-Riemannian Manifolds}{}\\
+A pseudo-Riemannian manifold is a smooth manifold $M$ together with a pseudo-Riemannian metric $g$ on $M$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $(M,g)$ be a pseudo-Riemannian manifold. Let $p\in M$. Let $(U,x^1,\dots,x^n)$ be a chart at $p$. Then $g_p$ as an element of $T_p(M)^\ast\otimes T_p(M)^\ast$ is given locally on the chart by $$g=\sum_{1\leq i,j\leq n}g_{ij}\;dx^i\otimes dx^j$$ where $g_{ij}:U\to\R$ are smooth functions such that $g_{ij}(p)=g_p\left(\frac{\partial}{\partial x^i}\bigg{|}_p,\frac{\partial}{\partial x^j}\bigg{|}_p\right)$. 
+\end{prp}
+
+\begin{defn}{Signature of the Metric}{}\\
+Let $(M,g)$ be a pseudo-Riemannian manifold. Define the signature of $g$ to be the signature of $g_p$ as a quadratic form. 
+\end{defn}
+
+Not every smooth manifold admits a metric with signature $(p,q)$ whenever $q\neq 0$. 
+
+\subsection{The Musical Isomorphisms}
+
+\subsection{The Levi-Civita Connection}
+
+\subsection{Curvature}
+
+\subsection{Calculus on Manifolds}
+
+\subsection{Hodge Star Operator}
 
 
 

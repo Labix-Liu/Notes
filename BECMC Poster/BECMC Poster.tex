@@ -1,0 +1,103 @@
+\documentclass[final]{beamer}
+\input{Headers.tex}
+\input{Shortcuts.tex}
+% ====================
+% Title Block Metadata
+% ====================
+
+\title{Cohomological Rigidity of Moment Angle Complexes}
+\author{Labix Liu}
+\institute[shortinst]{Queen Mary University of London}
+
+\footercontent{
+  \href{https://labix-liu.github.io}{https://labix-liu.github.io} \hfill
+  BECMC 2026, Birmingham, UK \hfill
+  \href{mailto:sin.liu@qmul.ac.uk}{sin.liu@qmul.ac.uk}}
+\begin{document}
+
+\begin{frame}[t]
+\begin{columns}[t]
+\separatorcolumn
+
+\begin{column}{\colwidth}
+
+  \begin{block}{Introduction}
+Toric topology is the study of spaces equipped with the action of a torus $T^n=\prod_{i=1}^nS^1$. This definition encapsulates a wide variety of equivariant spaces across different disciplines of mathematics such as toric varieties in algebraic geometry and Hamiltonian torus actions in symplectic geometry. We are interested in moment angle complexes. Given a simplicial complex $\mK$, define $$\mZ_\mK=\bigcup_{\sigma\in\mK}(D^2,S^1)^\sigma$$ where $$(D^2,S^1)^\sigma=\prod_{i=1}^nY_i\;\;\;\;\text{ where }\;\;\;\;Y_i=\begin{cases}
+D^2 & \text{ if }i\in\sigma\\
+S^1 & \text{ otherwise }
+\end{cases}$$ The cohomological rigidity conjecture states that for two simplicial complexes $\mK_1$ and $\mK_2$, we have $$H^\ast(\mZ_{\mK_1})\cong H^\ast(\mZ_{\mK_2})$$ if and only if $\mZ_{\mK_1}$ and $\mZ_{\mK_2}$ are diffeomorphic / homeomorphic / homotopy equivalent. 
+  \end{block}
+
+  \begin{block}{The Foundations}
+To tackle the cohomological rigidity conjecture we need to first understand the cohomology. Hochster's formula in \cite{ToricTopology} decomposes the cohomology into the cohomology of the simplicial complex itself. Namely, there is an isomorphism of rings $$H^\ast(\mZ_\mK)\cong\bigoplus_{J\subseteq\{1,\dots,n\}}H^\ast(\mK_J)$$ where 
+\begin{itemize}
+\item $\mK_J$ is the full subcomplex of $\mK$ with the vertices in $J$. 
+\item The additive isomorphism is given by $$H^n(\mZ_\mK)\cong\bigoplus_{J\subseteq\{1,\dots,n\}}H^{n-\lvert J\rvert-1}(\mK_J)$$
+\item The ring structure is given the map $H^i(\mK_I)\otimes H^j(\mK_J)\to H^{i+j+1}(\mK_{I\cup H_J})$ which sends products of generators to generators if $I\cap J=\emptyset$ and $0$ otherwise. 
+\end{itemize}
+Now we need to understand the space itself. A classical result comes from \cite{Mcgraven}, which states that for a stacked polytope $P$, there is a diffeomorphism $$\mZ_{\partial P}\cong\#_{k=3}^{m-n+1}(S^k\times S^{m+n-k})^{\#(k-2)\binom{m-n}{k-1}}$$ where $n=\dim(P)$ and $m=\lvert V(P)\rvert$. A more recent result from \cite{Amaranta} states that for a simplicial complex $\mK$ that is a neighbourly triangulation of $S^{2n+1}$, there is a homotopy equivalence $$\mZ_\mK\simeq\#_{i=1}^j\left(S^{t_i}\times S^{s_i}\right)$$ for some $j\in\N^+$ and some $t_i,s_i\in\N^+$. Notice that in both cases the diffeomorphism type and the homotopy type are both connected sums of products of two spheres. 
+  \end{block}
+
+\end{column}
+
+\separatorcolumn
+
+\begin{column}{\colwidth}
+
+  \begin{alertblock}{An Example}
+Consider the case where $\mK$ is a pentagon. Let us investigate the main techniques used in the proof of \cite{Amaranta}. 
+\begin{enumerate}
+\item Using Hochster's formula and Hatcher 4C.1, we deduce that the $6$-skeleton of the $7$-dimensional moment angle complex is given by $$\overline{\mZ_\mK}=\bigvee_{i=1}^5(S^3\vee S^4)$$
+\item The attaching map of the top cell is given by $S^6\to\mZ_\mK$. We may use the Hilton-Milnor theorem to decompose the map into a sum of whitehead products and inclusions: $$\pi_6(\overline{\mZ_\mK})\cong\pi_6(S^3)^5\times\pi_6(S^4)\times\pi_6(S^5)^{10}\times\pi_6(S^6)^{25}$$
+\item In the theorem, our attaching map in the component $\pi_6(S^6)^{10}$ is of the form $S^6\to S^6\overset{\text{Wh}}{\to} S^3\vee S^4\hookrightarrow\overline{\mZ_\mK}$. Follow a similar argument in Hatcher 4C.2 to read the map as cup products in the cohomology ring. Then since the cohomology of $\mZ_\mK$ is completely identified by Hochster's formula, we see that the coefficients of this map is $\pm1$ in $5$ cases and $0$ in the others. This is precisely the attaching map for $(S^3\times S^4)^{\#5}$. 
+\item In the theorem, our attaching map in the component $\pi_6(S^5)^{25}$ is of the form $S^6\to S^5\overset{\text{Wh}}{\to} S^3\vee S^3\hookrightarrow\overline{\mZ_\mK}$. Let $J\subseteq\{1,\dots,5\}$ be a subset of four elements. Then we have $$\mZ_{\mK_J}=S^3\vee S^3\vee S^3\vee S^4\vee S^4$$ There are five choices of $J$ that contains all possible permutation of the choices of $S^3$'s that make up the Whitehead product. Then using the retractions $\mZ_{\mK_J}\to\mZ_\mK\to\mZ_{\mK_J}$ and the null-homotopy $S^6\to S^5\to S^3\vee S^3\hookrightarrow\overline{\mZ_\mK}\to\mZ_\mK$ gives us the fact that $S^6\to S^5$ is null homotopic. The remaining $\pi_6(S^3)$ and $\pi_6(S^4)$ follow a similar argument by choosing the appropriate subcomplexes. 
+\end{enumerate}
+  \end{alertblock}
+
+  \begin{block}{The Case of Simplicial 4-Polytopes with 8 Vertices}
+We focus on the case of simplicial $4$-polytopes with $8$ vertices. These are classified in \cite{Grunbaum} and are denoted by $P_i^8$ for $1\leq i\leq 37$. There is a characterization in \cite{Oganisian} which says that for a simplicial complex $\mK$ that is a triangulation of $S^3$, we have $$H^\ast(\mZ_\mK)\cong H^\ast\left(\#_{i=1}^j\left(\prod_{k=1}^{t_i}S^{d_k}\right)\right)$$ if and only if exact;y one of the following are true. 
+\begin{itemize}
+\item $\mK=S^0\ast S^0\ast S^0\ast S^0$. 
+\item The underlying graph of $\mK$ is chordal. 
+\item The underlying graph of $\mK$ has exactly two missing edges with distinct vertices (forming a square). 
+\end{itemize}
+  \end{block}
+
+\end{column}
+
+\separatorcolumn
+
+\begin{column}{\colwidth}
+
+  \begin{block}{Known Results}
+We list some of the known results here. 
+\begin{itemize}
+\item $P_1^8,P_2^8,P_3^8$ are stacked polytopes, so it follows from the previous sections that their diffeomorphism type is identified: $$\mZ_{\partial P_1^8}\cong\mZ_{\partial P_2^8}\cong\mZ_{\partial P_3^8}\cong(S^3\times S^9)^{\#6}\#(S^4\times S^8)^{\#8}\#(S^5\times S^7)^{\#3}$$
+\item $P_{35}^8,P_{36}^8,P_{37}^8$ are neighbourly polytopes, so it follows from the previous sections that their homotopy type is identified: $$\mZ_{\partial P_{35}^8}\simeq\mZ_{\partial P_{36}^8}\simeq\mZ_{\partial P_{37}^8}\simeq(S^5\times S^7)^{\#16}\#(S^6\times S^6)^{\#15}$$
+\item $P_{34}^8$ is a cross polytope, given by $P_{34}^8=S^0\ast S^0\ast S^0\ast S^0$. \cite{Fan} shows that we have a homeomorphism $$\mZ_{\partial P_{34}^8}\cong S^3\times S^3\times S^3\times S^3$$
+\item The cohomology for $\mZ_{\partial P_{28}^8}$ is computed by \cite{Fan} and \cite{Iriye} determined its diffeomorphism type to be $$\mZ_{\partial P_{28}^8}\cong(S^3\times S^3\times S^6)\#(S^5\times S^7)^{\#8}\#(S^6\times S^6)^{\#8}$$
+\end{itemize}
+  \end{block}
+
+  \begin{exampleblock}{The Edge Cases}
+A quick check shows that other than $i=7,16,17,22,26,29$, the cohomology of $\mZ_{\partial P_i^8}$ has the cohomology of a connected sum of a product of spheres. For the case $i=7$, we computed the cohomology to be $$H^\ast(\mZ_{\partial P_7^8})=H^\ast((S^3\times S^9)^{\#3}\#(S^4\times S^8)^{\#3}\#(S^5\times S^7)\# X)$$ where $$H^\ast(X)=\frac{\Z\langle a_1,a_2,b_1,b_2,c,d_1,d_2,e,f_1,f_2,g_1,g_2,h\rangle}{I}$$ and $I$ is the ideal generated by the following relations: 
+\begin{itemize}
+\item $a_1a_2=d_2$, $a_ib_i=e$, $a_ic=f_i$, $a_1d_1=g_2,a_2d_2=g_1$, $b_ic=g_i$. 
+\item Poincare relations $a_ig_i=b_if_i=ce=d_1d_2=h$. 
+\item $z^2=0$ for all generators $z$. 
+\end{itemize}
+and $\deg(a_i)=3$, $\deg(b_i)=4$, $\deg(c)=5$, $\deg(d_i)=6$, $\deg(e)=7$, $\deg(f_i)=8$, $\deg(h)=12$ (13 generators and 28 relations). 
+  \end{exampleblock}
+
+  \begin{block}{References}
+    \nocite{*}
+    \footnotesize{\bibliographystyle{alpha}\bibliography{ref}}
+  \end{block}
+
+\end{column}
+
+\separatorcolumn
+\end{columns}
+\end{frame}
+
+\end{document}

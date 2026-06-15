@@ -1,0 +1,217 @@
+\documentclass[a4paper]{article}
+
+\input{C:/Users/liula/Desktop/Latex/Headers/Headers.tex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Labix}
+\lhead{The Geometry of Fiber Bundles}
+\rfoot{\thepage}
+
+\title{The Geometry of Fiber Bundles}
+
+\author{Labix}
+
+\date{\today}
+\begin{document}
+\maketitle
+\pagebreak
+\tableofcontents
+\pagebreak
+\section{Fundamental Constructions}
+\subsection{Properties of the Space of Vector Fields}
+\begin{defn}{The Lie Bracket}{}\\
+Let $M$ be a smooth manifold. Let $X,Y\in\mathfrak{X}(M)$ be smooth vector fields. Define the Lie bracket of $X$ and $Y$ to be the vector field $[X,Y]\in\mathfrak{X}(M)$ given by $$[X,Y]_p(f)=X_p(Y_p(f))-Y_p(X_p(f))$$ for all $f\in\mC^\infty(M)$ for each $p\in M$. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $M$ be a smooth manifold. Then $(\mathfrak{X}(M),[-,-])$ is a Lie algebra. 
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $M$ be a smooth manifold. Let $G$ be a Lie group acting smoothly on $M$. Then the map $\text{Lie}(G)\to\mathfrak{X}(M)$ given by $$\xi\mapsto\xi_M$$ is a Lie algebra homomorphism.  
+\end{prp}
+
+\subsection{The Normal Bundle}
+\begin{defn}{The Normal Bundle}{}\\
+Let $M,N$ be smooth manifolds. Let $\iota:N\hookrightarrow M$ be a smooth embedding. Define the normal bundle of $N$ in $M$ to be the quotient bundle $$N_{M/N}=\frac{TM}{TN}$$
+\end{defn}
+
+\begin{eg}{}{}\\
+Let $\iota:S^n\to\R^{n+1}$ be the standard inclusion of the unit sphere. Then the following are true. 
+\begin{itemize}
+\item $N_{\R^{n+1}/S^n}\cong\varepsilon$ is a trivial bundle of rank $1$. 
+\item $w_i(TS^n)=1$ for all $i$. 
+\end{itemize}
+\begin{proof}\\
+Notice that $N_{\R^{n+1}/S^n}$ is a bundle of rank equal to $1$. It is the trivial bundle if and only if it admits a nowhere vanishing section. Define a section $s:S^n\to N_{\R^{n+1}/S^n}$ by $s(x)=(x,x)$ where $x\in N_{\R^{n+1}/S^n}$ is a vector in the direction $x$. Then clearly it is non-vanishing. \\
+
+Now we have $TS^n\oplus N_{\R^{n+1}/S^n}=T\R^{n+1}$. Applying the total Stiefel-Whitney class gives $w(TS^n)\cdot 1=w(TS^n)w(N_{\R^{n+1}/S^n})=w(T\R^{n+1})=1$. Hence $w(TS^n)=1$. Since $w_0(TS^n)=1$, the grading in the cohomology ring implies that $w_i(TS^n)=0$ for all $i$. 
+\end{proof}
+\end{eg}
+
+\pagebreak
+\section{Smooth Fiber Bundles}
+\subsection{Basic Structures}
+\begin{defn}{Smooth Fiber Bundles}{}\\
+Let $E,M,F$ be smooth manifolds. Let $p:E\to M$ be a fiber bundle with fiber $F$ and local trivialization charts $(U_k,\phi_k)$ for $k\in I$. We say that $p$ is a smooth fiber bundle if the following are true. 
+\begin{itemize}
+\item $p$ is smooth. 
+\item $\phi_k$ is a diffeomorphism for all $k\in I$. 
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $p:E\to M$ be a smooth fiber bundle with fiber $F$. Let $p,q\in M$. If $M$ is connected, then $E_p$ is diffeomorphic to $E_q$. 
+\end{lmm}
+
+\begin{defn}{Smooth Sections}{}
+\end{defn}
+
+\subsection{The Jet Bundle}
+\begin{defn}{Jet Equivalence}{}\\
+Let $M,N$ be smooth manifolds. Let $f,g:M\to N$ be smooth maps. Let $p\in M$ such that $f(p)=g(p)$. Let $k\in\N$. We say that $f$ and $g$ are $k$-jet equivalent at $p$ if there exists charts $(U,\phi=(x^1,\dots,x^n))$ of $M$ and $(V,\psi=(y^1,\dots,y^m))$ of $N$ such that $U\subseteq f^{-1}(V)\cap g^{-1}(V)$, we have $$\frac{\partial}{\partial x_{i_j}}\cdots\frac{\partial}{\partial x_{i_1}}\bigg{|}_{\phi(p)}(y^t\circ f\circ\phi^{-1})=\frac{\partial}{\partial x_{i_j}}\cdots\frac{\partial}{\partial x_{i_1}}\bigg{|}_{\phi(p)}(y^t\circ g\circ\phi^{-1})$$ for all $1\leq t\leq m$ and all $0\leq j\leq k$ and all $1\leq i_1,\dots,i_j\leq n$. In this case we denote $f\sim_p^kg$. 
+\end{defn}
+
+\begin{defn}{The Set of Jets}{}\\
+Let $M,N$ be smooth manifolds. Let $p\in M$. Define the set of $k$-jets from $M$ to $N$ by $$J_p^k(M,N)=\frac{\{f:M\to N\;|\;f\text{ is a smooth map }\}}{\sim_p^k}$$
+\end{defn}
+
+\begin{defn}{The Jet Bundle}{}\\
+Let $M,N$ be smooth manifolds. Define the $k$th jet bundle from $M$ to $N$ to be the set $$J^k(M,N)=\coprod_{p\in M}J_p^k(M,N)$$ together with the following data. For $(U,\phi=(x^1,\dots,x^n))$ a chart of $M$ and $(V,\psi=(y^1,\dots,y^m))$ a chart of $N$, define $$W(U,V)=\{[f]\in J_p^k(M,N)\;|\;p\in U,f(p)\in V\}$$ and define the map $W(U,V)\to\phi(U)\times\R^n$ by $$[f]\mapsto\left(\phi(p),\left(\frac{\partial}{\partial x_{i_j}}\cdots\frac{\partial}{\partial x_{i_1}}\bigg{|}_{\phi(p)}(y^t\circ f\circ\phi^{-1})\right)_{1\leq t\leq\dim(N),0\leq j\leq k,1\leq i_1,\dots,i_j\leq\dim(M)}\right)$$ where $n=\dim(N)\sum_{r=0}^k\binom{\dim(M)+r-1}{r}$. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $M,N$ be smooth manifolds. Then $J^k(M,N)$ is a smooth vector bundle over $M$ of dimension $$\dim(J^k(M,N))=\dim(M)+\dim(N)\sum_{r=0}^k\binom{\dim(M)+r-1}{r}$$
+\end{lmm}
+
+\begin{eg}{}{}\\
+Let $k=1$. Then we have $$\dim(J^1(M,N))=\dim(M)+\dim(N)\left(1+\dim(M)\right)$$ A local chart of $J^1(M,N)$ is given as follows. Let $(U,\phi=(x^1,\dots,x^n))$ be a chart of $M$ and $(V,\psi=(y^1,\dots,y^m))$ a chart of $N$. Then $$\left(W(U,V),\left(\phi=(x^1,\dots,x^n),\psi=(y^1,\dots,y^m),\left(\frac{\partial\left(y^t\circ-\circ\phi^{-1}\right)}{\partial x_i}\bigg{|}_{\phi(p)}\right)_{1\leq t\leq\dim(N),1\leq i\leq\dim(M)}\right)\right)$$ is a chart of $J^1(M,N)$. 
+\end{eg}
+
+\begin{defn}{Jet Prolongation}{}\\
+Let $M,N$ be smooth manifolds. Let $f:M\to N$ be a smooth map. Define the $k$th jet prolongation of $f$ to be the section $j^kf\in\mC^\infty(J^1(M,N))$ given by $$p\mapsto[f]\in J_p^k(M,N)$$
+\end{defn}
+
+\begin{defn}{The Jet Bundle of a Fiber Bundle}{}\\
+Let $M$ be a smooth manifold. Let $p:E\to M$ be a smooth fiber bundle. Define the $k$th jet bundle of $E$ to be the subbundle $$J^k(E)=\coprod_{p\in M}J_p^k(E)\subseteq J^k(M,E)$$ where $J_p^k(E)=\{[f]\in J_p^k(M,E)\;|\;f\in\mC^\infty(E)\text{ is a smooth section }\}$. 
+\end{defn}
+
+\pagebreak
+\section{Smooth Principle Bundles}
+\subsection{Basic Structures}
+\begin{prp}{}{}\\
+Let $M$ be a smooth manifold. Let $G$ be a Lie group with a free and smooth action on $M$. Then the following are true. 
+\begin{itemize}
+\item For each $x\in M/G$, there exists a neighbourhood $U$ of $x$ and a map $s:U\to M$ such that $\pi\circ s=\text{id}_U$, where $\pi:M\to M/G$ is the projection map. 
+\item The projection map $M\to M/G$ is a principal $G$-bundle. 
+\end{itemize}
+\end{prp}
+
+\begin{eg}{}{}\\
+Let $G$ be a Lie group. Let $H\leq G$ be a Lie subgroup. Then $G$ acts on $H$ by left multiplication. The above prp shows that $G/H$ is a Lie group and $G\to G/H$ is a principal $G$-bundle since the orbit space of $G$ acting on $H$ is just $G/H$. 
+\end{eg}
+
+\begin{thm}{Poincaré-Hopf Theorem}{}\\
+Let $M$ be a smooth manifold. Then we have $$e(TM)([M])=\chi(M)$$
+\end{thm}
+
+\subsection{Connections on a Principal Bundle}
+\begin{defn}{The Vertical Bundle}{}\\
+Let $M$ be a smooth manifold. Let $G$ be a Lie group. Let $\pi:P\to M$ be a smooth principal bundle over $G$. Define the vertical bundle of $P$ to be the smooth subbundle $$VP=\coprod_{p\in P}\ker(d\pi_p)$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $M$ be a smooth manifold. Let $G$ be a Lie group. Let $\pi:P\to M$ be a smooth principal bundle over $G$. Let $p\in P$. Then there is an isomorphism $$\iota_p:\text{Lie}(G)\overset{\cong}{\to}(VP)_p$$ given by $g\mapsto\frac{d e^{tg}\cdot p}{dt}\bigg{|}_{t=0}$. 
+\end{lmm}
+
+\begin{defn}{Horizontal Distributions}{}\\
+Let $M$ be a smooth manifold. Let $G$ be a Lie group. Let $\pi:P\to M$ be a smooth principal bundle over $G$. A horizontal distribution on $P$ is a subbundle $HP\subseteq TP$ such that the following are true. 
+\begin{itemize}
+\item $TP=VP\oplus HP$. 
+\item $(HP)_{g\cdot p}=(L_g)_\ast(HP)_p$ for all $p\in P$ and $g\in G$. 
+\end{itemize}
+\end{defn}
+
+Generalizes connections on vector bundles in the following way: For $p:E\to M$ a smooth vector bundle, a connection on $\text{Fr}(E)$ as a principal $\text{GL}(n,F)$ bundle is the same data as a connection on $p:E\to M$ as a vector bundle. 
+
+\begin{defn}{Connection Forms on Principal Bundles}{}\\
+Let $M$ be a smooth manifold. Let $G$ be a Lie group. Let $\pi:P\to M$ be a smooth principal bundle over $G$. A connection $1$-form on $P$ is a smooth section $\omega\in\mC^\infty(T^\ast P\otimes\text{Lie}(G))$ such that the following are true. 
+\begin{itemize}
+\item We have $\omega_p(\iota_p)=\text{id}_{\text{Lie}(G)}$ for all $p\in P$. 
+\item We have $$\omega_{g\cdot p}((dL_g)_p(v))=\text{Ad}(g)(\omega_p(v))$$ for all $g\in G$, $p\in P$ and $v\in T_pP$. 
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $M$ be a smooth manifold. Let $G$ be a Lie group. Let $\pi:P\to M$ be a smooth principal bundle over $G$. Then the following are true. 
+\begin{itemize}
+\item Suppose that $HP$ is a horizontal distribution on $P$. Define a $1$-form $\omega$ pointwise by $\omega_p(X)=\iota_p^{-1}(X^V)$ where $X^V$ is the vertical component of $X$ in the decomposition $T_pP=(VP)_p\oplus(HP)_p$. Then $\omega$ is a connection $1$-form. 
+\item Suppose that $\omega$ is a connection $1$-form on $P$. Then $\coprod_{p\in P}\ker(\omega_p)$ is a horizontal distribution on $P$. 
+\end{itemize}
+\end{prp}
+
+\begin{defn}{The Curvature Form of a Connection}{}\\
+Let $M$ be a smooth manifold. Let $G$ be a Lie group. Let $\pi:P\to M$ be a smooth principal bundle over $G$. Let $\omega$ be a connection $1$-form. Define the curvature form of $\omega$ to be the $2$-form $\Omega\in\mC^\infty(\Lambda^2T^\ast P\otimes\text{Lie}(G))$ given by $$\Omega=d\omega+\frac{1}{2}[\omega\wedge\omega]$$
+\end{defn}
+
+This definition is motivated by the local description of the curvature form for vector bundles. \\
+
+Using tensor algebra, we see that $T^\ast P\otimes T^\ast P\otimes\mathfrak{g}\cong TP\times TP\to(P\times\mathfrak{g})$. Since $\Lambda^2T^\ast P$ is the subbundle of $T^\ast P\otimes T^\ast P$ consisting of alternating forms, we may also think of $\Omega\in\mC^\infty(\Lambda^2T^\ast P\otimes\mathfrak{g})$ as a map $TP\times TP\to P\times\mathfrak{g}$ satisfying $\Omega(X,X)=0$. Also, for each $p\in P$, $\Omega_p:T_pP\times T_pP\to\mathfrak{g}$ is then an alternating bilinear map. 
+
+\begin{defn}{Components of the Curvature Form}{}\\
+Let $M$ be a smooth manifold. Let $G$ be a Lie group. Let $\pi:P\to M$ be a smooth principal bundle over $G$. Let $\omega$ be a connection $1$-form. Let $\Omega$ be the curvature form. Let $e_1,\dots,e_n$ be a basis of $\mathfrak{g}$. Define the components of $\Omega$ to be the $2$-forms $\Omega^i\in\Omega^2(P)$ such that $$\Omega=\sum_{i=1}^n\Omega^i\otimes e_i$$
+\end{defn}
+
+\subsection{The Chern-Weil Homomorphism}
+Let $V$ be a finite dimensional vector space over a field $k$. Recall from Rings and Modules that there is an isomorphism of graded $F$-algebras $S(V)\cong k[x_1,\dots,x_n]$. 
+
+\begin{defn}{Ad-Invariant Polynomials}{}\\
+Let $G$ be a Lie group. Let $f\in S(\text{Lie}(G)^\ast)$. We say that $f$ is ad-invariant if $f(\text{Ad}_g(X))=X$ for all $X\in\text{Lie}(G)$. 
+\end{defn}
+
+\begin{defn}{The Algebra of Ad-Invariant Polynomials}{}\\
+Let $G$ be a Lie group. Define $\R$-algebra of ad-invariant polynomials  of $G$ by $$I(G)=\{f\in S(\text{Lie}(G)^\ast)\;|\;f\text{ is ad-invariant }\}$$
+\end{defn}
+
+Let $f\in S(\text{Lie}(G)^\ast)$ be a polynomial. Let $\Omega$ be a curvature $2$-form. For each $p\in P$, we know that $\Omega_p$ is an alternating bilinear map from $T_pP$ to $\text{Lie}(G)$. 
+
+\begin{defn}{Evaluating Polynomials on the Curvature}{}\\
+Let $M$ be a smooth manifold. Let $G$ be a Lie group. Let $\pi:P\to M$ be a smooth principal bundle over $G$. Let $\omega$ be a connection $1$-form. Let $f\in I(G)$ be an ad-invariant polynomial of the form $f=\sum_{i_1,\dots,i_n}\alpha_{i_1,\dots,i_n}x_1^{i_1}\cdots x_n^{i_n}$. Let $\Omega$ be the curvature $2$-form of $\omega$. Define the evaluation of $f$ on $\Omega$ to be the $2k$-form $f(\Omega)\in\Omega^{2k}(M)$ given by $$f(\Omega)=\sum_{i_1,\dots,i_n}\alpha_{i_1,\dots,i_n}(\Omega^1)^{\wedge i_1}\wedge\cdots \wedge(\Omega^n)^{i_n}$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $M$ be a smooth manifold. Let $G$ be a Lie group. Let $\pi:P\to M$ be a smooth principal bundle over $G$. Let $f\in I(G)$ be an ad-invariant polynomial. Let $\omega$ be a connection $1$-form. Let $\Omega$ be the curvature form. Then we have $$df(\Omega)=0$$
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $M$ be a smooth manifold. Let $G$ be a Lie group. Let $\pi:P\to M$ be a smooth principal bundle over $G$. Let $f\in I(G)$ be an ad-invariant polynomial. Let $\omega,\omega'$ be connection $1$-forms. Let $\Omega$ and $\Omega'$ be the curvature forms respectively. Then we have $$[f(\Omega)]=[f(\Omega')]\in H_\text{dR}^{2k}(M)$$
+\end{lmm}
+
+\begin{defn}{The Chern-Weil Homomorphism}{}\\
+Let $M$ be a smooth manifold. Let $G$ be a Lie group. Let $\pi:P\to M$ be a smooth principal bundle over $G$. Let $\Omega$ be the curvature form of any connection. Define the Chern-Weil homomorphism to be the map $$P(\Omega):S(\text{Lie}(G)^\ast)\to H_\text{dR}^\ast(M)$$ given by $f\mapsto[f(\Omega)]$. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $M$ be a smooth manifold. Let $G$ be a Lie group. Let $\pi:P\to M$ be a smooth principal bundle over $G$. Let $\Omega$ be the curvature form of any connection. Then $P(\Omega)$ is an algebra homomorphism. 
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $M$ be a smooth manifold. Let $\pi:P\to M$ be a smooth vector bundle of dimension $n$ over $\C$. Let $\Omega$ be the curvature form of any connection. Suppose that $f_0,\dots,f_n\in S(\mathfrak{gl}(n,\C)^\ast)$ are such that $c_X(\lambda)=\sum_{i=0}^nf_i(X)\lambda^{n-i}$ Then the following are true. 
+\begin{itemize}
+\item $f_0,\dots,f_n$ generate $S(\mathfrak{gl}(n,\C)^\ast)$ as a $\C$-algebra. 
+\item $[f_1(\Omega)],\dots,[f_n(\Omega)]$ are the Chern classes of $P$. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $M$ be a smooth manifold. Let $\pi:P\to M$ be a smooth vector bundle of dimension $n$ over $\R$. Let $\Omega$ be the curvature form of any connection. Suppose that $f_0,\dots,f_n\in S(\mathfrak{gl}(n,\R)^\ast)$ are such that $c_X(\lambda)=\sum_{i=0}^nf_i(X)\lambda^{n-i}$ Then the following are true. 
+\begin{itemize}
+\item $f_0,\dots,f_n$ generate $S(\mathfrak{gl}(n,\R)^\ast)$ as a $\R$-algebra. 
+\item $[f_1(\Omega)],\dots,[f_n(\Omega)]$ are the Pontrjagin classes of $P$. 
+\end{itemize}
+\end{prp}
+
+
+
+\end{document}
