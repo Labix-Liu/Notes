@@ -2115,4 +2115,390 @@ Let $G$ be a group. Let $R$ be an integral domain. Then there is an isomorphism 
 Let $R$ be a regular ring. Let $G$ be a torsion free group. Then the inclusion map induces a natural isomorphism $$K_0(R)\cong K_0(R[G])$$
 \end{conj}
 
+\pagebreak
+\section{Ergodic Theory}
+\subsection{}
+\begin{defn}{Measure Preserving Systems}{}\\
+Let $(X,\mF,\mu)$ be a measure space. Let $T:X\to X$ be a measurable function. We say that $T$ is a measure preserving function if $$\mu(T^{-1}(E))=\mu(E)$$ for all $E\in\mF$. In this case, we call $(X,\mF,\mu,T)$ a measure preserving system. 
+\end{defn}
+
+\begin{defn}{Probability Preserving System}{}\\
+Let $(X,\mF,\mu,T)$ be a measure preserving system. We say that it is a probability preserving system if $(X,\mF,\mu)$ is a probability space. 
+\end{defn}
+
+\begin{thm}{Poincare Recurrence Theorem}{}\\
+Let $(X,\mF,\mu,T)$ be a probability preserving system. Let $E\in\mF$. Then we have $$\mu(\{x\in E\;|\;\exists N\text{ such that }T^n(x)\notin E\text{ for all }n>N\})=0$$
+\end{thm}
+
+In other words, most points in $E$ go back to $E$ infinitely often after applying a certain number of $T$'s. 
+
+\begin{defn}{Measure Theoretically Isomorphic}{}\\
+Let $(X,\mF,\mu,T)$ and $(Y,\mE,\sigma,S)$ be measure preserving systems. Let $\pi:X\to Y$ be a measurable function. We say that $\pi$ is a measure theoretically isomorphism if the following are true. 
+\begin{itemize}
+\item There exists $A\subseteq X$ and $B\subseteq Y$ such that $\mu(X\setminus A)=\mu(Y\setminus B)=0$ and $\pi|_A:A\to B$ is invertible with a measurable inverse. 
+\item For all $E\in\mE$, we have $\mu(\pi^{-1}(E))=\sigma(E)$. 
+\item $S\circ\pi=\pi\circ T$. 
+\end{itemize}
+\end{defn}
+
+\subsection{}
+\begin{defn}{Invariant Sets}{}\\
+Let $(X,\mF,\mu,T)$ be a measure preserving system. Let $E\in\mF$. We say that $E$ is invariant if $$T^{-1}(E)=E$$
+\end{defn}
+
+\begin{defn}{Ergodic Systems}{}\\
+Let $(X,\mF,\mu,T)$ be a measure preserving system. We say that the system is ergodic if for all invariant sets $E$, we have $\mu(E)=0$ or $\mu(X\setminus E)=0$. In this case, we say that $\mu$ is an ergodic measure. 
+\end{defn}
+
+\pagebreak
+\section{Classical Field Theory}
+
+\begin{defn}{Classical Fields}{}\\
+A classical field is an element $$s\in\mC^\infty(E)$$ where $E\to M$ is a vector bundle. 
+\end{defn}
+
+\subsection{Lagrangian Density}
+\begin{defn}{Lagrangian Density}{}\\
+Let $p:E\to M$ be a smooth vector bundle over Minkowski spacetime. A Lagrangian density on $E$ is a smooth bundle map $$\mL:J^1(E)\to\text{Den}(M)$$
+\end{defn}
+
+\begin{defn}{Lagrangian Function}{}\\
+Let $p:E\to M$ be a smooth vector bundle over Minkowski spacetime. Let $\mL:J^1(E)\to\text{Den}(M)$ be a Lagrangian density. Define the Lagrangian function of $\mL$ to be the unique function $L\in\mC^\infty(J^1(E))$ such that $$\mL=L\mu_\eta$$
+\end{defn}
+
+Recall: $j^1\phi:M\to J^1E$ is the jet prolongation of $\phi$. 
+
+\begin{defn}{Action Functional}{}\\
+Let $p:E\to M$ be a smooth vector bundle over Minkowski spacetime. Let $\mL:J^1(E)\to\text{Den}(M)$ be a Lagrangian. Let $\Omega\subseteq M$ be compact. Define the action functional of $\mL$ on $\Omega$ to be the map $S:\mC^\infty(E)\to\R$ given by $$S[\phi]=\int_\Omega\mL(j^1\phi)$$
+\end{defn}
+
+\begin{defn}{Admissible Variations}{}\\
+Let $p:E\to M$ be a smooth vector bundle over Minkowski spacetime. Let $\Omega\subseteq M$ be compact. Define the set of admissible variations on $\Omega$ to be the set $$\mC^\infty_{\partial\Omega}(E|_\Omega)=\{\delta\phi\in\mC^\infty(E|_\Omega)\;|\;\delta\phi|_{\partial\Omega}=0\})$$
+\end{defn}
+
+\begin{defn}{First Variation}{}\\
+Let $p:E\to M$ be a smooth vector bundle over Minkowski spacetime. Let $\mL:J^1(E)\to\text{Den}(M)$ be a Lagrangian. Let $\Omega\subseteq M$ be compact. Let $\phi\in\mC^\infty(E)$. Let $\delta\phi\in\mC^\infty_{\partial\Omega}(E|_{\Omega})$ be an admissible variation. Define the first variation of $\phi$ along $\delta\phi$ by $$\delta S[\phi,\delta\phi]=\frac{d}{d\varepsilon}\bigg{|}_{\varepsilon=0}S[\phi+\varepsilon\delta\phi]\in\R$$
+\end{defn}
+
+\begin{defn}{The Euler-Lagrange Operator}{}\\
+Let $p:E\to M$ be a smooth vector bundle over Minkowski spacetime. Let $\mL:J^1(E)\to\text{Den}(M)$ be a Lagrangian. Define the Euler-Lagrange operator $\text{EL}:\mC^\infty(E)\to\mC^\infty(\Hom(E,\text{Den}(M)))$ as follows. Let $(U,x^1,\cdots,x^4)$ be a chart of $M$. Let $(p^{-1}(U),x^i,y^j)$ be a local trivialization chart of $E$. Let $(p^{-1}(U),x^i,y^j,y_i^j)$ be a local chart on $J^1(E)$ where $y_i^j\in\mC^\infty(J^1(E))$ is such that $y_i^j(j_p^1\phi)=\frac{\partial y^j\circ\phi}{\partial x^i}\bigg{|}_p$. Then locally at the chart, the operator $\text{EL}(\phi)_p:E_p\to\text{Den}_p(M)$ is given by $$\text{EL}(\phi)_p(v)=\sum_{j=1}^{\rank(E)}y^j(v)\left(\frac{\partial L}{\partial y^j}\circ j^1\phi-\sum_{i=1}^4\frac{\partial}{\partial x^i}\left(\frac{\partial L}{\partial y_i^j}\circ j^1\phi\right)\right)\bigg{|}_p\mu_\eta$$ where $\phi\in\mC^\infty(E)$ and $v\in E_p$. 
+\end{defn}
+
+To explain: 
+\begin{itemize}
+\item For $v\in E_p$, $y^j(v)$ picks out the $j$th coordinate of $v$ according to our local chart. 
+\item $\frac{\partial L}{\partial y^j}$ is a smooth function of $J^1(E)$. We may compose with $j^1\phi:M\to J^1(E)$ to obtain a smooth function from $M$ to $\R$. 
+\item Similarly, $\frac{\partial L}{\partial y_i^j}\circ j^1\phi$ is a smooth function from $M$ to $\R$. Using the local chart of $M$, we may differentiate this function with respect to $x^i$ to obtain a another smooth function from $M$ to $\R$. 
+\item Notice that everything before the Minkowski density is indeed a real number. Hence $\text{EL}(\phi)_p(v)$ is indeed an element of $\text{Den}_p(M)\cong\R$. 
+\end{itemize}
+
+\begin{thm}{Euler-Lagrange Theorem}{}\\
+Let $p:E\to M$ be a smooth vector bundle over Minkowski spacetime. Let $\mL:J^1(E)\to\text{Den}(M)$ be a Lagrangian. Let $\phi\in\mC^\infty(E)$. Then we have $$\text{EL}(\phi)=0$$ if and only if $\delta S[\phi,\delta\phi]=0$ for all $\delta\phi\in\mC_{\partial\Omega}^\infty(E|_\Omega)$. 
+\end{thm}
+
+\subsection{Hamiltonian Density}
+\begin{defn}{Conjugate Momentum Density}{}\\
+Let $p:E\to M$ be a smooth vector bundle over Minkowski spacetime. Let $\mL:J^1(E)\to\text{Den}(M)$ be a Lagrangian. Let $t\in\R$. Let $\{\Sigma_t\;|\;t\in\R\}$ be an inertial foliation. Let $(p^{-1}(U),x^i,y^j,y_i^j)$ be a local chart of $J^1(E)$. Define the conjugate momentum density $\pi_t:\mC^\infty(E)\to\mC^\infty(\Hom(E|_{\Sigma_t},\text{Den}(\Sigma_t)))$ of $\mL$ at $t$ at the local chart by $$\pi_t(\phi)_p(v)=\sum_{j=1}^{\rank(E)}y^j(v)\left(\frac{\partial L}{\partial y_1^j}\circ j^1\phi\right)\bigg{|}_p\mu_\eta|_{\Sigma_t}$$
+\end{defn}
+
+\begin{defn}{Hamiltonian Density}{}\\
+Let $p:E\to M$ be a smooth vector bundle over Minkowski spacetime. Let $\mL:J^1(E)\to\text{Den}(M)$ be a Lagrangian. Let $t\in\R$. Let $\{\Sigma_t\;|\;t\in\R\}$ be an inertial foliation. Let $u_p$ be the corresponding inertial observer field. Define the Hamiltonian density of $\mL$ to be the function $\mH_t:\mC^\infty(E|_{\Sigma_t})\times\mC^\infty(\Hom(E|_{\Sigma_t},\text{Den}(\Sigma_t)))\to\mC^\infty(\text{Den}(\Sigma_t))$ given by $$\mH_t(\phi)_p=\left(\pi_t(\phi)_p(j^1\phi(p)(u_p))-L\circ j^1\phi(p)\right)\mu_\eta|_{\Sigma_t}$$
+\end{defn}
+
+\begin{defn}{The Hamilton Operator}{}
+\end{defn}
+
+\begin{thm}{Hamilton's Equations}{}\\
+
+\end{thm}
+
+\subsection{Covariant Hamiltonian Formalism}
+
+\subsection{Scalar Fields and Klein-Gordon Lagrangian}
+\begin{defn}{Klein-Gordon Lagrangian Density}{}\\
+Define the Klein-Gordon Lagrangian density to be the bundle map $\mL_\text{KD}:J^1(M\times\R)\to\text{Den}(M)$ given at local chart $(U,x^1,\cdots,x^4,y,y^1,\dots,y^4)$ by $$\mL=\left(\frac{1}{2}\sum_{i=1}^4\sum_{j=1}^4\eta_{ij}y_iy_j-\frac{1}{2}m^2y^2\right)\mu_\eta$$ where $(\eta_{ij})$ is the matrix representation of $\eta$ and $m\in\R$. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $(U,x^1,\cdots,x^4,y,y^1,\dots,y^4)$ be a local chart of $J^1(M\times\R)$. Then we have $$\mL_\text{KD}=\left(\frac{1}{2}\left((y_1)^2-(y_2)^2-(y_3)^2-(y_4)^2\right)-\frac{1}{2}m^2y^2\right)\mu_\eta$$
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $(U,x^1,\cdots,x^4,y,y^1,\dots,y^4)$ be a local chart of $J^1(M\times\R)$. Then we have $$\text{EL}(\phi)_p(v)=y(v)\left(-m^2\phi(p)-\left(\frac{\partial^2\phi}{\partial x_1^2}-\frac{\partial^2\phi}{\partial x_2^2}-\frac{\partial^2\phi}{\partial x_3^2}-\frac{\partial^2\phi}{\partial x_4^2}\right)\right)\mu_\eta$$
+\end{lmm}
+
+\begin{defn}{d'Alembertian}{}\\
+Define the d'Alembertian operator $\square:\mC^\infty(M)\to\mC^\infty(M)$ by $$\square\phi=\frac{\partial^2\phi}{\partial x_1^2}-\frac{\partial^2\phi}{\partial x_2^2}-\frac{\partial^2\phi}{\partial x_3^2}-\frac{\partial^2\phi}{\partial x_4^2}$$
+\end{defn}
+
+\begin{thm}{Klein-Gordon Equations}{}\\
+Let $\phi\in\mC^\infty(M\times\R)$. Then $\text{EL}(\phi)=0$ if and only if $$(\square+m^2)\phi=0$$
+\end{thm}
+
+\begin{prp}{Klein-Gordon Hamiltonian}{}
+\end{prp}
+
+\subsection{Noether's Theorem}
+\begin{defn}{Continuous Symmetry}{}
+\end{defn}
+
+\begin{thm}{Noether's Theorem}{}
+\end{thm}
+
+\pagebreak
+\section{Electromagnetism}
+Classical field theory is developed to accommodate discoveries in the field of electromagnetism. We demonstrate the power of this language. 
+
+\subsection*{The Observation of Charge}
+Certain objects, when rubbed together, exert forces on one another across empty space. A glass rod rubbed with silk attracts a rubber rod rubbed with fur. Two glass rods rubbed with silk repel each other. Two rubber rods repel each other. \\
+
+This observation suggests that matter can acquire a property which causes it to exert and respond to forces. We call this property \textit{electric charge}. The pattern of attraction and repulsion suggests that charge comes in two varieties. We label them positive and negative, with the convention that like charges repel and opposite charges attract. \\
+
+A key further observation is that charge is \textit{conserved}: in any isolated process, the total charge never changes. When a glass rod is rubbed with silk, charge is not created --- it is transferred from one object to the other, leaving the total unchanged. 
+
+\subsection*{Coulomb's Law and the Electric Field}
+In 1785, Charles-Augustin de Coulomb measured the force between charged spheres using a torsion balance. He found that the force between two point charges $q_1$ and $q_2$ separated by a distance $r$ is: $$F=k_e\frac{q_1 q_2}{r^2}$$ where $k_e$ is a constant of proportionality. The force is repulsive if the charges have the same sign, and attractive if they have opposite signs. This is Coulomb's law. \\
+
+The \textit{electric field} is the conceptual tool that makes sense of how this force is transmitted. Rather than saying that charge $q_1$ acts directly on charge $q_2$ at a distance, we say that $q_1$ modifies the space around it, producing an electric field $\E$. The charge $q_2$ then responds to the field it finds itself in, not directly to $q_1$. The field is defined operationally as the force per unit charge exerted on a small positive test charge: $$E(x)=\lim_{q \to 0}\frac{F(x)}{q}$$
+The limit ensures we do not disturb the field we are trying to measure. The electric field is physically real: it carries energy and propagates at finite speed, so distant charges cannot influence each other instantaneously. 
+
+\subsection*{Magnetism and Faraday's Discovery}
+Magnetic phenomena were known long before electromagnetism was unified. Lodestones attract iron. Compass needles align with the Earth's field. For centuries, electricity and magnetism appeared to be entirely separate phenomena. \\
+
+In 1820, Hans Christian Orsted discovered that a current-carrying wire deflects a compass needle placed nearby. A moving charge produces a \textit{magnetic field} $B$ in the space around it, just as a static charge produces an electric field. Andre-Marie Ampere then showed quantitatively that parallel currents attract, and anti-parallel currents repel. \\
+
+In 1831, Michael Faraday made the reciprocal discovery: a changing magnetic field drives a current in a nearby wire. He described this in terms of \textit{lines of force} threading through a loop. When the number of these lines changes --- whether by moving a magnet, changing a current, or moving the loop itself --- a voltage is induced in the loop. This is electromagnetic induction. \\
+
+Faraday also observed that magnetic field lines always form closed loops. No matter how a magnet is cut or arranged, one never finds an isolated magnetic ``charge'' (a \textit{monopole}) from which field lines emanate. This asymmetry between electricity and magnetism --- electric charges exist, magnetic charges do not --- is a fundamental observational fact. 
+
+\subsection*{The Unification}
+The deepest insight of the theory, clarified by Einstein's special relativity, is that electric and magnetic fields are not truly separate objects. They are two facets of a single \textit{electromagnetic field}, seen from different reference frames. \\
+
+An observer watching a stationary charge sees only an electric field. A second observer moving relative to the first sees the same charge in motion --- a current --- and therefore sees both an electric and a magnetic field. The same physical situation produces different fields depending on the observer's state of motion. This is not a paradox; it means the split between $E$ and $B$ is frame-dependent, while the underlying electromagnetic field is the invariant object. 
+
+\subsection*{Maxwell's Equations}
+Experiment 1: Coulomb's Law: The electric field produced by a point charge $q$ at the origin is given by the map $E:\R^3\to\R^3$ where $$E(x)=\frac{q}{4\pi\varepsilon_0}\frac{x}{\abs{x}^2}$$ for some constant $\varepsilon_0\in\R$. 
+
+Axiom 1: Gauss's Law: Denote $\rho$ by the charge per unit volume of $V\subseteq\R^3$. From the above we can deduce $$\int_SE\cdot dS=\frac{1}{\varepsilon_0}\int_V\rho dV$$, which equivalently says that $$\nabla\cdot E=\frac{\rho}{\varepsilon_0}$$
+
+
+Experiment 2: $$\int_SB\cdot dS=0$$ for a closed surface $S$. 
+
+Axiom 2: Gauss's Law: $$\nabla B=0$$
+
+Experiment 3: Faraday observed $$\int_CE\cdot dl=-\frac{d}{dt}\int_\Sigma B\cdot dS$$ where $C$ bounds the surface $\Sigma$. 
+
+Axiom 3: Faraday's Law: $$\nabla\times E=-\frac{\partial B}{\partial t}$$
+
+Experiment 4: Ampere observed???
+
+Axiom 4: Ampere Maxwell Law: $$\nabla\times B=\mu_0J+\mu_0\varepsilon_0\frac{\partial E}{\partial t}$$
+
+Theorem: the above implies conservation of charge. 
+
+Lorentz force law: $$F=q(E+v\times B)$$
+
+Something called the field potential $F$ packs axiom 2 and 3 into a convenient package. 
+
+Notice that all the above are not time dependent. Einstein: when talking about how these fields evolve in time, the split between $E$ and $B$ is frame dependent, but the electromagnetic field is frame independent. (what this means: $E$ and $B$ come from $F$, $F$ has a frame independent description, and we recover E and B by choosing a frame)
+
+\subsection{The Potential and Deriving the Classical Maxwell Equations}
+\begin{defn}{The Four Potential}{}\\
+A four potential is a smooth section $A\in\Omega^1(M)$. 
+\end{defn}
+
+We can reverse the process: the four potential gives the sourceless maxwell equations (2) and (3). Only if we assume conservation of charge, we can imply (1) and (4). 
+
+\begin{defn}{The Field Tensor}{}\\
+Let $A\in\Omega^1(M)$ be a four potential. Define the field tensor of $A$ by $$F=dA\in\Omega^2(M)$$
+\end{defn}
+
+\begin{defn}{Electric and Magnetic Fields}{}\\
+Let $A\in\Omega^1(M)$ be a four potential. Let $u\in\mH^+$ correspond to an inertial observer field. 
+\begin{itemize}
+\item Define the electric field of $A$ to be $$E=\iota_uF\in\Omega^1(M)$$ Explicitly, we have $E_p(v)=F(u,v)$. 
+\item Define the magnetic field of $A$ to be $$B=\iota_u\ast F\in\Omega^1(M)$$ Explicitly, we have $B_p(v)=(\ast F)(u,v)$
+\end{itemize}
+\end{defn}
+
+Let $\{\Sigma_t\;|\;t\in\R\}$ be the corresponding foliation (recall that they are the slices of $M$ along a fixed time $t$). Then $E$ and $B$ restrict to each $\Sigma_t$ which are the familiar electric and magnetic fields in classical electromagnetism. The restriction does not loose information because the time component is $0$. 
+
+\begin{defn}{Classical Electric and Magnetic Fields}{}\\
+Let $A\in\Omega^1(M)$ be a four potential. Let $u\in\mH^+$ correspond to an inertial observer field. Let $\{\Sigma_t\;|\;t\in\R\}$ be the corresponding inertial foliation. Let $\iota_t:\Sigma_t\hookrightarrow M$ be the inclusion. 
+\begin{itemize}
+\item Define the electric field at time $t$ to be $$E_t=\iota_t^\ast E\in\Omega^1(\Sigma_t)$$
+\item Define the magnetic field at time $t$ to be $$B_t=\iota_t^\ast B\in\Omega^1(\Sigma_t)$$
+\end{itemize}
+\end{defn}
+
+\begin{defn}{The Four Current of a Potential}{}\\
+Let $A\in\Omega^1(M)$ be a four potential. Define the four current to be $$J=\ast^{-1}d\ast F\in\Omega^1(M)$$
+\end{defn}
+
+\begin{defn}{Charge Density}{}\\
+Let $A\in\Omega^1(M)$ be a four potential. Let $u\in\mH^+$ correspond to an inertial observer field. Define the charge density of $A$ by $$\rho=\iota_u J\in\mC^\infty(M)$$
+\end{defn}
+
+\begin{thm}{Classical Maxwell's Equations}{}\\
+Let $A\in\Omega^1(M)$ be a four potential. Let $u\in\mH^+$ correspond to an inertial observer field. Let $\{\Sigma_t\;|\;t\in\R\}$ be the corresponding inertial foliation. Let $\iota_t:\Sigma_t\hookrightarrow M$ be the inclusion map. Then the following are true. 
+\begin{itemize}
+\item Gauss's law for electricity: $d_{\Sigma_t}\ast_{\Sigma_t}E_t=\iota_t^\ast\ast J$. 
+\item Gauss's law for magnetism: $d_{\Sigma_t}B_t=0$. 
+\item Faraday's Law: $d_{\Sigma_t}E_t+\frac{\partial B_t}{\partial t}=0$. 
+\item Ampere-Maxwell Law: $d_{\Sigma_t}\ast_{\Sigma_t}B_t-\frac{\partial E_t}{\partial t}=\iota_t^\ast J_{\Sigma_t}$. 
+\end{itemize}
+\end{thm}
+
+\subsection{The Maxwell Lagrangian}
+\begin{defn}{The Maxwell Lagrangian}{}\\
+Define the Maxwell Lagrangian to be the map $\mL_\text{ML}:J^1(T^\ast M)\to\text{Den}(M)$ given by $$\mL(j^1A)_p=-\frac{1}{4}(dA)_p\wedge\ast(dA)_p$$
+\end{defn}
+
+\begin{prp}{}{}\\
+The Euler-Lagrange operator of the Maxwell Lagrangian is given by $$\text{EL}_\text{ML}(A)=d\ast dA-\ast J$$
+\end{prp}
+
+\subsection{Computing the Potential From a Current}
+Starting with $A$, we defined all the other electromagnetic quantities. Physically, we start directly with the electromagnetic field and deduce all the other quantities. On the other hand, we can start with $J$, and ask what the other quantities are. This is more natural because physically, starting with $J$ is the same as specifying the matter distribution (where the charges are and how they move). 
+
+Postulate: Conservation of charge: $d\ast J=0$. 
+
+\begin{defn}{The Four Current}{}\\
+A four current is a section $J\in\Omega^1(M)$ such that $d\ast J=0$. 
+\end{defn}
+
+If we started with a four potential $A$, recall that $J$ is defined by the formula $d\ast J=d\ast dA$. 
+
+\begin{prp}{}{}\\
+Let $J\in\Omega^1(M)$ be a four current. Let $A\in\Omega^1(M)$. Then $d\ast dA=d\ast J$ if and only if $\text{EL}_\text{ML}(A)=0$. 
+\end{prp}
+
+The problem is that we cannot just take this as the definition of the associated potential, because $A$ is not unique. Let $f\in\mC^\infty(M)$. Then notice that if $A$ is a solution, then $A+df$ is also a solution. We choose a common potential as definition (so other definitions can also possibly work, but we use the following one as the standard one). 
+
+\begin{defn}{Gauge Fixing}{}\\
+This is gives some boundary conditions so that the pde $d\ast J=d\ast dA$ is well posed. 
+\end{defn}
+
+The solution to the pde is given as follows: 
+
+\begin{defn}{The Retarded Potential}{}\\
+Let $J=\sum_{i=1}^4J_idx^i\in\Omega^1(M)$ be a four current. Define the retarded potential of $J$ to be the one form $A=\sum_{i=1}^4A_idx^i$ whose components are given by $$A_i(p_1,\dots,p_4)=\frac{1}{4\pi}\int_{\R^3}\frac{J_i(p_1-\sqrt{(p_2-x_2)^2+(p_3-x_3)^2+(p_4-x_4)^2},x_2,x_3,x_4)}{\sqrt{(p_2-x_2)^2+(p_3-x_3)^2+(p_4-x_4)^2}}dx_2dx_3dx_4$$
+\end{defn}
+
+\pagebreak
+\section{General Relativity}
+Equivalence Principle:
+Dynamics Postulate: 
+
+Minimal-coupling principle. 
+
+\begin{defn}{Spacetime}{}\\
+Spacetime is an $n$-dimensional orientable pseudo-Riemannian manifold $(M,g)$ where $g$ has signature $(n-1,1)$. 
+\end{defn}
+
+\begin{defn}{Einstein-Hilbert Action}{}
+\end{defn}
+
+Whats next: Classical field theory (which includes relativistic field theory), continuum mechanics (which includes relativistic quantum mechanics). 
+
+\pagebreak
+\section{The Logical Chain of Classical Field Theory and Gauge Theory}
+
+\subsection*{Step 1: The Field}
+
+We observe a physical quantity distributed over spacetime — a temperature, a velocity, an electromagnetic strength. Mathematically this is a fiber bundle $\pi: E \to M$, where $M$ is spacetime and the fiber $E_x$ is the space of possible values of the quantity at $x$. A \textbf{section} $\phi \in \Gamma(E)$ is one complete specification of the quantity at every point — a possible physical configuration.
+
+\subsection*{Step 2: The Lagrangian as a Choice of Physics}
+
+A Lagrangian density $\Lambda \in \Omega^n(J^kE)$ is a choice of action functional
+\[
+S[\phi] = \int_\Omega (j^k\phi)^*\Lambda
+\]
+Different Lagrangians encode different physical theories. The Euler-Lagrange equations — the equations of motion — are derived from $\Lambda$ by the variational principle. The physical sections are the critical points of $S$.
+
+\subsection*{Step 3: Observing a Symmetry}
+
+You compute the Euler-Lagrange equations and notice that the Lagrangian $\Lambda$ is invariant under some subgroup of automorphisms of $E$. An \textbf{automorphism} of $\pi: E \to M$ is a fiber-preserving diffeomorphism $\Phi: E \to E$. Such an automorphism acts on sections by
+\[
+\phi \mapsto \Phi \circ \phi
+\]
+and the Lagrangian being invariant means
+\[
+S[\Phi \circ \phi] = S[\phi] \quad \text{for all } \phi \in \Gamma(E)
+\]
+At this stage, the symmetry group acts the same way at every point — it is \textbf{global}. You observe this as an empirical fact about your Lagrangian. 
+
+Symmetries of the action induces certain laws of physics, such as conservation of energy, momentum, charge etc. This is Noether's theorem. 
+
+Another note: Rather than starting with a Lagrangian and observe the symmetries of its action, we may also start with a set of symmetries that we would like to enforce, apply it to all differential forms and retain only the invariants, and see what Lagrangian you would get. 
+
+\subsection*{Step 4: The Absolute vs Relative Observation}
+The global symmetry exists because the field takes values in a space that has \textbf{no preferred origin or frame} — the fiber $E_x$ has a group of self-maps (rotations, phase shifts, color rotations) that are physically unobservable. Different observers, or different conventions, would describe the same physical situation using sections related by this group action. The global symmetry is an artifact of having made consistent conventional choices everywhere at once. We need not restrict ourselves to consider symmetries of the entire space, and this is supported by physics: 
+
+\subsubsection*{Argument 1: Special Relativity}
+
+Special relativity says there is no notion of simultaneity — two spacelike separated points have no canonical notion of ``the same moment.'' A global transformation is therefore not a physically coherent operation in a relativistic theory. If you believe in special relativity, you are forced to allow your symmetry to act differently at different points. The global symmetry is then a special case of the local one, not the fundamental object.
+
+\subsubsection*{Argument 2: The Gauge Principle}
+
+The difference induced by the symmetry of the action is not observable. The phase is therefore a \textbf{convention} --- a choice made by an observer at $x$ to  describe the field. If the phase is a convention, then different observers at different points of spacetime should be free to make different conventional choices independently. There is no physical mechanism that would force their conventions to agree globally. The true symmetry group of the theory is therefore not the global group $G$ but the local group $mathcal{G} = \mathrm{Map}(M, G)$ of all smooth $G$-valued functions on spacetime.
+
+This is the \textbf{gauge principle}: any redundancy in the description of a physical system should be a local redundancy. It is a postulate, not a theorem. Its justification is that it works --- every time it is applied, it produces a physically correct and predictive theory.
+
+\subsection*{Step 5: Promoting to Local Symmetry}
+
+This forces you to demand invariance not just under global $G$-transformations
+\[
+\phi(x) \mapsto g \cdot \phi(x), \quad g \in G \text{ constant}
+\]
+but under local $G$-transformations
+\[
+\phi(x) \mapsto g(x) \cdot \phi(x), \quad g: M \to G \text{ smooth}
+\]
+
+The Lagrangian, built from ordinary derivatives $\partial_\mu\phi$, immediately fails to be 
+locally invariant. The reason is fundamental: $\partial_\mu\phi$ compares field values at 
+nearby points $x$ and $x + dx$, which under local symmetry live in fibers with 
+\textbf{independent conventions}. Subtracting them is meaningless — it is comparing 
+quantities measured in different units.
+
+\subsection*{Step 6: The Mathematics Is Now Forced}
+
+To make sense of differentiation under local symmetry, we need a way to 
+\textbf{compare vectors in nearby fibers} compatibly with the $G$-structure. But this is 
+precisely the definition of a \textbf{connection}.
+Where does this connection live? The answer is that the principal bundle is not introduced 
+from outside — it is \textbf{already contained inside the vector bundle $E$}.
+
+The fibers $E_x$ are vector spaces, but the isomorphism $E_x \cong \mathbb{R}^r$ is not 
+canonical — it requires a choice of basis. A \textbf{frame} at $x$ is an ordered basis for 
+$E_x$. The set of all frames at $x$ carries a natural free transitive right action of 
+$GL(r, \mathbb{R})$, making it a $GL(r,\mathbb{R})$-torsor. Taking the disjoint union over 
+all $x \in M$ produces the \textbf{frame bundle}
+\[
+P := \bigsqcup_{x \in M} \{\text{ordered bases for } E_x\}
+\]
+a principal $GL(r, \mathbb{R})$-bundle canonically constructed from $E$.
+
+Now, the observation of a global $G$-symmetry in Step 3 is precisely the observation that 
+the physically relevant frames are not arbitrary frames, but only those related by 
+$G$-transformations. The structure group \textbf{reduces} from $GL(r, \mathbb{R})$ to $G$, 
+producing a principal $G$-bundle
+\[
+P_G \subset P
+\]
+canonically determined by the symmetry. The original vector bundle is recovered as the 
+associated bundle $E = P_G \times_G V$.
+
+The connection demanded by local symmetry lives on $P_G$, because $P_G$ is the bundle whose 
+fibers are $G$-torsors — they encode exactly the gauge freedom at each point. A connection 
+on $P_G$ transports $G$-frames between nearby fibers, and therefore transports everything 
+associated to those frames, including sections of $E = P_G \times_G V$.
+
+\subsection*{Step 7: What Follows From The Maths}
+
+Since the principal bundle is just a collection of frames at each fiber. A local section of the principal bundle is a choice of local coordinates. The mathematical fact that non-trivial principal bundles have no global sections can be interpreted as the fact that there is generally no globally consistent choice of coordinates because the symmetries now act locally. 
+
+A connection in the principal bundle gives a covariant derivative in the associated bundle. This gives a way to compare phases across different time space. 
+
 \end{document}

@@ -4,7 +4,8 @@
 % ====================
 % Title Block Metadata
 % ====================
-
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, calc}
 \title{Cohomological Rigidity of Moment Angle Complexes}
 \author{Labix Liu}
 \institute[shortinst]{Queen Mary University of London}
@@ -14,18 +15,62 @@
   BECMC 2026, Birmingham, UK \hfill
   \href{mailto:sin.liu@qmul.ac.uk}{sin.liu@qmul.ac.uk}}
 \begin{document}
-
+\usebackgroundtemplate{%
+  \begin{tikzpicture}[remember picture, overlay]
+    \useasboundingbox (0,0) rectangle (\paperwidth,\paperheight);
+    \fill[white] (0,0) rectangle (\paperwidth,\paperheight);
+    % ===== Scattered triangles (polytopes) =====
+    \foreach \x/\y/\rot/\scl in {8/72/15/2.4, 38/78/70/2.8, 95/74/40/2.0, 18/8/10/2.2, 55/10/55/2.6, 88/12/130/1.8, 5/42/85/2.0, 105/45/20/2.2, 70/55/100/1.8, 25/30/60/2.0} {
+      \draw[gray!10, fill=gray!6, rotate around={\rot:(\x,\y)}]
+        (\x,\y) -- (\x+1.5*\scl,\y+0.4*\scl) -- (\x+0.6*\scl,\y+1.8*\scl) -- cycle;
+    }
+    % ===== Scattered quadrilaterals (simple polytopes) =====
+    \foreach \x/\y/\rot/\scl in {45/45/25/2.2, 78/30/60/2.4, 12/58/15/2.0, 100/62/35/1.9} {
+      \draw[gray!10, fill=gray!6, rotate around={\rot:(\x,\y)}]
+        (\x,\y) -- (\x+2*\scl,\y) -- (\x+2.3*\scl,\y+1.6*\scl) -- (\x+0.3*\scl,\y+1.8*\scl) -- cycle;
+    }
+    % ===== Scattered regular pentagons =====
+    \foreach \x/\y/\scl in {15/55/2.0, 90/68/1.8, 50/15/2.2, 112/35/1.6, 65/72/1.7} {
+      \node[regular polygon, regular polygon sides=5, draw=gray!10,
+            fill=gray!6, minimum size=\scl cm, rotate=18] at (\x,\y) {};
+    }
+    % ===== Simplicial complex meshes (triangulated patches) =====
+    \begin{scope}[shift={(4,4)}]
+      \foreach \i in {0,...,6} {
+        \foreach \j in {0,...,2} {
+          \draw[gray!10] (\i*1.8,\j*1.6) -- (\i*1.8+1.8,\j*1.6) -- (\i*1.8+0.9,\j*1.6+1.4) -- cycle;
+        }
+      }
+    \end{scope}
+    \begin{scope}[shift={(82,4)}]
+      \foreach \i in {0,...,5} {
+        \foreach \j in {0,...,2} {
+          \draw[gray!10] (\i*1.8,\j*1.6) -- (\i*1.8+1.8,\j*1.6) -- (\i*1.8+0.9,\j*1.6+1.4) -- cycle;
+        }
+      }
+    \end{scope}
+    \begin{scope}[shift={(45,76)}]
+      \foreach \i in {0,...,6} {
+        \foreach \j in {0,...,1} {
+          \draw[gray!10] (\i*1.8,\j*1.6) -- (\i*1.8+1.8,\j*1.6) -- (\i*1.8+0.9,\j*1.6+1.4) -- cycle;
+        }
+      }
+    \end{scope}
+  \end{tikzpicture}
+}
 \begin{frame}[t]
 \begin{columns}[t]
 \separatorcolumn
 
 \begin{column}{\colwidth}
 
-  \begin{block}{Introduction}
-Toric topology is the study of spaces equipped with the action of a torus $T^n=\prod_{i=1}^nS^1$. This definition encapsulates a wide variety of equivariant spaces across different disciplines of mathematics such as toric varieties in algebraic geometry and Hamiltonian torus actions in symplectic geometry. We are interested in moment angle complexes. Given a simplicial complex $\mK$, define $$\mZ_\mK=\bigcup_{\sigma\in\mK}(D^2,S^1)^\sigma$$ where $$(D^2,S^1)^\sigma=\prod_{i=1}^nY_i\;\;\;\;\text{ where }\;\;\;\;Y_i=\begin{cases}
+  \begin{block}{Introduction and Goals}
+Given a simplicial complex $\mK$, define the moment angle complex associated to $\mK$ to be $$\mZ_\mK=\bigcup_{\sigma\in\mK}(D^2,S^1)^\sigma$$ where $$(D^2,S^1)^\sigma=\prod_{i=1}^nY_i\;\;\;\;\text{ where }\;\;\;\;Y_i=\begin{cases}
 D^2 & \text{ if }i\in\sigma\\
 S^1 & \text{ otherwise }
-\end{cases}$$ The cohomological rigidity conjecture states that for two simplicial complexes $\mK_1$ and $\mK_2$, we have $$H^\ast(\mZ_{\mK_1})\cong H^\ast(\mZ_{\mK_2})$$ if and only if $\mZ_{\mK_1}$ and $\mZ_{\mK_2}$ are diffeomorphic / homeomorphic / homotopy equivalent. 
+\end{cases}$$ The cohomological rigidity conjecture states that for two simplicial complexes $\mK_1$ and $\mK_2$, we have $$H^\ast(\mZ_{\mK_1})\cong H^\ast(\mZ_{\mK_2})$$ if and only if $\mZ_{\mK_1}$ and $\mZ_{\mK_2}$ are diffeomorphic / homeomorphic / homotopy equivalent. \\~\\
+
+The main focus of our work is to determine the homotopy type of moment angle complexes arising from simplicial $4$-polytopes and $8$-vertices. 
   \end{block}
 
   \begin{block}{The Foundations}
@@ -35,7 +80,12 @@ To tackle the cohomological rigidity conjecture we need to first understand the 
 \item The additive isomorphism is given by $$H^n(\mZ_\mK)\cong\bigoplus_{J\subseteq\{1,\dots,n\}}H^{n-\lvert J\rvert-1}(\mK_J)$$
 \item The ring structure is given the map $H^i(\mK_I)\otimes H^j(\mK_J)\to H^{i+j+1}(\mK_{I\cup H_J})$ which sends products of generators to generators if $I\cap J=\emptyset$ and $0$ otherwise. 
 \end{itemize}
-Now we need to understand the space itself. A classical result comes from \cite{Mcgraven}, which states that for a stacked polytope $P$, there is a diffeomorphism $$\mZ_{\partial P}\cong\#_{k=3}^{m-n+1}(S^k\times S^{m+n-k})^{\#(k-2)\binom{m-n}{k-1}}$$ where $n=\dim(P)$ and $m=\lvert V(P)\rvert$. A more recent result from \cite{Amaranta} states that for a simplicial complex $\mK$ that is a neighbourly triangulation of $S^{2n+1}$, there is a homotopy equivalence $$\mZ_\mK\simeq\#_{i=1}^j\left(S^{t_i}\times S^{s_i}\right)$$ for some $j\in\N^+$ and some $t_i,s_i\in\N^+$. Notice that in both cases the diffeomorphism type and the homotopy type are both connected sums of products of two spheres. 
+Now we need to understand the space itself. We list two usful results here. 
+\begin{itemize}
+\item \cite{Mcgraven} states that for a stacked polytope $P$, there is a diffeomorphism $$\mZ_{\partial P}\cong\#_{k=3}^{m-n+1}(S^k\times S^{m+n-k})^{\#(k-2)\binom{m-n}{k-1}}$$ where $n=\dim(P)$ and $m=\lvert V(P)\rvert$. 
+\item \cite{Amaranta} states that for a simplicial complex $\mK$ that is a neighbourly triangulation of $S^{2n+1}$, there is a homotopy equivalence $$\mZ_\mK\simeq\#_{i=1}^j\left(S^{t_i}\times S^{s_i}\right)$$ for some $j\in\N^+$ and some $t_i,s_i\in\N^+$. 
+\end{itemize}
+Notice that in both cases the diffeomorphism type and the homotopy type are both connected sums of products of two spheres. 
   \end{block}
 
 \end{column}
@@ -45,17 +95,25 @@ Now we need to understand the space itself. A classical result comes from \cite{
 \begin{column}{\colwidth}
 
   \begin{alertblock}{An Example}
-Consider the case where $\mK$ is a pentagon. Let us investigate the main techniques used in the proof of \cite{Amaranta}. 
+Let us investigate the main techniques used in the proof of \cite{Amaranta} using
+\begin{center}
+\begin{tikzpicture}
+  \node at (0,0) {$\mK\;=\;\;\;\;\;\;\;\;\;$};
+  \node[regular polygon, regular polygon sides=5,
+        draw, minimum size=2.5cm, fill=blue!10] at (1.8,0) {};
+\end{tikzpicture}
+\end{center}
 \begin{enumerate}
 \item Using Hochster's formula and Hatcher 4C.1, we deduce that the $6$-skeleton of the $7$-dimensional moment angle complex is given by $$\overline{\mZ_\mK}=\bigvee_{i=1}^5(S^3\vee S^4)$$
-\item The attaching map of the top cell is given by $S^6\to\mZ_\mK$. We may use the Hilton-Milnor theorem to decompose the map into a sum of whitehead products and inclusions: $$\pi_6(\overline{\mZ_\mK})\cong\pi_6(S^3)^5\times\pi_6(S^4)\times\pi_6(S^5)^{10}\times\pi_6(S^6)^{25}$$
-\item In the theorem, our attaching map in the component $\pi_6(S^6)^{10}$ is of the form $S^6\to S^6\overset{\text{Wh}}{\to} S^3\vee S^4\hookrightarrow\overline{\mZ_\mK}$. Follow a similar argument in Hatcher 4C.2 to read the map as cup products in the cohomology ring. Then since the cohomology of $\mZ_\mK$ is completely identified by Hochster's formula, we see that the coefficients of this map is $\pm1$ in $5$ cases and $0$ in the others. This is precisely the attaching map for $(S^3\times S^4)^{\#5}$. 
+\item The attaching map of the top cell is given by $S^6\to\mZ_\mK$. The Hilton-Milnor theorem tells us $$\pi_6(\overline{\mZ_\mK})\cong\pi_6(S^3)^5\times\pi_6(S^4)\times\pi_6(S^5)^{10}\times\pi_6(S^6)^{25}$$
+\item In the theorem, our attaching map in the component $\pi_6(S^6)^{10}$ is of the form $S^6\to S^6\overset{\text{Wh}}{\to} S^3\vee S^4\hookrightarrow\overline{\mZ_\mK}$. Follow a similar argument in Hatcher 4C.2 to read the map as cup products in the cohomology ring. Hochster's formula implies that the coefficients of this map is $\pm1$ in $5$ cases and $0$ in the others. This is precisely the attaching map for $(S^3\times S^4)^{\#5}$. 
 \item In the theorem, our attaching map in the component $\pi_6(S^5)^{25}$ is of the form $S^6\to S^5\overset{\text{Wh}}{\to} S^3\vee S^3\hookrightarrow\overline{\mZ_\mK}$. Let $J\subseteq\{1,\dots,5\}$ be a subset of four elements. Then we have $$\mZ_{\mK_J}=S^3\vee S^3\vee S^3\vee S^4\vee S^4$$ There are five choices of $J$ that contains all possible permutation of the choices of $S^3$'s that make up the Whitehead product. Then using the retractions $\mZ_{\mK_J}\to\mZ_\mK\to\mZ_{\mK_J}$ and the null-homotopy $S^6\to S^5\to S^3\vee S^3\hookrightarrow\overline{\mZ_\mK}\to\mZ_\mK$ gives us the fact that $S^6\to S^5$ is null homotopic. The remaining $\pi_6(S^3)$ and $\pi_6(S^4)$ follow a similar argument by choosing the appropriate subcomplexes. 
 \end{enumerate}
+The flow of the proof goes as follows: $$\mK\to\substack{\text{Cohomology}\\\text{of }\mZ_\mK}\to\substack{\text{The top}-1\\\text{skeleton of }\overline{\mZ_\mK}}\to\substack{\text{Analyze the top attaching map}\\\text{with Hilton-Milnor theorem}}$$
   \end{alertblock}
 
   \begin{block}{The Case of Simplicial 4-Polytopes with 8 Vertices}
-We focus on the case of simplicial $4$-polytopes with $8$ vertices. These are classified in \cite{Grunbaum} and are denoted by $P_i^8$ for $1\leq i\leq 37$. There is a characterization in \cite{Oganisian} which says that for a simplicial complex $\mK$ that is a triangulation of $S^3$, we have $$H^\ast(\mZ_\mK)\cong H^\ast\left(\#_{i=1}^j\left(\prod_{k=1}^{t_i}S^{d_k}\right)\right)$$ if and only if exact;y one of the following are true. 
+Simplicial $4$-polytopes with $8$ vertices are classified in \cite{Grunbaum} and are denoted by $P_i^8$ for $1\leq i\leq 37$. The paper \cite{Oganisian} says that for a simplicial complex $\mK$ that is a triangulation of $S^3$, we have $$H^\ast(\mZ_\mK)\cong H^\ast\left(\#_{i=1}^j\left(\prod_{k=1}^{t_i}S^{d_k}\right)\right)$$ if and only if exactly one of the following are true. 
 \begin{itemize}
 \item $\mK=S^0\ast S^0\ast S^0\ast S^0$. 
 \item The underlying graph of $\mK$ is chordal. 
