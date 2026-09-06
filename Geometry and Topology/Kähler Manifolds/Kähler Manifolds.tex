@@ -1,0 +1,149 @@
+\documentclass[a4paper]{article}
+
+\input{C:/Users/liula/Desktop/Latex/Headers/Headers.tex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Labix}
+\lhead{Kähler Manifolds}
+\rfoot{\thepage}
+
+\title{Kähler Manifolds}
+
+\author{Labix}
+
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+\end{abstract}
+\pagebreak
+\tableofcontents
+
+\pagebreak
+\section{Kahler Manifolds}
+\subsection{Equivalent Definitions}
+\begin{defn}{Kahler Forms}{}\\
+Let $(M,h)$ be a complex Hermitian manifold. Let $\omega$ be the associated form. We say that $\omega$ is a Kahler form if $d\omega=0$. In this case, we say that $M$ is a Kahler manifold. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $M$ be a Kahler manifold. Then the following are true. 
+\begin{itemize}
+\item Let $g=\frac{1}{2}(h+\overline{h})$ be the associated Riemannian metric. Then $(M,g)$ is a Riemannian manifold. 
+\item Let $\omega=\frac{i}{2}(h-\overline{h})$ be the associated $(1,1)$-form. Then $(M,\omega)$ is a symplectic manifold. 
+\end{itemize}
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $(M,\omega)$ be a symplectic manifold. Then $\omega$ is a Kahler form if and only if $M$ admits an integrable almost complex structure $J$. In this case, the following are true. 
+\begin{itemize}
+\item The Riemannian metric is given by $g(u,v)=\omega(u,Jv)$. 
+\item The Hermitian metric is given by $h=g-i\omega$. 
+\end{itemize}
+\end{prp}
+
+\begin{thm}{Banyaga}{}\\
+Let $M$ be a compact complex manifold. Let $\omega_1$ and $\omega_2$ be Kahler forms on $M$. Then $(M,\omega_1)$ and $(M,\omega_2)$ are symplectomorphic. 
+\end{thm}
+
+\begin{prp}{}{}\\
+Let $(M,g)$ be a Riemannian manifold of dimension $2n$. Then $M$ admits a Kahler form if and only if $\text{Hol}(\nabla^g)\leq U(n)$. 
+\end{prp}
+
+\begin{eg}{}{}\\
+$\C\Prj^n$ together with the Fubini-Study metric is a Kahler manifold. 
+\end{eg}
+
+\begin{eg}{}{}\\
+Every Riemann surfaces is a Kahler manifold. 
+\end{eg}
+
+\subsection{The Hodge Decomposition and the Hodge Filtration}
+\begin{thm}{Hodge Decomposition Theorem}{}\\
+Let $M$ be a compact Kahler manifold. Then the following are true. 
+\begin{itemize}
+\item There is an isomorphism $$H_\text{dR}^k(M;\C)\cong\bigoplus_{p+q=k}H^{p,q}(M)$$ for all $k\in\N$. 
+\item There is an isomorphism $$H^{p,q}(M)\cong\overline{H^{q,p}(M)}$$ for all $p,q\in\N$. 
+\item $\dim_\R(H_\text{dR}^k(M))$ is even for all $k\in\N$. 
+\end{itemize}
+\end{thm}
+
+\begin{eg}{}{}\\
+Every compact Riemann surface is of the form $\Sigma_g$ for some $g\geq 0$. We have seen above that $\Sigma_g$ is Kahler. We know that $$H_\text{dR}^k(\Sigma_g;\C)=\begin{cases}
+\C & \text{ if }k=0,2\\
+\C^{2g} & \text{ if }k=1\\
+0 & \text{ otherwise }
+\end{cases}$$
+From this we conclude that $H^{0,0}(\Sigma_g)=\C$. Now since $\dim_\C(H^{p,q}(M))=\dim_\C(\overline{H^{q,p}(\Sigma_g)})=\dim_\C(H^{q,p}(\Sigma_g))$, we conclude that $H^{1,0}(\Sigma_g)\cong H^{0,1}(\Sigma_g)\cong\C^g$. Also, since $\Sigma_g$ has complex dimension $1$, it has no holomorphic $2$-forms. Hence $H^{2,0}(\Sigma_g)=H^{0,2}(\Sigma_g)=0$. This leaves us with $H^{1,1}(\Sigma_g)=H^2(\Sigma_g)=\C$. The hodge diamond of $\Sigma_g$ is given by  \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	& 1 & \\
+	g && g \\
+	& 1
+\end{tikzcd}} \\
+\end{eg}
+
+\begin{defn}{Hodge Filtration}{}\\
+Let $M$ be a complex manifold. Define the Hodge filtration by $$(F^i\Omega_M^\bullet)^j=\begin{cases}
+\Omega_M^j & \text{ if }j\geq i\\
+0 & \text{ otherwise }
+\end{cases}$$
+Define the Hodge filtration on cohomology by $$F^iH^k(M,\C)=\im\left(\H^k(M,F^p\Omega_M^\bullet)\to\H^k(M,\Omega_M^\bullet)\cong H^k(M,\C)\right)$$
+\end{defn}
+
+The hypercohomology of a complex of sheaves always admits a double complex, which then gives us a spectral sequence. 
+
+\begin{defn}{Analytic Hodge de Rham Spectral Sequence}{}\\
+Let $M$ be a complex manifold. Define the Hodge de Rham spectral sequence to be the spectral sequence associated to the Hodge filtration $F^\bullet\Omega_M^\bullet$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $M$ be a compact Kahler manifold. Then we have $E_1^{p,q}=H^{p,q}(M)\Rightarrow H^{p+q}(M)$. 
+\end{prp}
+
+\begin{crl}{}{}\\
+Let $M$ be a compact Kahler manifold. Then we have $$F^iH^k(M;\C)=\bigoplus_{p\geq i}H^{p,k-p}(M)$$
+\end{crl}
+
+\subsection{The Lefschetz Operator}
+\begin{defn}{The Lefschetz Operator}{}\\
+Let $M$ be a Kahler manifold. Let $\omega$ be its associated form. Define the Lefschetz operator to be the map $L:\Omega^k(M)\to\Omega^{k+2}(M)$ given by $$\alpha\mapsto\alpha\wedge\omega$$
+\end{defn}
+
+\begin{defn}{Adjoint of the Lefschetz Operator}{}\\
+Let $M$ be a Kahler manifold. Define the adjoint of $L$ to be the map $\Lambda:\Omega^k(M)\to\Omega^{k-2}(M)$ such that $$\langle\Lambda\omega,\eta\rangle_{L^2}=\langle\omega, L\eta\rangle_{L^2}$$ for all $\omega\in\Omega^k(M)$ and $\eta\in\Omega^{k-2}(M)$. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $M$ be a Kahler manifold. Then we have $$\Lambda=\ast^{-1}L\ast$$
+\end{lmm}
+
+\begin{prp}{The Kahler Identities}{}\\
+Let $M$ be a Kahler manifold. Then the following are true. 
+\begin{itemize}
+\item $[\Lambda,\overline{\partial}]=-i\partial^\ast$. 
+\item $[\Lambda,\partial]=-i\overline{\partial}^\ast$. 
+\end{itemize}
+\end{prp}
+
+\begin{thm}{Hard Lefschetz Theorem}{}\\
+Let $M$ be a compact Kahler manifold. Then the following are true. 
+\begin{itemize}
+\item The Lefschetz operator induces an isomorphism $$L^k:H_\text{dR}^{n-k}(M)\overset{\cong}{\longrightarrow} H_\text{dR}^{n+k}(M)$$
+\end{itemize}
+\end{thm}
+
+\begin{defn}{Primitive Cohomology}{}\\
+Let $M$ be a compact Kahler manifold. Let $n=\dim(M)$. Define the primitive cohomology of $M$ to be $$H_\text{prim}^i(M)=\ker(L^{n-i+1}:H_\text{dR}^i(M)\to H_\text{dR}^{2n-i+2}(M))$$
+\end{defn}
+
+\begin{prp}{Lefschetz Decomposition}{}\\
+Let $M$ be a compact Kahler manifold. Then there is an isomorphism $$H_\text{dR}^k(M)=\bigoplus_{2r\leq k} L^r(H_\text{prim}^{k-2r}(M))$$
+\end{prp}
+
+\begin{thm}{The Hodge Index Theorem}{}\\
+Let $M$ be a compact Kahler manifold of complex dimension $2n$. Suppose that $$h=\sum_{p=0}^{2m}\sum_{q=0}^{2m}(-1)^p\dim_\C(H^{p,q}(M))$$Then the signature of the non-degenerate symmetric bilinear form $H^n(X;\R)\times H^n(X;\R)\to\R$ from Poincare duality is given by $(h,2n-h)$. 
+\end{thm}
+
+
+\end{document}

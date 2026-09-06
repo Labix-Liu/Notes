@@ -275,6 +275,17 @@ Any $\Z$-module homomorphism is determined by where $1$ is mapped to. Let $\varp
 \end{proof}
 \end{eg}
 
+\begin{eg}{}{}\\
+Let $R$ be a commutative ring. Then we have $$\Hom_{R[x]}\left(\frac{R[x]}{(x^n)},\frac{R[x]}{(x^m)}\right)\cong\frac{R[x]}{(x^{\min\{m,n\}})}$$
+\begin{proof}\\
+Define $\varphi:\Hom_{R[x]}\left(\frac{R[x]}{(x^n)},\frac{R[x]}{(x^m)}\right)\to\frac{R[x]}{(x^{\min\{m,n\}})}$ by $\varphi(f)=f(1)$. This is a well defined $R[x]$-module homomorphism because $\varphi(f+g)=(f+g)(1)=f(1)+g(1)=\varphi(f)+\varphi(g)$ and $\varphi(r\cdot f)=(r\cdot f)(1)=r\cdot f(1)=r\cdot\varphi(f)$. \\
+
+Let $f\in\frac{R[x]}{(x^{\min\{m,n\}})}$. Then we have a well defined $R[x]$-module homomorphism $R[x]\to\frac{R[x]}{(x^{\min\{m,n\}})}$ given by $1\mapsto f$. It descends to a well defined homomorphism in $\Hom_{R[x]}\left(\frac{R[x]}{(x^n)},\frac{R[x]}{(x^m)}\right)$ because $x^n\cdot f=0$. Hence $\varphi$ is surjective. \\
+
+Suppose that $\varphi(f)=0$. Let $p\in\frac{R[x]}{(x^n)}$. Since $f$ is a $k[x]$-module homomorphism, we have $f(p)=p\cdot f(1)=0$ so that $f=0$. Thus $f$ is injective. 
+\end{proof}
+\end{eg}
+
 \begin{prp}{}{}\\
 Let $R$ be a ring. Let $M_i$ be an $R$-module for each $i\in I$. Let $N$ be an $R$-module. Then the following are true. 
 \begin{itemize}
@@ -459,6 +470,13 @@ By commutativity of tensor product over commutative rings, we also have distribu
 Let $R$ be a commutative ring. Let $\{M_i\;|\;i\in I\}$ be a collection of $R$-modules. Let $N$ be an $R$-module. Then there is an $R$-module isomorphism $$\left(\bigoplus_{i\in I}M_i\right)\otimes_RN\cong\bigoplus_{i\in I}(M_i\otimes_RN)$$ given by $(m_i)_{i\in I}\otimes n\mapsto(m_i\otimes n)_{i\in I}$. 
 \end{prp}
 
+\begin{eg}{}{}\\
+Let $R$ be a commutative ring. Then we have $$R[x]\otimes_RR[y]\cong R[x,y]$$
+\begin{proof}\\
+Use the $R$-module isomorphisms $$R[x]\cong\bigoplus_{i=0}^\infty R\cdot x^i\;\;\;\text{ and }\;\;\;R[x,y]\cong\bigoplus_{i,j=0}^\infty R\cdot x^iy^j$$ and apply the above prp two times. 
+\end{proof}
+\end{eg}
+
 \begin{prp}{}{}\\
 Let $R$ be a ring. Let $I$ be an ideal of $R$. Then the following are true. 
 \begin{itemize}
@@ -469,6 +487,10 @@ Let $R$ be a ring. Let $I$ be an ideal of $R$. Then the following are true.
 
 \begin{eg}{}{}\\
 Let $n\in\N^+$. Let $A$ be an abelian group. Then we have $$\Z/n\Z\otimes_\Z A\cong A/nA$$
+\end{eg}
+
+\begin{eg}{}{}\\
+Let $R$ be a commutative ring. Then we have $$\frac{R[x]}{(x^n)}\otimes_{R[x]}\frac{R[x]}{(x^m)}\cong\frac{R[x]}{(x^{\min\{m,n\}})}$$
 \end{eg}
 
 \subsection{Change of Base Ring}
@@ -1472,10 +1494,12 @@ Since $\varphi$ is surjective, for any maximal ideal $m$ of $S$, we have $\varph
 \pagebreak
 \section{Chain Conditions}
 \subsection{Noetherian Rings and Modules}
-\begin{defn}{Ascending Chain Condition}{} Let $R$ be a ring. Let $M$ be an $R$-module. We say that $M$ satisfies the ascending chain condition if for any chain of $R$-submodules $$M_1\subseteq M_2\subseteq M_3\subseteq\cdots$$ there is a positive integer $n$ such that $M_i=M_n$ for all $i\geq n$. 
+\begin{defn}{Ascending Chain Condition}{}\\
+Let $R$ be a ring. Let $M$ be an $R$-module. We say that $M$ satisfies the ascending chain condition if for any chain of $R$-submodules $$M_1\subseteq M_2\subseteq M_3\subseteq\cdots$$ there is a positive integer $n$ such that $M_i=M_n$ for all $i\geq n$. 
 \end{defn}
 
-\begin{defn}{Noetherian Modules}{} Let $R$ be a ring. Let $M$ be a left $R$-module. We say that $M$ is left Noetherian if $M$ satisfies the ascending chain condition. 
+\begin{defn}{Noetherian Modules}{}\\
+Let $R$ be a ring. Let $M$ be a left $R$-module. We say that $M$ is left Noetherian if $M$ satisfies the ascending chain condition. 
 \end{defn}
 
 The Noetherian property depends on the left / right module structure. For example, $$R=\begin{pmatrix}
@@ -1483,7 +1507,22 @@ The Noetherian property depends on the left / right module structure. For exampl
 0 & \Q
 \end{pmatrix}$$ is right Noetherian but not left Noetherian. 
 
-\begin{prp}{}{} Let $R$ be a ring and $M$ an $R$-module. Then the following are equivalent. 
+\begin{eg}{}{}\\
+The following are true. 
+\begin{itemize}
+\item $\Z$ is Noetherian. 
+\item Every field is Noetherian. 
+\end{itemize}
+\begin{proof}\\
+\begin{itemize}
+\item Recall that $\Z$ is a PID. Let $(x_k)$ for $k\in\N$ be an strictly ascending chain of ideals of $\Z$ for $x_k\in\Z$. Then $(x_k)\subset(x_{k+1})$ means that $x_{k+1}\;|\;x_k$ and $x_{k+1}\neq x_k$. But $1\leq x_{k+1}<x_k$ is a strictly decreasing sequence and must be eventually constant. This is a contradiction to the strictly ascending assumption. 
+\item Let $F$ be a field. Then the only ideals of $F$ are $(0)$ or $F$. Thus any ascending chain of ideals in $F$ must stabilize. 
+\end{itemize}
+\end{proof}
+\end{eg}
+
+\begin{prp}{}{}\\
+Let $R$ be a ring and $M$ an $R$-module. Then the following are equivalent. 
 \begin{itemize}
 \item $M$ is Noetherian
 \item Every $R$-submodule of $M$ is finitely generated
@@ -1501,7 +1540,8 @@ By assumption, $N$ is finitely generated by some elements, say $f_1,\dots,f_n$. 
 \end{proof}
 \end{prp}
 
-\begin{prp}{}{} Let $R$ be a ring. Let $M_1,M_2,M_3$ be $R$-modules. Let $f:M_1\to M_2$ and $g:M_2\to M_3$ be $R$-module homomorphisms such that \\~\\
+\begin{prp}{}{}\\
+Let $R$ be a ring. Let $M_1,M_2,M_3$ be $R$-modules. Let $f:M_1\to M_2$ and $g:M_2\to M_3$ be $R$-module homomorphisms such that \\~\\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	0 & {M_1} & {M_2} & {M_3} & 0
 	\arrow[from=1-1, to=1-2]
@@ -1519,7 +1559,8 @@ Suppose that $M_1$ and $M_3$ are Noetherian. Let $H_1\subseteq\cdots\subseteq H_
 \end{proof}
 \end{prp}
 
-\begin{crl}{}{} Let $R$ be a ring. Let $M$ be a left $R$-module. Then the following are true. 
+\begin{crl}{}{}\\
+Let $R$ be a ring. Let $M$ be a left $R$-module. Then the following are true. 
 \begin{itemize}
 \item If $N$ is an $R$-submodule of $M$, then $M$ is Noetherian if and only if $N$ and $M/N$ is Noetherian
 \item If $N$ is an left $R$-module, then $M\oplus N$ is Noetherian if and only if $M$ and $N$ are Noetherian
@@ -1548,7 +1589,8 @@ By the above proposition we conclude.
 \end{proof}
 \end{crl}
 
-\begin{crl}{}{} Let $R$ be a Noetherian ring. Let $M$ be a left $R$-module. Then $M$ is Noetherian if and only if $M$ is a finitely generated $R$-module. 
+\begin{crl}{}{}\\
+Let $R$ be a Noetherian ring. Let $M$ be a left $R$-module. Then $M$ is Noetherian if and only if $M$ is a finitely generated $R$-module. 
 \begin{proof}
 Suppose that $M$ is Noetherian. Then by 7.1.3 $M$ is a finitely generated $R$-module. Now suppose that $M$ is finitely generated. Then there exists a surjective homomorphism $\phi:R^n\to M$ for some $n$. Then we have an exact sequence \\~\\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
@@ -1563,12 +1605,12 @@ Since $R$ is Noetherian, $R^n$ is Noetherian by 7.1.5. Then by 7.1.4 we have tha
 \end{crl}
 
 \subsection{Artinian Rings and Modules}
-\begin{defn}{Descending Chain Condition}{} An $R$-module $M$ is said to satisfy the descending chain condition if for any $M_1,M_2,\dots$ submodules of $M$ such that $$M_1\supseteq M_2\supseteq M_3\supseteq\cdots$$ is an ascending chain, then there is a positive integer $n$ such that $M_i=M_n$ for all $i\geq n$. 
+\begin{defn}{Descending Chain Condition}{}\\
+Let $R$ be a ring. Let $M$ be an $R$-module. We say that $M$ satisfies the descending chain condition if for any chain of $R$-submodules $$M_1\supseteq M_2\supseteq M_3\supseteq\cdots$$ there is a positive integer $n$ such that $M_i=M_n$ for all $i\geq n$. 
 \end{defn}
 
-\begin{defn}{Artinian Rings and Modules}{} Let $R$ be a ring. Let $M$ be a left $R$-module. We say that $M$ is left (right) Artinian if $M$ satisfies the descending chain condition. We say that a ring $R$ is left (right) Artinian if $R$ is Artinian when viewed as an $R$-module. \\~\\
-
-An $R$-module or a ring is said to be Artinian if it is both left and right Artinian. 
+\begin{defn}{Artinian Modules}{}\\
+Let $R$ be a ring. Let $M$ be an $R$-module. We say that $M$ is left Artinian if $M$ satisfies the descending chain condition. 
 \end{defn}
 
 \begin{prp}{}{} Let $R$ be a ring and $M$ an $R$-module. Then $M$ is Artinian if and only if every non-empty collection of $R$-submodules of $M$ has a minimal element. 
@@ -1747,6 +1789,10 @@ Let $R$ be a PID. Let $M$ be a finitely generated $R$-module. Then there is an $
 Let $R$ be a PID. Let $M,N$ be a finitely generated $R$-modules with primary decomposition given by $$M\cong R^f\oplus\bigoplus_{i=1}^n\frac{R}{(p_i^{a_i})}\;\;\;\;\text{ and }\;\;\;\;N\cong R^e\oplus\bigoplus_{i=1}^m\frac{R}{(q_i^{b_i})}$$ Then there is an $R$-module isomorphism $M\cong N$ if and only if $f=e$, $n=m$ and $\{p_1,\dots,p_n\}=\{q_1,\dots,q_m\}$. 
 \end{thm}
 
+\begin{eg}{}{}\\
+Let $k$ be a field. Every finitely generated $k[x]$-module is of the form $$M=k[x]^m\oplus\bigoplus_{i=1}^n\frac{k[x]}{(x^{k_i})}$$ for some $k_i$. 
+\end{eg}
+
 \subsection{The Rational Canonical Form}
 
 \pagebreak
@@ -1761,7 +1807,14 @@ Let $R$ be a ring. We say that $R$ is $\Z$-graded if the following are true.
 We say that an element $r\in R$ is homogenous if $r\in R_k$ for some $k\in\Z$. 
 \end{defn}
 
-If $S_k=\{0\}$ for all $k<0$, we also say that $R$ is $\N$-graded. 
+If $R_k=\{0\}$ for all $k<0$, we also say that $R$ is $\N$-graded. 
+
+\begin{eg}{}{}\\
+The following are true. 
+\begin{itemize}
+\item $R[x_1,\dots,x_n]$ is a graded ring where $R[x_1,\dots,x_n]_i =R\left\langle x_1^{k_1}\cdots x_n^{k_n}\;|\;i=\sum_{j=1}^nk_j\right\rangle$. 
+\end{itemize}
+\end{eg}
 
 \begin{prp}{}{}\\
 Let $R=\bigoplus_{k\in\Z}R_k$ be a graded ring. Then the following are true. 
@@ -1927,7 +1980,32 @@ Let $R$ be a commutative graded ring. Let $A,B$ be graded $R$-algebras. Let $\va
 \end{itemize}
 \end{defn}
 
-\subsection{Relevant Ideals}
+\begin{defn}{Standard Graded Algebras}{}\\
+Let $R$ be a commutative ring. A standard graded algebra over $R$ is a graded algebra $A$ over $R$ such that the following are true. 
+\begin{itemize}
+\item $A_0=R$. 
+\item $A_1$ is a finitely generated $R$-module. 
+\item $A_1$ generates $A$ as an $R$-algebra. 
+\end{itemize}
+\end{defn}
+
+\begin{eg}{}{}\\
+Let $k$ be a field. Then $k[x_1,\dots,x_n]$ with $\deg(x_i)=1$ is a standard graded algebra over $k$. 
+\end{eg}
+
+\begin{lmm}{}{}\\
+Let $R$ be a commutative ring. Let $A$ be a standard graded algebra over $R$. Then $A$ is a commutative graded ring. 
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $R$ be a commutative ring. Let $A$ be a standard graded algebra over $R$. Then $R_+$ is the unique homogeneous maximal ideal of $A$. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $R$ be a commutative ring. Let $A$ be a standard graded algebra over $R$. Then $A$ is Noetherian. 
+\end{prp}
+
+\subsection{Irrelevant Ideals}
 \begin{defn}{The Irrelevant Ideal}{}\\
 Let $S=\bigoplus_{n\in\Z}S_n$ be a graded ring. Define the irrelevant ideal of $S$ to be $$S_+=S\setminus S_0$$
 \end{defn}
@@ -1944,15 +2022,14 @@ Let $S$ be a graded ring. Let $I\subseteq S$ be a homogeneous ideal. Then $I_+$ 
 Let $S$ be a graded ring. Let $I\subseteq S$ be a homogeneous ideal. We say that $I$ is irrelevant if $S_+\subseteq\sqrt{I}$. Otherwise, we say that $I$ is relevant. 
 \end{defn}
 
-\subsection{Noetherian Conditions}
-\begin{prp}{}{}\\ Let $R=\bigoplus_{n\in\N}R_i$ be a graded ring. Then $R$ is Noetherian if and only if $R_0$ is Noetherian and $R$ is finitely generated as an $R_0$-module. 
-\begin{proof}\\
-If $R_0$ is Noetherian and $R$ is finitely generated, then by 7.1.6 we know that $R$ is Noetherian. \\
+\subsection{Graded Free Modules}
+\begin{defn}{Graded Free Modules}{}\\
+Let $R$ be a graded ring. Let $M$ be a graded $R$-module. We say that $M$ is a graded free $R$-module if $M$ admits a basis consisting of homogeneous elements. 
+\end{defn}
 
-Suppose now that $R$ is Noetherian. Then $R_0\cong R/R_+$ is a quotient of $R$ and so is Noetherian. Since $R_+$ is a homogeneous ideal of $R$, it is finitely generated by say $x_1,\dots,x_r$ where each $x_i$ is of degree $d_i$. Then we have $$R_n=\sum_{i=1}^r x_1R_{n-{d_i}}$$ Indeed, the expression on the right lies in $R_n$. Conversely, given $x\in R_n$, there exists $f_1,\dots,f_r\in R$ such that $x=\sum_{i=1}^rx_if_i$. If $g_i$ is the homogeneous term of $f_i$ of degree $d_i$, then we have $x=\sum_{i=1}^rx_ig_i$. Hence $R_n$ is a subset of the expression on the right. This implies that $R=R_0[x_1,\dots,x_r]$ and so $R$ is finitely generated. 
-\end{proof}
-\end{prp}
-
+\begin{lmm}{}{}\\
+Let $R$ be a graded ring. Let $M$ be a graded $R$-module. Then $M$ is a graded free $R$-module if and only if there is a graded isomorphism $$M\cong\bigoplus_{i\in I}R(-d_i)$$ for some $d_i\in\N$. 
+\end{lmm}
 
 \pagebreak
 \section{Tensor, Symmetric and Exterior Algebras}

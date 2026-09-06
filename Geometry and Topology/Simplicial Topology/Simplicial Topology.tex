@@ -137,13 +137,6 @@ and so we conclude.
 \pagebreak
 \section{Simplicial Complexes}
 \subsection{Basic Definition}
-\begin{defn}{Simplicial Complexes}{} Let $\mK$ be a set of simplexes. We say that $\mK$ is a simplicial complex if the following are true. 
-\begin{itemize}
-\item For any $S\in\mK$, every face $\partial_k S$ of $S$ lies in $\mK$. 
-\item If $S_1$ and $S_2$ are two simplexes in $\mK$, then either $S_1\cap S_2$ is empty or $S_1\cap S_2$ is a common face of both $S_1$ and $S_2$. 
-\end{itemize}
-\end{defn}
-
 \begin{defn}{Abstract Simplicial Complex}{}\\
 Let $S$ be a set. We say that $S$ is a simplicial complex if for all $\sigma\in S$ and $\tau\subseteq\sigma$, we have $\tau\in S$. Elements of $S$ are called faces. 
 \end{defn}
@@ -161,6 +154,14 @@ The following are simplicial complexes.
 The set $S=\mP(\{1,2,3\})\cup\mP(\{1,3,4\})\cup\mP(\{2,4\})$ is an abstract simplicial complex. 
 \end{eg}
 
+\begin{defn}{The Boundary of a Face}{}\\
+Let $\mK$ be a simplicial complex. Let $\sigma\in\mK$. Define the boundary of $\sigma$ by $$\partial\sigma=\{\tau\in\mK\;|\;\tau\subseteq\sigma\}$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $\mK$ be a simplicial complex. Let $\sigma\in\mK$. Then $\partial\sigma$ is a simplicial complex. 
+\end{lmm}
+
 \begin{defn}{Dimension}{}\\
 Let $S$ be a simplicial complex. 
 \begin{itemize}
@@ -169,13 +170,27 @@ Let $S$ be a simplicial complex.
 \end{itemize}
 \end{defn}
 
-\begin{defn}{Vertex Set}{}\\
-Let $S$ be a simplicial complex. Define the vertex set of $S$ to be $$V(S)=\bigcup_{\sigma\in S}\sigma$$
+\begin{defn}{The Skeleton of a Simplicial Complex}{}\\
+Let $\mK$ be a simplicial complex. Define the $i$th skeleton of $\mK$ by $$\text{sk}_i\mK=\{\sigma\in\mK\;|\;\dim(\sigma)\leq i\}$$
 \end{defn}
 
-Thus it is clear that $S\subseteq\mP(V(S))$. \\
+\begin{defn}{Vertices and Maximal Faces}{}\\
+Let $\mK$ be a simplicial complex. 
+\begin{itemize}
+\item A vertex of $\mK$ is a simplex in $\mK$ of dimension $0$. Denote the set of vertices of $\mK$ by $V(\mK)$. 
+\item A maximal face of $\mK$ is a simplex $\sigma$ such that if $\sigma\subseteq\tau$, then $\sigma=\tau$. 
+\end{itemize}
+\end{defn}
 
-We mostly consider the case where $V(S)$ is finite. In this case, we may replace the underlying set by $\{1,\dots,n\}$ by a suitable $n\in\N$. 
+\begin{defn}{Pure Dimensional Complexes}{}\\
+Let $\mK$ be a simplicial complex. We say that $\mK$ is pure dimensional if all maximal faces of $\mK$ have the same dimension. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $\mK$ be a simplicial complex. Then we have $$V(\mK)=\text{sk}_0(\mK)=\bigcup_{\sigma\in\mK}\sigma$$
+\end{lmm}
+
+We mostly consider the case where $V(S)$ is finite. In this case, we may replace the underlying set by $\{1,\dots,n\}$ for a suitable $n\in\N$. 
 
 \begin{defn}{Missing Faces}{}\\
 Let $S$ be a simplicial complex. Let $\sigma\subseteq V(S)$. We say that $\sigma$ is a missing face of $S$ if the following are true. 
@@ -186,8 +201,21 @@ Let $S$ be a simplicial complex. Let $\sigma\subseteq V(S)$. We say that $\sigma
 Denote the set of all missing faces of $S$ by $$\text{MF}(S)=\{\sigma\subseteq V(S)\;|\;\sigma\text{ is a missing face }\}$$
 \end{defn}
 
+\begin{defn}{Refinements}{}\\
+Let $\mK,\mL$ be simplicial complexes. We say that $\mL$ is a refinement of $\mK$ if for all $\tau\in\mL$, there exists $\sigma\in\mK$ such that $\tau\subseteq\sigma$. 
+\end{defn}
+
+\subsection{Realizing a Simplicial Complex}
+\begin{defn}{Geometric Simplicial Complexes}{}\\
+Let $\mK$ be a set of simplexes. We say that $\mK$ is a geometric simplicial complex if the following are true. 
+\begin{itemize}
+\item For any $S\in\mK$, every face $\partial_k S$ of $S$ lies in $\mK$. 
+\item If $S_1$ and $S_2$ are two simplexes in $\mK$, then either $S_1\cap S_2$ is empty or $S_1\cap S_2$ is a common face of both $S_1$ and $S_2$. 
+\end{itemize}
+\end{defn}
+
 \begin{defn}{Associated Abstract Simplicial Complex}{}\\
-Let $\mK$ be a simplicial complex. Define the associated abstract simplicial complex $A(\mK)\subseteq\mP(V(\mK))$ as follows: For each simplex $\Delta\in\mK$, we have $V(\Delta)\subseteq A(\mK)$. 
+Let $\mK$ be a geometric simplicial complex. Define the associated abstract simplicial complex $A(\mK)\subseteq\mP(V(\mK))$ as follows: For each simplex $\Delta\in\mK$, we have $V(\Delta)\subseteq A(\mK)$. 
 \end{defn}
 
 \begin{lmm}{}{}\\
@@ -203,10 +231,37 @@ Let $S,T$ be simplicial complexes. Let $f:V(S)\to V(T)$ be a function. We say th
 Let $S,T,U$ be simplicial complexes. Let $f:V(S)\to V(T)$ and $g:V(T)\to V(U)$ be simplicial maps. Then $g\circ f$ is a simplicial map. 
 \end{lmm}
 
+\begin{eg}{}{}\\
+If $\mL$ is a refinement of $\mK$, then there is a map $\mL\to\mK$ sending $\tau\in\mL$ to the simplex $\sigma\in\mK$ such that $\tau\subseteq\sigma$. 
+\end{eg}
+
 \begin{defn}{Isomorphism of Simplicial Complexes}{}\\
 Let $S,T$ be simplicial complexes. Let $f:V(S)\to V(T)$ be a function. We say that $f$ is an isomorphism if there exists a simplicial map $g:V(T)\to V(S)$ such that $$g\circ f=\text{id}_{V(S)}\;\;\;\text{ and }\;\;\;f\circ g=\text{id}_{V(T)}$$
 \end{defn}
 
+\subsection{Cubical Embeddings of Simplicial Complexes}
+\begin{defn}{The Faces of the $n$-Cube}{}\\
+Let $n\in\N^+$. Let $J\subseteq I\subseteq\{1,\dots,n\}$. Define the faces of $I^n$ by $$C_{J\subseteq I}=\{(x_1,\dots,x_n)\in I^n\;|\;x_i=0\text{ for }i\in J,x_i=1\text{ for }i\notin I\}$$
+\end{defn}
+
+\begin{defn}{The Cubical Embedding}{}\\
+Let $n\in\N$. Define the cubical embedding $i_c:\abs{\Delta^n}\to[0,1]^{n+1}$ as follows. 
+\begin{enumerate}
+\item For $1\leq k\leq n$, the barycenter of the $k$-dimensional face $B([e_{i_1},\dots,e_{i_k}])$ is sent to $(u_1,\dots,u_{n+1})\in[0,1]^{n+1}$ where $u_j=0$ if $j\in\{i_1,\dots,i_k\}$ and $u_j=1$ otherwise. 
+\item Extend this into a piecewise linear embedding $i_c:\abs{\Delta^n}\to[0,1]^{n+1}$ as follows. For each simplex $[p_1,\dots,p_l]$ in the barycentric subdivision of $\Delta^n$, $[i_c(p_1),\dots,i_c(p_l)]$ lies on a face of $[0,1]^{n+1}$. Hence there exists an simplicial map sending $[p_1,\dots,p_l]$ to $[i_c(p_1),\dots,i_c(p_l)]$. 
+\end{enumerate}
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $n\in\N$. Then $\partial[0,1]^n$ is a simplicial complex. 
+\end{lmm}
+
+\begin{defn}{Cubical Embeddings of Abstract Simplicial Complexes}{}\\
+Let $\mK$ be an abstract simplicial complex. Define the cubical embedding of $\mK$ to be the subspace $$\text{cc}(\mK)=i_c(\abs{\mK})$$
+\end{defn}
+
+\pagebreak
+\section{Properties of Simplicial Complexes}
 \subsection{The Face Vector of a Simplicial Complex}
 \begin{defn}{The Face Vector}{}\\
 Let $\mK$ be an abstract simplicial complex. Define the face vector $(f_0,\dots,f_{\dim(\mK)})$ of $S$ by the formula $$f_i=\text{The number of }i\text{-dimensional faces of }\mK$$ for $0\leq i\leq\dim(\mK)$. By convention, we set $f_{-1}=1$. 
@@ -241,26 +296,27 @@ Let $S$ be an abstract simplicial complex on $\{1,\dots,n\}$. Let $(f_0,\dots,f_
 \end{itemize}
 \end{lmm}
 
-\subsection{Cubical Embeddings of Simplicial Complexes}
-\begin{defn}{The Faces of the $n$-Cube}{}\\
-Let $n\in\N^+$. Let $J\subseteq I\subseteq\{1,\dots,n\}$. Define the faces of $I^n$ by $$C_{J\subseteq I}=\{(x_1,\dots,x_n)\in I^n\;|\;x_i=0\text{ for }i\in J,x_i=1\text{ for }i\notin I\}$$
+\subsection{Neighbourly Complexes}
+\begin{defn}{k-Neighbourly Complexes}{}\\
+Let $\mK$ be a simplicial complex. We say that $\mK$ is $k$-neighbourly if for any $S\subseteq V(\mK)$ such that $\abs{S}\leq k$, we have $S\in\mK$. 
 \end{defn}
 
-\begin{defn}{The Cubical Embedding}{}\\
-Let $n\in\N$. Define the cubical embedding $i_c:\abs{\Delta^n}\to[0,1]^{n+1}$ as follows. 
-\begin{enumerate}
-\item For $1\leq k\leq n$, the barycenter of the $k$-dimensional face $B([e_{i_1},\dots,e_{i_k}])$ is sent to $(u_1,\dots,u_{n+1})\in[0,1]^{n+1}$ where $u_j=0$ if $j\in\{i_1,\dots,i_k\}$ and $u_j=1$ otherwise. 
-\item Extend this into a piecewise linear embedding $i_c:\abs{\Delta^n}\to[0,1]^{n+1}$ as follows. For each simplex $[p_1,\dots,p_l]$ in the barycentric subdivision of $\Delta^n$, $[i_c(p_1),\dots,i_c(p_l)]$ lies on a face of $[0,1]^{n+1}$. Hence there exists an simplicial map sending $[p_1,\dots,p_l]$ to $[i_c(p_1),\dots,i_c(p_l)]$. 
-\end{enumerate}
+\begin{defn}{Neighbourly Complexes}{}\\
+Let $\mK$ be a simplicial complex. We say that $\mK$ is a neighbourly complex if $\mK$ is $\floor{\dim(\mK)/2}$-neighbourly. 
 \end{defn}
 
-\begin{lmm}{}{}\\
-Let $n\in\N$. Then $\partial[0,1]^n$ is a simplicial complex. 
-\end{lmm}
+\begin{eg}{}{}\\
+The following are true. 
+\begin{itemize}
+\item Every simplicial complex is $1$-neighbourly. 
+\item $\Delta^n$ is $(n+1)$-neighbourly. 
+\item $\partial\Delta^n$ is $n$-neighbourly. 
+\end{itemize}
+\end{eg}
 
-\begin{defn}{Cubical Embeddings of Abstract Simplicial Complexes}{}\\
-Let $\mK$ be an abstract simplicial complex. Define the cubical embedding of $\mK$ to be the subspace $$\text{cc}(\mK)=i_c(\abs{\mK})$$
-\end{defn}
+\subsection{Shellability}
+
+\subsection{Vertex Decomposition}
 
 \pagebreak
 \section{Operations on Simplicial Complexes}
@@ -274,7 +330,11 @@ Let $\mK$ be a simplicial complex. Define the barycentric subdivision of $\mK$ t
 The idea is to add vertex for each simplex in the simplicial complex so that the underlying set of the barycentric subdivision is $\mK$. Since $\mK$ is a subset of $\mP(\mK)$, elements of $\mK$ are partially ordered by inclusion, each inclusion with the geometric meaning of faces of the simplex. 
 
 \begin{lmm}{}{}\\
-Let $\mK$ be a simplicial complex. Then we have $$\dim(\text{Bd}(\mK))=\dim(\mK)$$
+Let $\mK$ be a simplicial complex. Then the following are true. 
+\begin{itemize}
+\item $\dim(\text{Bd}(\mK))=\dim(\mK)$. 
+\item $\text{Bd}(\mK)$ is a refinement of $\mK$. 
+\end{itemize}
 \end{lmm}
 
 \begin{prp}{}{}\\
@@ -495,16 +555,19 @@ The main goal is now to associate to every $\Delta$-complex an abelian group. Th
 
 We begin by treating the case of $\Delta$-sets. 
 
-\begin{defn}{Simplicial $n$-Chains}{} Let $S=(S_\bullet,d_\bullet)$ be a $\Delta$-set. Define the group of simplicial $n$-chains on $S$ to be free group $$\Delta_n(S)=\Z\langle\Delta_k^n\;|\;\Delta_k^n\in S_n\rangle$$ on the set of $n$-simplexes. An $n$ chain is then of the form $$\sum_km_k\Delta_k^n$$ for $m_k\in\Z$ and $\Delta_k^N\in S_n$. 
+\begin{defn}{Simplicial $n$-Chains}{}\\
+Let $S=(S_\bullet,d_\bullet)$ be a $\Delta$-set. Define the group of simplicial $n$-chains on $S$ to be the free group $$C_n^\Delta(S)=\Z\langle\Delta_k^n\;|\;\Delta_k^n\in S_n\rangle$$ generated by the set of $n$-simplexes. 
 \end{defn}
 
 All the simplicial $n$-chains are related by a formula called the boundary operator. 
 
-\begin{defn}{Boundary Operator}{} Let $S$ be a $\Delta$-set. Define the boundary operator $\partial_n:\Delta_n(S)\to\Delta_{n-1}(S)$ by $$\partial_n(s)=\sum_{k=0}^n(-1)^kd_i^n(s)$$
+\begin{defn}{Boundary Operator}{}\\
+Let $S$ be a $\Delta$-set. Define the boundary operator $\partial_n:C_n^\Delta(S)\to C_{n-1}^\Delta(S)$ by $$\partial_n(s)=\sum_{k=0}^n(-1)^kd_i^n(s)$$
 \end{defn}
 
-\begin{prp}{}{} The family of abelian groups $\Delta_n(S)$ of a $\Delta$-set $S$ and the boundary operator $\partial$ forms a chain complex $$(\Delta_\bullet(S),\partial_\bullet)$$ In particular, $\partial_n\circ\partial_{n+1}=0$ for all $n\in\N$ where $\partial_n$ is the boundary operator above. 
-\begin{proof}
+\begin{prp}{}{}\\
+Let $S$ be a $\Delta$-set. Then we have $\partial_{n-1}\circ\partial_n$. 
+\begin{proof}\\
 Let $s\in\Delta_{n+1}(X)$. Then we have that $$(\partial_n\circ\partial_{n+1})(s)=\partial_n\left(\sum_{j=0}^{n+1}(-1)^jd_j^{n+1}(s)\right)=\sum_{i=0}^n\sum_{j=0}^{n+1}(-1)^{i+j}d_i^n(d_j^{n+1}(s))$$ Fix a pair $0\leq i<j\leq n+1$. By definition 2.1.5, $A=(-1)^{i+j}d_i^n(d_j^{n+1}(s))$ and $B=(-1)^{i+j}d_{j-1}^n(d_i^{n+1}(s))$ cancel out. Moreover every summand is of the form $A$ or $B$ and not both so that the sum vanishes. In other words, we have that 
 \begin{align*}
 \sum_{i=0}^n\sum_{j=0}^{n+1}(-1)^{i+j}d_i^n(d_j^{n+1}(s))&=\sum_{0\leq i<j\leq n+1}(-1)^{i+j}d_i^n(d_j^{n+1}(s))+\sum_{0\leq j<i\leq n}(-1)^{i+j}d_i^n(d_j^{n+1}(s))\\
@@ -516,7 +579,9 @@ We conclude that $(\Delta_\bullet(S),\partial_\bullet)$ forms a chain complex.
 \end{proof}
 \end{prp}
 
-Recalling from section $1$, we can now define the homology groups of the chain complex. 
+\begin{defn}{The Induced Map}{}\\
+Let $S,T$ be $\Delta$-sets. Let $f:S\to T$ be a map of $\delta$-sets. Define the induced map $$C_n^\Delta(f):C_n^\Delta(S)\to C_n^\Delta(T)$$ by $s\mapsto f_n(s)$. 
+\end{defn}
 
 \begin{defn}{The Simplicial Homology Groups}{} Let $S$ be a $\Delta$-set and $(\Delta_\bullet(S),\partial_\bullet)$ the chain complex of $S$. 
 \begin{itemize}
@@ -526,31 +591,38 @@ Recalling from section $1$, we can now define the homology groups of the chain c
 \end{itemize}
 \end{defn}
 
-We will see different forms of chain complexes in the rest of the notes. In fact, we have seen from section $1$ that to every chain complex we can associate a sequence of homology groups. In our case of simplicial homology, there is a very topological way of understanding the homology groups. But this is not necessarily true for general homology groups built out of arbitrary chain complexes. 
-
-\begin{defn}{Simplicial Homology Groups of a Geometric Realization}{} Let $X$ be a topological space with a $\Delta$-complex structure $\abs{S}\cong X$, define its $n$th simplicial homology group to be $$H_n^\Delta(X)=H_n^\Delta(S)$$
-\end{defn}
-
-By definition, $H_n^\Delta(X)$ would be nonzero exactly when the cycles in $X$, quotiented out with boundary of the faces is exactly the $n$ dimensional holes. This is because cycles in $X$ does not necessarily capture holes as there may be some faces within the cycles. Therefore we have to quotient out the cycles that encapture faces. \\
-
-Since $H_n(C_\bullet)$ in general just means the homology groups of the chain complex $C_\bullet$, to distinguish between different homologies arising from different chain complexes, we will give special names for specific homology groups. In this instance, the simplicial homology of $X$ will be denoted $H_n^\Delta(X)$ instead of just $H_n(X)$. This is also to distinguish between other types of homology on $X$, such as singular homology. \\
-
 We have seen that a map between two chain complexes induces a map between the homology groups. We can now define a map between two $\Delta$-sets so that they induce a map in chain complexes and in turn, a map in simplicial homology groups. 
-
-\begin{lmm}{}{} A map of $\Delta$-sets $f_\bullet:S\to S'$ induces a chain map $f_\bullet:\Delta_\bullet(S)\to\Delta_\bullet(S')$. 
-\begin{proof}
-Define $f_n:\Delta_n(S)\to\Delta_n(S')$ on each generator $s\in S_n$ by $s\mapsto f_n(s)$ and extend it linearly on the free group. Then $f_n$ is naturally a group homomorphism. We now verify that $f_n$ together with the boundary operators satisfy the required commutativity. For $s\in S_n$, we have that 
-\begin{align*}
-\partial_n'(f_n(s))&=\sum_{k=0}^n(-1)^kd_k^n(f_n(s))\\
-&=\sum_{k=0}^n(-1)^kf_{n-1}(d_k(s))\\
-&=f_{n-1}\left(\sum_{k=0}^n(-1)^kd_k(s)\right)\\
-&=f_{n-1}(\partial_n(s))
-\end{align*}
-and so we conclude. 
-\end{proof}
-\end{lmm}
 
 Combining with the induced map in homology, we thus have that given a map of $\Delta$-sets, it induces a map in homology. 
 
+\subsection{Relation to Refinements}
+\begin{defn}{Induced map of Refinements}{}\\
+Let $\mK,\mL$ be simplicial complexes. Suppose that $\mL$ is a refinement of $\mK$. Define the induced map of chain complexes $$C_n^\Delta(\mK)\to C_n^\Delta(\mL)$$ by $\sigma\mapsto\sum_{\tau\in\mL,\tau\subseteq\sigma}(-1)^{k_\tau}\tau$
+\end{defn}
+
+Composing with the induced map $C_n^\Delta(\mL)\to C_n^\Delta(\mK)$ induced isomorphisms on homology. 
+
+\subsection{Simplicial Cohomology}
+
+\subsection{The Alexander Dual}
+\begin{defn}{The Alexander Dual}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Suppose that $\mK\neq\Delta^{n-1}$. Define the Alexander dual of $\mK$ to be $$\widehat{\mK}=\{I\subseteq\{1,\dots,n\}\;|\;\{1,\dots,n\}\setminus I\notin\mK\}$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Suppose that $\mK\neq\Delta^{n-1}$. Then we have $\widehat{\widehat{\mK}}=\mK$. 
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Let $\sigma\in\mK$. Then $\sigma$ is a facet of $\widehat{\mK}$ if and only if $\{1,\dots,n\}\setminus\sigma\in\text{MF}(\mK)$. 
+\end{lmm}
+
+\begin{thm}{Combinatorial Alexander Duality}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Suppose that $\mK\neq\Delta^{n-1}$. Then there is an isomorphism $$\widetilde{H}^j(\mK)=\widetilde{H}_{n-3-j}(\widehat{\mK})$$ for $-1\leq j\leq n-2$ where we set $\widetilde{H}^{-1}(\mK)=\Z$. 
+\end{thm}
+
+\begin{crl}{}{}\\
+Let $\mK$ be a simplicial complex on $\{1,\dots,n\}$. Suppose that $\mK\neq\Delta^{n-1}$. Let $I\subseteq\{1,\dots,n\}$ such that $I\notin\mK$. Then there is an isomorphism $$\widetilde{H}^j(\mK_I)=\widetilde{H}_{n-3-j}(\text{lk}_{\widehat{\mK}}(\{1,\dots,n\}\setminus I))$$ for $-1\leq j\leq\abs{I}-2$. 
+\end{crl}
 
 \end{document}

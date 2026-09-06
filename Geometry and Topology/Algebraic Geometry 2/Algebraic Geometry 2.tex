@@ -18,6 +18,9 @@
 
 \pagebreak
 \tableofcontents
+\pagebreak
+
+\part{Foundations of Scheme Theory}
 
 \pagebreak
 \section{Spectra and its Structure Sheaf}
@@ -154,8 +157,6 @@ Since $\V^\text{S}$ and $\I^\text{S}$ are inclusion reversing, the smallest prim
 \end{proof}
 \end{prp}
 
-This shows that each irreducible closed subset has exactly one generic point, and each irreducible closed subset can be written uniquely as the closure of some point in the spectrum. 
-
 \subsection{Topological Properties of Spectra}
 \begin{lmm}{}{} Let $k$ be an algebraically closed field. Let $V$ be an affine variety. Then the bijection given by the Hilbert's nullstellensatz $$V\cong\text{maxSpec}(k[V])$$ is a homeomorphism where $\text{maxSpec}(k[V])$ inherits the subspace topology of $\text{Spec}(k[V])$. 
 \end{lmm}
@@ -238,9 +239,9 @@ Suppose for a contradiction that $\emptyset\neq\bigcap_{i=1}^n\V^\text{S}(f_i)$,
 We now define the structure sheaf on a spectrum so that they form a locally ringed space. 
 
 \begin{defn}{Structure Sheaf}{}\\
-Let $R$ be a commutative ring and $\text{Spec}(R)$ the spectrum of $A$ as a topological space. Define the structure sheaf $$\mO_{\text{Spec}(R)}:\bold{Open}(\text{Spec}(R))\to\bold{Rings}$$ on $\text{Spec}(R)$ by the following. 
+Let $R$ be a commutative ring. Define the structure sheaf $$\mO_{\text{Spec}(R)}:\bold{Open}(\text{Spec}(R))\to\bold{Rings}$$ on $\text{Spec}(R)$ by the following. 
 \begin{itemize}
-\item For each $U\subseteq X$ open, define $$\mO_{\text{Spec}(R)}(U)=\left\{(s_p)_{p\in U}\in\prod_{p\in U}R_p\;\bigg{|}\;\substack{\forall p,\exists p\in\;U_p\subseteq U\text{ open and }a,f\in R\text{ s.t.}\\q\in U_p\text{ implies }f\notin q\text{ and }s_q=a/f\in A_q}\right\}$$
+\item For each $U\subseteq\text{Spec}(R)$ open, define $$\mO_{\text{Spec}(R)}(U)=\left\{(s_p)_{p\in U}\in\prod_{p\in U}R_p\;\bigg{|}\;\substack{\forall p,\exists p\in\;U_p\subseteq U\text{ open and }a,f\in R\text{ s.t.}\\q\in U_p\text{ implies }f\notin q\text{ and }s_q=a/f\in A_q}\right\}$$
 \item For $V\subseteq U$ an inclusion, the unique morphism $\mO_{\text{Spec}(R)}(U)\to\mO_{\text{Spec}(R)}(V)$ is the projection map $$\text{res}_V^U:\prod_{p\in U}R_p\to\prod_{p\in V}R_p$$
 \end{itemize}
 \end{defn}
@@ -699,12 +700,12 @@ and thus completing the proof (surjectivity given by composition with $X\to\text
 \end{proof}
 \end{prp}
 
-\begin{crl}{}{}\\
-Let $R$ be a commutative ring. Then $\text{Spec}(R)$ is the terminal object of $\bold{Sch}_R$. 
-\begin{proof}
-Let $X$ be a scheme over $R$. By the above, there is a natural isomorphism $$\Hom_{\bold{Sch}}(X,\text{Spec}(R))\cong\Hom_\bold{CRing}(R,\Gamma(X))\cong\Hom_{\bold{Alg}_R}(R,\Gamma(X))$$ Since $R$ is the initial object of $\bold{Alg}_R$, the hom set consists of one element. Hence $\text{Spec}(R)$ is the terminal object of $\bold{Sch}_R$. 
-\end{proof}
-\end{crl}
+\subsection{Relative Schemes}
+\begin{defn}{The Category of Relative Schemes}{}\\
+Let $S$ be a scheme. Define the category of schemes over $S$ to be the slice category $$\bold{Sch}_S=\bold{Sch}_{/S}$$
+\end{defn}
+
+Recall that fibered products is a name for pullbacks, and pullbacks are the same as products in the appropriate slice category. 
 
 \begin{prp}{}{} Let $X$ and $Y$ be two schemes over $S$. Then the fibered product $X\times_SY$ exists and is unique up to unique isomorphism. 
 \begin{proof}
@@ -716,6 +717,10 @@ We first prove the theorem for the case of affine schemes. Let $X=\text{Spec}(A)
 \end{align*}
 Thus we have proved that $\text{Spec}(A\otimes_CB)$ is the fiber product of $X$ and $Y$ over $S$. 
 \end{proof}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $R$ be a commutative ring. Then there is an adjunction $$\Gamma:\bold{Sch}_R\overset{\dashv}{\rightleftarrows}\bold{CAlg}_R:\text{Spec}$$
 \end{prp}
 
 \subsection{More on Projective Schemes}
@@ -743,67 +748,28 @@ Let $S=\bigoplus_{i=0}^\infty S_i$ be a commutative graded ring. Suppose that $S
 Let $X$ be a scheme. Let $n\in\N\setminus\{0\}$. Define the projective $n$-space over $X$ to be $$\Prj_X^n=\Prj_\Z^n\times_\Z X$$
 \end{defn}
 
-\subsection{Interpreting Elements of the Sheaf as Functions}
-\begin{defn}{The Residue Field}{}\\
-Let $X$ be a scheme. Let $p\in X$. Define the residue field of $p$ to be $$k(p)=\frac{\mO_{X,p}}{m}$$ where $m$ is the unique maximal ideal of $\mO_{X,p}$. 
-\end{defn}
-
-\begin{defn}{Values of Elements of a Sheaf}{}\\
-Let $(X,\mO_X)$ be a scheme. Let $U\subseteq X$ be an open set. Let $f\in\mO_X(U)$. Let $p\in U$. Define the value of $f$ at $p$ to be the image of $f$ in the morphism $$\mO_X(U)\to\mO_{X,p}\to k(p)$$ We denote the value by $f(p)$. 
-\end{defn}
-
-\begin{lmm}{}{}\\
-Let $(X,\mO_X)$ be a scheme. Let $U\subseteq X$ be an open set. Let $f\in\mO_X(U)$. Then the set $$S=\{p\in U\;|\;\text{ the value of }f\text{ at }p\text{ is non-zero }\}$$ is an open subset of $X$. 
-\begin{proof}\\
-Suppose that $p$ lies in the given set. This means that $[(f,U)]\in\mO_{X,p}$ is invertible. So there exists $[(g,V)]\in\mO_{X,p}$ such that $[(f,U)]\cdot[(g,V)]=[(1,X)]$. So there exists an open neighborhood $W_p\subseteq U\cap V$ of $p$ such that $f|_{W_p}\cdot g|_{W_p}=1$. Notice that for any $q\in W_p$, the same equation holds in $\mO_{X,q}$. Hence $S=\bigcup_{p\in S}W_p$ is an open set. 
-\end{proof}
-\end{lmm}
-
-\begin{defn}{Support of a Section}{}\\
-Let $(X,\mO_X)$ be a scheme. Let $f\in\mO_X(X)$ be a global section. Define the support of $f$ to be $$\text{Supp}(f)=\{p\in X\;|\;[(f,X)]\neq 0\in\mO_{X,p}\}$$
-\end{defn}
-
-\begin{lmm}{}{}\\
-Let $(X,\mO_X)$ be a scheme. Let $f\in\mO_X(X)$ be a global section. Then $\text{Supp}(f)\subseteq X$ is a closed subset. 
-\begin{proof}\\
-For any $p\notin\text{Supp}(f)$, we have that $[(f,X)]\in\mO_{X,p}$ is zero. So there exists a neighborhood $V_p\subseteq X$ of $p$ such that $f|_{V_p}=0$. Then for all $q\in V_p$, clearly $[(f,X)]=0\in\mO_{X,q}$. Then clearly $U=\bigcup_{p\in X}V_p$ is an open subset of $X$ that is the complement of $\text{Supp}(f)$. Hence $\text{Supp}(f)$ is a closed subset. 
-\end{proof}
-\end{lmm}
-
-Notice that $\{p\in X\;|\;f(p)=0\}$ is an open subset, while the support of $f$ is closed. They are two different notions. 
-
-\pagebreak
-\section{Points on A Scheme}
-\subsection{The Functor of Points}
+\subsection{Points on A Scheme}
 Let $k$ be a field. Recall the Yoneda Embedding to be the functor $$\bold{Sch}_k\to\Hom_{\bold{Cat}^{\text{op}}}(\bold{Sch}_k,\bold{Set})$$ given by the following data. 
 \begin{itemize}
 \item A scheme $X$ over $k$ is assigned to the functor $\Hom_{\bold{Sch}_k}(-,X):\bold{Sch}_k\to\bold{Set}$. 
 \item A morphism $f:X\to Y$ over $k$ is assigned to the natural transformation $\Hom_{\bold{Sch}_k}(-,Y)\to\Hom_{\bold{Sch}_k}(-,X)$ given by precomposition with $f$. 
 \end{itemize}
 
-The Yoneda lemma then says that this is a fully faithful functor. One can restrict the Yoneda embedding to the category of affine schemes, and using the equivalence of the category of finitely generated schemes of finite type over $k$ with the category of finitely generated $k$-algebras, we obtain the following series of definitions. 
-
-\begin{defn}{R-Points of a Scheme}{}\\
-Let $S$ be a scheme. Let $X,Z$ be schemes over $S$. Define the $Z$-points of $X$ to be $$X(Z)=\Hom_{\bold{Sch}_S}(Z,X)$$
-\end{defn}
+The Yoneda lemma then says that this is a fully faithful functor. Because schemes are patched together by affine schemes, a non-trivial statement says that the scheme can be recovered just by considering the Yoneda embedding restricted to affine schemes. 
 
 \begin{defn}{The Functor of Points}{}\\
-Let $S$ be a scheme. Let $X,Z$ be schemes over $S$. Define the functor $$\widetilde{X}:\bold{Sch}_S\to\bold{Set}$$ as follows. 
+Let $S$ be a scheme. Let $X$ be a scheme over $S$. Define the functor of points $$\widetilde{X}:\bold{AffSch}_S\to\bold{Set}$$ by the following data. 
 \begin{itemize}
-\item For a scheme $Z$ over $S$, $\widetilde{X}(Z)=X(Z)$ is the $Z$-points of $X$. 
-\item For a morphism of schemes $f:Z\to Y$, $X(f):X(Z)\to X(Y)$ is given by precomposition with $f$. 
+\item For an affine scheme $Z$ over $S$, we have $\widetilde{X}(Z)=\Hom_{\bold{Sch}_S}(Z,X)$. 
+\item For a morphism of schemes $f:Z\to Y$ over $S$, the morphism $\widetilde{X}(Y)\to\widetilde{X}(Z)$ is induced by precomposition with $f$. 
 \end{itemize}
 \end{defn}
 
-The Yoneda embedding implies the following. 
+\begin{prp}{}{}\\
+Let $S$ be a scheme. Let $X$ be a scheme over $S$. Then the functor $\widetilde{(-)}:\bold{Sch}_S\to\Hom_{\bold{Cat}}(\bold{AffSch}_S,\bold{Set})$ is fully faithful. 
+\end{prp}
 
-\begin{lmm}{}{}\\
-Let $S$ be a scheme. Then the Yoneda embedding $\widetilde{(-)}:\bold{Sch}_S\to\Hom_{\bold{Cat}}(\bold{Sch}_S,\bold{Set})$ is fully faithful. 
-\end{lmm}
-
-In other words, the $Z$ points of a scheme for all $Z$ determine the scheme itself. \\
-
-We now specialize it to the case where $R=k$ the base field. 
+If $S=\text{Spec}(R)$ is affine, then we can use the equivalence between $R$-algebras and affine schemes over $S$ to get a functor $$\widetilde{X}:\bold{CAlg}_R\to\bold{Set}$$ If $X=\text{Spec}(A)$ is also affine, then the functor of points collapses to $$\widetilde{\text{Spec}(A)}(\text{Spec}(B))=\Hom_{\bold{CAlg}_R}(A,B)$$
 
 \begin{eg}{}{}\\
 The $\C$-points of $\text{Spec}(\C[x])$ are in bijection with $\C$. 
@@ -822,14 +788,9 @@ Indeed, by the fully faithfulness of spec, we have $$\Hom_{\bold{Sch}}\left(\tex
 \end{eg}
 
 \begin{prp}{}{}\\
-Let $k$ be a field. Let $X$ be a scheme. Then there is a natural bijection $$X(k)\cong\{x\in X\;|\;\text{the canonical homomorphism }k\to k(x)\text{ is an isomorphism }\}$$
+Let $k$ be a field. Let $X$ be a scheme. Then there is a natural bijection $$\widetilde{X}(k)\cong\{x\in X\;|\;\text{the canonical homomorphism }k\to k(x)\text{ is an isomorphism }\}$$
 \end{prp}
 
-\begin{lmm}{}{}\\
-Let $k$ be an algebraically closed field. Let $X$ be a variety over $k$. Then there is a natural bijection $$X(k)\cong\{x\in X\;|\;x\text{ is a closed point of }X\}$$
-\end{lmm}
-
-\subsection{Generic Points and Function Fields}
 \begin{defn}{Generic Points}{}\\
 Let $X$ be a space. Let $Z\subseteq X$ be an irreducible closed subset. Let $p\in Z$. We say that $p$ is a generic point for $Z$ if $Z=\overline{\{p\}}$. 
 \end{defn}
@@ -859,20 +820,34 @@ For the second part of the statement, note that the map $p\mapsto\overline{\{p\}
 \end{proof}
 \end{lmm}
 
-\begin{defn}{Function Field of an Integral Scheme}{}\\
-Let $X$ be an integral scheme. Let $\nu$ be its unique generic point. Define the function field of $X$ to be $$k(X)=\mO_{X,\eta}$$
+\subsection{Interpreting Elements of the Sheaf as Functions}
+\begin{defn}{The Residue Field}{}\\
+Let $X$ be a scheme. Let $p\in X$. Define the residue field of $p$ to be $$\kappa(p)=\frac{\mO_{X,p}}{m}$$ where $m$ is the unique maximal ideal of $\mO_{X,p}$. 
+\end{defn}
+
+\begin{defn}{Values of Elements of a Sheaf}{}\\
+Let $(X,\mO_X)$ be a scheme. Let $U\subseteq X$ be an open set. Let $f\in\mO_X(U)$. Let $p\in U$. Define the value of $f$ at $p$ to be the image of $f$ in the morphism $$\mO_X(U)\to\mO_{X,p}\to\kappa(p)$$ We denote the value by $f(p)$. 
 \end{defn}
 
 \begin{lmm}{}{}\\
-Let $X$ be an integral scheme. Then the following are true. 
-\begin{itemize}
-\item $k(X)$ is a field. 
-\item If $\text{Spec}(R)\cong U\subseteq X$ is a non-empty affine open subset of $X$, then there is a natural isomorphism of rings $k(X)\cong\text{Frac}(R)$ given by the localization map. 
-\end{itemize}
+Let $(X,\mO_X)$ be a scheme. Let $U\subseteq X$ be an open set. Let $f\in\mO_X(U)$. Then the set $$S=\{p\in U\;|\;\text{ the value of }f\text{ at }p\text{ is non-zero }\}$$ is an open subset of $X$. 
 \begin{proof}\\
-The first point follows from the second point. Let $\varphi:U\overset{\cong}{\to}\text{Spec}(R)$ be the scheme isomorphism. The ring homomorphism is given as follows. Then by 2.4.10 in Sheaf Theory, we have natural isomorphisms $$\mO_{X,\eta}\cong\left(\mO_X|_{\text{Spec}(R)}\right)_\eta\cong\mO_{\text{Spec}(R),\varphi(\eta)}\cong R_{\varphi(\eta)}$$ where the last isomorphism follows from 1.3.3. Then there is a natural localization map $\mO_{X,\eta}\cong R_{\varphi(\eta)}\to\text{Frac}(R)$. Now since $X$ is integral, $R\cong\mO_X(\text{Spec}(R))$ is an integral domain and so must have a unique generic point that is the zero ideal $(0)$. Since $\varphi(\eta)$ is also a generic point of $\text{Spec}(R)$, we must have $\varphi(\eta)=(0)$. Then $R_{\varphi(\eta)}=R_{(0)}=\text{Frac}(R)$ so our given map is an isomorphism. 
+Suppose that $p$ lies in the given set. This means that $[(f,U)]\in\mO_{X,p}$ is invertible. So there exists $[(g,V)]\in\mO_{X,p}$ such that $[(f,U)]\cdot[(g,V)]=[(1,X)]$. So there exists an open neighborhood $W_p\subseteq U\cap V$ of $p$ such that $f|_{W_p}\cdot g|_{W_p}=1$. Notice that for any $q\in W_p$, the same equation holds in $\mO_{X,q}$. Hence $S=\bigcup_{p\in S}W_p$ is an open set. 
 \end{proof}
 \end{lmm}
+
+\begin{defn}{Support of a Section}{}\\
+Let $(X,\mO_X)$ be a scheme. Let $f\in\mO_X(X)$ be a global section. Define the support of $f$ to be $$\text{Supp}(f)=\{p\in X\;|\;[(f,X)]\neq 0\in\mO_{X,p}\}$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $(X,\mO_X)$ be a scheme. Let $f\in\mO_X(X)$ be a global section. Then $\text{Supp}(f)\subseteq X$ is a closed subset. 
+\begin{proof}\\
+For any $p\notin\text{Supp}(f)$, we have that $[(f,X)]\in\mO_{X,p}$ is zero. So there exists a neighborhood $V_p\subseteq X$ of $p$ such that $f|_{V_p}=0$. Then for all $q\in V_p$, clearly $[(f,X)]=0\in\mO_{X,q}$. Then clearly $U=\bigcup_{p\in X}V_p$ is an open subset of $X$ that is the complement of $\text{Supp}(f)$. Hence $\text{Supp}(f)$ is a closed subset. 
+\end{proof}
+\end{lmm}
+
+Notice that $\{p\in X\;|\;f(p)=0\}$ is an open subset, while the support of $f$ is closed. They are two different notions. 
 
 \pagebreak
 \section{Topological Properties of Schemes}
@@ -978,6 +953,44 @@ If $R$ is an integral domain, then by 1.2.6, $\text{Spec}(R)$ is irreducible. Si
 Let $k$ be an algebraically closed field. Let $X,Y$ be integral schemes over $k$. Then $X\times_kY$ is integral. 
 \end{prp}
 
+\subsection{Rational Functions on a Scheme}
+\begin{defn}{The Sheaf of Total Quotient Ring}{}\\
+Let $X$ be a scheme. Define the sheaf of total quotient rings $\mK_X$ to be the sheafification of the sheaf $Q_X$ given by the following data. 
+\begin{itemize}
+\item For each open subset $U\subseteq X$, we have $Q_X(U)=Q(\mO_X(U))$. 
+\item For each inclusion of open sets $V\subseteq U$, the map $Q(\mO_X(U))\to Q(\mO_X(V))$ is the map induced by the universal property of localization. 
+\end{itemize}
+\end{defn}
+
+The generic points corresponding to the irreducible components (those maximal among irreducible closed subsets) play a special role. 
+
+\begin{prp}{}{}\\
+Let $X$ be a scheme. Then the following are true. 
+\begin{itemize}
+\item Let $p\in X$. Then we have $\mK_{X,p}=Q(\mO_{X,p})$. 
+\item Let $Z\subseteq X$ be an irreducible component of $X$. Let $\eta$ be its corresponding generic point. Then we have $\mK_{X,\eta}=\mO_{X,\eta}$. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $X$ be a reduced scheme. Let $Z\subseteq X$ be an irreducible component of $X$. Let $\eta$ be its corresponding generic point. Then the following are true. 
+\begin{itemize}
+\item $\mK_{X,\eta}$ is a field. 
+\item We have $\mK_{X,\eta}=\mK(Z)$. 
+\end{itemize}
+\end{prp}
+
+\begin{defn}{Function Field of an Integral Scheme}{}\\
+Let $X$ be an integral scheme. Let $\eta$ be its unique generic point. Define the function field of $X$ to be $$k(X)=\mK_X(X)=\mK_{X,\eta}=\mO_{X,\eta}$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $X$ be an integral scheme. If $\text{Spec}(R)\cong U\subseteq X$ is a non-empty affine open subset of $X$, then there is a natural isomorphism of rings $k(X)\cong\text{Frac}(R)$ given by the localization map. 
+\begin{proof}\\
+Let $\varphi:U\overset{\cong}{\to}\text{Spec}(R)$ be the scheme isomorphism. The ring homomorphism is given as follows. Then by 2.4.10 in Sheaf Theory, we have natural isomorphisms $$\mO_{X,\eta}\cong\left(\mO_X|_{\text{Spec}(R)}\right)_\eta\cong\mO_{\text{Spec}(R),\varphi(\eta)}\cong R_{\varphi(\eta)}$$ where the last isomorphism follows from 1.3.3. Then there is a natural localization map $\mO_{X,\eta}\cong R_{\varphi(\eta)}\to\text{Frac}(R)$. Now since $X$ is integral, $R\cong\mO_X(\text{Spec}(R))$ is an integral domain and so must have a unique generic point that is the zero ideal $(0)$. Since $\varphi(\eta)$ is also a generic point of $\text{Spec}(R)$, we must have $\varphi(\eta)=(0)$. Then $R_{\varphi(\eta)}=R_{(0)}=\text{Frac}(R)$ so our given map is an isomorphism. 
+\end{proof}
+\end{lmm}
+
 \subsection{Noetherian Schemes}
 \begin{defn}{Locally Noetherian Schemes}{}\\
 Let $X$ be a scheme. We say that $X$ is locally Noetherian if there exists an open affine cover $\{U_i=\text{Spec}(A_i)\;|\;i\in I\}$ of $X$ such that each $A_i$ is Noetherian. 
@@ -1016,12 +1029,16 @@ Let $k$ be a field. Let $X$ be a scheme over $k$. We say that $X$ is geometrical
 \end{defn}
 
 \begin{prp}{}{}\\
-Let $k$ be a field. Let $X$ be a scheme over $k$. Then the following are true. 
+Let $k$ be a field. Let $X$ be a scheme over $k$. Then the following are equivalent. 
 \begin{itemize}
 \item $X$ is geometrically reduced. 
 \item $X\times_kk_p$ is reduced, where $k_p$ is the perfect closure of $k$. 
 \item For all field extensions $K/k$, $X\times_kK$ is reduced. 
 \end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $X$ be a scheme over $k$. If $X$ is geometrically reduced, then $X$ is reduced. 
 \end{prp}
 
 \begin{defn}{Geometrically Connected}{}
@@ -1203,8 +1220,8 @@ Let $X,Y$ be schemes. Let $f:X\to Y$ be a morphism. We say that $f$ is of finite
 
 It is easy to see that we have the following results. 
 \begin{itemize}
-\item Let $k$ be a field. There is an equivalence of categories between the category of finitely generated $k$-algebras and the category of schemes of finite type over $k$ given by the spec functor and the global section functor. 
-\item The restricted Yoneda embedding from the category of schemes of finite type over $k$ to the category of functors $$\Hom_{\bold{Cat}}(\bold{FGAlg}_k,\bold{Set})$$ is fully faithful. 
+\item Let $R$ be a commutative ring. Then the adjunction $\Gamma:\bold{Sch}_R\overset{\dashv}{\rightleftarrows}\bold{CAlg}_R:\text{Spec}$ restricts to an adjunction between schemes of finite type over $R$ and finitely generated algebras over $R$. 
+\item Let $R$ be a commutative ring. The fully faithful functor $\widetilde{(-)}:\bold{Sch}_R\to\Hom_{\bold{Cat}}(\bold{CAlg}_R,\bold{Set})$ restricts to a fully faithful functor from schemes of finite types to $\Hom_{\bold{Cat}}(\bold{FGCAlg}_R,\bold{Set})$. 
 \end{itemize}
 
 \begin{lmm}{}{}\\
@@ -1490,6 +1507,10 @@ Let $k$ be a field. Let $X$ be a variety over $k$. Let $x\in X$. Then the follow
 \end{itemize}
 \end{lmm}
 
+\begin{crl}{}{}\\
+Let $k$ be an algebraically closed field. Let $X$ be a variety over $k$. Then there is a natural bijection $$X(k)\cong\{x\in X\;|\;x\text{ is a closed point of }X\}$$
+\end{crl}
+
 \begin{defn}{The Category of Varieties}{} Define the category of varieties $\text{Var}_k$ over a field $k$ as follows. 
 \begin{itemize}
 \item The objects are varieties $X$ over $k$
@@ -1544,6 +1565,10 @@ Let $k$ be a field. Let $X$ be an affine variety over $k$. If $X$ is complete, t
 \begin{prp}{}{}\\
 Let $k$ be a field. Let $X$ be a variety over $k$. If $X$ is projective, then $X$ is complete. 
 \end{prp}
+
+\pagebreak
+
+\part{Modules and Bundles over a Scheme}
 
 \pagebreak
 \section{Sheaf of Modules over a Scheme}
@@ -1655,7 +1680,7 @@ Let $R$ be a commutative ring. Then $\widetilde{(-)}$ and $\Gamma$ are exact fun
 \end{itemize}
 \end{prp}
 
-\begin{lmm}{}{} Let $S$ be a graded ring and let $M$ be a graded module over $S$. Then $\widetilde{M}$ is a $\mO_{\text{Proj}(S)}$-module. Moreover, if $S$ is Noetherian, then $\widetilde{M}$ is a coherent $\mO_{\text{Proj}(S)}$-module. 
+\begin{lmm}{}{} Let $S$ be a graded ring and let $M$ be a graded module over $S$. Then $\widetilde{M}$ is a $\mO_{\text{Proj}(S)}$-module. 
 \end{lmm}
 
 For a graded ring $S$, recall that we can shift the grading of $S$ up and down, and it will still be a graded ring. This is the shifted $S(n)$ where $n$ denotes shifting up $n$ times. (Note that this is not true for algebras because $S$ is an algebra over $S_0$, if the grading is shifted then $S(n)$ is an algebra over $S(n)_n$. 
@@ -1698,11 +1723,78 @@ Let $X$ be a space. Let $\mC$ be an algebraic category. Then there is an equival
 
 Thus it suffices to define the values of a sheaf or a morphism of sheaves only on a distinguished base of $X$. 
 
+\subsection{The Support of a Module}
+Let $R$ be a commutative ring. Let $M$ be a finitely generated $R$-module. Let $P_1,\dots,P_k$ be the complete list of distinct minimal prime ideals over $\text{Ann}_R(M)$. Recall that the support of the module $M$ is given by $$\text{Supp}(M)=\bigcup_{i=1}^k\V^S(P_i)$$ Now let $P_1,\dots,P_k$ be the prime ideals appearing in the disassembly of $M$. Then we have the relation $$\text{Ass}(M)\subseteq\{P_1,\dots,P_k\}\subseteq\text{Supp}(M)=\V^S(\text{Ann}_R(M))$$ Moreover, the minimal primes in the four sets coincide. Here we explain the geometric intuition for these notions. \\
+
+By definition, $\text{Supp}(M)$ is the set of points of $\text{Spec}(R)$ for which $\widetilde{M}_P=M_P$ is non-zero. Thinking of $\widetilde{M}$ as a ring of functions on $\text{Spec}(R)$, this is the same as saying it suffices to define the functions for points in the support. The fact that $\text{Supp}(M)=\V^S(\text{Ann}_R(M))$ means that $\text{Supp}(M)$ is a closed subscheme itself. 
+
+\begin{prp}{}{}\\
+Let $R$ be a commutative ring. Let $M$ be a finitely generated $R$-module. If $R$ is Noetherian, then we have $$\text{Supp}(M)=\overline{\text{Ass}(M)}$$
+\end{prp}
+
+Recall that the associated primes record the zero divisors of $M$ if $R$ is Noetherian: $$\bigcup_{P\in\text{Ass}(M)}P=\{r\in R\;|\;r\text{ is a zero divisor of }M\}$$
+
+\begin{prp}{}{}\\
+Let $R$ be a Noetherian commutative ring. Let $M$ be a finitely generated $R$-module. Then the irreducible components of $\text{Supp}(M)$ is given by $$\text{Supp}(M)=\bigcup_{P\in\text{Ass}(M),P\text{ is minimal }}\V^S(P)$$
+\end{prp}
+
+What about the non minimal primes? Those are the embedded primes. 
+
+\begin{defn}{Embedded Primes}{}\\
+Let $R$ be a Noetherian commutative ring. Let $M$ be a finitely generated $R$-module. Let $P\in\text{Ass}(M)$. We say that $P$ is an embedded prime if $P$ is not minimal in $\text{Ass}(M)$. 
+\end{defn}
+
+Intuition: The only elements of a ring that an embedded prime can annihilate are nilpotents. So if a ring is reduced, it has no embedded primes. 
+
+\subsection{The Relative Spec and Proj Functors}
+\begin{defn}{The Relative Spec Functor}{}\\
+Let $Y$ be a scheme. Let $\mA$ be a quasi-coherent sheaf of $\mO_Y$-algebras. Define the relative spec of $\mF$ to be the unique scheme $X=\text{Spec}_Y(\mA)$ given by the following gluing data. 
+\begin{itemize}
+\item The affine schemes $\text{Spec}(\mA(V))$ for each affine open subsets $V\subseteq Y$. 
+\item For affine open subsets $V_i,V_j\subseteq Y$, an open subset $V_{ij}=\text{Spec}(\mA(V_i\cap V_j))$. 
+\item The isomorphisms $V_{ij}\cong V_{ji}$ given by the identity. 
+\end{itemize}
+together with the morphism $f:X\to Y$ given by the gluing data $\text{Spec}(\mA(V))\to Y$ induced by $\mO_Y(V)\to\mA(V)$. 
+\end{defn}
+
+\begin{defn}{The Relative Proj Functor}{}\\
+Let $Y$ be a scheme. Let $\mS=\bigoplus_{n\geq 0}\mS_n$ be a quasi-coherent sheaf of graded $\mO_Y$-algebras. Define the relative proj of $\mS$ to be the unique scheme $X=\text{Proj}_Y(\mS)$ given by the following gluing data.
+\begin{itemize}
+\item The schemes $\text{Proj}(\mS(V))$ for each affine open subset $V\subseteq Y$.
+\item For affine open subsets $V_i,V_j\subseteq Y$, an open subset $V_{ij}=\text{Proj}(\mS(V_i\cap V_j))$.
+\item The isomorphisms $V_{ij}\cong V_{ji}$ given by the identity.
+\end{itemize}
+together with the morphism $f:X\to Y$ given by the gluing data $\text{Proj}(\mS(V))\to Y$ induced by $\mO_Y(V)\to\mS_0(V)$.
+\end{defn}
+
+\pagebreak
+\section{Types of Sheaves of Modules}
+\subsection{Finitely Presented and Generated Sheaves}
+\begin{prp}{}{}\\
+Let $(X,\mO_X)$ be a scheme. Let $\mF$ be a sheaf of $\mO_X$-modules. Then the following are equivalent. 
+\begin{itemize}
+\item $\mF$ is a sheaf of finite type
+\item For all affine open subschemes $U$, $\mF(U)$ is a finitely generated $\mO_X(U)$-module. 
+\item There exists an affine open cover $\{U_i\;|\;i\in I\}$ of $X$ such that $\mF(U_i)$ is a finitely generated $\mO_X(U_i)$-module. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $(X,\mO_X)$ be a scheme. Let $\mF$ be a sheaf of $\mO_X$-modules. Then the following are equivalent. 
+\begin{itemize}
+\item $\mF$ is finitely presented. 
+\item For all affine open subschemes $U$, $\mF(U)$ is a finitely presented $\mO_X(U)$-module. 
+\item There exists an affine open cover $\{U_i\;|\;i\in I\}$ of $X$ such that $\mF(U_i)$ is a finitely presented $\mO_X(U_i)$-module. 
+\end{itemize}
+\end{prp}
+
 \subsection{Quasi-Coherent Modules}
-\begin{prp}{}{} Let $(X,\mO_X)$ be a scheme. Let $\mF$ be a $\mO_X$-module. Then the following are equivalent. 
+\begin{prp}{}{}\\
+Let $(X,\mO_X)$ be a scheme. Let $\mF$ be a sheaf of $\mO_X$-modules. Then the following are equivalent. 
 \begin{itemize}
 \item $\mF$ is quasi-coherent. 
-\item For all affine open subschemes $U$, $\mF|_U\cong\widetilde{M}$ for some $\mO_X(U)$-module $M$. 
+\item For all affine open subschemes $U$, we have $\mF(U)\cong\widetilde{M}$ for some $\mO_X(U)$-module $M$. 
+\item There exists an affine open cover $\{U_i\;|\;i\in I\}$ of $X$ such that $\mF(U_i)\cong\widetilde{M_i}$ for some $\mO_X(U)$-module $M_i$. 
 \end{itemize}
 \end{prp}
 
@@ -1726,31 +1818,13 @@ Let $(X,\mO_X)$ be scheme. Let $\mF$ be sheaf of $\mO_X$-modules. Then $\mF$ is 
 given by the universal property of localization is an isomorphism. 
 \end{prp}
 
-\subsection{Sheaves of Finite Type and Finitely Presented}
 \begin{prp}{}{}\\
-Let $(X,\mO_X)$ be a scheme. Let $\mF$ be a sheaf of $\mO_X$-modules. Then the following are equivalent. 
-\begin{itemize}
-\item $\mF$ is a sheaf of finite type
-\item For all affine open subschemes $U$, $\mF(U)$ is a finitely generated $\mO_X(U)$-module. 
-\item There exists an affine open cover $\{U_i\;|\;i\in I\}$ of $X$ such that $\mF(U_i)$ is a finitely generated $\mO_X(U_i)$-module. 
-\end{itemize}
+Let $R$ be a commutative ring. Then there is an equivalence of categories $$\bold{Mod}_R\cong\bold{QCoh}_{\mO_{\text{Spec}(R)}}$$ given by $\widetilde{(-)}$ and $\Gamma$. 
 \end{prp}
 
-\begin{defn}{Finitely Presented Sheaves}{}\\
-Let $(X,\mO_X)$ be a scheme. Let $\mF$ be a sheaf of $\mO_X$-modules. We say that $\mF$ is a finitely presented sheaf if for all affine open subschemes $U$, $\mF(U)$ is a finitely presented $\mO_X(U)$-module. 
-\end{defn}
-
 \begin{prp}{}{}\\
-Let $(X,\mO_X)$ be a scheme. Let $\mF$ be a sheaf of $\mO_X$-modules. Then the following are equivalent. 
-\begin{itemize}
-\item $\mF$ is finitely presented. 
-\item There exists an affine open cover $\{U_i\;|\;i\in I\}$ of $X$ such that $\mF(U_i)$ is a finitely presented $\mO_X(U_i)$-module. 
-\end{itemize}
+Let $S$ be a graded ring. There is an adjunction given by $$\widetilde{(-)}:\bold{GrMod}_S\rightleftarrows\bold{QCoh}_{\mO_{\text{Proj}(S)}}:\Gamma_\bullet$$ Explicitly, there is a natural isomrophism $$\Hom_{\bold{QCoh}_{\mO_{\text{Proj}(S)}}}(\widetilde{M},\mF)\cong\Hom_{\bold{GrMod}_S}(M,\Gamma_\bullet(\mF))$$ for $M$ a graded $S$-module and $\mF$ a $\mO_{\text{Proj}(S)}$-module. 
 \end{prp}
-
-\begin{lmm}{}{}\\
-Let $(X,\mO_X)$ be a scheme. Let $\mF$ be a sheaf of $\mO_X$-modules. If $\mF$ is finitely presented, then $\mF$ is finitely generated. 
-\end{lmm}
 
 \subsection{Coherent Modules}
 \begin{prp}{}{}\\
@@ -1761,90 +1835,132 @@ Let $(X,\mO_X)$ be a scheme. Let $\mF$ be a sheaf of $\mO_X$-modules. Then the f
 \item There exists an affine open cover $\{U_i\;|\;i\in I\}$ of $X$ such that $\mF(U_i)$ is a coherent $\mO_X(U_i)$-module. 
 \end{itemize}
 \end{prp}
-
-\begin{lmm}{}{}\\
-Let $(X,\mO_X)$ be a scheme. Let $\mF$ be a sheaf of $\mO_X$-modules. If $\mF$ is coherent, then $\mF$ is finitely presented. 
-\end{lmm}
-
 \begin{prp}{}{}\\
-Let $(X,\mO_X)$ be a locally Noetherian scheme. Let $\mF$ be a sheaf of $\mO_X$-modules. Then $\mF$ is a coherent sheaf if and only if $\mF$ is quasi-coherent and the $\mO_X(U)$-modules $M$ for $\mF|_U\cong\widetilde{M}$ for $U$ an affine open subset can be chosen so that they are finitely generated. 
+Let $(X,\mO_X)$ be a locally Noetherian scheme. Then $\mO_X$ is coherent. 
 \end{prp}
 
-\begin{prp}{}{}\\
-Let $(X,\mO_X)$ be a locally Noetherian scheme. Let $\mF$ be a sheaf of $\mO_X$-modules. Then the following are equivalent. 
+From sheaf theory, we know that if $\mO_X$ is coherent, then the following are equivalent for $\mF\in\bold{Mod}_{\mO_X}$. 
 \begin{itemize}
 \item $\mF$ is of finite type. 
 \item $\mF$ is finitely presented. 
 \item $\mF$ is a coherent sheaf. 
 \end{itemize}
-\end{prp}
 
-\subsection{Adjunction Formulas}
-\begin{prp}{}{} Let $R$ be a commutative ring. Then there is an equivalence of categories $$\bold{Mod}_R\cong\bold{QCoh}_{\mO_{\text{Spec}(R)}}$$ given by $\widetilde{(-)}$ and $\Gamma$. 
-\end{prp}
-
-\begin{prp}{}{} Let $R$ be a Noetherian commutative ring. Then there is an equivalence of categories $$\bold{Coh}_R\cong\bold{Coh}_{\mO_{\text{Spec}(R)}}$$ given by $\widetilde{(-)}$ and $\Gamma$. 
+\begin{prp}{}{}\\
+Let $X$ be a locally Noetherian scheme. Then $\bold{Coh}_{\mO_X}$ is an abelian subcategory of $\bold{QCoh}_{\mO_X}$. 
 \end{prp}
 
 \begin{prp}{}{}\\
-Let $S$ be a graded ring. There is an adjunction given by $$\widetilde{(-)}:\bold{GrMod}_S\rightleftarrows\bold{QCoh}_{\mO_{\text{Proj}(S)}}:\Gamma_\bullet$$ Explicitly, there is a natural isomrophism $$\Hom_{\bold{QCoh}_{\mO_{\text{Proj}(S)}}}(\widetilde{M},\mF)\cong\Hom_{\bold{GrMod}_S}(M,\Gamma_\bullet(\mF))$$ for $M$ a graded $S$-module and $\mF$ a $\mO_{\text{Proj}(S)}$-module. 
+Let $X$ be a locally Noetherian scheme. Then every quasi-coherent sheaf is a filtered colimit of coherent sheaves. 
 \end{prp}
-
-We summarize all the adjunction formulas and equivalence of categories in the following list. 
-\begin{itemize}
-\item There is an adjunction $$\Gamma:\bold{Sch}\overset{\dashv}{\rightleftarrows}\bold{CRing}:\text{Spec}$$ It restricts to an equivalence of categories $$\bold{Sch}\cong\bold{CRing}$$
-\item Let $R$ be a commutative ring. Then there is an adjunction $$\widetilde{(-)}:\bold{Mod}_R\overset{\dashv}{\rightleftarrows}\bold{Mod}_{\mO_{\text{Spec}(R)}}:\Gamma$$ It restricts to equivalence of categories $$\bold{Mod}_R\cong\bold{QCoh}_{\mO_{\text{Spec}(R)}}\;\;\;\;\text{ and }\;\;\;\;\bold{Coh}_R\cong\bold{Coh}_{\mO_{\text{Spec}(R)}}$$
-\item Let $S$ be a commutative graded ring. Then there is an adjunction $$\widetilde{(-)}:\bold{GrMod}_S\rightleftarrows\bold{QCoh}_{\mO_{\text{Proj}(S)}}:\Gamma_\bullet$$
-\end{itemize}
-
-\subsection{Connections to Associated Primes}
-We recall some notions from Commutative Algebra 1. Let $R$ be a commutative ring. Let $M$ be an $R$-module. 
-\begin{itemize}
-\item The support of $M$ is $$\text{Supp}(M)=\{P\in\text{Spec}(R)\;|\;M_P\neq 0\}$$
-\end{itemize}
-
-We recall the following facts: 
-\begin{itemize}
-\item If $M$ is finitely generated, then $$\text{Supp}(M)=\V^\text{S}(\text{Ann}_R(M))$$
-\item If $R$ is Noetherian, then $$\bigcup_{P\in\text{Ass}(M)}P=\{r\in R\;|\;r\text{ is a zero divisor of }M\}\cup\{0\}$$
-\end{itemize}
-
-Recall from Commutative Algebra 1 6.2.3 that i
 
 \begin{prp}{}{}\\
-Let $R$ be a Noetherian commutative ring. Let $M$ be a finitely generated $R$-module. Then $$\text{Supp}(M)=\overline{\text{Ass}_R(M)}$$
+Let $R$ be a Noetherian commutative ring. Then there is an equivalence of categories $$\bold{Coh}_R\cong\bold{Coh}_{\mO_{\text{Spec}(R)}}$$ given by $\widetilde{(-)}$ and $\Gamma$. 
 \end{prp}
 
-\subsection{Vector Bundles over a Scheme}
+\pagebreak
+\section{Vector Bundles over a Scheme}
+\subsection{Vector Bundles and Sections}
 \begin{defn}{Vector Bundles}{}\\
-Let $k$ be a field. Let $E,X$ be schemes. Let $f:X\to Y$ be a map. We say that $f$ is a vector bundle if the following are true. 
+Let $E,X$ be schemes. Let $\pi:E\to X$ be a map. We say that $\pi$ is a vector bundle of rank $n$ if the following are true. 
 \begin{itemize}
-\item $f$ is surjective. 
-\item There exists a collection of isomorphisms $$\{(U_i\subseteq B,\phi_i:f{-1}(U_i)\to U_i\times\A_k^n)\}$$ called local trivialization charts such that $B=\bigcup_{i\in I}U_i$ and the following diagram commutes: \\
+\item $\pi$ is surjective. 
+\item There exists a collection of isomorphisms $$\{(U_i\subseteq B,\phi_i:\pi^{-1}(U_i)\overset{\cong}{\longrightarrow} \A_{U_i}^n)\}$$ called local trivialization charts such that $B=\bigcup_{i\in I}U_i$ and the following diagram commutes: \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
-	{p^{-1}(U_i)} && {U_i\times\A_k^n} \\
+	{p^{-1}(U_i)} && {\A_{U_i}^n} \\
 	& U_i
 	\arrow["{\phi_i}", from=1-1, to=1-3]
 	\arrow["p"', from=1-1, to=2-2]
 	\arrow["\pi", from=1-3, to=2-2]
 \end{tikzcd}}\\
-\item For each $b\in B$, the map $\phi_i|_{p^{-1}(b)}:p^{-1}(b)\to\{b\}\times\A_k^n$ is a linear isomorphism. 
+\item For each pair $i,j\in I$ and each open affine subscheme $V=\text{Spec}(A)\subseteq U_i\cap U_j$, the $A$-algebra automorphism $\theta_V\in\text{Aut}_A(A[x_1,\dots,x_n])$ corresponding to $$\phi_i|_{\pi^{-1}(V)}\circ\left(\phi_j|_{\pi^{-1}(V)}\right)^{-1}:\A_V^n\to\A_V^n$$ is of the form $$\theta_V(x_i)=\sum_{j=1}^na_{ij}x_j$$
 \end{itemize}
 \end{defn}
 
-\begin{defn}{Transition Functions}{}\\
-Let $k$ be a field. Let $p:E\to X$ be a vector bundle over $k$. Let $(U_\alpha,\phi_\alpha)$ and $(U_\beta,\phi_\beta)$ be local trivialization charts. Define the transition function $g_{\alpha,\beta}:U_\alpha\cap U_\beta\to\text{GL}(n,k)$ by $$x\mapsto\phi_\beta\circ\phi_\alpha^{-1}(x,-):k^n\to k^n$$
+Note: The topological definition does not directly translate over because every point of a topological space $X$ has the same value field and a continuous map is completely determined by its value at each point. For schemes, each point does not have a fixed residue field, even if the scheme lies over a field. Moreover, points do not determine morphism of schemes. The fix is to instead of checking pointwise linear isomorphism, we check it on all possible affine open sets of the intersections. \\
+
+If $E$ and $X$ are $k$-schemes, then we have $\A_{U_i}^n=U_i\times_k\A_k^n$ so the definition looks more familiar to the topological case. 
+
+\begin{prp}{}{}\\
+Let $E,X$ be schemes. Let $\pi:E\to X$ be a map. Then $\pi$ is a vector bundle if and only if the following are true. 
+\begin{itemize}
+\item $\pi$ is surjective. 
+\item There exists a collection of isomorphisms $$\{(U_i\subseteq B,\phi_i:\pi^{-1}(U_i)\overset{\cong}{\longrightarrow} \A_{U_i}^n)\}$$ called local trivialization charts such that $B=\bigcup_{i\in I}U_i$ and the following diagram commutes: \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{p^{-1}(U_i)} && {\A_{U_i}^n} \\
+	& U_i
+	\arrow["{\phi_i}", from=1-1, to=1-3]
+	\arrow["p"', from=1-1, to=2-2]
+	\arrow["\pi", from=1-3, to=2-2]
+\end{tikzcd}}\\
+\item For each pair $i,j\in I$, there exists $g_{ij}\in\text{GL}(n,\mO_X(U_i\cap U_j))$ called transition functions such that the following diagram commutes: \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\A_{U_i\cap U_j}^n} && {\A_{U_i\cap U_j}^n} \\
+	& {\pi^{-1}(U_i\cap U_j)}
+	\arrow["{\text{id}\times g_{ij}}", from=1-1, to=1-3]
+	\arrow["{\phi_i}", from=2-2, to=1-1]
+	\arrow["{\phi_j}"', from=2-2, to=1-3]
+\end{tikzcd}}\\
+\end{itemize}
+\end{prp}
+
+\begin{lmm}{}{}\\
+Let $E,X$ be schemes. Let $\pi:E\to X$ be a vector bundle. Let $\{(U_i,\phi_i)\;|\;i\in I\}$ be the local trivialization charts. Then the following are true. 
+\begin{itemize}
+\item $g_{ik}=g_{jk}\circ g_{ij}$ in $U_i\cap U_j\cap U_k$. 
+\item $g_{ii}=1_{\text{GL}(n,\mO_X(U_i))}$. 
+\end{itemize}
+\end{lmm}
+
+\begin{defn}{Morphisms of Vector Bundles}{}\\
+Let $E,F,X$ be schemes. Let $\pi_E:E\to X$ and $\pi_F:F\to X$ be vector bundles of rank $n$ and $m$ respectively. Let $\{(U_i,\phi_i)\;|\;i\in I\}$ and $\{(U_i,\psi_i)\;|\;i\in I\}$ be local trivialization charts of $E$ and $F$ respectively with the same cover. Let $f:E\to F$ be a morphism over $X$. We say that $f$ is a morphism of vector bundles if one of the following conditions are true. 
+\begin{itemize}
+\item For any open affine subset $V=\text{Spec}(A)\subseteq U_i$, the map of $A$-algebras $\tau_V:A[y_1,\dots,y_m]\to A[x_1,\dots,x_n]$ corresponding to $$\psi_i|_{\pi_F^{-1}(V)}\circ f\circ \phi_i|_{\pi_E^{-1}(V)}:\A_V^n\to\A_V^m$$ is of the form $$\tau_V(y_i)=\sum_{j=1}^nh_{ij}x_j$$
+\item We have $$\psi_i\circ f\circ\phi_i^{-1}=\text{id}_{U_i}\times h_i:U_i\times\A^n\to U_i\times\A^m$$ for some $h_i\in M_{m\times n}(\mO_X(U_i))$. Moreover, we have $$g_{ij}^F\cdot h=h\cdot g_{ij}^E$$ for all $i,j\in I$. 
+\end{itemize}
 \end{defn}
 
-In other words, ,we have $$\phi_\beta\circ\phi_\alpha^{-1}(x,v)=(x,g_{\alpha,\beta}(x)(v))$$
-
-\begin{defn}{}{}\\
-Map of vector bundles
+\begin{defn}{Isomorphism of Vector Bundles}{}\\
+Let $E,F,X$ be schemes. Let $\pi_E:E\to X$ and $\pi_F:F\to X$ be vector bundles. Let $f:E\to F$ be a morphism. We say that $f$ is an isomorphism if there exists a morphism $g:F\to E$ such that $$g\circ f=\text{id}_E\;\;\;\text{ and }\;\;\;f\circ g=\text{id}_F$$
 \end{defn}
 
-\begin{defn}{}{}
-Associated locally free sheaf of vb
+\begin{prp}{}{}\\
+Let $E,F,X$ be schemes. Let $\pi_E:E\to X$ and $\pi_F:F\to X$ be vector bundles of rank $n$. Let $f:E\to F$ be a morphism with local matrices $\{h_i\;|\;i\in I\}$. Then $f$ is an isomorphism if and only if $h_i\in\text{GL}(n,\mO_X(U_i))$. 
+\end{prp}
+
+\begin{defn}{The Category of Vector Bundles}{}\\
+Let $X$ be a scheme. Let $n\in\N$. Define the category of vector bundles $$\bold{Vect}_n(X)$$ to consist of the following data. 
+\begin{itemize}
+\item The objects are the rank $n$ vector bundles over $X$. 
+\item The morphisms are the morphisms of vector bundles. 
+\item Composition is given by the composition of morphisms of schemes. 
+\end{itemize}
 \end{defn}
+
+There is a one to one correspondence between vector bundles up to isomorphism and transition functions up to equivalence. 
+
+\subsection{The Sheaf of Local Sections}
+\begin{defn}{Local Sections}{}\\
+Let $E,X$ be schemes. Let $\pi:E\to X$ be a vector bundle. Let $U\subseteq X$ be open. A local section of $E$ at $U$ is a map $s:U\to X$ such that $\pi\circ s=\text{id}_U$. 
+\end{defn}
+
+\begin{defn}{Sheaf of Local Sections}{}\\
+Let $E,X$ be schemes. Let $\pi:E\to X$ be a vector bundle. Define the sheaf of local sections $$\mF(E):\bold{Open}(X)\to\bold{Set}$$ as follows. 
+\begin{itemize}
+\item For each $U\subseteq X$ open, define $$\mF(E)(U)=\{s:U\to E\;|\;s\text{ is a local section }\}$$
+\item For each inclusion of open sets $U\hookrightarrow V$, define $\mF(E)(V)\to\mF(E)(U)$ by restriction of local sections $s\mapsto s|_U$. 
+\end{itemize}
+\end{defn}
+
+\subsection{The Equivalence with Locally Free Sheaves}
+\begin{prp}{}{}\\
+Let $X$ be a scheme. Then there is an equivalence of categories $$\bold{Vect}_n(X)\simeq\bold{Loc}_n(X)$$ given as follows. 
+\begin{itemize}
+\item For each vector bundle $\pi:E\to X$, the associated locally free sheaf is the sheaf of local sections $\mF(E)$. 
+\item For each locally free sheaf $\mA$ of $X$, the associated vector bundle is given by $\text{Spec}_X(\text{Sym}(\mA^\vee))\to X$. 
+\end{itemize}
+\end{prp}
+
 
 \pagebreak
 \section{Subschemes of a Scheme}
@@ -1896,7 +2012,11 @@ Let $S$ be a commutative graded ring. Then there is a one to one correspondence 
 \subsection{Locally Closed Subschemes}
 
 \pagebreak
-\section{The Geometry of Schemes}
+
+\part{The Geometry of Schemes}
+
+\pagebreak
+\section{Geometric Properties of Schemes}
 \subsection{Dimension and Codimension}
 \begin{defn}{The Dimension of a Scheme}{}\\
 Let $X$ be a scheme. Define the dimension of $X$ to be dimension of the underlying space of $X$. Explicitly, we have $$\dim(X)=\sup_{\substack{Z_0,\dots,Z_n\subseteq X\\\text{closed irreducible subsets}}}\{n\in\N\;|\;Z_0\subset Z_1\subset\dots\subset Z_n\}$$
@@ -1980,6 +2100,10 @@ From Commutative Algebra 1 7.5.9, we have seen that the first two rings are norm
 \end{proof}
 \end{eg}
 
+\begin{prp}{}{}\\
+Let $X$ be a normal scheme. Let $U\subseteq X$ be open such that $\text{codim}_X(U)\geq 2$. Let $\mF$ be a reflexive sheaf of $\mO_X$-modules. Then we there is an isomorphism $$\mF\cong i_\ast(\mF|_U)$$ where $i:U\hookrightarrow X$ is the inclusion map. 
+\end{prp}
+
 \begin{defn}{The Normalization of a Scheme}{}\\
 Let $X$ be an integral scheme. The normalization of $X$ consists of a scheme $\widetilde{X}$ and a morphism $\pi:\widetilde{X}\to X$ that satisfies the following universal property. For every normal integral scheme $Z$ and every dominant morphism $\phi:Z\to X$, there exists a unique morphism $\widetilde{\phi}:Z\to\widetilde{X}$ such that the following diagram commutes: \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
@@ -2049,17 +2173,60 @@ For any point $p$, we have $$J_pX=(3x^2\;\;\;-2y)$$ For a point of the form $p=(
 \end{proof}
 \end{eg}
 
-\subsection{The Tangent Space}
-\begin{defn}{The Zariski (Co)Tangent Space}{}\\
-Let $X$ be a scheme. Let $p\in X$. Let $m_p$ be the unique maximal ideal of $\mO_{X,p}$. 
-\begin{itemize}
-\item Define the Zariski tangent space at $p$ to be $$T_pX=\left(\frac{m_p}{m_p^2}\right)^\ast$$
-\item Define the Zariski cotangent space at $p$ to be $$T_pX^\ast=\frac{m_p}{m_p^2}$$
-\end{itemize}
+\subsection{The Smooth Locus}
+In practice, smooth schemes and smooth varieties are the most well behaved. When dealing with schemes that are singular, we may consider the set of all smooth points instead. 
+
+\begin{defn}{Smooth Locus}{}\\
+Let $k$ be a field. Let $X$ be a scheme of finite type over $k$. Define the smooth locus of $X$ to be $$X_\text{sm}=\{x\in X\;|\;x\text{ is a smooth point }\}$$
 \end{defn}
 
 \begin{prp}{}{}\\
-Let $k$ be a field. Let $X$ be a scheme of finite type over $k$. Let $p\in X(k)$ be a $k$-valued point. Then there is an isomorphism $$T_pX\cong\text{coker}(J_pX)$$
+Let $k$ be a field. Let $X$ be a scheme of finite type over $k$. Then $X_\text{sm}$ is open in $X$. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $X$ be a scheme of finite type over $k$. If $X$ is a normal, then we have $$\text{codim}_X(X\setminus X_\text{sm})\geq 2$$
+\end{prp}
+
+Hence reflexive sheaves and line bundles of a normal scheme is the same content as those on the smooth locus. This makes normal schemes the next most well behaved schemes after smooth schemes. 
+
+\begin{thm}{Generic Smoothness}{}\\
+Let $k$ be a perfect field. Let $X$ be an integral scheme of finite type over $k$. Then $X_\text{sm}$ is dense in $X$ and $\dim(X_\text{sm})=\dim(X)$. 
+\end{thm}
+
+\subsection{Cohen-Macaulay and Gorenstein Schemes}
+\begin{defn}{Cohen-Macaulay Schemes}{}\\
+Let $(X,\mO_X)$ be a scheme. We say that $X$ is Cohen-Macaulay if $\mO_{X,p}$ is Cohen-Macaulay for all $p\in X$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $X$ be a locally Noetherian scheme. 
+\begin{itemize}
+\item If $\dim(X)=0$, then $X$ is Cohen-Macaulay. 
+\item Suppose that $\dim(X)=1$. Then $X$ is Cohen-Macaulay if and only if $X$ has no embedded primes. 
+\end{itemize}
+\end{prp}
+
+\begin{defn}{Gorenstein Schemes}{}\\
+Let $(X,\mO_X)$ be a scheme. We say that $X$ is Gorenstein if $\mO_{X,p}$ is Gorenstein for all $p\in X$. 
+\end{defn}
+
+\subsection{Serre's $R_n$ and $S_n$ Criterion}
+\begin{defn}{Serre's $R_n$ Criterion}{}\\
+Let $X$ be a scheme. Let $n\in\N$. We say that $X$ satisfies $R_n$ if $\mO_{X,p}$ satisfies $R_n$ for all $p\in X$. 
+\end{defn}
+
+\begin{defn}{Serre's $S_n$ Criterion}{}\\
+Let $X$ be a scheme. Let $n\in\N$. We say that $X$ satisfies $S_n$ if $\mO_{X,p}$ satisfies $S_n$ for all $p\in X$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $X$ be a locally Noetherian scheme. Then the following are true. 
+\begin{itemize}
+\item $X$ is reduced if and only if $X$ satisfies $R_0$ and $S_1$. 
+\item $X$ is normal if and only if $X$ satisfies $R_1$ and $S_2$. 
+\item $X$ is Cohen-Macaulay if and only if $X$ satisfies $S_n$ for all $n\geq 0$. 
+\end{itemize}
 \end{prp}
 
 \pagebreak
@@ -2240,11 +2407,28 @@ Let $X$ be a locally Noetherian integral scheme. Define the function $d:\text{CD
 Let $X$ be a locally Noetherian integral scheme. Then $d:\text{CDiv}(X)\to\text{Div}(X)$ is an injective group homomorphism. 
 \end{prp}
 
-Thus we have inclusions $$\text{CDiv}(X)\hookrightarrow\substack{\text{Locally Principal}\\\text{ Divisors of }X}\hookrightarrow\text{Div}(X)$$
-
 \begin{prp}{}{}\\
 Let $X$ be a normal Noetherian integral scheme. Let $D$ be a Weil divisor on $X$. Then $D\in\im(d)$ if and only if $D$ is locally principal. In this case, we have $\mO(D)=\mL(D)$. 
 \end{prp}
+
+\begin{prp}{}{}\\
+Let $X$ be a normal Noetherian integral scheme. Then there is a bijection $$\text{Cl}(X)\;\;\overset{1:1}{\longleftrightarrow}\;\;\{\mF\;|\;\mF\text{ is a reflexive sheaf of rank }1\}/\cong$$
+\end{prp}
+
+If $X$ is normal and integral, then we have the following relation. 
+
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	& {\text{Div}(X)} & {\text{Reflexive Sheaves}} \\
+	{\text{CDiv}(X)} & {\text{Locally Principal}} & {\text{Invertible Sheaves}} \\
+	& \begin{array}{c} \substack{\text{Invertible subsheaves}\\\text{of }\mK_X^\ast} \end{array}
+	\arrow[from=1-2, to=1-3]
+	\arrow["{1:1}", from=2-1, to=2-2]
+	\arrow["{1:1}", from=2-1, to=3-2]
+	\arrow[hook, from=2-2, to=1-2]
+	\arrow[hook, from=2-2, to=2-3]
+	\arrow[hook, from=2-3, to=1-3]
+	\arrow[hook, from=3-2, to=2-3]
+\end{tikzcd}} \\~\\
 
 \begin{prp}{}{} Let $X$ be an integral, separated Noetherian scheme such that all local rings are UFD. Then the following are true. 
 \begin{itemize}
@@ -2254,9 +2438,6 @@ Let $X$ be a normal Noetherian integral scheme. Let $D$ be a Weil divisor on $X$
 \end{prp}
 
 \begin{crl}{}{} Let $X$ be a scheme. If $X$ is Noetherian, integral, separated and that all local rings are UFDs, then there are natural isomorphisms $$\text{Cl}(X)\cong\text{CCl}(X)\cong\text{Pic}(X)$$
-\end{crl}
-
-\begin{crl}{}{} Let $X=\Prj_k^n$ be the projective space over some field $k$. Then every invertible sheaf on $X$ is isomorphic to $\mO_X(m)$ for some $m\in\Z$. 
 \end{crl}
 
 \begin{defn}{Degree $0$ Picard Group}{}\\
@@ -2311,37 +2492,6 @@ Let $X$ be a Noetherian scheme. Let $\mL$ be an invertible sheaf of $\mO_X$-modu
 
 The condition that $\mF\otimes\mL^{\otimes n}$ is globally generated for large $n$ can be thought of as saying that $\mL^{\otimes n}$ eventually trivializes any coherent sheaf, or that $\mL$ is positive enough to overcome any twisting present in $\mF$. This is why ample sheaves are the correct algebraic generalization of positive line bundles in complex geometry. 
 
-\subsection{Relation to Divisors}
-\begin{defn}{The Associated Map of Divisors}{}\\
-Let $k$ be a field. Let $X$ be a variety over $k$. Let $D$ be a Cartier divisor on $X$. Define the associated map of $D$ to be the map $F_D:X\to\Prj(\Gamma(X,\mL(D))^\ast)$ given by $$p\mapsto\left[\text{ev}_p\right]$$ where $\text{ev}_p:\Gamma(X,\mL(D))\to\mL(D)_p\otimes_{\mO_{X,p}}k(p)$ is the map given by $f\mapsto f\otimes 1$. 
-\end{defn}
-
-\begin{lmm}{}{}\\
-Let $k$ be a field. Let $X$ be a variety over $k$. Let $D$ be a Cartier divisor on $X$. Let $s_0,\dots,s_n$ a basis for $\Gamma(X,\mL(D))$. Then the associated map is given by $$F_D(p)=[s_0(p):\cdots:s_n(p)]$$
-\end{lmm}
-
-\begin{lmm}{}{}\\
-Let $k$ be a field. Let $X$ be a variety over $k$. Let $D$ be a Cartier divisor on $X$. Then the following are true. 
-\begin{itemize}
-\item $F_D$ is a rational map. 
-\item $F_D$ is a morphism if and only if $\mL(D)$ is base point free. 
-\end{itemize}
-\end{lmm}
-
-\begin{lmm}{}{}\\
-Let $k$ be a field. Let $X$ be a variety over $k$. Let $D$ be a Cartier divisor on $X$. Suppose that $\mL(D)$ is base point free. Then $F_D$ corresponds to the morphism to projective space from the one to one correspondence to invertible sheaves. 
-\end{lmm}
-
-\begin{defn}{Complete Linear Systems}{}\\
-Let $k$ be a field. Let $X$ be a variety over $k$. Let $D$ be a Cartier divisor on $X$. Define the complete linear system of $D$ to be $$\abs{D}=\{D'\in\text{CDiv}(X)\;|\;D\sim D'\text{ and }D'\text{ is effective }\}$$
-\end{defn}
-
-\begin{prp}{}{}\\
-Let $k$ be an algebraically closed field. Let $X$ be a smooth projective variety over $k$. Let $D$ be an effective Cartier divisor on $X$. Then there is a bijection $$\Prj(\Gamma(X,\mL(D))^\ast)\;\;\overset{1:1}{\longleftrightarrow}\;\;\{E\in[D]\;|\;E\text{ is effective }\}$$ given by $[f]\mapsto D+\text{div}(f)$. 
-\end{prp}
-
-Notice that if $D$ itself is effective, then the inverse of the above bijection sends $D$ to the equivalence class of all constant functions in $\Prj(\mL(D))$. 
-
 \pagebreak
 \section{Differentials}
 \subsection{The Sheaf of Differentials}
@@ -2388,6 +2538,47 @@ Let $X,Y,Z$ be schemes. Let $f:Y\to Z$ be a morphism. Let $i:X\to Y$ be a closed
 \end{tikzcd}}
 \end{prp}
 
+\subsection{The Tangent Sheaf}
+\begin{defn}{The Relative Tangent Sheaf}{}\\
+Let $X,Y$ be a schemes. Let $f:X\to Y$ be a morphism. Define the relative tangent sheaf of $X$ to be $$\mT_{X/Y}=\left(\Omega_{X/Y}^1\right)^\vee$$
+\end{defn}
+
+\begin{defn}{The Zariski (Co)Tangent Space}{}\\
+Let $X$ be a scheme. Let $p\in X$. Let $m_p$ be the unique maximal ideal of $\mO_{X,p}$. 
+\begin{itemize}
+\item Define the Zariski tangent space at $p$ to be $$T_pX=\left(\frac{m_p}{m_p^2}\right)^\ast$$
+\item Define the Zariski cotangent space at $p$ to be $$T_pX^\ast=\frac{m_p}{m_p^2}$$
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{}\\\
+Let $X$ be a scheme. Let $p\in X$. Then we have $$T_pX\cong\mT_{X,p}\otimes_{\mO_{X,p}}\kappa(p)$$
+\end{prp}
+
+\begin{crl}{}{}\\
+Let $X$ be a scheme. Let $p\in X$. Then we have $$T_pX^\ast\cong\Omega_{X,p}^1\otimes_{\mO_{X,p}}\kappa(p)$$
+\end{crl}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $X$ be a scheme of finite type over $k$. Let $p\in X(k)$ be a $k$-valued point. Then there is an isomorphism $$T_pX\cong\text{coker}(J_pX)$$
+\end{prp}
+
+\subsection{The Normal Bundle}
+\begin{defn}{The Normal Sheaf}{}\\
+Let $X,Y$ be schemes. Let $\iota:Y\to X$ be a closed embedding. Define the normal sheaf of $Y$ in $X$ by $$\mN_{Y/X}=\Hom_{\mO_Y}\left(\frac{\mI_Y}{\mI_Y^2},\mO_Y\right)$$
+\end{defn}
+
+\subsection{Flat Morphisms}
+\begin{thm}{Miracle Flatness}{}\\
+Let $k$ be a field. Let $X,Y$ be schemes over $k$ with pure dimension. Let $f:X\to Y$ be a morphism of $k$-schemes. Suppose that the following are true. 
+\begin{itemize}
+\item $X$ is Cohen-Macaulay. 
+\item $Y$ is regular. 
+\item Fibers of $f$ have dimension $\dim(X)-\dim(Y)$. 
+\end{itemize}
+Then $f$ is flat. 
+\end{thm}
+
 \subsection{Smooth Morphisms}
 \begin{defn}{Smooth Morphisms}{}\\
 Let $k$ be a field. Let $X,Y$ be schemes locally of finite type over $k$. Let $f:X\to Y$ be a morphism over $k$. We say that $f$ is smooth of relative dimension $n$ if the following are true. 
@@ -2420,65 +2611,10 @@ Let $k$ be an algebraically closed field. Let $X,Y$ be schemes locally of finite
 \end{itemize}
 \end{prp}
 
-\subsection{Smooth Locus}
-\begin{defn}{Smooth Locus}{}\\
-Let $k$ be a field. Let $X$ be a scheme of finite type over $k$. Define the smooth locus of $X$ to be $$X_\text{sm}=\{x\in X\;|\;x\text{ is a smooth point }\}$$
+\subsection{The Sheaf of Zariski Differential Forms}
+\begin{defn}{The Sheaf of Zariski Differential Forms}{}\\
+Let $k$ be a scheme. Let $X$ be a scheme of finite type over $k$. Let $j:X_\text{sm}\hookrightarrow X$ be the inclusion map. Define the sheaf of Zariski differential formws to be $$\widehat{\Omega}_{X/k}^1=j_\ast\Omega_{X_\text{sm}/k}^1$$
 \end{defn}
-
-\begin{prp}{}{}\\
-Let $k$ be a field. Let $X$ be a scheme of finite type over $k$. Then $X_\text{sm}$ is open in $X$. 
-\end{prp}
-
-\begin{thm}{Generic Smoothness}{}\\
-Let $k$ be a perfect field. Let $X$ be an integral scheme of finite type over $k$. Then $X_\text{sm}$ is dense in $X$ and $\dim(X_\text{sm})=\dim(X)$. 
-\end{thm}
-
-\begin{defn}{The Pushforward Differentials}{}\\
-Let $k$ be a scheme. Let $X$ be a scheme of finite type over $k$. Let $j:X_\text{sm}\hookrightarrow X$ be the inclusion map. Define the pushforward sheaf of $p$-differentials to be $$\widehat{\Omega}_{X/k}^p=j_\ast\Omega_{X_\text{sm}/k}^p$$
-\end{defn}
-
-\subsection{Differential Forms on Varieties}
-\begin{prp}{}{}\\
-Let $k$ be a field. Let $X$ be a smooth variety over $k$. Let $i:Y\to X$ be a closed embedding. Let $\mI$ be the ideal sheaf of the closed embedding. Then $Y$ is smooth if and only if the second fundamental exact sequence is exact on the left: \\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	0 & \mI/\mI^2 & \Omega_X^1\otimes_{\mO_X}\mO_Y & \Omega_Y^1 & 0
-	\arrow[from=1-1, to=1-2]
-	\arrow[from=1-2, to=1-3]
-	\arrow[from=1-3, to=1-4]
-	\arrow[from=1-4, to=1-5]
-\end{tikzcd}}\\~\\
-\end{prp}
-
-\begin{crl}{}{}\\
-Let $k$ be a field of characteristic $0$ or a finite field. Let $X$ be a smooth variety over $k$. Let $p\in X$ be a closed point. Then the second fundamental exact sequence induces an isomorphism $$\frac{m_p}{m_p^2}\cong\Omega_X^1\otimes_{\mO_X}\frac{\mO_{X,p}}{m_p}$$ where $m_p$ is the maximal ideal of $\mO_{X,p}$. 
-\end{crl}
-
-\begin{thm}{Euler Sequence}{} Let $A$ be a commutative ring. Then there is an exact sequence \\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	0 & {\Omega_{\Prj_A^n/A}^1} & {\mO_{\Prj_A^n}(-1)^{n+1}} & {\mO_X} & 0
-	\arrow[from=1-1, to=1-2]
-	\arrow["f", from=1-2, to=1-3]
-	\arrow["g", from=1-3, to=1-4]
-	\arrow[from=1-4, to=1-5]
-\end{tikzcd}} \\
-where the morphisms are defined as follows. 
-\begin{itemize}
-\item The morphism $f:\Omega_{\Prj_A^n/A}^1\to\mO_{\Prj_A^n}(-1)^{n+1}$ is defined by
-\item The morphism $g:\mO_{\Prj_A^n}(-1)^{n+1}\to\mO_X$ is defined as follows. Let $e_0,\dots,e_n$ be the $A[x_0,\dots,x_n]$-basis of the graded $A$-module $A[x_0,\dots,x_n]^{n+1}$ (each has degree $1$). Then $g$ is induced by the morphism $A[x_0,\dots,x_n]^{n+1}\to A[x_0,\dots,x_n]$ defined by $e_i\to x_i$. 
-\end{itemize}
-\end{thm}
-
-\begin{prp}{}{}\\
-Let $k$ be a field of characteristic $0$. Let $X\subseteq\Prj_k^n$ be a hypersurface of degree $d\in\N\setminus\{0\}$. Let $i:X\to\Prj_k^n$ be the inclusion. Then there is an exact sequence \\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	0 & {\mO_X(-d)} & {i^\ast\Omega_{\Prj_k^n/k}^1} & {\Omega_{X/k}^1} & 0
-	\arrow[from=1-1, to=1-2]
-	\arrow["f", from=1-2, to=1-3]
-	\arrow["g", from=1-3, to=1-4]
-	\arrow[from=1-4, to=1-5]
-\end{tikzcd}} \\
-where
-\end{prp}
 
 \subsection{Higher Differential Forms}
 \begin{defn}{The Differential}{}\\
@@ -2500,12 +2636,73 @@ Let $X,Y$ be schemes. Let $f:X\to Y$ be a morphism. Define the relative de Rham 
 \end{defn}
 
 \begin{defn}{The Canonical Sheaf}{}\\
-Let $k$ be a field. Let $X$ be a smooth schemes over $k$. Define the canonical sheaf of $X$ to be $$\mK_X=\Omega_{X/k}^{\dim(X)}=\bigwedge_{i=1}^{\dim(X)}\Omega_{X/k}^1$$
+Let $k$ be a field. Let $X$ be a normal scheme of finite type over $k$. Define the canonical sheaf of $X$ to be $$\mK_X=j_\ast\bigwedge_{i=1}^{\dim(X)}\Omega_{X_\text{sm}/k}^1$$
 \end{defn}
 
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $X$ be a smooth scheme of finite type over $k$. Then we have a natural isomorphism $$\mK_X=\Omega_{X/k}^{\dim(X)}$$
+\end{prp}
+
+Note that the lower exterior products of the sheaf of differential forms and the Zariski sheaf is not isomorphic (the proof relies on reflexive sheaves being determined up to cutting out a codim $\geq 2$ locus)
+
 \begin{defn}{The Canonical Divisor}{}\\
-Let $k$ be a field. Let $X$ be a smooth schemes over $k$. Define the canonical divisor of $X$ to be any Cartier divisor $K_X$ such that $$\mL(K_X)=\mK_X$$
+Let $k$ be a field. Let $X$ be a normal scheme over $k$. Define the canonical divisor of $X$ to be any Cartier divisor $K_X$ such that $$\mL(K_X)=\mK_X$$
 \end{defn}
+
+\pagebreak
+\section{Resolution of Singularities}
+\subsection{The Blowing Up Construction}
+\begin{defn}{The Blow Up Along a Subscheme}{}\\
+Let $X$ be a scheme. Let $Y\subseteq X$ be a closed subscheme of $X$. Define the blow up of $Y$ in $X$ to be $$\text{Bl}_X(Y)=\text{Proj}_X\left(\bigoplus_{i=0}^\infty\mI_Y\right)$$ together with the canonical projection $\pi:\text{Bl}_X(Y)\to X$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $X$ be a scheme. Let $Y\subseteq X$ be a closed subscheme of $X$. Let $U=\text{Spec}(R)\subseteq X$ be an affine open subset. Then we have $$\pi^{-1}(U)\cong\text{Proj}\left(R[\I^S(Y\cap U)t]\right)$$
+\end{prp}
+
+\begin{prp}{The Universal Property of Blow Ups}{}\\
+Let $X$ be a scheme. Let $Y\subseteq X$ be a closed subscheme of $X$. Then $\text{Bl}_X(Y)$ satisfies the following universal property: For any scheme $Z$ and a morphism $f:Z\to X$ such that $f^{-1}\mI_Y\in\bold{Mod}_{\mO_Z}$ is invertible, there exists a unique morphism $g:Z\to\text{Bl}_X(Y)$ such that the following diagram commutes: \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	Z & {\text{Bl}_X(Y)} \\
+	& X
+	\arrow["{\exists!g}", dashed, from=1-1, to=1-2]
+	\arrow["f"', from=1-1, to=2-2]
+	\arrow["\pi", from=1-2, to=2-2]
+\end{tikzcd}} \\
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $X$ be a scheme. Let $Y\subseteq X$ be a closed subscheme of $X$. Then $\pi:\text{Bl}_X(Y)\to X$ is proper. 
+\end{prp}
+
+\begin{lmm}{}{}\\
+Let $X$ be a scheme. Let $Y\subseteq X$ be a closed subscheme of $X$. If $\mI_Y$ is invertible, then $\pi$ induces an isomorphism $\text{Bl}_X(Y)\cong X$. 
+\end{lmm}
+
+\subsection{The Exceptional Divisor}
+\begin{defn}{The Exceptional Divisor}{}\\
+Let $X$ be a scheme. Let $Y\subseteq X$ be a closed subscheme of $X$. Define the exceptional divisor of $Y$ in $X$ to be $$E_XY=\pi^{-1}(Y)\subseteq\text{Bl}_X(Y)$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $X$ be a scheme. Let $Y\subseteq X$ be a closed subscheme of $X$. Then we have $$E_XY\cong\text{Proj}_X\left(\bigoplus_{k=0}^\infty\frac{\mI_Y^k}{\mI_Y^{k+1}}\right)$$
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $X$ be a scheme. Let $Y\subseteq X$ be a closed subscheme of $X$. Let $U=\text{Spec}(R)$ be an affine open subset of $X$. Then we have $$E_XY\cap\pi^{-1}(U)=\text{Proj}\left(\text{gr}_R(\I^S(Y\cap U))\right)$$
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $X$ be a scheme. Let $Y\subseteq X$ be a closed subscheme of $X$. Then $E_XY$ is an effective Cartier divisor of $\text{Bl}_X(Y)$. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $X$ be a scheme. Let $Y\subseteq X$ be a closed subscheme of $X$. Then we have an isomorphism $$\text{Bl}_X(Y)\setminus E_XY\cong X\setminus Y$$ induced by $\pi|_{\text{Bl}_X(Y)\setminus E_XY}$. 
+\end{prp}
+
+\pagebreak
+
+\part{Topics in Scheme Theory}
 
 \pagebreak
 \section{Cohomology of Schemes}
@@ -2527,8 +2724,8 @@ Let $(X,\mO_X)$ be a Noetherian scheme. Let $\mF$ be an $\mO_X$-module. Then we 
 \end{prp}
 
 \begin{prp}{}{}\\
-Let $R$ be a Noetherian commutative ring. Let $\mF$ be an $\mO_{\text{Spec}(R)}$-module. Then we have $$H^i(X,\mF)=\begin{cases}
-\mF(X) & \text{ if } i=0\\
+Let $R$ be a Noetherian commutative ring. Let $\mF$ be an $\mO_{\text{Spec}(R)}$-module. Then we have $$H^i(\text{Spec}(R),\mF)=\begin{cases}
+\mF(\text{Spec}(R)) & \text{ if } i=0\\
 0 & \text{ otherwise }
 \end{cases}$$
 \end{prp}
@@ -2543,22 +2740,6 @@ Let $X$ be a Noetherian scheme. Then the following are equivalent.
 \item $H^1(X,\mI)=0$ for all coherent sheaves of ideals $\mI$
 \end{itemize}
 \end{thm}
-
-\begin{prp}{}{}\\
-Let $R$ be a Noetherian commutative ring. Then we have $$H^i(\Prj_R^n,\mO_{\Prj_R^n}(m))\cong\begin{cases}
-R^{\binom{n+m}{m}} & \text{ if }i=0\text{ and }m\geq 0\\
-R^{\binom{-m-1}{-n-m-1}} & \text{ if }i=n\text{ and }m\leq-n-1\\
-0 & \text{ otherwise }
-\end{cases}$$
-\end{prp}
-
-\begin{thm}{Serre Duality}{}\\
-Let $R$ be a Noetherian commutative ring. Let $m\in\Z$. Then the natural map $$H^i(\Prj_R^n,\mO_{\Prj_R^n}(m))\times H^{n-i}(\Prj_R^n,\mO_{\Prj_R^n}(-m-n-1))\to H^n(\Prj_R^n,\mO_{\Prj_R^n}(-n-1))\cong R$$ is a perfect pairing of finitely generated free $R$-modules. 
-\end{thm}
-
-\begin{prp}{}{}\\
-Let $k$ be a field. Let $\mF$ be a locally free sheaf on $\Prj_k^1$ of rank $m$. Then there exists $a_1,\dots,a_m\in\N$ such that $a_i\leq a_{i+1}$ and $$\mF\cong\bigoplus_{i=1}^m\mO_{\Prj_k^1}(a_i)$$
-\end{prp}
 
 \begin{prp}{}{}\\
 Let $R$ be a Noetherian commutative ring. Let $X$ be a proper scheme over $\text{Spec}(R)$. Let $\mL$ be an invertible sheaf on $X$. Then $\mL$ is ample if and only if for every coherent sheaf $\mF$ on $X$, there exists $N\in\N$ such that $$H^i(X,\mF\otimes\mL^{\otimes n})=0$$ for all $i>0$ and $n\geq N$. 
@@ -2584,12 +2765,315 @@ Let $X$ be a scheme. Then the following diagram is commutative: \\
 where the bottom horizontal map is induced by the long exact sequence of the short exact sequence $0\to\mO_X^\ast\to Q_X^\ast\to\frac{Q_X^\ast}{\mO_X^\ast}\to 0$. 
 \end{prp}
 
+\subsection{The Case of Projective Space}
+\begin{prp}{}{}\\
+Let $k$ be a field. Then the functors $$\widetilde{(-)}:\bold{GrMod}_{k[x_0,\dots,x_n]}\to\bold{QCoh}_{\Prj_k^n}\;\;\;\;\text{ and }\;\;\;\;\widetilde{(-)}:\bold{FGMod}_{k[x_0,\dots,x_n]}\to\bold{Coh}_{\Prj_k^n}$$ are essentially surjective. 
+\end{prp}
 
+\begin{prp}{}{}\\
+Let $k$ be a field. Then we have $$\text{Cl}(\Prj_k^n)\cong\text{CCl}(\Prj_k^n)\cong\text{Pic}(\Prj_k^n)\cong\Z$$
+\end{prp}
 
+\begin{crl}{}{}\\
+Let $k$ be a field. Then every invertible sheaf on $\Prj_k^n$ is isomorphic to the twisting sheaf $\mO_{\Prj_k^n}(m)$ for some $m\in\Z$. 
+\end{crl}
 
+\begin{prp}{}{}\\
+Let $R$ be a Noetherian commutative ring. Then we have $$H^i(\Prj_R^n,\mO_{\Prj_R^n}(m))\cong\begin{cases}
+R^{\binom{n+m}{m}} & \text{ if }i=0\text{ and }m\geq 0\\
+R^{\binom{-m-1}{-n-m-1}} & \text{ if }i=n\text{ and }m\leq-n-1\\
+0 & \text{ otherwise }
+\end{cases}$$
+\end{prp}
 
+\begin{thm}{Serre Duality}{}\\
+Let $R$ be a Noetherian commutative ring. Let $m\in\Z$. Then the natural map $$H^i(\Prj_R^n,\mO_{\Prj_R^n}(m))\times H^{n-i}(\Prj_R^n,\mO_{\Prj_R^n}(-m-n-1))\to H^n(\Prj_R^n,\mO_{\Prj_R^n}(-n-1))\cong R$$ is a perfect pairing of finitely generated free $R$-modules. 
+\end{thm}
 
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $\mF$ be a locally free sheaf on $\Prj_k^1$ of rank $m$. Then there exists $a_1,\dots,a_m\in\N$ such that $a_i\leq a_{i+1}$ and $$\mF\cong\bigoplus_{i=1}^m\mO_{\Prj_k^1}(a_i)$$
+\end{prp}
 
+\begin{thm}{The Euler Exact Sequence}{}\\
+Let $R$ be a commutative ring. Then there is a short exact sequence of the form \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {\mO_{\Prj_R^n}} & {\mO_{\Prj_R^n}(1)^{\oplus n+1}} & {\mT_{\Prj_k^n}} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["f", from=1-2, to=1-3]
+	\arrow["g", from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}} \\ where the maps are given as follows. 
+\end{thm}
 
+\begin{crl}{}{}\\
+Let $R$ be a commutative ring. Then there is a short exact sequence of the form \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {\Omega_{\Prj_R^n/R}^1} & {\mO_{\Prj_R^n}(-1)^{\oplus n+1}} & {\mO_{\Prj_R^n}} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["{g^\vee}", from=1-2, to=1-3]
+	\arrow["{f^\vee}", from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}} \\ where the maps are the duals of the map in the Euler exact sequence. 
+\end{crl}
+
+\begin{prp}{}{}\\
+Let $k$ be a field of characteristic $0$. Let $X\subseteq\Prj_k^n$ be a hypersurface of degree $d\in\N\setminus\{0\}$. Let $i:X\to\Prj_k^n$ be the inclusion. Then there is an exact sequence \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\mO_X(-d)} & {i^\ast\Omega_{\Prj_k^n/k}^1} & {\Omega_{X/k}^1} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["f", from=1-2, to=1-3]
+	\arrow["g", from=1-3, to=1-4]
+\end{tikzcd}} \\
+where ??? Moreover, if $X$ is smooth, then the sequence is exact on the left. 
+\end{prp}
+
+\pagebreak
+\section{Duality Theorems in Cohomology}
+\subsection{The Ext Sheaf}
+\begin{prp}{}{}\\
+Let $X$ be a Notherian scheme. Let $\mF,\mG\in\bold{Mod}_{\mO_X}$. Suppose that $\mF$ is coherent. Then we have $$\mathscr{E}\text{xt}_{\mO_X}^i(\mF,\mG)_p\cong\text{Ext}_{\mO_{X,p}}^i(\mF_p,\mG_p)$$ for all $p\in X$. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $R$ be a Noetherian commutative ring. Let $M,N$ be $R$-modules. Suppose that $M$ is finitely generated. Then the following are true. 
+\begin{itemize}
+\item There is an isomorphism $$\text{Ext}_{\text{Spec}(R)}^i(\widetilde{M},\widetilde{N})\cong\text{Ext}_R^i(M,N)$$
+\item There is an isomorphism $$\mathscr{E}\text{xt}_{\text{Spec}(R)}^i(\widetilde{M},\widetilde{N})\cong\widetilde{\text{Ext}_R^i(M,N)}$$
+\end{itemize}
+\end{prp}
+
+\subsection{The Dualizing Sheaf}
+\begin{defn}{The Dualizing Sheaf}{}\\
+Let $k$ be a field. Let $X$ be a projective scheme over $k$. A dualizing sheaf of $X$ is a coherent sheaf of $\mO_X$-modules $\omega_X$ together with a map $t:H^{\dim(X)}(X,\omega_X)\to k$ such that the natural map $$\Hom(\mF,\omega_X)\times H^n(X,\mF)\to H^n(X,\omega_X)\overset{t}{\longrightarrow}k$$ is a perfect pairing for all $\mF\in\bold{Coh}_X$. 
+\end{defn}
+
+In other words, the dualizing sheaf represents the functor $$\mF\mapsto(H^{\dim(X)}(X,\mF))^\ast$$
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $X$ be a projective scheme over $k$. If a dualizing sheaf exists for $X$, then it is unique up to unique isomorphism. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $X$ be a projective scheme over $k$. Then $X$ admits a dualizing sheaf given by $$\omega_X=\mathscr{E}\text{xt}_{\Prj_k^N}^r(\mO_X,\omega_{\Prj_k^N})$$ where we have chosen an embedding $X\to\Prj_k^N$ as a subscheme and $r=\text{codim}(X)$. 
+\end{prp}
+
+\subsection{Relation to Cohen-Macaulay}
+But we want duality in all cohomology groups, not just the top one. 
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $X$ be a projective scheme over $k$. Then for all $\mF\in\bold{Coh}_X$, there exists natural maps $$\theta^i:\text{Ext}^i(\mF,\omega_X)\to(H^{\dim(X)-i}(X,\mF))^\ast$$ such that $\theta^0$ is the isomorphism in the definition of the dualizing sheaf. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $X$ be a projective scheme over $k$. Then the following are equivalent. 
+\begin{itemize}
+\item $X$ is Cohen-Macaulay and equidimensional. 
+\item We have $\theta^i:\text{Ext}^i(\mF,\omega_X)\to(H^{\dim(X)-i}(X,\mF))^\ast$ is an isomorphism for all $i$ and all $\mF\in\bold{Coh}_X$. 
+\item We have $H^i(X,\mF(-k))=0$ for any $\mF\in\bold{Loc}_X$ and $i\leq\dim(X)-1$ and $q>N$ for some $N\in\N$. 
+\end{itemize}
+\end{prp}
+
+\begin{crl}{}{}\\
+Let $k$ be a field. Let $X$ be a projective Cohen-Macaulay scheme over $k$. Then there are natural isomorphisms $$H^i(X,\mF)\cong(H^{\dim(X)-i}(X,\mF^\vee\otimes\omega_X))^\ast$$ for any $\mF\in\bold{Loc}_X$. 
+\end{crl}
+
+\subsection{The Dualizing Complex}
+
+If $X$ is Cohen-Macaulay, then the dualizing complex is concentrated in degree $\dim(X)$. 
+
+\subsection{Relation to Gorenstein}
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $X$ be a Cohen-Macaulay scheme of finite type over $k$. Then $X$ is Gorenstein if and only if $\omega_X$ is invertible. 
+\end{prp}
+
+\pagebreak
+\section{Topics in Classical Algebraic Geometry}
+Varieties are reduced separated schemes of finite type over $k$. We also have $$\text{Smooth}\subseteq\text{Regular}\subseteq\text{Normal}$$ and $$\text{Regular}\subseteq\text{Local Complete Interesections}\subseteq\text{Gorenstein}\subseteq\text{Cohen-Macaulay}$$
+
+Further learning:
+\begin{itemize}
+\item birational geometry, blowing ups and resolution of singularities. 
+\item intersection theory and the chow ring. 
+\item connections to complex analytic geometry. 
+\item group schemes. 
+\end{itemize}
+
+\subsection{Divisors on Varieties}
+For a general irreducible variety, we have the diagram: \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\text{CDiv}(X)} & \substack{\text{Locally}\\\text{Principal Divisors}} & {\text{Div}(X)} \\
+	\substack{\text{Invertible}\\\text{subsheaves of }Q_X} & \substack{\text{Line}\\\text{Bundles}} & \substack{\text{Reflexive sheaves}\\\text{of rank }1}
+	\arrow[two heads, from=1-1, to=1-2]
+	\arrow["{1:1}", from=1-1, to=2-1]
+	\arrow[hook, from=1-2, to=1-3]
+	\arrow[from=1-2, to=2-3]
+	\arrow[from=1-3, to=2-3]
+	\arrow[two heads, from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+\end{tikzcd}} \\ and it descends to the diagram: \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\text{CCl}(X)} & {\text{Cl}(X)} \\
+	{\text{Pic}(X)} & \substack{\text{Reflexive sheaves}\\\text{of rank }1}/\cong 
+	\arrow[from=1-1, to=1-2]
+	\arrow["\cong"', from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}} \\
+
+When the variety is irreducible and normal, we have \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\text{CDiv}(X)} & \substack{\text{Locally}\\\text{Principal Divisors}} & {\text{Div}(X)} \\
+	\substack{\text{Invertible}\\\text{subsheaves of }Q_X} & \substack{\text{Line}\\\text{Bundles}} & \substack{\text{Reflexive sheaves}\\\text{of rank }1}
+	\arrow["\cong", from=1-1, to=1-2]
+	\arrow["{1:1}", from=1-1, to=2-1]
+	\arrow[hook, from=1-2, to=1-3]
+	\arrow[from=1-2, to=2-2]
+	\arrow["{1:1}", from=1-3, to=2-3]
+	\arrow[two heads, from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+\end{tikzcd}} \\ and it descends to the diagram: \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\text{CCl}(X)} & {\text{Cl}(X)} \\
+	{\text{Pic}(X)} & \substack{\text{Reflexive sheaves}\\\text{of rank }1}/\cong 
+	\arrow[hook, from=1-1, to=1-2]
+	\arrow["\cong"', from=1-1, to=2-1]
+	\arrow["\cong"', from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}} \\
+
+If the variety is now smooth and irreducible, then everything collapses and we have $$\text{Div}(X)\cong\text{CDiv}(X)$$ and $$\text{Cl}(X)\cong\text{CCl}(X)\cong\text{Pic}(X)$$
+
+\begin{defn}{The Associated Map of Divisors}{}\\
+Let $k$ be a field. Let $X$ be a variety over $k$. Let $D$ be a Cartier divisor on $X$. Define the associated map of $D$ to be the map $F_D:X\to\Prj(\Gamma(X,\mL(D))^\ast)$ given by $$p\mapsto\left[\text{ev}_p\right]$$ where $\text{ev}_p:\Gamma(X,\mL(D))\to\mL(D)_p\otimes_{\mO_{X,p}}k(p)$ is the map given by $f\mapsto f\otimes 1$. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $X$ be a variety over $k$. Let $D$ be a Cartier divisor on $X$. Let $s_0,\dots,s_n$ a basis for $\Gamma(X,\mL(D))$. Then the associated map is given by $$F_D(p)=[s_0(p):\cdots:s_n(p)]$$
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $X$ be a variety over $k$. Let $D$ be a Cartier divisor on $X$. Then the following are true. 
+\begin{itemize}
+\item $F_D$ is a rational map. 
+\item $F_D$ is a morphism if and only if $\mL(D)$ is base point free. 
+\end{itemize}
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $k$ be a field. Let $X$ be a variety over $k$. Let $D$ be a Cartier divisor on $X$. Suppose that $\mL(D)$ is base point free. Then $F_D$ corresponds to the morphism to projective space from the one to one correspondence to invertible sheaves. 
+\end{lmm}
+
+\begin{defn}{Complete Linear Systems}{}\\
+Let $k$ be a field. Let $X$ be a variety over $k$. Let $D$ be a Cartier divisor on $X$. Define the complete linear system of $D$ to be $$\abs{D}=\{D'\in\text{CDiv}(X)\;|\;D\sim D'\text{ and }D'\text{ is effective }\}$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $k$ be an algebraically closed field. Let $X$ be a smooth projective variety over $k$. Let $D$ be an effective Cartier divisor on $X$. Then there is a bijection $$\Prj(\Gamma(X,\mL(D))^\ast)\;\;\overset{1:1}{\longleftrightarrow}\;\;\{E\in[D]\;|\;E\text{ is effective }\}$$ given by $[f]\mapsto D+\text{div}(f)$. 
+\end{prp}
+
+Notice that if $D$ itself is effective, then the inverse of the above bijection sends $D$ to the equivalence class of all constant functions in $\Prj(\mL(D))$. 
+
+\subsection{Differential Forms on Varieties}
+If $X$ is normal, we have the notion of the canonical sheaf $\mK_X=j_\ast\bigwedge_{i=1}^{\dim(X)}\Omega_{X_\text{sm}/k}^1$ and this coincides with the usual $\Omega_X^{\dim(X)}$ when $X$ is smooth. 
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $X$ be a smooth variety over $k$. Let $i:Y\to X$ be a closed embedding. Let $\mI$ be the ideal sheaf of the closed embedding. Then $Y$ is smooth if and only if the second fundamental exact sequence is exact on the left: \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & \mI/\mI^2 & \Omega_X^1\otimes_{\mO_X}\mO_Y & \Omega_Y^1 & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\~\\
+\end{prp}
+
+\subsection{Blowing Up Varieties}
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $X$ be variety over $k$. Let $Y\subset X$ be a closed subvariety of $X$. Then the following are true. 
+\begin{itemize}
+\item $\text{Bl}_X(Y)$ is a variety over $k$. 
+\item If $X$ is quasi-projective, then $\text{Bl}_X(Y)$ is quasi-projective. 
+\item If $X$ is projective, then $\text{Bl}_X(Y)$ is projective. 
+\end{itemize}
+\end{prp}
+
+\begin{thm}{Hironaka 1964}{}\\
+Let $k$ be a field of characteristic $0$. Let $X$ be a variety over $k$. Then the following are true. 
+\begin{itemize}
+\item There exists a smooth variety $\widetilde{X}$ over $k$ and a proper birational morphism $\pi:\widetilde{X}\to X$ such that there is an isomorphism $\pi^{-1}(X_\text{sm})\cong X_\text{sm}$. 
+\item $\widetilde{X}$ is constructed by a sequence $X=X_0,\dots,X_n=\widetilde{X}$ where each $X_{i+1}\to X_i$ is a blow up. 
+\end{itemize}
+\end{thm}
+
+This is functorial!\\
+
+Characteristic $p$ for $\dim\geq 4$ is a major open problem. 
+
+\subsection{Sheaf Cohomology of Varieties}
+If $X$ is affine, then we already know that $$H^n(X;\mF)=\begin{cases}
+\mF(X) & \text{ if }n=0\\
+0 & \text{ otherwise }
+\end{cases}$$ If $X=\Prj_k^n$ we also know a few things: 
+\begin{itemize}
+\item Every invertible sheaf on $\Prj_k^n$ is isomorphic to $\mO_{\Prj_k^n}(m)$ for some $m\in\Z$. 
+\item The sheaf cohomology of invertible sheaves on $\Prj_k^n$ is given by $$H^i(\Prj_k^n,\mO_{\Prj_k^n}(m))=\begin{cases}
+k^{\binom{n+m}{m}} & \text{ if }i=0\text{ and }m\geq 0\\
+k^{\binom{-m-1}{-n-m-1}} & \text{ if }i=n\text{ and }m\leq-n-1\\
+0 & \text{ otherwise }
+\end{cases}$$
+\item Serre duality: $$H^i(\Prj_k^n,\mO_{\Prj_k^n}(m))\times H^{n-i}(\Prj_k^n,\mO_{\Prj_k^n}(-m-n-1))\to H^n(\Prj_k^n,\mO_{\Prj_k^n}(-n-1))\cong k$$ is a perfect pairing. 
+\item Every locally free sheaf $\mF$ on $\Prj_k^1$ is given by $$\mF\cong\bigoplus_{i=1}^m\mO_{\Prj_k^1}(a_i)$$
+\item The Euler exact sequence and its dual: \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {\mO_{\Prj_k^n}} & {\mO_{\Prj_k^n}(1)^{\oplus n+1}} & {\mT_{\Prj_k^n}} & 0 \\
+	0 & {\Omega_{\Prj_k^n/k}^1} & {\mO_{\Prj_k^n}(-1)^{\oplus n+1}} & {\mO_{\Prj_k^n}} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-3, to=2-4]
+	\arrow[from=2-4, to=2-5]
+\end{tikzcd}}\\~\\
+\end{itemize}
+
+Now if $i:X\hookrightarrow\Prj_k^n$ is a hypersurface of degree $d$, then we also have an exact sequence: \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\mO_X(-d)} & {i^\ast\Omega_{\Prj_k^n/k}^1} & {\Omega_{X/k}^1} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+\end{tikzcd}}\\~\\
+If $X$ is smooth, then the sequence is exact on the left and we also have \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {\mO_{\Prj_k^n}(-d)} & {\mO_{\Prj_k^n}} & {\mO_X} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\~\\
+
+\subsection{The Dualizing Sheaf and the Canonical Sheaf}
+\begin{prp}{}{}\\
+Let $k$ be an algebraically closed field. Let $X$ be a smooth projective variety over $k$. Then there is an isomorphism $$\omega_X\cong\mK_X$$
+\end{prp}
+
+\begin{crl}{}{}\\
+Let $k$ be an algebraically closed field. Let $X$ be a smooth projective variety over $k$. Then there are natural isomorphisms $$H^q(X,\Omega_X^p)\cong(H^{\dim(X)-q}(X,\Omega_X^{\dim(X)-p}))^\ast$$
+\end{crl}
+
+\begin{prp}{}{}\\
+Let $k$ be a field. Let $X$ be a normal and Cohen-Macaulay variety over $k$. Then there is an isomorphism $$\omega_X\cong\mK_X$$
+\end{prp}
+
+\begin{defn}{Fano, Calabi-Yau and Varieties of General Type}{}\\
+Let $k$ be a field. Let $X$ be a smooth variety over $k$. 
+\begin{itemize}
+\item We say that $X$ is a fano variety if $-K_X$ is ample. 
+\item We say that $X$ is Calabi-Yau if $K_X=0$. 
+\item We say that $X$ is of general type if $K_X$ is ample. 
+\end{itemize}
+\end{defn}
 
 \end{document}

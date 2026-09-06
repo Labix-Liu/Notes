@@ -21,18 +21,14 @@
 \tableofcontents
 \pagebreak
 
+\part{Introduction to Group Theory}
+
+\pagebreak
+
 \section{Introduction to Groups}
-Abstract algebra is the study of symmetry, and the most basic form of symmetry is refined into the definition of a group. However the notion of a group was not explicitly defined until set theory and the formalization of a group. Despite this, the concept of groups and group actions had been made use by a number of Mathematicians, such as Galois in his study of the symmetries of the roots of a polynomial. 
-
 \subsection{Basic Concepts of Groups}
-Formally, the definition of a group involves a set and an operation on the set that gives rise to symmetry. 
-
-\begin{defn}{Binary Operation}{}\\
-A binary operation $\ast$ on a set $G$ is a function $$\ast:G\times G\to G$$
-\end{defn}
-
 \begin{defn}{Groups}{}\\
-A group is an ordered pair $(G,\ast)$ where $G$ is a set and $\ast:G\times G\to G$ is a binary operation on $G$ satisfying the following axioms. 
+A group is an ordered pair $(G,\ast)$ where $G$ is a set and $\ast:G\times G\to G$ is a function satisfying the following axioms. 
 \begin{itemize}
 \item Associativity: $a\ast(b\ast c)=(a\ast b)\ast c$ for all $a,b,c\in G$
 \item Identity element: There exists an element $e\in G$, called an identity of G, such that for all $a\in G$ we have $a\ast e=e\ast a=a$
@@ -61,6 +57,7 @@ The following are true.
 \item $(\N,+)$ is not a group. 
 \item $(\Z,+)$ is an abelian group. 
 \item $(\R\setminus\{0\},\times)$ is an abelian group. 
+\item $(\R_{>0},\times)$ is an abelian group. 
 \end{itemize}
 \begin{proof}\\
 No element in $\N$ is an inverse for $1\in\N$. \\
@@ -90,6 +87,13 @@ Suppose that the inverse of $a$ is $c$ and the inverse of $b$ is $d$. Then $(ab)
 \end{proof}
 \end{lmm}
 
+\begin{eg}{}{}\\
+Let $G$ be a group. Suppose that $g^2=1$ for all $g\in G$. Then $G$ is abelian. 
+\begin{proof}\\
+Since $g=g^{-1}$, we have that $$gh=g^{-1}h^{-1}=(hg)^{-1}=hg$$ for all $g,h\in G$. 
+\end{proof}
+\end{eg}
+
 \begin{defn}{Order of an Element}{}\\
 For a group $G$ and an element $x\in G$ define the order of $x$ to be the smallest integer $n$ such that $x^n=1$, and denote this integer by $$\abs{x}=\min\{n\in\N\;|\;x^n=1\}$$ If no positive power of $x$ is the identity, the order of $x$ is defined to be infinity and $x$ is said to be of infinite order. 
 \end{defn}
@@ -97,20 +101,6 @@ For a group $G$ and an element $x\in G$ define the order of $x$ to be the smalle
 \begin{defn}{Order of a Group}{}\\
 Let $G$ be a group. The order of $G$ is the number of elements that $G$ has, denoted by $\abs{G}$. We say that $G$ is a finite group if $\abs{G}$ is a finite number. Otherwise $G$ is an infinite group. 
 \end{defn}
-
-A group does not necessarily have to contain an element of the same order of the group. 
-
-\begin{eg}{The Klein Four Group}{}\\
-Let $K=\{1,a,b,c\}$. Define a binary operation $\cdot:K\times K\to K$ by the following rules. 
-\begin{itemize}
-\item For all $x\in K$, we have $1\cdot x=x=x\cdot 1$. 
-\item For all $x\in K$, we have $x\cdot x=1$. 
-\item $a\cdot b=b\cdot a=c$. 
-\item $a\cdot c=c\cdot a=b$. 
-\item $b\cdot c=c\cdot b=a$. 
-\end{itemize}
-Then $(K,\cdot)$ is a group, and $\abs{a}=\abs{b}=\abs{c}=2$. 
-\end{eg}
 
 \begin{lmm}{}{}\\
 Let $G$ be a group. Let $k\in\N$. Then $a^k=1$ if and only if $\abs{a}$ divides $k$. 
@@ -134,12 +124,12 @@ Thus we must have $\abs{g^k}$ divides $\frac{n}{\gcd(k,n)}$. Now we know that $g
 \end{proof}
 \end{lmm}
 
-\begin{lmm}{}{}\\
-Let $G$ be a group. Let $a,b\in G$ be elements that commute with each other. Then $\abs{ab}$ divides $\lcm(\abs{a},\abs{b})$. 
+\begin{eg}{}{}\\
+Let $G$ be a finite group of order $2n$. Prove that $G$ contains an element of order $2$. 
 \begin{proof}\\
-Let $l=\lcm(\abs{a},\abs{b})$. Since $a$ and $b$ commutes, we have that $$(ab)^l=a^lb^l=1$$ and so $\abs{ab}$ divides $l$. 
+Note that $\abs{g}=\abs{g^{-1}}$. Let $X=\{g\in G\;|\;g\neq g^{-1}\}$. Then $\abs{X}$ is even. Then $\abs{(G\setminus X)\setminus\{1\}}$ is odd and hence non-zero. An element in this set must have order $2$. 
 \end{proof}
-\end{lmm}
+\end{eg}
 
 \subsection{Subgroups}
 The idea of a subgroup is that some (not all) elements in a group can also form a group in and of itself. Most of the structure of a group carries on to its subgroup, while the converse may not necessarily be true. 
@@ -175,6 +165,15 @@ Suppose that $H$ is satisfies the above two conditions. We show that it implies 
 \end{proof}
 \end{prp}
 
+\begin{eg}{}{}\\
+Let $0\neq H\leq(\Q,+)$ be a subgroup such that $x\in H\setminus\{0\}$ implies $1/x\in H$. Prove that $H=\Q$. 
+\begin{proof}\\
+Firstly I claim that $1\in H$. Let $p/q\in H$ be a non-zero element. Since $H$ is closed under addition, we have that adding $p/q$ to itself $q$ times, which is $p$, lie in $H$. By assumption, we have $1/p\in H$. Again since $H$ is closed under addition, we have $1=p\cdot (1/p)\in H$. \\
+
+Now let $r/s\in\Q$ be an arbitrary non-zero element. Then $s\cdot 1=s$ lie in $H$ since $H$ is closed under addition. By assumption, we have $1/s\in H$. Again since $H$ is closed under addition, adding $1/s$ to itself $r$ times, which is $r/s$, lie in $H$. Hence $H=\Q$. 
+\end{proof}
+\end{eg}
+
 \begin{prp}{}{}\\
 Let $G$ be a group. Let $H,K\leq G$ be subgroups. Then $H\cap K\leq G$ is a subgroup. 
 \begin{proof}\\
@@ -188,12 +187,26 @@ The subgroup criterion is satisfied thus $H\cap K$ is a subgroup of $G$.
 \end{proof}
 \end{prp}
 
+\begin{eg}{}{}\\
+Let $n,m\in\Z$. Then we have $n\Z\cap m\Z=\gcd(n,m)\Z$. 
+\end{eg}
+
 \subsection{Homomorphisms and Isomorphisms}
 Homomorphisms and isomorphisms are important concepts not only in terms of the ability to classify groups with similar structure, but is also useful in the creation of new groups, such as subgroups and quotient groups. One common idea throughout all of mathematics is to not only study the object itself, but to also study functions in and out of the object. In the case of groups, a meaningful function would be one that preserve the study of a group. This leads to the definition of a group homomorphism. 
 
 \begin{defn}{Group Homomorphisms}{}\\
 Let $(G,*)$ and $(H,\circ)$ be groups. A map $\phi:G\to H$ such that $$\phi(x*y)=\phi(x)\circ\phi(y)$$ for all $x,y\in G$ is called a homomorphism. 
 \end{defn}
+
+\begin{eg}{}{}\\
+The following are true. 
+\begin{itemize}
+\item Let $n\in\Z$. The function $\phi:\Z\to\Z$ given by $\phi(k)=nk$ is a homomorphism. 
+\item Let $n\in\Z$. The function $\phi:\Z\to\{e^{2\pi ik/n}\in\C\;|\;0\leq k\leq n-1\}$ given by $\phi(k)=e^{2\pi i k/n}$ is a homomorphism. 
+
+\item Let $n\in\Z$. The function $\phi:\Z\to\Z$ given by $\phi(k)=n+k$ is not a homomorphism. 
+\end{itemize}
+\end{eg}
 
 As a result of preserving group structures, group homomorphisms are more rigid compared to a regular function. 
 
@@ -219,6 +232,32 @@ We have that $\phi(g)\cdots\phi(g)=\phi(g\cdots g)$ by applying the definition o
 \end{proof}
 \end{lmm}
 
+\begin{eg}{}{}\\
+Let $G$ be a group. Let $\varphi:G\to G$ be the function given by $\varphi(g)=g^{-1}$. Prove that $\varphi$ is a homomorphism if and only if $G$ is abelian. 
+\begin{proof}\\
+Suppose that $\varphi(g)=g^{-1}$ defines a homomorphism. Then we have $$ghg^{-1}h^{-1}=gh\varphi(g)\varphi(h)=gh\varphi(gh)=gh(gh)^{-1}=1_G$$ for any $g,h\in G$. Thus $G$ is abelian. Now suppose that $G$ is abelian. Let $g,h\in G$. Then we have $$\varphi(gh)=(gh)^{-1}=h^{-1}g^{-1}=\varphi(h)\varphi(g)=\varphi(g)\varphi(h)$$ so that $\varphi$ is a homomorphism. 
+\end{proof}
+\end{eg}
+
+\begin{eg}{}{}\\
+Let $G$ be a group. Let $\varphi:G\to G$ be the function given by $\varphi(g)=g^2$. Prove that $\varphi$ is a homomorphism if and only if $G$ is abelian. 
+\begin{proof}\\
+Suppose that $\varphi(g)=g^2$ defines a homomorphism. Let $g,h\in G$. Then we have $$ghgh=\varphi(gh)=\varphi(g)\varphi(h)=g^2h^2$$ Multiplying by $g^{-1}$ on the left and $h^{-1}$ on the right gives $hg=gh$. Thus $G$ is abelian. Now suppose that $G$ is abelian. Let $g,h\in G$. Then we have $$\varphi(gh)=ghgh=g^2h^2=\varphi(g)\varphi(h)$$ Thus $\varphi$ is a homomorphism. 
+\end{proof}
+\end{eg}
+
+\begin{eg}{}{}\\
+Let $G$ be a finite group. Let $\sigma:G\to G$ be a homomorphism such that the following are true. 
+\begin{itemize}
+\item $\sigma(g)=g$ if and only if $g=1$. 
+\item $\sigma^2=\text{id}_G$. 
+\end{itemize}
+Prove that $G$ is abelian. 
+\begin{proof}\\
+I claim that $G=\{x^{-1}\sigma(x)\;|\;x\in G\}$. Clearly the set on the right is a subset of $G$. Moreover, notice that if $x^{-1}\sigma(x)=y^{-1}\sigma(y)$, then we have $\sigma(xy^{-1})=xy^{-1}$ which implies that $xy^{-1}=1$. Hence $x=y$. Thus distinct $x\in G$ gives distinct elements $x^{-1}\sigma(x)$. Hence the size of the set on the right is at least $\abs{G}$. Thus we have equality. This means that every element of $G$ is of the form $x^{-1}\sigma(x)$ for some $x\in G$. Now notice that $$\sigma(x^{-1}\sigma(x))=\sigma(x)^{-1}\sigma(\sigma(x))=\sigma(x)^{-1}x$$ Thus $\sigma$ is the map given by $\sigma(g)=g^{-1}$. Since we assumed that $\sigma$ is a homomorphism, the above implies that $G$ is abelian. 
+\end{proof}
+\end{eg}
+
 \begin{lmm}{}{}\\
 The following are true regrading group homomorphisms. 
 \begin{itemize}
@@ -233,13 +272,13 @@ Let $g_1,g_2\in G$. Then we have $$\text{id}_G(g_1g_2)=g_1g_2=\text{id}_G(g_1)\t
 \end{lmm}
 
 \begin{defn}{Kernel}{}\\
-Let $G,H$ be groups. Let $\phi:G\to H$ be a homomorphism. Define the kernel of $\phi$ to be $$\ker(\phi)=\{g\in G|\ker(g)=1_H\}$$
+Let $G,H$ be groups. Let $\phi:G\to H$ be a homomorphism. Define the kernel of $\phi$ to be $$\ker(\phi)=\{g\in G\;|\;\phi(g)=1_H\}$$
 \end{defn}
 
 \begin{lmm}{}{}\\
 Let $G,H$ be groups. Let $\phi:G\to H$ be a homomorphism. Then the following are true regarding the kernel. 
 \begin{itemize}
-\item Then $\ker(\phi)$ is a subgroup of $G$. 
+\item $\ker(\phi)$ is a subgroup of $G$. 
 \item $\phi$ is injective if and only if $\ker(\phi)=\{1_G\}$. 
 \end{itemize}
 \begin{proof}\\
@@ -260,6 +299,10 @@ Then $g_1g_2^{-1}\in\ker(\phi)=\{1_G\}$, we have that $g_1g_2^{-1}=1_G$ so that 
 \end{proof}
 \end{lmm}
 
+\begin{eg}{}{}\\
+The kernel of the map $\abs{\;\cdot\;}:\R\setminus\{0\}\to\R\setminus\{0\}$ is given by $\ker(\abs{\;\cdot\;})=\{\pm 1\}$. 
+\end{eg}
+
 When a map of sets have an inverse, we say that the two sets are bijective. When a group homomorphisms has an inverse, we have the corresponding notion called isomorphic. 
 
 \begin{defn}{Group Isomorphisms}{}\\
@@ -273,10 +316,10 @@ Let $G,H$ be groups. Let $\phi:G\to H$ be a group homomorphism.
 \begin{prp}{Properties of Isomorphism}{}\\
 Let $G,H$ be groups. Let $\phi:G\to H$ be a group isomorphism. Then the following are true. 
 \begin{itemize}
-\item $\phi^{-1}$ is an isomorphism
-\item $\abs{G}=\abs{H}$
-\item $G$ is abelian if and only if $H$ is abelian
-\item $\abs{x}=\abs{\phi(x)}$
+\item $\phi^{-1}$ is an isomorphism. 
+\item $\abs{G}=\abs{H}$. 
+\item $G$ is abelian if and only if $H$ is abelian. 
+\item $\abs{x}=\abs{\phi(x)}$ for all $x\in G$. 
 \end{itemize}
 \begin{proof}\\
 Since $\phi$ is bijective, $\phi^{-1}$ is also bijective thus it is well defined. But we also need to prove that $\phi^{-1}$ is a homomorphism. Let $h_1,h_2\in H$. Then there exists unique $g_1,g_2\in G$ such that $\phi(g_1)=h_1$ and $\phi(g_2)=h_2$. Then $$\phi^{-1}(h_1h_2)=\phi^{-1}(\phi(g_1)\phi(g_2))=\phi^{-1}(\phi(g_1g_2))=g_1g_2=\phi^{-1}(h_1)\phi^{-1}(h_2)$$ thus we are done. \\
@@ -335,9 +378,9 @@ Let $G$ be a group and $S$ a subset of $G$. We say that $S$ is a generating set 
 \end{defn}
 
 \begin{eg}{}{}\\
-The subset $\{1\}$ generates the group $\Z$. 
+We have $\langle n,m\rangle=\gcd(n,m)\Z$. 
 \begin{proof}\\
-Every number $n\in\N$ is a finite sum of $n$ ones. Similarly every number $-n$ for $n\in\N$ is a finite sum of $n$ negative ones. 
+Let $x\in\langle n,m\rangle$. Then there exists $a,b\in\Z$ such that $x=an+bm$. By corollary of Bezout's lemma, if $x\in\N$ then $\gcd(n,m)$ divides $x$. Hence $\langle n,m\rangle\leq\gcd(n,m)\Z$. Conversely, if $y\in\gcd(n,m)\Z$, then there exists $k\in\Z$ such that $\gcd(n,m)k=y$. By Bezout's lemma, there exists $a,b\in\Z$ such that $an+bm=\gcd(n,m)$. Then we have $(ak)n+(bk)m=y$ so that $y\in\langle n,m\rangle$. 
 \end{proof}
 \end{eg}
 
@@ -345,6 +388,15 @@ Every number $n\in\N$ is a finite sum of $n$ ones. Similarly every number $-n$ f
 \begin{defn}{Cyclic Groups}{}\\
 Let $G$ be a group. We say that $G$ is cyclic if there exists $g\in G$ such that $$G=\langle g\rangle$$
 \end{defn}
+
+\begin{eg}{}{}\\
+The following are true. 
+\begin{itemize}
+\item $\Z$ is a cyclic group. 
+\item $\Q$ is not a cyclic group. 
+\item $\R$ is not a cyclic group. 
+\end{itemize}
+\end{eg}
 
 \begin{lmm}{}{}\\
 Let $G$ be a group. If $G$ is cyclic, then $G$ is abelian. 
@@ -548,6 +600,13 @@ Let $H$ be a subgroup of $G$. Since $G$ is abelian, we have $gHg^{-1}=gg^{-1}H=H
 \end{proof}
 \end{eg}
 
+\begin{eg}{}{}\\
+Let $G$ be a finite group. Let $H\leq G$ be a subgroup such that $[G:H]=2$. Prove that $H\trianglelefteq G$. 
+\begin{proof}\\
+Let $g\in G\setminus H$. Then we have $G/H=\{H,gH\}$. By prp3.1.6, we have $\{H,gH\}=G/H=\{H,Hg\}$. Thus $gH=Hg$ and that $gHg^{-1}=H$. Hence $H$ is normal. 
+\end{proof}
+\end{eg}
+
 \begin{prp}{}{}\\
 Let $G$ be a group. Let $H\leq G$ be a subgroup. Write $g_1H\cdot g_2H=\{ab\;|\;a\in g_1H,b\in g_2H\}$. Then $$g_1H\cdot g_2H=(g_1g_2)H$$ for all $g_1,g_2\in G$ if and only if $H\trianglelefteq G$. 
 \begin{proof}\\
@@ -687,8 +746,8 @@ Define $\phi:\frac{G}{H}\to\frac{G}{K}$ by $\phi(gH)=gK$. This is a group homomo
 \begin{thm}{The Correspondence Theorem for Groups}{}\\
 Let $G$ be a group. Let $N\trianglelefteq G$ be normal. Let $\phi:G\to\frac{G}{N}$ be the quotient map. Then the following are true. 
 \begin{itemize}
-\item There is an inclusion preserving bijection $$\left\{H\subseteq G\;\bigg{|}\;\substack{H\text{ is a subgroup of }G\\\text{ containing }N}\right\}\;\;\overset{1:1}{\longleftrightarrow}\left\{H\subseteq G/N\;\bigg{|}\;\substack{H\text{ is a subgroup}\\\text{of }G/N}\right\}$$ given by $H\mapsto\phi(H)$. 
-\item The above bijection restricts to a bijection $$\left\{H\subseteq G\;\bigg{|}\;\substack{H\text{ is a normal subgroup}\\\text{of }G\text{ containing }N}\right\}\;\;\overset{1:1}{\longleftrightarrow}\left\{H\subseteq G/N\;\bigg{|}\;\substack{H\text{ is a normal}\\\text{subgroup of }G/N}\right\}$$
+\item There is an inclusion preserving bijection $$\left\{H\subseteq G\;\bigg{|}\;\substack{H\text{ is a subgroup of }G\\\text{ containing }N}\right\}\;\;\overset{1:1}{\longleftrightarrow}\;\;\left\{H\subseteq G/N\;\bigg{|}\;\substack{H\text{ is a subgroup}\\\text{of }G/N}\right\}$$ given by $H\mapsto\phi(H)$. 
+\item The above bijection restricts to a bijection $$\left\{H\subseteq G\;\bigg{|}\;\substack{H\text{ is a normal subgroup}\\\text{of }G\text{ containing }N}\right\}\;\;\overset{1:1}{\longleftrightarrow}\;\;\left\{H\subseteq G/N\;\bigg{|}\;\substack{H\text{ is a normal}\\\text{subgroup of }G/N}\right\}$$
 \end{itemize}
 \end{thm}
 
@@ -746,6 +805,10 @@ Since $\abs{X}=\abs{Y}$, there exists a bijection $\phi:X\to Y$. Define a functi
 
 Since $\text{Sym}(X)$ is invariant under the number of elements of $X$, we denote $S_n$ once and for all for $\text{Sym}(\{1,\dots,n\})$. 
 
+\begin{defn}{The Standard Symmetric Group}{}\\
+Let $n\in\N^+$. Define the standard symmetric group by $$S_n=\text{Sym}\left(\{1,\dots,n\}\right)$$
+\end{defn}
+
 \subsection{Cycle Notation}
 Notice that matrix presentation is unique since each element $f\in\text{Sym}(X)$ is uniquely defined by where it sends each element to. While this presentation makes it clear the images of each element in $X$, it is often rather cumbersome to write. Therefore we have an alternate and more compact notation. 
 
@@ -778,7 +841,7 @@ If $x\notin\{b_1,\dots,b_s\}$, then the same argument gives $f(g(x))=f(x)=g(f(x)
 
 Compared to matrix presentations, the cycle notation is far from being unique. In particular, we can represent the same element in $\text{Sym}(X)$ by either swapping the order of the individual cycles or by changing the starting element of each cycle by another element in the same cycle. We prove that the cycle notation is unique up the following sense. \\
 
-\begin{thm}{}{}\\
+\begin{prp}{}{}\\
 Let $X$ be a finite set. Then the following are true. 
 \begin{itemize}
 \item Every element in $\text{Sym}(X)$ can be written as a product of disjoint cycles. 
@@ -789,10 +852,74 @@ If $\text{id}_X$ is the identity element then we can write it as $()$ the empty 
 
 If not, this process can be repeated. It also terminates in finite steps since $\text{Sym}(X)$ is finite. When it terminates, we will have obtained a product of disjoint cycles representing $f$. Uniqueness follows because if $f=f_1\cdots f_m$ we have seen by construction that each $f_i$ completely determines $f$. 
 \end{proof}
-\end{thm}
+\end{prp}
 
 Cycle notations make multplication of elements in $S_n$ easier. Suppose that we want to find the following product $$\tau\cdot\psi=\begin{pmatrix}2&4&7&8\end{pmatrix}\begin{pmatrix}1&3\end{pmatrix}\begin{pmatrix}5&6\end{pmatrix}\cdot\begin{pmatrix}1 & 3 & 7\end{pmatrix}\begin{pmatrix}2&5&6&9\end{pmatrix}\begin{pmatrix}4&10\end{pmatrix}$$
 We start with any element, say $1$. Then observe that $\psi$ maps $1$ to $3$. We then see that $3$ maps to $1$ in $\tau$ so $1$ maps to itself and we can omit the trivial cycles. Now for $2$, we see that $2$ maps to $5$ in $\psi$ and $5$ maps to $6$ in $\tau$. So we can write down $\begin{pmatrix}2&6&\cdots\end{pmatrix}$. Now instead of choosing another element to begin. We follow up on $6$ to see that $6$ maps to $9$. This means we can continue to chain and write $\begin{pmatrix}2&6&9&\cdots\end{pmatrix}$. Once you reach the end, you begin a new cycle with another element not in previous cycles. 
+
+\begin{prp}{}{}\\
+Let $n,m\in\N^+$. Suppose that $m\leq n$. Then the number of $m$ cycles in $S_n$ is given by $\frac{n!}{m(n-m)!}$. 
+\begin{proof}\\
+A cycle of length $m$ is defined by specifying $m$ numbers in $\{1,\dots,n\}$, modulo a cyclic permutation of the chosen elements. 
+\end{proof}
+\end{prp}
+
+\begin{defn}{Cycle Types}{}\\
+Let $n\in\N^+$. Let $\phi\in S_n$. We say that $\phi$ has cycle type $2^{r_2}3^{r_3}\cdots$ if it has exactly $r_k$ $k$ cycles for $k\geq 2$. \\
+A transposition is a cycle of type $2$. 
+\end{defn}
+
+Notice that the following proposition means that we will have a third notation for elements of $S_n$. 
+
+\begin{prp}{}{}\\
+Let $n\in\N^+$. Let $\tau$ be a cycle of type $k$ in $S_n$. Then the following are true. 
+\begin{itemize}
+\item $\tau$ has order $k$
+\item $\tau$ can be decomposed into a product of $k-1$ transpositions
+\end{itemize}
+\begin{proof}\\
+\begin{itemize}
+\item Let $\tau$ be a cycle of order $k$. Notice that multiplying $n$ times of the same element means that we are taking the $i$th element in $\tau$ to the $i+n$ modulo $k$ element in the cycle. If $n=k$ then every element goes to itself, which means that $\tau^k$ is just the permutation that maps every element to iself, which is the identity of the permutation group. 
+\item For a cycle $\begin{pmatrix}x_1,\dots,x_k\end{pmatrix}$. Notice that the product $$\begin{pmatrix}x_{k-1}&x_k\end{pmatrix}\cdots\begin{pmatrix}x_2&x_3\end{pmatrix}\begin{pmatrix}x_1&x_2\end{pmatrix}$$ returns the original cycle. 
+\end{itemize}
+Thus we are done. 
+\end{proof}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $n\in\N^+$. Let $f\in S_n$ be such that $f=f_1\cdots f_k$ is a product of $k$-cycles. Then $$\abs{f}=\lcm(\abs{f_1},\dots,\abs{f_k})$$ 
+\begin{proof}\\
+We proceed by induction. We have done the case $n=1$ above. Now suppose that for all $1\geq m<k$, we have $\abs{f_1\cdots f_m}=\lcm(n_1,\dots,n_m)$. Let $g=f_1\cdots f_{k-1}$. Write $f_i=\begin{pmatrix}a_{i,1}&\cdots&a_{i,t_i}\end{pmatrix}$. Then $$\text{supp}(g)=\{a_{i,j}\;|\;1\;leq i<k, 1\leq j\leq t_i\}$$ and $\text{supp}(f_k)=\{a_{k,1},\dots,a_{k,t}\}$ so that by lemma 3.4.4, we have $\langle g\rangle\cap\langle f_k\rangle=\{1\}$. By proposition 1.3.6 and since disjoint cycles commute, we have that $$\abs{f}=\lcm(\abs{g},\abs{f_k})=\lcm(\abs{f_1},\dots,\abs{f_k})$$ and so we conclude. 
+\end{proof}
+\end{prp}
+
+\begin{eg}{}{}\\
+Let $f\in S_4$ be an element of order $4$. Note that if $4=\lcm(x,y)$ then $x=4$ or $y=4$. Hence the elements of order $4$ are just the cycles of length $4$. 
+\end{eg}
+
+\begin{prp}{}{}\\
+Let $n\in\N^+$. Let $f,g\in S_n$ be permutations such that $f=(a_1,\dots,a_r)$, then $$gfg^{-1}=\begin{pmatrix}g(a_1) & \cdots & g(a_r)\end{pmatrix}$$ 
+\begin{proof}\\
+For $1\leq i\leq r$, let $b_i=g(a_i)$. For $1\leq i\leq r-1$, we have that 
+\begin{align*}
+(gfg^{-1})(b_i)&=g(f(a_i))\\
+&=g(a_{i+1})\\
+&=b_{i+1}
+\end{align*}
+Similarly, we have that $(gfg^{-1})(b_r)=a_1$. For $b\in X\setminus\{b_1,\dots,b_r\}$, suppose that $c\in X$ is such that $g(c)=b$. Then we have that $(gfg^{-1})(b)=g(f(c))=g(c)=b$ and so we conclude. 
+\end{proof}
+\end{prp}
+
+\begin{defn}{The Sign Function}{}\\
+Let $n\in\N^+$. Define the sign function $\text{sgn}:S_n\to\{-1,1\}\leq\Q^\times$ by $$\text{sgn}(\phi)=\begin{cases}
+1 & \text{if $\phi$ is even}\\
+-1 & \text{if $\phi$ is odd}
+\end{cases}$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $n\in\N^+$. Then the sign function is a group homomorphism. 
+\end{lmm}
 
 \subsection{The Permutation Groups}
 \begin{defn}{Permutation Groups}{}\\
@@ -825,67 +952,6 @@ Let $G,H$ be permutation groups on a finite set $X$. If $\text{supp}(G)\cap\text
 We show the contrapositive. Suppose that $G\cap H$ has a non-trivial element, say $g$. Then since $\langle g\rangle\leq G,H$, we have that $\text{supp}(\langle g\rangle)\subseteq\text{supp}(G),\text{supp}(H)$ so that $$\text{supp}(g)=\text{supp}(\langle g\rangle)\subseteq\text{supp}(G)\cap\text{supp}(H)$$ But $\text{supp}(g)$ cannot be empty because if it is, then $g$ fixes all $x\in X$ so that $g$ is the identity, a contradiction. Thus $\text{supp}(G)\cap\text{supp}(H)$ is non-empty. 
 \end{proof}
 \end{prp}
-
-\subsection{Cycle Types}
-\begin{defn}{Cycle Types}{}\\
-Let $n\in\N^+$. Let $\phi\in S_n$. We say that $\phi$ has cycle type $2^{r_2}3^{r_3}\cdots$ if it has exactly $r_k$ $k$ cycles for $k\geq 2$. \\
-A transposition is a cycle of type $2$. 
-\end{defn}
-
-Notice that the following proposition means that we will have a third notation for elements of $S_n$. 
-
-\begin{prp}{}{}\\
-Let $n\in\N^+$. Let $\tau$ be a cycle of type $k$ in $S_n$. Then the following are true. 
-\begin{itemize}
-\item $\tau$ has order $k$
-\item $\tau$ can be decomposed into a product of $k-1$ transpositions
-\end{itemize}
-\begin{proof}\\
-\begin{itemize}
-\item Let $\tau$ be a cycle of order $k$. Notice that multiplying $n$ times of the same element means that we are taking the $i$th element in $\tau$ to the $i+n$ modulo $k$ element in the cycle. If $n=k$ then every element goes to itself, which means that $\tau^k$ is just the permutation that maps every element to iself, which is the identity of the permutation group. 
-\item For a cycle $\begin{pmatrix}x_1,\dots,x_k\end{pmatrix}$. Notice that the product $$\begin{pmatrix}x_{k-1}&x_k\end{pmatrix}\cdots\begin{pmatrix}x_2&x_3\end{pmatrix}\begin{pmatrix}x_1&x_2\end{pmatrix}$$ returns the original cycle. 
-\end{itemize}
-Thus we are done. 
-\end{proof}
-\end{prp}
-
-\begin{prp}{}{}\\
-Let $X$ be a finite set. Let $f\in\text{Sym}(X)$ be such that $f=f_1\cdots f_k$ is a product of $k$-cycles. Then $$\abs{f}=\lcm(\abs{f_1},\dots,\abs{f_k})$$ 
-\begin{proof}\\
-We proceed by induction. We have done the case $n=1$ above. Now suppose that for all $1\geq m<k$, we have $\abs{f_1\cdots f_m}=\lcm(n_1,\dots,n_m)$. Let $g=f_1\cdots f_{k-1}$. Write $f_i=\begin{pmatrix}a_{i,1}&\cdots&a_{i,t_i}\end{pmatrix}$. Then $$\text{supp}(g)=\{a_{i,j}\;|\;1\;leq i<k, 1\leq j\leq t_i\}$$ and $\text{supp}(f_k)=\{a_{k,1},\dots,a_{k,t}\}$ so that by lemma 3.4.4, we have $\langle g\rangle\cap\langle f_k\rangle=\{1\}$. By proposition 1.3.6 and since disjoint cycles commute, we have that $$\abs{f}=\lcm(\abs{g},\abs{f_k})=\lcm(\abs{f_1},\dots,\abs{f_k})$$ and so we conclude. 
-\end{proof}
-\end{prp}
-
-\begin{prp}{}{}\\
-Let $n\in\N^+$. Let $f,g\in S_n$ be permutations such that $f=(a_1,\dots,a_r)$, then $$gfg^{-1}=\begin{pmatrix}g(a_1) & \cdots & g(a_r)\end{pmatrix}$$ 
-\begin{proof}\\
-For $1\leq i\leq r$, let $b_i=g(a_i)$. For $1\leq i\leq r-1$, we have that 
-\begin{align*}
-(gfg^{-1})(b_i)&=g(f(a_i))\\
-&=g(a_{i+1})\\
-&=b_{i+1}
-\end{align*}
-Similarly, we have that $(gfg^{-1})(b_r)=a_1$. For $b\in X\setminus\{b_1,\dots,b_r\}$, suppose that $c\in X$ is such that $g(c)=b$. Then we have that $(gfg^{-1})(b)=g(f(c))=g(c)=b$ and so we conclude. 
-\end{proof}
-\end{prp}
-
-\begin{prp}{}{}\\
-Let $n\in\N^+$. Two permutations in $S_n$ are conjugate if and only if they have the same cycle types. 
-\begin{proof}\\
-If $f$ and $g$ are conjugate in $S_n$, then by the above theorem they have the same cycle type. 
-\end{proof}
-\end{prp}
-
-\begin{defn}{The Sign Function}{}\\
-Let $n\in\N^+$. Define the sign function $\text{sgn}:S_n\to\{-1,1\}\leq\Q^\times$ by $$\text{sgn}(\phi)=\begin{cases}
-1 & \text{if $\phi$ is even}\\
--1 & \text{if $\phi$ is odd}
-\end{cases}$$
-\end{defn}
-
-\begin{lmm}{}{}\\
-Let $n\in\N^+$. Then the sign function is a group homomorphism. 
-\end{lmm}
 
 \subsection{The Alternating Groups}
 Based on the number of transpositions an element can be decomposed to, we classify them into odd and even permutations. This motivates the definition of the alternating group. 
@@ -932,6 +998,20 @@ Let $n\geq 3$. Then $\abs{D_{2n}}=2n$.
 Since $\sigma\tau=\tau\sigma^{-1}$, it suffices to count all elements in $D_{2n}$ of the form $\sigma^k\tau^m$ for $k,m\in\N$. Since $\abs{\sigma}=n$ and $\abs{\tau}=2$, we conclude that there are $2n$ elements in $D_{2n}$. 
 \end{proof}
 \end{prp}
+
+\begin{eg}{}{}\\
+The following are true. 
+\begin{itemize}
+\item $D_6=S_3$. 
+\item $D_{24}$ is not isomorphic to $S_4$. 
+\end{itemize}
+\begin{proof}\\
+\begin{itemize}
+\item Follows from the fact that $\abs{D_6}=\abs{S_3}$. 
+\item Analyzing the possible cycle types of $S_4$ shows that $S_4$ does not contain elements of order $12$. But $D_6$ does and isomorphic groups contains the same number of elements of a fixed order. 
+\end{itemize}
+\end{proof}
+\end{eg}
 
 \begin{prp}{}{}\\
 Let $n\geq 3$. Write $D_{2n}=\langle\sigma,\tau\rangle$. Then $\langle\sigma\rangle$ is a normal subgroup of $D_{2n}$. 
@@ -1086,21 +1166,29 @@ Thus $\abs{\text{Orb}_G(x)}=[G:\text{Stab}_G(x)]$.
 \subsection{The Action of Conjugation}
 Conjugation marks one of the most important group actions that one should consider, with the other two being rather trivial: the action of left multiplication and the action of $G$ on the set of cosets of $H$ in $G$. In particular, Cauchy's theorem is a major application of such a group action. 
 
-\begin{defn}{Conjugation}{}\\
-Let $G$ be a group. Define conjugation to be an action of $G$ on $G$ where $\cdot:G\times G\to G$ is defined by $g\cdot x=gxg^{-1}$. Define the conjugacy classes of a group to be the orbits of conjugation: $$\text{Cl}(G)=\{\text{Orb}_G(x)\;|\;x\in G\}$$ Two elements are said to be conjugate to each other if they lie in the same conjugacy classes. 
-\end{defn}
-
-\begin{defn}{Conjugacy Classes}{}
-Let $G$ be a group. Suppose that $G$ acts on itself by conjugation. 
+\begin{defn}{Conjugacy Classes}{}\\
+Let $G$ be a group. 
 \begin{itemize}
-\item Let $x\in G$. Define the conjugacy class of $x$ to be the orbits of the action $$\text{Cl}(x)=\{gxg^{-1}\;|\;g\in G\}=\text{Orb}_G(x)$$
+\item Let $x\in G$. Define the conjugacy class of $x$ to be the orbits of the action of conjugation: $$\text{Cl}(x)=\{gxg^{-1}\;|\;g\in G\}=\text{Orb}_G(x)$$
 \item Define the set of conjugacy classes of $G$ to be $$\text{Cl}(G)=\{\text{Cl}(x)\;|\;x\in G\}$$
 \end{itemize}
 \end{defn}
 
+\begin{eg}{}{}\\
+Let $n\in\N^+$. Two permutations in $S_n$ are conjugate if and only if they have the same cycle types. 
+\begin{proof}\\
+If $f$ and $g$ are conjugate in $S_n$, then by the above theorem they have the same cycle type. 
+\end{proof}
+\end{eg}
+
 It is easy to see that the action of conjugation is indeed a group action. Aside from the conjugacy classes of a group, we also have the notion of centralizers. 
 
-\begin{defn}{Centralizer and Center}{} Let $G$ be a group. Define the centralizer of a group to be the stabilizer of conjugation: $$C_G(x)=\{g\in G\;|\;gx=xg\}=\text{Stab}_G(x)$$ Define the center of a group to be the kernel of conjugation: $$Z(G)=\{g\in G\;|\;gxg^{-1}=x\text{ for all }x\in X\}=\ker(G,G,\cdot)$$
+\begin{defn}{Centralizes}{}\\
+Let $G$ be a group. Let $x\in G$. Define the centralizer of $x$ in $G$ to be the stabilizer of the action of conjugation: $$C_G(x)=\{g\in G\;|\;gxg^{-1}=x\}$$
+\end{defn}
+
+\begin{defn}{The Center of a Group}{}\\
+Let $G$ be a group. Define the center of $G$ to be the kernel of the action of conjugation: $$Z(G)=\{g\in G\;|\;gxg^{-1}=x\text{ for all }x\in X\}=\ker(G,G,\cdot)$$
 \end{defn}
 
 Since $Z(G)$ consists of all elements of $G$ that commute with other elements,  $Z(G)=G$ naturally implies that $G$ is abelian. \\
@@ -1446,6 +1534,10 @@ It remains to show that this is a bijection. But $\abs{HK}=\frac{\abs{H}\abs{K}}
 \end{prp}
 
 As a direct result, if in addition to the above conditions, we have $G=HK$ then $G\cong H\rtimes_\phi K$. 
+
+\pagebreak
+
+\part{Introduction to Ring Theory}
 
 \pagebreak
 \section{Introduction to Rings}
@@ -2544,7 +2636,7 @@ Suppose for a contradiction that $f$ is reducible in $R[x]$. Then there exists n
 \end{proof}
 \end{thm}
 
-\begin{eg}\\
+\begin{eg}{}{}\\
 The following polynomials are irreducible. 
 \begin{itemize}
 \item $x^4+3x+6\in\Z[x]$. 
@@ -2556,7 +2648,6 @@ Apply Eisenstein's criterion with $P=(5)$. \\
 Let $f(x)=x^4+1$. Apply Eisenstein's criterion to $f(x+1)$ with $P=(2)$. Since any factorization of $f(x+1)$ gives a factorization of $f(x)$ by replacing $x$ with $x-1$, we conclude that $f(x)$ is irreducible. 
 \end{proof}	
 \end{eg}
-
 
 \begin{thm}{Generalized Gauss's Lemma}{}\\
 Let $R$ be a UFD. Let $f\in R[x]$ be primitive. Then $f$ is irreducible in $R[x]$ if and only if $f$ is irreducible in $\text{Frac}(R)[x]$. 

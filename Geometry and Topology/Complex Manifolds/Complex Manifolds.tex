@@ -92,6 +92,10 @@ Let $M$ be a complex manifold. A holomorphic vector bundle is a vector bundle $p
 Let $M$ be a complex manifold. Let $E$ be a complex manifold and $p:E\to M$ a vector bundle over $\C$. Then $p$ is a holomorphic vector bundle if and only if the transition maps $g_{i,j}:U_i\cap U_j\to\text{GL}(n,\C)$ are holomorphic. 
 \end{prp}
 
+\begin{defn}{Holomorphic Sections}{}\\
+Let $M$ be complex manifold. Let $p:E\to M$ be a holomorphic vector bundle. Let $U\subseteq M$. Define the holomorphic sections from $U$ to $E$ to be $$\Gamma^\text{hol}(U,E)=\{s\in\Gamma(U,E)\;|\;s\text{ is holomorphic }\}$$
+\end{defn}
+
 \subsection{Vector Bundles and Sheaves}
 \begin{thm}{Serre's Correspondence for Topological Manifolds}{}\\
 Let $M$ be a topological manifold. Then there is an equivalence of categories $$\bold{Vect}^\R(M)\simeq\bold{LF}_{\mC_M^0}$$
@@ -181,7 +185,7 @@ Let $M$ be a complex manifold. Let $p\in M$. Define the Holomorphic Tangent spac
 Immediately one is curious of the relation between $T_p^\text{Holo}(M)$ and $T_p(M)$ since every complex manifold is a smooth manifold of double the dimension. 
 
 \begin{prp}{}{}\\
-Let $M$ be a complex manifold. Let $p\in M$. Then we have $T_p^{1,0}(M)=T_p^\text{Holo}(M)$. 
+Let $M$ be a complex manifold. Let $p\in M$. Then there is a biholomorphism $T_p^{1,0}(M)=T_p^\text{Holo}(M)$. 
 \end{prp}
 
 %https://math.stackexchange.com/questions/577501/complexified-tangent-space
@@ -232,27 +236,21 @@ Let $(M,J)$ be an almost complex manifold. Then $J$ is integrable if and only if
 \pagebreak
 \section{Complex Differential Forms}
 \subsection{Complexified Differential Forms}
-\begin{defn}{}{}\\
-Let $M$ be a complex manifold. Define ??? to be $$\Omega_{M,\C}^k$$ to be the sheaf of smooth sections of $\Lambda^k(T_\C M)$. 
+\begin{defn}{The Sheaf of Complex Valued Forms}{}\\
+Let $M$ be a complex manifold. Define the sheaf of complex valued $k$-forms $\Omega_{M,\C}^k$ of $M$ to be the sheaf of smooth sections of $\Lambda^k(T_\C(M))$. Explicitly, we have $$\Omega_{M,\C}^k(U)=\Gamma^\infty(U,\Lambda^k(T_\C(M))$$
 \end{defn}
 
-Let $M$ be a complex manifold. The $\C$-vector space $\Omega_\C^1(M)$ consists of smooth maps from $M$ to $T_\C^\ast M$. The splitting $T_\C^\ast M=TM^+\oplus TM^-$ together with sections on operations of vector bundles means that giving a section of $T_\C^\ast M$ is the same as giving a section of $TM^+$ and $TM^-$. Thus we acquire a splitting $\Omega_\C^1(M)=\Omega^{1,0}(M)\oplus\Omega^{0,1}(M)$. 
+\begin{lmm}{}{}\\
+Let $M$ be a complex manifold. Then $\Omega_{M,\C}^k$ is a fine sheaf of $\mC_{M,\C}^\infty$-modules of rank $\binom{2n}{k}$. 
+\end{lmm}
 
-Let $M$ be a complex manifold. The splitting $T_\C^\ast M=TM^+\oplus TM^-$. Properties of the exterior product that translates to vector bundles as $$\Lambda^n(T_\C^\ast M)=\bigoplus_{p+q=n}\Lambda^p(TM^+)\otimes\Lambda^q(TM^-)$$
+\begin{lmm}{}{}\\
+Let $M$ be a complex manifold. Then there is an isomorphism $$\Omega_{M,\C}^k\cong\Omega_{M,\R}^k\otimes_{\underline{\R}}\underline{\C}$$
+\end{lmm}
 
-\begin{defn}{}{}\\
-Let $M$ be a complex manifold. Define ??? to be $$\Omega_M^{p,q}$$ to be the sheaf of smooth sections of $\Lambda^p(TM^+)\otimes\Lambda^q(TM^-)$. 
-\end{defn}
-
-It follows that $\Omega_\C^n(M)=\bigoplus_{p+q=n}\Omega^{p,q}(M)$. 
-
-\begin{prp}{}{}\\
-Let $M$ be a complex manifold. Then the following are true. 
-\begin{itemize}
-\item There is a $\mC_M^\infty$-module isomorphism $$\Omega_{M,\C}^n\cong\bigoplus_{p+q=n}\Omega_M^{p,q}$$
-\item There is a $\mC_M^\infty$-module isomorphism $$\Omega_M^{p,q}\cong\Lambda^p\Omega_M^{1,0}\otimes_\C\Lambda^q\Omega_M^{0,1}$$
-\end{itemize}
-\end{prp}
+\begin{lmm}{}{}\\
+Let $M$ be a complex manifold. Then there is an isomorphism $$\Omega_{M,\C}^k\cong\Lambda_{\mC_{M,\C}^\infty}^k\Omega_{M,\C}^1$$
+\end{lmm}
 
 \begin{defn}{The Complexified Differential}{}\\
 Let $M$ be a complex manifold. 
@@ -262,19 +260,31 @@ Let $M$ be a complex manifold.
 \end{itemize}
 \end{defn}
 
-\begin{defn}{The Complex de Rham Chain Complex}{}\\
-Let $M$ be a complex manifold. Define the de Rham chain complex of $M$ to be $(\Omega_{M,\C}^\bullet(M),d_\C)$. 
-\end{defn}
-
 \begin{defn}{The Complex de Rham Cohomology Groups}{}\\
 Let $M$ be a complex manifold. Define the $n$th holomorphic de Rham cohomology groups of $M$ to be $$H_\text{dR}^n(M;\C)=H^n(\Omega_{M,\C}^\bullet(M),d_\C)$$
 \end{defn}
 
 \begin{prp}{}{}\\
-Let $M$ be a complex manifold. Then there is a natural isomorphism $$H_\text{dR}^n(M;\C)\cong H_\text{dR}^n(M;\R)\otimes_\R\C$$ for all $n\in\N$. 
+Let $M$ be a complex manifold. Then there are natural isomorphisms $$H_\text{dR}^n(M;\C)\cong H_\text{dR}^n(M;\R)\otimes_\R\C\cong\H^n(M,\Omega_{M,\C}^\bullet)$$ for all $n\in\N$. 
 \end{prp}
 
-\subsection{Dolbeault Cohomology}
+\subsection{Mixed Differential Forms}
+Let $M$ be a complex manifold. The $\C$-vector space $\Omega_\C^1(M)$ consists of smooth maps from $M$ to $T_\C^\ast M$. The splitting $T_\C^\ast M=TM^+\oplus TM^-$ together with sections on operations of vector bundles means that giving a section of $T_\C^\ast M$ is the same as giving a section of $TM^+$ and $TM^-$. Thus we acquire a splitting $\Omega_\C^1(M)=\Omega^{1,0}(M)\oplus\Omega^{0,1}(M)$. 
+
+Let $M$ be a complex manifold. The splitting $T_\C^\ast M=TM^+\oplus TM^-$. Properties of the exterior product that translates to vector bundles as $$\Lambda^n(T_\C^\ast M)=\bigoplus_{p+q=n}\Lambda^p(TM^+)\otimes\Lambda^q(TM^-)$$
+
+\begin{defn}{The Sheaf of Mixed Differential Forms}{}\\
+Let $M$ be a complex manifold. Define the sheaf of $(p,q)$-forms $\Omega_M^{p,q}$ to be the sheaf of smooth sections of $\Lambda^p(T^{1,0})^\ast\otimes\Lambda^q(T^{0,1})^\ast$. Explicitly, we have $$\Omega_M^{p,q}(U)=\Gamma^\infty(U,\Lambda^p(T^{1,0})^\ast\otimes\Lambda^q(T^{0,1})^\ast)$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $M$ be a complex manifold. Then $\Omega_M^{p,q}$ is a fine sheaf of $\mC_{M,\C}^\infty$-modules of rank $\binom{n}{p}\binom{n}{q}$. 
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $M$ be a complex manifold. Then there is an isomorphism $$\Omega_{M,\C}^n=\bigoplus_{p+q=n}\Omega_M^{p,q}$$
+\end{lmm}
+
 \begin{defn}{Dolbeault Operators}{}\\
 Let $M$ be a complex manifold. Define the Dolbeault operators on $M$ by $$\partial=\text{proj}_{p+1,q}\circ d:\Omega^{p,q}\to\Omega^{p+1,q}\;\;\;\text{ and }\;\;\;\overline{\partial}=\text{proj}_{p,q+1}\circ d:\Omega^{p,q}\to\Omega^{p,q+1}$$
 \end{defn}
@@ -324,10 +334,6 @@ We can now write the bicomplex in a grid: \\
 \end{tikzcd}}\\
 Note that the squares here are not commutative, and this is not the notation we have defined for bicomplexes. If we augment the differential in the total complex by accounting the anti-commutativity of the squares, we would obtain isomorphisms $$H_\text{dR}^k(M;\C)=H^k(\text{Tot}(\Omega^{\bullet,\bullet}(M),\partial,\overline{\partial}))$$
 
-\begin{defn}{Holomorphic de Rham Cohomology}{}\\
-Let $M$ be a complex manifold. Define the $n$th holomorphic de Rham cohomology group of $M$ to be $$H_\text{Holo}^n(M)=H^n(\Omega_M^{\bullet,0}(M),\partial)$$
-\end{defn}
-
 \begin{defn}{Dolbeault Complex}{} Let $M$ be a complex manifold. Let $p\in\N$. Define the $p$th Dolbeault complex of $M$ to be the cochain complex \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
 \cdots\arrow[r] & \Omega^{p,q-1}(M)\arrow[r, "\overline{\partial}"] & \Omega^{p,q}(M)\arrow[r, "\overline{\partial}"] & \Omega^{p,q+1}(M)\arrow[r, "\overline{\partial}"] & \cdots
@@ -338,9 +344,36 @@ denoted $\Omega^{p,\bullet}(M)$.
 \begin{defn}{Dolbeault Cohomology}{} Define the dobeault cohomology of a complex manifold $M$ to be $$H^{p,q}(M)=\frac{\ker(\bar{\partial}:\Omega^{p,q}(M)\to\Omega^{p,q+1}(M)}{\im(\bar{\partial}:\Omega^{p,q-1}(M)\to\Omega^{p,q}(M))}=H^q(\Omega^{p,\bullet}(M),\overline{\partial})$$
 \end{defn}
 
-We may relate Dolbeault cohomology with sheaf cohomology. 
+\begin{lmm}{}{}\\
+Let $M$ be a complex manifold. Then there is an isomorphism $$H^{p,q}(M)\cong\H(M,\Omega_M^{p,\bullet})$$
+\end{lmm}
 
-\begin{thm}{}{}\\
+\subsection{Holomorphic Differential Forms}
+\begin{defn}{The Sheaf of Holomorphic Differential Forms}{}\\
+Let $M$ be a complex manifold. Define the sheaf of holomorphic $k$-forms $\Omega_M^k$ of $M$ to be the sheaf of holomorphic sections of $\Lambda^k(T^{1,0})^\ast$. Explicitly, we have $$\Omega_M^k(U)=\Gamma^\text{hol}(U,\Lambda^k(T^{1,0})^\ast)$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $M$ be a complex manifold. Then $\Omega_M^k$ is a sheaf of $\mO_M$-modules. 
+\end{lmm}
+
+Notice that this is a sheaf of $\mO_M$-modules and not $\mC^\infty(M)$. In general $\Omega_M^k$ is strictly smaller than $\Omega_M^{k,0}$. 
+
+\begin{lmm}{}{}\\
+Let $M$ be a complex manifold. Then $(\Omega_M^\bullet,\partial)$ is a cochain complex. 
+\end{lmm}
+
+\begin{defn}{Holomorphic de Rham Cohomology}{}\\
+Let $M$ be a complex manifold. Define the $k$th holomorphic de Rham cohomology group of $M$ to be $$H_\text{hol}^k(M)=\H^k(M,\Omega_M^\bullet)$$
+\end{defn}
+
+$\Omega_M^k$ is coherent but not fine. Hence this is genuinely a different object from $H^k(\Omega_M^k(M),\partial)$. 
+
+\begin{prp}{}{}\\
+Let $M$ be a complex manifold. Then there is an isomorphism $$H_\text{dR}^k(M;\C)\cong H_\text{hol}^k(M)$$
+\end{prp}
+
+\begin{thm}{Dolbeault's Theorem}{}\\
 Let $M$ be a complex manifold. Then we have an isomorphism $$H^{p,q}(M)\cong H^q(M,\Omega_M^p)$$
 \end{thm}
 
@@ -453,7 +486,21 @@ Let $(M,h)$ be a complex Hermitian manifold. Let $n=\dim(M)$. Then the following
 \end{itemize}
 \end{prp}
 
-\subsection{The Antiholomorphic Adjoint Differential Operator}
+\subsection{Adjoints of Differential Operators}
+Recall that for a Riemannian manifold, the exterior derivative $d:\Omega^n(M)\to\Omega^{n+1}(M)$ admits an adjoint that is characterized by the formula $d^\ast=-\ast d\ast$. In the theory of complex manifolds, the splitting $d=\partial+\overline{\partial}$ means that $\partial$ and $\overline{\partial}$ also admits adjoints. 
+
+\begin{defn}{The Adjoint of $\partial$}{}\\
+Let $(M,h)$ be a complex Hermitian manifold. Define the operator $\partial^\ast:\Omega^{p,q}(M)\to\Omega^{p-1,q}(M)$ to be the operator such that $$\langle\partial^\ast\omega,\eta\rangle_{L^2}=\langle\omega,\partial\eta\rangle_{L^2}$$ for all $\omega\in\Omega^{p,q}(M)$ and $\eta\in\Omega^{p-1,q}(M)$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $(M,h)$ be a complex Hermitian manifold. Then the following are true. 
+\begin{itemize}
+\item $\partial^\ast=-\ast\partial\ast$. 
+\item $\partial^\ast\circ\partial^\ast=0$. 
+\end{itemize}
+\end{prp}
+
 \begin{defn}{The Adjoint of $\overline{\partial}$}{}\\
 Let $(M,h)$ be a complex Hermitian manifold. Define the operator $\overline{\partial}^\ast:\Omega^{p,q}(M)\to\Omega^{p,q-1}(M)$ to be the operator such that $$\langle\overline{\partial}^\ast\omega,\eta\rangle_{L^2}=\langle\omega,\overline{\partial}\eta\rangle_{L^2}$$ for all $\omega\in\Omega^{p,q}(M)$ and $\eta\in\Omega^{p,q-1}(M)$. 
 \end{defn}
@@ -466,8 +513,8 @@ Let $(M,h)$ be a complex Hermitian manifold. Then the following are true.
 \end{itemize}
 \end{prp}
 
-\begin{defn}{The Complex Laplacian Operator}{}\\
-Let $(M,h)$ be a complex Hermitian manifold. Define the complex Laplacian operator to be the map $\Delta_{\overline{\partial}}:\Omega^{p,q}(M)\to\Omega^{p,q}(M)$ by $$\Delta_{\overline{\partial}}=\overline{\partial}\circ\overline{\partial}^\ast+\overline{\partial}^\ast\circ\overline{\partial}$$
+\begin{defn}{The Complex Laplacian Operators}{}\\
+Let $(M,h)$ be a complex Hermitian manifold. Define the complex Laplacian operators $\Delta_{\partial},\Delta_{\overline{\partial}}:\Omega^{p,q}(M)\to\Omega^{p,q}(M)$ by $$\Delta_\partial=\partial\circ\partial^\ast+\partial^\ast\circ\partial\;\;\;\text{ and }\;\;\;\Delta_{\overline{\partial}}=\overline{\partial}\circ\overline{\partial}^\ast+\overline{\partial}^\ast\circ\overline{\partial}$$
 \end{defn}
 
 \begin{defn}{Complex Harmonic Forms}{}\\

@@ -21,30 +21,24 @@
 \tableofcontents
 \pagebreak
 
-\section{The General Theory of Sheaves}
-\subsection{Basic Definition of Presheaves}
-As with how we equipped to each variety $V$ its coordinate ring $k[V]$ which are functions on $V$, we want to equip to each spectrum some ring which are functions on them. It will not make sense that we can define functions on spectrums immediately. \\
-
-In its full generality, sheaves are designed to encode all local information into one compact notation. It often has uses in complex geometry for its differential forms and smooth functions. In algebraic geometry it is fundamental for redefining the notion of a variety. 
-
-\begin{defn}{The Category of Open Sets}{} Let $(X,\mT)$ be a topological space. Define the category $\bold{Open}(X)$ to consist of the following data. 
+\pagebreak
+\section{Introduction to Presheaves and Sheaves}
+\subsection{The Category of Presheaves of Sets}
+\begin{defn}{The Category of Open Sets}{}\\
+Let $(X,\mT)$ be a topological space. Define the category $\bold{Open}(X)$ to consist of the following data. 
 \begin{itemize}
-\item The objects $\text{Ob}(\bold{Open}(X))=\mT$ are the open sets of $X$
-\item For $U,V\subseteq X$ two open sets of $X$, the morphisms $$\Hom_{\bold{Open}(X)}(U,V)=\begin{cases}
-\{\iota:U\hookrightarrow V\text{ the inclusion map}\} & \text{ if } U\subseteq V\\
-\emptyset & \text{otherwise}
+\item The objects are given by the open sets $\mT$ of $X$. 
+\item For two open sets $U,V\in\mT$, define the morphisms from $U$ to $V$ by $$\Hom_{\bold{Open}(X)}(U,V)=\begin{cases}
+\{\iota:U\hookrightarrow V\} & \text{ if }U\subseteq V\\
+\emptyset & \text{ otherwise }
 \end{cases}$$
-\item Composition is given as the composition of functions. 
+\item Composition is given by the composition of functions. 
 \end{itemize}
 \end{defn}
 
-Recall from Category Theory 1 that a presheaf on $\mC$ is just a contravariant functor $\mC\to\bold{Set}$. Using the category of open sets we can now define presheaves on spaces. 
-
 \begin{defn}{Presheaves on a Space}{}\\
-Let $X$ be a space. Let $\mC$ be a category. A $\mC$-presheaf on $X$ is a contravariant functor $$\mF:\bold{Open}(X)\to\mC$$
+Let $X$ be a space. A presheaf on $X$ is a contravariant functor $\mF:\bold{Open}(X)\to\bold{Set}$. 
 \end{defn}
-
-As per the definition of a functor, for each inclusion map $\iota:V\to U$ of open sets in $X$, passing through a presheaf $\mF$ gives a unique morphism $\mF(\iota):\mF(U)\to\mF(V)$. We often denote $\mF(\iota)$ as $\text{res}_V^U$ or $(-)|_V$. 
 
 \begin{eg}{The Constant Presheaf}{}\\
 Let $X$ be a space. Let $S$ be a set. Define the constant presheaf with value $S$ to be the presheaf $\underline{S}_\text{pre}$ defined as follows. 
@@ -54,25 +48,27 @@ Let $X$ be a space. Let $S$ be a set. Define the constant presheaf with value $S
 \end{itemize}
 \end{eg}
 
-\begin{defn}{The Stalk of a Presheaf}{} Let $\mF$ be a presheaf on a topological space $(X,\mathcal{T})$. Let $p\in X$. Consider the full subcategory $\mJ_p$ of $\bold{Open}(X)$ consisting of open sets in $X$ that contain $p$. Define the stalk of $\mF$ at $p$ to be the colimit $$\mF_p=\underset{\mJ_p}{\text{colim}}\mF(V_p)$$ 
+\begin{defn}{The Category of Presheaves}{}\\
+Let $X$ be a topological space. Define the category of presheaves on $X$ to be $$\bold{PSh}(X)=\text{Func}(\bold{Open}(X)^\text{op},\bold{Set})$$
 \end{defn}
 
-\begin{defn}{Morphism of Presheaves}{}\\
-Let $X$ be a topological space. Let $\mC$ be a category. Let $\mF,\mG$ be $\mC$-presheaves on $X$. A morphism $\varphi:\mF\to\mG$ is a natural transformation of functors. 
-\end{defn}
+\begin{prp}{}{}\\
+Let $X$ be a space. Then $\bold{PSh}(X)$ admits all finite limits. 
+\end{prp}
 
-Notice that the natural transformation $\phi$ here takes every open set $U$ and maps it to a group homomorphism $\phi(U):\mF(U)\to\mG(U)$ if $\mF$ and $\mG$ are presheaves with values in $\bold{Grp}$. 
+We now have the definition of a morphism of presheaves, which is just a natural transformation, and the definition of isomorphisms, which is just a natural isomorphism. 
+
+\begin{defn}{The Stalk of a Presheaf}{}\\
+Let $X$ be a space. Let $\mF$ be a presheaf on $X$. Let $p\in X$. Consider the full subcategory $\mJ_p$ of $\bold{Open}(X)$ consisting of open sets in $X$ that contain $p$. Define the stalk of $\mF$ at $p$ to be the colimit $$\mF_p=\underset{\mJ_p}{\text{colim}}\mF(V_p)$$
+\end{defn}
 
 \begin{defn}{Induced Map of Stalks}{}\\
-Let $X$ be a topological space. Let $\mC$ be a category. Let $\mF,\mG$ be $\mC$-presheaves on $X$. Let $p\in X$. Define the induced map of stalks $$\phi_p:\mF_p\to\mG_p$$ to be the map induced by the universal product of colimits. 
+Let $X$ be a topological space. Let $\mF,\mG$ be presheaves on $X$. Let $p\in X$. Define the induced map of stalks $$\phi_p:\mF_p\to\mG_p$$ to be the map induced by the universal product of colimits. 
 \end{defn}
 
-\begin{defn}{Isomorphism of Presheaves}{}\\
-Let $X$ be a topological space. Let $X$ be a topological space. Let $\mC$ be a category. Let $\mF,\mG$ be $\mC$-presheaves on $X$. Let $\varphi:\mF\to\mG$ be a morphism of presheaves. We say that $\varphi$ is an isomorphism if $\varphi$ is a natural isomorphism. In this case, we say that $\mF$ and $\mG$ are isomorphic. 
-\end{defn}
-
-\subsection{Sheaves with Values in a Set}
-\begin{defn}{Sheaves}{} Let $X$ be a space. A $\bold{Set}$-sheaf on $X$ is a $\bold{Set}$-presheaf $\mF:\bold{Open}\to\bold{Sets}$ satisfying two additional properties
+\subsection{The Category of Sheaves of Sets}
+\begin{defn}{Sheaves}{}\\
+Let $X$ be a space. A sheaf on $X$ is a presheaf $\mF:\bold{Open}\to\bold{Sets}$ such that the following are true. 
 \begin{itemize}
 \item Identity: If $\{U_i|i\in I\}$ is an open cover of $U$ and $\phi_1,\phi_2\in\mF(U)$ and $\phi_1|_{U_i}=\phi_2|_{U_i}$ for all $i$, then $\phi_1=\phi_2$
 \item Gluing: If $\{U_i|i\in I\}$ is an open cover of $U$ and $\phi_i\in\mF(U_i)$ for all $i\in I$ such that $\phi_i|_{U_i\cap U_j}=\phi_j|_{U_i\cap U_j}$ for all $i,j\in I$, then there is exists some $\phi\in\mF(U)$ such that $\phi|_{U_i}=\phi_i$ for all $i\in I$. 
@@ -107,24 +103,8 @@ Define a function $\underline{S}(U)\to\prod_{C\in\mB}S$ as follows. For each con
 \end{proof}
 \end{eg}
 
-\begin{prp}{Gluing Sheaves}{}\\
-Let $X$ be a space. Let $\{U_i\;|\;i\in I\}$ be an open cover of $X$. Let $\mF_i$ be a sheaf of sets on $U_i$. Let $\phi_{i,j}:\mF_i|_{U_i\cap U_j}\to\mF_j|_{U_i\cap U_j}$ be a collection of morphism of sheaves for ranging $i,j\in I$ such that the following are true. 
-\begin{itemize}
-\item For each $i,j\in I$, $\phi_{i,j}$ is an isomorphism. 
-\item For each $i,j,k\in I$, we have $\phi_{j,k}\circ\phi_{i,j}=\phi_{i,k}$. 
-\end{itemize}
-Then there exists a unique (up to unique isomoprhism) sheaf of sets $\mF$ on $X$ such that there are isomorphisms $\mF|_{U_i}\overset{\cong}{\to}\mF_i$ for all $i\in I$. 
-\end{prp}
-
-\subsection{Sheaves with Values in a Category}
-Presheaves are easily generalized to take values in an arbitrary category because they are simply defined to be contravariant functors. 
-
-\begin{defn}{Presheaves with Values in a Category}{} Let $X$ be a space. Let $\mC$ be a category. A presheaf on $X$ with values in $\mC$ is a contravariant functor $$\mF:\bold{Open}(X)\to\mC$$
-\end{defn}
-
-However, it is hard to define sheaves with values on an arbitrary category $\mC$. This is because in our definition of sheaves on sets, we made use of the fact that morphisms in $\bold{Set}$ have a well defined notion of restriction. We will define sheaves on a general category by first considering sheaves with an underlying set. 
-
-\begin{thm}{}{} Let $X$ be a space. Let $\mF$ be a presheaf with values in $\bold{Set}$. Then the following are equivalent characterizations. 
+\begin{prp}{}{}\\
+Let $X$ be a space. Let $\mF$ be a presheaf. Then the following are equivalent characterizations. 
 \begin{itemize}
 \item $\mF$ is a sheaf
 \item For any open covering $U=\bigcup_{i\in I}U_i$, the sequence \\
@@ -153,325 +133,307 @@ Finally, we also need to show that $f$ is injective. Suppose that $x,y\in\mF(U)$
 
 Now suppose that the equalizer condition is satisfied. Then $f$ is injective. This means that for $x,y\in\mF(U)$ such that $x_i=y_i$ for all $i\in I$, then $x=y$. But this is precisely the identity axiom. Suppose that $\im(f)=\text{Eq}(g,h)$. Let $s_i\in\mF(U_i)$ such that $$s_i|_{U_i\cap U_j}=g(s_i)=h(s_i)=s_j|_{U_i\cap U_j}$$ for all $i,j\in I$. Then $(s_i)_{i\in I}\in\text{Eq}(g,h)=\im(f)$. Which means that there exists some $s\in\mF(U)$ such that $s|_{U_i}=s_i$. But this is the content of the gluing axiom. Since the identity and the gluing axiom are satisfied, we conclude that $\mF$ is a sheaf. 
 \end{proof}
-\end{thm}
+\end{prp}
 
-Motivated by the above characterization, we define sheaves with values on a category with finite products as follows. 
-
-\begin{defn}{Sheaves with Values in a Category}{} Let $X$ be a space. Let $\mC$ be a category that admits all products. Let $\mF$ be a presheaf on $X$ with values in $\mC$. We say that $\mF$ is a sheaf with values in $\mC$ if for every open covering $U=\bigcup_{i\in I}U_i$, the following diagram \\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	{\mF(U)} & {\prod_{i\in I}\mF(U_i)} & {\prod_{(i,j)\in I\times I}\mF(U_i\cap U_j)}
-	\arrow["f", from=1-1, to=1-2]
-	\arrow["g", shift left, from=1-2, to=1-3]
-	\arrow["h"', shift right, from=1-2, to=1-3]
-\end{tikzcd}}\\
-is an equalizer diagram, where $f,g,h$ are defined as follows. 
+\begin{prp}{Gluing Sheaves}{}\\
+Let $X$ be a space. Let $\{U_i\;|\;i\in I\}$ be an open cover of $X$. Let $\mF_i$ be a sheaf of sets on $U_i$. Let $\phi_{i,j}:\mF_i|_{U_i\cap U_j}\to\mF_j|_{U_i\cap U_j}$ be a collection of morphism of sheaves for ranging $i,j\in I$ such that the following are true. 
 \begin{itemize}
-\item The morphism $f$ is the product $$\prod_{i\in I}\text{res}_{U_i}^U:\mF(U)\to\mF(U_i)$$
-\item The morphism $g$ is the product $$\prod_{(i,j)\in I\times I}\text{res}_{U_i\cap U_j}^{U_i}:\mF(U_i)\to\mF(U_i\cap U_j)$$
-\item The morphism $h$ is the product $$\prod_{(i,j)\in I\times I}\text{res}_{U_i\cap U_j}^{U_j}:\mF(U_j)\to\mF(U_i\cap U_j)$$
+\item For each $i,j\in I$, $\phi_{i,j}$ is an isomorphism. 
+\item For each $i,j,k\in I$, we have $\phi_{j,k}\circ\phi_{i,j}=\phi_{i,k}$. 
 \end{itemize}
-\end{defn}
-
-Note: the double product is ordered so that the equalizing condition is the same as the gluing condition. 
-
-\begin{prp}{}{}\\
-Let $X$ be a space. Let $\mC$ be a category that admits all products. Let $F:\mC\to\bold{Set}$ be a functor such that the following are true. 
-\begin{itemize}
-\item $F$ is faithful. 
-\item $F$ preserves limits. 
-\item A morphism $f\in\mC$ is an isomorphism if and only if $F(f)\in\bold{Set}$ is an isomorphism. 
-\end{itemize}
-Let $\mF$ be a presheaf on $X$ with values in $\mC$. Then $\mF$ is a sheaf with values in $\mC$ if and only if $F\circ\mF$ is a sheaf of sets. 
-\begin{proof}\\
-Suppose that $\mF$ is a sheaf. Then the following diagram is an equalizer for any open set $U$ and any open cover $\{U_i\;|\;i\in I\}$ of $U$: \\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	{\mF(U)} & {\prod_{i\in I}\mF(U_i)} & {\prod_{(i,j)\in I\times I}\mF(U_i\cap U_j)}
-	\arrow["f", from=1-1, to=1-2]
-	\arrow["g", shift left, from=1-2, to=1-3]
-	\arrow["h"', shift right, from=1-2, to=1-3]
-\end{tikzcd}}\\
-Since $F$ commutes with limits, the following diagram is an equalizer: \\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	{F\circ\mF(U)} & {\prod_{i\in I}F\circ\mF(U_i)} & {\prod_{(i,j)\in I\times I}F\circ\mF(U_i\cap U_j)}
-	\arrow["f", from=1-1, to=1-2]
-	\arrow["g", shift left, from=1-2, to=1-3]
-	\arrow["h"', shift right, from=1-2, to=1-3]
-\end{tikzcd}}\\
-Hence $F\circ\mF$ is a sheaf. \\
-
-Conversely, suppose that $F\circ\mF$ is a sheaf. Let $E$ be the equalizer of the following diagram: \\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	{\prod_{i\in I}F\circ\mF(U_i)} & {\prod_{(i,j)\in I\times I}F\circ\mF(U_i\cap U_j)}
-	\arrow["g", shift left, from=1-1, to=1-2]
-	\arrow["h"', shift right, from=1-1, to=1-2]
-\end{tikzcd}}\\
-By the universal property of products and the definition of a presheaf, we obtain a morphism $\mF(U)\to E$. Since $F$ preserves limits, we have that $F\circ\mF(U)$ and $F(E)$ are both equalizers of the same diagram, and so the morphism $F\circ\mF(U)\to F(E)$ is an isomorphism. By assumption on $F$, we conclude that $\mF(U)\cong E$. Hence $\mF$ is a sheaf. 
-\end{proof}
+Then there exists a unique (up to unique isomoprhism) sheaf of sets $\mF$ on $X$ such that there are isomorphisms $\mF|_{U_i}\overset{\cong}{\to}\mF_i$ for all $i\in I$. 
 \end{prp}
 
-The following definition is inspired by the Stacks Project. 
-
-\begin{defn}{Algebraic Categories}{}\\
-Let $\mC$ be a category. We say that $\mC$ is an algebraic category if there exists a functor $F:\mC\to\bold{Set}$ such that the following are true. 
-\begin{itemize}
-\item $\mC$ admits all products and filtered colimits. 
-\item $F$ is faithful (so that $\mC$ is a concrete category). 
-\item $F$ preserves limits and filtered colimits. 
-\item A morphism $f\in\mC$ is an isomorphism if and only if $F(f)\in\bold{Set}$ is an isomorphism. 
-\end{itemize}
-\end{defn}
-
-This allows us to simplify statements about sheaves with values in categories whose objects are algebraic in nature. Some examples of algebraic categories include: $$\bold{Set},\bold{Grp},\bold{Ab},\bold{Ring},\bold{CRing},\bold{Mod}_R,\bold{Alg}_R$$ They are all equipped with a forgetful functor to sets that is faithful, is the right adjoint of the free functor (take $\text{id}:\bold{Set}\to\bold{Set}$ for $\bold{Set}$) and reflects isomorphisms. \\
-
-We abuse notation and think of as if $\mF(U)$ are sets for each open set $U\subseteq X$ (in reality only $(F\circ\mF)(U)$ are sets). 
-
-\begin{lmm}{}{}\\
-Let $X$ be a topological space. Let $\mC$ be an algebraic category. Let $\mF$ be a $\mC$-presheaf on $X$. Let $p\in X$. Then we have $$\mF_p=\frac{\{(U,f)\;|\;U\subseteq X\text{ is an open neighborhood of }p, f\in\mF(U)\}}{\sim}$$ where $(U,f)\sim(V,g)$ if there exists $W\subseteq U\cap V$ an open neighborhood of $p$ such that $f|_W=g|_W$. 
-\begin{proof}
-If $\mF$ is a $\bold{Set}$-presheaf, the above would be an explicit construction of the filtered colimit. Since $\mC$ is algebraic, $F:\mC\to\bold{Set}$ preserves colimits and by abuse of notation we obtain the following set-theoretic description. 
-\end{proof}
-\end{lmm}
-
-Think of the definition of stalks as follows: Treat $f$ and $g$ to be sections in $\mF(U_1)$ and $\mF(U_2)$ where $V\subseteq U_1\cap U_2$ is open and contains $x$. Then we think of $f$ and $g$ to be the same function in the stalk as long as they agree on some open set that contains $x$. \\
-
-Indeed, since we do not care about the entirety of the domain of $f$ and $g$, and only care about what happens locally near $x$, it makes sense for us to treat them as a function when they appear to be the same locally. \\
-
-Let $[(s,U)]\in\mF_p$ be an element of the stalk. Consider the following commutative diagram: \\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	{\mF(U)} & {\mG(U)} \\
-	{\mF_p} & {\mG_p}
-	\arrow[from=1-1, to=1-2]
-	\arrow[from=1-1, to=2-1]
-	\arrow[from=1-2, to=2-2]
-	\arrow[from=2-1, to=2-2]
-\end{tikzcd}} \\
-The element $s\in\mF(U)$ maps vertically on the left to $[(s,U)]\in\mF_p$. Since the diagram is commutative, we see that the image of the element in $\mF_p$ from the induced map of stalks is $[(\phi(U)(s),U)]$. This is the formula for the induced map. 
-
-\begin{prp}{}{}\\
-Let $X$ be a topological space. Let $\mC$ be an algebraic category. Let $\mF,\mG$ be $\mC$-presheaves on $X$. Let $\varphi:\mF\to\mG$ be a morphism. Then $\varphi$ is an isomorphism if and only if for all $p\in X$, the induced map $$\varphi_p:\mF_p\to\mG_p$$ is an isomorphism. 
-\begin{proof}\\
-Suppose that $\phi$ is an isomorphism of sheaves. Then $\phi$ and $\phi^{-1}$ induces unique morphisms $\phi_p:\mF_p\to\mG_{X,p}$ and $\phi_p^{-1}:\mG_{X,p}\to\mF_p$ making the following diagram commute: \\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	{\mF(U)} & {\mG(U)} & {\mF(U)} & {\mG(U)} \\
-	{\mF_p} & {\mG_{X,p}} & {\mF_p} & {\mG(V)}
-	\arrow["{\phi(U)}", from=1-1, to=1-2]
-	\arrow[from=1-1, to=2-1]
-	\arrow["{\phi^{-1}(U)}", from=1-2, to=1-3]
-	\arrow[from=1-2, to=2-2]
-	\arrow["{\phi^{-1}(U)}", from=1-3, to=1-4]
-	\arrow[from=1-3, to=2-3]
-	\arrow[from=1-4, to=2-4]
-	\arrow["{\exists!}"', dashed, from=2-1, to=2-2]
-	\arrow["{\exists!}"', dashed, from=2-2, to=2-3]
-	\arrow["{\exists!}"', dashed, from=2-3, to=2-4]
-\end{tikzcd}} \\
-On the other hand, the identity morphisms $\text{id}_\mF$ and $\text{id}_\mG$ also induces the identity map on the level of stalks. Thus we must have $\phi_p\circ\phi^{-1}_p=\text{id}_{\mG_{X,p}}$ and $\phi^{-1}_p\circ\phi_p=\text{id}_{\mF_p}$ . Hence the induced morphism of stalks is an isomorphism. \\
-
-Now suppose that $\phi_p$ is an isomorphism for each $p\in X$. We show that $\phi(U)$ is bijective for all $U\subseteq X$ open. Let $s\in\mF(U)$ such that $\phi(U)(s)=0$. Then for each $p\in U$, $\phi(U)(s)$ considered as an element in $\mG_{X,p}$ is equal to $0$. Since $\phi_p$ is injective, $s=0$ in $\mF_p$. This means that there exists an open neighbourhood $V_p\subseteq U$ of $p$ such that $s\in\phi(V_p)$ is $0$ for each $p\in U$. Since $U$ is covered by the open neighbourhoods $V_p$ for $p\in U$, by the identity axiom we conclude that $s=0$ in $\phi(U)$. Thus $\phi$ is injective. \\
-
-Now let $t\in\mG(U)$. Let $t_p$ be the corresponding element of $t$ in $\mG_{X,p}$ for each $p\in U$. Since $\phi_p$ is surjective, there exists $s_p\in\mF_p$ such that $\phi_p(s_p)=t_p$ for each $p\in U$. Suppose that on a neighbourhood $V_p$ of $p$, $s_p$ is represented as $r_p$. Then $\phi(r_p)\in\mG(V_p)$ and $t|_{V_p}$ are two elements whose germs in $\mG_{X,p}$ are equal. Hence there exists $W_p\subseteq V_p$ containing $p$ such that $\phi(r_p)=t|_{W_p}$ in $\mG(W_p)$. Now $U$ is covered by open sets of the form $W_p$ for each $p\in U$. Let $p\in W_p$ and $q\in W_q$. Then both $r_p|_{W_p\cap W_q}$ and $r_q|_{W_p\cap W_q}$ are two sections in $\mF(W_p\cap W_q)$ that are sent to $t|_{W_p\cap W_q}\in\mG(W_p\cap W_q)$ by $\phi(W_p\cap W_q)$. By injectivity, they are equal. We conclude that $$r_p|_{W_p\cap W_q}=r_q|_{W_p\cap W_q}$$ By the gluing axiom, we conclude that there exists a section $s\in\mF(U)$ such that $s|_{W_p}=r_p$. Now $\phi(s)$ and $t$ are two sections in $\mG(U)$ such that for any $p\in U$, $\phi(s)|_{W_p}=t|_{W_p}$. By the identity axiom, we conclude that $\phi(s)=t$. 
-\end{proof}
-\end{prp}
-
-Note that the above proposition is very untrue for presheaves because as one can see, proving both injective and surjective requires to use of the sheaf axioms instead of just the presheaf datum. 
-
-\begin{prp}{}{}\\
-Let $X$ be a topological space. Let $\mC$ be an algebraic category. Let $\mF,\mG$ be $\mC$-presheaves on $X$. Let $\varphi,\psi:\mF\to\mG$ be morphisms. Then $\varphi=\phi$ if and only if for all $p\in X$, we have $\varphi_p=\phi_p$. 
-\begin{proof}\\
-Clearly if $\varphi(U)=\psi(U)$ for all open sets $U\subseteq X$, we must have that the induced map of colimits are equal. So suppose instead that $\varphi_p=\psi_p$ for all $p\in X$. Consider the following commutative diagram: \\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	{\mF(U)} & {\mG(U)} \\
-	{\prod_{p\in U}\mF_p} & {\prod_{p\in U}\mG_p}
-	\arrow[from=1-1, to=1-2]
-	\arrow[from=1-1, to=2-1]
-	\arrow[from=1-2, to=2-2]
-	\arrow[from=2-1, to=2-2]
-\end{tikzcd}} \\
-where the top and bottom maps are either $\varphi$ or $\psi$ and their induced product map of stalks. \\
-
-I claim that the vertical maps are injective. Suppose that $s,t\in\mF(U)$ are such that $([(s,U)])_{p\in U}=([(t,U)])_{p\in U}$. This means that for each $p\in U$, we have that $[(s,U)]=[(t,U)]\in\mF_p$. This means that there exists an open subset $p\in V_p\subseteq U$ such that $s|_{V_p}=t|_{V_p}$. Now the collection $\{V_p\;|\;p\in U\}$ forms an open cover of $U$. Since $\mF$ is a sheaf, the identity axiom implies that $s=t$ on $U$. Hence the map is injective. \\
-
-Let $s\in\mF(U)$. Then the left vertical map sends $s$ to $([(s,U)])_{p\in U}$ and $\prod_{p\in U}\varphi_p=\prod_{p\in U}\psi_p$ sends the element to $([(\varphi(U)(s),U)])_{p\in U}=([(\psi(U)(s),U)])_{p\in U}$. Since the right vertical map is injective, we must have $\varphi(U)(s)=\psi(U)(s)$. Hence we have $\varphi=\psi$. 
-\end{proof}
-\end{prp}
-
-\begin{defn}{The Category of Presheaves}{}\\
-Let $X$ be a topological space. Let $\mC$ be a category. Define the category of presheaves on $X$ with values in $\mC$ to be $$\bold{P}\mC(X)=\text{Func}(\bold{Open}(X)^\text{op},\mC)$$
-\end{defn}
-
-\begin{defn}{The Category of Sheaves over a Category}{} Let $X$ be a topological space. Let $\mC$ be a category that admits all products. Define the category $\mC(X)$ of sheaves on $X$ with values in $\mC$ to be the full subcategory of $\bold{P}\mC(X)$ consisting of sheaves on $X$ with values in $\mC$. 
-\end{defn}
-
-\subsection{Defining Sheaves on a Subcategory of Open Sets}
-\begin{defn}{Sheaves of a Space on a Subcategory of Open Sets}{}\\
-Let $X$ be a space. Let $\mS$ be a subcategory of $\bold{Open}(X)$. Let $\mC$ be an algebraic category with forgetful functor $F:\mC\to\bold{Set}$. A sheaf of $X$ on $\mS$ is a contravariant functor $\mF:\mS^\text{op}\to\mC$ such that $F\circ\mF$ is a sheaf. 
-\end{defn}
-
-\begin{defn}{The Category of Sheaves on a Space on a Subcategory of Open Sets}{}\\
-Let $X$ be a space. Let $\mS$ be a subcategory of $\bold{Open}(X)$. Let $\mC$ be an algebraic category. Define the category of sheaves of $X$ on $\mS$ $$\mC_\mS(X)$$ to be the full subcategory of $\Hom_{\bold{Cat}}(\mS^\text{op},\mC)$ consisting of sheaves of $X$ on $\mS$. 
+\begin{defn}{The Category of Sheaves of Sets}{}\\
+Let $X$ be a space. Define the category of sheaves of sets $\bold{Sh}(X)$ on $X$ to be the full subcategory of $\bold{PSh}(X,\bold{Set})$ consisting of sheaves of sets. 
 \end{defn}
 
 \begin{prp}{}{}\\
-Let $X$ be a space. Let $\mS$ be a subcategory of $\bold{Open}(X)$. Let $\mC$ be an algebraic category. If $\mS\subseteq\bold{Open}(X)$ is filteredm, then there is an equivalence of categories $$\mC(X)=\mC_\mS(X)$$
+Let $X$ be a space. Then $\bold{Sh}(X)$ admits all finite limits. 
 \end{prp}
 
-An example of $\mS$ would be: any base $\mB$ of the topology of $X$. 
+\begin{prp}{}{}\\
+Let $X$ be a space. Let $\mF,\mG$ be sheaves on $X$. Let $\varphi:\mF\to\mG$ be a morphism. Then $\varphi$ is an isomorphism if and only if $\varphi_p:\mF_p\to\mG_p$ is a bijection for all $p\in X$. 
+\end{prp}
 
-\pagebreak
-\section{Properties of the Category of Sheaves}
-\subsection{Sheafification}
+\begin{prp}{}{}\\
+Let $X$ be a space. Let $\mF,\mG$ be sheaves on $X$. Let $\varphi,\psi:\mF\to\mG$ be morphisms. Then $\varphi=\phi$ if and only if $\varphi_p=\psi_p$ for all $p\in X$. 
+\end{prp}
+
+\subsection{The Sheafification Functor}
 \begin{defn}{Compatible Germs}{}\\
-Let $X$ be a space. Let $\mC$ be an algebraic category. Let $\mF$ be an $\mC$-presheaf on $X$. Let $([(s_p,U_p)])_{p\in U}\in\prod_{p\in U}\mF_p$. We say that the element is a compatible germ if for all $p\in U$, there exists an open subset $p\in V_p\subseteq U$ such that $$[(s_p|_{V_p},V_p)]=[(s_q,U_q)]\in\mF_q$$ for all $q\in V_p$. 
+Let $X$ be a space. Let $\mF$ be a presheaf on $X$. Let $([(s_p,U_p)])_{p\in U}\in\prod_{p\in U}\mF_p$. We say that the element is a compatible germ if for all $p\in U$, there exists an open subset $p\in V_p\subseteq U$ such that $$[(s_p|_{V_p},V_p)]=[(s_q,U_q)]\in\mF_q$$ for all $q\in V_p$. 
 \end{defn}
 
 \begin{lmm}{}{}\\
-Let $X$ be a space. Let $\mC$ be an algebraic category. Let $\mF$ be an $\mC$-presheaf on $X$. Let $([(s_p,U_p)])_{p\in U}\in\prod_{p\in U}\mF_p$. Then the element is a compatible germ if and only if there exists an open cover $U=\bigcup_{i\in I}U_i$ of $U$ together with elements $f_i\in\mF(U_i)$ such that for all $p\in U_i$ for all $i$, $[(f_i,U_i)]=[(s_p,U_p)]\in\mF_p$. 
-\begin{proof}\\
-Suppose that $([(s_p,U_p)])_{p\in U}\in\prod_{p\in U}\mF_p$ is a compatible germ. Then $\{U_p\;|\;p\in U\}$ is a valid open cover of $U$ together with the elements $s_p\in\mF(U_p)$ so that the latter condition is satisfied. \\
-
-Conversely, suppose that the latter condition is satisfied. Let $p\in U$. Since $\{U_i\;|\;i\in I\}$ is an open cover of $U$, there exists $i\in I$ such that $p\in U_i$. Then for all $q\in U_i$, we have $[(f_i,U_i)]=[(s_q,U_q)]\in\mF_q$ by assumption. Hence we are done. 
-\end{proof}
+Let $X$ be a space. Let $\mF$ be a presheaf on $X$. Let $([(s_p,U_p)])_{p\in U}\in\prod_{p\in U}\mF_p$. Then the element is a compatible germ if and only if there exists an open cover $\bigcup_{i\in I}U_i$ of $U$ and $f_i\in\mF(U_i)$ such that $$[(f_i,U_i)]=[(s_p,U_p)]\in\mF_p$$ for all $i$ and all $p\in U_i$. 
 \end{lmm}
-
-Thus not only are isomorphism of sheaves determined on the level of stalks, the morphism of sheaves themselves are determined on the level of stalks. 
 
 \begin{defn}{Sheafification}{}\\
-Let $X$ be a space. Let $\mC$ be an algebraic category. Let $\mF$ be an $\mC$-presheaf on $X$. Define the sheafification $$\mF^\text{sh}:\bold{Open}(X)\to\mA$$ of $\mF$ as follows. 
+Let $X$ be a space. Let $\mF$ be a presheaf on $X$. Define the sheafification of $\mF$ to be the sheaf $$\mF^\text{sh}:\bold{Open}(X)\to\bold{Set}$$ given as follows. 
 \begin{itemize}
-\item For each open set $U\subseteq X$, $$\mF^\text{sh}(U)=\left\{([(s_p,U_p)])_{p\in U}\in\prod_{p\in U}\mF_p\;\bigg{|}\;([(s_p,U_p)])_{p\in U}\text{ is a compatible germ }\right\}$$
-\item For each $V\subseteq U$ an inclusion, there is a unique morphism $\mF^\text{sh}(U)\to\mF^\text{sh}(V)$ that sends $([(s_p,U_p)])_{p\in U}\in\in\mF^\text(U)$ to $$([(s_p,U_p)])_{p\in V}$$
+\item For each open set $U\subseteq X$, we have $$\mF^\text{sh}(U)=\left\{([(s_p,U_p)])_{p\in U}\in\prod_{p\in U}\mF_p\;\bigg{|}\;([(s_p,U_p)])_{p\in U}\text{ is a compatible germ }\right\}$$
+\item For each $V\subseteq U$ an inclusion, there is a unique morphism $\mF^\text{sh}(U)\to\mF^\text{sh}(V)$ given by $$([(s_p,U_p)])_{p\in U}\in\mF^\text{sh}(U)\mapsto([(s_p,U_p])_{p\in V}$$
 \end{itemize}
 \end{defn}
 
 \begin{lmm}{}{}\\
-Let $X$ be a space. Let $\mC$ be an algebraic category. Let $\mF$ be an $\mC$-presheaf on $X$. Then $\mF^\text{sh}$ is a $\mC$-sheaf. 
-\begin{proof}\\
-We first show that $\mF^\text{sh}$ is a sheaf. Let $\{W_i\;|\;i\in I\}$ be an open cover for an open set $U\subseteq X$. \\
-
-For the identity axiom, suppose that $([(s_p,U_p)])_{p\in U}$ and $([t_p,V_p])_{p\in U}$ in $\mF(U)$ are such that their restriction to $\mF^\text{sh}(W_i)$ are equal. This means that $([(s_p,U_p)])_{p\in W_i}=([(s_p,U_p)])_{p\in W_i}$ or in other words, that $[(s_p,U_p)]=[(t_p,V_p)]\in\mF_p$. Then since $\{W_i\;|\;i\in I\}$ covers $U$, we must have $([(s_p,U_p)])_{p\in U}=([t_p,V_p])_{p\in U}$ in $\mF(U)$. \\
-
-For gluing, suppose that we are given $([(s_p,U_p)])_{p\in W_i}\in\mF^\text{sh}(W_i)$ for each $i\in I$ such that restricting to common intersections give equal elements. This means that the element $([(s_p,U_p)])_{p\in U}$ is a well defined element of $\mF^\text{sh}$. 
-\end{proof}
+Let $X$ be a space. Let $\mF$ be a presheaf on $X$. Then $\mF^\text{sh}(X)$ is a sheaf. 
 \end{lmm}
 
-\begin{eg}{}{}\\
-Let $X$ be a space. Let $S$ be a set. Then we have $$\underline{S}=\left(\underline{S}_\text{pre}\right)^\text{sh}$$
-\end{eg}
-
-\begin{defn}{Universal Morphism of Sheafification}{}\\
-Let $X$ be a space. Let $\mC$ be an algebraic category. Let $\mF$ be an $\mC$-presheaf on $X$. Define the universal morphism of sheafification $\theta_\mF$ as follows. For each open set $U\subseteq X$, define $$\theta_\mF(U):\mF(U)\to\prod_{p\in U}\mF_p$$ by $s\mapsto([(s,U)])_{p\in U}$. 
+\begin{defn}{The Universal Morphism}{}\\
+Let $X$ be a space. Let $\mF$ be a presheaf on $X$. Define the universal morphism $\theta_\mF:\mF\to\mF^\text{sh}$ as follows. For each open set $U\subseteq X$, define $$\theta_\mF(U):\mF(U)\to\prod_{p\in U}\mF_p$$ by $s\mapsto([(s,U)])_{p\in U}$. 
 \end{defn}
 
 \begin{lmm}{}{}\\
-Let $X$ be a space. Let $\mC$ be an algebraic category. Let $\mF$ be an $\mC$-presheaf on $X$. Then the following are true. 
+Let $X$ be a space. Let $\mF$ be a presheaf on $X$. Let $U\subseteq X$ be an open set. Then the following are true. 
 \begin{itemize}
-\item $\im(\theta_\mF)=\mF^\text{sh}(U)$. 
-\item If $\mF$ is a sheaf, then for any open subset $U\subseteq X$, $\theta_\mF(U):\mF\to\mF^\text{sh}$ is injective. 
+\item $\im(\theta_\mF(U))=\mF^\text{sh}(U)$. 
+\item If $\mF$ is a sheaf, then $\theta_\mF(U):\mF\to\mF^\text{sh}$ is injective. 
 \end{itemize}
-\begin{proof}
-\begin{itemize}
-\item Clearly any element in the image of the map is a compatible germ. Now conversely, suppose that $([(s_p,U_p)])_{p\in U}$ is a compatible germ. Now $\{U_p\;|\;p\in U\}$ is an open cover of $U$. Let $p,q\in U$ be arbitrary. Let $r\in U_p\cap U_q$. Then there exists an open subset $V_r\subseteq U_p$ such that $[(s_p|_{V_r},V_r)]=[(s_q,U_q)]\in\mF_q$. This means that there exists an open subset $W_r\subseteq V_r\cap U_q$ such that $s_p|_{W_r}=s_q|_{W_r}$. Now since $\{W_r\;|\;r\in U_p\cap U_q\}$ covers $U_p\cap U_q$, we must have that $s_p|_{U_i\cap U_j}=s_q|_{U_i\cap U_j}$ by the identity axiom. Then by the gluability axiom, there exists $s\in\mF(U)$ such that $s|_{U_p}=s_p\in\mF(U_p)$. Now clearly $([(s,U)])_{p\in U}=([(s_p,U_p)])_{p\in U}$ since $s|_{U_p}=s_p\in\mF(U_p)$. Hence the map is surjective. 
-\item Suppose that $s,t\in\mF(U)$ are such that $([(s,U)])_{p\in U}=([(t,U)])_{p\in U}$. This means that for each $p\in U$, we have that $[(s,U)]=[(t,U)]\in\mF_p$. This means that there exists an open subset $p\in V_p\subseteq U$ such that $s|_{V_p}=t|_{V_p}$. Now the collection $\{V_p\;|\;p\in U\}$ forms an open cover of $U$. Since $\mF$ is a sheaf, the identity axiom implies that $s=t$ on $U$. Hence the map is injective. 
-\end{itemize}
-\end{proof}
 \end{lmm}
 
 \begin{lmm}{}{}\\
-Let $X$ be a space. Let $\mC$ be an algebraic category. Let $\mF$ be an $\mC$-presheaf on $X$. Then $\theta$ induces an isomorphism $$\theta_p:\mF_p\overset{\cong}{\longrightarrow}\mF_p^\text{sh}$$ of stalks for each $p\in X$. 
-\begin{proof}\\
-By the universal property of stalks as colimits, the morphism $\theta_p$ is defined by $[(s,U)]\mapsto[(([(s,U)])_{p\in U},U)]$. \\
-
-Suppose that $[(([(s,U)])_{q\in U},U)]=[(([(t,U)])_{q\in U},U)]$. By the definition of the equivalence relation, we have that $([(s,U)])_{q\in U}$ and $([(t,U)])_{q\in U}$ agree on $U$. Hence for each $q\in U$, we have $[(s,U)]=[(t,U)]$. Again by the definition of the equivalence relation, we have $s=t$ on $U$. Hence $\theta_p$ is injective. \\
-
-To show that $\theta_p$ is surjective, let $[(([(s_q,U_q)])_{q\in U},U)]\in\mF_p^\text{sh}$. Since $s$ is a compatible germ by definition, there exists an open cover $\{U_i\;|\;i\in I\}$ of $U$ together with elements $f_i\in\mF(U_i)$ such that $[(f_i,U_i)]=[(s_q,U_q)]\in\mF_p$ for all $q\in U_i$ for all $i$. In particular, for our already fixed choice of $p\in X$, there exists $i\in I$ and $f_i\in\mF(U_i)$ such that $[(f_i,U_i)]=[(s_p,U_p)]\in\mF_p$. Now $[(f_i,U_i)]\in\mF_p$ is mapped to $[(([(f_i,U_i)])_{q\in U_i},U_i)]$. I claim that $$[(([(f_i,U_i)])_{q\in U_i},U_i)]=[(([(s_q,U_q)])_{q\in U},U)]\in\mF_p^\text{sh}$$ Indeed, in the intersection $U_i=U_i\cap U$, we have $[(f_i,U_i)]=[(s_q,U_q)]$ for all $q\in U_i$. by definition. Hence we have $([(f_i,U_i)])_{q\in U_i}=([(s_q,U_q)])_{q\in U_i}$ and hence we have surjectivity. 
-\end{proof}
+Let $X$ be a space. Let $\mF$ be a sheaf on $X$. Then the following are true. 
+\begin{itemize}
+\item $\theta$ induces an isomorphism $$\theta_p:\mF_p\overset{\cong}{\longrightarrow}\mF_p^\text{sh}$$ for all $p\in X$. 
+\item $\theta:\mF:\mF\to\mF^\text{sh}$ is an isomorphism. 
+\end{itemize}
 \end{lmm}
 
 \begin{prp}{The Universal Property of Sheafification}{}\\
-Let $X$ be a space. Let $\mC$ be an algebraic category. Let $\mF$ be an $\mC$-presheaf on $X$. Then the sheafification $\mF^\text{sh}$ of $\mF$ together with the universal morphism $\theta$ satisfies the following universal property. For any sheaf $\mG$ on $X$ and morphism of presheaves $\varphi:\mF\to\mG$, there exists a unique morphism $\varphi^\text{sh}:\mF^\text{sh}\to\mG$ such that the following diagram commutes: \\
+Let $X$ be a space. Let $\mF$ be a presheaf on $X$. Then the sheafification $\mF^\text{sh}$ together with $\theta_\mF$ satisfies the following universal property. For any sheaf $\mG$ on $X$ and any morphism $\varphi:\mF\to\mG$, there exists a unique morphism $\varphi^\text{sh}:\mF^\text{sh}\to\mG$ such that the following diagram commutes: \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	\mF & {\mF^\text{sh}} \\
 	& \mG
-	\arrow["\theta", from=1-1, to=1-2]
+	\arrow["{\theta_\mF}", from=1-1, to=1-2]
 	\arrow["\varphi"', from=1-1, to=2-2]
 	\arrow["{\exists!\varphi^\text{sh}}", dashed, from=1-2, to=2-2]
-\end{tikzcd}} \\
-Moreover, $\mF^+$ is the unique (up to unique isomorphism) sheaf of $X$ satisfying the above property. 
-\begin{proof}\\
-Let $\mG$ be a sheaf. Let $\phi:\mF\to\mG$ be a morphism of presheaves. To define a morphism of sheaves $\mF^\text{sh}\to\mG$, we first define it on each open set $U$ and prove that the relevant square diagrams commute. So define $\phi^\text{sh}(U):\mF^\text{sh}(U)\to\mG(U)$ for each open set $U\subseteq X$ as follows. For $([(s_p,U_p)])_{p\in U})$ an element in $\prod_{p\in U}\mF_p$, the product map $\prod_{p\in U}\phi_p$ sends the our element to $([\phi(U_p)(s_p),U_p)])_{p\in U}$. Let $([(s_p,U_p)])_{p\in U}$ be a compatible germ. I claim that $([\phi(U_p)(s_p),U_p)])_{p\in U}$ is a compatible germ. By lemma 1.2.6, there exists an open cover $\{U_i\;|\;i\in I\}$ of $U$ together with elements in $f_i\in\mF(U_i)$ such that for all $i\in I$ and all $p\in U_i$, $[(f_i,U_i)]=[(s_p,U_p)]$. Now the elements $\phi(U_i)(f_i)$ for all $i$ proves the claim since $\phi_p$ maps $[(f_i,U_i)]$ to $[(\phi(U_i)(f_i),U_i)]$, $[(s_p,U_p)]\mapsto[(\phi(U_p)(s_p),U_p)]$ and $[(f_i,U_i)]=[(s_p,U_p)]\in\mF_p$ implies that $[(\phi(U_i)(f_i,U_i)]=[(\phi(U_p)(s_p),U_p)]$. By lemma 1.2.9, we obtain a unique element in $\mG(U)$. Hence we obtain a map $\phi^\text{sh}(U):\mF^\text{sh}(U)\to\mG(U)$. \\
-
-Now we show that the composite $\mF\to\mF^\text{sh}\to\mG$ is equal to $\phi$. Notice that given $s\in\mF(U)$, it is sent to $([(s,U)]_{p\in U}$ in $\mF^\text{sh}(U)$ and then to $([(\phi(U)(s),U)])_{p\in U}$ in $\mG(U)$. Evidently, $\phi(U)(s)\in\mG(U)$ is the unique preimage of $([(\phi(U)(s),U)])_{p\in U}$ of the map in lemma 1.2.7. Hence $s\mapsto\phi(U)(s)$ matches up with the map of presheaves $\phi:\mF\to\mG$. \\
-
-It remains to show uniqueness of the morphism $\phi^\text{sh}$. Suppose that $\psi:\mF^\text{sh}\to\mG$ is another morphism of sheaves such that $\phi=\psi\circ\theta$. By the above lemma, $\theta$ is an isomorphism at stalks. Hence for all $p\in X$, we have $$\phi_p\circ\theta_p^{-1}=\psi_p$$ On the other hand, the equation $\phi=\phi^\text{sh}\circ\theta$ gives $$\phi_p\circ\theta_p^{-1}=\phi_p^\text{sh}$$ Equating the two gives $\psi_p=\phi_p^\text{sh}$ for all $p\in X$. Since $\mF^\text{sh}$ and $\mG$ are sheaves, By 1.2.6 we conclude that $\psi=\phi^\text{sh}$ and so we are done. 
-\end{proof}
+\end{tikzcd}}\\
+Moreover, $\mF^\text{sh}$ is the unique (up to unique isomorphism) sheaf of $X$ satisfying the above property. 
 \end{prp}
 
-\begin{lmm}{}{}\\
-Let $X$ be a space. Let $\mC$ be an algebraic category. Let $\mF$ be an $\mC$-presheaf on $X$. Then the universal morphism $\theta:\mF\to\mF^\text{sh}$ is an isomorphism. 
-\begin{proof}\\
-By 1.2.11, we have that $\theta_p$ is an isomorphism for all $p\in X$. Hence by 1.2.4, we have that $\theta$ is an isomorphism. 
-\end{proof}
-\end{lmm}
-
-Thus the theory of compatible germs gives us an explicit way of understanding the elements of a sheaf by a collection of elements in the stalks. 
-
 \begin{defn}{The Sheafification Functor}{}\\
-Let $X$ be a space. Let $\mC$ be an algebraic category. Define the sheafification functor $$(-)^\text{sh}:\bold{P}\mC(X)\to\mC(X)$$ as follows. 
+Let $X$ be a space. Define the sheafification functor $$(-)^\text{sh}:\bold{PSh}(X)\to\bold{Sh}(X)$$ as follows. 
 \begin{itemize}
-\item For each presheaf $\mF$ on $X$, $\mF^\text{sh}$ is the sheafification of $\mF$. 
+\item Each presheaf $\mF$ is sent to its sheafification $\mF^\text{sh}$. 
 \item For each morphism of presheaves $\mF\to\mG$, the morphism of sheaves is given by the universal property of $\mF^\text{sh}$ applied to the composite $\mF\to\mG\to\mG^\text{sh}$. 
 \end{itemize}
 \end{defn}
 
 \begin{prp}{}{}\\
-Let $X$ be a space. Let $\mC$ be an algebraic category. Let $\text{Forget}:\mC(X)\to\bold{P}\mC(X)$ be the forgetful functor. Then there is an adjunction $$(-)^\text{sh}:\bold{P}\mC(X)\overset{\dashv}{\rightleftarrows}\mC(X):\text{Forget}$$
-\begin{proof}\\
-The universal property of sheafification gives a map from the right hom set to the left hom set. Conversely, precomposition with the universal morphism $\mF\to\mF^\text{sh}$ gives the map to the other direction. Evidently they are inverses of each other. It remains to show that this bijection is natural in both variables. In other words, we ought to show that the following two squares commute: \\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	{\Hom_{\bold{Set(X)}}(\mF^\text{sh},\mG)} & {\Hom_{\bold{PSet}(X)}(\mF,\text{Forget}(\mG))} \\
-	{\Hom_{\bold{Set(X)}}(\mH^\text{sh},\mG)} & {\Hom_{\bold{PSet}(X)}(\mH,\text{Forget}(\mG))} \\
-	{\Hom_{\bold{Set(X)}}(\mF^\text{sh},\mG)} & {\Hom_{\bold{PSet}(X)}(\mF,\text{Forget}(\mG))} \\
-	{\Hom_{\bold{Set(X)}}(\mF^\text{sh},\mI)} & {\Hom_{\bold{PSet}(X)}(\mF,\text{Forget}(\mI))}
-	\arrow["\cong", from=1-1, to=1-2]
-	\arrow["{-\circ\varphi^\text{sh}}", from=2-1, to=1-1]
-	\arrow["\cong"', from=2-1, to=2-2]
-	\arrow["{-\circ\varphi}"', from=2-2, to=1-2]
-	\arrow["\cong", from=3-1, to=3-2]
-	\arrow["{\psi\circ-}"', from=3-1, to=4-1]
-	\arrow["{\text{Forget}(\psi)\circ-}", from=3-2, to=4-2]
-	\arrow["\cong"', from=4-1, to=4-2]
-\end{tikzcd}} \\
-for two morphisms $\varphi:\mF\to\mH$ and $\psi:\mG\to\mI$. Since $\bold{Sh}(X)$ is a full subcategory of $\bold{PSh}(X)$, clearly the square on the bottom commutes. For the top square, let $\sigma:\mH^\text{sh}\to\mG$ be a morphism. Following the left and top arrows, we obtain the morphism $\sigma\circ\varphi^\text{sh}\circ\theta_\mF$. Following the bottom and right arrows, we obtain the morphism $\sigma\circ\theta_\mH\circ\varphi$. I claim that $\varphi^\text{sh}\circ\theta_\mF=\theta_\mH\circ\varphi$. Indeed, the definition of $\varphi^\text{sh}$ as in def 2.1.10 is given by the universal property of sheafification of the composite $\theta_\mH\circ\varphi$. Hence precomposing $\varphi^\text{sh}$ with $\theta_\mF$ is precisely $\theta_\mH\circ\varphi$. Thus we are done. 
-\end{proof}
+Let $X$ be a space. Let $\iota:\bold{Sh}(X)\hookrightarrow\bold{PSh}(X)$ be the inclusion functor. Then there is an adjunction $$(-)^\text{sh}:\bold{PSh}(X)\overset{\dashv}{\rightleftarrows}\bold{Sh}(X):\iota$$
 \end{prp}
 
-\subsection{The Category of (Pre)Sheaves as an Abelian Category}
-\begin{lmm}{}{}\\
-Let $X$ be a topological space. Let $\mA$ be an abelian category. Let $\ast$ be the zero object of $\mA$. Then the sheaf $\underline{\ast}$ is the zero object of $\mA(X)$. 
-\begin{proof}
-Let $\mF\in\mA(X)$ be an abelian sheaf. We first show the existence and uniqueness of a morphism $\underline{\ast}\to\mF$. Suppose that $\varphi:\underline{\ast}\to\mF$ is a morphism. Then for each open set $U\subseteq X$, there is a unique morphism $\varphi(U):\underline{\ast}(U)=\ast\to\mF(U)$. Hence $\varphi$ is unique. Existence is also evident. \\
-
-Similarly, we show the existence and uniqueness of a morphism $\mF\to\underline{\ast}$. Suppose that $\varphi:\mF\to\underline{\ast}$ is a morphism. Then for each open set $U\subseteq X$, there is a unique morphism $\varphi(U):\mF(U)\to\ast=\underline{\ast}(U)$. Hence $\varphi$ is unique. Existence is also evident. 
-\end{proof}
-\end{lmm}
-
-\begin{defn}{The Product Sheaf}{}\\
-Let $X$ be a space. Let $\mC$ be a category that admits all products. Let $\mF,\mG$ be $\mC$-sheaves on $X$. Define the product $\mF\times\mG$ sheaf of $\mF$ and $\mG$ as follows. 
+\subsection{Pushforward and Pullback Sheaves}
+\begin{defn}{Direct Image Sheaf}{}\\
+Let $X,Y$ be spaces. Let $f:X\to Y$ be a map. Let $\mF$ be a presheaf on $X$. Define the direct image of sheaf $$f_\ast\mF:\bold{Open}(Y)\to\mC$$ as follows. 
 \begin{itemize}
-\item For each open set $U\subseteq X$, define $(\mF\times\mG)(U)=\mF(U)\times\mG(U)$. 
-\item For each inclusion of open sets $V\subseteq U$, define the morphism $(\mF\times\mG)(U)\to(\mF\times\mG)(V)$ by $\text{res}_V^U\times\text{res}_V^U$. 
+\item For each open set $U\subseteq Y$, define $f_\ast\mF(U)=\mF(f^{-1}(U))$. 
+\item For each inclusion $V\subseteq U$, define the induced map $$\mF(f^{-1}(U))\to\mF(f^{-1}(V))$$ to be the map $\mF(\text{incl.}:f^{-1}(V)\hookrightarrow f^{-1}(U))$. 
 \end{itemize}
 \end{defn}
 
-\begin{lmm}{}{}\\
-Let $X$ be a space. Let $\mC$ be a category that admits all products. Let $\mF,\mG$ be $\mC$-sheaves on $X$. Then $\mF\times\mG$ is the categorical product of $\mF$ and $\mG$ in $\mC(X)$. 
+\begin{prp}{}{}\\
+Let $X,Y$ be spaces. Let $f:X\to Y$ be a map. Let $\mF$ be a sheaf. Then $f_\ast\mF$ is a sheaf on $Y$. 
 \begin{proof}\\
-Firstly, the identity and gluing axiom of $\mF\times\mG$ can be checked coordinate wise. Clearly, there are projection morphisms $\mF\times\mG\to\mF,\mG$ open set wise. Let $\mH$ be a sheaf with morphisms $\mH\to\mF,\mG$. Then by the universal product of products of abelian groups, there is a unique morphism $\mH(U)\to(\mF\times\mG)(U)$ for each open set $U\subseteq X$ such that the composition $\mH(U)\to(\mF\times\mG)(U)\to\mF(U),\mG(U)$ is equal to $\mH(U)\to\mF(U),\mG(U)$ respectively. Then they assemble into a morphism of sheaves $\mH\to\mF\times\mG$. This morphism is unique by construction. 
+It is clear that $f_\ast\mF$ is a presheaf on $Y$. We need to check the identity and gluing axiom. By 1.3.4, without loss of generality we can assume that $\mC=\bold{Set}$. \\
+
+Identity: Let $U\subseteq Y$ be an open set. Let $\{U_i\;|\;i\in I\}$ be an open cover of $U$. Denote the inclusion maps by $\iota_i:U_i\to U$. Let $s,t\in f_\ast\mF(U)$. Suppose that $f_\ast\mF(\iota_i)(s)=f_\ast\mF(\iota_i)(t)$ for all $i\in I$. This means that $s,t\in\mF(f^{-1}(U))$ is such that the images of $s,t$ in $\mF(f^{-1}(U_i))$ are equal for all $i\in I$. Since $\{f^{-1}(U_i)\}$ is an open cover of $f^{-1}(U)$ and $\mF$ is a sheaf on $X$, this means that $s=t$. \\
+
+Gluing: Let $U\subseteq Y$ be an open set. Let $\{U_i\;|\;i\in I\}$ be an open cover of $U$. Suppose that $s_i\in f_\ast\mF(U_i)=\mF(f^{-1}(U_i))$ is such that the images of $s_i$ and $s_j$ in $f_\ast\mF(U_i\cap U_j)=\mF(f^{-1}(U_i\cap U_j))$ agree for all $i,j\in I$. Since $\{f^{-1}(U_i)\}$ is an open cover of $f^{-1}(U)$ and $\mF$ is a sheaf on $X$, we conclude that there exists $s\in\mF(f^{-1}(U))=f_\ast\mF(U)$ such that the image of $s$ in $\mF(f^{-1}(U_i))=f_\ast\mF(U_i)$ is $s_i$ for all $i\in I$. Thus the gluing axiom is satisfied. 
+\end{proof}
+\end{prp}
+
+\begin{eg}{Skyscraper Sheaf}{}\\
+Let $X$ be a space. Let $p\in X$. Let $S$ be a set. Let $\underline{S}$ be the constant sheaf on $\{p\}$. Define the skyscraper sheaf of $X$ at $p$ to be the pushforward $$\iota_\ast\underline{S}(U)=\underline{S}(\iota^{-1}(U))$$ where $\iota:\{p\}\hookrightarrow X$ is the inclusion map. 
+\end{eg}
+
+\begin{defn}{The Direct Image Sheaf Functor}{}\\
+Let $X,Y$ be spaces. Let $f:X\to Y$ be a map. Let $\mF$ be a sheaf on $X$. Define the direct image sheaf functor $$f_\ast:\bold{Sh}(X)\to\bold{Sh}(Y)$$ by the following data. 
+\begin{itemize}
+\item For each sheaf $\mF$ of $X$, $f_\ast\mF$ is the direct image sheaf on $Y$. 
+\item For each morphism $\varphi:\mF\to\mG$, $f_\ast\varphi:f_\ast\mF\to f_\ast\mG$ is the morphism given by $$\varphi(f^{-1}(U)):\mF(f^{-1}(U))\to\mG(f^{-1}(U))$$
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Inverse Image Sheaf}{}\\
+Let $X,Y$ be spaces. Let $f:X\to Y$ be a map. Let $\mG$ be a sheaf on $Y$. Define the inverse image sheaf $f^{-1}\mG$ to be the sheafification of the presheaf on $X$ defined as follows. 
+\begin{itemize}
+\item For each open set $U\subseteq X$, let $\mJ(U)\subseteq\bold{Open}(X)$ be the full subcategory consisting of open sets of $Y$ the contain $f(U)$. Then the presheaf sends $U$ to $\underset{W\in\mJ(U)}{\lim}\mG(W)$. 
+\item For each inclusion $V\subseteq U$, define the induced map to be induced by the universal property of the limit. 
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $X,Y$ be spaces. Let $f:X\to Y$ be a map. Let $\mG$ be a sheaf on $Y$. Then the inverse image sheaf $f^{-1}\mG$ is a sheaf. 
+\end{prp}
+
+\begin{defn}{The Inverse Image Sheaf Functor}{}\\
+Let $X,Y$ be spaces. Let $f:X\to Y$ be a map. Let $\mF$ be a sheaf on $X$. Define the inverse image sheaf functor $$f^{-1}:\bold{Sh}(Y)\to\bold{Sh}(X)$$ by the following data. 
+\begin{itemize}
+\item For each sheaf $\mF$ of $Y$, $f^{-1}\mF$ is the inverse image sheaf on $X$. 
+\item For each morphism $\varphi:\mF\to\mG$, the morphism $f^{-1}\mF\to f^{-1}\mG$ is induced by the universal property of limits. 
+\end{itemize}
+\end{defn}
+
+\begin{eg}{}{}\\
+Let $Y$ be a space. Let $p\in Y$. Let $\iota:\{p\}\hookrightarrow Y$ be the inclusion map. Let $\mG$ be a sheaf on $Y$. Then we have $$\left(\iota^{-1}\mG\right)(\{p\})=\mG_p$$
+\end{eg}
+
+\begin{prp}{}{}\\
+Let $X,Y$ be spaces. Let $f:X\to Y$ be a map. Then there is an adjunction $$f^{-1}:\bold{Sh}(Y)\overset{\dashv}{\rightleftarrows}\bold{Sh}(X):f_\ast$$
+\end{prp}
+
+\begin{crl}{}{}\\
+Let $X,Y$ be spaces. Let $f:X\to Y$ be a map. Let $\mG$ be a sheaf of $Y$. Then there is a natural isomorphism $$(f^{-1}\mG)_p\cong\mG_{f(p)}$$ for any $p\in X$. 
+\begin{proof}
+$f^{-1}$ is a left adjoint and stalks are colimits. Since left adjoints preserve colimits we are done. 
+\end{proof}
+\end{crl}
+
+\begin{eg}{}{}\\
+Let $X$ be a space. Let $U\subseteq X$ be an open subset. Let $\mF$ be a sheaf of sets on $X$. Let $p\in U$. Then we have $$(\mF|_U)_p\cong\mF_p$$
+\begin{proof}
+Follows from the above corollary. 
+\end{proof}
+\end{eg}
+
+\begin{lmm}{}{}\\
+Let $Y$ be a space. Let $U\subseteq Y$ be an open set. Let $\iota:U\hookrightarrow Y$ be the inclusion map. Let $\mG$ be a sheaf on $Y$. Then there is a natural isomorphism $$\iota^{-1}\mG\cong\mG|_U$$
+\begin{proof}
+Write $\iota^{-1}\mG_\text{pre}$ the inverse image sheaf before sheafification. Recall that before sheafification, for $W\subseteq U$ an open set we have $(\iota^{-1}\mG_\text{pre})(W)=\colim_{V\supseteq W}\mG(V)$. Since $W$ is the initial object in the category of open sets containing $W$, we have that he colimit is equal to the terminal object. Hence $(\iota^{-1}\mG_\text{pre})(W)=\mG(W)$. Since $\mG$ is already a sheaf, sheafification gives a natural isomorphism $\iota^{-1}\mG)\cong\iota^{-1}\mG_\text{pre}$ and the latter is equal to $\mG|_U$. 
 \end{proof}
 \end{lmm}
 
+\subsection{Ring, Module and Algebra Objects in Presheaves and Sheaves}
+\begin{defn}{The Product Sheaf}{}\\
+Let $X$ be a space. Let $\mF,\mG$ be presheaves on $X$. Define the product of $\mF\times\mG$ as follows. 
+\begin{itemize}
+\item For each open set $U\subseteq X$, define $(\mF\times\mG)(U)=\mF(U)\times\mG(U)$. 
+\item For each inclusion of open sets $V\subseteq U$, the morphism is given by $\text{res}_V^U\times\text{res}_V^U:(\mF\times\mG)(U)\to(\mF\times\mG)(V)$. 
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $X$ be a space. Let $\mF,\mG$ be presheaves on $X$. Then the following are true. 
+\begin{itemize}
+\item $\mF\times\mG$ is the categorical product in $\bold{PSh}(X)$. 
+\item If $\mF$ and $\mG$ are sheaves, then $\mF\times\mG$ is the categorical product in $\bold{Sh}(X)$. 
+\end{itemize}
+\end{prp}
+
+\begin{defn}{The Category of Presheaves and Sheaves of Rings}{}\\
+Let $X$ be space. 
+\begin{itemize}
+\item Define the category of presheaves of rings on $X$ to be the category $$\bold{PRing}(X)=\bold{Ring}(\bold{PSh}(X,\bold{Set}),\times,\underline{\ast})$$ of ring objects. 
+\item Define the category of sheaves of rings on $X$ to be the category $$\bold{Ring}(X)=\bold{Ring}(\bold{Sh}(X),\times,\underline{\ast})$$ of ring objects. 
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $X$ be a space. Then the initial object of $\bold{Ring}(X)$ is $\underline{\Z}$. 
+\end{prp}
+
+\begin{defn}{The Category of Presheaves and Sheaves of Modules}{}\\
+Let $X$ be a space. Let $\mO_X$ be a sheaf of rings on $X$. 
+\begin{itemize}
+\item Define the category of presheaves of $\mO_X$-modules on $X$ to be the category $$\bold{PMod}_{\mO_X}={_\bold{\mO_X}\bold{Mod}(\bold{PSh}(X))}$$
+\item Define the category of sheaves of $\mO_X$-modules on $X$ to be the category $$\bold{Mod}_{\mO_X}={_\bold{\mO_X}\bold{Mod}(\bold{Sh}(X))}$$
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $X$ be a space. Let $\mO_X$ be a sheaf of rings on $X$. Let $\mF$ be presheaf of sets. Then $\mF$ is a presheaf of $\mO_X$-modules if and only if the following are true. 
+\begin{itemize}
+\item For each open set $U\subseteq X$, we have that $\mF(U)$ is an $\mO_X(U)$-module. 
+\item For each inclusion of open sets $V\subseteq U$, the morphism $\mF(U)\to\mF(V)$ is a group homomorphism. 
+\end{itemize}
+\end{prp}
+
+\begin{lmm}{}{}\\
+Let $X$ be a space. Let $\mO_X$ be a sheaf of rings on $X$. Then the following are true. 
+\begin{itemize}
+\item Let $\mF$ be a presheaf of $\mO_X$-modules. Then $\mF_p$ is an $\mO_{X,p}$-module for all $p\in X$. 
+\item Let $\mF,\mG$ be presheaf of $\mO_X$-modules. Let $\varphi:\mF\to\mG$ be a morphism of presheaves of $\mO_X$-modules. Then $\varphi(U):\mF(U)\to\mG(U)$ is an $\mO_X(U)$-module homomorphism for all open sets $U\subseteq X$. 
+\item Let $\mF,\mG$ be presheaf of $\mO_X$-modules. Let $\varphi:\mF\to\mG$ be a morphism of presheaves of $\mO_X$-modules. Then $\varphi_p:\mF_p\to\mG_p$ is an $\mO_{X,p}$-module homomorphism for all $p\in X$. 
+\end{itemize}
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $X$ be a space. Then the sheafification functor restricts to an adjunction $$(-)^\text{sh}:\bold{Mod}_{\mO_X}\overset{\dashv}{\rightleftarrows}\bold{PMod}_{\mO_X}:\iota$$
+\end{lmm}
+
+\begin{defn}{The Category of Presheaves and Sheaves of Algebras}{}\\
+Let $X$ be a space. Let $\mO_X$ be a sheaf of commutative rings on $X$. 
+\begin{itemize}
+\item Define the category of presheaves of $\mO_X$-algebras on $X$ to be the category $$\bold{PAlg}_{\mO_X}=\bold{Alg}_{\mO_X}(\bold{PSh}(X))$$
+\item Define the category of sheaves of $\mO_X$-algebras on $X$ to be the category $$\bold{Alg}_{\mO_X}=\bold{Alg}_{\mO_X}(\bold{Sh}(X))$$
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $X$ be a space. Then we have $\bold{Ring}(X)\cong\bold{Alg}_{\underline{\Z}}$. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $X$ be a space. Let $\mO_X$ be a sheaf of rings on $X$. Let $\mA$ be presheaf of sets. Then $\mA$ is a presheaf of $\mO_X$-modules if and only if the following are true. 
+\begin{itemize}
+\item For each open set $U\subseteq X$, we have that $\mA(U)$ is an $\mO_X(U)$-algebra. 
+\item For each inclusion of open sets $V\subseteq U$, the morphism $\mA(U)\to\mA(V)$ is a $\mO_X(U)$-algebra homomorphism. 
+\end{itemize}
+\end{prp}
+
+\begin{lmm}{}{}\\
+Let $X$ be a space. Let $\mO_X$ be a sheaf of rings on $X$. Then the following are true. 
+\begin{itemize}
+\item Let $\mA$ be a presheaf of $\mO_X$-algebras. Then $\mA_p$ is an $\mO_{X,p}$-algebra for all $p\in X$. 
+\item Let $\mA,\mB$ be presheaf of $\mO_X$-algebras. Let $\varphi:\mA\to\mB$ be a morphism of presheaves of $\mO_X$-algebras. Then $\varphi(U):\mA(U)\to\mB(U)$ is an $\mO_X(U)$-algebra homomorphism for all open sets $U\subseteq X$. 
+\item Let $\mA,\mB$ be presheaf of $\mO_X$-algebras. Let $\varphi:\mA\to\mB$ be a morphism of presheaves of $\mO_X$-algebras. Then $\varphi_p:\mA_p\to\mB_p$ is an $\mO_{X,p}$-algebra homomorphism for all $p\in X$. 
+\end{itemize}
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $X$ be a space. Then the sheafification functor restricts to an adjunction $$(-)^\text{sh}:\bold{Alg}_{\mO_X}\overset{\dashv}{\rightleftarrows}\bold{PAlg}_{\mO_X}:\iota$$
+\end{lmm}
+
+\pagebreak
+\section{Sheaves of Modules over a Sheaf of Rings}
+\subsection{The Category of Ringed Spaces}
+\begin{defn}{Ringed Space}{}\\
+A ringed space is a topological space $X$ with a sheaf of rings $\mO_X$ on $X$. 
+\end{defn}
+
+\begin{defn}{Morphisms of Ringed Spaces}{}\\
+Let $(X,\mathcal{O}_X)$ and $(Y,\mathcal{O}_Y)$ be ringed spaces. A morphism of ringed spaces from $(X,\mathcal{O}_X)$ to $(Y,\mathcal{O}_Y)$ is a pair $(f,f^\#)$ of continuous map $f:X\to Y$ and a map $f^\#:\mathcal{O}_Y\to f_\ast\mathcal{O}_X$ of sheaves of rings on $Y$. 
+\end{defn}
+
+\begin{defn}{Commutative Ringed Space}{}\\
+Let $(X,\mO_X)$ be a ringed space. We say that $X$ is a commutative ringed space if $\mO_X$ is a sheaf of commutative rings. 
+\end{defn}
+
+\begin{defn}{Locally Ringed Spaces}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. We say that $X$ is a locally ringed space if for all $p\in X$, $\mO_{X,p}$ is a local ring. 
+\end{defn}
+
+Suppose that $(X,\mO_X)$ and $(Y,\mO_Y)$ are locally ringed spaces. Given a point $p\in X$, we obtain induced maps $$f^\#:\mO_Y(V)\to f_\ast\mO_X(f^{-1}(V))$$ for any neighbourhood $V$ of $f(p)$. Taking the colimit, we obtain a map $$\mO_{Y,f(p)}=\text{colim}_V\mO_Y(V)\to\text{colim}_V\mO_X(f^{-1}(V))$$ As $V$ ranges through the neighbourhood of $f(p)$, $f^{-1}(V)$ ranges over a subset of the neighbourhoods of $p$ so that we obtain a map $$\mO_{Y,f(p)}=\text{colim}_V\mO_Y(V)\to\text{colim}_V\mO_X(f^{-1}(V))\to\mO_{X,p}$$
+
+\begin{defn}{Morphisms of Locally Ringed Spaces}{}\\
+Let $(X,\mathcal{O}_X)$ and $(Y,\mathcal{O}_Y)$ be locally ringed spaces. Then a morphism of locally ringed spaces is a morphism of ringed spaces such that for each $p\in X$, the induced map of local rings $$f_p^\#:\mO_{Y,f(p)}\to\mO_{X,p}$$ is a local homomorphism of local rings. 
+\end{defn}
+
+\begin{defn}{The Category of Locally Ringed Spaces}{}\\
+Define the category $\bold{LRS}$ of locally ringed spaces as follows. 
+\begin{itemize}
+\item The objects are locally ringed spaces. 
+\item The morphisms are morphisms of locally ringed spaces. \
+\item Composition is given by the composition of continuous functions and composition of natural transformations. 
+\end{itemize}
+\end{defn}
+
+\subsection{The Abelian Category Structure of Sheaves of Modules}
 \begin{defn}{The Presheaf Kernel}{}\\
-Let $X$ be a space. Let $\mA$ be an abelian category that is an algebraic category. Let $\mF,\mG$ be $\mA$-sheaves on $X$. Let $\varphi:\mF\to\mG$ be a morphism. Define the kernel $\ker(\varphi)$ of $\varphi$ as follows. 
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF,\mG\in\bold{PMod}_{\mO_X}$. Let $\varphi:\mF\to\mG$ be a morphism. Define the kernel $\ker(\varphi)$ of $\varphi$ as follows. 
 \begin{itemize}
 \item For each open set $U\subseteq X$, define $\ker(\varphi)(U)=\ker(\varphi(U))$. 
 \item For each inclusion $V\subseteq U$ of open sets, define the restriction morphism by the universal property of kernels as follows: \\
@@ -489,8 +451,40 @@ Let $X$ be a space. Let $\mA$ be an abelian category that is an algebraic catego
 \end{itemize}
 \end{defn}
 
+\begin{prp}{}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF,\mG\in\bold{PMod}_{\mO_X}$. Let $\varphi:\mF\to\mG$ be a morphism. Then the following are true. 
+\begin{itemize}
+\item $\ker(\varphi)$ is the categorical kernel of $\varphi$ in $\bold{PMod}_{\mO_X}$. 
+\item If $\mF,\mG\in\bold{Mod}_{\mO_X}$, then $\ker(\varphi)$ is a sheaf and is the categorical kernel of $\varphi$ in $\bold{Mod}_{\mO_X}$. 
+\item $\ker(\varphi)_p=\ker(\varphi_p)$. 
+\end{itemize}
+\begin{proof}\\
+\begin{itemize}
+\item Let $U\subseteq X$ be an open set. Let $\{U_i\;|\;i\in I\}$ be an open cover of $U$. Let $f,g\in\ker(\varphi)(U)$ such that $\text{res}_{U_i}^U(f)=\text{res}_{U_i}^U(g)$. Consider the following commutative diagram: \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\ker(\varphi(U))} & {\mF(U)} \\
+	{\ker(\varphi(U_i))} & {\mF(U_i)}
+	\arrow[from=1-1, to=1-2]
+	\arrow["{\text{res}_V^U}"', from=1-1, to=2-1]
+	\arrow["{\text{res}_V^U}"', from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}} \\~\\
+Consider the images of $f$ and $g$ in $\mF(U)$. Since $f$ and $g$ map vertically down to the same element in $\ker(\varphi)(U_i)$, by commutativity of the diagram, the images of $f$ and $g$ in $\mF(U)$ map vertically to the same element in $\mF(U_i)$. Since this is true for all $i\in I$, the identity property of the sheaf $\mF$ implies that the image of $f$ and $g$ in $\mF(U)$ are equal. This means that $f-g\in\ker(\varphi(U))$ map to $0\in\mF(U)$. Since $\ker(\varphi)(U)$ is a subgroup of $\mF(U)$, we must have $f=g$. This proves the identity property of $\ker(\varphi)$. 
+\item I claim that the induced map $\ker(\phi)_p\to\mF_p\to\mG_p$ is the zero map. Indeed, the map $\ker(\phi)_p\to\mF_p$ is induced by the maps $\ker(\phi)(U)\to\mF(U)$ for each open set $U\subseteq X$, which composes with $\mF(U)\to\mG(U)$ to give the zero map. Hence by the universal property of the kernel of $\phi_p$, we obtain a unique morphism $\ker(\phi)_p\to\ker(\phi_p)$. Since the morphism $\ker(\phi)\to\mF$ is the inclusion map for each open set, the morphism $\ker(\phi)_p\to\mF_p$ is also the inclusion map and so $\ker(\phi_p)\subseteq\ker(\phi_p)$. Conversely, suppose that $[(s,U)]\in\ker(\phi_p)$. Then we have $[(\phi(U)(s),U)]=[(0,V)]$ for some $V\subseteq X$ open. This means that there exists $W\subseteq U\cap V$ open such that $\phi(U)(s)|_W=0|_W$. But we have 
+\begin{align*}
+0|_W&=\phi(U)(s)|_W\\
+&=\text{res}_W^U(\phi(U)(s))\\
+&=\phi(W)(\text{res}_W^U(s))\tag{$\phi$ is a morphism}\\
+&=\phi(W)(s|_W)
+\end{align*}
+and so $s|_W\in\ker(\phi)(W)$. By definition of the kernel of $\phi$, we have $[(s|_W,W)]\in\ker(\phi)_p$. But $[(s|_W,W)]=[(s,U)]$ and so we are done. \\
+
+\end{itemize}
+\end{proof}
+\end{prp}
+
 \begin{defn}{The Presheaf Cokernel}{}\\
-Let $X$ be a space. Let $\mA$ be an abelian category that is an algebraic category. Let $\mF,\mG$ be $\mA$-sheaves on $X$. Let $\varphi:\mF\to\mG$ be a morphism. Define the cokernel $\coker(\varphi)$ of $\varphi$ as follows. 
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF,\mG\in\bold{PMod}_{\mO_X}$. Let $\varphi:\mF\to\mG$ be a morphism. Define the cokernel $\coker(\varphi)$ of $\varphi$ as follows. 
 \begin{itemize}
 \item For each open set $U\subseteq X$, define $\coker(\varphi)(U)=\coker(\varphi(U))$. 
 \item For each inclusion $V\subseteq U$ of open sets, define the restriction morphism by the universal property of cokernels as follows: \\
@@ -509,33 +503,14 @@ Let $X$ be a space. Let $\mA$ be an abelian category that is an algebraic catego
 \end{defn}
 
 \begin{prp}{}{}\\
-Let $X$ be a space. Let $\mA$ be an abelian category that is an algebraic category. Let $\mF,\mG$ be $\mA$-sheaves on $X$. Let $\varphi:\mF\to\mG$ be a morphism. Then the following are true. 
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF,\mG\in\bold{PMod}_{\mO_X}$. Let $\varphi:\mF\to\mG$ be a morphism. Then the following are true. 
 \begin{itemize}
-\item The presheaf $\ker(\varphi)$ is the categorical kernel of $\varphi$ in $\bold{P}\mA(X)$. 
-\item The presheaf $\coker(\varphi)$ is the categorical cokernel of $\varphi$ in $\bold{P}\mA(X)$. 
+\item $\coker(\varphi)$ is the categorical cokernel of $\varphi$ in $\bold{PMod}_{\mO_X}$. 
+\item If $\mF,\mG\in\bold{Mod}_{\mO_X}$, then $\coker(\varphi)^\text{sh}$ is a sheaf and is the categorical cokernel of $\varphi$ in $\bold{Mod}_{\mO_X}$. 
+\item If $\mF,\mG\in\bold{Mod}_{\mO_X}$, then $\coker(\varphi)_p^\text{sh}=\coker(\varphi_p)$. 
 \end{itemize}
-\begin{proof}
-\end{proof}
-\end{prp}
-
-\begin{prp}{}{}\\
-Let $X$ be a space. Let $\mA$ be an abelian category that is an algebraic category. Let $\mF,\mG$ be $\mA$-sheaves on $X$. Let $\varphi:\mF\to\mG$ be a morphism. Then the following are true. 
+\begin{proof}\\
 \begin{itemize}
-\item The presheaf $\ker(\varphi)$ is a sheaf, and is the categorical kernel of $\varphi$ in $\mA(X)$. 
-\item The sheafification of the presheaf $\coker(\varphi)$ is the categorical cokernel of $\varphi$ in $\mA(X)$. 
-\end{itemize}
-\begin{proof}
-\begin{itemize}
-\item Let $U\subseteq X$ be an open set. Let $\{U_i\;|\;i\in I\}$ be an open cover of $U$. Let $f,g\in\ker(\varphi)(U)$ such that $\text{res}_{U_i}^U(f)=\text{res}_{U_i}^U(g)$. Consider the following commutative diagram: \\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	{\ker(\varphi(U))} & {\mF(U)} \\
-	{\ker(\varphi(U_i))} & {\mF(U_i)}
-	\arrow[from=1-1, to=1-2]
-	\arrow["{\text{res}_V^U}"', from=1-1, to=2-1]
-	\arrow["{\text{res}_V^U}"', from=1-2, to=2-2]
-	\arrow[from=2-1, to=2-2]
-\end{tikzcd}} \\~\\
-Consider the images of $f$ and $g$ in $\mF(U)$. Since $f$ and $g$ map vertically down to the same element in $\ker(\varphi)(U_i)$, by commutativity of the diagram, the images of $f$ and $g$ in $\mF(U)$ map vertically to the same element in $\mF(U_i)$. Since this is true for all $i\in I$, the identity property of the sheaf $\mF$ implies that the image of $f$ and $g$ in $\mF(U)$ are equal. This means that $f-g\in\ker(\varphi(U))$ map to $0\in\mF(U)$. Since $\ker(\varphi)(U)$ is a subgroup of $\mF(U)$, we must have $f=g$. This proves the identity property of $\ker(\varphi)$. 
 \item We prove that $\text{coker}(\varphi)^\text{sh}$ satisfy the universal property of the cokernel. Let $\mH$ be a sheaf on $X$ with values in $\mA$. Let $\psi:\mG\to\mH$ be a morphism such that the composite $\mF\to\mG\to\mH$ is $0$. Consider the following diagram: \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	\mF & \mG & {\text{coker}(\varphi)} & {\text{coker}(\varphi)^\text{sh}} \\
@@ -548,34 +523,15 @@ Consider the images of $f$ and $g$ in $\mF(U)$. Since $f$ and $g$ map vertically
 	\arrow["{\exists!}", dashed, from=1-4, to=2-4]
 \end{tikzcd}} \\~\\
 By the universal property of cokernels in the category of presheaves, there exists a unique morphism $\text{coker}(\varphi)\to\mH$ such that the relevant diagram commutes. Then by the universal property of sheafification, we obtain the unique morphism required to satisfy the universal property of the cokernel. 
+\item Colimits commute with colimits. 
 \end{itemize}
 \end{proof}
 \end{prp}
 
 \begin{prp}{}{}\\
-Let $X$ be a space. Let $\mA$ be an abelian category that is an algebraic category. Let $\mF,\mG$ be $\mA$-sheaves on $X$. Let $\varphi:\mF\to\mG$ be a morphism. Let $p\in X$. Then the following are true. 
-\begin{itemize}
-\item $\ker(\phi)_p=\ker(\phi_p)$. 
-\item There is a natural isomorphism $\text{coker}(\varphi)_p^\text{sh}\cong\text{coker}(\varphi_p)$. 
-\end{itemize}
+Let $X$ be a space. Then $\bold{Mod}_{\mO_X}$ is an abelian category. 
 \begin{proof}
-I claim that the induced map $\ker(\phi)_p\to\mF_p\to\mG_p$ is the zero map. Indeed, the map $\ker(\phi)_p\to\mF_p$ is induced by the maps $\ker(\phi)(U)\to\mF(U)$ for each open set $U\subseteq X$, which composes with $\mF(U)\to\mG(U)$ to give the zero map. Hence by the universal property of the kernel of $\phi_p$, we obtain a unique morphism $\ker(\phi)_p\to\ker(\phi_p)$. Since the morphism $\ker(\phi)\to\mF$ is the inclusion map for each open set, the morphism $\ker(\phi)_p\to\mF_p$ is also the inclusion map and so $\ker(\phi_p)\subseteq\ker(\phi_p)$. Conversely, suppose that $[(s,U)]\in\ker(\phi_p)$. Then we have $[(\phi(U)(s),U)]=[(0,V)]$ for some $V\subseteq X$ open. This means that there exists $W\subseteq U\cap V$ open such that $\phi(U)(s)|_W=0|_W$. But we have 
-\begin{align*}
-0|_W&=\phi(U)(s)|_W\\
-&=\text{res}_W^U(\phi(U)(s))\\
-&=\phi(W)(\text{res}_W^U(s))\tag{$\phi$ is a morphism}\\
-&=\phi(W)(s|_W)
-\end{align*}
-and so $s|_W\in\ker(\phi)(W)$. By definition of the kernel of $\phi$, we have $[(s|_W,W)]\in\ker(\phi)_p$. But $[(s|_W,W)]=[(s,U)]$ and so we are done. \\
-
-For cokernels, we invoke the fact that colimits commutes with colimits. 
-\end{proof}
-\end{prp}
-
-\begin{prp}{}{}\\
-Let $X$ be a space. Let $\mA$ be an abelian category that is an algebraic category. Then $\mA(X)$ is an abelian category. 
-\begin{proof}
-We showed that $\mA(X)$ has a zero object by 2.2.1. The hom sets have the structure of an abelian group by open set wise, point wise addition. Thus addition distributes over composition. Finite products are given in def 2.2.2 and lmm 2.2.3. Kernels and cokernels are given above for arbitrary morphisms. Now for any monomorphism $\varphi:\mF\to\mG$ of sheaves, 
+We showed that $\bold{Mod}_{\mO_X}$ has a zero object by 2.2.1. The hom sets have the structure of an abelian group by open set wise, point wise addition. Thus addition distributes over composition. Finite products are given in def 2.2.2 and lmm 2.2.3. Kernels and cokernels are given above for arbitrary morphisms. Now for any monomorphism $\varphi:\mF\to\mG$ of sheaves, 
 \end{proof}
 \end{prp}
 
@@ -588,7 +544,7 @@ Let $\mA$ be an abelian category. Let $f$ b e a morphism. Recall the following e
 If $\mA=\bold{Set}$ recall also that injective functions and monomorphisms coincide, while surjective functions and monomorphisms coincide. 
 
 \begin{defn}{The Image Presheaf}{}\\
-Let $X$ be a space. Let $\mA$ be an abelian category that is an algebraic category. Let $\mF,\mG$ be $\mA$-sheaves on $X$. Define the image presheaf $\im(\varphi)$ by the following. 
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF,\mG\in\bold{PMod}_{\mO_X}$. Define the image presheaf $\im(\varphi)$ by the following. 
 \begin{itemize}
 \item For each open set $U\subseteq X$, define $\im(\varphi)(U)=\im(\varphi(U))$. 
 \item For each inclusion of open sets $V\subseteq U$, define $\im(\varphi)(U)\to\im(\varphi)(V)$ by the universal property of kernels as follows: \\
@@ -607,11 +563,11 @@ Let $X$ be a space. Let $\mA$ be an abelian category that is an algebraic catego
 \end{defn}
 
 \begin{prp}{}{}\\
-Let $X$ be a space. Let $\mA$ be an abelian category that is an algebraic category. Let $\mF,\mG$ be $\mA$-sheaves on $X$. Let $\varphi:\mF\to\mG$ be a morphism. Then the following are true. 
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF,\mG\in\bold{PMod}_{\mO_X}$. Let $\varphi:\mF\to\mG$ be a morphism. Then the following are true. 
 \begin{itemize}
-\item The image presheaf $\im(\varphi)$ is the image of $\varphi$ in $\bold{P}\mA(X)$. 
-\item The sheafification of the image presheaf $\im(\varphi)^\text{sh}$ is the image of $\varphi$ in $\mA(X)$. 
-\item There is a natural isomorphism $\im(\varphi_p)=\im(\varphi)_p$. 
+\item $\im(\varphi)$ is the image of $\varphi$ in $\bold{PMod}_{\mO_X}$. 
+\item If $\mF,\mG\in\bold{Mod}_{\mO_X}$, then $\im(\varphi)^\text{sh}$ is the image of $\varphi$ in $\bold{Mod}_{\mO_X}$. 
+\item There is a natural isomorphism $\im(\varphi)_p^\text{sh}=\im(\varphi_p)$. 
 \end{itemize}
 \begin{proof}
 \begin{itemize}
@@ -622,19 +578,14 @@ Let $X$ be a space. Let $\mA$ be an abelian category that is an algebraic catego
 \end{proof}
 \end{prp}
 
-\subsection{Exact Sequences of Sheaves}
-From now on, we focus on the abelian category of sheaves and not presheaves. Therefore we will drop the sheafification symbol for cokernels and images since they mean the abelian categorical object that is the cokernel and the image. \\
-
-Let $X$ be a space. Let $\mA$ be an abelian category that is an algebraic category. Since $\mA(X)$ is an abelian category, it makes sense to talk about chain complexes and in particular, exact sequences of sheaves. Recall that a sequence of sheaves $\mF\to\mG\to\mH$ is exact if $\im(\mF\to\mG)=\ker(\mG\to\mH)$. 
-
 \begin{prp}{}{}\\
-Let $X$ be a space. Let $\mA$ be an abelian category that is an algebraic category. Suppose the following \\
+Let $X$ be a space. Suppose the following \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	\mF & \mG & \mH
 	\arrow[from=1-1, to=1-2]
 	\arrow[from=1-2, to=1-3]
 \end{tikzcd}} \\~\\
-is a sequence of $\mA$-sheaves on $X$. Then the sequence is exact if and only if the following sequence of stalks\\
+is a sequence in $\bold{Mod}_{\mO_X}$. Then the sequence is exact if and only if the following sequence of stalks\\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	{\mF_p} & {\mG_p} & {\mH_p}
 	\arrow[from=1-1, to=1-2]
@@ -646,9 +597,10 @@ We have that $\im(\mF\to\mG)=\ker(\mG\to\mH)$ and taking stalks gives $\im(\mF_p
 \end{proof}
 \end{prp}
 
-Thus the functor $$(-)_p:\mA(X)\to\mA$$ of taking stalks is exact. 
+Thus the functor $$(-)_p:\bold{Mod}_{\mO_X}\to\bold{Mod}_{\mO_{X,p}}$$ of taking stalks is exact. 
 
-\begin{prp}{}{} Let $X$ be a space. Let $\mA$ be an abelian category that is an algebraic category. Let the following be a sequence of $\mA$-sheaves on $X$: \\
+\begin{prp}{}{}\\
+Let $X$ be a space. Let the following be a sequence in $\bold{Mod}_{\mO_X}$: \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	0 & \mF & \mG & \mH
 	\arrow[from=1-1, to=1-2]
@@ -675,268 +627,176 @@ Thus $\im(\varphi)(U)\subseteq\ker(\psi)(U)$. Let $s\in\ker(\psi)(U)$.
 \end{proof}
 \end{prp}
 
-Thus the functor $$(-)(U):\mA(X)\to\mA$$ is left exact. It is in general not right exact. 
+Thus the functor $$(-)(U):\bold{Mod}_{\mO_X}\to\bold{Mod}_{\mO_X(U)}$$ is left exact. It is in general not right exact. 
 
 \begin{prp}{}{}\\
-Let $X$ be a topological space. Let $\mC$ be an algebraic category. Let $\mF,\mG$ be $\mC$-sheaves on $X$. Let $\varphi:\mF\to\mG$ be a morphism. Then the following are equivalent. 
+Let $X$ be a topological space. Let $\mF,\mG\in\bold{Mod}_{\mO_X}$. Let $\varphi:\mF\to\mG$ be a morphism. Then the following are equivalent. 
 \begin{itemize}
 \item $\varphi$ is injective (a monomorphism). 
 \item For each $U\subseteq X$ open, $\varphi(U)$ is injective. 
 \item For each $p\in X$, $\varphi_p$ is injective. 
 \end{itemize}
 \begin{proof}
-When $\mA$ is not $\bold{Set}$, $(1)\iff(2)$ is a special case of 2.3.2. $(1)\iff(3)$ is a special case of 2.3.1. 
+$(1)\iff(2)$ is a special case of 2.3.2. $(1)\iff(3)$ is a special case of 2.3.1. 
 \end{proof}
 \end{prp}
 
 \begin{prp}{}{}\\
-Let $X$ be a space. Let $\mC$ be an algebraic category. Let $\mF,\mG$ be $\mC$-sheaves on $X$. Let $\varphi:\mF\to\mG$ be a morphism. Then the following are equivalent. 
+Let $X$ be a topological space. Let $\mF,\mG\in\bold{Mod}_{\mO_X}$. Let $\varphi:\mF\to\mG$ be a morphism. Then the following are equivalent. 
 \begin{itemize}
-\item $\varphi$ is srujective (an epimorphism). 
+\item $\varphi$ is surjective (an epimorphism). 
 \item For each $U\subseteq X$ open and for every $g\in\mG(U)$, there exists an open cover $\{U_i\;|\;i\in I\}$ of $U$ and there exists $f_i\in\mF(U_i)$ such that $\varphi(U_i)(f_i)=g|_{U_i}$. 
 \item For each $p\in X$, $\varphi_p$ is surjective. 
 \item There exists a base $\mB=\{B_i\;|\;i\in I\}$ of $X$ such that $\varphi(B_i)$ is surjective for all $i\in I$. 
 \end{itemize}
 \end{prp}
 
-\subsection{Adjunctions between Sheaves of Different Spaces}
-\begin{defn}{Direct Image Sheaf}{}\\
-Let $X,Y$ be spaces. Let $f:X\to Y$ be a map. Let $\mC$ be category. Let $\mF$ be a $\mC$-presheaf on $X$. Define the direct image of sheaf $$f_\ast\mF:\bold{Open}(Y)\to\mC$$ as follows. 
+\subsection{Graded Sheaves}
+\begin{defn}{Graded Sheaves of $\mO_X$-Modules}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF$ be a sheaf of $\mO_X$-modules. We say that $\mF$ is graded if the following are true. 
 \begin{itemize}
-\item For each open set $U\subseteq Y$, define $f_\ast\mF(U)=\mF(f^{-1}(U))$. 
-\item For each inclusion $V\subseteq U$, define the induced map $$\mF(f^{-1}(U))\to\mF(f^{-1}(V))$$ to be the map $\mF(\text{incl.}:f^{-1}(V)\hookrightarrow f^{-1}(U))$. 
+\item $\mF$ admits a decomposition $$\mF=\bigoplus_{i=-\infty}^\infty \mF_i$$ where each $\mF_i$ is a sheaf of $\mO_X$-modules. 
+\item For each open set $U\subseteq X$, we have that $\mF(U)$ admits a grading $$\mF(U)=\bigoplus_{i=-\infty}^\infty\mF_i(U)$$ as a $\mO_X(U)$-module. 
+\item For each inclusion $V\subseteq U$ of open sets in $X$, the induced map $\mF(U)\to\mF(V)$ restricts to maps $\mF_i(U)\to\mF_i(V)$ for all $i$. 
 \end{itemize}
 \end{defn}
 
-\begin{prp}{}{}\\
-Let $X,Y$ be spaces. Let $f:X\to Y$ be a map. Let $\mC$ be an algebraic category. Let $\mF$ be a $\mC$-sheaf. Then $f_\ast\mF$ is a sheaf on $Y$. 
-\begin{proof}\\
-It is clear that $f_\ast\mF$ is a presheaf on $Y$. We need to check the identity and gluing axiom. By 1.3.4, without loss of generality we can assume that $\mC=\bold{Set}$. \\
-
-Identity: Let $U\subseteq Y$ be an open set. Let $\{U_i\;|\;i\in I\}$ be an open cover of $U$. Denote the inclusion maps by $\iota_i:U_i\to U$. Let $s,t\in f_\ast\mF(U)$. Suppose that $f_\ast\mF(\iota_i)(s)=f_\ast\mF(\iota_i)(t)$ for all $i\in I$. This means that $s,t\in\mF(f^{-1}(U))$ is such that the images of $s,t$ in $\mF(f^{-1}(U_i))$ are equal for all $i\in I$. Since $\{f^{-1}(U_i)\}$ is an open cover of $f^{-1}(U)$ and $\mF$ is a sheaf on $X$, this means that $s=t$. \\
-
-Gluing: Let $U\subseteq Y$ be an open set. Let $\{U_i\;|\;i\in I\}$ be an open cover of $U$. Suppose that $s_i\in f_\ast\mF(U_i)=\mF(f^{-1}(U_i))$ is such that the images of $s_i$ and $s_j$ in $f_\ast\mF(U_i\cap U_j)=\mF(f^{-1}(U_i\cap U_j))$ agree for all $i,j\in I$. Since $\{f^{-1}(U_i)\}$ is an open cover of $f^{-1}(U)$ and $\mF$ is a sheaf on $X$, we conclude that there exists $s\in\mF(f^{-1}(U))=f_\ast\mF(U)$ such that the image of $s$ in $\mF(f^{-1}(U_i))=f_\ast\mF(U_i)$ is $s_i$ for all $i\in I$. Thus the gluing axiom is satisfied. 
-\end{proof}
-\end{prp}
-
-\begin{eg}{Skyscraper Sheaf}{}\\
-Let $X$ be a space. Let $p\in X$. Let $S$ be a set. Let $\underline{S}$ be the constant sheaf on $\{p\}$. Define the skyscraper sheaf of $X$ at $p$ to be the pushforward $$\iota_\ast\underline{S}(U)=\underline{S}(\iota^{-1}(U))$$ where $\iota:\{p\}\hookrightarrow X$ is the inclusion map. 
-\end{eg}
-
-\begin{defn}{The Direct Image Sheaf Functor}{}\\
-Let $X,Y$ be spaces. Let $f:X\to Y$ be a map. Let $\mC$ be a category. Let $\mF$ be a $\mC$-sheaf on $X$. Define the direct image sheaf functor $$f_\ast:\mC(X)\to\mC(Y)$$ by the following data. 
+\begin{defn}{Graded Sheaves of $\mO_X$-Algebras}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF$ be a sheaf of $\mO_X$-algebras. We say that $\mF$ is graded if the following are true. 
 \begin{itemize}
-\item For each sheaf $\mF$ of $X$, $f_\ast\mF$ is the direct image sheaf on $Y$. 
-\item For each morphism $\varphi:\mF\to\mG$, $f_\ast\varphi:f_\ast\mF\to f_\ast\mG$ is the morphism given by $$\varphi(f^{-1}(U)):\mF(f^{-1}(U))\to\mG(f^{-1}(U))$$
+\item $\mF$ is graded as a $\mO_X$-module. 
+\item The map $\mF\otimes_{\mO_X}\mF\to\mF$ restricts to maps $\mF_i\otimes_{\mO_X}\mF_j\to\mF_{i+j}$. 
 \end{itemize}
 \end{defn}
-
-\begin{defn}{Inverse Image Sheaf}{}\\
-Let $X,Y$ be spaces. Let $f:X\to Y$ be a map. Let $\mC$ be a sheaf that admits all filtered colimits. Let $\mG$ be a sheaf on $Y$. Define the inverse image sheaf $f^{-1}\mG$ to be the sheafification of the presheaf on $X$ defined as follows. 
-\begin{itemize}
-\item For each open set $U\subseteq X$, let $\mJ(U)\subseteq\bold{Open}(X)$ be the full subcategory consisting of open sets of $Y$ the contain $f(U)$. Then the presheaf sends $U$ to $\underset{W\in\mJ(U)}{\lim}\mG(W)$. 
-\item For each inclusion $V\subseteq U$, define the induced map to be induced by the universal property of the limit. 
-\end{itemize}
-\end{defn}
-
-\begin{prp}{}{}\\
-Let $X,Y$ be spaces. Let $f:X\to Y$ be a map. Let $\mC$ be an algebraic category. Let $\mG$ be a sheaf on $Y$. Then the inverse image sheaf $f^{-1}\mG$ is a sheaf. 
-\end{prp}
-
-\begin{defn}{The Inverse Image Sheaf Functor}{}\\
-Let $X,Y$ be spaces. Let $f:X\to Y$ be a map. Let $\mC$ be a sheaf that admits all filtered colimits. Let $\mF$ be a sheaf on $X$. Define the inverse image sheaf functor $$f^{-1}:\mC(Y)\to\mC(X)$$ by the following data. 
-\begin{itemize}
-\item For each sheaf $\mF$ of $Y$, $f^{-1}\mF$ is the inverse image sheaf on $X$. 
-\item For each morphism $\varphi:\mF\to\mG$, the morphism $f^{-1}\mF\to f^{-1}\mG$ is induced by the universal property of limits. 
-\end{itemize}
-\end{defn}
-
-\begin{eg}{}{}\\
-Let $Y$ be a space. Let $p\in Y$. Let $\iota:\{p\}\hookrightarrow Y$ be the inclusion map. Let $\mG$ be a sheaf on $Y$. Then we have $$\left(\iota^{-1}\mG\right)(\{p\})=\mG_p$$
-\end{eg}
-
-\begin{prp}{}{}\\
-Let $X,Y$ be spaces. Let $f:X\to Y$ be a map. Let $\mC$ be an algebraic category. Then there is an adjunction $$f^{-1}:\mC(Y)\overset{\dashv}{\rightleftarrows}\mC(X):f_\ast$$
-\end{prp}
-
-\begin{crl}{}{}\\
-Let $X,Y$ be spaces. Let $f:X\to Y$ be a map. Let $\mC$ be an algebraic category. Let $\mC$ be an algebraic category. Let $\mG$ be a $\mC$-sheaf of $Y$. Then there is a natural isomorphism $$(f^{-1}\mG)_p\cong\mG_{f(p)}$$ for any $p\in X$. 
-\begin{proof}
-$f^{-1}$ is a left adjoint and stalks are colimits. Since left adjoints preserve colimits we are done. 
-\end{proof}
-\end{crl}
-
-\begin{eg}{}{}\\
-Let $X$ be a space. Let $U\subseteq X$ be an open subset. Let $\mF$ be a sheaf of sets on $X$. Let $p\in U$. Then we have $$(\mF|_U)_p\cong\mF_p$$
-\begin{proof}
-Follows from the above corollary. 
-\end{proof}
-\end{eg}
-
-\begin{lmm}{}{}\\
-Let $Y$ be a space. Let $U\subseteq Y$ be an open set. Let $\iota:U\hookrightarrow Y$ be the inclusion map. Let $\mC$ be an algebraic category. Let $\mG$ be a $\mC$-sheaf on $Y$. Then there is a natural isomorphism $$\iota^{-1}\mG\cong\mG|_U$$
-\begin{proof}
-Write $\iota^{-1}\mG_\text{pre}$ the inverse image sheaf before sheafification. Recall that before sheafification, for $W\subseteq U$ an open set we have $(\iota^{-1}\mG_\text{pre})(W)=\colim_{V\supseteq W}\mG(V)$. Since $W$ is the initial object in the category of open sets containing $W$, we have that he colimit is equal to the terminal object. Hence $(\iota^{-1}\mG_\text{pre})(W)=\mG(W)$. Since $\mG$ is already a sheaf, sheafification gives a natural isomorphism $\iota^{-1}\mG)\cong\iota^{-1}\mG_\text{pre}$ and the latter is equal to $\mG|_U$. 
-\end{proof}
-\end{lmm}
-
-\begin{prp}{}{}\\
-Let $X,Y$ be spaces. Let $f:X\to Y$ be a map. Let $\mC$ be an algebraic category. Then $\iota^{-1}:\mC(Y)\to\mC(X)$ is an exact functor. 
-\end{prp}
-
-\subsection{Enriching the Category of Sheaves with Sheaves}
-\begin{defn}{The Sheaf of Local Homomorphisms}{}\\
-Let $X$ be a space. Let $\mA$ be an abelian category that is an algebraic category. Let $\mF,\mG$ be $\mA$-sheaves on $X$. Define the sheaf hom $$\mathscr{H}om(\mF,\mG)$$ from $\mF$ to $\mG$ as follows. 
-\begin{itemize}
-\item For each $U\subseteq X$ open subset, $$\mathscr{H}om(\mF,\mG)(U)=\Hom_{\mA(U)}(\mF|_U,\mG|_U)$$
-\item For each inclusion $V\subseteq U$ of open subsets, define $$\mathscr{H}om(\mF,\mG)(U)\to\mathscr{H}om(\mF,\mG)(V)$$ by $$\{\sigma_A:\mF|_U(A)\to\mG|_U(A)\;|\;A\subseteq U\text{ open }\}\mapsto\{\sigma_A\;|\;A\subseteq V\text{ open }\}$$
-\end{itemize}
-\end{defn}
-
-\begin{prp}{}{}\\
-$\mathscr{H}om(\mF,-)$ is left exact. $\mathscr{H}om(-,\mG)$ is right exact. 
-\end{prp}
-
-\subsection{Ringed Spaces}
-\begin{defn}{Ringed Space}{}\\
-A ringed space is a topological space $X$ with a sheaf of rings $\mO_X$ on $X$. 
-\end{defn}
-
-\begin{defn}{Morphisms of Ringed Spaces}{} Let $(X,\mathcal{O}_X)$ and $(Y,\mathcal{O}_Y)$ be ringed spaces. A morphism of ringed spaces from $(X,\mathcal{O}_X)$ to $(Y,\mathcal{O}_Y)$ is a pair $(f,f^\#)$ of continuous map $f:X\to Y$ and a map $f^\#:\mathcal{O}_Y\to f_\ast\mathcal{O}_X$ of sheaves of rings on $Y$. 
-\end{defn}
-
-\begin{defn}{Locally Ringed Spaces}{}\\
-Let $(X,\mO_X)$ be a ringed space. We say that $X$ is a locally ringed space if for all $p\in X$, $\mO_{X,p}$ is a local ring. 
-\end{defn}
-
-Suppose that $(X,\mO_X)$ and $(Y,\mO_Y)$ are locally ringed spaces. Given a point $p\in X$, we obtain induced maps $$f^\#:\mO_Y(V)\to f_\ast\mO_X(f^{-1}(V))$$ for any neighbourhood $V$ of $f(p)$. Taking the colimit, we obtain a map $$\mO_{Y,f(p)}=\text{colim}_V\mO_Y(V)\to\text{colim}_V\mO_X(f^{-1}(V))$$ As $V$ ranges through the neighbourhood of $f(p)$, $f^{-1}(V)$ ranges over a subset of the neighbourhoods of $p$ so that we obtain a map $$\mO_{Y,f(p)}=\text{colim}_V\mO_Y(V)\to\text{colim}_V\mO_X(f^{-1}(V))\to\mO_{X,p}$$
-
-\begin{defn}{Morphisms of Locally Ringed Spaces}{} Let $(X,\mathcal{O}_X)$ and $(Y,\mathcal{O}_Y)$ be locally ringed spaces. Then a morphism of locally ringed spaces is a morphism of ringed spaces such that for each $p\in X$, the induced map of local rings $$f_p^\#:\mO_{Y,f(p)}\to\mO_{X,p}$$ is a local homomorphism of local rings. 
-\end{defn}
-
-\begin{defn}{The Category of Locally Ringed Spaces}{}\\
-Define the category $\bold{LRS}$ of locally ringed spaces as follows. 
-\begin{itemize}
-\item The objects are locally ringed spaces. 
-\item The morphisms are morphisms of locally ringed spaces. \
-\item Composition is given by the composition of continuous functions and composition of natural transformations. 
-\end{itemize}
-\end{defn}
-
-\pagebreak
-\section{Modules over a Sheaf}
-\subsection{The Sheaf of $\mO_X$-Modules}
-\begin{defn}{Presheaf of $\mO_X$-modules}{} Let $(X,\mO_X)$ be a ringed space. We say that an $\bold{Ab}$-presheaf $\mF$ of $X$ is a presheaf of $\mO_X$-modules if the following are true. 
-\begin{itemize}
-\item For every open set $U\subseteq X$, $\mF(U)$ is an $\mO_X(U)$-module
-\item For each inclusion of open sets $V\subseteq U$, the restriction homomorphism $\mF(U)\to\mF(V)$ is such that the following diagram commutes: \\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-\mO_X(U)\times\mF(U)\arrow[r, "\text{action}"]\arrow[d, "\text{res}_{U,V}\times\text{res}_{U,V}"'] &\mF(U)\arrow[d, "\text{res}_{U,V}"]\\
-\mO_X(V)\times\mF(V)\arrow[r, "\text{action}"] & \mF(V)
-\end{tikzcd}}
-\end{itemize}
-\end{defn}
-
-\begin{defn}{Sheaf of $\mO_X$-modules}{}\\
-Let $(X,\mO_X)$ be a ringed space. Let $\mF$ be a presheaf of $\mO_X$-modules. We say that $\mF$ is a sheaf of $\mO_X$-modules if $\mF$ is a sheaf. 
-\end{defn}
-
-\begin{lmm}{}{}\\
-Let $(X,\mO_X)$ be a ringed space. Let $\mF$ be a presheaf of $\mO_X$-modules. Let $p\in X$. Then $\mF_p$ is an $\mO_{X,p}$-module. 
-\begin{proof}\\
-
-\end{proof}
-\end{lmm}
-
-\begin{defn}{Morphisms of $\mO_X$-modules}{}
-\end{defn}
-
-\begin{defn}{Induced Morphism of Stalks}{}
-\end{defn}
-
-\subsection{Sheafification of $\mO_X$-Modules}
-\subsection{The Category of $\mO_X$-Modules is an Abelian Category}
-\begin{defn}{The Category of $\mO_X$-Modules}{} Let $(X,\mO_X)$ be a ringed space. Define the category of $\mO_X$-modules $\bold{Mod}_{\mO_X}$ to consist of the following data. 
-\begin{itemize}
-\item The objects consists sheaves of $\mO_X$-modules. 
-\item The morphisms are just morphisms of sheaves between $\mO_X$-modules. 
-\item Composition is given by the composition of morphisms of sheaves. 
-\end{itemize}
-\end{defn}
-
-Kernels, Cokernels (instead of defining it, prove that the abelian sheaves are actually sheaves of $\mO_X$-modules). 
-Commuting with stalks. 
-
-\begin{prp}{}{}\\
-Let $(X,\mO_X)$ be a ringed space. Then $\bold{Mod}_{\mO_X}$ is an abelian category. 
-\end{prp}
-
-\begin{prp}{}{}\\
-Let $(X,\mO_X)$ be a ringed space. Let the following be a sequence \\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	\mF & \mG & \mH
-	\arrow[from=1-1, to=1-2]
-	\arrow[from=1-2, to=1-3]
-\end{tikzcd}} \\
-of $\mO_X$-modules. Then the sequence is exact if and only if it is exact as a sequence of $\bold{Ab}$-sheaves. 
-\end{prp}
-
-Exactness with stalks. 
-Left exactness of taking sections. 
-Checking Injectivity and Surjectivity. 
 
 \subsection{Tensor-Hom Adjunction}
-\begin{defn}{The Sheaf of Local Sections}{}\\
-Let $(X,\mO_X)$ be a ringed space. Let $\mF,\mG\in\bold{Mod}_{\mO_X}$. Define the sheaf hom from $\mF$ to $\mG$ to be the sheaf $$\mathscr{H}om(\mF,\mG)$$ defined as follows. 
-\begin{itemize}
-\item Each open set $U$ is sent to the abelian group $$\mathscr{H}om(\mF,\mG)(U)=\mathscr{H}om_{\bold{Mod}_{\mO_X}}(\mF|_U,\mG|_U)$$
-\item For each inclusion of open sets $V\hookrightarrow U$, define the morphism $$\mathscr{H}om_{\bold{Mod}_{\mO_X}}(\mF|_U,\mG|_U)\to\Hom_{\bold{Mod}_{\mO_X}}(\mF,\mG)(V)$$ as follows. A morphism of sheaves $\phi:\mF|_U\to\mG|_U$ is sent to the restriction $\phi|_V:\mF|_V\to\mG|_V$. 
-\end{itemize}
-\end{defn}
-
 \begin{defn}{Tensor Products}{}\\
-Let $(X,\mO_X)$ be a ringed space. Let $\mF,\mG$ be sheaves of $\mO_X$-modules. Define the tensor product $\mF\otimes_{\mO_X}\mG$ of $\mF$ and $\mG$ to be the sheafification of the sheaf defined as follows. 
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF,\mG\in\bold{Mod}_{\mO_X}$. Define the tensor product $\mF\otimes_{\mO_X}\mG$ of $\mF$ and $\mG$ to be the sheafification of the sheaf defined as follows. 
 \begin{itemize}
 \item For each open set $U\subseteq X$, define $(\mF\otimes_{\mO_X}\mG)(U)=\mF(U)\otimes_{\mO_X(U)}\mG(U)$. 
 \item For each inclusion of open sets $V\subseteq U$, define the morphism $(\mF\otimes_{\mO_X}\mG)(U)\to(\mF\otimes_{\mO_X}\mG)(V)$ by 
 \end{itemize}
 \end{defn}
 
-Tensor-hom adjunction. 
-
 Tensor products commute with stalks. 
 
-\subsection{Functoriality of the Category of Modules over a Sheaf}
-\begin{lmm}{}{}\\
-Let $(X,\mO_X),(Y,\mO_Y)$ be ringed spaces. Let $f:X\to Y$ be a morphism of ringed spaces. Let $\mF$ be a sheaf of $\mO_X$-modules. Then $f_\ast\mF$ is a sheaf of $\mO_Y$-modules. 
-\end{lmm}
-
-\begin{defn}{The Inverse Image Module}{}\\
-Let $(X,\mO_X),(Y,\mO_Y)$ be ringed spaces. Let $f:X\to Y$ be a morphism. Let $\mG$ be an $\mO_Y$-module. Define the inverse image module of $\mG$ to be $$f^\ast\mG=f^{-1}\mG\otimes_{f^{-1}\mO_Y}\mO_X$$
-\end{defn}
-
-\begin{lmm}{}{}\\
-Let $(X,\mO_X),(Y,\mO_Y)$ be ringed spaces. Let $f:X\to Y$ be a morphism. Let $\mG$ be an $\mO_Y$-module. Then $f^\ast\mG$ is a sheaf of $\mO_X$-modules. 
-\end{lmm}
-
-\begin{defn}{The Inverse Image Module Functor}{}\\
-Let $(X,\mO_X),(Y,\mO_Y)$ be ringed spaces. Let $f:X\to Y$ be a morphism. Define the inverse image module functor $$f^\ast:\bold{Mod}_{\mO_Y}\to\bold{Mod}_{\mO_X}$$ as follows. 
+\begin{defn}{The Sheaf Hom}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF,\mG\in\bold{Mod}_{\mO_X}$. Define the sheaf hom from $\mF$ to $\mG$ to be the sheaf $$\mathscr{H}om(\mF,\mG)$$ defined as follows. 
 \begin{itemize}
-\item For $\mG$ an $\mO_Y$-module, $f^\ast\mG$ is the inverse image module. 
-\item For $\mG\to\mH$ a morphism of $\mO_Y$-modules, define $f^\ast\mG\to f^\ast\mH$ by the induced morphism from $f^{-1}\mG\to f^{-1}\mH$. 
+\item Each open set $U$ is sent to the abelian group $$\mathscr{H}om(\mF,\mG)(U)=\mathscr{H}om_{\bold{Mod}_{\mO_X|_U}}(\mF|_U,\mG|_U)$$
+\item For each inclusion of open sets $V\hookrightarrow U$, define the morphism $$\mathscr{H}om_{\bold{Mod}_{\mO_X}}(\mF|_U,\mG|_U)\to\Hom_{\bold{Mod}_{\mO_X}}(\mF,\mG)(V)$$ as follows. A morphism of sheaves $\phi:\mF|_U\to\mG|_U$ is sent to the restriction $\phi|_V:\mF|_V\to\mG|_V$. 
 \end{itemize}
 \end{defn}
 
+\begin{defn}{The Dual Sheaf}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF$ be a sheaf of $\mO_X$-modules. Define the dual sheaf of $\mF$ to be $$\mF^\vee=\mathscr{H}om(\mF,\mO_X)$$
+\end{defn}
+
+\begin{thm}{The Tensor-Hom Adjunction}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF,\mG,\mH\in\bold{Mod}_{\mO_X}$. Then there is a natural isomorphism $$\Hom_{\bold{Mod}_{\mO_X}}(\mF\otimes_{\mO_X}\mG,\mH)\cong\Hom_{\bold{Mod}_{\mO_X}}(\mF,\mathscr{H}om_{\bold{Mod}_{\mO_X}}(\mG,\mH))$$
+\end{thm}
+
 \begin{prp}{}{}\\
-Let $(X,\mO_X),(Y,\mO_Y)$ be ringed spaces. Let $f:X\to Y$ be a morphism of ringed spaces. Then there is an adjunction given by $$f^\ast:\bold{Mod}_{\mO_Y}\overset{\dashv}{\rightleftarrows}\bold{Mod}_{\mO_X}:f_\ast$$
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mA,\mB\in\bold{Alg}_{\mO_X}$. Then $\mathscr{H}om_{\bold{Alg}_{\mO_X}}(\mA,\mB)\in\bold{Alg}_{\mO_X}$. 
 \end{prp}
 
-Exactness of inverse image functor
+\begin{prp}{}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mA,\mB,\mC\in\bold{Alg}_{\mO_X}$. Then we have $$\mathscr{H}om_{\bold{Alg}_{\mO_X}}(\mA\otimes_{\mO_X}\mB,\mC)\cong\mathscr{H}om_{\bold{Alg}_{\mO_X}}(\mA,\mC)\times\mathscr{H}om_{\bold{Alg}_{\mO_X}}(\mB,\mC)$$
+\end{prp}
+
+\subsection{Pushforward and Pullback Sheaves of Modules}
+\begin{lmm}{}{}\\
+Let $X,Y$ be spaces. Let $f:X\to Y$ be a map. Then inverse and direct image adjunction restricts to an adjunction $$f^{-1}:\bold{Ab}(Y)\overset{\dashv}{\rightleftarrows}\bold{Ab}(X):f_\ast$$
+\end{lmm}
+
+However for modules in general, we need to modify the inverse image functor to incorporate the action of the ring. 
+
+\begin{defn}{Inverse Image Sheaf}{}\\
+Let $(X,\mO_X)$ and $(Y,\mO_Y)$ be commutative ringed spaces. Let $f:X\to Y$ be a morphism. Let $\mG$ be a sheaf on $Y$. Define the inverse image sheaf of $\mG$ by $$f^\ast\mG=\mO_X\otimes_{f^{-1}\mO_Y}f^{-1}\mG$$
+\end{defn}
+
+Since tensor products are functorial, the inverse image sheaf is also a functorial construction. Also, this is basically a change of rings formula. In particular, the underlying sheaf of abelian groups of $f^{-1}\mG$ and $f^\ast\mG$ are the same. 
+
+\begin{lmm}{}{}\\
+Let $X,Y$ be spaces. Let $f:X\to Y$ be a map. Then there is an adjunction $$f^\ast:\bold{Mod}_{\mO_Y}\overset{\dashv}{\rightleftarrows}\bold{Mod}_{\mO_X}:f_\ast$$
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $X,Y$ be spaces. Let $f:X\to Y$ be a map. Then inverse and direct image adjunction restricts to an adjunction $$f^\ast:\bold{Alg}_{\mO_Y}\overset{\dashv}{\rightleftarrows}\bold{Alg}_{\mO_X}:f_\ast$$
+\end{lmm}
+
+\subsection{Tensor Algebra and its Subalgebras}
+From operad theory a lot of constructions are carried over eg symmetric products, exterior products. 
+
+\begin{defn}{$k$th Tensor Power}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF$ be a sheaf of $\mO_X$-modules. Define the $k$th tensor power of $\mF$ to be sheafification of the presheaf $$U\mapsto T^k(\mF(U))$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF$ be a sheaf of $\mO_X$-modules. If $\mF$ is locally free of rank $n$, then $T^k(\mF)$ is locally free of rank $n^k$. 
+\end{lmm}
+
+\begin{defn}{Tensor Algebra}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF$ be a sheaf of $\mO_X$-modules. Define the tensor algebra of $\mF$ to be sheafification of the presheaf $$U\mapsto T(\mF(U))$$
+\end{defn}
+
+\begin{defn}{$k$th Symmetric Power}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF$ be a sheaf of $\mO_X$-modules. Define the $k$th symmetric power of $\mF$ to be sheafification of the presheaf $$U\mapsto S^k(\mF(U))$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF$ be a sheaf of $\mO_X$-modules. If $\mF$ is locally free of rank $n$, then $T^k(\mF)$ is locally free of rank $\binom{n+k-1}{n-1}$. 
+\end{lmm}
+
+\begin{defn}{Symmetric Algebra}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF$ be a sheaf of $\mO_X$-modules. Define the symmetric algebra of $\mF$ to be sheafification of the presheaf $$U\mapsto S(\mF(U))$$
+\end{defn}
+
+\begin{defn}{$k$th Exterior Power}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF$ be a sheaf of $\mO_X$-modules. Define the $k$th exterior power of $\mF$ to be sheafification of the presheaf $$U\mapsto\Lambda^k(\mF(U))$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF$ be a sheaf of $\mO_X$-modules. If $\mF$ is locally free of rank $n$, then the following are true. 
+\begin{itemize}
+\item $\Lambda^k(\mF)$ is locally free of rank $\binom{n}{k}$. 
+\item The multiplication $\Lambda^r(\mF)\otimes_{\mO_X}\Lambda^{n-r}(\mF)\to\Lambda^n(\mF)$ is an isomorphism for any $r$. 
+\end{itemize}
+\end{lmm}
+
+\begin{defn}{Exterior Algebra}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF$ be a sheaf of $\mO_X$-modules. Define the exterior algebra of $\mF$ to be sheafification of the presheaf $$U\mapsto\Lambda(\mF(U))$$
+\end{defn}
+
+all the above commutes with pullbacks of commutative ringed spaces. 
+
+\pagebreak
+\section{Different Types of Sheaves of Modules}
+\subsection{Some Finiteness Properties}
+\begin{defn}{Sheaf of Finite Type}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF\in\bold{Mod}_{\mO_X}$. We say that $\mF$ is a sheaf of finite type if there exists an open cover $\{U_i\;|\;i\in I\}$ of $X$ such that there is a surjective morphism $$\mO_X^{\otimes n_i}|_{U_i}\to\mF|_{U_i}$$ for some $n_i\in\N$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF\in\bold{Mod}_{\mO_X}$ be a sheaf of finite type. Then $\mF_{X,p}$ is a finitely generated $\mO_{X,p}$-module for all $p\in X$. 
+\end{prp}
+
+\begin{defn}{Finitely Presented Sheaves}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF\in\bold{Mod}_{\mO_X}$. We say that $\mF$ is finitely presented if there exists an open cover $\{U_i\;|\;i\in I\}$ of $X$ such that there is an exact sequence \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	{\mO_X^{m_i}|_U} & {\mO_X^{n_i}|_U} & {\mF|_U} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+\end{tikzcd}}\\
+for some $m_i,n_i\in\N$. 
+\end{defn}
 
 \subsection{Quasi-Coherent Sheaves}
 Quasi-coherent sheaves and coherent sheaves has extremely abstract definitions. If one is only interested in the case of Algebraic Geometry, then there is a very nice explicit way of defining it, so readers may skip this part. 
 
-\begin{defn}{Quasi-Coherent Sheaves}{} Let $(X,\mO_X)$ be a ringed space. Let $\mF$ be a sheaf of $\mO_X$-module. We say that $\mF$ is a quasi-coherent sheaf if for all $p\in X$, there exists an open neighbourhood $U\subseteq X$ such that there is an exact sequence: \\
+\begin{defn}{Quasi-Coherent Sheaves}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF$ be a sheaf of $\mO_X$-module. We say that $\mF$ is a quasi-coherent sheaf if for all $p\in X$, there exists an open neighbourhood $U\subseteq X$ such that there is an exact sequence: \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	{\mO_X^{\otimes I}|_U} & {\mO_X^{\otimes J}|_U} & {\mF|_U} & 0
 	\arrow[from=1-1, to=1-2]
@@ -946,36 +806,23 @@ Quasi-coherent sheaves and coherent sheaves has extremely abstract definitions. 
 for some countable indexing sets $I$ and $J$. 
 \end{defn}
 
-\begin{defn}{The Category of Quasi-Coherent Sheaves}{} Let $(X,\mO_X)$ be a ringed space. Define the category of quasi-coherent sheaves $$\bold{QCoh}_{\mO_X}$$ over $(X,\mO_X)$ as follows. 
-\begin{itemize}
-\item The objects are the quasi-coherent sheaves $\mF$ over $(X,\mO_X)$
-\item The morphisms are morphisms between sheaves of modules. This means that if $\mF$ and $\mG$ are quasi-coherent $\mO_X$-modules, then a morphism $\mF\to\mG$ is a natural transformation $\lambda:\mF\to\mG$ that respects the module structure. 
-\item Composition is given by the composition of sheaves
-\end{itemize}
+\begin{defn}{The Category of Quasi-coherent Sheaves}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Define the category of coherent sheaves $\bold{QCoh}_{\mO_X}$ to be the full subcategory of $\bold{Mod}_{\mO_X}$ consisting of quasi-coherent sheaves. 
 \end{defn}
 
-\begin{defn}{Sheaf of Finite Type}{}  Let $(X,\mO_X)$ be a ringed space. Let $\mF$ be a sheaf of $\mO_X$-module. We say that $\mF$ is a sheaf of finite type if for all $p\in X$, there exists an open neighbourhood $U\subseteq X$ such that there is a surjective morphism $$\mO_X^{\otimes n}|_U\to\mF|_U$$ for some $n\in\N$. 
-\end{defn}
-
-\begin{defn}{Coherent Sheaves}{} Let $(X,\mO_X)$ be a ringed space. Let $\mF$ be a sheaf of $\mO_X$-module. We say that $\mF$ is coherent if the following are true. 
+\begin{defn}{Coherent Sheaves}{} Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF$ be a sheaf of $\mO_X$-module. We say that $\mF$ is coherent if the following are true. 
 \begin{itemize}
 \item $\mF$ is a sheaf of finite type. 
 \item For any $U\subseteq X$ and any morphism $$\varphi:\mO_X^{\otimes n}|_U\to\mF|_U$$ of $\mO_X$-modules, then kernel of $\varphi$ is a sheaf of finite type. 
 \end{itemize}
 \end{defn}
 
-\begin{defn}{The Category of Quasi-Coherent Sheaves}{} Let $(X,\mO_X)$ be a ringed space. Define the category of quasi-coherent sheaves $$\bold{Coh}_{\mO_X}$$ over $(X,\mO_X)$ as follows. 
-\begin{itemize}
-\item The objects are the coherent sheaves $\mF$ over $(X,\mO_X)$
-\item The morphisms are morphisms between sheaves of modules. This means that if $\mF$ and $\mG$ are quasi-coherent $\mO_X$-modules, then a morphism $\mF\to\mG$ is a natural transformation $\lambda:\mF\to\mG$ that respects the module structure. 
-\item Composition is given by the composition of sheaves
-\end{itemize}
+\begin{defn}{The Category of Coherent Sheaves}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Define the category of coherent sheaves $\bold{Coh}_{\mO_X}$ to be the full subcategory of $\bold{QCoh}_{\mO_X}$ consisting of coherent sheaves. 
 \end{defn}
 
-\begin{thm}{}{} Let $(X,\mO_X)$ be a ringed space. Then $\bold{Coh}_{\mO_X}$ is an abelian category. 
-\end{thm}
-
-\begin{prp}{}{} Let $(X,\mO_X)$ be a ringed space. Let the following \\
+\begin{prp}{}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let the following \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	0 & \mF & {\mF'} & {\mF''} & 0
 	\arrow[from=1-1, to=1-2]
@@ -986,18 +833,59 @@ for some countable indexing sets $I$ and $J$.
 be an exact sequence of sheaves. If two of the three sheaves are coherent, then so is the last one. 
 \end{prp}
 
-\subsection{Locally Free Sheaves}
-\begin{defn}{Free and Locally Free Sheaves}{} Let $(X,\mA)$ be a ringed space. Let $\mF$ be a $\mA$-module. We say that $\mF$ is free is there is an isomorphism $$\mF\cong\mA^{\oplus n}$$ of sheaves. We say that $\mF$ is locally free if $X$ has an open cover $\{U_i\;|\;i\in I\}$ such that for each $U_i$, there is an isomorphism $$\mF|_{U_i}\cong\left(\mA|_{U_i}\right)^{\oplus n}$$ of sheaves. In this case we say that the rank of $\mF$ is $n$. 
+\begin{prp}{}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF\in\bold{Mod}_{\mO_X}$. Then the following are true. 
+\begin{itemize}
+\item If $\mF$ is coherent, then $\mF$ is finitely presented. 
+\item If $\mF$ is finitely presented, then $\mF$ is of finite type. 
+\item If $\mF$ is finitely presented, then $\mF$ is quasi-coherent. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF\in\bold{Mod}_{\mO_X}$. If $\mO_X$ is coherent, then the following are equivalent. 
+\begin{itemize}
+\item $\mF$ is coherent. 
+\item $\mF$ is finitely presented. 
+\item $\mF$ is of finite type. 
+\end{itemize}
+\end{prp}
+
+\subsection{Reflexive Sheaves}
+\begin{defn}{Reflexive Sheaves}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF$ be a sheaf of $\mO_X$-modules. We say that $\mF$ is reflexive if there is an isomorphism of $\mO_X$-modules $$\mF^{\vee\vee}\cong\mF$$
 \end{defn}
 
-\begin{lmm}{}{} If $X$ is connected then the rank of a locally free sheaf on $X$ is constant. 
+\subsection{Locally Free Sheaves}
+\begin{defn}{Free Sheaves}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF$ be a $\mO_X$-module. We say that $\mF$ is free is there is an isomorphism of $\mO_X$-modules $$\mF\cong\mO_X^{\oplus n}$$
+\end{defn}
+
+\begin{defn}{Locally Free Sheaves}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF$ be a sheaf of $\mO_X$-modules. We say that $\mF$ is locally free if $X$ has an open cover $\{U_i\;|\;i\in I\}$ such that for each $U_i$, there is an isomorphism of $\mO_X$-modules $$\mF|_{U_i}\cong\left(\mO_X|_{U_i}\right)^{\oplus n_i}$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF$ be a locally free sheaf. Then $\mF$ is reflexive. 
 \end{lmm}
 
-\begin{prp}{}{} Let $(X,\mO)$ be a ringed space. Let $\mF$ be a sheaf of $\mO$-modules. Then $\mF$ is locally free of rank $r$ if and only if $$\mF_p\cong\mO_{X,p}^r$$ for all $p\in X$. 
+\begin{defn}{The Rank of a Locally Free Sheaf}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF$ be a locally free sheaf of $\mO_X$-modules. We say that the rank of $\mF$ is $n\in\N$ if there exists an open cover $\{U_i\;|\;i\in I\}$ of $X$ such that there are isomorphisms of $\mO_X$-modules $$\mF|_{U_i}\cong\left(\mO_X|_{U_i}\right)^{\oplus n}$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF$ be a locally free sheaf of $\mO_X$-modules. If $X$ is connected, then the rank of $\mF$ is well defined. 
+\end{lmm}
+
+\begin{prp}{}{} Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF$ be a sheaf of $\mO_X$-modules. Then $\mF$ is locally free of rank $r$ if and only if $$\mF_p\cong\mO_{X,p}^r$$ for all $p\in X$. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF$ be a sheaf of $\mO_X$-modules. If $\mF$ is locally free, then $\mF$ is reflexive. 
 \end{prp}
 
 \begin{defn}{The Category of Locally Free Sheaves}{}\\
-Let $(X,\mO_X)$ be a ringed space. Define the category of locally free sheaves $$\bold{LF}_{\mO_X}$$ of rank $n$ over $X$ as follows. 
+Let $(X,\mO_X)$ be a commutative ringed space. Define the category of locally free sheaves $$\bold{Loc}_X$$ of rank $n$ over $X$ as follows. 
 \begin{itemize}
 \item The objects are the locally free sheaves over $X$
 \item The morphisms are the morphisms of sheaves of modules
@@ -1006,57 +894,65 @@ Let $(X,\mO_X)$ be a ringed space. Define the category of locally free sheaves $
 \end{defn}
 
 \subsection{Invertible Sheaves}
-\begin{defn}{Invertible Sheaf}{} Let $X$ be a ringed space. We say that a sheaf $\mF$ on $X$ is invertible if it is a locally free sheaf on rank $1$. 
+\begin{defn}{Invertible Sheaf}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF$ be a sheaf of $\mO_X$-modules. We say that $\mF$ is an invertible sheaf if $\mF$ is a locally free sheaf of rank $1$. 
 \end{defn}
 
-\begin{thm}{}{} Let $(X,\mathcal{O}_X)$ be a ringed space. Then the following are equivalent characterization of a sheaf of $\mathcal{O}_X$-modules $\mF$
+\begin{prp}{}{}\\
+Let $(X,\mathcal{O}_X)$ be a commutative ringed space. Then the following are equivalent characterization of a sheaf of $\mathcal{O}_X$-modules $\mF$
 \begin{itemize}
 \item $\mF$ is invertible
 \item There exists a sheaf $G$ such that $F\otimes_{\mathcal{O}_X}G\cong\mathcal{O}_X$
 \item $\mF\otimes_{\mathcal{O}_X}\mF^{\vee}\cong\mathcal{O}_X$
 \end{itemize}
-\end{thm}
-
-\begin{prp}{}{} Let $(X,\mO_X)$ be a ringed space. Let $\mF$ and $\mG$ be invertible sheaves on $X$. Then $$\mF\otimes\mG$$ is also an invertible sheaf. 
 \end{prp}
 
-\begin{defn}{The Picard Group}{} Let $(X,\mO_X)$ be a ringed space. Define the Picard group of $X$ to be the set $$\text{Pic}(X)=\{\mL\;|\;\mL\text{ is an invertible sheaf on }X\}$$ together with the tensor product $\otimes$. 
+\begin{prp}{}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF$ and $\mG$ be invertible sheaves on $X$. Then $\mF\otimes\mG$ is an invertible sheaf on $X$. 
+\end{prp}
+
+\begin{defn}{The Picard Group}{} Let $(X,\mO_X)$ be a commutative ringed space. Define the Picard group of $X$ to be the set $$\text{Pic}(X)=\{\mL\;|\;\mL\text{ is an invertible sheaf on }X\}$$ together with the tensor product $\otimes$. 
 \end{defn}
 
 \pagebreak
 \section{Sheaf Cohomology}
-\subsection{The Global Section Functor}
-\begin{defn}{Global Section Functor}{} Let $X$ be a space. Define the global section functor to be the functor $\Gamma(X,-):\bold{Ab}(X)\to\bold{Ab}$ defined as follows. 
+\subsection{Basic Definitions}
+\begin{prp}{}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Then $\bold{Mod}_{\mO_X}$ has enough injectives. 
+\end{prp}
+
+\begin{defn}{Global Section Functor}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Define the global section functor $\Gamma_{\mO_X}(X,-):\bold{Mod}_{\mO_X}\to\bold{Mod}_{\mO_X(X)}$ by the following data. 
 \begin{itemize}
-\item A sheaf $\mF$ of groups on $X$ is sent to $\Gamma(X,\mF)=\mF(X)$
-\item For a morphism of sheaves $\phi:\mF\to\mG$, $\Gamma(X,-)$ sends it to the ring homomorphism $\phi(X):\mF(X)\to\mG(X)$
+\item For $\mF\in\bold{Mod}_{\mO_X}$, we have $\Gamma_{\mO_X}(X,\mF)=\mF(X)$. 
+\item For a morphism of sheaves $\phi:\mF\to\mG$, $\Gamma(X,-)$ sends it to the group homomorphism $\phi(X):\mF(X)\to\mG(X)$
 \end{itemize}
 \end{defn}
 
 In general, we can define functor by sending every sheaf to a the local section of a chosen open set. This operation in general is left exact. This means that we have the following proposition. 
 
-\begin{crl}{}{} Let $X$ be a space. The global section functor $\Gamma(X,-):\bold{Ab}(X)\to\bold{Ab}$ is a left exact functor. 
+\begin{crl}{}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. The global section functor $\Gamma_{\mO_X}(X,-):\bold{Mod}_{\mO_X}\to\bold{Mod}_{\mO_X(X)}$ is a left exact functor. 
 \begin{proof}
 The global section functor is a special case of the above proposition. 
 \end{proof}
 \end{crl}
 
-\begin{defn}{Cohomology Functors}{} Let $X$ be a space. Define the cohomology functors $$H^i(X,-)=R^i\Gamma(X,-):\bold{Ab}(X)\to\bold{Ab}$$ of $X$ to be the right derived functors of $\Gamma(X,-):\bold{Ab}(X)\to\bold{Ab}$. For any sheaf $\mF$ of abelian groups on $X$, the groups $H^i(X,\mF)$ are called the cohomology groups of $\mF$. 
+\begin{defn}{Cohomology Functors}{}\\
+Let $X$ be a space. Let $\mF\in\bold{Mod}_{\mO_X(X)}$. Define the sheaf cohomology of $\mF$ to be $$H^i(X,\mF)=R^i\Gamma_{\mO_X}(X,-)(\mF)$$
 \end{defn}
-
-\begin{prp}{}{} Let $(X,\mO_X)$ be a ringed space. Then the derived functors of $$\Gamma(X,-):{_{\mO_X}\bold{Mod}}(X)\to\bold{Ab}$$ coincide with the derived functors of $\Gamma(X,-):\bold{Ab}(X)\to\bold{Ab}$. 
-\end{prp}
-
-Thus there is no distinction in considering the cohomology groups of sheaf of $\mO_X$-modules and when considering them as simply a sheaf of abelian groups. 
 
 \subsection{Flasque Sheaves}
-\begin{defn}{Flasque Sheaves}{} A sheaf $\mF$ on a space $X$ is said to be flasque if for every pair of open sets $V\subset U$, the restriction map $\mF(U)\to\mF(V)$ is surjective. 
+\begin{defn}{Flasque Sheaves}{}\\
+Let $X$ be a space. Let $\mF\in\bold{Ab}(X)$. We say that $\mF$ is flasque if for any open sets $V\subseteq U\subseteq X$, we have that $\mF(U)\to\mF(V)$ is surjective. 
 \end{defn}
 
-\begin{lmm}{}{} If $(X,\mO_X)$ is a ringed space, then any injective $\mO_X$-module is flasque. 
+\begin{lmm}{}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF\in\bold{Mod}_{\mO_X}$. Then $\mF$ is flasque. 
 \end{lmm}
 
-\begin{lmm}{}{} Let $X$ be a space and let $\mF,\mF',\mF''$ be sheaves on $X$ such that there is an exact sequence \\
+\begin{lmm}{}{}\\
+Let $X$ be a space and let $\mF,\mF',\mF''$ be sheaves on $X$ such that there is an exact sequence \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	0 & \mF & \mF' & \mF'' & 0
 	\arrow[from=1-1, to=1-2]
@@ -1076,7 +972,7 @@ of sheaves. Then the following are true.
 	\arrow[from=1-4, to=1-5]
 \end{tikzcd}}
 \end{itemize}
-\begin{proof}
+\begin{proof}\\
 Suppose that $\mF$ and $\mF'$ are flasque. Then by naturality we obtain a commutative diagram \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	0 & {\mF(U)} & {\mF'(U)} & {\mF''(U)} & 0 \\
@@ -1099,8 +995,9 @@ Now suppose that $\mF$ is flasque.
 \end{proof}
 \end{lmm}
 
-\begin{prp}{}{} Let $X$ be a space and let $\mF$ be a sheaf on $X$. If $\mF$ is flasque then $\mF$ is acyclic for $\Gamma(X,-)$. Explicitly, this means that $$H^i(X,\mF)=0$$ for all $i>0$. 
-\begin{proof}
+\begin{prp}{}{}\\
+Let $X$ be a space and let $\mF$ be a sheaf on $X$. If $\mF$ is flasque then $\mF$ is acyclic for $\Gamma(X,-)$. Explicitly, this means that $$H^i(X,\mF)=0$$ for all $i>0$. 
+\begin{proof}\\
 Since $\bold{Ab}(X)$ has enough injective objects, suppose that $\mI$ is an injective object of $\bold{Ab}(X)$ such that $\mF$ is a subobject of $\mI$. Let $\mG$ be the quotient sheaf $\mF/\mI$. Then there is an exact sequence \\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
 	0 & \mF & \mI & \mG & 0
@@ -1167,8 +1064,15 @@ Let $X$ be a space. Let $\mF\in\bold{Ab}(X)$ be a sheaf. Then $\text{Gd}(\mF)^\b
 Consequently, the sheaf cohomology of $\mF$ acquires the formula $$H^i(X;\mF)=H^i(\Gamma(X,\text{Gd}(\mF)^\bullet)$$
 
 \subsection{\v{C}ech Cohomology}
-\begin{defn}{\v{C}ech Complex}{} Let $X$ be a topological space and $\mU=\{U_i|i\in I\}$ an open cover of $X$ where $I$ is an indexing set. For any $(i_0,\dots,i_k)\in I^{k+1}$, denote $$U_{i_0,\dots,i_k}=U_{i_0}\cap U_{i_1}\cap\dots\cap U_{i_k}$$ Define for each $k$, $$C^k(X,\mU,\mF)=\prod_{(i_0,\dots,i_k)\in I^{k+1}}\mF(U_{i_0,\dots,i_k})$$ Furthermore, define a boundary map $d:C^k(X,\mU,\mF)\to C^{k+1}(X,\mU,\mF)$ by $$c_{i_0\dots,i_k}\overset{d}{\mapsto}\sum_{s=0}^{k+1}(-1)^s\text{res}(c_{i_0,\dots,\hat{i}_s,\dots,i_{k+1}})$$ Define the \v{C}ech complex to be $(C^\bullet(X,\mU,\mF),d)$. 
+\begin{defn}{\v{C}ech Complex}{}\\
+Let $X$ be a space. Let $\mU=\{U_i\;|\;i\in I\}$ be an open cover of $X$ where $I$ is an indexing set. Let $\mF\in\bold{Ab}(X)$. Define the \v{C}ech complex $$(C^\bullet(X,\mU,\mF),d)\in\bold{Ch}(\bold{Ab})$$ of $\mF$ with respect to $\mU$ as follows. 
+\begin{itemize}
+\item The terms of the chain complex is given by $$C^k(X,\mU,\mF)=\prod_{i_0<\cdots<i_k}\mF(U_{i_0}\cap U_{i_1}\cap\dots\cap U_{i_k})$$
+\item Define the boundary map $d:C^k(X,\mU,\mF)\to C^{k+1}(X,\mU,\mF)$ as follows. For $s\in C^k(X,\mU,\mF)$ whose components are indicated by $s_{i_0,\dots,i_k}$, the components of $d(s)$ is given by $$(d(s))_{i_0,\dots,i_{k+1}}=\sum_{j=0}^{k+1}(-1)^js_{i_0,\dots,i_{j-1},\widehat{i_j},i_{j+1},\dots,i_{k+1}}|_{U_{i_0,\dots,i_{k+1}}}$$
+\end{itemize}
 \end{defn}
+
+We use the notation $U_{i_0,\dots,i_k}=U_{i_0}\cap U_{i_1}\cap\dots\cap U_{i_k}$. 
 
 \begin{lmm}{}{} For any space $X$ and any open cover $\mU$ of $X$, $(C^\bullet(X,\mU,\mF),d)$ is indeed a chain complex. 
 \end{lmm}
@@ -1176,11 +1080,9 @@ Consequently, the sheaf cohomology of $\mF$ acquires the formula $$H^i(X;\mF)=H^
 \begin{defn}{\v{C}ech Cohomology}{} Let $(C^\bullet(X,\mU,\mF),d)$ be a \v{C}ech complex. Define the $k$th cohomology group of it to be $$\text{\v{H}}^k(X,\mU,\mF)=\frac{\ker(C^k(X,\mU,\mF)\to C^{k+1}(X,\mU,\mF))}{\im(C^{k-1}(X,\mU,\mF)\to C^k(X,\mU,\mF))}=H(C^\bullet(X,\mU,\mF),d)$$
 \end{defn}
 
-\begin{lmm}{}{} For any \v{C}ech complex, we have that $\text{\v{H}}^0(X,\mU,\mF)=\mF(X)$. 
+\begin{lmm}{}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mU$ be an open cover of $X$. Then we have $\text{\v{H}}^0(X,\mU,\mF)=\mF(X)$. 
 \end{lmm}
-
-\begin{prp}{}{} Let $X$ be a topological space and $\mU$ an open cover of $X$. If the open sets $U_{i_0,\dots,i_k}$ satisfy that $H^k(U_{i_0,\dots,i_k},\mF)=0$ for all $k>0$, then $$H^k(X,\mF)=\text{\v{H}}^k(X,\mU,\mF)$$
-\end{prp}
 
 \begin{defn}{The Sheafified \v{C}ech Complex}{}\\
 Let $X$ be a space. Let $\mU$ be an open cover of $X$. Let $\mF$ be a sheaf on $X$. Define the sheafified \v{C}ech complex $\mC^\bullet(X,\mU,\mF)$ by the following. 
@@ -1196,7 +1098,7 @@ Note that by construction, we have $\Gamma(X,\mC^p(X,\mU,\mF))=C^p(X,\mU,\mF)$.
 Let $X$ be a space. Let $\mU$ be an open cover of $X$. Let $\mF$ be a sheaf on $X$. Then the following are true. 
 \begin{itemize}
 \item $\mC^\bullet(X,\mU,\mF)$ is a resolution of $\mF$. 
-\item If $X$ is flasque, then $\mC^\bullet(X,\mU,\mF)$ is a flasque (and hence acyclic) resolution of $\mF$. 
+\item If $\mF$ is flasque, then $\mC^\bullet(X,\mU,\mF)$ is a flasque (and hence acyclic) resolution of $\mF$. 
 \end{itemize}
 \end{lmm}
 
@@ -1215,8 +1117,13 @@ Let $X$ be a space. Let $\mF$ be a sheaf on $X$. Then there is a natural isomorp
 \end{prp}
 
 \begin{prp}{}{}\\
-Let $(X,\mO_X)$ be a ringed space. Then there is a natural isomorphism $$\text{Pic}(X)\cong H^1(X,\mO_X^\ast)$$
+Let $(X,\mO_X)$ be a commutative ringed space. Then there is a natural isomorphism $$\text{Pic}(X)\cong H^1(X,\mO_X^\ast)$$
 \end{prp}
+
+\subsection{Relation to Singular Cohomology}
+\begin{thm}{(Y. Sella 2016)}{}\\
+Let $X$ be a locally contractible space. Then there is an isomorphism $$H_\text{sing}^n(X;\Z)\cong H_\text{sheaf}^n(X;\underline{\Z})$$
+\end{thm}
 
 \subsection{Hypercohomology}
 \begin{defn}{Hypercohomology of a Space}{}\\
@@ -1226,7 +1133,7 @@ Let $X$ be a space. Let $\mF^\bullet$ be a cochain complex of sheaves on $X$. De
 \begin{prp}{}{}\\
 Let $X$ be a space. Let $\mF^\bullet\in\bold{CCh}^+(\bold{Ab}(X))$ be a bounded below cochain complex. Let $\mI^\bullet\in\bold{CCh}^+(\bold{Ab}(X))$ be a bounded below cochain complex such that the following are true. 
 \begin{itemize}
-\item $I^n$ is injective for all $n$. 
+\item $\mI^n$ is acyclic for all $n$. 
 \item There is a quasi-isomorphism $F^\bullet\to\mI^\bullet$. 
 \end{itemize}
 Then we have $$\H^n(X;\mF^\bullet)=H^i(\Gamma(X,\mI^\bullet))$$
@@ -1236,123 +1143,54 @@ Then we have $$\H^n(X;\mF^\bullet)=H^i(\Gamma(X,\mI^\bullet))$$
 Let $X$ be a space. Let $\mF^\bullet\in\bold{CCh}^+(\bold{Ab}(X))$ be a cochain complex of sheaves on $X$. Then there is a natural isomorphism $$\H^n(X;\mF^\bullet)\cong H^n(\Gamma(X,\text{Tot}^{\prod}(\text{Gd}^\bullet,\mF^\bullet)))$$
 \end{prp}
 
-\subsection{Relation to Singular Cohomology}
-\begin{thm}{(Y. Sella 2016)}{}\\
-Let $X$ be a locally contractible space. Then there is an isomorphism $$H_\text{sing}^n(X;\Z)\cong H_\text{sheaf}^n(X;\underline{\Z})$$
-\end{thm}
-
-\subsection{Classifying Invertible Sheaves}
+\pagebreak
+\section{More Homological Tools}
+\subsection{Derived Direct Image and Inverse Image}
 \begin{prp}{}{}\\
-Let $(X,\mO_X)$ be a locally ringed space. Then there is a natural isomorphism $$\text{Pic}(X)\cong H^1(X,\mO_X^\ast)$$
+Let $(X,\mO_X)$ and $(Y,\mO_Y)$ be commutative ringed spaces. Let $f:X\to Y$ be a morphism. Then $f_\ast$ is left exact. 
 \end{prp}
 
-\pagebreak
-\section{Sites, Sieves and Grothendieck Topologies}
-\subsection{Sites on a Category}
-We now want to generalize the notion of sheaves to general categories, not just spaces. However, there is no notion of open sets in an arbitrary category. Grothendieck realized that the essence of sheaves comes from the data of the open covers $U=\bigcup_{i\in I}U_i$ for each open set $U$ in a space $X$. 
-
-\begin{defn}{Covers}{} Let $\mC$ be a category. Let $U\in\mC$ be an object. A cover of $U$ is a collection of morphisms $$\{U_i\to U\;|\;i\in I\}$$
-\end{defn}
-
-\begin{defn}{Coverages (nLab)}{} Let $\mC$ be a category. A coverage $\text{Cov}(\mC)$ of $\mC$ consists a collection of covers for each $U\in\mC$, such that the following are true. 
-\begin{itemize}
-\item If $\{f_i:U_i\to U\;|\;i\in I\}$ is a cover of $U$ and $g:V\to U$ is a morphism in $\mC$, then there exists a cover $\{h_j:V_j\to V\}$ of $V$ such that every $g\circ h_j:V_j\to U$ factors through the cover of $U$. Or in other words, for each $h_j:V_j\to V$, there exists $U_i$ and $f_i:U_i\to U$ such that the following diagram commutes: \\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	{V_j} & {U_i} \\
-	V & U
-	\arrow["k", dashed, from=1-1, to=1-2]
-	\arrow["{h_j}"', from=1-1, to=2-1]
-	\arrow["{f_i}", from=1-2, to=2-2]
-	\arrow["g"', from=2-1, to=2-2]
-\end{tikzcd}}\\
-\end{itemize}
-\end{defn}
-
-\begin{defn}{Coverages (Stacks)}{} Let $\mC$ be a category. A coverage $\text{Cov}(\mC)$ of $\mC$ consists a collection of covers for each $U\in\mC$, such that the following are true. 
-\begin{itemize}
-\item If $V\to U$ is an isomorphism then $\{V\to U\}\in\text{Cov}(\mC)$
-\item If $\{U_i\to U\;|\;i\in I\}\in\text{Cov}(\mC)$ and $\{V_{i,j}\to U_i\;|\;j\in J_i\}\in\text{Cov}(\mC)$ for each $i\in I$, then $\{V_{i,j}\to U_i\to U\;|\;i,j\in I\}\in\text{Cov}(\mC)$
-\item If $\{f_i:U_i\to U\;|\;i\in I\}\in\text{Cov}(\mC)$ and $g:V\to U$ is a morphism, then the pullback \\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	{U_i\times_UV} & {U_i} \\
-	V & U
-	\arrow["\text{proj.}", dashed, from=1-1, to=1-2]
-	\arrow["{\text{proj.}}"', from=1-1, to=2-1]
-	\arrow["{g}", from=1-2, to=2-2]
-	\arrow["f_i"', from=2-1, to=2-2]
-\end{tikzcd}}\\
-exists for all $i\in I$ and $\{U_i\times_UV\to U\}\in\text{Cov}(\mC)$. 
-\end{itemize}
-\end{defn}
-
-\begin{defn}{Sites (nLab)}{} A site is a category $\mC$ together with a coverage $\text{Cov}(\mC)$. 
-\end{defn}
-
-\begin{defn}{Continuous Functors}{} Let $\mC$ and $\mD$ be two sites. Let $F:\mC\to\mD$ be a functor. We say that $F$ is continuous if the following are true. 
-\begin{itemize}
-\item $F$ preserves fiber products
-\item $F$ sends covers to covers
-\end{itemize}
-\end{defn}
-
-\pagebreak
-\section{Sheaf Cohomology of Sites}
-\subsection{Sheaves on Sites}
-\begin{defn}{Sheaves on Sites}{} Let $(\mC,\text{Cov}(\mC))$ be a site. Let $\mF$ be a presheaf of sets on $\mC$. We say that $\mF$ if a sheaf on $\mC$ if for all $\{f_i:U_i\to U\;|\;i\in I\}\in\text{Cov}(\mC)$, the following diagram \\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	{\mF(U)} & {\prod_{i\in I}\mF(U_i)} & {\prod_{i,j\in I}\mF(U_i\times_UU_j)}
-	\arrow["p", from=1-1, to=1-2]
-	\arrow["q", shift left, from=1-2, to=1-3]
-	\arrow["r"', shift right, from=1-2, to=1-3]
-\end{tikzcd}}\\
-is an equalizer diagram, where $p$ is the product of the maps $\mF(f_i)$, $q$ is the product of the maps $\mF(\text{proj}_i:U_i\times_UU_j\to U_i)$ and $r$ is the product of the maps $\mF(\text{proj}_j:U_i\times_UU_j\to U_j)$. 
-\end{defn}
-
-\begin{defn}{Abelian Sheaves}{} Let $\mC$ be a site. Define the category of abelian sheaves $$\bold{Ab}(\mC)$$ over $\mC$ to consist of the following data. 
-\begin{itemize}
-\item The objects are the abelian sheaves on $\mC$
-\item The morphisms are the natural transformations of functors
-\item Composition is given by the composition of natural transformations
-\end{itemize}
-\end{defn}
-
-\begin{thm}{}{} Let $\mC$ be a site. Then $\bold{Ab}(\mC)$ has enough injectives. 
-\end{thm}
-
-TBA: category of abelian sheaves on $\mC$ has enough injectives
-
-TBA: A bunch of adjunctions analogous to that of sheaves. 
-
-\subsection{Sheaf Cohomology of Sites}
-\begin{defn}{Global Sections Functor}{} Let $\mC$ be a site. Define the global section functor $$\Gamma(-,\mC):\bold{Ab}(\mC)\to\bold{Ab}$$ by the following data. 
-\begin{itemize}
-\item A sheaf $\mF$ on $\mC$ is sent to $\Gamma(\mF,\mC)=\mF(\mC)$. 
-\item For a morphism of sheaves $\phi:\mF\to\mG$, the global section functor sends it to the group homomorphism $\mF(\mC)\to\mG(\mC)$
-\end{itemize}
-\end{defn}
-
-\begin{prp}{}{} Let $\mC$ be a site. Then the global section functor $\Gamma(-,\mC):\bold{Ab}(\mC)\to\bold{Ab}$ is left exact. 
+\begin{prp}{}{}\\
+Let $(X,\mO_X)$ and $(Y,\mO_Y)$ be commutative ringed spaces. Let $f:X\to Y$ be a morphism. Then $f^{-1}$ is exact. 
 \end{prp}
 
-\begin{defn}{Sheaf Cohomology of Sites}{} Let $\mC$ be a site. Define the sheaf cohomology functor of $\mC$ to be $$H^k(\mC,-)=R^k\Gamma:\bold{Ab}(\mC)\to\bold{Ab}$$ the right derived functors of $\Gamma(-,\mC)$. 
+\subsection{Ext for Sheaves of Modules}
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF\in\bold{Mod}_{\mO_X}$. Then we have a functor $\mathscr{H}om_{\mO_X}(\mF,-):\bold{Mod}_{\mO_X}\to\bold{Mod}_{\mO_X}$ between abelian categories. 
+
+\begin{defn}{Ext Functor for Sheaves}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF,\mG\in\bold{Mod}_{\mO_X}$. Define the $i$th ext sheaf of $\mF$ and $\mG$ to be $$\mathscr{E}\text{xt}_{\mO_X}^i(\mF,\mG)=R^i\mathscr{H}\text{om}_{\mO_X}(\mF,-)(\mG)$$
 \end{defn}
 
-\pagebreak
-\section{Etale Cohomology}
-To be removed: 
+\begin{lmm}{}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mI\in\bold{Mod}_{\mO_X}$ be an injective sheaf. Let $U\subseteq X$ be an open subset. Then $\mI|_U$ is injective in $\bold{Mod}_{\mO_X|_U}$. 
+\end{lmm}
 
-\begin{defn}{(Small) Etale Sites}{} Let $X$ be a scheme. The etale site $X_\text{et}$ over $X$ consists of the following data. 
+\begin{prp}{}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF,\mG\in\bold{Mod}_{\mO_X}$. Let $U\subseteq X$ be open. Then we have $$\mathscr{E}\text{xt}_{\mO_X}^i(\mF,\mG)|_{\mO_X|_U}\cong\mathscr{E}\text{xt}_U^i(\mF|_U,\mG|_U)$$
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF\in\bold{Mod}_{\mO_X}$. Then we have $$\mathscr{E}\text{xt}_{\mO_X}^i(\mO_X,\mF)=\begin{cases}
+\mF & \text{ if }i=0\\
+0 & \text{ otherwise }
+\end{cases}$$
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF\in\bold{Mod}_{\mO_X}$. Then we have $$\text{Ext}_{\mO_X}^i(\mO_X,\mF)\cong H^i(X,\mF)$$
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF,\mG\in\bold{Mod}_{\mO_X}$. Let $\mL_\bullet$ be a resolution of $\mF$ such that each $\mL_i$ is locally free of finite rank. Then we have $$\mathscr{E}\text{xt}_{\mO_X}^i(\mF,\mG)\cong H^i(\mathscr{H}\text{om}_{\mO_X}(\mL_\bullet,\mG))$$
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $(X,\mO_X)$ be a commutative ringed space. Let $\mF,\mG,\mL\in\bold{Mod}_{\mO_X}$. Suppose that $\mL$ is locally free of finite rank. Then the following are true. 
 \begin{itemize}
-\item The underlying category is the full subcategory $\bold{Sch}/X$ of schemes over $X$ consisting of etale morphisms $U\to X$
-\item The coverage consists of the surjective families of etale morphisms $\{U_i\to U\;|\;i\in I\}$. 
+\item There is an isomorphism $$\text{Ext}_{\mO_X}^i(\mF\otimes_{\mO_X}\mL,\mG)\cong\text{Ext}_{\mO_X}^i(\mF,\mL^\vee\otimes_{\mO_X}\mG)$$
+\item There is an isomorphism $$\mathscr{E}\text{xt}_{\mO_X}^i(\mF\otimes_{\mO_X}\mL,\mG)\cong\mathscr{E}\text{xt}_{\mO_X}^i(\mF,\mL^\vee\otimes_{\mO_X}\mG)\cong\mathscr{E}\text{xt}_{\mO_X}^i(\mF,\mG)\otimes_{\mO_X}\mL^\vee$$
 \end{itemize}
-\end{defn}
-
-Finite etale site, the flat site, the big etale site
-
-\begin{defn}{Etale Cohomology}{} Let $X$ be a scheme. Define the etale cohomology of $X$ to be the sheaf cohomology of the category $X_\text{et}$. Explicitly, this means that $$H_\text{et}^k(X,-)=H^k(X_\text{et},-):\bold{Ab}(X_\text{et})\to\bold{Ab}$$
-\end{defn}
-
+\end{prp}
 
 
 

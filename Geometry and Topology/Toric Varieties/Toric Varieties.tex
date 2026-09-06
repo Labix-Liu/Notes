@@ -21,193 +21,23 @@
 \tableofcontents
 \pagebreak
 
-\pagebreak
-\section{Monoids}
-\subsection{Basic Properties of Monoids}
-\begin{defn}{Monoids}{}\\
-A monoid is a pair $(M,\ast)$ where $M$ is a set and $\ast:M\times M\to M$ is a binary operation on $M$ satisfying the following axioms: 
-\begin{itemize}
-\item Associativity: $(a\ast b)\ast c=a\ast(b\ast c)$ for all $a,b,c\in M$. 
-\item Identity: There exists $1_M\in M$ such that $1_M\ast a=a=a\ast 1_M$ for all $a\in M$. 
-\end{itemize}
-\end{defn}
-
-\begin{defn}{Monoid Homomorphisms}{}\\
-Let $M,N$ be monoids. Let $\phi:M\to N$ be a function. We say that $\phi$ is a monoid homomorphism if the following are true. 
-\begin{itemize}
-\item $\phi(m_1m_2)=\phi(m_1)\phi(m_2)$ for all $m_1,m_2\in M$. 
-\item $\phi(1_M)=1_N$. 
-\end{itemize}
-\end{defn}
-
-\begin{defn}{Commutative Monoids}{}\\
-Let $M$ be a monoid. We say that $M$ is commutative if $$a\ast b=b\ast a$$ for all $a,b\in M$. 
-\end{defn}
-
-\begin{defn}{Cancellative Monoids}{}\\
-Let $M$ be a monoid. We say that $M$ is cancellative if the following are true. 
-\begin{itemize}
-\item $ab=ac$ implies $b=c$ for all $a,b,c\in M$. 
-\item $ba=ca$ implies $b=c$ for all $a,b,c\in M$. 
-\end{itemize}
-\end{defn}
-
-\begin{defn}{Finitely Generated Monoids}{}\\
-Let $M$ be a monoid. We say that $M$ is finitely generated if there exists $m_1,\dots,m_n\in M$ such that $$m=m_1^{a_1}\cdots m_n^{a_n}$$ for all $m\in M$ and some $a_1,\dots,a_n\in\N$. 
-\end{defn}
-
-\subsection{The Grothendieck Completion of a Group}
-\begin{defn}{Grothendieck Completion}{}\\
-Let $M$ be a commutative monoid. Define the Grothendieck completion of $M$ to be the set $$G(M)=\frac{M\times M}{\sim}$$ where $(m_1,m_2)\sim(n_1,n_2)$ if $m_1+n_2+k=m_2+n_1+k$ together with the binary operation $\ast:G(M)\times G(M)\to G(M)$ defined by $$(m_1,m_2)\ast(n_1,n_2)=(m_1+n_1,m_2+n_2)$$
-\end{defn}
-
-\begin{lmm}{}{}\\
-Let $M$ be a commutative monoid. Then $G(M)$ is an abelian group. 
-\end{lmm}
-
-\begin{defn}{The Canonical Homomorphism}{}\\
-Let $M$ be a commutative monoid. Define the canonical homomorphism to the Grothendieck completion to be the function $i:M\to G(M)$ given by $i(m)=(m,0)$. 
-\end{defn}
-
-\begin{prp}{Universal Property of the Grothendieck Completion}{}\\
-Let $M$ be a commutative monoid. Then $G(M)$ and the canonical map $i:M\to G(M)$ satisfies the following universal property: For any abelian group $G$ and any monoid homomorphism $\phi:M\to G$, there exists a unique group homomorphism $\psi:G(M)\to G$ such that the following diagram commutes: \\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	M & {G(M)} \\
-	& G
-	\arrow["i", from=1-1, to=1-2]
-	\arrow["\phi"', from=1-1, to=2-2]
-	\arrow["{\exists!\psi}", dashed, from=1-2, to=2-2]
-\end{tikzcd}} \\
-Moreover, $G(M)$ is the unique (up to unique isomorphism) abelian group satisfying this property. 
-\end{prp}
-
-\begin{lmm}{}{}\\
-Let $M$ be a cancellative commutative monoid. Then the canonical morphism $i:M\to G(M)$ is injective. 
-\end{lmm}
-
-\subsection{The Monoid Ring}
-\begin{defn}{The Monoid Ring}{}\\
-Let $S$ be a monoid. Let $R$ be a ring. Define the semi-group ring of $S$ over $R$ to be the left $R$-module $$R[S]=\bigoplus_{s\in S}R\cdot t^s$$ together with multiplication defined on basis by $t^{s_1}\cdot t^{s_2}=t^{s_1+s_2}$
-\end{defn}
-
-\begin{lmm}{}{}\\
-Let $S$ be a monoid. Let $R$ be a ring. Then the following are true. 
-\begin{itemize}
-\item $R[S]$ is a ring. 
-\item If $S$ is commutative, then $R[S]$ is a commutative ring. 
-\item If $R$ and $S$ are commutative, then $R[S]$ is an $R$-algebra. 
-\end{itemize}
-\end{lmm}
-
-\begin{defn}{Monomial Notation}{}\\
-Let $R$ be a commutative ring. Let $u=(u_1,\dots,u_n)\in\N^n$. Define $$x^u=x_1^{u_1}\cdots x_n^{u_n}\in R[x_1,\dots,x_n]$$
-\end{defn}
-
-\begin{defn}{Lattice Ideal}{}\\
-Let $L\subseteq\Z^n$ be a lattice. Let $R$ be a commutative ring. Define the lattice ideal of $L$ in $R[x_1,\dots,x_n]$ to be $$I_L=\langle x^u-x^v\;|\;u,v\in\N^n\text{ and }u-v\in L\rangle$$
-\end{defn}
-
-\begin{prp}{}{}\\
-Let $k$ be a field. Let $S$ be a finitely generated commutative monoid. Let $s_1,\dots,s_n$ be a set of generators of $S$. Let $\phi:\Z^n\to G(S)$ be the group homomorphism defined by $e_i\mapsto s_i$. Then there is a $k$-algebra isomorphism $$k[S]\cong\frac{k[x_1,\dots,x_n]}{I_{\ker(\phi)}}$$
-\end{prp}
-
-\begin{prp}{}{}\\
-Let $k$ be a field. Let $S$ be a finitely generated commutative monoid. Let $s_1,\dots,s_n$ be a set of generators of $S$. Then we have $$\dim(k[S])=n-\rank(\ker(\phi))$$
-\end{prp}
-
-\begin{defn}{Affine Semi-group}{}\\
-Let $S$ be a monoid. We say that $S$ is an affine semi-group if there exists an injective monoid homomorphism $S\to\N^d$ for some $d\in\N$. 
-\end{defn}
-
-\begin{prp}{}{}\\
-Let $k$ be a field. Let $S$ be a finitely generated commutative monoid. Let $s_1,\dots,s_n$ be a set of generators of $S$. Let $\phi:\Z^n\to G(S)$ be the group homomorphism defined by $e_i\mapsto s_i$. Then the following are equivalent. 
-\begin{itemize}
-\item $I_{\ker(\phi)}$ is prime. 
-\item $k[S]$ is an integral domain. 
-\item $G(S)$ is a free abelian group. 
-\item $S$ is an affine semi-group. 
-\end{itemize}
-\end{prp}
-
-\subsection{Affine Semigroup Associated to a Rational Polyhedral Cone}
-\begin{lmm}{Gordon's Lemma}{}\\
-Let $\sigma\subseteq\R^n$ be a rational polyhedral cone. Let $A\subseteq\Z^n$ be a subgroup. Then $\sigma\cap A$ is an affine semi-group. 
-\end{lmm}
-
-Conversely, given an affine semigroup $S\subseteq\N^n$, we may associate to it a cone $$\R_{\geq 0}S=\{rs\;|\;r\in\R_{\geq 0}\text{ and }s\in S\}$$ So given an affine semigroup, we may obtain a new affine semigroup by passing to cones then passing back. This is called the saturation of the affine semigroup. 
-
-\begin{defn}{Saturation of an Affine Semigroup}{}\\
-Let $S$ be an affine semigroup. Define the saturation of $S$ to be $$S_\text{sat}=(\R_{\geq 0}S)\cap G(S)$$
-\end{defn}
-
-\begin{prp}{}{}\\
-Let $S$ be an affine semigroup. Then we have $$\overline{k[S]}=k[S_\text{sat}]$$
-\end{prp}
-
-\begin{defn}{Saturated Affine Semigroup}{}\\
-Let $S$ be an affine semigroup. We say that $S$ is saturated if $S=S_\text{sat}$. 
-\end{defn}
-
-\begin{lmm}{}{}\\
-Let $\sigma\subseteq\R^n$ be a strongly convex rational polyhedral cone. Then $\sigma\cap S$ is saturated. 
-\end{lmm}
-
-\begin{lmm}{}{}\\
-Let $\sigma_1,\sigma_2\subseteq\R^n$ be cones such that $\sigma_1\cap\sigma_2$ is a face of both cones. Let $A\subseteq\Z^n$ be a subgroup. Then we have $$(\sigma_1\cap\sigma_2)\cap A=(\sigma_1\cap A)+(\sigma_2\cap A)$$
-\end{lmm}
-
-\pagebreak
 \section{Introduction to Toric Varieties}
-\subsection{The Standard $n$-Torus}
-\begin{defn}{The Standard $n$-Torus}{}\\
-Let $k$ be a field. Let $n\in\N^+$. Define the standard $n$-torus over $k$ to be the affine group variety $$\G_m^n(k)=\text{Spec}(k[x,x^{-1}])^n$$
-\end{defn}
-
-\begin{defn}{Tori}{}\\
-Let $k$ be a field. Let $T$ be an affine variety over $k$. We say that $T$ is a torus if there exists a field extension $K/k$ such that $T\cong\G_m^n(K)$. 
-\end{defn}
-
-\begin{defn}{Split Tori}{}\\
-Let $k$ be a field. Let $T$ be a torus over the field extension $K/k$. We say that $T$ is split if $K=k$. 
-\end{defn}
-
-If $K$ is separably closed or algebraically closed, then all tori are split. 
-
-\begin{lmm}{}{}\\
-Let $k$ be a field. Let $T$ be a torus over $k$. Then the following are true. 
-\begin{itemize}
-\item Let $T'$ be a torus over $k$. Let $\phi:T\to T'$ be a morphism of group schemes. Then $\im(\phi)$ is closed torus in $T'$. 
-\item Let $H\leq T$ be a subgroup variety of $T$. If $H$ is irreducible, then $H$ is a torus. 
-\item Let $H\leq T$ be a subgroup of $T$. Then $T/H$ is a torus. 
-\end{itemize}
-\end{lmm}
-
-Recall that the functor $D:\bold{FGAb}\to\bold{Diag}$ sending a finitely generated abelian group $G$ to $D(G)=\text{Spec}(k[G])$ is an equivalence of categories. Evidently split tori corresponds to the free abelian groups of finite rank under the equivalence. \\
-
-The following are some more properties of a split torus $T$:
-\begin{itemize}
-\item $T$ is diagonalizable ($T$ is a torus if and only if $T$ is smooth connected diagonalizable)
-\item Every representation of $G$ is diagonalizable. 
-\item If $V$ is a representation of $T$, then we can decompose $V$ into its eigenspaces: $$V=\bigoplus_{\chi\in\chi(T)}V_\chi$$
-\end{itemize}
-
-Let $(m_1,\dots,m_n)\in\Z^n$, we have a character $\chi:T\to\C^\times$ defined by $(t_1,\dots,t_n)\mapsto t_1{m_1}\cdots t_n^{m_n}$. All characters of $T$ are of this form. In other words, we have $M=\Hom(T,\C^\times)\cong\Z^n$. 
-
-\begin{defn}{One-parameter Subgroups}{}\\
-Let $k$ be a field. Let $T$ be a torus over $k$. A one-parameter subgroup of $T$ is a homomorphism of group schemes $\G_m\to T$. 
-\end{defn}
-
-\begin{defn}{The Group of One-Parameter Subgroups}{}\\
+\subsection{Characters and One Parameter Subgroups}
+\begin{defn}{The Group of One Parameter Subgroups}{}\\
 Let $k$ be a field. Let $T$ be a torus over $k$. Define the group of one parameter subgroups of $T$ to be the set $$\lambda(T)=\{\lambda:\G_m\to T\;|\;\lambda\text{ is a one-parameter subgroup }\}$$ together with pointwise multiplication. 
 \end{defn}
 
 \begin{lmm}{}{}\\
-Let $k$ be a field. Let $T$ be a torus over $k$. Let $f:T\to\G_m^n$ be an isomorphism. Then $f$ induces isomorphisms $$\chi(T)\cong\Z^n\;\;\;\text{ and }\;\;\;\lambda(T)\cong\Z^n$$
-\end{lmm}
-
-\begin{lmm}{}{}\\
 Let $k$ be a field. Let $T$ be a split torus over $k$. Then the map $$\langle-,-\rangle:\chi(T)\times\lambda(T)\to\chi(\G_m)\cong\Z$$ given by $\langle\chi,\lambda\rangle\mapsto\chi\circ\lambda$ is a perfect pairing. 
 \end{lmm}
+
+Fix a split torus $T$. We have constructed the group of characters $\chi(T)$ and the group of one parameter subgroups $\lambda(T)$. \\
+
+Now start with a lattice $M\cong\Z^n$. We think of it as specifying a group of characters. We may recover the underlying split torus by $T=\text{Spec}(k[M])$. The group one parameter subgroups is deduced by taking the dual $\lambda(T)=\Hom_\bold{Ab}(M,\Z)$. \\
+
+Finally, start with a lattice $N\cong\Z^n$. We think of it as specifying a group of one parameter subgroups. We may recover the underlying split torus by $T=N\otimes_\Z k^\ast$. The group of characters can be recovered by taking the dual $\chi(T)=\Hom_\bold{Ab}(N,\Z)$. \\
+
+Thus any one of $T,M,N$ is enough data to determine a torus. 
 
 \subsection{General Toric Varieties}
 \begin{defn}{Toric Varieties}{}\\
@@ -225,13 +55,11 @@ The one parameter subgroups $\lambda\in\lambda(T)$ traces out the curves on the 
 For example, suppose we wish to add in the point $(1,0)\in\C^2$ to the torus $T=(\C^\times)^2$. When we add int limit points, we expect certain characters on the torus to no longer be elements of the coordinate ring of the toric variety. Let $x^ay^b\in\C[T]$ be a general character of a torus. Then it is well defined on the point $(1,0)$ if and only if $b>0$. This adds a linear inequality to the lattice $\chi(T)$. On the other hand, we may think of $(1,0)$ as the limit point of the one parameter subgroup $\lambda(t)=(t^1,t^0)$. However we also need to consider the equivariant action of the torus, so adding just the point $(1,0)$ is not enough. 
 
 \begin{eg}{}{}\\
-The following are true. 
+The following are toric varieties. 
 \begin{itemize}
-\item $\C^\times$ is a toric variety. 
-\item $\C^n$ is a toric variety. 
-\item $\Prj^n$ is a toric variety. 
-\item If $X,Y$ are toric varieties, then $X\times Y$ is a toric variety. 
-\item The total space of the line bundle over $\Prj^n$ is a toric variety. 
+\item The torus $\G_m^n(\C)$. 
+\item Affine space $\A_\C^n$. 
+\item Projective space $\Prj_\C^n$. 
 \end{itemize}
 \end{eg}
 
@@ -243,10 +71,40 @@ There are two ways to construct normal toric varieties: \\
 
 (2): Encode a projective variety as the proj construction given by a polytope. 
 
-\subsection{Constructing Affine Toric Varieties}
+\begin{defn}{Torus Factors}{}\\
+Let $X$ be a toric variety. We say that $X$ has a torus factor if there is an equivariant isomorphism $$X\cong Y\times T^k$$ for some toric variety $Y$. 
+\end{defn}
+
+\begin{defn}{Toric Morphisms}{}\\
+Let $X,Y$ be toric varieties over $\C$. Let $\phi:X\o Y$ be an equivariant morphism. We say that $\phi$ is a toric morphism if the following are true. 
+\begin{itemize}
+\item $\phi(T_X)\subseteq T_Y$. 
+\item $\phi|_{T_X}:T_X\to T_Y$ is an equivariant morphism. 
+\end{itemize}
+\end{defn}
+
+\subsection{Equivalent Characterizations of Affine Toric Varieties}
+\begin{eg}{}{}\\
+The following are affine toric varieties. 
+\begin{itemize}
+\item The cuspidal cubic $\V(x^3-y^2)$. 
+\item The variety $\V(xy-zw)$. 
+\end{itemize}
+\begin{proof}
+\begin{itemize}
+\item Notice that the map $\C^\times\to\V(x^3-y^2)$ given by $t\mapsto(t^2,t^3)$ defines a dense torus whose only point outside the torus is the origin. Hence the action of the torus extends naturally to all of the variety. 
+\item Similarly, the map $(\C^\times)^3\to\V(xy-zw)$ given by $(t_1,t_2,t_3)\mapsto(t_1,t_2,t_3,t_1t_2t_3^{-1})$ defines a torus inside the variety. The remaining points outside the torus is given by $\V(zw)\cup\V(xy)$ the torus action extends naturally along the four axes. 
+\end{itemize}
+\end{proof}
+\end{eg}
+
+There are a few ways to define affine toric varieties. One such way is to choose directions in the torus to take closure. 
+
 \begin{defn}{Affine Toric Varieties Associated to Characters}{}\\
 Let $T$ be a torus over $\C$. Let $\mA=\{\chi_1,\dots,\chi_s\}\subseteq\chi(T)$ be characters of $T$. Define the affine toric variety associated to $\mA$ to be $$Y_\mA=\overline{\im(\Phi_\mA)}$$ where $\Phi_\mA:T\to\A_\C^s$ is the map defined by $\Phi_\mA(t)=(\chi_1(t),\dots,\chi_s(t))$
 \end{defn}
+
+Here we think of a choice of basis for $\chi(T)$ is a choice integral coordinates on $T$. Then choosing $\mA$ is to choose which rays in the $\chi(T)$ to take closure. 
 
 \begin{prp}{}{}\\
 Let $T$ be a torus over $\C$. Let $\mA=\{\chi_1,\dots,\chi_s\}\subseteq\chi(T)$ be characters of $T$. Then the following are true. 
@@ -263,21 +121,14 @@ Since $T$ acts on itself for being a torus, the map $\Phi_\mA$ gives the action 
 \end{proof}
 \end{prp}
 
-\begin{eg}{The Rational Normal Cone}{}\\
-Let $d\in\N^+$. Let $\phi:\C^2\to\C^{d+1}$ be the morphism defined by $$\phi(s,t)=(s^d,s^{d-1}t,\dots,st^{d-1},t^d)$$ Then the following are true. 
-\begin{itemize}
-\item $\im(\phi)$ is an affine toric variety. 
-\item $\I(\im(\phi))=(x_ix_{j+1}-x_{i+1}x_j\;|\;1\leq i<j\leq d)$. 
-\end{itemize}
-\begin{proof}\\
-Let $I=(x_ix_{j+1}-x_{i+1}x_j\;|\;1\leq i<j\leq d)\subseteq\C[x_1,\dots,x_{d+1}]$. Notice that by projecting to projective space, we have that $\phi$ is the veronese map. It follows from the same technique that $\im(\phi)=\V(I)$. By the above, we know that $\im(\phi)$ is an affine toric variety. \\
-
-Now we have $\I(\im(\phi))=\I(\V(I))=I$ because toric varieties are irreducible. 
-\end{proof}
-\end{eg}
+Both the toric varieties $\V(x^3-y^2)$ and $\V(xy-zw)$ can be defined by first writing down the torus in this way. 
 
 \begin{defn}{Toric Ideals}{}\\
-Let $L\subseteq\Z^n$ be a lattice. Let $R$ be a commutative ring. Let $I_L\subseteq R[x_1,\dots,x_n]$ be the lattice ideal of $L$. We say that $I_L$ is a toric ideal if $I_L$ is a prime ideal. 
+Let $I\subseteq\C[x_1,\dots,x_n]$ be an ideal. We say that $I$ is a toric ideal if the following are true. 
+\begin{itemize}
+\item $I$ is a lattice ideal. 
+\item $I$ is a prime ideal. 
+\end{itemize}
 \end{defn}
 
 \begin{lmm}{}{}\\
@@ -288,12 +139,10 @@ If $I$ is a toric ideal then it is clearly prime and generated by binomials. So 
 \end{lmm}
 
 \begin{prp}{}{}\\
-Let $S$ be an affine semigroup. Then the following are true. 
-\begin{itemize}
-\item $\text{Spec}(\C[S])$ is an affine toric variety. 
-\item The character group of the torus in $\text{Spec}(\C[S])$ is given by $\langle t^s\;|\;s\in S\rangle$. 
-\end{itemize}
+Let $S$ be an affine semigroup. Then $\text{Spec}(\C[S])$ is an affine toric variety. 
 \end{prp}
+
+Fix a torus $T$. For each $\chi\in\chi(T)$, notice that if $X$ is a variety such that $T\subseteq X$ is dense, then $\chi\in\C(X)$. Then specifying an affine semigroup $S\subseteq\chi(T)$ is the same as choosing which characters you want to be regular functions instead of rational functions. 
 
 \begin{prp}{}{}\\
 Let $X$ be an irreducible affine variety over $\C$. Then the following are equivalent. 
@@ -305,11 +154,29 @@ Let $X$ be an irreducible affine variety over $\C$. Then the following are equiv
 \end{itemize}
 \end{prp}
 
-Let $S$ be an affine semigroup. Recall that the saturation of $S$ is the affine semigroup $$S_\text{sat}=\R_{\geq 0}S\cap G(S)$$ where $G(S)$ is the Grothendieck completion of $S$. 
+\begin{eg}{The Rational Normal Cone}{}\\
+Let $d\in\N^+$. Let $\phi:\C^2\to\C^{d+1}$ be the morphism defined by $$\phi(s,t)=(s^d,s^{d-1}t,\dots,st^{d-1},t^d)$$ Define the rational normal cone of degree $d$ to be $$\widehat{C}_d=\im(\phi)$$ Then the following are true. 
+\begin{itemize}
+\item $\I(\widehat{C}_d)=(x_ix_{j+1}-x_{i+1}x_j\;|\;1\leq i<j\leq d)$. 
+\item $\widehat{C}_d$ is an affine toric variety. 
+\end{itemize}
+\begin{proof}\\
+Let $I=(x_ix_{j+1}-x_{i+1}x_j\;|\;1\leq i<j\leq d)\subseteq\C[x_1,\dots,x_{d+1}]$. Clearly we have $\widehat{C}_d\subseteq\V(I)$. For the reverse inclusion, notice first that if $d=0$ then the result is trivial. Now let $p=(p_1,\dots,p_{d+1})\in\V(I)$. If $p=0$ then clearly $p\in\im(\phi)$. Now let $m=\min\{k\;|\;p_k\neq 0\}$. I claim that $m=1$ or $d+1$. Notice that we have $x_{k-1}x_{k+1}-x_k^2\in I$ for $2\leq k\leq d$. If $2\leq m\leq d$, then $p_{m-1}=0$ so that $p_m=0$, contradicting the minimality of $m$. Hence $m=1$ or $d+1$. If $m=d+1$, then $p=(0,\dots,0,p_{d+1})$. Since $p_{d+1}\in\C^\times$, choose $t\in\C$ such that $t^d=p_{d+1}$. Then we have that $(0,t)\mapsto p$ so $p\in\im(\phi)$. If $m=1$, let $r=p_2/p_1$. Using the relation $x_1x_{j+1}=x_2x_j$ we deduce that $p_{j+1}/p_j=r$. Hence $p$ is given by $p=(p_1,p_1r,\dots,p_1r^d)$. Since $p_1\in\C^\times$, choose $s\in\C$ such that $s^d=p_1$. Then we have $(s,rs)\mapsto p$ so that $p\in\widehat{C}_d$. Thus we are done. 
+\end{proof}
+\end{eg}
 
-\begin{lmm}{}{}\\
-Let $X=\text{Spec}(\C[S])$ be an affine toric variety over $\C$ where $S$ is an affine semigroup. Then the normalization of $X$ is given by $$\widetilde{X}=\text{Spec}(\C[S_{\text{sat}}])$$ together with the normalization map given by the inclusion $\C[S]\hookrightarrow\C[S_{\text{sat}}]$. 
-\end{lmm}
+\begin{eg}{}{}\\
+Let $T=(\C^\times)^3$. Consider the toric variety $X=\V(xy-zw)$. Then the following are true. 
+\begin{itemize}
+\item Let $\mA=\{\chi_1(t_1,t_2,t_3)=t_1,\chi_2(t_1,t_2,t_3)=t_2,\chi_3(t_1,t_2,t_3)=t_3,\chi_4(t_1,t_2,t_3)=t_1t_2t_3^{-1}\}\subseteq\chi(T)$. Then $Y_\mA=X$. 
+\item The toric ideal of $X$ is given by $(xy-zw)$. 
+\item Consider the isomorphism $\chi(T)\cong\Z^3$ given by $\chi_i\mapsto e_i$ for $1\leq i\leq 3$. Let $S\subseteq\Z^3$ be the affine semigroup generated by $$\left\{\begin{pmatrix}1\\0\\0
+\end{pmatrix},\begin{pmatrix}0\\1\\0
+\end{pmatrix},\begin{pmatrix}0\\0\\1
+\end{pmatrix},\begin{pmatrix}1\\1\\-1
+\end{pmatrix}\right\}$$. Then we have $X=\text{Spec}(\C[S])$. 
+\end{itemize}
+\end{eg}
 
 \begin{prp}{}{}\\
 Let $k$ be an algebraically closed field. Let $S$ be an affine semi-group with generators given by $m_1,\dots,m_s$. Then there is a bijection $$\{p\in\text{Spec}(k[S])\;|\;p\text{ is a closed point }\}\;\;\overset{1:1}{\longleftrightarrow}\;\;\{\phi:S\to(\C,\cdot)\;|\;\phi\text{ is a monoid homomorphism }\}$$ given as follows. 
@@ -319,52 +186,145 @@ Let $k$ be an algebraically closed field. Let $S$ be an affine semi-group with g
 \end{itemize}
 \end{prp}
 
-\subsection{Cones and Affine Normal Toric Varieties}
+\begin{prp}{}{}\\
+Let $S_1,S_2$ be affine semigroups. Let $\phi:\text{Spec}(\C[S_1])\to\text{Spec}(\C[S_2])$ be a morphism. Then $\phi$ is toric if and only if it is induced by a semigroup homomorphism $S_1\to S_2$. 
+\end{prp}
+
+\subsection{Conditions for Normality in Affine Toric Varieties}
+\begin{defn}{Saturation of an Affine Semigroup}{}\\
+Let $S$ be an affine semigroup. Define the saturation of $S$ to be $$S_\text{sat}=(\R_{\geq 0}S)\cap G(S)$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $S$ be an affine semigroup. Then we have $$\overline{k[S]}=k[S_\text{sat}]$$
+\end{prp}
+
+\begin{defn}{Saturated Affine Semigroup}{}\\
+Let $S$ be an affine semigroup. We say that $S$ is saturated if $S=S_\text{sat}$. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $\sigma\subseteq\R^n$ be a strongly convex rational polyhedral cone. Then $\sigma\cap S$ is saturated. 
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $X=\text{Spec}(\C[S])$ be an affine toric variety over $\C$ where $S$ is an affine semigroup. Then the normalization of $X$ is given by $$\widetilde{X}=\text{Spec}(\C[S_{\text{sat}}])$$ together with the normalization map given by the inclusion $\C[S]\hookrightarrow\C[S_{\text{sat}}]$. 
+\end{lmm}
+
+\subsection{Equivalent Characterizations of Projective Toric Varieties}
+\begin{defn}{Projective Toric Varieties Associated to Characters}{}\\
+Let $T$ be a torus over $\C$. Let $\mA=\{\chi_1,\dots,\chi_s\}\subseteq\chi(T)$ be characters of $T$. Define the projective toric variety associated to $\mA$ by $$X_\mA=\overline{\im(\pi\circ\Phi_\mA)}$$ where $\Phi_\mA:T\to\A_\mC^s$ is the map defined by $\Phi_\mA(t)=(\chi_1(t),\dots,\chi_s(t))$ and $\pi:\A_\mC^s\to\C\Prj^{s-1}$ is the projection map. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $T$ be a torus over $\C$. Let $\mA=\{\chi_1,\dots,\chi_s\}\subseteq\chi(T)$ be characters of $T$. Then the following are equivalent. 
+\begin{itemize}
+\item $Y_\mA$ is the affine cone of $X_\mA$. 
+\item $\I(Y_\mA)=\I^H(X_\mA)$. 
+\item $\I(Y_\mA)$ is a homogeneous ideal. 
+\item There exists $u\in N$ and $k\in\N^+$ such that $\langle\chi_i,u\rangle=k$ for $1\leq i\leq s$. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $T$ be a torus over $\C$. Let $\mA=\{\chi_1,\dots,\chi_s\}\subseteq\chi(T)$ be characters of $T$. Then the following are true. 
+\begin{itemize}
+\item We have $$\chi(T_{X_\mA})=\Z\mA\cap\left\{(a_1,\dots,a_s)\in\Z^s\;\bigg{|}\;\sum_{i=1}^sa_i=0\right\}$$
+\item The dimension of the torus is given by $$\dim(T_{X_\mA})=\begin{cases}
+\rank(\Z\mA)-1 & \text{ if }\I(Y_\mA)\text{ is a homogeneous ideal }\\
+\rank(\Z\mA) & \text{ otherwise }
+\end{cases}$$
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $T$ be a torus over $\C$. Let $\mA=\{\chi_1,\dots,\chi_s\}\subseteq\chi(T)$ be characters of $T$. Then we have $$X_\mA\cap U_i=Y_{\mA\setminus\{\chi_i\}}$$
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $T$ be a torus over $\C$. Let $\mA=\{\chi_1,\dots,\chi_s\}\subseteq\chi(T)$ be characters of $T$. Let $J=\{j\in\{1,\dots,s\}\;|\;\chi_j\text{ is a vertex of }\text{Cone}(\text{Conv}(\mA))\}$. Then we have $$X_\mA=\bigcup_{j\in J}X_\mA\cap U_j$$
+\end{prp}
+
+\pagebreak
+\section{Toric Varieties and Convex Geometry}
+\subsection{Cones and Affine Toric Varieties}
+\begin{lmm}{Gordon's Lemma}{}\\
+Let $\sigma\subseteq\R^n$ be a rational polyhedral cone. Let $A\subseteq\Z^n$ be a subgroup. Then $\sigma\cap A$ is an affine semi-group. 
+\end{lmm}
+
 \begin{defn}{Affine Semigroup Associated to a Cone}{}\\
 Let $\sigma\subseteq\R^n$ be a rational polyhedral cone. Define the associated affine semigroup to be $$S_\sigma=\sigma^\vee\cap(\R^n)^\ast$$
 \end{defn}
 
+\begin{defn}{Affine Toric Variety Associated to a Cone}{}\\
+Let $T$ be a torus over $\C$. Let $\sigma\in\lambda(T)\otimes_\Z\C^\times$ be a rational polyhedral cone. Define the associated affine toric variety by $$U_\sigma=\text{Spec}(\C[S_\sigma])$$
+\end{defn}
+
 \begin{eg}{}{}\\
-There is an isomorphism $$\text{Spec}(\C[\{0\}^\vee\cap\Z^n])\cong\text{Spec}(\G_m^n)$$
-\begin{proof}\\
-The dual cone of $\{0\}$ is $\R^n$ and intersecting with $\Z^n$ just gives itself. So $\C[\Z^n]=\C[x_1,\dots,x_n,x_1^{-1},\dots,x_n^{-1}]$ is just the coordinate ring of the standard $n$-torus. 
+The following are true. 
+\begin{itemize}
+\item There is an isomorphism $$\text{Spec}(\C[\{0\}^\vee\cap\Z^n])\cong\text{Spec}(\G_m^n)$$
+\item Let $e_1,e_2,e_3\in\R^3$ be the standard basis vectors. Let $\sigma=\text{Cone}(e_1,e_2,e_1+e_3,e_2+e_3)\subseteq\R^3$. Then we have $$\C[S_\sigma]=\frac{\C[x,y,z,w]}{(xy-zw)}$$
+\item Let $e_1,e_2,e_3\in\R^3$ be the standard basis vectors. Let $\sigma=\text{Cone}(e_2,e_3,2e_1+e_2+e_3)\subseteq\R^3$. Then we have $$\C[S_\sigma]\cong\frac{\C[x_1,\dots,x_6]}{(x_1x_4-x_2x_3,x_1x_5-x_2^2,x_1x_6-x_3^2)}$$
+\item Let $e_1,e_2\in\R^2$ be the standard basis vectors. Let $\sigma=\text{Cone}(de_1-e_2,e_2)$. Then we have $$U_\sigma=\widehat{C}_d$$
+\end{itemize}
+\begin{proof}
+\begin{itemize}
+\item The dual cone of $\{0\}$ is $\R^n$ and intersecting with $\Z^n$ just gives itself. So $\C[\Z^n]=\C[x_1,\dots,x_n,x_1^{-1},\dots,x_n^{-1}]$ is just the coordinate ring of the standard $n$-torus. 
+\item We compute the dual cone to be $$\sigma^\vee=H_{(1,0,0)}^+\cap H_{(0,1,0)}^+\cap H_{(1,0,1)}^+\cap H_{(0,1,1)}^+$$ A generating set of $S_\sigma$ as a monoid is given by $\{e_1,e_2,e_3,e_1+e_2-e_3\}$. The kernel of the map $\Z^4\to\Z^3$ defined by $e_i\mapsto e_i$ for $1\leq i\leq 3$ and $e_4\mapsto(1,1,-1)$ is given by $\Z\langle e_1+e_2-e_3-e_4\rangle$. Thus we are done. 
+\item We compute the dual cone to be $$\sigma^\vee=H_{(2,1,1)}^+\cap H_{(0,1,0)}^+\cap H_{(0,0,1)}^+$$ A generating set of $S_\sigma$ as a monoid is then given by $\{(1,0,0),(0,1,0),(0,0,1),(-1,1,1),(-1,2,0),(-1,0,2)\}$. The kernel of the map $\Z^6\to\Z^3$ defined by $e_i\mapsto e_i$ for $1\leq i\leq 3$ and $e_4\mapsto(-1,1,1),e_5\mapsto(-1,2,0),e_6\mapsto(-1,0,2)$ is given by $\Z\langle e_1-e_2-e_3+e_4,e_1-2e_2+e_5,e_1-2e_3+e_6\rangle$. The ideal associated to this lattice is given by $(x_1x_4-x_2x_3,x_1x_5-x_2^2,x_1x_6-x_3^2)$. Thus we are done. 
+\item The dual cone is given by $$\sigma^\vee=H_{(d,-1)}^+\cap H_{(0,1)}^+$$ A generating set for the monoid $S_\sigma$ is given by $\{e_1+ie_2\;|\;0\leq i\leq d\}$. The kernel of the map $\Z^{d+1}\to\Z^2$ defined by $e_i\mapsto e_1+ie_2$ is given by $\Z\langle e_i+e_{j+1}-e_{i+1}e_j\;|\;0\leq i<j\leq d-1\rangle$. Notice that the lattice ideal of the kernel is precisely the ideal defining the rational normal cone. Hence we are done. 
+\end{itemize}
 \end{proof}
 \end{eg}
 
-\begin{eg}{}{}\\
-Let $e_1,e_2,e_3\in\R^3$ be the standard basis vectors. Let $\sigma=\text{Cone}(e_1,e_2,e_1+e_3,e_2+e_3)\subseteq\R^3$. Then we have $$\C[S_\sigma]=\frac{\C[x,y,z,w]}{(xy-zw)}$$
-\begin{proof}\\
-We compute the dual cone to be $$\sigma^\vee=H_{(1,0,0)}^+\cap H_{(0,1,0)}^+\cap H_{(1,0,1)}^+\cap H_{(0,1,1)}^+$$ A generating set of $S_\sigma$ as a monoid is given by $\{e_1,e_2,e_3,e_1+e_2-e_3\}$. The kernel of the map $\Z^4\to\Z^3$ defined by $e_i\mapsto e_i$ for $1\leq i\leq 3$ and $e_4\mapsto(1,1,-1)$ is given by $\Z\langle e_1+e_2-e_3-e_4\rangle$. Thus we are done. 
-\end{proof}
-\end{eg}
-
-\begin{eg}{}{}\\
-Let $e_1,e_2,e_3\in\R^3$ be the standard basis vectors. Let $\sigma=\text{Cone}(e_2,e_3,2e_1+e_2+e_3)\subseteq\R^3$. Then we have $$\C[S_\sigma]\cong\frac{\C[x_1,\dots,x_6]}{(x_1x_4-x_2x_3,x_1x_5-x_2^2,x_1x_6-x_3^2)}$$
-\begin{proof}\\
-We compute the dual cone to be $$\sigma^\vee=H_{(2,1,1)}^+\cap H_{(0,1,0)}^+\cap H_{(0,0,1)}^+$$ A generating set of $S_\sigma$ as a monoid is then given by $\{(1,0,0),(0,1,0),(0,0,1),(-1,1,1),(-1,2,0),(-1,0,2)\}$. The kernel of the map $\Z^6\to\Z^3$ defined by $e_i\mapsto e_i$ for $1\leq i\leq 3$ and $e_4\mapsto(-1,1,1),e_5\mapsto(-1,2,0),e_6\mapsto(-1,0,2)$ is given by $\Z\langle e_1-e_2-e_3+e_4,e_1-2e_2+e_5,e_1-2e_3+e_6\rangle$. The ideal associated to this lattice is given by $(x_1x_4-x_2x_3,x_1x_5-x_2^2,x_1x_6-x_3^2)$. Thus we are done. 
-\end{proof}
-\end{eg}
-
-\begin{eg}{}{}\\
-Let $e_1,e_2\in\R^2$ be the standard basis vectors. Let $\sigma=\text{Cone}(de_1-e_2,e_2)$. Then we have $$\C[S_\sigma]\cong\frac{\C[x_0,\dots,x_d]}{(x_ix_{j+1}-x_jx_{i+1}\;|\;0\leq i<j\leq d-1)}$$
-\begin{proof}\\
-The dual cone is given by $$\sigma^\vee=H_{(d,-1)}^+\cap H_{(0,1)}^+$$ A generating set for the monoid $S_\sigma$ is given by $\{e_1+ie_2\;|\;0\leq i\leq d\}$. The kernel of the map $\Z^{d+1}\to\Z^2$ defined by $e_i\mapsto e_1+ie_2$ is given by $\Z\langle e_i+e_{j+1}-e_{i+1}e_j\;|\;0\leq i<j\leq d-1\rangle$. Notice that the lattice ideal of the kernel is precisely the ideal defining the rational normal cone. Hence we are done. 
-\end{proof}
-\end{eg}
-
-Not all affine toric varieties comes from cones. But all affine normal toric varieties come from strongly convex rational polyhedral cones. 
+\begin{prp}{}{}\\
+Let $T$ be a torus over $\C$. Let $\sigma\in\lambda(T)\otimes_\Z\C^\times$ be a rational polyhedral cone. Then the following are equivalent. 
+\begin{itemize}
+\item $\sigma$ is strongly convex. 
+\item $T_{U_\sigma}=\lambda(T)\otimes_\Z\C^\times$. 
+\item $\dim(U_\sigma)=\rank(\lambda(T))=\dim(T)$. 
+\end{itemize}
+\end{prp}
 
 \begin{prp}{}{}\\
 Let $V$ be an affine toric variety. Then the following are equivalent. 
 \begin{itemize}
 \item $V$ is normal. 
-\item $V=\text{Spec}(\C[S])$ where $S$ is a saturated affine semigroup. 
-\item $V=\text{Spec}(\C[S_\sigma])$ where $\sigma$ is a strongly convex rational polyhedral cone. 
+\item There exists a saturated affine semigroup such that $V=\text{Spec}(\C[S])$. 
+\item There exists a strongly convex rational polyhedral cone $
+\sigma$ such that $V=\text{Spec}(\C[S_\sigma])$. 
 \end{itemize}
 \end{prp}
 
+\begin{eg}{}{}\\
+The following are affine normal toric varieties. 
+\begin{itemize}
+\item $\V(xy-zw)\subseteq\A_\C^4$. 
+\item For $d\geq 1$, the rational normal cone $\widehat{C}_d$. 
+\end{itemize}
+\end{eg}
+
 \begin{prp}{}{}\\
-Let $n\in\N^+$. Let $\sigma\subseteq\R^n$ be a cone. Let $\tau\subseteq\sigma$ be a face of the cone. Let $H_\phi$ be the supporting hyperplane for $\tau$ where $\phi\in\sigma^\vee\cap\Z^n$. Then we have $$\C[S_\tau]=\C[S_\sigma]_\phi$$
+Let $T$ be a torus over $\C$. Let $\sigma\in\lambda(T)$ be a strongly convex rational polyhedral cone. Then $U_\sigma$ has a fixed point if and only if $\dim(\sigma)=\dim(T)$. In this case, the maximal ideal corresponding to the fixed point is given by $$\langle \chi\;|\;\chi\in S_\sigma\setminus\{0\}\rangle\subseteq\C[S_\sigma]$$
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $T_1,T_2$ be two tori. Let $\sigma_1\in T_1$ and $\sigma_2\in T_2$ be two strongly convex rational polyhedral cones. Let $\phi:U_{\sigma_1}\to U_{\sigma_2}$ be a morphism. Then $\phi$ is a toric morphism if and only if there exists a map $\psi:\lambda(T_1)\to\lambda(T_2)$ such that the following are true. 
+\begin{itemize}
+\item $\phi$ is induced by $\psi\otimes_\Z\text{id}$. 
+\item $\psi(\sigma_1)\subseteq\sigma_2$. 
+\end{itemize}
+\end{prp}
+
+Let $T$ be a torus over $\C$. Let $\sigma\in\lambda(T)\otimes_\Z\C^\times$ be a strongly convex rational polyhedral cone. Recall that $\sigma$ is regular if it can be generated by a subset of a basis of $\lambda(T)$. 
+
+\begin{prp}{}{}\\
+Let $T$ be a torus over $\C$. Let $\sigma\in\lambda(T)\otimes_\Z\C^\times$ be a strongly convex rational polyhedral cone. Then $U_\sigma$ is smooth if and only if $\sigma$ is regular. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $T$ be a torus over $\C$. Let $\sigma$ be a strongly convex rational polyhedral cone in $\lambda(T)$. Let $\tau\subseteq\sigma$ be a face. Let $H_\phi$ be the supporting hyperplane for $\tau$ where $\phi\in\sigma^\vee\cap\lambda(T)$. Then we have $$\C[S_\tau]=\C[S_\sigma]_\phi$$
 \end{prp}
 
 \begin{eg}{}{}\\
@@ -375,13 +335,36 @@ We already computed that $\C[S_\sigma]=\frac{\C[x,y,z,w]}{(xy-zw)}$. Notice that
 \end{eg}
 
 \subsection{Polytopes and Projective Toric Varieties}
+We begin with the very ample case. Let $T$ be a torus over $\C$. Let $P\subseteq\chi(T)\otimes_\Z\C^\ast$ be a full-dimensional very ample polytope with lattice $M$. Suppose that $\abs{P\cap M}=s$ is finite. Then $X_{P\cap M}$ is a projective toric variety. 
+
+\begin{defn}{The Projective Toric Variety Associated to a Lattice Polytope}{}\\
+Let $T$ be a torus over $\C$. Let $P\subseteq\chi(T)\otimes_\Z\C^\ast$ be a full-dimensional lattice polytope with lattice $M$. Define the toric variety associated to $P$ by $$X_P=X_{(kP)\cap M}$$ for any $k$ such that $kP$ is very ample. 
+\end{defn}
+
+Such a $k$ exists by Ewald-Wessels theorem, which says that $kP$ is normal for all $k\geq\dim(P)-1$. 
+
+\begin{prp}{}{}\\
+Let $T$ be a torus over $\C$. Let $P\subseteq\chi(T)\otimes_\Z\C^\ast$ be a full-dimensional very ample polytope with lattice $M$. Suppose that $P\cap M=\{\chi_1,\dots,\chi_s\}$ is finite. Then the following are true. 
+\begin{itemize}
+\item We have $$X_{P\cap M}\cap U_i=U_{\sigma_i}$$ where $\sigma_i$ is the strongly convex rational cone dual to $\text{Cone}(P\cap M\setminus\{\chi_i\})$. 
+\item The torus is given by $$T_{X_{P\cap M}}=T$$
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $T$ be a torus over $\C$. Let $P\subseteq\chi(T)\otimes_\Z\C^\ast$ be a full-dimensional lattice polytope with lattice $M$. Then the following are true. 
+\begin{itemize}
+\item $X_P$ is normal. 
+\item $X_P$ is projectively normal under the embedding induced by $kP$ if and only if $kP$ is normal. 
+\end{itemize}
+\end{prp}
 
 \subsection{Fans and Normal Toric Varieties}
-\begin{defn}{Scheme Associated to a Fan}{}\\
-Let $n\in\N^+$. Let $\Sigma$ be a fan in $\R^n$. Define the scheme $X_\Sigma$ associated to $\Sigma$ by the following gluing data. 
+\begin{defn}{Toric Variety Associated to a Fan}{}\\
+Let $T$ be a torus. Let $\Sigma$ be a rational fan in $\lambda(T)$. Define the scheme $X_\Sigma$ associated to $\Sigma$ by the following gluing data. 
 \begin{itemize}
 \item The schemes $\text{Spec}(\C[S_\sigma])$ for each $\sigma\in\Sigma$. 
-\item For each $\sigma_1,\sigma_2\in\Sigma$, an open subscheme $$\text{Spec}(\C[S_{\sigma_1\cap\sigma_2}])$$ of $\text{Spec}(\C[S_{\sigma_1}])$ and $\text{Spec}(\C[S_{\sigma_2}])$. 
+\item For each $\sigma_1,\sigma_2\in\Sigma$, an open subscheme $$\text{Spec}(\C[S_{\sigma_1\cap\sigma_2}])\subseteq\text{Spec}(\C[S_{\sigma_1}])\;\;\text{ and }\;\;\text{Spec}(\C[S_{\sigma_2}])$$
 \item The gluing maps are the identity maps. 
 \end{itemize}
 \end{defn}
@@ -389,7 +372,7 @@ Let $n\in\N^+$. Let $\Sigma$ be a fan in $\R^n$. Define the scheme $X_\Sigma$ as
 We need to check that the above data is sufficient to define a scheme for gluing. 
 
 \begin{prp}{}{}\\
-Let $n\in\N^+$. Let $\Sigma$ be a fan in $\R^n$. Then $X_\Sigma$ is a normal, separated toric variety. 
+Let $T$ be a torus. Let $\Sigma$ be a rational fan in $\lambda(T)$. Then $X_\Sigma$ is a normal, separated toric variety with torus $T$. 
 \begin{proof}\\
 Sketch proof: \\
 
@@ -403,48 +386,58 @@ Now notice that $X_\Sigma$ is separated if and only if for any cones $\sigma_1,\
 \end{proof}
 \end{prp}
 
+\begin{eg}{Projective Space}{}\\
+Let $e_1,\dots,e_n\in\R^n$ be the standard basis vectors of $\R^n$. Denote $e_{n+1}=-\sum_{i=1}^ne_i$. Let $$\Sigma=\{\text{Cone}(e_{i_1},\dots,e_{i_k})\;|\;1\leq k\leq n+1,1<i_1\leq\cdots<i_k\leq n+1\}$$ Then we have $$X_\Sigma=\Prj_\C^n$$
+\end{eg}
+
+\begin{eg}{Hirzebruch Surface}{}\\
+Let $r\in\N$. Let $e_1,e_2\in\R^2$ be the standard basis vectors of $\R^2$. Let $$\Sigma=\{\text{Cone}(e_1,e_2),\text{Cone}(e_1,-e_2),\text{Cone}(-e_1+re_2,-e_2),\text{Cone}(-e_1+re_2,e_1)\}$$ Define the Hirzebruch surface by $$\mathscr{H}_r=X_\Sigma$$
+\end{eg}
+
 \begin{thm}{(Sumihiro)}{}\\
 Let $X$ be a normal separated variety equipped with the action of a torus $T$. Let $p\in X$. Then there exists an affine open neighbourhood $U$ of $p$ such that $U$ is $T$-invariant. 
 \end{thm}
 
 \begin{crl}{}{}\\
-Let $X$ be a normal separated toric variety. Then there exists a fan $\Sigma$ in $\R^n$ for some $n\in\N^+$ such that $X=X_\Sigma$. 
+Let $X$ be a normal separated toric variety. Then there exists a rational fan $\Sigma$ in $\lambda(T_X)$ such that $X=X_\Sigma$. 
 \end{crl}
 
 Intuition: Adding a new cone to a fan partially compactifies. 
 
-\begin{eg}{}{}\\
-Let $e_1,e_2\subseteq\R^2$ be the standard basis vectors. Let $\Sigma$ be the fan whose maximal cones are given by $\text{Cone}(e_1,e_2),\text{Cone}(e_1,-e_1-e_2),\text{Cone}(e_2,-e_1-e_2)$. Then $X_\Sigma=\Prj^2$. 
-\end{eg}
-
 \begin{prp}{}{}\\
-Let $n_1,n_2\in\N^+$. Let $\Sigma_1,\Sigma_2$ be fans in $\R^{n_1}$ and $\R^{n_2}$ respectively. Then we have $$X_{\Sigma_1\times\Sigma_2}\cong X_{\Sigma_1}\times X_{\Sigma_2}$$
+Let $T_1,T_2$ be a tori over $\C$. Let $\Sigma_1,\Sigma_2$ be rational fans in $\lambda(T_1),\lambda(T_2)$ respectively. Then we have $$X_{\Sigma_1\times\Sigma_2}\cong X_{\Sigma_1}\times X_{\Sigma_2}$$
 \end{prp}
 
-\subsection{Geometric Properties of Toric Varieties}
 \begin{prp}{}{}\\
-Let $N$ be a lattice of dimension $n$. Let $\sigma\subseteq N\otimes_\Z\R$ be a rational polyhedral cone. Then the following are equivalent. 
+Let $T$ be a torus. Let $\Sigma$ be a rational fan in $\lambda(T)$. Then the following are true. 
 \begin{itemize}
-\item $\text{Spec}(\C[S_\sigma])$ is normal. 
-\item $\dim(\text{Spec}(\C[S_\sigma]))=n$. 
-\item $T_{\text{Spec}(\C[S_\sigma])}=N\otimes_\Z\C^\times$. 
-\item $\sigma$ is strongly convex. 
+\item $X_\Sigma$ is smooth if and only if $\Sigma$ is smooth. 
+\item $X_\Sigma$ is complete if and only if $\Sigma$ is complete. 
 \end{itemize}
 \end{prp}
 
 \begin{prp}{}{}\\
-Let $V$ be an affine toric variety. Then $V$ is smooth if and only if $V=\text{Spec}(\C[S_\sigma])$ where $\sigma$ is a strongly convex regular rational polyhedral cone. 
+Let $T_1,T_2$ be a tori over $\C$. Let $\Sigma_1,\Sigma_2$ be rational fans in $\lambda(T_1),\lambda(T_2)$ respectively. Let $\phi:X_{\Sigma_1}\to X_{\Sigma_2}$ be a morphism. Then $\phi$ is a toric morphism if and only if there exists a $\Z$-linear map $f:\lambda(T_1)\to\lambda(T_2)$ such that the following are true. 
+\begin{itemize}
+\item For each cone $\sigma\in\Sigma_1$, there exists a cone $\tau\in\Sigma_2$ such that $f(\sigma)\subseteq\tau$. 
+\item $\phi|_{T_1}=f\otimes_\Z\text{id}_{\C^\ast}$. 
+\end{itemize}
 \end{prp}
 
-Thus we have constructed a dictionary 
-\begin{align*}
-\text{Affine Toric Varieties}\;\;&\overset{1:1}{\longleftrightarrow}\;\;\text{Rational Polyhedral Cones}\\
-\text{Affine Normal Toric Varieties}\;\;&\overset{1:1}{\longleftrightarrow}\;\;\text{Strongly Convex Rational Polyhedral Cones}\\
-\text{Affine Smooth Toric Varieties}\;\;&\overset{1:1}{\longleftrightarrow}\;\;\text{Regular Rational Polyhedral Cones}\\
-\text{Affine Toric Orbifolds}\;\;&\overset{1:1}{\longleftrightarrow}\;\;\text{Simplicial Rational Polyhedral Cones}
-\end{align*}
+\begin{defn}{Ray Generators}{}\\
+Let $\Sigma\subseteq\R^n$ be a rational fan. Let $\rho\in\Sigma(1)$ be a ray. Denote $u_\rho$ by the ray generator of $\rho$. 
+\end{defn}
 
-\subsection{Orbit Cone Correspondence}
+\begin{prp}{}{}\\
+Let $T$ be a torus. Let $\Sigma$ be a rational fan in $\lambda(T)$. Then the following are equivalent. 
+\begin{itemize}
+\item $X_\Sigma$ has no torus factors. 
+\item $\Gamma(X_\Sigma,\mO_{X_\Sigma})^\ast=\C^\ast$. 
+\item The set $\{u_\rho\;|\;\rho\in\Sigma(1)\}$ spans $\lambda(T)$. 
+\end{itemize}
+\end{prp}
+
+\subsection{The Orbit-Cone Correspondence}
 \begin{defn}{Distinguished Point of a Cone}{}\\
 Let $\sigma\subseteq\R^n$ be a cone. Let $\gamma:S_\sigma\to\C$ be the monoid homomorphism defined by $$\gamma(m)=\begin{cases}
 1 & \text{ if } m\in S_\sigma\cap\sigma^\perp=\sigma^\perp\cap(\R^n)^\ast\\
@@ -454,44 +447,79 @@ Define the distinguished point of $\sigma$ to be the closed point in $\text{Spec
 \end{defn}
 
 \begin{lmm}{}{}\\
-Let $\Sigma$ be a fan in $\R^n$. Let $\sigma\in\Sigma$ be a cone. Then we have $$\dim(\text{Orb}_{T_{X_\Sigma}}(p_\sigma))=n-\dim(\sigma)$$
+Let $\Sigma$ be a rational fan in $\R^n$. Let $\sigma\in\Sigma$ be a cone. Then we have $$\dim(\text{Orb}_{T_{X_\Sigma}}(p_\sigma))=n-\dim(\sigma)$$
 \end{lmm}
 
 \begin{thm}{The Orbit-Cone Correspondence}{}\\
-Let $\Sigma$ be a fan in $\R^n$. Then there is a one to one correspondence $$\Sigma\;\;\overset{1:1}{\longleftrightarrow}X_\Sigma/T_{X_\Sigma}$$ given by $\sigma\mapsto\text{Orb}_{T_{X_\Sigma}}(p_\sigma)$. 
+Let $\Sigma$ be a rational fan in $\R^n$. Then there is a one to one correspondence $$\Sigma\;\;\overset{1:1}{\longleftrightarrow}X_\Sigma/T_{X_\Sigma}$$ given by $\sigma\mapsto\text{Orb}_{T_{X_\Sigma}}(p_\sigma)$. 
 \end{thm}
 
 \begin{prp}{}{}\\
-Let $\Sigma$ be a fan in $\R^n$. Let $\sigma\in\Sigma$ be a cone. Then we have $$\text{Spec}(\C[S_\sigma])=\bigcup_{\tau\text{ is a face of }\sigma}\text{Orb}_{T_{X_\Sigma}}(\tau)$$
+Let $\Sigma$ be a rational fan in $\R^n$. Let $\sigma\in\Sigma$ be a cone. Then we have $$\text{Spec}(\C[S_\sigma])=\bigcup_{\tau\text{ is a face of }\sigma}\text{Orb}_{T_{X_\Sigma}}(\tau)$$
 \end{prp}
 
+\pagebreak
+\section{The Cox Ring}
+\subsection{Basic Definitions}
+\begin{defn}{The Cox Ring}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a rational fan in $\lambda(T)$. Define the Cox ring of $X_\Sigma$ to be the algebra $$\text{Cox}(X_\Sigma)=\C[x_\rho\;|\;\rho\in\Sigma(1)]$$ together with the grading given by $$\deg\left(\prod_{\rho\in\Sigma(1)}x_\rho^{a_\rho}\right)=\left[\sum_{\rho\in\Sigma(1)}a_\rho D(\rho)\right]\in\text{Cl}(X_\Sigma)$$
+\end{defn}
+
+\subsection{Toric Varieties as a Quotient of the Cox Ring}
+
+\begin{defn}{The Irrelevant Ideal}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a rational fan in $\lambda(T)$. Define the irrelevant ideal by $$B(\Sigma)=\left\langle\prod_{\rho\notin\sigma(1)}x_\rho\;\bigg{|}\;\sigma\in\Sigma_\text{max}\right\rangle\subseteq\text{Cox}(X_\Sigma)$$
+\end{defn}
+
+\begin{defn}{The Exceptional Set}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a rational fan in $\lambda(T)$. Define the exceptional set to be $$Z(\Sigma)=\V^H(B(\Sigma))\subseteq X_\Sigma$$
+\end{defn}
+
+
+\subsection{The Toric Nullstellensatz}
+The projective nullstellensatz can be viewed as a more general phenomenon in the toric setting. 
+
+\begin{thm}{The Toric Weak Nullstellensatz}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a rational fan in $\lambda(T)$ such that $\{u_\rho\;|\;\rho\in\Sigma(1)\}$ spans $\lambda(T)$. Let $I\subseteq\text{Cox}(X_\Sigma)$ be a homogeneous ideal. Then we have $$\V^H(I)\subseteq Z(\Sigma)\;\;\;\text{ if and only if }\;\;\;B(\Sigma)\subseteq\sqrt{I}$$
+\end{thm}
+
+\begin{thm}{The Toric Nullstellensatz}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a rational fan in $\lambda(T)$ such that $\{u_\rho\;|\;\rho\in\Sigma(1)\}$ spans $\lambda(T)$. Then there is an inclusion reversing bijection $$\left\{I\subseteq\text{Cox}(X_\Sigma)\;\bigg{|}\;\substack{I\text{is a radical homogeneous}\\\text{ such that }I\subseteq B(\Sigma)}\right\}\;\;\overset{\text{1:1}}{\longleftrightarrow}\;\;\left\{\substack{\text{Closed Subsets of}\\X_\Sigma}\right\}$$ given by $I\mapsto\V^H(I)$ and $Y\mapsto\I^H(Y)$. 
+\end{thm}
+
+\pagebreak
+\section{Divisors and Torus Invariant Divisors}
 \subsection{Divisors on Toric Varieties}
+\begin{defn}{The Divisor of a Ray}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a rational fan in $\lambda(T)$. Let $\rho\in\Sigma(1)$ be a ray. Define the associated divisor of $\rho$ by $$D(\rho)=\overline{\text{Orb}_T(p_\rho)}\in\text{Div}(X_\Sigma)$$
+\end{defn}
+
 \begin{prp}{}{}\\
-Let $N$ be a lattice. Let $\Sigma$ be a fan in $N\otimes_\Z\R$. Let $\chi$ be a character of $T_{X_\Sigma}$. Then the following are true. 
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a rational fan in $\lambda(T)$. Let $\chi$ be a character of $T$. Then the following are true. 
 \begin{itemize}
 \item $\chi$ is a rational function on $X_\Sigma$. 
-\item The divisor of $\chi$ is given by $$\text{div}(\chi)=\sum_{\rho\in\Sigma(1)}\langle\chi,u_\rho\rangle\overline{\text{Orb}_{T_{X_\Sigma}}(p_\rho)}$$ where $u_\rho$ is a generator of $\rho\cap N$. 
+\item The divisor of $\chi$ is given by $$\text{div}(\chi)=\sum_{\rho\in\Sigma(1)}\langle\chi,u_\rho\rangle D(\rho)$$
 \end{itemize}
 \end{prp}
 
 \begin{defn}{$T$-Invariant Divisor Group}{}\\
-Let $\Sigma$ be a fan in $\R^n$. Define the $T_{X_\Sigma}$-invariant divisor group of $X_\Sigma$ to be the subgroup $$\text{Div}_{T_{X_\Sigma}}(X_\Sigma)=\bigoplus_{\rho\in\Sigma(1)}\Z\overline{\text{Orb}_{T_{X_\Sigma}}(\rho)}\leq\text{Div}(X_\Sigma)$$
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a rational fan in $\lambda(T)$. Define the $T$-invariant divisor group of $X_\Sigma$ to be the subgroup $$\text{Div}_T(X_\Sigma)=\bigoplus_{\rho\in\Sigma(1)}\Z\cdot D(\rho)\leq\text{Div}(X_\Sigma)$$
 \end{defn}
 
 \begin{prp}{}{}\\
-Let $\Sigma$ be a fan in $\R^n$. Then the following are true. 
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a rational fan in $\lambda(T)$. Then the following are true. 
 \begin{itemize}
 \item There is an exact sequence of the form \\~\\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
-	{\chi(T)} & {\text{Div}_{T_{X_\Sigma}}(X_\Sigma)} & {\text{Cl}(X_\Sigma)} & 0
+	{\chi(T)} & {\text{Div}_T(X_\Sigma)} & {\text{Cl}(X_\Sigma)} & 0
 	\arrow[from=1-1, to=1-2]
 	\arrow[from=1-2, to=1-3]
 	\arrow[from=1-3, to=1-4]
 \end{tikzcd}}\\
-where the first map is given by $\chi\mapsto\text{div}(\chi)$ and the second map is the restriction of the quotient map from the group of divisors to the class group. 
-\item Let $u_\rho$ be a generator for $\rho\cap\Z^n$. If $\{u_\rho\;|\;\rho\in\Sigma(1)\}$ spans $\Z^n$ (i.e. $X_\Sigma$ has no torus factors), then there the above sequence is exact on the left: \\~\\
+where the first map is given by $\chi\mapsto\text{div}(\chi)$. 
+\item If $X_\Sigma$ has no torus factors, then there the above sequence is exact on the left: \\~\\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
-	0 & {\chi(T)} & {\text{Div}_{T_{X_\Sigma}}(X_\Sigma)} & {\text{Cl}(X_\Sigma)} & 0
+	0 & {\chi(T)} & {\text{Div}_T(X_\Sigma)} & {\text{Cl}(X_\Sigma)} & 0
 	\arrow[from=1-1, to=1-2]
 	\arrow[from=1-2, to=1-3]
 	\arrow[from=1-3, to=1-4]
@@ -501,7 +529,7 @@ where the first map is given by $\chi\mapsto\text{div}(\chi)$ and the second map
 \end{prp}
 
 \begin{eg}{}{}\\
-We have $$\text{Cl}\left(\text{Spec}\left(\frac{\C[x,y,z,w]}{(xy-zw)}\right)\right)=\Z$$
+Let $d\geq 1$. Then we have $$\text{Cl}\left(\widehat{C}_d\right)=\Z$$
 \begin{proof}\\
 Recall that the affine toric variety is the toric variety associated to the cone $\text{Cone}(e_1,e_2,e_1+e_3,e_2+e_3)$. It has four $1$-dimensional faces given by $e_1,e_2,e_1+e_3,e_2+e_3$. Now the character lattice for the torus is $\Z^3$ with generators $e_1,e_2,e_3$. Then we compute that $\text{div}(e_1)=\overline{O(e_1)}+\overline{O(e_1+e_3)}$ and etc. By the above proposition, it suffices to compute the cokernel of the matrix $\begin{pmatrix}
 1 & 0 & 0\\
@@ -522,23 +550,45 @@ d & -1
 \end{proof}
 \end{eg}
 
+\begin{eg}{}{}\\
+Let $r\in\N$. Then we have $$\text{Cl}(\mathscr{H}_r)\cong\Z^2$$
+\begin{proof}\\
+Recall that the the cone of $\mathscr{H}_r$ is given by $$\Sigma=\{\text{Cone}(e_1,e_2),\text{Cone}(e_1,-e_2),\text{Cone}(-e_1+re_2,-e_2),\text{Cone}(-e_1+re_2,e_1)\}$$ Clearly the rays $e_1,e_2,-e_2,-e_1+re_2$ span $\lambda(T)$. The inclusion map $\chi(T)\to\text{Div}_T(\mathscr{H}_r)$ is as follows. Let $\chi_1(s,t)=s$ and $\chi_2(s,t)=t$ be the basis of $\chi(T)$. Then we have $$\text{div}(\chi_1)=D(e_1)-D(-e_1+re_2)\;\;\text{ and }\;\;\text{div}(\chi_2)=D(e_2)-D(-e_2)+rD(-e_1+re_2)$$ The matrix representing the $\Z$-linear map and its Smith normal form is given by $$\text{SNF}\left(\begin{pmatrix}
+1 & 0\\
+0 & 1\\
+0 & -1\\
+-1 & r
+\end{pmatrix}\right)=\begin{pmatrix}
+1 & 0\\
+0 & 1\\
+0 & 0\\
+0 & 0
+\end{pmatrix}$$ The cokernel is precisely the class group and so we have $$\text{Cl}(\mathscr{H}_r)\cong\Z\cdot[D(e_1)]\oplus\Z\cdot[D(e_2)]$$
+\end{proof}
+\end{eg}
+
+\begin{prp}{}{}\\
+Let $T_1,T_2$ be tori over $\C$. Let $\Sigma_1,\Sigma_2$ be rational fans over $\lambda(T_1)$ and $\lambda(T_2)$ respectively. Then we have $$\text{Cl}(X_{\Sigma_1\times\Sigma_2})\cong\text{Cl}(X_{\Sigma_1})\oplus\text{Cl}(X_{\Sigma_2})$$
+\end{prp}
+
 \begin{defn}{$T$-Invariant Cartier Divisor Group}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a rational fan in $\lambda(T)$. Define the $T$-invariant Cartier divisor group of $X_\Sigma$ to be the subgroup $$\text{CDiv}_T(X_\Sigma)=\left\{D\in\text{CDiv}(X_\Sigma)\;\bigg{|}\;D\sim\sum_{\rho\in\Sigma(1)}a_\rho D(\rho)\in\text{Div}(X_\Sigma)\right\}$$
 \end{defn}
 
 \begin{prp}{}{}\\
-Let $\Sigma$ be a fan in $\R^n$. Then the following are true. 
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a rational fan in $\lambda(T)$. Then the following are true. 
 \begin{itemize}
 \item There is an exact sequence of the form \\~\\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
-	{\chi(T)} & {\text{CDiv}_{T_{X_\Sigma}}(X_\Sigma)} & {\text{CCl}(X_\Sigma)} & 0
+	{\chi(T)} & {\text{CDiv}_T(X_\Sigma)} & {\text{CCl}(X_\Sigma)} & 0
 	\arrow[from=1-1, to=1-2]
 	\arrow[from=1-2, to=1-3]
 	\arrow[from=1-3, to=1-4]
 \end{tikzcd}}\\
 where the first map is given by $\chi\mapsto\text{div}(\chi)$ and the second map is the restriction of the quotient map from the group of divisors to the class group. 
-\item Let $u_\rho$ be a generator for $\rho\cap\Z^n$. If $\{u_\rho\;|\;\rho\in\Sigma(1)\}$ spans $\Z^n$ (i.e. $X_\Sigma$ has no torus factors), then there the above sequence is exact on the left: \\~\\
+\item If $X_\Sigma$ has no torus factors, then there the above sequence is exact on the left: \\~\\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
-	0 & {\chi(T)} & {\text{Div}_{T_{X_\Sigma}}(X_\Sigma)} & {\text{CCl}(X_\Sigma)} & 0
+	0 & {\chi(T)} & {\text{CDiv}_T(X_\Sigma)} & {\text{CCl}(X_\Sigma)} & 0
 	\arrow[from=1-1, to=1-2]
 	\arrow[from=1-2, to=1-3]
 	\arrow[from=1-3, to=1-4]
@@ -548,28 +598,40 @@ where the first map is given by $\chi\mapsto\text{div}(\chi)$ and the second map
 \end{prp}
 
 \begin{prp}{}{}\\
-Let $\sigma\subseteq\R^n$ be a strongly convex rational polyhedral cone. Then the following are true. 
+Let $T$ be a torus over $\C$. Let $\sigma$ be a strongly convex rational cone in $\lambda(T)$. Then we have $$\text{Cl}(U_\sigma)=0$$
+\end{prp}
+
+\begin{eg}{}{}\\
+The following are true. 
 \begin{itemize}
-\item Every $T_{X_\Sigma}$-invariant Cartier divisor on $\text{Spec}(\C[S_\sigma])$ is the divisor of a character. 
-\item $\text{Pic}(\text{Spec}(\C[S_\sigma]))=0$. 
+\item $\text{CCl}(\V(xy-zw))=0$. 
+\item For $d\geq 1$, we have $\text{CCl}(\widehat{C}_d)=0$
 \end{itemize}
+\end{eg}
+
+\begin{prp}{}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a rational fan in $\lambda(T)$. Let $\sigma\in\Sigma$ be a cone such that $\dim(\sigma)=\dim(T)$. Then $\text{CCl}(X_\Sigma)$ is a free abelian group. 
 \end{prp}
 
 \begin{prp}{}{}\\
-Let $\Sigma$ be a fan in $\R^n$. Let $\sigma\in\Sigma$ be a cone such that $\dim(\sigma)=n$, then $\text{Pic}(X_\Sigma)$ is a free abelian group. 
-\end{prp}
-
-\begin{prp}{}{}\\
-Let $\Sigma$ be a fan in $\R^n$. Then the following are equivalent. 
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a rational fan in $\lambda(T)$.  Then the following are equivalent. 
 \begin{itemize}
 \item $X_\Sigma$ is smooth. 
-\item Every Weil divisor is a Carteir divisor. 
+\item $\text{Div}(X_\Sigma)=\text{CDiv}(X_\Sigma)$
 \item $\text{Cl}(X_\Sigma)\cong\text{CCl}(X_\Sigma)$. 
 \end{itemize}
 \end{prp}
 
+\begin{eg}{}{}\\
+The following are true. 
+\begin{itemize}
+\item $\text{CCl}(\Prj_\C^n)\cong\Z$. 
+\item For $r\in\N$, we have $\text{CCl}(\mathscr{H}_r)\cong\Z^2$. 
+\end{itemize}
+\end{eg}
+
 \begin{prp}{}{}\\
-Let $\Sigma$ be a fan in $\R^n$. Then the following are equivalent. 
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a rational fan in $\lambda(T)$. Then the following are equivalent. 
 \begin{itemize}
 \item $\Sigma$ is simplicial. 
 \item $X_\Sigma$ is an orbifold. 
@@ -578,14 +640,330 @@ Let $\Sigma$ be a fan in $\R^n$. Then the following are equivalent.
 \end{prp}
 
 \begin{prp}{}{}\\
-4.2.8 Cox
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a rational fan in $\lambda(T)$. Let $D=\sum_{\rho\in\Sigma(1)}a_\rho D(\rho)\in\text{Div}_T(X_\Sigma)$ be a Weil divisor. Then the following are equivalent. 
+\begin{itemize}
+\item $D$ is a Cartier divisor. 
+\item $D|_{U_\sigma}\in\text{Div}(U_\sigma)$ is principal for all $\sigma\in\Sigma$. 
+\item For each $\sigma\in\Sigma$, there exists $\chi_\sigma\in\chi(T)$ such that $\langle\chi_\sigma,u_\rho\rangle=-a_\rho$ for all $\rho\in\sigma(1)$. 
+\item For each $\sigma\in\Sigma_\text{max}$, there exists $\chi_\sigma\in\chi(T)$ such that $\langle\chi_\sigma,u_\rho\rangle=-a_\rho$ for all $\rho\in\sigma(1)$. 
+\end{itemize}
+\end{prp}
+
+\begin{defn}{Cartier Data of Toric Variety}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a rational fan in $\lambda(T)$. Let $D=\sum_{\rho\in\Sigma(1)}a_\rho D(\rho)\in\text{CDiv}_T(X_\Sigma)$ be a Cartier divisor. A Cartier data for $D$ is a collection $\{m_\sigma\}_{\sigma\in\Sigma}$ such that $$\langle\chi_\sigma,u_\rho\rangle=-a_\rho$$ for all $\rho\in\sigma(1)$. 
+\end{defn}
+
+Colimit description of $\text{CCl}$. 
+
+\begin{defn}{The Polyhedron Associated to a Divisor}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a rational fan in $\lambda(T)$. Let $D=\sum_{\rho\in\Sigma(1)}a_\rho D(\rho)\in\text{Div}_T(X_\Sigma)$. Define the associated polyhedron by $$P_D=\{\chi\in\chi(T)\otimes_\Z\R\;|\;\langle\chi,u_\rho\rangle\geq-a_\rho\text{ for all }\rho\in\Sigma(1)\}$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a rational fan in $\lambda(T)$. Let $D\in\text{Div}_T(X_\Sigma)$. If $X_\Sigma$ is complete, then $P_D$ is a convex polytope. 
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a rational fan in $\lambda(T)$. Let $D\in\text{Div}_T(X_\Sigma)$. Then we have $$\Gamma(X_\Sigma,\mO_{X_\Sigma}(D))\cong\bigoplus_{\chi\in\chi(T),\text{div}(\chi)+D\geq 0}\C\cdot\chi=\bigoplus_{\chi\in P_D\cap\chi(T)}\C\cdot\chi$$
+\end{prp}
+
+\subsection{Support Functions}
+\begin{defn}{Support Functions}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a rational fan in $\lambda(T)$. Let $\varphi:\abs{\Sigma}\to\R$ be a function. We say that $\varphi$ is a support function if for each $\sigma\in\Sigma$, we have that $\varphi|_\sigma:\sigma\to\R$ is a linear map. 
+\end{defn}
+
+\begin{defn}{Integral Support Functions}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a rational fan in $\lambda(T)$. Let $\varphi:\abs{\Sigma}\to\R$ be a support function. We say that $\varphi$ is integral if $$\varphi(\abs{\Sigma}\cap\lambda(T))\subseteq\Z$$ Denote the set of all integral support functions by $$\text{SF}(\Sigma,\lambda(T))=\{\varphi:\abs{\Sigma}\to\R\;|\;\varphi\text{ is an integral support function }\}$$
+\end{defn}
+
+\begin{defn}{The Associated Support Function}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a rational fan in $\lambda(T)$. Let $D=\sum_{\rho\in\Sigma(1)}a_\rho D(\rho)\in\text{Div}_T(X_\Sigma)$. Let $\{m_\sigma\}_{\sigma\in\Sigma}$ be a Cartier data of $D$. Define the associated support function by $$\varphi_D(u)=\langle m_\sigma,u\rangle\;\;\;\text{ for }u\in\sigma$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a rational fan in $\lambda(T)$. Let $D=\sum_{\rho\in\Sigma(1)}a_\rho D(\rho)\in\text{Div}_T(X_\Sigma)$. Then there is a group isomorphism $$\text{CDiv}_T(X_\Sigma)\cong\text{SF}(\Sigma,\lambda(T))$$ given by $D\mapsto\varphi_D$. 
+\end{prp}
+
+\subsection{Basepoint Free and Ample Divisors}
+\begin{prp}{}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a rational fan in $\lambda(T)$. Suppose that $\Sigma_\text{max}=\Sigma(\dim(T))$. Let $D=\sum_{\rho\in\Sigma(1)}a_\rho D(\rho)\in\text{CDiv}_T(X_\Sigma)$. For each $\sigma\in\Sigma$, let $\chi_\sigma\in\chi(T)$ be the unique character such that $$\langle\chi_\sigma,u_\rho\rangle=-a_\rho$$ for all $\rho\in\Sigma(1)$. Then $D$ is basepoint free if and only if $m_\sigma\in P_D$ for all $\sigma\in\Sigma(\dim(T))$. 
+\end{prp}
+
+Recall that if $\abs{\Sigma}$ is a cone that is convex and full-dimensional, then we have $$\abs{\Sigma}=\text{Cone}(\{u_\rho\;|\;\rho\in\Sigma(1)\})=\bigcup_{\sigma\in\Sigma(n)}\sigma$$ In particular, we have $\Sigma_\text{max}=\Sigma(n)$. Also recall that a function $f$ on a convex set is concave if we have $$f(tu+(1-t)v)\geq tf(u)+(1-t)f(v)$$ for all $u,v$ in the domain and $t\in[0,1]$. 
+
+\begin{lmm}{}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a rational fan in $\lambda(T)$ with convex support and is full-dimensional. Let $D\in\text{CDiv}_T(X_\Sigma)$ be a Cartier divisor. Let $\{m_\sigma\}_{\sigma\in\Sigma}$ be a Cartier data of $D$. Then the following are equivalent. 
+\begin{itemize}
+\item $\varphi_D$ is concave. 
+\item $\varphi_D(u)\leq\langle m_\sigma,u\rangle$ for all $u\in\abs{\Sigma}$ and $\sigma\in\Sigma(\dim(T))$. 
+\item $\varphi_D(u)=\min\{\langle m_\sigma,u\rangle\;|\;\sigma\in\Sigma(\dim(T))\}$ for all $u\in\abs{\Sigma}$. 
+\end{itemize}
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a rational fan in $\lambda(T)$ with convex support and is full-dimensional. Let $D\in\text{CDiv}_T(X_\Sigma)$ be a Cartier divisor. Then we have $$P_D=\{\chi\in\chi(T)\;|\;\varphi_D(u)\leq\langle m,u\rangle\text{ for all }u\in\abs{\Sigma}\}$$
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a rational fan in $\lambda(T)$ with convex support and is full-dimensional. Let $D\in\text{CDiv}_T(X_\Sigma)$ be a Cartier divisor. Let $\{m_\sigma\}_{\sigma\in\Sigma}$ be a Cartier data of $D$. Then the following are equivalent. 
+\begin{itemize}
+\item $D$ is basepoint free. 
+\item $m_\sigma\in P_D$ for all $\sigma\in\Sigma(\dim(T))$. 
+\item $\varphi_D$ is concave. 
+\end{itemize}
 \end{prp}
 
 \begin{prp}{}{}\\
-4.3.2 Cox
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a complete rational fan in $\lambda(T)$. Let $D\in\text{CDiv}_T(X_\Sigma)$ be a Cartier divisor. Let $\{m_\sigma\}_{\sigma\in\Sigma}$ be a Cartier data of $D$. Then the following are equivalent. 
+\begin{itemize}
+\item $D$ is basepoint free. 
+\item $P_D=\text{Conv}(\{m_\sigma\;|\;\sigma\in\Sigma(\dim(T))\})$. 
+\item $V(P_D)=\{m_\sigma\;|\;\sigma\in\Sigma(\dim(T))\}$. 
+\item $\varphi_D(u)=\min\{\langle m,u\rangle\;|\;m\in P_D\}$ for all $u\in\lambda(T)$. 
+\end{itemize}
 \end{prp}
 
-Lmm5.1.1
+\begin{defn}{Strictly Concave Associated Support Functions}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a complete rational fan in $\lambda(T)$. Let $D\in\text{CDiv}_T(X_\Sigma)$ be a Cartier divisor. Let $\{m_\sigma\}_{\sigma\in\Sigma}$ be a Cartier data of $D$. We say that $\varphi_D$ is strictly concave if the following are true. 
+\begin{itemize}
+\item $\varphi_D$ is concave. 
+\item For all $\sigma\in\Sigma(\dim(T))$, we have $$\langle m_\sigma,u\rangle=\varphi_D(u)$$ if and only if $u\in\sigma$. 
+\end{itemize}
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a complete rational fan in $\lambda(T)$. Let $D=\sum_{\rho\in\Sigma(1)}a_\rho D(\rho)\in\text{CDiv}_T(X_\Sigma)$ be a Cartier divisor. Let $\{m_\sigma\}_{\sigma\in\Sigma}$ be a Cartier data of $D$. Then the following are equivalent. 
+\begin{itemize}
+\item $\varphi_D$ is strictly concave. 
+\item $\varphi_D(u)<\langle m_\sigma,u\rangle$ for all $u\in\abs{\Sigma}\setminus\sigma$ and $\sigma\in\Sigma(\dim(T))$. 
+\item $\varphi_D$ is concave and $m_\sigma\neq m_\tau$ when $\sigma\neq\tau\in\Sigma(\dim(T))$. 
+\item $\langle m_\sigma,u_\rho\langle>-a_\rho$ for all $\rho\in\Sigma(1)\setminus\sigma(1)$ and $\sigma\in\Sigma(\dim(T))$. 
+\item $\varphi_D(u+v)>\varphi_D(u)+\varphi_D(v)$ for all $u,v\in\abs{\Sigma}$ and $u,v$ does not lie in the same cone. 
+\end{itemize}
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a complete rational fan in $\lambda(T)$. Let $D\in\text{CDiv}_T(X_\Sigma)$ be a Cartier divisor. Then $D$ is ample if and only if $\varphi_D$ is strictly convex. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a complete rational fan in $\lambda(T)$. Let $D\in\text{CDiv}_T(X_\Sigma)$ be a Cartier divisor. If $\dim(T)\geq 2$ and $D$ is ample, then $kD$ is very ample for all $k\geq\dim(T)-1$. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a smooth complete rational fan in $\lambda(T)$. Let $D\in\text{CDiv}_T(X_\Sigma)$ be a Cartier divisor. Then $D$ is ample if and only if it is very ample. 
+\end{prp}
+
+\begin{thm}{Toric Chow Lemma}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a complete rational fan in $\lambda(T)$. Then there exists a refinement $\Sigma'$ of $\Sigma$ such that $X_{\Sigma'}$ is projective and the induced toric morphism $X_{\Sigma'}\to X_\Sigma$ is proper and birational. 
+\end{thm}
+
+\subsection{Divisors of Toric Varieties of a Polytope}
+
+\begin{prp}{}{}\\
+Let $T$ be a torus over $\C$. There is a one to one correspondence $$\left\{P\subseteq\chi(T)\otimes_\Z\R\;\bigg{|}\;\substack{P\text{ is a full-}\\\text{dimensional lattic polytope }}\right\}\;\;\overset{1:1}{\longleftrightarrow}\;\;\left\{(X_\Sigma,D)\;\bigg{|}\;\substack{\Sigma\text{ is a complete fan in }\lambda(T)\\\text{and }D\in\text{CDiv}_T(X_\Sigma)\text{ is ample }}\right\}$$ given by $P\mapsto(X_P,D_P)$ and $(X_\Sigma,D)\mapsto P_D$. 
+\end{prp}
+
+\pagebreak
+\section{Sheaves and Bundles on Normal Toric Varieties}
+\subsection{Sheaves on the Cox Ring}
+Recall that every quasi-coherent sheaves of modules over $\Prj^n$ is given by the associated sheaf of a graded module over the polynomial  ring. There is also a toric generalization of this result. 
+
+\begin{prp}{}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a rational fan in $\lambda(T)$ such that $\{u_\rho\;|\;\rho\in\Sigma(1)\}$ spans $\lambda(T)$. Then the following are true. 
+\begin{itemize}
+\item The functor $$\widetilde{(-)}:\bold{GrMod}_{\text{Cox}(X_\Sigma)}\to\bold{QCoh}_{X_\Sigma}$$ is essentially surjective. 
+\item The functor $$\widetilde{(-)}:\bold{FGMod}_{\text{Cox}(X_\Sigma)}\to\bold{Coh}_{X_\Sigma}$$ is essentially surjective. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a rational fan in $\lambda(T)$ such that $\{u_\rho\;|\;\rho\in\Sigma(1)\}$ spans $\lambda(T)$. Let $D\in\text{Div}_T(X_\Sigma)$. Then there is an isomorphism of $\mO_X$-modules $$\mO_X(D)\cong\mO_X([D])=\widetilde{S_{[D]}}$$
+\end{prp}
+
+\subsection{Toric Vector Bundles}
+
+\pagebreak
+\section{Projective Morphisms and Projective Bundles}
+
+\pagebreak
+\section{The Sheaf of Differential Forms}
+\subsection{}
+\begin{prp}{}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a regular fan on $\lambda(T)$. Then there is an exact sequence \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {\Omega_{X_\Sigma}^1} & {M\otimes_\Z\mO_{X_\Sigma}} & {\bigoplus_{\rho\in\Sigma(1)}i_\ast\mO_{D(\rho)}} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["\alpha", from=1-2, to=1-3]
+	\arrow["\beta", from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\
+where the maps are given as follows. 
+\begin{itemize}
+\item $\alpha$ is defined by gluing the maps $\Omega_{\C[S_\sigma]/\C}^1\to M\otimes_\Z\C[S_\sigma]$ given by $d\chi\mapsto m\otimes\chi$. 
+\item $\beta$ is the direct sum of the maps induced by the inclusion $i:D(\rho)\hookrightarrow X_\Sigma$. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a fan on $\lambda(T)$. Then there is an exact sequence \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {\widehat{\Omega}_{X_\Sigma}^1} & {M\otimes_\Z\mO_{X_\Sigma}} & {\bigoplus_{\rho\in\Sigma(1)}i_\ast\mO_{D(\rho)}}
+	\arrow[from=1-1, to=1-2]
+	\arrow["\alpha{\vee\vee}", from=1-2, to=1-3]
+	\arrow["\beta", from=1-3, to=1-4]
+\end{tikzcd}}\\
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a fan on $\lambda(T)$. If $\Sigma$ is simplicial, then there is a short exact sequence  \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {\widehat{\Omega}_{X_\Sigma}^1} & {M\otimes_\Z\mO_{X_\Sigma}} & {\bigoplus_{\rho\in\Sigma(1)}i_\ast\mO_{D(\rho)}} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["\alpha{\vee\vee}", from=1-2, to=1-3]
+	\arrow["\beta", from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a fan on $\lambda(T)$ such that $\{u_\rho\;|\;\rho\in\Sigma(1)\}$ spans $\lambda(T)$. Then there is a natural isomorphism $$\widehat{\Omega}_{X_\Sigma}^1\cong\widehat{\Omega_{\text{Cox}(X_\Sigma)}^1}$$
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a fan on $\lambda(T)$. Then there is an exact sequence \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {\widehat{\Omega}_{X_\Sigma}^p} & {\bigwedge_{i=1}^pM\otimes_\Z\mO_{X_\Sigma}} & {\bigoplus_{\rho\in\Sigma(1)}\bigwedge_{i=1}^{p-1}\left(\rho^\perp\cap\chi(T)\right)\otimes_\Z i_\ast\mO_{D(\rho)}}
+	\arrow[from=1-1, to=1-2]
+	\arrow["{\alpha=\bigwedge_{i=1}^p\alpha}", from=1-2, to=1-3]
+	\arrow["{\beta_p}", from=1-3, to=1-4]
+\end{tikzcd}}\\
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $T$ be a torus over $\C$. Let $\sigma$ be a strongly convex rational polyhedral cone over $\lambda(T)$. Then we have an isomorphism $$\Gamma(U_\sigma,\widehat{\Omega}_{U_\sigma}^p)\cong\bigoplus_{\chi\in\sigma^\vee\cap\chi(T)}\bigwedge_{i=1}^p V_\sigma(\chi)\cdot\chi$$ where we have $$V_\sigma(\chi)=\C\left\langle\chi_0\in\chi(T)\;\bigg{|}\;\substack{\chi_0\text{ lies in the minimal}\\\text{face of }\sigma\text{ containing }\chi}\right\rangle$$
+\end{prp}
+
+\subsection{The Toric Euler Exact Sequence}
+\begin{thm}{The Toric Euler Exact Sequence}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a simplicial fan on $\lambda(T)$ such that $\{u_\rho\;|\;\rho\in\Sigma(1)\}$ spans $\lambda(T)$. Then there is an exact sequence \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {\widehat{\Omega}_{X_\Sigma}^1} & {\bigoplus_{\rho\in\Sigma(1)}\mO_{X_\Sigma}(-D(\rho))} & {\text{Cl}(X_\Sigma)\otimes_\Z\mO_{X_\Sigma}} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\
+\end{thm}
+
+\begin{crl}{}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a regular fan on $\lambda(T)$ such that $\{u_\rho\;|\;\rho\in\Sigma(1)\}$ spans $\lambda(T)$. Then there are exact sequences \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {\Omega_{X_\Sigma}^1} & {\bigoplus_{\rho\in\Sigma(1)}\mO_{X_\Sigma}(-D(\rho))} & {\text{Cl}(X_\Sigma)\otimes_\Z\mO_{X_\Sigma}} & 0 \\
+	0 & {\mO_{X_\Sigma}} & {\bigoplus_{\rho\in\Sigma(1)}\mO_{X_\Sigma}(D(\rho))} & {\mT_{X_\Sigma}} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-3, to=2-4]
+	\arrow[from=2-4, to=2-5]
+\end{tikzcd}}\\
+\end{crl}
+
+\subsection{The Canonical Bundle}
+\begin{prp}{}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a fan on $\lambda(T)$. Then there is a natural isomorphism $$\mK_{X_\Sigma}\cong\mO_{X_\Sigma}\left(-\sum_{\rho\in\Sigma(1)}D(\rho)\right)$$
+\end{prp}
+
+\begin{crl}{}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a fan on $\lambda(T)$. Then the canonical divisor of $X_\Sigma$ is $T$-invariant and is given by $$K_{X_\Sigma}=-\sum_{\rho\in\Sigma(1)}D(\rho)$$
+\end{crl}
+
+\begin{prp}{}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a fan on $\lambda(T)$. Then there is an exact sequence \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {\mK_{X_\Sigma}} & {\mO_{X_\Sigma}} & {\bigoplus_{\rho\in\Sigma(1)}i_\ast\mO_{D(\rho)}}
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+\end{tikzcd}}\\
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a fan on $\lambda(T)$. Then $K_{X_\Sigma}$ is Cartier if and only if there exists $\{m_\sigma\in\Z\;|\;\sigma\in\Sigma_{\max}\}$ such that $$\langle m_\sigma,u_\rho\rangle=1$$ for all $\rho\in\sigma(1)$. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a fan on $\lambda(T)$. Then the following are true. 
+\begin{itemize}
+\item If $X_\Sigma$ is projective and Fano, then $P_{-K_{X_\Sigma}}$ is a reflexive polytope. 
+\item If $P$ is a reflexive polytope and $\Sigma=\Sigma_P$, then $X_\Sigma$ is Fano. 
+\end{itemize}
+\end{prp}
+
+
+\pagebreak
+\section{Sheaf Cohomology}
+
+For a toric variety $X_\Sigma$ and a divisor $D=\sum_{\rho\in\Sigma(1)}a_\rho D(\rho)$, the canonical affine open cover $\mU=\{U_\sigma\;|\;\sigma\in\Sigma\}$ gives the Cech complex 
+\begin{align*}
+C^k(X_\Sigma,\mU,\mO_{X_\Sigma}(D))&=\bigoplus_{\sigma_0,\dots,\sigma_k\in\Sigma}\Gamma\left(U_{\sigma_0}\cap\cdots\cap U_{\sigma_k}\mO_{X_\Sigma}(D)\right)\\
+&=\bigoplus_{\sigma_0,\dots,\sigma_k\in\Sigma}H^0(U_{\sigma_0}\cap\cdots\cap U_{\sigma_k},\mO_{X_\Sigma}(D))\\
+&=\bigoplus_{\sigma_0,\dots,\sigma_k\in\Sigma}H^0(U_{\sigma_0}\cap\cdots\cap U_{\sigma_k},\mO_{X_\Sigma}(D))_\chi
+\end{align*}
+where $$H^0(U_{\sigma_0}\cap\cdots\cap U_{\sigma_k},\mO_{X_\Sigma}(D))_\chi=\begin{cases}
+\C\cdot\chi & \text{ if }\langle\chi,u_\rho\rangle\geq-a_\rho\text{ for all }\rho\in\sigma(1)\\
+0 & \text{ otherwise }
+\end{cases}$$ The Cech complex and hence sheaf cohomology inherits a grading. \\
+
+Explicitly, we know that $T$ acts on each affine piece and hence it acts on $\Gamma(U_\sigma,\mO_{X_\Sigma}(D))$ by $(t\cdot f)(x)=f(t^{-1}\cdot x)$. Then properties of $T$ implies that $T$-vector spaces are simultaneously diagonalizable, thus we have a decomposition of the Cech complex (either view $C^k$ as a $T$-vector space or see each piece in the direct sum as a $T$-space). Then sheaf cohomology also acquires a grading. 
+
+\begin{defn}{The Weight Spaces of Sheaf Cohomology}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a fan on $\lambda(T)$. Let $D=\sum_{\rho\in\Sigma(1)}a_\rho D(\rho)$ be a divisor. Define the weight spaces of $D$ to be the components in the direct sum $$H^k(X_\Sigma,\mO_{X_\Sigma}(D))=\bigoplus_{\chi\in\chi(T)}H^k(X_\Sigma,\mO_{X_\Sigma}(D))_\chi$$
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a fan on $\lambda(T)$. Let $D=\sum_{\rho\in\Sigma(1)}a_\rho D(\rho)$ be a divisor. Then we have $$H^k(X_\Sigma,\mO_{X_\Sigma}(D))_\chi\cong\widetilde{H}^{k-1}\left(V_{D,\chi}=\bigcup_{\sigma\in\Sigma}\text{Conv}(\{u_\rho\;|\;\rho\in\sigma(1),\langle\chi,u_\rho\rangle\leq-a_\rho\}),\C\right)$$
+\end{prp}
+
+\subsection{Vanishing Theorems I}
+\begin{thm}{The Batyrev-Borisov Vanishing Theorem}{}\\
+\end{thm}
+
+\begin{prp}{}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a fan on $\lambda(T)$. Then $X_\Sigma$ is Cohen-Macaulay. 
+\end{prp}
+
+Since $X$ is normal and Cohen-Macaulay, we must have $$\omega_X=\mK_X$$ i.e. the dualizing sheaf and the canonical sheaf coincides. Then $X$ is Gorenstein if and only if $\omega_X=\mK_X$ is invertible if and only if $K_X$ is Cartier. 
+
+Serre duality holds. 
+
+\begin{thm}{Toric Serre Duality}{}
+\end{thm}
+
+\subsection{Vanishing Theorems II}
+Classical vanishing theorems give us the following results. We set $X_\Sigma$ to be smooth projective and $D$ ample Cartier divisor. \\
+
+Kodaira vanishing theorem: $$H^p(X_\Sigma,\mK_{X_\Sigma}(D))=0\;\;\text{ for all }p>0$$
+Nakano vanishing theorem: $$H^p(X_\Sigma,\Omega_{X_\Sigma}^q(D))=0\;\;\text{ for all }p+q>n$$
+
+\begin{thm}{Bott-Steenbrink-Danilov}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a fan on $\lambda(T)$. Suppose that $X_\Sigma$ is projective. Let $D$ be an ample Cartier divisor. Then we have $$H^p(X_\Sigma,\widehat{\Omega}_{X_\Sigma}^q(D))=0$$ for all $p\geq 1$ and $q\geq 0$. 
+\end{thm}
+
+\begin{prp}{}{}\\
+Let $T$ be a torus over $\C$. Let $\Sigma$ be a complete simplicial fan on $\lambda(T)$. Then we have $$H^p(X_\Sigma,\widehat{\Omega}_{X_\Sigma}^q)=0$$ for all $p\neq q$. 
+\end{prp}
+
+\pagebreak
+\section{Toric Resolutions and Toric Singularities}
+
+\pagebreak
+\section{The Chow Ring}
+
+
 
 
 \end{document}

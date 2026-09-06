@@ -20,32 +20,23 @@
 \tableofcontents
 \pagebreak
 \section{Polyhedrons and Polytopes}
-\subsection{Convex Geometry}
-\begin{defn}{Convex Sets}{}\\
-Let $C\subseteq\R^n$. We say that $C$ is convex if for all $x,y\in C$ and $t\in[0,1]$, we have $(1-t)x+ty\in C$. 
-\end{defn}
-
-\begin{defn}{Convex Hull}{}\\
-Let $S\subseteq\R^n$ be a subset. Define the convex hull of $S$ to be $$\text{Conv}(S)=\left\{\sum_{k=1}^n\lambda_kx_k\;\bigg{|}\;x_k\in S\text{ and }\sum_{k=1}^n\lambda_k=1\right\}$$
-\end{defn}
-
-\begin{prp}{}{}\\
-Let $S\subseteq\R^n$ be a subset. Then we have $$\text{Conv}(S)=\bigcap_{\substack{S\subseteq C\subseteq\R^n\\C\text{ is convex }}}C$$
-\end{prp}
-
-\begin{thm}{Caratheodory's Theorem}{}\\
-Let $S\subseteq\R^n$ be a subset. Then there exists $x_1,\dots,x_{n+1}\in S$ such that $$\text{Conv}(S)=\text{Conv}(x_1,\dots,x_{n+1})$$
-\end{thm}
-
 \subsection{Polyhedrons and its Properties}
 Polytopes exists more generically in Euclidean space. We lose nothing discussing polytopes in $\R^n$ since Euclidean spaces maybe identified with $\R^n$ canonically. 
 
 \begin{defn}{Halfspaces}{}\\
-A halfspace of $\R^n$ is a subset of $\R^n$ of the form $$\{x\in\R^n\;|\;\langle a,x\rangle+b\geq 0\}$$ for some $a,b\in\R^n$. 
+A halfspace of $\R^n$ is a subset of $\R^n$ of the form $$H_{x,b}^+=\{x\in\R^n\;|\;\langle a,x\rangle\geq -b\}$$ for some $a,b\in\R^n$. 
 \end{defn}
 
 \begin{defn}{Polyhedrons}{}\\
-Let $P\subseteq\R^n$. We say that $P$ is a polyhedon if there exists finitely many half spaces $H_1,\dots,H_k$ such that $$P=\bigcap_{i=1}^kH_i$$
+Let $P\subseteq\R^n$. We say that $P$ is a polyhedon if there exists finitely many half spaces $H_{x_1,b_1}^+,\dots,H_{x_k,b_k}^+$ such that $$P=\bigcap_{i=1}^kH_{x_i,b_i}^+$$
+\end{defn}
+
+\begin{defn}{Dimension}{}\\
+Let $P\subseteq\R^n$ be a polyhedron. Define the dimension of $P$ to be the dimension of the smallest affine subspace containing $P$. 
+\end{defn}
+
+\begin{defn}{Full-Dimensional Polyhedrons}{}\\
+Let $P\subseteq\R^n$ be a polyhedron. We say that $P$ is full-dimensional if $\dim(P)=n$. 
 \end{defn}
 
 \begin{defn}{Polytopes}{}\\
@@ -55,10 +46,6 @@ Let $P\subseteq\R^n$ be a polyhedron. We say that $P$ is a polytope if $P$ is bo
 \begin{thm}{Weyl-Minkowski}{}\\
 Let $P\subseteq\R^n$ be a subset. Then $P$ is a polytope if and only if there exists a finite subset $S\subseteq\R^n$ such that $P=\text{Conv}(S)$. 
 \end{thm}
-
-\begin{defn}{Dimension}{}\\
-Let $P\subseteq\R^n$ be a polytope. Define the dimension of $P$ to be the dimension of the smallest affine subspace containing $P$. 
-\end{defn}
 
 \subsection{The Faces of a Polyhedron}
 \begin{defn}{Supporting Hyperplane}{}\\
@@ -117,6 +104,11 @@ Let $P\subseteq\R^n$ be a polytope. Define the edge graph $G(P)$ of $P$ by the f
 \item $E(G(P))=\{(p,q)\;|\;\text{ There exists an edge }E\text{ such that }\partial E=\{p,q\}\}$. 
 \end{itemize}
 \end{defn}
+
+\subsection{Properties of Convex Polytopes}
+\begin{prp}{}{}\\
+Let $P\subseteq\R^n$ be a convex polytope. Then there exists a triangulation $\mK$ of $P$ such that every face of $P$ is a simplex in $\mK$. 
+\end{prp}
 
 \subsection{Dual Polytopes}
 \begin{defn}{Polar Dual}{}\\
@@ -379,6 +371,7 @@ Let $P$ be a simplicial polytope such that $\dim(P)\geq 3$. Suppose that $f_0(P)
 \end{thm}
 
 \subsection{Neighbourly Polytopes}
+Let $\mK$ be a simplicial complex. Recall that $\mK$ is $k$-neighbourly if for any $I\subseteq V(\mK)$ such that $\abs{I}\leq k$, we have that $I\in\mK$. This definition also applies to polytopes. 
 
 \pagebreak
 \section{Classical Families of Polytopes}
@@ -487,36 +480,33 @@ Let $C\subseteq\R^n$ be a subset. Then the following are equivalent.
 \end{itemize}
 \end{prp}
 
-Therefore cones are also polyhedrons. 
+Thus the notion of faces, dimensions, supporting hyperplanes etc all apply to polyhedral cones. 
 
-\begin{defn}{Dimension of a Cone}{}\\
-Let $C\subseteq\R^n$ be a cone. Define the dimension of $C$ to be the dimension of the smallest affine subspace containing $C$. 
-\end{defn}
-
-\begin{defn}{Rational Cones}{}\\
-Let $C\subseteq\R^n$ be a cone. We say that $C$ is rational if there exists a finite set $S\subseteq\Z^n$ such that $C=\text{Cone}(S)$. 
-\end{defn}
-
-\begin{defn}{Regular Cones}{}\\
-Let $C\subseteq\R^n$ be a cone. We say that $C$ is regular if there exists a finite set $S\subseteq\Z^n$ such that the following are true. 
-\begin{itemize}
-\item $C=\text{Cone}(S)$. 
-\item Elements of $S$ are $\Z$-linearly independent. 
-\end{itemize}
-\end{defn}
-
-\begin{defn}{Simplicial Cones}{}\\
-Let $C\subseteq\R^n$ be a cone. We say that $C$ is simplicial if there exists a finite set $S\subseteq\R^n$ such that the following are true. 
-\begin{itemize}
-\item $C=\text{Cone}(S)$. 
-\item Elements of $S$ are $\R$-linearly independent. 
-\end{itemize}
+\begin{defn}{Rays}{}\\
+Let $C\subseteq\R^n$ be a cone. We say that $C$ is a ray with $\dim(C)=1$. 
 \end{defn}
 
 \subsection{The Dual Cone}
 \begin{defn}{The Dual of a Cone}{}\\
 Let $C\in\R^n$ be a cone. Define the dual of $C$ to be $$C^\vee=\{x\in\R^n\;|\;\langle x,c\rangle\geq 0\text{ for all }c\in C\}$$
 \end{defn}
+
+\begin{defn}{The Dual Face}{}\\
+Let $C\in\R^n$ be a cone. Let $F\subseteq C$ be a face of $C$. Define the dual face of $F$ by $$F^\ast=\{x\in C^\vee\;|\;\langle x,u\rangle=0\;|\;\text{ for all }u\in F\}$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $C\in\R^n$ be a cone. Let $F\subseteq C$ be a face of $C$. Then the following are true. 
+\begin{itemize}
+\item $F^\ast$ is a face of $C^\vee$. 
+\item $F^{\ast\ast}=F$. 
+\item $\dim(F^\ast)=\dim(C)-\dim(F)$. 
+\end{itemize}
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $C\in\R^n$ be a cone. Then there is an inclusion reversing bijection $$\mF(C)\;\;\overset{1:1}{\longleftrightarrow}\;\;\mF(C^\vee)$$ given by $F\mapsto F^\ast$. 
+\end{prp}
 
 \begin{defn}{Associated Hyperplane and Halfspace of a Linear Functional}{}\\
 Let $\phi\in(\R^n)^\ast$. Define the associated hyperplane of $\phi$ to be $$H_\phi=\{x\in\R^n\;|\;\phi(x)=0\}$$ Define the associated halfspace of $\phi$ to be $$H_\phi^+=\{x\in\R^n\;|\;\phi(x)\geq 0\}$$
@@ -527,12 +517,11 @@ Let $C\in\R^n$ be a cone. Let $H$ be a hyperplane in $\R^n$. Then $H$ is a suppo
 \end{lmm}
 
 \begin{lmm}{}{}\\
-Let $C\in\R^n$ be a polyhedral cone. Then the following are true. 
+Let $C\in\R^n$ be a cone. Then the following are true. 
 \begin{itemize}
-\item $C^\vee$ is a polyhedral cone. 
+\item $C^\vee$ is a cone. 
 \item $(C^\vee)^\vee=C$. 
 \item $C=\bigcap_{i=1}^nH_{\phi_i}$ for $\phi_i\in(\R^n)^\ast$ if and only if $C^\vee=\text{Cone}(\phi_1,\dots,\phi_n)$. 
-\item If $C$ is strongly convex, then $C^\vee$ is strongly convex. 
 \end{itemize}
 \end{lmm}
 
@@ -540,17 +529,72 @@ Let $C\in\R^n$ be a polyhedral cone. Then the following are true.
 Let $C_1,C_2\subseteq\R^n$ be cones such that $F=C_1\cap C_2$ is a face of both $C_1$ and $C_2$. Then there exists $\phi\in C_1^\vee\cap(-C_2)^\vee$ such that $$F=C_1\cap H_\phi=C_2\cap H_\phi$$
 \end{lmm}
 
+\subsection{Ray Generators}
+\begin{defn}{Rational Cones}{}\\
+Let $C\subseteq\R^n$ be a cone. We say that $C$ is rational if there exists a finite set $S\subseteq\Z^n$ such that $C=\text{Cone}(S)$. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $C\subseteq\R^n$ be a rational cone. Then the following are true. 
+\begin{itemize}
+\item If $F\subseteq C$ is a face of $C$, then $F$ is rational. 
+\item $C^\vee$ is rational. 
+\end{itemize}
+\end{lmm}
+
 \begin{defn}{Strongly Convex Cones}{}\\
 Let $C\subseteq\R^n$ be a cone. We say that $C$ is strongly convex if $C$ does not contain a line. 
 \end{defn}
 
 \begin{lmm}{}{}\\
+Let $C\subseteq\R^n$ be a strongly convex cone. Then the following are true. 
+\begin{itemize}
+\item If $F\subseteq C$ is a face of $C$, then $F$ is strongly convex. 
+\item $C^\vee$ is strongly convex. 
+\end{itemize}
+\end{lmm}
+
+\begin{prp}{}{}\\
 Let $C\subseteq\R^n$ be a cone. Then the following are equivalent. 
 \begin{itemize}
-\item $C$ is strongly convex. 
-\item $\{0\}$ is a face of $C$. 
+\item $C$ is a strongly convex cone. 
 \item $C\cap(-C)=\{0\}$. 
+\item $\{0\}$ is a face of $C$. 
 \item $\dim(C^\vee)=n$. 
+\end{itemize}
+\end{prp}
+
+\begin{defn}{Ray Generators}{}\\
+Let $C\subseteq\R^n$ be a strongly convex rational cone. Let $R_1,\dots,R_m$ be the edges of $C$. Define the ray generators of $C$ to be the unique vectors $v_1,\dots,v_m\in C$ such that the following are true. 
+\begin{itemize}
+\item $v_1,\dots,v_m\in\Z^n$. 
+\item $v_i\in R_i$ for each $i$. 
+\item $C=\text{Cone}(v_1,\dots,v_m)$. 
+\item For each $i$, if $w_i\in R_i\cap\Z^n$ then $\abs{v_i}\leq\abs{w_i}$. 
+\end{itemize}
+\end{defn}
+
+\begin{defn}{Regular Cones}{}\\
+Let $C\subseteq\R^n$ be a strongly convex rational cone. We say that $C$ is regular if its ray generators are $\Z$-linearly independent. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $C\subseteq\R^n$ be a regular cone. Then the following are true. 
+\begin{itemize}
+\item If $F\subseteq C$ is a face of $C$, then $F$ is regular. 
+\item $C^\vee$ is regular. 
+\end{itemize}
+\end{lmm}
+
+\begin{defn}{Simplicial Cones}{}\\
+Let $C\subseteq\R^n$ be a strongly convex rational cone. We say that $C$ is simplicial if its ray generators are $\R$-linearly independent. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $C\subseteq\R^n$ be a simplicial cone. Then the following are true. 
+\begin{itemize}
+\item If $F\subseteq C$ is a face of $C$, then $F$ is simplicial. 
+\item $C^\vee$ is simplicial. 
 \end{itemize}
 \end{lmm}
 
@@ -562,21 +606,123 @@ Let $n\in\N^+$. A fan in $\R^n$ is a finite set of cones $\Sigma$ such that the 
 \item For each cone $C\in\Sigma$ and each face $F$ of $C$, we have $F\in\Sigma$. 
 \item For cones $C_1,C_2\in\Sigma$, we have $C_1\cap C_2$ are faces of $C_1$ and $C_2$. 
 \end{itemize}
-We write $\Sigma(d)=\{C\in\Sigma\;|\;\dim(C)=d\}$ for the $d$-dimensional cones in the fan. 
+We write $$\Sigma(d)=\{C\in\Sigma\;|\;\dim(C)=d\}$$ for the $d$-dimensional cones in the fan. 
+\end{defn}
+
+\begin{defn}{The Maximal Cones of a Fan}{}\\
+Let $n\in\N^+$. Let $\Sigma$ be a fan in $\R^n$. Define $$\Sigma_\text{max}=\{\sigma\in\Sigma\;|\;\sigma\text{ is maximal in }\Sigma\text{ with respect to inclusion }\}$$
+\end{defn}
+
+\begin{defn}{Types of Fans}{}\\
+Let $n\in\N^+$. Let $\Sigma$ be a fan in $\R^n$. 
+\begin{itemize}
+\item We say that $\Sigma$ is rational if all $\sigma\in\Sigma$ is rational. 
+\item We say that $\Sigma$ is regular if all $\sigma\in\Sigma$ is regular. 
+\item We say that $\Sigma$ is simplicial if all $\sigma\in\Sigma$ is simplicial. 
+\end{itemize}
 \end{defn}
 
 \begin{defn}{The Support of a Fan}{}\\
 Let $n\in\N^+$. Let $\Sigma$ be a fan in $\R^n$. Define the support of $\Sigma$ to be $$\abs{\Sigma}=\cup_{C\in\Sigma}C$$
 \end{defn}
 
-\begin{defn}{Types of Fans}{}
+\begin{defn}{Convex Support}{}\\
+Let $n\in\N^+$. Let $\Sigma$ be a fan in $\R^n$. We say that $\Sigma$ has convex support if $\abs{\Sigma}$ is convex. 
 \end{defn}
+
+\begin{lmm}{}{}\\
+Let $n\in\N^+$. Let $\Sigma$ be a fan in $\R^n$ with convex support. Then $\abs{\Sigma}$ is a convex cone. 
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $n\in\N^+$. Let $\Sigma$ be a fan in $\R^n$ with convex support and full-dimensional. Then we have $$\abs{\Sigma}=\text{Cone}(\{u_\rho\;|\;\rho\in\Sigma(1)\})=\bigcup_{\sigma\in\Sigma(n)}\sigma$$
+\end{lmm}
 
 \begin{defn}{Complete Fans}{}\\
 Let $n\in\N^+$. Let $\Sigma$ be a fan in $\R^n$. We say that $\Sigma$ is complete if $\abs{\Sigma}=\R^n$. 
 \end{defn}
 
-\subsection{Normal Fan}
+\begin{lmm}{}{}\\
+Let $n\in\N^+$. Let $\Sigma$ be a fan in $\R^n$. If $\Sigma$ is complete, then $\Sigma_\text{max}=\Sigma(n)$. 
+\end{lmm}
+
+\subsection{The Normal Fan of a Polytope}
+\begin{defn}{The Normal Fan of a Polytope}{}\\
+Let $P$ be a convex polytope. Define the normal fan of $P$ to be $$\Sigma_P=\{\sigma_Q\;|\;Q\text{ is a face of }P\}$$ where $$\sigma_Q=\{x\in\R^n\;|\;\langle q,x\rangle\leq\langle p,x\rangle\text{ for all }p\in P\text{ and }q\in Q\}$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $P$ be a convex polytope. Then $\Sigma_P$ is a complete fan. 
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $P\subseteq\R^n$ be a convex polytope. Then the following are true. 
+\begin{itemize}
+\item For any $m\in\R^n$, we have $\Sigma_P=\Sigma_{m+P}$. 
+\item For any $k>0$, we have $\Sigma_P=\Sigma_{kP}$. 
+\end{itemize}
+\end{lmm}
+
+\begin{defn}{Delzant Polytopes}{}\\
+Let $P$ be a convex polytope. We say that $P$ is Delzant if $\Sigma_P$ is regular. 
+\end{defn}
+
+\pagebreak
+\section{Lattice Polytopes}
+\subsection{Basic Definitions}
+\begin{defn}{Lattice Polytopes}{}\\
+Let $P\subseteq\R^n$ be a convex polytope. We say that $P$ is a lattice polytope if there exists a lattice $N\subseteq\R^n$ such that $V(P)\subseteq N$. 
+\end{defn}
+
+\subsection{The Fan of a Full-Dimensional Lattice Polytope}
+Using a coordinate transformation, we may always assume that $V(P)\subseteq\Z^n$ for a lattice polytope $P$. For a lattice polytope, for each facet $F=H_{x_i,b}^+\cap P$ of $P$, the ray generated by $x_i$ is rational and we can always find a ray generator. Thus $P$ admits a canonical presentation $P=\bigcap_{i=1}^kH_{u_F,b}^+$ by these generators $u_F$. \\
+
+Let $\Sigma_P=\{\sigma_Q\;|\;Q\text{ is a face of }P\}$ be the normal fan of $P$. If $P$ is full dimensional, we have $$\sigma_Q=\text{Cone}(\{u_F\;|\;Q\subseteq F\})$$
+
+\begin{prp}{}{}\\
+Let $P$ be a full-dimensional lattice polytope. Then there is an inclusion reversing bijection $$\mF(P)\;\;\overset{1:1}{\longleftrightarrow}\;\;\Sigma_P$$ given by $Q\mapsto\sigma_Q$. 
+\end{prp}
+
+\subsection{Normal and Very Ample Polytopes}
+\begin{defn}{Normal Polytopes}{}\\
+Let $P$ be a lattice polytope. We say that $P$ is normal if $$(kP)\cap\Z^n+(lP)\cap\Z^n=((k+l)P)\cap\Z^n$$ for all $k,l\in\N$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $P$ be a full-dimensional lattice polytope. If $\dim(P)\geq 2$, then $kP$ is normal for all $k\geq\dim(P)-1$. 
+\end{prp}
+
+\begin{defn}{Very Ample Polytope}{}\\
+Let $P$ be a lattice polytope. We say that $P$ is very ample if ???
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $P$ be a normal polytope. Then $P$ is very ample. 
+\end{prp}
+
+\begin{thm}{Ewald–Wessels}{}\\
+Let $P$ be a full-dimensional lattice polytope. Then $kP$ is normal for all $k\geq\dim(P)-1$. 
+\end{thm}
+
+\subsection{Ehrhart Theory}
+\begin{defn}{The Ehrhart Polynomial}{}\\
+Let $P\subseteq\R^d$ be a full-dimensional lattice polytope. Define the Ehrhart polynomial to be the function $E_P:\N\to\N$ given by $$E_P(m)=\abs{mP\cap\Z^d}$$
+\end{defn}
+
+\begin{thm}{Ehrhart}{}\\
+Let $P\subseteq\R^d$ be a full-dimensional lattice polytope. Then $E_P\in\R[x]$. 
+\end{thm}
+
+\begin{lmm}{}{}\\
+Let $P\subseteq\R^d$ be a full-dimensional lattice polytope. Then the leading term of $E_P$ is $\text{Vol}(P)$. 
+\end{lmm}
+
+\subsection{Reflexive and Gorenstein Polytopes}
+\begin{defn}{Reflexive Polytopes}{}\\
+Let $P$ be a lattice polytope. We say that $P$ is a reflexive polytope if $P^\ast$ is a lattice polytope. 
+\end{defn}
+
+\subsection{Unimodular Triangulations}
 
 
 \end{document}

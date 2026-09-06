@@ -32,7 +32,8 @@ A probability space is a measure space $(\Omega,\mF,P:\mF\to[0,1])$.
 Explicitly, a probability space is a triple $(\Omega,\mF,P)$ consisting of the following data: 
 \begin{itemize}
 \item $\Omega\neq\emptyset$ is a set called the sample space. 
-\item $\mF\subseteq\mP(\Omega)$ is a $\sigma$-algebra called events.  \item $P:\mF\to[0,1]$ is a set function. 
+\item $\mF\subseteq\mP(\Omega)$ is a $\sigma$-algebra called events. 
+\item $P:\mF\to[0,1]$ is a set function. 
 \end{itemize}
 such that the following are true: 
 \begin{itemize}
@@ -625,16 +626,35 @@ Solving this gives $E[X]=7$.
 \pagebreak
 \section{Convergence of Random Variables}
 \subsection{Different Notions of Convergences}
-\begin{defn}{Convergence in Mean Square}{} We say that a sequence of random variables $X_1,X_2,\dots$ converges in mean square to a random variable $X$ if $$\lim_{n\to\infty}E[(X_n-X)^2]=0$$
+\begin{defn}{Convergence in Mean Square}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X_n:\Omega\to\R$ be a sequence of random variables for $n\in\N\setminus\{0\}$. Let $X:\Omega\to\R$ be a random variable. We say that $(X_n)_{n\in\N}$ converges in mean square to $X$ if $$\lim_{n\to\infty}E[(X_n-X)^2]=0$$
 \end{defn}
 
-\begin{defn}{Convergence in Probability}{} We say that a sequence of random variables $X_1,X_2,\dots$ converges in probability to a random variable $X$ if for every $\epsilon>0$, we have $$\lim_{n\to\infty}P(\abs{X_n-X}>\epsilon)=0$$
+\begin{defn}{Convergence in Probability}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X_n:\Omega\to\R$ be a sequence of random variables for $n\in\N\setminus\{0\}$. Let $X:\Omega\to\R$ be a random variable. We say that $(X_n)_{n\in\N}$ converges in probability to $X$ if for every $\epsilon>0$, we have $$\lim_{n\to\infty}P(\abs{X_n-X}>\epsilon)=0$$
 \end{defn}
 
-\begin{defn}{Convergence in Distribution}{} We say that a sequence of random variables $X_1,X_2,\dots$ converges in distribution to a random variable $X$ if $$\lim_{n\to\infty}F_{X_n}(x)=F_X(x)$$ for every $x$ in the set $C=\{x\in\mathbb{R}:F_X\text{ is continuous at } x\}$. 
+\begin{defn}{Convergence in Distribution}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X_n:\Omega\to\R$ be a sequence of random variables for $n\in\N\setminus\{0\}$. Let $X:\Omega\to\R$ be a random variable. We say that $(X_n)_{n\in\N}$ converges in distribution to $X$ if $$\lim_{n\to\infty}F_{X_n}(x)=F_X(x)$$ for every $x$ in the set $C=\{x\in\mathbb{R}:F_X\text{ is continuous at } x\}$. 
 \end{defn}
 
-\begin{prp}{}{} Let $(\Omega,\mF,P)$ be a probability space. Let $X_n:\Omega\to\R$ be a sequence of random variables for $n\in\N\setminus\{0\}$. Let $X:\Omega\to\R$ also be a random variable. Then the following are true. 
+\begin{eg}{}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X_n:\Omega\to\R$ be a sequence of independently and identically distributed random variables for $n\in\N\setminus\{0\}$. Then $(n(1-\max\{X_1,\dots,X_n\}))_{n\in\N}$ converges in distribution to $\text{Exp}(1)$. 
+\begin{proof}\\
+Notice that 
+\begin{align*}
+P(n(1-\max\{X_1,\dots,X_n\}<t)&=1-P(n(1-\max\{X_1,\dots,X_n\}\geq t)\\
+&=1-P\left(\max\{X_1,\dots,X_n\}\leq 1-\frac{t}{n}\right)\\
+&=1-P\left(\bigcap_{k=1}^n\left\{X_k\leq 1-\frac{t}{n}\right\}\right)\\
+&=1-\left(P\left(X_1<1-\frac{t}{n}\right)\right)^n\\
+&=1-\left(1-\frac{t}{n}\right)^n
+\end{align*}
+As $n\to\infty$, we get $\lim_{n\to\infty}P(n(1-\max\{X_1,\dots,X_n\}<t)=1-e^{-t}$, which is the cumulative distribution of $\text{Exp}(1)$. 
+\end{proof}
+\end{eg}
+
+\begin{prp}{}{}\\
+Let $(\Omega,\mF,P)$ be a probability space. Let $X_n:\Omega\to\R$ be a sequence of random variables for $n\in\N\setminus\{0\}$. Let $X:\Omega\to\R$ also be a random variable. Then the following are true. 
 \begin{itemize}
 \item If $X_n$ converges in mean square to $X$, then $X_n$ converges in probability to $X$. 
 \item If $X_n$ converges in probability to $X$, then $X_n$ converges in distribution to $X$. 

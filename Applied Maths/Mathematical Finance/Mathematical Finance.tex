@@ -16,20 +16,11 @@
 \date{\today}
 \begin{document}
 \maketitle
+\pagebreak
 \tableofcontents
 
-Plan of the notes: 
-
-Introduce financial assets
-
-No arbitrage assumption and its mathematical consequences. 
-
-Binomial and Black Scholes model. 
-
-
 \pagebreak
-\section{}
-
+\section{Basics of Market Models}
 \subsection{Modeling the Market with Stochastic Processes}
 A bond is a financial asset in which you lend $£B_0$ to a bank today and received $£B_T$ at time $T\in\R_{\geq 0}$. The value of the bond at time $t\in[0,T]$ is given by $B_t$. The value of the bond is fixed and has no uncertainty. We model this as a stochastic process in the following way. 
 
@@ -91,6 +82,7 @@ Let $(\Omega,\mF,P)$ be a probability space with filtration $\{\mF_t\;|\;t\in[0,
 Let $(\Omega,\mF,P)$ be a probability space with filtration $\{\mF_t\;|\;t\in[0,\infty)\}$. Let $(B,S_1,\dots,S_d)$ be a market model. Let $\varphi:\Omega\times[0,\infty)\to\R^{d+1}$ be a trading strategy. We say that $\varphi$ is self financing if $$\widetilde{V}(\varphi)(-,t)=\widetilde{V}_0(\varphi)(-,t)+\int_0^t(\varphi_1(-,s),\dots,\varphi_d(-,s))d\widetilde{S}(-,s)$$ almost surely. 
 \end{defn}
 
+\subsection{Arbitrages}
 An arbitrage opportunity is a trading strategy that 
 \begin{itemize}
 \item Requires no money upfront (zero initial cost)
@@ -125,14 +117,31 @@ Let $(\Omega,\mF,P)$ be a probability space with filtration $\{\mF_t\;|\;t\in[0,
 
 \end{thm}
 
+\subsection{Financial Derivatives}
+\begin{defn}{Payoffs}{}\\
+Let $(\Omega,\mF,P)$ be a probability space with filtration $\{\mF_t\;|\;t\in[0,\infty)\}$. Let $(B,S)$ be a market model. Let $T\in\R$. Define a payoff of the stock with maturity time $T$ to be an $\mF_T$-measurable function $H:\Omega\to\R$. 
+\end{defn}
+
 An option is a contract that gives the buyer the right, but not the obligation to buy or sell a stock at a pre-agreed price. \\
+
+\begin{defn}{European Options}{}\\
+Let $(\Omega,\mF,P)$ be a probability space with filtration $\{\mF_t\;|\;t\in[0,\infty)\}$. Let $(B,S)$ be a market model. 
+\begin{itemize}
+\item A European call option is a payoff $C:\Omega\to\R$ of the form $$C=\max\{S_T-K,0\}$$ with maturity time $T$ and $K\in\R$ called strike price. 
+\item A European put option is a payoff $P:\Omega\to\R$ of the form $$P=\max\{K-S_T,0\}$$ with maturity time $T$ and $K\in\R$ called strike price. 
+\end{itemize}
+\end{defn}
 
 A European call option on a stock $S$ with strike price $K\in\R_{\geq 0}$ and maturity $T\in\R_{\geq 0}$ is a contract that pays its holder $$\max\{S_T-K,0\}$$ at time $T$. It gives the holder the right to buy the stock at price $K$. \\
 
 A European put option on a stock $S$ with strike price $K\in\R_{\geq 0}$ and maturity $T\in\R_{\geq 0}$ is a contract that pays its holder $$\max\{K-S_T,0\}$$ at time $T$. It gives the holder the right to sell the stock at price $K$. \\
 
-Put-call parity: $$C_0-P_0=S_0-Ke^{-rT}$$
+\begin{thm}{Put-Call Parity}{}\\
+Let $(\Omega,\mF,P)$ be a probability space with filtration $\{\mF_t\;|\;t\in[0,\infty)\}$. Let $(B,S)$ be a market model with no arbitrage. Suppose that $B_t=e^{rt}$. Let $C,P$ be a European call and put option of the stock with maturity time $T$ and strike price $K$ respectively. Then we have $$C-P=S_0-Ke^{-rT}$$
+\end{thm}
 
+\pagebreak
+\section{Simplifying the Market Model}
 \subsection{The Binomial Model}
 The one step binomial is a simple model for stock prices and it has two possible futures: the stock either goes up or down in value. The bond grows in a fixed factor. 
 
@@ -160,6 +169,22 @@ Let $(\Omega,\mF,P,B,S)$ be the one step binomial model given by the above. Let 
 \begin{lmm}{}{}\\
 Let $(\Omega,\mF,P,B,S)$ be the one step binomial model given by the above. Then it has no arbitrage if and only if $d<B_1<u$. 
 \end{lmm}
+
+\begin{prp}{}{}\\
+Let $(\Omega,\mF,P,B,S)$ be the one step binomial model given by the above. Let $H:\Omega\to\R$ be a payoff. If the model has no arbitrage, then there exists a trading strategy $\varphi:\Omega\times\{0,1\}\to\R$ such that $$\varphi_0(1+r)+\varphi_1uS_0=H(w_u)\;\;\;\text{ and }\;\;\;\varphi_0(1+r)+\varphi_1dS_0=H(w_d)$$ In this case, we have $$V_0(\varphi)=\frac{qH(w_u)+(1-q)H(w_d)}{1+r}$$ where $q=\frac{(1+r)-d}{u-d}$. 
+\end{prp}
+
+This trading strategy is risk-free. 
+
+\begin{defn}{Hedge Ratio}{}\\
+Let $(\Omega,\mF,P,B,S)$ be the one step binomial model given by the above. Let $H:\Omega\to\R$ be a payoff. Define the hedge ratio to be $$\Delta=\frac{H(w_u)-H(w_d)}{(u-d)S_0}$$
+\end{defn}
+
+$\Delta$ is the number of shares you need to hold per bond. 
+
+\subsection{The Multi-step Binomial Model}
+
+\subsection{The Black-Scholes Model}
 
 \pagebreak
 \section{Basic Concepts in Finance}
@@ -268,156 +293,6 @@ Leveraged Returns
 
 \pagebreak
 \section{Equity}
-
-\pagebreak
-\section{Derivatives}
-Assets: Items
-Stocks: Makes you own a small percentage of a company. 
-Shares: The unit for stocks. (Owning share = Owning a certain number of stocks)
-Bonds: Buying debt from a loan issuer. 
-Options: Contract that gives the ability to buy / sell assets at a certain time in the future. 
-Futures: Contract to buy / sell assets at a certain time in the future. 
-Value: Total gain / loss from the whole ordeal. 
-
-Derivatives: Just think of them as options / future for now. 
-Strike price: the cost of exercising the derivative at the expiration date. 
-
-Idea: Derivatives themselves can also be traded. 
-
-Call: Looking to buy. 
-Put: Looking to sell. 
-
-European options: can only exercise at the specified date. 
-American options: can exercise any time before the specified date. 
-
-Derivative Traders: 
-Hedger: Actually exercises the derivative. (To minimize loss)
-Speculator: Actually bets on the ups and downs of the derivatives. 
-Arbitrageurs: Finding certain entry point to guarantee some winnings by calling / putting a combination of derivatives. (Too powerful and rare so we usually assume no arbitrage opportunities occur)
-
-The price of an option is a function of 
-\begin{itemize}
-\item $S_0$: Current stock price. 
-\item $K$: Strike price. 
-\item $T$: Time to expiration. 
-\item $r$: Risk free interest rate. 
-\item Dividends that are expected to be paid. 
-\end{itemize}
-More notation: 
-\begin{itemize}
-\item $S_T$: Stock price at expiration day. 
-\item $C/P$: American call / put. 
-\item $c/p$: European call / put. 
-\end{itemize}
-
-We assume no arbitrage opportunities (if there is then it disappears quickly). 
-
-We have 
-\begin{itemize}
-\item $C\leq S_0$
-\item $S_0-Ke^{rT}\leq c\leq S_0$. 
-\item $P\leq K$
-\item $Ke^{-rT}-S_0\leq p\leq Ke^{-rT}$
-\end{itemize}
-
-More:
-\begin{itemize}
-\item $c+Ke^{-rT}=p+S_0$ (idea: European call and put options worth the same price at time $T$)
-\item $S_0-K\leq C-P\leq S_0-Ke^{-rT}$
-\end{itemize}
-
-
-
-\pagebreak
-\section{Mathematical Models for Option Pricing}
-\subsection{Background Terminology}
-Risk-neutral: A situation where investors do not expect an increase in return when the risk increases. This has two consequences. 
-\begin{itemize}
-\item The expected return of a stock is the risk free rate. 
-\item The discount rate for the expected pay off of an option is the risk free. 
-\end{itemize}
-
-Risk-less: A portfolio is risk-less when regardless of the outcome, the net total is constant. 
-
-\subsection{One-Period Binomial Models}
-\begin{defn}{The Binomial Model}{} Suppose that $t$ is the current time. An asset has a current stock price of $S_0$ with an unknown option price $\mO$. After a time step of $dt$, the stock price either increase by a multiplicative factor of $u>1$ or the stock price decreases by a multiplicative factor of $d<1$. Denote the corresponding option value (the net gain from the option) by $\mO_u$ and $\mO_d$ respectively. \\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	t && {t+dt} \\
-	&& \begin{array}{c} \substack{uS_0\\\mO_u} \end{array} \\
-	\begin{array}{c} \substack{S_0\\\mO} \end{array} \\
-	&& \begin{array}{c} \substack{dS_0\\\mO_d} \end{array}
-	\arrow["dt", from=1-1, to=1-3]
-	\arrow["p", from=3-1, to=2-3]
-	\arrow["{1-p}"', from=3-1, to=4-3]
-\end{tikzcd}} \\
-The number $0<p<1$ is an unknown quantity denoting the probability that the stock price increases. 
-\end{defn}
-
-\begin{lmm}{}{} Assume there is no arbitrage opportunity and the world is risk-neutral. Assume the binomial model. Suppose a portfolio of buying $\Delta\in\N$ stocks and shorting a call option. Then the portfolio is risk-less when $$\Delta=\frac{\mO_u-\mO_d}{uS_0-dS_0}$$
-\end{lmm}
-
-\begin{prp}{}{} Assume there is no arbitrage opportunity and the world is risk-neutral. Assume the binomial model. Denote $V(t)=S_0\Delta-\mO$ the value of the portfolio of buying $\Delta$ stocks and shorting a call option. Then the following are true. 
-\begin{itemize}
-\item The probability $p$ that the stock price increases is given by $$p=\frac{e^{rdt}-d}{u-d}$$
-\item The option price is given by $$\mO=e^{-rdt}\left(p\mO_u+(1-p)\mO_d\right)$$
-\end{itemize} 
-\begin{proof}
-Accounting for the discount rate, we have $$V(t+dt)=(uS_0\Delta-\mO_u)e^{-rdt}=(dS_0\Delta-\mO_d)e^{-rdt}$$ by definition of $\Delta$. Equating $V(t)$ and $V(t+dt)$ gives the desired result. 
-\end{proof}
-\end{prp}
-
-\begin{lmm}{}{} Assume there is no arbitrage opportunity and the world is risk-neutral. Assume the binomial model. Suppose that the implied volatility is $\sigma$. Then we have $$u=e^{\sigma\sqrt{dt}}\;\;\;\;\text{ and }\;\;\;\;d=e^{-\sigma\sqrt{dt}}$$
-\end{lmm}
-
-\subsection{Multi-Period Binomial Models}
-\begin{defn}{The Multi-Period Binomial Model}{} Suppose that $t$ is the current time. An asset has a current stock price of $S_0$ with an unknown option price $\mO$. After a time step of $dt$, the stock price either increase by a multiplicative factor of $u>1$ or the stock price decreases by a multiplicative factor of $d<1$. Denote the corresponding option value (the net gain from the option) by $\mO_u$ and $\mO_d$ respectively. \\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	&&&& \begin{array}{c} \substack{u^2S_0\\\mO_{u^2}} \end{array} & \cdots \\
-	&& \begin{array}{c} \substack{uS_0\\\mO_u} \end{array} \\
-	\begin{array}{c} \substack{S_0\\\mO} \end{array} &&&& \begin{array}{c} \substack{udS_0\\\mO_{ud}} \end{array} & \cdots \\
-	&& \begin{array}{c} \substack{dS_0\\\mO_d} \end{array} \\
-	&&&& \begin{array}{c} \substack{d^2S_0\\\mO_{d^2}} \end{array} & \cdots
-	\arrow["p", from=2-3, to=1-5]
-	\arrow["{1-p}", from=2-3, to=3-5]
-	\arrow["p", from=3-1, to=2-3]
-	\arrow["{1-p}"', from=3-1, to=4-3]
-	\arrow["p"', from=4-3, to=3-5]
-	\arrow["{1-p}"', from=4-3, to=5-5]
-\end{tikzcd}} \\
-The number $0<p<1$ is an unknown quantity denoting the probability that the stock price increases. The process iterates for $n$-times. 
-\end{defn}
-
-Notice at each time-step, the process is identical except with a different current stock and option price. Therefore we can iterate the one-period binomial model $n$-times to recover the option value. 
-
-\begin{prp}{}{} Assume there is no arbitrage opportunity and the world is risk-neutral. Assume the mutli-period binomial model with period $n$. Then the European call option price is given by $$\mO=e^{-nrdt}\left(\sum_{i=0}^n\binom{n}{i}p^{n-i}(1-p)^i\mO_{u^{n-i}d^i}\right)$$
-\end{prp}
-
-\subsection{Black-Scholes-Merton Model}
-\begin{defn}{Black-Scholes-Merton Model}{} Let $T$ be a set time (in years). Denote $S:\Omega\times[0,T]\to\R$ the stochastic processes that is the value of a certain stock. Let $\mu$ be the annual expected return. Let $\sigma$ be the annual volatility of the stock price. The Black-Scholes-Merton Model makes the following assumptions
-\begin{itemize}
-\item The percentage in stock is normally distributed: $$\frac{S_{t+dt}-S_t}{S_t}\sim N(\mu dt, \sigma^2dt)$$ 
-\item $\mu$ and $\sigma$ are constants over time. 
-\item The risk free interest rate is constant over time. 
-\item There are no dividends during the lifetime of the stock. 
-\item There are no arbitrage opportunities. 
-\end{itemize}
-\end{defn}
-
-\begin{lmm}{}{} Let $T$ be a set time (in years). Denote $S:\Omega\times[0,T]\to\R$ the stochastic processes that is the value of a certain stock. Let $\mu$ be the annual expected return. Let $\sigma$ be the volatility of the stock price. Assume the Black-Scholes-Merton model. Then we have $$\ln(S_t)\sim N\left(\ln(S_0)+\left(\mu-\frac{\sigma^2}{2}\right)T,\sigma^2T\right)$$
-\end{lmm}
-
-Rate of return: The percentage return averaged over a certain amount of time. 
-
-\begin{lmm}{}{} Let $T$ be a set time (in years). Denote $S:\Omega\times[0,T]\to\R$ the stochastic processes that is the value of a certain stock. Assume the Black-Scholes-Merton model. Let $r$ be the continuously compounded rate of return of $S$. Then we have $$r\sim N\left(\mu-\frac{\sigma^2}{2},\frac{\sigma^2}{T}\right)$$
-\end{lmm}
-
-Volatility: a measure of uncertainty of return. So it is precisely the variance of the rate of return. Hence the annual volatility is $\sigma$. Checks out. 
-
-\begin{prp}{}{} Let $T$ be a set time (in years). Denote $S:\Omega\times[0,T]\to\R$ the stochastic processes that is the value of a certain stock. Assume the Black-Scholes-Merton model. Then the European call option price according to the model is $$c=S_0 F_N(d_1)-Ke^{-rT}F_N(d_2)$$ where $K$ is the strike price, $r$ is the risk-free interest rate and $F_N$ is the cumulative distribution function of $N(0,1)$ and $$d_1=\frac{\ln(S_0/K)+(r+\sigma^2/2)T}{\sigma\sqrt{T}}\;\;\;\;\text{ and }\;\;\;\;d_2=\frac{\ln(S_0/K)+(r-\sigma^2/2)T}{\sigma\sqrt{T}}=d_1-\sigma\sqrt{T}$$
-\end{prp}
-
-
-
 
 
 

@@ -15,36 +15,141 @@
 \date{\today}
 \begin{document}
 \maketitle
-
+\pagebreak
 \tableofcontents
 \pagebreak
 
-\section{}
-\subsection{}
-\begin{defn}{Holomorphic Functions of Several Variables}{}\\
-Let $U\subseteq\C^n$ be open. Let $f=(f_1,\dots,f_n):U\to\C$ be a function. Let $p\in U$. We say that $f$ is holomorphic at $p$ if the Cauchy-Riemann condition is satisfied: $$\frac{\partial f}{\partial\overline{z}_k}=\frac{1}{2}\left(\frac{\partial f}{\partial x_k}-\frac{1}{i}\frac{\partial f}{\partial y_k}\right)=0$$ for $1\leq k\leq n$. 
-\end{defn}
-
+\section{Holomorphic and Analytic Functions}
+\subsection{Polydiscs}
 \begin{defn}{Polydiscs}{}\\
-Let $(a_1,\dots,a_n)\in\C^n$. Let $r_i>0$ for $1\leq i\leq n$. Define the polydisc at $(a_1,\dots,a_n)$ of polyradii $(r_1,\dots,r_n)$ to be $$\Delta_{(a_1,\dots,a_n)}(r_1,\dots,r_n)=\{(z_1,\dots,z_n)\in\C^n\;|\;\abs{z_i-a_i}<r_i\text{ for }1\leq i\leq n\}$$
+Let $p=(p_1,\dots,p_n)\in\C^n$. Let $r=(r_1,\dots,r_n)\in\N^n$. Define the polydisc of polyradii $r$ at $p$ to be $$D_r(p)=\{(z_1,\dots,z_n)\in\C^n\;|\;\abs{z_i-p_i}<r_i\text{ for }1\leq i\leq n\}$$
 \end{defn}
 
-\begin{defn}{The Boundary Torus}{}\\
-Let $(a_1,\dots,a_n)\in\C^n$. Let $r_i>0$ for $1\leq i\leq n$. Define the boundary torus of the polydisc $\Delta_{(a_1,\dots,a_n)}(r_1,\dots,r_n)$ to be $$T_{(a_1,\dots,a_n)}(r_1,\dots,r_n)=\{(z_1,\dots,z_n)\in\C^n\;|\;\abs{z_i-a_i}<r_i\text{ for }1\leq i\leq n\}$$
+\begin{defn}{Shilov Boundary}{}\\
+Let $p=(p_1,\dots,p_n)\in\C^n$. Let $r=(r_1,\dots,r_n)\in\N^n$. Define the Shilov boundary of the polydisc $D_r(p)$ by $$T_r(p)=\{(z_1,\dots,z_n)\in\C^n\;|\;\abs{z_i-p_i}=r_i\text{ for }1\leq i\leq n\}$$
 \end{defn}
 
-The boundary torus is not quite the boundary of the polydisc: it is strictly smaller. 
+The Shilov boundary is not quite the topological boundary of the polydisc: it is strictly smaller. 
+
+\subsection{Holomorphic and Analytic Functions}
+\begin{defn}{Partial Derivatives}{}\\
+Let $U\subseteq\C^n$ be open. Let $f=(f_1,\dots,f_n):U\to\C$ be a function. For $1\leq k\leq n$, define the partial derivatives $$\frac{\partial f}{\partial z_k}=\frac{1}{2}\left(\frac{\partial f}{\partial x_k}-i\frac{\partial f}{\partial y_k}\right)\;\;\;\text{ and }\;\;\;\frac{\partial f}{\partial\overline{z_k}}=\frac{1}{2}\left(\frac{\partial f}{\partial x_k}+i\frac{\partial f}{\partial y_k}\right)$$
+\end{defn}
+
+\begin{defn}{Holomorphic Functions of Several Variables}{}\\
+Let $U\subseteq\C^n$ be open. Let $f=(f_1,\dots,f_n):U\to\C$ be a function. Let $p\in U$. We say that $f$ is holomorphic at $p$ if the Cauchy-Riemann condition is satisfied: $$\frac{\partial f}{\partial\overline{z}_k}=0$$ for $1\leq k\leq n$. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $U\subseteq\C^n$ be open. Let $f=(f_1,\dots,f_n):U\to\C$ be a holomorphic function. Then we have $$\frac{\partial f}{\partial z_k}=\lim_{w\in\C\to 0}\frac{f(z_1,\dots,z_{k-1},z_k+w,z_{k+1},\dots,z_n)-f(z_1,\dots,z_n)}{w}$$
+\end{lmm}
 
 \begin{thm}{Cauchy's Integral Formula}{}\\
-Let $U\subseteq\C^n$ be open. Let $f:U\to\C$ be a holomorphic function. Let $\Delta_{(a_1,\dots,a_n)}(r_1,\dots,r_n)\subseteq U$. Then we have $$f(z_1,\dots,z_n)=\frac{1}{(2\pi i)^n}\int_{T_{(a_1,\dots,a_n)}(r_1,\dots,r_n)}\frac{f(w_1,\dots,w_n)}{(w_1-z_1)\cdots(w_n-z_n)}\;dw_1\cdots dw_n$$ for all $(z_1,\dots,z_n)\in\Delta_{(a_1,\dots,a_n)}(r_1,\dots,r_n)$. 
+Let $U\subseteq\C^n$ be open. Let $f:U\to\C$ be a holomorphic function. Let $p\in U$. Let $r\in\N^n$. Then we have $$f(z_1,\dots,z_n)=\frac{1}{(2\pi i)^n}\int_{T_r(p)}\frac{f(w_1,\dots,w_n)}{(w_1-z_1)\cdots(w_n-z_n)}\;dw_1\cdots dw_n$$ for all $(z_1,\dots,z_n)\in D_r(p)$. 
 \end{thm}
 
-\subsection{Power Series}
+\begin{defn}{Analytic Functions}{}\\
+Let $U\subseteq\C^n$ be open. Let $f:U\to\C$ be a function. We say that $f$ is analytic if for all $p\in U$, there exists $r\in\N^n$ such that $D_r(p)\subseteq U$ and $$f(z)=\sum_{\alpha\in\N^n}c_\alpha(z_1-p_1)^{\alpha_1}\cdots(z_n-p_n)^{\alpha_n}$$ for all $z\in D_r(p)$. 
+\end{defn}
 
-\subsection{Analytic Functions}
+\begin{prp}{}{}\\
+Let $U\subseteq\C^n$ be open. Let $f:U\to\C$ be a continuous function. Suppose that $D_r(p)\subseteq U$ for some $p\in U$ and $r\in\N^n$. Then the function $$(z_1,\dots,z_n)\mapsto\frac{1}{(2\pi n)!}\int_{T_r(p)}\frac{f(z_1,\dots,z_n)}{(z_1-p_1)\cdots(z_n-p_n)}\;dz_1\cdots dz_n$$ is analytic. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $U\subseteq\C^n$ be open. Let $f:U\to\C$ be a function. Then $f$ is holomorphic if and only if it is analytic. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $U\subseteq\C^n$ be open. Let $f:U\to\C$ be an analytic function. Suppose that locally at $p=(p_1,\dots,p_n)\in U$, the function is given by $$f=\sum_{\alpha\in\N^n}c_\alpha(z_1-p_1)^{\alpha_1}\cdots(z_n-p_n)^{\alpha_n}$$ Then we have $$c_\alpha=\frac{1}{\alpha_1!\cdots\alpha_n!}\frac{\partial^{\alpha_1}}{\partial z_1^{\alpha_1}}\cdots\frac{\partial^{\alpha_n}}{\partial z_n^{\alpha_n}}f(p)$$
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $U\subseteq\C^n$ be open. Let $f:U\to\C$ be a holomorphic function. Suppose that $D_r(p)\subseteq U$ for some $r\in\N^n$ and $p=(p_1,\dots,p_n)\in U$. Then we have $$\frac{\partial^{\alpha_1}}{\partial z_1^{\alpha_1}}\cdots\frac{\partial^{\alpha_n}}{\partial z_n^{\alpha_n}}f(p)=\frac{\alpha_1!\cdots\alpha_n!}{(2\pi i)^n}\int_{T_r(p)}\frac{f(z_1,\dots,z_n)}{(z_1-p_1)^{\alpha_1+1}\cdots(z_n-p_n)^{\alpha_n+1}}\;dz_1\cdots dz_n$$
+\end{prp}
+
+\subsection{Basic Properties of Holomorphic Functions}
+\begin{thm}{The Identity Theorem}{}\\
+Let $U\subseteq\C^n$ be connected and open. Let $f:U\to\C$ be a holomorphic function. Suppose that $f|_N=0$ for some open set $\emptyset\subset N\subseteq U$. Then we have $f=0$. 
+\end{thm}
+
+\begin{thm}{The Open Mapping Theorem}{}\\
+Let $U\subseteq\C^n$ be connected and open. Let $f:U\to\C$ be a non-constant holomorphic function. Then $f(U)$ is connected and open. 
+\end{thm}
 
 
+\begin{thm}{The Maximum Principle}{}\\
+Let $U\subseteq\C^n$ be connected and open. Let $f:U\to\C$ be a holomorphic function. Suppose that there exist $p\in U$ and an open set $p\in V\subseteq U$ such that $\abs{f(p)}>\abs{f(z)}$ for all $z\in V$. Then we have $f(z)=p$. 
+\end{thm}
 
+The Riemann mapping theorem on $\C^n$ is false for $n\geq 2$. 
+
+\begin{eg}{Poincare 1907}{}\\
+$B_1(0)\subseteq\C^2$ and $D_{(1,1)}(0,0)$ are not biholomorphic. 
+\end{eg}
+
+\begin{thm}{Hartog's Theorem}{}\\
+Let $n\geq 2$. Let $U\subseteq\C^n$ be open. Let $K\subseteq U$ be compact in $U$ such that $U\setminus K$ is connected. Let $f:U\setminus K\to\C$ be a holomorphic function. Then $f$ can be extended uniquely to $U$. 
+\end{thm}
+
+\subsection{The Weierstrass Preparation Theorem}
+\begin{defn}{Weierstrass Polynomials}{}\\
+A Weierstrass polynomial is a function $W:\C^n\to\C$ of the form $$W(z_1,\dots,z_n)=z_n^k+\sum_{j=1}^ka_j(z_1,\dots,z_{n-1})z_n^{k-j}$$ for some $k\in\N^+$ and $a_j:\C^{n-1}\to\C$ are holomorphic in $D_{r_j}(0)$ for some $r_j\in\N^+$ and $a_j(0)=0$. 
+\end{defn}
+
+\begin{thm}{The Weierstrass Preparation Theorem}{}\\
+Let $U\subseteq\C^n$ be open such that $0\in U$. Let $f:U\to\C$ be a function. Suppose that there exists an open set $V\subseteq U$ such that $0\in V$ and $f$ is holomorphic on $V$. Suppose that $f(0,\dots,0,w)$ is not identically $0$. Then there exists a holomorphic function $g$ and a Weierstrass polynomial $W$ such that $$f=gW$$ and $g\neq 0$ for some neighbourhood $0\in S\subseteq U$. 
+\end{thm}
+
+\begin{thm}{The Weierstrass Division Theorem}{}\\
+\end{thm}
+
+
+\pagebreak
+\section{Domains of Holomorphy}
+\subsection{Basic Definitions}
+\begin{defn}{Domains of Holomorphy}{}\\
+Let $\Omega\subseteq\C^n$ be open. We say that $\Omega$ is a domain of holomorphy if there are no open sets $U,V\subseteq\C^n$ such that the following are true. 
+\begin{itemize}
+\item $U\neq\emptyset$ and $U\subseteq\Omega\cap V$. 
+\item $V$ is connected and $V\not\subseteq\Omega$. 
+\item For any holomorphic function $f:\Omega\to\C^n$, there exists a holomorphic function $g:V\to\C$ such that $f|_U=g|_U$. 
+\end{itemize} 
+\end{defn}
+
+In other words, $\Omega$ is a domain of holomorphy if there exists some holomorphic function on $\Omega$ that cannot be extended to a holomorphic function on some larger set than $\Omega$. 
+
+\begin{lmm}{}{}\\
+Let $\Omega\subseteq\C$. Then $\Omega$ is a domain of holomorphy. 
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $\Omega\subseteq\C^n$ be a convex open set. Then $\Omega$ is a domain of holomorphy. 
+\end{lmm}
+
+\subsection{Different Notions of Convexity in $\C^n$}
+\begin{defn}{Holomorphic Convexity}{}
+\end{defn}
+
+\begin{defn}{Pseudoconvexity}{}
+\end{defn}
+
+\subsection{Plurisubharmonic Functions}
+
+\subsection{Equivalent Characterizations of Domains of Holomorphy}
+\begin{prp}{}{}\\
+Let $\Omega\subseteq\C^n$ be open. Then the following are equivalent. 
+\begin{itemize}
+\item $\Omega$ is a domain of holomorphy. 
+\item $\Omega$ is holomorphically convex. 
+\item $\Omega$ is pseudoconvex. 
+\end{itemize}
+\end{prp}
+
+\subsection{The Levi Problem}
+
+\pagebreak
+\section{Solutions to the $\overline{\partial}$ Equation}
 
 
 

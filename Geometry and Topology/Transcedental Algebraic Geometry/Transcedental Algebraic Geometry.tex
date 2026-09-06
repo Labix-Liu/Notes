@@ -1,0 +1,372 @@
+\documentclass[a4paper]{article}
+
+\input{C:/Users/liula/Desktop/Latex/Headers/Headers.tex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Labix}
+\lhead{Transcedental Algebraic Geometry}
+\rfoot{\thepage}
+
+\title{Transcedental Algebraic Geometry}
+
+\author{Labix}
+
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+\end{abstract}
+\pagebreak
+\tableofcontents
+
+\pagebreak
+\section{The GAGA Principle}
+\subsection{The Analytification Functor}
+Recall that the category of schemes and the category of analytic spaces are both full subcategories of locally ringed spaces. 
+
+\begin{defn}{The Analytification of a Scheme}{}\\
+Let $X$ be a scheme locally of finite type over $\C$. Define the analytification of $X$ to be the unique analytic space $X^\text{an}$ together with a morphism of locally ringed space $\alpha:X^\text{an}\to X$ satisfying the following universal property: For any analytic space $Y$ and any morphism of locally ringed spaces $f:Y\to X$, there exists a unique morphism of analytic spaces $g:Y\to X^\text{an}$ such that the following diagram commutes: \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	& Y \\
+	{X^\text{an}} & X
+	\arrow["{\exists!g}"', dashed, from=1-2, to=2-1]
+	\arrow["f", from=1-2, to=2-2]
+	\arrow["\alpha"', from=2-1, to=2-2]
+\end{tikzcd}}\\
+\end{defn}
+
+Recall that the Yoneda embedding $h:\bold{LRS}\to\bold{Set}^{\bold{LRS}}$ is the functor sending a locally ringed space $X$ to the functor $h_X:\bold{LRS}\to\bold{Set}$ defined by $h_X(Y)=\Hom_{\bold{LRS}}(Y,X)$. Then the universal property of the analytification means that the functor $h_X$ restricted to analytic spaces $\bold{An}$ is representable. \\
+
+One thinks of the morphism $X^\text{an}\to X$ as doing two things. It is an enlargement of the standard topology of $X^\text{an}$ to the Zariski topology of $X$, and it introduces generic points outside of $X(\C)$ (Indeed we will see that $X^\text{an}$ has the same underlying set as $X(\C)$). 
+
+\begin{thm}{}{}\\
+Let $X$ be a scheme locally of finite type over $\C$. Then the analytification of $X$ exists and is unique up to unique isomorphism. 
+\end{thm}
+
+\begin{defn}{The Analytification Functor}{}\\
+Define the analytification functor $$(-)^\text{an}:\bold{Sch}_\C\to\bold{An}$$ as follows. 
+\begin{itemize}
+\item For each scheme $X$ locally of finite type over $\C$, we have $X^\text{an}$ is the analytification of $X$. 
+\item For a morphism of schemes $f:X\to Y$ over $\C$, the universal propertyof $Y^\text{an}$ induces a morphism $X\to Y^\text{an}$. Precomposing with the canonical morphism $X^\text{an}\to Y^\text{an}$ gives the desired map $X^\text{an}\to Y^\text{an}$. 
+\end{itemize}
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $X$ be a scheme locally of finite type over $\C$. Then the underlying set of $X^\text{an}$ is given by $X(\C)$. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $X$ be a scheme locally of finite type over $\C$. Then the following are true. 
+\begin{itemize}
+\item $X$ is separated if and only if $X^\text{an}$ is Hausdorff. 
+\item $X$ is connected if and only if $X^\text{an}$ is connected. 
+\item $X$ is smooth if and only if $X^\text{an}$ is a complex manifold. 
+\item $X$ is proper if and only if $X^\text{an}$ is compact. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $X$ be a variety over $\C$. Then the following are true. 
+\begin{itemize}
+\item If $X$ is irreducible, then $X^\text{an}$ is connected. 
+\item If $X$ is smooth and affine, then $X^\text{an}$ is a Stein manifold. 
+\item If $X$ is smooth and projective, then $X^\text{an}$ is Kahler. 
+\end{itemize}
+\end{prp}
+
+\begin{thm}{GAGA}{}\\
+Let $X$ be a proper scheme of finite type over $\C$. Then the following are true. 
+\begin{itemize}
+\item Let $\mF$ be a sheaf of $\mO_X$-modules. Then $\mF^\text{an}$ is a sheaf of $\mO_{X^\text{an}}$-module. 
+\item Let $\mF$ be a sheaf of $\mO_X$-modules. There is a natural isomorphism $$H^i(X,\mF)\cong H^i(X^\text{an},\mF^\text{an})$$
+\item The analytification functor induces an equivalence of categories $$\bold{Coh}_{\mO_X}\cong\bold{Coh}_{\mO_{X^\text{an}}}$$
+\item Let $Y\subseteq X^\text{an}$ be a closed complex analytic subspace. Then there exists a closed subvariety $Z$ of $X$ such that $Z^\text{an}=Y$. 
+\end{itemize}
+\end{thm}
+
+\begin{crl}{Chow's Theorem}{}\\
+Let $X$ be a closed complex analytic subspace of $\C\Prj^n$. Then $X$ is a projective variety over $\C$. 
+\end{crl}
+
+The important point is that: the theory of smooth projective complex varieties are subsumed by the theory of Kahler manifolds. Divisors and line bundles correspond bijectively thanks to Chow's theorem. 
+
+\subsection{Algebraic de Rham Cohomology}
+\begin{defn}{Algebraic de Rham Cohomology}{}\\
+Let $S$ be a scheme. Let $X$ be a scheme over $S$. Define the $n$th algebraic de Rham cohomology group by $$H_\text{dR}^n(X/S)=\H^n(X;\Omega_{X/S}^\bullet)$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $S$ be a scheme. Let $X$ be a scheme over $S$. Then $\text{Tot}^\oplus\left(C^\bullet(X,\mU,\Omega_{X/S}^\bullet)\right)$ is an acyclic resolution of $\Omega_{X/S}^\bullet$. 
+\end{lmm}
+
+Thus one way to compute the de Rham cohomology would be $$H_\text{dR}^n(X/S)\cong H^n(\text{Tot}^\oplus(\mC^\bullet(X,\mU,\Omega_{X/S}^\bullet))$$
+
+\begin{eg}{}{}\\
+We have $$H_\text{dR}^n(\Prj_\C^1/\C)\cong\begin{cases}
+\C & \text{ if }k=0,2\\
+0 & \text{ otherwise }
+\end{cases}$$
+\begin{proof}\\
+Consider the canonical affine cover $\mU=\{U_0,U_1\}$ of $\Prj_\C^1$. We have $$C^0(\Prj_\C^1,\mU,\Omega_{\Prj_\C^1/\C}^k)=\Omega_{\Prj_\C^1/\C}^k(U_0)\times\Omega_{\Prj_\C^1/\C}^k(U_1)\cong\begin{cases}
+\C[x]dx\oplus\C[y]dy & \text{ if }k=1\\
+0 & \text{ otherwise }
+\end{cases}$$ and $$C^1(\Prj_\C^1,\mU,\Omega_{\Prj_\C^1/\C}^k)=\Omega_{\Prj_\C^1/\C}^k(U_0\cap U_1)\cong\begin{cases}
+\C[x,x^{-1}]dx & \text{ if }k=1\\
+0 & \text{ otherwise }
+\end{cases}$$ Also we have $$C^0(\Prj_\C^1,\mU,\mO_{\Prj_\C^1})\cong\C[x]\oplus\C[y]\;\;\;\text{ and }\;\;\;C^1(\Prj_\C^1,\mU,\mO_{\Prj_\C^1})\cong\C[x,x^{-1}]$$ so all the data assembles into the diagram \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	& 0 &&&& 0 & \\
+	0 & {\C[x]dx\oplus\C[y]dy} &&&& {\C[x,x^{-1}]dx} & 0 \\
+	\\
+	0 & {\C[x]\oplus\C[y]} &&&& {\C[x,x^{-1}]} & 0 \\
+	& 0 &&&& 0
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=1-2]
+	\arrow["{(fdx,gdy)\mapsto(-x^{-2}g(x^{-1})-f(x))dx}", from=2-2, to=2-6]
+	\arrow[from=2-6, to=1-6]
+	\arrow[from=2-6, to=2-7]
+	\arrow[from=4-1, to=4-2]
+	\arrow["{(f,g)\mapsto(df,dg)}", from=4-2, to=2-2]
+	\arrow["{(f,g)\mapsto g(x^{-1})-f(x)}"', from=4-2, to=4-6]
+	\arrow["{f\mapsto df}"', from=4-6, to=2-6]
+	\arrow[from=4-6, to=4-7]
+	\arrow[from=5-2, to=4-2]
+	\arrow[from=5-6, to=4-6]
+\end{tikzcd}}\\
+Then the total complex is given by \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {\C[x]\oplus\C[y]} &&& {\C[x]dx\oplus\C[dy]\oplus\C[x,x^{-1}]} &&& {\C[x,x^{-1}]dx} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["{(f,g)\mapsto(f(x)-g(x^{-1}),df,dg)}", from=1-2, to=1-5]
+	\arrow["{(gdx,hdy,f)\mapsto df+(-x^{-2}h(x^{-1})-g(x))dx}", from=1-5, to=1-8]
+	\arrow[from=1-8, to=1-9]
+\end{tikzcd}}\\
+Then we have $H_\text{dR}^0(\Prj_\C^1/\C)\cong\C$ and $H_\text{dR}^1(\Prj_\C^1/\C)=\frac{\C[x,x^{-1}]dx}{\C[x,x^{-1}]dx}=0$ and $H_\text{dR}^2(\Prj_\C^1/\C)\cong\C\langle x^{-1}dx\rangle\cong\C$
+\end{proof}
+\end{eg}
+
+\begin{lmm}{}{}\\
+Let $k$ be a field of characteristic $0$. Let $X$ be a smooth affine variety over $k$. Then we have $$H_\text{dR}^n(X)=H^n(\Gamma(X,\Omega_{X/k}^\bullet))$$ for all $n\in\N$. 
+\end{lmm}
+
+\begin{eg}{}{}\\
+Let $X=\text{Spec}(\C[x,x^{-1}])$. Then we have $$H_\text{dR}^n(X/\C)\cong\begin{cases}
+\C & \text{ if }n=0,1\\
+0 & \text{ otherwise }
+\end{cases}$$
+\begin{proof}\\
+Since $X$ is smooth and affine over $\C$, we just have to take global sections. The relevant chain complex is then $0\to\mO_X(X)\to\Omega_{X/\C}^1(X)\to 0$. Since $X$ is affine, we have that $\mO_X(X)=\C[x,x^{-1}]$. To compute $\Omega_{X/\C}^1(X)$, notice that $\Omega_{X/\C}^1(X)=\Omega_{\C[x,x^{-1}]/\C}^1$. Then we have $$\Omega_{\C[x,x^{-1}]/\C}^1\cong\left(\Omega_{\C[x]/\C}^1\right)_x\cong\left(\C[x]dx\right)_x\cong\C[x,x^{-1}]dx$$ The differential $\mO_X(X)\to\Omega_{X/\C}^1(X)$ is then just the total differential $f\mapsto df$. Clearly we have $H_\text{dR}^0(X/\C)=\ker(f\mapsto df)=\C$, and we have $$H_\text{dR}^1(X/\C)=\frac{\C[x,x^{-1}]dx}{\C\langle x^n\;|\;n\in\Z\setminus\{-1\}\rangle}\cong\C\langle x^{-1}\;dx\rangle\cong\C$$
+\end{proof}
+\end{eg}
+
+\begin{prp}{}{}\\
+Let $S$ be a scheme. Let $X$ be a scheme over $S$. Then the following are true. 
+\begin{itemize}
+\item $H_\text{dR}^n(X/S)$ is a $H_\text{dR}^0(X/S)$-module. 
+\item The map $H_\text{dR}^i(X/S)\times H_\text{dR}^j(X/S)\to H_\text{dR}^{i+j}(X/S)$ induced by the wedge of differential forms is a $H_\text{dR}^0(X/S)$-linear. 
+\end{itemize}
+\end{prp}
+
+\begin{defn}{The de Rham Cohomology Ring}{}\\
+Let $S$ be a scheme. Let $X$ be a scheme over $S$. Define the de Rham cohomology ring of $X$ to be $$H_\text{dR}^\ast(X/S)=\bigoplus_{i=0}^\infty H_\text{dR}^i(X/S)$$ together with ring structure given by wedge of differential forms. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $S$ be a scheme. Let $X$ be a scheme over $S$. Then $H_\text{dR}^\ast(X/S)$ is a graded commutative $H_\text{dR}^0(X/S)$-algebra. 
+\end{lmm}
+
+\begin{eg}{}{}\\
+Let $k$ be a field of characteristic $0$. Let $R=k[x_1,\dots,x_n]$ be the polynomial ring over $k$. Then $\Gamma\left(X,\Omega_{\text{Spec}(R)/k}^1\right)=\Omega_{R/k}^1=\bigoplus_{i=1}^nRdx_i$. Then we have $$\Gamma\left(X,\Omega_{\text{Spec}(R)/k}^j\right)=\bigoplus_{1\leq i_1<\cdots<i_j\leq n} Rdx_{i_1}\wedge\cdots\wedge dx_{i_j}$$ Then we have $$H_\text{dR}^i(R/k)=\begin{cases}
+k & \text{ if }i=0\\
+0 & \text{ otherwise }
+\end{cases}$$
+\end{eg}
+
+TBR:
+
+\begin{eg}{}{}\\
+Let $k$ be a field of characteristic $p>0$. Then we have $$\dim_k(H^1(\Gamma(\text{Spec}(k[t]),\Omega_{\text{Spec}(k[t])/k}^1)))=\infty$$ Indeed, we have $$H^1(\Gamma(\text{Spec}(k[t]),\Omega_{\text{Spec}(k[t])/k}^1))=\frac{k[t]}{\langle f'(t)\;|\;f\in k[t]\rangle}=\frac{k[t]}{\bigoplus_{i=1}^\infty it^{i-1}dt}\cong\bigoplus_{i=1}^\infty t^{ip-1}dt$$
+\end{eg}
+
+\begin{eg}{}{}\\
+$\Omega_{\Z[\sqrt{2}]/\Z}^1\cong(\Z/2\Z)d\sqrt{2}$. $H^1(\Gamma(\text{Spec}(\Z\sqrt{2}),\Omega_{\Z[\sqrt{2}]/\Z}^1))\neq0$
+\end{eg}
+
+\begin{eg}{}{}\\
+Let $k$ be a field of characteristic $p\neq 2$. Let $f\in k[x]$ be separable. Let $R=\frac{k[x,y]}{y^2-f(x)}$. Then we have $$\Omega_{R/k}^1\cong\frac{\Omega_{k[x,y]/k}^1\otimes_{k[x,y]}k}{(2ydy-f'(x)dx)}\cong\frac{Rdx\oplus Rdy}{R(2ydy-f'(x)dx)}$$ Using the quotient relation, we may write $dy=\frac{f'(x)dx}{2y}$ in the module. Thus $dx/y$ is a generator of the module. \\
+
+Since $f$ is separable, there exists $g,h\in k[x]$ such that $gf+hf'=1$. Let $\omega=aydx+2bdy\in\Omega_{R/k}^1$. Then we have $y\omega=dx$. Hence $y$ divides $dx$ and $\omega=dx/y$. \\
+
+Now let $z=a(x)+b(x)y\in R$ be arbitrary. Then we have $$dz=(a'(x)+b'(x)y)dx+h(x)dy=(ya'(x)+b'(x)f(x)+\frac{1}{2}b(x)f'(x))\omega$$ Thus every element of $\Omega_{R/k}^1$ is of the form $q(x)\omega$ for some $q(x)\in k[x]$. If $\deg(q)\geq\deg(f)$, then there exists $p\in k[x]$ such that $\deg(p)>\deg(q)$ such that $$[p(x)\omega]=[q(x)\omega]$$ in $H_\text{dR}^1(R/k)$. 
+\end{eg}
+
+\begin{lmm}{}{}\\
+Let $k$ be a field of characteristic $0$. Let $X$ be a smooth variety over $k$. Then the following are true. 
+\begin{itemize}
+\item $H_\text{dR}^i(X)=0$ for all $i>2\dim(X)$. 
+\item If $X$ is affine, then $H_\text{dR}^i(X)=0$ for all $i>\dim(X)$. 
+\end{itemize}
+\end{lmm}
+
+\begin{prp}{}{}\\
+
+\end{prp}
+
+\subsection{The Hodge de Rham Spectral Sequence}
+\begin{defn}{The Hodge Filtration}{}\\
+Let $S$ be a scheme. Let $X$ be a scheme over $S$. Define the Hodge filtration $F^\bullet\Omega_{X/S}^\bullet$ of $X$ to be $$F^i\Omega_{X/S}^j=\begin{cases}
+\Omega_{X/S}^j & \text{ if }j\geq i\\
+0 & \text{ otherwise }
+\end{cases}$$
+\end{defn}
+
+Thus for each $i$, the collection of complexes $$F^i\Omega_{X/S}^\bullet=(0\to\Omega_{X/S}^i\to\Omega_{X/S}^{i+1}\to\cdots)$$ form the filtration for $\Omega_{X/S}^\bullet$. 
+
+\begin{lmm}{}{}\\
+Let $S$ be a scheme. Let $X$ be a scheme over $S$. Then $F^\bullet\Omega_{X/S}^\bullet$ is an exhaustive filtration. 
+\end{lmm}
+
+\begin{defn}{The Hodge de Rham Spectral Sequence}{}\\
+Let $S$ be a scheme. Let $X$ be a scheme over $S$. Define the Hodge de Rham spectral sequence to be the spectral sequence associated to the Hodge siltration $F^\bullet\Omega_{X/S}^\bullet$. 
+\end{defn}
+
+The $E^0$ page is given by $$E_0^{p,q}=\frac{F^p\Omega_{X/S}^{p+q}}{F^{p+1}\Omega_{X/S}^{p+q}}=\frac{\Omega_{X/S}^q}{\Omega_{X/S}^{q-1}}$$
+
+\begin{lmm}{}{}\\
+Let $S$ be a scheme. Let $X$ be a scheme over $S$. Then we have $$E_1^{p,q}=H^q(X,\Omega_{X/S}^p)\Rightarrow H_\text{dR}^{p+q}(X/S)$$
+\end{lmm}
+
+\begin{thm}{Deligne}{}\\
+If $S=\text{Spec}(k)$, $k$ char $0$, $X\to S$ smooth and proper. Then the Hodge de Rham spectral sequence degenerates at the $E_1$ page (all differentials in page $1$ is $0$). 
+\end{thm}
+
+When you have a $2$-step filtration: $0\to F^1C^\bullet\to C^\bullet\to C^\bullet/F^1C^\bullet\to 0$, the spectral sequence is the long exact sequence in cohomology. 
+
+\subsection{Comparing Cohomology Theories}
+\begin{thm}{Grothendieck}{}\\
+Let $X$ be a smooth variety over $\C$. Then there is a natural isomorphism $$H_\text{dR}^n(X)\cong H_\text{Holo}^n(X^\text{an})\cong H_\text{dR}^n(X^\text{an})$$ induced by the canonical map $\alpha:X^\text{an}\to X$. 
+\end{thm}
+
+\begin{crl}{}{}\\
+Let $X$ be a smooth variety over $\C$. Then the above isomorphism and de Rham's theorem induces a natural isomrophism $$H_\text{dR}^n(X)\cong H_\text{sing}^n(X^\text{an};\C)$$
+\end{crl}
+
+\begin{thm}{The Period Isomorphism}{}\\
+Let $k$ be a subfield of $\C$. Let $X$ be a smooth variety over $k$. Then there is a natural isomorphism $$H_\text{dR}^\ast(X)\otimes_k\C\cong H_\text{sing}^\ast(X^\text{an};\Q)\otimes_\Q\C$$
+\end{thm}
+
+Map of Chow ring to singular cohomology. 
+
+\pagebreak
+\section{Compact Kahler Manifolds}
+\subsection{Equivalence to Smooth Projective Varieties}
+\begin{prp}{}{}\\
+Let $X$ be a smooth projective variety over $\C$. Let $\mL$ be a line bundle over $X$. Then $\mL$ is ample if and only if $\mL^\text{an}$ is positive. 
+\end{prp}
+
+\begin{thm}{Kodaira Embedding}{}\\
+Let $X$ be a compact complex manifold. Then the following are equivalent. 
+\begin{itemize}
+\item $X$ admits a holomorphic embedding into $\C\Prj^n$. 
+\item $X$ admits an ample line bundle. 
+\item $X$ admits a positive line bundle. 
+\item $X$ is admits a Kahler metric $\omega$ such that $[\omega]\in H^{1,1}(X,\Z)$. 
+\item There exists a projective variety $Z$ over $\C$ such that $Z^\text{an}=X$. 
+\end{itemize}
+\end{thm}
+
+Under the GAGA principle, we establish a dictionary. 
+
+\begin{table}[h]
+\centering
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{} p{5cm} p{5cm} p{4.3cm} @{}}
+\toprule
+\textbf{Smooth projective notion} & \textbf{Compact K\"ahler notion} & \textbf{Comparison theorem} \\
+\midrule
+$\text{Pic}(X)$ & $\text{Pic}(X^\text{an})$ & GAGA (Serre) \\
+$\bold{Coh}_{\mO_X}$ & $\bold{Coh}_{\mO_{X^\text{an}}}$ & GAGA \\
+Algebraic subvarieties & Closed analytic subvarieties & Chow's theorem \\
+$\Hom_{\bold{Var}}(X,Y)$ & $\Hom_\text{hol}(X^\text{an},Y^\text{an})$ & GAGA + Chow \\
+$H_{dR}^k(X/\C)$ & $H_{dR}^k(X^{an},\C)=H_\text{hol}^k(X^\text{an})$ & Grothendieck comparison \\
+Hodge filtration & Hodge filtration & Grothendieck comparison \\
+Ample line bundle & Positive line bundles \\
+Closed embeddings to projective space & Holomorphic embeddings to projective space\\
+\bottomrule
+\end{tabular}
+\end{table}
+ 
+In particular we have an equivalence of categories $$\text{Smooth Projective Varieties}\simeq\text{Compact Kahler Manifolds with a choice of Kahler metric }[\omega]\in H^{1,1}(X;\Z)$$
+
+
+
+\begin{thm}{Kodaira-Nakano Vanishing Theorem}{}\\
+Let $X$ be a compact Kahler manifold. Let $p:L\to X$ be a positive line bundle. Then we have $$H^q(X,\Omega^p(L))=0$$ for $p+q>\dim(X)$. 
+\end{thm}
+
+\subsection{Hodge Classes}
+\begin{defn}{Hodge Classes}{}\\
+Let $X$ be a smooth projective variety. Define the $p$th Hodge classes of $X$ to be $$\text{Hdg}^p(X)=H^{2p}(X;\Z)\cap H^{p,p}(X)$$
+\end{defn}
+
+The Lefschetz $(1,1)$-theorem says that chern classes of a compact Kahler manifold $X$ corresponds to Hodge class $\text{Hdg}^1(X)$. 
+
+\begin{defn}{The Algebraic Cycles of Smooth Subvarieties}{}\\
+Let $X$ be a smooth projective variety. Let $Z\subseteq X$ be a smooth closed, irreducible complex analytic subvariety of $Z$. Define the Hodge class of $Z$ by $$[Z]=D^{-1}(\iota_\ast[Z]_Z)\in H^{\dim_\R(X)-\dim_\R(Z)}(X;\Z)$$ where $\iota_\ast:H_{\dim_\R(Z)}(Z;\Z)\to H_{\dim_\R(Z)}(X;\Z)$ is induced by inclusion $\iota:Z\hookrightarrow X$ and $D:H^{\dim_\R(X)-\dim_\R(Z)}(X;\Z)\to H_{\dim_\R(Z)}(X;\Z)$ is the poincare duality map. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $X$ be a smooth projective variety. Let $Z\subseteq X$ be a smooth closed, irreducible complex analytic subvariety of $Z$. Then $[Z]\in\text{Hdg}^{\dim_\C(X)-\dim_\C(Z)}(X)$. 
+\end{lmm}
+
+\begin{defn}{The Algebraic Cycles of General Subvarieties}{}\\
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $X$ be a smooth projective variety. Let $Z\subseteq X$ be a closed, irreducible complex analytic subvariety of $Z$. Then $[Z]\in\text{Hdg}^{\dim_\C(X)-\dim_\C(Z)}(X)$. 
+\end{lmm}
+
+\begin{defn}{The Cycle Homomorphism}{}\\
+Let $X$ be a smooth projective variety. Define the cycle homomorphism to be the map $\text{cl}:\text{CH}^p(X)\to\text{Hdg}^p(X)$ given by $[Z]\in\text{CH}^p(X)\mapsto[Z]\in\text{Hdg}^p(X)$. 
+\end{defn}
+
+\begin{conj}{The Hodge Conjecture}{}\\
+Let $X$ be a smooth projective variety. Let $\alpha\in\text{Hdg}^1(X)$. Then there exists $N\in\N$ such that $N\alpha\in\im(\text{cl})$. 
+\end{conj}
+
+\subsection{The Lefschetz Theorems}
+\begin{thm}{Lefschetz Hyperplane Theorem}{}\\
+Let $X$ be a compact Kahler manifold. Let $V\subseteq X$ be a smooth variety of dimension $\dim(X)-1$. Then the restriction map $$H^k(X,\Z)\to H^k(V,\Z)$$ induces isomorphisms for $0\leq k<\dim(X)-1$ and is injective for $k=\dim(X)-1$. 
+\end{thm}
+
+\begin{thm}{The Lefschetz $(1,1)$ Theorem}{}\\
+Let $X$ be a compact Kahler manifold. Let $\alpha\in H^2(X,\Z)$. Then $\alpha$ is the first Chern class of a line bundle if and only if $\alpha\in H^{1,1}(X)$. 
+\end{thm}
+
+\begin{prp}{}{}\\
+Let $X$ be a compact Kahler manifold. Let $D\in\text{Div}(X)$ be a divisor. Then we have $$c_1(\mL(D))=[D]\in H^2(X;\Z)$$
+\end{prp}
+
+\begin{crl}{}{}\\
+Let $X$ be a compact Kahler manifold. Then the Hodge conjecture is true for $p=1$. 
+\end{crl}
+
+\subsection{Projective Curves}
+\begin{prp}{}{}\\
+Let $X$ be a smooth projective curve over $\C$. Then $X^\text{an}$ is homeomorphic to $\Sigma_{p_g(X)}$ the orientable surface of genus $p_g(X)$. 
+\end{prp}
+
+\begin{crl}{}{}\\
+There is an equivalence of categories between smooth projective curves over $\C$ and compact Riemann surfaces. 
+\end{crl}
+
+\pagebreak
+\section{Mixed Hodge Structures}
+
+\pagebreak
+\section{Periods and Period Maps}
+
+
+
+\end{document}

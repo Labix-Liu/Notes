@@ -22,19 +22,6 @@
 
 \pagebreak
 \section{Results from Homological Algebra}
-\subsection{Inverse Systems}
-\begin{prp}{}{} Left Exactness of the Inverse Limit Functor
-\end{prp}
-
-\begin{defn}{The Mittag-Leffler Condition}{}
-\end{defn}
-
-\begin{lmm}{}{} Surjective maps imply Mittag-Leffler
-\end{lmm}
-
-\begin{prp}{}{} Exactness of the inverse limit functor with Mittag-Leffler
-\end{prp}
-
 \subsection{Projective and Injective Modules}
 Let $R$ be a commutative ring. Let $P$ be an $R$-module. Recall that $P$ is projective if one of the following equivalent conditions hold. 
 \begin{itemize}
@@ -74,6 +61,48 @@ M\arrow[r, "\exists h"', dashed] & I
 \end{tikzcd}} \\
 \end{itemize}
 
+\subsection{Graded Injective and Projective Modules}
+Let $R$ be a graded ring. Then the category of graded modules over $R$ is abelian. Therefore we may define graded injective and graded projective modules in the same way, as well as graded free, graded injective and graded projective resolutions. 
+
+\begin{eg}{}{}\\
+Let $k$ be a field. Let $R=k[x]$ with $\deg(x)=1$. Then $k[x,x^{-1}]/k[x]$ is an injective graded $R/xR$-module, but it is not injective as an ungraded module. 
+\end{eg}
+
+\begin{prp}{}{}\\
+Let $R$ be a graded ring. Let $I$ be a graded $R$-module. Then $I$ is injective if and only if for graded $R$-modules $M,N$ and all injective graded homomorphisms $f:M\to N$ and all graded maps $u:M\to I$, there exists a graded morphism $N\to I$ such that the following diagram commutes: \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	M & I \\
+	N
+	\arrow["u", from=1-1, to=1-2]
+	\arrow["f"', from=1-1, to=2-1]
+	\arrow["{\exists!}"', dashed, from=2-1, to=1-2]
+\end{tikzcd}}\\
+\end{prp}
+
+\begin{lmm}{}{}\\
+Let $R$ be a graded ring. Let $F$ be a graded free $R$-module. Then $F$ is projective. 
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $R$ be a graded ring. Let $P$ be a graded $R$-module. Then the following are equivalent. 
+\begin{itemize}
+\item $P$ is projective. 
+\item For all graded $R$-modules $M,N$ and all surjective graded homomorphisms $f:M\to N$ and graded $u:P\to N$, there exists a graded morphism $P\to M$ such that the following diagram commutes: \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	& M \\
+	P & N
+	\arrow["f", from=1-2, to=2-2]
+	\arrow["{\exists!}", dashed, from=2-1, to=1-2]
+	\arrow["u"', from=2-1, to=2-2]
+\end{tikzcd}}\\
+\item $P\oplus Q$ is a graded free $R$-module for some graded $R$-module $Q$. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $R$ be a graded ring. Let $P$ be a graded $R$-module that is projective. Then $P$ is projective as an ungraded $R$-module. 
+\end{prp}
+
 \subsection{Flat Modules}
 Let $R$ be a commutative ring. Let $M$ be an $R$-module. Recall that $M$ is a flat $R$-module if the functor $-\otimes_R M$ is exact. Equivalently, the functor sends injective maps to injective maps. Moreover, we have the following properties: 
 \begin{itemize}
@@ -84,30 +113,9 @@ Let $R$ be a commutative ring. Let $M$ be an $R$-module. Recall that $M$ is a fl
 
 Moreover, we have the following relations between different homological notions of modules $$\text{Free Modules}\subset\text{Projective Modules}\subset\text{Flat Modules}\subset\text{Torsion Free Modules}$$
 
-\begin{prp}{}{} Let $R$ be a commutative ring. Let $S$ be a multiplicative subset of $R$. Then $S^{-1}R$ is a flat $R$-module. 
+\begin{prp}{}{}\\
+Let $R$ be a commutative ring. Let $S$ be a multiplicative subset of $R$. Then $S^{-1}R$ is a flat $R$-module. 
 \end{prp}
-
-\begin{defn}{Faithfully Flat}{} Let $R$ be a commutative ring. Let $M$ be an $R$-module. We say that $M$ is faithfully flat if for any sequence of $R$-modules: \\~\\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	0 & M_1 & M_2 & M_3 & 0
-	\arrow[from=1-1, to=1-2]
-	\arrow["f", from=1-2, to=1-3]
-	\arrow["g", from=1-3, to=1-4]
-	\arrow[from=1-4, to=1-5]
-\end{tikzcd}}\\~\\
-The sequence is short exact if and only if the sequence\\~\\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	0 & M_1\otimes_RM & M_2\otimes_RM & M_3\otimes_RM & 0
-	\arrow[from=1-1, to=1-2]
-	\arrow["f\otimes_R\text{id}_M", from=1-2, to=1-3]
-	\arrow["g\otimes_R\text{id}_M", from=1-3, to=1-4]
-	\arrow[from=1-4, to=1-5]
-\end{tikzcd}}\\~\\
-is exact. 
-\end{defn} 
-
-\begin{defn}{Flat Homomorphism}{} Let $R,S$ be rings. Let $\varphi:R\to S$ be a ring homomorphism. We say that $\varphi$ is flat if $S$ is flat as an $R$-module. 
-\end{defn}
 
 \begin{prp}{}{} Let $R$ be a commutative ring. Let $M$ be an $R$-module. Then the following are equivalent. 
 \begin{itemize}
@@ -126,6 +134,22 @@ is exact.
 	\arrow[from=1-4, to=1-5]
 \end{tikzcd}}\\~\\
 If $M_1$ and $M_3$ are flat, then $M_2$ is flat. 
+\end{prp}
+
+\begin{defn}{Flat Homomorphism}{} Let $R,S$ be rings. Let $\varphi:R\to S$ be a ring homomorphism. We say that $\varphi$ is flat if $S$ is flat as an $R$-module. 
+\end{defn}
+
+\subsection{Inverse Systems}
+\begin{prp}{}{} Left Exactness of the Inverse Limit Functor
+\end{prp}
+
+\begin{defn}{The Mittag-Leffler Condition}{}
+\end{defn}
+
+\begin{lmm}{}{} Surjective maps imply Mittag-Leffler
+\end{lmm}
+
+\begin{prp}{}{} Exactness of the inverse limit functor with Mittag-Leffler
 \end{prp}
 
 \subsection{Socle of a Module}
@@ -174,6 +198,8 @@ Then the following are true.
 
 \begin{prp}{}{} Let $R$ be a commutative ring. Let $S$ be an $R$-algebra. Let $M,N$ be left $R$-modules. If $S$ is flat over $R$ and $M$ is finitely presented, then there is an isomorphism $$S\otimes_R\Hom_R(M,N)\cong\Hom_S(S\otimes_RM,S\otimes_RN)$$
 \end{prp}
+
+In particular, since localization can be described as a tensor product: $S^{-1}M=S^{-1}R\otimes_RM$, we have a natural isomorphism $$\Hom_{S^{-1}R}(S^{-1}M,S^{-1}N)\cong S^{-1}\Hom_R(M,N)$$
 
 \subsection{Coherent Modules}
 \begin{defn}{Coherent Modules}{}\\
@@ -246,6 +272,15 @@ Let $R$ be a commutative ring. Then $\bold{Coh}_R$ is an abelian category.
 \end{defn}
 
 We have seen in Rings and Modules that the graded ring associated to the filtrartion $$R\supseteq I\supseteq I^2\supseteq\cdots\supseteq I^n\supseteq\cdots$$ is precisely the graded ring $$\text{gr}_I(M)=\bigoplus_{n=0}^\infty\frac{I^n}{I^{n+1}}$$ associated to the commutative ring $R$. 
+
+\subsection{The Rees Algebra}
+\begin{defn}{The Rees Algebra}{}\\
+Let $R$ be a commutative ring. Let $I$ be an ideal of $R$. Define the Rees algebra of $I$ in $R$ to be $$R[It]=\bigoplus_{k=0}^\infty I^k\cdot t^k\subseteq R[t]$$
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $R$ be a commutative ring. Let $I$ be an ideal of $R$. Then there is a graded $R$-module isomorphism $$\text{gr}_I(R)\cong\frac{R[It]}{IR[It]}$$
+\end{lmm}
 
 \subsection{The I-Adic Filtration}
 \begin{defn}{I-Adic Filtration}{} Let $R$ be a commutative ring. Let $I$ be an ideal of $R$. Define the $I$-adic filtration of $R$ to be the filtration $$M\supseteq IM\supseteq I^2M\supseteq\cdots\supseteq I^nM\supseteq\cdots$$
@@ -416,6 +451,34 @@ We induct on $n$.
 \end{proof}
 \end{thm}
 
+\subsection{Zariski Pairs}
+\begin{defn}{Zariski Pairs}{}\\
+Let $R$ be a Noetherian commutative ring. Let $I\subseteq R$ be an ideal. We say that $(R,I)$ is a Zariski pair if $I\subseteq J(R)$. 
+\end{defn}
+
+\begin{lmm}{}{}\\
+Let $R$ be a Noetherian commutative ring. Let $I\subseteq R$ be an ideal. Then the following are equivalent. 
+\begin{itemize}
+\item $(R,I)$ is a Zariski pair. 
+\item $\bigcap_{n=1}^\infty I^nM=0$ for all finitely generated $R$-module $M$. 
+\item $R$ is $I$-adically complete. 
+\end{itemize}
+\end{lmm}
+
+The theory of Noetherian local rings and graded Noetherian rings are similar because they are both Zariski pairs. 
+
+\begin{lmm}{}{}\\
+Let $(R,m)$ be a Noetherian local ring. Then $(R,m)$ is a Zariski pair. 
+\end{lmm}
+
+\begin{lmm}{}{}\\
+Let $R$ be a Notherian graded ring. Then $(R,R_+)$ is a Zariski pair. 
+\end{lmm}
+
+\begin{thm}{Nakayama's Lemma}{}\\
+Let $(R,I)$ be a Zariski pair. Let $M$ be a finitely generated $R$-module. Suppose that $IM=M$. Then we have $M=0$. 
+\end{thm}
+
 \pagebreak
 \section{More on Dimension Theory}
 \subsection{The Hilbert Series of a General Graded Module}
@@ -450,7 +513,7 @@ Then we have $$HF_{A_d}(n)=HF_{A_d(-1)}(n)+HF_{A_{d-1}}(n)=HF_{A_d}(n-1)+\binom{
 \end{proof}
 \end{eg}
 
-\begin{eg}{}{} Let $k$ be a field. Let $n\geq 2$. Let $f\in k[x_1,\dots,x_d]$ be a homogeneous polynomial of degree $s$. Let $A=\frac{k[x_1,\dots,x_n]}{(f)}$. Then we have $$HF_A(n)=\binom{d+n-1}{d-1}-\binom{d+n-1-s}{d-1}$$ 
+\begin{eg}{}{} Let $k$ be a field. Let $d\geq 2$. Let $f\in k[x_1,\dots,x_d]$ be a homogeneous polynomial of degree $s$. Let $A=\frac{k[x_1,\dots,x_d]}{(f)}$. Then we have $$HF_A(n)=\binom{d+n-1}{d-1}-\binom{d+n-1-s}{d-1}$$ 
 \begin{proof}
 Consider the short exact sequence \\~\\
 \adjustbox{scale=1.0,center}{\begin{tikzcd}
@@ -497,6 +560,29 @@ Consider the short exact sequence \\~\\
 	\arrow[from=1-4, to=1-5]
 \end{tikzcd}} \\~\\
 The Hilbert function of $R$ is given by $$HF_R(n)=HF_{k[x_1,\dots,x_d]}(n)-HF_{k[x_1,\dots,x_d]}(n-r)$$ Then we have that $$t^{n-r}HF_R(n)=t^{-r}(t^n HF_{k[x_1,\dots,x_n]}(n))+t^{n-r}HF_{k[x_1,\dots,x_n]}(n-r)$$ and summing over $n$ gives $$t^{-r}HS_R(t)=(t^{-r}+1)HS_{k[x_1,\dots,x_n]}(t)$$ and simplifying gives our desired result. 
+\end{proof}
+\end{eg}
+
+\begin{eg}{}{}\\
+The Hilbert polynomial of $A=\frac{k[x,y,z,w]}{(x,y)\cap(z,w)}$ is given by $$HP_A(t)=2t-t^2$$
+\begin{proof}\\
+Recall that we have a short exact sequence \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {\frac{k[x,y,z,w]}{(x,y)\cap(z,w)}} & {\frac{k[x,y,z,w]}{(x,y)}\oplus\frac{k[x,y,z,w]}{(z,w)}} & {\frac{k[x,y,z,w]}{(x,y)+(z,w)}} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\~\\
+Notice that the module in the middle is isomorphic to $k[z,w]\oplus k[x,y]$. Using the exact sequence \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & {k[z,w]} & {k[z,w]\oplus k[x,y]} & {k[x,y]} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\~\\
+gives us $HS_{k[z,w]\oplus k[x,y]}(t)=\frac{2}{(1-t)^2}$. Also, we have $(x,y)+(z,w)=(x,y,z,w)$ in $k[x,y,z,w]$ so the quotient with the ring gives $k$. Thus we have $HS_{\frac{k[x,y,z,w]}{(x,y)+(z,w)}}(t)=1$. Thus we have $$HS_A(t)=HS_{k[z,w]\oplus k[x,y]}(t)-HS_{\frac{k[x,y,z,w]}{(x,y)+(z,w)}}(t)=\frac{2}{(1-t)^2}-1=\frac{2t-t^2}{(1-t)^2}$$ Hence we have $HP_A(t)=2t-t^2$. 
 \end{proof}
 \end{eg}
 
@@ -633,7 +719,8 @@ Applying the above prp gives $d(R)=\max\{d(R),d(R/(x))\}$. Assume for a contradi
 \end{proof}
 \end{lmm}
 
-\begin{thm}{The Fundamental Theorem of Dimension Theory}{} Let $(R,m)$ be a local Noetherian ring. Let $M$ be a finitely generated $R$-module. Let $I$ be an $m$-primary ideal. Then the following numbers are equal. 
+\begin{thm}{The Fundamental Theorem of Dimension Theory}{}\\
+Let $(R,m)$ be a local Noetherian ring. Let $M$ be a finitely generated $R$-module. Let $I$ be an $m$-primary ideal. Then the following numbers are equal. 
 \begin{itemize}
 \item The Krull dimension $$\dim(M)=\dim(R/\text{Ann}_R(M))$$
 \item The Hilbert-Samuel degree $$d(M)=\min\{d\in\N\;|\;\lim_{t\to 1}(1-t)^dHS_{\text{gr}_I(M)}(t)<\infty\}$$
@@ -673,6 +760,19 @@ Let $Q_0\subset\cdots\subset Q_k$ be a strictly increasing chain of prime ideals
 \end{proof}
 \end{thm}
 
+\begin{lmm}{}{}\\
+Let $R$ be a Noetherian graded ring. Then we have $\dim(R)=\dim(R_{(R_+)})$. 
+\end{lmm}
+
+\begin{prp}{}{}\\
+Let $R$ be a Noetherian commutative graded ring. Suppose that $R_0$ is a field. Let $M$ be a finitely generated graded $R$-module. Let $I\subseteq R$ be an ideal such that $\sqrt{I}=R_+$. Then the following numbers are equal. 
+\begin{itemize}
+\item The Krull dimension $$\dim(M)=\dim(R/\text{Ann}_R(M))$$
+\item The Hilbert-Samuel degree $$d(M)=\min\{d\in\N\;|\;\lim_{t\to 1}(1-t)^dHS_{\text{gr}_I(M)}(t)<\infty\}$$
+\item The minimal number of generators $$\delta_IM=\min\{n\in\N\;|\;x_1,\dots,x_n\in R_+\text{ such that }l_R(M/(x_1,\dots,x_n)M)<\infty\}$$
+\end{itemize}
+\end{prp}
+
 \begin{thm}{Krull's Height Theorem}{}\\
 Let $R$ be a Noetherian commutative ring. Let $I$ be a proper ideal generated by $n$ elements. Let $P$ be the smallest prime ideal containing $I$. Then $$\text{ht}_R(P)\leq n$$
 \begin{proof}\\
@@ -699,11 +799,12 @@ Following the above, we have that $\dim(R/(x_1,\dots,x_d))=0$. Thus we have that
 \end{proof}
 \end{prp}
 
-\begin{prp}{}{} Let $(R,m)$ be a local ring. Then we have $$\dim(R)=\dim(\widehat{R})$$
+\begin{prp}{}{}\\
+Let $(R,m)$ be a local ring. Then we have $$\dim(R)=\dim(\widehat{R})$$
 \end{prp}
 
 \pagebreak
-\section{Regular Sequences}
+\section{Regular Sequences and Depth}
 \subsection{Regular Sequences}
 \begin{defn}{Regular Elements}{}\\
 Let $R$ be a commutative ring. Let $M$ be an $R$-module. Let $x\in R$. We say that $x$ is an $M$-regular element if for all $0\neq m\in M$, $xm\neq 0$. 
@@ -730,10 +831,8 @@ On the other hand, $xy$ is a regular element of $F[x,y,z]$ since it is not a zer
 \end{proof}
 \end{eg}
 
-\begin{lmm}{}{} Let $R$ be a commutative ring. Let $M$ be an $R$-module. If $x_1,\dots,x_n$ is an $M$-regular sequence, then $x_1^r,\dots,x_n^r$ is an $M$-regular sequence for all $r\in\N\setminus\{0\}$. 
-\end{lmm}
-
-\begin{lmm}{}{} Let $(R,m)$ be a local ring. If $x_1,\dots,x_n\in m$ is a regular sequence, then it is always extendable to a system of parameters. 
+\begin{lmm}{}{}\\
+Let $R$ be a commutative ring. Let $M$ be an $R$-module. If $x_1,\dots,x_n$ is an $M$-regular sequence, then $x_1^r,\dots,x_n^r$ is an $M$-regular sequence for all $r\in\N\setminus\{0\}$. 
 \end{lmm}
 
 \begin{crl}{}{}\\
@@ -747,7 +846,8 @@ Idea: both system of parameters and regular sequences cuts down a variety by dim
 
 %https://math.stackexchange.com/questions/1209465/what-is-a-geometric-interpretation-of-regular-sequences-in-various-instances
 
-\begin{defn}{Maximal Regular Sequences}{} Let $R$ be a commutative ring. Let $M$ be an $R$-module. Let $x_1,\dots,x_n\in I$ be a regular sequence. We say that the sequence is maximal if for any $y\in I$, $x_1,\dots,x_n,y$ is not a regular sequence. 
+\begin{defn}{Maximal Regular Sequences}{}\\
+Let $R$ be a commutative ring. Let $M$ be an $R$-module. Let $x_1,\dots,x_n\in I$ be a regular sequence. We say that the sequence is maximal if for any $y\in I$, $x_1,\dots,x_n,y$ is not a regular sequence. 
 \end{defn}
 
 \subsection{Relation to the Koszul Complex}
@@ -832,12 +932,78 @@ If moreover $H_1^\text{Kos}(x_1,\dots,x_n;M)=0$, then $x_1,\dots,x_n$ is an $M$-
 \end{prp}
 
 \subsection{The Depth of a Module}
-\begin{defn}{Depth of a Module}{} Let $R$ be a commutative ring. Let $I$ be an ideal of $R$. Let $M$ be a finitely generated $R$-module. Define the $I$-depth of $M$ to be $$\text{depth}_I(M)=\sup\{n\in\N\;|\;x_1,\dots,x_n\in I\text{ is an }M\text{-regular sequence }\}$$
+\begin{prp}{}{}\\
+Let $R$ be a commutative ring. Let $M,N$ be $R$-modules. Then the following are true. 
+\begin{itemize}
+\item If $\text{Ann}_R(N)$ contains an $M$-regular element, then we have $\Hom_R(N,M)=0$. 
+\item If $R$ is Noetherian and $M,N$ are finitely generated and $\Hom_R(N,M)=0$, then $\text{Ann}_R(N)$ contains an $M$-regular element. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $R$ be a commutative ring. Let $M,N$ be $R$-modules. Let $x_1,\dots,x_n\in\text{Ann}_R(N)$ be an $M$-regular sequence. Then we have $$\Hom_R(N,M/(x_1,\dots,x_n)M)\cong\text{Ext}_R^n(N,M)$$
+\end{prp}
+
+\begin{defn}{Depth of a Module}{}\\
+Let $R$ be a Noetherian commutative ring. Let $I$ be an ideal of $R$. Let $M$ be a finitely generated $R$-module such that $IM\neq M$. Define the $I$-depth of $M$ to be $$\text{depth}_I(M)=\max\{n\in\N\;|\;x_1,\dots,x_n\in I\text{ is an }M\text{-regular sequence }\}$$
 \end{defn}
 
 If $(R,m)$ is a local ring then we write $\text{depth}(M)=\text{depth}_m(M)$. 
 
-\begin{lmm}{}{} Let $(R,m)$ be a Noetherian local ring. Let $M$ be an $R$-module. Then $\text{depth}(M)=0$ if and only if $m$ is an associated prime of $M$. 
+\begin{thm}{Ree}{}\\
+Let $R$ be a Noetherian commutative ring. Let $I$ be an ideal of $R$. Let $M$ be a finitely generated $R$-module such that $IM\neq M$. Then depth is well defined and is given by $$\text{depth}_I(M)=\min\{i\in\N\;|\;\text{Ext}_R^i(R/I,M)\neq 0\}$$
+\end{thm}
+
+\begin{prp}{}{}\\
+Let $R$ be a Noetherian commutative ring. Let $I$ be an ideal of $R$. Let the following be an exact sequence of finitely generated $R$-modules \\~\\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	0 & M_1 & M_2 & M_3 & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow["f", from=1-2, to=1-3]
+	\arrow["g", from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\~\\
+such that $IM_k\neq M_k$ for $k=1,2,3$. Then the following are true. 
+\begin{itemize}
+\item $\text{depth}_I(M_2)\geq\min\{\text{depth}_I(M_1),\text{depth}_I(M_3)\}$. 
+\item $\text{depth}_I(M_3)\geq\min\{\text{depth}_I(M_1)-1,\text{depth}_I(M_2)\}$. 
+\item $\text{depth}_I(M_1)\geq\min\{\text{depth}_I(M_2),\text{depth}_I(M_3)+1\}$. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $R$ be a Noetherian commutative ring. Let $I$ be an ideal of $R$. Let $M$ be a finitely generated $R$-module such that $IM\neq M$. Then the following are true. 
+\begin{itemize}
+\item $\text{depth}_I(M)=\inf\{\text{depth}_I(M_P)\;|\;P\in\text{Spec}(R)\}$. 
+\item $\text{depth}_{\sqrt{I}}(M)=\text{depth}_I(M)$. 
+\item Let $x_1,\dots,x_n\in I$ be an $M$-regular sequence. Then we have $\text{depth}_I(M/(x_1,\dots,x_n)M)=\text{depth}_I(M)-n$. 
+\end{itemize}
+\end{prp}
+\begin{prp}{}{}\\
+Let $R$ be a Noetherian commutative ring. Let $I$ be an ideal of $R$. Let $M$ be a finitely generated $R$-module such that $IM\neq M$. Let $n\in\N$. Then the following are equivalent. 
+\begin{itemize}
+\item For all $i<n$, $$\text{Ext}_R^i(N,M)=0$$ for all finitely generated $R$-module $N$ such that $\text{Supp}(N)\subseteq\{P\in\text{Spec}(R)\;|\;I\subseteq P\}$. 
+\item For all $i<n$, $$\text{Ext}_R^i(N,M)=0$$ for some finitely generated $R$-module $N$ such that $\text{Supp}(N)=\{P\in\text{Spec}(R)\;|\;I\subseteq P\}$. 
+\item For all $i<n$, $$\text{Ext}_R^i\left(R/I,M\right)=0$$
+\end{itemize}
+\end{prp}
+
+\begin{prp}{Depth Sensitivity of the Koszul Complex}{}\\
+Let $R$ be a Noetherian commutative ring. Let $I=(x_1,\dots,x_n)$ be an ideal of $R$. Let $M$ be a finitely generated $R$-module such that $IM\neq M$. Then we have $$\text{depth}_I(M)=n-\sup\{i\in\N\;|\;H_i^\text{Kos}(x_1,\dots,x_n,M)\neq 0\}$$
+\end{prp}
+
+\begin{crl}{}{}\\
+Let $R$ be a Noetherian commutative ring. Let $I=(x_1,\dots,x_n)$ be an ideal of $R$. Let $M$ be a finitely generated $R$-module such that $IM\neq M$. Then $x_1,\dots,x_n$ is an $M$-regular sequence if and only if $\text{depth}_I(M)=n$. 
+\end{crl}
+
+We now restrict to the case of Noetherian local rings. 
+
+\begin{thm}{Ischebeck's Theorem}{}\\
+Let $(R,m)$ be a Noetherian local ring. Let $M,N$ be non-zero finitely generated $R$-modules. Then we have $$\text{Ext}_R^i(N,M)=0$$ for all $0\leq i\leq\text{depth}_m(M)-\dim(N)$. 
+\end{thm}
+
+\begin{lmm}{}{}\\
+Let $(R,m)$ be a Noetherian local ring. Let $M$ be an $R$-module. Then $\text{depth}(M)=0$ if and only if $m$ is an associated prime of $M$. 
 \begin{proof}
 The depth is equal to the maximal $M$-regular sequence in $m$. It is $0$ if and only if there is no regular sequences at all, which is true if and only if every element of $m$ is a zero divisor. Since the union of associated primes is precisely the set of non-zero zero divisors, every element of $m$ is a zero divisor if and only if $m$ is contained in the union of associated primes. By plenty of primes, $m$ is contained in one of the associated primes. Then by maximality of $m$, $m$ is an associated prime of $M$. 
 \end{proof}
@@ -855,61 +1021,16 @@ Clearly $y+t$ is a non-zero divisor because the ideal in the quotient does not c
 \end{proof}
 \end{eg}
 
-\begin{prp}{Depth Sensitivity of the Koszul Complex}{} Let $R$ be a Noetherian commutative ring. Let $I=(x_1,\dots,x_n)$ be an ideal of $R$. Let $M$ be a finitely generated $R$-module such that $IM\neq M$. Then we have $$\text{depth}_I(M)=n-\sup\{i\in\N\;|\;H_i^\text{Kos}(x_1,\dots,x_n,M)\neq 0\}$$
+\subsection{Depth and Dimension}
+\begin{prp}{}{}\\
+Let $(R,m)$ be a Noetherian local ring. Let $M\neq 0$ be a finitely generated $R$-module. Then every $M$-regular sequence is extendable to a system of parameters. 
 \end{prp}
 
-\begin{crl}{}{} Let $R$ be a Noetherian commutative ring. Let $I=(x_1,\dots,x_n)$ be an ideal of $R$. Let $M$ be a finitely generated $R$-module such that $IM\neq M$. Then $x_1,\dots,x_n$ is an $M$-regular sequence if and only if $\text{depth}_I(M)=n$. 
-\end{crl}
+As a corollary, we must have $\text{depth}(M)\leq\dim(M)$. 
 
-\subsection{Depth and the Vanishing of Ext}
-\begin{prp}{}{} Let $R$ be a Noetherian commutative ring. Let $I$ be an ideal of $R$. Let $M$ be a finitely generated $R$-module such that $IM\neq M$. Let $n\in\N$. Then the following are equivalent. 
-\begin{itemize}
-\item For all $i<n$, $$\text{Ext}_R^i(N,M)=0$$ for all finitely generated $R$-module $N$ such that $\text{Supp}(N)\subseteq\{P\in\text{Spec}(R)\;|\;I\subseteq P\}$. 
-\item For all $i<n$, $$\text{Ext}_R^i(N,M)=0$$ for some finitely generated $R$-module $N$ such that $\text{Supp}(N)=\{P\in\text{Spec}(R)\;|\;I\subseteq P\}$. 
-\item For all $i<n$, $$\text{Ext}_R^i\left(R/I,M\right)=0$$
-\end{itemize}
+\begin{prp}{}{}\\
+Let $(R,m)$ be a Noetherian local ring. Let $M\neq 0$ be a finitely generated $R$-module. Let $P\in\text{Ass}(M)$. Then we have $$\text{depth}(M)\leq\dim(R/P)$$
 \end{prp}
-
-\begin{thm}{Rees' Theorem}{}\\
-Let $R$ be a Noetherian commutative ring. Let $I$ be an ideal of $R$. Let $M$ be a finitely generated $R$-module such that $IM\neq M$. Then we have $$\text{depth}_I(M)=\min\{n\in\N\;|\;\text{Ext}_R^n(R/I,M)\neq 0\}$$
-\begin{proof}
-\end{proof}
-\end{thm}
-
-\begin{lmm}{}{} Let $(R,m)$ be a Noetherian local ring. Let the following be an exact sequence of finitely generated $R$-modules. \\~\\
-\adjustbox{scale=1.0,center}{\begin{tikzcd}
-	0 & M_1 & M_2 & M_3 & 0
-	\arrow[from=1-1, to=1-2]
-	\arrow["f", from=1-2, to=1-3]
-	\arrow["g", from=1-3, to=1-4]
-	\arrow[from=1-4, to=1-5]
-\end{tikzcd}}\\~\\
-Then the following are true. 
-\begin{itemize}
-\item $\text{depth}(M_2)\geq\min\{\text{depth}(M_1),\text{depth}(M_3)\}$. 
-\item $\text{depth}(M_3)\geq\min\{\text{depth}(M_1)-1,\text{depth}(M_2)\}$. 
-\item $\text{depth}(M_1)\geq\min\{\text{depth}(M_2),\text{depth}(M_3)+1\}$. 
-\end{itemize}
-\end{lmm}
-
-\begin{lmm}{}{} Let $(R,m)$ be a Noetherian local ring. Let $M\neq\{0\}$ be a finitely generated $R$-module. Let $x\in R$ be an $M$-regular element. Then we have $$\text{depth}(M/xM)=\text{depth}(M)-1$$
-\end{lmm}
-
-\begin{crl}{}{} Let $(R,m)$ be a Noetherian local ring. Let $M\neq\{0\}$ be a finitely generated $R$-module. Let $x_1,\dots,x_r$ be an $M$-regular sequence of length $r<\text{depth}(M)$. Then $x_1,\dots,x_r$ can be extended to an $M$-regular sequence of length $\text{depth}(M)$. 
-\end{crl}
-
-\begin{thm}{Ischebeck's Theorem}{} Let $(R,m)$ be a Noetherian local ring. Let $M,N$ be non-zero finitely generated $R$-modules. Then we have $$\text{Ext}_R^i(N,M)=0$$ for all $0\leq i\leq\text{depth}_m(M)-\dim(N)$. 
-\end{thm}
-
-\begin{prp}{}{} Let $(R,m)$ be a Noetherian local ring. Let $M$ be a finitely generated $R$-module. Let $P\in\text{Ass}(M)$. Then we have $$\text{depth}_m(M)\leq\dim\left(\frac{R}{P}\right)$$
-\end{prp}
-
-\begin{prp}{}{} Let $(R,m)$ be a Noetherian local ring. Then we have $$\text{depth}_m(R)=\text{depth}_{\widehat{m}}(\widehat{R})$$
-\end{prp}
-
-\subsection{Further Results on Depth}
-\begin{thm}{Serre's Criterion for Normality}{} Let $R$ be a Noetherian integral domain. Suppose that for every $P\in\text{Spec}(R)$ such that $\text{ht}(P)=1$, $R_P$ is a DVR. Then $R$ is normal if and only if for every $P\in\text{Spec}(R)$ such that $\text{ht}(P)\geq 2$, $\text{depth}(R_P)\geq 2$. 
-\end{thm}
 
 \pagebreak
 \section{Homological Dimension Theory}
@@ -945,40 +1066,64 @@ Let $R$ be a commutative ring. Let $M$ be an $R$-module. Then we have $$\text{pd
 Let $R$ be a Noetherian commutative ring. Let $M$ be a finitely generated $R$-module. Then we have $$\text{depth}_I(M)\leq\text{pd}_R(R/I)$$
 \end{crl}
 
-\subsection{Minimal Resolutions of Local Rings}
+\subsection{Minimal Resolutions}
 Let $R$ be a commutative ring. Recall that if $R$ is a local ring or if $R$ is graded, then any finitely generated modules that are projective must be free. Thus projective resolutions and free resolutions of these rings amount to the same thing. 
 
-\begin{defn}{Minimal Free Resolutions of Local Rings}{}\\
-Let $(R,m)$ be a local ring. Let $M$ be a finitely generated $R$-module. Let $(F_\bullet,d)$ be a free resolution of $M$. We say that $F_\bullet$ is minimal if $d\otimes_R\text{id}_{R/m}=0$ and $F_0\otimes_RR/m\to M\otimes_RR/m$ is an isomorphism. 
+\begin{defn}{Minimal Free Resolutions for Noetherian Local Rings}{}\\
+Let $(R,m)$ be a Noetherian local ring. Let $M$ be a finitely generated $R$-module. Let $(F_\bullet,d)$ be a free resolution of $M$. We say that $F_\bullet$ is minimal if $\im(F_n\to F_{n-1})\subseteq mF_{n-1}$ for all $n$. 
 \end{defn}
 
-\begin{lmm}{}{}\\
-Let $(R,m)$ be a local ring. Let $M$ be a finitely generated $R$-module. Let $(F_\bullet,d)$ be a free resolution of $M$. Then $F_\bullet$ is minimal if and only if for each $\im(d_i)\subseteq mF_{i-1}$ for all $i\in\N$. 
-\end{lmm}
-
 \begin{prp}{}{}\\
-Let $(R,m)$ be a local ring. Let $M$ be a finitely generated $R$-module. If $R$ is Noetherian, then a minimal free resolution exists and is unique up to isomorphism. 
+Let $(R,m)$ be a Noetherian local ring. Let $M$ be a finitely generated $R$-module. Let $(F_\bullet,d)$ be a free resolution of $M$. Then the following are equivalent. 
+\begin{itemize}
+\item $(F_\bullet,d)$ is a minimal free resolution. 
+\item $\rank(F_n)=\dim_{R/m}(\text{Tor}_i^R(M,R/m))$ for all $n$. 
+\item $\rank(F_n)=\dim_{R/m}(\text{Ext}_R^i(M,R/m))$ for all $n$. 
+\item $(F_\bullet,d)$ is isomorphic to a chain complex of the form \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\cdots & {R^{\beta_n}} & \cdots & {R^{\beta_0}} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\
+where $R^{\beta_0}\to M$ is the map given by choosing a minimal set of generators of $M$, and $R^{\beta_n}\to R^{\beta_{n-1}}$ is the map given by choose a minimal set of generators of $\ker(R^{\beta_{n-1}}\to R^{\beta_{n-2}})$. 
+\end{itemize}
 \end{prp}
 
 \begin{prp}{}{}\\
-Let $(R,m)$ be local ring. Let $M$ be a finitely generated $R$-module. Then we have $$\text{pd}_R(M)=\sup\{i\in\N\;|\;\text{Tor}_i^R(R/m,M)\}$$
+Let $(R,m)$ be a Noetherian local ring. Let $M$ be a finitely generated $R$-module. Let $(F_\bullet,d)$ be a minimal free resolution of $M$ given by $$F_n=R^{\beta_n}$$ Then we have $$\beta_n=\dim_{R/m}(\text{Tor}_i^R(M,R/m))$$
 \end{prp}
 
-\begin{defn}{Minimal Free Resolutions of Graded Modules}{}\\
-Let $R$ be a Noetherian $\N$-graded ring such that $R_0$ is a field. Let $M$ be a finitely generated graded $R$-module. Let $(F_\bullet,d)$ be a graded free resolution of $M$. We say that $F_\bullet$ is minimal if $d_i\otimes_RR_0=0$ and $F_0\otimes_RR_0\to M\otimes_RR_0$ is an isomorphism. 
+\begin{prp}{}{}\\
+Let $(R,m)$ be a Notherian local ring. Let $M$ be a finitely generated $R$-module. Then we have $$\text{pd}_R(M)=\text{sup}\{i\in\N\;|\;\text{Tor}_i^R(R/m,M)\neq 0\}$$
+\end{prp}
+
+\begin{defn}{Minimal Free Resolutions for Graded Rings}{}\\
+Let $R$ be a Noetherian graded ring such that $R_0$ is a field. Let $M$ be a finitely generated graded $R$-module. Let $(F_\bullet,d)$ be a graded free resolution of $M$. We say that $F_\bullet$ is minimal if $\im(F_n\to F_{n-1})\subseteq mF_{n-1}$ for all $n$. 
 \end{defn}
 
-\begin{lmm}{}{}\\
-Let $R$ be a Noetherian $\N$-graded ring such that $R_0$ is a field. Let $M$ be a finitely generated graded $R$-module. Let $(F_\bullet,d)$ be a graded free resolution of $M$. Then $F_\bullet$ is minimal if and only if for each $\im(d_i)\subseteq mF_{i-1}$ for all $i\in\N$. 
-\end{lmm}
+Recall Ext and Tor also has graded versions. 
 
 \begin{prp}{}{}\\
-Let $R$ be an $\N$-graded ring such that $R_0$ is a field. Let $M$ be a finitely generated graded $R$-module. Let $(F,d)$ be a minimal free resolution of $M$. Then we have $$\text{Tor}_i^R(M,R_0)=F_i\otimes_RR_0$$
+Let $R$ be a Noetherian graded ring such that $R_0$ is a field. Let $M$ be a finitely generated graded $R$-module. Let $(F_\bullet,d)$ be a graded free resolution of $M$. Then the following are equivalent. 
+\begin{itemize}
+\item $(F_\bullet,d)$ is a minimal graded free resolution. 
+\item $(F_\bullet,d)$ is isomorphic to a chain complex of the form \\
+\adjustbox{scale=1.0,center}{\begin{tikzcd}
+	\cdots & {\bigoplus_{j\in\Z}R(-j)^{\beta_{n,j}}} & \cdots & {\bigoplus_{j\in\Z}R(-j)^{\beta_{0,j}}} & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}}\\
+where $\bigoplus_{j\in\Z}R(-j)^{\beta_{0,j}}\to M$ is the map given by choosing a minimal set of generators of $M$ degree wise , and $$\bigoplus_{j\in\Z}R(-j)^{\beta_{n,j}}\to\bigoplus_{j\in\Z}R(-j)^{\beta_{n-1,j}}$$ is the map given by choose a minimal set of generators of $$\ker\left(\bigoplus_{j\in\Z}R(-j)^{\beta_{n-1,j}}\to\bigoplus_{j\in\Z}R(-j)^{\beta_{n-2,j}}\right)$$ degree wise. 
+\end{itemize}
 \end{prp}
 
-\begin{prp}{}{}\\
-Let $k$ be a field. Let $M$ be a finitely generated graded $k[x_1,\dots,x_n]$-module where $\deg(x_i)=1$. Then a minimal graded free resolution of $M$ exists and is unique up to isomorphism. 
-\end{prp}
+\begin{crl}{}{}\\
+Let $R$ be a Noetherian graded ring such that $R_0$ is a field. Let $M$ be a finitely generated graded $R$-module. Let $(F_\bullet,d)$ be a minimal graded free resolution of $M$ given by $$F_n=\bigoplus_{j\in\Z}R(-j)^{\beta_{n,j}}$$ Then we have $$\beta_{n,j}=\dim_{R_0}(\text{Tor}_n^R(M,R_0)_j)$$
+\end{crl}
 
 \subsection{Global Dimensions}
 \begin{defn}{Global Dimension}{}\\
@@ -995,7 +1140,12 @@ Let $R$ be a commutative ring. Define the global dimension of $R$ to be $$\text{
 \end{prp}
 
 \subsection{The Auslander-Buchsbaum Formula}
-\begin{thm}{Auslander–Buchsbaum Formula}{} Let $(R,m)$ be a Noetherian local ring. Let $M$ be a finitely generated $R$-module. If $\text{pd}_R(M)$ is finite, then we have $$\text{pd}_R(M)+\text{depth}_m(M)=\text{depth}_m(R)$$
+\begin{lmm}{}{}\\
+Let $(R,m)$ be a Noetherian local ring. Let $M$ be a finitely generated $R$-module. If $x\in m$ is $R$-regular and $M$-regular, then we have $$\text{pd}_R(M)=\text{pd}_{R/(x)}\left(\frac{M}{xM}\right)$$
+\end{lmm}
+
+\begin{thm}{Auslander–Buchsbaum Formula}{}\\
+Let $(R,m)$ be a Noetherian local ring. Let $M$ be a finitely generated $R$-module. If $\text{pd}_R(M)$ is finite, then we have $$\text{pd}_R(M)+\text{depth}_m(M)=\text{depth}_m(R)$$
 \end{thm}
 
 \subsection{Hilbert's Syzygy Theorem}
@@ -1016,23 +1166,136 @@ Let $k$ be a field. Let $M$ be a finitely generated module over $k[x_1,\dots,x_n
 \end{thm}
 
 \pagebreak
-\section{Regular Local Rings}
-\subsection{Basic Definitions}
-\begin{defn}{Regular Local Rings}{} Let $(R,m)$ be a Noetherian local ring. We say that $R$ is a regular local ring if $$\dim(R)=\dim_{R/m}\left(\frac{m}{m^2}\right)$$
+\section{Cohen-Macaulay Rings}
+\subsection{Cohen-Macaulay Rings and Modules}
+Let $R$ be a Noetherian local ring. Recall that $R$ is a regular local ring if its maximal ideal is generated by $\dim(R)$ elements. IN this case, the sequence of elements generating the maximal ideal is called a regular system of parameters. It is in general not true that they form a $m$-regular sequence. \\
+
+Recall that $\dim(M)=\dim(R/\text{Ann}(M))$. 
+
+\begin{defn}{Cohen-Macaulay Modules over Noetherain Local Rings}{}\\
+Let $(R,m)$ be a Noetherian local ring. Let $M$ be a non-zero finitely generated $R$-module. We say that $M$ is Cohen-Macaulay if $$\dim(M)=\text{depth}(M)$$ By convention $M=0$ is also a Cohen-Macaulay module. 
 \end{defn}
 
-\begin{prp}{}{} Let $(R,m)$ be a Noetherian local ring of dimension $d$. Then the following are equivalent. 
+In the case that $M=R$, we say that $R$ is a Cohen-Macaulay ring if $$\dim(R)=\text{depth}(R)$$ In general, we know that $\text{depth}(R)\leq\dim(R)$ because every regular sequence can be extended to a system of parameters, but there is no guarantee that the extended sequence is then a regular sequence. The condition that $\dim(R)=\text{depth}(R)$ then refers to the existence of a regular sequence that is also a system of parameters. This means that system of parameters in a Cohen-Macaulay ring coincides with maximal regular sequences. \\
+
+We first describe some properties of Cohen-Macaulay modules. 
+
+\begin{prp}{}{}\\
+Let $(R,m)$ be a Noetherian local ring. Let $M$ be a Cohen-Macaulay $R$-module. Then the following are true. 
 \begin{itemize}
-\item $R$ is a regular local ring. 
-\item $\text{gr}_m(R)$ is isomorphic to $k[x_1,\dots,x_d]$ as a graded ring. 
-\item $m$ is generated by $d$ elements. 
+\item $\text{depth}(M)=\dim(R/P)$ for all $P\in\text{Ass}(M)$. 
+\item $M$ has no embedded associated primes. 
 \end{itemize}
 \end{prp}
 
-\begin{lmm}{}{} Let $R$ be regular local ring. Then $R$ is an integral domain. 
+\begin{prp}{}{}\\
+Let $(R,m)$ be a Noetherian local ring. Let $M$ be a Cohen-Macaulay $R$-module. Let $I$ be an ideal of $R$. Then we have $$\text{depth}_I(M)=\dim(M)-\dim(M/IM)$$
+\end{prp}
+
+\begin{crl}{}{}\\
+Let $(R,m)$ be a Cohen-Macaulay local ring. Let $I\neq R$ be an ideal. Then we have $$\text{ht}(I)=\text{depth}(I)$$
+\end{crl}
+
+\begin{prp}{}{}\\
+Let $(R,m)$ be a Noetherian local ring. Let $M$ be a Cohen-Macaulay $R$-module. Let $x_1,\dots,x_n\in R$. Then the following are equivalent. 
+\begin{itemize}
+\item $x_1,\dots,x_n$ is an $M$-regular sequence. 
+\item $\dim(M/(x_1,\dots,x_n)M)=\dim(M)-n$. 
+\item $x_1,\dots,x_n$ is extendable to a system of parameters. 
+\end{itemize}
+\end{prp}
+
+\begin{crl}{}{}\\
+Let $(R,m)$ be a Noetherian local ring. Let $M$ be a Cohen-Macaulay $R$-module. Then every system of parameters is a maximal $M$-regular sequence. 
+\end{crl}
+
+\begin{defn}{Cohen-Macaulay Modules}{}\\
+Let $R$ be a Noetherian commutative ring. Let $M$ be an $R$-module. We say that $M$ is a Cohen-Macaulay if $M_m$ is a Cohen-Macaulay module for all maximal ideals $m\in\text{Supp}(M)$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $R$ be a Noetherian commutative ring. Let $M$ be a finitely generated $R$-module. Let $x_1,\dots,x_r$ be an $M$-regular sequence. Then the following are true. 
+\begin{itemize}
+\item If $M$ is Cohen-Macaulay, then $M/(x_1,\dots,x_r)M$ is Cohen-Macaulay. 
+\item Suppose that $R$ is a local ring. Then $M$ is Cohen-Macaulay if and only if $M/(x_1,\dots,x_r)M$ is Cohen-Macaulay. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $R$ be a Noetherian commutative ring. Let $M$ be a Cohen-Macaulay $R$-module. Let $P\in\text{Spec}(R)$. Then the following are true. 
+\begin{itemize}
+\item $M_P$ is a Cohen-Macaulay $R_P$-module. 
+\item $\text{depth}_P(M)=\text{depth}_{PR_P}(M_P)$. 
+\item Suppose that $R$ is a local ring. Then we have $$\dim(M)=\dim(M_P)+\dim(M/PM)$$
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $R$ be a Noetherian commutative ring. Then the following are true. 
+\begin{itemize}
+\item $R$ is Cohen-Macaulay if and only if $\widehat{R}$ is Cohen-Macaulay. 
+\item $R$ is Cohen-Macaulay if and only if $R[x]$ is Cohen-Macaulay. 
+\end{itemize}
+\end{prp}
+
+\begin{thm}{Miracle Flatness}{}\\
+Let $(R,m_R)$ and $(S,m_S)$ be Noetherian local rings. Let $\varphi:R\to S$ be a local homomorphism. Suppose that the following are true. 
+\begin{itemize}
+\item $R$ is regular. 
+\item $S$ is Cohen-Macaulay. 
+\item $\frac{S}{m_S}=S\otimes_R\frac{R}{m}$ has dimension $\dim(S)-\dim(R)$. 
+\end{itemize}
+Then $\varphi$ is flat. 
+\end{thm}
+
+\begin{defn}{Unmixed Ideals}{} Let $R$ be a Noetherian commutative ring. Let $I\subseteq R$ be a proper ideal. We say that $I$ is unmixed if for any prime divisor $P\in\text{Spec}(R)$ of $I$, the height $\text{ht}(P)$ is constant. 
+\end{defn}
+
+\begin{lmm}{}{} Let $R$ be a Noetherian commutative ring. Let $I\subseteq R$ be a proper ideal. Then $I$ is unmixed if and only if $I$ has no embedded associated primes. 
 \end{lmm}
 
-\begin{lmm}{}{} Let $R$ be commutative ring. Then $R$ is a regular local ring of dimension $1$ if and only if $R$ is a DVR. 
+\begin{thm}{The Unmixedness Theorem}{} Let $R$ be a Noetherian commutative ring. Then $R$ is Cohen-Macaulay if and only if for every $r\geq 0$, every ideal $I$ generated by $r$ elements such that $\text{ht}(I)=r$ is unmixed. 
+\end{thm}
+
+\subsection{Regular Local Rings}
+\begin{defn}{Regular Local Rings}{}\\
+Let $(R,m)$ be a Noetherian local ring. We say that $R$ is a regular local ring if $$\dim(R)=\dim_{R/m}\left(\frac{m}{m^2}\right)$$
+\end{defn}
+
+\begin{defn}{Regular System of Parameters}{}\\
+Let $(R,m)$ be a Noetherian local ring. A regular system of parameters is a system of parameters of $R$ that generate $m$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $(R,m)$ be a Notherian local ring. Then $R$ is a regular local ring if and only if $m$ admits a regular system of parameters. 
+\end{prp}
+
+Consequently, regular system of parameters are also maximal $M$-regular sequences. 
+
+\begin{prp}{}{}\\
+Let $(R,m)$ be a regular local ring. Let $x_1,\dots,x_i\in m$ be elements in $m$. Then the following are equivalent. 
+\begin{itemize}
+\item The sequence $x_1,\dots,x_i$ can be extended to a regular system of parameters for $R$. 
+\item $[x_1],\dots,[x_i]$ are linearly independent in $\frac{m}{m^2}$. 
+\item $\frac{R}{(x_1,\dots,x_i)}$ is a regular local ring of dimension $\dim(R)-i$. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $(R,m)$ be a Noetherian local ring of dimension $d$. Let $x_1,\dots,x_d$ be minimal generators of $m$. Then the following are equivalent. 
+\begin{itemize}
+\item $R$ is a regular local ring. 
+\item $x_1,\dots,x_d$ is an $R$-regular sequence. 
+\item There is an isomorphism of graded algebras $$\text{gr}_m(R)\cong k[y_1,\dots,y_d]$$ given by $[x_i]\mapsto y_i$. 
+\end{itemize}
+\end{prp}
+
+\begin{crl}{}{}\\
+Let $(R,m)$ be a regular local ring. Then $R$ is Cohen-Macaulay. 
+\end{crl}
+
+\begin{lmm}{}{}\\
+Let $R$ be commutative ring. Then $R$ is a regular local ring of dimension $1$ if and only if $R$ is a DVR. 
 \begin{proof}
 We have seen that if $R$ is a DVR, then $R$ is a regular local ring of dimension $1$. 
 \end{proof}
@@ -1045,103 +1308,74 @@ We have seen that if $R$ is a DVR, then $R$ is a regular local ring of dimension
 \end{itemize}
 \end{lmm}
 
-\subsection{Regular System of Parameters}
-\begin{defn}{Regular System of Parameters}{} Let $(R,m)$ be a regular local ring. A regular system of parameters is a system of parameters of $R$ that generate $m$. 
-\end{defn}
-
-\begin{prp}{}{} Let $(R,m)$ be a regular local ring. Then any regular system of parameters is a regular sequence. 
-\end{prp}
-
-\begin{prp}{}{} Let $(R,m)$ be a regular local ring of dimension $\dim(R)=d$. Let $x_1,\dots,x_i\in m$ be elements in $m$. Then the following are equivalent. 
+\begin{thm}{Auslander-Buchsbaum-Serre}{}\\
+Let $(R,m)$ be a Noetherian local ring. Then the following are equivalent. 
 \begin{itemize}
-\item The sequence $x_1,\dots,x_i$ can be extended to a regular system of parameters for $R$. 
-\item $[x_1],\dots,[x_i]$ are linearly independent in $\frac{m}{m^2}$. 
-\item $\frac{R}{(x_1,\dots,x_i)}$ is a regular local ring of dimension $d-i$. 
+\item $R$ is a regular local ring. 
+\item $\text{pd}(M)<\infty$ for all finitely generated $R$-modules $M$. 
+\item $\text{pd}(R/m)<\infty$. 
 \end{itemize}
-\end{prp}
+\end{thm}
 
-\begin{prp}{}{} Let $(R,m)$ be a regular local ring of dimension $n$. Suppose that $x_1,\dots,x_n$ is a regular sequence of parameters for $R$. Then the set $$\{x_1^{k_1}\cdots x_n^{k_n}\;|\;k_1+\dots+k_n=d\}$$ forms a basis for the vector space $m^d/m^{d+1}$ over $R/m$. In particular, we have $$\dim_{R/m}\left(\frac{m^d}{m^{d+1}}\right)=\binom{d+n-1}{d}$$
-\end{prp}
-
-\begin{crl}{}{} Let $(R,m)$ be a regular local ring of dimension $n$. Then the set $$\{x_1^{k_1}\cdots x_n^{k_n}\;|\;k_1+\dots+k_n\leq d\}$$ forms a basis for the vector space $R/m^{d+1}$ over $R/m$. In particular, we have $$l_{R/m}\left(\frac{R}{m^{d+1}}\right)=\binom{d+n}{d}$$
-\end{crl}
-
-\subsection{Characterization Using Homological Dimensions}
 \begin{prp}{}{} Let $R$ be a local ring. Then $R$ is a regular local ring if and only if $\text{gl dim}(R)<\infty$. 
 \end{prp}
 
 \begin{crl}{}{} Let $R$ be a regular local ring. Let $P\in\text{Spec}(R)$. Then $R_P$ is a regular local ring. 
 \end{crl}
 
-\begin{thm}{Auslander–Buchsbaum Theorem}{} Let $R$ be a regular local ring. Then $R$ is a UFD. 
+\begin{thm}{Auslander–Buchsbaum-Nagata}{}\\
+Let $R$ be a regular local ring. Then $R$ is a UFD. 
 \end{thm}
 
-\subsection{Regular Rings}
+\subsection{Complete Intersection Rings}
+
+\subsection{Serre's $R_n$ and $S_n$ Criterion}
+
+$$\substack{\text{Regular}\\\text{Local Rings}}\subset\substack{\text{Complete}\\\text{Intersection Rings}}\subset\substack{\text{Gorenstein}\\\text{Rings}}\subset\substack{\text{Cohen-Macauley}\\\text{Rings}}$$
+
+\begin{defn}{Serre's $R_n$ Criterion}{}\\
+Let $R$ be a Noetherian commutative ring. Let $n\in\N$. We say that $X$ satisfies $R_n$ if $R_P$ is a regular local ring for all prime ideals $P\subseteq R$ such that $\text{ht}(P)\leq n$. 
+\end{defn}
+
+\begin{defn}{Serre's $S_n$ Criterion}{}\\
+Let $R$ be a Noetherian commutative ring. Let $n\in\N$. We say that $X$ satisfies $S_n$ if $$\text{depth}(R_P)\geq\min\{n,\text{ht}(P)\}$$ for all prime ideals $P\subseteq R$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $R$ be a Noetherian commutative ring. Then the following are true. 
+\begin{itemize}
+\item $R$ is reduced if and only if $R$ satisfies $R_0$ and $S_1$. 
+\item $R$ is normal if and only if $R$ satisfies $R_1$ and $S_2$. 
+\item $R$ is Cohen-Macaulay if and only if $R$ satisfies $S_n$ for all $n\geq 0$. 
+\end{itemize}
+\end{prp}
 
 \pagebreak
-\section{Three Important Rings}
-\subsection{Cohen-Macaulay for Noetherian Local Rings}
-Let $R$ be a Noetherian local ring. Recall that $R$ is a regular local ring if its maximal ideal is generated by $\dim(R)$ elements. IN this case, the sequence of elements generating the maximal ideal is called a regular system of parameters. It is in general not true that they form a $m$-regular sequence. \\
-
-Recall that $\dim(M)=\dim(R/\text{Ann}(M))$. 
-
-\begin{defn}{Cohen-Macaulay Modules over Noetherain Local Rings}{} Let $(R,m)$ be a Noetherian local ring. Let $M$ be a non-zero finitely generated $R$-module. We say that $M$ is Cohen-Macaulay if $$\dim(M)=\text{depth}(M)$$ By convention $M=0$ is also a Cohen-Macaulay module. 
-\end{defn}
-
-In the case that $M=R$, we say that $R$ is a Cohen-Macaulay ring if $$\dim(R)=\text{depth}(R)$$ In general, we know that $\text{depth}(R)\leq\dim(R)$ because every regular sequence can be extended to a system of parameters, but there is no guarantee that the extended sequence is then a regular sequence. The condition that $\dim(R)=\text{depth}(R)$ then refers to the existence of a regular sequence that is also a system of parameters. 
-
-This means that system of parameters in a Cohen-Macaulay ring coincides with maximal regular sequences. 
-
-\begin{prp}{}{} Let $(R,m)$ be a Noetherian local ring. Let $M$ be Cohen-Macaulay $R$-module. Let $P\in\text{Ass}(M)$. Then we have $$\dim(M)=\text{depth}(M)=\dim\left(\frac{R}{P}\right)$$ Moreover, $M$ has no embedded associated primes (every associated prime is minimal). 
-\end{prp}
-
-\begin{prp}{}{} Let $(R,m)$ be a Noetherian local ring. Let $M$ be a finitely generated $R$-module. Let $x_1,\dots,x_r$ be an $M$-regular sequence. Then $M$ is Cohen-Macaulay if and only if $M/(x_1,\dots,x_r)M$ is Cohen-Macaulay. 
-\end{prp}
-
-\begin{prp}{}{} Let $(R,m)$ be a Noetherian local ring. Let $M$ be a finitely generated $R$-module. Then every system of parameters is a maximal $M$-regular sequence. 
-\end{prp}
-
-\begin{prp}{}{} Let $(R,m)$ be a Noetherian local ring. Let $M$ be a Cohen-Macaulay $R$-module. Let $P\in\text{Spec}(R)$. Then the following are true. 
-\begin{itemize}
-\item $M_P$ is a Cohen-Macaulay $R_P$-module. 
-\item $\text{depth}_P(M)=\text{depth}_{PR_P}(M_P)$. 
-\end{itemize}
-\end{prp}
-
-\begin{lmm}{}{} Let $R$ be a regular local ring. Then $R$ is a Cohen-Macaulay ring. 
-\end{lmm}
-
-\begin{prp}{}{} Let $(R,m)$ be a Noetherian local ring. Then the following are true. 
-\begin{itemize}
-\item $R$ is Cohen-Macaulay if and only if $\widehat{R}$ is Cohen-Macaulay. 
-\item $R$ is Cohen-Macaulay if and only if $R[x]$ is Cohen-Macaulay. 
-\end{itemize}
-\end{prp}
-
-\subsection{Cohen-Macaulay for General Noetherian Rings}
-\begin{defn}{Cohen-Macaulay Modules}{} Let $R$ be a Noetherian commutative ring. Let $M$ be an $R$-module. We say that $M$ is a Cohen-Macaulay if for all maximal ideals $m\in\text{Supp}(M)$, $M_m$ is Cohen-Macaulay. 
-\end{defn}
-
-\begin{prp}{}{} Let $R$ be a commutative ring. Then the following are true. 
-\begin{itemize}
-\item $R$ is Cohen-Macaulay if and only if $\widehat{R}$ is Cohen-Macaulay. 
-\item $R$ is Cohen-Macaulay if and only if $R[x]$ is Cohen-Macaulay. 
-\end{itemize}
-\end{prp}
-
-\begin{defn}{Unmixed Ideals}{} Let $R$ be a Noetherian commutative ring. Let $I\subseteq R$ be a proper ideal. We say that $I$ is unmixed if for any prime divisor $P\in\text{Spec}(R)$ of $I$, the height $\text{ht}(P)$ is constant. 
-\end{defn}
-
-\begin{lmm}{}{} Let $R$ be a Noetherian commutative ring. Let $I\subseteq R$ be a proper ideal. Then $I$ is unmixed if and only if $I$ has no embedded associated primes. 
-\end{lmm}
-
-\begin{thm}{The Unmixedness Theorem}{} Let $R$ be a Noetherian commutative ring. Then $R$ is Cohen-Macaulay if and only if for every $r\geq 0$, every ideal $I$ generated by $r$ elements such that $\text{ht}(I)=r$ is unmixed. 
-\end{thm}
-
+\section{Gorenstein Rings}
 \subsection{Gorenstein Rings}
-\begin{defn}{Gorenstein Rings}{}\\
-Let $R$ be a Noetherian local ring. We say that $R$ is a Gorenstein ring if $$\text{id}_R(R)<\infty$$
+\begin{defn}{Gorenstein Local Rings}{}\\
+Let $R$ be a Noetherian local ring. We say that $R$ is Gorenstein if $$\text{id}_R(R)<\infty$$
 \end{defn}
+
+\begin{defn}{Gorenstein Rings}{}\\
+Let $R$ be a Noetherian commutative ring. We say that $R$ is Gorenstein if $R_m$ is a Gorenstein local ring for all maximal ideals $m$. 
+\end{defn}
+
+\begin{prp}{}{}\\
+Let $R$ be a Gorenstein ring. Let $P\in\text{Spec}(R)$. Then $R_P$ is Gorenstein. 
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $R$ be a Noetherian commutative ring. Let $x_1,\dots,x_n$ be an $R$-regular sequence. Then the following are true. 
+\begin{itemize}
+\item If $R$ is Gorenstein, then $R/(x_1,\dots,x_n)$ is Gorenstein. 
+\item Suppose that $R$ is local . Then $R$ is Gorenstein if and only if $R/(x_1,\dots,x_n)$ is Gorenstein. 
+\end{itemize}
+\end{prp}
+
+\begin{prp}{}{}\\
+Let $R$ be a Noetherian local ring. Then $R$ is Gorenstein if and only if $\widehat{R}$ is Gorenstein. 
+\end{prp}
 
 \begin{prp}{}{}\\
 Let $R$ be a Noetherian local ring. Then the following are equivalent. 
@@ -1154,12 +1388,11 @@ Let $R$ be a Noetherian local ring. Then the following are equivalent.
 \end{itemize}
 \end{prp}
 
-\begin{crl}{}{} Let $R$ be a regular local ring. Then $R$ is Gorenstein. 
+\begin{crl}{}{}\\
+Let $R$ be a regular local ring. Then $R$ is Gorenstein. 
 \end{crl}
 
-\subsection{Complete Intersection Rings}
-
-$$\substack{\text{Regular}\\\text{Local Rings}}\subset\substack{\text{Complete}\\\text{Intersection Rings}}\subset\substack{\text{Gorenstein}\\\text{Rings}}\subset\substack{\text{Cohen-Macauley}\\\text{Rings}}$$
+\subsection{The Canonical Module}
 
 \pagebreak
 \section{Kähler Differentials}
